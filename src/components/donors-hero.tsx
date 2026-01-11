@@ -1,0 +1,79 @@
+"use client";
+
+import Link from "next/link";
+
+import { DynamicStackedPartyDonations } from "./dynamic-stacked-party-line";
+import { useHash } from "../hooks/use-hash";
+import { formatCountryCurrency } from "../utils/formatter";
+
+import type { CountryConfig } from "../utils/countries";
+import type { BigDonor } from "../utils/loader/biggest-donors";
+import type { ConstLocale } from "../utils/locales";
+import type { Translations } from "@/messages/translations";
+import type { FC } from "react";
+
+import { useTranslations } from "@/hooks/use-translations";
+import { getDonorName } from "@/utils/donor";
+
+const TOP_DONORS_TO_SHOW = 8;
+
+export const BigDonorPill: FC<{
+  donor: Omit<BigDonor, "id"> & { id?: string };
+  locale: ConstLocale;
+  country: CountryConfig;
+  translations: Translations;
+}> = ({ country, donor, locale, translations }) => {
+  const { hash } = useHash(donor.name);
+
+  const donorId = donor.id ?? hash;
+
+  return (
+    <li className="basis-full overflow-hidden p-1 sm:basis-1/2 lg:basis-1/4">
+      <Link
+        className="flex rounded-md bg-white p-2 shadow-sm transition-all hover:bg-gray-50 hover:shadow-md hover:saturate-100 dark:bg-gray-900 dark:hover:bg-gray-950"
+        prefetch={false}
+        href={donorId ? `/${locale}/${country.id}/donor/${donorId}` : "#"}
+      >
+        <div className="w-2 shrink-0 overflow-hidden rounded-full">
+          <DynamicStackedPartyDonations
+            country={country}
+            years={country.years}
+            locale={locale}
+            partyYearsSums={donor.partyYearSums}
+            direction={"vertical"}
+          />
+        </div>
+        <div className="overflow-hidden pl-2 text-sm">
+          <div className="truncate font-semibold">
+            {getDonorName(donor.name, translations)}
+          </div>
+          <div className="tabular-nums">
+            {formatCountryCurrency(locale, donor.sum, country)}
+          </div>
+        </div>
+      </Link>
+    </li>
+  );
+};
+
+export const DonorsHero: FC<{
+  locale: ConstLocale;
+  country: CountryConfig;
+  biggestDonors: BigDonor[];
+}> = ({ country, locale, biggestDonors }) => {
+  const { translations } = useTranslations();
+
+  return (
+    <ul className="flex flex-wrap pt-4">
+      {biggestDonors.slice(0, TOP_DONORS_TO_SHOW).map((bigDonor) => (
+        <BigDonorPill
+          translations={translations}
+          donor={bigDonor}
+          country={country}
+          key={bigDonor.id}
+          locale={locale}
+        />
+      ))}
+    </ul>
+  );
+};

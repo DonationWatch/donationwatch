@@ -47,14 +47,21 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-/tasks/load-data/**/.donations-cache/
 /test-results/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
-/public/data
-/public/thumbnails
-!/public/data/**/wikipedia/**
 .open-next
 .wrangler
 *.zip
+
+# app specific data which we don't want to ship
+/public/*.txt
+/public/data
+/public/thumbnails
+/public/geojson/**
+/tasks/load-data/**/.donations-cache/**
+/tasks/data/**/donations.ts
+/tasks/data/**/*.ts
+/src/data/**/*.ts
+/tasks/load-data/**/anonymized-donors.json

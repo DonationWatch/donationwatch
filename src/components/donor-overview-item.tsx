@@ -1,0 +1,57 @@
+import { ArrowRight } from "lucide-react";
+
+import { DonorLink } from "./donor-link";
+import { CurrencyRankingItem } from "./ranking-item";
+
+import type { CountryConfig } from "../utils/countries";
+import type { Translations } from "@/messages/translations";
+import type { ReactNode, FC } from "react";
+
+import { getDonorName } from "@/utils/donor";
+
+export const DonorOverviewItem: FC<{
+  name: string;
+  amount: number;
+  rank: number;
+  sum: number;
+  detail: ReactNode | undefined;
+  country: CountryConfig;
+  expanded: boolean;
+  onToggleExpanded: (expanded: boolean) => void;
+  translations: Translations;
+}> = ({
+  rank,
+  country,
+  name,
+  amount,
+  sum,
+  detail,
+  expanded,
+  onToggleExpanded,
+  translations,
+}) => {
+  return (
+    <CurrencyRankingItem
+      amount={amount}
+      rank={rank}
+      sum={sum}
+      detail={detail}
+      country={country}
+      expanded={expanded}
+      onToggleExpanded={onToggleExpanded}
+      openAction={
+        <DonorLink
+          className="m-0.5 ml-2 shrink-0 cursor-pointer rounded-full p-1.5 hover:bg-stone-200 dark:hover:bg-neutral-50/10"
+          country={country}
+          donor={name}
+        >
+          <ArrowRight size={16} />
+        </DonorLink>
+      }
+    >
+      <div className="truncate font-semibold">
+        {getDonorName(name, translations)}
+      </div>
+    </CurrencyRankingItem>
+  );
+};

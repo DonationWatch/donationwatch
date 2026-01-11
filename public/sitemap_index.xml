@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://donation.watch/sitemap/en.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://donation.watch/sitemap/de.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://donation.watch/sitemap/nl.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://donation.watch/sitemap/no.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://donation.watch/sitemap/cs.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://donation.watch/sitemap/et.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://donation.watch/sitemap/hr.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://donation.watch/sitemap/lv.xml</loc>
+  </sitemap>
+</sitemapindex>

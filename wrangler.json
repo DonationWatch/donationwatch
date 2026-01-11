@@ -1,0 +1,33 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "main": ".open-next/worker.js",
+  "name": "donationwatch",
+  "compatibility_date": "2025-09-15",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "preview_urls": true,
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "vars": {
+    "NODE_VERSION": "22"
+  },
+  "observability": {
+    "enabled": true,
+    "traces": {
+      "enabled": true,
+      "head_sampling_rate": 0.25
+    },
+    "logs": {
+      "invocation_logs": true,
+      "head_sampling_rate": 1
+    }
+  },
+  "kv_namespaces": [],
+  "placement": {
+    "mode": "smart"
+  },
+  "limits": {
+    "cpu_ms": 1000
+  }
+}

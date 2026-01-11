@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+@plugin "tailwindcss-content-visibility";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --breakpoint-*: initial;
+  --breakpoint-xs: 475px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  --color-primary-50: #eef2ff;
+  --color-primary-100: #e0e7ff;
+  --color-primary-200: #c7d2fe;
+  --color-primary-300: #a5b4fc;
+  --color-primary-400: #818cf8;
+  --color-primary-500: #6366f1;
+  --color-primary-600: #4f46e5;
+  --color-primary-700: #4338ca;
+  --color-primary-800: #3730a3;
+  --color-primary-900: #312e81;
+  --color-primary-950: #1e1b4b;
+
+  --saturate-80: 0.8;
+
+  --color-background: #f6f9fc;
+  --color-foreground: oklch(0.145 0 0);
+  --color-card: oklch(1 0 0);
+  --color-card-foreground: oklch(0.145 0 0);
+  --color-popover: var(--color-background);
+  --color-popover-foreground: oklch(0.145 0 0);
+  --color-primary: oklch(0.205 0 0);
+  --color-primary-foreground: oklch(0.985 0 0);
+  --color-secondary: oklch(0.97 0 0);
+  --color-secondary-foreground: oklch(0.205 0 0);
+  --color-muted: oklch(0.97 0 0);
+  --color-muted-foreground: oklch(0.556 0 0);
+  --color-accent: oklch(0.97 0 0);
+  --color-accent-foreground: oklch(0.205 0 0);
+  --color-border: oklch(0.922 0 0);
+  --color-input: oklch(0.922 0 0);
+  --color-ring: oklch(0.708 0 0);
+
+  --color-sidebar: var(--color-background);
+  --color-sidebar-foreground: oklch(0.145 0 0);
+  --color-sidebar-primary: oklch(0.205 0 0);
+  --color-sidebar-primary-foreground: oklch(0.985 0 0);
+  --color-sidebar-accent: var(--color-neutral-100);
+  --color-sidebar-accent-foreground: oklch(0.205 0 0);
+  --color-sidebar-border: var(--color-slate-200);
+  --color-sidebar-ring: oklch(0.708 0 0);
+}
+
+@utility container {
+  @media (width >= --theme(--breakpoint-xs)) {
+    max-width: none;
+  }
+  @media (width >= --theme(--breakpoint-xl)) {
+    max-width: var(--breakpoint-xl);
+  }
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    /*border-color: var(--color-gray-200, currentColor);*/
+  }
+}
+
+:root {
+  --rt-opacity: 1 !important;
+}
+
+body,
+html {
+  background-color: var(--color-background);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #070a13;
+    --color-foreground: oklch(0.985 0 0);
+    --color-card: oklch(0.205 0 0);
+    --color-card-foreground: oklch(0.985 0 0);
+    --color-popover: var(--color-slate-900);
+    --color-popover-foreground: oklch(0.985 0 0);
+    --color-primary: oklch(0.922 0 0);
+    --color-primary-foreground: oklch(0.205 0 0);
+    --color-secondary: oklch(0.269 0 0);
+    --color-secondary-foreground: oklch(0.985 0 0);
+    --color-muted: oklch(0.269 0 0);
+    --color-muted-foreground: oklch(0.708 0 0);
+    --color-accent: oklch(0.371 0 0);
+    --color-accent-foreground: oklch(0.985 0 0);
+    --color-border: oklch(1 0 0 / 10%);
+    --color-input: oklch(1 0 0 / 15%);
+    --color-ring: oklch(0.556 0 0);
+
+    --color-sidebar: var(--color-slate-900);
+    --color-sidebar-foreground: oklch(0.985 0 0);
+    --color-sidebar-primary: oklch(0.488 0.243 264.376);
+    --color-sidebar-primary-foreground: oklch(0.985 0 0);
+    --color-sidebar-accent: var(--color-slate-800);
+    --color-sidebar-accent-foreground: oklch(0.985 0 0);
+    --color-sidebar-border: color-mix(
+      in oklab,
+      var(--color-slate-50) 6%,
+      transparent
+    );
+    --color-sidebar-ring: oklch(0.439 0 0);
+  }
+}
+
+.card {
+  @apply block rounded-sm bg-white p-4 shadow-sm transition dark:bg-gray-900;
+}
+
+.card--action {
+  @apply cursor-pointer hover:bg-gray-50 hover:shadow-md dark:hover:bg-gray-950;
+}

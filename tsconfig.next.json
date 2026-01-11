@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.base.json",
+  "files": ["types/next-env.d.ts", "types/global.d.ts", "types/echarts.d.ts"],
+  "include": ["**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["**/*.test.ts", "tasks"],
+  "compilerOptions": {
+    "plugins": [{ "name": "next" }]
+  },
+}

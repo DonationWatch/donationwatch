@@ -1,0 +1,554 @@
+import { notFound } from "next/navigation";
+
+import { ErrorAlert, InfoAlert, SuccessAlert } from "../../../components/alert";
+import { Article, ArticleSection } from "../../../components/layout/article";
+import { NonCountryRootLayout } from "../../../components/ui/non-country-root-layout";
+import { formatTwoDigitDate } from "../../../utils/formatter";
+import { LOCALES } from "../../../utils/locales";
+import { generateAlternates } from "../../../utils/meta";
+import { notFoundMetadata } from "../../../utils/not-found-metadata";
+import { isValidLocale } from "../../../utils/validate";
+import { getTranslations, t } from "../translations";
+
+import type { Translations } from "../../../messages/translations";
+import type { ConstLocale } from "../../../utils/locales";
+import type { Metadata } from "next";
+import type { ReactNode } from "react";
+
+export const dynamicParams = false;
+export const dynamic = "error";
+
+export async function generateStaticParams() {
+  return LOCALES.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata(
+  props: PageProps<"/[locale]/fun">,
+): Promise<Metadata> {
+  const params = await props.params;
+
+  if (!isValidLocale(params.locale)) return notFoundMetadata;
+  const { locale } = params;
+
+  const translations = await getTranslations(locale);
+
+  return {
+    title: `${translations.fun.title} | DonationWatch`,
+    alternates: generateAlternates("fun"),
+  };
+}
+
+const FunFact = ({
+  locale,
+  translations,
+  title,
+  text,
+  status,
+  date,
+  children,
+}: {
+  locale: ConstLocale;
+  translations: Translations;
+  title: Record<ConstLocale, string>;
+  text: Record<ConstLocale, string>;
+  status?: { owner: string; type: "reported" | "fixed" | "wontfix" };
+  date: string;
+  children?: ReactNode;
+}) => {
+  return (
+    <ArticleSection title={title[locale]}>
+      <div className="space-y-4">
+        <h3 className="text-sm">
+          {formatTwoDigitDate(locale, new Date(date))}
+        </h3>
+        <p>{text[locale]}</p>
+        {children ? (
+          <pre className="font-mono text-sm whitespace-pre-line">
+            {children}
+          </pre>
+        ) : null}
+      </div>
+      {status ? (
+        status.type === "reported" ? (
+          <InfoAlert
+            text={t(translations.fun.reported, { owner: status.owner })}
+          />
+        ) : status.type === "wontfix" ? (
+          <ErrorAlert
+            text={t(translations.fun.reported_wontfix, {
+              owner: status.owner,
+            })}
+          />
+        ) : (
+          <SuccessAlert
+            text={t(translations.fun.reported_fixed, {
+              owner: status.owner,
+            })}
+          />
+        )
+      ) : null}
+    </ArticleSection>
+  );
+};
+
+export default async function Page(props: PageProps<"/[locale]/fun">) {
+  const params = await props.params;
+
+  if (!isValidLocale(params.locale)) return notFound();
+  const { locale } = params;
+
+  const translations = await getTranslations(locale);
+
+  return (
+    <NonCountryRootLayout locale={locale} translations={translations}>
+      <Article
+        title={translations.fun.title}
+        subtitle={
+          <>
+            <p>{translations.fun.p0}</p>
+            <p>{translations.fun.p1}</p>
+          </>
+        }
+      >
+        <FunFact
+          locale={locale}
+          translations={translations}
+          status={{
+            owner:
+              "Authority for European Political Parties and European Political Foundations",
+            type: "fixed",
+          }}
+          title={{
+            en: "EU Donations documents mix-up",
+            de: "Verwechslung bei EU-Spendendokumenten",
+            et: "EL-i annetuste dokumentide segadus",
+            nl: "Verwarring met EU-donatiedocumenten",
+            cs: "Záměna dokumentů o darování v EU",
+            lv: "ES ziedojumu dokumentu sajaukums",
+            hr: "Zamjena dokumenata o donacijama EU-a",
+            no: "EU-donasjonsdokumenter blandet sammen",
+          }}
+          text={{
+            en: "The 2025 donations page for European political parties mistakenly links party donations to an older version of the foundations report.",
+            de: "Die Spendenseite 2025 für europäische politische Parteien verweist fälschlicherweise auf eine ältere Version des Stiftungsberichts.",
+            et: "2025. aasta Euroopa erakondade annetuste leht viitab ekslikult fondi aruande vanemale versioonile.",
+            nl: "De donatiepagina van 2025 voor Europese politieke partijen verwijst per ongeluk naar een oudere versie van het stichtingsrapport.",
+            cs: "Stránka s dary za rok 2025 pro evropské politické strany omylem odkazuje na starší verzi zprávy o nadacích.",
+            lv: "2025. gada Eiropas politisko partiju ziedojumu lapa kļūdaini norāda uz vecāku fonda ziņojuma versiju.",
+            hr: "Stranica o donacijama za 2025. godinu za europske političke stranke pogrešno povezuje donacije stranaka sa starijom verzijom izvješća zaklade.",
+            no: "Siden for donasjoner i 2025 for europeiske politiske partier lenker ved en feil til en eldre versjon av stiftelsesrapporten.",
+          }}
+          date={"2025-11-03"}
+        >
+          <pre>
+            {`<a
+  href="/cmsdata/293644/2025 FOUNDATIONS Donations table as of 2025-03-11.pdf"
+  target="_blank"
+>
+  2025 PARTIES Donations
+</a>
+`}
+          </pre>
+        </FunFact>
+        <FunFact
+          locale={locale}
+          translations={translations}
+          title={{
+            en: "Czech test donations",
+            de: "Tschechische Testspenden",
+            et: "Tšehhi testannetused",
+            nl: "Tsjechische testdonaties",
+            cs: "České testovací dary",
+            lv: "Čehijas testa ziedojumi",
+            hr: "Češke probne donacije",
+            no: "Tsjekkiske testdonasjoner",
+          }}
+          text={{
+            en: 'The Czech ÚDHPSH seems to prepare their annual donation dataset with test data. ("Česká zkušební strana" can be translated to "Czech Testing Party").',
+            de: "Die tschechische ÚDHPSH scheint ihren jährlichen Spendedatensatz mit Testdaten vorzubereiten. („Česká zkušební strana“ kann als „Tschechische Testpartei“ übersetzt werden.)",
+            et: "Tundub, et Tšehhi ÚDHPSH valmistab oma iga-aastast annetuste andmekogumit testandmetega. („Česká zkušební strana“ tähendab „Tšehhi testipartei“.)",
+            nl: "De Tsjechische ÚDHPSH lijkt hun jaarlijkse donatiegegevensset met testgegevens voor te bereiden. („Česká zkušební strana“ kan worden vertaald als „Tsjechische testpartij“.)",
+            cs: "Česká ÚDHPSH zřejmě připravuje svůj každoroční datový soubor darů s testovacími daty. („Česká zkušební strana“ lze přeložit jako „Czech Testing Party“.)",
+            lv: "Izskatās, ka Čehijas ÚDHPSH sagatavo savu ikgadējo ziedojumu datu kopu ar testa datiem. („Česká zkušební strana“ var tulkot kā „Čehijas testēšanas partija“.)",
+            hr: "Čini se da češki ÚDHPSH priprema svoj godišnji skup podataka o donacijama s probnim podacima. („Česká zkušební strana“ može se prevesti kao „Češka probna stranka“.)",
+            no: 'Tsjekkias ÚDHPSH ser ut til å forberede sitt årlige donasjonsdatasett med testdata. ("Česká zkušební strana" kan oversettes til "Tsjekkiske testparti").',
+          }}
+          date={"2025-10-24"}
+        >
+          <pre>
+            {JSON.stringify(
+              {
+                shortName: "ČZS",
+                longName: "Česká zkušební strana",
+                donations: [
+                  {
+                    money: 1500,
+                    lastName: "Druhý",
+                    firstName: "Tester",
+                  },
+                  {
+                    money: 300,
+                    lastName: "Testovač",
+                    firstName: "Testovací",
+                  },
+                ],
+              },
+              null,
+              " ",
+            )}
+          </pre>
+        </FunFact>
+        <FunFact
+          locale={locale}
+          translations={translations}
+          title={{
+            en: "Typo Challenge in the AEC Dataset",
+            de: "Typo-Herausforderung im AEC-Datensatz",
+            et: "Trükivigade väljakutse AEC andmekogus",
+            nl: "Typo-uitdaging in de AEC Dataset",
+            cs: "Výzva překlepů v datové sadě AEC",
+            lv: "Nepareizrakstības izaicinājums AEC datu kopā",
+            hr: "Izazov s tipfelerima u AEC skupu podataka",
+            no: "Typo-utfordring i AEC-datasettet",
+          }}
+          text={{
+            en: 'While working with the Australian Electoral Commission’s “Detailed Receipts” dataset, we noticed creative spelling in the "received from" field. For example, WESTPAC BAKING CORPORATION appears as if someone traded banking for cakes! We’ve also come across at least eight inventive spelling attempts for the word "association.".',
+            de: "Beim Arbeiten mit dem „Detailed Receipts“-Datensatz der Australian Electoral Commission haben wir kreative Schreibweisen im Feld „received from“ bemerkt. Zum Beispiel erscheint WESTPAC BAKING CORPORATION, als hätte jemand Bankgeschäfte gegen Kuchen getauscht! Außerdem sind wir auf mindestens acht erfinderische Schreibversuche für das Wort „association“ gestoßen.",
+            et: "Töötades Australian Electoral Commissioni „Detailed Receipts“ andmekoguga, märkasime loomingulisi kirjaviisivigu „received from“ väljal. Näiteks on WESTPAC BAKING CORPORATION toodud kujul, justkui keegi oleks panganduse koogitegemise vastu vahetanud! Samuti oleme kohanud vähemalt kaheksat uudset katset kirjutada sõna „association“.",
+            nl: "Bij het werken met de 'Detailed Receipts'-dataset van de Australian Electoral Commission viel ons creatieve spelling op in het veld 'received from'. Zo lijkt WESTPAC BAKING CORPORATION wel alsof iemand bankzaken heeft verwisseld voor taarten! Ook kwamen we minstens acht originele spellingspogingen voor het woord 'association' tegen.",
+            cs: "Při práci s datovou sadou „Detailní příjmy“ od Australian Electoral Commission jsme si všimli kreativního pravopisu v poli „received from“. Například WESTPAC BAKING CORPORATION působí, jako by někdo vyměnil bankovnictví za pečení! Narazili jsme také na nejméně osm vynalézavých pokusů o napsání slova „association“.",
+            lv: "Strādājot ar Austrālijas Vēlēšanu komisijas „Detailed Receipts” datu kopu, pamanījām radošu pareizrakstību laukā „received from”. Piemēram, WESTPAC BAKING CORPORATION izskatās, it kā kāds būtu banku nomainījis pret kūkām! Esam saskārušies arī vismaz ar astoņiem izgudrojuma mēģinājumiem vārda „association” pareizrakstībā.",
+            hr: "Dok smo radili s „Detailed Receipts“ skupom podataka Australske izborne komisije, primijetili smo kreativno pisanje u polju „received from“. Na primjer, WESTPAC BAKING CORPORATION izgleda kao da je netko zamijenio bankarstvo za kolače! Također smo naišli na najmanje osam domišljatih pokušaja pravopisa riječi „association“.",
+            no: "Mens vi jobbet med Australian Electoral Commissions 'Detailed Receipts'-datasett, la vi merke til kreativ staving i feltet 'received from'. For eksempel ser WESTPAC BAKING CORPORATION ut som om noen har byttet bankvirksomhet mot kaker! Vi har også kommet over minst åtte oppfinnsomme staveforsøk for ordet 'association'.",
+          }}
+          date={"2025-08-08"}
+        >
+          association
+          <br />
+          associatiion
+          <br />
+          assocation
+          <br />
+          associatio
+          <br />
+          assocn
+          <br />
+          assoc
+          <br />
+          associoation
+          <br />
+          associaton
+          <br />
+          associaiton
+        </FunFact>
+        <FunFact
+          locale={locale}
+          translations={translations}
+          title={{
+            en: "UK Electoral Commission search site down after SSL certificate expiry",
+            de: "Suchseite der britischen Wahlkommission nach Ablauf des SSL-Zertifikats nicht erreichbar",
+            et: "Suurbritannia Valimiskomisjoni otsinguleht pole saadaval pärast SSL-sertifikaadi aegumist",
+            nl: "Zoekpagina van de Britse Kiescommissie niet bereikbaar na afloop SSL-certificaat",
+            cs: "Vyhledávací stránka britské volební komise nedostupná po vypršení platnosti SSL certifikátu",
+            lv: "Apvienotās Karalistes vēlēšanu komisijas meklēšanas vietne nav pieejama pēc SSL sertifikāta termiņa beigām",
+            hr: "Pretraživač stranica Britanske izborne komisije nedostupan nakon isteka SSL certifikata",
+            no: "UK Electoral Commission søkeside nede etter utløp av SSL-sertifikat",
+          }}
+          text={{
+            en: "The search portal for the UK Electoral Commission became unavailable due to an expired SSL certificate, blocking secure access for users.",
+            de: "Das Suchportal der britischen Wahlkommission wurde aufgrund eines abgelaufenen SSL-Zertifikats unerreichbar, wodurch der sichere Zugriff für Nutzer blockiert wurde.",
+            et: "Suurbritannia Valimiskomisjoni otsingupäringu portaal muutus kättesaamatu tänu aegunud SSL-sertifikaadile, mis blokeeris kasutajate turvalise ligipääsu.",
+            nl: "Het zoekportaal van de Britse Kiescommissie werd onbereikbaar door een verlopen SSL-certificaat, waardoor gebruikers geen veilige toegang meer hadden.",
+            cs: "Vyhledávací portál britské volební komise se stal nedostupným kvůli vypršení platnosti SSL certifikátu, čímž byla zablokována bezpečná přístupnost pro uživatele.",
+            lv: "Apvienotās Karalistes vēlēšanu komisijas meklēšanas portāls kļuva nepieejams, jo SSL sertifikāts bija beidzies, bloķējot drošu piekļuvi lietotājiem.",
+            hr: "Pretraživački portal Britanske izborne komisije postao je nedostupan zbog isteka SSL certifikata, čime je blokiran siguran pristup korisnicima.",
+            no: "Søkeportalen for UK Electoral Commission ble utilgjengelig på grunn av et utløpt SSL-sertifikat, noe som blokkerte sikker tilgang for brukere.",
+          }}
+          status={{
+            type: "fixed",
+            owner: "The Electoral Commission",
+          }}
+          date={"2025-06-07"}
+        >
+          This Connection is Invalid. SSL certificate expired.
+          <br />
+          <br />
+          Site: search.electoralcommission.org.uk
+          <br />
+          Certificate CN: search.electoralcommission.org.uk
+          <br />
+          Certificate Authority: GeoTrust TLS RSA CA G1
+          <br />
+          Certificate Validity:
+          <br />
+          Not Before: Jul 8 00:00:00 2024 GMT
+          <br />
+          Not After: Jun 6 23:59:59 2025 GMT
+        </FunFact>
+        <FunFact
+          locale={locale}
+          translations={translations}
+          title={{
+            en: "Missing documents in the Croatian database",
+            de: "Fehlende Dokumente in der kroatischen Datenbank",
+            et: "Puuduvad dokumendid Horvaatia andmebaasis",
+            nl: "Ontbrekende documenten in de Kroatische database",
+            cs: "Chybějící dokumenty v chorvatské databázi",
+            lv: "Trūkstošie dokumenti Horvātijas datubāzē",
+            hr: "Nedostajući dokumenti u hrvatskoj bazi podataka",
+            no: "Manglende dokumenter i den kroatiske databasen",
+          }}
+          text={{
+            en: 'The State Electoral Commission of the Republic of Croatia\'s database is missing certain party documents from 2019 and 2020, including lists of donations. These documents were previously linked but now return a "404 Not Found" error.',
+            de: 'Die Datenbank der Staatswahlkommission der Republik Kroatien fehlt es an bestimmten Parteidokumenten aus den Jahren 2019 und 2020, darunter Spendenlisten. Diese Dokumente waren zuvor verlinkt, liefern jetzt jedoch einen "404 Nicht gefunden"-Fehler.',
+            et: 'Horvaatia Vabariigi Riikliku Valimiskomisjoni andmebaasist puuduvad teatud erakondade dokumendid aastatest 2019 ja 2020, sealhulgas annetuste loendid. Need dokumendid olid varem lingitud, kuid nüüd tagastavad "404 Ei leitud" vea.',
+            nl: 'De database van de Staatsverkiezingscommissie van de Republiek Kroatië ontbeert bepaalde partijdocumenten uit 2019 en 2020, waaronder donatielijsten. Deze documenten waren eerder gelinkt, maar geven nu een "404 Niet gevonden"-fout.',
+            cs: 'Databáze Státní volební komise Republiky Chorvatsko chybí jisté stranické dokumenty z let 2019 a 2020, včetně seznamů darů. Tyto dokumenty byly dříve propojeny, nyní však vracejí chybu "404 Nenalezeno".',
+            lv: 'Horvātijas Republikas Valsts vēlēšanu komisijas datubāzē trūkst noteikti partiju dokumenti no 2019. un 2020. gada, tostarp ziedojumu saraksti. Šie dokumenti bija iepriekš saistīti, bet tagad atgriež "404 Nav atrasts" kļūdu.',
+            hr: 'Baza podataka Državne izborne komisije Republike Hrvatske nedostaje određeni stranački dokumenti iz 2019. i 2020. godine, uključujući i popise donacija. Ti dokumenti su ranije bili povezani, ali sada vraćaju grešku "404 Nije pronađeno".',
+            no: "Databasen til Statens valgkommisjon i Republikken Kroatia mangler visse partidokumenter fra 2019 og 2020, inkludert lister over donasjoner. Disse dokumentene var tidligere",
+          }}
+          status={{
+            type: "fixed",
+            owner: "Državno izborno povjerenstvo Republike Hrvatske",
+          }}
+          date={"2025-03-06"}
+        >
+          <ul>
+            <li>2019 - HRVATSKA BRANITELJSKA PUČKA STRANKA - HBPS</li>
+            <li>2019 - STRANKA UMIROVLJENIKA - SU</li>
+            <li>
+              2020 - MAKSIMIRSKA GRAĐANSKA INICIJATIVA - ZAJEDNO - MGI - ZAJEDNO
+            </li>
+            <li>2020 - ŽELJKO KERUM - HRVATSKA GRAĐANSKA STRANKA - HGS</li>
+          </ul>
+        </FunFact>
+        <FunFact
+          locale={locale}
+          translations={translations}
+          title={{
+            en: "EU foundation donation country code uses Greek unicode characters",
+            de: "EU-Stiftungsspenden-Ländercode verwendet griechische Unicode-Zeichen",
+            et: "ELi sihtasutuse annetuse riigikood kasutab kreeka unikoodimärke.",
+            nl: "De landcode voor EU-stichtingsdonaties gebruikt Griekse unicode-tekens",
+            cs: "Kód země nadace EU používá řecké znaky Unicode",
+            lv: "ES fonda ziedojumu valsts kods izmanto grieķu unikoda rakstzīmes",
+            hr: "Šifra države donacije zaklade EU koristi grčke unicode znakove",
+            no: "EU-stiftelses donasjonslandskode bruker greske unicode-tegn",
+          }}
+          text={{
+            en:
+              "There was one donation in the 2021 EU foundation document that randomly used Greek unicode characters to represent the ISO country code for Belgium " +
+              "(GREEK CAPITAL LETTER BETA and GREEK CAPITAL LETTER EPSILON). Everywhere else, they correctly use the ASCII characters instead.",
+            de: "Es gab eine Spende im EU-Gründungsdokument 2021, bei der willkürlich griechische Unicode-Zeichen zur Darstellung des ISO-Ländercodes für Belgien verwendet wurden (GREEK CAPITAL LETTER BETA and GREEK CAPITAL LETTER EPSILON). Überall sonst werden stattdessen korrekt die ASCII-Zeichen verwendet.",
+            et: "ELi 2021. aasta alusdokumendis oli üks annetus, milles kasutati juhuslikult Kreeka unikoodimärke Belgia ISO riigikoodi tähistamiseks (GREEK CAPITAL LETTER BETA and GREEK CAPITAL LETTER EPSILON). Kõikjal mujal kasutatakse selle asemel korrektselt ASCII-märke.",
+            nl: "Er was één donatie in het EU-stichtingsdocument van 2021 die willekeurig Griekse unicode-tekens gebruikte om de ISO-landencode voor België weer te geven (GREEK CAPITAL LETTER BETA and GREEK CAPITAL LETTER EPSILON). Overal elders worden de ASCII-tekens correct gebruikt.",
+            cs: "V dokumentu o založení EU v roce 2021 byl jeden dar, který náhodně použil řecké znaky unicode pro reprezentaci kódu ISO země Belgie (GREEK CAPITAL LETTER BETA and GREEK CAPITAL LETTER EPSILON). Všude jinde se místo toho správně používají znaky ASCII.",
+            lv: "2021. gada ES dibināšanas dokumentā bija viens ziedojums, kurā Beļģijas ISO valsts koda apzīmēšanai nejauši tika izmantotas grieķu vienkoda zīmes (GREEK CAPITAL LETTER BETA and GREEK CAPITAL LETTER EPSILON). Visur citur tā vietā pareizi izmantotas ASCII rakstzīmes.",
+            hr: "Postojala je jedna donacija u temeljnom dokumentu EU-a za 2021. koja je nasumično koristila grčke unicode znakove za predstavljanje ISO koda zemlje za Belgiju (GREEK CAPITAL LETTER BETA i GREEK CAPITAL LETTER EPSILON). Svugdje drugdje ispravno koriste ASCII znakove.",
+            no: "Det var en donasjon i 2021 EU-stiftelsesdokumentet som tilfeldig brukte greske unicode-tegn for å representere ISO-landskoden for Belgia (GREEK CAPITAL LETTER BETA and GREEK CAPITAL LETTER EPSILON). Overalt ellers bruker de i stedet korrekt ASCII-tegn.",
+          }}
+          date={"2024-12-10"}
+          status={{
+            type: "reported",
+            owner:
+              "Authority for European Political Parties and European Political Foundations",
+          }}
+        >
+          NOVE SA;<span className="font-black text-red-800">ΒΕ</span>;6000
+          <br />
+          NOVE SA;<span className="font-black text-green-800">BE</span>;6000
+        </FunFact>
+        <FunFact
+          locale={locale}
+          translations={translations}
+          title={{
+            en: "Australia had some donations dated to 2106",
+            de: "Australien hatte einige Spenden, die auf das Jahr 2106 datiert waren.",
+            et: "Austraalias olid mõned annetused dateeritud 2106. aastani",
+            nl: "Australië had een aantal donaties gedateerd op 2106",
+            cs: "Austrálie měla několik darů datovaných do roku 2106",
+            lv: "Austrālijā bija daži ziedojumi, kas datēti ar 2106. gadu",
+            hr: "Australija je imala neke donacije iz 2106",
+            no: "Australia hadde noen donasjoner datert til 2106",
+          }}
+          text={{
+            en: "There seemed to be a typo for in the dataset of the Australian Electoral Commission for some donations in the year 2016 that were dated to 2106.",
+            de: "Im Datensatz der australischen Wahlkommission scheint sich ein Tippfehler eingeschlichen zu haben, denn einige Spenden aus dem Jahr 2016 wurden auf das Jahr 2106 datiert.",
+            et: "Tundus, et Austraalia valimiskomisjoni andmekogumis on trükiviga mõne annetuse puhul aastatel 2016-2106.",
+            nl: "Er leek een tikfout te zitten in de dataset van de Australian Electoral Commission voor sommige donaties in het jaar 2016 die gedateerd waren op 2106.",
+            cs: "Zdá se, že v souboru údajů australské volební komise došlo k překlepu u některých darů v roce 2016, které byly datovány do roku 2106.",
+            lv: "Šķiet, ka Austrālijas Vēlēšanu komisijas datubāzē ir pārrakstīšanās kļūda attiecībā uz dažiem ziedojumiem 2016. gadā, kas datēti ar 2106. gadu.",
+            hr: "Čini se da postoji tipfeler u skupu podataka Australskog izbornog povjerenstva za neke donacije u 2016. godini koje su bile datirane u 2106. godinu.",
+            no: "Det ser ut til å være en skrivefeil i datasettet til Australian Electoral Commission for noen donasjoner i året 2016 som var datert til 2106.",
+          }}
+          status={{
+            type: "wontfix",
+            owner: "Australian Electoral Commission",
+          }}
+          date={"2024-11-22"}
+        >
+          2015-16;XXX;ALP National Secretariat/ALP - FED;4/14/
+          <span className="font-black text-red-800">2106</span>;3500
+          <br />
+          2015-16;XXX;Liberal Party of Australia/LIB-NSW;5/25/
+          <span className="font-black text-red-800">2106</span>;1500
+        </FunFact>
+        <FunFact
+          locale={locale}
+          translations={translations}
+          title={{
+            en: "Austria changed their currency format for new rows",
+            de: "Österreich hat sein Währungsformat für neue Zeilen geändert",
+            et: "Austria muutis oma valuutaformaati uute ridade jaoks",
+            nl: "Oostenrijk heeft zijn valutaformaat gewijzigd voor nieuwe rijen",
+            cs: "Rakousko změnilo formát měny pro nové řádky",
+            lv: "Austrija mainīja valūtas formātu jaunām rindām",
+            hr: "Austrija je promijenila format valute za nove retke",
+            no: "Østerrike endret valutaformatet for nye rader",
+          }}
+          text={{
+            en: 'For some reason the 2024 donation document from Austria changed it\'s currency format for new rows from "EUR" to "Euro".',
+            de: "Aus irgendeinem Grund änderte das österreichische Spendendokument 2024 das Währungsformat für neue Zeilen von „EUR“ auf „Euro“.",
+            et: "Mingil põhjusel muudeti Austria 2024. aasta annetusdokumendis uute ridade valuutaformaat „EUR“ asemel „Euro“.",
+            nl: "Om de een of andere reden heeft het 2024 donatiedocument van Oostenrijk de valuta-indeling voor nieuwe rijen veranderd van “EUR” in “Euro”.",
+            cs: "Z nějakého důvodu se v rakouském dotačním dokumentu na rok 2024 změnil formát měny pro nové řádky z „EUR“ na „Euro“.",
+            lv: "Kādu iemeslu dēļ Austrijas 2024. gada ziedojuma dokumentā jaunajām rindām mainīts valūtas formāts no “EUR” uz “Euro”.",
+            hr: 'Iz nekog je razloga dokument o donaciji iz Austrije iz 2024. promijenio format valute za nove retke iz "EUR" u "Euro".',
+            no: 'Av en eller annen grunn endret Østerrikes donasjonsdokument for 2024 valutaformatet for nye rader fra "EUR" til "Euro".',
+          }}
+          status={{ type: "fixed", owner: "Rechnungshof" }}
+          date={"2024-11-08"}
+        >
+          KPÖ;30.07.24;27.06.24;XXX;1100;1000;
+          <span className="font-black text-green-800">EUR</span>;KPÖ
+          Bundespartei; KPÖ;04.11.24;26.07.24;YYY;1150;1000;
+          <span className="font-black text-red-800">Euro</span>;KPÖ
+          Bundespartei;
+        </FunFact>
+        <FunFact
+          locale={locale}
+          translations={translations}
+          title={{
+            en: "Incorrect link on Romania's donation page",
+            de: "Falscher Link auf der Spendenseite von Rumänien",
+            et: "Vale link Rumeenia annetuste lehel",
+            nl: "Onjuiste link op de donatiepagina van Roemenië",
+            cs: "Nesprávný odkaz na darovací stránce Rumunska",
+            lv: "Nepareiza saite uz Rumānijas ziedojumu lapu",
+            hr: "Netočna poveznica na stranici za donacije Rumunjske",
+            no: "Feil lenke på donasjonssiden til Romania",
+          }}
+          text={{
+            en: 'Romania links to the donation data of "PDR PARTIDUL DISPORA ROMANA" which points to a 404 page.',
+            de: "Rumänien verweist auf die Spendendaten von „PDR PARTIDUL DISPORA ROMANA“, die auf eine 404-Seite verweisen.",
+            et: "Rumeenia viitab „PDR PARTIDUL DISPORA ROMANA“ annetusandmetele, mis viitavad 404-leheküljele.",
+            nl: "Roemenië verwijst naar de donatiegegevens van “PDR PARTIDUL DISPORA ROMANA”, die naar een 404-pagina verwijst.",
+            cs: "Rumunsko odkazuje na darovací údaje společnosti „PDR PARTIDUL DISPORA ROMANA“, které odkazují na stránku 404.",
+            lv: "Rumānijas saites uz “PDR PARTIDUL DISPORA ROMANA” ziedojumu datiem norāda uz 404 lapu.",
+            hr: 'Rumunjska se povezuje s podacima o donacijama "PDR PARTIDUL DISPORA ROMANA" koji upućuju na stranicu 404.',
+            no: 'Romania lenker til donasjonsdataene til "PDR PARTIDUL DISPORA ROMANA" som peker til en 404-side.',
+          }}
+          status={{
+            type: "reported",
+            owner: "Departamentul de Control al Finanțării Partidelor",
+          }}
+          date={"2024-09-29"}
+        />
+        <FunFact
+          locale={locale}
+          translations={translations}
+          title={{
+            en: "Changed date format for new donations in Germany",
+            de: "Geändertes Datumsformat für neue Spenden in Deutschland",
+            et: "Muudetud kuupäeva formaat uute annetuste puhul Saksamaal",
+            nl: "Datumnotatie gewijzigd voor nieuwe donaties in Duitsland",
+            cs: "Změna formátu data pro nové dary v Německu",
+            lv: "Mainīts datumu formāts jauniem ziedojumiem Vācijā",
+            hr: "Promijenjen format datuma za nove donacije u Njemačkoj",
+            no: "Endret datoformat for nye donasjoner i Tyskland",
+          }}
+          text={{
+            en: "The Bundestag has changed the date format for new donations. The month was written out for the newly added donations. This change was later corrected.",
+            de: "Der Bundestag hat das Datumsformat für neue Spenden geändert. Bei den neu hinzugekommenen Spenden wurde der Monat ausgeschrieben. Diese Änderung wurde später korrigiert.",
+            et: "Bundestag on muutnud uute annetuste kuupäevaformaati. Kuu kirjutati välja uute lisatud annetuste puhul. See muudatus parandati hiljem.",
+            nl: "De Bondsdag heeft de datumnotatie voor nieuwe donaties gewijzigd. De maand werd uitgeschreven voor de nieuw toegevoegde donaties. Deze wijziging is later gecorrigeerd.",
+            cs: "Spolkový sněm změnil formát data pro nové dary. U nově přidaných darů byl vypsán měsíc. Tato změna byla později opravena.",
+            lv: "Bundestāgs ir mainījis datumu formātu jauniem ziedojumiem. Jaunizveidotajiem ziedojumiem tika izrakstīts mēnesis. Vēlāk šī izmaiņa tika labota.",
+            hr: "Bundestag je promijenio format datuma za nove donacije. Mjesec je ispisan za novododane donacije. Ta je promjena kasnije ispravljena.",
+            no: "Bundestag har endret datoformatet for nye donasjoner. Måneden ble skrevet ut for de nylig tilføyde donasjonene. Denne endringen ble senere korrigert.",
+          }}
+          date={"2024-04-04"}
+        >
+          <span className="font-black text-red-800">3. April 2024</span>
+          <br />
+          <span className="font-black text-green-800">03.04.2024</span>
+        </FunFact>
+        <FunFact
+          locale={locale}
+          translations={translations}
+          title={{
+            en: "Germany had a typo in one of its zipcode for Frankfurt",
+            de: "Deutschland hatte einen Tippfehler in einer seiner Postleitzahlen für Frankfurt",
+            et: "Saksamaal oli ühes Frankfurdi postiindeksis trükiviga",
+            nl: "Duitsland had een typfout in een van zijn postcodes voor Frankfurt",
+            cs: "Německo mělo překlep v jednom z poštovních směrovacích čísel pro Frankfurt.",
+            lv: "Vācijā vienā no Frankfurtes pasta indeksiem bija pārrakstīšanās kļūda.",
+            hr: "Njemačka je imala tipfeler u jednom od svojih poštanskih brojeva za Frankfurt",
+            no: "Tyskland hadde en skrivefeil i en av postnumrene sine for Frankfurt",
+          }}
+          text={{
+            en: `One donation in 2021 had "0329" as its zip for Frankfurt, which is incorrect as it should be "60329".`,
+            de: "Bei einer Spende im Jahr 2021 war als Postleitzahl für Frankfurt „0329“ angegeben, was nicht korrekt ist, da die Postleitzahl „60329“ lauten müsste.",
+            et: "Ühel annetusel aastal 2021 oli Frankfurdi postiindeksiks „0329“, mis on vale, kuna see peaks olema „60329“.",
+            nl: "Een donatie in 2021 had “0329” als postcode voor Frankfurt, wat onjuist is omdat het “60329” zou moeten zijn.",
+            cs: "U jednoho příspěvku v roce 2021 bylo jako poštovní směrovací číslo pro Frankfurt uvedeno „0329“, což není správně, protože by mělo být „60329“.",
+            lv: "Vienā 2021. gada ziedojumā kā Frankfurtes pasta indekss bija norādīts “0329”, kas ir nepareizi, jo tam vajadzētu būt “60329”.",
+            hr: 'Jedna donacija 2021. imala je "0329" kao poštanski broj za Frankfurt, što je netočno jer bi trebalo biti "60329".',
+            no: 'En donasjon i 2021 hadde "0329" som postnummer for Frankfurt, noe som er feil da det skulle vært "60329".',
+          }}
+          status={{
+            type: "fixed",
+            owner: "Bundestag",
+          }}
+          date={"2024-02-23"}
+        >
+          Deutsche Vermögensberatung AG
+          <br />
+          Wilhelm-Leuschner-Straße 24
+          <br />
+          <span className="font-black text-red-800">0329</span> Frankfurt am
+          Main
+        </FunFact>
+        <FunFact
+          locale={locale}
+          translations={translations}
+          title={{
+            en: "The Austrian party donation document for 2022 randomly uses macintosh file encoding",
+            de: "Das österreichische Parteispendenpapier für 2022 verwendet zufällig die Macintosh-Dateikodierung",
+            et: "Austria partei 2022. aasta annetusdokument kasutab juhuslikult macintosh-faili kodeeringut",
+            nl: "Het donatiedocument van de Oostenrijkse partij voor 2022 gebruikt willekeurig macintosh-bestandscodering",
+            cs: "Dokument rakouské strany o dotacích na rok 2022 namátkou používá kódování souborů Macintosh.",
+            lv: "Austrijas partijas ziedojumu dokumentā 2022. gadam izlases veidā tiek izmantota macintosh failu kodēšana",
+            hr: "Dokument o donaciji austrijske stranke za 2022. nasumično koristi kodiranje datoteka za Macintosh",
+            no: "Det østerrikske partiets donasjonsdokument for 2022 bruker tilfeldig macintosh-fil-koding",
+          }}
+          text={{
+            en: `All csv files from Austria use utf8 encoding except the one from 2022 which uses Apple Macintosh encoding.`,
+            de: "Alle csv-Dateien aus Österreich verwenden utf8-Kodierung, mit Ausnahme derjenigen aus dem Jahr 2022, die Apple Macintosh-Kodierung verwendet.",
+            et: "Kõik Austriast pärit csv-failid kasutavad utf8-kodeeringut, välja arvatud 2022. aasta fail, mis kasutab Apple Macintoshi kodeeringut.",
+            nl: "Alle csv-bestanden uit Oostenrijk gebruiken utf8 codering, behalve die uit 2022 die Apple Macintosh codering gebruikt.",
+            cs: "Všechny soubory csv z Rakouska používají kódování utf8 s výjimkou souboru z roku 2022, který používá kódování Apple Macintosh.",
+            lv: "Visos Austrijas csv failos tiek izmantota utf8 kodēšana, izņemot 2022. gada failu, kurā izmantota Apple Macintosh kodēšana.",
+            hr: "Sve csv datoteke iz Austrije koriste utf8 kodiranje osim one iz 2022. koja koristi Apple Macintosh kodiranje.",
+            no: "Alle csv-filer fra Østerrike bruker utf8-koding bortsett fra den fra 2022 som bruker Apple Macintosh-koding.",
+          }}
+          date={"2024-02-06"}
+        >
+          Zu ver<span className="font-black text-red-800">�</span>
+          ffentlichen;;;;;;
+        </FunFact>
+      </Article>
+    </NonCountryRootLayout>
+  );
+}

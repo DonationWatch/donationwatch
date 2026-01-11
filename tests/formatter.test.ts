@@ -1,0 +1,89 @@
+import { expect, test } from "vitest";
+
+import { Country } from "../src/utils/countries";
+import { getCountryConfig } from "../src/utils/data/get-country-config";
+import { dateDiffInDays } from "../src/utils/date";
+import {
+  formatCountryCurrency,
+  formatDate,
+  formatPercentFormat,
+  formatRelativeDate,
+  formatTwoDigitDate,
+  formatYearsRange,
+} from "../src/utils/formatter";
+
+test("format EUR", async () => {
+  const countryConfig = await getCountryConfig(Country.germany);
+
+  expect(formatCountryCurrency("en", 0, countryConfig)).toBe("€0.00");
+  expect(formatCountryCurrency("en", 100, countryConfig)).toBe("€100.00");
+
+  expect(formatCountryCurrency("de", 1, countryConfig)).toBe("1,00 €");
+  expect(formatCountryCurrency("de", 200, countryConfig)).toBe("200,00 €");
+});
+
+test("format CHF", async () => {
+  const countryConfig = await getCountryConfig(Country.switzerland);
+
+  expect(formatCountryCurrency("en", 0, countryConfig)).toBe("CHF 0.00");
+  expect(formatCountryCurrency("en", 100, countryConfig)).toBe("CHF 100.00");
+
+  expect(formatCountryCurrency("de", 1, countryConfig)).toBe("1,00 CHF");
+  expect(formatCountryCurrency("de", 200, countryConfig)).toBe("200,00 CHF");
+});
+
+test("formatDate", () => {
+  const date1 = new Date("2023-11-15T08:31:57.418Z");
+  const date2 = new Date("2023-11-11T08:31:57.418Z").getTime();
+
+  expect(formatDate("en", date1)).toBe("November 15, 2023");
+  expect(formatDate("en", date2)).toBe("November 11, 2023");
+
+  expect(formatDate("de", date1)).toBe("15. November 2023");
+  expect(formatDate("de", date2)).toBe("11. November 2023");
+});
+
+test("formatTwoDigitDate", () => {
+  const date1 = new Date("2023-11-15T08:31:57.418Z");
+  const date2 = new Date("2023-11-11T08:31:57.418Z").getTime();
+
+  expect(formatTwoDigitDate("en", date1)).toBe("11/15/23");
+  expect(formatTwoDigitDate("en", date2)).toBe("11/11/23");
+
+  expect(formatTwoDigitDate("de", date1)).toBe("15.11.23");
+  expect(formatTwoDigitDate("de", date2)).toBe("11.11.23");
+});
+
+test("formatRelativeDate", () => {
+  const date1 = new Date("2023-11-15T08:31:57.418Z");
+  const date2 = new Date("2023-11-11T08:31:57.418Z");
+  const diff = dateDiffInDays(date1, date2);
+
+  expect(formatRelativeDate("en", diff, "days")).toBe("4 days ago");
+
+  expect(formatRelativeDate("de", diff, "days")).toBe("vor 4 Tagen");
+});
+
+test("formatRelativeDate today", () => {
+  const date1 = new Date("2023-11-15T08:31:57.418Z");
+  const date2 = new Date("2023-11-15T12:31:57.418Z");
+  const diff = dateDiffInDays(date1, date2);
+
+  expect(formatRelativeDate("en", diff, "days")).toBe("");
+  expect(formatRelativeDate("de", diff, "days")).toBe("");
+});
+
+test("formatPercentFormat", () => {
+  expect(formatPercentFormat("en", 0.5)).toBe("50%");
+  expect(formatPercentFormat("en", 0.25)).toBe("25%");
+
+  expect(formatPercentFormat("de", 0.5)).toBe("50 %");
+  expect(formatPercentFormat("de", 0.25)).toBe("25 %");
+});
+
+test("formatYearsRange", () => {
+  expect(formatYearsRange([])).toBe("");
+  expect(formatYearsRange(["2010"])).toBe("2010");
+  expect(formatYearsRange(["2010", "2011"])).toBe("2010 - 2011");
+  expect(formatYearsRange(["2010", "2011", "2012"])).toBe("2010 - 2012");
+});

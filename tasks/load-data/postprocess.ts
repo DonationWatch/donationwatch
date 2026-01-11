@@ -1,0 +1,558 @@
+import assert from "assert";
+import fs from "fs/promises";
+import path from "path";
+import { fileURLToPath } from "url";
+
+import {
+  DONOR_ID_HASH_LEN,
+  MOST_RECENT_HISTORY_SIZE,
+  BIGGEST_DONATIONS_COUNT,
+} from "../../src/utils/config";
+import { Country } from "../../src/utils/countries";
+import { getCountryConfig } from "../../src/utils/data/get-country-config";
+import { getHistory } from "../../src/utils/data/get-history";
+import { donationYear } from "../../src/utils/date";
+import { getTransparency } from "../../src/utils/loader/normalized";
+import { getWikiArticles } from "../../src/utils/loader/wiki";
+import { donationDateSorter } from "../../src/utils/sort";
+import { getDonations } from "../data/load-donations";
+import { jsonAsTsModule, jsonAsTsModuleWithType } from "../utils";
+import {
+  donationsToDonationsDocumentWithDonorIds,
+  donationsToDonationsDocumentWithoutDonorIds,
+  hash,
+} from "./util";
+import { sumPartySums } from "../../src/utils/math";
+import { DonationField } from "../../src/utils/types";
+
+import type { CountryCode, CountryConfig } from "../../src/utils/countries";
+import type {
+  PartyStats,
+  PartyYearsSums,
+} from "../../src/utils/loader/party-years-sums";
+import type {
+  Donation,
+  Party,
+  DonorMeta,
+  DonorMetaRelation,
+  DonorMetaDefinition,
+} from "../../src/utils/types";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const buildMostRecentDonations = (
+  country: CountryConfig,
+  donations: Donation[],
+) => {
+  return getHistory(country, donations)
+    .filter((entry) => entry.date)
+    .toSorted((a, b) =>
+      donationDateSorter(
+        {
+          [DonationField.Date]: a.date,
+          [DonationField.Id]: a.id,
+          idx: a.id,
+        },
+        {
+          [DonationField.Date]: b.date,
+          [DonationField.Id]: b.id,
+          idx: b.id,
+        },
+      ),
+    )
+    .toReversed()
+    .slice(0, MOST_RECENT_HISTORY_SIZE)
+    .toSorted((a, b) =>
+      donationDateSorter(
+        {
+          [DonationField.Date]: a.date,
+          [DonationField.Id]: a.id,
+          idx: a.id,
+        },
+        {
+          [DonationField.Date]: b.date,
+          [DonationField.Id]: b.id,
+          idx: b.id,
+        },
+      ),
+    )
+    .toReversed();
+};
+
+const getPartySumPartYear = (
+  country: CountryConfig,
+  donations: Donation[],
+  parties: Party[],
+  years: string[],
+): Record<string, PartyStats> => {
+  const sums: Record<
+    string,
+    {
+      sum: number;
+      count: number;
+      average: number;
+      lastDonation: string;
+    }
+  > = {};
+
+  const yearsSet = new Set(years);
+  const partiesSet = new Set(parties.map((p) => p.id));
+
+  donations.forEach((donation) => {
+    if (!yearsSet.has(donationYear(donation))) return;
+    if (!partiesSet.has(donation[DonationField.Receiver])) return;
+
+    sums[donation[DonationField.Receiver]] ??= {
+      sum: 0,
+      count: 0,
+      average: 0,
+      lastDonation: donation[DonationField.Date],
+    };
+
+    sums[donation[DonationField.Receiver]].sum +=
+      donation[DonationField.Amount];
+    sums[donation[DonationField.Receiver]].count++;
+    if (
+      sums[donation[DonationField.Receiver]].lastDonation <
+      donation[DonationField.Date]
+    ) {
+      sums[donation[DonationField.Receiver]].lastDonation =
+        donation[DonationField.Date];
+    }
+  });
+
+  return Object.fromEntries(
+    Object.entries(sums).map(([party, stats]) => {
+      return [
+        party,
+        {
+          sum: stats.sum,
+          count: stats.count,
+          average: stats.count === 0 ? 0 : stats.sum / stats.count,
+          lastDonation: stats.lastDonation,
+        },
+      ];
+    }),
+  );
+};
+
+const buildPartySums = (country: CountryConfig, donations: Donation[]) => {
+  const result: Record<string, ReturnType<typeof getPartySumPartYear>> = {};
+
+  country.years.forEach((year) => {
+    const parties = country.parties.filter((party) =>
+      party.years.includes(year),
+    );
+    result[year] = getPartySumPartYear(country, donations, parties, [year]);
+  });
+
+  return result;
+};
+
+const buildBiggestDonors = (country: CountryConfig, donations: Donation[]) => {
+  const result: Record<
+    string,
+    { name: string; sum: number; partyYearSums: PartyYearsSums }
+  > = {};
+  const amount = 30;
+
+  donations.forEach((donation) => {
+    const year = donationYear(donation);
+    const donorId = hash(donation[DonationField.DonorName]);
+    result[donorId] ??= {
+      sum: 0,
+      name: donation[DonationField.DonorName],
+      partyYearSums: {},
+    };
+    result[donorId].sum += donation[DonationField.Amount];
+
+    result[donorId].partyYearSums ??= {};
+    result[donorId].partyYearSums[year] ??= {};
+    result[donorId].partyYearSums[year][donation[DonationField.Receiver]] ??= {
+      sum: 0,
+      count: 0,
+      average: 0,
+      lastDonation: donation[DonationField.Date],
+    };
+
+    result[donorId].partyYearSums[year][donation[DonationField.Receiver]].sum +=
+      donation[DonationField.Amount];
+    result[donorId].partyYearSums[year][donation[DonationField.Receiver]]
+      .count++;
+  });
+
+  return Object.entries(result)
+    .toSorted(([, a], [, b]) => b.sum - a.sum)
+    .slice(0, amount)
+    .map(([id, { name, sum, partyYearSums }]) => ({
+      id,
+      name,
+      sum,
+      partyYearSums,
+    }));
+};
+
+const buildBiggestDonations = (
+  country: CountryConfig,
+  donations: Donation[],
+) => {
+  return donations
+    .toSorted((a, b) => b[DonationField.Amount] - a[DonationField.Amount])
+    .slice(0, BIGGEST_DONATIONS_COUNT);
+};
+
+const prebuildWikipediaJsons = async (country: CountryConfig) => {
+  const publicDataDir = path.join(__dirname, "../../public/data", country.id);
+  const byPageId = path.join(publicDataDir, "wikipedia/by-pageId");
+
+  await fs.mkdir(byPageId, { recursive: true });
+
+  const { articles } = await getWikiArticles(country.id);
+
+  for (const [pageId, article] of Object.entries(articles)) {
+    await fs.writeFile(
+      path.join(byPageId, `${pageId}.json`),
+      JSON.stringify({ extract: article }),
+    );
+  }
+};
+
+const postprocessGeojson = async () => {
+  const publicDataDir = path.join(__dirname, "../../public/geojson");
+
+  await fs.mkdir(publicDataDir, { recursive: true });
+
+  for (const file of ["europe.ts", "austria.ts", "germany.ts", "canada.ts"]) {
+    const content = await import(`./geojson/${file}`).then(
+      (module) => module.default,
+    );
+    await fs.writeFile(
+      path.join(publicDataDir, file),
+      jsonAsTsModule(JSON.stringify(content)),
+    );
+  }
+};
+
+const prebuildStaticNormalizationJsons = async (country: CountryConfig) => {
+  const dataDir = path.join(__dirname, "../../public/data", country.id);
+  const normalized = await getTransparency(country.id);
+
+  await fs.writeFile(
+    path.join(dataDir, "normalized.json"),
+    JSON.stringify(normalized),
+  );
+};
+
+const prebuiltDonorIds = async (
+  country: CountryConfig,
+  donations: Donation[],
+) => {
+  const publicDataDir = path.join(__dirname, "../../public/data", country.id);
+  const fileName = path.join(publicDataDir, "donor-ids.json");
+  const donorSums: Record<string, number> = {};
+
+  donations.forEach((donation) => {
+    donorSums[donation[DonationField.DonorName]] ??= 0;
+    donorSums[donation[DonationField.DonorName]] +=
+      donation[DonationField.Amount];
+  });
+
+  await fs.writeFile(
+    fileName,
+    JSON.stringify({
+      donors: Object.entries(donorSums)
+        .toSorted(([, a], [, b]) => b - a)
+        .map(([id]) => id),
+    }),
+  );
+};
+
+const prebuildDonorMeta = async (
+  country: CountryConfig,
+  donations: Donation[],
+) => {
+  const donorMetaDir = path.join(
+    __dirname,
+    "../../public/data",
+    country.id,
+    "donor-meta",
+  );
+
+  await fs.mkdir(donorMetaDir, { recursive: true });
+
+  const donorMetaPath = path.join(
+    __dirname,
+    `../data/${country.code.toLowerCase()}/donor-meta.ts`,
+  );
+  const { default: donorMeta }: { default: DonorMetaDefinition } = await import(
+    donorMetaPath
+  );
+  const processedMeta: Record<string, DonorMeta> = {};
+
+  const relationDonors = new Set<string>();
+
+  donorMeta.relations?.forEach((relations) => {
+    relations.forEach((rel) => relationDonors.add(rel[0]));
+  });
+
+  // [donor, sums]
+  const donorPartySums: Record<string, PartyYearsSums> = {};
+
+  donations.forEach((donation) => {
+    const receiver = donation[DonationField.Receiver];
+    const donor = donation[DonationField.DonorName];
+
+    if (!relationDonors.has(donor)) {
+      return;
+    }
+
+    const year = donationYear(donation);
+    donorPartySums[donor] ??= {};
+    donorPartySums[donor][year] ??= {};
+    donorPartySums[donor][year][receiver] ??= {
+      sum: 0,
+      count: 0,
+      average: 0,
+      lastDonation: donation[DonationField.Date],
+    };
+
+    donorPartySums[donor][year][donation[DonationField.Receiver]].sum +=
+      donation[DonationField.Amount];
+    donorPartySums[donor][year][donation[DonationField.Receiver]].count++;
+    if (
+      donorPartySums[donor][year][donation[DonationField.Receiver]]
+        .lastDonation < donation[DonationField.Date]
+    ) {
+      donorPartySums[donor][year][
+        donation[DonationField.Receiver]
+      ].lastDonation = donation[DonationField.Date];
+    }
+  });
+
+  // populate relations
+  donorMeta.relations?.forEach((entries) => {
+    entries.forEach(([donor]) => {
+      assert(
+        donorPartySums[donor],
+        `Relation uses donor that has no sums: ${donor}`,
+      );
+
+      processedMeta[donor] ??= {};
+      processedMeta[donor].relations ??= [];
+
+      // add all other donors in the relation for that donor
+      processedMeta[donor].relations.push(
+        ...entries
+          .filter((entry) => entry[0] !== donor)
+          .map(
+            (entry): DonorMetaRelation => [...entry, donorPartySums[entry[0]]],
+          )
+          .toSorted(
+            ([, , sumsA], [, , sumsB]) =>
+              sumPartySums(sumsB) - sumPartySums(sumsA),
+          ),
+      );
+    });
+  });
+
+  // populate singular donor metadata
+  Object.entries(donorMeta.donors).forEach(([donor, meta]) => {
+    if (Object.keys(meta).length === 0) {
+      // skip empty meta
+      return;
+    }
+
+    processedMeta[donor] ??= {};
+    if (meta.wiki) {
+      processedMeta[donor].wiki = meta.wiki;
+    }
+  });
+
+  for (const [donor, meta] of Object.entries(processedMeta)) {
+    if (Object.keys(meta).length === 0) {
+      // skip empty meta
+      continue;
+    }
+
+    const fileName = path.join(donorMetaDir, `${hash(donor)}.json`);
+
+    await fs.writeFile(fileName, JSON.stringify(meta));
+  }
+};
+
+const prebuildStaticDonationJsons = async (
+  country: CountryConfig,
+  donations: Donation[],
+) => {
+  const publicDataDir = path.join(__dirname, "../../public/data", country.id);
+  const byYearDataDir = path.join(publicDataDir, "donations/by-year");
+  const byPartyDataDir = path.join(publicDataDir, "donations/by-party");
+  const byDonorHashDataDir = path.join(publicDataDir, "donations/by-donor");
+
+  await fs.mkdir(byYearDataDir, { recursive: true });
+  await fs.mkdir(byPartyDataDir, { recursive: true });
+  await fs.mkdir(byDonorHashDataDir, { recursive: true });
+
+  const perYear: Record<string, Donation[]> = {};
+  const perParty: Record<string, Donation[]> = {};
+  const perDonorHash: Record<string, Donation[]> = {};
+
+  country.years.forEach((year) => {
+    perYear[year] ??= [];
+  });
+  country.parties.forEach((party) => {
+    perParty[party.id] ??= [];
+  });
+
+  for (const donation of donations) {
+    const donorId = hash(donation[DonationField.DonorName]);
+    perYear[donationYear(donation)].push(donation);
+    if (!perParty[donation[DonationField.Receiver]]) {
+      console.log(
+        "No party found for donation",
+        donation[DonationField.Receiver],
+        donation,
+      );
+    }
+    perParty[donation[DonationField.Receiver]].push(donation);
+
+    const shortDonorHash = donorId.substring(0, DONOR_ID_HASH_LEN);
+    perDonorHash[shortDonorHash] ??= [];
+    perDonorHash[shortDonorHash].push(donation);
+  }
+
+  await Promise.all([
+    Object.entries(perYear).map(([year, donations]) =>
+      fs.writeFile(
+        path.join(byYearDataDir, `${year}.json`),
+        JSON.stringify(donationsToDonationsDocumentWithoutDonorIds(donations)),
+      ),
+    ),
+    Object.entries(perParty).map(([party, donations]) =>
+      fs.writeFile(
+        path.join(byPartyDataDir, `${party}.json`),
+        JSON.stringify(donationsToDonationsDocumentWithoutDonorIds(donations)),
+      ),
+    ),
+    Object.entries(perDonorHash).map(([hash, donations]) =>
+      fs.writeFile(
+        path.join(byDonorHashDataDir, `${hash}.json`),
+        JSON.stringify(donationsToDonationsDocumentWithDonorIds(donations)),
+      ),
+    ),
+  ]);
+};
+
+const postprocess = async (
+  countryConfig: CountryConfig,
+  donations: Donation[],
+) => {
+  const dataDir = path.join(__dirname, "../../src/data", countryConfig.id);
+
+  await Promise.all([
+    fs.writeFile(
+      path.join(dataDir, "most-recent.ts"),
+      jsonAsTsModuleWithType(
+        JSON.stringify(buildMostRecentDonations(countryConfig, donations)),
+        {
+          name: "HistoryEntry[]",
+          as: "HistoryEntry[]",
+          import:
+            'import type {HistoryEntry} from "../../utils/data/get-history";',
+        },
+      ),
+    ),
+    fs.writeFile(
+      path.join(dataDir, "party-sums.ts"),
+      jsonAsTsModule(JSON.stringify(buildPartySums(countryConfig, donations))),
+    ),
+    fs.writeFile(
+      path.join(dataDir, "biggest-donors.ts"),
+      jsonAsTsModuleWithType(
+        JSON.stringify(buildBiggestDonors(countryConfig, donations)),
+        {
+          name: "BigDonor[]",
+          import: "import {BigDonor} from '../../utils/loader/biggest-donors';",
+        },
+      ),
+    ),
+    fs.writeFile(
+      path.join(dataDir, "biggest-donations.ts"),
+      jsonAsTsModuleWithType(
+        JSON.stringify(buildBiggestDonations(countryConfig, donations)),
+        {
+          name: "Donation[]",
+          import: "import {Donation} from '../../utils/types';",
+        },
+      ),
+    ),
+  ]);
+
+  const publicDataDir = path.join(
+    __dirname,
+    "../../public/data",
+    countryConfig.id,
+  );
+  await fs.rm(publicDataDir, { force: true, recursive: true });
+  await fs.mkdir(publicDataDir, { recursive: true });
+
+  await Promise.all([
+    prebuildStaticDonationJsons(countryConfig, donations),
+    prebuiltDonorIds(countryConfig, donations),
+    prebuildWikipediaJsons(countryConfig),
+    prebuildStaticNormalizationJsons(countryConfig),
+    prebuildDonorMeta(countryConfig, donations),
+  ]);
+};
+
+const countries: CountryCode[] = [
+  "AT",
+  "CH",
+  "DE",
+  "NL",
+  "EU",
+  "EE",
+  "CZ",
+  "LV",
+  "AU",
+  "UK",
+  "RS",
+  "HR",
+  "CA",
+  "GE",
+  "NO",
+];
+const codeCountry: Record<CountryCode, Country> = {
+  DE: Country.germany,
+  CH: Country.switzerland,
+  AT: Country.austria,
+  NL: Country.netherlands,
+  EU: Country.europeanunion,
+  EE: Country.estonia,
+  CZ: Country.czechrepublic,
+  LV: Country.latvia,
+  AU: Country.australia,
+  UK: Country.unitedkingdom,
+  RS: Country.serbia,
+  HR: Country.croatia,
+  CA: Country.canada,
+  GE: Country.georgia,
+  NO: Country.norway,
+};
+const main = async () => {
+  await Promise.all(
+    countries.map(async (countryCode) => {
+      const country = codeCountry[countryCode];
+      const [countryConfig, countryDonations] = await Promise.all([
+        getCountryConfig(country),
+        getDonations(country),
+      ]);
+
+      return postprocess(countryConfig, countryDonations);
+    }),
+  );
+
+  await postprocessGeojson();
+};
+
+main();

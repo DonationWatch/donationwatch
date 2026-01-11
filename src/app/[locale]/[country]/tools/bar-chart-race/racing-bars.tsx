@@ -1,0 +1,38 @@
+"use client";
+import { type FC, Suspense } from "react";
+
+import { RacingBarsContent } from "./racing-bars-content";
+import { useDonationsByYears } from "../../../../../hooks/use-api";
+import { useTranslations } from "../../../../../hooks/use-translations";
+import { isNotNullandNotUndefined } from "../../../../../utils/array";
+import Loading from "../../loading";
+
+import type { CountryConfig } from "../../../../../utils/countries";
+
+export const RacingBars: FC<{
+  countryConfig: CountryConfig;
+}> = ({ countryConfig }) => {
+  const { translations } = useTranslations();
+
+  // Always load ALL years
+  const results = useDonationsByYears(countryConfig, countryConfig.years);
+  const error = results.some((r) => r.error);
+  const isLoading = results.some((r) => r.isLoading);
+
+  if (isLoading) return <Loading />;
+
+  if (error) return <div>{translations.data_error}</div>;
+
+  const allDonations = results
+    .flatMap((r) => r.data)
+    .filter(isNotNullandNotUndefined);
+
+  return (
+    <Suspense fallback={<Loading />}>
+      <RacingBarsContent
+        countryConfig={countryConfig}
+        allDonations={allDonations}
+      />
+    </Suspense>
+  );
+};

@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://donation.watch/sitemap_index.xml
