@@ -36,19 +36,19 @@ const main = async () => {
         log(
           `Loading remote data for ${loader.countryCode} for years ${loadYears.join(", ")}`,
         );
-        await Promise.all(
-          loadYears.map(async (year) => {
-            try {
-              await loader.prepareCache();
-              await loader.loadYearDataToCache(year);
-              // add some random delay to avoid hitting rate limits
-              await timeout(500 + Math.random() * 5000);
-            } catch (error) {
-              log(`Error loading ${loader.countryCode} year ${year}`, error);
-              // process.exit(1);
-            }
-          }),
-        );
+
+        // run the loaders sequentially to avoid overloading the remote servers
+        for (const year of loadYears) {
+          try {
+            await loader.prepareCache();
+            await loader.loadYearDataToCache(year);
+            // add some random delay to avoid hitting rate limits
+            await timeout(500 + Math.random() * 5000);
+          } catch (error) {
+            log(`Error loading ${loader.countryCode} year ${year}`, error);
+            // process.exit(1);
+          }
+        }
       }
 
       await loader.run(processYears);
