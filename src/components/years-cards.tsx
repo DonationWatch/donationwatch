@@ -7,17 +7,22 @@ import type { Translations } from "../messages/translations";
 import type { CountryConfig } from "../utils/countries";
 import type { PartyYearsSums } from "../utils/loader/party-years-sums";
 import type { ConstLocale } from "../utils/locales";
-import type { FC } from "react";
 
 const VISIBLE_PARTIES = 6;
 
-const YearCard: FC<{
+const YearCard = ({
+  year,
+  sum,
+  locale,
+  country,
+  partyYearsSums,
+}: {
   year: string;
   locale: ConstLocale;
   country: CountryConfig;
   sum: number;
   partyYearsSums: PartyYearsSums;
-}> = ({ year, sum, locale, country, partyYearsSums }) => {
+}) => {
   return (
     <li key={year}>
       <Link
@@ -42,12 +47,17 @@ const YearCard: FC<{
   );
 };
 
-export const YearsCards: FC<{
+export const YearsCards = ({
+  country,
+  locale,
+  translations,
+  partyYearsSums,
+}: {
   country: CountryConfig;
   locale: ConstLocale;
   translations: Translations;
   partyYearsSums: PartyYearsSums;
-}> = ({ country, locale, translations, partyYearsSums }) => {
+}) => {
   const years = country.years
     .toReversed()
     .map((year): [string, number] => {

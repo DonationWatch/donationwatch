@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-import type { FC, ReactNode } from "react";
+import type { ReactNode } from "react";
 
 export const splitTranslation = (text: string) => {
   const regex = /\{(\w+)\}/g;
@@ -40,10 +40,13 @@ export const splitTranslation = (text: string) => {
   return parts;
 };
 
-export const Translation: FC<{
+export const Translation = ({
+  text,
+  variables,
+}: {
   text: string;
   variables?: Record<string, string | number | ReactNode>;
-}> = ({ text, variables }) => {
+}) => {
   if (!variables) return text;
 
   const parts = splitTranslation(text);

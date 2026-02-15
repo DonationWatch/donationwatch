@@ -6,17 +6,22 @@ import { formatCountryCurrency } from "../utils/formatter";
 
 import type { CountryConfig } from "../utils/countries";
 import type { ConstLocale } from "../utils/locales";
-import type { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 
-export const NonInteractableRankingItem: FC<
-  {
-    amount: number;
-    rank: number;
-    sum: number;
-    locale: ConstLocale;
-    country: CountryConfig;
-  } & PropsWithChildren
-> = async ({ amount, country, rank, sum, children, locale }) => {
+export const NonInteractableRankingItem = async ({
+  amount,
+  country,
+  rank,
+  sum,
+  children,
+  locale,
+}: PropsWithChildren<{
+  amount: number;
+  rank: number;
+  sum: number;
+  locale: ConstLocale;
+  country: CountryConfig;
+}>) => {
   return (
     <section
       data-testid="ranking-item"

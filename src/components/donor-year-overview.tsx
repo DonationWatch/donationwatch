@@ -1,7 +1,7 @@
 "use client";
 
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
-import { type FC, useCallback, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 import { DonorOverviewItem } from "./donor-overview-item";
 import { DynamicDonorDonationsDetail } from "./dynamic-donor-donations-detail";
@@ -16,12 +16,17 @@ import type { CountryConfig } from "../utils/countries";
 import type { Donation, ReceiverId } from "../utils/types";
 import type { Translations } from "@/messages/translations";
 
-const DonorYearOverviewContent: FC<{
+const DonorYearOverviewContent = ({
+  donations,
+  years,
+  country,
+  translations,
+}: {
   donations: Donation[];
   years: string[];
   country: CountryConfig;
   translations: Translations;
-}> = ({ donations, years, country, translations }) => {
+}) => {
   const donorRegistry: Record<
     string,
     {
@@ -130,10 +135,13 @@ const DonorYearOverviewContent: FC<{
   );
 };
 
-export const DonorYearOverview: FC<{
+export const DonorYearOverview = ({
+  country,
+  years,
+}: {
   years: string[];
   country: CountryConfig;
-}> = ({ country, years }) => {
+}) => {
   const { translations } = useTranslations();
   const results = useDonationsByYears(country, years);
   const error = results.some((r) => r.error);

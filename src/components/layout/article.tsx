@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren, ReactNode } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 
 export const slugify = (text: string): string =>
   text
@@ -6,20 +6,18 @@ export const slugify = (text: string): string =>
     .replace(/ /g, "-")
     .replace(/[^\w-]+/g, "");
 
-export const Article: FC<
-  {
-    title?: string;
-    subtitle?: ReactNode;
-    skipTitleOffset?: boolean;
-    fullWidth?: boolean;
-  } & PropsWithChildren
-> = ({
+export const Article = ({
   children,
   title,
   subtitle,
   skipTitleOffset = false,
   fullWidth = false,
-}) => {
+}: PropsWithChildren<{
+  title?: string;
+  subtitle?: ReactNode;
+  skipTitleOffset?: boolean;
+  fullWidth?: boolean;
+}>) => {
   return (
     <article className="container mx-auto flex justify-between p-4">
       <div
@@ -43,11 +41,12 @@ export const Article: FC<
   );
 };
 
-export const ArticleSectionWrapper: FC<
-  PropsWithChildren & {
-    id: string;
-  }
-> = ({ id, children }) => {
+export const ArticleSectionWrapper = ({
+  id,
+  children,
+}: PropsWithChildren<{
+  id: string;
+}>) => {
   return (
     <section className="space-y-4 lg:mt-4" aria-labelledby={id}>
       {children}
@@ -55,18 +54,14 @@ export const ArticleSectionWrapper: FC<
   );
 };
 
-export const ArticleSectionOneColumns: FC<PropsWithChildren> = ({
-  children,
-}) => {
+export const ArticleSectionOneColumns = ({ children }: PropsWithChildren) => {
   return (
     <div className="relative mb-8 grid gap-8 lg:grid-cols-1 xl:gap-12">
       {children}
     </div>
   );
 };
-export const ArticleSectionTwoColumns: FC<PropsWithChildren> = ({
-  children,
-}) => {
+export const ArticleSectionTwoColumns = ({ children }: PropsWithChildren) => {
   return (
     <div className="relative mb-8 grid gap-8 lg:grid-cols-2 xl:gap-12">
       {children}
@@ -74,7 +69,7 @@ export const ArticleSectionTwoColumns: FC<PropsWithChildren> = ({
   );
 };
 
-export const ArticleSectionColumn: FC<PropsWithChildren> = ({ children }) => {
+export const ArticleSectionColumn = ({ children }: PropsWithChildren) => {
   return (
     <div className="mx-auto w-full space-y-2 lg:w-10/12 lg:w-full">
       {children}
@@ -82,12 +77,14 @@ export const ArticleSectionColumn: FC<PropsWithChildren> = ({ children }) => {
   );
 };
 
-export const ArticleSection: FC<
-  PropsWithChildren & {
-    title: string;
-    id?: string;
-  }
-> = ({ children, title, id = `sec-${slugify(title)}` }) => {
+export const ArticleSection = ({
+  children,
+  title,
+  id = `sec-${slugify(title)}`,
+}: PropsWithChildren<{
+  title: string;
+  id?: string;
+}>) => {
   return (
     <ArticleSectionWrapper id={id}>
       <ArticleSectionTitle title={title} id={id} />
@@ -97,11 +94,15 @@ export const ArticleSection: FC<
 };
 
 type HeadingTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
-export const ArticleSectionTitle: FC<{
+export const ArticleSectionTitle = ({
+  title,
+  id,
+  as = "h2",
+}: {
   title: string;
   id: string;
   as?: HeadingTag;
-}> = ({ title, id, as = "h2" }) => {
+}) => {
   const Tag = as;
   return (
     <Tag id={id} className="mb-4 pt-6 text-2xl font-semibold">

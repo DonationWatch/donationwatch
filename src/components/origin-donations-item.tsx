@@ -5,9 +5,18 @@ import { AddressField, DonationField } from "../utils/types";
 import type { Translations } from "../messages/translations";
 import type { CountryConfig } from "../utils/countries";
 import type { Donation } from "../utils/types";
-import type { FC } from "react";
 
-export const OriginDonationsItem: FC<{
+export const OriginDonationsItem = ({
+  id,
+  translations,
+  country,
+  amount,
+  rank,
+  sum,
+  donations,
+  expanded,
+  onToggleExpanded,
+}: {
   id: string;
   translations: Translations;
   amount: number;
@@ -18,16 +27,6 @@ export const OriginDonationsItem: FC<{
   country: CountryConfig;
   expanded: boolean;
   onToggleExpanded: (expanded: boolean) => void;
-}> = ({
-  id,
-  translations,
-  country,
-  amount,
-  rank,
-  sum,
-  donations,
-  expanded,
-  onToggleExpanded,
 }) => {
   const address = donations.at(0)?.[DonationField.Address];
 

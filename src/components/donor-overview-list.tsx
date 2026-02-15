@@ -1,7 +1,7 @@
 "use client";
 
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
-import { type FC, useCallback, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 import { DonorOverviewItem } from "./donor-overview-item";
 import { DynamicDonorDonationsDetail } from "./dynamic-donor-donations-detail";
@@ -15,7 +15,12 @@ import type { CountryConfig } from "../utils/countries";
 import type { Donation, Party, ReceiverId } from "../utils/types";
 import type { Translations } from "@/messages/translations";
 
-const DonorOverviewListContent: FC<{
+const DonorOverviewListContent = ({
+  donors,
+  countryConfig,
+  sum,
+  translations,
+}: {
   countryConfig: CountryConfig;
   sum: number;
   donors: {
@@ -24,7 +29,7 @@ const DonorOverviewListContent: FC<{
     donations: { party: ReceiverId; donation: Donation }[];
   }[];
   translations: Translations;
-}> = ({ donors, countryConfig, sum, translations }) => {
+}) => {
   const [expandedDonors, setExpandedDonors] = useState<string[]>([]);
 
   const parentRef = useRef<HTMLDivElement>(null);
@@ -98,10 +103,13 @@ const DonorOverviewListContent: FC<{
   );
 };
 
-export const DonorOverviewList: FC<{
+export const DonorOverviewList = ({
+  countryConfig,
+  party,
+}: {
   countryConfig: CountryConfig;
   party: Party;
-}> = ({ countryConfig, party }) => {
+}) => {
   const { translations } = useTranslations();
   const { data, error, isLoading } = useDonationsByParty(countryConfig, party);
 

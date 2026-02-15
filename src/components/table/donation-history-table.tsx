@@ -29,19 +29,24 @@ import { PartyLink } from "../party-link";
 import type { CountryConfig } from "../../utils/countries";
 import type { HistoryEntry } from "../../utils/data/get-history";
 import type { Donation } from "../../utils/types";
-import type { FC } from "react";
 
 import { getDonorName } from "@/utils/donor";
 
 const columnHelper = createColumnHelper<HistoryEntry>();
 
-export const DonationHistoryTable: FC<{
+export const DonationHistoryTable = ({
+  country,
+  years,
+  partiesIds,
+  donations,
+  readonlyDonor = false,
+}: {
   country: CountryConfig;
   years?: string[];
   partiesIds: string[];
   donations: Donation[];
   readonlyDonor?: boolean;
-}> = ({ country, years, partiesIds, donations, readonlyDonor = false }) => {
+}) => {
   const { translations, locale } = useTranslations();
   const partiesIdSet = new Set(partiesIds);
   const [sorting, setSorting] = useState<SortingState>([

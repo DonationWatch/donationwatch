@@ -8,12 +8,14 @@ import { useTranslations } from "../hooks/use-translations";
 
 import type { CountryConfig } from "../utils/countries";
 import type { Party } from "../utils/types";
-import type { FC } from "react";
 
-export const PartyDonationHistory: FC<{
+export const PartyDonationHistory = ({
+  country,
+  party,
+}: {
   country: CountryConfig;
   party: Party;
-}> = ({ country, party }) => {
+}) => {
   const { translations } = useTranslations();
   const { data, error, isLoading } = useDonationsByParty(country, party);
 
@@ -39,10 +41,13 @@ export const PartyDonationHistory: FC<{
   );
 };
 
-export const YearDonationHistory: FC<{
+export const YearDonationHistory = ({
+  country,
+  years,
+}: {
   country: CountryConfig;
   years: string[];
-}> = ({ country, years }) => {
+}) => {
   const { translations } = useTranslations();
   const results = useDonationsByYears(country, years);
   const error = results.some((r) => r.error);

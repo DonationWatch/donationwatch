@@ -1,5 +1,4 @@
 /* eslint-disable react/no-unknown-property */
-import type { FC } from "react";
 
 const variants = {
   large: {
@@ -12,11 +11,15 @@ const variants = {
   },
 };
 
-export const ImageMetaCard: FC<{
+export const ImageMetaCard = ({
+  title,
+  value,
+  variant = "normal",
+}: {
   title: string;
   value: string | number;
   variant?: keyof typeof variants;
-}> = ({ title, value, variant = "normal" }) => {
+}) => {
   return (
     <div tw="flex flex-col">
       <div tw={`flex ${variants[variant].value} font-semibold leading-none`}>

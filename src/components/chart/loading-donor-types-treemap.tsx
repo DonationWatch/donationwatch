@@ -17,16 +17,22 @@ import Loading from "../loading";
 import type { Donation, Party, ReceiverId } from "../../utils/types";
 import type { EChartsOption, TreemapSeriesOption } from "echarts";
 import type { TreemapSeriesNodeItemOption } from "echarts/types/src/chart/treemap/TreemapSeries.js";
-import type { FC } from "react";
 
-export const LoadedDonorTypeTreemap: FC<{
+export const LoadedDonorTypeTreemap = ({
+  country,
+  title,
+  subtitle,
+  donations,
+  parties = [],
+  years = [],
+}: {
   country: CountryConfig;
   title: string;
   subtitle: string;
   donations: Donation[];
   parties?: Party[];
   years?: string[];
-}> = ({ country, title, subtitle, donations, parties = [], years = [] }) => {
+}) => {
   const { translations, locale } = useTranslations();
 
   const yearsSet = new Set<string>(years);
@@ -314,12 +320,17 @@ export const LoadedDonorTypeTreemap: FC<{
   );
 };
 
-export const LoadingPartyDonorTypeTreemap: FC<{
+export const LoadingPartyDonorTypeTreemap = ({
+  country,
+  party,
+  title,
+  subtitle,
+}: {
   country: CountryConfig;
   party: Party;
   title: string;
   subtitle: string;
-}> = ({ country, party, title, subtitle }) => {
+}) => {
   const { translations } = useTranslations();
 
   const { data, error, isLoading } = useDonationsByParty(country, party);

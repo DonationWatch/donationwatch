@@ -1,6 +1,6 @@
 "use client";
 
-import { type FC, useEffect } from "react";
+import { useEffect } from "react";
 
 import { PartyDot } from "./party-dot";
 import { PartyLink } from "./party-link";
@@ -12,7 +12,11 @@ import { DonationField } from "../utils/types";
 import type { CountryConfig } from "../utils/countries";
 import type { Donation, ReceiverId } from "../utils/types";
 
-export const DonorDonationsDetail: FC<{
+export const DonorDonationsDetail = ({
+  country,
+  donor,
+  onVisibleChanged,
+}: {
   donor: {
     sum: number;
     name: string;
@@ -20,7 +24,7 @@ export const DonorDonationsDetail: FC<{
   };
   country: CountryConfig;
   onVisibleChanged?: () => void;
-}> = ({ country, donor, onVisibleChanged }) => {
+}) => {
   const { translations, locale } = useTranslations();
 
   useEffect(() => {

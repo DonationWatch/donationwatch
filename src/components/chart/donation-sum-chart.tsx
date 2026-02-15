@@ -23,7 +23,6 @@ import Loading from "../loading";
 
 import type { Donation, Party, ReceiverId } from "../../utils/types";
 import type { EChartsOption, LineSeriesOption } from "echarts";
-import type { FC } from "react";
 
 const symbolConfiguration = (idx: number) => {
   const symbols = ["circle", "rect", "triangle", "diamond", "pin", "arrow"];
@@ -36,20 +35,20 @@ const symbolConfiguration = (idx: number) => {
 
 type LineDatum = [number, number];
 
-export const DonationSumChart: FC<{
-  country: CountryConfig;
-  years: string[];
-  parties: Party[];
-  title: string;
-  subtitle: string;
-  limitToFirstDateYear?: boolean;
-}> = ({
+export const DonationSumChart = ({
   country,
   title: chartTitle,
   subtitle,
   years,
   parties,
   limitToFirstDateYear,
+}: {
+  country: CountryConfig;
+  years: string[];
+  parties: Party[];
+  title: string;
+  subtitle: string;
+  limitToFirstDateYear?: boolean;
 }) => {
   const { translations } = useTranslations();
   const results = useDonationsByYears(country, years);
@@ -76,20 +75,20 @@ export const DonationSumChart: FC<{
   );
 };
 
-export const DonationPartyChart: FC<{
-  country: CountryConfig;
-  years: string[];
-  party: Party;
-  title: string;
-  subtitle: string;
-  limitToFirstDateYear?: boolean;
-}> = ({
+export const DonationPartyChart = ({
   country,
   title: chartTitle,
   subtitle,
   years,
   party,
   limitToFirstDateYear,
+}: {
+  country: CountryConfig;
+  years: string[];
+  party: Party;
+  title: string;
+  subtitle: string;
+  limitToFirstDateYear?: boolean;
 }) => {
   const { translations } = useTranslations();
   const { data, error, isLoading } = useDonationsByParty(country, party);
@@ -110,15 +109,7 @@ export const DonationPartyChart: FC<{
   );
 };
 
-const DonationTimeseriesChart: FC<{
-  donations: Donation[];
-  country: CountryConfig;
-  years: string[];
-  parties: Party[];
-  title: string;
-  subtitle: string;
-  limitToFirstDateYear?: boolean;
-}> = ({
+const DonationTimeseriesChart = ({
   country,
   title: chartTitle,
   subtitle,
@@ -126,6 +117,14 @@ const DonationTimeseriesChart: FC<{
   parties,
   limitToFirstDateYear,
   donations,
+}: {
+  donations: Donation[];
+  country: CountryConfig;
+  years: string[];
+  parties: Party[];
+  title: string;
+  subtitle: string;
+  limitToFirstDateYear?: boolean;
 }) => {
   const { locale } = useTranslations();
   const { backgroundColor, isMobile, isDark } = useChart();
@@ -378,16 +377,7 @@ const DonationTimeseriesChart: FC<{
   );
 };
 
-export const DonationStackedTimeseriesChart: FC<{
-  donations: Donation[];
-  country: CountryConfig;
-  years: string[];
-  parties: Party[];
-  title: string;
-  subtitle: string;
-  limitToFirstDateYear?: boolean;
-  donationsHaveYearsOnly?: boolean;
-}> = ({
+export const DonationStackedTimeseriesChart = ({
   country,
   title: chartTitle,
   subtitle,
@@ -396,6 +386,15 @@ export const DonationStackedTimeseriesChart: FC<{
   limitToFirstDateYear,
   donations,
   donationsHaveYearsOnly = false,
+}: {
+  donations: Donation[];
+  country: CountryConfig;
+  years: string[];
+  parties: Party[];
+  title: string;
+  subtitle: string;
+  limitToFirstDateYear?: boolean;
+  donationsHaveYearsOnly?: boolean;
 }) => {
   const { locale } = useTranslations();
   const { backgroundColor, isMobile, isDark } = useChart();

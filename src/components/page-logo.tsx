@@ -1,8 +1,9 @@
-import type { FC } from "react";
-
-export const PageLogo: FC<{ size?: number; className?: string }> = ({
+export const PageLogo = ({
   className,
   size = 20,
+}: {
+  size?: number;
+  className?: string;
 }) => {
   return (
     <svg
@@ -44,9 +45,12 @@ export const PageLogo: FC<{ size?: number; className?: string }> = ({
   );
 };
 
-export const PageLogo2: FC<{ size?: number; className?: string }> = ({
+export const PageLogo2 = ({
   className,
   size = 20,
+}: {
+  size?: number;
+  className?: string;
 }) => {
   return (
     <svg

@@ -11,12 +11,14 @@ import { DonationField, DonorType } from "../utils/types";
 
 import type { CountryConfig } from "../utils/countries";
 import type { Party } from "../utils/types";
-import type { FC } from "react";
 
-export const LoadingPartyDonorTypeText: FC<{
+export const LoadingPartyDonorTypeText = ({
+  party,
+  country,
+}: {
   country: CountryConfig;
   party: Party;
-}> = ({ party, country }) => {
+}) => {
   const { translations, locale } = useTranslations();
 
   const {

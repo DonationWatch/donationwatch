@@ -1,6 +1,6 @@
 "use client";
 
-import { type FC, useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 
 import { DonorLink } from "./donor-link";
 import { PartyDot } from "./party-dot";
@@ -36,12 +36,17 @@ const TopDonationsItemDetailSkeleton = () => {
   );
 };
 
-export const LoadingTopYearDonationsItemDetail: FC<{
+export const LoadingTopYearDonationsItemDetail = ({
+  showDonationParty = false,
+  country,
+  years,
+  partyId,
+}: {
   showDonationParty?: boolean;
   country: CountryConfig;
   years: string[];
   partyId: ReceiverId;
-}> = ({ showDonationParty = false, country, years, partyId }) => {
+}) => {
   const { translations } = useTranslations();
   const results = useDonationsByYears(country, years);
   const error = results.some((r) => r.error);
@@ -72,12 +77,17 @@ export const LoadingTopYearDonationsItemDetail: FC<{
   );
 };
 
-export const LoadedTopDonationsItemDetail: FC<{
+export const LoadedTopDonationsItemDetail = ({
+  showDonationParty = false,
+  country,
+  partyId,
+  donations,
+}: {
   showDonationParty?: boolean;
   country: CountryConfig;
   partyId: ReceiverId;
   donations: Donation[];
-}> = ({ showDonationParty = false, country, partyId, donations }) => {
+}) => {
   return (
     <TopDonationsItemDetail
       country={country}
@@ -87,11 +97,15 @@ export const LoadedTopDonationsItemDetail: FC<{
   );
 };
 
-export const TopDonationsItemDetail: FC<{
+export const TopDonationsItemDetail = ({
+  showDonationParty = false,
+  country,
+  donations,
+}: {
   showDonationParty?: boolean;
   country: CountryConfig;
   donations: Donation[];
-}> = ({ showDonationParty = false, country, donations }) => {
+}) => {
   const { translations, locale } = useTranslations();
   const parentRef = useRef<HTMLDivElement>(null);
   const isSm = useBreakpoint("sm");

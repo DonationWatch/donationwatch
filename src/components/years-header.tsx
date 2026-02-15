@@ -21,18 +21,9 @@ import type { CountryConfig } from "../utils/countries";
 import type { PartyYearsSums } from "../utils/loader/party-years-sums";
 import type { ConstLocale } from "../utils/locales";
 import type { Party } from "../utils/types";
-import type { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 
-const Wrapper: FC<
-  PropsWithChildren & {
-    translations: Translations;
-    readonly: boolean;
-    locale: ConstLocale;
-    years: string[];
-    country: CountryConfig;
-    className?: string;
-  }
-> = ({
+const Wrapper = ({
   className,
   children,
   country,
@@ -40,7 +31,14 @@ const Wrapper: FC<
   readonly,
   locale,
   years,
-}) => {
+}: PropsWithChildren<{
+  translations: Translations;
+  readonly: boolean;
+  locale: ConstLocale;
+  years: string[];
+  country: CountryConfig;
+  className?: string;
+}>) => {
   const ariaLabel = `${translations.years.title} ${formatYearsRange(years)}`;
   const yearsParam = serializeYears(years);
 
@@ -60,22 +58,7 @@ const Wrapper: FC<
   );
 };
 
-const HighscoreHeader: FC<{
-  className?: string;
-  country: CountryConfig;
-  partyYearsSums: PartyYearsSums;
-  idPrefix: string;
-  translations: Translations;
-  locale: ConstLocale;
-  parties: Party[];
-  years: string[];
-  showTop3: boolean;
-  readonly?: boolean;
-  showExtendedMeta?: boolean;
-  title?: string;
-  withStackedBar?: boolean;
-  titleBeforeYears?: boolean;
-}> = ({
+const HighscoreHeader = ({
   className,
   translations,
   years,
@@ -90,6 +73,21 @@ const HighscoreHeader: FC<{
   partyYearsSums,
   withStackedBar = true,
   titleBeforeYears = false,
+}: {
+  className?: string;
+  country: CountryConfig;
+  partyYearsSums: PartyYearsSums;
+  idPrefix: string;
+  translations: Translations;
+  locale: ConstLocale;
+  parties: Party[];
+  years: string[];
+  showTop3: boolean;
+  readonly?: boolean;
+  showExtendedMeta?: boolean;
+  title?: string;
+  withStackedBar?: boolean;
+  titleBeforeYears?: boolean;
 }) => {
   const { count, sum, sums, sumNumbers } = getPartiesSum(
     country,
@@ -166,21 +164,7 @@ const HighscoreHeader: FC<{
   );
 };
 
-export const YearsHeader: FC<{
-  idPrefix?: string;
-  translations: Translations;
-  locale: ConstLocale;
-  years: string[];
-  showTop3?: boolean;
-  showExtendedMeta?: boolean;
-  readonly?: boolean;
-  country: CountryConfig;
-  title?: string;
-  partySums: PartyYearsSums;
-  withStackedBar?: boolean;
-  className?: string;
-  titleBeforeYears?: boolean;
-}> = async ({
+export const YearsHeader = async ({
   translations,
   locale,
   years,
@@ -194,6 +178,20 @@ export const YearsHeader: FC<{
   withStackedBar = true,
   className,
   titleBeforeYears = false,
+}: {
+  idPrefix?: string;
+  translations: Translations;
+  locale: ConstLocale;
+  years: string[];
+  showTop3?: boolean;
+  showExtendedMeta?: boolean;
+  readonly?: boolean;
+  country: CountryConfig;
+  title?: string;
+  partySums: PartyYearsSums;
+  withStackedBar?: boolean;
+  className?: string;
+  titleBeforeYears?: boolean;
 }) => {
   const parties = getParties(country, years);
 

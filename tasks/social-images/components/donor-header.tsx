@@ -20,18 +20,23 @@ import type { PartySum } from "../../../src/utils/data/get-parties-sum";
 import type { BigDonor } from "../../../src/utils/loader/biggest-donors";
 import type { ConstLocale } from "../../../src/utils/locales";
 import type { Donation, Party, ReceiverId } from "../../../src/utils/types";
-import type { FC, PropsWithChildren, ReactNode } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 
 import { getDonorName } from "@/utils/donor";
 
-export const ImageStackedPartyDonations: FC<{
+export const ImageStackedPartyDonations = ({
+  country,
+  donations,
+  years,
+  donor,
+}: {
   translations: Translations;
   years: string[];
   donor?: string;
   locale: ConstLocale;
   country: CountryConfig;
   donations: Donation[];
-}> = ({ country, donations, years, donor }) => {
+}) => {
   const sums: Record<ReceiverId, number> = {};
   let sum = 0;
 
@@ -77,13 +82,18 @@ export const ImageStackedPartyDonations: FC<{
   );
 };
 
-const ImageRankingItem: FC<{
+const ImageRankingItem = ({
+  amount,
+  party,
+  locale,
+  country,
+}: {
   party: Party;
   amount: number;
   sum: number;
   locale: ConstLocale;
   country: CountryConfig;
-}> = ({ amount, party, locale, country }) => {
+}) => {
   return (
     <div tw="mb-2 text-2xl flex w-full overflow-hidden items-center font-semibold justify-between text-left">
       <div
@@ -103,14 +113,17 @@ const ImageRankingItem: FC<{
   );
 };
 
-export const ImagePageHeader: FC<
-  PropsWithChildren & {
-    translations: Translations;
-    locale: ConstLocale;
-    right?: string | ReactNode;
-    country: CountryConfig;
-  }
-> = ({ translations, right, country, children }) => {
+export const ImagePageHeader = ({
+  translations,
+  right,
+  country,
+  children,
+}: PropsWithChildren<{
+  translations: Translations;
+  locale: ConstLocale;
+  right?: string | ReactNode;
+  country: CountryConfig;
+}>) => {
   return (
     <header tw="border-b border-slate-200 h-[64px] leading-none shrink-0">
       <div tw="flex w-full justify-between items-center px-6">
@@ -136,13 +149,19 @@ export const ImagePageHeader: FC<
   );
 };
 
-export const DonorHeader: FC<{
+export const DonorHeader = ({
+  country,
+  translations,
+  locale,
+  donor,
+  donations,
+}: {
   translations: Translations;
   locale: ConstLocale;
   country: CountryConfig;
   donations: Donation[];
   donor: BigDonor;
-}> = ({ country, translations, locale, donor, donations }) => {
+}) => {
   let sum = 0;
   let count = 0;
 

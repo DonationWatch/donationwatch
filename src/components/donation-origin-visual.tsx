@@ -13,18 +13,23 @@ import { useTranslations } from "../hooks/use-translations";
 import { type CountryConfig, getCountryName } from "../utils/countries";
 
 import type { Donation, Party } from "../utils/types";
-import type { FC } from "react";
 
 type ChartType = "map" | "sankey";
 const DEFAULT_TYPE: ChartType = "map";
 
-export const DonationOriginVisual: FC<{
+export const DonationOriginVisual = ({
+  donations,
+  country,
+  years,
+  parties,
+  subtitle,
+}: {
   country: CountryConfig;
   donations: Donation[];
   years: string[];
   parties: Party[];
   subtitle: string;
-}> = ({ donations, country, years, parties, subtitle }) => {
+}) => {
   const { translations } = useTranslations();
 
   const [chartType, setChartType] = useState<ChartType>(DEFAULT_TYPE);

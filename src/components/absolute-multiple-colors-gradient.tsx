@@ -1,8 +1,8 @@
-import type { FC } from "react";
-
-export const AbsoluteMultipleColorsGradient: FC<{
+export const AbsoluteMultipleColorsGradient = ({
+  colors,
+}: {
   colors: { color: string; width: number }[];
-}> = ({ colors }) => {
+}) => {
   return (
     <>
       <div className="pointer-events-none absolute inset-0 z-0 lg:-mx-16">

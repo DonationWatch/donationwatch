@@ -5,12 +5,14 @@ import { useWikipediaByPageId } from "../hooks/use-api";
 import { useTranslations } from "../hooks/use-translations";
 
 import type { UnloadedCountryConfig } from "../utils/countries";
-import type { FC } from "react";
 
-export const WikiQuote: FC<{
+export const WikiQuote = ({
+  pageId,
+  country,
+}: {
   pageId: number;
   country: UnloadedCountryConfig;
-}> = ({ pageId, country }) => {
+}) => {
   const { translations } = useTranslations();
   const { data, error, isLoading } = useWikipediaByPageId(country, pageId);
 
@@ -33,7 +35,7 @@ export const WikiQuote: FC<{
         <a
           target="_blank"
           rel="noopener noreferrer"
-          className="text-sm text-primary-600 dark:text-primary-300"
+          className="text-primary-600 dark:text-primary-300 text-sm"
           href={url}
         >
           via wikipedia.org

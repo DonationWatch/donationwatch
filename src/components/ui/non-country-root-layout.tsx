@@ -5,14 +5,16 @@ import { SidebarInset } from "./sidebar";
 
 import type { Translations } from "../../messages/translations";
 import type { ConstLocale } from "../../utils/locales";
-import type { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 
-export const NonCountryRootLayout: FC<
-  PropsWithChildren & {
-    translations: Translations;
-    locale: ConstLocale;
-  }
-> = ({ translations, locale, children }) => {
+export const NonCountryRootLayout = ({
+  translations,
+  locale,
+  children,
+}: PropsWithChildren<{
+  translations: Translations;
+  locale: ConstLocale;
+}>) => {
   return (
     <>
       <AppSidebar translations={translations} locale={locale} />

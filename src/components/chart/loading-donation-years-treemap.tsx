@@ -18,19 +18,10 @@ import Loading from "../loading";
 import type { Donation, Party, ReceiverId } from "../../utils/types";
 import type { EChartsOption, TreemapSeriesOption } from "echarts";
 import type { TreemapSeriesNodeItemOption } from "echarts/types/src/chart/treemap/TreemapSeries.js";
-import type { FC } from "react";
 
 import { getDonorName } from "@/utils/donor";
 
-export const LoadedDonationYearsTreemap: FC<{
-  country: CountryConfig;
-  tooSmallAreaColor?: string;
-  title: string;
-  subtitle: string;
-  donations: Donation[];
-  parties?: Party[];
-  years?: string[];
-}> = ({
+export const LoadedDonationYearsTreemap = ({
   country,
   tooSmallAreaColor = "#6366f1",
   title,
@@ -38,6 +29,14 @@ export const LoadedDonationYearsTreemap: FC<{
   donations,
   parties = [],
   years = [],
+}: {
+  country: CountryConfig;
+  tooSmallAreaColor?: string;
+  title: string;
+  subtitle: string;
+  donations: Donation[];
+  parties?: Party[];
+  years?: string[];
 }) => {
   const { translations, locale } = useTranslations();
 
@@ -284,20 +283,20 @@ export const LoadedDonationYearsTreemap: FC<{
   );
 };
 
-export const LoadingDonationYearsTreemap: FC<{
-  country: CountryConfig;
-  years: string[];
-  parties: Party[];
-  tooSmallAreaColor?: string;
-  title: string;
-  subtitle: string;
-}> = ({
+export const LoadingDonationYearsTreemap = ({
   country,
   years,
   parties,
   tooSmallAreaColor = "#6366f1",
   title,
   subtitle,
+}: {
+  country: CountryConfig;
+  years: string[];
+  parties: Party[];
+  tooSmallAreaColor?: string;
+  title: string;
+  subtitle: string;
 }) => {
   const { translations } = useTranslations();
   const results = useDonationsByYears(country, years);
@@ -324,13 +323,19 @@ export const LoadingDonationYearsTreemap: FC<{
   );
 };
 
-export const LoadingDonationPartyTreemap: FC<{
+export const LoadingDonationPartyTreemap = ({
+  country,
+  party,
+  tooSmallAreaColor = "#6366f1",
+  title,
+  subtitle,
+}: {
   country: CountryConfig;
   party: Party;
   tooSmallAreaColor?: string;
   title: string;
   subtitle: string;
-}> = ({ country, party, tooSmallAreaColor = "#6366f1", title, subtitle }) => {
+}) => {
   const { translations } = useTranslations();
 
   const { data, error, isLoading } = useDonationsByParty(country, party);

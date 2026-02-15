@@ -15,16 +15,22 @@ import { AddressField, DonationField } from "../../utils/types";
 
 import type { Donation, Party, ReceiverId } from "../../utils/types";
 import type { EChartsOption } from "echarts";
-import type { FC } from "react";
 
-export const DonationStateMap: FC<{
+export const DonationStateMap = ({
+  country,
+  donations,
+  title: chartTitle,
+  subtitle,
+  parties,
+  years,
+}: {
   country: CountryConfig;
   parties: Party[];
   years: string[];
   title: string;
   subtitle: string;
   donations: Donation[];
-}> = ({ country, donations, title: chartTitle, subtitle, parties, years }) => {
+}) => {
   const { translations, locale } = useTranslations();
   const { isMobile, backgroundColor, isDark } = useChart();
   const countryCode = country.code;

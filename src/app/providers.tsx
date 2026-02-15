@@ -8,14 +8,16 @@ import { SIDENAV_PERSISTENCE_KEY } from "../utils/config";
 
 import type { Translations } from "../messages/translations";
 import type { ConstLocale } from "../utils/locales";
-import type { PropsWithChildren, FC, ReactNode } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 
-export const Providers: FC<
-  PropsWithChildren & {
-    locale: ConstLocale;
-    translations: Translations;
-  }
-> = ({ children, translations, locale }) => {
+export const Providers = ({
+  children,
+  translations,
+  locale,
+}: PropsWithChildren<{
+  locale: ConstLocale;
+  translations: Translations;
+}>) => {
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -104,7 +106,7 @@ type SearchDialogContextValue = {
 export const SearchDialogContext =
   createContext<SearchDialogContextValue | null>(null);
 
-export const SearchDialogProvider: FC<PropsWithChildren> = ({ children }) => {
+export const SearchDialogProvider = ({ children }: PropsWithChildren) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const value = useMemo(

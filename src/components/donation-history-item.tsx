@@ -9,15 +9,20 @@ import { formatCountryCurrency } from "../utils/formatter";
 
 import type { CountryConfig } from "../utils/countries";
 import type { ReceiverId } from "../utils/types";
-import type { FC } from "react";
 
-export const DonationHistoryItem: FC<{
+export const DonationHistoryItem = ({
+  date,
+  amount,
+  party,
+  donor,
+  country,
+}: {
   date: string;
   party: ReceiverId;
   donor: string;
   amount: number;
   country: CountryConfig;
-}> = ({ date, amount, party, donor, country }) => {
+}) => {
   const { translations, locale } = useTranslations();
   const fmtAmount = formatCountryCurrency(locale, amount, country);
 

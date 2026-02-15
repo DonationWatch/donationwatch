@@ -16,12 +16,14 @@ import { sumPartySums } from "../utils/math";
 import type { CountryConfig } from "../utils/countries";
 import type { PartyYearsSums } from "../utils/loader/party-years-sums";
 import type { DonorMeta, ReceiverId } from "../utils/types";
-import type { FC } from "react";
 
-export const RelatedDonorsSection: FC<{
+export const RelatedDonorsSection = ({
+  country,
+  donorMeta,
+}: {
   country: CountryConfig;
   donorMeta: DonorMeta;
-}> = ({ country, donorMeta }) => {
+}) => {
   const { locale, translations } = useTranslations();
 
   if (!donorMeta.relations) {

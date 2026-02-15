@@ -1,6 +1,6 @@
 "use client";
 
-import { type FC, useState } from "react";
+import { useState } from "react";
 
 import {
   LoadedTopYearDonationsItem,
@@ -13,14 +13,21 @@ import type { PartySum } from "../utils/data/get-parties-sum";
 import type { ConstLocale } from "../utils/locales";
 import type { Donation } from "../utils/types";
 
-export const TopPartyYearDonations: FC<{
+export const TopPartyYearDonations = ({
+  sum,
+  sums,
+  country,
+  years,
+  translations,
+  locale,
+}: {
   sums: PartySum[];
   years: string[];
   sum: number;
   country: CountryConfig;
   translations: Translations;
   locale: ConstLocale;
-}> = ({ sum, sums, country, years, translations, locale }) => {
+}) => {
   const [expandedParties, setExpandedParties] = useState<string[]>([]);
   const onToggleExpanded = (state: string) => {
     setExpandedParties((prev) =>
@@ -51,12 +58,17 @@ export const TopPartyYearDonations: FC<{
   );
 };
 
-export const LoadedTopPartyDonations: FC<{
+export const LoadedTopPartyDonations = ({
+  sum,
+  sums,
+  country,
+  donations,
+}: {
   donations: Donation[];
   sums: PartySum[];
   sum: number;
   country: CountryConfig;
-}> = ({ sum, sums, country, donations }) => {
+}) => {
   const [expandedParties, setExpandedParties] = useState<string[]>([]);
   const onToggleExpanded = (state: string) => {
     setExpandedParties((prev) =>

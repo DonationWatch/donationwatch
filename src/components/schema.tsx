@@ -1,10 +1,11 @@
 import type { ConstLocale } from "../utils/locales";
-import type { FC } from "react";
 import type { FAQPage, WebPage, WithContext } from "schema-dts";
 
-export const LastModifiedSchema: FC<{
+export const LastModifiedSchema = ({
+  dateModified,
+}: {
   dateModified: string;
-}> = ({ dateModified }) => {
+}) => {
   const jsonLd: WithContext<WebPage> = {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -21,10 +22,13 @@ export const LastModifiedSchema: FC<{
   );
 };
 
-export const FaqSchema: FC<{
+export const FaqSchema = ({
+  faq,
+  inLanguage,
+}: {
   inLanguage: ConstLocale;
   faq: { question: string; answer: string }[];
-}> = ({ faq, inLanguage }) => {
+}) => {
   const jsonLd: WithContext<FAQPage> = {
     "@context": "https://schema.org",
     "@type": "FAQPage",

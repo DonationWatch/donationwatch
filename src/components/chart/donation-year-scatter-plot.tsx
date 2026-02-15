@@ -24,15 +24,20 @@ import type {
   SingleAxisComponentOption,
   TitleComponentOption,
 } from "echarts";
-import type { FC } from "react";
 
-export const DonationYearScatterPlot: FC<{
+export const DonationYearScatterPlot = ({
+  country,
+  title: chartTitle,
+  subtitle,
+  years,
+  parties,
+}: {
   country: CountryConfig;
   years: string[];
   parties: Party[];
   title: string;
   subtitle: string;
-}> = ({ country, title: chartTitle, subtitle, years, parties }) => {
+}) => {
   const { translations, locale } = useTranslations();
   const { backgroundColor } = useChart();
 

@@ -1,5 +1,5 @@
 import { Expand, X, ZoomOut } from "lucide-react";
-import { type FC, useState, type JSX, useRef } from "react";
+import { useState, type JSX, useRef } from "react";
 
 import { DynamicEchart } from "./dynamic-echart";
 import { t } from "../../app/[locale]/translations";
@@ -23,22 +23,7 @@ import type {
 import type { CountryConfig } from "../../utils/countries";
 import type { LucideIcon } from "lucide-react";
 
-export const ExpandableReactEchart: FC<
-  ReactEChartsProps & {
-    country: CountryConfig;
-    title?: string;
-    height: number;
-    subtitle?: string;
-    feature?: ChartFeature;
-    onZrClick?: OnZrClickFn;
-    onClick?: OnClickFn;
-    allowExpand?: boolean;
-    years: string[];
-    maxHeightScreen?: boolean;
-    noteYearOnlyDonations?: boolean;
-    footer?: boolean;
-  }
-> = ({
+export const ExpandableReactEchart = ({
   years,
   country,
   title,
@@ -54,6 +39,19 @@ export const ExpandableReactEchart: FC<
   maxHeightScreen = false,
   noteYearOnlyDonations = false,
   footer = true,
+}: ReactEChartsProps & {
+  country: CountryConfig;
+  title?: string;
+  height: number;
+  subtitle?: string;
+  feature?: ChartFeature;
+  onZrClick?: OnZrClickFn;
+  onClick?: OnClickFn;
+  allowExpand?: boolean;
+  years: string[];
+  maxHeightScreen?: boolean;
+  noteYearOnlyDonations?: boolean;
+  footer?: boolean;
 }): JSX.Element => {
   const { translations, locale } = useTranslations();
 

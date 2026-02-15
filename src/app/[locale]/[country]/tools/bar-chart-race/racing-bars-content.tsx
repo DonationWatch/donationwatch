@@ -2,7 +2,7 @@
 
 import { CheckIcon, ChevronDownIcon } from "lucide-react";
 import { parseAsString, useQueryState } from "nuqs";
-import { type FC, useMemo } from "react";
+import { useMemo } from "react";
 
 import { EChartsRacingBars } from "../../../../../components/echarts/echarts-racing-bars";
 import { Button } from "../../../../../components/ui/button";
@@ -24,10 +24,13 @@ import { t } from "../../../translations";
 
 import { firstItem, lastItem } from "@/utils/array";
 
-export const RacingBarsContent: FC<{
+export const RacingBarsContent = ({
+  countryConfig,
+  allDonations,
+}: {
   countryConfig: CountryConfig;
   allDonations: Donation[];
-}> = ({ countryConfig, allDonations }) => {
+}) => {
   const { translations, locale } = useTranslations();
 
   const lastLegislativeYear = lastItem(countryConfig.legislativeYears);

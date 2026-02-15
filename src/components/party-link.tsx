@@ -7,17 +7,22 @@ import { type CountryConfig, getParty } from "../utils/countries";
 import type { Translations } from "../messages/translations";
 import type { ConstLocale } from "../utils/locales";
 import type { ReceiverId } from "../utils/types";
-import type { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 
-export const PartyLink: FC<
-  PropsWithChildren & {
-    party: ReceiverId;
-    locale: ConstLocale;
-    className?: string;
-    country: CountryConfig;
-    translations: Translations;
-  }
-> = ({ locale, party, className, children, country, translations }) => {
+export const PartyLink = ({
+  locale,
+  party,
+  className,
+  children,
+  country,
+  translations,
+}: PropsWithChildren<{
+  party: ReceiverId;
+  locale: ConstLocale;
+  className?: string;
+  country: CountryConfig;
+  translations: Translations;
+}>) => {
   return (
     <Link
       prefetch={false}

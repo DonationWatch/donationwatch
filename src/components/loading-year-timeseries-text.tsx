@@ -12,13 +12,16 @@ import { DonationField } from "../utils/types";
 
 import type { CountryConfig } from "../utils/countries";
 import type { Donation, Party } from "../utils/types";
-import type { FC } from "react";
 
-export const LoadingYearTimeseriesText: FC<{
+export const LoadingYearTimeseriesText = ({
+  parties,
+  years,
+  country,
+}: {
   country: CountryConfig;
   parties: Party[];
   years: string[];
-}> = ({ parties, years, country }) => {
+}) => {
   const { translations } = useTranslations();
   const results = useDonationsByYears(country, years);
 

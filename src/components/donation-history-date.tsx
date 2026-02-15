@@ -5,12 +5,13 @@ import { dateDiffInDays, donationYear } from "../utils/date";
 import { formatDate, formatRelativeDate } from "../utils/formatter";
 import { DonationField } from "../utils/types";
 
-import type { FC } from "react";
-
-export const DonationHistoryDate: FC<{
+export const DonationHistoryDate = ({
+  date,
+  now,
+}: {
   date: string;
   now: number;
-}> = ({ date, now }) => {
+}) => {
   const { locale } = useTranslations();
 
   if (date === donationYear({ [DonationField.Date]: date }))

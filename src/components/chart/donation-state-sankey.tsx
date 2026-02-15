@@ -16,7 +16,6 @@ import { AddressField, DonationField } from "../../utils/types";
 import type { Donation, Party, ReceiverId } from "../../utils/types";
 import type { EChartsOption } from "echarts";
 import type { SankeyNodeItemOption } from "echarts/types/src/chart/sankey/SankeySeries.js";
-import type { FC } from "react";
 
 interface Edge {
   source: string;
@@ -24,14 +23,21 @@ interface Edge {
   value: number;
 }
 
-export const DonationStateSankey: FC<{
+export const DonationStateSankey = ({
+  country,
+  donations,
+  title: chartTitle,
+  subtitle,
+  parties,
+  years,
+}: {
   country: CountryConfig;
   parties: Party[];
   years: string[];
   title: string;
   subtitle: string;
   donations: Donation[];
-}> = ({ country, donations, title: chartTitle, subtitle, parties, years }) => {
+}) => {
   const { translations, locale } = useTranslations();
   const { backgroundColor } = useChart();
 

@@ -1,9 +1,12 @@
-import type { FC, JSX } from "react";
+import type { JSX } from "react";
 
-export const MetaCardTitle: FC<{
+export const MetaCardTitle = ({
+  variant,
+  title,
+}: {
   title: string;
   variant?: "default" | "small";
-}> = ({ variant, title }) => {
+}) => {
   return (
     <div
       className={`${
@@ -15,12 +18,17 @@ export const MetaCardTitle: FC<{
   );
 };
 
-export const MetaCard: FC<{
+export const MetaCard = ({
+  title,
+  value,
+  footer,
+  variant = "default",
+}: {
   title: string;
   value: string | number | JSX.Element;
   footer?: string;
   variant?: "default" | "small";
-}> = ({ title, value, footer, variant = "default" }) => {
+}) => {
   return (
     <div>
       <MetaCardTitle variant={variant} title={title} />

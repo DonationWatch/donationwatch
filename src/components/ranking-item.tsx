@@ -7,7 +7,7 @@ import { useTranslations } from "../hooks/use-translations";
 import { formatCountryCurrency } from "../utils/formatter";
 
 import type { CountryConfig } from "../utils/countries";
-import type { PropsWithChildren, ReactNode, FC } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 
 const colorClasses: Record<number, string> = {
   1: "from-yellow-100 to-yellow-200 text-yellow-900",
@@ -15,9 +15,7 @@ const colorClasses: Record<number, string> = {
   3: "from-amber-100 to-amber-200 text-amber-900",
 };
 
-export const RankBadge: FC<{
-  rank: number;
-}> = ({ rank }) => {
+export const RankBadge = ({ rank }: { rank: number }) => {
   return (
     <div
       aria-hidden={true}
@@ -31,19 +29,7 @@ export const RankBadge: FC<{
   );
 };
 
-export const CurrencyRankingItem: FC<
-  {
-    id?: string;
-    amount: number;
-    rank: number;
-    sum: number;
-    detail?: ReactNode;
-    country: CountryConfig;
-    expanded: boolean;
-    onToggleExpanded: (expanded: boolean) => void;
-    openAction?: ReactNode;
-  } & PropsWithChildren
-> = ({
+export const CurrencyRankingItem = ({
   id = "n",
   amount,
   country,
@@ -54,7 +40,17 @@ export const CurrencyRankingItem: FC<
   expanded,
   onToggleExpanded,
   openAction,
-}) => {
+}: PropsWithChildren<{
+  id?: string;
+  amount: number;
+  rank: number;
+  sum: number;
+  detail?: ReactNode;
+  country: CountryConfig;
+  expanded: boolean;
+  onToggleExpanded: (expanded: boolean) => void;
+  openAction?: ReactNode;
+}>) => {
   const { locale } = useTranslations();
 
   return (
@@ -80,19 +76,7 @@ export const CurrencyRankingItem: FC<
   );
 };
 
-export const RankingItem: FC<
-  {
-    id?: string;
-    rank: number;
-    detail?: ReactNode;
-    country: CountryConfig;
-    expanded: boolean;
-    onToggleExpanded: (expanded: boolean) => void;
-    right?: ReactNode;
-    showRank?: boolean;
-    openAction?: ReactNode;
-  } & PropsWithChildren
-> = ({
+export const RankingItem = ({
   id = "n",
   rank,
   children,
@@ -102,7 +86,17 @@ export const RankingItem: FC<
   right,
   showRank = true,
   openAction,
-}) => {
+}: PropsWithChildren<{
+  id?: string;
+  rank: number;
+  detail?: ReactNode;
+  country: CountryConfig;
+  expanded: boolean;
+  onToggleExpanded: (expanded: boolean) => void;
+  right?: ReactNode;
+  showRank?: boolean;
+  openAction?: ReactNode;
+}>) => {
   return (
     <section
       className="grow overflow-x-hidden"

@@ -11,13 +11,16 @@ import { getBuild } from "../utils/loader/build";
 import type { Translations } from "../messages/translations";
 import type { CountryConfig } from "../utils/countries";
 import type { ConstLocale } from "../utils/locales";
-import type { FC } from "react";
 
-export const CountryFooter: FC<{
+export const CountryFooter = ({
+  locale,
+  country,
+  translations,
+}: {
   translations: Translations;
   country: CountryConfig;
   locale: ConstLocale;
-}> = ({ locale, country, translations }) => {
+}) => {
   return (
     <section className="container mx-auto shrink-0 px-4 text-gray-600 dark:text-gray-400">
       <div className="grid grid-cols-2 items-start justify-between py-4 sm:grid-cols-3 sm:justify-items-center">

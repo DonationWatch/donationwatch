@@ -2,7 +2,6 @@
 
 import type { CountryConfig } from "@/utils/countries";
 import type { Party } from "@/utils/types";
-import type { FC } from "react";
 
 import { t } from "@/app/[locale]/translations";
 import Loading from "@/components/loading";
@@ -12,10 +11,13 @@ import { donationYear } from "@/utils/date";
 import { formatCountryCurrency, formatPercentFormat } from "@/utils/formatter";
 import { DonationField } from "@/utils/types";
 
-export const PartyTimelineText: FC<{
+export const PartyTimelineText = ({
+  party,
+  country,
+}: {
   country: CountryConfig;
   party: Party;
-}> = ({ party, country }) => {
+}) => {
   const { translations, locale } = useTranslations();
   const { data, error, isLoading } = useDonationsByParty(country, party);
 

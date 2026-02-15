@@ -6,15 +6,20 @@ import { t } from "../app/[locale]/translations";
 import type { Translations } from "../messages/translations";
 import type { CountryConfig } from "../utils/countries";
 import type { ConstLocale } from "../utils/locales";
-import type { FC } from "react";
 
-const YearsFooterLink: FC<{
+const YearsFooterLink = ({
+  next,
+  translations,
+  year,
+  locale,
+  country,
+}: {
   year: number;
   locale: ConstLocale;
   country: CountryConfig;
   translations: Translations;
   next?: boolean;
-}> = ({ next, translations, year, locale, country }) => {
+}) => {
   return (
     <Link
       prefetch={false}
@@ -29,12 +34,17 @@ const YearsFooterLink: FC<{
   );
 };
 
-export const YearsFooterNav: FC<{
+export const YearsFooterNav = ({
+  years,
+  translations,
+  country,
+  locale,
+}: {
   years: string[];
   translations: Translations;
   locale: ConstLocale;
   country: CountryConfig;
-}> = ({ years, translations, country, locale }) => {
+}) => {
   const firstYearNumber = parseInt(years.at(0)!, 10);
   const lastYearNumber = parseInt(years.at(-1)!, 10);
 

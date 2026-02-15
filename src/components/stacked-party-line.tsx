@@ -9,21 +9,20 @@ import type {
 } from "../utils/loader/party-years-sums";
 import type { ConstLocale } from "../utils/locales";
 import type { ReceiverId } from "../utils/types";
-import type { FC } from "react";
 
-export const StackedPartyDonations: FC<{
-  country: CountryConfig;
-  years: string[];
-  locale: ConstLocale;
-  partyYearsSums: PartyYearsSums;
-  direction?: "horizontal" | "vertical";
-}> = ({
+export const StackedPartyDonations = ({
   years,
   country,
   // TODO: handle donator support
   locale,
   partyYearsSums,
   direction = "horizontal",
+}: {
+  country: CountryConfig;
+  years: string[];
+  locale: ConstLocale;
+  partyYearsSums: PartyYearsSums;
+  direction?: "horizontal" | "vertical";
 }) => {
   const sums: Record<ReceiverId, number> = {};
   let sum = 0;
@@ -69,11 +68,15 @@ export const StackedPartyDonations: FC<{
   );
 };
 
-export const AbsoluteMultiplePartySumsGradient: FC<{
+export const AbsoluteMultiplePartySumsGradient = ({
+  partyYearsSums,
+  years,
+  country,
+}: {
   partyYearsSums: PartyYearsSums;
   years: string[];
   country: CountryConfig;
-}> = ({ partyYearsSums, years, country }) => {
+}) => {
   const sums: Record<string, number> = {};
   let sum = 0;
 

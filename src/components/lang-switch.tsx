@@ -14,8 +14,6 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 
-import type { FC } from "react";
-
 const languagesInTheirLanguage: Record<(typeof CONST_LOCALES)[number], string> =
   {
     en: "English",
@@ -28,7 +26,7 @@ const languagesInTheirLanguage: Record<(typeof CONST_LOCALES)[number], string> =
     no: "Norsk",
   };
 
-export const LangSwitch: FC = () => {
+export const LangSwitch = () => {
   const { translations } = useTranslations();
   const pathname = usePathname();
 

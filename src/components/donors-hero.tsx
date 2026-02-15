@@ -10,19 +10,23 @@ import type { CountryConfig } from "../utils/countries";
 import type { BigDonor } from "../utils/loader/biggest-donors";
 import type { ConstLocale } from "../utils/locales";
 import type { Translations } from "@/messages/translations";
-import type { FC } from "react";
 
 import { useTranslations } from "@/hooks/use-translations";
 import { getDonorName } from "@/utils/donor";
 
 const TOP_DONORS_TO_SHOW = 8;
 
-export const BigDonorPill: FC<{
+export const BigDonorPill = ({
+  country,
+  donor,
+  locale,
+  translations,
+}: {
   donor: Omit<BigDonor, "id"> & { id?: string };
   locale: ConstLocale;
   country: CountryConfig;
   translations: Translations;
-}> = ({ country, donor, locale, translations }) => {
+}) => {
   const { hash } = useHash(donor.name);
 
   const donorId = donor.id ?? hash;
@@ -56,11 +60,15 @@ export const BigDonorPill: FC<{
   );
 };
 
-export const DonorsHero: FC<{
+export const DonorsHero = ({
+  country,
+  locale,
+  biggestDonors,
+}: {
   locale: ConstLocale;
   country: CountryConfig;
   biggestDonors: BigDonor[];
-}> = ({ country, locale, biggestDonors }) => {
+}) => {
   const { translations } = useTranslations();
 
   return (

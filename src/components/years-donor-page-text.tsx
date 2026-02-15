@@ -18,15 +18,18 @@ import { DonationField } from "../utils/types";
 
 import type { CountryConfig } from "../utils/countries";
 import type { Donation, Party } from "../utils/types";
-import type { FC } from "react";
 
 const TOP_DONORS_TO_SHOW = 5;
 
-export const YearsDonorPageText: FC<{
+export const YearsDonorPageText = ({
+  years,
+  country,
+  parties,
+}: {
   years: string[];
   country: CountryConfig;
   parties: Party[];
-}> = ({ years, country, parties }) => {
+}) => {
   const { translations, locale } = useTranslations();
   const results = useDonationsByYears(country, years);
   const error = results.some((r) => r.error);

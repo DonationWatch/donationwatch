@@ -12,17 +12,21 @@ import type { Translations } from "../../../src/messages/translations";
 import type { CountryConfig } from "../../../src/utils/countries";
 import type { ConstLocale } from "../../../src/utils/locales";
 import type { Donation, Party } from "../../../src/utils/types";
-import type { FC } from "react";
 
 import { getDonorName } from "@/utils/donor";
 
-const RankingItem: FC<{
+const RankingItem = ({
+  amount,
+  name,
+  locale,
+  country,
+}: {
   name: string;
   amount: number;
   sum: number;
   locale: ConstLocale;
   country: CountryConfig;
-}> = ({ amount, name, locale, country }) => {
+}) => {
   return (
     <section tw="mb-2 text-2xl flex w-full overflow-hidden items-center justify-between text-left font-semibold">
       <div
@@ -42,13 +46,19 @@ const RankingItem: FC<{
   );
 };
 
-export const ImagePartyHeader: FC<{
+export const ImagePartyHeader = ({
+  country,
+  donations,
+  translations,
+  locale,
+  party,
+}: {
   country: CountryConfig;
   translations: Translations;
   party: Party;
   locale: ConstLocale;
   donations: Donation[];
-}> = ({ country, donations, translations, locale, party }) => {
+}) => {
   const partyDonations = donations.filter(
     (donation) => donation[DonationField.Receiver] === party.id,
   );

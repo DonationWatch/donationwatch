@@ -24,16 +24,20 @@ import type { Translations } from "../messages/translations";
 import type { CountryConfig } from "../utils/countries";
 import type { ConstLocale } from "../utils/locales";
 import type { Donation, Party } from "../utils/types";
-import type { FC } from "react";
 
 type DonorHistogram = Record<number, Record<string, number>>;
 
-const HistogramItemDetailLine: FC<{
+const HistogramItemDetailLine = ({
+  country,
+  amount,
+  locale,
+  donor,
+}: {
   locale: ConstLocale;
   country: CountryConfig;
   amount: number;
   donor: string;
-}> = ({ country, amount, locale, donor }) => {
+}) => {
   const fmtAmount = formatCountryCurrency(locale, amount, country);
 
   return (
@@ -48,12 +52,17 @@ const HistogramItemDetailLine: FC<{
   );
 };
 
-export const HistogramItemDetail: FC<{
+export const HistogramItemDetail = ({
+  country,
+  sums,
+  translations,
+  locale,
+}: {
   country: CountryConfig;
   sums: { donor: string; sum: number }[];
   translations: Translations;
   locale: ConstLocale;
-}> = ({ country, sums, translations, locale }) => {
+}) => {
   const parentRef = useRef<HTMLDivElement>(null);
   const isSm = useBreakpoint("sm");
 
@@ -107,11 +116,15 @@ export const HistogramItemDetail: FC<{
   );
 };
 
-const DonorHistogramTextText: FC<{
+const DonorHistogramTextText = ({
+  histogram,
+  donorReceivers,
+  years,
+}: {
   donorReceivers: Record<string, Set<string>>;
   histogram: DonorHistogram;
   years: string[];
-}> = ({ histogram, donorReceivers, years }) => {
+}) => {
   const { translations, locale } = useTranslations();
 
   const sortedBuckets = Object.entries(histogram)
@@ -173,7 +186,11 @@ const DonorHistogramTextText: FC<{
   );
 };
 
-const DonorHistogramTextList: FC<{
+const DonorHistogramTextList = ({
+  countDonorSums,
+  country,
+  locale,
+}: {
   country: CountryConfig;
   locale: ConstLocale;
   countDonorSums: {
@@ -183,7 +200,7 @@ const DonorHistogramTextList: FC<{
       sum: number;
     }[];
   }[];
-}> = ({ countDonorSums, country, locale }) => {
+}) => {
   const { translations } = useTranslations();
   const [expandedBuckets, setExpandedBuckets] = useState<string[]>([]);
   const onToggleExpanded = (state: string) => {
@@ -227,13 +244,19 @@ const DonorHistogramTextList: FC<{
   );
 };
 
-const LoadedYearsDonorHistogramText: FC<{
+const LoadedYearsDonorHistogramText = ({
+  years,
+  country,
+  parties,
+  donations,
+  locale,
+}: {
   years: string[];
   country: CountryConfig;
   parties: Party[];
   donations: Donation[];
   locale: ConstLocale;
-}> = ({ years, country, parties, donations, locale }) => {
+}) => {
   const yearsSet = new Set<string>(years);
   const partiesSet = new Set<Party>(parties);
 
@@ -306,11 +329,15 @@ const LoadedYearsDonorHistogramText: FC<{
   );
 };
 
-export const LoadingYearsDonorHistogramText: FC<{
+export const LoadingYearsDonorHistogramText = ({
+  years,
+  country,
+  parties,
+}: {
   years: string[];
   country: CountryConfig;
   parties: Party[];
-}> = ({ years, country, parties }) => {
+}) => {
   const { translations, locale } = useTranslations();
   const results = useDonationsByYears(country, years);
   const error = results.some((r) => r.error);

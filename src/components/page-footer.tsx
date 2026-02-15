@@ -7,14 +7,16 @@ import { GITHUB_URL } from "../utils/config";
 
 import type { Translations } from "../messages/translations";
 import type { ConstLocale } from "../utils/locales";
-import type { FC } from "react";
 
 const currentYear = new Date().getFullYear();
 
-export const PageFooter: FC<{
+export const PageFooter = async ({
+  locale,
+  translations,
+}: {
   translations: Translations;
   locale: ConstLocale;
-}> = async ({ locale, translations }) => {
+}) => {
   return (
     <footer className="container mx-auto shrink-0 px-4 text-gray-600 dark:text-gray-400">
       <div className="flex flex-col justify-between gap-2 py-4 text-sm sm:flex-row">

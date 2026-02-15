@@ -1,5 +1,5 @@
 "use client";
-import { type FC, Suspense } from "react";
+import { Suspense } from "react";
 
 import { RacingBarsContent } from "./racing-bars-content";
 import { useDonationsByYears } from "../../../../../hooks/use-api";
@@ -9,9 +9,11 @@ import Loading from "../../loading";
 
 import type { CountryConfig } from "../../../../../utils/countries";
 
-export const RacingBars: FC<{
+export const RacingBars = ({
+  countryConfig,
+}: {
   countryConfig: CountryConfig;
-}> = ({ countryConfig }) => {
+}) => {
   const { translations } = useTranslations();
 
   // Always load ALL years

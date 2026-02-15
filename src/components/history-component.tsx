@@ -4,11 +4,12 @@ import { DonationHistoryItem } from "./donation-history-item";
 import { getMostRecent } from "../utils/loader/most-recent";
 
 import type { CountryConfig } from "../utils/countries";
-import type { FC } from "react";
 
-export const HistoryComponent: FC<{
+export const HistoryComponent = async ({
+  country,
+}: {
   country: CountryConfig;
-}> = async ({ country }) => {
+}) => {
   const history = await getMostRecent(country.id);
 
   return (

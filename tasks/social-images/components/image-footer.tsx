@@ -11,13 +11,16 @@ import { getBuild } from "../../../src/utils/loader/build";
 import type { Translations } from "../../../src/messages/translations";
 import type { CountryConfig } from "../../../src/utils/countries";
 import type { ConstLocale } from "../../../src/utils/locales";
-import type { FC } from "react";
 
-export const ImageFooter: FC<{
+export const ImageFooter = ({
+  translations,
+  country,
+  locale,
+}: {
   translations: Translations;
   locale: ConstLocale;
   country: CountryConfig;
-}> = ({ translations, country, locale }) => {
+}) => {
   return (
     <div tw="shrink-0 flex flex-col text-sm text-slate-600 justify-end pr-4 pb-2 font-semibold">
       <div tw="flex justify-end">

@@ -17,11 +17,11 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
 import type { Country, CountryConfig } from "../utils/countries";
 import type { Party, ReceiverId } from "../utils/types";
 import type { NonEmptyArray } from "@/utils/array";
-import type { FC, ReactNode } from "react";
+import type { ReactNode } from "react";
 
 const MAX_DONOR_LEN = 15;
 
-export const CountryHeaderSearch: FC = () => {
+export const CountryHeaderSearch = () => {
   const { country: activeCountry } = useParams<{ country: Country }>();
 
   if (!activeCountry) return null;
@@ -29,11 +29,15 @@ export const CountryHeaderSearch: FC = () => {
   return <HeaderSearch />;
 };
 
-const SearchDialog: FC<{
+const SearchDialog = ({
+  country,
+  onClose,
+  isOpen,
+}: {
   country: CountryConfig;
   isOpen: boolean;
   onClose: () => void;
-}> = ({ country, onClose, isOpen }) => {
+}) => {
   const { translations } = useTranslations();
 
   return (
@@ -61,7 +65,7 @@ const SearchDialog: FC<{
   );
 };
 
-const HeaderSearch: FC = () => {
+const HeaderSearch = () => {
   const { translations } = useTranslations();
   const { country: activeCountry } = useParams<{ country: Country }>();
   const { isOpen, open, close } = useSearchDialog();
@@ -85,10 +89,13 @@ const HeaderSearch: FC = () => {
   );
 };
 
-const GlobalSearch: FC<{
+const GlobalSearch = ({
+  countryConfig,
+  onClose,
+}: {
   countryConfig: CountryConfig;
   onClose: () => void;
-}> = ({ countryConfig, onClose }) => {
+}) => {
   const { translations, locale } = useTranslations();
   const router = useRouter();
   const [search, setSearch] = useState("");
@@ -183,7 +190,11 @@ const GlobalSearch: FC<{
       id: "year",
       title: translations.search.years,
       items: visibleYears.map(
-        (year) => ({ type: "year", id: year }) as YearItem,
+        (year) =>
+          ({
+            type: "year",
+            id: year,
+          }) as YearItem,
       ),
     },
     {
@@ -191,7 +202,11 @@ const GlobalSearch: FC<{
       title: translations.search.legislative_years,
       items: visibleLegislativeYears.map(
         (years) =>
-          ({ type: "years", id: serializeYears(years), years }) as YearsItem,
+          ({
+            type: "years",
+            id: serializeYears(years),
+            years,
+          }) as YearsItem,
       ),
     },
     {
@@ -287,7 +302,14 @@ interface YearItem extends BaseItem {
   type: "year";
 }
 
-const SelectableList: FC<{
+const SelectableList = ({
+  groups,
+  render,
+  onSelect,
+  search,
+  onSearchChange,
+  onClose,
+}: {
   groups: {
     id: string;
     title: string;
@@ -298,7 +320,7 @@ const SelectableList: FC<{
   search: string;
   onSearchChange: (search: string) => void;
   onClose: () => void;
-}> = ({ groups, render, onSelect, search, onSearchChange, onClose }) => {
+}) => {
   const { translations } = useTranslations();
   const [selectedGroupIdx, setSelectedGroupIdx] = useState(0);
   const [selectedItemIdx, setSelectedItemIdx] = useState(-1);

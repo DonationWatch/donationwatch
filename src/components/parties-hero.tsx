@@ -9,15 +9,19 @@ import type { Translations } from "../messages/translations";
 import type { CountryConfig } from "../utils/countries";
 import type { ConstLocale } from "../utils/locales";
 import type { Party } from "../utils/types";
-import type { CSSProperties, FC } from "react";
+import type { CSSProperties } from "react";
 
 const VISIBLE_PARTIES = 4;
 
-const PartyLinkPill: FC<{
+const PartyLinkPill = ({
+  country,
+  party,
+  locale,
+}: {
   party: Party;
   locale: ConstLocale;
   country: CountryConfig;
-}> = ({ country, party, locale }) => {
+}) => {
   const color = partyColor(party.id, country);
   return (
     <li className="basis-full overflow-hidden p-1 sm:basis-1/2 lg:basis-1/4">
@@ -46,11 +50,15 @@ const PartyLinkPill: FC<{
   );
 };
 
-export const PartiesHero: FC<{
+export const PartiesHero = async ({
+  translations,
+  country,
+  locale,
+}: {
   translations: Translations;
   locale: ConstLocale;
   country: CountryConfig;
-}> = async ({ translations, country, locale }) => {
+}) => {
   const allParties = country.parties.toSorted((a, b) => b.sum - a.sum);
 
   return (

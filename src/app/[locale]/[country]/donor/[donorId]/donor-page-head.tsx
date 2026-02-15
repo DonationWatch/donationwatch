@@ -32,7 +32,6 @@ import type {
   ReceiverId,
 } from "../../../../../utils/types";
 import type { Translations } from "@/messages/translations";
-import type { FC } from "react";
 
 import {
   Tooltip,
@@ -80,10 +79,13 @@ export const DonorPageHead = ({
   );
 };
 
-const DonorTypeTooltip: FC<{
+const DonorTypeTooltip = ({
+  donorType,
+  translations,
+}: {
   translations: Translations;
   donorType: DonorType;
-}> = ({ donorType, translations }) => {
+}) => {
   if (donorType !== DonorType.AnonymizedDonor) return;
 
   return (
@@ -107,9 +109,11 @@ const DonorTypeTooltip: FC<{
   );
 };
 
-const RedactedDonorTooltip: FC<{
+const RedactedDonorTooltip = ({
+  translations,
+}: {
   translations: Translations;
-}> = ({ translations }) => {
+}) => {
   return (
     <Tooltip>
       <TooltipTrigger

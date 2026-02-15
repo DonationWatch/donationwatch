@@ -19,15 +19,16 @@ import { useTranslations } from "../hooks/use-translations";
 import { COUNTRIES, COUNTRY_CONFIG, getCountryName } from "../utils/countries";
 
 import type { Country } from "../utils/countries";
-import type { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 
 import { countryFlags } from "@/utils/country-flags";
 
-export const RootLink: FC<
-  {
-    className?: string;
-  } & PropsWithChildren
-> = ({ className, children }) => {
+export const RootLink = ({
+  className,
+  children,
+}: PropsWithChildren<{
+  className?: string;
+}>) => {
   const { translations, locale } = useTranslations();
   let { country: activeCountry } = useParams<{
     country: Country | undefined;
@@ -54,7 +55,7 @@ export const RootLink: FC<
   );
 };
 
-export const CountrySwitch: FC = () => {
+export const CountrySwitch = () => {
   const { translations, locale } = useTranslations();
   let { country: activeCountry } = useParams<{
     country: Country | undefined;

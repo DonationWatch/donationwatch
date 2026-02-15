@@ -34,7 +34,6 @@ import { t } from "../../../translations";
 
 import type { Country, CountryConfig } from "../../../../../utils/countries";
 import type { Donation, ReceiverId } from "../../../../../utils/types";
-import type { FC } from "react";
 
 import { getDonorName } from "@/utils/donor";
 
@@ -464,10 +463,13 @@ export const DonorClientPage = ({
   );
 };
 
-const DonorDonationTable: FC<{
+const DonorDonationTable = ({
+  donations,
+  countryConfig,
+}: {
   countryConfig: CountryConfig;
   donations: Donation[];
-}> = ({ donations, countryConfig }) => {
+}) => {
   const { translations } = useTranslations();
   const donorName = getDonorName(
     donations.at(0)?.[DonationField.DonorName] ?? "",

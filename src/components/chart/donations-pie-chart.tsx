@@ -18,13 +18,16 @@ import type { PartyYearsSums } from "../../utils/loader/party-years-sums";
 import type { ReceiverId } from "../../utils/types";
 import type { EChartsOption, TreemapSeriesOption } from "echarts";
 import type { TreemapSeriesNodeItemOption } from "echarts/types/src/chart/treemap/TreemapSeries.js";
-import type { FC } from "react";
 
-export const DonationsPieChart: FC<{
+export const DonationsPieChart = ({
+  country,
+  partyYearsSums,
+  years,
+}: {
   country: CountryConfig;
   partyYearsSums: PartyYearsSums;
   years: string[];
-}> = ({ country, partyYearsSums, years }) => {
+}) => {
   const { translations, locale } = useTranslations();
   const router = useRouter();
   const { backgroundColor, isMobile } = useChart();

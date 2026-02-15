@@ -20,14 +20,16 @@ import type {
   EChartsOption,
   MarkAreaComponentOption,
 } from "echarts";
-import type { FC } from "react";
 
 const PER_YEAR_HEIGHT = 20;
 
-export const DonationStackedYears: FC<{
+export const DonationStackedYears = ({
+  country,
+  partyYearsSums,
+}: {
   country: CountryConfig;
   partyYearsSums: PartyYearsSums;
-}> = ({ country, partyYearsSums }) => {
+}) => {
   const { translations, locale } = useTranslations();
   const router = useRouter();
   const { backgroundColor, isMobile, isDark } = useChart();

@@ -1,6 +1,6 @@
 "use client";
 
-import { type FC, useState } from "react";
+import { useState } from "react";
 
 import { DonationOriginVisual } from "./donation-origin-visual";
 import Loading from "./loading";
@@ -29,7 +29,15 @@ import {
 import type { OriginPartySum } from "../utils/data/get-origin-donations";
 import type { Donation, Party } from "../utils/types";
 
-const CurrentCountryPart: FC<{
+const CurrentCountryPart = ({
+  sums,
+  donations,
+  sum,
+  years,
+  parties,
+  country,
+  subtitle,
+}: {
   country: CountryConfig;
   sums: OriginPartySum[];
   donations: Donation[];
@@ -37,7 +45,7 @@ const CurrentCountryPart: FC<{
   parties: Party[];
   sum: number;
   subtitle: string;
-}> = ({ sums, donations, sum, years, parties, country, subtitle }) => {
+}) => {
   const { translations, locale } = useTranslations();
   const [expandedDonors, setExpandedDonors] = useState<string[]>([]);
   const onToggleExpanded = (state: string) => {
@@ -130,12 +138,17 @@ const CurrentCountryPart: FC<{
   );
 };
 
-const OtherCountryPart: FC<{
+const OtherCountryPart = ({
+  sums,
+  sum,
+  years,
+  country,
+}: {
   country: CountryConfig;
   sums: OriginPartySum[];
   years: string[];
   sum: number;
-}> = ({ sums, sum, years, country }) => {
+}) => {
   const { translations, locale } = useTranslations();
   const [expandedCountries, setExpandedCountries] = useState<string[]>([]);
   const onToggleExpanded = (state: string) => {
@@ -230,11 +243,15 @@ const OtherCountryPart: FC<{
   );
 };
 
-export const DonationYearOrigin: FC<{
+export const DonationYearOrigin = ({
+  country,
+  years,
+  parties,
+}: {
   years: string[];
   parties: Party[];
   country: CountryConfig;
-}> = ({ country, years, parties }) => {
+}) => {
   const { translations } = useTranslations();
   const results = useDonationsByYears(country, years);
   const error = results.some((r) => r.error);
@@ -261,11 +278,15 @@ export const DonationYearOrigin: FC<{
   );
 };
 
-export const DonationPartyOrigin: FC<{
+export const DonationPartyOrigin = ({
+  country,
+  years,
+  party,
+}: {
   years: string[];
   party: Party;
   country: CountryConfig;
-}> = ({ country, years, party }) => {
+}) => {
   const { translations } = useTranslations();
   const { data, error, isLoading } = useDonationsByParty(country, party);
 
@@ -286,13 +307,19 @@ export const DonationPartyOrigin: FC<{
   );
 };
 
-const DonationOrigin: FC<{
+const DonationOrigin = ({
+  country,
+  years,
+  parties,
+  donations,
+  subtitle,
+}: {
   years: string[];
   parties: Party[];
   country: CountryConfig;
   donations: Donation[];
   subtitle: string;
-}> = ({ country, years, parties, donations, subtitle }) => {
+}) => {
   const { translations, locale } = useTranslations();
   const { sum, sums } = getOriginDonations(country, donations, parties, years);
 

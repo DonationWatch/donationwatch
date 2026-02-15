@@ -5,17 +5,20 @@ import { useTranslations } from "../hooks/use-translations";
 import { cn } from "../utils/classname";
 
 import type { CountryConfig } from "../utils/countries";
-import type { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 
 import { getDonorName } from "@/utils/donor";
 
-export const DonorLink: FC<
-  PropsWithChildren & {
-    donor: string;
-    className?: string;
-    country: CountryConfig;
-  }
-> = ({ children, donor, country, className }) => {
+export const DonorLink = ({
+  children,
+  donor,
+  country,
+  className,
+}: PropsWithChildren<{
+  donor: string;
+  className?: string;
+  country: CountryConfig;
+}>) => {
   const { translations, locale } = useTranslations();
   const { hash, isHashing, error } = useHash(donor);
 

@@ -8,11 +8,12 @@ import { useTranslations } from "../hooks/use-translations";
 import { countryCodesToCountry } from "../utils/countries";
 
 import type { CountryConfig, CountryCode } from "../utils/countries";
-import type { FC } from "react";
 
-export const DetectedCountryContent: FC<{
+export const DetectedCountryContent = ({
+  detectedCountryCode,
+}: {
   detectedCountryCode?: CountryCode;
-}> = ({ detectedCountryCode }) => {
+}) => {
   const { locale, translations } = useTranslations();
   const detectedCountry = translations.countries[detectedCountryCode ?? "??"];
 
@@ -53,9 +54,7 @@ const DetectedCountryFallback = () => {
   );
 };
 
-export const DetectedCountry: FC<{
-  country?: CountryConfig;
-}> = ({ country }) => {
+export const DetectedCountry = ({ country }: { country?: CountryConfig }) => {
   const { data, isLoading, error } = useDetectedCountry();
 
   const notDoneLoadingComponent = <DetectedCountryFallback />;

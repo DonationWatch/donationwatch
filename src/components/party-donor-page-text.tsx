@@ -22,14 +22,17 @@ import { ArticleSectionTitle } from "./layout/article";
 
 import type { CountryConfig } from "../utils/countries";
 import type { Donation, Party } from "../utils/types";
-import type { FC, ReactNode } from "react";
+import type { ReactNode } from "react";
 
 const TOP_DONORS_TO_SHOW = 5;
 
-export const PartyDonorPageText: FC<{
+export const PartyDonorPageText = ({
+  party,
+  country,
+}: {
   country: CountryConfig;
   party: Party;
-}> = ({ party, country }) => {
+}) => {
   const { translations, locale } = useTranslations();
   const { data, error, isLoading } = useDonationsByParty(country, party);
 

@@ -11,7 +11,7 @@ import { sumPartySums } from "../utils/math";
 import type { CountryConfig } from "../utils/countries";
 import type { PartyYearsSums } from "../utils/loader/party-years-sums";
 import type { ConstLocale } from "../utils/locales";
-import type { FC, JSX } from "react";
+import type { JSX } from "react";
 
 const kindIcons: Record<RelationKind, JSX.Element> = {
   [RelationKind.family]: <Family size={16} />,
@@ -19,13 +19,19 @@ const kindIcons: Record<RelationKind, JSX.Element> = {
   [RelationKind.owner]: <BriefcaseBusiness size={16} />,
 };
 
-export const RelatedDonorChip: FC<{
+export const RelatedDonorChip = ({
+  name,
+  kind,
+  locale,
+  country,
+  sums,
+}: {
   name: string;
   kind: RelationKind;
   locale: ConstLocale;
   country: CountryConfig;
   sums?: PartyYearsSums;
-}> = ({ name, kind, locale, country, sums }) => {
+}) => {
   const sum = sumPartySums(sums ?? {});
 
   return (

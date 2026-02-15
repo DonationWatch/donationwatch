@@ -13,16 +13,22 @@ import type { Translations } from "../messages/translations";
 import type { CountryConfig } from "../utils/countries";
 import type { ConstLocale } from "../utils/locales";
 import type { Donation, ReceiverId } from "../utils/types";
-import type { FC } from "react";
 
-export const ReadonlyTopYearDonationsItem: FC<{
+export const ReadonlyTopYearDonationsItem = ({
+  partyId,
+  amount,
+  rank,
+  sum,
+  locale,
+  country,
+}: {
   partyId: ReceiverId;
   amount: number;
   rank: number;
   sum: number;
   locale: ConstLocale;
   country: CountryConfig;
-}> = ({ partyId, amount, rank, sum, locale, country }) => {
+}) => {
   return (
     <NonInteractableRankingItem
       amount={amount}
@@ -41,18 +47,7 @@ export const ReadonlyTopYearDonationsItem: FC<{
   );
 };
 
-export const LoadingTopYearDonationsItem: FC<{
-  partyId: ReceiverId;
-  amount: number;
-  rank: number;
-  sum: number;
-  country: CountryConfig;
-  years?: string[];
-  expanded: boolean;
-  onToggleExpanded: (expanded: boolean) => void;
-  translations: Translations;
-  locale: ConstLocale;
-}> = ({
+export const LoadingTopYearDonationsItem = ({
   partyId,
   amount,
   rank,
@@ -63,6 +58,17 @@ export const LoadingTopYearDonationsItem: FC<{
   onToggleExpanded,
   translations,
   locale,
+}: {
+  partyId: ReceiverId;
+  amount: number;
+  rank: number;
+  sum: number;
+  country: CountryConfig;
+  years?: string[];
+  expanded: boolean;
+  onToggleExpanded: (expanded: boolean) => void;
+  translations: Translations;
+  locale: ConstLocale;
 }) => {
   return (
     <CurrencyRankingItem
@@ -98,7 +104,16 @@ export const LoadingTopYearDonationsItem: FC<{
   );
 };
 
-export const LoadedTopYearDonationsItem: FC<{
+export const LoadedTopYearDonationsItem = ({
+  partyId,
+  amount,
+  rank,
+  sum,
+  country,
+  expanded,
+  onToggleExpanded,
+  donations,
+}: {
   partyId: ReceiverId;
   amount: number;
   rank: number;
@@ -108,15 +123,6 @@ export const LoadedTopYearDonationsItem: FC<{
   expanded: boolean;
   onToggleExpanded: (expanded: boolean) => void;
   donations: Donation[];
-}> = ({
-  partyId,
-  amount,
-  rank,
-  sum,
-  country,
-  expanded,
-  onToggleExpanded,
-  donations,
 }) => {
   return (
     <CurrencyRankingItem

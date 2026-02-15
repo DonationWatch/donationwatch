@@ -13,16 +13,20 @@ import type { Translations } from "../messages/translations";
 import type { CountryConfig } from "../utils/countries";
 import type { ConstLocale } from "../utils/locales";
 import type { Donation } from "../utils/types";
-import type { FC } from "react";
 
 import { getDonationDonorName } from "@/utils/donor";
 
-export const BiggestDonationsHero: FC<{
+export const BiggestDonationsHero = ({
+  country,
+  locale,
+  translations,
+  biggestDonations,
+}: {
   locale: ConstLocale;
   country: CountryConfig;
   translations: Translations;
   biggestDonations: Donation[];
-}> = ({ country, locale, translations, biggestDonations }) => {
+}) => {
   if (!biggestDonations.length) return null;
 
   const biggestDonation = biggestDonations.at(0)!;

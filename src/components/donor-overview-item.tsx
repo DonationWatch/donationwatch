@@ -5,21 +5,11 @@ import { CurrencyRankingItem } from "./ranking-item";
 
 import type { CountryConfig } from "../utils/countries";
 import type { Translations } from "@/messages/translations";
-import type { ReactNode, FC } from "react";
+import type { ReactNode } from "react";
 
 import { getDonorName } from "@/utils/donor";
 
-export const DonorOverviewItem: FC<{
-  name: string;
-  amount: number;
-  rank: number;
-  sum: number;
-  detail: ReactNode | undefined;
-  country: CountryConfig;
-  expanded: boolean;
-  onToggleExpanded: (expanded: boolean) => void;
-  translations: Translations;
-}> = ({
+export const DonorOverviewItem = ({
   rank,
   country,
   name,
@@ -29,6 +19,16 @@ export const DonorOverviewItem: FC<{
   expanded,
   onToggleExpanded,
   translations,
+}: {
+  name: string;
+  amount: number;
+  rank: number;
+  sum: number;
+  detail: ReactNode | undefined;
+  country: CountryConfig;
+  expanded: boolean;
+  onToggleExpanded: (expanded: boolean) => void;
+  translations: Translations;
 }) => {
   return (
     <CurrencyRankingItem

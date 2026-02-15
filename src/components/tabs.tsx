@@ -1,7 +1,7 @@
 import { NavigationLink } from "./navigation-link";
 
 import type { LucideIcon } from "lucide-react";
-import type { PropsWithChildren, FC } from "react";
+import type { PropsWithChildren } from "react";
 
 export interface TabItem {
   icon: LucideIcon;
@@ -10,7 +10,7 @@ export interface TabItem {
   label: string;
 }
 
-export const TabList: FC<PropsWithChildren> = ({ children }) => {
+export const TabList = ({ children }: PropsWithChildren) => {
   return (
     <div
       role="tablist"
@@ -21,9 +21,7 @@ export const TabList: FC<PropsWithChildren> = ({ children }) => {
   );
 };
 
-export const NavigationTabs: FC<{
-  items: TabItem[];
-}> = ({ items }) => {
+export const NavigationTabs = ({ items }: { items: TabItem[] }) => {
   return (
     <TabList>
       {items.map((item) => (

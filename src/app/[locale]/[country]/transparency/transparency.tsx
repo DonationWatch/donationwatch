@@ -9,11 +9,12 @@ import { getCountryName } from "../../../../utils/countries";
 import { t } from "../../translations";
 
 import type { CountryConfig } from "../../../../utils/countries";
-import type { FC } from "react";
 
-export const Transparency: FC<{
+export const Transparency = ({
+  countryConfig,
+}: {
   countryConfig: CountryConfig;
-}> = ({ countryConfig }) => {
+}) => {
   const { translations, locale } = useTranslations();
   const { data, error, isLoading } = useNormalized(countryConfig);
 

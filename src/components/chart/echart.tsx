@@ -16,7 +16,7 @@ import Loading from "../loading";
 import type { EChartsOption, SetOptionOpts } from "echarts";
 import type { EChartsType } from "echarts/core";
 import type { EChartsExtensionInstaller } from "echarts/types/src/extension.js";
-import type { FC, JSX, Ref } from "react";
+import type { JSX, Ref } from "react";
 
 echarts.use([
   CanvasRenderer,
@@ -111,15 +111,7 @@ export interface EChartsPublicApi {
   resetZoom: () => void;
 }
 
-export const ReactECharts: FC<
-  ReactEChartsProps & {
-    feature?: ChartFeature;
-    onZrClick?: OnZrClickFn;
-    onClick?: OnClickFn;
-    onZoom?: () => void;
-    ref?: Ref<EChartsPublicApi | undefined>;
-  }
-> = ({
+export const ReactECharts = ({
   onZrClick,
   onClick,
   onZoom,
@@ -128,6 +120,12 @@ export const ReactECharts: FC<
   settings,
   theme,
   ref,
+}: ReactEChartsProps & {
+  feature?: ChartFeature;
+  onZrClick?: OnZrClickFn;
+  onClick?: OnClickFn;
+  onZoom?: () => void;
+  ref?: Ref<EChartsPublicApi | undefined>;
 }): JSX.Element => {
   const [loadingModules, setLoadingModules] = useState<boolean>(true);
   const chartRef = useRef<HTMLDivElement>(null);

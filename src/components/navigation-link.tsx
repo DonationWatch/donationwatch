@@ -3,14 +3,19 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import type { ComponentProps, FC, JSX, PropsWithChildren } from "react";
+import type { ComponentProps, JSX, PropsWithChildren } from "react";
 
-export const NavigationLink: FC<{
+export const NavigationLink = ({
+  label,
+  href,
+  activeHref,
+  icon,
+}: {
   label: string;
   href: string;
   activeHref?: string;
   icon: JSX.Element;
-}> = ({ label, href, activeHref, icon }) => {
+}) => {
   const activeClass =
     "text-primary-700 shadow-md bg-white dark:bg-primary-900 dark:text-primary-200";
 
@@ -28,15 +33,21 @@ export const NavigationLink: FC<{
   );
 };
 
-export const ActiveLink: FC<
+export const ActiveLink = ({
+  href,
+  activeHref,
+  activeClass,
+  className,
+  children,
+  ...others
+}: PropsWithChildren<
   {
     href: string;
     activeHref?: string;
     activeClass: string;
     className?: string;
-  } & ComponentProps<typeof Link> &
-    PropsWithChildren
-> = ({ href, activeHref, activeClass, className, children, ...others }) => {
+  } & ComponentProps<typeof Link>
+>) => {
   const pathname = usePathname();
   const isActive = activeHref
     ? pathname.startsWith(activeHref)

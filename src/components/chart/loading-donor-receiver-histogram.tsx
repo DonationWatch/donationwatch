@@ -15,17 +15,23 @@ import type { CountryConfig } from "../../utils/countries";
 import type { Donation, Party } from "../../utils/types";
 import type { EChartsOption } from "echarts";
 import type { CallbackDataParams } from "echarts/types/dist/shared";
-import type { FC } from "react";
 
 // Bar chart that represents a histogram of x axis being the amount of distinct receivers per donor
-export const LoadedDonorReceiverHistogram: FC<{
+export const LoadedDonorReceiverHistogram = ({
+  country,
+  title,
+  subtitle,
+  donations,
+  parties = [],
+  years = [],
+}: {
   country: CountryConfig;
   title: string;
   subtitle: string;
   donations: Donation[];
   parties?: Party[];
   years?: string[];
-}> = ({ country, title, subtitle, donations, parties = [], years = [] }) => {
+}) => {
   const { translations, locale } = useTranslations();
 
   const yearsSet = new Set<string>(years);
@@ -180,14 +186,20 @@ export const LoadedDonorReceiverHistogram: FC<{
   );
 };
 
-export const LoadingDonorReceiverHistogram: FC<{
+export const LoadingDonorReceiverHistogram = ({
+  country,
+  years,
+  parties,
+  title,
+  subtitle,
+}: {
   country: CountryConfig;
   years: string[];
   parties: Party[];
   tooSmallAreaColor?: string;
   title: string;
   subtitle: string;
-}> = ({ country, years, parties, title, subtitle }) => {
+}) => {
   const { translations } = useTranslations();
   const results = useDonationsByYears(country, years);
   const error = results.some((r) => r.error);

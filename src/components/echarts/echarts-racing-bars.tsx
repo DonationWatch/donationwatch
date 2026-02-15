@@ -13,7 +13,6 @@ import { Button } from "../ui/button";
 import type { ConstLocale } from "../../utils/locales";
 import type { CountryConfig, Currency } from "@/utils/countries";
 import type { BarSeriesOption, EChartsOption } from "echarts";
-import type { FC } from "react";
 
 import { t } from "@/app/[locale]/translations";
 import { ExpandableReactEchart } from "@/components/chart/expandable-react-echart";
@@ -41,7 +40,7 @@ const CHART_WIDTH = 1040; // 16:10
 const CHART_HEIGHT = 650;
 const backgroundColor = "#111827";
 
-export const EChartsRacingBars: FC<EChartsRacingBarsProps> = ({
+export const EChartsRacingBars = ({
   countryConfig,
   donations,
   years,
@@ -52,7 +51,7 @@ export const EChartsRacingBars: FC<EChartsRacingBarsProps> = ({
   subtitle,
   partiesById,
   totalRuntimeMs = DEFAULT_TOTAL_RUNTIME_MS,
-}) => {
+}: EChartsRacingBarsProps) => {
   const { translations } = useTranslations();
   const containerRef = useRef<HTMLDivElement>(null);
   const animationIntervalRef = useRef<NodeJS.Timeout | null>(null);

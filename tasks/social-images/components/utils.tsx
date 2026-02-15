@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unknown-property */
-import type { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 
-export const ThumbnailWrapper: FC<PropsWithChildren> = ({ children }) => {
+export const ThumbnailWrapper = ({ children }: PropsWithChildren) => {
   return (
     <div
       tw="bg-white w-full h-full flex flex-col"

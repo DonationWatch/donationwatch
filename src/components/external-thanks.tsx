@@ -5,7 +5,6 @@ import { Country } from "../utils/countries";
 import type { Translations } from "../messages/translations";
 import type { CountryConfig } from "../utils/countries";
 import type { ConstLocale } from "../utils/locales";
-import type { FC } from "react";
 
 const externalThanks: Partial<
   Record<Country, { name: string; url: string }[]>
@@ -42,11 +41,15 @@ const externalThanks: Partial<
   ],
 };
 
-export const ExternalThanks: FC<{
+export const ExternalThanks = ({
+  country,
+  translations,
+  locale,
+}: {
   translations: Translations;
   country: CountryConfig;
   locale: ConstLocale;
-}> = ({ country, translations, locale }) => {
+}) => {
   const thanks = externalThanks[country.id];
 
   if (!thanks) return null;

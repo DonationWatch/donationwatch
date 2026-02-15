@@ -5,19 +5,26 @@ import { DonationField } from "../utils/types";
 
 import type { CountryConfig } from "../utils/countries";
 import type { ConstLocale } from "../utils/locales";
-import type { PropsWithChildren, FC } from "react";
+import type { PropsWithChildren } from "react";
 
-export const RankingItemLine: FC<
-  {
-    label: string;
-    date: string;
-    amount: number;
-    locale: ConstLocale;
-    country: CountryConfig;
-    year: string;
-    className?: string;
-  } & PropsWithChildren
-> = ({ country, className, year, amount, label, date, children, locale }) => {
+export const RankingItemLine = ({
+  country,
+  className,
+  year,
+  amount,
+  label,
+  date,
+  children,
+  locale,
+}: PropsWithChildren<{
+  label: string;
+  date: string;
+  amount: number;
+  locale: ConstLocale;
+  country: CountryConfig;
+  year: string;
+  className?: string;
+}>) => {
   const fmtAmount = formatCountryCurrency(locale, amount, country);
 
   return (

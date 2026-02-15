@@ -4,14 +4,18 @@ import { formatPartyShortName } from "../utils/formatter";
 
 import type { CountryConfig } from "../utils/countries";
 import type { ReceiverId } from "../utils/types";
-import type { FC } from "react";
 
-export const PartyDot: FC<{
+export const PartyDot = ({
+  party,
+  country,
+  nameClassName,
+  className = "",
+}: {
   party: ReceiverId;
   className?: string;
   nameClassName?: string;
   country: CountryConfig;
-}> = ({ party, country, nameClassName, className = "" }) => {
+}) => {
   return (
     <span className={cn("flex items-center font-medium", className)}>
       <span

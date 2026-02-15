@@ -6,15 +6,20 @@ import type { Translations } from "../messages/translations";
 import type { CountryConfig } from "../utils/countries";
 import type { ConstLocale } from "../utils/locales";
 import type { ReceiverId } from "../utils/types";
-import type { FC } from "react";
 
-export const TextPartyLink: FC<{
+export const TextPartyLink = ({
+  truncated = false,
+  party: partyId,
+  country,
+  translations,
+  locale,
+}: {
   party: ReceiverId;
   country: CountryConfig;
   locale: ConstLocale;
   translations: Translations;
   truncated?: boolean;
-}> = ({ truncated = false, party: partyId, country, translations, locale }) => {
+}) => {
   const party = getParty(country, partyId);
   return (
     <PartyLink
