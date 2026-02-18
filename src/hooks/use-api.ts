@@ -130,7 +130,7 @@ export const useDonationsByDonorId = (
         .then((data) =>
           // Filter donations by donor ID
           donationDocumentToDonations(data, (donation) => {
-            const [, donationDonorId] =
+            const [, , /* name */ /* ubos */ donationDonorId] =
               data.donors[donation[DonationField.DonorIndex]];
             return donationDonorId === donorId;
           }),

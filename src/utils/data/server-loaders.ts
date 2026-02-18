@@ -49,7 +49,7 @@ export async function getDonationsByDonorId(
 
     // Filter donations by donor ID
     return donationDocumentToDonations(data, (donation) => {
-      const [, donationDonorId] =
+      const [, , /* name */ /* ubos */ donationDonorId] =
         data.donors[donation[DonationField.DonorIndex]];
       return donationDonorId === donorId;
     });

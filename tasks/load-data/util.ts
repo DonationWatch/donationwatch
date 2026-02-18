@@ -70,7 +70,7 @@ export const donationsToDonationsDocumentWithoutDonorIds = (
 ): DonationsDocumentWithoutDonorIds => {
   const document = donationsToDonationsDocument(donations);
   return {
-    donors: document.donors.map(([donorName]) => [donorName]),
+    donors: document.donors.map(([donorName, ubos]) => [donorName, ubos]),
     donations: document.donations,
   };
 };
@@ -85,14 +85,26 @@ const donationsToDonationsDocument = (
   donations: Donation[],
 ): DonationsDocument => {
   const donorIds: Record<string, string> = {};
+  const donorUBOs: Record<string, Set<string>> = {};
 
   donations.forEach((donation) => {
     const donorName = donation[DonationField.DonorName];
+    const ubos = donation[DonationField.UBOs];
+
     donorIds[donorName] = hash(donorName);
+
+    if (ubos?.length) {
+      donorUBOs[donorName] ??= new Set([]);
+      ubos.forEach((ubo) => donorUBOs[donorName].add(ubo));
+    }
   });
 
   const document: DonationsDocument = {
-    donors: Object.entries(donorIds),
+    donors: Object.entries(donorIds).map(([donorName, donorId]) => [
+      donorName,
+      donorUBOs[donorName] ? [...donorUBOs[donorName]] : null,
+      donorId,
+    ]),
     donations: [],
   };
   const donorNames = Object.keys(donorIds);
@@ -101,10 +113,14 @@ const donationsToDonationsDocument = (
     const donorName = donation[DonationField.DonorName];
     const donorIndex = donorNames.indexOf(donorName);
 
-    const { [DonationField.DonorName]: _, ...donationWithoutName } = donation;
+    const {
+      [DonationField.DonorName]: _1,
+      [DonationField.UBOs]: _2,
+      ...donationWithStrippedFields
+    } = donation;
 
     document.donations.push({
-      ...donationWithoutName,
+      ...donationWithStrippedFields,
       [DonationField.DonorIndex]: donorIndex,
     });
   });

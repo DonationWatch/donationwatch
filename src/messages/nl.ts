@@ -555,6 +555,9 @@ const Nl = {
       description:
         "De identiteit van de donor is door de publicerende instantie geredigeerd vóór de publicatie van deze gegevens. Het donatiebedrag blijft opgenomen in de berekeningen van de totale financiering om financiële transparantie te waarborgen.",
     },
+    ubo: "Uiteindelijk belanghebbenden (UBO's)",
+    ubo_description:
+      'Een Uiteindelijk Belanghebbende (UBO) is de persoon die feitelijk aan de touwtjes trekt. Het zijn de individuen die uiteindelijk de donor bezitten of controleren, doorgaans door 25% of meer van de aandelen of stemrechten te houden. Als geen enkele persoon aan deze drempel voldoet, kan het hoger management (zoals directeuren) worden vermeld als "pseudo-UBO\'s" om verantwoordelijkheid te waarborgen.',
   },
   countries: {
     "??": "Niet gespecificeerd",

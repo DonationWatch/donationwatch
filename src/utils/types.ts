@@ -44,6 +44,9 @@ export const enum DonationField {
   Receiver,
   Address,
   DonorIndex,
+  // Ultimate Beneficial Owners
+  // see https://en.wikipedia.org/wiki/Beneficial_ownership
+  UBOs,
 }
 
 export interface Donation {
@@ -56,6 +59,7 @@ export interface Donation {
   [DonationField.Address]: DonationAddress;
   [DonationField.Receiver]: ReceiverId;
   [DonationField.DonorType]?: DonorType;
+  [DonationField.UBOs]?: string[];
 }
 
 export interface Party {

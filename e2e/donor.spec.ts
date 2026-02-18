@@ -2,7 +2,9 @@ import { expect } from "@playwright/test";
 
 import { test } from "./util/fixture";
 import { hash } from "../tasks/load-data/util";
-import { DONOR_WITH_WIKIPEDIA_ARTICLE } from "../tests/config";
+import { DONOR_WITH_UBOs, DONOR_WITH_WIKIPEDIA_ARTICLE } from "../tests/config";
+
+import { formatAnd } from "@/utils/formatter";
 
 test.describe("Donor page", () => {
   test("works as expected", async ({
@@ -42,6 +44,24 @@ test.describe("Donor page", () => {
       await test.step("is accessible", async () => {
         await accessibility.check();
       });
+    });
+  });
+
+  test("shows UBOs if known", async ({
+    page,
+    donorPage,
+    baseURL,
+    accessibility,
+    locale,
+  }) => {
+    await page.goto(`${baseURL}/germany/donor/${hash(DONOR_WITH_UBOs)}`);
+
+    await expect(donorPage.uboText).toHaveText(
+      formatAnd(locale, ["Fake UBO 1", "Fake UBO 2"]),
+    );
+
+    await test.step("is accessible", async () => {
+      await accessibility.check();
     });
   });
 });

@@ -504,6 +504,9 @@ const Hr = {
       description:
         "Identitet donatora redigirala je nadležna institucija prije objave ovih podataka. Iznos donacije i dalje je uključen u izračune ukupnog financiranja kako bi se očuvala financijska transparentnost.",
     },
+    ubo: "Stvarni vlasnici (SV)",
+    ubo_description:
+      'Stvarni vlasnik (SV) je osoba koja zapravo vuče konce. To su pojedinci koji u konačnici posjeduju ili kontroliraju donatora, obično držeći 25% ili više njegovih dionica ili glasačkih prava. Ako nijedna pojedinačna osoba ne ispunjava ovaj prag, viši menadžment (poput direktora) može biti naveden kao "pseudo-SV" kako bi se osigurala odgovornost.',
   },
   countries: {
     "??": "Nije navedeno",

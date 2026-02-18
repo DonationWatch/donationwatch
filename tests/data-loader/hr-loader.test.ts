@@ -1,6 +1,6 @@
 import { expect, test, describe } from "vitest";
 
-import { currencyConversion } from "../tasks/load-data/hr/hr-loader";
+import { currencyConversion } from "../../tasks/load-data/hr/hr-loader";
 
 describe("currencyConversion", () => {
   test("it doesn't convert entries after 2024", () => {

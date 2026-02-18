@@ -511,6 +511,9 @@ const No = {
       description:
         "Giverens identitet ble sladdet av den publiserende myndigheten før disse dataene ble offentliggjort. Donasjonsbeløpet er fortsatt inkludert i beregningene av total finansiering for å ivareta finansiell åpenhet.",
     },
+    ubo: "Reelle rettighetshavere (RRH)",
+    ubo_description:
+      'En reell rettighetshaver (RRH) er personen som faktisk styrer. Det er de personene som til syvende og sist eier eller kontrollerer giveren, vanligvis ved å inneha 25 % eller mer av aksjene eller stemmerettighetene. Hvis ingen enkeltperson oppfyller denne terskelen, kan toppledelsen (som direktører) bli oppført som "pseudo-RRH-er" for å sikre ansvarlighet.',
   },
   countries: {
     "??": "Ikke spesifisert",

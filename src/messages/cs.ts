@@ -549,6 +549,9 @@ const Cs = {
       description:
         "Identita dárce byla před zveřejněním těchto údajů redigována zveřejňujícím orgánem. Výše daru zůstává zahrnuta ve výpočtech celkového financování, aby byla zachována finanční transparentnost.",
     },
+    ubo: "Konečný skutečný vlastník (KSV)",
+    ubo_description:
+      'Konečný skutečný vlastník (KSV) je osoba, která skutečně táhne za nitky. Jedná se o jednotlivce, kteří v konečném důsledku vlastní nebo kontrolují dárce, typicky držením 25 % nebo více jeho akcií nebo hlasovacích práv. Pokud žádná jednotlivá osoba nesplňuje tuto hranici, může být vrcholný management (například ředitelé) uveden jako "pseudo-KSV" k zajištění odpovědnosti.',
   },
   countries: {
     "??": "Neuvedeno",
