@@ -560,6 +560,9 @@ const Et = {
       description:
         "Avaldav asutus varjas annetaja isikuandmed enne nende andmete avaldamist. Annetuse summa on siiski kogurahastuse arvutustes arvesse võetud, et säilitada finantsläbipaistvus.",
     },
+    ubo: "Tegelikud kasusaajad (TK)",
+    ubo_description:
+      'Tegelik kasusaaja (TK) on isik, kes tegelikult niite tõmbab. Need on üksikisikud, kes lõpuks omavad või kontrollivad annetajat, tavaliselt omades 25% või rohkem tema aktsiatest või hääleõigustest. Kui ükski üksikisik ei vasta sellele künnisväärtusele, võidakse kõrgem juhtkond (nagu direktorid) loetleda "pseudo-TK-dena", et tagada vastutus.',
   },
   countries: {
     "??": "Ei ole täpsustatud",

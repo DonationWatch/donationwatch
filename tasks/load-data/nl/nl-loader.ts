@@ -12,12 +12,52 @@ import { AddressField, DonationField } from "../../../src/utils/types";
 import { DataLoader } from "../data-loader";
 import { donorMeta } from "./donor-meta";
 
-import type { Countries } from "../../../src/utils/locales";
 import type {
   ExtractedDonationAddress,
   ReceiverId,
 } from "../../../src/utils/types";
 import type { ExtractedYearData, PartyConfig } from "../data-loader";
+
+export const uboExtractorAfter2025 = (ubo: string): string[] => {
+  return ubo.split("\n").filter(Boolean);
+};
+
+export const uboExtractor2024 = (
+  uboName: string,
+  uboCityResidence: string,
+): string[] | undefined => {
+  if (uboName || uboCityResidence) {
+    // join each ubo name and city residence line
+    const uboNames = uboName
+      .split("\n")
+      .map((l) => l.trim())
+      .filter(Boolean);
+    const uboCities = uboCityResidence
+      .split("\n")
+      .map((l) => l.trim())
+      .filter(Boolean);
+
+    if (uboNames.length > 1 && uboCities.length === 1) {
+      // fill the uboCities for all uboNames if we only have one city residence line but multiple ubo name lines,
+      // as it seems to be the case that they just put the city residence in the first line and left the rest empty
+      uboCities.push(...Array(uboNames.length - 1).fill(uboCities[0]));
+    }
+
+    if (uboNames.length === 1 && uboCities.length > 1) {
+      // remove all except the first uboCities entry as there seems to be a type in some rows :(
+      uboCities.splice(1);
+    }
+
+    assert(
+      uboNames.length === uboCities.length,
+      `UBO name and city residence lines should match: ${uboName} - ${uboCityResidence}`,
+    );
+
+    return uboNames.map(
+      (name, idx) => `${name.trim()}, ${uboCities[idx].trim()}`,
+    );
+  }
+};
 
 export class NlLoader extends DataLoader {
   parties: Record<string, PartyConfig> = {
@@ -314,12 +354,16 @@ export class NlLoader extends DataLoader {
         isoDate = `${year}`;
       }
 
+      const ubos = uboExtractorAfter2025(ubo);
+
       return {
         [DonationField.Date]: isoDate,
         [DonationField.Receiver]: party.trim() as ReceiverId,
         [DonationField.Amount]: total,
         [DonationField.DonorName]: name,
         [DonationField.Address]: this.findAddress(address),
+        // optionally add UBO
+        ...(ubos?.length ? { [DonationField.UBOs]: ubos } : undefined),
       };
     },
     2024: (year, col, idx, rows) => {
@@ -359,8 +403,16 @@ export class NlLoader extends DataLoader {
         };
       };
 
-      const { party, totalAmount, donorName, donorAddress, amount, date } =
-        extractRow(col);
+      const {
+        party,
+        totalAmount,
+        donorName,
+        donorAddress,
+        amount,
+        date,
+        uboName,
+        uboCityResidence,
+      } = extractRow(col);
 
       // skip if we don't have a total amount
       if (!totalAmount) return;
@@ -373,12 +425,16 @@ export class NlLoader extends DataLoader {
         isoDate = `${year}`;
       }
 
+      const ubo = uboExtractor2024(uboName, uboCityResidence);
+
       return {
         [DonationField.Date]: isoDate,
         [DonationField.Receiver]: party.trim() as ReceiverId,
         [DonationField.Amount]: totalAmount,
         [DonationField.DonorName]: donorName,
         [DonationField.Address]: this.findAddress(donorAddress),
+        // optionally add UBO
+        ...(ubo?.length ? { [DonationField.UBOs]: ubo } : undefined),
       };
     },
     2023: (year, col, idx, rows) => {

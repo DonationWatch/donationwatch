@@ -1,6 +1,6 @@
 "use client";
 
-import { HatGlasses, Lock } from "lucide-react";
+import { HatGlasses, Info, Lock } from "lucide-react";
 
 import { AbsoluteMultipleColorsGradient } from "../../../../../components/absolute-multiple-colors-gradient";
 import { PageHeader } from "../../../../../components/layout/page-header";
@@ -14,6 +14,7 @@ import { useTranslations } from "../../../../../hooks/use-translations";
 import { partyColor } from "../../../../../utils/color";
 import { donationYear } from "../../../../../utils/date";
 import {
+  formatAnd,
   formatCountryCurrency,
   formatNumber,
   formatYearsRange,
@@ -135,6 +136,25 @@ const RedactedDonorTooltip = ({
   );
 };
 
+const UBOsTooltip = ({ translations }: { translations: Translations }) => {
+  return (
+    <Tooltip>
+      <TooltipTrigger
+        render={<div className="ml-1 inline-block cursor-help" tabIndex={0} />}
+      >
+        <Info size={16} />
+      </TooltipTrigger>
+      <TooltipContent>
+        <div className="max-w-80 p-1">
+          <p className="text-xs leading-relaxed opacity-90">
+            {translations.donor.ubo_description}
+          </p>
+        </div>
+      </TooltipContent>
+    </Tooltip>
+  );
+};
+
 const DonorPageHeadContent = ({
   countryConfig,
   donations,
@@ -156,6 +176,7 @@ const DonorPageHeadContent = ({
   const firstYear = donationYear(donations[0]);
   const lastYear = donationYear(donations[donations.length - 1]);
   let lastDonation: string | undefined = undefined;
+  const ubos = new Set<string>();
 
   donations.forEach((donation) => {
     sums[donation[DonationField.Receiver]] ??= 0;
@@ -165,6 +186,8 @@ const DonorPageHeadContent = ({
     if (!lastDonation || donation[DonationField.Date] > lastDonation) {
       lastDonation = donation[DonationField.Date];
     }
+
+    donation[DonationField.UBOs]?.forEach((ubo) => ubos.add(ubo));
   });
 
   const avg = sum / donations.length;
@@ -291,6 +314,20 @@ const DonorPageHeadContent = ({
                   ))}
                 </div>
               </div>
+            ) : null}
+            {ubos.size > 0 ? (
+              <section aria-labelledby="ubo-heading">
+                <MetaCardTitle
+                  id="ubo-heading"
+                  title={
+                    <>
+                      {translations.donor.ubo}
+                      <UBOsTooltip translations={translations} />
+                    </>
+                  }
+                />
+                <p className="mt-2">{formatAnd(locale, [...ubos])}</p>
+              </section>
             ) : null}
           </div>
           <div className="mb-3">

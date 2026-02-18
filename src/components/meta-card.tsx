@@ -3,12 +3,15 @@ import type { JSX } from "react";
 export const MetaCardTitle = ({
   variant,
   title,
+  id,
 }: {
-  title: string;
+  title: string | JSX.Element;
   variant?: "default" | "small";
+  id?: string;
 }) => {
   return (
     <div
+      id={id}
       className={`${
         variant === "small" ? "text-sm" : "text-base"
       } mb-1 leading-none text-slate-500 dark:text-slate-300`}

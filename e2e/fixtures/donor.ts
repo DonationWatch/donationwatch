@@ -9,4 +9,7 @@ export class DonorPage extends PageObject {
     this.props,
   );
   public readonly pageTitle = this.page.locator("#sec-donor-overview");
+  public readonly uboText = this.page.locator(
+    'section[aria-labelledby="ubo-heading"] p',
+  );
 }

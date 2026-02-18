@@ -559,6 +559,9 @@ const Lv = {
       description:
         "Donora identitāti pirms šo datu publicēšanas rediģēja publicējošā iestāde. Ziedojuma summa joprojām ir iekļauta kopējā finansējuma aprēķinos, lai saglabātu finanšu caurspīdīgumu.",
     },
+    ubo: "Patiesie labuma guvēji (PLG)",
+    ubo_description:
+      'Patiesais labuma guvējs (PLG) ir persona, kas faktiski vada procesus. Tie ir indivīdi, kas galu galā pieder vai kontrolē ziedotāju, parasti turot 25% vai vairāk no tā akcijām vai balsstiesībām. Ja neviens atsevišķs cilvēks neatbilst šim slieksnim, augstākā vadība (piemēram, direktori) var tikt norādīti kā "pseudo-PLG", lai nodrošinātu atbildību.',
   },
   countries: {
     "??": "Nav norādīts",

@@ -7,12 +7,12 @@ type DocumentDonation = Omit<Donation, DonationField.DonorName> & {
 };
 
 export interface DonationsDocument {
-  donors: [donorName: string, donorId: string][];
+  donors: [donorName: string, ubos: string[] | null, donorId: string][];
   donations: DocumentDonation[];
 }
 
 export interface DonationsDocumentWithoutDonorIds {
-  donors: [donorName: string][];
+  donors: [donorName: string, ubos: string[] | null][];
   donations: DocumentDonation[];
 }
 
@@ -22,11 +22,12 @@ export const donationDocumentDonationToDonation = (
   donation: DocumentDonation,
 ): Donation => {
   const donorIndex = donation[DonationField.DonorIndex];
-  const [donorName] = doc.donors[donorIndex];
+  const [donorName, ubos] = doc.donors[donorIndex];
 
   return {
     ...donation,
     [DonationField.DonorName]: donorName,
+    ...(ubos ? { [DonationField.UBOs]: ubos } : undefined),
   };
 };
 

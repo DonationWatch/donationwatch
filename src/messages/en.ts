@@ -511,6 +511,9 @@ const En = {
       description:
         "The donor's identity was redacted by the publishing authority prior to the release of this data. The donation amount remains included in the total funding calculations to maintain financial transparency.",
     },
+    ubo: "Ultimate beneficial owners (UBOs)",
+    ubo_description:
+      'An Ultimate Beneficial Owner (UBO) is the person who actually pulls the strings. They are the individuals who ultimately own or control the donor, typically by holding 25% or more of its shares or voting rights. If no single person meets this threshold, senior management (like Directors) may be listed as "pseudo-UBOs" to ensure accountability.',
   },
   countries: {
     "??": "Not specified",

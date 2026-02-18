@@ -544,6 +544,9 @@ const De = {
       description:
         "Die Identität der Spenderin bzw. des Spenders wurde von der veröffentlichenden Behörde vor der Veröffentlichung dieser Daten geschwärzt. Der Spendenbetrag bleibt in den Berechnungen der Gesamtfinanzierung enthalten, um die finanzielle Transparenz zu wahren.",
     },
+    ubo: "Wirtschaftlich Berechtigte (WBs)",
+    ubo_description:
+      'Ein wirtschaftlich Berechtigter (WB) ist die Person, die tatsächlich die Fäden zieht. Es handelt sich um die Personen, die letztendlich den Spender besitzen oder kontrollieren, typischerweise durch das Halten von 25% oder mehr seiner Anteile oder Stimmrechte. Wenn keine einzelne Person diese Schwelle erreicht, können Führungskräfte (wie Geschäftsführer) als "Pseudo-WBs" aufgeführt werden, um die Rechenschaftspflicht sicherzustellen.',
   },
   countries: {
     "??": "Nicht angegeben",

@@ -3,6 +3,7 @@ import debug from "debug";
 import {
   DONOR_WITH_REL_A,
   DONOR_WITH_REL_B,
+  DONOR_WITH_UBOs,
   DONOR_WITH_WIKIPEDIA_ARTICLE,
 } from "../../tests/config";
 import { DataLoader } from "../load-data/data-loader";
@@ -97,6 +98,17 @@ class FakeDataLoader extends DataLoader {
     extracted.push({
       idx: `fake-${year}-${idx++}`,
       [DonationField.DonorName]: DONOR_WITH_WIKIPEDIA_ARTICLE,
+      [DonationField.Date]: `${year}-01-01`,
+      [DonationField.Amount]: countryConfig.minPublicDonationAmount + 1,
+      [DonationField.Receiver]: this.pickRandomParty(),
+      [DonationField.Address]: { [AddressField.Country]: "??" },
+    } as ExtractedYearData);
+
+    // create fake donation with UBOs
+    extracted.push({
+      idx: `fake-${year}-${idx++}`,
+      [DonationField.DonorName]: DONOR_WITH_UBOs,
+      [DonationField.UBOs]: ["Fake UBO 1", "Fake UBO 2"],
       [DonationField.Date]: `${year}-01-01`,
       [DonationField.Amount]: countryConfig.minPublicDonationAmount + 1,
       [DonationField.Receiver]: this.pickRandomParty(),
