@@ -3,6 +3,13 @@ import { fileURLToPath } from "url";
 
 import { Resvg } from "@resvg/resvg-js";
 
+import type {
+  createTranslator,
+  Messages,
+  NamespaceKeys,
+  NestedKeyOf,
+} from "next-intl";
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export const THUMBNAIL_SIZE = {
@@ -33,3 +40,9 @@ export function toImage(svg: string) {
   const pngData = resvg.render();
   return pngData.asPng();
 }
+
+export type CreateTranslator = <
+  NestedKey extends NamespaceKeys<Messages, NestedKeyOf<Messages>> = never,
+>(
+  namespace?: NestedKey,
+) => ReturnType<typeof createTranslator<Messages, NestedKey>>;

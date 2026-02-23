@@ -1,5 +1,5 @@
 "use client";
-
+import { useTranslations, useLocale } from "next-intl";
 import { useEffect, useMemo, useRef } from "react";
 
 import { DonorLink } from "./donor-link";
@@ -9,7 +9,6 @@ import { RankingItemLine } from "./ranking-item-line";
 import { Skeleton } from "./skeleton";
 import { useDonationsByYears } from "../hooks/use-api";
 import { useBreakpoint } from "../hooks/use-media-query";
-import { useTranslations } from "../hooks/use-translations";
 import { useVirtual } from "../hooks/use-virtual";
 import { isNotNullandNotUndefined } from "../utils/array";
 import { donationYear } from "../utils/date";
@@ -47,7 +46,7 @@ export const LoadingTopYearDonationsItemDetail = ({
   years: string[];
   partyId: ReceiverId;
 }) => {
-  const { translations } = useTranslations();
+  const t = useTranslations("data");
   const results = useDonationsByYears(country, years);
   const error = results.some((r) => r.error);
   const isLoading = results.some((r) => r.isLoading);
@@ -56,13 +55,13 @@ export const LoadingTopYearDonationsItemDetail = ({
     return (
       <div
         className="cursor-wait"
-        aria-label={translations.loading}
-        title={translations.loading}
+        aria-label={t("loading")}
+        title={t("loading")}
       >
         <TopDonationsItemDetailSkeleton />
       </div>
     );
-  if (error) return <div>{translations.data_error}</div>;
+  if (error) return <div>{t("error")}</div>;
 
   const donations = results
     .flatMap((r) => r.data)
@@ -106,7 +105,9 @@ export const TopDonationsItemDetail = ({
   country: CountryConfig;
   donations: Donation[];
 }) => {
-  const { translations, locale } = useTranslations();
+  const t = useTranslations();
+  const tCommon = useTranslations("common");
+  const locale = useLocale();
   const parentRef = useRef<HTMLDivElement>(null);
   const isSm = useBreakpoint("sm");
 
@@ -131,7 +132,7 @@ export const TopDonationsItemDetail = ({
     >
       <ul
         className="relative w-full"
-        aria-label={translations.party_donations}
+        aria-label={t("party_donations")}
         style={{
           height: `${rowVirtualizer.getTotalSize()}px`,
         }}
@@ -151,7 +152,7 @@ export const TopDonationsItemDetail = ({
               <RankingItemLine
                 className="overflow-hidden pr-2"
                 year={donationYear(donation)}
-                label={getDonationDonorName(donation, translations)}
+                label={getDonationDonorName(donation, tCommon)}
                 date={donation[DonationField.Date]}
                 amount={donation[DonationField.Amount]}
                 locale={locale}
@@ -169,7 +170,6 @@ export const TopDonationsItemDetail = ({
                     className="mx-2 shrink-0"
                     party={donation[DonationField.Receiver]}
                     country={country}
-                    translations={translations}
                     locale={locale}
                   >
                     <PartyDot

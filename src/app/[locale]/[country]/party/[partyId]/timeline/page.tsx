@@ -1,6 +1,5 @@
-"use server";
-
 import { notFound } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { DonationPartyChart } from "../../../../../../components/chart/donation-sum-chart";
 import {
@@ -20,7 +19,6 @@ import {
   isValidLocale,
   isValidParty,
 } from "../../../../../../utils/validate";
-import { getTranslations, t } from "../../../../translations";
 
 import type { Metadata } from "next";
 
@@ -35,11 +33,12 @@ export async function generateMetadata(
 
   if (!isValidLocale(params.locale)) return notFoundMetadata;
   if (!isValidCountry(params.country)) return notFoundMetadata;
+  setRequestLocale(params.locale);
 
-  const { locale, country, partyId } = params;
+  const { country, partyId } = params;
 
-  const [translations, countryConfig] = await Promise.all([
-    getTranslations(locale),
+  const [t, countryConfig] = await Promise.all([
+    getTranslations({ locale: params.locale }),
     getCountryConfig(country),
   ]);
 
@@ -47,11 +46,11 @@ export async function generateMetadata(
   const party = getParty(countryConfig, partyId);
 
   return {
-    title: `${t(translations.page_title.party.timeline, {
+    title: `${t("page_title.party.timeline", {
       party: party.short,
-      country: getCountryName(countryConfig, translations),
+      country: getCountryName(countryConfig, t),
     })}`,
-    description: t(translations.party.timeline.detail.summary, {
+    description: t("party.timeline.detail.summary", {
       party: party.short,
     }),
     alternates: generateAlternates(`${country}/party/${partyId}/timeline`),
@@ -64,11 +63,12 @@ export default async function TimelinePage(
 
   if (!isValidLocale(params.locale)) return notFound();
   if (!isValidCountry(params.country)) return notFound();
+  setRequestLocale(params.locale);
 
   const { locale, country, partyId } = params;
 
-  const [translations, countryConfig] = await Promise.all([
-    getTranslations(locale),
+  const [t, countryConfig] = await Promise.all([
+    getTranslations({ locale }),
     getCountryConfig(country),
   ]);
 
@@ -87,24 +87,24 @@ export default async function TimelinePage(
             <ArticleSectionTitle
               as={"h1"}
               id={"sec-timeline"}
-              title={t(translations.party.timeline.detail.title, {
+              title={t("party.timeline.detail.title", {
                 party: party.short,
               })}
             />
             <p>
-              {t(translations.party.timeline.detail.summary, {
+              {t("party.timeline.detail.summary", {
                 party: party.short,
               })}
             </p>
           </ArticleSectionColumn>
           <ArticleSectionColumn>
             <DonationPartyChart
-              title={t(translations.party.timeline.chart_title, {
+              title={t("party.timeline.chart_title", {
                 party: party.short,
               })}
-              subtitle={t(translations.party.timeline.subtitle, {
+              subtitle={t("party.timeline.subtitle", {
                 party: party.short,
-                country: getCountryName(countryConfig, translations),
+                country: getCountryName(countryConfig, t),
               })}
               country={countryConfig}
               years={countryConfig.years}
@@ -122,12 +122,12 @@ export default async function TimelinePage(
           <ArticleSectionColumn>
             <DonationPerMonthChart
               country={countryConfig}
-              title={t(translations.per_year_party.title, {
+              title={t("per_year_party.title", {
                 party: party.short,
               })}
               resolution={"year"}
-              subtitle={t(translations.per_year_party.subtitle, {
-                country: getCountryName(countryConfig, translations),
+              subtitle={t("per_year_party.subtitle", {
+                country: getCountryName(countryConfig, t),
                 years: formatYearsRange(countryConfig.years),
                 party: party.short,
               })}

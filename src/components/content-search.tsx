@@ -1,13 +1,12 @@
 "use client";
-
 import { Frown, Search, X } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
+import { useTranslations, useLocale } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 
 import { PartyDot } from "./party-dot";
 import { useCountryConfig, useDonorNames } from "../hooks/use-api";
 import { useSearchDialog } from "../hooks/use-search-dialog";
-import { useTranslations } from "../hooks/use-translations";
 import { cn } from "../utils/classname";
 import { getParty } from "../utils/countries";
 import { clientSha1 } from "../utils/hash";
@@ -38,7 +37,7 @@ const SearchDialog = ({
   isOpen: boolean;
   onClose: () => void;
 }) => {
-  const { translations } = useTranslations();
+  const t = useTranslations("search");
 
   return (
     <Dialog
@@ -53,7 +52,7 @@ const SearchDialog = ({
         data-testid="search-dialog"
       >
         <DialogHeader className="sr-only">
-          <DialogTitle>{translations.search.filter_description}</DialogTitle>
+          <DialogTitle>{t("filter_description")}</DialogTitle>
         </DialogHeader>
         <div className="flex grow flex-col overflow-hidden">
           {isOpen ? (
@@ -66,7 +65,7 @@ const SearchDialog = ({
 };
 
 const HeaderSearch = () => {
-  const { translations } = useTranslations();
+  const t = useTranslations("search");
   const { country: activeCountry } = useParams<{ country: Country }>();
   const { isOpen, open, close } = useSearchDialog();
 
@@ -79,8 +78,8 @@ const HeaderSearch = () => {
       <button
         className="flex size-10 cursor-pointer items-center justify-center rounded-full p-1 hover:bg-neutral-600/10"
         onClick={() => open()}
-        aria-label={translations.search.filter_description}
-        title={translations.search.filter}
+        aria-label={t("filter_description")}
+        title={t("filter")}
       >
         <Search aria-hidden={true} size={18} />
       </button>
@@ -96,7 +95,8 @@ const GlobalSearch = ({
   countryConfig: CountryConfig;
   onClose: () => void;
 }) => {
-  const { translations, locale } = useTranslations();
+  const tSearch = useTranslations("search");
+  const locale = useLocale();
   const router = useRouter();
   const [search, setSearch] = useState("");
   const allParties = countryConfig.parties;
@@ -180,7 +180,7 @@ const GlobalSearch = ({
   }[] = [
     {
       id: "parties",
-      title: translations.search.parties,
+      title: tSearch("parties"),
       items: visibleParties.map((party) => ({
         type: "party",
         id: party.id,
@@ -188,7 +188,7 @@ const GlobalSearch = ({
     },
     {
       id: "year",
-      title: translations.search.years,
+      title: tSearch("years"),
       items: visibleYears.map(
         (year) =>
           ({
@@ -199,7 +199,7 @@ const GlobalSearch = ({
     },
     {
       id: "years",
-      title: translations.search.legislative_years,
+      title: tSearch("legislative_years"),
       items: visibleLegislativeYears.map(
         (years) =>
           ({
@@ -211,7 +211,7 @@ const GlobalSearch = ({
     },
     {
       id: "donors",
-      title: translations.search.donors,
+      title: tSearch("donors"),
       items: visibleDonors.map(
         ([name, search]): DonorItem => ({
           type: "donor",
@@ -321,7 +321,8 @@ const SelectableList = ({
   onSearchChange: (search: string) => void;
   onClose: () => void;
 }) => {
-  const { translations } = useTranslations();
+  const t = useTranslations();
+  const tSearch = useTranslations("search");
   const [selectedGroupIdx, setSelectedGroupIdx] = useState(0);
   const [selectedItemIdx, setSelectedItemIdx] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -448,9 +449,9 @@ const SelectableList = ({
           <Search aria-hidden={true} className="mr-2 h-4 w-4 shrink-0" />
           <input
             role={"searchbox"}
-            aria-label={translations.search.filter_description}
+            aria-label={tSearch("filter_description")}
             ref={inputRef}
-            placeholder={translations.search.filter_description}
+            placeholder={tSearch("filter_description")}
             value={search}
             onChange={(e) => onSearchChange(e.target.value)}
             onKeyDown={handleKeyDown}
@@ -460,7 +461,7 @@ const SelectableList = ({
             type="button"
             className="shrink-0 p-2 opacity-75 hover:opacity-100"
             onClick={onClose}
-            title={translations.actions.close}
+            title={t("actions.close")}
           >
             <X />
           </button>
@@ -470,7 +471,7 @@ const SelectableList = ({
         {element.every((group) => group === null) ? (
           <Empty>
             <Frown size={28} className="mb-2" />
-            {translations.search.empty}
+            {tSearch("empty")}
           </Empty>
         ) : (
           element

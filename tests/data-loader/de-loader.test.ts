@@ -3,7 +3,7 @@ import { expect, test, beforeEach } from "vitest";
 import { DeLoader } from "../../tasks/load-data/de/de-loader";
 
 import type { ExtractedYearData } from "../../tasks/load-data/data-loader";
-import type { Countries } from "@/utils/locales";
+import type { Countries } from "@/utils/countries";
 import type { ReceiverId } from "@/utils/types";
 
 import { AddressField, DonationField } from "@/utils/types";

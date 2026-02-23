@@ -1,11 +1,10 @@
 "use client";
-
+import { useLocale } from "next-intl";
 import { useEffect } from "react";
 
 import { PartyDot } from "./party-dot";
 import { PartyLink } from "./party-link";
 import { RankingItemLine } from "./ranking-item-line";
-import { useTranslations } from "../hooks/use-translations";
 import { donationYear } from "../utils/date";
 import { DonationField } from "../utils/types";
 
@@ -25,7 +24,7 @@ export const DonorDonationsDetail = ({
   country: CountryConfig;
   onVisibleChanged?: () => void;
 }) => {
-  const { translations, locale } = useTranslations();
+  const locale = useLocale();
 
   useEffect(() => {
     onVisibleChanged?.();
@@ -44,12 +43,7 @@ export const DonorDonationsDetail = ({
       locale={locale}
       country={country}
     >
-      <PartyLink
-        party={party}
-        country={country}
-        translations={translations}
-        locale={locale}
-      >
+      <PartyLink party={party} country={country} locale={locale}>
         <PartyDot party={party} country={country} />
       </PartyLink>
     </RankingItemLine>

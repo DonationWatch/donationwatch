@@ -1,3 +1,4 @@
+"use client";
 import {
   createColumnHelper,
   flexRender,
@@ -8,10 +9,10 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { ArrowDownNarrowWide, ArrowUpNarrowWide } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
 import { useMemo, useRef, useState } from "react";
 
 import { useMobile } from "../../hooks/use-media-query";
-import { useTranslations } from "../../hooks/use-translations";
 import { useVirtual } from "../../hooks/use-virtual";
 import { isNotNullandNotUndefined } from "../../utils/array";
 import { cn } from "../../utils/classname";
@@ -30,7 +31,7 @@ import type { CountryConfig } from "../../utils/countries";
 import type { HistoryEntry } from "../../utils/data/get-history";
 import type { Donation } from "../../utils/types";
 
-import { getDonorName } from "@/utils/donor";
+import { DonorName } from "@/components/donor-name";
 
 const columnHelper = createColumnHelper<HistoryEntry>();
 
@@ -47,7 +48,9 @@ export const DonationHistoryTable = ({
   donations: Donation[];
   readonlyDonor?: boolean;
 }) => {
-  const { translations, locale } = useTranslations();
+  const t = useTranslations();
+  const tSort = useTranslations("sort");
+  const locale = useLocale();
   const partiesIdSet = new Set(partiesIds);
   const [sorting, setSorting] = useState<SortingState>([
     { id: "date", desc: true },
@@ -84,7 +87,6 @@ export const DonationHistoryTable = ({
                   <PartyLink
                     party={historyEntry.party}
                     country={country}
-                    translations={translations}
                     locale={locale}
                   >
                     <PartyDot
@@ -97,7 +99,7 @@ export const DonationHistoryTable = ({
                 <div className="justify-between space-y-1 sm:flex sm:space-y-0">
                   <div className="space-x-1 font-semibold">
                     {readonlyDonor ? (
-                      getDonorName(historyEntry.donor, translations)
+                      <DonorName donor={historyEntry.donor} />
                     ) : (
                       <DonorLink country={country} donor={historyEntry.donor} />
                     )}
@@ -118,7 +120,7 @@ export const DonationHistoryTable = ({
 
     return [
       columnHelper.accessor("date", {
-        header: translations.common.date,
+        header: t("common.date"),
         size: 150,
         meta: {
           className: "font-mono",
@@ -133,14 +135,13 @@ export const DonationHistoryTable = ({
         },
       }),
       columnHelper.accessor("party", {
-        header: translations.common.party,
+        header: t("common.party"),
         size: 150,
         cell: (cell) => (
           <PartyLink
             className="overflow-x-hidden"
             party={cell.getValue()}
             country={country}
-            translations={translations}
             locale={locale}
           >
             <PartyDot
@@ -153,19 +154,19 @@ export const DonationHistoryTable = ({
         ),
       }),
       columnHelper.accessor("donor", {
-        header: translations.common.donor,
+        header: t("common.donor"),
         meta: {
           fill: true,
         },
         cell: (cell) =>
           readonlyDonor ? (
-            getDonorName(cell.row.original.donor, translations)
+            <DonorName donor={cell.row.original.donor} />
           ) : (
             <DonorLink country={country} donor={cell.row.original.donor} />
           ),
       }),
       columnHelper.accessor("amount", {
-        header: translations.common.amount,
+        header: t("common.amount"),
         size: 150,
         meta: {
           className: "justify-end tabular-nums",
@@ -253,10 +254,10 @@ export const DonationHistoryTable = ({
                         title={
                           header.column.getCanSort()
                             ? header.column.getNextSortingOrder() === "asc"
-                              ? translations.sort.asc
+                              ? tSort("asc")
                               : header.column.getNextSortingOrder() === "desc"
-                                ? translations.sort.desc
-                                : translations.sort.clear
+                                ? tSort("desc")
+                                : tSort("clear")
                             : undefined
                         }
                       >

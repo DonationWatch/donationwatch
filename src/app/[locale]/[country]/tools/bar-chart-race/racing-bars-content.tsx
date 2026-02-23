@@ -1,6 +1,6 @@
 "use client";
-
 import { CheckIcon, ChevronDownIcon } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { parseAsString, useQueryState } from "nuqs";
 import { useMemo } from "react";
 
@@ -12,7 +12,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../../../../../components/ui/dropdown-menu";
-import { useTranslations } from "../../../../../hooks/use-translations";
 import { cn } from "../../../../../utils/classname";
 import {
   type CountryConfig,
@@ -20,7 +19,6 @@ import {
 } from "../../../../../utils/countries";
 import { formatYearsRange } from "../../../../../utils/formatter";
 import { type Donation, DonationField } from "../../../../../utils/types";
-import { t } from "../../../translations";
 
 import { firstItem, lastItem } from "@/utils/array";
 
@@ -31,7 +29,10 @@ export const RacingBarsContent = ({
   countryConfig: CountryConfig;
   allDonations: Donation[];
 }) => {
-  const { translations, locale } = useTranslations();
+  const t = useTranslations();
+  const tSearch = useTranslations("search");
+  const tBarChartRace = useTranslations("bar_chart_race");
+  const locale = useLocale();
 
   const lastLegislativeYear = lastItem(countryConfig.legislativeYears);
   const minYear = countryConfig.years[0];
@@ -115,7 +116,7 @@ export const RacingBarsContent = ({
     <div className="flex flex-col gap-4">
       <fieldset className="m-0 border-0 p-0">
         <legend className="mb-2 text-sm font-medium">
-          {translations.search.legislative_years}
+          {tSearch("legislative_years")}
         </legend>
         <div className="flex flex-wrap gap-2">
           {countryConfig.legislativeYears.map((years) => {
@@ -143,7 +144,7 @@ export const RacingBarsContent = ({
       {/* Individual year buttons */}
       <fieldset className="m-0 border-0 p-0">
         <legend className="mb-2 text-sm font-medium">
-          {translations.bar_chart_race.individual_years}
+          {tBarChartRace("individual_years")}
         </legend>
         <div className="flex flex-wrap gap-2">
           {countryConfig.years.map((year) => {
@@ -167,54 +168,54 @@ export const RacingBarsContent = ({
 
       <fieldset className="m-0 border-0 p-0">
         <legend className="mb-2 text-sm font-medium">
-          {translations.bar_chart_race.group_by.label}
+          {tBarChartRace("group_by.label")}
         </legend>
         <div
           className="flex gap-2"
           role="group"
-          aria-label={translations.bar_chart_race.group_by.label}
+          aria-label={tBarChartRace("group_by.label")}
         >
           <Button
             variant={groupByParam === "donor" ? "default" : "outline"}
             onClick={() => setGroupBy("donor")}
             aria-pressed={groupByParam === "donor"}
           >
-            {translations.bar_chart_race.group_by.donor}
+            {tBarChartRace("group_by.donor")}
           </Button>
           <Button
             variant={groupByParam === "receiver" ? "default" : "outline"}
             onClick={() => setGroupBy("receiver")}
             aria-pressed={groupByParam === "receiver"}
           >
-            {translations.bar_chart_race.group_by.receiver}
+            {tBarChartRace("group_by.receiver")}
           </Button>
         </div>
       </fieldset>
 
       <fieldset className="m-0 border-0 p-0">
         <legend className="mb-2 text-sm font-medium">
-          {translations.bar_chart_race.animation_duration}
+          {tBarChartRace("animation_duration")}
         </legend>
         <div
           className="flex gap-2"
           role="group"
-          aria-label={translations.bar_chart_race.animation_duration}
+          aria-label={tBarChartRace("animation_duration")}
         >
           {[
             {
-              label: t(translations.bar_chart_race.duration_s, {
+              label: tBarChartRace("duration_s", {
                 seconds: "10",
               }),
               value: "10000",
             },
             {
-              label: t(translations.bar_chart_race.duration_s, {
+              label: tBarChartRace("duration_s", {
                 seconds: "30",
               }),
               value: "30000",
             },
             {
-              label: t(translations.bar_chart_race.duration_s, {
+              label: tBarChartRace("duration_s", {
                 seconds: "60",
               }),
               value: "60000",
@@ -236,11 +237,11 @@ export const RacingBarsContent = ({
       {/* Advanced year range selection */}
       <details className="group">
         <summary className="text-accent-foreground hover:text-foreground cursor-pointer text-sm font-medium">
-          Advanced: Custom year range
+          {tBarChartRace("custom_range")}
         </summary>
         <div className="mt-2 flex flex-row items-center gap-2">
           <label htmlFor="from-year-select" className="text-sm font-medium">
-            {translations.bar_chart_race.from}
+            {tBarChartRace("from")}
           </label>
           <DropdownMenu>
             <DropdownMenuTrigger
@@ -273,7 +274,7 @@ export const RacingBarsContent = ({
 
           <span className="text-muted-foreground">-</span>
           <label htmlFor="to-year-select" className="text-sm font-medium">
-            {translations.bar_chart_race.to}
+            {tBarChartRace("to")}
           </label>
 
           <DropdownMenu>
@@ -316,16 +317,16 @@ export const RacingBarsContent = ({
           groupByField={groupByField}
           locale={locale}
           currency={countryConfig.currency}
-          title={translations.overview.pie.title}
-          subtitle={t(translations.overview.pie.subtitle, {
+          title={tBarChartRace("chart_title")}
+          subtitle={tBarChartRace("chart_subtitle", {
             years: formatYearsRange(validSelectedYears),
-            country: getCountryName(countryConfig, translations),
+            country: getCountryName(countryConfig, t),
           })}
           partiesById={countryConfig.partiesById}
           totalRuntimeMs={totalRuntimeMs}
         />
       ) : (
-        translations.bar_chart_race.no_data
+        tBarChartRace("no_data")
       )}
     </div>
   );

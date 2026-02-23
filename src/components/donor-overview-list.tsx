@@ -1,25 +1,22 @@
 "use client";
-
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
+import { useTranslations } from "next-intl";
 import { useCallback, useRef, useState } from "react";
 
 import { DonorOverviewItem } from "./donor-overview-item";
 import { DynamicDonorDonationsDetail } from "./dynamic-donor-donations-detail";
 import Loading from "./loading";
 import { useDonationsByParty } from "../hooks/use-api";
-import { useTranslations } from "../hooks/use-translations";
 import { donationYear } from "../utils/date";
 import { DonationField } from "../utils/types";
 
 import type { CountryConfig } from "../utils/countries";
 import type { Donation, Party, ReceiverId } from "../utils/types";
-import type { Translations } from "@/messages/translations";
 
 const DonorOverviewListContent = ({
   donors,
   countryConfig,
   sum,
-  translations,
 }: {
   countryConfig: CountryConfig;
   sum: number;
@@ -28,7 +25,6 @@ const DonorOverviewListContent = ({
     name: string;
     donations: { party: ReceiverId; donation: Donation }[];
   }[];
-  translations: Translations;
 }) => {
   const [expandedDonors, setExpandedDonors] = useState<string[]>([]);
 
@@ -73,7 +69,6 @@ const DonorOverviewListContent = ({
               }}
             >
               <DonorOverviewItem
-                translations={translations}
                 name={entry.name}
                 country={countryConfig}
                 amount={entry.sum}
@@ -110,11 +105,11 @@ export const DonorOverviewList = ({
   countryConfig: CountryConfig;
   party: Party;
 }) => {
-  const { translations } = useTranslations();
+  const tData = useTranslations("data");
   const { data, error, isLoading } = useDonationsByParty(countryConfig, party);
 
   if (isLoading) return <Loading />;
-  if (error || !data) return <div>{translations.data_error}</div>;
+  if (error || !data) return <div>{tData("error")}</div>;
 
   const donations = data;
 
@@ -176,7 +171,6 @@ export const DonorOverviewList = ({
 
   return (
     <DonorOverviewListContent
-      translations={translations}
       donors={sortedDonors}
       sum={sum}
       countryConfig={countryConfig}

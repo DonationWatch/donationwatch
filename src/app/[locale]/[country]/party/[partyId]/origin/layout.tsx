@@ -1,6 +1,5 @@
-"use server";
-
 import { notFound, redirect } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { getParty, getCountryName } from "../../../../../../utils/countries";
 import { getCountryConfig } from "../../../../../../utils/data/get-country-config";
@@ -10,7 +9,6 @@ import {
   isValidLocale,
   isValidParty,
 } from "../../../../../../utils/validate";
-import { getTranslations, t } from "../../../../translations";
 
 import type { Metadata } from "next";
 
@@ -18,14 +16,14 @@ export async function generateMetadata(
   props: LayoutProps<"/[locale]/[country]/party/[partyId]/origin">,
 ): Promise<Metadata> {
   const params = await props.params;
-
   if (!isValidLocale(params.locale)) return notFoundMetadata;
   if (!isValidCountry(params.country)) return notFoundMetadata;
+  setRequestLocale(params.locale);
 
-  const { locale, country, partyId } = params;
+  const { country, partyId } = params;
 
-  const [translations, countryConfig] = await Promise.all([
-    getTranslations(locale),
+  const [t, countryConfig] = await Promise.all([
+    getTranslations({ locale: params.locale }),
     getCountryConfig(country),
   ]);
 
@@ -33,13 +31,13 @@ export async function generateMetadata(
   const party = getParty(countryConfig, partyId);
 
   return {
-    title: `${t(translations.page_title.party.origin, {
+    title: `${t("page_title.party.origin", {
       party: party.short,
-      country: getCountryName(countryConfig, translations),
+      country: getCountryName(countryConfig, t),
     })}`,
-    description: t(translations.origin.detail.description, {
+    description: t("origin.detail.description", {
       party: party.short,
-      country: getCountryName(countryConfig, translations),
+      country: getCountryName(countryConfig, t),
     }),
   };
 }
@@ -51,6 +49,7 @@ export default async function OriginLayout(
 
   if (!isValidLocale(params.locale)) return notFound();
   if (!isValidCountry(params.country)) return notFound();
+  setRequestLocale(params.locale);
 
   const { country } = params;
 

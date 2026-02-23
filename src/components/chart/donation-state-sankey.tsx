@@ -1,8 +1,8 @@
 "use client";
+import { useTranslations, useLocale } from "next-intl";
 
 import { ExpandableReactEchart } from "./expandable-react-echart";
 import { useChart } from "../../hooks/use-chart";
-import { useTranslations } from "../../hooks/use-translations";
 import { partyColor } from "../../utils/color";
 import { Country, type CountryConfig } from "../../utils/countries";
 import { donationYear } from "../../utils/date";
@@ -38,7 +38,8 @@ export const DonationStateSankey = ({
   subtitle: string;
   donations: Donation[];
 }) => {
-  const { translations, locale } = useTranslations();
+  const t = useTranslations();
+  const locale = useLocale();
   const { backgroundColor } = useChart();
 
   const isEu = country.id === Country.europeanunion;
@@ -60,12 +61,14 @@ export const DonationStateSankey = ({
     if (!yearsSet.has(donationYear(donation))) return;
 
     const state = isEu
-      ? (translations.countries as Record<string, string>)[
-          donation[DonationField.Address][AddressField.State]!
-        ]
-      : (translations.state as Record<string, Record<string, string>>)[
-          country.id
-        ][donation[DonationField.Address][AddressField.State]!];
+      ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        t(`countries.${donation[DonationField.Address][AddressField.State]!}`)
+      : t(
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          `state.${country.id}.${donation[DonationField.Address][AddressField.State]!}`,
+        );
 
     foundParties.add(donation[DonationField.Receiver]);
     foundState.add(state);

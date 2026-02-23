@@ -1,9 +1,9 @@
 "use client";
-
 import { cva, type VariantProps } from "class-variance-authority";
 import { PanelLeftIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 import * as React from "react";
 
 import { Separator } from "./separator";
@@ -21,7 +21,6 @@ import {
   TooltipTrigger,
 } from "./tooltip";
 import { useBreakpoint } from "../../hooks/use-media-query";
-import { useTranslations } from "../../hooks/use-translations";
 import { cn } from "../../utils/classname";
 
 import type { ComponentProps } from "react";
@@ -271,7 +270,7 @@ function SidebarTrigger({
   ...props
 }: ComponentProps<"button">) {
   const { toggleSidebar } = useSidebar();
-  const { translations } = useTranslations();
+  const t = useTranslations("sidebar");
 
   return (
     <button
@@ -281,8 +280,8 @@ function SidebarTrigger({
         "flex size-10 cursor-pointer items-center justify-center rounded-full p-1 hover:bg-neutral-600/10",
         className,
       )}
-      title={translations.sidebar.toggle}
-      aria-label={translations.sidebar.toggle}
+      title={t("toggle")}
+      aria-label={t("toggle")}
       onClick={(event) => {
         onClick?.(event);
         toggleSidebar();

@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { RacingBars } from "./racing-bars";
 import { Article } from "../../../../../components/layout/article";
@@ -7,12 +8,10 @@ import { LOCALES } from "../../../../../utils/locales";
 import { generateAlternates } from "../../../../../utils/meta";
 import { notFoundMetadata } from "../../../../../utils/not-found-metadata";
 import { isValidCountry, isValidLocale } from "../../../../../utils/validate";
-import { getTranslations } from "../../../translations";
 
 import type { Metadata } from "next";
 
 export const dynamicParams = false;
-export const dynamic = "error";
 
 export async function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
@@ -25,13 +24,18 @@ export async function generateMetadata(
 
   if (!isValidLocale(params.locale)) return notFoundMetadata;
   if (!isValidCountry(params.country)) return notFoundMetadata;
-  const { locale, country } = params;
+  setRequestLocale(params.locale);
 
-  const translations = await getTranslations(locale);
+  const { country } = params;
+
+  const t = await getTranslations({
+    locale: params.locale,
+    namespace: "bar_chart_race",
+  });
 
   return {
-    title: `${translations.bar_chart_race.title} | DonationWatch`,
-    description: translations.bar_chart_race.description,
+    title: `${t("title")} | DonationWatch`,
+    description: t("description"),
     alternates: generateAlternates(`${country}/tools/data`),
   };
 }
@@ -43,10 +47,12 @@ export default async function Page(
 
   if (!isValidLocale(params.locale)) return notFound();
   if (!isValidCountry(params.country)) return notFound();
-  const { locale, country } = params;
+  setRequestLocale(params.locale);
 
-  const [translations, countryConfig] = await Promise.all([
-    getTranslations(locale),
+  const { country } = params;
+
+  const [t, countryConfig] = await Promise.all([
+    getTranslations({ locale: params.locale, namespace: "bar_chart_race" }),
     getCountryConfig(country),
   ]);
 
@@ -55,15 +61,11 @@ export default async function Page(
   }
 
   return (
-    <Article title={translations.bar_chart_race.title}>
+    <Article title={t("title")}>
       {countryConfig.hasTimeline ? (
         <>
-          <p className="mb-8 max-w-prose">
-            {translations.bar_chart_race.description}
-          </p>
-          <p className="mb-8 max-w-prose text-sm">
-            {translations.bar_chart_race.note}
-          </p>
+          <p className="mb-8 max-w-prose">{t("description")}</p>
+          <p className="mb-8 max-w-prose text-sm">{t("note")}</p>
           <RacingBars countryConfig={countryConfig} />
         </>
       ) : null}

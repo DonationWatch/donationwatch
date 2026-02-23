@@ -1,4 +1,4 @@
-import type { Translations } from "@/messages/translations";
+import type { StrictNamespacedTranslator } from "@/utils/translator";
 import type { Donation } from "@/utils/types";
 
 import {
@@ -9,17 +9,20 @@ import { DonationField } from "@/utils/types";
 
 export const getDonationDonorName = (
   d: Donation,
-  translations: Translations,
+  t: StrictNamespacedTranslator<"common">,
 ) => {
   const donor = d[DonationField.DonorName];
-  return getDonorName(donor, translations);
+  return getDonorName(donor, t);
 };
 
-export const getDonorName = (donor: string, translations: Translations) => {
+export const getDonorName = (
+  donor: string,
+  t: StrictNamespacedTranslator<"common">,
+) => {
   if (donor === ANONYMIZED_DONOR_KEYWORD) {
-    return translations.common.anonymizedDonor;
+    return t("anonymizedDonor");
   } else if (isRedactedDonor(donor)) {
-    return translations.common.redactedDonor;
+    return t("redactedDonor");
   }
   return donor;
 };

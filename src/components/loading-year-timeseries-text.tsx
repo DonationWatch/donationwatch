@@ -1,9 +1,8 @@
 "use client";
+import { useTranslations } from "next-intl";
 
 import Loading from "./loading";
-import { t } from "../app/[locale]/translations";
 import { useDonationsByYears } from "../hooks/use-api";
-import { useTranslations } from "../hooks/use-translations";
 import { isNotNullandNotUndefined } from "../utils/array";
 import { getCountryName } from "../utils/countries";
 import { donationYear } from "../utils/date";
@@ -22,14 +21,15 @@ export const LoadingYearTimeseriesText = ({
   parties: Party[];
   years: string[];
 }) => {
-  const { translations } = useTranslations();
+  const t = useTranslations();
+  const tData = useTranslations("data");
   const results = useDonationsByYears(country, years);
 
   const error = results.some((r) => r.error);
   const isLoading = results.some((r) => r.isLoading);
 
   if (isLoading) return <Loading />;
-  if (error) return <div>{translations.data_error}</div>;
+  if (error) return <div>{tData("error")}</div>;
 
   const yearsSet = new Set<string>(years);
   const partiesSet = new Set<string>(parties.map((p) => p.id));
@@ -49,9 +49,9 @@ export const LoadingYearTimeseriesText = ({
 
   return (
     <p>
-      {t(translations.timeline.days, {
+      {t("timeline.days", {
         years: formatYearsRange(years),
-        country: getCountryName(country, translations),
+        country: getCountryName(country, t),
         n: uniqueDonationDates.size,
       })}
     </p>

@@ -1,15 +1,17 @@
+"use client";
+
 /* eslint-disable react/no-unknown-property */
-import { t } from "../../../src/app/[locale]/translations";
+
 import { formatCompactCountryCurrency } from "../../../src/utils/formatter";
 import { ImageFooter } from "../components/image-footer";
 import { ImagePageHeader } from "../components/image-years-header";
 import { ThumbnailWrapper } from "../components/utils";
 import { THUMBNAIL_SIZE } from "../utils";
 
-import type { Translations } from "../../../src/messages/translations";
 import type { CountryConfig } from "../../../src/utils/countries";
 import type { PartyYearsSums } from "../../../src/utils/loader/party-years-sums";
 import type { ConstLocale } from "../../../src/utils/locales";
+import type { CreateTranslator } from "../utils";
 
 const YEARS_TO_DISPLAY = 5;
 const X_AXIS_TICKS = 5;
@@ -24,11 +26,12 @@ const CHART_CONTENT_WIDTH =
 
 export const CountryPageImage = async (
   locale: ConstLocale,
+  getTranslations: CreateTranslator,
   countryConfig: CountryConfig,
-  translations: Translations,
   partyYearSums: PartyYearsSums,
 ) => {
   let maxValue = 0;
+  const t = getTranslations();
 
   const yearsToDisplay =
     countryConfig.years.length > YEARS_TO_DISPLAY
@@ -117,8 +120,8 @@ export const CountryPageImage = async (
   const Label = (
     <div tw="flex shrink-0 flex-col py-2 pb-4">
       <div tw="flex text-xl font-semibold">
-        {translations.home.stacked_years}{" "}
-        {t(translations.over_min_public_amount, {
+        {t("home.stacked_years")}{" "}
+        {t("over_min_public_amount", {
           amount: formatCompactCountryCurrency(
             locale,
             countryConfig.minPublicDonationAmount,
@@ -133,7 +136,7 @@ export const CountryPageImage = async (
     <ThumbnailWrapper>
       <div tw="flex flex-col grow w-full relative">
         <ImagePageHeader
-          translations={translations}
+          getTranslations={getTranslations}
           locale={locale}
           country={countryConfig}
         >
@@ -143,8 +146,8 @@ export const CountryPageImage = async (
         <div tw="flex py-4">{Chart}</div>
       </div>
       <ImageFooter
+        getTranslations={getTranslations}
         country={countryConfig}
-        translations={translations}
         locale={locale}
       />
     </ThumbnailWrapper>

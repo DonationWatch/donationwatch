@@ -4,10 +4,9 @@ import { DonorLink } from "./donor-link";
 import { CurrencyRankingItem } from "./ranking-item";
 
 import type { CountryConfig } from "../utils/countries";
-import type { Translations } from "@/messages/translations";
 import type { ReactNode } from "react";
 
-import { getDonorName } from "@/utils/donor";
+import { DonorName } from "@/components/donor-name";
 
 export const DonorOverviewItem = ({
   rank,
@@ -18,7 +17,6 @@ export const DonorOverviewItem = ({
   detail,
   expanded,
   onToggleExpanded,
-  translations,
 }: {
   name: string;
   amount: number;
@@ -28,7 +26,6 @@ export const DonorOverviewItem = ({
   country: CountryConfig;
   expanded: boolean;
   onToggleExpanded: (expanded: boolean) => void;
-  translations: Translations;
 }) => {
   return (
     <CurrencyRankingItem
@@ -50,7 +47,7 @@ export const DonorOverviewItem = ({
       }
     >
       <div className="truncate font-semibold">
-        {getDonorName(name, translations)}
+        <DonorName donor={name} />
       </div>
     </CurrencyRankingItem>
   );

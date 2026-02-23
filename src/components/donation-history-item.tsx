@@ -1,10 +1,10 @@
 "use client";
+import { useLocale } from "next-intl";
 
 import { DonorLink } from "./donor-link";
 import { DynamicDonationHistoryDate } from "./dynamic-donation-history-date";
 import { PartyDot } from "./party-dot";
 import { PartyLink } from "./party-link";
-import { useTranslations } from "../hooks/use-translations";
 import { formatCountryCurrency } from "../utils/formatter";
 
 import type { CountryConfig } from "../utils/countries";
@@ -23,7 +23,7 @@ export const DonationHistoryItem = ({
   amount: number;
   country: CountryConfig;
 }) => {
-  const { translations, locale } = useTranslations();
+  const locale = useLocale();
   const fmtAmount = formatCountryCurrency(locale, amount, country);
 
   const now = Date.now();
@@ -40,7 +40,6 @@ export const DonationHistoryItem = ({
             className="overflow-hidden px-2"
             party={party}
             country={country}
-            translations={translations}
             locale={locale}
           >
             <PartyDot

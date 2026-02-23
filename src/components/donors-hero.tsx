@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 
 import { DynamicStackedPartyDonations } from "./dynamic-stacked-party-line";
@@ -9,10 +8,8 @@ import { formatCountryCurrency } from "../utils/formatter";
 import type { CountryConfig } from "../utils/countries";
 import type { BigDonor } from "../utils/loader/biggest-donors";
 import type { ConstLocale } from "../utils/locales";
-import type { Translations } from "@/messages/translations";
 
-import { useTranslations } from "@/hooks/use-translations";
-import { getDonorName } from "@/utils/donor";
+import { DonorName } from "@/components/donor-name";
 
 const TOP_DONORS_TO_SHOW = 8;
 
@@ -20,12 +17,10 @@ export const BigDonorPill = ({
   country,
   donor,
   locale,
-  translations,
 }: {
   donor: Omit<BigDonor, "id"> & { id?: string };
   locale: ConstLocale;
   country: CountryConfig;
-  translations: Translations;
 }) => {
   const { hash } = useHash(donor.name);
 
@@ -49,7 +44,7 @@ export const BigDonorPill = ({
         </div>
         <div className="overflow-hidden pl-2 text-sm">
           <div className="truncate font-semibold">
-            {getDonorName(donor.name, translations)}
+            <DonorName donor={donor.name} />
           </div>
           <div className="tabular-nums">
             {formatCountryCurrency(locale, donor.sum, country)}
@@ -69,13 +64,10 @@ export const DonorsHero = ({
   country: CountryConfig;
   biggestDonors: BigDonor[];
 }) => {
-  const { translations } = useTranslations();
-
   return (
     <ul className="flex flex-wrap pt-4">
       {biggestDonors.slice(0, TOP_DONORS_TO_SHOW).map((bigDonor) => (
         <BigDonorPill
-          translations={translations}
           donor={bigDonor}
           country={country}
           key={bigDonor.id}

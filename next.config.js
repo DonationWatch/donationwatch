@@ -1,8 +1,11 @@
 import Analyzer from "@next/bundle-analyzer";
 import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
 
-const env = process.env.NODE_ENV;
+import createNextIntlPlugin from "next-intl/plugin";
 
+const withNextIntl = createNextIntlPlugin();
+
+const env = process.env.NODE_ENV;
 const isProd = env === "production";
 const isAnalyze = process.env.ANALYZE === "true";
 
@@ -80,4 +83,6 @@ const nextConfig = {
   },
 };
 
-export default isAnalyze ? Analyzer({ enabled: true })(nextConfig) : nextConfig;
+export default withNextIntl(
+  isAnalyze ? Analyzer({ enabled: true })(nextConfig) : nextConfig,
+);

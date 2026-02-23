@@ -1,12 +1,11 @@
 "use client";
+import { useTranslations, useLocale } from "next-intl";
 
 import type { CountryConfig } from "@/utils/countries";
 import type { Party } from "@/utils/types";
 
-import { t } from "@/app/[locale]/translations";
 import Loading from "@/components/loading";
 import { useDonationsByParty } from "@/hooks/use-api";
-import { useTranslations } from "@/hooks/use-translations";
 import { donationYear } from "@/utils/date";
 import { formatCountryCurrency, formatPercentFormat } from "@/utils/formatter";
 import { DonationField } from "@/utils/types";
@@ -18,11 +17,13 @@ export const PartyTimelineText = ({
   country: CountryConfig;
   party: Party;
 }) => {
-  const { translations, locale } = useTranslations();
+  const t = useTranslations();
+  const tData = useTranslations("data");
+  const locale = useLocale();
   const { data, error, isLoading } = useDonationsByParty(country, party);
 
   if (isLoading) return <Loading />;
-  if (error || !data) return <div>{translations.data_error}</div>;
+  if (error || !data) return <div>{tData("error")}</div>;
 
   let sum = 0;
   const donations = data;
@@ -40,7 +41,7 @@ export const PartyTimelineText = ({
   return (
     <>
       <p className="mb-6">
-        {t(translations.party.timeline.detail.per_year, { party: party.short })}
+        {t("party.timeline.detail.per_year", { party: party.short })}
       </p>
       <ul className="mx-2 py-2 text-sm *:py-1">
         {Object.entries(perYearSums).map(([year, yearSum]) => {

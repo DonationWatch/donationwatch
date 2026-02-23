@@ -1,11 +1,9 @@
-"use server";
-
 import { NotFoundButton } from "../components/not-found-button";
 import { PageLogo } from "../components/page-logo";
 
 // We don't use translations here as the build seems to embed then into all pages
 
-export default async function NotFound() {
+export default function NotFound() {
   return (
     <html lang="en">
       <body className="@container flex min-h-screen flex-col">

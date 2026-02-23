@@ -1,5 +1,6 @@
 import { ChartLine, Earth, History, UserRound } from "lucide-react";
 import { notFound } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { AbsoluteMultipleColorsGradient } from "../../../../../components/absolute-multiple-colors-gradient";
 import { PageHeader } from "../../../../../components/layout/page-header";
@@ -28,7 +29,6 @@ import {
   isValidLocale,
   isValidParty,
 } from "../../../../../utils/validate";
-import { getTranslations } from "../../../translations";
 
 import type { ParamsOf } from "../../../../../../.next/types/routes";
 import type { TabItem } from "../../../../../components/tabs";
@@ -64,9 +64,10 @@ export async function generateMetadata(
 
   if (!isValidLocale(locale)) return notFoundMetadata;
   if (!isValidCountry(country)) return notFoundMetadata;
+  setRequestLocale(locale);
 
-  const [translations, countryConfig] = await Promise.all([
-    getTranslations(locale),
+  const [t, countryConfig] = await Promise.all([
+    getTranslations({ locale }),
     getCountryConfig(country),
   ]);
 
@@ -78,7 +79,7 @@ export async function generateMetadata(
     return notFoundMetadata;
   }
 
-  const countryPart = generateCountryTitlePart(countryConfig, translations);
+  const countryPart = generateCountryTitlePart(countryConfig, t);
 
   const title = {
     template: `%s | DonationWatch`,
@@ -107,15 +108,17 @@ export default async function PartyLayout(
 
   if (!isValidLocale(params.locale)) return notFound();
   if (!isValidCountry(params.country)) return notFound();
+  setRequestLocale(params.locale);
 
   const { locale, country, partyId } = params;
 
   const { children } = props;
 
-  const [translations, countryConfig, partyYearsSums] = await Promise.all([
-    getTranslations(locale),
+  const [t, countryConfig, partyYearsSums, tCommon] = await Promise.all([
+    getTranslations({ locale }),
     getCountryConfig(country),
     getPartyYearsSums(country),
+    getTranslations({ locale, namespace: "common" }),
   ]);
 
   if (!isValidParty(partyId, countryConfig)) return notFound();
@@ -139,25 +142,25 @@ export default async function PartyLayout(
     {
       icon: UserRound,
       href: `/${locale}/${country}/party/${party.id}/donors`,
-      label: translations.donors.title,
+      label: t("donors.title"),
     },
     {
       icon: History,
       href: `/${locale}/${country}/party/${party.id}/changes`,
-      label: translations.changes.title,
+      label: t("changes.title"),
     },
     countryConfig.hasTimeline
       ? {
           icon: ChartLine,
           href: `/${locale}/${country}/party/${party.id}/timeline`,
-          label: translations.timeline.title,
+          label: t("timeline.title"),
         }
       : undefined,
     countryConfig.hasOrigin
       ? {
           icon: Earth,
           href: `/${locale}/${country}/party/${party.id}/origin/overview`,
-          label: translations.origin.title,
+          label: t("origin.title"),
         }
       : undefined,
   ].filter(isNotNullandNotUndefined);
@@ -176,7 +179,7 @@ export default async function PartyLayout(
         <section aria-labelledby="hero-label">
           <div className="mb-4">
             <h2 className="mb-2 text-slate-500 dark:text-slate-300">
-              {translations.years.title}
+              {t("years.title")}
             </h2>
             <h3 className="text-3xl font-semibold sm:text-4xl" id="hero-label">
               {party.short}
@@ -188,11 +191,11 @@ export default async function PartyLayout(
           <div className="mb-3">
             <div className="flex-row space-y-2 sm:flex sm:space-y-0 sm:space-x-10">
               <MetaCard
-                title={translations.donation_count}
+                title={t("donation_count")}
                 value={formatNumber(locale, donationCount)}
               />
               <MetaCard
-                title={translations.sum}
+                title={t("sum")}
                 value={formatCountryCurrency(
                   locale,
                   donationSum,
@@ -201,7 +204,7 @@ export default async function PartyLayout(
               />
               {showExtendedMeta && donationCount > 1 && (
                 <MetaCard
-                  title={translations.average}
+                  title={t("average")}
                   value={formatCountryCurrency(
                     locale,
                     donationSum / donationCount,
@@ -213,10 +216,7 @@ export default async function PartyLayout(
           </div>
           <div className="mb-3">
             {wikiPageId && (
-              <section
-                aria-label={translations.donor_dialog.summary}
-                className="pt-4 sm:px-4"
-              >
+              <section aria-label={tCommon("summary")} className="pt-4 sm:px-4">
                 <WikiQuote pageId={wikiPageId} country={countryConfig} />
               </section>
             )}

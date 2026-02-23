@@ -1,11 +1,10 @@
 import { test as base } from "@playwright/test";
+import { createTranslator } from "next-intl";
 
-import { getTranslations } from "../../src/app/[locale]/translations";
 import { Country } from "../../src/utils/countries";
 import { Accessibility } from "../fixtures/accessibility";
 import { DonorPage } from "../fixtures/donor";
 import { DonorsPage } from "../fixtures/donors";
-import { GlobalDialog } from "../fixtures/global-dialog";
 import { GlobalSearch } from "../fixtures/global-search";
 import { HistoryPage } from "../fixtures/history";
 import { HomePage } from "../fixtures/home";
@@ -19,14 +18,13 @@ import { Tools } from "../fixtures/tools";
 import { YearOverviewPage } from "../fixtures/year-overview";
 
 import type { FixtureProps } from "./props";
-import type { Translations } from "../../src/messages/translations";
 import type { ConstLocale } from "../../src/utils/locales";
+import type { RootTranslator } from "@/utils/translator";
 
 type SharedFixtures = {
   homePage: HomePage;
   rootPage: RootPage;
 
-  dialog: GlobalDialog;
   search: GlobalSearch;
   yearOverviewPage: YearOverviewPage;
   historyPage: HistoryPage;
@@ -40,7 +38,7 @@ type SharedFixtures = {
 
   tools: Tools;
 
-  translations: Translations;
+  translations: RootTranslator;
   country: Country;
   accessibility: Accessibility;
   locale: ConstLocale;
@@ -58,8 +56,18 @@ export const test = base.extend<SharedFixtures>({
       locale,
     }),
   translations: async ({ locale }, use) => {
-    const translations = await getTranslations(locale ?? "en");
-    await use(translations);
+    const currentLocale = locale ?? "en";
+
+    await use(
+      createTranslator({
+        locale: currentLocale,
+        messages: (
+          await import(`../../src/messages/${currentLocale}.json`, {
+            with: { type: "json" },
+          })
+        ).default,
+      }),
+    );
   },
   homePage: async ({ props }, use) => {
     await use(new HomePage(props));
@@ -84,9 +92,6 @@ export const test = base.extend<SharedFixtures>({
   },
   donorPage: async ({ props }, use) => {
     await use(new DonorPage(props));
-  },
-  dialog: async ({ props }, use) => {
-    await use(new GlobalDialog(props));
   },
   search: async ({ props }, use) => {
     await use(new GlobalSearch(props));

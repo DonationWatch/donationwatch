@@ -1,31 +1,27 @@
 "use client";
-
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
+import { useTranslations } from "next-intl";
 import { useCallback, useRef, useState } from "react";
 
 import { DonorOverviewItem } from "./donor-overview-item";
 import { DynamicDonorDonationsDetail } from "./dynamic-donor-donations-detail";
 import Loading from "./loading";
 import { useDonationsByYears } from "../hooks/use-api";
-import { useTranslations } from "../hooks/use-translations";
 import { isNotNullandNotUndefined } from "../utils/array";
 import { donationYear } from "../utils/date";
 import { DonationField } from "../utils/types";
 
 import type { CountryConfig } from "../utils/countries";
 import type { Donation, ReceiverId } from "../utils/types";
-import type { Translations } from "@/messages/translations";
 
 const DonorYearOverviewContent = ({
   donations,
   years,
   country,
-  translations,
 }: {
   donations: Donation[];
   years: string[];
   country: CountryConfig;
-  translations: Translations;
 }) => {
   const donorRegistry: Record<
     string,
@@ -105,7 +101,6 @@ const DonorYearOverviewContent = ({
               }}
             >
               <DonorOverviewItem
-                translations={translations}
                 name={donor.name}
                 amount={donor.sum}
                 rank={virtualItem.index + 1}
@@ -142,13 +137,13 @@ export const DonorYearOverview = ({
   years: string[];
   country: CountryConfig;
 }) => {
-  const { translations } = useTranslations();
+  const tData = useTranslations("data");
   const results = useDonationsByYears(country, years);
   const error = results.some((r) => r.error);
   const isLoading = results.some((r) => r.isLoading);
 
   if (isLoading) return <Loading />;
-  if (error) return <div>{translations.data_error}</div>;
+  if (error) return <div>{tData("error")}</div>;
 
   const donations = results
     .flatMap((r) => r.data)
@@ -156,7 +151,6 @@ export const DonorYearOverview = ({
 
   return (
     <DonorYearOverviewContent
-      translations={translations}
       donations={donations}
       years={years}
       country={country}

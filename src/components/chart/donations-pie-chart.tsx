@@ -1,11 +1,9 @@
 "use client";
-
 import { useRouter } from "next/navigation";
+import { useTranslations, useLocale } from "next-intl";
 
 import { ExpandableReactEchart } from "./expandable-react-echart";
-import { t } from "../../app/[locale]/translations";
 import { useChart } from "../../hooks/use-chart";
-import { useTranslations } from "../../hooks/use-translations";
 import { partyColor } from "../../utils/color";
 import {
   type CountryConfig,
@@ -28,7 +26,8 @@ export const DonationsPieChart = ({
   partyYearsSums: PartyYearsSums;
   years: string[];
 }) => {
-  const { translations, locale } = useTranslations();
+  const t = useTranslations();
+  const locale = useLocale();
   const router = useRouter();
   const { backgroundColor, isMobile } = useChart();
   const partySums: Record<string, number> = {};
@@ -142,9 +141,9 @@ export const DonationsPieChart = ({
       height={650}
       maxHeightScreen={true}
       allowExpand={true}
-      title={translations.overview.pie.title}
-      subtitle={t(translations.overview.pie.subtitle, {
-        country: getCountryName(country, translations),
+      title={t("overview.pie.title")}
+      subtitle={t("overview.pie.subtitle", {
+        country: getCountryName(country, t),
         years: formatYearsRange(years),
       })}
       country={country}

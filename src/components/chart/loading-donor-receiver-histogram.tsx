@@ -1,10 +1,9 @@
 "use client";
+import { useTranslations, useLocale } from "next-intl";
 
 import { ExpandableReactEchart } from "./expandable-react-echart";
-import { t } from "../../app/[locale]/translations";
 import { useDonationsByYears } from "../../hooks/use-api";
 import { useChart } from "../../hooks/use-chart";
-import { useTranslations } from "../../hooks/use-translations";
 import { isNotNullandNotUndefined } from "../../utils/array";
 import { donationYear } from "../../utils/date";
 import { formatNumber } from "../../utils/formatter";
@@ -32,7 +31,8 @@ export const LoadedDonorReceiverHistogram = ({
   parties?: Party[];
   years?: string[];
 }) => {
-  const { translations, locale } = useTranslations();
+  const t = useTranslations();
+  const locale = useLocale();
 
   const yearsSet = new Set<string>(years);
   const partiesSet = new Set<Party>(parties);
@@ -120,7 +120,7 @@ export const LoadedDonorReceiverHistogram = ({
         const receiversCount = data[0] || 0;
         const donorCount = data[1] || 0;
 
-        return t(translations.donors.histogram.tooltip, {
+        return t("donors.histogram.tooltip", {
           donors: formatNumber(locale, donorCount),
           parties: formatNumber(locale, receiversCount),
         });
@@ -167,7 +167,7 @@ export const LoadedDonorReceiverHistogram = ({
           receiversCount,
           donorCount,
         ]),
-        name: translations.years.title,
+        name: t("years.title"),
       },
     ],
   };
@@ -200,13 +200,13 @@ export const LoadingDonorReceiverHistogram = ({
   title: string;
   subtitle: string;
 }) => {
-  const { translations } = useTranslations();
+  const t = useTranslations("data");
   const results = useDonationsByYears(country, years);
   const error = results.some((r) => r.error);
   const isLoading = results.some((r) => r.isLoading);
 
   if (isLoading) return <Loading />;
-  if (error) return <div>{translations.data_error}</div>;
+  if (error) return <div>{t("error")}</div>;
 
   const donations = results
     .flatMap((r) => r.data)

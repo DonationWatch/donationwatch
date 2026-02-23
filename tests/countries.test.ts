@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 
-import en from "../src/messages/en";
+import en from "../src/messages/en.json";
 import { COUNTRIES } from "../src/utils/countries";
 import { getCountryConfig } from "../src/utils/data/get-country-config";
 import { AddressField, DonationField } from "../src/utils/types";

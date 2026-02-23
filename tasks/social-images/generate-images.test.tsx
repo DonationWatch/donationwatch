@@ -3,6 +3,7 @@ import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
 
+import { createTranslator } from "next-intl";
 import satori from "satori";
 import { it, describe, beforeAll, afterAll } from "vitest";
 
@@ -12,7 +13,6 @@ import { DonorImage } from "./images/donor-image";
 import { PartyPageImage } from "./images/party-page-image";
 import { RootPageImage } from "./images/root-page-image";
 import { THUMBNAIL_SIZE, toImage } from "./utils";
-import { getTranslations } from "../../src/app/[locale]/translations";
 import { COUNTRIES } from "../../src/utils/countries";
 import { getCountryConfig } from "../../src/utils/data/get-country-config";
 import { getBiggestDonors } from "../../src/utils/loader/biggest-donors";
@@ -20,7 +20,7 @@ import { getPartyYearsSums } from "../../src/utils/loader/party-years-sums";
 import { CONST_LOCALES } from "../../src/utils/locales";
 import { getDonations } from "../data/load-donations";
 
-import type { Translations } from "../../src/messages/translations";
+import type { CreateTranslator } from "./utils";
 import type { CountryConfig } from "../../src/utils/countries";
 import type { BigDonor } from "../../src/utils/loader/biggest-donors";
 import type { PartyYearsSums } from "../../src/utils/loader/party-years-sums";
@@ -95,12 +95,23 @@ describe.each(CONST_LOCALES.map((locale) => ({ locale })))(
   "language $locale",
   ({ locale }) => {
     const LOCALE_OUT_DIR = path.join(OUT_DIR, locale);
-    let translations: Translations;
+    let getTranslations: CreateTranslator;
 
     beforeAll(async () => {
-      translations = await getTranslations(locale);
-
       await fs.mkdir(LOCALE_OUT_DIR, { recursive: true });
+
+      const messages = (
+        await import(`../../src/messages/${locale}.json`, {
+          with: { type: "json" },
+        })
+      ).default;
+
+      getTranslations = (namespace?: string) =>
+        createTranslator({
+          locale,
+          namespace,
+          messages,
+        });
     });
 
     afterAll(async () => {
@@ -125,7 +136,7 @@ describe.each(CONST_LOCALES.map((locale) => ({ locale })))(
       );
 
       const png = await renderComponent(
-        await RootPageImage(locale, translations, countryDatas),
+        await RootPageImage(locale, getTranslations, countryDatas),
       );
 
       await fs.writeFile(path.join(LOCALE_OUT_DIR, `cover.png`), png);
@@ -169,8 +180,8 @@ describe.each(CONST_LOCALES.map((locale) => ({ locale })))(
           const png = await renderComponent(
             await CountryPageImage(
               locale,
+              getTranslations,
               countryConfig,
-              translations,
               yearSums,
             ),
           );
@@ -183,8 +194,8 @@ describe.each(CONST_LOCALES.map((locale) => ({ locale })))(
             const png = await renderComponent(
               await DonorImage(
                 locale,
+                getTranslations,
                 countryConfig,
-                translations,
                 donor,
                 donations,
               ),
@@ -202,8 +213,8 @@ describe.each(CONST_LOCALES.map((locale) => ({ locale })))(
             const png = await renderComponent(
               await PartyPageImage(
                 locale,
+                getTranslations,
                 countryConfig,
-                translations,
                 party.id,
                 donations,
               ),
@@ -224,8 +235,8 @@ describe.each(CONST_LOCALES.map((locale) => ({ locale })))(
             const png = await renderComponent(
               await CountryYearsPageImage(
                 locale,
+                getTranslations,
                 countryConfig,
-                translations,
                 donations,
                 years,
                 yearSums,
@@ -248,8 +259,8 @@ describe.each(CONST_LOCALES.map((locale) => ({ locale })))(
             const png = await renderComponent(
               await CountryYearsPageImage(
                 locale,
+                getTranslations,
                 countryConfig,
-                translations,
                 donations,
                 [year],
                 yearSums,

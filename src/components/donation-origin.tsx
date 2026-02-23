@@ -1,13 +1,11 @@
 "use client";
-
+import { useTranslations, useLocale } from "next-intl";
 import { useState } from "react";
 
 import { DonationOriginVisual } from "./donation-origin-visual";
 import Loading from "./loading";
 import { OriginDonationsItem } from "./origin-donations-item";
-import { t } from "../app/[locale]/translations";
 import { useDonationsByParty, useDonationsByYears } from "../hooks/use-api";
-import { useTranslations } from "../hooks/use-translations";
 import { isNotNullandNotUndefined } from "../utils/array";
 import {
   Country,
@@ -46,7 +44,8 @@ const CurrentCountryPart = ({
   sum: number;
   subtitle: string;
 }) => {
-  const { translations, locale } = useTranslations();
+  const t = useTranslations();
+  const locale = useLocale();
   const [expandedDonors, setExpandedDonors] = useState<string[]>([]);
   const onToggleExpanded = (state: string) => {
     setExpandedDonors((prev) =>
@@ -69,10 +68,6 @@ const CurrentCountryPart = ({
   });
 
   const isEU = country.id === Country.europeanunion;
-  const countries = translations.countries as Record<string, string>;
-  const states = (translations.state as Record<string, Record<string, string>>)[
-    country.id
-  ];
 
   return (
     <ArticleSectionWrapper id={"sec-current-country"}>
@@ -81,18 +76,22 @@ const CurrentCountryPart = ({
           <ArticleSectionTitle
             as={"h2"}
             id={"sec-current-country"}
-            title={t(translations.origin.country.title, {
-              country: getCountryName(country, translations),
+            title={t("origin.country.title", {
+              country: getCountryName(country, t),
             })}
           />
           <p className="mb-6">
-            {t(translations.origin.country.summary, {
+            {t("origin.country.summary", {
               from: years.at(0)!,
               until: years.at(-1)!,
               stateCount: sums.length,
               highestState: isEU
-                ? countries[largestDonationSum[1].state!]
-                : states[largestDonationSum[1].state!],
+                ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                  // @ts-ignore
+                  t(`countries.${largestDonationSum[1].state!}`)
+                : // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                  // @ts-ignore
+                  t(`state.${country.id}.${largestDonationSum[1].state!}`),
               highestSum: formatCountryCurrency(
                 locale,
                 largestDonationSum[1].sum,
@@ -100,8 +99,12 @@ const CurrentCountryPart = ({
               ),
               largesDonationCountNum: largesDonationCount[1].donations.length,
               largesDonationCountState: isEU
-                ? countries[largesDonationCount[1].state!]
-                : states[largesDonationCount[1].state!],
+                ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                  // @ts-ignore
+                  t(`countries.${largesDonationCount[1].state!}`)
+                : // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                  // @ts-ignore
+                  t(`state.${country.id}.${largesDonationCount[1].state!}`),
             })}
           </p>
 
@@ -109,7 +112,6 @@ const CurrentCountryPart = ({
             {sums.map(([bucket, data], idx) => (
               <OriginDonationsItem
                 id={"current"}
-                translations={translations}
                 rank={idx + 1}
                 key={bucket}
                 amount={data.sum}
@@ -149,7 +151,8 @@ const OtherCountryPart = ({
   years: string[];
   sum: number;
 }) => {
-  const { translations, locale } = useTranslations();
+  const t = useTranslations();
+  const locale = useLocale();
   const [expandedCountries, setExpandedCountries] = useState<string[]>([]);
   const onToggleExpanded = (state: string) => {
     setExpandedCountries((prev) =>
@@ -179,22 +182,23 @@ const OtherCountryPart = ({
           <ArticleSectionTitle
             as={"h2"}
             id={"sec-other-country"}
-            title={t(translations.origin.elsewhere.title, {
-              country: getCountryName(country, translations),
+            title={t("origin.elsewhere.title", {
+              country: getCountryName(country, t),
             })}
           />
 
           <p className="mb-6">
-            {t(translations.origin.elsewhere.summary, {
+            {t("origin.elsewhere.summary", {
               from: years.at(0)!,
               until: years.at(-1)!,
               countryCount: sums.length,
-              highestCountry:
-                translations.countries[
-                  largesOtherDonationSum[1].donations[0][DonationField.Address][
-                    AddressField.Country
-                  ]!
-                ],
+              highestCountry: t(
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                `countries.${largesOtherDonationSum[1].donations[0][
+                  DonationField.Address
+                ][AddressField.Country]!}`,
+              ),
               highestSum: formatCountryCurrency(
                 locale,
                 largesOtherDonationSum[1].sum,
@@ -202,12 +206,15 @@ const OtherCountryPart = ({
               ),
               largesDonationCountNum:
                 largesOtherDonationCount[1].donations.length,
-              largesDonationCountState:
-                translations.countries[
+              largesDonationCountState: t(
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                `countries.${
                   largesOtherDonationCount[1].donations[0][
                     DonationField.Address
                   ][AddressField.Country]
-                ],
+                }`,
+              ),
             })}
           </p>
 
@@ -215,7 +222,6 @@ const OtherCountryPart = ({
             {sums.map(([bucket, data], idx) => (
               <OriginDonationsItem
                 id={"other"}
-                translations={translations}
                 rank={idx + 1}
                 key={bucket}
                 amount={data.sum}
@@ -252,13 +258,14 @@ export const DonationYearOrigin = ({
   parties: Party[];
   country: CountryConfig;
 }) => {
-  const { translations } = useTranslations();
+  const t = useTranslations();
+  const tData = useTranslations("data");
   const results = useDonationsByYears(country, years);
   const error = results.some((r) => r.error);
   const isLoading = results.some((r) => r.isLoading);
 
   if (isLoading) return <Loading />;
-  if (error) return <div>{translations.data_error}</div>;
+  if (error) return <div>{tData("error")}</div>;
 
   const donations = results
     .flatMap((r) => r.data)
@@ -270,8 +277,8 @@ export const DonationYearOrigin = ({
       parties={parties}
       country={country}
       donations={donations}
-      subtitle={t(translations.origin.country.subtitle, {
-        country: getCountryName(country, translations),
+      subtitle={t("origin.country.subtitle", {
+        country: getCountryName(country, t),
         years: formatYearsRange(years),
       })}
     />
@@ -287,11 +294,12 @@ export const DonationPartyOrigin = ({
   party: Party;
   country: CountryConfig;
 }) => {
-  const { translations } = useTranslations();
+  const t = useTranslations();
+  const tData = useTranslations("data");
   const { data, error, isLoading } = useDonationsByParty(country, party);
 
   if (isLoading) return <Loading />;
-  if (error || !data) return <div>{translations.data_error}</div>;
+  if (error || !data) return <div>{tData("error")}</div>;
 
   return (
     <DonationOrigin
@@ -299,9 +307,9 @@ export const DonationPartyOrigin = ({
       parties={[party]}
       country={country}
       donations={data.flat()}
-      subtitle={t(translations.origin.party.subtitle, {
+      subtitle={t("origin.party.subtitle", {
         party: party.short,
-        country: getCountryName(country, translations),
+        country: getCountryName(country, t),
       })}
     />
   );
@@ -320,7 +328,8 @@ const DonationOrigin = ({
   donations: Donation[];
   subtitle: string;
 }) => {
-  const { translations, locale } = useTranslations();
+  const t = useTranslations();
+  const locale = useLocale();
   const { sum, sums } = getOriginDonations(country, donations, parties, years);
 
   const isEu = country.id === Country.europeanunion;
@@ -361,27 +370,27 @@ const DonationOrigin = ({
             <ArticleSectionTitle
               as={"h1"}
               id={"sec-origin"}
-              title={translations.origin.detail.title}
+              title={t("origin.detail.title")}
             />
             <p className="mb-6">
-              {t(translations.origin.detail.summary, {
-                country: getCountryName(country, translations),
+              {t("origin.detail.summary", {
+                country: getCountryName(country, t),
               })}
             </p>
             {country.id === Country.austria ? (
               <p className="mb-6">
-                {t(translations.origin.detail.country[country.id], {
-                  country: getCountryName(country, translations),
+                {t(`origin.detail.country.${country.id}`, {
+                  country: getCountryName(country, t),
                 })}
               </p>
             ) : null}
             <p>
-              {t(translations.origin.detail.sum, {
+              {t("origin.detail.sum", {
                 years:
                   years.length > 1
                     ? formatYearsRange(years)
                     : (years.at(0) as string),
-                country: getCountryName(country, translations),
+                country: getCountryName(country, t),
                 sumCountry: formatCountryCurrency(locale, sumCountry, country),
                 sumOthers: formatCountryCurrency(locale, sumOthers, country),
               })}

@@ -1,3 +1,5 @@
+"use client";
+
 /* eslint-disable react/no-unknown-property */
 import { ImageMetaCard } from "./image-meta-card";
 import { PageLogo } from "../../../src/components/page-logo";
@@ -15,11 +17,11 @@ import {
 } from "../../../src/utils/formatter";
 import { DonationField } from "../../../src/utils/types";
 
-import type { Translations } from "../../../src/messages/translations";
 import type { PartySum } from "../../../src/utils/data/get-parties-sum";
 import type { BigDonor } from "../../../src/utils/loader/biggest-donors";
 import type { ConstLocale } from "../../../src/utils/locales";
 import type { Donation, Party, ReceiverId } from "../../../src/utils/types";
+import type { CreateTranslator } from "../utils";
 import type { PropsWithChildren, ReactNode } from "react";
 
 import { getDonorName } from "@/utils/donor";
@@ -30,7 +32,6 @@ export const ImageStackedPartyDonations = ({
   years,
   donor,
 }: {
-  translations: Translations;
   years: string[];
   donor?: string;
   locale: ConstLocale;
@@ -114,16 +115,18 @@ const ImageRankingItem = ({
 };
 
 export const ImagePageHeader = ({
-  translations,
+  getTranslations,
   right,
   country,
   children,
 }: PropsWithChildren<{
-  translations: Translations;
+  getTranslations: CreateTranslator;
   locale: ConstLocale;
   right?: string | ReactNode;
   country: CountryConfig;
 }>) => {
+  const t = getTranslations();
+
   return (
     <header tw="border-b border-slate-200 h-[64px] leading-none shrink-0">
       <div tw="flex w-full justify-between items-center px-6">
@@ -133,7 +136,7 @@ export const ImagePageHeader = ({
           </div>
           <div tw="flex flex-col ml-4">
             <div tw="text-3xl font-semibold leading-none">
-              {getCountryName(country, translations)}
+              {getCountryName(country, t)}
             </div>
             <div tw="text-slate-600 font-semibold">DonationWatch</div>
           </div>
@@ -150,18 +153,20 @@ export const ImagePageHeader = ({
 };
 
 export const DonorHeader = ({
+  getTranslations,
   country,
-  translations,
   locale,
   donor,
   donations,
 }: {
-  translations: Translations;
+  getTranslations: CreateTranslator;
   locale: ConstLocale;
   country: CountryConfig;
   donations: Donation[];
   donor: BigDonor;
 }) => {
+  const t = getTranslations();
+  const tCommon = getTranslations("common");
   let sum = 0;
   let count = 0;
 
@@ -188,7 +193,7 @@ export const DonorHeader = ({
   return (
     <div tw="flex flex-col grow w-full">
       <ImagePageHeader
-        translations={translations}
+        getTranslations={getTranslations}
         locale={locale}
         country={country}
       />
@@ -202,25 +207,25 @@ export const DonorHeader = ({
               overflow: "hidden",
             }}
           >
-            {getDonorName(donor.name, translations)}
+            {getDonorName(donor.name, tCommon)}
           </div>
         </div>
         <div tw="flex flex-col mb-4">
           <div tw="flex">
             <div tw="flex mr-10">
               <ImageMetaCard
-                title={translations.donation_count}
+                title={t("donation_count")}
                 value={formatNumber(locale, count)}
               />
             </div>
             <div tw="flex mr-10">
               <ImageMetaCard
-                title={translations.sum}
+                title={t("sum")}
                 value={formatCountryCurrency(locale, sum, country)}
               />
             </div>
             <ImageMetaCard
-              title={translations.donor.active_period}
+              title={t("donor.active_period")}
               value={formatYearsRange([firstYear, lastYear])}
             />
           </div>
@@ -230,7 +235,6 @@ export const DonorHeader = ({
             country={country}
             donations={donations}
             years={country.years}
-            translations={translations}
             locale={locale}
           />
         </div>

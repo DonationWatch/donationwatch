@@ -1,8 +1,8 @@
 import { zipMappings } from "./zip-data";
 import { AddressField } from "../../../src/utils/types";
 
-import type { Countries } from "../../../src/utils/locales";
 import type { DonationAddress } from "../../../src/utils/types";
+import type { Countries } from "@/utils/countries";
 
 export const extractAddress = (zip: string): DonationAddress => {
   const address: DonationAddress = { [AddressField.Country]: "AT" };

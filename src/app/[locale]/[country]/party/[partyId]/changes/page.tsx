@@ -1,6 +1,5 @@
-"use server";
-
 import { notFound } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { DynamicPartyDonationHistory } from "../../../../../../components/dynamic-donation-history";
 import {
@@ -19,7 +18,6 @@ import {
   isValidLocale,
   isValidParty,
 } from "../../../../../../utils/validate";
-import { getTranslations, t } from "../../../../translations";
 
 import type { Metadata } from "next";
 
@@ -30,11 +28,12 @@ export async function generateMetadata(
 
   if (!isValidLocale(params.locale)) return notFoundMetadata;
   if (!isValidCountry(params.country)) return notFoundMetadata;
+  setRequestLocale(params.locale);
 
-  const { locale, country, partyId } = params;
+  const { country, partyId } = params;
 
-  const [translations, countryConfig] = await Promise.all([
-    getTranslations(locale),
+  const [t, countryConfig] = await Promise.all([
+    getTranslations({ locale: params.locale }),
     getCountryConfig(country),
   ]);
 
@@ -42,11 +41,11 @@ export async function generateMetadata(
   const party = getParty(countryConfig, partyId);
 
   return {
-    title: `${t(translations.page_title.party.changes, {
+    title: `${t("page_title.party.changes", {
       party: party.short,
-      country: getCountryName(countryConfig, translations),
+      country: getCountryName(countryConfig, t),
     })}`,
-    description: t(translations.party.changes.detail.summary, {
+    description: t("party.changes.detail.summary", {
       party: party.short,
     }),
     alternates: generateAlternates(`${country}/party/${partyId}/changes`),
@@ -60,11 +59,12 @@ export default async function ChangesPage(
 
   if (!isValidLocale(params.locale)) return notFound();
   if (!isValidCountry(params.country)) return notFound();
+  setRequestLocale(params.locale);
 
-  const { locale, country, partyId } = params;
+  const { country, partyId } = params;
 
-  const [translations, countryConfig] = await Promise.all([
-    getTranslations(locale),
+  const [t, countryConfig] = await Promise.all([
+    getTranslations({ locale: params.locale }),
     getCountryConfig(country),
   ]);
 
@@ -80,12 +80,12 @@ export default async function ChangesPage(
             <ArticleSectionTitle
               as={"h1"}
               id={"sec-years-changes"}
-              title={t(translations.party.changes.detail.title, {
+              title={t("party.changes.detail.title", {
                 party: party.short,
               })}
             />
             <p className="mb-6">
-              {t(translations.party.changes.detail.summary, {
+              {t("party.changes.detail.summary", {
                 party: party.short,
               })}
             </p>

@@ -1,14 +1,12 @@
 "use client";
-
+import { useTranslations, useLocale } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 
 import { DonorLink } from "./donor-link";
 import Loading from "./loading";
 import { RankingItem } from "./ranking-item";
-import { t } from "../app/[locale]/translations";
 import { useDonationsByYears } from "../hooks/use-api";
 import { useBreakpoint } from "../hooks/use-media-query";
-import { useTranslations } from "../hooks/use-translations";
 import { useVirtual } from "../hooks/use-virtual";
 import { isNotNullandNotUndefined } from "../utils/array";
 import { donationYear } from "../utils/date";
@@ -20,7 +18,6 @@ import {
 } from "../utils/formatter";
 import { DonationField } from "../utils/types";
 
-import type { Translations } from "../messages/translations";
 import type { CountryConfig } from "../utils/countries";
 import type { ConstLocale } from "../utils/locales";
 import type { Donation, Party } from "../utils/types";
@@ -55,14 +52,13 @@ const HistogramItemDetailLine = ({
 export const HistogramItemDetail = ({
   country,
   sums,
-  translations,
   locale,
 }: {
   country: CountryConfig;
   sums: { donor: string; sum: number }[];
-  translations: Translations;
   locale: ConstLocale;
 }) => {
+  const t = useTranslations();
   const parentRef = useRef<HTMLDivElement>(null);
   const isSm = useBreakpoint("sm");
 
@@ -85,7 +81,7 @@ export const HistogramItemDetail = ({
     >
       <ul
         className="relative w-full"
-        aria-label={translations.party_donations}
+        aria-label={t("party_donations")}
         style={{
           height: `${rowVirtualizer.getTotalSize()}px`,
         }}
@@ -125,7 +121,8 @@ const DonorHistogramTextText = ({
   histogram: DonorHistogram;
   years: string[];
 }) => {
-  const { translations, locale } = useTranslations();
+  const t = useTranslations();
+  const locale = useLocale();
 
   const sortedBuckets = Object.entries(histogram)
     .map(([receiversCount, donors]) => ({
@@ -161,7 +158,7 @@ const DonorHistogramTextText = ({
   return (
     <>
       <p className="mb-6">
-        {t(translations.donors.histogram.p1, {
+        {t("donors.histogram.p1", {
           years: formatYearsRange(years),
           max: maxBucket?.receiversCount ?? 0,
           donors: maxBucket?.donorCount ?? 0,
@@ -172,7 +169,7 @@ const DonorHistogramTextText = ({
       <p className="mb-6"></p>
       {justOne ? (
         <p className="mb-6">
-          {t(translations.donors.histogram.p2, {
+          {t("donors.histogram.p2", {
             percentage: formatPercentFormat(
               locale,
               justOne.donorCount / donorsCount,
@@ -201,7 +198,7 @@ const DonorHistogramTextList = ({
     }[];
   }[];
 }) => {
-  const { translations } = useTranslations();
+  const t = useTranslations();
   const [expandedBuckets, setExpandedBuckets] = useState<string[]>([]);
   const onToggleExpanded = (state: string) => {
     setExpandedBuckets((prev) =>
@@ -225,14 +222,13 @@ const DonorHistogramTextList = ({
               onToggleExpanded={() => onToggleExpanded(receiversCount)}
               detail={
                 <HistogramItemDetail
-                  translations={translations}
                   locale={locale}
                   country={country}
                   sums={donorSums}
                 />
               }
             >
-              {t(translations.donors.histogram.item, {
+              {t("donors.histogram.item", {
                 donors: donorSums.length,
                 parties: receiversCount,
               })}
@@ -338,13 +334,14 @@ export const LoadingYearsDonorHistogramText = ({
   country: CountryConfig;
   parties: Party[];
 }) => {
-  const { translations, locale } = useTranslations();
+  const t = useTranslations("data");
+  const locale = useLocale();
   const results = useDonationsByYears(country, years);
   const error = results.some((r) => r.error);
   const isLoading = results.some((r) => r.isLoading);
 
   if (isLoading) return <Loading />;
-  if (error) return <div>{translations.data_error}</div>;
+  if (error) return <div>{t("error")}</div>;
 
   const donations = results
     .flatMap((r) => r.data)

@@ -1,10 +1,8 @@
 "use client";
-
 import { ArrowUpRight } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
 
-import { t } from "../app/[locale]/translations";
 import { useDetectedCountry } from "../hooks/use-api";
-import { useTranslations } from "../hooks/use-translations";
 import { countryCodesToCountry } from "../utils/countries";
 
 import type { CountryConfig, CountryCode } from "../utils/countries";
@@ -14,8 +12,9 @@ export const DetectedCountryContent = ({
 }: {
   detectedCountryCode?: CountryCode;
 }) => {
-  const { locale, translations } = useTranslations();
-  const detectedCountry = translations.countries[detectedCountryCode ?? "??"];
+  const t = useTranslations();
+  const locale = useLocale();
+  const detectedCountry = t.raw(`countries.${detectedCountryCode ?? "??"}`);
 
   const destinationLink = detectedCountryCode
     ? `/${locale}/${countryCodesToCountry[detectedCountryCode]}`
@@ -27,7 +26,7 @@ export const DetectedCountryContent = ({
       aria-hidden={!detectedCountryCode}
       rel="nofollow"
       href={destinationLink}
-      title={t(translations.detect_country.action, {
+      title={t("detect_country.action", {
         country: detectedCountry,
       })}
       className="card card--action inline-flex flex-col justify-between gap-6 rounded-lg !py-2 text-sm lg:flex-row lg:items-center"
@@ -35,9 +34,9 @@ export const DetectedCountryContent = ({
       <div className="flex items-center gap-3">
         <ArrowUpRight size={18} />
         <div>
-          {t(translations.detect_country.title, { country: detectedCountry })}
+          {t("detect_country.title", { country: detectedCountry })}
           <br />
-          {t(translations.detect_country.description, {
+          {t("detect_country.description", {
             country: detectedCountry,
           })}
         </div>

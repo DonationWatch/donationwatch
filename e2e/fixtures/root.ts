@@ -7,6 +7,6 @@ export class RootPage extends PageObject {
     this.page.getByTestId("detected-country");
 
   public readonly countryLinks = this.page
-    .getByLabel(this.translations.header.country_selection)
+    .getByLabel(this.translations("header.country_selection"))
     .locator("a");
 }

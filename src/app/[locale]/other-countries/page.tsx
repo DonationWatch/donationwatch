@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Article, ArticleSection } from "../../../components/layout/article";
 import { NonCountryRootLayout } from "../../../components/ui/non-country-root-layout";
@@ -7,13 +8,11 @@ import { LOCALES } from "../../../utils/locales";
 import { generateAlternates } from "../../../utils/meta";
 import { notFoundMetadata } from "../../../utils/not-found-metadata";
 import { isValidLocale } from "../../../utils/validate";
-import { getTranslations } from "../translations";
 
-import type En from "../../../messages/en";
+import type { Countries } from "@/utils/countries";
 import type { Metadata } from "next";
 
 export const dynamicParams = false;
-export const dynamic = "error";
 
 export async function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
@@ -205,7 +204,7 @@ Basert på vår innledende gjennomgang kan Italia, Slovenia og Bosnia-Hercegovin
 } as const;
 
 const sources: {
-  country: keyof typeof En.countries;
+  country: Countries;
   note: CountryNote;
   source: { name: string; url: string };
 }[] = [
@@ -297,12 +296,12 @@ export async function generateMetadata(
   const params = await props.params;
 
   if (!isValidLocale(params.locale)) return notFoundMetadata;
-  const { locale } = params;
+  setRequestLocale(params.locale);
 
-  const translations = await getTranslations(locale);
+  const t = await getTranslations({ locale: params.locale });
 
   return {
-    title: `${translations.other_countries.title} | DonationWatch`,
+    title: `${t("other_countries.title")} | DonationWatch`,
     alternates: generateAlternates("imprint"),
   };
 }
@@ -313,15 +312,17 @@ export default async function Page(
   const params = await props.params;
 
   if (!isValidLocale(params.locale)) return notFound();
+  setRequestLocale(params.locale);
+
   const { locale } = params;
 
   const pageTranslations = componentTranslations[locale];
-  const translations = await getTranslations(locale);
+  const t = await getTranslations({ locale });
 
   return (
-    <NonCountryRootLayout locale={locale} translations={translations}>
+    <NonCountryRootLayout locale={locale}>
       <Article
-        title={translations.other_countries.title}
+        title={t("other_countries.title")}
         subtitle={pageTranslations.p0}
       >
         <ArticleSection title={pageTranslations.h1}>
@@ -339,13 +340,7 @@ export default async function Page(
               <tbody>
                 {sources.map((source) => (
                   <tr key={source.country}>
-                    <td>
-                      {
-                        translations.countries[
-                          source.country as keyof typeof En.countries
-                        ]
-                      }
-                    </td>
+                    <td>{t.raw(`countries.${source.country}`)}</td>
                     <td>{pageTranslations.notes[source.note]}</td>
                     <td>
                       <a

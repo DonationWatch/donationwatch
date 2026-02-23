@@ -1,9 +1,9 @@
 "use client";
+import { useLocale, useTranslations } from "next-intl";
 
 import { ExpandableReactEchart } from "./expandable-react-echart";
 import { useDonationsByParty, useDonationsByYears } from "../../hooks/use-api";
 import { useChart } from "../../hooks/use-chart";
-import { useTranslations } from "../../hooks/use-translations";
 import { isNotNullandNotUndefined } from "../../utils/array";
 import { partyColor } from "../../utils/color";
 import { type CountryConfig, getParty } from "../../utils/countries";
@@ -50,13 +50,13 @@ export const DonationSumChart = ({
   subtitle: string;
   limitToFirstDateYear?: boolean;
 }) => {
-  const { translations } = useTranslations();
+  const t = useTranslations("data");
   const results = useDonationsByYears(country, years);
   const error = results.some((r) => r.error);
   const isLoading = results.some((r) => r.isLoading);
 
   if (isLoading) return <Loading />;
-  if (error) return translations.data_error;
+  if (error) return t("error");
 
   const donations = results
     .flatMap((r) => r.data)
@@ -90,11 +90,11 @@ export const DonationPartyChart = ({
   subtitle: string;
   limitToFirstDateYear?: boolean;
 }) => {
-  const { translations } = useTranslations();
+  const t = useTranslations("data");
   const { data, error, isLoading } = useDonationsByParty(country, party);
 
   if (isLoading) return <Loading />;
-  if (error || !data) return translations.data_error;
+  if (error || !data) return t("error");
 
   return (
     <DonationTimeseriesChart
@@ -126,7 +126,7 @@ const DonationTimeseriesChart = ({
   subtitle: string;
   limitToFirstDateYear?: boolean;
 }) => {
-  const { locale } = useTranslations();
+  const locale = useLocale();
   const { backgroundColor, isMobile, isDark } = useChart();
 
   const leftmostYear = limitToFirstDateYear
@@ -396,7 +396,7 @@ export const DonationStackedTimeseriesChart = ({
   limitToFirstDateYear?: boolean;
   donationsHaveYearsOnly?: boolean;
 }) => {
-  const { locale } = useTranslations();
+  const locale = useLocale();
   const { backgroundColor, isMobile, isDark } = useChart();
 
   const leftmostYear = limitToFirstDateYear

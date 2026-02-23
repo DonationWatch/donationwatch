@@ -1,10 +1,8 @@
-"use server";
-
 import { DynamicContentSearch } from "./dynamic-content-search";
 import { LangSwitch } from "./lang-switch";
 import { SidebarTriggerButtons } from "./ui/sidebar-trigger-buttons";
 
-export const PageHeader = async () => {
+export const PageHeader = () => {
   return (
     <div className="sticky top-0 z-20 lg:-mx-16">
       <header className="pointer-events-none absolute top-0 right-0 left-0 flex shrink-0 border-b border-transparent dark:text-white">

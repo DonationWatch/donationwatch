@@ -6,8 +6,9 @@ import type {
   ReceiverFilter,
   ReceiverId,
 } from "./types";
-import type { Translations } from "../messages/translations";
+import type En from "../messages/en.json";
 import type { NonEmptyArray } from "@/utils/array";
+import type { createTranslator, Messages } from "next-intl";
 
 export const enum Country {
   germany = "germany",
@@ -91,7 +92,7 @@ export interface CountryConfig {
     dates: IsoDate[];
   };
   // list of iso state codes
-  states: string[];
+  states: readonly string[];
   wikiCountry: "en" | "de";
   // true if the country has donations with a date containing more than the year
   hasDate: boolean;
@@ -757,12 +758,12 @@ export const countryCodesToCountry: Record<string, Country> =
 
 export const getCountryName = (
   country: { code: CountryCode },
-  translations: Translations,
+  t: ReturnType<typeof createTranslator<Messages>>,
   referencing: boolean = false,
 ): string => {
   return referencing
-    ? translations.ref_countries[country.code]
-    : translations.countries[country.code];
+    ? t(`ref_countries.${country.code}`)
+    : t(`countries.${country.code}`);
 };
 
 export const getParty = (
@@ -786,3 +787,5 @@ export const findCorrectParty = (
     .trim();
   return country.partiesById[normalizedPartyId as ReceiverId];
 };
+
+export type Countries = keyof typeof En.countries;

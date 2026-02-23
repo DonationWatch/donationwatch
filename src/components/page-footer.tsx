@@ -1,31 +1,31 @@
-"use server";
-
+"use client";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 import { Translation } from "./translation";
-import { BSKY_URL, GITHUB_URL, TWITTER_URL } from "../utils/config";
+import {
+  BSKY_URL,
+  DATA_LICENSE,
+  GITHUB_URL,
+  TWITTER_URL,
+} from "../utils/config";
 
-import type { Translations } from "../messages/translations";
 import type { ConstLocale } from "../utils/locales";
 
 const currentYear = new Date().getFullYear();
 
-export const PageFooter = async ({
-  locale,
-  translations,
-}: {
-  translations: Translations;
-  locale: ConstLocale;
-}) => {
+export const PageFooter = ({ locale }: { locale: ConstLocale }) => {
+  const t = useTranslations();
+
   return (
     <footer className="container mx-auto shrink-0 px-4 text-gray-600 dark:text-gray-400">
       <div className="flex grid-cols-3 flex-col gap-2 py-4 text-sm sm:grid sm:flex-row">
         <div className="sm:justify-self-start">
-          <span aria-label={translations.copyright}>&copy;</span> {currentYear}{" "}
+          <span aria-label={t("copyright")}>&copy;</span> {currentYear}{" "}
           DonationWatch
           <div className="mt-1 text-xs">
             <Translation
-              text={translations.charts_license}
+              text={t.raw("footer.charts_license")}
               variables={{
                 license: (
                   <a
@@ -34,7 +34,7 @@ export const PageFooter = async ({
                     rel="noopener noreferrer"
                     className="hover:text-primary-800 dark:hover:text-primary-400"
                   >
-                    CC BY 4.0
+                    {DATA_LICENSE}
                   </a>
                 ),
               }}
@@ -111,35 +111,35 @@ export const PageFooter = async ({
             className="hover:text-primary-800 dark:hover:text-primary-400 block"
             href={`/${locale}/other-countries`}
           >
-            {translations.other_countries.title}
+            {t("other_countries.title")}
           </Link>
           <Link
             prefetch={false}
             className="hover:text-primary-800 dark:hover:text-primary-400 block"
             href={`/${locale}/fun`}
           >
-            {translations.fun.link}
+            {t("fun.link")}
           </Link>
           <Link
             prefetch={false}
             className="hover:text-primary-800 dark:hover:text-primary-400 block"
             href={`/${locale}/imprint`}
           >
-            {translations.imprint.title}
+            {t("imprint.title")}
           </Link>
           <Link
             prefetch={false}
             className="hover:text-primary-800 dark:hover:text-primary-400 block"
             href={`/${locale}/privacy`}
           >
-            {translations.privacy.title}
+            {t("privacy.title")}
           </Link>
           <Link
             prefetch={false}
             className="hover:text-primary-800 dark:hover:text-primary-400 block"
             href={`/${locale}/about`}
           >
-            {translations.about.title}
+            {t("about.title")}
           </Link>
         </div>
       </div>

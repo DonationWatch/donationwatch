@@ -1,25 +1,17 @@
 "use client";
-
 import Link from "next/link";
+import { useTranslations, useLocale } from "next-intl";
 
 import { PageLogo } from "./page-logo";
-import { t } from "../app/[locale]/translations";
 import { formatDate } from "../utils/formatter";
 import { getBuild } from "../utils/loader/build";
 
-import type { Translations } from "../messages/translations";
 import type { CountryConfig } from "../utils/countries";
-import type { ConstLocale } from "../utils/locales";
 
-export const CountryFooter = ({
-  locale,
-  country,
-  translations,
-}: {
-  translations: Translations;
-  country: CountryConfig;
-  locale: ConstLocale;
-}) => {
+export const CountryFooter = ({ country }: { country: CountryConfig }) => {
+  const t = useTranslations();
+  const locale = useLocale();
+
   return (
     <section className="container mx-auto shrink-0 px-4 text-gray-600 dark:text-gray-400">
       <div className="grid-cols-3 items-start justify-between py-2 sm:grid sm:justify-items-center">
@@ -35,7 +27,7 @@ export const CountryFooter = ({
         </div>
 
         <div className="px-2 text-sm sm:p-2">
-          {t(translations.footer.build, {
+          {t("footer.build", {
             date: formatDate(locale, new Date(getBuild(country.id).t)),
           })}
         </div>
@@ -47,7 +39,7 @@ export const CountryFooter = ({
             href={country.source.url}
             rel="noreferrer"
           >
-            {translations.footer.sources}
+            {t("footer.sources")}
           </a>
           <Link
             className="hover:text-primary-800 dark:hover:text-primary-400 p-2 text-sm"
@@ -55,7 +47,7 @@ export const CountryFooter = ({
             prefetch={false}
             rel="nofollow"
           >
-            {translations.transparency.title}
+            {t("transparency.title")}
           </Link>
         </div>
       </div>

@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
-import { getTranslations } from "./translations";
 import { AbsoluteMultipleColorsGradient } from "../../components/absolute-multiple-colors-gradient";
 import {
   Article,
@@ -51,17 +51,18 @@ export async function generateMetadata(
   const { locale } = await props.params;
 
   if (!isValidLocale(locale)) return notFoundMetadata;
+  setRequestLocale(locale);
 
-  const translations = await getTranslations(locale);
+  const t = await getTranslations({ locale });
   const imageUrl = `${THUMBNAIL_PREFIX}/${locale}/cover.png`;
 
   return {
-    title: `DonationWatch – ${translations.root.title}`,
-    description: translations.description,
+    title: `DonationWatch – ${t("root.title")}`,
+    description: t("description"),
     alternates: generateAlternates(""),
     openGraph: baseOpenGraph({
       locale,
-      title: `DonationWatch – ${translations.root.title}`,
+      title: `DonationWatch – ${t("root.title")}`,
       images: [{ url: imageUrl, width: 800, height: 418 }],
     }),
     twitter: baseTwitter({
@@ -75,9 +76,10 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
   const params = await props.params;
 
   if (!isValidLocale(params.locale)) return notFound();
+  setRequestLocale(params.locale);
 
   const { locale } = params;
-  const translations = await getTranslations(locale);
+  const t = await getTranslations({ locale });
   const countriesArray = [...COUNTRIES];
 
   const countryDatas = await Promise.all(
@@ -111,7 +113,7 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
   });
 
   return (
-    <NonCountryRootLayout locale={locale} translations={translations}>
+    <NonCountryRootLayout locale={locale}>
       <AbsoluteMultipleColorsGradient
         colors={[{ color: "#3730a3", width: 100 }]}
       />
@@ -124,9 +126,9 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
           <h1 className="mb-2 text-4xl font-bold sm:text-5xl" id="hero-title">
             DonationWatch
           </h1>
-          <p className="mb-4 text-xl sm:text-2xl">{translations.root.title}</p>
+          <p className="mb-4 text-xl sm:text-2xl">{t("root.title")}</p>
           <p className="mx-auto mb-4 text-base sm:text-lg lg:max-w-2xl">
-            {translations.root.subtitle}
+            {t("root.subtitle")}
           </p>
           <div className="flex justify-center">
             <div className="inline-block text-left">
@@ -143,25 +145,25 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
               <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
                 <div className="text-center">
                   <MetaCard
-                    title={translations.root.stats.countries}
+                    title={t("root.stats.countries")}
                     value={formatNumber(locale, trackedCountries)}
                   />
                 </div>
                 <div className="text-center">
                   <MetaCard
-                    title={translations.root.stats.parties}
+                    title={t("root.stats.parties")}
                     value={formatNumber(locale, trackedParties)}
                   />
                 </div>
                 <div className="text-center">
                   <MetaCard
-                    title={translations.root.stats.donations}
+                    title={t("root.stats.donations")}
                     value={formatNumber(locale, trackedDonations)}
                   />
                 </div>
                 <div className="text-center">
                   <MetaCard
-                    title={translations.root.stats.currencies}
+                    title={t("root.stats.currencies")}
                     value={Object.keys(currencyTotals).length}
                   />
                 </div>
@@ -170,26 +172,23 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
           </ArticleSectionOneColumns>
         </ArticleSectionWrapper>
 
-        <ArticleSection
-          title={translations.root.countries.title}
-          id="countries"
-        >
+        <ArticleSection title={t("root.countries.title")} id="countries">
           <p className="mb-6 text-gray-600 dark:text-gray-400">
-            {translations.root.countries.subtitle}
+            {t("root.countries.subtitle")}
           </p>
           <nav
-            aria-label={translations.header.country_selection}
+            aria-label={t("header.country_selection")}
             className="grid grid-cols-2 gap-2 lg:grid-cols-3 xl:gap-4 2xl:grid-cols-5"
           >
             {countriesArray
               .toSorted((a, b) => {
-                const nameA = getCountryName(COUNTRY_CONFIG[a], translations);
-                const nameB = getCountryName(COUNTRY_CONFIG[b], translations);
+                const nameA = getCountryName(COUNTRY_CONFIG[a], t);
+                const nameB = getCountryName(COUNTRY_CONFIG[b], t);
                 return nameA.localeCompare(nameB, locale);
               })
               .map((countryId) => {
                 const config = COUNTRY_CONFIG[countryId];
-                const countryName = getCountryName(config, translations);
+                const countryName = getCountryName(config, t);
 
                 return (
                   <Link
@@ -225,22 +224,14 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
           </nav>
         </ArticleSection>
 
-        <ArticleSection
-          title={translations.root.why.title}
-          id="why-transparency"
-        >
-          <p className="text-gray-700 dark:text-gray-300">
-            {translations.root.why.p0}
-          </p>
+        <ArticleSection title={t("root.why.title")} id="why-transparency">
+          <p className="text-gray-700 dark:text-gray-300">{t("root.why.p0")}</p>
         </ArticleSection>
 
-        <ArticleSection
-          title={translations.root.open_source.title}
-          id="open-source"
-        >
+        <ArticleSection title={t("root.open_source.title")} id="open-source">
           <p className="text-gray-700 dark:text-gray-300">
             <Translation
-              text={translations.root.open_source.p0}
+              text={t.raw("root.open_source.p0")}
               variables={{
                 github: (
                   <a

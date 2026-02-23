@@ -1,4 +1,5 @@
 import { notFound, redirect } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { LoadingDonationYearsTreemap } from "../../../../../components/chart/loading-donation-years-treemap";
 import { LoadingDonorReceiverHistogram } from "../../../../../components/chart/loading-donor-receiver-histogram";
@@ -25,7 +26,6 @@ import { generateAlternates } from "../../../../../utils/meta";
 import { notFoundMetadata } from "../../../../../utils/not-found-metadata";
 import { deserializeYears } from "../../../../../utils/serializers";
 import { isValidCountry, isValidLocale } from "../../../../../utils/validate";
-import { getTranslations, t } from "../../../translations";
 
 import type { Metadata } from "next";
 
@@ -36,24 +36,25 @@ export async function generateMetadata(
 
   if (!isValidLocale(params.locale)) return notFoundMetadata;
   if (!isValidCountry(params.country)) return notFoundMetadata;
+  setRequestLocale(params.locale);
 
   const { locale, country } = params;
   const years = params.years;
 
-  const [translations, countryConfig] = await Promise.all([
-    getTranslations(locale),
+  const [t, countryConfig] = await Promise.all([
+    getTranslations({ locale }),
     getCountryConfig(country),
   ]);
 
   const yearsRange = formatYearsRange(deserializeYears(years));
-  const countryName = getCountryName(countryConfig, translations);
-  const description = t(translations.donors.description, {
+  const countryName = getCountryName(countryConfig, t);
+  const description = t("donors.description", {
     year: yearsRange,
     country: countryName,
   });
 
   return {
-    title: `${t(translations.page_title.years.donors, {
+    title: `${t("page_title.years.donors", {
       year: yearsRange,
       country: countryName,
     })}`,
@@ -69,12 +70,13 @@ export default async function YearPage(
 
   if (!isValidLocale(params.locale)) return notFound();
   if (!isValidCountry(params.country)) return notFound();
+  setRequestLocale(params.locale);
 
-  const { locale, country } = params;
+  const { country } = params;
   const years = deserializeYears(params.years);
 
-  const [translations, countryConfig, partySums] = await Promise.all([
-    getTranslations(locale),
+  const [t, countryConfig, partySums] = await Promise.all([
+    getTranslations({ locale: params.locale }),
     getCountryConfig(country),
     getPartyYearsSums(country),
   ]);
@@ -95,10 +97,10 @@ export default async function YearPage(
             <ArticleSectionTitle
               as={"h1"}
               id={"sec-years-donors"}
-              title={translations.donors.detail.title}
+              title={t("donors.detail.title")}
             />
-            <p className="mb-6">{translations.donors.detail.summary}</p>
-            <p className="mb-6">{translations.donors.detail.summary2}</p>
+            <p className="mb-6">{t("donors.detail.summary")}</p>
+            <p className="mb-6">{t("donors.detail.summary2")}</p>
             <YearsDonorPageText
               country={countryConfig}
               years={years}
@@ -111,9 +113,9 @@ export default async function YearPage(
                 country={countryConfig}
                 years={years}
                 parties={parties}
-                title={translations.donors.detail.title}
-                subtitle={t(translations.donors.detail.subtitle, {
-                  country: getCountryName(countryConfig, translations),
+                title={t("donors.detail.title")}
+                subtitle={t("donors.detail.subtitle", {
+                  country: getCountryName(countryConfig, t),
                   years: formatYearsRange(years),
                 })}
               />
@@ -127,9 +129,9 @@ export default async function YearPage(
             <ArticleSectionTitle
               as={"h2"}
               id={"sec-histogram"}
-              title={translations.donors.histogram.title}
+              title={t("donors.histogram.title")}
             />
-            <p className="mb-6">{translations.donors.histogram.p0}</p>
+            <p className="mb-6">{t("donors.histogram.p0")}</p>
             <LoadingYearsDonorHistogramText
               country={countryConfig}
               years={years}
@@ -142,9 +144,9 @@ export default async function YearPage(
                 country={countryConfig}
                 years={years}
                 parties={parties}
-                title={translations.donors.histogram.title}
-                subtitle={t(translations.donors.histogram.subtitle, {
-                  country: getCountryName(countryConfig, translations),
+                title={t("donors.histogram.title")}
+                subtitle={t("donors.histogram.subtitle", {
+                  country: getCountryName(countryConfig, t),
                   years: formatYearsRange(years),
                 })}
               />
@@ -158,9 +160,9 @@ export default async function YearPage(
             <ArticleSectionTitle
               as={"h2"}
               id={"sec-donor-list"}
-              title={translations.donors.list.title}
+              title={t("donors.list.title")}
             />
-            <p className="mb-6">{translations.donors.list.p0}</p>
+            <p className="mb-6">{t("donors.list.p0")}</p>
             <DonorYearOverview country={countryConfig} years={years} />
           </ArticleSectionColumn>
         </ArticleSectionOneColumns>

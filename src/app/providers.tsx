@@ -1,22 +1,23 @@
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { NextIntlClientProvider } from "next-intl";
 import { createContext, useEffect, useMemo, useState } from "react";
 
 import { SidebarProvider } from "../components/ui/sidebar";
 import { SIDENAV_PERSISTENCE_KEY } from "../utils/config";
 
-import type { Translations } from "../messages/translations";
 import type { ConstLocale } from "../utils/locales";
-import type { PropsWithChildren, ReactNode } from "react";
+import type { Messages } from "next-intl";
+import type { PropsWithChildren } from "react";
 
 export const Providers = ({
   children,
-  translations,
   locale,
+  messages,
 }: PropsWithChildren<{
   locale: ConstLocale;
-  translations: Translations;
+  messages: Messages;
 }>) => {
   const [queryClient] = useState(
     () =>
@@ -33,13 +34,13 @@ export const Providers = ({
   );
 
   return (
-    <ServerTranslationProvider locale={locale} translations={translations}>
+    <NextIntlClientProvider locale={locale} messages={messages}>
       <QueryClientProvider client={queryClient}>
         <SidebarLocalStorageProvider>
           <SearchDialogProvider>{children}</SearchDialogProvider>
         </SidebarLocalStorageProvider>
       </QueryClientProvider>
-    </ServerTranslationProvider>
+    </NextIntlClientProvider>
   );
 };
 
@@ -68,32 +69,6 @@ export function SidebarLocalStorageProvider({ children }: PropsWithChildren) {
     <SidebarProvider open={open} onOpenChange={setOpen}>
       {children}
     </SidebarProvider>
-  );
-}
-
-export const TranslationContext = createContext<{
-  locale: ConstLocale;
-  translations: Translations;
-}>(
-  {} as {
-    locale: ConstLocale;
-    translations: Translations;
-  },
-);
-
-export function ServerTranslationProvider({
-  translations,
-  children,
-  locale,
-}: {
-  locale: ConstLocale;
-  translations: Translations;
-  children: ReactNode;
-}) {
-  return (
-    <TranslationContext.Provider value={{ locale, translations }}>
-      {children}
-    </TranslationContext.Provider>
   );
 }
 

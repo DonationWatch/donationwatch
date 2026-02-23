@@ -10,7 +10,7 @@ class Sidebar extends LocatorObject {
     this.props,
   );
   public readonly searchButton = this.locator.getByText(
-    this.translations.search.filter,
+    this.translations("search.filter"),
   );
 
   public async expectOpen(open = true) {
@@ -20,7 +20,7 @@ class Sidebar extends LocatorObject {
 
 export class Navigation extends PageObject {
   public readonly sidebarTrigger = this.page.getByTitle(
-    this.translations.sidebar.toggle,
+    this.translations("sidebar.toggle"),
   );
   public readonly sidebar = new Sidebar(
     this.page.locator('[data-slot="sidebar"]'),

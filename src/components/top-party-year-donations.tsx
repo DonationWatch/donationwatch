@@ -1,5 +1,5 @@
 "use client";
-
+import { useLocale } from "next-intl";
 import { useState } from "react";
 
 import {
@@ -7,10 +7,8 @@ import {
   LoadingTopYearDonationsItem,
 } from "./loading-top-year-donations-item";
 
-import type { Translations } from "../messages/translations";
 import type { CountryConfig } from "../utils/countries";
 import type { PartySum } from "../utils/data/get-parties-sum";
-import type { ConstLocale } from "../utils/locales";
 import type { Donation } from "../utils/types";
 
 export const TopPartyYearDonations = ({
@@ -18,16 +16,13 @@ export const TopPartyYearDonations = ({
   sums,
   country,
   years,
-  translations,
-  locale,
 }: {
   sums: PartySum[];
   years: string[];
   sum: number;
   country: CountryConfig;
-  translations: Translations;
-  locale: ConstLocale;
 }) => {
+  const locale = useLocale();
   const [expandedParties, setExpandedParties] = useState<string[]>([]);
   const onToggleExpanded = (state: string) => {
     setExpandedParties((prev) =>
@@ -42,7 +37,6 @@ export const TopPartyYearDonations = ({
       {sums.map(([party, data], idx) => (
         <LoadingTopYearDonationsItem
           locale={locale}
-          translations={translations}
           rank={idx + 1}
           key={party}
           partyId={party}

@@ -1,9 +1,9 @@
 "use client";
+import { useTranslations } from "next-intl";
 import { Suspense } from "react";
 
 import { RacingBarsContent } from "./racing-bars-content";
 import { useDonationsByYears } from "../../../../../hooks/use-api";
-import { useTranslations } from "../../../../../hooks/use-translations";
 import { isNotNullandNotUndefined } from "../../../../../utils/array";
 import Loading from "../../loading";
 
@@ -14,7 +14,7 @@ export const RacingBars = ({
 }: {
   countryConfig: CountryConfig;
 }) => {
-  const { translations } = useTranslations();
+  const t = useTranslations("data");
 
   // Always load ALL years
   const results = useDonationsByYears(countryConfig, countryConfig.years);
@@ -23,7 +23,7 @@ export const RacingBars = ({
 
   if (isLoading) return <Loading />;
 
-  if (error) return <div>{translations.data_error}</div>;
+  if (error) return <div>{t("error")}</div>;
 
   const allDonations = results
     .flatMap((r) => r.data)

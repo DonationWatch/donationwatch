@@ -1,11 +1,10 @@
 "use client";
-
 import { useRouter } from "next/navigation";
+import { useTranslations, useLocale } from "next-intl";
 
 import { ExpandableReactEchart } from "./expandable-react-echart";
 import { useDonationsByParty, useDonationsByYears } from "../../hooks/use-api";
 import { useChart } from "../../hooks/use-chart";
-import { useTranslations } from "../../hooks/use-translations";
 import { isNotNullandNotUndefined } from "../../utils/array";
 import { partyColor } from "../../utils/color";
 import { type CountryConfig, getParty } from "../../utils/countries";
@@ -38,7 +37,9 @@ export const LoadedDonationYearsTreemap = ({
   parties?: Party[];
   years?: string[];
 }) => {
-  const { translations, locale } = useTranslations();
+  const t = useTranslations();
+  const tCommon = useTranslations("common");
+  const locale = useLocale();
 
   const yearsSet = new Set<string>(years);
   const partiesSet = new Set<Party>(parties);
@@ -198,7 +199,7 @@ export const LoadedDonationYearsTreemap = ({
       },
     },
     series: {
-      name: translations.years.title,
+      name: t("years.title"),
       type: "treemap",
       roam: !isMobile,
       nodeClick: false,
@@ -221,7 +222,7 @@ export const LoadedDonationYearsTreemap = ({
 
           if (params.treeAncestors.length === 2) {
             // is "root" level
-            return `{name|${getDonorName(params.name, translations)}} {value|${formatCountryCurrency(locale, params.value as number, country)}}`;
+            return `{name|${getDonorName(params.name, tCommon)}} {value|${formatCountryCurrency(locale, params.value as number, country)}}`;
           }
 
           return ``;
@@ -298,13 +299,13 @@ export const LoadingDonationYearsTreemap = ({
   title: string;
   subtitle: string;
 }) => {
-  const { translations } = useTranslations();
+  const t = useTranslations("data");
   const results = useDonationsByYears(country, years);
   const error = results.some((r) => r.error);
   const isLoading = results.some((r) => r.isLoading);
 
   if (isLoading) return <Loading />;
-  if (error) return <div>{translations.data_error}</div>;
+  if (error) return <div>{t("error")}</div>;
 
   const donations = results
     .flatMap((r) => r.data)
@@ -336,12 +337,12 @@ export const LoadingDonationPartyTreemap = ({
   title: string;
   subtitle: string;
 }) => {
-  const { translations } = useTranslations();
+  const t = useTranslations("data");
 
   const { data, error, isLoading } = useDonationsByParty(country, party);
 
   if (isLoading) return <Loading />;
-  if (error || !data) return <div>{translations.data_error}</div>;
+  if (error || !data) return <div>{t("error")}</div>;
 
   return (
     <LoadedDonationYearsTreemap

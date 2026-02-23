@@ -1,23 +1,23 @@
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { Suspense } from "react";
 
 import { DataExport } from "../../../../../components/data-export";
 import { Article } from "../../../../../components/layout/article";
-import Loading from "../../../../../components/loading";
 import { getCountryConfig } from "../../../../../utils/data/get-country-config";
 import { LOCALES } from "../../../../../utils/locales";
 import { generateAlternates } from "../../../../../utils/meta";
 import { notFoundMetadata } from "../../../../../utils/not-found-metadata";
 import { isValidCountry, isValidLocale } from "../../../../../utils/validate";
-import { getTranslations } from "../../../translations";
 
 import type { Metadata } from "next";
+import { COUNTRIES } from "@/utils/countries";
 
 export const dynamicParams = false;
-export const dynamic = "error";
 
 export async function generateStaticParams() {
-  return LOCALES.map((locale) => ({ locale }));
+  return [...COUNTRIES].flatMap((country) =>
+    LOCALES.map((locale) => ({ locale, country })),
+  );
 }
 
 export async function generateMetadata(
@@ -27,12 +27,14 @@ export async function generateMetadata(
 
   if (!isValidLocale(params.locale)) return notFoundMetadata;
   if (!isValidCountry(params.country)) return notFoundMetadata;
-  const { locale, country } = params;
+  setRequestLocale(params.locale);
 
-  const translations = await getTranslations(locale);
+  const { country } = params;
+
+  const t = await getTranslations({ locale: params.locale });
 
   return {
-    title: `${translations.export.title} | DonationWatch`,
+    title: `${t("export.title")} | DonationWatch`,
     alternates: generateAlternates(`${country}/tools/data`),
   };
 }
@@ -44,15 +46,17 @@ export default async function Page(
 
   if (!isValidLocale(params.locale)) return notFound();
   if (!isValidCountry(params.country)) return notFound();
+  setRequestLocale(params.locale);
+
   const { locale, country } = params;
 
-  const [translations, countryConfig] = await Promise.all([
-    getTranslations(locale),
+  const [t, countryConfig] = await Promise.all([
+    getTranslations({ locale }),
     getCountryConfig(country),
   ]);
 
   return (
-    <Article title={translations.export.title}>
+    <Article title={t("export.title")}>
       <DataExport country={countryConfig} />
     </Article>
   );

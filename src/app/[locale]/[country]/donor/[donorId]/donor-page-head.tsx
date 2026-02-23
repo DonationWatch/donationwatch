@@ -1,6 +1,6 @@
 "use client";
-
 import { HatGlasses, Info, Lock } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 
 import { AbsoluteMultipleColorsGradient } from "../../../../../components/absolute-multiple-colors-gradient";
 import { PageHeader } from "../../../../../components/layout/page-header";
@@ -10,7 +10,6 @@ import { RelatedDonorChip } from "../../../../../components/related-donor-chip";
 import { LastModifiedSchema } from "../../../../../components/schema";
 import { WikiQuote } from "../../../../../components/wiki-quote";
 import { useDonationsByDonorId } from "../../../../../hooks/use-api";
-import { useTranslations } from "../../../../../hooks/use-translations";
 import { partyColor } from "../../../../../utils/color";
 import { donationYear } from "../../../../../utils/date";
 import {
@@ -25,14 +24,16 @@ import {
   DonorType,
 } from "../../../../../utils/types";
 
-import type { Country, CountryConfig } from "../../../../../utils/countries";
-import type { Countries } from "../../../../../utils/locales";
+import type {
+  Countries,
+  Country,
+  CountryConfig,
+} from "../../../../../utils/countries";
 import type {
   Donation,
   DonorMeta,
   ReceiverId,
 } from "../../../../../utils/types";
-import type { Translations } from "@/messages/translations";
 
 import {
   Tooltip,
@@ -51,7 +52,7 @@ export const DonorPageHead = ({
   country: Country;
   donorMeta: DonorMeta;
 }) => {
-  const { translations } = useTranslations();
+  const t = useTranslations("data");
   const { data, isLoading, error } = useDonationsByDonorId(
     countryConfig,
     donorId,
@@ -65,7 +66,7 @@ export const DonorPageHead = ({
     );
   }
 
-  if (error || !data) return translations.data_error;
+  if (error || !data) return t("error");
 
   if (!data || !data.length) {
     return null;
@@ -80,13 +81,9 @@ export const DonorPageHead = ({
   );
 };
 
-const DonorTypeTooltip = ({
-  donorType,
-  translations,
-}: {
-  translations: Translations;
-  donorType: DonorType;
-}) => {
+const DonorTypeTooltip = ({ donorType }: { donorType: DonorType }) => {
+  const t = useTranslations("donor.anonymized");
+
   if (donorType !== DonorType.AnonymizedDonor) return;
 
   return (
@@ -99,10 +96,10 @@ const DonorTypeTooltip = ({
       <TooltipContent>
         <div className="max-w-60 space-y-1.5 p-1">
           <h3 className="flex items-center gap-1.5 font-semibold">
-            {translations.donor.anonymized.title}
+            {t("title")}
           </h3>
           <p className="text-xs leading-relaxed opacity-90">
-            {translations.donor.anonymized.description}
+            {t("description")}
           </p>
         </div>
       </TooltipContent>
@@ -110,11 +107,9 @@ const DonorTypeTooltip = ({
   );
 };
 
-const RedactedDonorTooltip = ({
-  translations,
-}: {
-  translations: Translations;
-}) => {
+const RedactedDonorTooltip = () => {
+  const t = useTranslations("donor.redacted");
+
   return (
     <Tooltip>
       <TooltipTrigger
@@ -125,10 +120,10 @@ const RedactedDonorTooltip = ({
       <TooltipContent>
         <div className="max-w-60 space-y-1.5 p-1">
           <h3 className="flex items-center gap-1.5 font-semibold">
-            {translations.donor.redacted.title}
+            {t("title")}
           </h3>
           <p className="text-xs leading-relaxed opacity-90">
-            {translations.donor.redacted.description}
+            {t("description")}
           </p>
         </div>
       </TooltipContent>
@@ -136,7 +131,9 @@ const RedactedDonorTooltip = ({
   );
 };
 
-const UBOsTooltip = ({ translations }: { translations: Translations }) => {
+const UBOsTooltip = () => {
+  const t = useTranslations("donor");
+
   return (
     <Tooltip>
       <TooltipTrigger
@@ -147,7 +144,7 @@ const UBOsTooltip = ({ translations }: { translations: Translations }) => {
       <TooltipContent>
         <div className="max-w-80 p-1">
           <p className="text-xs leading-relaxed opacity-90">
-            {translations.donor.ubo_description}
+            {t("ubo_description")}
           </p>
         </div>
       </TooltipContent>
@@ -164,11 +161,13 @@ const DonorPageHeadContent = ({
   donations: Donation[];
   donorMeta: DonorMeta;
 }) => {
-  const { translations, locale } = useTranslations();
+  const t = useTranslations();
+  const tCommon = useTranslations("common");
+  const locale = useLocale();
   const wikiPageId = donorMeta.wiki;
 
   const rawDonorName = donations.at(0)?.[DonationField.DonorName] ?? "";
-  const donorName = getDonorName(rawDonorName, translations);
+  const donorName = getDonorName(rawDonorName, tCommon);
   const donorType = donations.at(0)?.[DonationField.DonorType];
 
   let sum: number = 0;
@@ -199,8 +198,12 @@ const DonorPageHeadContent = ({
   const addresses: { country: Countries; state?: string }[] = Object.entries(
     donations.reduce<Partial<Record<Countries, Record<string, boolean>>>>(
       (acc, donation) => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         acc[donation[DonationField.Address][AddressField.Country]] ??= {};
         if (donation[DonationField.Address][AddressField.State]) {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           acc[donation[DonationField.Address][AddressField.Country]]![
             donation[DonationField.Address][AddressField.State]
           ] = true;
@@ -231,22 +234,15 @@ const DonorPageHeadContent = ({
         <section aria-labelledby="hero-label">
           <h1 className="mb-4">
             <div className="mb-2 leading-none text-slate-500 dark:text-slate-300">
-              {translations.donor.title}
+              {t("donor.title")}
             </div>
             <div
               className="flex items-center text-3xl sm:text-4xl"
               id="hero-label"
             >
               {donorName}
-              {donorType ? (
-                <DonorTypeTooltip
-                  translations={translations}
-                  donorType={donorType}
-                />
-              ) : null}
-              {isRedactedDonor(rawDonorName) ? (
-                <RedactedDonorTooltip translations={translations} />
-              ) : null}
+              {donorType ? <DonorTypeTooltip donorType={donorType} /> : null}
+              {isRedactedDonor(rawDonorName) ? <RedactedDonorTooltip /> : null}
             </div>
           </h1>
 
@@ -254,53 +250,50 @@ const DonorPageHeadContent = ({
             {addresses.map((address, idx) => (
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2" key={idx}>
                 <MetaCard
-                  title={translations.donation_dialog.country}
-                  value={translations.countries[address.country]}
+                  title={tCommon("country")}
+                  value={t(`countries.${address.country}`)}
                 />
                 {address.state && address.state !== address.country && (
                   <MetaCard
-                    title={translations.donation_dialog.state}
-                    value={
-                      (
-                        translations.state as Record<
-                          string,
-                          Record<string, string>
-                        >
-                      )[countryConfig.id][address.state]
-                    }
+                    title={tCommon("state")}
+                    value={t.raw(
+                      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                      // @ts-ignore
+                      `state.${countryConfig.id}.${address.state}`,
+                    )}
                   />
                 )}
               </div>
             ))}
             <div className="flex-row space-y-2 sm:flex sm:space-y-0 sm:space-x-10">
               <MetaCard
-                title={translations.donation_count}
+                title={t("donation_count")}
                 value={formatNumber(locale, donations.length)}
               />
               <MetaCard
-                title={translations.sum}
+                title={t("sum")}
                 value={formatCountryCurrency(locale, sum, countryConfig)}
               />
               {donations.length > 1 ? (
                 <MetaCard
-                  title={translations.average}
+                  title={t("average")}
                   value={formatCountryCurrency(locale, avg, countryConfig)}
                 />
               ) : null}
               <MetaCard
-                title={translations.donor.active_period}
+                title={t("donor.active_period")}
                 value={formatYearsRange([firstYear, lastYear])}
               />
               {donorType && donorType !== DonorType.AnonymizedDonor ? (
                 <MetaCard
-                  title={translations.donor.type}
-                  value={translations.donor_type[donorType]}
+                  title={t("donor.type")}
+                  value={t(`donor_type.${donorType}`)}
                 />
               ) : null}
             </div>
             {donorMeta.relations ? (
               <div>
-                <MetaCardTitle title={translations.related.donors} />
+                <MetaCardTitle title={t("related.donors")} />
                 <div className="mt-2 flex flex-wrap gap-2">
                   {donorMeta.relations.map(([name, kind, sums]) => (
                     <RelatedDonorChip
@@ -321,8 +314,8 @@ const DonorPageHeadContent = ({
                   id="ubo-heading"
                   title={
                     <>
-                      {translations.donor.ubo}
-                      <UBOsTooltip translations={translations} />
+                      {t("donor.ubo")}
+                      <UBOsTooltip />
                     </>
                   }
                 />
@@ -332,10 +325,7 @@ const DonorPageHeadContent = ({
           </div>
           <div className="mb-3">
             {wikiPageId && (
-              <section
-                aria-label={translations.donor_dialog.summary}
-                className="pt-4 sm:px-4"
-              >
+              <section aria-label={tCommon("summary")} className="pt-4 sm:px-4">
                 <WikiQuote pageId={wikiPageId} country={countryConfig} />
               </section>
             )}

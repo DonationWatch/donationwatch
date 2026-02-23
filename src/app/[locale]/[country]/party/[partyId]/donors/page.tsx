@@ -1,6 +1,5 @@
-"use server";
-
 import { notFound } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { LoadingDonationPartyTreemap } from "../../../../../../components/chart/loading-donation-years-treemap";
 import { LoadingPartyDonorTypeTreemap } from "../../../../../../components/chart/loading-donor-types-treemap";
@@ -29,7 +28,6 @@ import {
   isValidLocale,
   isValidParty,
 } from "../../../../../../utils/validate";
-import { getTranslations, t } from "../../../../translations";
 
 import type { Metadata } from "next";
 
@@ -40,11 +38,12 @@ export async function generateMetadata(
 
   if (!isValidLocale(params.locale)) return notFoundMetadata;
   if (!isValidCountry(params.country)) return notFoundMetadata;
+  setRequestLocale(params.locale);
 
   const { locale, country, partyId } = params;
 
-  const [translations, countryConfig, partySums] = await Promise.all([
-    getTranslations(locale),
+  const [t, countryConfig, partySums] = await Promise.all([
+    getTranslations({ locale }),
     getCountryConfig(country),
     getPartyYearsSums(country),
   ]);
@@ -65,26 +64,23 @@ export async function generateMetadata(
     }
   }
 
-  const description = t(
-    "Since {year}, the {party} has received a total of {count} donations exceeding {minimumAmount}, amounting to a cumulative sum of {sum}. Explore detailed information on major donors and donation trends to the {party} in {country}.",
-    {
-      year: countryConfig.minYear,
-      party: party.short,
-      count,
-      minimumAmount: formatCompactCountryCurrency(
-        locale,
-        countryConfig.minPublicDonationAmount,
-        countryConfig,
-      ),
-      sum: formatCountryCurrency(locale, sum, countryConfig),
-      country: getCountryName(countryConfig, translations),
-    },
-  );
+  const description = t("page_title.party.description", {
+    year: countryConfig.minYear,
+    party: party.short,
+    count,
+    minimumAmount: formatCompactCountryCurrency(
+      locale,
+      countryConfig.minPublicDonationAmount,
+      countryConfig,
+    ),
+    sum: formatCountryCurrency(locale, sum, countryConfig),
+    country: getCountryName(countryConfig, t),
+  });
 
   return {
-    title: `${t(translations.page_title.party.donors, {
+    title: `${t("page_title.party.donors", {
       party: party.short,
-      country: getCountryName(countryConfig, translations),
+      country: getCountryName(countryConfig, t),
     })}`,
     description,
     alternates: generateAlternates(`${country}/party/${partyId}/donors`),
@@ -98,11 +94,12 @@ export default async function DonorPage(
 
   if (!isValidLocale(params.locale)) return notFound();
   if (!isValidCountry(params.country)) return notFound();
+  setRequestLocale(params.locale);
 
-  const { locale, country, partyId } = params;
+  const { country, partyId } = params;
 
-  const [translations, countryConfig] = await Promise.all([
-    getTranslations(locale),
+  const [t, countryConfig] = await Promise.all([
+    getTranslations({ locale: params.locale }),
     getCountryConfig(country),
   ]);
 
@@ -122,12 +119,12 @@ export default async function DonorPage(
                 country={countryConfig}
                 party={party}
                 tooSmallAreaColor={party.color}
-                title={t(translations.party.donors.title, {
+                title={t("party.donors.title", {
                   party: party.short,
                 })}
-                subtitle={t(translations.party.donors.subtitle, {
+                subtitle={t("party.donors.subtitle", {
                   party: party.short,
-                  country: getCountryName(countryConfig, translations),
+                  country: getCountryName(countryConfig, t),
                 })}
               />
             </div>
@@ -141,7 +138,7 @@ export default async function DonorPage(
             <ArticleSectionColumn>
               <ArticleSectionTitle
                 id={"sec-party-donor-types"}
-                title={translations.party.donor_types.title}
+                title={t("party.donor_types.title")}
               />
               <LoadingPartyDonorTypeText
                 country={countryConfig}
@@ -152,16 +149,13 @@ export default async function DonorPage(
               <LoadingPartyDonorTypeTreemap
                 country={countryConfig}
                 party={party}
-                title={t(translations.party.donor_types.treemap.title, {
+                title={t("party.donor_types.treemap.title", {
                   party: party.short,
                 })}
-                subtitle={t(
-                  translations.party.donor_types.treemap.description,
-                  {
-                    party: party.short,
-                    country: getCountryName(countryConfig, translations),
-                  },
-                )}
+                subtitle={t("party.donor_types.treemap.description", {
+                  party: party.short,
+                  country: getCountryName(countryConfig, t),
+                })}
               />
             </ArticleSectionColumn>
           </ArticleSectionTwoColumns>

@@ -1,13 +1,12 @@
 "use client";
+import { useTranslations, useLocale } from "next-intl";
 
 import { DonorLink } from "./donor-link";
 import { FormatAnd } from "./formatter";
 import Loading from "./loading";
 import { FaqSchema } from "./schema";
 import { Translation } from "./translation";
-import { t } from "../app/[locale]/translations";
 import { useDonationsByParty } from "../hooks/use-api";
-import { useTranslations } from "../hooks/use-translations";
 import { isNotNullandNotUndefined } from "../utils/array";
 import { donationYear } from "../utils/date";
 import {
@@ -33,11 +32,13 @@ export const PartyDonorPageText = ({
   country: CountryConfig;
   party: Party;
 }) => {
-  const { translations, locale } = useTranslations();
+  const t = useTranslations();
+  const tData = useTranslations("data");
+  const locale = useLocale();
   const { data, error, isLoading } = useDonationsByParty(country, party);
 
   if (isLoading) return <Loading />;
-  if (error || !data) return <div>{translations.data_error}</div>;
+  if (error || !data) return <div>{tData("error")}</div>;
 
   let sum = 0;
   const donations = data;
@@ -121,8 +122,8 @@ export const PartyDonorPageText = ({
     answerHTML?: ReactNode;
   }[] = [
     {
-      question: t(translations.party.qa.sum.q, { party: party.short }),
-      answer: t(translations.party.qa.sum.a, {
+      question: t("party.qa.sum.q", { party: party.short }),
+      answer: t("party.qa.sum.a", {
         party: party.short,
         sum: formatCountryCurrency(locale, sum, country),
         count: partyDonations.length,
@@ -138,8 +139,8 @@ export const PartyDonorPageText = ({
       }),
     },
     {
-      question: t(translations.party.qa.top_donors.q, { party: party.short }),
-      answer: t(translations.party.qa.top_donors.a, {
+      question: t("party.qa.top_donors.q", { party: party.short }),
+      answer: t("party.qa.top_donors.a", {
         party: party.short,
         donors: formatAnd(
           locale,
@@ -151,7 +152,7 @@ export const PartyDonorPageText = ({
       }),
       answerHTML: (
         <Translation
-          text={translations.party.qa.top_donors.a}
+          text={t.raw("party.qa.top_donors.a")}
           variables={{
             party: party.short,
             donors: (
@@ -171,10 +172,10 @@ export const PartyDonorPageText = ({
     },
     biggestSingularDonation
       ? {
-          question: t(translations.party.qa.largest_singular.q, {
+          question: t("party.qa.largest_singular.q", {
             party: party.short,
           }),
-          answer: t(translations.party.qa.largest_singular.a, {
+          answer: t("party.qa.largest_singular.a", {
             amount: formatCountryCurrency(
               locale,
               biggestSingularDonation[DonationField.Amount],
@@ -188,7 +189,7 @@ export const PartyDonorPageText = ({
           }),
           answerHTML: (
             <Translation
-              text={translations.party.qa.largest_singular.a}
+              text={t.raw("party.qa.largest_singular.a")}
               variables={{
                 amount: formatCountryCurrency(
                   locale,
@@ -212,10 +213,10 @@ export const PartyDonorPageText = ({
       : undefined,
     biggestDonor
       ? {
-          question: t(translations.party.qa.biggest_overall.q, {
+          question: t("party.qa.biggest_overall.q", {
             party: party.short,
           }),
-          answer: t(translations.party.qa.biggest_overall.a, {
+          answer: t("party.qa.biggest_overall.a", {
             party: party.short,
             donor: biggestDonor.name,
             sum: formatCountryCurrency(locale, biggestDonor.sum, country),
@@ -223,7 +224,7 @@ export const PartyDonorPageText = ({
 
           answerHTML: (
             <Translation
-              text={translations.party.qa.biggest_overall.a}
+              text={t.raw("party.qa.biggest_overall.a")}
               variables={{
                 party: party.short,
                 donor: (
@@ -237,10 +238,10 @@ export const PartyDonorPageText = ({
       : undefined,
     frequentDonor
       ? {
-          question: t(translations.party.qa.frequent_donor.q, {
+          question: t("party.qa.frequent_donor.q", {
             party: party.short,
           }),
-          answer: t(translations.party.qa.frequent_donor.a, {
+          answer: t("party.qa.frequent_donor.a", {
             party: party.short,
             donor: frequentDonor.name,
             count: frequentDonor.count,
@@ -252,7 +253,7 @@ export const PartyDonorPageText = ({
           }),
           answerHTML: (
             <Translation
-              text={translations.party.qa.frequent_donor.a}
+              text={t.raw("party.qa.frequent_donor.a")}
               variables={{
                 party: party.short,
                 donor: (
@@ -277,10 +278,10 @@ export const PartyDonorPageText = ({
       <ArticleSectionTitle
         as={"h1"}
         id={"sec-party-donors"}
-        title={t(translations.party.donors.title, { party: party.short })}
+        title={t("party.donors.title", { party: party.short })}
       />
       <p className="mb-6">
-        {t(translations.party.donors.summary, {
+        {t("party.donors.summary", {
           party: party.short,
           minYear: formatYear(
             locale,
@@ -294,7 +295,7 @@ export const PartyDonorPageText = ({
           source: country.source.name,
         })}
       </p>
-      <section aria-label={translations.faq}>
+      <section aria-label={t("faq")}>
         <dl className="space-y-2">
           {faqData.map((item, index) => (
             <div key={index} className="pb-3">

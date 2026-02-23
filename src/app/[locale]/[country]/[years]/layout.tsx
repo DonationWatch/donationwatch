@@ -1,5 +1,6 @@
 import { List, History, UserRound, ChartLine, Earth } from "lucide-react";
 import { notFound } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { DynamicAbsoluteMultiplePartySumsGradient } from "../../../../components/dynamic-stacked-party-line";
 import { PageHeader } from "../../../../components/layout/page-header";
@@ -25,7 +26,6 @@ import {
   serializeYears,
 } from "../../../../utils/serializers";
 import { isValidCountry, isValidLocale } from "../../../../utils/validate";
-import { getTranslations, t } from "../../translations";
 
 import type { ParamsOf } from "../../../../../.next/types/routes";
 import type { TabItem } from "../../../../components/tabs";
@@ -69,11 +69,12 @@ export async function generateMetadata(
 
   if (!isValidLocale(params.locale)) return notFoundMetadata;
   if (!isValidCountry(params.country)) return notFoundMetadata;
+  setRequestLocale(params.locale);
 
   const years = deserializeYears(params.years);
 
-  const [translations, countryConfig] = await Promise.all([
-    getTranslations(params.locale),
+  const [t, countryConfig] = await Promise.all([
+    getTranslations({ locale: params.locale }),
     getCountryConfig(params.country),
   ]);
 
@@ -86,7 +87,7 @@ export async function generateMetadata(
 
   const title = {
     template: `%s | DonationWatch`,
-    default: `${t(translations.title, { country: getCountryName(countryConfig, translations) })} ${formatYearsRange(
+    default: `${t("title", { country: getCountryName(countryConfig, t) })} ${formatYearsRange(
       years,
     )} | DonationWatch`,
   };
@@ -111,13 +112,14 @@ export default async function YearsLayout(
 
   if (!isValidLocale(params.locale)) return notFound();
   if (!isValidCountry(params.country)) return notFound();
+  setRequestLocale(params.locale);
 
   const { children } = props;
   const { locale, country } = params;
   const years = deserializeYears(params.years);
 
-  const [translations, countryConfig, partySums] = await Promise.all([
-    getTranslations(locale),
+  const [t, countryConfig, partySums] = await Promise.all([
+    getTranslations({ locale }),
     getCountryConfig(country),
     getPartyYearsSums(country),
   ]);
@@ -132,24 +134,24 @@ export default async function YearsLayout(
     {
       icon: List,
       href: `/${locale}/${country}/${yearsLink}/overview`,
-      label: translations.overview.title,
+      label: t("overview.title"),
     },
     {
       icon: History,
       href: `/${locale}/${country}/${yearsLink}/changes`,
-      label: translations.changes.title,
+      label: t("changes.title"),
     },
     {
       icon: UserRound,
       href: `/${locale}/${country}/${yearsLink}/donors`,
       activeHref: `/${locale}/${country}/${yearsLink}/donors`,
-      label: translations.donors.title,
+      label: t("donors.title"),
     },
     countryConfig.hasTimeline
       ? {
           icon: ChartLine,
           href: `/${locale}/${country}/${yearsLink}/timeline`,
-          label: translations.timeline.title,
+          label: t("timeline.title"),
         }
       : undefined,
     countryConfig.hasOrigin
@@ -157,7 +159,7 @@ export default async function YearsLayout(
           icon: Earth,
           href: `/${locale}/${country}/${yearsLink}/origin/overview`,
           activeHref: `/${locale}/${country}/${yearsLink}/origin`,
-          label: translations.origin.title,
+          label: t("origin.title"),
         }
       : undefined,
   ].filter(isNotNullandNotUndefined);
@@ -178,9 +180,8 @@ export default async function YearsLayout(
       <PageHeader>
         <YearsHeader
           titleBeforeYears={true}
-          title={translations.years.title}
+          title={t("years.title")}
           idPrefix="hero-"
-          translations={translations}
           locale={locale}
           years={years}
           showTop3={false}
@@ -203,12 +204,7 @@ export default async function YearsLayout(
       {children}
 
       <div className="container mx-auto px-4">
-        <YearsFooterNav
-          years={years}
-          locale={locale}
-          country={countryConfig}
-          translations={translations}
-        />
+        <YearsFooterNav years={years} locale={locale} country={countryConfig} />
       </div>
     </>
   );

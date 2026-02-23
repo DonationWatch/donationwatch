@@ -1,0 +1,668 @@
+{
+  "copyright": "Copyright",
+  "description": "DonationWatch gives clear insights into donors and parties, facilitating the understanding of political financing by explaining complex data in a simple manner",
+  "title": "Party donations {country}",
+  "sum": "Sum",
+  "donation_count": "Donation count",
+  "average": "Average",
+  "donations_by_party": "Donations by party",
+  "donations_per_year": "Donations per year",
+  "party_donations": "Party donations",
+  "more": "More",
+  "data_since": "Since {year}",
+  "view_party": "View the {party} party page",
+  "faq": "Frequently asked questions",
+  "data": {
+    "loading": "Content is loading...",
+    "error": "Error loading data"
+  },
+  "sidebar": {
+    "toggle": "Toggle sidebar",
+    "donations": "Donations",
+    "all_countries": "All countries",
+    "tools": "Tools",
+    "show_all": "Show all ({num})",
+    "show_less": "Show less"
+  },
+  "search": {
+    "filter": "Search...",
+    "filter_description": "Search for parties, years or donors",
+    "parties": "Parties",
+    "years": "Years",
+    "legislative_years": "Legislative years",
+    "empty": "No results found",
+    "donors": "Donors"
+  },
+  "page_title": {
+    "years": {
+      "description": "In {year}, {parties} parties in {country} received a total of {sum} from {count} donations over {minAmount}. Explore detailed breakdowns by party, donor, and trends in political funding.",
+      "overview": "Overview of political party donations in {country} for {year}",
+      "changes": "Recent changes in political party donations in {country} for {year}",
+      "donors": "Top donors to political parties in {country} for {year}",
+      "timeline": "Timeline of political party donations in {country} for {year}",
+      "origin": "Geographical overview of party donations in {country} for {year}"
+    },
+    "party": {
+      "donors": "Top donors of {party} {country}",
+      "changes": "Recent changes in {party} donations {country}",
+      "timeline": "Timeline of {party} party donations {country}",
+      "origin": "Geographical overview of {party} party donations {country}",
+      "description": "Since {year}, the {party} has received a total of {count} donations exceeding {minimumAmount}, amounting to a cumulative sum of {sum}. Explore detailed information on major donors and donation trends to the {party} in {country}."
+    },
+    "donor": {
+      "overview": "Donations by {donor} in {country}",
+      "description": "{donor} has donated a total of {sum} across {count} donations over {minAmount} since {minYear}. These contributions were distributed to {parties} different parties. Explore detailed insights into donation patterns and recipient parties for this donor in {country}."
+    }
+  },
+  "chart": {
+    "save_as_image": "Save as image",
+    "toggle_fullscreen": "Toggle fullscreen",
+    "reset_zoom": "Reset zoom"
+  },
+  "over_min_public_amount": "over {amount}",
+  "over_threshold": "only parties ≥ {count} donations or ≥ {sum}",
+  "prelim_data": "preliminary data since {year}",
+  "excludes_year_only_donations": "excludes donations with year as date",
+  "common": {
+    "date": "Date",
+    "party": "Party",
+    "donor": "Donor",
+    "amount": "Amount",
+    "anonymizedDonor": "Anonymized Donor",
+    "redactedDonor": "Redacted Donor",
+    "country": "Country",
+    "state": "State",
+    "summary": "Summary"
+  },
+  "sort": {
+    "asc": "Sort ascending",
+    "desc": "Sort descending",
+    "clear": "Clear sorting"
+  },
+  "footer": {
+    "sources": "Sources",
+    "build": "As of {date}",
+    "build_since": "As of {date}, since {year}",
+    "published_by": "As published by {source}",
+    "charts_license": "Charts licensed {license} with attribution"
+  },
+  "header": {
+    "home": "Homepage",
+    "language_selection": "Language selection",
+    "country_selection": "Country selection"
+  },
+  "actions": {
+    "close": "Close",
+    "play": "Play",
+    "pause": "Pause",
+    "restart": "Restart"
+  },
+  "donor_dialog": {
+    "title": "Donor information"
+  },
+  "root": {
+    "title": "Open source political party donations tracker",
+    "subtitle": "Track and explore political donations across multiple countries. Understand who funds political parties and how money flows worldwide.",
+    "stats": {
+      "countries": "Countries covered",
+      "parties": "Political parties",
+      "donations": "Individual donations",
+      "currencies": "Currencies tracked"
+    },
+    "countries": {
+      "title": "Explore political donations by country",
+      "subtitle": "Select a country to access detailed donation records, party financing data, and donor information."
+    },
+    "why": {
+      "title": "Why political donation transparency matters",
+      "p0": "Democracy depends on informed citizens. By making political donation data accessible and easy to explore, we help people understand the financial relationships that shape their political landscape. Transparency in political financing builds trust, strengthens accountability, and empowers voters to make informed decisions."
+    },
+    "open_source": {
+      "title": "Open Source",
+      "p0": "DonationWatch is open source. You can explore the code, report issues, or contribute on {github}."
+    }
+  },
+  "home": {
+    "most_recent": "Most recent donations",
+    "hero": {
+      "subtitle": "Political party donations tracker for {country}",
+      "subtitle_no_country": "Political party donations tracker"
+    },
+    "biggest_donations": {
+      "text": "Since {minYear}, the biggest disclosed single donation in {country} reached {amount} from {donor} to {party} in {year}. This is followed by {others}.",
+      "list": "{amount} from {donor} to {receiver}"
+    },
+    "last_period": "Most recent year:",
+    "previous_period": "Donations from the previous year.",
+    "what": {
+      "title": "What is this?",
+      "summary": "Party donations are an important part of politics. They are an important indicator of political support.\n\nWe try to present this data clearly and comprehensibly.",
+      "threshold": "Due to the high number of minor political parties, we only track donations for parties that meet a specific threshold. The current threshold is set at {count} donations or a total of {sum} in contributions to that party, regardless of the size of individual donations.",
+      "source": {
+        "austria": "The data used here comes from the Austrian Court of Audit and includes all party donations documented there since 2012.\n\nPlease note: Before July 8, 2019, political parties had to report individual donations of over 51,000 euros (until 2018 over 50,000 euros) to the ACA. Since July 2019, the reporting limit has been 2,500 euros.\n\nThe parties' data is normally updated on a quarterly basis.",
+        "germany": "The data used here comes from the German Bundestag and includes all party donations over €50,000 documented there since 2010 and over €35,000 since March 5, 2024.",
+        "switzerland": "The data used here comes from the Swiss Federal Finance Control and includes all political donations documented there since 2023.",
+        "netherlands": "The information presented here is sourced from the Government of the Netherlands and includes all political donations recorded since 2022 that exceed €1,000, as reported in the annual “Overzicht van giften aan politieke partijen en hun neveninstellingen”.\n\nFor the current year, only donations exceeding €10,000 are included, based on the “Overzicht substantiële giften aan politieke partijen” dataset.\n\nPlease note: Some donations lack specific date information and therefore are not included in time-series or other date-based visualizations.\n\nDonations reported for SP and GL may appear relatively high because both parties require their MPs and administrators to contribute a substantial portion of their salaries to the party.",
+        "europeanunion": "The data presented here is sourced from the Authority for European Political Parties and European Political Foundations, encompassing all documented party and foundation donations since 2018. Due to the importance of European political foundations, we track and display their donations similarly to those of European political parties.\n\nAs the official data does not include data, no time series or similar visual representations are available.\n\nNote that in the run-up to the 2024 European elections (from December 6, 2023 to June 10, 2024), special reporting requirements for donations applied, with weekly reports and timely publication by the authority.\nSince June 10, 2024, only donations over 12,000 euros must be reported immediately. Other donations will only be available after the annual financial statements have been submitted.",
+        "estonia": "The data used here comes from the Estonian Party Funding Monitoring Committee and includes all political donations documented there since 2014 that exceed 1 euro.\n\nPolitical parties in Estonia are required to report their income, including donations received, on a quarterly basis.\nThe data on the committee's website is updated accordingly on a quarterly basis.",
+        "czechrepublic": "The data used here comes from the Office for the Control of the Administration of Political Parties and Political Movements and includes all political donations documented there since 2018 that exceed CZK 25.\n\nThis scope also encompasses all contributions to parties or political movements that have either received more than 100 individual donations or surpassed 1 million CZK in total donation amounts, regardless of individual contribution sizes. The data is updated annually.\nDonor type detection is based on identifying a donor as an Individual if both firstName and lastName fields are present.",
+        "latvia": "The data used here comes from the Corruption Prevention and Combating Office and includes all political donations documented there since 2015, exceeding €1.",
+        "australia": "The data used here comes from the Australian Electoral Commission (AEC) and specifically from the \"Donations Made Details\" dataset that the AEC publishes. It includes all political donations documented there since 2014, exceeding €1.\n\nIt's worth noting that the AEC dataset may contain some typographical errors, which could result in certain donations being unaccounted for or not properly assigned to a specific party due to data entry inconsistencies. Additionally, the AEC's annual disclosures are released on February 1 each year, but the data does not provide a complete picture of all contributions due to the disclosure threshold of $15,000.\n\nDonor types are classified by matching donor names. All common trade unions are manually mapped to the Trade Union donor type. Companies are detected by checking for specific corporate identifiers in the donor name: 'Pty' (Proprietary), 'Ltd' at the end of the name, 'Corporation', or 'Corp'.",
+        "unitedkingdom": "The data used here comes from the Electoral Commission and includes all political donations that have been documented there since 2010 and exceed £1,000.\n\nThe donation data is updated quarterly.",
+        "serbia": "The data used here does not come from the government, but from the non-profit organization “Center for Investigative Journalism of Serbia” (“Centar za istraživačko novinarstvo Srbije” - CINS), which has kindly aggregated the donation data of the Serbian Anti-Corruption Agency.\n\nThis data includes all political donations documented there since 2015.\n\nAs the dataset does not provide specific date information for individual donations, it is unfortunately not possible to display timelines or other time-based visualizations.",
+        "croatia": "The data used here comes from the State Electoral Commission of the Republic of Croatia (DIP) and includes all political donations with a monetary value exceeding €1, documented since 2019.\nThe dataset uses only the last donation document published for each reporting year (as reported by izbori) to avoid duplicates from earlier versions of the same year’s report.\nAll donations are displayed in Euro, while the underlying dataset uses Kuna until 2024. Donations originally made in Kuna are converted to Euro using approximate exchange rates for each half-year period from 2019 to 2024: H1 (0.1340, 0.1335, 0.1332, 0.1329, 0.1326) and H2 (0.1341, 0.1338, 0.1334, 0.1327, 0.1328).",
+        "canada": "The data used here comes from Elections Canada and is based on the \"contributions as submitted\" dataset. It includes all political donations with a monetary value exceeding €500, documented since 2015. All entries that are part of the \"Statement of Contributions Received\" report from the \"Annual\" electoral event to \"Registered parties\" are included.",
+        "georgia": "The information presented here is sourced from the Anti-Corruption Bureau (ანტიკორუფციული ბიურო﻿) of Georgia and includes all political donations recorded since 2011 that exceed 1 GEL. The dataset comprises only contributions classified as type #10 (Monetary donations) or type #16 (Monetary donations made by legal entities).",
+        "norway": "The data used here comes from the official party funding publications by Statistics Norway (SSB) and Partifinansiering.no. Totals shown are aggregated from multiple reported receiver entities (such as central, regional, local, and youth units) into a single total per party, with the underlying receiver mapping kept available for transparency.\n\nThe Norway dataset is refreshed on an annual update cycle, reflecting the cadence of the underlying disclosures."
+      },
+      "source_link": "Data source"
+    },
+    "list": {
+      "subtitle": "Legislative periods",
+      "title": "Past legislative periods",
+      "summary": "Our Legislative Period Overview compiles all donations throughout the entirety of a legislative term. Click on a card to navigate to the respective legislative period."
+    },
+    "years": {
+      "title": "Yearly Party Donations Overview",
+      "subtitle": "Aggregated Sums Across the Years",
+      "more": "View all remaining years",
+      "summary": "Explore our annual party donations overview, summarizing all contributions for each year. Click on a card to navigate to the detailed yearly breakdown."
+    },
+    "parties": {
+      "title": "Party donations",
+      "subtitle": "Details on individual parties",
+      "more": "View all remaining parties",
+      "summary": "Explore our party donations overview, aggregating all contributions for each party. Click on a card to access the donation details."
+    },
+    "donors": {
+      "title": "Donor donations",
+      "subtitle": "Details on individual donors",
+      "summary": "Discover our donors overview, showcasing the most significant financial contributors since {minYear}. Click on a donor to view their detailed contribution information."
+    },
+    "stacked_years": "Donation amount per year",
+    "stacked_years_subtitle": "Aggregated sum of published contributions in {country}, by year from {years}."
+  },
+  "years": {
+    "title": "Party donations",
+    "subtitle": "Cumulative sum of published donations to each party in {country}, {years}.",
+    "goto_year": "Go to year {year}",
+    "no_data": {
+      "title": "No data available",
+      "summary": "We're sorry, but we don't have any donation data for {year} yet.",
+      "last_year": "Alternatively, check out the data from {year}."
+    }
+  },
+  "overview": {
+    "title": "Overview",
+    "detail": {
+      "title": "Top political parties and their total donations",
+      "summary": "This list presents the top political parties and their cumulative donations within a specific interval, arranged in descending order based on the sum of donations",
+      "summary2": "In the years {years}, a total of {partyCount} parties received a combined total of {donationSum} through {donationCount} donations exceeding {minimumAmount}.",
+      "most_donations": "The {party} received the most donations with a total of {count} contributions, amounting to {sum}.",
+      "highest_sum": "The 5 parties with the highest total donations are {parties}."
+    },
+    "scatter": {
+      "title": "Donation distribution",
+      "subtitle": "Individual donations to each party, by amount and frequency, in {country} from {years}.",
+      "summary": "The party donation distribution overview provides a succinct analysis of donation distributions among various political parties. Through a scatter plot visualization, each point represents a party, with the x-axis indicating donation amounts and scatter size reflecting donation frequency.",
+      "span": "The {biggestSpanParty} party recorded the largest donation margin, with a difference of {biggestSpanAmount} between the smallest and largest donation."
+    },
+    "pie": {
+      "title": "Distribution of party donations",
+      "subtitle": "Total published donations to each party, {country}, {years}."
+    }
+  },
+  "changes": {
+    "title": "Changes",
+    "description": "Explore a detailed table of political party donations in {country} from {year}, only contributions above {minAmount}, sorted by transaction date, with donor and amount information.",
+    "detail": {
+      "title": "Party donations by transaction date",
+      "summary": "This page displays a list of party donations sorted by their transaction date, with the most recent donations appearing at the top. It provides information about the amount received by each party and the corresponding donors."
+    }
+  },
+  "donors": {
+    "title": "Donors",
+    "description": "View the full list of {year} donors to political parties in {country}. Find out who gave the most and how much each contributed.",
+    "detail": {
+      "title": "Donor contributions to political parties",
+      "subtitle": "Total published contributions by individual donors to each political party in {country}, {years}.",
+      "summary": "The Treemap visualizes the party donations in a clearly structured display. The top level shows the individual donors, who are represented by rectangles whose size is proportional to the amount of their donations.",
+      "summary2": "Below each donor are further rectangles representing the respective recipient parties. This hierarchical arrangement provides a quick overview of the distribution of donations and shows at a glance how many recipients each donor has supported.",
+      "unique_donors": "The number of different donors in {years} amounts to {count} donors.",
+      "biggest_donor": "The highest total donation of {amount} came from {donor}.",
+      "most_donations": "With {count} donations (total amount: {sum}), {donor} tops the list of the most frequent individual donors.",
+      "most_unique_parties": "{donor} made donations to a total of {count} different parties (total amount: {sum}), showing the greatest diversity among the donation recipients.",
+      "top_3": "In {years}, the top {amount} donors are {donors}."
+    },
+    "list": {
+      "title": "Top individual donors by total contributions",
+      "p0": "This section presents a ranked list of all individual donors within the selected years, sorted by the cumulative sum of their published donations. By highlighting the donors who have contributed the most."
+    },
+    "sankey": {
+      "title": "Sankey diagram"
+    },
+    "histogram": {
+      "title": "Distribution of donors by number of unique recipients",
+      "subtitle": "Number of unique political parties that received published contributions from individual donors in {country}, {years}.",
+      "p0": "This chart provides an overview of how individual donors distribute their contributions among political parties, highlighting whether donors tend to focus their support on a single party or spread it across several parties over time.",
+      "p1": "In {years}, the highest number of different parties supported by a single donor was {max}. Only {donors} donor contributed to {max} parties. On average, each donor supported {mean} parties (median: {median}).",
+      "p2": "With {singlePartyDonors} out of {totalDonors} donors, {percentage} of donors contributed to just one party.",
+      "tooltip": "{donors} donors • {parties} unique parties",
+      "item": "{donors} donors donated to {parties} parties"
+    }
+  },
+  "timeline": {
+    "title": "Timeline",
+    "description": "View a timeline of all political party donations in {country} for {years}, with monthly totals and trends across the years.",
+    "detail": {
+      "title": "Timeline of political party donations",
+      "summary": "View the interactive line chart below to track the donation history of each political party over time. The x-axis represents the dates, while the y-axis shows the amount of money donated. Each political party is represented by a distinct line that grows with each donation."
+    },
+    "days": "In {country}, throughout {years}, donations were tracked on {n} unique days."
+  },
+  "per_year_party": {
+    "title": "Donations to {party} per year",
+    "subtitle": "Yearly sum of published donations to {party} in {country}, {years}."
+  },
+  "per_month": {
+    "title": "Donations per month",
+    "subtitle": "Monthly sum of published donations to each party in {country}, {years}.",
+    "description": "This stacked bar chart illustrates monthly donation data for multiple political parties. The x-axis shows months, the y-axis represents donation sums, and each bar is segmented by color to display individual party contributions, allowing for easy comparison of party donations within and across months.",
+    "highest_sum": "{month} had the highest total donations, with a combined count of {count} donations amounting to {sum}.",
+    "most_months": "{party} received donations in {count} months, the most months with contributions among all parties.",
+    "month_most_donations": "The month with the highest donation count was {month}, which received a total of {count} individual donations."
+  },
+  "party": {
+    "donors": {
+      "title": "Donors for {party}",
+      "subtitle": "Total published contributions by individual donors to the {party} in {country}.",
+      "summary": "This page presents all officially disclosed donations over {minSum} to {party} since {minYear}, grouped by donor to show total contributions over time. All figures are based on official disclosures published by the {source}, shown both as a treemap for visual comparison and as an expandable list of the underlying transactions."
+    },
+    "donor_types": {
+      "title": "Donor types",
+      "treemap": {
+        "title": "{party} donor types",
+        "description": "Total published contributions to {party} in {country} by donor type."
+      },
+      "p0": "This treemap groups reported political donations by donor type (for example, individuals, companies, and public funds) and sizes each rectangle by the total amount contributed in the selected period and scope.",
+      "p1": "Larger boxes indicate higher sums, and the names shown within each box are the largest contributors inside their donor type. This view includes {count} distinct donor types for {party}.",
+      "p2": "Below is a list ranking sectors by their total contributions, sorted from highest to lowest:"
+    },
+    "qa": {
+      "sum": {
+        "q": "How much has {party} received in donations?",
+        "a": "{party} has received {sum} in total donations from {count} documented donations."
+      },
+      "top_donors": {
+        "q": "Who are the top donors to {party}?",
+        "a": "The top donors to {party} are: {donors}."
+      },
+      "largest_singular": {
+        "q": "What was the largest single donation to {party}?",
+        "a": "The largest single donation was {amount} from {donor} on {date}."
+      },
+      "biggest_overall": {
+        "q": "Who is the biggest overall donor to {party}?",
+        "a": "The biggest overall donor to {party} is {donor} with total donations of {sum}."
+      },
+      "frequent_donor": {
+        "q": "Who has made the most donations to {party}?",
+        "a": "{donor} has made the most donations to {party} with {count} separate donations totaling {sum}."
+      }
+    },
+    "overview": {
+      "title": "Donation Overview {party}"
+    },
+    "changes": {
+      "detail": {
+        "title": "{party} Donations by Transaction Date",
+        "summary": "This page showcases a list of {party} donations sorted by their transaction date, with the most recent contributions listed at the top. It offers details about the amount received by the {party} and the respective donors."
+      }
+    },
+    "timeline": {
+      "chart_title": "{party} donations",
+      "subtitle": "Cumulative sum of published donations to the {party} in {country}.",
+      "detail": {
+        "title": "Timeline of {party} Donations",
+        "summary": "Explore the interactive line chart to track the donation history of {party} over time. The x-axis represents the dates, while the y-axis shows the amount of money donated. {party} is represented by a distinct line that grows with each donation.",
+        "per_year": "The total amount of donations received by {party} varies by year. Below is a historical overview of the annual funding totals declared by the party. This list tracks the sum of all reportable contributions and financial support for each specific year:"
+      }
+    }
+  },
+  "origin": {
+    "title": "Origin",
+    "description": "See where political party donations in {country} for {years} come from—breakdown by state and international contributions.",
+    "detail": {
+      "title": "Donation origin at a glance",
+      "description": "See transparent origins of political donations to {party} in {country}: breakdown by state and foreign sources.",
+      "summary": "Explore a clear overview of the geographical origins of donations. Discover which states or countries outside {country} contribute support. Follow the transparency of donation distribution to gain insights into the geographic landscape of contributions.",
+      "country": {
+        "austria": "In Austria, the origin of donations is only recorded from 2023 onwards. For this reason, all older donations cannot be allocated to individual federal states."
+      },
+      "sum": "For the year {years}, political party donations in {country} totaled {sumCountry} from domestic sources. Contributions from foreign origins amounted to {sumOthers}."
+    },
+    "type": {
+      "map": "Map"
+    },
+    "party": {
+      "subtitle": "Total published donations to {party} by state of origin in {country}."
+    },
+    "country": {
+      "title": "Donations from {country}",
+      "subtitle": "Total published donations by state of origin in {country}, {years}.",
+      "summary": "Between the years {from} and {until}, donations were recorded from {stateCount} different federal states. The state with the highest donation amount is {highestState} with {highestSum}. The majority of donations, specifically {largesDonationCountNum}, came from {largesDonationCountState}."
+    },
+    "elsewhere": {
+      "title": "Donations from outside {country}",
+      "summary": "Between the years {from} and {until}, donations were recorded from {countryCount} different countries. The country with the highest donation amount is {highestCountry} with {highestSum}. The majority of donations, specifically {largesDonationCountNum}, came from {largesDonationCountState}."
+    }
+  },
+  "donor": {
+    "title": "Donations from the donor",
+    "subtitle": "Total contributions and recipients",
+    "active_period": "Active period",
+    "type": "Donor type",
+    "summary": "{donor} has made a total of {sum} in the form of {count} individual donations. The average donation size is {avg}. The donations were distributed to {parties} different parties.",
+    "oldest": "The first donation after {minYear} was made on {date} with an amount of {amount} to the {party}.",
+    "newest": "The most recent donation was made on {date}, with {amount} going to the {party}.",
+    "most_donations": "The most frequent donations were made to the {list}.",
+    "most_donations_item": "{party} ({count})",
+    "highest_most_donation": "The year {biggestYear} was characterized by the highest total donation amount of {biggestSum}, while the most individual donations ({mostCount}) were made in {mostYear}.",
+    "biggest": "The largest single donation of {amount} went to the {party} on {date}.",
+    "tree_map": "Donations from {name}",
+    "tree_map_subtitle": "Total published donations to each party in {country}.",
+    "biggest_amounts": "The donations were primarily directed towards a select group of parties. Below is a breakdown of recipients by amount and percentage of the total donated:",
+    "table": "This section provides a comprehensive overview of all individual donations made by {donor}. You can sort the table by date, party, or amount to easily explore how the donations were distributed over time and across recipients. This detailed view enables transparent tracking of every contribution and offers deeper insights into the donor’s giving patterns.",
+    "timeline": {
+      "title": "Donation accumulation over time",
+      "p0": "This section shows how donations from {donor} since {year} to different political parties have changed over time. The chart visualizes the total amount donated, with each party’s share highlighted, so it’s easy to see when and where support was directed.",
+      "p1": "Follow the lines to observe patterns, spikes, or shifts in giving. This overview offers a transparent look at how one donor’s contributions are distributed across the political landscape.",
+      "years": "Donations have varied over the years. The following shows the total donation amounts by year, along with the percentage each year contributes to the overall donations made by this donor.",
+      "chart_subtitle": "Cumulative donations from {donor} to political parties in {country}, displayed by amount and date since {minYear}."
+    },
+    "anonymized": {
+      "title": "Record Anonymized",
+      "description": "The personal identity associated with this donation has been removed in compliance with a valid GDPR request. The donation amount remains included in the total funding calculations to maintain financial transparency."
+    },
+    "redacted": {
+      "title": "Record Redacted",
+      "description": "The donor's identity was redacted by the publishing authority prior to the release of this data. The donation amount remains included in the total funding calculations to maintain financial transparency."
+    },
+    "ubo": "Ultimate beneficial owners (UBOs)",
+    "ubo_description": "An Ultimate Beneficial Owner (UBO) is the person who actually pulls the strings. They are the individuals who ultimately own or control the donor, typically by holding 25% or more of its shares or voting rights. If no single person meets this threshold, senior management (like Directors) may be listed as \"pseudo-UBOs\" to ensure accountability."
+  },
+  "countries": {
+    "??": "Not specified",
+    "DE": "Germany",
+    "DK": "Denmark",
+    "CH": "Switzerland",
+    "TH": "Thailand",
+    "AT": "Austria",
+    "UK": "United Kingdom",
+    "NL": "Netherlands",
+    "EU": "European Union",
+    "LV": "Latvia",
+    "ES": "Spain",
+    "FI": "Finland",
+    "HR": "Croatia",
+    "BE": "Belgium",
+    "LU": "Luxembourg",
+    "SI": "Slovenia",
+    "EE": "Estonia",
+    "FR": "France",
+    "IE": "Ireland",
+    "IT": "Italy",
+    "PL": "Poland",
+    "RO": "Romania",
+    "CY": "Cyprus",
+    "MT": "Malta",
+    "PT": "Portugal",
+    "LT": "Lithuania",
+    "HU": "Hungary",
+    "CZ": "Czech Republic",
+    "SG": "Singapore",
+    "MC": "Monaco",
+    "SE": "Sweden",
+    "AD": "Andorra",
+    "IM": "Isle of Man",
+    "NO": "Norway",
+    "LI": "Liechtenstein",
+    "MK": "Macedonia",
+    "AL": "Albania",
+    "MD": "Moldova",
+    "SM": "San Marino",
+    "FO": "Faroe Islands",
+    "BA": "Bosnia and Herzegovina",
+    "ME": "Montenegro",
+    "BG": "Bulgaria",
+    "BY": "Belarus",
+    "GR": "Greece",
+    "IS": "Iceland",
+    "SK": "Slovakia",
+    "UA": "Ukraine",
+    "GB": "United Kingdom",
+    "RS": "Serbia",
+    "AU": "Australia",
+    "ZA": "South Africa",
+    "US": "United States",
+    "CA": "Canada",
+    "GE": "Georgia",
+    "NZ": "New Zealand",
+    "VE": "Venezuela"
+  },
+  "ref_countries": {
+    "DE": "Germany",
+    "DK": "Denmark",
+    "CH": "Switzerland",
+    "TH": "Thailand",
+    "AT": "Austria",
+    "UK": "United Kingdom",
+    "NL": "Netherlands",
+    "EU": "the European Union",
+    "LV": "Latvia",
+    "ES": "Spain",
+    "FI": "Finland",
+    "HR": "Croatia",
+    "BE": "Belgium",
+    "LU": "Luxembourg",
+    "SI": "Slovenia",
+    "EE": "Estonia",
+    "FR": "France",
+    "IE": "Ireland",
+    "IT": "Italy",
+    "PL": "Poland",
+    "RO": "Romania",
+    "CY": "Cyprus",
+    "CZ": "Czech Republic",
+    "AU": "Australia",
+    "RS": "Serbia",
+    "CA": "Canada",
+    "GE": "Georgia",
+    "NO": "Norway"
+  },
+  "state": {
+    "germany": {
+      "BW": "Baden-Württemberg",
+      "BY": "Bavaria",
+      "BE": "Berlin",
+      "BB": "Brandenburg",
+      "HB": "Bremen",
+      "HH": "Hamburg",
+      "HE": "Hesse",
+      "MV": "Mecklenburg-Vorpommern",
+      "NI": "Lower Saxony",
+      "NW": "North Rhine-Westphalia",
+      "RP": "Rhineland-Palatinate",
+      "SL": "Saarland",
+      "SN": "Saxony",
+      "ST": "Saxony-Anhalt",
+      "SH": "Schleswig-Holstein",
+      "TH": "Thuringia"
+    },
+    "austria": {
+      "1": "Burgenland",
+      "2": "Carinthia",
+      "3": "Lower Austria",
+      "4": "Upper Austria",
+      "5": "Salzburg",
+      "6": "Styria",
+      "7": "Tyrol",
+      "8": "Vorarlberg",
+      "9": "Vienna"
+    },
+    "canada": {
+      "ON": "Ontario",
+      "QC": "Quebec",
+      "NS": "Nova Scotia",
+      "NB": "New Brunswick",
+      "MB": "Manitoba",
+      "BC": "British Columbia",
+      "PE": "Prince Edward Island",
+      "SK": "Saskatchewan",
+      "AB": "Alberta",
+      "NL": "Newfoundland and Labrador",
+      "NT": "Northwest Territories",
+      "YT": "Yukon",
+      "NU": "Nunavut"
+    }
+  },
+  "about": {
+    "title": "About",
+    "description": {
+      "p0": "DonationWatch emerged from frustration with the lack of easily readable data on the official site of the German Bundestag.",
+      "p1": "Our aim is to enhance this by utilizing publicly available data and presenting it more effectively.",
+      "p2": "We noticed that countries like Austria, Switzerland, and the Netherlands publish their political donations in various structured formats. To create a unified interface that simplifies access to this information, we have included these countries in our project. More countries will be added as we find and process the relevant data.",
+      "p3": "If you have any suggestions or feedback, please feel free to",
+      "mail": "contact us"
+    },
+    "source": "All visualized information comes exclusively from publicly available government sources, incorporating no previously unreleased data or private records. Transparency is our foundation"
+  },
+  "imprint": {
+    "title": "Imprint"
+  },
+  "privacy": {
+    "title": "Privacy policy",
+    "last_updated": "Last updated: {date}",
+    "effective_date": "Effective date: {date}",
+    "data": {
+      "title": "1. Data Collection",
+      "p": "We do not collect any personal data from visitors to our website. This includes:",
+      "li0": "No registration forms",
+      "li1": "No newsletter signups",
+      "li2": "No user accounts",
+      "li3": "No cookies for tracking purposes"
+    },
+    "cf": {
+      "title": "2. Cloudflare Services",
+      "link": "View cloudflares privacy policy",
+      "p": "We utilize two Cloudflare services:",
+      "workers": {
+        "summary": "Cloudflare Workers: Serverless platform for content delivery (no user data processing)"
+      },
+      "analytics": {
+        "summary": "Cloudflare Web Analytics: Privacy-focused analytics that:",
+        "li0": "Does not use cookies",
+        "li1": "Only collects aggregated metrics"
+      }
+    },
+    "logs": {
+      "title": "3. Automatic Server Logs",
+      "p": "Our hosting provider may collect:",
+      "li0": "IP addresses (anonymized)",
+      "li1": "Request timestamps",
+      "li2": "Browser/device types",
+      "retention": "This data is automatically deleted within 7 days."
+    },
+    "contact": {
+      "title": "Contact",
+      "p": "For privacy questions:"
+    }
+  },
+  "fun": {
+    "link": "Fun facts",
+    "title": "Fun facts about public data",
+    "p0": "This page showcases interesting findings from our work with publicly released governmental data. These observations are not critiques, but rather minor quirks that can occur in any large dataset.",
+    "p1": "While we report issues upstream when appropriate, we don't consider them urgent matters for governmental institutions to address. In our experience, these organizations have been receptive and open to feedback.",
+    "reported_fixed": "This was reported to {owner} and corrected by them.",
+    "reported_wontfix": "This was reported to {owner} and they can't change it.",
+    "reported": "This was reported to {owner}."
+  },
+  "transparency": {
+    "title": "Transparency",
+    "p0": "We strive to provide clear and consistent information about political party donors. To achieve this, we automatically normalize certain donor names to ensure uniformity across our database. This approach allows us to maintain accuracy while accounting for discrepancies in how names may be recorded.",
+    "p1": "In the interest of transparency, we've compiled a list of normalized names along with their variations encountered in our donation records. Below, you'll find each normalized name followed by its variations. This list helps explain why you might see donor names that don't appear exactly in our source documents.",
+    "section": {
+      "filtered_donors": "Filtered donors",
+      "filtered_receivers": "Filtered receivers",
+      "aggregated": "Aggregated Donors"
+    },
+    "filtered_donors": {
+      "p0": "To accurately represent the true sources of political donations, we filter out certain transactions that are actually governmental contributions rather than genuine donations. Because our source datasets do not explicitly label these, we rely on a set of regular expression (regexp) filtering rules to automatically identify and remove such entries. You can review the full list of applied regexp filter rules below.",
+      "p1": "Below is a list of donors whose contributions were filtered out according to our criteria and filtering rules."
+    },
+    "filtered_receivers": {
+      "p0": "To ensure we only present meaningful recipient data, we also filter out certain receivers or parties that are deemed irrelevant or non-operational for donor-tracking purposes. Since our datasets do not always label these receivers explicitly, we apply a set of regexp-based rules to automatically exclude them.",
+      "p1": "You can review the full list of applied regexp filter rules below."
+    },
+    "receivers": {
+      "title": "Aggregated Receivers",
+      "p0": "In {country}, donations may be reported to different organizational units within a party. For consistency, we consolidates related receiver entities into one party-level total. The list below documents which receiver entities are aggregated into each party."
+    }
+  },
+  "related": {
+    "donors": "Similar donors"
+  },
+  "detect_country": {
+    "title": "It looks like you're in {country}.",
+    "description": "Tap to explore political donations in {country}.",
+    "action": "View donations for {country}"
+  },
+  "donor_type": {
+    "0": "Other",
+    "1": "Individual",
+    "2": "Company",
+    "3": "Trade union",
+    "4": "Public fund",
+    "5": "Unincorporated Association",
+    "6": "Registered Political Party",
+    "7": "Trust",
+    "8": "Friendly Society",
+    "9": "Limited Liability Partnership",
+    "10": "Building Society",
+    "11": "Non Profit Legal Entity",
+    "12": "Anonymized Donor"
+  },
+  "other_countries": {
+    "title": "Other countries"
+  },
+  "thanks": "With thanks to organizations like {external} for providing valuable information on political donation mechanisms.",
+  "export": {
+    "title": "Data export",
+    "p0": "Get the complete dataset of political donations for {country} used on this site. The export includes normalized donor names, amounts, dates, and recipient parties.",
+    "p1": "Important: This is not the raw data from the {source}. This dataset contains only donations that have been normalized and filtered by our team. Please review our {transparency} section for methodology.",
+    "license": "License: {license}",
+    "download": "Download {format}",
+    "includes_donations": "{num} donations included"
+  },
+  "bar_chart_race": {
+    "title": "Bar Chart Race",
+    "description": "Visualize the accumulation of donations over time. Select a year range to see how party funding evolves dynamically.",
+    "from": "From",
+    "to": "To",
+    "download_video": "Download video",
+    "rendering": "Rendering... {percentage}",
+    "no_data": "No data available for the selected range.",
+    "note": "Please note: This animation is rendered client-side in your browser and may be resource-intensive on some devices. Downloading the video will automatically play through the full animation.",
+    "individual_years": "Individual years",
+    "animation_duration": "Animation Duration",
+    "duration_s": "{seconds}s",
+    "custom_range": "Advanced: Custom year range",
+    "group_by": {
+      "label": "Group by",
+      "receiver": "Party",
+      "donor": "Donor"
+    },
+    "chart_title": "Distribution of party donations",
+    "chart_subtitle": "Total published donations to each party, {country}, {years}."
+  }
+}

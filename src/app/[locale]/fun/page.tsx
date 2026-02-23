@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { ErrorAlert, InfoAlert, SuccessAlert } from "../../../components/alert";
 import { Article, ArticleSection } from "../../../components/layout/article";
@@ -8,15 +9,13 @@ import { LOCALES } from "../../../utils/locales";
 import { generateAlternates } from "../../../utils/meta";
 import { notFoundMetadata } from "../../../utils/not-found-metadata";
 import { isValidLocale } from "../../../utils/validate";
-import { getTranslations, t } from "../translations";
 
-import type { Translations } from "../../../messages/translations";
 import type { ConstLocale } from "../../../utils/locales";
+import type { StrictNamespacedTranslator } from "@/utils/translator";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 export const dynamicParams = false;
-export const dynamic = "error";
 
 export async function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
@@ -28,32 +27,32 @@ export async function generateMetadata(
   const params = await props.params;
 
   if (!isValidLocale(params.locale)) return notFoundMetadata;
-  const { locale } = params;
+  setRequestLocale(params.locale);
 
-  const translations = await getTranslations(locale);
+  const t = await getTranslations({ locale: params.locale, namespace: "fun" });
 
   return {
-    title: `${translations.fun.title} | DonationWatch`,
+    title: `${t("title")} | DonationWatch`,
     alternates: generateAlternates("fun"),
   };
 }
 
 const FunFact = ({
   locale,
-  translations,
   title,
   text,
   status,
   date,
   children,
+  t,
 }: {
   locale: ConstLocale;
-  translations: Translations;
   title: Record<ConstLocale, string>;
   text: Record<ConstLocale, string>;
   status?: { owner: string; type: "reported" | "fixed" | "wontfix" };
   date: string;
   children?: ReactNode;
+  t: StrictNamespacedTranslator<"fun">;
 }) => {
   return (
     <ArticleSection title={title[locale]}>
@@ -70,18 +69,16 @@ const FunFact = ({
       </div>
       {status ? (
         status.type === "reported" ? (
-          <InfoAlert
-            text={t(translations.fun.reported, { owner: status.owner })}
-          />
+          <InfoAlert text={t("reported", { owner: status.owner })} />
         ) : status.type === "wontfix" ? (
           <ErrorAlert
-            text={t(translations.fun.reported_wontfix, {
+            text={t("reported_wontfix", {
               owner: status.owner,
             })}
           />
         ) : (
           <SuccessAlert
-            text={t(translations.fun.reported_fixed, {
+            text={t("reported_fixed", {
               owner: status.owner,
             })}
           />
@@ -95,24 +92,26 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
   const params = await props.params;
 
   if (!isValidLocale(params.locale)) return notFound();
+  setRequestLocale(params.locale);
+
   const { locale } = params;
 
-  const translations = await getTranslations(locale);
+  const t = await getTranslations({ locale, namespace: "fun" });
 
   return (
-    <NonCountryRootLayout locale={locale} translations={translations}>
+    <NonCountryRootLayout locale={locale}>
       <Article
-        title={translations.fun.title}
+        title={t("title")}
         subtitle={
           <>
-            <p>{translations.fun.p0}</p>
-            <p>{translations.fun.p1}</p>
+            <p>{t("p0")}</p>
+            <p>{t("p1")}</p>
           </>
         }
       >
         <FunFact
+          t={t}
           locale={locale}
-          translations={translations}
           status={{
             owner:
               "Authority for European Political Parties and European Political Foundations",
@@ -151,8 +150,8 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
           </pre>
         </FunFact>
         <FunFact
+          t={t}
           locale={locale}
-          translations={translations}
           title={{
             en: "Czech test donations",
             de: "Tschechische Testspenden",
@@ -199,8 +198,8 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
           </pre>
         </FunFact>
         <FunFact
+          t={t}
           locale={locale}
-          translations={translations}
           title={{
             en: "Typo Challenge in the AEC Dataset",
             de: "Typo-Herausforderung im AEC-Datensatz",
@@ -242,8 +241,8 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
           associaiton
         </FunFact>
         <FunFact
+          t={t}
           locale={locale}
-          translations={translations}
           title={{
             en: "UK Electoral Commission search site down after SSL certificate expiry",
             de: "Suchseite der britischen Wahlkommission nach Ablauf des SSL-Zertifikats nicht erreichbar",
@@ -286,8 +285,8 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
           Not After: Jun 6 23:59:59 2025 GMT
         </FunFact>
         <FunFact
+          t={t}
           locale={locale}
-          translations={translations}
           title={{
             en: "Missing documents in the Croatian database",
             de: "Fehlende Dokumente in der kroatischen Datenbank",
@@ -324,8 +323,8 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
           </ul>
         </FunFact>
         <FunFact
+          t={t}
           locale={locale}
-          translations={translations}
           title={{
             en: "EU foundation donation country code uses Greek unicode characters",
             de: "EU-Stiftungsspenden-Ländercode verwendet griechische Unicode-Zeichen",
@@ -360,8 +359,8 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
           NOVE SA;<span className="font-black text-green-800">BE</span>;6000
         </FunFact>
         <FunFact
+          t={t}
           locale={locale}
-          translations={translations}
           title={{
             en: "Australia had some donations dated to 2106",
             de: "Australien hatte einige Spenden, die auf das Jahr 2106 datiert waren.",
@@ -395,8 +394,8 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
           <span className="font-black text-red-800">2106</span>;1500
         </FunFact>
         <FunFact
+          t={t}
           locale={locale}
-          translations={translations}
           title={{
             en: "Austria changed their currency format for new rows",
             de: "Österreich hat sein Währungsformat für neue Zeilen geändert",
@@ -427,8 +426,8 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
           Bundespartei;
         </FunFact>
         <FunFact
+          t={t}
           locale={locale}
-          translations={translations}
           title={{
             en: "Incorrect link on Romania's donation page",
             de: "Falscher Link auf der Spendenseite von Rumänien",
@@ -456,8 +455,8 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
           date={"2024-09-29"}
         />
         <FunFact
+          t={t}
           locale={locale}
-          translations={translations}
           title={{
             en: "Changed date format for new donations in Germany",
             de: "Geändertes Datumsformat für neue Spenden in Deutschland",
@@ -485,8 +484,8 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
           <span className="font-black text-green-800">03.04.2024</span>
         </FunFact>
         <FunFact
+          t={t}
           locale={locale}
-          translations={translations}
           title={{
             en: "Germany had a typo in one of its zipcode for Frankfurt",
             de: "Deutschland hatte einen Tippfehler in einer seiner Postleitzahlen für Frankfurt",
@@ -521,8 +520,8 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
           Main
         </FunFact>
         <FunFact
+          t={t}
           locale={locale}
-          translations={translations}
           title={{
             en: "The Austrian party donation document for 2022 randomly uses macintosh file encoding",
             de: "Das österreichische Parteispendenpapier für 2022 verwendet zufällig die Macintosh-Dateikodierung",

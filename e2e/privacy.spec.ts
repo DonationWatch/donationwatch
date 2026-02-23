@@ -9,7 +9,7 @@ test.describe("Privacy page", () => {
 
   test(`is accessible`, async ({ accessibility, translations, page }) => {
     await expect(
-      page.getByRole("heading", { name: translations.privacy.title }),
+      page.getByRole("heading", { name: translations("privacy.title") }),
     ).toBeVisible();
 
     await accessibility.check();

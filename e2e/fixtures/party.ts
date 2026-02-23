@@ -6,7 +6,7 @@ export class PartyPage extends PageObject {
   public readonly yearsHeader = new YearsHeader(
     this.page.locator("section", {
       has: this.page.getByRole("heading", {
-        name: this.translations.years.title,
+        name: this.translations("years.title"),
         exact: true,
       }),
     }),
@@ -17,7 +17,7 @@ export class PartyPage extends PageObject {
   public readonly pageTitle = this.page.getByRole("heading", { level: 1 });
   public readonly donorTypeSection = new DonorTypeSection(
     this.page.getByRole("region", {
-      name: this.translations.party.donor_types.title,
+      name: this.translations("party.donor_types.title"),
     }),
     this.props,
   );
