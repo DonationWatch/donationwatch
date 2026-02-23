@@ -5,7 +5,7 @@ export class HomePage extends PageObject {
   public readonly currentLegislativePeriod = new YearsHeader(
     this.page.locator(".card", {
       has: this.page.getByRole("heading", {
-        name: this.translations.home.last_period,
+        name: this.translations("home.last_period"),
         exact: true,
       }),
     }),
@@ -13,19 +13,19 @@ export class HomePage extends PageObject {
   );
   public readonly mostRecentDonations = this.page.locator(".card", {
     has: this.page.getByRole("heading", {
-      name: this.translations.home.most_recent,
+      name: this.translations("home.most_recent"),
       exact: true,
     }),
   });
   public readonly partiesList = this.page.locator("section", {
     has: this.page.getByRole("heading", {
-      name: this.translations.home.parties.title,
+      name: this.translations("home.parties.title"),
       exact: true,
     }),
   });
   public readonly pastLegislativePeriods = this.page.locator("section", {
     has: this.page.getByRole("heading", {
-      name: this.translations.home.list.title,
+      name: this.translations("home.list.title"),
       exact: true,
     }),
   });

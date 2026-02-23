@@ -1,9 +1,9 @@
 "use client";
+import { useLocale, useTranslations } from "next-intl";
 
 import { ExpandableReactEchart } from "./expandable-react-echart";
 import { useDonationsByYears } from "../../hooks/use-api";
 import { useChart } from "../../hooks/use-chart";
-import { useTranslations } from "../../hooks/use-translations";
 import { isNotNullandNotUndefined } from "../../utils/array";
 import { partyColor } from "../../utils/color";
 import { type CountryConfig, getParty } from "../../utils/countries";
@@ -42,13 +42,13 @@ export const DonationPerMonthChart = ({
   limitToFirstDateYear?: boolean;
   resolution?: DonationPerMonthResolution;
 }) => {
-  const { translations } = useTranslations();
+  const t = useTranslations("data");
   const results = useDonationsByYears(country, years);
   const error = results.some((r) => r.error);
   const isLoading = results.some((r) => r.isLoading);
 
   if (isLoading) return <Loading />;
-  if (error) return <div>{translations.data_error}</div>;
+  if (error) return <div>{t("error")}</div>;
 
   const donations = results
     .flatMap((r) => r.data)
@@ -87,7 +87,7 @@ const DonationBarChart = ({
   limitToFirstDateYear?: boolean;
   resolution?: DonationPerMonthResolution;
 }) => {
-  const { locale } = useTranslations();
+  const locale = useLocale();
   const { backgroundColor, isMobile, isDark } = useChart();
 
   const leftmostYear = limitToFirstDateYear

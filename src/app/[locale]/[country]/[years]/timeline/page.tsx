@@ -1,4 +1,5 @@
 import { notFound, redirect } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { DonationPerMonthChart } from "../../../../../components/chart/donation-per-month-chart";
 import { DonationSumChart } from "../../../../../components/chart/donation-sum-chart";
@@ -24,7 +25,6 @@ import { generateAlternates } from "../../../../../utils/meta";
 import { notFoundMetadata } from "../../../../../utils/not-found-metadata";
 import { deserializeYears } from "../../../../../utils/serializers";
 import { isValidCountry, isValidLocale } from "../../../../../utils/validate";
-import { getTranslations, t } from "../../../translations";
 
 import type { Metadata } from "next";
 
@@ -35,11 +35,12 @@ export async function generateMetadata(
 
   if (!isValidLocale(params.locale)) return notFoundMetadata;
   if (!isValidCountry(params.country)) return notFoundMetadata;
+  setRequestLocale(params.locale);
 
-  const { locale, country } = params;
+  const { country } = params;
 
-  const [translations, countryConfig, partySums] = await Promise.all([
-    getTranslations(locale),
+  const [t, countryConfig, partySums] = await Promise.all([
+    getTranslations({ locale: params.locale }),
     getCountryConfig(country),
     getPartyYearsSums(country),
   ]);
@@ -52,16 +53,16 @@ export async function generateMetadata(
   }
 
   const yearsRange = formatYearsRange(years);
-  const countryName = getCountryName(countryConfig, translations);
-  const description = t(translations.timeline.description, {
+  const countryName = getCountryName(countryConfig, t);
+  const description = t("timeline.description", {
     years: yearsRange,
     country: countryName,
   });
 
   return {
-    title: `${t(translations.page_title.years.timeline, {
+    title: `${t("page_title.years.timeline", {
       year: formatYearsRange(years),
-      country: getCountryName(countryConfig, translations),
+      country: getCountryName(countryConfig, t),
     })}`,
     description,
     alternates: generateAlternates(`${country}/${params.years}/timeline`),
@@ -74,10 +75,11 @@ export default async function TimelinePage(
 
   if (!isValidLocale(params.locale)) return notFound();
   if (!isValidCountry(params.country)) return notFound();
+  setRequestLocale(params.locale);
 
   const years = deserializeYears(params.years);
-  const [translations, countryConfig] = await Promise.all([
-    getTranslations(params.locale),
+  const [t, countryConfig] = await Promise.all([
+    getTranslations({ locale: params.locale }),
     getCountryConfig(params.country),
   ]);
 
@@ -91,9 +93,9 @@ export default async function TimelinePage(
             <ArticleSectionTitle
               as={"h1"}
               id={"sec-timeline"}
-              title={translations.timeline.detail.title}
+              title={t("timeline.detail.title")}
             />
-            <p className="mb-6">{translations.timeline.detail.summary}</p>
+            <p className="mb-6">{t("timeline.detail.summary")}</p>
             <LoadingYearTimeseriesText
               country={countryConfig}
               parties={parties}
@@ -103,9 +105,9 @@ export default async function TimelinePage(
           <ArticleSectionColumn>
             <DonationSumChart
               country={countryConfig}
-              title={translations.years.title}
-              subtitle={t(translations.years.subtitle, {
-                country: getCountryName(countryConfig, translations),
+              title={t("years.title")}
+              subtitle={t("years.subtitle", {
+                country: getCountryName(countryConfig, t),
                 years: formatYearsRange(years),
               })}
               years={years}
@@ -120,7 +122,7 @@ export default async function TimelinePage(
             <ArticleSectionTitle
               as={"h2"}
               id={"sec-per-month"}
-              title={translations.per_month.title}
+              title={t("per_month.title")}
             />
             <LoadingYearBarsPageText
               country={countryConfig}
@@ -132,9 +134,9 @@ export default async function TimelinePage(
             <div>
               <DonationPerMonthChart
                 country={countryConfig}
-                title={translations.per_month.title}
-                subtitle={t(translations.per_month.subtitle, {
-                  country: getCountryName(countryConfig, translations),
+                title={t("per_month.title")}
+                subtitle={t("per_month.subtitle", {
+                  country: getCountryName(countryConfig, t),
                   years: formatYearsRange(years),
                 })}
                 years={years}

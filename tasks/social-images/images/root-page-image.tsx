@@ -1,19 +1,22 @@
+"use client";
+
 /* eslint-disable react/no-unknown-property */
 import { PageLogo } from "../../../src/components/page-logo";
 import { formatNumber } from "../../../src/utils/formatter";
 import { ImageMetaCard } from "../components/image-meta-card";
 import { ThumbnailWrapper } from "../components/utils";
 
-import type { Translations } from "../../../src/messages/translations";
 import type { Country, CountryConfig } from "../../../src/utils/countries";
 import type { PartyYearsSums } from "../../../src/utils/loader/party-years-sums";
 import type { ConstLocale } from "../../../src/utils/locales";
+import type { CreateTranslator } from "../utils";
 
 export const RootPageImage = async (
   locale: ConstLocale,
-  translations: Translations,
+  getTranslations: CreateTranslator,
   countryDatas: [Country, CountryConfig, PartyYearsSums][],
 ) => {
+  const t = getTranslations();
   let trackedParties = 0;
   let trackedDonations = 0;
 
@@ -34,9 +37,7 @@ export const RootPageImage = async (
           <div tw="flex justify-between items-center">
             <div tw="flex flex-col">
               <div tw="text-5xl font-bold">DonationWatch</div>
-              <div tw="text-3xl">
-                {translations.home.hero.subtitle_no_country}
-              </div>
+              <div tw="text-3xl">{t("home.hero.subtitle_no_country")}</div>
             </div>
             <div tw="flex text-indigo-700">
               <PageLogo size={128} />
@@ -47,20 +48,20 @@ export const RootPageImage = async (
               <div tw="mb-4 flex">
                 <ImageMetaCard
                   variant="large"
-                  title={translations.root.stats.countries}
+                  title={t("root.stats.countries")}
                   value={formatNumber(locale, countryDatas.length)}
                 />
               </div>
               <div tw="mb-4 flex">
                 <ImageMetaCard
                   variant="large"
-                  title={translations.root.stats.parties}
+                  title={t("root.stats.parties")}
                   value={formatNumber(locale, trackedParties)}
                 />
               </div>
               <ImageMetaCard
                 variant="large"
-                title={translations.root.stats.donations}
+                title={t("root.stats.donations")}
                 value={formatNumber(locale, trackedDonations)}
               />
             </div>

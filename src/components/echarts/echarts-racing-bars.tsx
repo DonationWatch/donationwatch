@@ -1,6 +1,6 @@
 "use client";
-
 import { Play, Pause, RotateCcw, Download } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 
 import {
@@ -14,9 +14,7 @@ import type { ConstLocale } from "../../utils/locales";
 import type { CountryConfig, Currency } from "@/utils/countries";
 import type { BarSeriesOption, EChartsOption } from "echarts";
 
-import { t } from "@/app/[locale]/translations";
 import { ExpandableReactEchart } from "@/components/chart/expandable-react-echart";
-import { useTranslations } from "@/hooks/use-translations";
 import { formatPercentFormat } from "@/utils/formatter";
 
 interface EChartsRacingBarsProps {
@@ -52,7 +50,7 @@ export const EChartsRacingBars = ({
   partiesById,
   totalRuntimeMs = DEFAULT_TOTAL_RUNTIME_MS,
 }: EChartsRacingBarsProps) => {
-  const { translations } = useTranslations();
+  const t = useTranslations();
   const containerRef = useRef<HTMLDivElement>(null);
   const animationIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
@@ -725,9 +723,7 @@ export const EChartsRacingBars = ({
             size="icon"
             onClick={togglePlay}
             disabled={isRecording}
-            title={
-              isPlaying ? translations.actions.pause : translations.actions.play
-            }
+            title={isPlaying ? t("actions.pause") : t("actions.play")}
           >
             {isPlaying ? (
               <Pause className="size-4" />
@@ -740,7 +736,7 @@ export const EChartsRacingBars = ({
             size="icon"
             onClick={handleRestart}
             disabled={isRecording}
-            title={translations.actions.restart}
+            title={t("actions.restart")}
           >
             <RotateCcw className="size-4" />
           </Button>
@@ -748,7 +744,7 @@ export const EChartsRacingBars = ({
         <div>
           {isRecording ? (
             <span className="mr-4 tabular-nums">
-              {t(translations.bar_chart_race.rendering, {
+              {t("bar_chart_race.rendering", {
                 percentage: formatPercentFormat(locale, recordingProgress),
               })}
             </span>
@@ -759,7 +755,7 @@ export const EChartsRacingBars = ({
             variant="default"
           >
             <Download />
-            {translations.bar_chart_race.download_video}
+            {t("bar_chart_race.download_video")}
           </Button>
         </div>
       </div>

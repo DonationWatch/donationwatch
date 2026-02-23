@@ -2,6 +2,7 @@ import { exec } from "child_process";
 import { promisify } from "util";
 
 import debug from "debug";
+import { createTranslator } from "next-intl";
 import {
   transpileModule,
   ModuleKind,
@@ -9,13 +10,13 @@ import {
   ModuleResolutionKind,
 } from "typescript";
 
-import { getTranslations, t } from "../../src/app/[locale]/translations";
 import { Country, getCountryName, getParty } from "../../src/utils/countries";
 import { getCountryConfig } from "../../src/utils/data/get-country-config";
 import { formatCompactCountryCurrency } from "../../src/utils/formatter";
 import { DonationField } from "../../src/utils/types";
 import { getDonations } from "../data/load-donations";
 import { promptCountries } from "../utils";
+import { interpolate } from "./string";
 
 import type { CountryConfig } from "../../src/utils/countries";
 import type { ConstLocale } from "../../src/utils/locales";
@@ -215,16 +216,25 @@ const main = async () => {
     log("Found party diffs:", partyDiffs);
 
     const lang = countryTranslations[country];
-    const translations = await getTranslations(lang);
-    let message = `${countryFlags[countryConfig.id]} ${t(
+
+    const t = createTranslator({
+      locale: lang,
+      messages: (
+        await import(`../../src/messages/${lang}.json`, {
+          with: { type: "json" },
+        })
+      ).default,
+    });
+
+    let message = `${countryFlags[countryConfig.id]} ${interpolate(
       messageTranslations[lang].title,
       {
-        country: getCountryName(countryConfig, translations),
+        country: getCountryName(countryConfig, t),
       },
     )}\n`;
 
     partyDiffs.slice(0, PARTIES_TO_LIST_FULLY).forEach(([receiver, data]) => {
-      message += `- ${t(messageTranslations[lang].line, {
+      message += `- ${interpolate(messageTranslations[lang].line, {
         receiver: getParty(countryConfig, receiver as ReceiverId).short,
         delta:
           deltaPrefix(data.delta) +
@@ -243,7 +253,7 @@ const main = async () => {
         otherCount += data.count;
       });
 
-      message += `${t(messageTranslations[lang].more, {
+      message += `${interpolate(messageTranslations[lang].more, {
         otherParties: otherParties.length,
         otherDelta:
           deltaPrefix(otherDelta) +
@@ -252,8 +262,8 @@ const main = async () => {
       })}`;
     }
 
-    message += `\n${t(messageTranslations[lang].hashtags, {
-      country: toHashTag(getCountryName(countryConfig, translations)),
+    message += `\n${interpolate(messageTranslations[lang].hashtags, {
+      country: toHashTag(getCountryName(countryConfig, t)),
     })}`;
 
     message += `\nhttps://donation.watch/${lang}/${countryConfig.id}`;

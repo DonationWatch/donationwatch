@@ -1,6 +1,6 @@
 "use client";
-
 import { Map, Workflow } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { DonationStateMap } from "./chart/donation-state-map";
@@ -8,8 +8,6 @@ import { DonationStateSankey } from "./chart/donation-state-sankey";
 import { DynamicGeoJsonLoader } from "./dynamic-geojson-loader";
 import { NavigationTab } from "./navigation-tab";
 import { TabList } from "./tabs";
-import { t } from "../app/[locale]/translations";
-import { useTranslations } from "../hooks/use-translations";
 import { type CountryConfig, getCountryName } from "../utils/countries";
 
 import type { Donation, Party } from "../utils/types";
@@ -30,7 +28,7 @@ export const DonationOriginVisual = ({
   parties: Party[];
   subtitle: string;
 }) => {
-  const { translations } = useTranslations();
+  const t = useTranslations();
 
   const [chartType, setChartType] = useState<ChartType>(DEFAULT_TYPE);
 
@@ -39,13 +37,13 @@ export const DonationOriginVisual = ({
       <TabList>
         <NavigationTab
           icon={<Map size={16} aria-hidden={true} />}
-          label={translations.origin.type.map}
+          label={t("origin.type.map")}
           isActive={chartType === "map"}
           onClick={() => setChartType("map")}
         />
         <NavigationTab
           icon={<Workflow size={16} aria-hidden={true} />}
-          label={translations.donors.sankey.title}
+          label={t("donors.sankey.title")}
           isActive={chartType === "sankey"}
           onClick={() => setChartType("sankey")}
         />
@@ -59,8 +57,8 @@ export const DonationOriginVisual = ({
               donations={donations}
               years={years}
               parties={parties}
-              title={t(translations.origin.country.title, {
-                country: getCountryName(country, translations),
+              title={t("origin.country.title", {
+                country: getCountryName(country, t),
               })}
               subtitle={subtitle}
             />
@@ -71,8 +69,8 @@ export const DonationOriginVisual = ({
             country={country}
             parties={parties}
             years={years}
-            title={t(translations.origin.country.title, {
-              country: getCountryName(country, translations),
+            title={t("origin.country.title", {
+              country: getCountryName(country, t),
             })}
             subtitle={subtitle}
           />

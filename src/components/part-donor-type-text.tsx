@@ -1,11 +1,10 @@
 "use client";
+import { useTranslations, useLocale } from "next-intl";
 
 import Loading from "./loading";
 import { PercentageHint } from "./percentage-hint";
 import { RankBadge } from "./ranking-item";
-import { t } from "../app/[locale]/translations";
 import { useDonationsByParty } from "../hooks/use-api";
-import { useTranslations } from "../hooks/use-translations";
 import { formatCountryCurrency } from "../utils/formatter";
 import { DonationField, DonorType } from "../utils/types";
 
@@ -19,7 +18,9 @@ export const LoadingPartyDonorTypeText = ({
   country: CountryConfig;
   party: Party;
 }) => {
-  const { translations, locale } = useTranslations();
+  const t = useTranslations();
+  const tData = useTranslations("data");
+  const locale = useLocale();
 
   const {
     data: donations,
@@ -28,7 +29,7 @@ export const LoadingPartyDonorTypeText = ({
   } = useDonationsByParty(country, party);
 
   if (isLoading) return <Loading />;
-  if (error || !donations) return <div>{translations.data_error}</div>;
+  if (error || !donations) return <div>{tData("error")}</div>;
 
   const sumByType: Partial<Record<DonorType, { sum: number; count: number }>> =
     {};
@@ -53,14 +54,14 @@ export const LoadingPartyDonorTypeText = ({
   return (
     <>
       <p>
-        {translations.party.donor_types.p0}
+        {t("party.donor_types.p0")}
         <br />
-        {t(translations.party.donor_types.p1, {
+        {t("party.donor_types.p1", {
           count: sortedEntries.length,
           party: party.short,
         })}
       </p>
-      <p>{translations.party.donor_types.p2}</p>
+      <p>{t("party.donor_types.p2")}</p>
       <ul className="mx-2 py-2 *:py-1">
         {sortedEntries.map(([type, stats], idx) => {
           const donorType = type as unknown as DonorType;
@@ -72,9 +73,7 @@ export const LoadingPartyDonorTypeText = ({
             >
               <div className="flex items-center overflow-x-hidden">
                 <RankBadge rank={idx + 1} />
-                <span className="truncate">
-                  {translations.donor_type[donorType]}
-                </span>
+                <span className="truncate">{t(`donor_type.${donorType}`)}</span>
               </div>
               <div className="ml-2 flex tabular-nums">
                 <span className="lg:mr-1">

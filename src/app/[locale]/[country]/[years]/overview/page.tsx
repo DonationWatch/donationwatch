@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { DonationYearScatterPlot } from "../../../../../components/chart/donation-year-scatter-plot";
 import { DonationsPieChart } from "../../../../../components/chart/donations-pie-chart";
@@ -33,7 +34,6 @@ import { generateAlternates } from "../../../../../utils/meta";
 import { notFoundMetadata } from "../../../../../utils/not-found-metadata";
 import { deserializeYears } from "../../../../../utils/serializers";
 import { isValidCountry, isValidLocale } from "../../../../../utils/validate";
-import { getTranslations, t } from "../../../translations";
 
 import type { Country } from "../../../../../utils/countries";
 import type { PartySum } from "../../../../../utils/data/get-parties-sum";
@@ -47,17 +47,18 @@ export async function generateMetadata(
 
   if (!isValidLocale(params.locale)) return notFoundMetadata;
   if (!isValidCountry(params.country)) return notFoundMetadata;
+  setRequestLocale(params.locale);
 
   const { locale, country } = params;
   const years = params.years;
 
-  const [translations, countryConfig, partyYearSums] = await Promise.all([
-    getTranslations(locale),
+  const [t, countryConfig, partyYearSums] = await Promise.all([
+    getTranslations({ locale }),
     getCountryConfig(country),
     getPartyYearsSums(country),
   ]);
 
-  const countryName = getCountryName(countryConfig, translations);
+  const countryName = getCountryName(countryConfig, t);
   const deserializedYears = deserializeYears(years);
   const yearRange = formatYearsRange(deserializedYears);
   const parties = getParties(countryConfig, deserializedYears);
@@ -68,7 +69,7 @@ export async function generateMetadata(
     deserializedYears,
   );
 
-  const description = t(translations.page_title.years.description, {
+  const description = t("page_title.years.description", {
     year: yearRange,
     country: countryName,
     parties: parties.length,
@@ -82,7 +83,7 @@ export async function generateMetadata(
   });
 
   return {
-    title: `${t(translations.page_title.years.overview, {
+    title: `${t("page_title.years.overview", {
       year: yearRange,
       country: countryName,
     })}`,
@@ -102,11 +103,12 @@ export default async function OverviewPage(props: {
 
   if (!isValidLocale(params.locale)) return notFound();
   if (!isValidCountry(params.country)) return notFound();
+  setRequestLocale(params.locale);
 
   const { locale } = params;
   const years = deserializeYears(params.years);
-  const [translations, countryConfig, partyYearSums] = await Promise.all([
-    getTranslations(params.locale),
+  const [t, countryConfig, partyYearSums] = await Promise.all([
+    getTranslations({ locale }),
     getCountryConfig(params.country),
     getPartyYearsSums(params.country),
   ]);
@@ -120,18 +122,18 @@ export default async function OverviewPage(props: {
       <div className="grow">
         <Article
           skipTitleOffset={true}
-          title={translations.years.no_data.title}
+          title={t("years.no_data.title")}
           subtitle={
             <>
               <p>
-                {t(translations.years.no_data.summary, {
+                {t("years.no_data.summary", {
                   year: formatYearsRange(years),
                 })}
                 {lastYearWithData
                   ? " " +
-                    t(translations.years.no_data.last_year, {
-                      year: lastYearWithData[0],
-                    })
+                  t("years.no_data.last_year", {
+                    year: lastYearWithData[0],
+                  })
                   : null}
               </p>
               {lastYearWithData ? (
@@ -139,7 +141,6 @@ export default async function OverviewPage(props: {
                   className="card card--action mt-8"
                   country={countryConfig}
                   idPrefix="list-"
-                  translations={translations}
                   locale={locale}
                   years={[lastYearWithData[0]]}
                   partySums={partyYearSums}
@@ -183,11 +184,11 @@ export default async function OverviewPage(props: {
             <ArticleSectionTitle
               as={"h1"}
               id={"sec-years-overview"}
-              title={translations.overview.detail.title}
+              title={t("overview.detail.title")}
             />
-            <p className="mb-6">{translations.overview.detail.summary}</p>
+            <p className="mb-6">{t("overview.detail.summary")}</p>
             <p className="mb-6">
-              {t(translations.overview.detail.summary2, {
+              {t("overview.detail.summary2", {
                 years: formatAnd(params.locale, years),
                 partyCount: sums.length,
                 donationCount: count,
@@ -206,7 +207,7 @@ export default async function OverviewPage(props: {
             {topDonationSums.length ? (
               <p className="mb-6">
                 <Translation
-                  text={translations.overview.detail.highest_sum}
+                  text={t.raw("overview.detail.highest_sum")}
                   variables={{
                     years: formatYearsRange(years),
                     parties: (
@@ -217,7 +218,6 @@ export default async function OverviewPage(props: {
                             <TextPartyLink
                               country={countryConfig}
                               party={receiverId}
-                              translations={translations}
                               locale={locale}
                             />
                             (
@@ -238,13 +238,12 @@ export default async function OverviewPage(props: {
             {mostDonations && (
               <p className="mb-6">
                 <Translation
-                  text={translations.overview.detail.most_donations}
+                  text={t.raw("overview.detail.most_donations")}
                   variables={{
                     party: (
                       <TextPartyLink
                         party={mostDonations[0]}
                         country={countryConfig}
-                        translations={translations}
                         locale={locale}
                       />
                     ),
@@ -259,8 +258,6 @@ export default async function OverviewPage(props: {
               </p>
             )}
             <TopPartyYearDonations
-              translations={translations}
-              locale={locale}
               years={years}
               country={countryConfig}
               sums={sums}
@@ -286,16 +283,16 @@ export default async function OverviewPage(props: {
               <ArticleSectionTitle
                 as={"h2"}
                 id={"sec-scatter"}
-                title={translations.overview.scatter.title}
+                title={t("overview.scatter.title")}
               />
-              <p className="mb-6">{translations.overview.scatter.summary}</p>
+              <p className="mb-6">{t("overview.scatter.summary")}</p>
               <DonationYearScatterPlot
                 years={years}
                 country={countryConfig}
                 parties={parties}
-                title={translations.overview.scatter.title}
-                subtitle={t(translations.overview.scatter.subtitle, {
-                  country: getCountryName(countryConfig, translations),
+                title={t("overview.scatter.title")}
+                subtitle={t("overview.scatter.subtitle", {
+                  country: getCountryName(countryConfig, t),
                   years: formatYearsRange(years),
                 })}
               />

@@ -1,13 +1,15 @@
+"use client";
+
 import Link from "next/link";
+import { useTranslations, useLocale } from "next-intl";
 
 import { useHash } from "../hooks/use-hash";
-import { useTranslations } from "../hooks/use-translations";
 import { cn } from "../utils/classname";
 
 import type { CountryConfig } from "../utils/countries";
 import type { PropsWithChildren } from "react";
 
-import { getDonorName } from "@/utils/donor";
+import { DonorName } from "@/components/donor-name";
 
 export const DonorLink = ({
   children,
@@ -19,7 +21,8 @@ export const DonorLink = ({
   className?: string;
   country: CountryConfig;
 }>) => {
-  const { translations, locale } = useTranslations();
+  const t = useTranslations();
+  const locale = useLocale();
   const { hash, isHashing, error } = useHash(donor);
 
   if (isHashing || error)
@@ -34,9 +37,9 @@ export const DonorLink = ({
         "hover:text-primary-700 dark:hover:text-primary-400 font-medium",
         className,
       )}
-      title={translations.donor_dialog.title}
+      title={t("donor_dialog.title")}
     >
-      {children ?? getDonorName(donor, translations)}
+      {children ?? <DonorName donor={donor} />}
     </Link>
   );
 };

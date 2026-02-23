@@ -1,14 +1,16 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+
 import { TopDonationsItemDetail } from "./loading-top-year-donations-item-detail";
 import { CurrencyRankingItem } from "./ranking-item";
 import { AddressField, DonationField } from "../utils/types";
 
-import type { Translations } from "../messages/translations";
 import type { CountryConfig } from "../utils/countries";
 import type { Donation } from "../utils/types";
 
 export const OriginDonationsItem = ({
   id,
-  translations,
   country,
   amount,
   rank,
@@ -18,7 +20,6 @@ export const OriginDonationsItem = ({
   onToggleExpanded,
 }: {
   id: string;
-  translations: Translations;
   amount: number;
   rank: number;
   sum: number;
@@ -28,6 +29,7 @@ export const OriginDonationsItem = ({
   expanded: boolean;
   onToggleExpanded: (expanded: boolean) => void;
 }) => {
+  const t = useTranslations();
   const address = donations.at(0)?.[DonationField.Address];
 
   if (!address) return null;
@@ -52,10 +54,12 @@ export const OriginDonationsItem = ({
       >
         {address[AddressField.State] &&
         address[AddressField.State] !== address[AddressField.Country]
-          ? (translations.state as Record<string, Record<string, string>>)[
-              country.id
-            ][address[AddressField.State]]
-          : translations.countries[address[AddressField.Country]]}
+          ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            t(`state.${country.id}.${address[AddressField.State]}`)
+          : // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            t(`countries.${address[AddressField.Country]}`)}
       </CurrencyRankingItem>
     </li>
   );

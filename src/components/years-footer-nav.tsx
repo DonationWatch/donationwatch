@@ -1,15 +1,13 @@
+"use client";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
-import { t } from "../app/[locale]/translations";
-
-import type { Translations } from "../messages/translations";
 import type { CountryConfig } from "../utils/countries";
 import type { ConstLocale } from "../utils/locales";
 
 const YearsFooterLink = ({
   next,
-  translations,
   year,
   locale,
   country,
@@ -17,13 +15,13 @@ const YearsFooterLink = ({
   year: number;
   locale: ConstLocale;
   country: CountryConfig;
-  translations: Translations;
   next?: boolean;
 }) => {
+  const t = useTranslations("years");
   return (
     <Link
       prefetch={false}
-      title={t(translations.years.goto_year, { year })}
+      title={t("goto_year", { year })}
       className="hover:text-primary-800 dark:hover:text-primary-400 flex items-center space-x-2 rounded-sm border border-transparent px-5 py-2 font-semibold uppercase hover:border-slate-300 dark:hover:border-slate-700"
       href={`/${locale}/${country.id}/${year}`}
     >
@@ -36,12 +34,10 @@ const YearsFooterLink = ({
 
 export const YearsFooterNav = ({
   years,
-  translations,
   country,
   locale,
 }: {
   years: string[];
-  translations: Translations;
   locale: ConstLocale;
   country: CountryConfig;
 }) => {
@@ -72,12 +68,7 @@ export const YearsFooterNav = ({
       <div className="border-t border-t-gray-200 dark:border-t-gray-800"></div>
       <div className="flex justify-between py-4">
         {canGoBack ? (
-          <YearsFooterLink
-            country={country}
-            locale={locale}
-            year={prevYear}
-            translations={translations}
-          />
+          <YearsFooterLink country={country} locale={locale} year={prevYear} />
         ) : (
           <div></div>
         )}
@@ -87,7 +78,6 @@ export const YearsFooterNav = ({
             locale={locale}
             year={nextYear}
             next={true}
-            translations={translations}
           />
         ) : (
           <div></div>

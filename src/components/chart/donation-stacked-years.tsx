@@ -1,11 +1,9 @@
 "use client";
-
 import { useRouter } from "next/navigation";
+import { useTranslations, useLocale } from "next-intl";
 
 import { ExpandableReactEchart } from "./expandable-react-echart";
-import { t } from "../../app/[locale]/translations";
 import { useChart } from "../../hooks/use-chart";
-import { useTranslations } from "../../hooks/use-translations";
 import { getCountryName } from "../../utils/countries";
 import {
   formatCompactCountryCurrency,
@@ -30,7 +28,8 @@ export const DonationStackedYears = ({
   country: CountryConfig;
   partyYearsSums: PartyYearsSums;
 }) => {
-  const { translations, locale } = useTranslations();
+  const t = useTranslations();
+  const locale = useLocale();
   const router = useRouter();
   const { backgroundColor, isMobile, isDark } = useChart();
 
@@ -130,9 +129,9 @@ export const DonationStackedYears = ({
     <div className="flex items-center justify-center">
       <ExpandableReactEchart
         height={chartHeight}
-        title={translations.home.stacked_years}
-        subtitle={t(translations.home.stacked_years_subtitle, {
-          country: getCountryName(country, translations),
+        title={t("home.stacked_years")}
+        subtitle={t("home.stacked_years_subtitle", {
+          country: getCountryName(country, t),
           years: formatYearsRange(country.years),
         })}
         country={country}

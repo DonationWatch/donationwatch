@@ -1,9 +1,8 @@
 "use client";
-
 import { Languages } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 
-import { useTranslations } from "../hooks/use-translations";
 import { CONST_LOCALES } from "../utils/locales";
 import {
   DropdownMenu,
@@ -27,7 +26,7 @@ const languagesInTheirLanguage: Record<(typeof CONST_LOCALES)[number], string> =
   };
 
 export const LangSwitch = () => {
-  const { translations } = useTranslations();
+  const t = useTranslations();
   const pathname = usePathname();
 
   const [activeLocale, ...path] = pathname.substring(1).split("/");
@@ -37,8 +36,8 @@ export const LangSwitch = () => {
       <DropdownMenuTrigger
         render={
           <button
-            aria-label={translations.header.language_selection}
-            title={translations.header.language_selection}
+            aria-label={t("header.language_selection")}
+            title={t("header.language_selection")}
             className="group flex size-10 cursor-pointer items-center justify-center rounded-full p-1 hover:bg-neutral-600/10"
           />
         }
@@ -48,7 +47,7 @@ export const LangSwitch = () => {
       <DropdownMenuContent className="w-56" align="start">
         <DropdownMenuGroup>
           <DropdownMenuLabel>
-            {translations.header.language_selection}
+            {t("header.language_selection")}
           </DropdownMenuLabel>
           {CONST_LOCALES.map((lang) => (
             <DropdownMenuItem

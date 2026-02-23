@@ -1,9 +1,7 @@
-"use client";
-
 import { ChevronRight } from "lucide-react";
+import { useLocale } from "next-intl";
 
 import { PercentageHint } from "./percentage-hint";
-import { useTranslations } from "../hooks/use-translations";
 import { formatCountryCurrency } from "../utils/formatter";
 
 import type { CountryConfig } from "../utils/countries";
@@ -51,7 +49,7 @@ export const CurrencyRankingItem = ({
   onToggleExpanded: (expanded: boolean) => void;
   openAction?: ReactNode;
 }>) => {
-  const { locale } = useTranslations();
+  const locale = useLocale();
 
   return (
     <RankingItem

@@ -37,3 +37,5 @@ export const SIDENAV_PERSISTENCE_KEY = "sidebar-open";
 // Should use Unicode Private Use Area (PUA)
 export const REDACTED_DONOR_KEYWORD = "\uE000";
 export const ANONYMIZED_DONOR_KEYWORD = "\uE001";
+
+export const DATA_LICENSE = "CC BY 4.0";

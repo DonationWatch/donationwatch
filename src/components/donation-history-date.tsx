@@ -1,6 +1,6 @@
 "use client";
+import { useLocale } from "next-intl";
 
-import { useTranslations } from "../hooks/use-translations";
 import { dateDiffInDays, donationYear } from "../utils/date";
 import { formatDate, formatRelativeDate } from "../utils/formatter";
 import { DonationField } from "../utils/types";
@@ -12,7 +12,7 @@ export const DonationHistoryDate = ({
   date: string;
   now: number;
 }) => {
-  const { locale } = useTranslations();
+  const locale = useLocale();
 
   if (date === donationYear({ [DonationField.Date]: date }))
     return <div className="shrink-0 text-sm">{date}</div>;

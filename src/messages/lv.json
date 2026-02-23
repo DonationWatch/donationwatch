@@ -1,0 +1,684 @@
+{
+  "copyright": "Autortiesības",
+  "description": "DonationWatch sniedz skaidru ieskatu par ziedotājiem un partijām, atvieglojot izpratni par politisko finansējumu, vienkāršā veidā izskaidrojot sarežģītus datus.",
+  "title": "Partiju ziedojumi {country}",
+  "sum": "Summa",
+  "donation_count": "Ziedojumu skaits",
+  "average": "Vidējais",
+  "donations_by_party": "Ziedojumi pa pusēm",
+  "donations_per_year": "Ziedojumi gadā",
+  "party_donations": "Partiju ziedojumi",
+  "more": "Vairāk",
+  "data_since": "Kopš {year}. gada",
+  "view_party": "Apskatīt {party} partijas lapu",
+  "faq": "Bieži uzdotie jautājumi",
+  "data": {
+    "loading": "Saturs tiek ielādēts...",
+    "error": "Kļūda datu ielādē"
+  },
+  "sidebar": {
+    "toggle": "Pārslēgt sānjoslu",
+    "donations": "Ziedojumi",
+    "all_countries": "Visas valstis",
+    "tools": "Rīki",
+    "show_all": "Rādīt visu ({num})",
+    "show_less": "Rādīt mazāk"
+  },
+  "search": {
+    "filter": "Meklēt...",
+    "filter_description": "Partiju, gadu vai ziedotāju meklēšana",
+    "parties": "Puses",
+    "years": "Gadi",
+    "legislative_years": "Likumdošanas gadi",
+    "empty": "Rezultāti nav atrasti",
+    "donors": "Ziedotāji"
+  },
+  "page_title": {
+    "years": {
+      "description": "{year}. gadā {parties} partijas {country} saņēma kopā {sum} no {count} ziedojumiem virs {minAmount}. Izpētiet detalizētu sadalījumu pa partijām, ziedotājiem un politiskās finansēšanas tendencēm.",
+      "overview": "Politisko partiju ziedojumu pārskats {country} gadā {year}",
+      "changes": "Jaunākās izmaiņas politisko partiju ziedojumos {country} gadā {year}",
+      "donors": "Galvenie ziedotāji politiskajām partijām {country} gadā {year}",
+      "timeline": "Politisko partiju ziedojumu laika grafiks {country} gadā {year}",
+      "origin": "Ģeogrāfiskais politisko partiju ziedojumu pārskats {country} gadā {year}"
+    },
+    "party": {
+      "donors": "{party} galvenie ziedotāji {country}",
+      "changes": "Jaunākās izmaiņas {party} ziedojumos {country}",
+      "timeline": "{party} partijas ziedojumu laika grafiks {country}",
+      "origin": "{party} partijas ziedojumu ģeogrāfiskais pārskats {country}",
+      "description": "Kopš {year} partija {party} ir saņēmusi kopumā {count} ziedojumus, kas pārsniedz {minimumAmount}, kopsummā {sum}. Izpētiet detalizētu informāciju par lielākajiem ziedotājiem un ziedojumu tendencēm partijai {party} valstī {country}."
+    },
+    "donor": {
+      "overview": "{donor} ziedojumi {country}",
+      "description": "{donor} kopumā ir ziedojis {sum} {count} ziedojumos, kas pārsniedz {minAmount} kopš {minYear}. Šie ziedojumi tika sadalīti {parties} dažādām partijām. Izpētiet detalizētu informāciju par šī ziedotāja ziedošanas paradumiem un saņēmējpartijām valstī {country}."
+    }
+  },
+  "chart": {
+    "save_as_image": "Saglabāt kā attēlu",
+    "toggle_fullscreen": "Pārslēgšanās uz pilnekrāna režīmu",
+    "reset_zoom": "Atiestatīt tālummaiņu"
+  },
+  "over_min_public_amount": "vairāk nekā {amount}",
+  "over_threshold": "tikai partijas ar ≥ {count} ziedojumiem vai ≥ {sum}",
+  "prelim_data": "provizoriskie dati kopš {year}. gada",
+  "excludes_year_only_donations": "izslēdz ziedojumus ar gadu kā datumu",
+  "common": {
+    "date": "datums",
+    "party": "Puse",
+    "donor": "Donors",
+    "amount": "Summa",
+    "anonymizedDonor": "Anonimizēts ziedotājs",
+    "redactedDonor": "Rediģēts ziedotājs",
+    "country": "Valsts",
+    "state": "Štats",
+    "summary": "Kopsavilkums"
+  },
+  "sort": {
+    "asc": "Kārtot augošā secībā",
+    "desc": "Kārtot dilstoši",
+    "clear": "Atcelt šķirošanu"
+  },
+  "footer": {
+    "sources": "Avoti",
+    "build": "Stāvoklis {date}",
+    "build_since": "No {date}, kopš {year}",
+    "published_by": "Kā publicējis {source}",
+    "charts_license": "Diagrammas licencētas saskaņā ar {license} ar norādi uz autoru"
+  },
+  "header": {
+    "home": "Sākumlapa",
+    "language_selection": "Valodas izvēle",
+    "country_selection": "Valstu izvēle"
+  },
+  "actions": {
+    "close": "Aizvērt",
+    "play": "Atskaņot",
+    "pause": "Pauzēt",
+    "restart": "Restartēt"
+  },
+  "donor_dialog": {
+    "title": "Donora informācija",
+    "summary": "Kopsavilkums"
+  },
+  "donation_dialog": {
+    "title": "Informācija par ziedojumiem",
+    "donor": "Donors",
+    "country": "Valsts",
+    "state": "Federālā valsts",
+    "receiver": "Uztvērējs",
+    "donation_amount": "Ziedojuma summa",
+    "date": "datums"
+  },
+  "root": {
+    "title": "Atvērtā pirmkoda politisko partiju ziedojumu izsekotājs",
+    "subtitle": "Izseko un izpēti politiskos ziedojumus vairākās valstīs. Saprotiet, kas finansē politiskās partijas un kā nauda plūst visā pasaulē.",
+    "stats": {
+      "countries": "Aptvertās valstis",
+      "parties": "Politiskās partijas",
+      "donations": "Individuālie ziedojumi",
+      "currencies": "Izsekotās valūtas"
+    },
+    "countries": {
+      "title": "Izpēti politiskos ziedojumus pēc valsts",
+      "subtitle": "Izvēlieties valsti, lai piekļūtu detalizētiem ziedojumu ierakstiem, partiju finansēšanas datiem un informācijai par ziedotājiem."
+    },
+    "why": {
+      "title": "Kāpēc politisko ziedojumu caurredzamība ir svarīga",
+      "p0": "Demokrātija balstās uz informētiem pilsoņiem. Padarot politisko ziedojumu datus pieejamus un viegli izpētāmus, mēs palīdzam cilvēkiem izprast finanšu attiecības, kas veido viņu politisko vidi. Caurredzamība politiskajā finansēšanā vairo uzticēšanos, stiprina atbildību un dod vēlētājiem iespēju pieņemt informētus lēmumus."
+    },
+    "open_source": {
+      "title": "Atvērtā pirmkoda",
+      "p0": "DonationWatch ir atvērtā pirmkoda projekts. Tu vari apskatīt kodu, ziņot par problēmām vai sniegt ieguldījumu vietnē {github}."
+    }
+  },
+  "home": {
+    "most_recent": "Jaunākie ziedojumi",
+    "hero": {
+      "subtitle": "Politisko partiju ziedojumu izsekotājs {country}",
+      "subtitle_no_country": "Politisko partiju ziedojumu izsekošana"
+    },
+    "biggest_donations": {
+      "text": "Since {minYear}, the biggest disclosed single donation in {country} reached {amount} from {donor} to {party} in {year}. This is followed by {others}.",
+      "list": "{amount} from {donor} to {receiver}"
+    },
+    "last_period": "Pēdējais gads:",
+    "previous_period": "Iepriekšējā gada ziedojumi.",
+    "what": {
+      "title": "Kas tas ir?",
+      "summary": "Partiju ziedojumi ir svarīga politikas sastāvdaļa. Tie ir svarīgs politiskā atbalsta rādītājs. Mēs cenšamies šos datus sniegt skaidri un saprotami.",
+      "threshold": "Ņemot vērā lielo mazāko politisko partiju skaitu, mēs reģistrējam ziedojumus tikai tām partijām, kas sasniedz noteiktu slieksni. Pašreizējais slieksnis ir noteikts kā {count} ziedojumi vai kopējā summa {sum} iemaksās šai partijai neatkarīgi no atsevišķu ziedojumu apmēra.",
+      "source": {
+        "austria": "Šeit izmantotie dati ir iegūti no Austrijas Revīzijas palātas un ietver visus partiju ziedojumus, kas dokumentēti kopš 2012. gada.\n\nLūdzu, ņemiet vērā: līdz 2019. gada 8. jūlijam politiskajām partijām bija jāziņo Revīzijas palātai par individuāliem ziedojumiem virs 51 000 eiro (līdz 2018. gadam - virs 50 000 eiro). Kopš 2019. gada jūlija ziņošanas ierobežojums ir 2500 eiro.\n\nPartijas datus parasti atjaunina reizi ceturksnī.",
+        "germany": "Šeit izmantotie dati ir iegūti no Vācijas Bundestāga un ietver visus partiju ziedojumus virs 50 000 eiro, kas dokumentēti kopš 2010. gada, un virs 35 000 eiro kopš 2024. gada 5. marta.",
+        "switzerland": "Šeit izmantotie dati ir iegūti no Šveices Federālās revīzijas iestādes un ietver visus partiju ziedojumus, kas dokumentēti kopš 2023. gada.",
+        "netherlands": "Šeit sniegtā informācija ir iegūta no Nīderlandes valdības un ietver visas kopš 2022. gada reģistrētās politiskās ziedojumus, kas pārsniedz 1 000 €, kā norādīts ikgadējā ziņojumā „Overzicht van giften aan politieke partijen en hun neveninstellingen“.\n\nPašreizējam gadam ir iekļauti tikai ziedojumi, kas pārsniedz 10 000 €, balstoties uz datu kopu „Overzicht substantiële giften aan politieke partijen“.\n\nLūdzu, ņemiet vērā: daļai ziedojumu nav norādīts konkrēts datums, tāpēc tie nav iekļauti laika rindās vai citās datumbāzētās vizualizācijās.\n\nSP un GL ziņotie ziedojumi var šķist salīdzinoši augsti, jo abas partijas prasa, lai to deputāti un vadītāji nozīmīgu daļu sava atalgojuma ziedotu partijai.",
+        "europeanunion": "Šeit sniegtie dati ir iegūti no Eiropas Politisko partiju un Eiropas Politisko fondu iestādes, aptverot visus dokumentētos partiju un fondu ziedojumus kopš 2018. gada. Ņemot vērā Eiropas politisko fondu nozīmi, mēs to ziedojumus izsekojam un atspoguļojam līdzīgi kā Eiropas politisko partiju ziedojumus.\n\nTā kā oficiālie dati neietver datus, nav pieejamas laika rindas vai līdzīgi vizuāli attēli.\n\nJāņem vērā, ka pirms 2024. gada Eiropas Parlamenta vēlēšanām (no 2023. gada 6. decembra līdz 2024. gada 10. jūnijam) tika piemērotas īpašas prasības par ziedojumu ziņošanu, iestādei ik nedēļu sniedzot ziņojumus un tos savlaicīgi publicējot.\nNo 2024. gada 10. jūnija nekavējoties jāziņo tikai par ziedojumiem, kas pārsniedz 12 000 euro. Pārējie ziedojumi būs pieejami tikai pēc gada finanšu pārskatu iesniegšanas.",
+        "estonia": "Šeit izmantotie dati ir iegūti no Igaunijas Partiju finansēšanas uzraudzības komitejas, un tie ietver visus kopš 2014. gada dokumentētos politiskos ziedojumus, kas pārsniedz 1 eiro.\n\nIgaunijas politiskajām partijām ir pienākums reizi ceturksnī ziņot par saviem ienākumiem, tostarp saņemtajiem ziedojumiem.\nDati komitejas tīmekļa vietnē tiek attiecīgi atjaunināti reizi ceturksnī.",
+        "czechrepublic": "Šeit izmantotie dati nāk no Politisko partiju un politisko kustību administrācijas uzraudzības biroja un ietver visas politiskās ziedojumu reģistrācijas kopš 2018. gada, kuru summa pārsniedz 25 CZK.\n\nŠis tvērums ietver arī visus ziedojumus partijām vai politiskajām kustībām, kas vai nu saņēmušas vairāk nekā 100 individuālus ziedojumus, vai kuru kopējā ziedojumu summa pārsniedz 1 miljonu CZK, neatkarīgi no atsevišķu ziedojumu lieluma. Dati tiek atjaunoti reizi gadā.\nZiedotāja veida noteikšana balstās uz identifikāciju kā fizisku personu, ja ir aizpildīti gan firstName, gan lastName lauki.",
+        "latvia": "Šeit izmantotie dati ir iegūti no Eiropas Politisko partiju un Eiropas Politisko fondu iestādes, un tie ietver visus partiju ziedojumus, kas dokumentēti kopš 2018. gada.\n\nTā kā oficiālie dati neietver datus, nav pieejamas laika rindas vai līdzīgi vizuāli attēli.\n\nJāņem vērā, ka pirms 2024. gada Eiropas Parlamenta vēlēšanām (no 2023. gada 6. decembra līdz 2024. gada 10. jūnijam) tika piemēroti īpaši ziņošanas pienākumi par ziedojumiem, iestādei ik nedēļu sniedzot ziņojumus un tos savlaicīgi publicējot.\nNo 2024. gada 10. jūnija nekavējoties jāziņo tikai par ziedojumiem, kas pārsniedz 12 000 euro. Pārējie ziedojumi būs pieejami tikai pēc gada finanšu pārskatu iesniegšanas.",
+        "australia": "Šeit izmantotie dati nāk no Austrālijas Vēlēšanu komisijas (AEC), un konkrēti no AEC publicētā datu kopuma \"Donations Made Details\". Tas ietver visus tajā dokumentētos politiskos ziedojumus kopš 2014. gada, kas pārsniedz €1.\n\nJāņem vērā, ka AEC datu kopā var būt dažas drukas kļūdas, kā rezultātā atsevišķi ziedojumi var netikt iekļauti vai datu ievades nekonsekvenču dēļ netikt pareizi piesaistīti konkrētai partijai. Turklāt AEC ikgadējās atklāšanas tiek publicētas katru gadu 1. februārī, taču dati nesniedz pilnīgu priekšstatu par visiem ieguldījumiem, jo atklāšanas slieksnis ir $15,000.\n\nZiedotāju tipi tiek klasificēti, saskaņojot ziedotāju nosaukumus. Visas izplatītās arodbiedrības tiek manuāli piesaistītas ziedotāja tipam 'Arodbiedrība'. Uzņēmumi tiek noteikti, pārbaudot, vai ziedotāja nosaukumā ir konkrēti korporatīvie identifikatori: 'Pty' (Proprietary), 'Ltd' nosaukuma beigās, 'Corporation' vai 'Corp'.",
+        "unitedkingdom": "Šeit izmantotie dati ir iegūti no Vēlēšanu komisijas un ietver visus politiskos ziedojumus, kas dokumentēti kopš 2010. gada un pārsniedz 1000 sterliņu mārciņu.\n\nDati par ziedojumiem tiek atjaunināti reizi ceturksnī.",
+        "serbia": "Šeit izmantotie dati nav iegūti no valdības, bet gan no bezpeļņas organizācijas “Serbijas Izmeklēšanas žurnālistikas centrs” (“Centar za istraživačko novinarstvo Srbije” - CINS), kas laipni apkopoja Serbijas Korupcijas apkarošanas aģentūras ziedojumu datus.\n\nŠie dati ietver visus politiskos ziedojumus, kas dokumentēti kopš 2015. gada.\n\nTā kā datu kopa nesniedz konkrētu datumu informāciju par atsevišķiem ziedojumiem, diemžēl nav iespējams attēlot laika grafikus vai citas uz laiku balstītas vizualizācijas.",
+        "croatia": "Šeit izmantotie dati nāk no Horvātijas Republikas Valsts vēlēšanu komisijas (DIP) un ietver visus politiskos ziedojumus, kuru naudas vērtība pārsniedz 1 €, un kas ir dokumentēti kopš 2019. gada.\nDatu kopa katram pārskata gadam izmanto tikai pēdējo publicēto ziedojumu dokumentu (kā ziņo izbori), lai izvairītos no dublikātiem no iepriekšējām tā paša gada pārskata versijām.\nVisi ziedojumi tiek attēloti eiro, savukārt pamatā esošajā datu kopā līdz 2024. gadam tiek izmantotas kunas. Ziedojumi, kas sākotnēji veikti kunās, tiek konvertēti uz eiro, izmantojot aptuvenus valūtas kursus katram pusgadam no 2019. līdz 2024. gadam: H1 (0.1340, 0.1335, 0.1332, 0.1329, 0.1326) un H2 (0.1341, 0.1338, 0.1334, 0.1327, 0.1328).",
+        "canada": "Šeit izmantotie dati ir no Elections Canada un balstīti uz datu kopu “contributions as submitted”. Tie ietver visas politiskās ziedojumus ar naudas vērtību, kas pārsniedz 500 €, kas dokumentēti kopš 2015. gada. Iekļauti ir visi ieraksti, kas ir daļa no ziņojuma “Statement of Contributions Received” no vēlēšanu notikuma “Annual” reģistrētajām partijām.",
+        "georgia": "Šeit sniegtā informācija ir iegūta no Gruzijas Pretkorupcijas biroja (ანტიკორუფციული ბიურო﻿) un ietver visus politiskos ziedojumus, kas kopš 2011. gada pārsniedz 1 GEL. Datu kopa ietver tikai tādus ziedojumus, kas klasificēti kā tipa #10 (Naudas ziedojumi) vai tipa #16 (Naudas ziedojumi no juridiskām personām).",
+        "norway": "Šeit izmantotie dati nāk no Statistics Norway (SSB) un Partifinansiering.no oficiālajām partiju finansēšanas publikācijām. Attēlotās kopsummas ir agregētas no vairākām ziņotām saņēmēju vienībām (piemēram, centrālajām, reģionālajām, vietējām un jaunatnes struktūrvienībām) vienā kopsummā par katru partiju, saglabājot pieejamu pamatā esošo saņēmēju atbilstības kartējumu caurskatāmībai.\n\nNorvēģijas datu kopa tiek atjaunota reizi gadā, atspoguļojot pamatā esošo atklāšanas datu publicēšanas ritmu."
+      },
+      "source_link": "Datu avots"
+    },
+    "list": {
+      "subtitle": "Likumdošanas periodi",
+      "title": "Iepriekšējie likumdošanas periodi",
+      "summary": "Mūsu likumdošanas perioda pārskats sniedz pilnīgu pārskatu par visiem ziedojumiem likumdošanas perioda laikā. Noklikšķiniet uz kartes, lai apskatītu informāciju par konkrētu likumdošanas periodu."
+    },
+    "years": {
+      "title": "Partiju ziedojumu gada pārskats",
+      "subtitle": "Apkopotie kopsummas gada laikā",
+      "more": "Rādīt visus citus gadus",
+      "summary": "Mūsu ikgadējais partiju ziedojumu pārskats sniedz kopsavilkumu par visiem ziedojumiem par katru gadu. Noklikšķiniet uz kartes, lai atvērtu detalizētu gada pārskatu."
+    },
+    "parties": {
+      "title": "Partiju ziedojumi",
+      "subtitle": "Sīkāka informācija par atsevišķām pusēm",
+      "more": "Rādīt visas pārējās puses",
+      "summary": "Mūsu partiju ziedojumu pārskatā ir apkopoti visi katras partijas ziedojumi. Noklikšķiniet uz kartes, lai iegūtu detalizētu informāciju par ziedojumiem."
+    },
+    "donors": {
+      "title": "Ziedotāju ziedojumi",
+      "subtitle": "Informācija par atsevišķiem ziedotājiem",
+      "summary": "Atklājiet mūsu ziedotāju pārskatu, kurā parādīti nozīmīgākie finansiālie atbalstītāji kopš {minYear}. Noklikšķiniet uz ziedotāja, lai skatītu detalizētu informāciju par viņu ieguldījumu."
+    },
+    "stacked_years": "Ziedojuma summa gadā",
+    "stacked_years_subtitle": "Apvienotā publicēto ieguldījumu summa {country} pa gadiem no {years}."
+  },
+  "years": {
+    "title": "Partiju ziedojumi",
+    "subtitle": "Kopējā publicēto ziedojumu summa katrai partijai {country}, {years}.",
+    "goto_year": "Pāriet uz {year}. gadu.",
+    "no_data": {
+      "title": "Nav pieejamu datu",
+      "summary": "Atvainojamies, bet mums vēl nav ziedojumu datu par {year}. gadu.",
+      "last_year": "Alternatīvi varat apskatīt datus no {year}. gada."
+    }
+  },
+  "overview": {
+    "title": "Pārskats",
+    "detail": {
+      "title": "Lielākās politiskās partijas un to ziedojumu kopsumma",
+      "summary": "Šajā sarakstā ir norādītas svarīgākās politiskās partijas un to kumulatīvie ziedojumi noteiktā laika periodā, kas sakārtoti pēc ziedojumu apjoma.",
+      "summary2": "{years}. gadā kopumā {partyCount} partijas saņēma {donationSum}, izmantojot {donationCount} ziedojumus {minimumAmount} apmērā.",
+      "most_donations": "Visvairāk ziedojumu saņēma {party} - {count} ziedojumi, kuru kopējā summa bija {sum}.",
+      "highest_sum": "Piecas partijas ar vislielāko ziedojumu kopsummu ir {parties}."
+    },
+    "scatter": {
+      "title": "Ziedojumu sadale",
+      "subtitle": "Individuālie ziedojumi katrai partijai pēc summas un biežuma {country} no {years}.",
+      "summary": "Pārskats par partiju ziedojumu sadalījumu sniedz kodolīgu analīzi par ziedojumu sadalījumu starp dažādām politiskajām partijām. Katrs punkts attēlo partiju, x ass norāda ziedojumu summas, bet izkliedes diagramma - ziedojumu biežumu.",
+      "span": "Vislielākā ziedojumu starpība bija {biggestSpanParty} partijai - starpība starp mazāko un lielāko ziedojumu bija {biggestSpanAmount}."
+    },
+    "pie": {
+      "title": "Partiju ziedojumu sadale",
+      "subtitle": "Kopējie publicētie ziedojumi katrai partijai, {country}, {years}."
+    }
+  },
+  "changes": {
+    "title": "Izmaiņas",
+    "description": "Izpētiet detalizētu tabulu ar politisko partiju ziedojumiem {country} no {year}. Tikai ziedojumi virs {minAmount}, kārtoti pēc darījuma datuma, ar informāciju par ziedotāju un summu.",
+    "detail": {
+      "title": "Pušu ziedojumi pēc darījuma datuma",
+      "summary": "Šajā lapā ir redzami partiju ziedojumi, kas sakārtoti pēc darījuma datuma, un jaunākie ziedojumi ir norādīti augšpusē. Tiek sniegta informācija par to, cik daudz naudas katra partija ir saņēmusi no kāda ziedotāja."
+    }
+  },
+  "donors": {
+    "title": "Donors",
+    "description": "Skatiet pilnu {year}. gada politisko partiju ziedotāju sarakstu {country}. Uzziniet, kurš ziedoja visvairāk un cik katrs ir ziedojis.",
+    "detail": {
+      "title": "Ziedotāju ziedojumi politiskajām partijām",
+      "subtitle": "Kopējais publicēto individuālo ziedotāju ieguldījums katrai politiskajai partijai {country}, {years}.",
+      "summary": "Koku karte vizualizē partiju ziedojumus skaidri strukturētā veidā. Augšējā līmenī parādīti individuālie ziedotāji, kas attēloti ar taisnstūriem, kuru izmērs ir proporcionāls ziedojumu summai.",
+      "summary2": "Zem katra ziedotāja ir vēl citi taisnstūri, kas attēlo attiecīgās saņēmējas partijas. Šis hierarhiskais izkārtojums nodrošina ātru pārskatu par ziedojumu sadalījumu un uzreiz parāda, cik saņēmējus katrs ziedotājs ir atbalstījis.",
+      "unique_donors": "Dažādu donoru skaits {years}. gadā ir {count} donori.",
+      "biggest_donor": "Vislielāko kopējo ziedojumu {amount} apmērā veica {donor}.",
+      "most_donations": "{donor} ar {count} ziedojumiem (kopējā summa: {sum}) ir biežāko individuālo ziedotāju saraksta līdere.",
+      "most_unique_parties": "{donor} ziedoja kopumā {count} dažādām partijām (kopējā summa: {sum}), kas liecina par vislielāko ziedojumu saņēmēju daudzveidību.",
+      "top_3": "{years} gadā lielākie {amount} ziedotāji ir {donors}."
+    },
+    "list": {
+      "title": "Top individuālie ziedotāji pēc kopējām ziedojumu summām",
+      "p0": "Šajā sadaļā ir sniegts visu individuālo ziedotāju rangs izvēlētajos gados, kārtots pēc kumulatīvās summas no viņu publiskotajiem ziedojumiem. Tādējādi tiek izcelti tie ziedotāji, kuri ir ieguldījuši visvairāk."
+    },
+    "sankey": {
+      "title": "Sankey diagramma"
+    },
+    "histogram": {
+      "title": "Ziedotāju sadalījums pēc unikālo saņēmēju skaita",
+      "subtitle": "Unikālo politisko partiju skaits, kas saņēma publicētos ziedojumus no individuāliem ziedotājiem valstī {country}, {years}.",
+      "p0": "Šis diagrammas attēlojums sniedz pārskatu par to, kā individuālie ziedotāji sadala savus ziedojumus starp politiskajām partijām, iezīmējot, vai viņi mēdz koncentrēt atbalstu vienai partijai vai to sadalīt starp vairākām partijām laika gaitā.",
+      "p1": "Gadā {years} lielākais dažādu partiju skaits, ko atbalstīja viens ziedotājs, bija {max}. Tikai {donors} ziedotājs ziedoja {max} partijām. Vidēji katrs ziedotājs atbalstīja {mean} partijas (mediāna: {median}).",
+      "p2": "No {totalDonors} ziedotājiem {singlePartyDonors} ziedoja tikai vienai partijai, kas ir {percentage} no visiem ziedotājiem.",
+      "tooltip": "{donors} ziedotāji • {parties} unikālas partijas",
+      "item": "{donors} ziedotāji ziedoja {parties} partijām"
+    }
+  },
+  "timeline": {
+    "title": "Attīstība",
+    "description": "Skatiet visu politisko partiju ziedojumu laika skalu {country} par {years} ar ikmēneša kopsummām un tendencēm gadu gaitā.",
+    "detail": {
+      "title": "Partiju ziedojumu attīstība laika gaitā",
+      "summary": "Aplūkojiet zemāk redzamo interaktīvo līnijdiagrammu, lai sekotu līdzi katras politiskās partijas ziedojumu vēsturei laika gaitā. X ass attēlo datumus, bet y ass parāda ziedojumu summu. Katra politiskā partija ir attēlota ar atsevišķu līniju, kas pieaug ar katru ziedojumu."
+    },
+    "days": "Valstī {country} {years} laikā tika reģistrēti ziedojumi {n} dažādās dienās."
+  },
+  "per_year_party": {
+    "title": "Ziedojumi partijai {party} gadā",
+    "subtitle": "Publicēto ziedojumu gada kopsumma partijai {party} valstī {country}, {years}."
+  },
+  "per_month": {
+    "title": "Ziedojumi mēnesī",
+    "subtitle": "Mēneša publicēto ziedojumu summa katrai partijai {country}, {years}.",
+    "description": "Šī sakārtotā joslu diagramma ilustrē ikmēneša ziedojumu datus par vairākām politiskajām partijām. Uz x ass ir attēloti mēneši, uz y ass - ziedojumu summas, un katra josla ir sadalīta pa krāsām, lai parādītu atsevišķu partiju ziedojumus, tādējādi ļaujot viegli salīdzināt partiju ziedojumus mēnešos un starp mēnešiem.",
+    "highest_sum": "{month} ziedojumu kopsumma bija vislielākā - kopā tika saņemti {count} ziedojumi par kopējo summu {sum}.",
+    "most_months": "{party} saņēma ziedojumus {count} mēnešos, kas ir visvairāk mēnešu ar ieguldījumiem starp visām partijm.",
+    "month_most_donations": "Mēnesis ar vislielāko ziedojumu skaitu bija {month}, kad kopumā tika saņemti {count} individuāli ziedojumi."
+  },
+  "party": {
+    "donors": {
+      "title": "Ziedotāji {party}",
+      "subtitle": "Kopējais publicēto individuālo ziedotāju ieguldījums partijai {party} {country}.",
+      "summary": "Šī lapa prezentē visas oficiāli atklātās ziedojumus virs {minSum} partijai {party} kopš {minYear}, grupētus pēc ziedotājiem, lai parādītu kopējās iemaksas laika gaitā. Visi skaitļi ir balstīti uz oficiālajām atklāsmēm, ko publicējusi {source}, parādīti gan kā treemap vizuālajam salīdzinājumam, gan kā izvēršams pamatā esošo transakciju saraksts."
+    },
+    "donor_types": {
+      "title": "Ziedotāju veidi",
+      "treemap": {
+        "title": "Ziedotāju veidi partijai {party}",
+        "description": "Kopējie publicētie ziedojumi {party} valstī {country} pēc ziedotāju veida."
+      },
+      "p0": "Šī koka karte grupē ziņotos politiskos ziedojumus pēc ziedotāju veida (piemēram, fiziskas personas, uzņēmumi un valsts fondi) un nosaka katra taisnstūra izmēru pēc kopējās summas izvēlētajā periodā un apjomā.",
+      "p1": "Lielāki kvadrāti norāda uz lielākām summām, un katrā kvadrātā redzamie vārdi ir lielākie ziedotāji savā kategorijā. Šajā skatā iekļauti {count} dažādi ziedotāju veidi partijai {party}.",
+      "p2": "Zemāk ir saraksts ar nozarēm, kas sarindotas pēc kopējā ziedojumu apjoma, no lielākā līdz mazākajam:"
+    },
+    "qa": {
+      "sum": {
+        "q": "Cik {party} ir saņēmusi ziedojumos?",
+        "a": "{party} ir saņēmusi kopumā {sum} ziedojumos no {count} dokumentētiem ziedojumiem."
+      },
+      "top_donors": {
+        "q": "Kas ir lielākie {party} ziedotāji?",
+        "a": "Lielākie {party} ziedotāji ir: {donors}."
+      },
+      "largest_singular": {
+        "q": "Kāds bija lielākais atsevišķais ziedojums {party}?",
+        "a": "Lielākais atsevišķais ziedojums bija {amount} no {donor} {date}."
+      },
+      "biggest_overall": {
+        "q": "Kas ir lielākais kopējais {party} ziedotājs?",
+        "a": "Lielākais kopējais {party} ziedotājs ir {donor} ar kopējiem ziedojumiem {sum}."
+      },
+      "frequent_donor": {
+        "q": "Kas ir veicis visvairāk ziedojumu {party}?",
+        "a": "{donor} ir veicis visvairāk ziedojumu {party} ar {count} atsevišķiem ziedojumiem kopumā {sum}."
+      }
+    },
+    "overview": {
+      "title": "Ziedojumu pārskats {party}"
+    },
+    "changes": {
+      "detail": {
+        "title": "{party} ziedojumi pēc darījuma datuma",
+        "summary": "Šajā lapā ir redzams {party} ziedojumu saraksts, kas sakārtots pēc darījuma datuma, un jaunākie ziedojumi ir redzami augšpusē. Tajā sniegta informācija par katra ziedojuma summu {party} un attiecīgajiem ziedotājiem."
+      }
+    },
+    "timeline": {
+      "chart_title": "{party} partijas ziedojumi",
+      "subtitle": "Kopējā publicēto ziedojumu summa partijai {party} {country}.",
+      "detail": {
+        "title": "{party} ziedojumi laika gaitā",
+        "summary": "Izpēti interaktīvo līniju diagrammu, lai laika gaitā sekotu {party} ziedojumu vēsturei. X ass attēlo datumus, bet Y ass rāda ziedoto naudas summu. {party} ir attēlota ar atsevišķu līniju, kas ar katru ziedojumu pieaug.",
+        "per_year": "Kopējā {party} saņemto ziedojumu summa atšķiras pa gadiem. Zemāk ir vēsturisks pārskats par partijas deklarētajiem gada finansējuma kopsummām. Šajā sarakstā ir apkopota visu ziņojamo iemaksu un finansiālā atbalsta summa katram konkrētajam gadam:"
+      }
+    }
+  },
+  "origin": {
+    "title": "Izcelsme",
+    "description": "Skatiet, no kurienes nāk politisko partiju ziedojumi {country} par {years}—sadalījums pa štatiem un starptautiskajiem ieguldījumiem.",
+    "detail": {
+      "title": "Dāvinājumu izcelsme īsumā",
+      "description": "Skatiet caurspīdīgu politisko ziedojumu izcelsmi {party} partijai valstī {country}: sadalījums pa štatiem un ārvalstu avotiem.",
+      "summary": "Iegūstiet skaidru pārskatu par ziedojumu ģeogrāfisko izcelsmi. Uzziniet, no kurām federālajām zemēm vai valstīm ārpus {country} nāk atbalsts. Pārredzami izsekot, kā ziedojumi tiek sadalīti ģeogrāfiski.",
+      "country": {
+        "austria": "Austrijā ziedojumu izcelsme tiek reģistrēta tikai no 2023. gada. Šā iemesla dēļ visus vecākos ziedojumus nevar iedalīt atsevišķām federālajām zemēm."
+      },
+      "sum": "{years}. gadā politisko partiju ziedojumi {country} no vietējiem avotiem kopumā sasniedza {sumCountry}. Ieguldījumi no ārvalstu avotiem veidoja {sumOthers}."
+    },
+    "type": {
+      "map": "Karte"
+    },
+    "party": {
+      "subtitle": "Kopējie publicētie ziedojumi {party} pēc izcelsmes valsts {country}."
+    },
+    "country": {
+      "title": "Ziedojumi no {country}",
+      "subtitle": "Kopējie publicētie ziedojumi pēc izcelsmes valsts {country}, {years}.",
+      "summary": "No {from}. līdz {until}. gadam tika reģistrēti ziedojumi no {stateCount} dažādām federālajām zemēm. Federālā zeme ar vislielāko ziedojumu skaitu ir {highestState} - {highestSum} ziedojumi, savukārt visvairāk ziedojumu, proti, {largesDonationCountNum}, saņemti no {largesDonationCountState}."
+    },
+    "elsewhere": {
+      "title": "Ziedojumi no ārvalstīm",
+      "summary": "No {from}. līdz {until}. gadam tika reģistrēti ziedojumi no {countryCount} dažādām citām valstīm. Valsts ar lielāko ziedojumu kopskaitu ir {highestCountry} - {highestSum}. Visvairāk ziedojumu, proti, {largesDonationCountNum}, ir saņemti no {largesDonationCountState}."
+    }
+  },
+  "state": {
+    "germany": {
+      "BW": "Bādene-Virtemberga",
+      "BY": "Bavārija",
+      "BE": "Berlīne",
+      "BB": "Brandenburgas",
+      "HB": "Brēmene",
+      "HH": "Hamburga",
+      "HE": "Hesene",
+      "MV": "Meklenburga-Priekšpomerānija",
+      "NI": "Lejassaksija",
+      "NW": "Ziemeļreina-Vestfālenē",
+      "RP": "Reinzeme-Pfalca",
+      "SL": "Zāras federālā zeme",
+      "SN": "Saksija",
+      "ST": "Saksija-Anhalte",
+      "SH": "Šlēzviga-Holšteina",
+      "TH": "Tīringene"
+    },
+    "austria": {
+      "1": "Burgenlande",
+      "2": "Karintija",
+      "3": "Lejasaustrija",
+      "4": "Augšaustrija",
+      "5": "Zalcburga",
+      "6": "Styria",
+      "7": "Tyrol",
+      "8": "Vorarlberga",
+      "9": "Vīne"
+    },
+    "canada": {
+      "ON": "Ontārio",
+      "QC": "Kvebeka",
+      "NS": "Jaunskotija",
+      "NB": "Ņūbransvika",
+      "MB": "Manitoba",
+      "BC": "Britu Kolumbija",
+      "PE": "Prinča Edvarda sala",
+      "SK": "Saskačevana",
+      "AB": "Alberta",
+      "NL": "Ņūfaundlenda un Labradora",
+      "NT": "Ziemeļrietumu teritorijas",
+      "YT": "Jukona",
+      "NU": "Nunavuta"
+    }
+  },
+  "donor": {
+    "title": "Ziedotāja ziedojumi",
+    "subtitle": "Kopējie ieguldījumi un saņēmēji",
+    "active_period": "Aktīvais periods",
+    "type": "Ziedojuma veids",
+    "summary": "{donor} ir kopumā ziedojis {sum} {count} atsevišķos ziedojumos. Vidējais ziedojuma lielums ir {avg}. Ziedojumi tika sadalīti starp {parties} dažādām partijām.",
+    "oldest": "Pirmais ziedojums pēc {minYear} tika veikts {date}, ziedojot {amount} partijai {party}.",
+    "newest": "Jaunākais ziedojums tika veikts {date}, kad {amount} tika ziedoti partijai {party}.",
+    "most_donations": "Visbiežāk ziedojumi tika pārskaitīti {list}.",
+    "most_donations_item": "{party} ({count})",
+    "highest_most_donation": "{biggestYear} gadā bija lielākā kopējā ziedojumu summa {biggestSum}, savukārt {mostYear} gadā tika veikts lielākais atsevišķo ziedojumu skaits ({mostCount}).",
+    "biggest": "Lielākais atsevišķais ziedojums {amount} apmērā tika veikts {date} partijai {party}.",
+    "tree_map": "{name} ziedojumi",
+    "tree_map_subtitle": "Kopējie publicētie ziedojumi katrai partijai {country}.",
+    "biggest_amounts": "Ziedojumi galvenokārt tika novirzīti izvēlētai partiju grupai. Zemāk ir sadalījums pēc saņēmējiem, summas un procentuālā īpatsvara no kopējā ziedojuma:",
+    "table": "Šī sadaļa sniedz visaptverošu pārskatu par visām individuālajām ziedojumu summām, ko veicis {donor}. Jūs varat kārtot tabulu pēc datuma, partijas vai summas, lai viegli izpētītu, kā ziedojumi tika izplatīti laikā un starp saņēmējiem. Šī detalizētā pārskata funkcija nodrošina caurspīdīgu katra ziedojuma izsekošanu un piedāvā dziļāku ieskatu ziedotāja ziedošanas paradumos.",
+    "timeline": {
+      "title": "Ziedojumu uzkrāšanās laika gaitā",
+      "p0": "Šajā sadaļā parādīts, kā ziedojumi no {donor} kopš {year} dažādām politiskajām partijām ir mainījušies laika gaitā. Diagrammā attēlots kopējais ziedojumu apjoms, izceļot katras partijas daļu, lai viegli redzētu, kad un kur tika sniegts atbalsts.",
+      "p1": "Izsekojiet līnijām, lai novērotu tendences, straujus kāpumus vai izmaiņas ziedošanā. Šis pārskats sniedz caurspīdīgu skatījumu uz to, kā viena ziedotāja ieguldījumi tiek sadalīti politiskajā ainavā.",
+      "years": "Ziedojumi ir mainījušies gadu gaitā. Tālāk parādītas kopējās ziedojumu summas pēc gadiem, kā arī procentuālais katra gada īpatsvars šī ziedotāja kopējā ziedojumu apjomā.",
+      "chart_subtitle": "Kopējie ziedojumi no {donor} politiskajām partijām {country}, attēloti pēc summas un datuma kopš {minYear}."
+    },
+    "anonymized": {
+      "title": "Ieraksts anonimizēts",
+      "description": "Personas identitāte, kas saistīta ar šo ziedojumu, ir noņemta saskaņā ar derīgu GDPR pieprasījumu. Ziedojuma summa joprojām ir iekļauta kopējos finansējuma aprēķinos, lai nodrošinātu finanšu caurskatāmību."
+    },
+    "redacted": {
+      "title": "Ieraksts rediģēts",
+      "description": "Donora identitāti pirms šo datu publicēšanas rediģēja publicējošā iestāde. Ziedojuma summa joprojām ir iekļauta kopējā finansējuma aprēķinos, lai saglabātu finanšu caurspīdīgumu."
+    },
+    "ubo": "Patiesie labuma guvēji (PLG)",
+    "ubo_description": "Patiesais labuma guvējs (PLG) ir persona, kas faktiski vada procesus. Tie ir indivīdi, kas galu galā pieder vai kontrolē ziedotāju, parasti turot 25% vai vairāk no tā akcijām vai balsstiesībām. Ja neviens atsevišķs cilvēks neatbilst šim slieksnim, augstākā vadība (piemēram, direktori) var tikt norādīti kā \"pseudo-PLG\", lai nodrošinātu atbildību."
+  },
+  "countries": {
+    "??": "Nav norādīts",
+    "DE": "Vācija",
+    "DK": "Dānija",
+    "CH": "Šveice",
+    "TH": "Taizeme",
+    "AT": "Austrija",
+    "UK": "Lielbritānija",
+    "NL": "Nīderlande",
+    "EU": "Eiropas Savienība",
+    "LV": "Latvija",
+    "ES": "Spānija",
+    "FI": "Somija",
+    "HR": "Horvātija",
+    "BE": "Beļģija",
+    "LU": "Luksemburga",
+    "SI": "Slovēnija",
+    "EE": "Igaunija",
+    "FR": "Francija",
+    "IE": "Īrija",
+    "IT": "Itālija",
+    "PL": "Polija",
+    "RO": "Rumānija",
+    "CY": "Kipra",
+    "MT": "Malta",
+    "PT": "Portugāle",
+    "LT": "Lietuva",
+    "HU": "Ungārija",
+    "CZ": "Čehija",
+    "SG": "Singapūra",
+    "MC": "Monako",
+    "SE": "Rootsi",
+    "AD": "Andora",
+    "IM": "Menas sala",
+    "NO": "Norvēģija",
+    "LI": "Lihtenšteina",
+    "MK": "Maķedonija",
+    "AL": "Albānija",
+    "MD": "Moldova",
+    "SM": "Sanmarīno",
+    "FO": "Fēru salas",
+    "BA": "Bosnija un Hercegovina",
+    "ME": "Melnkalne",
+    "BG": "Bulgārija",
+    "BY": "Baltkrievija",
+    "GR": "Grieķija",
+    "IS": "Islande",
+    "SK": "Slovākija",
+    "UA": "Ukraina",
+    "GB": "Apvienotā Karaliste",
+    "RS": "Serbija",
+    "AU": "Austrālija",
+    "ZA": "Dienvidāfrika",
+    "US": "Amerikas Savienotās Valstis",
+    "CA": "Kanāda",
+    "GE": "Gruzija",
+    "NZ": "Jaunzēlande",
+    "VE": "Venecuēla"
+  },
+  "ref_countries": {
+    "DE": "Vācija",
+    "DK": "Dānija",
+    "CH": "Šveice",
+    "TH": "Taizeme",
+    "AT": "Austrija",
+    "UK": "Lielbritānija",
+    "NL": "Nīderlande",
+    "EU": "Eiropas Savienība",
+    "LV": "Latvija",
+    "ES": "Spānija",
+    "FI": "Somija",
+    "HR": "Horvātija",
+    "BE": "Beļģija",
+    "LU": "Luksemburga",
+    "SI": "Slovēnija",
+    "EE": "Igaunija",
+    "FR": "Francija",
+    "IE": "Īrija",
+    "IT": "Itālija",
+    "PL": "Polija",
+    "RO": "Rumānija",
+    "CY": "Kipra",
+    "CZ": "Čehija",
+    "AU": "Austrālija",
+    "RS": "Serbija",
+    "CA": "Kanāda",
+    "GE": "Gruzija",
+    "NO": "Norvēģija"
+  },
+  "about": {
+    "title": "Par mums",
+    "description": {
+      "p0": "DonationWatch radās tāpēc, ka Vācijas Bundestāga oficiālajā tīmekļa vietnē dati nebija skaidri salasāmi.",
+      "p1": "Mūsu mērķis ir to uzlabot, izmantojot tikai publiski pieejamus datus un efektīvāk tos atspoguļojot.",
+      "p2": "Mēs sapratām, ka tādas valstis kā Austrija, Šveice un Nīderlande partijas ziedojumus publicē dažādos veidos. Lai izveidotu standartizētu saskarni, kas vienkāršotu piekļuvi šiem datiem, mēs esam iekļāvuši šīs valstis savā projektā. Citas valstis pievienosies, tiklīdz mums izdosies atrast un apstrādāt attiecīgos datus.",
+      "p3": "Ja jums ir kādi ieteikumi vai atsauksmes, lūdzu,",
+      "mail": "sazinieties ar mums."
+    },
+    "source": "Visa vizualizētā informācija nāk tikai no publiski pieejamiem valdības avotiem un nesatur nekādus iepriekš nepublicētus datus vai privātus ierakstus. Caurspīdība ir mūsu pamats."
+  },
+  "imprint": {
+    "title": "Imprint"
+  },
+  "privacy": {
+    "title": "Datu aizsardzība",
+    "last_updated": "Pēdējoreiz atjaunināts: {date}",
+    "effective_date": "Stājas spēkā: {date}",
+    "data": {
+      "title": "1. Datu vākšana",
+      "p": "Mēs neievācam personisko datu no mūsu vietnes apmeklētājiem. Tas ietver:",
+      "li0": "Nav reģistrācijas veidlapu",
+      "li1": "Nav biļetenu pierakstīšanās",
+      "li2": "Nav lietotāju kontu",
+      "li3": "Nav izsekošanas sīkdatņu"
+    },
+    "cf": {
+      "title": "2. Cloudflare pakalpojumi",
+      "link": "Skatīt Cloudflare privātuma politiku",
+      "p": "Mēs izmantojam divus Cloudflare pakalpojumus:",
+      "workers": {
+        "summary": "Cloudflare Workers: Serverless platforma satura piegādei (lietotāju datus neapstrādā)"
+      },
+      "analytics": {
+        "summary": "Cloudflare Web Analytics: Privātumam draudzīga analīze, kas:",
+        "li0": "Nelieto sīkdatnes",
+        "li1": "Vāc tikai apkopotus rādītājus"
+      }
+    },
+    "logs": {
+      "title": "3. Automātiskie servera logi",
+      "p": "Mūsu hostinga pakalpojumu sniedzējs var ievākt:",
+      "li0": "IP adreses (anonimizētas)",
+      "li1": "Pieprasījumu laika zīmogus",
+      "li2": "Pārlūkprogrammu/ierīču tipus",
+      "retention": "Šie dati tiek automātiski dzēsti 7 dienu laikā."
+    },
+    "contact": {
+      "title": "Kontakti",
+      "p": "Jautājumi par privātumu:"
+    }
+  },
+  "fun": {
+    "link": "Aizraujoši fakti",
+    "title": "Interesanti fakti par publiskajiem datiem",
+    "p0": "Šajā lapā ir parādīti interesanti atklājumi no mūsu darba ar publiski pieejamiem valdības datiem. Šie novērojumi nav kritika, bet drīzāk nelielas īpatnības, kas var parādīties jebkurā lielā datu kopā.",
+    "p1": "Lai gan mēs ziņojam par problēmām, kad tas ir nepieciešams, mēs neuzskatām tās par steidzamām lietām, kas valdības iestādēm būtu jārisina. Mūsu pieredze rāda, ka šīs organizācijas ir atsaucīgas un atvērtas atsauksmēm.",
+    "reported_fixed": "Par to tika ziņots {owner}, un viņi to izlaboja.",
+    "reported_wontfix": "Par to tika ziņots {owner}, un viņi to nevar mainīt.",
+    "reported": "Par to tika ziņots {owner}."
+  },
+  "transparency": {
+    "title": "Pārredzamība",
+    "p0": "Mēs cenšamies sniegt skaidru un konsekventu informāciju par politisko partiju ziedotājiem. Lai to panāktu, mēs automātiski normalizējam noteiktus ziedotāju vārdus, lai nodrošinātu viendabīgumu visā mūsu datu bāzē. Šāda pieeja ļauj mums saglabāt precizitāti, vienlaikus ņemot vērā neatbilstības, kas saistītas ar to, kā vārdi var tikt reģistrēti.",
+    "p1": "Caurspīdīguma labad esam apkopojuši normalizēto vārdu sarakstu, kā arī to variantus, kas sastopami mūsu ziedojumu ierakstos. Zemāk atradīsiet katru normalizēto vārdu kopā ar tā variācijām. Šis saraksts palīdz izskaidrot, kāpēc jūs varat redzēt ziedotāju vārdus, kas pilnībā nesakrīt ar tiem, kas atrodami mūsu avota dokumentos.",
+    "section": {
+      "filtered_donors": "Filtrētie ziedotāji",
+      "filtered_receivers": "Filtrētie saņēmēji",
+      "aggregated": "Apkopotie ziedotāji"
+    },
+    "filtered_donors": {
+      "p0": "Lai precīzi atspoguļotu patiesos politisko ziedojumu avotus, mēs atfiltrējam noteiktus darījumus, kas patiesībā ir valsts iemaksas, nevis īsti ziedojumi. Tā kā mūsu avota datu kopās tie nav skaidri marķēti, mēs izmantojam regulāro izteiksmju (regexp) filtrēšanas noteikumu kopumu, lai šādus ierakstus automātiski identificētu un noņemtu. Zemāk varat pārskatīt pilnu piemēroto regexp filtrēšanas noteikumu sarakstu.",
+      "p1": "Zemāk ir saraksts ar ziedotājiem, kuru iemaksas tika atfiltrētas saskaņā ar mūsu kritērijiem un filtrēšanas noteikumiem."
+    },
+    "filtered_receivers": {
+      "p0": "Lai nodrošinātu, ka parādām tikai jēgpilnus saņēmēju datus, mēs atfiltrējam arī noteiktus saņēmējus vai partijas, kas ziedotāju izsekošanas nolūkiem tiek uzskatītas par nebūtiskām vai neaktīvām. Tā kā mūsu datu kopās šie saņēmēji ne vienmēr ir skaidri marķēti, mēs piemērojam regexp balstītu noteikumu kopumu, lai tos automātiski izslēgtu.",
+      "p1": "Zemāk varat pārskatīt pilnu piemēroto regexp filtrēšanas noteikumu sarakstu."
+    },
+    "receivers": {
+      "title": "Apkopotie saņēmēji",
+      "p0": "Valstī {country} ziedojumi var tikt ziņoti dažādām partijas organizatoriskajām vienībām. Konsekvences nolūkos mēs apvienojam saistītas saņēmēju vienības vienā kopējā summā partijas līmenī. Zemāk redzamajā sarakstā ir norādīts, kuras saņēmēju vienības tiek apkopotas katrai partijai."
+    }
+  },
+  "related": {
+    "donors": "Līdzīgi donori"
+  },
+  "similar_donors": {
+    "title": "Līdzīgo ziedotāju tīkls",
+    "description": "Izpētiet plašāku ziedojumu tīklu, kas saistīts ar šo ziedotāju.",
+    "summary": "Saistītajā ziedojumu tīklā ir {count} unikāli ziedotāji.",
+    "list_title": "Partiju sadalījuma pārskats"
+  },
+  "detect_country": {
+    "title": "Izskatās, ka esat valstī {country}.",
+    "description": "Pieskarieties, lai izpētītu politiskos ziedojumus {country}.",
+    "action": "Skatīt ziedojumus valstij {country}"
+  },
+  "donor_type": {
+    "0": "Citi",
+    "1": "Fiziska persona",
+    "2": "Uzņēmums",
+    "3": "Arodbiedrība",
+    "4": "Publiskais fonds",
+    "5": "Neinkorporēta apvienība",
+    "6": "Reģistrēta politiskā partija",
+    "7": "Trasts",
+    "8": "Savstarpējās palīdzības biedrība",
+    "9": "Sabiedrība ar ierobežotu atbildību",
+    "10": "Celtniecības biedrība",
+    "11": "Nepeļņas juridiska persona",
+    "12": "Anonimizēts ziedotājs"
+  },
+  "other_countries": {
+    "title": "Citas valstis"
+  },
+  "thanks": "Pateicamies tādām organizācijām kā {external} par vērtīgas informācijas sniegšanu par politisko ziedojumu mehānismiem.",
+  "export": {
+    "title": "Datu eksports",
+    "p0": "Iegūstiet pilnu politisko ziedojumu datu kopu par {country}, kas tiek izmantota šajā vietnē. Eksports ietver normalizētus ziedotāju vārdus, summas, datumus un saņēmējpartijas.",
+    "p1": "Svarīgi: Tie nav neapstrādātie dati no {source}. Šajā datu kopā ir tikai tie ziedojumi, kurus mūsu komanda ir normalizējusi un filtrējusi. Lūdzu, iepazīstieties ar mūsu sadaļu {transparency} par metodiku.",
+    "license": "Licence: {license}",
+    "download": "Lejupielādēt {format}",
+    "includes_donations": "Iekļauti {num} ziedojumi"
+  },
+  "bar_chart_race": {
+    "title": "Stabiņu diagrammas sacensība",
+    "description": "Vizualizējiet ziedojumu uzkrāšanos laika gaitā. Atlasiet gadu diapazonu, lai redzētu, kā dinamiski attīstās partiju finansējums.",
+    "from": "No",
+    "to": "Līdz",
+    "download_video": "Lejupielādēt video",
+    "rendering": "Renderēšana... {percentage}",
+    "no_data": "Atlasītajam diapazonam nav pieejami dati.",
+    "note": "Lūdzu, ņemiet vērā: šī animācija tiek renderēta klienta pusē jūsu pārlūkprogrammā un dažās ierīcēs var būt resursietilpīga. Lejupielādējot video, automātiski tiks atskaņota visa animācija.",
+    "individual_years": "Atsevišķi gadi",
+    "animation_duration": "Animācijas ilgums",
+    "duration_s": "{seconds}s",
+    "custom_range": "Paplašināti: Pielāgots gadu diapazons",
+    "group_by": {
+      "label": "Grupēt pēc",
+      "receiver": "Partija",
+      "donor": "Ziedotājs"
+    },
+    "chart_title": "Partiju ziedojumu sadalījums",
+    "chart_subtitle": "Kopējie publicētie ziedojumi katrai partijai, {country}, {years}."
+  }
+}

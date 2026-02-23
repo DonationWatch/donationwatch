@@ -1,21 +1,21 @@
 "use client";
-
 import { DownloadIcon } from "lucide-react";
 import Link from "next/link";
+import { useTranslations, useLocale } from "next-intl";
 
 import { useDonationsByYears } from "../hooks/use-api";
-import { useTranslations } from "../hooks/use-translations";
 import { isNotNullandNotUndefined } from "../utils/array";
 import { getCountryName } from "../utils/countries";
 import { DonationField, AddressField } from "../utils/types";
 import { Button } from "./ui/button";
 
-import type { Translations } from "../messages/translations";
 import type { CountryConfig } from "../utils/countries";
 import type { Donation } from "../utils/types";
+import type { StrictNamespacedTranslator } from "@/utils/translator";
+import type { createTranslator, Messages } from "next-intl";
 
-import { t } from "@/app/[locale]/translations";
 import { Translation } from "@/components/translation";
+import { DATA_LICENSE } from "@/utils/config";
 import { getDonorName } from "@/utils/donor";
 import { formatNumber } from "@/utils/formatter";
 
@@ -29,7 +29,8 @@ function escapeCSVField(field: string): string {
 function generateJSON(
   donations: Donation[],
   country: CountryConfig,
-  translations: Translations,
+  t: ReturnType<typeof createTranslator<Messages>>,
+  tCommon: StrictNamespacedTranslator<"common">,
 ): string {
   return JSON.stringify(
     donations.map((d) => {
@@ -38,14 +39,12 @@ function generateJSON(
 
       return {
         date: d[DonationField.Date],
-        donor: getDonorName(d[DonationField.DonorName], translations),
+        donor: getDonorName(d[DonationField.DonorName], tCommon),
         receiver: country.partiesById[receiver]?.short ?? receiver,
         amount: d[DonationField.Amount],
         currency: country.currency,
         donor_type:
-          donorType !== undefined
-            ? translations.donor_type[donorType]
-            : undefined,
+          donorType !== undefined ? t(`donor_type.${donorType}`) : undefined,
         country: d[DonationField.Address]?.[AddressField.Country],
         state: d[DonationField.Address]?.[AddressField.State],
       };
@@ -56,7 +55,8 @@ function generateJSON(
 function generateCSV(
   donations: Donation[],
   country: CountryConfig,
-  translations: Translations,
+  t: ReturnType<typeof createTranslator<Messages>>,
+  tCommon: StrictNamespacedTranslator<"common">,
 ): string {
   const headers = ["Date", "Donor Name", "Receiver", "Amount", "Currency"];
 
@@ -73,9 +73,7 @@ function generateCSV(
     const party = country.partiesById[donation[DonationField.Receiver]];
     const row = [
       escapeCSVField(donation[DonationField.Date]),
-      escapeCSVField(
-        getDonorName(donation[DonationField.DonorName], translations),
-      ),
+      escapeCSVField(getDonorName(donation[DonationField.DonorName], tCommon)),
       escapeCSVField(party?.short ?? donation[DonationField.Receiver]),
       String(donation[DonationField.Amount]),
       country.currency,
@@ -83,9 +81,7 @@ function generateCSV(
 
     if (country.hasDonorType) {
       const donorType = donation[DonationField.DonorType];
-      row.push(
-        donorType !== undefined ? translations.donor_type[donorType] : "",
-      );
+      row.push(donorType !== undefined ? t(`donor_type.${donorType}`) : "");
     }
 
     if (country.hasOrigin) {
@@ -123,7 +119,10 @@ interface DataExportProps {
 }
 
 export function DataExport({ country }: DataExportProps) {
-  const { translations, locale } = useTranslations();
+  const t = useTranslations();
+  const tData = useTranslations("data");
+  const tCommon = useTranslations("common");
+  const locale = useLocale();
 
   const results = useDonationsByYears(country, country.years);
 
@@ -137,8 +136,8 @@ export function DataExport({ country }: DataExportProps) {
     const extension = format === "csv" ? "csv" : "json";
     const fileContent =
       format === "csv"
-        ? generateCSV(donations, country, translations)
-        : generateJSON(donations, country, translations);
+        ? generateCSV(donations, country, t, tCommon)
+        : generateJSON(donations, country, t, tCommon);
 
     downloadCSV(
       format === "csv" ? "text/csv" : "application/json",
@@ -153,9 +152,9 @@ export function DataExport({ country }: DataExportProps) {
     <div className="space-y-6">
       <p>
         <Translation
-          text={translations.export.p0}
+          text={t.raw("export.p0")}
           variables={{
-            country: getCountryName(country, translations),
+            country: getCountryName(country, t),
             license: (
               <a
                 href="https://creativecommons.org/licenses/by/4.0/deed.en"
@@ -163,7 +162,7 @@ export function DataExport({ country }: DataExportProps) {
                 rel={"noopener noreferrer"}
                 className="hover:text-primary-800 dark:hover:text-primary-400 underline"
               >
-                CC BY 4.0
+                {DATA_LICENSE}
               </a>
             ),
           }}
@@ -171,7 +170,7 @@ export function DataExport({ country }: DataExportProps) {
       </p>
       <p>
         <Translation
-          text={translations.export.p1}
+          text={t.raw("export.p1")}
           variables={{
             source: (
               <a
@@ -190,7 +189,7 @@ export function DataExport({ country }: DataExportProps) {
                 rel="nofollow"
                 className="hover:text-primary-800 dark:hover:text-primary-400 underline"
               >
-                {translations.transparency.title}
+                {t("transparency.title")}
               </Link>
             ),
           }}
@@ -199,7 +198,7 @@ export function DataExport({ country }: DataExportProps) {
       <p>
         {
           <Translation
-            text={translations.export.license}
+            text={t.raw("export.license")}
             variables={{
               license: (
                 <a
@@ -208,7 +207,7 @@ export function DataExport({ country }: DataExportProps) {
                   rel="noopener noreferrer"
                   className="hover:text-primary-800 dark:hover:text-primary-400 underline"
                 >
-                  CC BY 4.0
+                  {DATA_LICENSE}
                 </a>
               ),
             }}
@@ -226,7 +225,7 @@ export function DataExport({ country }: DataExportProps) {
           className="bg-primary-600 hover:bg-primary-700 disabled:bg-primary-600/50 flex cursor-pointer items-center gap-2 rounded-md px-4 py-2 text-white disabled:cursor-not-allowed"
         >
           <DownloadIcon className="size-4" />
-          {t(translations.export.download, {
+          {t("export.download", {
             format: "CSV",
           })}
         </Button>
@@ -239,18 +238,18 @@ export function DataExport({ country }: DataExportProps) {
           className="bg-primary-600 hover:bg-primary-700 disabled:bg-primary-600/50 flex cursor-pointer items-center gap-2 rounded-md px-4 py-2 text-white disabled:cursor-not-allowed"
         >
           <DownloadIcon className="size-4" />
-          {t(translations.export.download, {
+          {t("export.download", {
             format: "JSON",
           })}
         </Button>
 
         <span className="text-sm">
           {isLoading ? (
-            translations.loading
+            tData("loading")
           ) : hasError ? (
-            <span className="text-red-500">{translations.data_error}</span>
+            <span className="text-red-500">{tData("error")}</span>
           ) : (
-            t(translations.export.includes_donations, {
+            t("export.includes_donations", {
               num: formatNumber(locale, donations.length),
             })
           )}

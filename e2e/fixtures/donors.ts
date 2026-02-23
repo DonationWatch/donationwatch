@@ -8,7 +8,7 @@ export class DonorsPage extends PageObject {
     .getByTestId("ranking-item");
   public readonly pageTitle = this.page.getByRole("heading", {
     level: 1,
-    name: this.translations.donors.title,
+    name: this.translations("donors.title"),
   });
   public readonly histogramSection = this.page
     .locator('[aria-labelledby="sec-histogram"]')

@@ -1,4 +1,5 @@
 import { notFound, redirect } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { DynamicYearDonationHistory } from "../../../../../components/dynamic-donation-history";
 import {
@@ -20,7 +21,6 @@ import { generateAlternates } from "../../../../../utils/meta";
 import { notFoundMetadata } from "../../../../../utils/not-found-metadata";
 import { deserializeYears } from "../../../../../utils/serializers";
 import { isValidCountry, isValidLocale } from "../../../../../utils/validate";
-import { getTranslations, t } from "../../../translations";
 
 import type { Metadata } from "next";
 
@@ -32,20 +32,22 @@ export async function generateMetadata(
   if (!isValidLocale(params.locale)) return notFoundMetadata;
   if (!isValidCountry(params.country)) return notFoundMetadata;
 
+  setRequestLocale(params.locale);
+
   const locale = params.locale;
   const country = params.country;
   const years = params.years;
 
-  const [translations, countryConfig] = await Promise.all([
-    getTranslations(locale),
+  const [t, countryConfig] = await Promise.all([
+    getTranslations({ locale }),
     getCountryConfig(country),
   ]);
 
-  const countryName = getCountryName(countryConfig, translations);
+  const countryName = getCountryName(countryConfig, t);
   const deserializedYears = deserializeYears(years);
   const yearRange = formatYearsRange(deserializedYears);
 
-  const description = t(translations.changes.description, {
+  const description = t("changes.description", {
     country: countryName,
     year: yearRange,
     minAmount: formatCompactCountryCurrency(
@@ -56,7 +58,7 @@ export async function generateMetadata(
   });
 
   return {
-    title: `${t(translations.page_title.years.changes, {
+    title: `${t("page_title.years.changes", {
       year: yearRange,
       country: countryName,
     })}`,
@@ -72,12 +74,13 @@ export default async function ChangesPage(
 
   if (!isValidLocale(params.locale)) return notFound();
   if (!isValidCountry(params.country)) return notFound();
+  setRequestLocale(params.locale);
 
   const { locale, country } = params;
   const years = deserializeYears(params.years);
 
-  const [translations, countryConfig, partySums] = await Promise.all([
-    getTranslations(locale),
+  const [t, countryConfig, partySums] = await Promise.all([
+    getTranslations({ locale }),
     getCountryConfig(country),
     getPartyYearsSums(country),
   ]);
@@ -94,9 +97,9 @@ export default async function ChangesPage(
         <ArticleSectionTitle
           as={"h1"}
           id={"sec-years-changes"}
-          title={translations.changes.detail.title}
+          title={t("changes.detail.title")}
         />
-        <p className="mb-6">{translations.changes.detail.summary}</p>
+        <p className="mb-6">{t("changes.detail.summary")}</p>
         <DynamicYearDonationHistory years={years} country={countryConfig} />
       </ArticleSectionWrapper>
     </Article>

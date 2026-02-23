@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Article, ArticleSection } from "../../../components/layout/article";
 import { NonCountryRootLayout } from "../../../components/ui/non-country-root-layout";
@@ -7,12 +8,10 @@ import { LOCALES } from "../../../utils/locales";
 import { generateAlternates } from "../../../utils/meta";
 import { notFoundMetadata } from "../../../utils/not-found-metadata";
 import { isValidLocale } from "../../../utils/validate";
-import { getTranslations, t } from "../translations";
 
 import type { Metadata } from "next";
 
 export const dynamicParams = false;
-export const dynamic = "error";
 
 const LAST_UPDATE = "2025-02-10";
 const EFFECTIVE_DATE = "2025-02-10";
@@ -27,13 +26,16 @@ export async function generateMetadata(
   const params = await props.params;
 
   if (!isValidLocale(params.locale)) return notFoundMetadata;
-  const { locale } = params;
+  setRequestLocale(params.locale);
 
-  const translations = await getTranslations(locale);
+  const t = await getTranslations({
+    locale: params.locale,
+    namespace: "privacy",
+  });
 
   return {
     robots: "noindex, nofollow",
-    title: `${translations.privacy.title} | DonationWatch`,
+    title: `${t("title")} | DonationWatch`,
     alternates: generateAlternates("privacy"),
   };
 }
@@ -42,43 +44,45 @@ export default async function Page(props: PageProps<"/[locale]/privacy">) {
   const params = await props.params;
 
   if (!isValidLocale(params.locale)) return notFound();
+  setRequestLocale(params.locale);
+
   const { locale } = params;
 
-  const translations = await getTranslations(locale);
+  const t = await getTranslations({ locale, namespace: "privacy" });
 
   return (
-    <NonCountryRootLayout locale={locale} translations={translations}>
+    <NonCountryRootLayout locale={locale}>
       <Article
-        title={translations.privacy.title}
+        title={t("title")}
         subtitle={
           <div className="text-sm text-gray-500">
-            <p>{t(translations.privacy.last_updated, { date: LAST_UPDATE })}</p>
+            <p>{t("last_updated", { date: LAST_UPDATE })}</p>
             <p className="mt-1">
-              {t(translations.privacy.effective_date, { date: EFFECTIVE_DATE })}
+              {t("effective_date", { date: EFFECTIVE_DATE })}
             </p>
           </div>
         }
       >
-        <ArticleSection title={translations.privacy.data.title}>
-          <p className="mb-4">{translations.privacy.data.p}</p>
+        <ArticleSection title={t("data.title")}>
+          <p className="mb-4">{t("data.p")}</p>
           <ul className="list-disc space-y-2 pl-6">
-            <li>{translations.privacy.data.li0}</li>
-            <li>{translations.privacy.data.li1}</li>
-            <li>{translations.privacy.data.li2}</li>
-            <li>{translations.privacy.data.li3}</li>
+            <li>{t("data.li0")}</li>
+            <li>{t("data.li1")}</li>
+            <li>{t("data.li2")}</li>
+            <li>{t("data.li3")}</li>
           </ul>
         </ArticleSection>
 
         {/* Cloudflare Section */}
-        <ArticleSection title={translations.privacy.cf.title}>
-          <p className="mb-4">{translations.privacy.cf.p}</p>
+        <ArticleSection title={t("cf.title")}>
+          <p className="mb-4">{t("cf.p")}</p>
           <ol className="list-decimal space-y-2 pl-6">
-            <li>{translations.privacy.cf.workers.summary}</li>
+            <li>{t("cf.workers.summary")}</li>
             <li>
-              {translations.privacy.cf.analytics.summary}
+              {t("cf.analytics.summary")}
               <ul className="mt-2 list-disc space-y-1 pl-6">
-                <li>{translations.privacy.cf.analytics.li0}</li>
-                <li>{translations.privacy.cf.analytics.li1}</li>
+                <li>{t("cf.analytics.li0")}</li>
+                <li>{t("cf.analytics.li1")}</li>
               </ul>
             </li>
           </ol>
@@ -88,23 +92,23 @@ export default async function Page(props: PageProps<"/[locale]/privacy">) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            {translations.privacy.cf.link}
+            {t("cf.link")}
           </a>
         </ArticleSection>
 
-        <ArticleSection title={translations.privacy.logs.title}>
-          <p>{translations.privacy.logs.p}</p>
+        <ArticleSection title={t("logs.title")}>
+          <p>{t("logs.p")}</p>
           <ul className="mt-2 list-disc space-y-1 pl-6">
-            <li>{translations.privacy.logs.li0}</li>
-            <li>{translations.privacy.logs.li1}</li>
-            <li>{translations.privacy.logs.li2}</li>
+            <li>{t("logs.li0")}</li>
+            <li>{t("logs.li1")}</li>
+            <li>{t("logs.li2")}</li>
           </ul>
-          <p className="mt-2">{translations.privacy.logs.retention}</p>
+          <p className="mt-2">{t("logs.retention")}</p>
         </ArticleSection>
 
-        <ArticleSection title={translations.privacy.contact.title}>
+        <ArticleSection title={t("contact.title")}>
           <p>
-            {translations.privacy.contact.p} <br />
+            {t("contact.p")} <br />
             <a
               href={`mailto:${CONTACT_MAIL}`}
               className="text-primary-700 dark:text-primary-400 hover:underline"

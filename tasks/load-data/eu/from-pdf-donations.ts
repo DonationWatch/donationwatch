@@ -1,7 +1,7 @@
+import type { Countries } from "@/utils/countries";
+
 // generated with:
 // .split('\n').map(l => l.replaceAll('\t', ' ').split(' ').reverse()).map(([value, country, ...donor]) => [donor.reverse().join(' '), country, value])
-
-import type { Countries } from "../../../src/utils/locales";
 
 export const fromPdfDonations: Record<
   string,

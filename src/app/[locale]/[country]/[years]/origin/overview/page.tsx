@@ -1,13 +1,12 @@
-"use server";
-
 import { notFound } from "next/navigation";
+import { setRequestLocale } from "next-intl/server";
 
 import { DonationYearOrigin } from "../../../../../../components/donation-origin";
 import { getCountryConfig } from "../../../../../../utils/data/get-country-config";
 import { getParties } from "../../../../../../utils/data/get-parties";
 import { generateAlternates } from "../../../../../../utils/meta";
 import { deserializeYears } from "../../../../../../utils/serializers";
-import { isValidCountry } from "../../../../../../utils/validate";
+import { isValidCountry, isValidLocale } from "../../../../../../utils/validate";
 
 import type { Metadata } from "next";
 
@@ -28,7 +27,9 @@ export default async function OverviewPage(
 ) {
   const params = await props.params;
 
+  if (!isValidLocale(params.locale)) return notFound();
   if (!isValidCountry(params.country)) return notFound();
+  setRequestLocale(params.locale);
 
   const years = deserializeYears(params.years);
 

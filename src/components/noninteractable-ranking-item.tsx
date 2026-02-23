@@ -1,5 +1,3 @@
-"use server";
-
 import { PercentageHint } from "./percentage-hint";
 import { RankBadge } from "./ranking-item";
 import { formatCountryCurrency } from "../utils/formatter";
@@ -8,7 +6,7 @@ import type { CountryConfig } from "../utils/countries";
 import type { ConstLocale } from "../utils/locales";
 import type { PropsWithChildren } from "react";
 
-export const NonInteractableRankingItem = async ({
+export const NonInteractableRankingItem = ({
   amount,
   country,
   rank,

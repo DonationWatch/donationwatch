@@ -1,10 +1,10 @@
 "use client";
+import { useTranslations, useLocale } from "next-intl";
 
 import { ExpandableReactEchart } from "./expandable-react-echart";
 import { useChart } from "../../hooks/use-chart";
-import { useTranslations } from "../../hooks/use-translations";
 import { partyColor } from "../../utils/color";
-import { Country, type CountryConfig } from "../../utils/countries";
+import { Country } from "../../utils/countries";
 import { donationYear } from "../../utils/date";
 import {
   formatCountryCurrency,
@@ -13,6 +13,7 @@ import {
 import { createLambertConformalConicProjection } from "../../utils/map";
 import { AddressField, DonationField } from "../../utils/types";
 
+import type { Countries, CountryConfig } from "../../utils/countries";
 import type { Donation, Party, ReceiverId } from "../../utils/types";
 import type { EChartsOption } from "echarts";
 
@@ -31,7 +32,8 @@ export const DonationStateMap = ({
   subtitle: string;
   donations: Donation[];
 }) => {
-  const { translations, locale } = useTranslations();
+  const t = useTranslations();
+  const locale = useLocale();
   const { isMobile, backgroundColor, isDark } = useChart();
   const countryCode = country.code;
   const isEu = country.id === Country.europeanunion;
@@ -131,10 +133,10 @@ export const DonationStateMap = ({
         label: {
           formatter: (params) => {
             return isEu
-              ? (translations.countries as Record<string, string>)[params.name]
-              : (translations.state as Record<string, Record<string, string>>)[
-                  country.id
-                ][params.name];
+              ? t(`countries.${params.name as Countries}`)
+              : // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                t(`state.${country.id}.${params.name}`);
           },
         },
         tooltip: {
@@ -143,11 +145,19 @@ export const DonationStateMap = ({
             const state = params.name;
             const value = params.value as number;
 
-            let tooltipContent = `<div class="min-w-[200px] text-lg font-semibold leading-normal">${isEu ? (translations.countries as Record<string, string>)[state] : (translations.state as Record<string, Record<string, string>>)[country.id][state]}</div>`;
+            let tooltipContent = `<div class="min-w-[200px] text-lg font-semibold leading-normal">${
+              isEu
+                ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                  // @ts-ignore
+                  t(`countries.${state}`)
+                : // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                  // @ts-ignore
+                  t(`state.${country.id}.${state}`)
+            }</div>`;
 
-            tooltipContent += `<div class="flex justify-between"><div class="font-semibold leading-normal">${
-              translations.sum
-            }</div>${formatCountryCurrency(locale, Number.isNaN(value) ? 0 : value, country)}</div>`;
+            tooltipContent += `<div class="flex justify-between"><div class="font-semibold leading-normal">${t(
+              "sum",
+            )}</div>${formatCountryCurrency(locale, Number.isNaN(value) ? 0 : value, country)}</div>`;
 
             const donations = (
               Object.entries(statePartyDonations[params.name] ?? {}) as [

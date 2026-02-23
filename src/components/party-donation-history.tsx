@@ -1,10 +1,10 @@
 "use client";
+import { useTranslations } from "next-intl";
 
 import Loading from "./loading";
 import { useDonationsByParty, useDonationsByYears } from "../hooks/use-api";
 import { isNotNullandNotUndefined } from "../utils/array";
 import { DonationHistoryTable } from "./table/donation-history-table";
-import { useTranslations } from "../hooks/use-translations";
 
 import type { CountryConfig } from "../utils/countries";
 import type { Party } from "../utils/types";
@@ -16,21 +16,21 @@ export const PartyDonationHistory = ({
   country: CountryConfig;
   party: Party;
 }) => {
-  const { translations } = useTranslations();
+  const t = useTranslations("data");
   const { data, error, isLoading } = useDonationsByParty(country, party);
 
   if (isLoading)
     return (
       <div
         className="cursor-wait space-y-2"
-        aria-label={translations.loading}
-        title={translations.loading}
+        aria-label={t("loading")}
+        title={t("loading")}
       >
         <Loading />
       </div>
     );
 
-  if (error || !data) return <div>{translations.data_error}</div>;
+  if (error || !data) return <div>{t("error")}</div>;
 
   return (
     <DonationHistoryTable
@@ -48,7 +48,7 @@ export const YearDonationHistory = ({
   country: CountryConfig;
   years: string[];
 }) => {
-  const { translations } = useTranslations();
+  const t = useTranslations("data");
   const results = useDonationsByYears(country, years);
   const error = results.some((r) => r.error);
   const isLoading = results.some((r) => r.isLoading);
@@ -57,14 +57,14 @@ export const YearDonationHistory = ({
     return (
       <div
         className="cursor-wait space-y-2"
-        aria-label={translations.loading}
-        title={translations.loading}
+        aria-label={t("loading")}
+        title={t("loading")}
       >
         <Loading />
       </div>
     );
 
-  if (error) return <div>{translations.data_error}</div>;
+  if (error) return <div>{t("error")}</div>;
 
   const donations = results
     .flatMap((r) => r.data)

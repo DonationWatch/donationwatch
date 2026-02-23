@@ -1,5 +1,5 @@
 import type { PartyYearsSums } from "./loader/party-years-sums";
-import type { Countries } from "./locales";
+import type { Countries } from "@/utils/countries";
 
 declare const tags: unique symbol;
 export type ReceiverId = string & { [tags]: { receiverId: never } };
@@ -71,12 +71,6 @@ export interface Party {
   years: string[];
   wiki?: number;
 }
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-type ExtendsOne<_A extends B, B> = never;
-export type ExtendsBoth<A extends B, B extends C, C = A> =
-  | ExtendsOne<A, B>
-  | ExtendsOne<B, C>;
 
 export type IsoDate = `${number}-${number}-${number}`;
 

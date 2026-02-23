@@ -1,11 +1,11 @@
-"use server";
+"use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 import { partyColor } from "../utils/color";
 import { formatCountryCurrency } from "../utils/formatter";
 
-import type { Translations } from "../messages/translations";
 import type { CountryConfig } from "../utils/countries";
 import type { ConstLocale } from "../utils/locales";
 import type { Party } from "../utils/types";
@@ -50,15 +50,14 @@ const PartyLinkPill = ({
   );
 };
 
-export const PartiesHero = async ({
-  translations,
+export const PartiesHero = ({
   country,
   locale,
 }: {
-  translations: Translations;
-  locale: ConstLocale;
   country: CountryConfig;
+  locale: ConstLocale;
 }) => {
+  const t = useTranslations("home");
   const allParties = country.parties.toSorted((a, b) => b.sum - a.sum);
 
   return (
@@ -75,7 +74,7 @@ export const PartiesHero = async ({
       </ul>
       <details className="mt-4">
         <summary className="cursor-pointer select-none">
-          {translations.home.parties.more}
+          {t("parties.more")}
         </summary>
         <ul className="flex flex-wrap pt-4">
           {allParties.slice(VISIBLE_PARTIES).map((party) => (

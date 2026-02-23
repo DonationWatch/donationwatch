@@ -1,14 +1,12 @@
 import { LocatorObject } from "../util/locator";
 import { PageObject } from "../util/page";
 
-import { t } from "@/app/[locale]/translations";
-
 class DataExportTool extends LocatorObject {
   public downloadCSV = this.locator.getByText(
-    t(this.translations.export.download, { format: "CSV" }),
+    this.translations("export.download", { format: "CSV" }),
   );
   public downloadJSON = this.locator.getByText(
-    t(this.translations.export.download, { format: "JSON" }),
+    this.translations("export.download", { format: "JSON" }),
   );
 }
 class BarChartRaceTool extends LocatorObject {
@@ -16,7 +14,9 @@ class BarChartRaceTool extends LocatorObject {
     return this.locator.locator("fieldset").filter({
       has: this.locator
         .page()
-        .getByText(this.translations.search.legislative_years, { exact: true }),
+        .getByText(this.translations("search.legislative_years"), {
+          exact: true,
+        }),
     });
   }
 
@@ -24,7 +24,7 @@ class BarChartRaceTool extends LocatorObject {
     return this.locator.locator("fieldset").filter({
       has: this.locator
         .page()
-        .getByText(this.translations.bar_chart_race.individual_years, {
+        .getByText(this.translations("bar_chart_race.individual_years"), {
           exact: true,
         }),
     });
@@ -44,7 +44,7 @@ class BarChartRaceTool extends LocatorObject {
     return this.locator.locator("fieldset").filter({
       has: this.locator
         .page()
-        .getByText(this.translations.bar_chart_race.group_by.label, {
+        .getByText(this.translations("bar_chart_race.group_by.label"), {
           exact: true,
         }),
     });
@@ -52,13 +52,13 @@ class BarChartRaceTool extends LocatorObject {
 
   public get donorButton() {
     return this.groupByFieldset.getByRole("button", {
-      name: this.translations.bar_chart_race.group_by.donor,
+      name: this.translations("bar_chart_race.group_by.donor"),
     });
   }
 
   public get receiverButton() {
     return this.groupByFieldset.getByRole("button", {
-      name: this.translations.bar_chart_race.group_by.receiver,
+      name: this.translations("bar_chart_race.group_by.receiver"),
     });
   }
 
@@ -66,7 +66,7 @@ class BarChartRaceTool extends LocatorObject {
     return this.locator.locator("fieldset").filter({
       has: this.locator
         .page()
-        .getByText(this.translations.bar_chart_race.animation_duration, {
+        .getByText(this.translations("bar_chart_race.animation_duration"), {
           exact: true,
         }),
     });
@@ -88,12 +88,14 @@ class BarChartRaceTool extends LocatorObject {
 
   public get fromYearDropdown() {
     return this.advancedSection.getByLabel(
-      this.translations.bar_chart_race.from,
+      this.translations("bar_chart_race.from"),
     );
   }
 
   public get toYearDropdown() {
-    return this.advancedSection.getByLabel(this.translations.bar_chart_race.to);
+    return this.advancedSection.getByLabel(
+      this.translations("bar_chart_race.to"),
+    );
   }
 
   public fromYearOption(year: number) {
@@ -112,25 +114,25 @@ class BarChartRaceTool extends LocatorObject {
 
   public get playButton() {
     return this.locator.getByRole("button", {
-      name: this.translations.actions.play,
+      name: this.translations("actions.play"),
     });
   }
 
   public get pauseButton() {
     return this.locator.getByRole("button", {
-      name: this.translations.actions.pause,
+      name: this.translations("actions.pause"),
     });
   }
 
   public get restartButton() {
     return this.locator.getByRole("button", {
-      name: this.translations.actions.restart,
+      name: this.translations("actions.restart"),
     });
   }
 
   public get downloadVideoButton() {
     return this.locator.getByRole("button", {
-      name: this.translations.bar_chart_race.download_video,
+      name: this.translations("bar_chart_race.download_video"),
     });
   }
 }

@@ -1,8 +1,14 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+
 export default function Loading({
   heightClass = "h-[100px]",
 }: {
   heightClass?: string;
 }) {
+  const t = useTranslations("data");
+
   return (
     <div className={`flex ${heightClass} items-center justify-center`}>
       <div role="status">
@@ -22,7 +28,7 @@ export default function Loading({
             fill="currentFill"
           />
         </svg>
-        <span className="sr-only">Loading...</span>
+        <span className="sr-only">{t("loading")}</span>
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ import {
 import { DataLoader } from "../data-loader";
 import { donorMeta } from "./donor-meta";
 
-import type { Countries } from "../../../src/utils/locales";
+import type { Countries } from "../../../src/utils/countries";
 import type { ReceiverId } from "../../../src/utils/types";
 import type { ExtractedYearData, PartyConfig } from "../data-loader";
 import type { ReadableStream } from "stream/web";
@@ -573,7 +573,7 @@ export class GeLoader extends DataLoader {
           !(
             donationType === "#10 - ფულადი შემოწირულებები" ||
             donationType ===
-            "#16 - იურიდიული პირის მიერ განხორციელებული ფულადი შემოწირულებები"
+              "#16 - იურიდიული პირის მიერ განხორციელებული ფულადი შემოწირულებები"
           )
         )
           return;

@@ -1,8 +1,8 @@
 "use client";
+import { useTranslations } from "next-intl";
 
 import Loading from "./loading";
 import { useWikipediaByPageId } from "../hooks/use-api";
-import { useTranslations } from "../hooks/use-translations";
 
 import type { UnloadedCountryConfig } from "../utils/countries";
 
@@ -13,11 +13,11 @@ export const WikiQuote = ({
   pageId: number;
   country: UnloadedCountryConfig;
 }) => {
-  const { translations } = useTranslations();
+  const t = useTranslations("data");
   const { data, error, isLoading } = useWikipediaByPageId(country, pageId);
 
   if (isLoading) return <Loading />;
-  if (error) return <div>{translations.data_error}</div>;
+  if (error) return <div>{t("error")}</div>;
   if (!data) return null;
 
   const wikiCountry = country.wikiCountry;

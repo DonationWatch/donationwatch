@@ -1,8 +1,8 @@
 import { zipMappings } from "./zip-data";
 import { AddressField } from "../../../src/utils/types";
 
-import type { Countries } from "../../../src/utils/locales";
 import type { ExtractedDonationAddress } from "../../../src/utils/types";
+import type { Countries } from "@/utils/countries";
 
 export const countryCode = (cityLine: string): Countries => {
   if (cityLine.startsWith("A-")) return "AT";

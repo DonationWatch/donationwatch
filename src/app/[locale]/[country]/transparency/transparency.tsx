@@ -1,12 +1,11 @@
 "use client";
+import { useLocale, useTranslations } from "next-intl";
 
 import { FormatAnd } from "../../../../components/formatter";
 import { ArticleSection } from "../../../../components/layout/article";
 import Loading from "../../../../components/loading";
 import { useNormalized } from "../../../../hooks/use-api";
-import { useTranslations } from "../../../../hooks/use-translations";
 import { getCountryName } from "../../../../utils/countries";
-import { t } from "../../translations";
 
 import type { CountryConfig } from "../../../../utils/countries";
 
@@ -15,19 +14,20 @@ export const Transparency = ({
 }: {
   countryConfig: CountryConfig;
 }) => {
-  const { translations, locale } = useTranslations();
+  const t = useTranslations();
+  const tTransparency = useTranslations("transparency");
+  const tData = useTranslations("data");
+  const locale = useLocale();
   const { data, error, isLoading } = useNormalized(countryConfig);
 
   if (isLoading) return <Loading />;
-  if (error || !data) return translations.data_error;
+  if (error || !data) return tData("error");
 
   return (
     <>
       {countryConfig.receiverFilters ? (
-        <ArticleSection
-          title={translations.transparency.section.filtered_receivers}
-        >
-          <p>{translations.transparency.filtered_receivers.p0}</p>
+        <ArticleSection title={tTransparency("section.filtered_receivers")}>
+          <p>{tTransparency("filtered_receivers.p0")}</p>
           <ul className="list-inside list-disc text-sm">
             {countryConfig.receiverFilters.map((filter, idx) => (
               <li key={`filter-${idx}`}>
@@ -37,7 +37,7 @@ export const Transparency = ({
               </li>
             ))}
           </ul>
-          <p>{translations.transparency.filtered_receivers.p1}</p>
+          <p>{tTransparency("filtered_receivers.p1")}</p>
           <p className="text-sm">
             <FormatAnd
               locale={locale}
@@ -50,10 +50,8 @@ export const Transparency = ({
       ) : null}
 
       {countryConfig.donorFilters ? (
-        <ArticleSection
-          title={translations.transparency.section.filtered_donors}
-        >
-          <p>{translations.transparency.filtered_donors.p0}</p>
+        <ArticleSection title={tTransparency("section.filtered_donors")}>
+          <p>{tTransparency("filtered_donors.p0")}</p>
           <ul className="list-inside list-disc text-sm">
             {countryConfig.donorFilters.map((filter, idx) => (
               <li key={`filter-${idx}`}>
@@ -63,7 +61,7 @@ export const Transparency = ({
               </li>
             ))}
           </ul>
-          <p>{translations.transparency.filtered_donors.p1}</p>
+          <p>{tTransparency("filtered_donors.p1")}</p>
           <p className="text-sm">
             <FormatAnd
               locale={locale}
@@ -76,10 +74,10 @@ export const Transparency = ({
       ) : null}
 
       {data.normalizedReceivers.length ? (
-        <ArticleSection title={translations.transparency.receivers.title}>
+        <ArticleSection title={tTransparency("receivers.title")}>
           <p>
-            {t(translations.transparency.receivers.p0, {
-              country: getCountryName(countryConfig, translations),
+            {tTransparency("receivers.p0", {
+              country: getCountryName(countryConfig, t),
             })}
           </p>
           <ul data-testid="transparency-receiver-list">
@@ -105,9 +103,9 @@ export const Transparency = ({
         </ArticleSection>
       ) : null}
 
-      <ArticleSection title={translations.transparency.section.aggregated}>
-        <p>{translations.transparency.p0}</p>
-        <p>{translations.transparency.p1}</p>
+      <ArticleSection title={tTransparency("section.aggregated")}>
+        <p>{tTransparency("p0")}</p>
+        <p>{tTransparency("p1")}</p>
         <ul data-testid="transparency-list" className="text-sm">
           {data.normalizedDonors.map(([name, normalizedVariants]) => {
             return (

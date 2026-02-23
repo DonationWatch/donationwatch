@@ -1,12 +1,11 @@
 "use client";
+import { useTranslations, useLocale } from "next-intl";
 
 import { DonorLink } from "./donor-link";
 import { FormatAnd } from "./formatter";
 import Loading from "./loading";
 import { Translation } from "./translation";
-import { t } from "../app/[locale]/translations";
 import { useDonationsByYears } from "../hooks/use-api";
-import { useTranslations } from "../hooks/use-translations";
 import { isNotNullandNotUndefined } from "../utils/array";
 import { donationYear } from "../utils/date";
 import {
@@ -30,13 +29,15 @@ export const YearsDonorPageText = ({
   country: CountryConfig;
   parties: Party[];
 }) => {
-  const { translations, locale } = useTranslations();
+  const t = useTranslations();
+  const tData = useTranslations("data");
+  const locale = useLocale();
   const results = useDonationsByYears(country, years);
   const error = results.some((r) => r.error);
   const isLoading = results.some((r) => r.isLoading);
 
   if (isLoading) return <Loading />;
-  if (error) return <div>{translations.data_error}</div>;
+  if (error) return <div>{tData("error")}</div>;
 
   const biggestDonor: { donor: string; amount: number } = {
     donor: "",
@@ -139,7 +140,7 @@ export const YearsDonorPageText = ({
   return (
     <>
       <p className="mb-6">
-        {t(translations.donors.detail.unique_donors, {
+        {t("donors.detail.unique_donors", {
           years: formatAnd(locale, years),
           count: Object.keys(donorDonations).length,
         })}
@@ -148,7 +149,7 @@ export const YearsDonorPageText = ({
       {topDonors.length > 0 ? (
         <p className="mb-6">
           <Translation
-            text={translations.donors.detail.top_3}
+            text={t.raw("donors.detail.top_3")}
             variables={{
               amount: topDonors.length,
               years: formatYearsRange(years),
@@ -171,7 +172,7 @@ export const YearsDonorPageText = ({
       {biggestDonor.amount > 0 ? (
         <p className="mb-6">
           <Translation
-            text={translations.donors.detail.biggest_donor}
+            text={t.raw("donors.detail.biggest_donor")}
             variables={{
               amount: formatCountryCurrency(
                 locale,
@@ -186,7 +187,7 @@ export const YearsDonorPageText = ({
       {mostDonationsDonor.sum > 0 ? (
         <p className="mb-6">
           <Translation
-            text={translations.donors.detail.most_donations}
+            text={t.raw("donors.detail.most_donations")}
             variables={{
               count: mostDonationsDonor.count,
               sum: formatCountryCurrency(
@@ -205,7 +206,7 @@ export const YearsDonorPageText = ({
       {mostUniquePartiesDonor.count > 1 ? (
         <p>
           <Translation
-            text={translations.donors.detail.most_unique_parties}
+            text={t.raw("donors.detail.most_unique_parties")}
             variables={{
               count: mostUniquePartiesDonor.count,
               sum: formatCountryCurrency(

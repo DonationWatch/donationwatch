@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Transparency } from "./transparency";
 import { Article } from "../../../../components/layout/article";
@@ -7,12 +8,10 @@ import { LOCALES } from "../../../../utils/locales";
 import { generateAlternates } from "../../../../utils/meta";
 import { notFoundMetadata } from "../../../../utils/not-found-metadata";
 import { isValidCountry, isValidLocale } from "../../../../utils/validate";
-import { getTranslations } from "../../translations";
 
 import type { Metadata } from "next";
 
 export const dynamicParams = false;
-export const dynamic = "error";
 
 export async function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
@@ -25,13 +24,18 @@ export async function generateMetadata(
 
   if (!isValidLocale(params.locale)) return notFoundMetadata;
   if (!isValidCountry(params.country)) return notFoundMetadata;
-  const { locale, country } = params;
+  setRequestLocale(params.locale);
 
-  const translations = await getTranslations(locale);
+  const { country } = params;
+
+  const t = await getTranslations({
+    locale: params.locale,
+    namespace: "transparency",
+  });
 
   return {
     robots: "noindex, nofollow",
-    title: `${translations.transparency.title} | DonationWatch`,
+    title: `${t("title")} | DonationWatch`,
     alternates: generateAlternates(`${country}/transparency`),
   };
 }
@@ -43,15 +47,17 @@ export default async function Page(
 
   if (!isValidLocale(params.locale)) return notFound();
   if (!isValidCountry(params.country)) return notFound();
-  const { locale, country } = params;
+  setRequestLocale(params.locale);
 
-  const [translations, countryConfig] = await Promise.all([
-    getTranslations(locale),
+  const { country } = params;
+
+  const [t, countryConfig] = await Promise.all([
+    getTranslations({ locale: params.locale, namespace: "transparency" }),
     getCountryConfig(country),
   ]);
 
   return (
-    <Article title={translations.transparency.title}>
+    <Article title={t("title")}>
       <Transparency countryConfig={countryConfig} />
     </Article>
   );

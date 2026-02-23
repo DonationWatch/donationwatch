@@ -1,5 +1,4 @@
 "use client";
-
 import {
   CalendarDays,
   ChartBarStacked,
@@ -10,6 +9,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslations, useLocale } from "next-intl";
 import { useState } from "react";
 
 import { CountrySwitch } from "./country-switch";
@@ -43,26 +43,23 @@ import {
 } from "../utils/config";
 import { COUNTRY_CONFIG, getCountryName } from "../utils/countries";
 
-import type { Translations } from "../messages/translations";
 import type { Country, CountryConfig } from "../utils/countries";
 import type { BigDonor } from "../utils/loader/biggest-donors";
-import type { ConstLocale } from "../utils/locales";
 
-import { t } from "@/app/[locale]/translations";
 import { countryFlags } from "@/utils/country-flags";
 
 export function AppSidebar({
-  locale,
   countryConfig,
-  translations,
   biggestDonors,
 }: {
-  translations: Translations;
-  locale: ConstLocale;
   countryConfig?: CountryConfig;
   biggestDonors?: BigDonor[];
 }) {
   const [showAllParties, setShowAllParties] = useState(false);
+  const t = useTranslations();
+  const tSearch = useTranslations("search");
+  const tSidebar = useTranslations("sidebar");
+  const locale = useLocale();
 
   return (
     <Sidebar>
@@ -74,9 +71,7 @@ export function AppSidebar({
           <>
             <SidebarGroup>
               <SidenavSearchTrigger />
-              <SidebarGroupLabel>
-                {translations.sidebar.donations}
-              </SidebarGroupLabel>
+              <SidebarGroupLabel>{tSidebar("donations")}</SidebarGroupLabel>
               <SidebarGroupContent>
                 <SidebarMenu>
                   <Collapsible
@@ -85,7 +80,7 @@ export function AppSidebar({
                   >
                     <CollapsibleTrigger render={<SidebarMenuButton />}>
                       <CalendarDays />
-                      <span>{translations.search.years}</span>
+                      <span>{tSearch("years")}</span>
                       <ChevronRight className="ml-auto transition-transform duration-200 group-data-[open]/collapsible:rotate-90" />
                     </CollapsibleTrigger>
                     <CollapsibleContent>
@@ -112,7 +107,7 @@ export function AppSidebar({
                   >
                     <CollapsibleTrigger render={<SidebarMenuButton />}>
                       <Vote />
-                      <span>{translations.search.parties}</span>
+                      <span>{tSearch("parties")}</span>
                       <ChevronRight className="ml-auto transition-transform duration-200 group-data-[open]/collapsible:rotate-90" />
                     </CollapsibleTrigger>
                     <CollapsibleContent>
@@ -147,7 +142,7 @@ export function AppSidebar({
                                 className="hover:text-foreground cursor-pointer dark:text-gray-200"
                               >
                                 <span className="text-xs">
-                                  {t(translations.sidebar.show_all, {
+                                  {tSidebar("show_all", {
                                     num: countryConfig.parties.length,
                                   })}
                                 </span>
@@ -163,7 +158,7 @@ export function AppSidebar({
                                 className="hover:text-foreground cursor-pointer dark:text-gray-200"
                               >
                                 <span className="text-xs">
-                                  {translations.sidebar.show_less}
+                                  {tSidebar("show_less")}
                                 </span>
                               </SidebarMenuButton>
                             </SidebarMenuSubItem>
@@ -178,7 +173,7 @@ export function AppSidebar({
                     >
                       <CollapsibleTrigger render={<SidebarMenuButton />}>
                         <UserRound />
-                        <span>{translations.search.donors}</span>
+                        <span>{tSearch("donors")}</span>
                         <ChevronRight className="ml-auto transition-transform duration-200 group-data-[open]/collapsible:rotate-90" />
                       </CollapsibleTrigger>
                       <CollapsibleContent>
@@ -206,9 +201,7 @@ export function AppSidebar({
               </SidebarGroupContent>
             </SidebarGroup>
             <SidebarGroup>
-              <SidebarGroupLabel>
-                {translations.sidebar.tools}
-              </SidebarGroupLabel>
+              <SidebarGroupLabel>{tSidebar("tools")}</SidebarGroupLabel>
               <SidebarMenu>
                 <SidebarMenuItem>
                   <SidebarActiveMenuButton
@@ -218,7 +211,7 @@ export function AppSidebar({
                   >
                     <a href={`/${locale}/${countryConfig.id}/tools/data`}>
                       <FileSpreadsheet />
-                      <span>{translations.export.title}</span>
+                      <span>{t("export.title")}</span>
                     </a>
                   </SidebarActiveMenuButton>
                 </SidebarMenuItem>
@@ -243,15 +236,13 @@ export function AppSidebar({
           </>
         ) : (
           <SidebarGroup>
-            <SidebarGroupLabel>
-              {translations.sidebar.all_countries}
-            </SidebarGroupLabel>
+            <SidebarGroupLabel>{tSidebar("all_countries")}</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 {Object.entries(COUNTRY_CONFIG)
                   .map(([countryId, country]) => ({
                     countryId: countryId as Country,
-                    name: getCountryName(country, translations),
+                    name: getCountryName(country, t),
                   }))
                   .toSorted((a, b) => a.name.localeCompare(b.name, locale))
                   .map(({ countryId, name }) => (
@@ -285,15 +276,15 @@ export function AppSidebar({
           items={[
             {
               href: `/${locale}/other-countries`,
-              label: translations.other_countries.title,
+              label: t("other_countries.title"),
             },
             {
               href: `/${locale}/fun`,
-              label: translations.fun.link,
+              label: t("fun.link"),
             },
             {
               href: `/${locale}/about`,
-              label: translations.about.title,
+              label: t("about.title"),
             },
             {
               href: GITHUB_URL,

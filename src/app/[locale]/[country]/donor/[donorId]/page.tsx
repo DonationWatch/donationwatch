@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { DonorClientPage } from "./donor-client-page";
 import { DonorPageHead } from "./donor-page-head";
@@ -18,7 +19,6 @@ import {
 import { notFoundMetadata } from "../../../../../utils/not-found-metadata";
 import { DonationField, DonorType } from "../../../../../utils/types";
 import { isValidCountry, isValidLocale } from "../../../../../utils/validate";
-import { getTranslations, t } from "../../../translations";
 
 import type { Metadata } from "next";
 
@@ -35,16 +35,18 @@ export async function generateMetadata(
 
   if (!isValidLocale(params.locale)) return notFoundMetadata;
   if (!isValidCountry(params.country)) return notFoundMetadata;
+  setRequestLocale(params.locale);
 
   const { locale, country } = params;
   const donorId = params.donorId;
 
-  const [translations, countryConfig, donations, biggestDonors] =
+  const [t, countryConfig, donations, biggestDonors, tCommon] =
     await Promise.all([
-      getTranslations(locale),
+      getTranslations({ locale: params.locale }),
       getCountryConfig(country),
       getDonationsByDonorId(country, donorId),
       getBiggestDonors(country),
+      getTranslations({ locale: params.locale, namespace: "common" }),
     ]);
 
   if (!donations?.length) {
@@ -52,7 +54,7 @@ export async function generateMetadata(
   }
 
   const donorType = donations[0][DonationField.DonorType];
-  const donorName = getDonationDonorName(donations[0], translations);
+  const donorName = getDonationDonorName(donations[0], tCommon);
 
   let count = 0;
   let sum = 0;
@@ -64,8 +66,8 @@ export async function generateMetadata(
     parties.add(donation[DonationField.Receiver]);
   }
 
-  const description = t(translations.page_title.donor.description, {
-    country: getCountryName(countryConfig, translations),
+  const description = t("page_title.donor.description", {
+    country: getCountryName(countryConfig, t),
     donor: donorName,
     count,
     sum: formatCountryCurrency(locale, sum, countryConfig),
@@ -82,9 +84,9 @@ export async function generateMetadata(
   const imageUrl = `${THUMBNAIL_PREFIX}/${locale}/${country}/donors/${donorId}.png`;
 
   const metadata: Metadata = {
-    title: `${t(translations.page_title.donor.overview, {
+    title: `${t("page_title.donor.overview", {
       donor: donorName,
-      country: getCountryName(countryConfig, translations),
+      country: getCountryName(countryConfig, t),
     })}`,
     description,
     alternates: generateAlternates(`${country}/donor/${donorId}`),
@@ -124,6 +126,7 @@ export default async function DonorPageLayout(
 
   if (!isValidLocale(params.locale)) return notFound();
   if (!isValidCountry(params.country)) return notFound();
+  setRequestLocale(params.locale);
 
   const { country, donorId } = params;
 

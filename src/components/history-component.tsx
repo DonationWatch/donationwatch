@@ -1,5 +1,3 @@
-"use server";
-
 import { DonationHistoryItem } from "./donation-history-item";
 import { getMostRecent } from "../utils/loader/most-recent";
 

@@ -1,11 +1,10 @@
 "use client";
-
 import { useRouter } from "next/navigation";
+import { useTranslations, useLocale } from "next-intl";
 
 import { ExpandableReactEchart } from "./expandable-react-echart";
 import { useDonationsByParty } from "../../hooks/use-api";
 import { useChart } from "../../hooks/use-chart";
-import { useTranslations } from "../../hooks/use-translations";
 import { donorTypeColor, partyColor } from "../../utils/color";
 import { type CountryConfig, getParty } from "../../utils/countries";
 import { donationYear } from "../../utils/date";
@@ -33,7 +32,8 @@ export const LoadedDonorTypeTreemap = ({
   parties?: Party[];
   years?: string[];
 }) => {
-  const { translations, locale } = useTranslations();
+  const t = useTranslations();
+  const locale = useLocale();
 
   const yearsSet = new Set<string>(years);
   const partiesSet = new Set<Party>(parties);
@@ -224,8 +224,7 @@ export const LoadedDonorTypeTreemap = ({
 
         if (params.treeAncestors.length === 2) {
           // is "root" level
-          const categoryName =
-            translations.donor_type[params.name as DonorType];
+          const categoryName = t(`donor_type.${params.name as DonorType}`);
           content = `<div class="font-semibold">${categoryName}</div> <div>${formatCountryCurrency(locale, params.value as number, country)}</div>`;
         }
 
@@ -241,7 +240,7 @@ export const LoadedDonorTypeTreemap = ({
       },
     },
     series: {
-      name: translations.years.title,
+      name: t("years.title"),
       type: "treemap",
       roam: !isMobile,
       nodeClick: false,
@@ -264,7 +263,7 @@ export const LoadedDonorTypeTreemap = ({
 
           if (params.treeAncestors.length === 2) {
             // is "root" level
-            return `{name|${translations.donor_type[params.name as DonorType]}} {value|${formatCountryCurrency(locale, params.value as number, country)}}`;
+            return `{name|${t(`donor_type.${params.name as DonorType}`)}} {value|${formatCountryCurrency(locale, params.value as number, country)}}`;
           }
 
           return ``;
@@ -331,12 +330,12 @@ export const LoadingPartyDonorTypeTreemap = ({
   title: string;
   subtitle: string;
 }) => {
-  const { translations } = useTranslations();
+  const t = useTranslations("data");
 
   const { data, error, isLoading } = useDonationsByParty(country, party);
 
   if (isLoading) return <Loading />;
-  if (error || !data) return <div>{translations.data_error}</div>;
+  if (error || !data) return <div>{t("error")}</div>;
 
   return (
     <LoadedDonorTypeTreemap

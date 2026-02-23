@@ -1,5 +1,5 @@
 import { cleanupGeojson } from "./cleanup-geojson";
-import { Countries } from "../../../src/utils/locales";
+import { Countries } from "@/utils/countries";
 
 const europe = {"type":"FeatureCollection", "features": [
 {"type":"Feature","geometry":{"type":"Polygon","coordinates":[[[1.710967,42.473499],[1.781667,42.581661],[1.541111,42.65387],[1.435247,42.597149],[1.448333,42.450821],[1.710967,42.473499]]]},"properties":{"name":"Andorra","created_at":"2012-08-29T00:00:00Z","updated_at":"2012-08-29T00:00:00Z","cartodb_id":1}},

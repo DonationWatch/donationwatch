@@ -14,12 +14,12 @@ import { donorMeta } from "./donor-meta";
 import { AddressField, DonationField } from "../../../src/utils/types";
 import { Deferred } from "../util";
 
+import type { Countries } from "../../../src/utils/countries";
 import type {
   ExtractedDonationAddress,
   ReceiverId,
 } from "../../../src/utils/types";
 import type { ExtractedYearData, PartyConfig } from "../data-loader";
-import type { Countries } from "@/utils/locales";
 import type { ReadableStream } from "stream/web";
 
 const normalizeDonor = (donor: string): string => {

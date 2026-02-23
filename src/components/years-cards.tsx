@@ -1,9 +1,10 @@
+"use client";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 import { DynamicStackedPartyDonations } from "./dynamic-stacked-party-line";
 import { formatCompactCountryCurrency } from "../utils/formatter";
 
-import type { Translations } from "../messages/translations";
 import type { CountryConfig } from "../utils/countries";
 import type { PartyYearsSums } from "../utils/loader/party-years-sums";
 import type { ConstLocale } from "../utils/locales";
@@ -50,14 +51,14 @@ const YearCard = ({
 export const YearsCards = ({
   country,
   locale,
-  translations,
   partyYearsSums,
 }: {
   country: CountryConfig;
   locale: ConstLocale;
-  translations: Translations;
   partyYearsSums: PartyYearsSums;
 }) => {
+  const t = useTranslations("home");
+
   const years = country.years
     .toReversed()
     .map((year): [string, number] => {
@@ -97,7 +98,7 @@ export const YearsCards = ({
       {otherYearSums.length > 0 ? (
         <details>
           <summary className="my-3 cursor-pointer select-none">
-            {translations.home.years.more}
+            {t("years.more")}
           </summary>
           <ul className="grid grid-cols-2 gap-2 lg:grid-cols-3">
             {years.slice(VISIBLE_PARTIES).map(([year, sum]) => (

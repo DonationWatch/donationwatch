@@ -1,9 +1,9 @@
 "use client";
+import { useTranslations, useLocale } from "next-intl";
 
 import { ExpandableReactEchart } from "./expandable-react-echart";
 import { useDonationsByYears } from "../../hooks/use-api";
 import { useChart } from "../../hooks/use-chart";
-import { useTranslations } from "../../hooks/use-translations";
 import { isNotNullandNotUndefined } from "../../utils/array";
 import { partyColor } from "../../utils/color";
 import { type CountryConfig, getParty } from "../../utils/countries";
@@ -38,7 +38,9 @@ export const DonationYearScatterPlot = ({
   title: string;
   subtitle: string;
 }) => {
-  const { translations, locale } = useTranslations();
+  const t = useTranslations();
+  const tData = useTranslations("data");
+  const locale = useLocale();
   const { backgroundColor } = useChart();
 
   const results = useDonationsByYears(country, years);
@@ -46,7 +48,7 @@ export const DonationYearScatterPlot = ({
   const isLoading = results.some((r) => r.isLoading);
 
   if (isLoading) return <Loading />;
-  if (error) return <div>{translations.data_error}</div>;
+  if (error) return <div>{tData("error")}</div>;
 
   const donations = results
     .flatMap((r) => r.data)
@@ -213,7 +215,7 @@ ${partyPart}
       {typeof biggestSpanParty === "string" ? (
         <p className="mb-6">
           <Translation
-            text={translations.overview.scatter.span}
+            text={t.raw("overview.scatter.span")}
             variables={{
               biggestSpanAmount: formatCountryCurrency(
                 locale,
@@ -224,7 +226,6 @@ ${partyPart}
                 <TextPartyLink
                   party={biggestSpanParty}
                   country={country}
-                  translations={translations}
                   locale={locale}
                 />
               ),

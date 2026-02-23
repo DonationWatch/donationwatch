@@ -1,11 +1,11 @@
 "use client";
+import { useTranslations, useLocale } from "next-intl";
 
 import { FormatAnd } from "./formatter";
 import Loading from "./loading";
 import { TextPartyLink } from "./text-party-link";
 import { Translation } from "./translation";
 import { useDonationsByYears } from "../hooks/use-api";
-import { useTranslations } from "../hooks/use-translations";
 import { isNotNullandNotUndefined } from "../utils/array";
 import { donationYear } from "../utils/date";
 import { formatCountryCurrency, formatMonthYear } from "../utils/formatter";
@@ -23,14 +23,16 @@ export const LoadingYearBarsPageText = ({
   parties: Party[];
   years: string[];
 }) => {
-  const { translations, locale } = useTranslations();
+  const t = useTranslations();
+  const tData = useTranslations("data");
+  const locale = useLocale();
   const results = useDonationsByYears(country, years);
 
   const error = results.some((r) => r.error);
   const isLoading = results.some((r) => r.isLoading);
 
   if (isLoading) return <Loading />;
-  if (error) return <div>{translations.data_error}</div>;
+  if (error) return <div>{tData("error")}</div>;
 
   const yearsSet = new Set<string>(years);
   const partiesSet = new Set<string>(parties.map((p) => p.id));
@@ -114,11 +116,11 @@ export const LoadingYearBarsPageText = ({
 
   return (
     <>
-      <p className="mb-6">{translations.per_month.description}</p>
+      <p className="mb-6">{t("per_month.description")}</p>
       {monthWithHighestDonationSum ? (
         <p className="mb-6">
           <Translation
-            text={translations.per_month.highest_sum}
+            text={t.raw("per_month.highest_sum")}
             variables={{
               month: formatMonthYear(
                 locale,
@@ -137,7 +139,7 @@ export const LoadingYearBarsPageText = ({
       {partiesWithMostMonths?.length ? (
         <p className="mb-6">
           <Translation
-            text={translations.per_month.most_months}
+            text={t.raw("per_month.most_months")}
             variables={{
               party: (
                 <FormatAnd
@@ -147,7 +149,6 @@ export const LoadingYearBarsPageText = ({
                       key={partyId}
                       party={partyId}
                       country={country}
-                      translations={translations}
                       locale={locale}
                     />
                   ))}
@@ -161,7 +162,7 @@ export const LoadingYearBarsPageText = ({
       {monthWithMostDonations ? (
         <p>
           <Translation
-            text={translations.per_month.month_most_donations}
+            text={t.raw("per_month.month_most_donations")}
             variables={{
               month: formatMonthYear(
                 locale,

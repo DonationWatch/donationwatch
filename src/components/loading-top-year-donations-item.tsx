@@ -9,7 +9,6 @@ import { PartyDot } from "./party-dot";
 import { PartyLink } from "./party-link";
 import { CurrencyRankingItem } from "./ranking-item";
 
-import type { Translations } from "../messages/translations";
 import type { CountryConfig } from "../utils/countries";
 import type { ConstLocale } from "../utils/locales";
 import type { Donation, ReceiverId } from "../utils/types";
@@ -56,7 +55,6 @@ export const LoadingTopYearDonationsItem = ({
   years = [],
   expanded,
   onToggleExpanded,
-  translations,
   locale,
 }: {
   partyId: ReceiverId;
@@ -67,7 +65,6 @@ export const LoadingTopYearDonationsItem = ({
   years?: string[];
   expanded: boolean;
   onToggleExpanded: (expanded: boolean) => void;
-  translations: Translations;
   locale: ConstLocale;
 }) => {
   return (
@@ -85,7 +82,6 @@ export const LoadingTopYearDonationsItem = ({
           }
           party={partyId}
           country={country}
-          translations={translations}
           locale={locale}
         >
           <ArrowRight size={16} />

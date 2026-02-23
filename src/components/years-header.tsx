@@ -1,6 +1,7 @@
-"use server";
+"use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 import { DynamicStackedPartyDonations } from "./dynamic-stacked-party-line";
 import { ReadonlyTopYearDonationsItem } from "./loading-top-year-donations-item";
@@ -16,7 +17,6 @@ import {
 import { numbersAvg } from "../utils/math";
 import { serializeYears } from "../utils/serializers";
 
-import type { Translations } from "../messages/translations";
 import type { CountryConfig } from "../utils/countries";
 import type { PartyYearsSums } from "../utils/loader/party-years-sums";
 import type { ConstLocale } from "../utils/locales";
@@ -27,19 +27,18 @@ const Wrapper = ({
   className,
   children,
   country,
-  translations,
   readonly,
   locale,
   years,
 }: PropsWithChildren<{
-  translations: Translations;
   readonly: boolean;
   locale: ConstLocale;
   years: string[];
   country: CountryConfig;
   className?: string;
 }>) => {
-  const ariaLabel = `${translations.years.title} ${formatYearsRange(years)}`;
+  const t = useTranslations();
+  const ariaLabel = `${t("years.title")} ${formatYearsRange(years)}`;
   const yearsParam = serializeYears(years);
 
   return readonly ? (
@@ -60,7 +59,6 @@ const Wrapper = ({
 
 const HighscoreHeader = ({
   className,
-  translations,
   years,
   locale,
   parties,
@@ -78,7 +76,6 @@ const HighscoreHeader = ({
   country: CountryConfig;
   partyYearsSums: PartyYearsSums;
   idPrefix: string;
-  translations: Translations;
   locale: ConstLocale;
   parties: Party[];
   years: string[];
@@ -89,6 +86,8 @@ const HighscoreHeader = ({
   withStackedBar?: boolean;
   titleBeforeYears?: boolean;
 }) => {
+  const t = useTranslations();
+
   const { count, sum, sums, sumNumbers } = getPartiesSum(
     country,
     partyYearsSums,
@@ -99,7 +98,6 @@ const HighscoreHeader = ({
   return (
     <Wrapper
       className={className}
-      translations={translations}
       years={years}
       readonly={readonly}
       locale={locale}
@@ -116,16 +114,16 @@ const HighscoreHeader = ({
       <div className="mb-4">
         <div className="flex-row space-y-2 sm:flex sm:space-y-0 sm:space-x-10">
           <MetaCard
-            title={translations.donation_count}
+            title={t("donation_count")}
             value={formatNumber(locale, count)}
           />
           <MetaCard
-            title={translations.sum}
+            title={t("sum")}
             value={formatCountryCurrency(locale, sum, country)}
           />
           {showExtendedMeta && count > 1 && (
             <MetaCard
-              title={translations.average}
+              title={t("average")}
               value={formatCountryCurrency(
                 locale,
                 numbersAvg(sumNumbers, count),
@@ -164,8 +162,7 @@ const HighscoreHeader = ({
   );
 };
 
-export const YearsHeader = async ({
-  translations,
+export const YearsHeader = ({
   locale,
   years,
   idPrefix = "",
@@ -180,7 +177,6 @@ export const YearsHeader = async ({
   titleBeforeYears = false,
 }: {
   idPrefix?: string;
-  translations: Translations;
   locale: ConstLocale;
   years: string[];
   showTop3?: boolean;
@@ -201,7 +197,6 @@ export const YearsHeader = async ({
       country={country}
       partyYearsSums={partySums}
       idPrefix={idPrefix}
-      translations={translations}
       locale={locale}
       years={years}
       parties={parties}

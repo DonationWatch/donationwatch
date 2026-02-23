@@ -1,6 +1,5 @@
-"use server";
-
 import { notFound } from "next/navigation";
+import { setRequestLocale } from "next-intl/server";
 
 import { DonationPartyOrigin } from "../../../../../../../components/donation-origin";
 import { getParty } from "../../../../../../../utils/countries";
@@ -8,6 +7,7 @@ import { getCountryConfig } from "../../../../../../../utils/data/get-country-co
 import { generateAlternates } from "../../../../../../../utils/meta";
 import {
   isValidCountry,
+  isValidLocale,
   isValidParty,
 } from "../../../../../../../utils/validate";
 
@@ -34,7 +34,9 @@ export default async function OverviewPage(
 
   const { country, partyId } = params;
 
+  if (!isValidLocale(params.locale)) return notFound();
   if (!isValidCountry(country)) return notFound();
+  setRequestLocale(params.locale);
 
   const [countryConfig] = await Promise.all([getCountryConfig(country)]);
 

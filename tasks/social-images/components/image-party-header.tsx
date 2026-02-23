@@ -1,3 +1,5 @@
+"use client";
+
 /* eslint-disable react/no-unknown-property */
 import { ImageMetaCard } from "./image-meta-card";
 import { ImagePageHeader } from "./image-years-header";
@@ -8,10 +10,10 @@ import {
 } from "../../../src/utils/formatter";
 import { DonationField } from "../../../src/utils/types";
 
-import type { Translations } from "../../../src/messages/translations";
 import type { CountryConfig } from "../../../src/utils/countries";
 import type { ConstLocale } from "../../../src/utils/locales";
 import type { Donation, Party } from "../../../src/utils/types";
+import type { CreateTranslator } from "../utils";
 
 import { getDonorName } from "@/utils/donor";
 
@@ -47,18 +49,21 @@ const RankingItem = ({
 };
 
 export const ImagePartyHeader = ({
+  getTranslations,
   country,
   donations,
-  translations,
   locale,
   party,
 }: {
+  getTranslations: CreateTranslator;
   country: CountryConfig;
-  translations: Translations;
   party: Party;
   locale: ConstLocale;
   donations: Donation[];
 }) => {
+  const t = getTranslations();
+  const tCommon = getTranslations("common");
+
   const partyDonations = donations.filter(
     (donation) => donation[DonationField.Receiver] === party.id,
   );
@@ -95,7 +100,7 @@ export const ImagePartyHeader = ({
   return (
     <div tw="grow flex flex-col w-full">
       <ImagePageHeader
-        translations={translations}
+        getTranslations={getTranslations}
         locale={locale}
         country={country}
       />
@@ -121,12 +126,12 @@ export const ImagePartyHeader = ({
           <div tw="flex">
             <div tw="flex mr-10">
               <ImageMetaCard
-                title={translations.donation_count}
+                title={t("donation_count")}
                 value={formatNumber(locale, partyDonations.length)}
               />
             </div>
             <ImageMetaCard
-              title={translations.sum}
+              title={t("sum")}
               value={formatCountryCurrency(locale, party.sum, country)}
             />
           </div>
@@ -144,7 +149,7 @@ export const ImagePartyHeader = ({
           {sortedDonors.slice(0, 3).map((entry) => (
             <RankingItem
               key={entry.name}
-              name={getDonorName(entry.name, translations)}
+              name={getDonorName(entry.name, tCommon)}
               amount={entry.sum}
               sum={entry.sum}
               locale={locale}

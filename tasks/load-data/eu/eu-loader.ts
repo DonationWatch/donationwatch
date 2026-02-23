@@ -11,7 +11,7 @@ import { Country } from "../../../src/utils/countries";
 import { AddressField, DonationField } from "../../../src/utils/types";
 import { exists } from "../util";
 
-import type { Countries } from "../../../src/utils/locales";
+import type { Countries } from "../../../src/utils/countries";
 import type {
   ExtractedDonationAddress,
   ReceiverId,

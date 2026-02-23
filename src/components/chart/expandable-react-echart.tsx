@@ -1,9 +1,9 @@
+"use client";
 import { Expand, X, ZoomOut } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
 import { useState, type JSX, useRef } from "react";
 
 import { DynamicEchart } from "./dynamic-echart";
-import { t } from "../../app/[locale]/translations";
-import { useTranslations } from "../../hooks/use-translations";
 import { isNotNullandNotUndefined } from "../../utils/array";
 import {
   formatCompactCountryCurrency,
@@ -53,7 +53,9 @@ export const ExpandableReactEchart = ({
   noteYearOnlyDonations?: boolean;
   footer?: boolean;
 }): JSX.Element => {
-  const { translations, locale } = useTranslations();
+  const t = useTranslations();
+  const tChart = useTranslations("chart");
+  const locale = useLocale();
 
   const [isExpanded, setIsExpanded] = useState(false);
   const [isZoomed, setIsZoomed] = useState(false);
@@ -69,7 +71,7 @@ export const ExpandableReactEchart = ({
   if (feature === "treemap" && isZoomed) {
     tools.push({
       icon: ZoomOut,
-      title: translations.chart.reset_zoom,
+      title: tChart("reset_zoom"),
       onClick: () => {
         echartsRef.current?.resetZoom();
         setIsZoomed(false);
@@ -79,7 +81,7 @@ export const ExpandableReactEchart = ({
 
   if (allowExpand) {
     tools.push({
-      title: translations.chart.toggle_fullscreen,
+      title: tChart("toggle_fullscreen"),
       icon: isExpanded ? X : Expand,
       onClick: () => setIsExpanded(!isExpanded),
     });
@@ -144,7 +146,7 @@ export const ExpandableReactEchart = ({
       {footer ? (
         <footer className="w-full shrink-0 items-center justify-between space-y-2 px-4 pt-2 pb-4 text-xs">
           <div className="opacity-80">
-            {t(translations.footer.build, {
+            {t("footer.build", {
               date: formatTwoDigitDate(
                 locale,
                 new Date(getBuild(country.id).t),
@@ -152,7 +154,7 @@ export const ExpandableReactEchart = ({
             })}
             <br />
             {[
-              t(translations.over_min_public_amount, {
+              t("over_min_public_amount", {
                 amount: formatCompactCountryCurrency(
                   locale,
                   country.minPublicDonationAmount,
@@ -160,7 +162,7 @@ export const ExpandableReactEchart = ({
                 ),
               }),
               country.knownPartyRequirements
-                ? t(translations.over_threshold, {
+                ? t("over_threshold", {
                     count: country.knownPartyRequirements.count,
                     sum: formatCompactCountryCurrency(
                       locale,
@@ -170,12 +172,12 @@ export const ExpandableReactEchart = ({
                   })
                 : undefined,
               hasPreliminaryData
-                ? t(translations.prelim_data, {
+                ? t("prelim_data", {
                     year: country.preliminaryDataSince!,
                   })
                 : undefined,
               noteYearOnlyDonations
-                ? translations.excludes_year_only_donations
+                ? t("excludes_year_only_donations")
                 : undefined,
             ]
               .filter(isNotNullandNotUndefined)

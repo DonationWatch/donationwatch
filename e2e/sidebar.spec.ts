@@ -61,7 +61,7 @@ test.describe(`Desktop sidebar`, () => {
 
     await test.step("changing country", async () => {
       const dropdown = await navigation.sidebar.countrySwitch.open();
-      await dropdown.selectItemByName(translations.countries.AT);
+      await dropdown.selectItemByName(translations("countries.AT"));
       expect(page.url()).toContain(`${baseURL}/austria`);
     });
   });

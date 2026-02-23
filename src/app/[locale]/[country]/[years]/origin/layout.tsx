@@ -1,4 +1,5 @@
 import { notFound, redirect } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { getCountryName } from "../../../../../utils/countries";
 import { getCountryConfig } from "../../../../../utils/data/get-country-config";
@@ -10,7 +11,6 @@ import {
 import { notFoundMetadata } from "../../../../../utils/not-found-metadata";
 import { deserializeYears } from "../../../../../utils/serializers";
 import { isValidCountry, isValidLocale } from "../../../../../utils/validate";
-import { getTranslations, t } from "../../../translations";
 
 import type { Metadata } from "next";
 
@@ -22,26 +22,26 @@ export async function generateMetadata(
   if (!isValidLocale(params.locale)) return notFoundMetadata;
   if (!isValidCountry(params.country)) return notFoundMetadata;
 
-  const { locale, country } = params;
+  const { country } = params;
   const years = params.years;
 
-  const [translations, countryConfig] = await Promise.all([
-    getTranslations(locale),
+  const [t, countryConfig] = await Promise.all([
+    getTranslations({ locale: params.locale }),
     getCountryConfig(country),
   ]);
 
   const yearsRange = formatYearsRange(deserializeYears(years));
-  const countryName = getCountryName(countryConfig, translations);
+  const countryName = getCountryName(countryConfig, t);
 
-  const description = t(translations.origin.description, {
+  const description = t("origin.description", {
     years: yearsRange,
     country: countryName,
   });
 
   return {
-    title: `${t(translations.page_title.years.origin, {
+    title: `${t("page_title.years.origin", {
       year: formatYearsRange(deserializeYears(years)),
-      country: getCountryName(countryConfig, translations),
+      country: getCountryName(countryConfig, t),
     })}`,
     description,
   };
@@ -54,6 +54,7 @@ export default async function OriginLayout(
 
   if (!isValidLocale(params.locale)) return notFound();
   if (!isValidCountry(params.country)) return notFound();
+  setRequestLocale(params.locale);
 
   const { country } = params;
   const { children } = props;

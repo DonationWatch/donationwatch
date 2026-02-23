@@ -1,8 +1,10 @@
+
+import { getTranslations } from "next-intl/server";
+
 import { FormatAnd } from "./formatter";
 import { Translation } from "./translation";
 import { Country } from "../utils/countries";
 
-import type { Translations } from "../messages/translations";
 import type { CountryConfig } from "../utils/countries";
 import type { ConstLocale } from "../utils/locales";
 
@@ -41,12 +43,10 @@ const externalThanks: Partial<
   ],
 };
 
-export const ExternalThanks = ({
+export const ExternalThanks = async ({
   country,
-  translations,
   locale,
 }: {
-  translations: Translations;
   country: CountryConfig;
   locale: ConstLocale;
 }) => {
@@ -54,12 +54,14 @@ export const ExternalThanks = ({
 
   if (!thanks) return null;
 
+  const t = await getTranslations({ locale });
+
   return (
     <div className="container mx-auto space-y-4 px-4 text-sm text-gray-600 dark:text-gray-400">
       <div className="border-t border-t-gray-200 dark:border-t-gray-800"></div>
       <div className="px-2">
         <Translation
-          text={translations.thanks}
+          text={t.raw("thanks")}
           variables={{
             external: (
               <FormatAnd

@@ -5,7 +5,11 @@ import type { Country, CountryConfig } from "./countries";
 import type { ConstLocale } from "./locales";
 import type { ReceiverId } from "./types";
 
-export const isValidLocale = (locale: string): locale is ConstLocale => {
+export const isValidLocale = (
+  locale: string | undefined,
+): locale is ConstLocale => {
+  if (!locale) return false;
+
   return LOCALES_SET.has(locale as ConstLocale);
 };
 

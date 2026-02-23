@@ -3,15 +3,15 @@ import { ImageFooter } from "../components/image-footer";
 import { ImagePartyHeader } from "../components/image-party-header";
 import { ThumbnailWrapper } from "../components/utils";
 
-import type { Translations } from "../../../src/messages/translations";
 import type { CountryConfig } from "../../../src/utils/countries";
 import type { ConstLocale } from "../../../src/utils/locales";
 import type { Donation, ReceiverId } from "../../../src/utils/types";
+import type { CreateTranslator } from "../utils";
 
 export const PartyPageImage = async (
   locale: ConstLocale,
+  getTranslations: CreateTranslator,
   countryConfig: CountryConfig,
-  translations: Translations,
   partyId: ReceiverId,
   donations: Donation[],
 ) => {
@@ -20,17 +20,17 @@ export const PartyPageImage = async (
   return (
     <ThumbnailWrapper>
       <ImagePartyHeader
+        getTranslations={getTranslations}
         donations={donations.filter(
           (donation) => donation[DonationField.Receiver] === party.id,
         )}
         country={countryConfig}
-        translations={translations}
         locale={locale}
         party={party}
       />
       <ImageFooter
+        getTranslations={getTranslations}
         country={countryConfig}
-        translations={translations}
         locale={locale}
       />
     </ThumbnailWrapper>

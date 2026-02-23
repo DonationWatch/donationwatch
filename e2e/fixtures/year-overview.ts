@@ -6,7 +6,7 @@ export class YearOverviewPage extends PageObject {
   public readonly yearsHeader = new YearsHeader(
     this.page.locator(".card", {
       has: this.page.getByRole("heading", {
-        name: this.translations.years.title,
+        name: this.translations("years.title"),
         exact: true,
       }),
     }),

@@ -1,6 +1,6 @@
 "use client";
-
 import { notFound } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
 
 import { DonationStackedTimeseriesChart } from "../../../../../components/chart/donation-sum-chart";
 import { LoadedDonationYearsTreemap } from "../../../../../components/chart/loading-donation-years-treemap";
@@ -19,7 +19,6 @@ import { DonationHistoryTable } from "../../../../../components/table/donation-h
 import { TextPartyLink } from "../../../../../components/text-party-link";
 import { Translation } from "../../../../../components/translation";
 import { useDonationsByDonorId } from "../../../../../hooks/use-api";
-import { useTranslations } from "../../../../../hooks/use-translations";
 import { getCountryName, getParty } from "../../../../../utils/countries";
 import { donationYear, fillYears } from "../../../../../utils/date";
 import {
@@ -30,7 +29,6 @@ import {
   formatPercentFormat,
 } from "../../../../../utils/formatter";
 import { DonationField } from "../../../../../utils/types";
-import { t } from "../../../translations";
 
 import type { Country, CountryConfig } from "../../../../../utils/countries";
 import type { Donation, ReceiverId } from "../../../../../utils/types";
@@ -45,10 +43,12 @@ const DonorClientPageContent = ({
   countryConfig: CountryConfig;
   donations: Donation[];
 }) => {
-  const { translations, locale } = useTranslations();
+  const t = useTranslations();
+  const tCommon = useTranslations("common");
+  const locale = useLocale();
   const donorName = getDonorName(
     donations.at(0)?.[DonationField.DonorName] ?? "",
-    translations,
+    tCommon,
   );
   const sums: Record<string, number> = {};
   const donationParties: Record<ReceiverId, { sum: number; count: number }> =
@@ -136,10 +136,10 @@ const DonorClientPageContent = ({
         <ArticleSectionColumn>
           <ArticleSectionTitle
             id={"sec-donor-overview"}
-            title={translations.donor.subtitle}
+            title={t("donor.subtitle")}
           />
           <p className="mb-6">
-            {t(translations.donor.summary, {
+            {t("donor.summary", {
               donor: donorName,
               sum: formatCountryCurrency(locale, sum, countryConfig),
               count: formatNumber(locale, donations.length),
@@ -150,7 +150,7 @@ const DonorClientPageContent = ({
               ),
             })}
           </p>
-          <p className="mb-6">{translations.donor.biggest_amounts}</p>
+          <p className="mb-6">{t("donor.biggest_amounts")}</p>
           <ul className="mx-2 py-2 *:py-1">
             {allPartyDonations
               .toSorted((a, b) => b.sum - a.sum)
@@ -163,7 +163,6 @@ const DonorClientPageContent = ({
                     <RankBadge rank={idx + 1} />
                     <TextPartyLink
                       party={partyDonation.party}
-                      translations={translations}
                       locale={locale}
                       country={countryConfig}
                     />
@@ -188,7 +187,7 @@ const DonorClientPageContent = ({
             {oldestDonation ? (
               <>
                 <Translation
-                  text={translations.donor.oldest}
+                  text={t.raw("donor.oldest")}
                   variables={{
                     minYear: countryConfig.minYear,
                     date: formatDate(
@@ -204,7 +203,6 @@ const DonorClientPageContent = ({
                       <TextPartyLink
                         party={oldestDonation[DonationField.Receiver]}
                         country={countryConfig}
-                        translations={translations}
                         locale={locale}
                       />
                     ),
@@ -218,7 +216,7 @@ const DonorClientPageContent = ({
               oldestDonation?.[DonationField.Id] ? (
               <>
                 <Translation
-                  text={translations.donor.newest}
+                  text={t.raw("donor.newest")}
                   variables={{
                     date: formatDate(
                       locale,
@@ -233,7 +231,6 @@ const DonorClientPageContent = ({
                       <TextPartyLink
                         party={newestDonation[DonationField.Receiver]}
                         country={countryConfig}
-                        translations={translations}
                         locale={locale}
                       />
                     ),
@@ -245,12 +242,12 @@ const DonorClientPageContent = ({
           </p>
           <p className="mb-6">
             <Translation
-              text={translations.donor.most_donations}
+              text={t.raw("donor.most_donations")}
               variables={{
                 list: formatAnd(
                   locale,
                   mostPartyDonations.map(({ party, count }) =>
-                    t(translations.donor.most_donations_item, {
+                    t("donor.most_donations_item", {
                       party: getParty(countryConfig, party).short,
                       count: formatNumber(locale, count),
                     }),
@@ -261,7 +258,7 @@ const DonorClientPageContent = ({
             {mostDonationsYear.count > 0 && biggestYear.sum > 0 ? (
               <>
                 <br />
-                {t(translations.donor.highest_most_donation, {
+                {t("donor.highest_most_donation", {
                   biggestYear: biggestYear.year,
                   biggestSum: formatCountryCurrency(
                     locale,
@@ -277,7 +274,7 @@ const DonorClientPageContent = ({
               <>
                 <br />
                 <Translation
-                  text={translations.donor.biggest}
+                  text={t.raw("donor.biggest")}
                   variables={{
                     amount: formatCountryCurrency(
                       locale,
@@ -292,7 +289,6 @@ const DonorClientPageContent = ({
                       <TextPartyLink
                         party={biggestDonation[DonationField.Receiver]}
                         country={countryConfig}
-                        translations={translations}
                         locale={locale}
                       />
                     ),
@@ -306,12 +302,12 @@ const DonorClientPageContent = ({
           <div>
             <LoadedDonationYearsTreemap
               country={countryConfig}
-              title={t(translations.donor.tree_map, {
+              title={t("donor.tree_map", {
                 name: donorName,
               })}
-              subtitle={t(translations.donor.tree_map_subtitle, {
+              subtitle={t("donor.tree_map_subtitle", {
                 donor: donorName,
-                country: getCountryName(countryConfig, translations),
+                country: getCountryName(countryConfig, t),
               })}
               parties={countryConfig.parties}
               donations={donations}
@@ -331,12 +327,14 @@ const DonorDonationTimeline = ({
   countryConfig: CountryConfig;
   donations: Donation[];
 }) => {
-  const { translations, locale } = useTranslations();
+  const t = useTranslations();
+  const tCommon = useTranslations("common");
+  const locale = useLocale();
   const firstYear = donationYear(donations[0]);
   const lastYear = donationYear(donations[donations.length - 1]);
   const donorName = getDonorName(
     donations.at(0)?.[DonationField.DonorName] ?? "",
-    translations,
+    tCommon,
   );
 
   const parties = new Set<ReceiverId>();
@@ -364,16 +362,16 @@ const DonorDonationTimeline = ({
         <ArticleSectionColumn>
           <ArticleSectionTitle
             id={"sec-donor-timeseries"}
-            title={translations.donor.timeline.title}
+            title={t("donor.timeline.title")}
           />
 
           <p className="mb-6">
-            {t(translations.donor.timeline.p0, {
+            {t("donor.timeline.p0", {
               donor: donorName,
               year: firstYear,
             })}
           </p>
-          <p className="mb-6">{translations.donor.timeline.years}</p>
+          <p className="mb-6">{t("donor.timeline.years")}</p>
           <ul className="mx-2 py-2 text-sm *:py-1">
             {Object.entries(sumPerYear).map(([year, yearSum]) => (
               <li key={year} className="">
@@ -395,7 +393,7 @@ const DonorDonationTimeline = ({
               </li>
             ))}
           </ul>
-          <p className="mb-6">{translations.donor.timeline.p1}</p>
+          <p className="mb-6">{t("donor.timeline.p1")}</p>
         </ArticleSectionColumn>
         <ArticleSectionColumn>
           <div>
@@ -403,9 +401,9 @@ const DonorDonationTimeline = ({
               donations={donations}
               country={countryConfig}
               donationsHaveYearsOnly={donationsHaveYearsOnly}
-              title={translations.donor.timeline.title}
-              subtitle={t(translations.donor.timeline.chart_subtitle, {
-                country: getCountryName(countryConfig, translations),
+              title={t("donor.timeline.title")}
+              subtitle={t("donor.timeline.chart_subtitle", {
+                country: getCountryName(countryConfig, t),
                 donor: donorName,
                 minYear: firstYear,
               })}
@@ -427,7 +425,7 @@ export const DonorClientPage = ({
   countryConfig: CountryConfig;
   country: Country;
 }) => {
-  const { translations } = useTranslations();
+  const t = useTranslations("data");
   const { data, isLoading, error } = useDonationsByDonorId(
     countryConfig,
     donorId,
@@ -440,7 +438,7 @@ export const DonorClientPage = ({
       </div>
     );
 
-  if (error || !data) return translations.data_error;
+  if (error || !data) return t("error");
 
   if (!data || !data.length) {
     return notFound();
@@ -470,10 +468,11 @@ const DonorDonationTable = ({
   countryConfig: CountryConfig;
   donations: Donation[];
 }) => {
-  const { translations } = useTranslations();
+  const t = useTranslations();
+  const tCommon = useTranslations("common");
   const donorName = getDonorName(
     donations.at(0)?.[DonationField.DonorName] ?? "",
-    translations,
+    tCommon,
   );
 
   return (
@@ -482,11 +481,11 @@ const DonorDonationTable = ({
         <ArticleSectionColumn>
           <ArticleSectionTitle
             id={"sec-donor-donations-table"}
-            title={translations.changes.title}
+            title={t("changes.title")}
           />
 
           <p className="mb-6">
-            {t(translations.donor.table, {
+            {t("donor.table", {
               donor: donorName,
             })}
           </p>

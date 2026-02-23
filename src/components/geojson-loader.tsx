@@ -1,5 +1,4 @@
 "use client";
-
 import { MapChart } from "echarts/charts";
 import { VisualMapComponent } from "echarts/components";
 import * as echarts from "echarts/core";

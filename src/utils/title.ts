@@ -1,10 +1,10 @@
 import { type CountryConfig, getCountryName } from "./countries";
 
-import type { Translations } from "../messages/translations";
+import type { createTranslator, Messages } from "next-intl";
 
 export const generateCountryTitlePart = (
   country: CountryConfig,
-  translations: Translations,
+  t: ReturnType<typeof createTranslator<Messages>>,
 ): string => {
-  return getCountryName(country, translations);
+  return getCountryName(country, t);
 };
