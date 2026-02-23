@@ -28,14 +28,15 @@ export async function generateMetadata(
   if (!isValidCountry(country)) return notFoundMetadata;
   setRequestLocale(locale);
 
-  const [t, countryConfig] = await Promise.all([
+  const [t, tCountries, countryConfig] = await Promise.all([
     getTranslations({ locale }),
+    getTranslations({ locale, namespace: "countries" }),
     getCountryConfig(country),
   ]);
 
   const title = {
     template: `%s | DonationWatch`,
-    default: `${t("title", { country: getCountryName(countryConfig, t) })} | DonationWatch`,
+    default: `${t("title", { country: getCountryName(countryConfig, tCountries) })} | DonationWatch`,
   };
 
   const imageUrl = `${THUMBNAIL_PREFIX}/${locale}/${country}/cover.png`;

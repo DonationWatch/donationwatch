@@ -42,8 +42,9 @@ export async function generateMetadata(
 
   const { locale, country, partyId } = params;
 
-  const [t, countryConfig, partySums] = await Promise.all([
+  const [t, tCountries, countryConfig, partySums] = await Promise.all([
     getTranslations({ locale }),
+    getTranslations({ locale, namespace: "countries" }),
     getCountryConfig(country),
     getPartyYearsSums(country),
   ]);
@@ -74,13 +75,13 @@ export async function generateMetadata(
       countryConfig,
     ),
     sum: formatCountryCurrency(locale, sum, countryConfig),
-    country: getCountryName(countryConfig, t),
+    country: getCountryName(countryConfig, tCountries),
   });
 
   return {
     title: `${t("page_title.party.donors", {
       party: party.short,
-      country: getCountryName(countryConfig, t),
+      country: getCountryName(countryConfig, tCountries),
     })}`,
     description,
     alternates: generateAlternates(`${country}/party/${partyId}/donors`),
@@ -98,8 +99,9 @@ export default async function DonorPage(
 
   const { country, partyId } = params;
 
-  const [t, countryConfig] = await Promise.all([
+  const [t, tCountries, countryConfig] = await Promise.all([
     getTranslations({ locale: params.locale }),
+    getTranslations({ locale: params.locale, namespace: "countries" }),
     getCountryConfig(country),
   ]);
 
@@ -124,7 +126,7 @@ export default async function DonorPage(
                 })}
                 subtitle={t("party.donors.subtitle", {
                   party: party.short,
-                  country: getCountryName(countryConfig, t),
+                  country: getCountryName(countryConfig, tCountries),
                 })}
               />
             </div>
@@ -154,7 +156,7 @@ export default async function DonorPage(
                 })}
                 subtitle={t("party.donor_types.treemap.description", {
                   party: party.short,
-                  country: getCountryName(countryConfig, t),
+                  country: getCountryName(countryConfig, tCountries),
                 })}
               />
             </ArticleSectionColumn>

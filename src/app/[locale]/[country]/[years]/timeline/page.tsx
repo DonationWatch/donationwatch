@@ -39,8 +39,9 @@ export async function generateMetadata(
 
   const { country } = params;
 
-  const [t, countryConfig, partySums] = await Promise.all([
+  const [t, tCountries, countryConfig, partySums] = await Promise.all([
     getTranslations({ locale: params.locale }),
+    getTranslations({ locale: params.locale, namespace: "countries" }),
     getCountryConfig(country),
     getPartyYearsSums(country),
   ]);
@@ -53,7 +54,7 @@ export async function generateMetadata(
   }
 
   const yearsRange = formatYearsRange(years);
-  const countryName = getCountryName(countryConfig, t);
+  const countryName = getCountryName(countryConfig, tCountries);
   const description = t("timeline.description", {
     years: yearsRange,
     country: countryName,
@@ -62,7 +63,7 @@ export async function generateMetadata(
   return {
     title: `${t("page_title.years.timeline", {
       year: formatYearsRange(years),
-      country: getCountryName(countryConfig, t),
+      country: getCountryName(countryConfig, tCountries),
     })}`,
     description,
     alternates: generateAlternates(`${country}/${params.years}/timeline`),
@@ -78,8 +79,9 @@ export default async function TimelinePage(
   setRequestLocale(params.locale);
 
   const years = deserializeYears(params.years);
-  const [t, countryConfig] = await Promise.all([
+  const [t, tCountries, countryConfig] = await Promise.all([
     getTranslations({ locale: params.locale }),
+    getTranslations({ locale: params.locale, namespace: "countries" }),
     getCountryConfig(params.country),
   ]);
 
@@ -107,7 +109,7 @@ export default async function TimelinePage(
               country={countryConfig}
               title={t("years.title")}
               subtitle={t("years.subtitle", {
-                country: getCountryName(countryConfig, t),
+                country: getCountryName(countryConfig, tCountries),
                 years: formatYearsRange(years),
               })}
               years={years}
@@ -136,7 +138,7 @@ export default async function TimelinePage(
                 country={countryConfig}
                 title={t("per_month.title")}
                 subtitle={t("per_month.subtitle", {
-                  country: getCountryName(countryConfig, t),
+                  country: getCountryName(countryConfig, tCountries),
                   years: formatYearsRange(years),
                 })}
                 years={years}

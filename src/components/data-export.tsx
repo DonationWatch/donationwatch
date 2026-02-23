@@ -120,6 +120,7 @@ interface DataExportProps {
 
 export function DataExport({ country }: DataExportProps) {
   const t = useTranslations();
+  const tCountries = useTranslations("countries");
   const tData = useTranslations("data");
   const tCommon = useTranslations("common");
   const locale = useLocale();
@@ -154,7 +155,7 @@ export function DataExport({ country }: DataExportProps) {
         <Translation
           text={t.raw("export.p0")}
           variables={{
-            country: getCountryName(country, t),
+            country: getCountryName(country, tCountries),
             license: (
               <a
                 href="https://creativecommons.org/licenses/by/4.0/deed.en"

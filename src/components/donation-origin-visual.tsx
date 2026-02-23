@@ -29,6 +29,7 @@ export const DonationOriginVisual = ({
   subtitle: string;
 }) => {
   const t = useTranslations();
+  const tCountries = useTranslations("countries");
 
   const [chartType, setChartType] = useState<ChartType>(DEFAULT_TYPE);
 
@@ -58,7 +59,7 @@ export const DonationOriginVisual = ({
               years={years}
               parties={parties}
               title={t("origin.country.title", {
-                country: getCountryName(country, t),
+                country: getCountryName(country, tCountries),
               })}
               subtitle={subtitle}
             />
@@ -70,7 +71,7 @@ export const DonationOriginVisual = ({
             parties={parties}
             years={years}
             title={t("origin.country.title", {
-              country: getCountryName(country, t),
+              country: getCountryName(country, tCountries),
             })}
             subtitle={subtitle}
           />

@@ -51,13 +51,13 @@ export default async function Page(
 
   const { country } = params;
 
-  const [t, countryConfig] = await Promise.all([
+  const [tTransparency, countryConfig] = await Promise.all([
     getTranslations({ locale: params.locale, namespace: "transparency" }),
     getCountryConfig(country),
   ]);
 
   return (
-    <Article title={t("title")}>
+    <Article title={tTransparency("title")}>
       <Transparency countryConfig={countryConfig} />
     </Article>
   );

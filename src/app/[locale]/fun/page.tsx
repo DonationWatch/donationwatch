@@ -29,10 +29,13 @@ export async function generateMetadata(
   if (!isValidLocale(params.locale)) return notFoundMetadata;
   setRequestLocale(params.locale);
 
-  const t = await getTranslations({ locale: params.locale, namespace: "fun" });
+  const tFun = await getTranslations({
+    locale: params.locale,
+    namespace: "fun",
+  });
 
   return {
-    title: `${t("title")} | DonationWatch`,
+    title: `${tFun("title")} | DonationWatch`,
     alternates: generateAlternates("fun"),
   };
 }
@@ -96,21 +99,21 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
 
   const { locale } = params;
 
-  const t = await getTranslations({ locale, namespace: "fun" });
+  const tFun = await getTranslations({ locale, namespace: "fun" });
 
   return (
     <NonCountryRootLayout locale={locale}>
       <Article
-        title={t("title")}
+        title={tFun("title")}
         subtitle={
           <>
-            <p>{t("p0")}</p>
-            <p>{t("p1")}</p>
+            <p>{tFun("p0")}</p>
+            <p>{tFun("p1")}</p>
           </>
         }
       >
         <FunFact
-          t={t}
+          t={tFun}
           locale={locale}
           status={{
             owner:
@@ -150,7 +153,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
           </pre>
         </FunFact>
         <FunFact
-          t={t}
+          t={tFun}
           locale={locale}
           title={{
             en: "Czech test donations",
@@ -198,7 +201,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
           </pre>
         </FunFact>
         <FunFact
-          t={t}
+          t={tFun}
           locale={locale}
           title={{
             en: "Typo Challenge in the AEC Dataset",
@@ -241,7 +244,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
           associaiton
         </FunFact>
         <FunFact
-          t={t}
+          t={tFun}
           locale={locale}
           title={{
             en: "UK Electoral Commission search site down after SSL certificate expiry",
@@ -285,7 +288,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
           Not After: Jun 6 23:59:59 2025 GMT
         </FunFact>
         <FunFact
-          t={t}
+          t={tFun}
           locale={locale}
           title={{
             en: "Missing documents in the Croatian database",
@@ -323,7 +326,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
           </ul>
         </FunFact>
         <FunFact
-          t={t}
+          t={tFun}
           locale={locale}
           title={{
             en: "EU foundation donation country code uses Greek unicode characters",
@@ -359,7 +362,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
           NOVE SA;<span className="font-black text-green-800">BE</span>;6000
         </FunFact>
         <FunFact
-          t={t}
+          t={tFun}
           locale={locale}
           title={{
             en: "Australia had some donations dated to 2106",
@@ -394,7 +397,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
           <span className="font-black text-red-800">2106</span>;1500
         </FunFact>
         <FunFact
-          t={t}
+          t={tFun}
           locale={locale}
           title={{
             en: "Austria changed their currency format for new rows",
@@ -426,7 +429,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
           Bundespartei;
         </FunFact>
         <FunFact
-          t={t}
+          t={tFun}
           locale={locale}
           title={{
             en: "Incorrect link on Romania's donation page",
@@ -455,7 +458,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
           date={"2024-09-29"}
         />
         <FunFact
-          t={t}
+          t={tFun}
           locale={locale}
           title={{
             en: "Changed date format for new donations in Germany",
@@ -484,7 +487,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
           <span className="font-black text-green-800">03.04.2024</span>
         </FunFact>
         <FunFact
-          t={t}
+          t={tFun}
           locale={locale}
           title={{
             en: "Germany had a typo in one of its zipcode for Frankfurt",
@@ -520,7 +523,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
           Main
         </FunFact>
         <FunFact
-          t={t}
+          t={tFun}
           locale={locale}
           title={{
             en: "The Austrian party donation document for 2022 randomly uses macintosh file encoding",

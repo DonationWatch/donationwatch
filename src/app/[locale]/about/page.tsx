@@ -25,14 +25,14 @@ export async function generateMetadata(
   if (!isValidLocale(params.locale)) return notFoundMetadata;
   setRequestLocale(params.locale);
 
-  const t = await getTranslations({
+  const tAbout = await getTranslations({
     locale: params.locale,
     namespace: "about",
   });
 
   return {
     robots: "noindex, nofollow",
-    title: `${t("title")} | DonationWatch`,
+    title: `${tAbout("title")} | DonationWatch`,
     alternates: generateAlternates("about"),
   };
 }
@@ -45,19 +45,19 @@ export default async function Page(props: PageProps<"/[locale]/about">) {
 
   const { locale } = params;
 
-  const t = await getTranslations({ locale, namespace: "about" });
+  const tAbout = await getTranslations({ locale, namespace: "about" });
 
   return (
     <NonCountryRootLayout locale={locale}>
       <Article
-        title={t("title")}
+        title={tAbout("title")}
         subtitle={
           <>
-            <p>{t("description.p0")}</p>
-            <p>{t("description.p1")}</p>
-            <p>{t("description.p2")}</p>
+            <p>{tAbout("description.p0")}</p>
+            <p>{tAbout("description.p1")}</p>
+            <p>{tAbout("description.p2")}</p>
             <p>
-              {t("description.p3")} {t("description.mail")}:{" "}
+              {tAbout("description.p3")} {tAbout("description.mail")}:{" "}
               <a
                 href={`mailto:${CONTACT_MAIL}`}
                 className="text-primary-700 dark:text-primary-400 inline-block hover:underline"
@@ -66,7 +66,7 @@ export default async function Page(props: PageProps<"/[locale]/about">) {
               </a>
               .
             </p>
-            <p>{t("source")}</p>
+            <p>{tAbout("source")}</p>
           </>
         }
       />

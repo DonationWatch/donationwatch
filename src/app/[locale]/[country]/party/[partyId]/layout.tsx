@@ -66,8 +66,8 @@ export async function generateMetadata(
   if (!isValidCountry(country)) return notFoundMetadata;
   setRequestLocale(locale);
 
-  const [t, countryConfig] = await Promise.all([
-    getTranslations({ locale }),
+  const [tCountries, countryConfig] = await Promise.all([
+    getTranslations({ locale, namespace: "countries" }),
     getCountryConfig(country),
   ]);
 
@@ -79,7 +79,7 @@ export async function generateMetadata(
     return notFoundMetadata;
   }
 
-  const countryPart = generateCountryTitlePart(countryConfig, t);
+  const countryPart = generateCountryTitlePart(countryConfig, tCountries);
 
   const title = {
     template: `%s | DonationWatch`,

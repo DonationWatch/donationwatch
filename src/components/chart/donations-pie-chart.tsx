@@ -27,6 +27,7 @@ export const DonationsPieChart = ({
   years: string[];
 }) => {
   const t = useTranslations();
+  const tCountries = useTranslations("countries");
   const locale = useLocale();
   const router = useRouter();
   const { backgroundColor, isMobile } = useChart();
@@ -143,7 +144,7 @@ export const DonationsPieChart = ({
       allowExpand={true}
       title={t("overview.pie.title")}
       subtitle={t("overview.pie.subtitle", {
-        country: getCountryName(country, t),
+        country: getCountryName(country, tCountries),
         years: formatYearsRange(years),
       })}
       country={country}

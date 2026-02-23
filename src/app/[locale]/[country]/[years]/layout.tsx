@@ -73,8 +73,9 @@ export async function generateMetadata(
 
   const years = deserializeYears(params.years);
 
-  const [t, countryConfig] = await Promise.all([
+  const [t, tCountries, countryConfig] = await Promise.all([
     getTranslations({ locale: params.locale }),
+    getTranslations({ locale: params.locale, namespace: "countries" }),
     getCountryConfig(params.country),
   ]);
 
@@ -87,7 +88,7 @@ export async function generateMetadata(
 
   const title = {
     template: `%s | DonationWatch`,
-    default: `${t("title", { country: getCountryName(countryConfig, t) })} ${formatYearsRange(
+    default: `${t("title", { country: getCountryName(countryConfig, tCountries) })} ${formatYearsRange(
       years,
     )} | DonationWatch`,
   };

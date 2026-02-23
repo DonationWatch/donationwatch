@@ -32,8 +32,9 @@ export async function generateMetadata(
 
   const { country, partyId } = params;
 
-  const [t, countryConfig] = await Promise.all([
+  const [t, tCountries, countryConfig] = await Promise.all([
     getTranslations({ locale: params.locale }),
+    getTranslations({ locale: params.locale, namespace: "countries" }),
     getCountryConfig(country),
   ]);
 
@@ -43,7 +44,7 @@ export async function generateMetadata(
   return {
     title: `${t("page_title.party.changes", {
       party: party.short,
-      country: getCountryName(countryConfig, t),
+      country: getCountryName(countryConfig, tCountries),
     })}`,
     description: t("party.changes.detail.summary", {
       party: party.short,

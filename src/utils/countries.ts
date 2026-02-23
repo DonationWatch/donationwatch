@@ -8,7 +8,7 @@ import type {
 } from "./types";
 import type En from "../messages/en.json";
 import type { NonEmptyArray } from "@/utils/array";
-import type { createTranslator, Messages } from "next-intl";
+import type { StrictNamespacedTranslator } from "@/utils/translator";
 
 export const enum Country {
   germany = "germany",
@@ -758,12 +758,16 @@ export const countryCodesToCountry: Record<string, Country> =
 
 export const getCountryName = (
   country: { code: CountryCode },
-  t: ReturnType<typeof createTranslator<Messages>>,
-  referencing: boolean = false,
+  t: StrictNamespacedTranslator<"countries">,
 ): string => {
-  return referencing
-    ? t(`ref_countries.${country.code}`)
-    : t(`countries.${country.code}`);
+  return t(country.code);
+};
+
+export const getReferencingCountryName = (
+  country: { code: CountryCode },
+  t: StrictNamespacedTranslator<"ref_countries">,
+): string => {
+  return t(country.code);
 };
 
 export const getParty = (

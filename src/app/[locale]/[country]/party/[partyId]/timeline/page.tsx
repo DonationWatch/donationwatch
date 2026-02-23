@@ -37,8 +37,9 @@ export async function generateMetadata(
 
   const { country, partyId } = params;
 
-  const [t, countryConfig] = await Promise.all([
+  const [t, tCountries, countryConfig] = await Promise.all([
     getTranslations({ locale: params.locale }),
+    getTranslations({ locale: params.locale, namespace: "countries" }),
     getCountryConfig(country),
   ]);
 
@@ -48,7 +49,7 @@ export async function generateMetadata(
   return {
     title: `${t("page_title.party.timeline", {
       party: party.short,
-      country: getCountryName(countryConfig, t),
+      country: getCountryName(countryConfig, tCountries),
     })}`,
     description: t("party.timeline.detail.summary", {
       party: party.short,
@@ -67,8 +68,9 @@ export default async function TimelinePage(
 
   const { locale, country, partyId } = params;
 
-  const [t, countryConfig] = await Promise.all([
+  const [t, tCountries, countryConfig] = await Promise.all([
     getTranslations({ locale }),
+    getTranslations({ locale, namespace: "countries" }),
     getCountryConfig(country),
   ]);
 
@@ -104,7 +106,7 @@ export default async function TimelinePage(
               })}
               subtitle={t("party.timeline.subtitle", {
                 party: party.short,
-                country: getCountryName(countryConfig, t),
+                country: getCountryName(countryConfig, tCountries),
               })}
               country={countryConfig}
               years={countryConfig.years}
@@ -127,7 +129,7 @@ export default async function TimelinePage(
               })}
               resolution={"year"}
               subtitle={t("per_year_party.subtitle", {
-                country: getCountryName(countryConfig, t),
+                country: getCountryName(countryConfig, tCountries),
                 years: formatYearsRange(countryConfig.years),
                 party: party.short,
               })}

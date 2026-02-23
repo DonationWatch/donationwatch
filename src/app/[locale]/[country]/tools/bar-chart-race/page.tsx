@@ -51,7 +51,7 @@ export default async function Page(
 
   const { country } = params;
 
-  const [t, countryConfig] = await Promise.all([
+  const [tBarChartRace, countryConfig] = await Promise.all([
     getTranslations({ locale: params.locale, namespace: "bar_chart_race" }),
     getCountryConfig(country),
   ]);
@@ -61,11 +61,11 @@ export default async function Page(
   }
 
   return (
-    <Article title={t("title")}>
+    <Article title={tBarChartRace("title")}>
       {countryConfig.hasTimeline ? (
         <>
-          <p className="mb-8 max-w-prose">{t("description")}</p>
-          <p className="mb-8 max-w-prose text-sm">{t("note")}</p>
+          <p className="mb-8 max-w-prose">{tBarChartRace("description")}</p>
+          <p className="mb-8 max-w-prose text-sm">{tBarChartRace("note")}</p>
           <RacingBars countryConfig={countryConfig} />
         </>
       ) : null}

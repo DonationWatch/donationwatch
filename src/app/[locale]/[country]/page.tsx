@@ -12,7 +12,7 @@ import { HistoryComponent } from "../../../components/history-component";
 import { PartiesHero } from "../../../components/parties-hero";
 import { YearsCards } from "../../../components/years-cards";
 import { YearsHeader } from "../../../components/years-header";
-import { COUNTRIES, getCountryName } from "../../../utils/countries";
+import { COUNTRIES, getReferencingCountryName } from "../../../utils/countries";
 import { getCountryConfig } from "../../../utils/data/get-country-config";
 import {
   formatCompactCountryCurrency,
@@ -62,14 +62,21 @@ export default async function YearsPage(
 
   const { locale, country } = params;
 
-  const [t, countryConfig, partySums, biggestDonors, biggestDonations] =
-    await Promise.all([
-      getTranslations({ locale }),
-      getCountryConfig(country),
-      getPartyYearsSums(country),
-      getBiggestDonors(country),
-      loadCountryData(country, "biggestDonations"),
-    ]);
+  const [
+    tRefCountries,
+    tHome,
+    countryConfig,
+    partySums,
+    biggestDonors,
+    biggestDonations,
+  ] = await Promise.all([
+    getTranslations({ locale, namespace: "ref_countries" }),
+    getTranslations({ locale, namespace: "home" }),
+    getCountryConfig(country),
+    getPartyYearsSums(country),
+    getBiggestDonors(country),
+    loadCountryData(country, "biggestDonations"),
+  ]);
 
   // Get years that actually have donations by checking partySums
   const yearsWithDonations = Object.entries(partySums)
@@ -99,8 +106,11 @@ export default async function YearsPage(
                 DonationWatch
               </div>
               <div className="text-lg sm:text-xl" id="hero-label">
-                {t("home.hero.subtitle", {
-                  country: getCountryName(countryConfig, t, true),
+                {tHome("hero.subtitle", {
+                  country: getReferencingCountryName(
+                    countryConfig,
+                    tRefCountries,
+                  ),
                 })}
               </div>
             </h1>
@@ -114,7 +124,7 @@ export default async function YearsPage(
             <section aria-labelledby="last-period-title">
               <YearsHeader
                 className="card card--action"
-                title={t("home.last_period")}
+                title={tHome("last_period")}
                 idPrefix={"last-period-"}
                 locale={locale}
                 years={[`${currentYear}`]}
@@ -124,8 +134,8 @@ export default async function YearsPage(
             </section>
             {currentYear !== previousYear && previousYear ? (
               <Link
-                aria-label={t("home.previous_period")}
-                title={t("home.previous_period")}
+                aria-label={tHome("previous_period")}
+                title={tHome("previous_period")}
                 scroll={true}
                 href={`/${locale}/${countryConfig.id}/${previousYear}/overview`}
                 className="card card--action hover:text-primary-600 dark:hover:text-primary-400 mt-2"
@@ -154,16 +164,16 @@ export default async function YearsPage(
         <div className="items-center space-y-4 lg:flex lg:space-x-4">
           <div className="lg:basis-1/2">
             <h2 className="mb-4 text-2xl" id="home-what-title">
-              {t("home.what.title")}
+              {tHome("what.title")}
             </h2>
-            <p className="mb-4 whitespace-pre-wrap">{t("home.what.summary")}</p>
+            <p className="mb-4 whitespace-pre-wrap">{tHome("what.summary")}</p>
             <p className="mb-4 whitespace-pre-wrap">
-              {t(`home.what.source.${country}`)}
+              {tHome(`what.source.${country}`)}
               <br />
               {countryConfig.knownPartyRequirements ? (
                 <>
                   <br />
-                  {t("home.what.threshold", {
+                  {tHome("what.threshold", {
                     count: countryConfig.knownPartyRequirements.count,
                     sum: formatCompactCountryCurrency(
                       locale,
@@ -181,7 +191,7 @@ export default async function YearsPage(
                 href={countryConfig.source.url}
                 rel="noreferrer"
               >
-                {t("home.what.source_link")}
+                {tHome("what.source_link")}
               </a>
             </p>
           </div>
@@ -192,7 +202,7 @@ export default async function YearsPage(
             >
               <div className="card w-full">
                 <h3 className="mb-2 px-2" id="home-most-recent-donations">
-                  {t("home.most_recent")}
+                  {tHome("most_recent")}
                 </h3>
                 <HistoryComponent country={countryConfig} />
               </div>
@@ -206,10 +216,10 @@ export default async function YearsPage(
         aria-labelledby="year-donations-list"
       >
         <div className="text-primary-700 dark:text-primary-400 mb-2 text-lg">
-          {t("home.years.subtitle")}
+          {tHome("years.subtitle")}
         </div>
         <h2 className="mb-6 text-2xl" id="year-donations-list">
-          {t("home.years.title")}
+          {tHome("years.title")}
         </h2>
 
         <div className="grid gap-8 @4xl:grid-cols-2">
@@ -218,7 +228,7 @@ export default async function YearsPage(
             partyYearsSums={partySums}
           />
           <div>
-            <p className="mb-8 lg:text-lg">{t("home.years.summary")}</p>
+            <p className="mb-8 lg:text-lg">{tHome("years.summary")}</p>
 
             <YearsCards
               country={countryConfig}
@@ -234,14 +244,12 @@ export default async function YearsPage(
         aria-labelledby="home-parties-list"
       >
         <div className="text-primary-700 dark:text-primary-400 mb-2 text-lg">
-          {t("home.parties.subtitle")}
+          {tHome("parties.subtitle")}
         </div>
         <h2 className="mb-6 text-2xl" id="home-parties-list">
-          {t("home.parties.title")}
+          {tHome("parties.title")}
         </h2>
-        <p className="mb-8 lg:w-10/12 lg:text-lg">
-          {t("home.parties.summary")}
-        </p>
+        <p className="mb-8 lg:w-10/12 lg:text-lg">{tHome("parties.summary")}</p>
 
         <PartiesHero country={countryConfig} locale={locale} />
       </section>
@@ -251,13 +259,13 @@ export default async function YearsPage(
         aria-labelledby="home-donor-list"
       >
         <div className="text-primary-700 dark:text-primary-400 mb-2 text-lg">
-          {t("home.donors.subtitle")}
+          {tHome("donors.subtitle")}
         </div>
         <h2 className="mb-6 text-2xl" id="home-donor-list">
-          {t("home.donors.title")}
+          {tHome("donors.title")}
         </h2>
         <p className="mb-8 lg:w-10/12 lg:text-lg">
-          {t("home.donors.summary", {
+          {tHome("donors.summary", {
             minYear: countryConfig.minYear,
           })}
         </p>
@@ -280,12 +288,12 @@ export default async function YearsPage(
           aria-labelledby="home-history-list"
         >
           <div className="text-primary-700 dark:text-primary-400 mb-2 text-lg">
-            {t("home.list.subtitle")}
+            {tHome("list.subtitle")}
           </div>
           <h2 className="mb-6 text-2xl" id="home-history-list">
-            {t("home.list.title")}
+            {tHome("list.title")}
           </h2>
-          <p className="mb-8 lg:w-10/12 lg:text-lg">{t("home.list.summary")}</p>
+          <p className="mb-8 lg:w-10/12 lg:text-lg">{tHome("list.summary")}</p>
 
           <div className="grid gap-4 @3xl:grid-cols-2">
             {countryConfig.legislativeYears.map((years, idx) => (

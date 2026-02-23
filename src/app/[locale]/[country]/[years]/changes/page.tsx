@@ -38,12 +38,13 @@ export async function generateMetadata(
   const country = params.country;
   const years = params.years;
 
-  const [t, countryConfig] = await Promise.all([
+  const [t, tCountries, countryConfig] = await Promise.all([
     getTranslations({ locale }),
+    getTranslations({ locale, namespace: "countries" }),
     getCountryConfig(country),
   ]);
 
-  const countryName = getCountryName(countryConfig, t);
+  const countryName = getCountryName(countryConfig, tCountries);
   const deserializedYears = deserializeYears(years);
   const yearRange = formatYearsRange(deserializedYears);
 

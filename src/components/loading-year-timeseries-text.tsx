@@ -23,6 +23,7 @@ export const LoadingYearTimeseriesText = ({
 }) => {
   const t = useTranslations();
   const tData = useTranslations("data");
+  const tCountries = useTranslations("countries");
   const results = useDonationsByYears(country, years);
 
   const error = results.some((r) => r.error);
@@ -51,7 +52,7 @@ export const LoadingYearTimeseriesText = ({
     <p>
       {t("timeline.days", {
         years: formatYearsRange(years),
-        country: getCountryName(country, t),
+        country: getCountryName(country, tCountries),
         n: uniqueDonationDates.size,
       })}
     </p>

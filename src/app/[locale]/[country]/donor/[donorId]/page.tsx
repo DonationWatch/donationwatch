@@ -40,9 +40,10 @@ export async function generateMetadata(
   const { locale, country } = params;
   const donorId = params.donorId;
 
-  const [t, countryConfig, donations, biggestDonors, tCommon] =
+  const [t, tCountries, countryConfig, donations, biggestDonors, tCommon] =
     await Promise.all([
       getTranslations({ locale: params.locale }),
+      getTranslations({ locale: params.locale, namespace: "countries" }),
       getCountryConfig(country),
       getDonationsByDonorId(country, donorId),
       getBiggestDonors(country),
@@ -67,7 +68,7 @@ export async function generateMetadata(
   }
 
   const description = t("page_title.donor.description", {
-    country: getCountryName(countryConfig, t),
+    country: getCountryName(countryConfig, tCountries),
     donor: donorName,
     count,
     sum: formatCountryCurrency(locale, sum, countryConfig),
@@ -86,7 +87,7 @@ export async function generateMetadata(
   const metadata: Metadata = {
     title: `${t("page_title.donor.overview", {
       donor: donorName,
-      country: getCountryName(countryConfig, t),
+      country: getCountryName(countryConfig, tCountries),
     })}`,
     description,
     alternates: generateAlternates(`${country}/donor/${donorId}`),

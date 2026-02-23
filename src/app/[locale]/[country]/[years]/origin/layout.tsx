@@ -25,13 +25,14 @@ export async function generateMetadata(
   const { country } = params;
   const years = params.years;
 
-  const [t, countryConfig] = await Promise.all([
+  const [t, tCountries, countryConfig] = await Promise.all([
     getTranslations({ locale: params.locale }),
+    getTranslations({ locale: params.locale, namespace: "countries" }),
     getCountryConfig(country),
   ]);
 
   const yearsRange = formatYearsRange(deserializeYears(years));
-  const countryName = getCountryName(countryConfig, t);
+  const countryName = getCountryName(countryConfig, tCountries);
 
   const description = t("origin.description", {
     years: yearsRange,
@@ -41,7 +42,7 @@ export async function generateMetadata(
   return {
     title: `${t("page_title.years.origin", {
       year: formatYearsRange(deserializeYears(years)),
-      country: getCountryName(countryConfig, t),
+      country: getCountryName(countryConfig, tCountries),
     })}`,
     description,
   };

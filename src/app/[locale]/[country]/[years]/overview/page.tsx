@@ -52,13 +52,14 @@ export async function generateMetadata(
   const { locale, country } = params;
   const years = params.years;
 
-  const [t, countryConfig, partyYearSums] = await Promise.all([
+  const [t, tCountries, countryConfig, partyYearSums] = await Promise.all([
     getTranslations({ locale }),
+    getTranslations({ locale, namespace: "countries" }),
     getCountryConfig(country),
     getPartyYearsSums(country),
   ]);
 
-  const countryName = getCountryName(countryConfig, t);
+  const countryName = getCountryName(countryConfig, tCountries);
   const deserializedYears = deserializeYears(years);
   const yearRange = formatYearsRange(deserializedYears);
   const parties = getParties(countryConfig, deserializedYears);
@@ -107,8 +108,9 @@ export default async function OverviewPage(props: {
 
   const { locale } = params;
   const years = deserializeYears(params.years);
-  const [t, countryConfig, partyYearSums] = await Promise.all([
+  const [t, tCountries, countryConfig, partyYearSums] = await Promise.all([
     getTranslations({ locale }),
+    getTranslations({ locale, namespace: "countries" }),
     getCountryConfig(params.country),
     getPartyYearsSums(params.country),
   ]);
@@ -131,9 +133,9 @@ export default async function OverviewPage(props: {
                 })}
                 {lastYearWithData
                   ? " " +
-                  t("years.no_data.last_year", {
-                    year: lastYearWithData[0],
-                  })
+                    t("years.no_data.last_year", {
+                      year: lastYearWithData[0],
+                    })
                   : null}
               </p>
               {lastYearWithData ? (
@@ -292,7 +294,7 @@ export default async function OverviewPage(props: {
                 parties={parties}
                 title={t("overview.scatter.title")}
                 subtitle={t("overview.scatter.subtitle", {
-                  country: getCountryName(countryConfig, t),
+                  country: getCountryName(countryConfig, tCountries),
                   years: formatYearsRange(years),
                 })}
               />

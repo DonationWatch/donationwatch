@@ -57,6 +57,7 @@ export function AppSidebar({
 }) {
   const [showAllParties, setShowAllParties] = useState(false);
   const t = useTranslations();
+  const tCountries = useTranslations("countries");
   const tSearch = useTranslations("search");
   const tSidebar = useTranslations("sidebar");
   const locale = useLocale();
@@ -242,7 +243,7 @@ export function AppSidebar({
                 {Object.entries(COUNTRY_CONFIG)
                   .map(([countryId, country]) => ({
                     countryId: countryId as Country,
-                    name: getCountryName(country, t),
+                    name: getCountryName(country, tCountries),
                   }))
                   .toSorted((a, b) => a.name.localeCompare(b.name, locale))
                   .map(({ countryId, name }) => (

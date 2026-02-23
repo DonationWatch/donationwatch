@@ -25,14 +25,14 @@ export async function generateMetadata(
   if (!isValidLocale(params.locale)) return notFoundMetadata;
   setRequestLocale(params.locale);
 
-  const t = await getTranslations({
+  const tImprint = await getTranslations({
     locale: params.locale,
     namespace: "imprint",
   });
 
   return {
     robots: "noindex, nofollow",
-    title: `${t("title")} | DonationWatch`,
+    title: `${tImprint("title")} | DonationWatch`,
     alternates: generateAlternates("imprint"),
   };
 }
@@ -45,11 +45,11 @@ export default async function Page(props: PageProps<"/[locale]/imprint">) {
 
   const { locale } = params;
 
-  const t = await getTranslations({ locale, namespace: "imprint" });
+  const tImprint = await getTranslations({ locale, namespace: "imprint" });
 
   return (
     <NonCountryRootLayout locale={locale}>
-      <Article title={t("title")}>
+      <Article title={tImprint("title")}>
         <div className="whitespace-pre">{IMPRINT}</div>
         <a
           href={`mailto:${CONTACT_MAIL}`}

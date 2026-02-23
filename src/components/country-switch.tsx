@@ -58,6 +58,7 @@ export const RootLink = ({
 export const CountrySwitch = () => {
   const locale = useLocale();
   const t = useTranslations();
+  const tCountries = useTranslations("countries");
   const tSidebar = useTranslations("sidebar");
   let { country: activeCountry } = useParams<{
     country: Country | undefined;
@@ -110,7 +111,7 @@ export const CountrySwitch = () => {
                 .map((country) => {
                   const countryName = getCountryName(
                     { code: COUNTRY_CONFIG[country].code },
-                    t,
+                    tCountries,
                   );
                   return (
                     <DropdownMenuItem

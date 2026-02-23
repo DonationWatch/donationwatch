@@ -28,14 +28,14 @@ export async function generateMetadata(
   if (!isValidLocale(params.locale)) return notFoundMetadata;
   setRequestLocale(params.locale);
 
-  const t = await getTranslations({
+  const tPrivacy = await getTranslations({
     locale: params.locale,
     namespace: "privacy",
   });
 
   return {
     robots: "noindex, nofollow",
-    title: `${t("title")} | DonationWatch`,
+    title: `${tPrivacy("title")} | DonationWatch`,
     alternates: generateAlternates("privacy"),
   };
 }
@@ -48,41 +48,41 @@ export default async function Page(props: PageProps<"/[locale]/privacy">) {
 
   const { locale } = params;
 
-  const t = await getTranslations({ locale, namespace: "privacy" });
+  const tPrivacy = await getTranslations({ locale, namespace: "privacy" });
 
   return (
     <NonCountryRootLayout locale={locale}>
       <Article
-        title={t("title")}
+        title={tPrivacy("title")}
         subtitle={
           <div className="text-sm text-gray-500">
-            <p>{t("last_updated", { date: LAST_UPDATE })}</p>
+            <p>{tPrivacy("last_updated", { date: LAST_UPDATE })}</p>
             <p className="mt-1">
-              {t("effective_date", { date: EFFECTIVE_DATE })}
+              {tPrivacy("effective_date", { date: EFFECTIVE_DATE })}
             </p>
           </div>
         }
       >
-        <ArticleSection title={t("data.title")}>
-          <p className="mb-4">{t("data.p")}</p>
+        <ArticleSection title={tPrivacy("data.title")}>
+          <p className="mb-4">{tPrivacy("data.p")}</p>
           <ul className="list-disc space-y-2 pl-6">
-            <li>{t("data.li0")}</li>
-            <li>{t("data.li1")}</li>
-            <li>{t("data.li2")}</li>
-            <li>{t("data.li3")}</li>
+            <li>{tPrivacy("data.li0")}</li>
+            <li>{tPrivacy("data.li1")}</li>
+            <li>{tPrivacy("data.li2")}</li>
+            <li>{tPrivacy("data.li3")}</li>
           </ul>
         </ArticleSection>
 
         {/* Cloudflare Section */}
-        <ArticleSection title={t("cf.title")}>
-          <p className="mb-4">{t("cf.p")}</p>
+        <ArticleSection title={tPrivacy("cf.title")}>
+          <p className="mb-4">{tPrivacy("cf.p")}</p>
           <ol className="list-decimal space-y-2 pl-6">
-            <li>{t("cf.workers.summary")}</li>
+            <li>{tPrivacy("cf.workers.summary")}</li>
             <li>
-              {t("cf.analytics.summary")}
+              {tPrivacy("cf.analytics.summary")}
               <ul className="mt-2 list-disc space-y-1 pl-6">
-                <li>{t("cf.analytics.li0")}</li>
-                <li>{t("cf.analytics.li1")}</li>
+                <li>{tPrivacy("cf.analytics.li0")}</li>
+                <li>{tPrivacy("cf.analytics.li1")}</li>
               </ul>
             </li>
           </ol>
@@ -92,23 +92,23 @@ export default async function Page(props: PageProps<"/[locale]/privacy">) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            {t("cf.link")}
+            {tPrivacy("cf.link")}
           </a>
         </ArticleSection>
 
-        <ArticleSection title={t("logs.title")}>
-          <p>{t("logs.p")}</p>
+        <ArticleSection title={tPrivacy("logs.title")}>
+          <p>{tPrivacy("logs.p")}</p>
           <ul className="mt-2 list-disc space-y-1 pl-6">
-            <li>{t("logs.li0")}</li>
-            <li>{t("logs.li1")}</li>
-            <li>{t("logs.li2")}</li>
+            <li>{tPrivacy("logs.li0")}</li>
+            <li>{tPrivacy("logs.li1")}</li>
+            <li>{tPrivacy("logs.li2")}</li>
           </ul>
-          <p className="mt-2">{t("logs.retention")}</p>
+          <p className="mt-2">{tPrivacy("logs.retention")}</p>
         </ArticleSection>
 
-        <ArticleSection title={t("contact.title")}>
+        <ArticleSection title={tPrivacy("contact.title")}>
           <p>
-            {t("contact.p")} <br />
+            {tPrivacy("contact.p")} <br />
             <a
               href={`mailto:${CONTACT_MAIL}`}
               className="text-primary-700 dark:text-primary-400 hover:underline"

@@ -31,10 +31,13 @@ export async function generateMetadata(
 
   const { country } = params;
 
-  const t = await getTranslations({ locale: params.locale });
+  const tExport = await getTranslations({
+    locale: params.locale,
+    namespace: "export",
+  });
 
   return {
-    title: `${t("export.title")} | DonationWatch`,
+    title: `${tExport("title")} | DonationWatch`,
     alternates: generateAlternates(`${country}/tools/data`),
   };
 }
@@ -50,13 +53,13 @@ export default async function Page(
 
   const { locale, country } = params;
 
-  const [t, countryConfig] = await Promise.all([
-    getTranslations({ locale }),
+  const [tExport, countryConfig] = await Promise.all([
+    getTranslations({ locale, namespace: "export" }),
     getCountryConfig(country),
   ]);
 
   return (
-    <Article title={t("export.title")}>
+    <Article title={tExport("title")}>
       <DataExport country={countryConfig} />
     </Article>
   );

@@ -23,6 +23,7 @@ export const BiggestDonationsHero = ({
   biggestDonations: Donation[];
 }) => {
   const t = useTranslations();
+  const tCountries = useTranslations("countries");
   const tCommon = useTranslations("common");
   const locale = useLocale();
 
@@ -37,7 +38,7 @@ export const BiggestDonationsHero = ({
         text={t.raw("home.biggest_donations.text")}
         variables={{
           minYear: country.minYear,
-          country: getCountryName(country, t),
+          country: getCountryName(country, tCountries),
           amount: formatCountryCurrency(
             locale,
             biggestDonation[DonationField.Amount],

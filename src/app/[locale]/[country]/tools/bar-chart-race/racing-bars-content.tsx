@@ -29,7 +29,7 @@ export const RacingBarsContent = ({
   countryConfig: CountryConfig;
   allDonations: Donation[];
 }) => {
-  const t = useTranslations();
+  const tCountries = useTranslations("countries");
   const tSearch = useTranslations("search");
   const tBarChartRace = useTranslations("bar_chart_race");
   const locale = useLocale();
@@ -320,7 +320,7 @@ export const RacingBarsContent = ({
           title={tBarChartRace("chart_title")}
           subtitle={tBarChartRace("chart_subtitle", {
             years: formatYearsRange(validSelectedYears),
-            country: getCountryName(countryConfig, t),
+            country: getCountryName(countryConfig, tCountries),
           })}
           partiesById={countryConfig.partiesById}
           totalRuntimeMs={totalRuntimeMs}

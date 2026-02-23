@@ -53,16 +53,19 @@ export async function generateMetadata(
   if (!isValidLocale(locale)) return notFoundMetadata;
   setRequestLocale(locale);
 
-  const t = await getTranslations({ locale });
+  const [t, tRoot] = await Promise.all([
+    getTranslations({ locale }),
+    getTranslations({ locale, namespace: "root" }),
+  ]);
   const imageUrl = `${THUMBNAIL_PREFIX}/${locale}/cover.png`;
 
   return {
-    title: `DonationWatch – ${t("root.title")}`,
+    title: `DonationWatch – ${tRoot("title")}`,
     description: t("description"),
     alternates: generateAlternates(""),
     openGraph: baseOpenGraph({
       locale,
-      title: `DonationWatch – ${t("root.title")}`,
+      title: `DonationWatch – ${tRoot("title")}`,
       images: [{ url: imageUrl, width: 800, height: 418 }],
     }),
     twitter: baseTwitter({
@@ -79,7 +82,11 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
   setRequestLocale(params.locale);
 
   const { locale } = params;
-  const t = await getTranslations({ locale });
+  const [t, tCountries, tRoot] = await Promise.all([
+    getTranslations({ locale }),
+    getTranslations({ locale, namespace: "countries" }),
+    getTranslations({ locale, namespace: "root" }),
+  ]);
   const countriesArray = [...COUNTRIES];
 
   const countryDatas = await Promise.all(
@@ -126,9 +133,9 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
           <h1 className="mb-2 text-4xl font-bold sm:text-5xl" id="hero-title">
             DonationWatch
           </h1>
-          <p className="mb-4 text-xl sm:text-2xl">{t("root.title")}</p>
+          <p className="mb-4 text-xl sm:text-2xl">{tRoot("title")}</p>
           <p className="mx-auto mb-4 text-base sm:text-lg lg:max-w-2xl">
-            {t("root.subtitle")}
+            {tRoot("subtitle")}
           </p>
           <div className="flex justify-center">
             <div className="inline-block text-left">
@@ -145,25 +152,25 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
               <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
                 <div className="text-center">
                   <MetaCard
-                    title={t("root.stats.countries")}
+                    title={tRoot("stats.countries")}
                     value={formatNumber(locale, trackedCountries)}
                   />
                 </div>
                 <div className="text-center">
                   <MetaCard
-                    title={t("root.stats.parties")}
+                    title={tRoot("stats.parties")}
                     value={formatNumber(locale, trackedParties)}
                   />
                 </div>
                 <div className="text-center">
                   <MetaCard
-                    title={t("root.stats.donations")}
+                    title={tRoot("stats.donations")}
                     value={formatNumber(locale, trackedDonations)}
                   />
                 </div>
                 <div className="text-center">
                   <MetaCard
-                    title={t("root.stats.currencies")}
+                    title={tRoot("stats.currencies")}
                     value={Object.keys(currencyTotals).length}
                   />
                 </div>
@@ -172,9 +179,9 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
           </ArticleSectionOneColumns>
         </ArticleSectionWrapper>
 
-        <ArticleSection title={t("root.countries.title")} id="countries">
+        <ArticleSection title={tRoot("countries.title")} id="countries">
           <p className="mb-6 text-gray-600 dark:text-gray-400">
-            {t("root.countries.subtitle")}
+            {tRoot("countries.subtitle")}
           </p>
           <nav
             aria-label={t("header.country_selection")}
@@ -182,13 +189,13 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
           >
             {countriesArray
               .toSorted((a, b) => {
-                const nameA = getCountryName(COUNTRY_CONFIG[a], t);
-                const nameB = getCountryName(COUNTRY_CONFIG[b], t);
+                const nameA = getCountryName(COUNTRY_CONFIG[a], tCountries);
+                const nameB = getCountryName(COUNTRY_CONFIG[b], tCountries);
                 return nameA.localeCompare(nameB, locale);
               })
               .map((countryId) => {
                 const config = COUNTRY_CONFIG[countryId];
-                const countryName = getCountryName(config, t);
+                const countryName = getCountryName(config, tCountries);
 
                 return (
                   <Link
@@ -224,14 +231,14 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
           </nav>
         </ArticleSection>
 
-        <ArticleSection title={t("root.why.title")} id="why-transparency">
-          <p className="text-gray-700 dark:text-gray-300">{t("root.why.p0")}</p>
+        <ArticleSection title={tRoot("why.title")} id="why-transparency">
+          <p className="text-gray-700 dark:text-gray-300">{tRoot("why.p0")}</p>
         </ArticleSection>
 
-        <ArticleSection title={t("root.open_source.title")} id="open-source">
+        <ArticleSection title={tRoot("open_source.title")} id="open-source">
           <p className="text-gray-700 dark:text-gray-300">
             <Translation
-              text={t.raw("root.open_source.p0")}
+              text={tRoot.raw("open_source.p0")}
               variables={{
                 github: (
                   <a

@@ -43,7 +43,8 @@ const DonorClientPageContent = ({
   countryConfig: CountryConfig;
   donations: Donation[];
 }) => {
-  const t = useTranslations();
+  const tDonor = useTranslations("donor");
+  const tCountries = useTranslations("countries");
   const tCommon = useTranslations("common");
   const locale = useLocale();
   const donorName = getDonorName(
@@ -136,10 +137,10 @@ const DonorClientPageContent = ({
         <ArticleSectionColumn>
           <ArticleSectionTitle
             id={"sec-donor-overview"}
-            title={t("donor.subtitle")}
+            title={tDonor("subtitle")}
           />
           <p className="mb-6">
-            {t("donor.summary", {
+            {tDonor("summary", {
               donor: donorName,
               sum: formatCountryCurrency(locale, sum, countryConfig),
               count: formatNumber(locale, donations.length),
@@ -150,7 +151,7 @@ const DonorClientPageContent = ({
               ),
             })}
           </p>
-          <p className="mb-6">{t("donor.biggest_amounts")}</p>
+          <p className="mb-6">{tDonor("biggest_amounts")}</p>
           <ul className="mx-2 py-2 *:py-1">
             {allPartyDonations
               .toSorted((a, b) => b.sum - a.sum)
@@ -187,7 +188,7 @@ const DonorClientPageContent = ({
             {oldestDonation ? (
               <>
                 <Translation
-                  text={t.raw("donor.oldest")}
+                  text={tDonor.raw("oldest")}
                   variables={{
                     minYear: countryConfig.minYear,
                     date: formatDate(
@@ -216,7 +217,7 @@ const DonorClientPageContent = ({
               oldestDonation?.[DonationField.Id] ? (
               <>
                 <Translation
-                  text={t.raw("donor.newest")}
+                  text={tDonor.raw("newest")}
                   variables={{
                     date: formatDate(
                       locale,
@@ -242,12 +243,12 @@ const DonorClientPageContent = ({
           </p>
           <p className="mb-6">
             <Translation
-              text={t.raw("donor.most_donations")}
+              text={tDonor.raw("most_donations")}
               variables={{
                 list: formatAnd(
                   locale,
                   mostPartyDonations.map(({ party, count }) =>
-                    t("donor.most_donations_item", {
+                    tDonor("most_donations_item", {
                       party: getParty(countryConfig, party).short,
                       count: formatNumber(locale, count),
                     }),
@@ -258,7 +259,7 @@ const DonorClientPageContent = ({
             {mostDonationsYear.count > 0 && biggestYear.sum > 0 ? (
               <>
                 <br />
-                {t("donor.highest_most_donation", {
+                {tDonor("highest_most_donation", {
                   biggestYear: biggestYear.year,
                   biggestSum: formatCountryCurrency(
                     locale,
@@ -274,7 +275,7 @@ const DonorClientPageContent = ({
               <>
                 <br />
                 <Translation
-                  text={t.raw("donor.biggest")}
+                  text={tDonor.raw("biggest")}
                   variables={{
                     amount: formatCountryCurrency(
                       locale,
@@ -302,12 +303,12 @@ const DonorClientPageContent = ({
           <div>
             <LoadedDonationYearsTreemap
               country={countryConfig}
-              title={t("donor.tree_map", {
+              title={tDonor("tree_map", {
                 name: donorName,
               })}
-              subtitle={t("donor.tree_map_subtitle", {
+              subtitle={tDonor("tree_map_subtitle", {
                 donor: donorName,
-                country: getCountryName(countryConfig, t),
+                country: getCountryName(countryConfig, tCountries),
               })}
               parties={countryConfig.parties}
               donations={donations}
@@ -327,7 +328,8 @@ const DonorDonationTimeline = ({
   countryConfig: CountryConfig;
   donations: Donation[];
 }) => {
-  const t = useTranslations();
+  const tCountries = useTranslations("countries");
+  const tDonor = useTranslations("donor");
   const tCommon = useTranslations("common");
   const locale = useLocale();
   const firstYear = donationYear(donations[0]);
@@ -362,16 +364,16 @@ const DonorDonationTimeline = ({
         <ArticleSectionColumn>
           <ArticleSectionTitle
             id={"sec-donor-timeseries"}
-            title={t("donor.timeline.title")}
+            title={tDonor("timeline.title")}
           />
 
           <p className="mb-6">
-            {t("donor.timeline.p0", {
+            {tDonor("timeline.p0", {
               donor: donorName,
               year: firstYear,
             })}
           </p>
-          <p className="mb-6">{t("donor.timeline.years")}</p>
+          <p className="mb-6">{tDonor("timeline.years")}</p>
           <ul className="mx-2 py-2 text-sm *:py-1">
             {Object.entries(sumPerYear).map(([year, yearSum]) => (
               <li key={year} className="">
@@ -393,7 +395,7 @@ const DonorDonationTimeline = ({
               </li>
             ))}
           </ul>
-          <p className="mb-6">{t("donor.timeline.p1")}</p>
+          <p className="mb-6">{tDonor("timeline.p1")}</p>
         </ArticleSectionColumn>
         <ArticleSectionColumn>
           <div>
@@ -401,9 +403,9 @@ const DonorDonationTimeline = ({
               donations={donations}
               country={countryConfig}
               donationsHaveYearsOnly={donationsHaveYearsOnly}
-              title={t("donor.timeline.title")}
-              subtitle={t("donor.timeline.chart_subtitle", {
-                country: getCountryName(countryConfig, t),
+              title={tDonor("timeline.title")}
+              subtitle={tDonor("timeline.chart_subtitle", {
+                country: getCountryName(countryConfig, tCountries),
                 donor: donorName,
                 minYear: firstYear,
               })}

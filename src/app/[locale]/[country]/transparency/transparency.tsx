@@ -14,7 +14,7 @@ export const Transparency = ({
 }: {
   countryConfig: CountryConfig;
 }) => {
-  const t = useTranslations();
+  const tCountries = useTranslations("countries");
   const tTransparency = useTranslations("transparency");
   const tData = useTranslations("data");
   const locale = useLocale();
@@ -77,7 +77,7 @@ export const Transparency = ({
         <ArticleSection title={tTransparency("receivers.title")}>
           <p>
             {tTransparency("receivers.p0", {
-              country: getCountryName(countryConfig, t),
+              country: getCountryName(countryConfig, tCountries),
             })}
           </p>
           <ul data-testid="transparency-receiver-list">

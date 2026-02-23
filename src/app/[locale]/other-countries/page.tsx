@@ -298,10 +298,13 @@ export async function generateMetadata(
   if (!isValidLocale(params.locale)) return notFoundMetadata;
   setRequestLocale(params.locale);
 
-  const t = await getTranslations({ locale: params.locale });
+  const tOtherCountries = await getTranslations({
+    locale: params.locale,
+    namespace: "other_countries",
+  });
 
   return {
-    title: `${t("other_countries.title")} | DonationWatch`,
+    title: `${tOtherCountries("title")} | DonationWatch`,
     alternates: generateAlternates("imprint"),
   };
 }
@@ -317,14 +320,14 @@ export default async function Page(
   const { locale } = params;
 
   const pageTranslations = componentTranslations[locale];
-  const t = await getTranslations({ locale });
+  const [tOtherCountries, tCountries] = await Promise.all([
+    getTranslations({ locale, namespace: "other_countries" }),
+    getTranslations({ locale, namespace: "countries" }),
+  ]);
 
   return (
     <NonCountryRootLayout locale={locale}>
-      <Article
-        title={t("other_countries.title")}
-        subtitle={pageTranslations.p0}
-      >
+      <Article title={tOtherCountries("title")} subtitle={pageTranslations.p0}>
         <ArticleSection title={pageTranslations.h1}>
           {pageTranslations.p1}
 
@@ -340,7 +343,7 @@ export default async function Page(
               <tbody>
                 {sources.map((source) => (
                   <tr key={source.country}>
-                    <td>{t.raw(`countries.${source.country}`)}</td>
+                    <td>{tCountries(source.country)}</td>
                     <td>{pageTranslations.notes[source.note]}</td>
                     <td>
                       <a

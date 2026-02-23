@@ -45,6 +45,7 @@ const CurrentCountryPart = ({
   subtitle: string;
 }) => {
   const t = useTranslations();
+  const tCountries = useTranslations("countries");
   const locale = useLocale();
   const [expandedDonors, setExpandedDonors] = useState<string[]>([]);
   const onToggleExpanded = (state: string) => {
@@ -77,7 +78,7 @@ const CurrentCountryPart = ({
             as={"h2"}
             id={"sec-current-country"}
             title={t("origin.country.title", {
-              country: getCountryName(country, t),
+              country: getCountryName(country, tCountries),
             })}
           />
           <p className="mb-6">
@@ -152,6 +153,7 @@ const OtherCountryPart = ({
   sum: number;
 }) => {
   const t = useTranslations();
+  const tCountries = useTranslations("countries");
   const locale = useLocale();
   const [expandedCountries, setExpandedCountries] = useState<string[]>([]);
   const onToggleExpanded = (state: string) => {
@@ -183,7 +185,7 @@ const OtherCountryPart = ({
             as={"h2"}
             id={"sec-other-country"}
             title={t("origin.elsewhere.title", {
-              country: getCountryName(country, t),
+              country: getCountryName(country, tCountries),
             })}
           />
 
@@ -259,6 +261,7 @@ export const DonationYearOrigin = ({
   country: CountryConfig;
 }) => {
   const t = useTranslations();
+  const tCountries = useTranslations("countries");
   const tData = useTranslations("data");
   const results = useDonationsByYears(country, years);
   const error = results.some((r) => r.error);
@@ -278,7 +281,7 @@ export const DonationYearOrigin = ({
       country={country}
       donations={donations}
       subtitle={t("origin.country.subtitle", {
-        country: getCountryName(country, t),
+        country: getCountryName(country, tCountries),
         years: formatYearsRange(years),
       })}
     />
@@ -295,6 +298,7 @@ export const DonationPartyOrigin = ({
   country: CountryConfig;
 }) => {
   const t = useTranslations();
+  const tCountries = useTranslations("countries");
   const tData = useTranslations("data");
   const { data, error, isLoading } = useDonationsByParty(country, party);
 
@@ -309,7 +313,7 @@ export const DonationPartyOrigin = ({
       donations={data.flat()}
       subtitle={t("origin.party.subtitle", {
         party: party.short,
-        country: getCountryName(country, t),
+        country: getCountryName(country, tCountries),
       })}
     />
   );
@@ -329,6 +333,7 @@ const DonationOrigin = ({
   subtitle: string;
 }) => {
   const t = useTranslations();
+  const tCountries = useTranslations("countries");
   const locale = useLocale();
   const { sum, sums } = getOriginDonations(country, donations, parties, years);
 
@@ -374,13 +379,13 @@ const DonationOrigin = ({
             />
             <p className="mb-6">
               {t("origin.detail.summary", {
-                country: getCountryName(country, t),
+                country: getCountryName(country, tCountries),
               })}
             </p>
             {country.id === Country.austria ? (
               <p className="mb-6">
                 {t(`origin.detail.country.${country.id}`, {
-                  country: getCountryName(country, t),
+                  country: getCountryName(country, tCountries),
                 })}
               </p>
             ) : null}
@@ -390,7 +395,7 @@ const DonationOrigin = ({
                   years.length > 1
                     ? formatYearsRange(years)
                     : (years.at(0) as string),
-                country: getCountryName(country, t),
+                country: getCountryName(country, tCountries),
                 sumCountry: formatCountryCurrency(locale, sumCountry, country),
                 sumOthers: formatCountryCurrency(locale, sumOthers, country),
               })}

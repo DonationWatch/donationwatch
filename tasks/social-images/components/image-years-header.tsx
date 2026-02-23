@@ -125,7 +125,7 @@ export const ImagePageHeader = ({
   right?: string | ReactNode;
   country: CountryConfig;
 }>) => {
-  const t = getTranslations();
+  const tCountries = getTranslations("countries");
 
   return (
     <header tw="border-b border-slate-200 h-[64px] leading-none shrink-0">
@@ -136,7 +136,7 @@ export const ImagePageHeader = ({
           </div>
           <div tw="flex flex-col ml-4">
             <div tw="text-3xl font-semibold leading-none">
-              {getCountryName(country, t)}
+              {getCountryName(country, tCountries)}
             </div>
             <div tw="text-slate-600 font-semibold">DonationWatch</div>
           </div>

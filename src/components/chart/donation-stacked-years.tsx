@@ -29,6 +29,7 @@ export const DonationStackedYears = ({
   partyYearsSums: PartyYearsSums;
 }) => {
   const t = useTranslations();
+  const tCountries = useTranslations("countries");
   const locale = useLocale();
   const router = useRouter();
   const { backgroundColor, isMobile, isDark } = useChart();
@@ -131,7 +132,7 @@ export const DonationStackedYears = ({
         height={chartHeight}
         title={t("home.stacked_years")}
         subtitle={t("home.stacked_years_subtitle", {
-          country: getCountryName(country, t),
+          country: getCountryName(country, tCountries),
           years: formatYearsRange(country.years),
         })}
         country={country}

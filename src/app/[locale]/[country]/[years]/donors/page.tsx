@@ -41,13 +41,14 @@ export async function generateMetadata(
   const { locale, country } = params;
   const years = params.years;
 
-  const [t, countryConfig] = await Promise.all([
+  const [t, tCountries, countryConfig] = await Promise.all([
     getTranslations({ locale }),
+    getTranslations({ locale, namespace: "countries" }),
     getCountryConfig(country),
   ]);
 
   const yearsRange = formatYearsRange(deserializeYears(years));
-  const countryName = getCountryName(countryConfig, t);
+  const countryName = getCountryName(countryConfig, tCountries);
   const description = t("donors.description", {
     year: yearsRange,
     country: countryName,
@@ -75,8 +76,9 @@ export default async function YearPage(
   const { country } = params;
   const years = deserializeYears(params.years);
 
-  const [t, countryConfig, partySums] = await Promise.all([
+  const [t, tCountries, countryConfig, partySums] = await Promise.all([
     getTranslations({ locale: params.locale }),
+    getTranslations({ locale: params.locale, namespace: "countries" }),
     getCountryConfig(country),
     getPartyYearsSums(country),
   ]);
@@ -115,7 +117,7 @@ export default async function YearPage(
                 parties={parties}
                 title={t("donors.detail.title")}
                 subtitle={t("donors.detail.subtitle", {
-                  country: getCountryName(countryConfig, t),
+                  country: getCountryName(countryConfig, tCountries),
                   years: formatYearsRange(years),
                 })}
               />
@@ -146,7 +148,7 @@ export default async function YearPage(
                 parties={parties}
                 title={t("donors.histogram.title")}
                 subtitle={t("donors.histogram.subtitle", {
-                  country: getCountryName(countryConfig, t),
+                  country: getCountryName(countryConfig, tCountries),
                   years: formatYearsRange(years),
                 })}
               />
