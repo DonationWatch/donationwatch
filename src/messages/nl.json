@@ -12,6 +12,16 @@
   "data_since": "Sinds {year}",
   "view_party": "Bekijk de {party} partijpagina",
   "faq": "Veelgestelde vragen",
+  "navigation": {
+    "fun": "Leuke weetjes",
+    "about": "Over ons",
+    "other_countries": "Andere landen",
+    "imprint": "Colofon",
+    "privacy": "Privacybeleid",
+    "transparency": "Transparantie",
+    "sources": "Bronnen",
+    "export": "Gegevensexport"
+  },
   "data": {
     "loading": "Inhoud wordt geladen...",
     "error": "Fout bij het laden van gegevens"
@@ -72,7 +82,8 @@
     "redactedDonor": "Geanonimiseerde donor",
     "country": "Land",
     "state": "Staat",
-    "summary": "Samenvatting"
+    "summary": "Samenvatting",
+    "download_format": "{format} downloaden"
   },
   "sort": {
     "asc": "Sorteer oplopend",
@@ -132,15 +143,15 @@
       "p0": "DonationWatch is open source. Je kunt de code bekijken, problemen melden of bijdragen via {github}."
     }
   },
+  "biggest_donations": {
+    "text": "Kopš {minYear} gada lielākā atklātā atsevišķā ziedojums {country} sasniedza {amount} no {donor} partijai {party} {year} gadā. Tam seko {others}.",
+    "list": "{amount} no {donor} saņēmējam {receiver}"
+  },
   "home": {
     "most_recent": "Recente giften",
     "hero": {
       "subtitle": "Tracker voor giften van politieke partijen in {country}",
       "subtitle_no_country": "Tracker voor giften van politieke partijen"
-    },
-    "biggest_donations": {
-      "text": "Kopš {minYear} gada lielākā atklātā atsevišķā ziedojums {country} sasniedza {amount} no {donor} partijai {party} {year} gadā. Tam seko {others}.",
-      "list": "{amount} no {donor} saņēmējam {receiver}"
     },
     "last_period": "Meest recente jaar:",
     "previous_period": "Donaties van vorig jaar.",
@@ -188,9 +199,11 @@
       "title": "Donaties van donateurs",
       "subtitle": "Details over individuele donateurs",
       "summary": "Ontdek ons overzicht van donateurs, met de meest significante financiële bijdragers sinds {minYear}. Klik op een donateur om gedetailleerde informatie over hun bijdrage te bekijken."
-    },
-    "stacked_years": "Donatiebedrag per jaar",
-    "stacked_years_subtitle": "Geaggregeerde som van gepubliceerde bijdragen in {country}, per jaar vanaf {years}."
+    }
+  },
+  "stacked_years": {
+    "title": "Donatiebedrag per jaar",
+    "subtitle": "Geaggregeerde som van gepubliceerde bijdragen in {country}, per jaar vanaf {years}."
   },
   "years": {
     "title": "Partijgiften",
@@ -363,7 +376,7 @@
       "summary": "In de jaren {from} tot {until} werden giften uit {stateCount} verschillende deelstaten geregistreerd. De deelstaat met het hoogste donatiebedrag is {highestState} met {highestSum}. De meeste giften, namelijk {largesDonationCountNum}, kwamen uit {largesDonationCountState}."
     },
     "elsewhere": {
-      "title": "Giften uit het buitenland",
+      "title": "Donaties van buiten {country}",
       "summary": "In de jaren {from} tot {until} werden giften uit {countryCount} verschillende andere landen geregistreerd. Het land met het hoogste donatiebedrag is {highestCountry} met {highestSum}. De meeste giften, namelijk {largesDonationCountNum}, kwamen uit {largesDonationCountState}."
     }
   },
@@ -656,9 +669,7 @@
     "title": "Gegevensexport",
     "p0": "Download de volledige dataset met politieke donaties voor {country} die op deze site wordt gebruikt. De export bevat genormaliseerde donornamen, bedragen, datums en ontvangende partijen.",
     "p1": "Belangrijk: Dit zijn niet de ruwe gegevens van {source}. Deze dataset bevat alleen donaties die door ons team zijn genormaliseerd en gefilterd. Bekijk onze sectie {transparency} voor de methodiek.",
-    "license": "Licentie: {license}",
-    "download": "{format} downloaden",
-    "includes_donations": "{num} donaties inbegrepen"
+    "license": "Licentie: {license}"
   },
   "bar_chart_race": {
     "title": "Balkengrafiek-race",

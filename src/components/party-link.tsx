@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+
 
 import { cn } from "../utils/classname";
 import { type CountryConfig, getParty } from "../utils/countries";
@@ -8,6 +8,8 @@ import { type CountryConfig, getParty } from "../utils/countries";
 import type { ConstLocale } from "../utils/locales";
 import type { ReceiverId } from "../utils/types";
 import type { PropsWithChildren } from "react";
+
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 export const PartyLink = ({
   locale,

@@ -12,6 +12,16 @@
   "data_since": "Siden {year}",
   "view_party": "Vis partisiden for {party}",
   "faq": "Ofte stilte spørsmål",
+  "navigation": {
+    "fun": "Morsomme fakta",
+    "about": "Om oss",
+    "other_countries": "Andre land",
+    "imprint": "Impressum",
+    "privacy": "Personvernerklæring",
+    "transparency": "Åpenhet",
+    "sources": "Kilder",
+    "export": "Dataeksport"
+  },
   "data": {
     "loading": "Innhold lastes...",
     "error": "Feil ved lasting av data"
@@ -72,7 +82,8 @@
     "redactedDonor": "Sensurert giver",
     "country": "Land",
     "state": "Stat",
-    "summary": "Sammendrag"
+    "summary": "Sammendrag",
+    "download_format": "Last ned {format}"
   },
   "sort": {
     "asc": "Sorter stigende",
@@ -132,15 +143,15 @@
       "p0": "DonationWatch er åpen kildekode. Du kan se gjennom koden, rapportere problemer eller bidra på {github}."
     }
   },
+  "biggest_donations": {
+    "text": "Siden {minYear} var den største offentliggjorte enkeltdonasjonen i {country} på {amount} fra {donor} til {party} i {year}. Dette etterfølges av {others}.",
+    "list": "{amount} fra {donor} til {receiver}"
+  },
   "home": {
     "most_recent": "Nyeste donasjoner",
     "hero": {
       "subtitle": "Sporing av politiske partidonasjoner for {country}",
       "subtitle_no_country": "Sporing av politiske partidonasjoner"
-    },
-    "biggest_donations": {
-      "text": "Siden {minYear} var den største offentliggjorte enkeltdonasjonen i {country} på {amount} fra {donor} til {party} i {year}. Dette etterfølges av {others}.",
-      "list": "{amount} fra {donor} til {receiver}"
     },
     "last_period": "Siste år:",
     "previous_period": "Donasjoner fra forrige år.",
@@ -188,9 +199,11 @@
       "title": "Giverdonasjoner",
       "subtitle": "Detaljer om enkeltgivere",
       "summary": "Utforsk giveroversikten vår, som viser de mest betydelige økonomiske bidragsyterne siden {minYear}. Klikk på en giver for å se detaljert informasjon om bidragene."
-    },
-    "stacked_years": "Donasjonsbeløp per år",
-    "stacked_years_subtitle": "Aggregert sum av publiserte bidrag i {country}, per år fra {years}."
+    }
+  },
+  "stacked_years": {
+    "title": "Donasjonsbeløp per år",
+    "subtitle": "Aggregert sum av publiserte bidrag i {country}, per år fra {years}."
   },
   "years": {
     "title": "Partidonasjoner",
@@ -363,7 +376,7 @@
       "summary": "Mellom årene {from} og {until} ble donasjoner registrert fra {stateCount} ulike delstater/regioner. Delstaten/regionen med høyest donasjonsbeløp er {highestState} med {highestSum}. Flest donasjoner, nærmere bestemt {largesDonationCountNum}, kom fra {largesDonationCountState}."
     },
     "elsewhere": {
-      "title": "Donasjoner fra utenfor {country}",
+      "title": "Donasjoner utenfor {country}",
       "summary": "Mellom årene {from} og {until} ble donasjoner registrert fra {countryCount} ulike land. Landet med høyest donasjonsbeløp er {highestCountry} med {highestSum}. Flest donasjoner, nærmere bestemt {largesDonationCountNum}, kom fra {largesDonationCountState}."
     }
   },
@@ -656,9 +669,7 @@
     "title": "Dataeksport",
     "p0": "Få hele datasettet med politiske donasjoner for {country} som brukes på dette nettstedet. Eksporten inkluderer normaliserte donornavn, beløp, datoer og mottakerpartier.",
     "p1": "Viktig: Dette er ikke rådataene fra {source}. Dette datasettet inneholder kun donasjoner som er normalisert og filtrert av teamet vårt. Se delen {transparency} for metodebeskrivelse.",
-    "license": "Lisens: {license}",
-    "download": "Last ned {format}",
-    "includes_donations": "{num} donasjoner inkludert"
+    "license": "Lisens: {license}"
   },
   "bar_chart_race": {
     "title": "Søylediagram-kappløp",

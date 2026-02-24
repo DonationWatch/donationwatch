@@ -1,5 +1,4 @@
 "use client";
-import { useTranslations } from "next-intl";
 
 import Loading from "./loading";
 import { useDonationsByYears } from "../hooks/use-api";
@@ -11,6 +10,8 @@ import { DonationField } from "../utils/types";
 
 import type { CountryConfig } from "../utils/countries";
 import type { Donation, Party } from "../utils/types";
+
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 export const LoadingYearTimeseriesText = ({
   parties,

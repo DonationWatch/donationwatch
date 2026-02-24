@@ -1,5 +1,4 @@
 "use client";
-import { useTranslations } from "next-intl";
 import { Suspense } from "react";
 
 import { RacingBarsContent } from "./racing-bars-content";
@@ -8,6 +7,8 @@ import { isNotNullandNotUndefined } from "../../../../../utils/array";
 import Loading from "../../loading";
 
 import type { CountryConfig } from "../../../../../utils/countries";
+
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 export const RacingBars = ({
   countryConfig,

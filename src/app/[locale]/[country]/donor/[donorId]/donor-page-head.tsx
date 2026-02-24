@@ -1,6 +1,7 @@
 "use client";
 import { HatGlasses, Info, Lock } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
+
 
 import { AbsoluteMultipleColorsGradient } from "../../../../../components/absolute-multiple-colors-gradient";
 import { PageHeader } from "../../../../../components/layout/page-header";
@@ -40,6 +41,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { getDonorName, isRedactedDonor } from "@/utils/donor";
 
 export const DonorPageHead = ({

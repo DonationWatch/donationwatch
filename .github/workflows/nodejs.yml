@@ -29,6 +29,8 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Run translation tests
+        run: pnpm run test:i18n
       - name: Prepare data
         run: |
           pnpm run data:fake

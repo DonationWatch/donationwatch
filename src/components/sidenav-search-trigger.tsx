@@ -1,8 +1,10 @@
 "use client";
 import { Search } from "lucide-react";
-import { useTranslations } from "next-intl";
 
 import { useSearchDialog } from "../hooks/use-search-dialog";
+
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+
 export const SidenavSearchTrigger = () => {
   const { open } = useSearchDialog();
   const t = useTranslations("search");

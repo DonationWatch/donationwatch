@@ -1,5 +1,6 @@
 "use client";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
+
 
 import { ExpandableReactEchart } from "./expandable-react-echart";
 import { useDonationsByParty, useDonationsByYears } from "../../hooks/use-api";
@@ -23,6 +24,8 @@ import Loading from "../loading";
 
 import type { Donation, Party, ReceiverId } from "../../utils/types";
 import type { EChartsOption, LineSeriesOption } from "echarts";
+
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 const symbolConfiguration = (idx: number) => {
   const symbols = ["circle", "rect", "triangle", "diamond", "pin", "arrow"];

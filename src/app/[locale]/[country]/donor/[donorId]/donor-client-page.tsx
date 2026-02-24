@@ -1,6 +1,7 @@
 "use client";
 import { notFound } from "next/navigation";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
+
 
 import { DonationStackedTimeseriesChart } from "../../../../../components/chart/donation-sum-chart";
 import { LoadedDonationYearsTreemap } from "../../../../../components/chart/loading-donation-years-treemap";
@@ -33,6 +34,7 @@ import { DonationField } from "../../../../../utils/types";
 import type { Country, CountryConfig } from "../../../../../utils/countries";
 import type { Donation, ReceiverId } from "../../../../../utils/types";
 
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { getDonorName } from "@/utils/donor";
 
 const DonorClientPageContent = ({

@@ -12,6 +12,16 @@
   "data_since": "Since {year}",
   "view_party": "View the {party} party page",
   "faq": "Frequently asked questions",
+  "navigation": {
+    "fun": "Fun facts",
+    "about": "About",
+    "other_countries": "Other countries",
+    "imprint": "Imprint",
+    "privacy": "Privacy policy",
+    "transparency": "Transparency",
+    "sources": "Sources",
+    "export": "Data export"
+  },
   "data": {
     "loading": "Content is loading...",
     "error": "Error loading data"
@@ -72,7 +82,8 @@
     "redactedDonor": "Redacted Donor",
     "country": "Country",
     "state": "State",
-    "summary": "Summary"
+    "summary": "Summary",
+    "download_format": "Download {format}"
   },
   "sort": {
     "asc": "Sort ascending",
@@ -122,15 +133,15 @@
       "p0": "DonationWatch is open source. You can explore the code, report issues, or contribute on {github}."
     }
   },
+  "biggest_donations": {
+    "text": "Since {minYear}, the biggest disclosed single donation in {country} reached {amount} from {donor} to {party} in {year}. This is followed by {others}.",
+    "list": "{amount} from {donor} to {receiver}"
+  },
   "home": {
     "most_recent": "Most recent donations",
     "hero": {
       "subtitle": "Political party donations tracker for {country}",
       "subtitle_no_country": "Political party donations tracker"
-    },
-    "biggest_donations": {
-      "text": "Since {minYear}, the biggest disclosed single donation in {country} reached {amount} from {donor} to {party} in {year}. This is followed by {others}.",
-      "list": "{amount} from {donor} to {receiver}"
     },
     "last_period": "Most recent year:",
     "previous_period": "Donations from the previous year.",
@@ -178,9 +189,11 @@
       "title": "Donor donations",
       "subtitle": "Details on individual donors",
       "summary": "Discover our donors overview, showcasing the most significant financial contributors since {minYear}. Click on a donor to view their detailed contribution information."
-    },
-    "stacked_years": "Donation amount per year",
-    "stacked_years_subtitle": "Aggregated sum of published contributions in {country}, by year from {years}."
+    }
+  },
+  "stacked_years": {
+    "title": "Donation amount per year",
+    "subtitle": "Aggregated sum of published contributions in {country}, by year from {years}."
   },
   "years": {
     "title": "Party donations",
@@ -640,9 +653,7 @@
     "title": "Data export",
     "p0": "Get the complete dataset of political donations for {country} used on this site. The export includes normalized donor names, amounts, dates, and recipient parties.",
     "p1": "Important: This is not the raw data from the {source}. This dataset contains only donations that have been normalized and filtered by our team. Please review our {transparency} section for methodology.",
-    "license": "License: {license}",
-    "download": "Download {format}",
-    "includes_donations": "{num} donations included"
+    "license": "License: {license}"
   },
   "bar_chart_race": {
     "title": "Bar Chart Race",

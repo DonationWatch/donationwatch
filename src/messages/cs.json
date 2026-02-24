@@ -12,6 +12,16 @@
   "data_since": "Od roku {year}",
   "view_party": "Zobrazit stránku strany {party}",
   "faq": "Často kladené otázky",
+  "navigation": {
+    "fun": "Zajímavosti",
+    "about": "O nás",
+    "other_countries": "Další země",
+    "imprint": "Impresum",
+    "privacy": "Zásady ochrany osobních údajů",
+    "transparency": "Transparentnost",
+    "sources": "Zdroje",
+    "export": "Export dat"
+  },
   "data": {
     "loading": "Načítání obsahu...",
     "error": "Chyba při načítání dat"
@@ -72,7 +82,8 @@
     "redactedDonor": "Redigovaný dárce",
     "country": "Země",
     "state": "Stát",
-    "summary": "Souhrn"
+    "summary": "Souhrn",
+    "download_format": "Stáhnout {format}"
   },
   "sort": {
     "asc": "Řadit vzestupně",
@@ -132,15 +143,15 @@
       "p0": "DonationWatch je open source. Na {github} si můžete prohlédnout kód, nahlásit problémy nebo přispět."
     }
   },
+  "biggest_donations": {
+    "text": "Od roku {minYear} dosáhl největší zveřejněný jednotlivý dar v {country} částky {amount} od {donor} pro {party} v roce {year}. Následují {others}.",
+    "list": "{amount} od {donor} pro {receiver}"
+  },
   "home": {
     "most_recent": "Nejnovější dary",
     "hero": {
       "subtitle": "Sledování darů politických stran v {country}",
       "subtitle_no_country": "Sledování darů politických stran"
-    },
-    "biggest_donations": {
-      "text": "Od roku {minYear} dosáhl největší zveřejněný jednotlivý dar v {country} částky {amount} od {donor} pro {party} v roce {year}. Následují {others}.",
-      "list": "{amount} od {donor} pro {receiver}"
     },
     "last_period": "Nejnovější rok:",
     "previous_period": "Dary z předchozího roku.",
@@ -188,9 +199,11 @@
       "title": "Dary dárců",
       "subtitle": "Podrobnosti o jednotlivých dárcích",
       "summary": "Objevte náš přehled dárců, který ukazuje nejvýznamnější finanční přispěvatele od roku {minYear}. Kliknutím na dárce zobrazíte podrobné informace o jeho příspěvcích."
-    },
-    "stacked_years": "Výše příspěvku za rok",
-    "stacked_years_subtitle": "Agregovaný součet zveřejněných příspěvků v {country}, podle roku od {years}."
+    }
+  },
+  "stacked_years": {
+    "title": "Výše příspěvku za rok",
+    "subtitle": "Agregovaný součet zveřejněných příspěvků v {country}, podle roku od {years}."
   },
   "years": {
     "title": "Dary stranám",
@@ -363,7 +376,7 @@
       "summary": "V letech {from} až {until} byly zaznamenány dary z {stateCount} různých spolkových zemí. Spolková země s nejvyšší částkou darů je {highestState} s {highestSum}. Nejvíce darů, konkrétně {largesDonationCountNum}, pocházelo z {largesDonationCountState}."
     },
     "elsewhere": {
-      "title": "Dary ze zahraničí",
+      "title": "Dary ze zahraničí ({country})",
       "summary": "V letech {from} až {until} byly zaznamenány dary z {countryCount} různých jiných zemí. Země s nejvyšší částkou darů je {highestCountry} s {highestSum}. Nejvíce darů, konkrétně {largesDonationCountNum}, pocházelo z {largesDonationCountState}."
     }
   },
@@ -656,9 +669,7 @@
     "title": "Export dat",
     "p0": "Získejte kompletní datovou sadu politických darů pro {country} používanou na tomto webu. Export zahrnuje normalizovaná jména dárců, částky, data a příjemce (strany).",
     "p1": "Důležité: Nejde o surová data ze zdroje {source}. Tato datová sada obsahuje pouze dary, které náš tým normalizoval a vyfiltroval. Pro metodiku si prosím přečtěte naši část {transparency}.",
-    "license": "Licence: {license}",
-    "download": "Stáhnout {format}",
-    "includes_donations": "Zahrnuto darů: {num}"
+    "license": "Licence: {license}"
   },
   "bar_chart_race": {
     "title": "Závod sloupcového grafu",

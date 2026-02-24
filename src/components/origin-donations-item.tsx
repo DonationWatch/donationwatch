@@ -1,6 +1,5 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 
 import { TopDonationsItemDetail } from "./loading-top-year-donations-item-detail";
 import { CurrencyRankingItem } from "./ranking-item";
@@ -8,6 +7,8 @@ import { AddressField, DonationField } from "../utils/types";
 
 import type { CountryConfig } from "../utils/countries";
 import type { Donation } from "../utils/types";
+
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 export const OriginDonationsItem = ({
   id,

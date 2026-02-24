@@ -1,5 +1,6 @@
 "use client";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale } from "next-intl";
+
 
 import { FormatAnd } from "./formatter";
 import Loading from "./loading";
@@ -13,6 +14,8 @@ import { DonationField } from "../utils/types";
 
 import type { CountryConfig } from "../utils/countries";
 import type { Donation, Party, ReceiverId } from "../utils/types";
+
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 export const LoadingYearBarsPageText = ({
   parties,

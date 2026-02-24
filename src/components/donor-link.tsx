@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale } from "next-intl";
+
 
 import { useHash } from "../hooks/use-hash";
 import { cn } from "../utils/classname";
@@ -10,6 +11,7 @@ import type { CountryConfig } from "../utils/countries";
 import type { PropsWithChildren } from "react";
 
 import { DonorName } from "@/components/donor-name";
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 export const DonorLink = ({
   children,

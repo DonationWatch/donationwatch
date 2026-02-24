@@ -7,6 +7,7 @@ import {
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import { THUMBNAIL_PREFIX } from "../../utils/config";
+import { filterClientMessages } from "../../utils/i18n-filter";
 import { LOCALES } from "../../utils/locales";
 import { baseOpenGraph, baseTwitter } from "../../utils/meta";
 import { notFoundMetadata } from "../../utils/not-found-metadata";
@@ -53,13 +54,13 @@ export default async function LangLayout(props: LayoutProps<"/[locale]">) {
   const { locale } = params;
   const { children } = props;
 
-  const [messages] = await Promise.all([getMessages({ locale })]);
+  const messages = await getMessages({ locale });
 
   return (
     <html lang={locale} className="scroll-pt-15">
       <body className="min-h-screen w-full">
         <NuqsAdapter>
-          <Providers locale={locale} messages={messages}>
+          <Providers locale={locale} messages={filterClientMessages(messages)}>
             {children}
           </Providers>
         </NuqsAdapter>

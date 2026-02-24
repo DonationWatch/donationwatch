@@ -1,6 +1,5 @@
 "use client";
 import { Map, Workflow } from "lucide-react";
-import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { DonationStateMap } from "./chart/donation-state-map";
@@ -11,6 +10,8 @@ import { TabList } from "./tabs";
 import { type CountryConfig, getCountryName } from "../utils/countries";
 
 import type { Donation, Party } from "../utils/types";
+
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 type ChartType = "map" | "sankey";
 const DEFAULT_TYPE: ChartType = "map";

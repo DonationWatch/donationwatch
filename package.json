@@ -49,6 +49,7 @@
     "test:unit": "vitest run './tests/'",
     "test:unit:fake": "FAKE=true vitest run './tests/'",
     "test:unit:watch": "vitest",
+    "test:i18n": "i18n-check --source en --locales src/messages",
     "upload:images": "tsx tasks/social-images/upload.ts"
   },
   "type": "module",
@@ -81,6 +82,7 @@
     "@eslint/eslintrc": "^3.3.3",
     "@eslint/js": "^9.39.2",
     "@inquirer/prompts": "^8.2.0",
+    "@lingual/i18n-check": "^0.8.19",
     "@next/bundle-analyzer": "^15.5.11",
     "@next/eslint-plugin-next": "^15.5.11",
     "@opennextjs/cloudflare": "^1.16.2",

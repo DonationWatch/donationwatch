@@ -1,5 +1,6 @@
 "use client";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale } from "next-intl";
+
 
 import { ExpandableReactEchart } from "./expandable-react-echart";
 import { useDonationsByYears } from "../../hooks/use-api";
@@ -14,6 +15,8 @@ import type { CountryConfig } from "../../utils/countries";
 import type { Donation, Party } from "../../utils/types";
 import type { EChartsOption } from "echarts";
 import type { CallbackDataParams } from "echarts/types/dist/shared";
+
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 // Bar chart that represents a histogram of x axis being the amount of distinct receivers per donor
 export const LoadedDonorReceiverHistogram = ({

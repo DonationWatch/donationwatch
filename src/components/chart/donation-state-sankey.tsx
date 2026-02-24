@@ -1,5 +1,6 @@
 "use client";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale } from "next-intl";
+
 
 import { ExpandableReactEchart } from "./expandable-react-echart";
 import { useChart } from "../../hooks/use-chart";
@@ -16,6 +17,8 @@ import { AddressField, DonationField } from "../../utils/types";
 import type { Donation, Party, ReceiverId } from "../../utils/types";
 import type { EChartsOption } from "echarts";
 import type { SankeyNodeItemOption } from "echarts/types/src/chart/sankey/SankeySeries.js";
+
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 interface Edge {
   source: string;

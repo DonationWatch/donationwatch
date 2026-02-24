@@ -1,6 +1,5 @@
 "use client";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
-import { useTranslations } from "next-intl";
 import { useCallback, useRef, useState } from "react";
 
 import { DonorOverviewItem } from "./donor-overview-item";
@@ -13,6 +12,8 @@ import { DonationField } from "../utils/types";
 
 import type { CountryConfig } from "../utils/countries";
 import type { Donation, ReceiverId } from "../utils/types";
+
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 const DonorYearOverviewContent = ({
   donations,

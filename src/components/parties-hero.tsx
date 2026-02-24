@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
@@ -57,7 +55,7 @@ export const PartiesHero = ({
   country: CountryConfig;
   locale: ConstLocale;
 }) => {
-  const t = useTranslations("home");
+  const tHome = useTranslations("home");
   const allParties = country.parties.toSorted((a, b) => b.sum - a.sum);
 
   return (
@@ -74,7 +72,7 @@ export const PartiesHero = ({
       </ul>
       <details className="mt-4">
         <summary className="cursor-pointer select-none">
-          {t("parties.more")}
+          {tHome("parties.more")}
         </summary>
         <ul className="flex flex-wrap pt-4">
           {allParties.slice(VISIBLE_PARTIES).map((party) => (

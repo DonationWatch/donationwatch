@@ -1,6 +1,6 @@
 "use client";
 import { CheckIcon, ChevronDownIcon } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 import { parseAsString, useQueryState } from "nuqs";
 import { useMemo } from "react";
 
@@ -20,6 +20,7 @@ import {
 import { formatYearsRange } from "../../../../../utils/formatter";
 import { type Donation, DonationField } from "../../../../../utils/types";
 
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { firstItem, lastItem } from "@/utils/array";
 
 export const RacingBarsContent = ({

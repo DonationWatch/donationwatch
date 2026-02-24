@@ -1,6 +1,5 @@
 "use client";
 import { Play, Pause, RotateCcw, Download } from "lucide-react";
-import { useTranslations } from "next-intl";
 import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 
 import {
@@ -15,6 +14,7 @@ import type { CountryConfig, Currency } from "@/utils/countries";
 import type { BarSeriesOption, EChartsOption } from "echarts";
 
 import { ExpandableReactEchart } from "@/components/chart/expandable-react-echart";
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { formatPercentFormat } from "@/utils/formatter";
 
 interface EChartsRacingBarsProps {

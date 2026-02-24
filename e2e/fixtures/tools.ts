@@ -3,10 +3,10 @@ import { PageObject } from "../util/page";
 
 class DataExportTool extends LocatorObject {
   public downloadCSV = this.locator.getByText(
-    this.translations("export.download", { format: "CSV" }),
+    this.translations("common.download_format", { format: "CSV" }),
   );
   public downloadJSON = this.locator.getByText(
-    this.translations("export.download", { format: "JSON" }),
+    this.translations("common.download_format", { format: "JSON" }),
   );
 }
 class BarChartRaceTool extends LocatorObject {

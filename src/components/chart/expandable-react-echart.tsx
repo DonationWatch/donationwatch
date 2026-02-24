@@ -1,6 +1,6 @@
 "use client";
 import { Expand, X, ZoomOut } from "lucide-react";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale } from "next-intl";
 import { useState, type JSX, useRef } from "react";
 
 import { DynamicEchart } from "./dynamic-echart";
@@ -22,6 +22,8 @@ import type {
 } from "./echart";
 import type { CountryConfig } from "../../utils/countries";
 import type { LucideIcon } from "lucide-react";
+
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 export const ExpandableReactEchart = ({
   years,

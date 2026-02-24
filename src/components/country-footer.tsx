@@ -1,12 +1,14 @@
 "use client";
 import Link from "next/link";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale } from "next-intl";
 
 import { PageLogo } from "./page-logo";
 import { formatDate } from "../utils/formatter";
 import { getBuild } from "../utils/loader/build";
 
 import type { CountryConfig } from "../utils/countries";
+
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 export const CountryFooter = ({ country }: { country: CountryConfig }) => {
   const t = useTranslations();
@@ -39,7 +41,7 @@ export const CountryFooter = ({ country }: { country: CountryConfig }) => {
             href={country.source.url}
             rel="noreferrer"
           >
-            {t("footer.sources")}
+            {t("navigation.sources")}
           </a>
           <Link
             className="hover:text-primary-800 dark:hover:text-primary-400 p-2 text-sm"
@@ -47,7 +49,7 @@ export const CountryFooter = ({ country }: { country: CountryConfig }) => {
             prefetch={false}
             rel="nofollow"
           >
-            {t("transparency.title")}
+            {t("navigation.transparency")}
           </Link>
         </div>
       </div>

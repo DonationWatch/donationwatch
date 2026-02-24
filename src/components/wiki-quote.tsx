@@ -1,10 +1,11 @@
 "use client";
-import { useTranslations } from "next-intl";
 
 import Loading from "./loading";
 import { useWikipediaByPageId } from "../hooks/use-api";
 
 import type { UnloadedCountryConfig } from "../utils/countries";
+
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 export const WikiQuote = ({
   pageId,

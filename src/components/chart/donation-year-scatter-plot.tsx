@@ -1,5 +1,6 @@
 "use client";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale } from "next-intl";
+
 
 import { ExpandableReactEchart } from "./expandable-react-echart";
 import { useDonationsByYears } from "../../hooks/use-api";
@@ -24,6 +25,8 @@ import type {
   SingleAxisComponentOption,
   TitleComponentOption,
 } from "echarts";
+
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 export const DonationYearScatterPlot = ({
   country,

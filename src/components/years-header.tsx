@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+
 
 import { DynamicStackedPartyDonations } from "./dynamic-stacked-party-line";
 import { ReadonlyTopYearDonationsItem } from "./loading-top-year-donations-item";
@@ -22,6 +22,8 @@ import type { PartyYearsSums } from "../utils/loader/party-years-sums";
 import type { ConstLocale } from "../utils/locales";
 import type { Party } from "../utils/types";
 import type { PropsWithChildren } from "react";
+
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 const Wrapper = ({
   className,
