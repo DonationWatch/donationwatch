@@ -272,10 +272,10 @@ export class LvLoader extends DataLoader {
       code: "LPV",
       short: "LPV",
     },
-    'Politiskā partija "Republika"': {
+    "Mēs mainām noteikumus": {
       color: "#210106",
-      name: "Republika",
-      short: "Republika",
+      name: "Mēs mainām noteikumus",
+      short: "Mēs mainām noteikumus",
       code: "REPUBLIKA",
       wiki: 69091648,
     },
@@ -464,11 +464,16 @@ export class LvLoader extends DataLoader {
   }
 
   protected override normalizeReceiver(receiver: string): string {
-    return (
-      super
-        .normalizeReceiver(receiver)
-        // remove leading and trailing " if exists
-        .replace(/^"(.+)"$/, "$1")
-    );
+    receiver = super
+      .normalizeReceiver(receiver)
+      // remove leading and trailing " if exists
+      .replace(/^"(.+)"$/, "$1");
+
+    if (receiver === 'Politiskā partija "Republika"') {
+      // They've renamed Republika in feb 2026
+      return "Mēs mainām noteikumus";
+    }
+
+    return receiver;
   }
 }
