@@ -1,5 +1,5 @@
 "use client";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 
 import { DonorLink } from "./donor-link";
@@ -21,6 +21,8 @@ import { DonationField } from "../utils/types";
 import type { CountryConfig } from "../utils/countries";
 import type { ConstLocale } from "../utils/locales";
 import type { Donation, Party } from "../utils/types";
+
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 type DonorHistogram = Record<number, Record<string, number>>;
 

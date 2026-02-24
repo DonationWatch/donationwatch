@@ -1,6 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale } from "next-intl";
+
 
 import { ExpandableReactEchart } from "./expandable-react-echart";
 import { useDonationsByParty } from "../../hooks/use-api";
@@ -16,6 +17,8 @@ import Loading from "../loading";
 import type { Donation, Party, ReceiverId } from "../../utils/types";
 import type { EChartsOption, TreemapSeriesOption } from "echarts";
 import type { TreemapSeriesNodeItemOption } from "echarts/types/src/chart/treemap/TreemapSeries.js";
+
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 export const LoadedDonorTypeTreemap = ({
   country,

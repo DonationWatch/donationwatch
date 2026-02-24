@@ -7,6 +7,7 @@ import { createContext, useEffect, useMemo, useState } from "react";
 import { SidebarProvider } from "../components/ui/sidebar";
 import { SIDENAV_PERSISTENCE_KEY } from "../utils/config";
 
+import type { ClientMessages } from "../utils/i18n-filter";
 import type { ConstLocale } from "../utils/locales";
 import type { Messages } from "next-intl";
 import type { PropsWithChildren } from "react";
@@ -17,7 +18,7 @@ export const Providers = ({
   messages,
 }: PropsWithChildren<{
   locale: ConstLocale;
-  messages: Messages;
+  messages: ClientMessages;
 }>) => {
   const [queryClient] = useState(
     () =>
@@ -34,7 +35,10 @@ export const Providers = ({
   );
 
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
+    <NextIntlClientProvider
+      locale={locale}
+      messages={messages as unknown as Messages}
+    >
       <QueryClientProvider client={queryClient}>
         <SidebarLocalStorageProvider>
           <SearchDialogProvider>{children}</SearchDialogProvider>

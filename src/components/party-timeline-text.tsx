@@ -1,11 +1,13 @@
 "use client";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale } from "next-intl";
+
 
 import type { CountryConfig } from "@/utils/countries";
 import type { Party } from "@/utils/types";
 
 import Loading from "@/components/loading";
 import { useDonationsByParty } from "@/hooks/use-api";
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { donationYear } from "@/utils/date";
 import { formatCountryCurrency, formatPercentFormat } from "@/utils/formatter";
 import { DonationField } from "@/utils/types";

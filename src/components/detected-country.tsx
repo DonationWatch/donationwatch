@@ -1,11 +1,14 @@
 "use client";
 import { ArrowUpRight } from "lucide-react";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale } from "next-intl";
+
 
 import { useDetectedCountry } from "../hooks/use-api";
 import { countryCodesToCountry } from "../utils/countries";
 
 import type { CountryConfig, CountryCode } from "../utils/countries";
+
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 export const DetectedCountryContent = ({
   detectedCountryCode,

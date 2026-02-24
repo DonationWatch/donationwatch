@@ -12,6 +12,16 @@
   "data_since": "Od {year}",
   "view_party": "Pogledajte stranicu stranke {party}",
   "faq": "Često postavljana pitanja",
+  "navigation": {
+    "fun": "Zanimljivosti",
+    "about": "O nama",
+    "other_countries": "Druge zemlje",
+    "imprint": "Impresum",
+    "privacy": "Politika privatnosti",
+    "transparency": "Transparentnost",
+    "sources": "Izvori",
+    "export": "Izvoz podataka"
+  },
   "data": {
     "loading": "Sadržaj se učitava...",
     "error": "Pogreška pri učitavanju podataka"
@@ -72,7 +82,8 @@
     "redactedDonor": "Redigirani donator",
     "country": "Država",
     "state": "Savezna država",
-    "summary": "Sažetak"
+    "summary": "Sažetak",
+    "download_format": "Preuzmi {format}"
   },
   "sort": {
     "asc": "Sortiraj uzlazno",
@@ -132,15 +143,15 @@
       "p0": "DonationWatch je otvorenog koda. Možeš pregledati kod, prijaviti probleme ili doprinijeti na {github}."
     }
   },
+  "biggest_donations": {
+    "text": "Od {minYear} godine najveća objavljena pojedinačna donacija u {country} dosegla je {amount} od {donor} za {party} u {year} godini. Slijede {others}.",
+    "list": "{amount} od {donor} za {receiver}"
+  },
   "home": {
     "most_recent": "Najnovije donacije",
     "hero": {
       "subtitle": "Praćenje donacija političkim strankama za {country}",
       "subtitle_no_country": "Praćenje donacija političkim strankama"
-    },
-    "biggest_donations": {
-      "text": "Od {minYear} godine najveća objavljena pojedinačna donacija u {country} dosegla je {amount} od {donor} za {party} u {year} godini. Slijede {others}.",
-      "list": "{amount} od {donor} za {receiver}"
     },
     "last_period": "Najnovija godina:",
     "previous_period": "Donacije iz prethodne godine.",
@@ -188,9 +199,11 @@
       "title": "Donacije donatora",
       "subtitle": "Detalji o pojedinačnim donatorima",
       "summary": "Otkrijte naš pregled donatora, koji prikazuje najznačajnije financijske doprinositelje od {minYear}. Kliknite na donatora za pregled detaljnih informacija o njihovim doprinosima."
-    },
-    "stacked_years": "Iznos donacija po godini",
-    "stacked_years_subtitle": "Zbrojeni iznos objavljenih doprinosa u {country}, po godinama od {years}."
+    }
+  },
+  "stacked_years": {
+    "title": "Iznos donacija po godini",
+    "subtitle": "Zbrojeni iznos objavljenih doprinosa u {country}, po godinama od {years}."
   },
   "years": {
     "title": "Donacije strankama",
@@ -656,9 +669,7 @@
     "title": "Izvoz podataka",
     "p0": "Preuzmite cjeloviti skup podataka o političkim donacijama za {country} koji se koristi na ovoj stranici. Izvoz uključuje normalizirana imena donatora, iznose, datume i stranke primateljice.",
     "p1": "Važno: Ovo nisu sirovi podaci iz {source}. Ovaj skup podataka sadrži samo donacije koje je naš tim normalizirao i filtrirao. Molimo pogledajte naš odjeljak {transparency} za metodologiju.",
-    "license": "Licenca: {license}",
-    "download": "Preuzmi {format}",
-    "includes_donations": "Uključeno donacija: {num}"
+    "license": "Licenca: {license}"
   },
   "bar_chart_race": {
     "title": "Utrka stupčastog grafikona",

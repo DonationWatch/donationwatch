@@ -1,7 +1,6 @@
 "use client";
 
-import { useTranslations } from "next-intl";
-
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { getDonorName } from "@/utils/donor";
 
 export const DonorName = ({ donor }: { donor: string }) => {

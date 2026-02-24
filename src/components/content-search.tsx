@@ -1,7 +1,7 @@
 "use client";
 import { Frown, Search, X } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 
 import { PartyDot } from "./party-dot";
@@ -17,6 +17,8 @@ import type { Country, CountryConfig } from "../utils/countries";
 import type { Party, ReceiverId } from "../utils/types";
 import type { NonEmptyArray } from "@/utils/array";
 import type { ReactNode } from "react";
+
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 const MAX_DONOR_LEN = 15;
 

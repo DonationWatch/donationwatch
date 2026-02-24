@@ -10,7 +10,10 @@ import { notFoundMetadata } from "../../../../../utils/not-found-metadata";
 import { isValidCountry, isValidLocale } from "../../../../../utils/validate";
 
 import type { Metadata } from "next";
-import { COUNTRIES } from "@/utils/countries";
+import { COUNTRIES, getCountryName } from "@/utils/countries";
+import { Translation } from "@/components/translation";
+import Link from "next/link";
+import { DATA_LICENSE } from "@/utils/config";
 
 export const dynamicParams = false;
 
@@ -53,14 +56,82 @@ export default async function Page(
 
   const { locale, country } = params;
 
-  const [tExport, countryConfig] = await Promise.all([
+  const [tExport, tCountries, tNavigation, countryConfig] = await Promise.all([
     getTranslations({ locale, namespace: "export" }),
+    getTranslations({ locale, namespace: "countries" }),
+    getTranslations({ locale, namespace: "navigation" }),
     getCountryConfig(country),
   ]);
 
   return (
     <Article title={tExport("title")}>
-      <DataExport country={countryConfig} />
+      <div className="space-y-6">
+        <p>
+          <Translation
+            text={tExport.raw("p0")}
+            variables={{
+              country: getCountryName(countryConfig, tCountries),
+              license: (
+                <a
+                  href="https://creativecommons.org/licenses/by/4.0/deed.en"
+                  target="_blank"
+                  rel={"noopener noreferrer"}
+                  className="hover:text-primary-800 dark:hover:text-primary-400 underline"
+                >
+                  {DATA_LICENSE}
+                </a>
+              ),
+            }}
+          />
+        </p>
+        <p>
+          <Translation
+            text={tExport.raw("p1")}
+            variables={{
+              source: (
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={countryConfig.source.url}
+                  className="hover:text-primary-800 dark:hover:text-primary-400 underline"
+                >
+                  {countryConfig.source.name}
+                </a>
+              ),
+              transparency: (
+                <Link
+                  href={`/${locale}/${countryConfig.id}/transparency`}
+                  prefetch={false}
+                  rel="nofollow"
+                  className="hover:text-primary-800 dark:hover:text-primary-400 underline"
+                >
+                  {tNavigation("transparency")}
+                </Link>
+              ),
+            }}
+          />
+        </p>
+        <p>
+          {
+            <Translation
+              text={tExport.raw("license")}
+              variables={{
+                license: (
+                  <a
+                    href="https://creativecommons.org/licenses/by/4.0/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-primary-800 dark:hover:text-primary-400 underline"
+                  >
+                    {DATA_LICENSE}
+                  </a>
+                ),
+              }}
+            />
+          }
+        </p>
+        <DataExport country={countryConfig} />
+      </div>
     </Article>
   );
 }

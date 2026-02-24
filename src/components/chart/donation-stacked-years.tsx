@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale } from "next-intl";
 
 import { ExpandableReactEchart } from "./expandable-react-echart";
 import { useChart } from "../../hooks/use-chart";
@@ -19,6 +19,8 @@ import type {
   MarkAreaComponentOption,
 } from "echarts";
 
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+
 const PER_YEAR_HEIGHT = 20;
 
 export const DonationStackedYears = ({
@@ -28,7 +30,7 @@ export const DonationStackedYears = ({
   country: CountryConfig;
   partyYearsSums: PartyYearsSums;
 }) => {
-  const t = useTranslations();
+  const tStackedYears = useTranslations("stacked_years");
   const tCountries = useTranslations("countries");
   const locale = useLocale();
   const router = useRouter();
@@ -130,8 +132,8 @@ export const DonationStackedYears = ({
     <div className="flex items-center justify-center">
       <ExpandableReactEchart
         height={chartHeight}
-        title={t("home.stacked_years")}
-        subtitle={t("home.stacked_years_subtitle", {
+        title={tStackedYears("title")}
+        subtitle={tStackedYears("subtitle", {
           country: getCountryName(country, tCountries),
           years: formatYearsRange(country.years),
         })}

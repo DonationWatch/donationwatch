@@ -1,7 +1,7 @@
 "use client";
 import { Languages } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useTranslations } from "next-intl";
+
 
 import { CONST_LOCALES } from "../utils/locales";
 import {
@@ -12,6 +12,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 const languagesInTheirLanguage: Record<(typeof CONST_LOCALES)[number], string> =
   {

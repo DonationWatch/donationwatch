@@ -1,5 +1,6 @@
 "use client";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale } from "next-intl";
+
 
 import { DonorLink } from "./donor-link";
 import { FormatAnd } from "./formatter";
@@ -17,6 +18,8 @@ import { DonationField } from "../utils/types";
 
 import type { CountryConfig } from "../utils/countries";
 import type { Donation, Party } from "../utils/types";
+
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 const TOP_DONORS_TO_SHOW = 5;
 

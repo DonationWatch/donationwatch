@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 export default function Loading({
   heightClass = "h-[100px]",

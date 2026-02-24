@@ -3,7 +3,8 @@ import { ChevronDown, Globe } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale } from "next-intl";
+
 
 import { PageLogo } from "./page-logo";
 import {
@@ -20,6 +21,7 @@ import { COUNTRIES, COUNTRY_CONFIG, getCountryName } from "../utils/countries";
 import type { Country } from "../utils/countries";
 import type { PropsWithChildren } from "react";
 
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { countryFlags } from "@/utils/country-flags";
 
 export const RootLink = ({

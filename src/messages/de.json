@@ -12,6 +12,16 @@
   "data_since": "Seit {year}",
   "view_party": "Parteiseite der {party} ansehen",
   "faq": "Häufig gestellte Fragen",
+  "navigation": {
+    "fun": "Fakten & Kurioses",
+    "about": "Über uns",
+    "other_countries": "Andere Länder",
+    "imprint": "Impressum",
+    "privacy": "Datenschutzerklärung",
+    "transparency": "Transparenz",
+    "sources": "Quellen",
+    "export": "Datenexport"
+  },
   "data": {
     "loading": "Inhalt wird geladen...",
     "error": "Fehler beim Laden der Daten"
@@ -72,7 +82,8 @@
     "redactedDonor": "Geschwärzter Spender",
     "country": "Land",
     "state": "Bundesland",
-    "summary": "Zusammenfassung"
+    "summary": "Zusammenfassung",
+    "download_format": "{format} herunterladen"
   },
   "sort": {
     "asc": "Sortiere aufsteigend",
@@ -132,15 +143,15 @@
       "p0": "DonationWatch ist Open Source. Du kannst den Code ansehen, Probleme melden oder auf {github} beitragen."
     }
   },
+  "biggest_donations": {
+    "text": "Seit {minYear} belief sich die größte offengelegte Einzelspende in {country} auf {amount} von {donor} an {party} im Jahr {year}. Darauf folgen {others}.",
+    "list": "{amount} von {donor} an {receiver}"
+  },
   "home": {
     "most_recent": "Aktuellste Spenden",
     "hero": {
       "subtitle": "Parteispenden-Tracker für {country}",
       "subtitle_no_country": "Parteispenden-Tracker"
-    },
-    "biggest_donations": {
-      "text": "Seit {minYear} belief sich die größte offengelegte Einzelspende in {country} auf {amount} von {donor} an {party} im Jahr {year}. Darauf folgen {others}.",
-      "list": "{amount} von {donor} an {receiver}"
     },
     "last_period": "Letztes Jahr:",
     "previous_period": "Spenden aus dem vergangenen Jahr.",
@@ -188,9 +199,11 @@
       "title": "Spenderinnen und Spender",
       "subtitle": "Details zu einzelnen Spendern",
       "summary": "Entdecken Sie unsere Spenderübersicht, die die bedeutendsten finanziellen Beiträge seit {minYear} zeigt. Klicken Sie auf einen Spender, um detaillierte Informationen zu dessen Beiträgen zu sehen."
-    },
-    "stacked_years": "Spendenhöhe pro Jahr",
-    "stacked_years_subtitle": "Aggregierte Summe der veröffentlichten Beiträge in {country}, nach Jahr ab {years}."
+    }
+  },
+  "stacked_years": {
+    "title": "Spendenhöhe pro Jahr",
+    "subtitle": "Aggregierte Summe der veröffentlichten Beiträge in {country}, nach Jahr ab {years}."
   },
   "years": {
     "title": "Parteispenden",
@@ -363,7 +376,7 @@
       "summary": "In den Jahren {from} bis {until} wurden Spenden aus {stateCount} verschiedenen Bundesländern erfasst. Das Bundesland mit der höchsten Spendensumme ist {highestState} mit {highestSum}. Die meisten Spenden, nämlich {largesDonationCountNum}, kamen aus {largesDonationCountState}."
     },
     "elsewhere": {
-      "title": "Spenden aus dem Ausland",
+      "title": "Spenden aus dem Ausland ({country})",
       "summary": "In den Jahren {from} bis {until} wurden Spenden aus {countryCount} verschiedenen anderen Ländern erfasst. Das Land mit der höchsten Spendensumme ist {highestCountry} mit {highestSum}. Die meisten Spenden, nämlich {largesDonationCountNum}, kamen aus {largesDonationCountState}."
     }
   },
@@ -656,9 +669,7 @@
     "title": "Datenexport",
     "p0": "Erhalten Sie den vollständigen Datensatz politischer Spenden für {country}, der auf dieser Website verwendet wird. Der Export enthält normalisierte Spendernamen, Beträge, Daten und Empfängerparteien.",
     "p1": "Wichtig: Dies sind nicht die Rohdaten aus {source}. Dieser Datensatz enthält nur Spenden, die von unserem Team normalisiert und gefiltert wurden. Bitte lesen Sie unseren Abschnitt {transparency} zur Methodik.",
-    "license": "Lizenz: {license}",
-    "download": "{format} herunterladen",
-    "includes_donations": "{num} Spenden enthalten"
+    "license": "Lizenz: {license}"
   },
   "bar_chart_race": {
     "title": "Balkendiagramm-Rennen",

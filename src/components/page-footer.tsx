@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
 
 import { Translation } from "./translation";
 import {
@@ -11,6 +10,8 @@ import {
 } from "../utils/config";
 
 import type { ConstLocale } from "../utils/locales";
+
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 const currentYear = new Date().getFullYear();
 
@@ -111,35 +112,35 @@ export const PageFooter = ({ locale }: { locale: ConstLocale }) => {
             className="hover:text-primary-800 dark:hover:text-primary-400 block"
             href={`/${locale}/other-countries`}
           >
-            {t("other_countries.title")}
+            {t("navigation.other_countries")}
           </Link>
           <Link
             prefetch={false}
             className="hover:text-primary-800 dark:hover:text-primary-400 block"
             href={`/${locale}/fun`}
           >
-            {t("fun.link")}
+            {t("navigation.fun")}
           </Link>
           <Link
             prefetch={false}
             className="hover:text-primary-800 dark:hover:text-primary-400 block"
             href={`/${locale}/imprint`}
           >
-            {t("imprint.title")}
+            {t("navigation.imprint")}
           </Link>
           <Link
             prefetch={false}
             className="hover:text-primary-800 dark:hover:text-primary-400 block"
             href={`/${locale}/privacy`}
           >
-            {t("privacy.title")}
+            {t("navigation.privacy")}
           </Link>
           <Link
             prefetch={false}
             className="hover:text-primary-800 dark:hover:text-primary-400 block"
             href={`/${locale}/about`}
           >
-            {t("about.title")}
+            {t("navigation.about")}
           </Link>
         </div>
       </div>

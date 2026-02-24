@@ -12,6 +12,16 @@
   "data_since": "Alates {year}. aastast",
   "view_party": "Vaadake {party} partei lehekülge",
   "faq": "Korduma kippuvad küsimused",
+  "navigation": {
+    "fun": "Huvitavad faktid",
+    "about": "Meist",
+    "other_countries": "Teised riigid",
+    "imprint": "Impressum",
+    "privacy": "Privaatsuspoliitika",
+    "transparency": "Läbipaistvus",
+    "sources": "Allikad",
+    "export": "Andmete eksport"
+  },
   "data": {
     "loading": "Sisu laadimine...",
     "error": "Viga andmete laadimisel"
@@ -72,7 +82,8 @@
     "redactedDonor": "Varjatud annetaja",
     "country": "Riik",
     "state": "Osariik",
-    "summary": "Kokkuvõte"
+    "summary": "Kokkuvõte",
+    "download_format": "Laadi alla {format}"
   },
   "sort": {
     "asc": "Sorteerimine ülespoole",
@@ -132,15 +143,15 @@
       "p0": "DonationWatch on avatud lähtekoodiga. Saad koodi vaadata, probleemidest teatada või panustada {github} kaudu."
     }
   },
+  "biggest_donations": {
+    "text": "Alates {minYear} on {country} suurim avalikustatud üksikannetus ulatunud {amount}, mille andis {donor} parteile {party} aastal {year}. Sellele järgnevad {others}.",
+    "list": "{amount} annetajalt {donor} saajale {receiver}"
+  },
   "home": {
     "most_recent": "Viimased annetused",
     "hero": {
       "subtitle": "{country} erakondade annetuste jälgimine",
       "subtitle_no_country": "Poliitiliste parteide annetuste jälgimine"
-    },
-    "biggest_donations": {
-      "text": "Alates {minYear} on {country} suurim avalikustatud üksikannetus ulatunud {amount}, mille andis {donor} parteile {party} aastal {year}. Sellele järgnevad {others}.",
-      "list": "{amount} annetajalt {donor} saajale {receiver}"
     },
     "last_period": "Kõige hiljutisem aasta:",
     "previous_period": "Eelmise aasta annetused.",
@@ -188,9 +199,11 @@
       "title": "Annetajate annetused",
       "subtitle": "Üksikute annetajate üksikasjad",
       "summary": "Tutvuge meie annetajate ülevaatega, mis näitab olulisimaid rahalisi toetajaid alates aastast {minYear}. Klõpsake annetajal, et vaadata tema panuse üksikasjalikku teavet."
-    },
-    "stacked_years": "Annetuse summa aastas",
-    "stacked_years_subtitle": "Avaldatud annetuste koondsumma riigis {country} aastate lõikes alates {years}."
+    }
+  },
+  "stacked_years": {
+    "title": "Annetuse summa aastas",
+    "subtitle": "Avaldatud annetuste koondsumma riigis {country} aastate lõikes alates {years}."
   },
   "years": {
     "title": "Partei annetused",
@@ -363,7 +376,7 @@
       "summary": "Aastatel {from}-{until} registreeriti annetusi {stateCount} eri liidumaalt. Kõige suurema annetussummaga liidumaa on {highestState} {highestSum}. Kõige rohkem annetusi, nimelt {largesDonationCountNum}, tuli {largesDonationCountState}."
     },
     "elsewhere": {
-      "title": "Annetused välismaalt",
+      "title": "Annetused väljaspoolt {country}",
       "summary": "Aastatel {from}-{until} registreeriti annetusi {countryCount} erinevast riigist. Kõige suurema annetussummaga riik on {highestCountry} {highestSum}. Kõige rohkem annetusi, {largesDonationCountNum}, tuli {largesDonationCountState}."
     }
   },
@@ -656,9 +669,7 @@
     "title": "Andmete eksport",
     "p0": "Hankige sellel saidil kasutatav täielik poliitiliste annetuste andmestik riigi {country} kohta. Eksport sisaldab normaliseeritud annetajate nimesid, summasid, kuupäevi ja saajaparteisid.",
     "p1": "Oluline: Need ei ole {source} toorandmed. See andmestik sisaldab ainult annetusi, mille meie meeskond on normaliseerinud ja filtreerinud. Metoodika kohta vaadake palun meie jaotist {transparency}.",
-    "license": "Litsents: {license}",
-    "download": "Laadi alla {format}",
-    "includes_donations": "Sisaldab {num} annetust"
+    "license": "Litsents: {license}"
   },
   "bar_chart_race": {
     "title": "Tulpdiagrammi võidusõit",

@@ -1,5 +1,4 @@
 "use client";
-import { useTranslations } from "next-intl";
 
 import Loading from "./loading";
 import { useDonationsByParty, useDonationsByYears } from "../hooks/use-api";
@@ -8,6 +7,8 @@ import { DonationHistoryTable } from "./table/donation-history-table";
 
 import type { CountryConfig } from "../utils/countries";
 import type { Party } from "../utils/types";
+
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 export const PartyDonationHistory = ({
   country,

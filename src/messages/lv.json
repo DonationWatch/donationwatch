@@ -12,6 +12,16 @@
   "data_since": "Kopš {year}. gada",
   "view_party": "Apskatīt {party} partijas lapu",
   "faq": "Bieži uzdotie jautājumi",
+  "navigation": {
+    "fun": "Interesanti fakti",
+    "about": "Par mums",
+    "other_countries": "Citas valstis",
+    "imprint": "Iespiests",
+    "privacy": "Privātuma politika",
+    "transparency": "Caurspīdīgums",
+    "sources": "Avoti",
+    "export": "Datu eksports"
+  },
   "data": {
     "loading": "Saturs tiek ielādēts...",
     "error": "Kļūda datu ielādē"
@@ -72,7 +82,8 @@
     "redactedDonor": "Rediģēts ziedotājs",
     "country": "Valsts",
     "state": "Štats",
-    "summary": "Kopsavilkums"
+    "summary": "Kopsavilkums",
+    "download_format": "Lejupielādēt {format}"
   },
   "sort": {
     "asc": "Kārtot augošā secībā",
@@ -132,15 +143,15 @@
       "p0": "DonationWatch ir atvērtā pirmkoda projekts. Tu vari apskatīt kodu, ziņot par problēmām vai sniegt ieguldījumu vietnē {github}."
     }
   },
+  "biggest_donations": {
+    "text": "Since {minYear}, the biggest disclosed single donation in {country} reached {amount} from {donor} to {party} in {year}. This is followed by {others}.",
+    "list": "{amount} from {donor} to {receiver}"
+  },
   "home": {
     "most_recent": "Jaunākie ziedojumi",
     "hero": {
       "subtitle": "Politisko partiju ziedojumu izsekotājs {country}",
       "subtitle_no_country": "Politisko partiju ziedojumu izsekošana"
-    },
-    "biggest_donations": {
-      "text": "Since {minYear}, the biggest disclosed single donation in {country} reached {amount} from {donor} to {party} in {year}. This is followed by {others}.",
-      "list": "{amount} from {donor} to {receiver}"
     },
     "last_period": "Pēdējais gads:",
     "previous_period": "Iepriekšējā gada ziedojumi.",
@@ -188,9 +199,11 @@
       "title": "Ziedotāju ziedojumi",
       "subtitle": "Informācija par atsevišķiem ziedotājiem",
       "summary": "Atklājiet mūsu ziedotāju pārskatu, kurā parādīti nozīmīgākie finansiālie atbalstītāji kopš {minYear}. Noklikšķiniet uz ziedotāja, lai skatītu detalizētu informāciju par viņu ieguldījumu."
-    },
-    "stacked_years": "Ziedojuma summa gadā",
-    "stacked_years_subtitle": "Apvienotā publicēto ieguldījumu summa {country} pa gadiem no {years}."
+    }
+  },
+  "stacked_years": {
+    "title": "Ziedojuma summa gadā",
+    "subtitle": "Apvienotā publicēto ieguldījumu summa {country} pa gadiem no {years}."
   },
   "years": {
     "title": "Partiju ziedojumi",
@@ -363,7 +376,7 @@
       "summary": "No {from}. līdz {until}. gadam tika reģistrēti ziedojumi no {stateCount} dažādām federālajām zemēm. Federālā zeme ar vislielāko ziedojumu skaitu ir {highestState} - {highestSum} ziedojumi, savukārt visvairāk ziedojumu, proti, {largesDonationCountNum}, saņemti no {largesDonationCountState}."
     },
     "elsewhere": {
-      "title": "Ziedojumi no ārvalstīm",
+      "title": "Ziedojumi no ārpus {country}",
       "summary": "No {from}. līdz {until}. gadam tika reģistrēti ziedojumi no {countryCount} dažādām citām valstīm. Valsts ar lielāko ziedojumu kopskaitu ir {highestCountry} - {highestSum}. Visvairāk ziedojumu, proti, {largesDonationCountNum}, ir saņemti no {largesDonationCountState}."
     }
   },
@@ -656,9 +669,7 @@
     "title": "Datu eksports",
     "p0": "Iegūstiet pilnu politisko ziedojumu datu kopu par {country}, kas tiek izmantota šajā vietnē. Eksports ietver normalizētus ziedotāju vārdus, summas, datumus un saņēmējpartijas.",
     "p1": "Svarīgi: Tie nav neapstrādātie dati no {source}. Šajā datu kopā ir tikai tie ziedojumi, kurus mūsu komanda ir normalizējusi un filtrējusi. Lūdzu, iepazīstieties ar mūsu sadaļu {transparency} par metodiku.",
-    "license": "Licence: {license}",
-    "download": "Lejupielādēt {format}",
-    "includes_donations": "Iekļauti {num} ziedojumi"
+    "license": "Licence: {license}"
   },
   "bar_chart_race": {
     "title": "Stabiņu diagrammas sacensība",

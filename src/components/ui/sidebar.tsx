@@ -3,7 +3,6 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { PanelLeftIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useTranslations } from "next-intl";
 import * as React from "react";
 
 import { Separator } from "./separator";
@@ -24,6 +23,8 @@ import { useBreakpoint } from "../../hooks/use-media-query";
 import { cn } from "../../utils/classname";
 
 import type { ComponentProps } from "react";
+
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 // Simple Slot implementation to replace @radix-ui/react-slot
 function Slot({

@@ -1,5 +1,5 @@
 "use client";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale } from "next-intl";
 import { useState } from "react";
 
 import { DonationOriginVisual } from "./donation-origin-visual";
@@ -26,6 +26,8 @@ import {
 
 import type { OriginPartySum } from "../utils/data/get-origin-donations";
 import type { Donation, Party } from "../utils/types";
+
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 const CurrentCountryPart = ({
   sums,

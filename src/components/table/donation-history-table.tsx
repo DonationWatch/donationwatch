@@ -9,7 +9,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { ArrowDownNarrowWide, ArrowUpNarrowWide } from "lucide-react";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale } from "next-intl";
 import { useMemo, useRef, useState } from "react";
 
 import { useMobile } from "../../hooks/use-media-query";
@@ -32,6 +32,7 @@ import type { HistoryEntry } from "../../utils/data/get-history";
 import type { Donation } from "../../utils/types";
 
 import { DonorName } from "@/components/donor-name";
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 const columnHelper = createColumnHelper<HistoryEntry>();
 

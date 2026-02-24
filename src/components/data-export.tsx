@@ -1,11 +1,8 @@
 "use client";
 import { DownloadIcon } from "lucide-react";
-import Link from "next/link";
-import { useTranslations, useLocale } from "next-intl";
 
 import { useDonationsByYears } from "../hooks/use-api";
 import { isNotNullandNotUndefined } from "../utils/array";
-import { getCountryName } from "../utils/countries";
 import { DonationField, AddressField } from "../utils/types";
 import { Button } from "./ui/button";
 
@@ -14,10 +11,8 @@ import type { Donation } from "../utils/types";
 import type { StrictNamespacedTranslator } from "@/utils/translator";
 import type { createTranslator, Messages } from "next-intl";
 
-import { Translation } from "@/components/translation";
-import { DATA_LICENSE } from "@/utils/config";
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { getDonorName } from "@/utils/donor";
-import { formatNumber } from "@/utils/formatter";
 
 function escapeCSVField(field: string): string {
   if (field.includes(",") || field.includes('"') || field.includes("\n")) {
@@ -120,10 +115,8 @@ interface DataExportProps {
 
 export function DataExport({ country }: DataExportProps) {
   const t = useTranslations();
-  const tCountries = useTranslations("countries");
   const tData = useTranslations("data");
   const tCommon = useTranslations("common");
-  const locale = useLocale();
 
   const results = useDonationsByYears(country, country.years);
 
@@ -150,72 +143,7 @@ export function DataExport({ country }: DataExportProps) {
   const canDownload = !isLoading && !hasError;
 
   return (
-    <div className="space-y-6">
-      <p>
-        <Translation
-          text={t.raw("export.p0")}
-          variables={{
-            country: getCountryName(country, tCountries),
-            license: (
-              <a
-                href="https://creativecommons.org/licenses/by/4.0/deed.en"
-                target="_blank"
-                rel={"noopener noreferrer"}
-                className="hover:text-primary-800 dark:hover:text-primary-400 underline"
-              >
-                {DATA_LICENSE}
-              </a>
-            ),
-          }}
-        />
-      </p>
-      <p>
-        <Translation
-          text={t.raw("export.p1")}
-          variables={{
-            source: (
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href={country.source.url}
-                className="hover:text-primary-800 dark:hover:text-primary-400 underline"
-              >
-                {country.source.name}
-              </a>
-            ),
-            transparency: (
-              <Link
-                href={`/${locale}/${country.id}/transparency`}
-                prefetch={false}
-                rel="nofollow"
-                className="hover:text-primary-800 dark:hover:text-primary-400 underline"
-              >
-                {t("transparency.title")}
-              </Link>
-            ),
-          }}
-        />
-      </p>
-      <p>
-        {
-          <Translation
-            text={t.raw("export.license")}
-            variables={{
-              license: (
-                <a
-                  href="https://creativecommons.org/licenses/by/4.0/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-primary-800 dark:hover:text-primary-400 underline"
-                >
-                  {DATA_LICENSE}
-                </a>
-              ),
-            }}
-          />
-        }
-      </p>
-
+    <>
       {/* Status and Download */}
       <div className="flex flex-wrap items-center gap-4">
         <Button
@@ -226,7 +154,7 @@ export function DataExport({ country }: DataExportProps) {
           className="bg-primary-600 hover:bg-primary-700 disabled:bg-primary-600/50 flex cursor-pointer items-center gap-2 rounded-md px-4 py-2 text-white disabled:cursor-not-allowed"
         >
           <DownloadIcon className="size-4" />
-          {t("export.download", {
+          {tCommon("download_format", {
             format: "CSV",
           })}
         </Button>
@@ -239,7 +167,7 @@ export function DataExport({ country }: DataExportProps) {
           className="bg-primary-600 hover:bg-primary-700 disabled:bg-primary-600/50 flex cursor-pointer items-center gap-2 rounded-md px-4 py-2 text-white disabled:cursor-not-allowed"
         >
           <DownloadIcon className="size-4" />
-          {t("export.download", {
+          {tCommon("download_format", {
             format: "JSON",
           })}
         </Button>
@@ -249,13 +177,9 @@ export function DataExport({ country }: DataExportProps) {
             tData("loading")
           ) : hasError ? (
             <span className="text-red-500">{tData("error")}</span>
-          ) : (
-            t("export.includes_donations", {
-              num: formatNumber(locale, donations.length),
-            })
-          )}
+          ) : null}
         </span>
       </div>
-    </div>
+    </>
   );
 }

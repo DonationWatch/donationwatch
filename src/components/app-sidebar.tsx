@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale } from "next-intl";
 import { useState } from "react";
 
 import { CountrySwitch } from "./country-switch";
@@ -46,6 +46,7 @@ import { COUNTRY_CONFIG, getCountryName } from "../utils/countries";
 import type { Country, CountryConfig } from "../utils/countries";
 import type { BigDonor } from "../utils/loader/biggest-donors";
 
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { countryFlags } from "@/utils/country-flags";
 
 export function AppSidebar({
@@ -212,7 +213,7 @@ export function AppSidebar({
                   >
                     <a href={`/${locale}/${countryConfig.id}/tools/data`}>
                       <FileSpreadsheet />
-                      <span>{t("export.title")}</span>
+                      <span>{t("navigation.export")}</span>
                     </a>
                   </SidebarActiveMenuButton>
                 </SidebarMenuItem>
@@ -277,15 +278,15 @@ export function AppSidebar({
           items={[
             {
               href: `/${locale}/other-countries`,
-              label: t("other_countries.title"),
+              label: t("navigation.other_countries"),
             },
             {
               href: `/${locale}/fun`,
-              label: t("fun.link"),
+              label: t("navigation.fun"),
             },
             {
               href: `/${locale}/about`,
-              label: t("about.title"),
+              label: t("navigation.about"),
             },
             {
               href: GITHUB_URL,

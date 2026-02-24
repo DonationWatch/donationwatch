@@ -1,5 +1,5 @@
 "use client";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale } from "next-intl";
 import { useEffect, useMemo, useRef } from "react";
 
 import { DonorLink } from "./donor-link";
@@ -17,6 +17,7 @@ import { DonationField } from "../utils/types";
 import type { CountryConfig } from "../utils/countries";
 import type { Donation, ReceiverId } from "../utils/types";
 
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { getDonationDonorName } from "@/utils/donor";
 
 const TopDonationsItemDetailSkeleton = () => {

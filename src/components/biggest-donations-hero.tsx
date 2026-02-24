@@ -1,5 +1,5 @@
 "use client";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale } from "next-intl";
 
 import { DonorLink } from "./donor-link";
 import { FormatAnd } from "./formatter";
@@ -13,6 +13,7 @@ import type { CountryConfig } from "../utils/countries";
 import type { Donation } from "../utils/types";
 
 import { Translation } from "@/components/translation";
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { getDonationDonorName } from "@/utils/donor";
 
 export const BiggestDonationsHero = ({
@@ -22,7 +23,7 @@ export const BiggestDonationsHero = ({
   country: CountryConfig;
   biggestDonations: Donation[];
 }) => {
-  const t = useTranslations();
+  const tBiggestDonations = useTranslations("biggest_donations");
   const tCountries = useTranslations("countries");
   const tCommon = useTranslations("common");
   const locale = useLocale();
@@ -35,7 +36,7 @@ export const BiggestDonationsHero = ({
   return (
     <p className="mt-12 lg:w-10/12" data-testid="biggest-donations">
       <Translation
-        text={t.raw("home.biggest_donations.text")}
+        text={tBiggestDonations.raw("text")}
         variables={{
           minYear: country.minYear,
           country: getCountryName(country, tCountries),
@@ -64,7 +65,7 @@ export const BiggestDonationsHero = ({
               items={biggestDonations.slice(1).map((donation) => (
                 <Translation
                   key={donation[DonationField.Id]}
-                  text={t.raw("home.biggest_donations.list")}
+                  text={tBiggestDonations.raw("list")}
                   variables={{
                     amount: formatCountryCurrency(
                       locale,

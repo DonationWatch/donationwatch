@@ -1,5 +1,6 @@
 "use client";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale } from "next-intl";
+
 
 import Loading from "./loading";
 import { PercentageHint } from "./percentage-hint";
@@ -10,6 +11,8 @@ import { DonationField, DonorType } from "../utils/types";
 
 import type { CountryConfig } from "../utils/countries";
 import type { Party } from "../utils/types";
+
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 export const LoadingPartyDonorTypeText = ({
   party,
