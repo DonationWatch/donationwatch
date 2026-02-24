@@ -7,9 +7,6 @@ import type { HistoryEntry } from "../data/get-history";
 type DefaultExport<T> = { default: T };
 
 interface CountryLoaders {
-  wiki: (
-    country: Country,
-  ) => Promise<DefaultExport<{ articles: Record<number, string> }>>;
   partySums: (country: Country) => Promise<DefaultExport<PartyYearsSums>>;
   mostRecent: (country: Country) => Promise<DefaultExport<HistoryEntry[]>>;
   biggestDonors: (country: Country) => Promise<DefaultExport<BigDonor[]>>;
@@ -19,27 +16,16 @@ interface CountryLoaders {
       parties: Party[];
     }>
   >;
-  transparency: (country: Country) => Promise<
-    DefaultExport<{
-      filteredDonors: string[];
-      normalizedDonors: Record<string, string[]>;
-    }>
-  >;
   biggestDonations: (country: Country) => Promise<DefaultExport<Donation[]>>;
 }
 
-import(`../../data/australia/config`);
-
+// Note: anything that's imported here will be bundled in the server bundle
 const loaders: CountryLoaders = {
-  wiki: (country: Country) =>
-    import(`../../data/${country}/wikipedia-articles`),
   partySums: (country: Country) => import(`../../data/${country}/party-sums`),
   mostRecent: (country: Country) => import(`../../data/${country}/most-recent`),
   biggestDonors: (country: Country) =>
     import(`../../data/${country}/biggest-donors`),
   yearParties: (country: Country) => import(`../../data/${country}/config`),
-  transparency: (country: Country) =>
-    import(`../../data/${country}/transparency`),
   biggestDonations: (country: Country) =>
     import(`../../data/${country}/biggest-donations`),
 };
