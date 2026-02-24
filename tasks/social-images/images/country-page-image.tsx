@@ -120,7 +120,7 @@ export const CountryPageImage = async (
   const Label = (
     <div tw="flex shrink-0 flex-col py-2 pb-4">
       <div tw="flex text-xl font-semibold">
-        {t("home.stacked_years")}{" "}
+        {t("stacked_years.title")}{" "}
         {t("over_min_public_amount", {
           amount: formatCompactCountryCurrency(
             locale,

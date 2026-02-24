@@ -1,6 +1,6 @@
+/* eslint-disable react/no-unknown-property */
 "use client";
 
-/* eslint-disable react/no-unknown-property */
 import { ImageMetaCard } from "./image-meta-card";
 import { PageLogo } from "../../../src/components/page-logo";
 import { partyColor } from "../../../src/utils/color";
