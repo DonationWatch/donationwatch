@@ -337,5 +337,10 @@ export const donorMeta: DonorMetaDefinition = {
       ["HEATHROW AIRPORT HOLDINGS Ltd", RelationKind.company],
       ["Heathrow Airport Ltd", RelationKind.company],
     ],
+
+    [
+      ["LOCAL GOVERNMENT ASSOCIATION", RelationKind.organization],
+      ["Local Government Association Labour Group", RelationKind.organization],
+    ],
   ],
 };

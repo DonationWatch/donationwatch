@@ -96,6 +96,7 @@ export const enum RelationKind {
   family,
   company,
   owner,
+  organization,
 }
 
 // To be used as RegExp

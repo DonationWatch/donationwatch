@@ -1,6 +1,6 @@
 "use client";
 
-import { BriefcaseBusiness, Building2 } from "lucide-react";
+import { BriefcaseBusiness, Building2, Landmark } from "lucide-react";
 
 import { DonorLink } from "./donor-link";
 import { RelationKind } from "../utils/types";
@@ -17,6 +17,7 @@ const kindIcons: Record<RelationKind, JSX.Element> = {
   [RelationKind.family]: <Family size={16} />,
   [RelationKind.company]: <Building2 size={16} />,
   [RelationKind.owner]: <BriefcaseBusiness size={16} />,
+  [RelationKind.organization]: <Landmark size={16} />,
 };
 
 export const RelatedDonorChip = ({
