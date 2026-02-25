@@ -108,6 +108,14 @@ export default async function sitemap(props: {
                 url: `${BASE_URL}/${locale}/${country}/tools/data`,
                 lastModified,
               },
+              {
+                url: `${BASE_URL}/${locale}/${country}/tools/bar-chart-race`,
+                lastModified,
+              },
+              {
+                url: `${BASE_URL}/${locale}/${country}/tools/compare`,
+                lastModified,
+              },
               config.parties.flatMap((party) => {
                 const partiesBaseUrl = `${BASE_URL}/${locale}/${country}/party/${party.id}`;
                 const lastDonation = lastPartyStatsDonation(

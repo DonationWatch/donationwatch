@@ -691,5 +691,59 @@
     },
     "chart_title": "Rozložení stranických darů",
     "chart_subtitle": "Celkové zveřejněné dary jednotlivým stranám, {country}, {years}."
+  },
+  "compare_parties_page": {
+    "title": "Porovnat strany",
+    "description": "Vyberte níže mezi dvěma až čtyřmi stranami pro porovnání jejich statistik darů vedle sebe. Limit čtyř stran zajišťuje, že porovnání zůstane přehledné na všech obrazovkách."
+  },
+  "compare_parties": {
+    "parties": "Strany",
+    "min_select": "Vyberte alespoň dvě strany výše, abyste viděli porovnání.",
+    "comparing": "Porovnávání",
+    "years": "Roky",
+    "top_3_donors": "Top 3 dárci",
+    "n_donations": "{count} darů",
+    "donor_type": "Typ dárce",
+    "donor": "Dárce",
+    "overview": {
+      "title": "Přehled",
+      "description": "Obecné statistiky včetně celkové částky a počtu darů, které jednotlivé strany získaly ve zvoleném časovém období."
+    },
+    "timeline": {
+      "title": "Časová osa",
+      "description": "Chronologický přehled ukazující, kdy strany přijaly svůj první a poslední dar, a jejich nejaktivnější finanční období."
+    },
+    "top_donations": {
+      "title": "Největší dary",
+      "description": "Zvýrazňuje největší jednotlivý dar a nejštědřejší individuální dárce pro každou vybranou stranu."
+    },
+    "donor_types": {
+      "title": "Typy dárců",
+      "description": "Analýza finanční podpory podle typu subjektu, jako jsou firmy, jednotlivci nebo odbory.",
+      "biggest_donor_type": "Největší typ dárce"
+    },
+    "donors": {
+      "title": "Dárci",
+      "description": "Podrobnější pohled na osoby a organizace podporující jednotlivé strany, včetně četnosti a překryvů darů."
+    },
+    "overlapping": {
+      "title": "Překrývající se dárci ({count})",
+      "description": "Dárci, kteří přispěli více vybraným stranám.",
+      "more": "... a {count} dalších"
+    },
+    "stats": {
+      "sum": "Celková částka darů",
+      "count": "Počet darů",
+      "avg": "Průměrný dar",
+      "median": "Medián daru",
+      "first_year": "První rok daru",
+      "last_year": "Poslední rok daru",
+      "active_year_sum": "Nejaktivnější rok (podle částky)",
+      "active_year_count": "Rok s největším počtem darů",
+      "unique_donors": "Jedineční dárci",
+      "top_donor": "Největší dárce",
+      "frequent_donor": "Nejčastější dárce",
+      "biggest_donation": "Největší jednotlivý dar"
+    }
   }
 }

@@ -691,5 +691,59 @@
     },
     "chart_title": "Fordeling av partidonasjoner",
     "chart_subtitle": "Totalt publiserte donasjoner til hvert parti, {country}, {years}."
+  },
+  "compare_parties_page": {
+    "title": "Sammenlign partier",
+    "description": "Velg mellom to og fire partier nedenfor for å sammenligne donasjonsstatistikken deres side om side. Begrensningen på fire partier sørger for at sammenligningen forblir lesbar på alle skjermer."
+  },
+  "compare_parties": {
+    "parties": "Partier",
+    "min_select": "Velg minst to partier ovenfor for å se en sammenligning.",
+    "comparing": "Sammenligner",
+    "years": "År",
+    "top_3_donors": "Topp 3 givere",
+    "n_donations": "{count} donasjoner",
+    "donor_type": "Givertype",
+    "donor": "Giver",
+    "overview": {
+      "title": "Oversikt",
+      "description": "Generell statistikk, inkludert den totale summen og antall donasjoner hver part har mottatt i valgt tidsrom."
+    },
+    "timeline": {
+      "title": "Tidslinje",
+      "description": "En kronologisk oversikt som viser når partiene mottok sine første og siste donasjoner, samt deres mest finansielt aktive perioder."
+    },
+    "top_donations": {
+      "title": "Største donasjoner",
+      "description": "Fremhever den største enkeltstående innbetalingstransaksjonen og de største individuelle giverne for hver valgt part."
+    },
+    "donor_types": {
+      "title": "Givertyper",
+      "description": "En analyse av økonomisk støtte kategorisert etter enhetstype, som selskaper, privatpersoner eller fagforeninger.",
+      "biggest_donor_type": "Største givertype"
+    },
+    "donors": {
+      "title": "Givere",
+      "description": "Et dypere innblikk i de unike personene og organisasjonene som støtter hver part, inkludert hyppighet og overlappende bidrag."
+    },
+    "overlapping": {
+      "title": "Overlappende givere ({count})",
+      "description": "Givere som har donert til flere av de valgte partiene.",
+      "more": "... og {count} til"
+    },
+    "stats": {
+      "sum": "Totale donasjoner",
+      "count": "Antall donasjoner",
+      "avg": "Gjennomsnittlig donasjon",
+      "median": "Median-donasjon",
+      "first_year": "Første donasjonsår",
+      "last_year": "Siste donasjonsår",
+      "active_year_sum": "Mest aktive år (etter sum)",
+      "active_year_count": "Året med flest donasjoner",
+      "unique_donors": "Unike givere",
+      "top_donor": "Største giver",
+      "frequent_donor": "Mest hyppige giver",
+      "biggest_donation": "Største enkeltstående donasjon"
+    }
   }
 }

@@ -105,8 +105,65 @@ test.describe("Tools", () => {
         await barChartRaceTool.toYearOption(2021).click();
 
         const url = new URL(page.url());
+        expect(url.searchParams.get("to")).toBe("2021");
+      });
+    });
+  });
+
+  test.describe("Compare parties", () => {
+    test.beforeEach(async ({ page, baseURL }) => {
+      await page.goto(`${baseURL}/germany/tools/compare`);
+    });
+
+    test(`it works`, async ({ page, accessibility, tools }) => {
+      const { comparePartiesTool } = tools;
+
+      await expect(comparePartiesTool.legislativeYearsFieldset).toBeVisible();
+      await accessibility.check();
+
+      await test.step("Clicking legislative year range updates URL", async () => {
+        await comparePartiesTool.legislativeYearButton("2018-2021").click();
+
+        const url = new URL(page.url());
         expect(url.searchParams.get("from")).toBe("2018");
         expect(url.searchParams.get("to")).toBe("2021");
+      });
+
+      await test.step("Clicking individual year updates URL", async () => {
+        await comparePartiesTool.individualYearButton(2020).click();
+
+        const url = new URL(page.url());
+        expect(url.searchParams.get("from")).toBe("2020");
+        expect(url.searchParams.get("to")).toBe("2020");
+      });
+
+      await test.step("Clicking different individual year updates URL", async () => {
+        await comparePartiesTool.individualYearButton(2023).click();
+
+        const url = new URL(page.url());
+        expect(url.searchParams.get("from")).toBe("2023");
+        expect(url.searchParams.get("to")).toBe("2023");
+      });
+
+      await test.step("Opening advanced and selecting range updates URL", async () => {
+        await comparePartiesTool.advancedSummary.click();
+
+        await comparePartiesTool.fromYearDropdown.click();
+        await comparePartiesTool.fromYearOption(2018).click();
+
+        await comparePartiesTool.toYearDropdown.click();
+        await comparePartiesTool.toYearOption(2021).click();
+
+        const url = new URL(page.url());
+        expect(url.searchParams.get("from")).toBe("2018");
+        expect(url.searchParams.get("to")).toBe("2021");
+      });
+
+      await test.step("pick parties to compare", async () => {
+        await comparePartiesTool.partyButton("Volt").click();
+        await expect(comparePartiesTool.overviewSection).toBeHidden();
+        await comparePartiesTool.partyButton("SPD").click();
+        await expect(comparePartiesTool.overviewSection).toBeVisible();
       });
     });
   });

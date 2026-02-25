@@ -675,5 +675,59 @@
     },
     "chart_title": "Distribution of party donations",
     "chart_subtitle": "Total published donations to each party, {country}, {years}."
+  },
+  "compare_parties_page": {
+    "title": "Compare parties",
+    "description": "Select between two and four parties below to compare their donation statistics side-by-side. The limit of 4 parties ensures the comparison remains readable on all screens."
+  },
+  "compare_parties": {
+    "parties": "Parties",
+    "min_select": "Select at least two parties above to see a comparison.",
+    "comparing": "Comparing",
+    "years": "Years",
+    "top_3_donors": "Top 3 donors",
+    "n_donations": "{count} donations",
+    "donor_type": "Donor type",
+    "donor": "Donor",
+    "overview": {
+      "title": "Overview",
+      "description": "General statistics including the total sum and number of donations received by each party within the selected timeframe."
+    },
+    "timeline": {
+      "title": "Timeline",
+      "description": "A chronological breakdown showing when parties received their first and last donations, as well as their most financially active periods."
+    },
+    "top_donations": {
+      "title": "Top donations",
+      "description": "Highlights the largest single incoming transaction and the highest individual donors for each selected party."
+    },
+    "donor_types": {
+      "title": "Donor types",
+      "description": "An analysis of financial support categorized by entity types, such as companies, individuals, or trade unions.",
+      "biggest_donor_type": "Biggest donor type"
+    },
+    "donors": {
+      "title": "Donors",
+      "description": "A deeper look into the unique individuals and organizations backing each party, including frequency and overlapping contributions."
+    },
+    "overlapping": {
+      "title": "Overlapping donors ({count})",
+      "description": "Donors who donated to multiple selected parties.",
+      "more": "... and {count} more"
+    },
+    "stats": {
+      "sum": "Total donations",
+      "count": "Number of donations",
+      "avg": "Average donation",
+      "median": "Median donation",
+      "first_year": "First donation year",
+      "last_year": "Last donation year",
+      "active_year_sum": "Most active year (by sum)",
+      "active_year_count": "Year with most donations",
+      "unique_donors": "Unique donors",
+      "top_donor": "Top donor",
+      "frequent_donor": "Most frequent donor",
+      "biggest_donation": "Largest single donation"
+    }
   }
 }

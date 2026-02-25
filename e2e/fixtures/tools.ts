@@ -1,15 +1,7 @@
 import { LocatorObject } from "../util/locator";
 import { PageObject } from "../util/page";
 
-class DataExportTool extends LocatorObject {
-  public downloadCSV = this.locator.getByText(
-    this.translations("common.download_format", { format: "CSV" }),
-  );
-  public downloadJSON = this.locator.getByText(
-    this.translations("common.download_format", { format: "JSON" }),
-  );
-}
-class BarChartRaceTool extends LocatorObject {
+class YearRangeFilterTool extends LocatorObject {
   public get legislativeYearsFieldset() {
     return this.locator.locator("fieldset").filter({
       has: this.locator
@@ -40,6 +32,50 @@ class BarChartRaceTool extends LocatorObject {
     });
   }
 
+  public get advancedSection() {
+    return this.locator.locator("details");
+  }
+
+  public get advancedSummary() {
+    return this.advancedSection.locator("summary");
+  }
+
+  public get fromYearDropdown() {
+    return this.advancedSection.getByLabel(
+      this.translations("bar_chart_race.from"),
+    );
+  }
+
+  public get toYearDropdown() {
+    return this.advancedSection.getByLabel(
+      this.translations("bar_chart_race.to"),
+    );
+  }
+
+  public fromYearOption(year: number) {
+    return this.locator.page().getByRole("menuitem", {
+      name: year.toString(),
+      exact: true,
+    });
+  }
+
+  public toYearOption(year: number) {
+    return this.locator.page().getByRole("menuitem", {
+      name: year.toString(),
+      exact: true,
+    });
+  }
+}
+
+class DataExportTool extends LocatorObject {
+  public downloadCSV = this.locator.getByText(
+    this.translations("common.download_format", { format: "CSV" }),
+  );
+  public downloadJSON = this.locator.getByText(
+    this.translations("common.download_format", { format: "JSON" }),
+  );
+}
+class BarChartRaceTool extends YearRangeFilterTool {
   public get groupByFieldset() {
     return this.locator.locator("fieldset").filter({
       has: this.locator
@@ -78,40 +114,6 @@ class BarChartRaceTool extends LocatorObject {
     });
   }
 
-  public get advancedSection() {
-    return this.locator.locator("details");
-  }
-
-  public get advancedSummary() {
-    return this.advancedSection.locator("summary");
-  }
-
-  public get fromYearDropdown() {
-    return this.advancedSection.getByLabel(
-      this.translations("bar_chart_race.from"),
-    );
-  }
-
-  public get toYearDropdown() {
-    return this.advancedSection.getByLabel(
-      this.translations("bar_chart_race.to"),
-    );
-  }
-
-  public fromYearOption(year: number) {
-    return this.locator.page().getByRole("menuitem", {
-      name: year.toString(),
-      exact: true,
-    });
-  }
-
-  public toYearOption(year: number) {
-    return this.locator.page().getByRole("menuitem", {
-      name: year.toString(),
-      exact: true,
-    });
-  }
-
   public get playButton() {
     return this.locator.getByRole("button", {
       name: this.translations("actions.play"),
@@ -137,12 +139,56 @@ class BarChartRaceTool extends LocatorObject {
   }
 }
 
+class ComparePartiesTool extends YearRangeFilterTool {
+  public get partiesFieldset() {
+    return this.locator.locator("fieldset").filter({
+      has: this.locator
+        .page()
+        .getByText(this.translations("compare_parties.parties"), {
+          exact: true,
+        }),
+    });
+  }
+
+  public get overviewSection() {
+    return this.locator.locator("#sec-compare-overview").locator("..");
+  }
+
+  public get timelineSection() {
+    return this.locator.locator("#sec-compare-timeline").locator("..");
+  }
+
+  public get donorsSection() {
+    return this.locator.locator("#sec-compare-donors").locator("..");
+  }
+
+  public get topDonationsSection() {
+    return this.locator.locator("#sec-compare-top-donations").locator("..");
+  }
+
+  public get overlappingDonorsSection() {
+    return this.locator
+      .locator("#sec-compare-overlapping-donors")
+      .locator("..");
+  }
+
+  public partyButton(short: string) {
+    return this.partiesFieldset.getByRole("button", {
+      name: short,
+    });
+  }
+}
+
 export class Tools extends PageObject {
   public readonly dataExport = new DataExportTool(
     this.page.getByRole("main"),
     this.props,
   );
   public readonly barChartRaceTool = new BarChartRaceTool(
+    this.page.getByRole("main"),
+    this.props,
+  );
+  public readonly comparePartiesTool = new ComparePartiesTool(
     this.page.getByRole("main"),
     this.props,
   );

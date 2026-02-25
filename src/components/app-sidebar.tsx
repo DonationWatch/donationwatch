@@ -4,6 +4,7 @@ import {
   ChartBarStacked,
   ChevronRight,
   FileSpreadsheet,
+  Scale,
   UserRound,
   Vote,
 } from "lucide-react";
@@ -137,7 +138,7 @@ export function AppSidebar({
                           ))}
                         {!showAllParties &&
                           countryConfig.parties.length >
-                            SIDENAV_PARTIES_VISIBLE && (
+                          SIDENAV_PARTIES_VISIBLE && (
                             <SidebarMenuSubItem>
                               <SidebarMenuButton
                                 onClick={() => setShowAllParties(true)}
@@ -153,7 +154,7 @@ export function AppSidebar({
                           )}
                         {showAllParties &&
                           countryConfig.parties.length >
-                            SIDENAV_PARTIES_VISIBLE && (
+                          SIDENAV_PARTIES_VISIBLE && (
                             <SidebarMenuSubItem>
                               <SidebarMenuButton
                                 onClick={() => setShowAllParties(false)}
@@ -233,6 +234,18 @@ export function AppSidebar({
                     </SidebarActiveMenuButton>
                   </SidebarMenuItem>
                 ) : null}
+                <SidebarMenuItem>
+                  <SidebarActiveMenuButton
+                    activeHref={`/${locale}/${countryConfig.id}/tools/compare`}
+                    href={`/${locale}/${countryConfig.id}/tools/compare`}
+                    asChild
+                  >
+                    <a href={`/${locale}/${countryConfig.id}/tools/compare`}>
+                      <Scale />
+                      <span>Compare Parties</span>
+                    </a>
+                  </SidebarActiveMenuButton>
+                </SidebarMenuItem>
               </SidebarMenu>
             </SidebarGroup>
           </>

@@ -691,5 +691,59 @@
     },
     "chart_title": "Raspodjela donacija strankama",
     "chart_subtitle": "Ukupne objavljene donacije svakoj stranci, {country}, {years}."
+  },
+  "compare_parties_page": {
+    "title": "Usporedi stranke",
+    "description": "Ispod odaberite između dvije i četiri stranke kako biste usporedili njihovu statistiku donacija usporedno. Ograničenje od četiri stranke osigurava da usporedba ostane čitka na svim zaslonima."
+  },
+  "compare_parties": {
+    "parties": "Stranke",
+    "min_select": "Odaberite najmanje dvije stranke iznad kako biste vidjeli usporedbu.",
+    "comparing": "Uspoređivanje",
+    "years": "Godine",
+    "top_3_donors": "Top 3 donatora",
+    "n_donations": "{count} donacija",
+    "donor_type": "Tip donatora",
+    "donor": "Donator",
+    "overview": {
+      "title": "Pregled",
+      "description": "Opća statistika, uključujući ukupni iznos i broj donacija koje je svaka stranka primila u odabranom razdoblju."
+    },
+    "timeline": {
+      "title": "Vremenska crta",
+      "description": "Kronološki prikaz koji pokazuje kada su stranke primile svoju prvu i posljednju donaciju, kao i svoja financijski najaktivnija razdoblja."
+    },
+    "top_donations": {
+      "title": "Najveće donacije",
+      "description": "Ističe najveću pojedinačnu dolaznu transakciju i najveće pojedinačne donatore za svaku odabranu stranku."
+    },
+    "donor_types": {
+      "title": "Tipovi donatora",
+      "description": "Analiza financijske potpore razvrstane prema tipu subjekta, poput tvrtki, pojedinaca ili sindikata.",
+      "biggest_donor_type": "Najveći tip donatora"
+    },
+    "donors": {
+      "title": "Donatori",
+      "description": "Detaljniji uvid u jedinstvene osobe i organizacije koje podupiru svaku stranku, uključujući učestalost i preklapanje donacija."
+    },
+    "overlapping": {
+      "title": "Preklapajući donatori ({count})",
+      "description": "Donatori koji su donirali višestrukim odabranim strankama.",
+      "more": "... i još {count}"
+    },
+    "stats": {
+      "sum": "Ukupne donacije",
+      "count": "Broj donacija",
+      "avg": "Prosječna donacija",
+      "median": "Medijan donacije",
+      "first_year": "Prva godina donacije",
+      "last_year": "Zadnja godina donacije",
+      "active_year_sum": "Najaktivnija godina (prema iznosu)",
+      "active_year_count": "Godina s najviše donacija",
+      "unique_donors": "Jedinstveni donatori",
+      "top_donor": "Najveći donator",
+      "frequent_donor": "Najčešći donator",
+      "biggest_donation": "Najveća pojedinačna donacija"
+    }
   }
 }

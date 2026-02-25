@@ -691,5 +691,59 @@
     },
     "chart_title": "Erakondade annetuste jaotus",
     "chart_subtitle": "Kokku avaldatud annetused iga erakonna kohta, {country}, {years}."
+  },
+  "compare_parties_page": {
+    "title": "Võrdle erakondi",
+    "description": "Vali allpool kahe kuni nelja erakonna vahel, et võrrelda nende annetuste statistikat kõrvuti. Nelja erakonna piirang tagab, et võrdlus jääb kõigil ekraanidel loetavaks."
+  },
+  "compare_parties": {
+    "parties": "Erakonnad",
+    "min_select": "Vali ülal vähemalt kaks erakonda, et näha võrdlust.",
+    "comparing": "Võrdlus",
+    "years": "Aastad",
+    "top_3_donors": "Top 3 annetajat",
+    "n_donations": "{count} annetust",
+    "donor_type": "Annetaja tüüp",
+    "donor": "Annetaja",
+    "overview": {
+      "title": "Ülevaade",
+      "description": "Üldstatistika, sealhulgas iga erakonna saadud annetuste kogusumma ja arv valitud ajavahemikus."
+    },
+    "timeline": {
+      "title": "Ajajoon",
+      "description": "Kronoloogiline jaotus, mis näitab, millal erakonnad said oma esimese ja viimase annetuse ning millal olid nende finantsiliselt aktiivseimad perioodid."
+    },
+    "top_donations": {
+      "title": "Suurimad annetused",
+      "description": "Toob esile suurima üksiku sissetuleva tehingu ja suurimad individuaalsed annetajad iga valitud erakonna jaoks."
+    },
+    "donor_types": {
+      "title": "Annetajate tüübid",
+      "description": "Finantstoetuse analüüs, jaotatuna üksuse tüübi järgi, näiteks ettevõtted, eraisikud või ametiühingud.",
+      "biggest_donor_type": "Suurim annetaja tüüp"
+    },
+    "donors": {
+      "title": "Annetajad",
+      "description": "Põhjalikum vaade unikaalsetesse isikutesse ja organisatsioonidesse, kes iga erakonda toetavad, sh annetuste sagedus ja kattuvad panused."
+    },
+    "overlapping": {
+      "title": "Kattuvad annetajad ({count})",
+      "description": "Annetajad, kes on teinud annetusi mitmele valitud erakonnale.",
+      "more": "... ja veel {count}"
+    },
+    "stats": {
+      "sum": "Annetuste kogusumma",
+      "count": "Annetuste arv",
+      "avg": "Keskmine annetus",
+      "median": "Mediaanannetus",
+      "first_year": "Esimene annetuse aasta",
+      "last_year": "Viimane annetuse aasta",
+      "active_year_sum": "Aktiivseim aasta (summa järgi)",
+      "active_year_count": "Aasta kõige rohkemate annetustega",
+      "unique_donors": "Unikaalsed annetajad",
+      "top_donor": "Suurim annetaja",
+      "frequent_donor": "Kõige sagedasem annetaja",
+      "biggest_donation": "Suurim üksik annetus"
+    }
   }
 }
