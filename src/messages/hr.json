@@ -20,7 +20,9 @@
     "privacy": "Politika privatnosti",
     "transparency": "Transparentnost",
     "sources": "Izvori",
-    "export": "Izvoz podataka"
+    "export": "Izvoz podataka",
+    "bar_chart_race": "Utrka stupčastih grafikona",
+    "compare_parties": "Usporedi stranke"
   },
   "data": {
     "loading": "Sadržaj se učitava...",

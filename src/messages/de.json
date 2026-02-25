@@ -20,7 +20,9 @@
     "privacy": "Datenschutzerklärung",
     "transparency": "Transparenz",
     "sources": "Quellen",
-    "export": "Datenexport"
+    "export": "Datenexport",
+    "bar_chart_race": "Balkendiagramm-Rennen",
+    "compare_parties": "Parteien vergleichen"
   },
   "data": {
     "loading": "Inhalt wird geladen...",

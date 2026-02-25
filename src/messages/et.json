@@ -20,7 +20,9 @@
     "privacy": "Privaatsuspoliitika",
     "transparency": "Läbipaistvus",
     "sources": "Allikad",
-    "export": "Andmete eksport"
+    "export": "Andmete eksport",
+    "bar_chart_race": "Tulpdiagrammi võistlus",
+    "compare_parties": "Võrdle erakondi"
   },
   "data": {
     "loading": "Sisu laadimine...",

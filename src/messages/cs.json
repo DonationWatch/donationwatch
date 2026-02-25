@@ -20,7 +20,9 @@
     "privacy": "Zásady ochrany osobních údajů",
     "transparency": "Transparentnost",
     "sources": "Zdroje",
-    "export": "Export dat"
+    "export": "Export dat",
+    "bar_chart_race": "Závod sloupcových grafů",
+    "compare_parties": "Porovnat strany"
   },
   "data": {
     "loading": "Načítání obsahu...",

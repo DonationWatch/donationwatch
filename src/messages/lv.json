@@ -20,7 +20,9 @@
     "privacy": "Privātuma politika",
     "transparency": "Caurspīdīgums",
     "sources": "Avoti",
-    "export": "Datu eksports"
+    "export": "Datu eksports",
+    "bar_chart_race": "Joslu diagrammas sacensības",
+    "compare_parties": "Salīdzināt partijas"
   },
   "data": {
     "loading": "Saturs tiek ielādēts...",

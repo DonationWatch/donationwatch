@@ -20,7 +20,9 @@
     "privacy": "Privacybeleid",
     "transparency": "Transparantie",
     "sources": "Bronnen",
-    "export": "Gegevensexport"
+    "export": "Gegevensexport",
+    "bar_chart_race": "Staafdiagramrace",
+    "compare_parties": "Vergelijk partijen"
   },
   "data": {
     "loading": "Inhoud wordt geladen...",

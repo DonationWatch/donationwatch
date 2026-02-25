@@ -20,7 +20,9 @@
     "privacy": "Personvernerklæring",
     "transparency": "Åpenhet",
     "sources": "Kilder",
-    "export": "Dataeksport"
+    "export": "Dataeksport",
+    "bar_chart_race": "Søylediagram-kappløp",
+    "compare_parties": "Sammenlign partier"
   },
   "data": {
     "loading": "Innhold lastes...",

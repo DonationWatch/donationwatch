@@ -20,7 +20,9 @@
     "privacy": "Privacy policy",
     "transparency": "Transparency",
     "sources": "Sources",
-    "export": "Data export"
+    "export": "Data export",
+    "bar_chart_race": "Bar chart race",
+    "compare_parties": "Compare parties"
   },
   "data": {
     "loading": "Content is loading...",

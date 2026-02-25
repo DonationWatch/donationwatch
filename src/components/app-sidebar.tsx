@@ -138,7 +138,7 @@ export function AppSidebar({
                           ))}
                         {!showAllParties &&
                           countryConfig.parties.length >
-                          SIDENAV_PARTIES_VISIBLE && (
+                            SIDENAV_PARTIES_VISIBLE && (
                             <SidebarMenuSubItem>
                               <SidebarMenuButton
                                 onClick={() => setShowAllParties(true)}
@@ -154,7 +154,7 @@ export function AppSidebar({
                           )}
                         {showAllParties &&
                           countryConfig.parties.length >
-                          SIDENAV_PARTIES_VISIBLE && (
+                            SIDENAV_PARTIES_VISIBLE && (
                             <SidebarMenuSubItem>
                               <SidebarMenuButton
                                 onClick={() => setShowAllParties(false)}
@@ -229,7 +229,7 @@ export function AppSidebar({
                         href={`/${locale}/${countryConfig.id}/tools/bar-chart-race`}
                       >
                         <ChartBarStacked />
-                        <span>Bar Chart Race</span>
+                        <span>{t("navigation.bar_chart_race")}</span>
                       </a>
                     </SidebarActiveMenuButton>
                   </SidebarMenuItem>
@@ -242,7 +242,7 @@ export function AppSidebar({
                   >
                     <a href={`/${locale}/${countryConfig.id}/tools/compare`}>
                       <Scale />
-                      <span>Compare Parties</span>
+                      <span>{t("navigation.compare_parties")}</span>
                     </a>
                   </SidebarActiveMenuButton>
                 </SidebarMenuItem>
