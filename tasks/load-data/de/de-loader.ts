@@ -531,6 +531,10 @@ export class DeLoader extends DataLoader {
       donor = "Dr. Theiss Naturwaren GmbH";
     }
 
+    if (donor.endsWith("Aktiengesellschaft")) {
+      return donor.replace(/ Aktiengesellschaft$/, " AG");
+    }
+
     if (
       containsWords(donor, "Hans Helmuth Schmidt") &&
       address[AddressField.Zip] === "52353"
