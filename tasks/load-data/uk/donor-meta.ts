@@ -223,6 +223,15 @@ export const donorMeta: DonorMetaDefinition = {
     "Flamingo Land": {
       wiki: 1431576,
     },
+    "LOCAL GOVERNMENT ASSOCIATION": {
+      wiki: 3615272,
+    },
+    // Note: this is the wiki article of her husband.
+    // For now we don't support relations that aren't donors.
+    // This should be improved in the future, maybe even with additional tokens of [chairman, Daily Mail and General Trust, wiki: 714373]
+    "Claudia Caroline Harmsworth, Viscountess Rothermere": {
+      wiki: 1292344,
+    },
   },
   relations: [
     // Flamingo Land
@@ -322,6 +331,11 @@ export const donorMeta: DonorMetaDefinition = {
     [
       ["Dale Vince", RelationKind.owner],
       ["Ecotricity Ltd", RelationKind.company],
+    ],
+
+    [
+      ["HEATHROW AIRPORT HOLDINGS Ltd", RelationKind.company],
+      ["Heathrow Airport Ltd", RelationKind.company],
     ],
   ],
 };
