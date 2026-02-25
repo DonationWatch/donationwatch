@@ -691,5 +691,59 @@
     },
     "chart_title": "Partiju ziedojumu sadalījums",
     "chart_subtitle": "Kopējie publicētie ziedojumi katrai partijai, {country}, {years}."
+  },
+  "compare_parties_page": {
+    "title": "Salīdzināt partijas",
+    "description": "Zemāk izvēlieties no divām līdz četrām partijām, lai salīdzinātu to ziedojumu statistiku līdzās. Četru partiju ierobežojums nodrošina, ka salīdzinājums paliek pārskatāms uz visiem ekrāniem."
+  },
+  "compare_parties": {
+    "parties": "Partijas",
+    "min_select": "Izvēlieties vismaz divas partijas augstāk, lai redzētu salīdzinājumu.",
+    "comparing": "Salīdzināšana",
+    "years": "Gadi",
+    "top_3_donors": "Top 3 ziedotāji",
+    "n_donations": "{count} ziedojumi",
+    "donor_type": "Ziedotāja tips",
+    "donor": "Ziedotājs",
+    "overview": {
+      "title": "Pārskats",
+      "description": "Vispārīga statistika, tostarp katras partijas saņemto ziedojumu kopējā summa un skaits izvēlētajā laika periodā."
+    },
+    "timeline": {
+      "title": "Laika skala",
+      "description": "Hronoloģisks pārskats, kas parāda, kad partijas saņēma savu pirmo un pēdējo ziedojumu, kā arī to finansiāli aktīvākos periodus."
+    },
+    "top_donations": {
+      "title": "Lielākie ziedojumi",
+      "description": "Izceļ lielāko vienreizējo ienākošo darījumu un lielākos individuālos ziedotājus katrai izvēlētajai partijai."
+    },
+    "donor_types": {
+      "title": "Ziedotāju tipi",
+      "description": "Finansiālā atbalsta analīze, grupēta pēc subjekta tipa, piemēram, uzņēmumi, fiziskas personas vai arodbiedrības.",
+      "biggest_donor_type": "Lielākais ziedotāja tips"
+    },
+    "donors": {
+      "title": "Ziedotāji",
+      "description": "Detalizētāks ieskats unikālajās personās un organizācijās, kas atbalsta katru partiju, tostarp ziedojumu biežums un pārklāšanās."
+    },
+    "overlapping": {
+      "title": "Pārklājošies ziedotāji ({count})",
+      "description": "Ziedotāji, kas ziedojuši vairākām izvēlētajām partijām.",
+      "more": "... un vēl {count}"
+    },
+    "stats": {
+      "sum": "Kopējie ziedojumi",
+      "count": "Ziedojumu skaits",
+      "avg": "Vidējais ziedojums",
+      "median": "Mediānais ziedojums",
+      "first_year": "Pirmais ziedošanas gads",
+      "last_year": "Pēdējais ziedošanas gads",
+      "active_year_sum": "Aktīvākais gads (pēc summas)",
+      "active_year_count": "Gads ar visvairāk ziedojumiem",
+      "unique_donors": "Unikālie ziedotāji",
+      "top_donor": "Lielākais ziedotājs",
+      "frequent_donor": "Biežākais ziedotājs",
+      "biggest_donation": "Lielākais vienreizējais ziedojums"
+    }
   }
 }

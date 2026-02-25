@@ -691,5 +691,59 @@
     },
     "chart_title": "Verteilung der Parteispenden",
     "chart_subtitle": "Gesamtveröffentlichte Spenden an jede Partei, {country}, {years}."
+  },
+  "compare_parties_page": {
+    "title": "Parteien vergleichen",
+    "description": "Wählen Sie unten zwischen zwei und vier Parteien aus, um ihre Spendenstatistiken nebeneinander zu vergleichen. Das Limit von 4 Parteien stellt sicher, dass der Vergleich auf allen Bildschirmen lesbar bleibt."
+  },
+  "compare_parties": {
+    "parties": "Parteien",
+    "min_select": "Wählen Sie oben mindestens zwei Parteien aus, um einen Vergleich zu sehen.",
+    "comparing": "Vergleiche",
+    "years": "Jahre",
+    "top_3_donors": "Top 3 Spender",
+    "n_donations": "{count} Spenden",
+    "donor_type": "Spenderart",
+    "donor": "Spender",
+    "overview": {
+      "title": "Übersicht",
+      "description": "Allgemeine Statistiken, einschließlich der Gesamtsumme und der Anzahl der Spenden, die jede Partei im ausgewählten Zeitraum erhalten hat."
+    },
+    "timeline": {
+      "title": "Zeitverlauf",
+      "description": "Eine chronologische Übersicht zeigt, wann die Parteien ihre ersten und letzten Spenden erhielten sowie ihre finanziell aktivsten Phasen."
+    },
+    "top_donations": {
+      "title": "Höchste Spenden",
+      "description": "Hebt die größte einzelne eingegangene Transaktion und die höchsten Einzeldonoren für jede ausgewählte Partei hervor."
+    },
+    "donor_types": {
+      "title": "Spenderarten",
+      "description": "Eine Analyse der finanziellen Unterstützung nach Entitätstypen, wie Unternehmen, Einzelpersonen oder Gewerkschaften.",
+      "biggest_donor_type": "Größte Spenderart"
+    },
+    "donors": {
+      "title": "Spender",
+      "description": "Ein tieferer Einblick in die einzelnen Personen und Organisationen, die jede Partei unterstützen, einschließlich Häufigkeit und Überschneidungen."
+    },
+    "overlapping": {
+      "title": "Überschneidende Spender ({count})",
+      "description": "Spender, die an mehrere der ausgewählten Parteien gespendet haben.",
+      "more": "... und {count} weitere"
+    },
+    "stats": {
+      "sum": "Gesamtspenden",
+      "count": "Anzahl der Spenden",
+      "avg": "Durchschnittliche Spende",
+      "median": "Median-Spende",
+      "first_year": "Jahr der ersten Spende",
+      "last_year": "Jahr der letzten Spende",
+      "active_year_sum": "Aktivstes Jahr (nach Summe)",
+      "active_year_count": "Jahr mit den meisten Spenden",
+      "unique_donors": "Einzigartige Spender",
+      "top_donor": "Top-Spender",
+      "frequent_donor": "Häufigster Spender",
+      "biggest_donation": "Größte Einzelspende"
+    }
   }
 }

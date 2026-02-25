@@ -691,5 +691,59 @@
     },
     "chart_title": "Verdeling van partijdonaties",
     "chart_subtitle": "Totaal gepubliceerde donaties aan elke partij, {country}, {years}."
+  },
+  "compare_parties_page": {
+    "title": "Partijen vergelijken",
+    "description": "Selecteer hieronder tussen twee en vier partijen om hun donatiestatistieken naast elkaar te vergelijken. De limiet van vier partijen zorgt ervoor dat de vergelijking op alle schermen leesbaar blijft."
+  },
+  "compare_parties": {
+    "parties": "Partijen",
+    "min_select": "Selecteer hierboven minimaal twee partijen om een vergelijking te zien.",
+    "comparing": "Vergelijken",
+    "years": "Jaren",
+    "top_3_donors": "Top 3 donoren",
+    "n_donations": "{count} donaties",
+    "donor_type": "Donortype",
+    "donor": "Donor",
+    "overview": {
+      "title": "Overzicht",
+      "description": "Algemene statistieken, inclusief het totale bedrag en het aantal donaties dat elke partij in de geselecteerde periode heeft ontvangen."
+    },
+    "timeline": {
+      "title": "Tijdlijn",
+      "description": "Een chronologisch overzicht dat laat zien wanneer partijen hun eerste en laatste donatie ontvingen, evenals hun financieel meest actieve perioden."
+    },
+    "top_donations": {
+      "title": "Hoogste donaties",
+      "description": "Licht de grootste enkele binnenkomende transactie en de belangrijkste individuele donoren voor elke geselecteerde partij uit."
+    },
+    "donor_types": {
+      "title": "Donortypen",
+      "description": "Een analyse van financiële steun, gecategoriseerd naar type entiteit, zoals bedrijven, individuen of vakbonden.",
+      "biggest_donor_type": "Grootste donortype"
+    },
+    "donors": {
+      "title": "Donoren",
+      "description": "Een diepere blik op de unieke personen en organisaties die elke partij steunen, inclusief frequentie en overlappende bijdragen."
+    },
+    "overlapping": {
+      "title": "Overlappende donoren ({count})",
+      "description": "Donoren die aan meerdere geselecteerde partijen hebben gedoneerd.",
+      "more": "... en nog {count} meer"
+    },
+    "stats": {
+      "sum": "Totale donaties",
+      "count": "Aantal donaties",
+      "avg": "Gemiddelde donatie",
+      "median": "Mediandonatie",
+      "first_year": "Eerste donatiejaar",
+      "last_year": "Laatste donatiejaar",
+      "active_year_sum": "Meest actieve jaar (op bedrag)",
+      "active_year_count": "Jaar met de meeste donaties",
+      "unique_donors": "Unieke donoren",
+      "top_donor": "Topdonor",
+      "frequent_donor": "Meest frequente donor",
+      "biggest_donation": "Grootste enkele donatie"
+    }
   }
 }

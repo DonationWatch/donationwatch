@@ -15,6 +15,7 @@ export const SERVER_ONLY_NAMESPACES = [
   "home",
   "thanks",
   "export",
+  "compare_parties_page",
 ] as const;
 
 type ServerOnlyNamespace = (typeof SERVER_ONLY_NAMESPACES)[number];
