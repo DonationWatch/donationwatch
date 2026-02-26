@@ -55,29 +55,27 @@ export const extractAddress = (
     return { [AddressField.Country]: "CH" };
   }
 
-  if (lines.join(" ").includes("Österreich")) {
+  const text = lines.join(" ");
+
+  if (text.includes("Österreich")) {
     return { [AddressField.Country]: "AT" };
   }
-
-  if (lines.join(" ").includes("Niederlande")) {
+  if (text.includes("Niederlande")) {
     return { [AddressField.Country]: "NL" };
   }
-
-  if (lines.join(" ").includes("Schweiz")) {
+  if (text.includes("Schweiz")) {
     return { [AddressField.Country]: "CH" };
   }
-
-  if (lines.join(" ").endsWith("England")) {
+  if (text.endsWith("England")) {
     return { [AddressField.Country]: "UK" };
   }
-  if (lines.join(" ").endsWith("USA")) {
+  if (text.endsWith("USA") || text.endsWith("(USA)")) {
     return { [AddressField.Country]: "US" };
   }
-
-  if (lines.join(" ").endsWith("Südafrika")) {
+  if (text.endsWith("Südafrika")) {
     return { [AddressField.Country]: "ZA" };
   }
-  if (lines.join(" ").endsWith("Italien")) {
+  if (text.endsWith("Italien")) {
     return { [AddressField.Country]: "IT" };
   }
 

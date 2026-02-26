@@ -243,6 +243,9 @@ export const donorMeta: DonorMetaDefinition = {
     "Arnd Franz": {
       wiki: 1510967,
     },
+    "Bernd Erich Beetz": {
+      wiki: 11768738,
+    },
   },
   relations: [
     // Quandt/Klatten Family – BMW Major Shareholders

@@ -511,6 +511,11 @@ export class DeLoader extends DataLoader {
       return "Jan-Dirk Lüders";
     }
 
+    // TODO: this is leaking the address into the name, fix it by improving the address extraction
+    if (donor.startsWith("Bernd Erich Beetz")) {
+      return "Bernd Erich Beetz";
+    }
+
     if (donor.startsWith("Dr. Karl Gerhold c/o GETEC")) {
       return "Dr. Karl Gerhold c/o GETEC";
     }
