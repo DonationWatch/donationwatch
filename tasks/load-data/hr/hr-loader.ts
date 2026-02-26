@@ -870,6 +870,12 @@ export class HrLoader extends DataLoader {
       name: "NEZAVISNA LISTA BURA",
       color: "#60bd45",
     },
+    "DARIO ZUROVEC - NEZAVISNA LISTA - DARIO ZUROVEC - NL": {
+      name: "NEZAVISNA LISTA - Dario Zurovec",
+      short: "Dario Zurovec - NL",
+      code: "DZNL",
+      color: "#001f3f",
+    },
   };
 
   donorMeta = donorMeta;
