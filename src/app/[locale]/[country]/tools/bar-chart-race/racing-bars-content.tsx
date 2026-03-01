@@ -181,7 +181,6 @@ export const RacingBarsContent = ({
             years: formatYearsRange(validSelectedYears),
             country: getCountryName(countryConfig, tCountries),
           })}
-          partiesById={countryConfig.partiesById}
           totalRuntimeMs={totalRuntimeMs}
         />
       ) : (

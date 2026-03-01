@@ -2,7 +2,6 @@
 import { useRouter } from "next/navigation";
 import { useLocale } from "next-intl";
 
-
 import { ExpandableReactEchart } from "./expandable-react-echart";
 import { useDonationsByParty, useDonationsByYears } from "../../hooks/use-api";
 import { useChart } from "../../hooks/use-chart";
@@ -51,7 +50,9 @@ export const LoadedDonationYearsTreemap = ({
       yearsSet.add(donationYear(donation));
     }
     if (!parties.length) {
-      partiesSet.add(country.partiesById[donation[DonationField.Receiver]]);
+      partiesSet.add(
+        country.parties.find((p) => p.id === donation[DonationField.Receiver])!,
+      );
     }
   });
 

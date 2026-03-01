@@ -265,7 +265,9 @@ const LoadedYearsDonorHistogramText = ({
       yearsSet.add(donationYear(donation));
     }
     if (!parties.length) {
-      partiesSet.add(country.partiesById[donation[DonationField.Receiver]]);
+      partiesSet.add(
+        country.parties.find((p) => p.id === donation[DonationField.Receiver])!,
+      );
     }
   });
 

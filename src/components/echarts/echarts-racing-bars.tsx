@@ -6,7 +6,7 @@ import {
   formatCompactCurrency,
   formatTwoDigitDate,
 } from "../../utils/formatter";
-import { DonationField, type Donation, type Party } from "../../utils/types";
+import { DonationField, type Donation } from "../../utils/types";
 import { Button } from "../ui/button";
 
 import type { ConstLocale } from "../../utils/locales";
@@ -25,7 +25,6 @@ interface EChartsRacingBarsProps {
   currency: Currency;
   title: string;
   subtitle: string;
-  partiesById: Record<string, Party>;
   countryConfig: CountryConfig;
   /** Total runtime of the animation in milliseconds (default: 10000ms = 10s) */
   totalRuntimeMs?: number;
@@ -47,9 +46,11 @@ export const EChartsRacingBars = ({
   currency,
   title,
   subtitle,
-  partiesById,
   totalRuntimeMs = DEFAULT_TOTAL_RUNTIME_MS,
 }: EChartsRacingBarsProps) => {
+  const partiesById = useMemo(() => {
+    return Object.fromEntries(countryConfig.parties.map((p) => [p.id, p]));
+  }, [countryConfig.parties]);
   const t = useTranslations();
   const containerRef = useRef<HTMLDivElement>(null);
   const animationIntervalRef = useRef<NodeJS.Timeout | null>(null);

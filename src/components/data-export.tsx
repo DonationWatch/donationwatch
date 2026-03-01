@@ -35,7 +35,8 @@ function generateJSON(
       return {
         date: d[DonationField.Date],
         donor: getDonorName(d[DonationField.DonorName], tCommon),
-        receiver: country.partiesById[receiver]?.short ?? receiver,
+        receiver:
+          country.parties.find((p) => p.id === receiver)?.short ?? receiver,
         amount: d[DonationField.Amount],
         currency: country.currency,
         donor_type:
@@ -65,7 +66,9 @@ function generateCSV(
   const rows: string[] = [headers.join(",")];
 
   for (const donation of donations) {
-    const party = country.partiesById[donation[DonationField.Receiver]];
+    const party = country.parties.find(
+      (p) => p.id === donation[DonationField.Receiver],
+    );
     const row = [
       escapeCSVField(donation[DonationField.Date]),
       escapeCSVField(getDonorName(donation[DonationField.DonorName], tCommon)),

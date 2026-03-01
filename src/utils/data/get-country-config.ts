@@ -1,14 +1,6 @@
-import type { Party, ReceiverId } from "../types";
 import type { CountryConfig } from "../countries";
 import { Country, COUNTRY_CONFIG } from "../countries";
 import { loadCountryData } from "../loader/country-data-loaders";
-
-const partyById = (parties: Party[]): Record<ReceiverId, Party> => {
-  return parties.reduce<Record<ReceiverId, Party>>((acc, party) => {
-    acc[party.id] = party;
-    return acc;
-  }, {});
-};
 
 const loaded: Record<string, CountryConfig> = {};
 export const getCountryConfig = async (
@@ -22,7 +14,6 @@ export const getCountryConfig = async (
   const config = {
     ...COUNTRY_CONFIG[country],
     ...dataset,
-    partiesById: partyById(dataset.parties),
   };
 
   loaded[country] = config;

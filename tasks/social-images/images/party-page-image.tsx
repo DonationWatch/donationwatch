@@ -15,7 +15,7 @@ export const PartyPageImage = async (
   partyId: ReceiverId,
   donations: Donation[],
 ) => {
-  const party = countryConfig.partiesById[partyId];
+  const party = countryConfig.parties.find((p) => p.id === partyId)!;
 
   return (
     <ThumbnailWrapper>

@@ -21,5 +21,5 @@ export const isValidParty = (
   partyId: string,
   countryConfig: CountryConfig,
 ): partyId is ReceiverId => {
-  return Boolean(countryConfig.partiesById[partyId as ReceiverId]);
+  return countryConfig.parties.some((p) => p.id === partyId);
 };

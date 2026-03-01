@@ -79,7 +79,6 @@ export interface CountryConfig {
   years: string[];
   // This is sorted by sum. Meaning first entry is the party with the highest sum of donations.
   parties: Party[];
-  partiesById: Record<ReceiverId, Party>;
   legislativeYears: NonEmptyArray<NonEmptyArray<string>>;
   preliminaryDataSince?: string;
   minPublicDonationAmount: number;
@@ -118,10 +117,7 @@ export interface CountryConfig {
   receiverFilters?: ReceiverFilter[];
 }
 
-export type UnloadedCountryConfig = Omit<
-  CountryConfig,
-  "years" | "parties" | "partiesById" | "donations" | "wikipedia"
->;
+export type UnloadedCountryConfig = Omit<CountryConfig, "years" | "parties">;
 
 export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
   [Country.germany]: {
@@ -800,10 +796,14 @@ export const getParty = (
   country: CountryConfig,
   partyId: ReceiverId,
 ): Party => {
-  if (!country.partiesById[partyId]) {
+  const party = country.parties.find((p) => p.id === partyId);
+
+  if (!party) {
     console.error(`Unknown party ${partyId} (${country.id})`);
   }
-  return country.partiesById[partyId];
+
+  // Note: theoretically this can be undefined but we usually handle it before it reaches any code that requires the party
+  return party as Party;
 };
 
 export const findCorrectParty = (
@@ -815,7 +815,10 @@ export const findCorrectParty = (
     // remove anything that's not letter or number
     .replace(/[^A-Z0-9]/g, "")
     .trim();
-  return country.partiesById[normalizedPartyId as ReceiverId];
+
+  return country.parties.find(
+    (p) => p.id === (normalizedPartyId as ReceiverId),
+  );
 };
 
 export type Countries = keyof typeof En.countries;
