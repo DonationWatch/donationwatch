@@ -1,20 +1,11 @@
-"use client";
-import { useRouter } from "next/navigation";
-import { useEffect, use } from "react";
+import { redirect } from "next/navigation";
 
-import Loading from "../../../../../../components/loading";
-
-export default function OriginPage(
+export default async function OriginPage(
   props: PageProps<"/[locale]/[country]/party/[partyId]/origin">,
 ) {
-  const params = use(props.params);
-  const router = useRouter();
+  const params = await props.params;
 
-  useEffect(() => {
-    router.replace(
-      `/${params.locale}/${params.country}/party/${params.partyId}/origin/overview`,
-    );
-  }, []);
-
-  return <Loading />;
+  redirect(
+    `/${params.locale}/${params.country}/party/${params.partyId}/origin/overview`,
+  );
 }

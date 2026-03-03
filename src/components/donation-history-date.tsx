@@ -5,13 +5,8 @@ import { dateDiffInDays, donationYear } from "../utils/date";
 import { formatDate, formatRelativeDate } from "../utils/formatter";
 import { DonationField } from "../utils/types";
 
-export const DonationHistoryDate = ({
-  date,
-  now,
-}: {
-  date: string;
-  now: number;
-}) => {
+export const DonationHistoryDate = ({ date }: { date: string }) => {
+  const now = Date.now();
   const locale = useLocale();
 
   if (date === donationYear({ [DonationField.Date]: date }))

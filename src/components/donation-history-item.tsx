@@ -1,4 +1,3 @@
-"use client";
 import { useLocale } from "next-intl";
 
 import { DonorLink } from "./donor-link";
@@ -26,8 +25,6 @@ export const DonationHistoryItem = ({
   const locale = useLocale();
   const fmtAmount = formatCountryCurrency(locale, amount, country);
 
-  const now = Date.now();
-
   return (
     <li
       aria-label={`${party}: ${fmtAmount} ${donor}`}
@@ -35,7 +32,7 @@ export const DonationHistoryItem = ({
     >
       <div className="grow space-y-1 overflow-hidden">
         <div className="flex justify-between overflow-hidden text-gray-700 dark:text-gray-400">
-          <DynamicDonationHistoryDate date={date} now={now} />
+          <DynamicDonationHistoryDate date={date} />
           <PartyLink
             className="overflow-hidden px-2"
             party={party}
