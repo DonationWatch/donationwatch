@@ -1,5 +1,26 @@
 import type { ConstLocale } from "../utils/locales";
-import type { FAQPage, WebPage, WithContext } from "schema-dts";
+import type { FAQPage, Organization, WebPage, WithContext } from "schema-dts";
+
+import { BASE_URL, BSKY_URL, GITHUB_ORG, TWITTER_URL } from "@/utils/config";
+
+export const OrganizationSchema = () => {
+  const jsonLd: WithContext<Organization> = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "DonationWatch",
+    url: BASE_URL,
+    sameAs: [BSKY_URL, TWITTER_URL, GITHUB_ORG],
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+      }}
+    />
+  );
+};
 
 export const LastModifiedSchema = ({
   dateModified,

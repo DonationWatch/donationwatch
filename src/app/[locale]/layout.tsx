@@ -16,6 +16,8 @@ import { Providers } from "../providers";
 
 import type { Metadata } from "next";
 
+import { OrganizationSchema } from "@/components/schema";
+
 export async function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
 }
@@ -58,6 +60,9 @@ export default async function LangLayout(props: LayoutProps<"/[locale]">) {
 
   return (
     <html lang={locale} className="scroll-pt-15">
+      <head>
+        <OrganizationSchema />
+      </head>
       <body className="min-h-screen w-full">
         <NuqsAdapter>
           <Providers locale={locale} messages={filterClientMessages(messages)}>
