@@ -713,8 +713,8 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
     minPublicDonationAmount: 1,
     currency: "GEL",
     source: {
-      name: "ანტიკორუფციული ბიურო",
-      url: "https://monitoring.acb.gov.ge/",
+      name: "სახელმწიფო აუდიტის სამსახური",
+      url: "https://sao.ge/",
     },
     legislativeYears: [
       ["2013", "2014", "2015", "2016"],
