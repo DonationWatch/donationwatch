@@ -861,20 +861,39 @@ export class HrLoader extends DataLoader {
     "STJEPAN KOŽIĆ - NEZAVISNA LISTA - SKNL": {
       code: "SKNL",
       short: "SKNL",
-      name: "Stjepan Kožić Nezavisna Lista",
+      name: "Stjepan Kožić - NL",
       color: "#acc232",
     },
     "NEZAVISNA LISTA BURA - BURA": {
       code: "BURA",
       short: "BURA",
-      name: "NEZAVISNA LISTA BURA",
+      name: "BURA - NL",
       color: "#60bd45",
     },
     "DARIO ZUROVEC - NEZAVISNA LISTA - DARIO ZUROVEC - NL": {
-      name: "NEZAVISNA LISTA - Dario Zurovec",
+      name: "Dario Zurovec - NL",
       short: "Dario Zurovec - NL",
       code: "DZNL",
       color: "#001f3f",
+    },
+    "SVE SE MOŽE - SSM": {
+      name: "Sve se može!",
+      short: "Sve se može!",
+      code: "SSM",
+      color: "#0f7ec2",
+    },
+    "BERNARDIĆ DAVOR - NEZAVISNA LISTA SERVUS ZAGREB - SERVUS ZAGREB": {
+      name: "Bernardić Davor - NL Servus Zagreb",
+      short: "Bernardić Davor - NL Servus Zagreb",
+      code: "BDNLSZ",
+      color: "#00b2d6",
+    },
+    "MARIJA SELAK RASPUDIĆ - NEZAVISNA LISTA - MARIJA SELAK RASPUDIĆ - NL": {
+      name: "Marija Selak Raspudić - NL",
+      short: "Marija Selak Raspudić - NL",
+      code: "MSRNL",
+      color: "#2c6491",
+      wiki: 77852735,
     },
   };
 
