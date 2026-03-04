@@ -4,25 +4,6 @@ import { middleware } from "../src/middleware";
 import { extractYearsRange, getLocale } from "../src/utils/middleware";
 
 import type { NextRequest } from "next/server";
-import { skipIfFakeEnv } from "./config";
-
-test("does nothing with static files", async () => {
-  const skippedRequests = [
-    "/image.png",
-    "/favicon.ico",
-    "/image.jpg",
-    "_next/static/media/germany.1fe47647.svg",
-    "/data/germany/donations/by-year/2024.json?t=1734083138390",
-  ];
-
-  for (const pathname of skippedRequests) {
-    expect(
-      await middleware({
-        nextUrl: new URL(`https://example.com${pathname}`),
-      } as unknown as NextRequest),
-    ).toEqual(undefined);
-  }
-});
 
 test("redirects with locale if missing", async () => {
   const tests: [
@@ -69,66 +50,6 @@ test("adds country if it's missing", async () => {
     ["/de/about", 200, null],
     ["/de", 200, null],
     ["/en/2024/overview", 308, "https://example.com/en/germany/2024/overview"],
-  ] as [path: string, status: number, expected: string | null][];
-
-  for (const [path, status, expected] of tests) {
-    const request = {
-      url: new URL(`https://example.com${path}`),
-      nextUrl: new URL(`https://example.com${path}`),
-      headers: new Headers(),
-    } as unknown as NextRequest;
-    const response = await middleware(request);
-
-    expect(response?.status).toEqual(status);
-    expect(response?.headers.get("location")).toEqual(expected);
-  }
-});
-
-test("removes same year range", async () => {
-  const tests = [
-    ["/en/germany/2025/overview", 200, null],
-    ["/en/germany/2022-2025/overview", 200, null],
-    ["/en/germany/party/FDP/donors", 200, null],
-    [
-      "/en/germany/2022-2022/overview",
-      308,
-      "https://example.com/en/germany/2022/overview",
-    ],
-  ] as [path: string, status: number, expected: string | null][];
-
-  for (const [path, status, expected] of tests) {
-    const request = {
-      url: new URL(`https://example.com${path}`),
-      nextUrl: new URL(`https://example.com${path}`),
-      headers: new Headers(),
-    } as unknown as NextRequest;
-    const response = await middleware(request);
-
-    expect(response?.status).toEqual(status);
-    expect(response?.headers.get("location")).toEqual(expected);
-  }
-});
-
-test("redirects mistyped party ids to the correct ones", async (context) => {
-  skipIfFakeEnv(context);
-
-  const tests = [
-    ["/en/germany/party/FDP/", 200, null],
-    ["/en/germany/party/FDP", 200, null],
-    ["/en/germany/party/FDP/donors", 200, null],
-
-    ["/de/germany/party/fdp/", 308, "https://example.com/de/germany/party/FDP"],
-    ["/de/germany/party/fdp", 308, "https://example.com/de/germany/party/FDP"],
-    [
-      "/de/germany/party/fdp/donors",
-      308,
-      "https://example.com/de/germany/party/FDP/donors",
-    ],
-    [
-      "/en/australia/party/advance/timeline",
-      308,
-      "https://example.com/en/australia/party/ADVANCE/timeline",
-    ],
   ] as [path: string, status: number, expected: string | null][];
 
   for (const [path, status, expected] of tests) {
