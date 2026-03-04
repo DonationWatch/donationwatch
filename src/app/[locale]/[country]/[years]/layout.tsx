@@ -1,5 +1,5 @@
 import { List, History, UserRound, ChartLine, Earth } from "lucide-react";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { DynamicAbsoluteMultiplePartySumsGradient } from "../../../../components/dynamic-stacked-party-line";
@@ -110,6 +110,12 @@ export default async function YearsLayout(
   props: LayoutProps<"/[locale]/[country]/[years]">,
 ) {
   const params = await props.params;
+
+  // Normalize same-year ranges: e.g. /2023-2023/... -> /2023/...
+  const sameYearMatch = params.years.match(/^(\d{4})-(\d{4})$/);
+  if (sameYearMatch && sameYearMatch[1] === sameYearMatch[2]) {
+    redirect(`/${params.locale}/${params.country}/${sameYearMatch[1]}`);
+  }
 
   if (!isValidLocale(params.locale)) return notFound();
   if (!isValidCountry(params.country)) return notFound();

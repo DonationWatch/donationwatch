@@ -1,5 +1,5 @@
 import { ChartLine, Earth, History, UserRound } from "lucide-react";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { AbsoluteMultipleColorsGradient } from "../../../../../components/absolute-multiple-colors-gradient";
@@ -11,7 +11,7 @@ import { WikiQuote } from "../../../../../components/wiki-quote";
 import { isNotNullandNotUndefined } from "../../../../../utils/array";
 import { partyColor } from "../../../../../utils/color";
 import { THUMBNAIL_PREFIX } from "../../../../../utils/config";
-import { getParty } from "../../../../../utils/countries";
+import { findCorrectParty, getParty } from "../../../../../utils/countries";
 import { getCountryConfig } from "../../../../../utils/data/get-country-config";
 import {
   formatCountryCurrency,
@@ -121,7 +121,14 @@ export default async function PartyLayout(
     getTranslations({ locale, namespace: "common" }),
   ]);
 
-  if (!isValidParty(partyId, countryConfig)) return notFound();
+  if (!isValidParty(partyId, countryConfig)) {
+    const correctParty = findCorrectParty(countryConfig, partyId);
+    if (correctParty) {
+      redirect(`/${locale}/${country}/party/${correctParty.id}`);
+    }
+    return notFound();
+  }
+
   const party = getParty(countryConfig, partyId);
 
   let donationCount = 0;

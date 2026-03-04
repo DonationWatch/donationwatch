@@ -11,6 +11,16 @@ test.describe("Party page", () => {
     await expect(page.getByRole("heading")).toHaveText("Page not found");
   });
 
+  test("redirects wrong-cased party id to the correct one", async ({
+    page,
+    baseURL,
+    locale,
+  }) => {
+    await page.goto(`${baseURL}/germany/party/fdp/donors`);
+
+    await expect(page).toHaveURL(new RegExp(`/${locale}/germany/party/FDP`));
+  });
+
   test.describe("donors page", () => {
     test.beforeEach(async ({ page, baseURL, partyPage }) => {
       await page.goto(`${baseURL}/germany/party/${CHECK_PARTY}/donors`);

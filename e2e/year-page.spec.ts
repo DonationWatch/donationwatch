@@ -17,6 +17,17 @@ test.describe("Year page", () => {
     await expect(page.getByRole("heading")).toHaveText("Page not found");
   });
 
+  test("normalizes same-year range to single year", async ({
+    country,
+    page,
+    baseURL,
+    locale,
+  }) => {
+    await page.goto(`${baseURL}/${country}/2023-2023/overview`);
+
+    await expect(page).toHaveURL(new RegExp(`/${locale}/${country}/2023`));
+  });
+
   [...COUNTRIES]
     .filter((c) => c !== Country.croatia)
     .forEach((country) => {
