@@ -39,12 +39,14 @@ export async function generateMetadata(
 
   const { country } = params;
 
-  const [t, tCountries, countryConfig, partySums] = await Promise.all([
-    getTranslations({ locale: params.locale }),
-    getTranslations({ locale: params.locale, namespace: "countries" }),
-    getCountryConfig(country),
-    getPartyYearsSums(country),
-  ]);
+  const [t, tCountries, tPageTitle, countryConfig, partySums] =
+    await Promise.all([
+      getTranslations({ locale: params.locale }),
+      getTranslations({ locale: params.locale, namespace: "countries" }),
+      getTranslations({ locale: params.locale, namespace: "page_title" }),
+      getCountryConfig(country),
+      getPartyYearsSums(country),
+    ]);
   const years = deserializeYears(params.years);
 
   if (!hasYearSums(partySums, years)) {
@@ -61,10 +63,10 @@ export async function generateMetadata(
   });
 
   return {
-    title: `${t("page_title.years.timeline", {
+    title: tPageTitle("years.timeline", {
       year: formatYearsRange(years),
       country: getCountryName(countryConfig, tCountries),
-    })}`,
+    }),
     description,
     alternates: generateAlternates(`${country}/${params.years}/timeline`),
   };

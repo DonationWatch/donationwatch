@@ -38,9 +38,10 @@ export async function generateMetadata(
   const country = params.country;
   const years = params.years;
 
-  const [t, tCountries, countryConfig] = await Promise.all([
+  const [t, tCountries, tPageTitle, countryConfig] = await Promise.all([
     getTranslations({ locale }),
     getTranslations({ locale, namespace: "countries" }),
+    getTranslations({ locale, namespace: "page_title" }),
     getCountryConfig(country),
   ]);
 
@@ -59,10 +60,10 @@ export async function generateMetadata(
   });
 
   return {
-    title: `${t("page_title.years.changes", {
+    title: tPageTitle("years.changes", {
       year: yearRange,
       country: countryName,
-    })}`,
+    }),
     description,
     alternates: generateAlternates(`${country}/${years}/changes`),
   };

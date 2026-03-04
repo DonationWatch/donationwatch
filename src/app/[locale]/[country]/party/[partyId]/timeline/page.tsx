@@ -37,9 +37,10 @@ export async function generateMetadata(
 
   const { country, partyId } = params;
 
-  const [t, tCountries, countryConfig] = await Promise.all([
+  const [t, tCountries, tPageTitle, countryConfig] = await Promise.all([
     getTranslations({ locale: params.locale }),
     getTranslations({ locale: params.locale, namespace: "countries" }),
+    getTranslations({ locale: params.locale, namespace: "page_title" }),
     getCountryConfig(country),
   ]);
 
@@ -47,10 +48,10 @@ export async function generateMetadata(
   const party = getParty(countryConfig, partyId);
 
   return {
-    title: `${t("page_title.party.timeline", {
+    title: tPageTitle("party.timeline", {
       party: party.short,
       country: getCountryName(countryConfig, tCountries),
-    })}`,
+    }),
     description: t("party.timeline.detail.summary", {
       party: party.short,
     }),

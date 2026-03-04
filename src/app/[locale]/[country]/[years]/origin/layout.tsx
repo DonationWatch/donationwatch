@@ -25,9 +25,10 @@ export async function generateMetadata(
   const { country } = params;
   const years = params.years;
 
-  const [t, tCountries, countryConfig] = await Promise.all([
+  const [t, tCountries, tPageTitle, countryConfig] = await Promise.all([
     getTranslations({ locale: params.locale }),
     getTranslations({ locale: params.locale, namespace: "countries" }),
+    getTranslations({ locale: params.locale, namespace: "page_title" }),
     getCountryConfig(country),
   ]);
 
@@ -40,10 +41,10 @@ export async function generateMetadata(
   });
 
   return {
-    title: `${t("page_title.years.origin", {
+    title: tPageTitle("years.origin", {
       year: formatYearsRange(deserializeYears(years)),
       country: getCountryName(countryConfig, tCountries),
-    })}`,
+    }),
     description,
   };
 }

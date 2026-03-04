@@ -40,15 +40,21 @@ export async function generateMetadata(
   const { locale, country } = params;
   const donorId = params.donorId;
 
-  const [t, tCountries, countryConfig, donations, biggestDonors, tCommon] =
-    await Promise.all([
-      getTranslations({ locale: params.locale }),
-      getTranslations({ locale: params.locale, namespace: "countries" }),
-      getCountryConfig(country),
-      getDonationsByDonorId(country, donorId),
-      getBiggestDonors(country),
-      getTranslations({ locale: params.locale, namespace: "common" }),
-    ]);
+  const [
+    tCountries,
+    tPageTitle,
+    countryConfig,
+    donations,
+    biggestDonors,
+    tCommon,
+  ] = await Promise.all([
+    getTranslations({ locale: params.locale, namespace: "countries" }),
+    getTranslations({ locale: params.locale, namespace: "page_title" }),
+    getCountryConfig(country),
+    getDonationsByDonorId(country, donorId),
+    getBiggestDonors(country),
+    getTranslations({ locale: params.locale, namespace: "common" }),
+  ]);
 
   if (!donations?.length) {
     return notFoundMetadata;
@@ -67,7 +73,7 @@ export async function generateMetadata(
     parties.add(donation[DonationField.Receiver]);
   }
 
-  const description = t("page_title.donor.description", {
+  const description = tPageTitle("donor.description", {
     country: getCountryName(countryConfig, tCountries),
     donor: donorName,
     count,
@@ -85,10 +91,10 @@ export async function generateMetadata(
   const imageUrl = `${THUMBNAIL_PREFIX}/${locale}/${country}/donors/${donorId}.png`;
 
   const metadata: Metadata = {
-    title: `${t("page_title.donor.overview", {
+    title: tPageTitle("donor.overview", {
       donor: donorName,
       country: getCountryName(countryConfig, tCountries),
-    })}`,
+    }),
     description,
     alternates: generateAlternates(`${country}/donor/${donorId}`),
   };

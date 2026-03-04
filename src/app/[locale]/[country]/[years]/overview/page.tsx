@@ -52,12 +52,13 @@ export async function generateMetadata(
   const { locale, country } = params;
   const years = params.years;
 
-  const [t, tCountries, countryConfig, partyYearSums] = await Promise.all([
-    getTranslations({ locale }),
-    getTranslations({ locale, namespace: "countries" }),
-    getCountryConfig(country),
-    getPartyYearsSums(country),
-  ]);
+  const [tCountries, tPageTitle, countryConfig, partyYearSums] =
+    await Promise.all([
+      getTranslations({ locale, namespace: "countries" }),
+      getTranslations({ locale, namespace: "page_title" }),
+      getCountryConfig(country),
+      getPartyYearsSums(country),
+    ]);
 
   const countryName = getCountryName(countryConfig, tCountries);
   const deserializedYears = deserializeYears(years);
@@ -70,7 +71,7 @@ export async function generateMetadata(
     deserializedYears,
   );
 
-  const description = t("page_title.years.description", {
+  const description = tPageTitle("years.description", {
     year: yearRange,
     country: countryName,
     parties: parties.length,
@@ -84,10 +85,10 @@ export async function generateMetadata(
   });
 
   return {
-    title: `${t("page_title.years.overview", {
+    title: tPageTitle("years.overview", {
       year: yearRange,
       country: countryName,
-    })}`,
+    }),
     description,
     alternates: generateAlternates(`${country}/${years}/overview`),
   };
