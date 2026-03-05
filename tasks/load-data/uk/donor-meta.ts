@@ -232,6 +232,9 @@ export const donorMeta: DonorMetaDefinition = {
     "Claudia Caroline Harmsworth, Viscountess Rothermere": {
       wiki: 1292344,
     },
+    "Greybull Capital LLP": {
+      wiki: 50215801,
+    },
   },
   relations: [
     // Flamingo Land
@@ -341,6 +344,14 @@ export const donorMeta: DonorMetaDefinition = {
     [
       ["LOCAL GOVERNMENT ASSOCIATION", RelationKind.organization],
       ["Local Government Association Labour Group", RelationKind.organization],
+    ],
+
+    // Westcombe Group
+    [
+      ["WESTCOMBE DEVELOPMENTS Ltd", RelationKind.company],
+      ["WESTCOMBE HOMES Ltd", RelationKind.organization],
+      ["Kamal Pankhania", RelationKind.owner],
+      ["Vraj Pankhania", RelationKind.owner],
     ],
   ],
 };
