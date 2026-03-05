@@ -305,7 +305,7 @@ export async function generateMetadata(
 
   return {
     title: `${tOtherCountries("title")} | DonationWatch`,
-    alternates: generateAlternates("imprint"),
+    alternates: generateAlternates("other-countries"),
   };
 }
 

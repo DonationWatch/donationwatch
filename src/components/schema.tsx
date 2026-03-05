@@ -8,6 +8,7 @@ export const OrganizationSchema = () => {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "DonationWatch",
+    logo: "https://donation.watch/apple-icon.png",
     url: BASE_URL,
     sameAs: [BSKY_URL, TWITTER_URL, GITHUB_ORG],
   };
