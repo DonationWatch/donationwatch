@@ -895,6 +895,18 @@ export class HrLoader extends DataLoader {
       color: "#2c6491",
       wiki: 77852735,
     },
+    "PAVLE KALINIĆ - NEZAVISNA LISTA - PAVLE KALINIĆ - NL": {
+      name: "Pavle Kalinić - NL",
+      short: "Pavle Kalinić - NL",
+      code: "PAKALINICNL",
+      color: "#0c203b",
+    },
+    "DINA DOGAN - NEZAVISNA LISTA - DINA DOGAN - NL": {
+      name: "Dina Dogan - NL",
+      short: "Dina Dogan - NL",
+      code: "DINADOGANNL",
+      color: "#093ad6",
+    },
   };
 
   donorMeta = donorMeta;
