@@ -354,6 +354,19 @@ export class UkLoader extends DataLoader {
       name: "Socialist Labour Party",
       wiki: 39565355,
     },
+    "Your Party": {
+      name: "Your Party",
+      short: "Your Party",
+      code: "YOURPARTY",
+      color: "#FF3131",
+      wiki: 80517379,
+    },
+    "Open Party": {
+      name: "Open Party",
+      short: "Open Party",
+      code: "OPENPARTY",
+      color: "#f87988",
+    },
   };
 
   donorMeta = donorMeta;
