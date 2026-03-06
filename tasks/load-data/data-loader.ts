@@ -141,11 +141,14 @@ export abstract class DataLoader {
       "../data",
       countryCode.toLowerCase(),
     );
+
     this.donationsDataPath = path.join(this.taskDataDir, "donations.ts");
     this.donorMetaPath = path.join(this.taskDataDir, "donor-meta.ts");
+    this.transparencyDataPath = path.join(this.taskDataDir, "transparency.ts");
+
     this.configPath = path.join(this.dataDir, "config.ts");
     this.buildMetaPath = path.join(this.dataDir, "build.ts");
-    this.transparencyDataPath = path.join(this.dataDir, "transparency.ts");
+
     this.anonymizedDonorsPath = path.join(
       __dirname,
       countryCode.toLowerCase(),
