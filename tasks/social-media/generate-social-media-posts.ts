@@ -21,6 +21,7 @@ import { interpolate } from "./string";
 import type { CountryConfig } from "../../src/utils/countries";
 import type { ConstLocale } from "../../src/utils/locales";
 import type { Donation, ReceiverId } from "../../src/utils/types";
+import type { StrictNamespacedTranslator } from "@/utils/translator";
 
 const log = debug(`generate-social-media-posts`);
 
@@ -217,19 +218,21 @@ const main = async () => {
 
     const lang = countryTranslations[country];
 
-    const t = createTranslator({
-      locale: lang,
-      messages: (
-        await import(`../../src/messages/${lang}.json`, {
-          with: { type: "json" },
-        })
-      ).default,
-    });
+    const messages = await import(`../../src/messages/${lang}.json`, {
+      with: { type: "json" },
+    }).then((mod) => mod.default);
+
+    const tCountries: StrictNamespacedTranslator<"countries"> =
+      createTranslator({
+        locale: lang,
+        messages,
+        namespace: "countries",
+      });
 
     let message = `${countryFlags[countryConfig.id]} ${interpolate(
       messageTranslations[lang].title,
       {
-        country: getCountryName(countryConfig, t),
+        country: getCountryName(countryConfig, tCountries),
       },
     )}\n`;
 
@@ -263,7 +266,7 @@ const main = async () => {
     }
 
     message += `\n${interpolate(messageTranslations[lang].hashtags, {
-      country: toHashTag(getCountryName(countryConfig, t)),
+      country: toHashTag(getCountryName(countryConfig, tCountries)),
     })}`;
 
     message += `\nhttps://donation.watch/${lang}/${countryConfig.id}`;
