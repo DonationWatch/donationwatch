@@ -79,7 +79,10 @@ const extractEur = (strVal: string | number): number => {
 };
 
 const normalizeParty = (party: string): string => {
-  let normalized = party.replace("Ø  ", "").replace("’", "'");
+  let normalized = party
+    .replace("Ø  ", "")
+    .replace("Ø  ", "")
+    .replace("’", "'");
 
   if (normalized.startsWith("Coppieters")) {
     return "Coppieters Foundation";
@@ -339,7 +342,12 @@ export class EuLoader extends DataLoader {
 
         row = cleanRow(row);
 
-        if (row.length === 1 && row[0].startsWith("Ø ")) {
+        if (
+          row.length === 1 &&
+          (row[0].startsWith("Ø ") ||
+            // in the 2021 dataset the IED has a different whitespace character
+            row[0].startsWith("Ø  "))
+        ) {
           currentParty = row[0];
         }
 
@@ -662,7 +670,7 @@ export class EuLoader extends DataLoader {
 
         return donations.map(([donor, country, amount]) => ({
           idx: `${idx}`,
-          [DonationField.Amount]: ["2018", "2019"].includes(year)
+          [DonationField.Amount]: ["2018", "2019", "2020"].includes(year)
             ? parseFloat(amount.replace(".", "").replace(",", "."))
             : parseFloat(amount.replace(",", "")),
           [DonationField.DonorName]: donor,
@@ -680,12 +688,6 @@ export class EuLoader extends DataLoader {
   }
 
   yearFiles: Record<string, { parties?: string; foundations?: string }> = {
-    "2020": {
-      parties:
-        "https://www.appf.europa.eu/cmsdata/297637/PARTIES%20Contributions%20and%20donations%20related%20to%20financial%20year%202020%20updated%202023-03-17_Redacted.xlsx",
-      foundations:
-        "https://www.appf.europa.eu/cmsdata/297635/FOUNDATIONS%20Contributions%20and%20donations%20related%20to%20financial%20year%202020%20updated%202023-03-17_Redacted.xlsx",
-    },
     "2021": {
       parties:
         "https://www.appf.europa.eu/cmsdata/297619/PARTIES%20Contributions%20and%20donations%20related%20to%20financial%20year%202021_Redacted.xlsx",

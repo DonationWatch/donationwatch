@@ -172,81 +172,97 @@ describe("EU", () => {
   test("2018 has expected values", async () => {
     const data = euSums["2018"];
 
-    expect(data["ALDE"].sum).toBeCloseTo(12682.0 + 206200.0);
-    expect(data["ECPM"].sum).toBeCloseTo(15606.0 + 58359.99);
-    expect(data["ECR"].sum).toBeCloseTo(149732.87);
-    expect(data["EFA"].sum).toBeCloseTo(6490.0 + 11240.0);
-    expect(data["EGP"].sum).toBeCloseTo(1050.43);
-    expect(data["EL"].sum).toBeCloseTo(98.8);
+    hasExpectedDonations(data, [
+      ["ALDE", 12682.0 + 206200.0],
+      ["ECPM", 15606.0 + 58359.99],
+      ["ECR", 149732.87],
+      ["EFA", 6490.0 + 11240.0],
+      ["EGP", 1050.43],
+      ["EL", 98.8],
+
+      ["CF", 25_185.97],
+      ["ELF", 15_130.25 + 5_420],
+      ["FEPS", 74_152.69 + 401.5],
+      ["GEF", 6212],
+      ["IDF", 12_000],
+      ["ND", 257_342.07 + 9676.5],
+      ["SALLUX", 42_547.5 + 723.61],
+      ["TE", 15_483.09 + 19_412.27],
+      ["WMCES", 136_724.83],
+    ]);
   });
 
   test("2019 has expected values", async () => {
     const data = euSums["2019"];
 
-    expect(data["ALDE"].sum).toBeCloseTo(18626.5 + 39711.59);
-    expect(data["ECPM"].sum).toBeCloseTo(9606.0 + 66429.2);
-    expect(data["ECR"].sum).toBeCloseTo(2640.0 + 147932.65);
-    expect(data["EFA"].sum).toBeCloseTo(10 + 300);
-    expect(data["EGP"].sum).toBeCloseTo(8726.2);
-    expect(data["ID"].sum).toBeCloseTo(250);
-    expect(data["EL"].sum).toBeCloseTo(24.22);
+    hasExpectedDonations(data, [
+      ["ALDE", 18626.5 + 39711.59],
+      ["ECPM", 9606.0 + 66429.2],
+      ["ECR", 2640.0 + 147932.65],
+      ["EFA", 10 + 300],
+      ["EGP", 8726.2],
+      ["ID", 250],
+      ["EL", 24.22],
+
+      // foundations
+      ["CF", 2727.45],
+      ["ELF", 13_041.48],
+      ["FEPS", 16_246.81],
+      ["GEF", 12_128.7 + 5_485],
+      ["ND", 175_460.5 + 2000],
+      ["SALLUX", 16_948.41 + 714.04],
+      ["TE", 4420 + 130],
+      ["WMCES", 139_279.16],
+    ]);
   });
 
   test("2020 has expected values", async () => {
     const data = euSums["2020"];
 
-    expect(Object.keys(data)).toEqual([
-      "GEF",
-      "FEPS",
-      "ELF",
-      "CF",
-      "EL",
-      "ID",
-      "EGP",
-      "ECR",
-      "WMCES",
-      "SALLUX",
-      "ND",
-      "ECPM",
-      "ALDE",
-    ]);
+    hasExpectedDonations(data, [
+      ["ALDE", 6524.85 + 37000],
+      ["ECPM", 7034.74 + 40200.0],
+      ["ECR", 4500.0 + 230424.02],
+      ["EGP", 3279.0 + 450.0],
+      ["ID", 4600.0],
+      ["EL", 66.6],
 
-    expect(data["ALDE"].sum).toBeCloseTo(6524.85 + 37000);
-    expect(data["ECPM"].sum).toBeCloseTo(7034.74 + 40200.0);
-    expect(data["ECR"].sum).toBeCloseTo(4500.0 + 230424.02);
-    expect(data["EGP"].sum).toBeCloseTo(3279.0 + 450.0);
-    expect(data["ID"].sum).toBeCloseTo(4600.0);
-    expect(data["EL"].sum).toBeCloseTo(66.6);
+      // foundations
+      ["CF", 3_142.55],
+      ["ELF", 14_468.19],
+      ["FEPS", 2754.15],
+      ["GEF", 19_375.66 + 2_846],
+      ["ND", 249_424 + 2_000],
+      ["SALLUX", 13_750 + 1_975],
+      ["WMCES", 85_134.27],
+      ["IED", 0],
+      ["TE", 0],
+    ]);
   });
 
   test("2021 has expected values", async () => {
     const data = euSums["2021"];
 
-    expect(Object.keys(data)).toEqual([
-      "ALDE",
-      "WMCES",
-      "GEF",
-      "ND",
-      "ECPM",
-      "CF",
-      "ECR",
-      "ELF",
-      "SALLUX",
-      "EGP",
-      "EL",
-      "TE",
-      "EFA",
-      "ID",
-      "FEPS",
+    hasExpectedDonations(data, [
+      // parties
+      ["ALDE", 76667.17],
+      ["EGP", 8276.5],
+      ["EFA", 7000.0],
+      ["ID", 1000.0],
+      ["EL", 194.0],
+      ["ECR", 59612.0],
+      ["ECPM", 45848.09],
+      // foundations
+      ["WMCES", 99_253.19],
+      ["ELF", 37_911.94],
+      ["IED", 250],
+      ["GEF", 40_359.84],
+      ["ND", 154_640.0],
+      ["SALLUX", 11_530.0],
+      ["FEPS", 1_500.0],
+      ["TE", 664.0],
+      ["CF", 23_495.25],
     ]);
-
-    expect(data["ALDE"].sum).toBeCloseTo(76667.17);
-    expect(data["ECPM"].sum).toBeCloseTo(45848.09);
-    expect(data["ECR"].sum).toBeCloseTo(59612.0);
-    expect(data["EFA"].sum).toBeCloseTo(7000.0);
-    expect(data["EGP"].sum).toBeCloseTo(8276.5);
-    expect(data["ID"].sum).toBeCloseTo(1000.0);
-    expect(data["EL"].sum).toBeCloseTo(194.0);
   });
 
   test("2022 has expected values", async () => {
