@@ -125,8 +125,8 @@ describe("NL", () => {
     const data = nlSums["2026"];
 
     hasExpectedDonations(data, [
-      ["D66", 10_090.0],
-      ["VVD", 150_000.0],
+      ["D66", 60_090.0],
+      ["VVD", 190_000.0],
       ["GL", 10_000],
       ["PVDD", 200_000.0],
     ]);
