@@ -12,7 +12,6 @@ import { Country } from "../../src/utils/countries";
 import { getCountryConfig } from "../../src/utils/data/get-country-config";
 import { getHistory } from "../../src/utils/data/get-history";
 import { donationYear } from "../../src/utils/date";
-import { getTransparency } from "../../src/utils/loader/normalized";
 import { getWikiArticles } from "../../src/utils/loader/wiki";
 import { donationDateSorter } from "../../src/utils/sort";
 import { getDonations } from "../data/load-donations";
@@ -32,7 +31,6 @@ import type {
 } from "../../src/utils/loader/party-years-sums";
 import type {
   Donation,
-  Party,
   DonorMeta,
   DonorMetaRelation,
   DonorMetaDefinition,
@@ -79,71 +77,62 @@ const buildMostRecentDonations = (
     .toReversed();
 };
 
-const getPartySumPartYear = (
-  country: CountryConfig,
-  donations: Donation[],
-  parties: Party[],
-  years: string[],
-): Record<string, PartyStats> => {
-  const sums: Record<
+const buildPartySums = (country: CountryConfig, donations: Donation[]) => {
+  const result: Record<string, Record<string, PartyStats>> = {};
+
+  const rawSums: Record<
     string,
-    {
-      sum: number;
-      count: number;
-      average: number;
-      lastDonation: string;
-    }
+    Record<
+      string,
+      {
+        sum: number;
+        count: number;
+        lastDonation: string;
+      }
+    >
   > = {};
 
-  const yearsSet = new Set(years);
-  const partiesSet = new Set(parties.map((p) => p.id));
+  const yearsSet = new Set(country.years);
+  const partiesSet = new Set(country.parties.map((p) => p.id));
 
   donations.forEach((donation) => {
-    if (!yearsSet.has(donationYear(donation))) return;
-    if (!partiesSet.has(donation[DonationField.Receiver])) return;
+    const year = donationYear(donation);
+    if (!yearsSet.has(year)) return;
+    const receiver = donation[DonationField.Receiver];
+    if (!partiesSet.has(receiver)) return;
 
-    sums[donation[DonationField.Receiver]] ??= {
+    rawSums[year] ??= {};
+    rawSums[year][receiver] ??= {
       sum: 0,
       count: 0,
-      average: 0,
       lastDonation: donation[DonationField.Date],
     };
 
-    sums[donation[DonationField.Receiver]].sum +=
-      donation[DonationField.Amount];
-    sums[donation[DonationField.Receiver]].count++;
-    if (
-      sums[donation[DonationField.Receiver]].lastDonation <
-      donation[DonationField.Date]
-    ) {
-      sums[donation[DonationField.Receiver]].lastDonation =
-        donation[DonationField.Date];
+    rawSums[year][receiver].sum += donation[DonationField.Amount];
+    rawSums[year][receiver].count++;
+    if (rawSums[year][receiver].lastDonation < donation[DonationField.Date]) {
+      rawSums[year][receiver].lastDonation = donation[DonationField.Date];
     }
   });
 
-  return Object.fromEntries(
-    Object.entries(sums).map(([party, stats]) => {
-      return [
-        party,
-        {
+  country.years.forEach((year) => {
+    const partyStatsForYear: Record<string, PartyStats> = {};
+    const parties = country.parties.filter((party) =>
+      party.years.includes(year),
+    );
+
+    parties.forEach((party) => {
+      const stats = rawSums[year]?.[party.id];
+      if (stats) {
+        partyStatsForYear[party.id] = {
           sum: stats.sum,
           count: stats.count,
           average: stats.count === 0 ? 0 : stats.sum / stats.count,
           lastDonation: stats.lastDonation,
-        },
-      ];
-    }),
-  );
-};
-
-const buildPartySums = (country: CountryConfig, donations: Donation[]) => {
-  const result: Record<string, ReturnType<typeof getPartySumPartYear>> = {};
-
-  country.years.forEach((year) => {
-    const parties = country.parties.filter((party) =>
-      party.years.includes(year),
-    );
-    result[year] = getPartySumPartYear(country, donations, parties, [year]);
+        };
+      }
+    });
+    result[year] = partyStatsForYear;
   });
 
   return result;
@@ -235,7 +224,18 @@ const postprocessGeojson = async () => {
 
 const prebuildStaticNormalizationJsons = async (country: CountryConfig) => {
   const dataDir = path.join(__dirname, "../../public/data", country.id);
-  const normalized = await getTransparency(country.id);
+  const transparencyPath = path.join(
+    __dirname,
+    `../data/${country.code.toLowerCase()}/transparency.ts`,
+  );
+  const {
+    default: normalized,
+  }: {
+    default: {
+      filteredDonors: string[];
+      normalizedDonors: Record<string, string[]>;
+    };
+  } = await import(transparencyPath);
 
   await fs.writeFile(
     path.join(dataDir, "normalized.json"),

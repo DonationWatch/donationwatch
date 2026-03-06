@@ -108,10 +108,14 @@ const donationsToDonationsDocument = (
     donations: [],
   };
   const donorNames = Object.keys(donorIds);
+  const donorNameToIndex: Record<string, number> = {};
+  for (let i = 0; i < donorNames.length; i++) {
+    donorNameToIndex[donorNames[i]] = i;
+  }
 
   donations.forEach((donation) => {
     const donorName = donation[DonationField.DonorName];
-    const donorIndex = donorNames.indexOf(donorName);
+    const donorIndex = donorNameToIndex[donorName];
 
     const {
       [DonationField.DonorName]: _1,
