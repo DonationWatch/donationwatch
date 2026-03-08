@@ -296,6 +296,7 @@ export const donorMeta: DonorMetaDefinition = {
       ["Tisun Investments Ltd", RelationKind.company],
       ["Leave Means Leave Ltd", RelationKind.company],
       ["Sunley Holdings Ltd", RelationKind.company],
+      ["Britain Means Business Ltd", RelationKind.company],
     ],
 
     // Sainsbury
