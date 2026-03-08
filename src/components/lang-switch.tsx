@@ -25,6 +25,7 @@ const languagesInTheirLanguage: Record<(typeof CONST_LOCALES)[number], string> =
     et: "Eestlane",
     hr: "Hrvatski",
     no: "Norsk",
+    uk: "Українська",
   };
 
 export const LangSwitch = () => {

@@ -150,7 +150,7 @@ export default async function sitemap(props: {
                     lastModified: lastDonation ?? lastModified,
                   }));
               }),
-              config.legislativeYears.flatMap((years) => {
+              (config.legislativeYears ?? []).flatMap((years) => {
                 const yearsBaseUrl = `${BASE_URL}/${locale}/${country}/${years.at(
                   0,
                 )}-${years.at(-1)}`;

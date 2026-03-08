@@ -13,6 +13,8 @@ import {
 import { formatYearsRange } from "../../../../../utils/formatter";
 import { type Donation, DonationField } from "../../../../../utils/types";
 
+import type { NonEmptyArray } from "@/utils/array";
+
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { firstItem, lastItem } from "@/utils/array";
 
@@ -27,7 +29,11 @@ export const RacingBarsContent = ({
   const tBarChartRace = useTranslations("bar_chart_race");
   const locale = useLocale();
 
-  const lastLegislativeYear = lastItem(countryConfig.legislativeYears);
+  const lastLegislativeYear = lastItem(
+    countryConfig.legislativeYears ?? [
+      [countryConfig.years.at(0)!] as NonEmptyArray<string>,
+    ],
+  );
   const minYear = countryConfig.years[0];
   const maxYear = countryConfig.years[countryConfig.years.length - 1];
 

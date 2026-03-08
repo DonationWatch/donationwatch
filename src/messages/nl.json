@@ -176,7 +176,8 @@
         "croatia": "De hier gebruikte gegevens zijn afkomstig van de Staatsverkiezingscommissie van de Republiek Kroatië (DIP) en omvatten alle politieke donaties met een geldwaarde van meer dan €1, gedocumenteerd sinds 2019.\nDe dataset gebruikt voor elk rapportagejaar alleen het laatst gepubliceerde donatiedocument (zoals gerapporteerd door izbori) om duplicaten uit eerdere versies van het rapport van hetzelfde jaar te vermijden.\nAlle donaties worden weergegeven in euro, terwijl de onderliggende dataset tot en met 2024 kuna gebruikt. Donaties die oorspronkelijk in kuna zijn gedaan, worden omgerekend naar euro met behulp van benaderde wisselkoersen voor elk halfjaar van 2019 tot 2024: H1 (0.1340, 0.1335, 0.1332, 0.1329, 0.1326) en H2 (0.1341, 0.1338, 0.1334, 0.1327, 0.1328).",
         "canada": "De hier gebruikte gegevens zijn afkomstig van Elections Canada en zijn gebaseerd op de dataset “contributions as submitted”. Het omvat alle politieke donaties met een geldwaarde van meer dan €500, gedocumenteerd sinds 2015. Alle vermeldingen die deel uitmaken van het rapport “Statement of Contributions Received” van het verkiezingsevenement “Annual” aan “Registered parties” zijn inbegrepen.",
         "georgia": "De hier gepresenteerde informatie is afkomstig van het Bureau voor Anti-Corruptie (ანტიკორუფციული ბიურო﻿) van Georgië en bevat alle politieke donaties die sinds 2011 zijn geregistreerd en meer dan 1 GEL bedragen. De dataset omvat alleen bijdragen die zijn geclassificeerd als type #10 (Geldelijke donaties) of type #16 (Geldelijke donaties van rechtspersonen).",
-        "norway": "De hier gebruikte gegevens zijn afkomstig uit de officiële publicaties over partijfinanciering van Statistics Norway (SSB) en Partifinansiering.no. De getoonde totalen zijn geaggregeerd uit meerdere gerapporteerde ontvangende entiteiten (zoals centrale, regionale, lokale en jongerenafdelingen) tot één totaal per partij, waarbij de onderliggende toewijzing van ontvangers beschikbaar blijft voor transparantie.\n\nDe Noorwegen-dataset wordt jaarlijks bijgewerkt en weerspiegelt daarmee het ritme van de onderliggende openbaarmakingen."
+        "norway": "De hier gebruikte gegevens zijn afkomstig uit de officiële publicaties over partijfinanciering van Statistics Norway (SSB) en Partifinansiering.no. De getoonde totalen zijn geaggregeerd uit meerdere gerapporteerde ontvangende entiteiten (zoals centrale, regionale, lokale en jongerenafdelingen) tot één totaal per partij, waarbij de onderliggende toewijzing van ontvangers beschikbaar blijft voor transparantie.\n\nDe Noorwegen-dataset wordt jaarlijks bijgewerkt en weerspiegelt daarmee het ritme van de onderliggende openbaarmakingen.",
+        "ukraine": "De hier gebruikte gegevens zijn afkomstig van het Nationaal Agentschap voor Corruptiepreventie (NAZK) via het PolitData-portaal. Ze omvatten alle gegevens die in de officiële rapporten zijn aangemerkt als ‘monetaire bijdragen’.\n\nOpmerking over de gegevensomvang: Dit totaal weerspiegelt alleen rechtstreekse financiële overdrachten. Het omvat geen staatsfinanciering voor parlementaire partijen of niet-geldelijke (in natura) bijdragen zoals goederen en diensten.\n\nVanwege de grootschalige Russische invasie werd de verplichte rapportage door politieke partijen van begin 2022 tot eind 2023 om veiligheids- en logistieke redenen opgeschort. Na de goedkeuring van Wet 3337-IX vullen de partijen hun rapporten nu achteraf aan. De gegevens voor 2022–2025 worden nog bijgewerkt terwijl de NAZK deze inzendingen verwerkt."
       },
       "source_link": "Gegevensbron"
     },
@@ -549,7 +550,8 @@
     "RS": "Servië",
     "CA": "Canada",
     "GE": "Georgië",
-    "NO": "Noorwegen"
+    "NO": "Noorwegen",
+    "UA": "Oekraïne"
   },
   "about": {
     "title": "Over ons",

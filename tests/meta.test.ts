@@ -14,6 +14,7 @@ test("generateAlternates", () => {
       et: "https://donation.watch/et",
       hr: "https://donation.watch/hr",
       no: "https://donation.watch/no",
+      uk: "https://donation.watch/uk",
     },
   });
 
@@ -28,6 +29,7 @@ test("generateAlternates", () => {
       et: "https://donation.watch/et/foo",
       hr: "https://donation.watch/hr/foo",
       no: "https://donation.watch/no/foo",
+      uk: "https://donation.watch/uk/foo",
     },
   });
 
@@ -42,6 +44,7 @@ test("generateAlternates", () => {
       et: "https://donation.watch/et/foo/bar/baz",
       hr: "https://donation.watch/hr/foo/bar/baz",
       no: "https://donation.watch/no/foo/bar/baz",
+      uk: "https://donation.watch/uk/foo/bar/baz",
     },
   });
 });

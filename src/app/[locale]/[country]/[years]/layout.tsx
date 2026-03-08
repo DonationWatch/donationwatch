@@ -53,7 +53,7 @@ export async function generateStaticParams({
     ...countryConfig.years.toSorted(sortYearsDesc).slice(0, CACHED_LAST_YEARS),
 
     // legislative year ranges
-    ...countryConfig.legislativeYears
+    ...(countryConfig.legislativeYears ?? [])
       .map((years) => serializeYears(years))
       .toSorted(sortYearsDesc)
       .slice(0, CACHED_LAST_LEGISLATIVE_YEARS),

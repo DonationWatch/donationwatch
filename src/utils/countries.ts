@@ -26,6 +26,7 @@ export const enum Country {
   canada = "canada",
   georgia = "georgia",
   norway = "norway",
+  ukraine = "ukraine",
 }
 
 export type CountryCode =
@@ -43,7 +44,8 @@ export type CountryCode =
   | "HR"
   | "CA"
   | "GE"
-  | "NO";
+  | "NO"
+  | "UA";
 
 export type Currency =
   | "EUR"
@@ -54,7 +56,8 @@ export type Currency =
   | "RSD"
   | "CAD"
   | "GEL"
-  | "NOK";
+  | "NOK"
+  | "UAH";
 
 export const COUNTRIES = new Set<Country>([
   Country.germany,
@@ -72,6 +75,7 @@ export const COUNTRIES = new Set<Country>([
   Country.canada,
   Country.georgia,
   Country.norway,
+  Country.ukraine,
 ]);
 
 export interface CountryConfig {
@@ -79,7 +83,7 @@ export interface CountryConfig {
   years: string[];
   // This is sorted by sum. Meaning first entry is the party with the highest sum of donations.
   parties: Party[];
-  legislativeYears: NonEmptyArray<NonEmptyArray<string>>;
+  legislativeYears?: NonEmptyArray<NonEmptyArray<string>>;
   preliminaryDataSince?: string;
   minPublicDonationAmount: number;
   source: { name: string; url: string };
@@ -765,6 +769,29 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
     markers: {
       label: "Stortingsvalg",
       dates: ["2013-09-09", "2017-09-11", "2021-09-13", "2025-09-08"],
+    },
+    states: [],
+  },
+  [Country.ukraine]: {
+    id: Country.ukraine,
+    minYear: "2020",
+    preliminaryDataSince: "2021",
+    hasTimeline: true,
+    hasOrigin: false,
+    hasDate: true,
+    hasDonorType: false,
+    minPublicDonationAmount: 10,
+    currency: "UAH",
+    source: {
+      name: "Національне агентство з питань запобігання корупції",
+      url: "https://politdata.nazk.gov.ua/",
+    },
+    legislativeYears: undefined,
+    code: "UA",
+    wikiCountry: "en",
+    markers: {
+      label: "Президентські вибори",
+      dates: [],
     },
     states: [],
   },

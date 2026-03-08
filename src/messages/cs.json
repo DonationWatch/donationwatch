@@ -176,7 +176,8 @@
         "croatia": "Zde použitá data pocházejí ze Státní volební komise Chorvatské republiky (DIP) a zahrnují všechny politické dary s peněžní hodnotou přesahující 1 €, které jsou dokumentovány od roku 2019.\nDatová sada používá pro každý vykazovaný rok pouze poslední zveřejněný dokument o darech (podle údajů izbori), aby se předešlo duplicitám z dřívějších verzí zprávy za tentýž rok.\nVšechny dary jsou zobrazeny v eurech, zatímco podkladová datová sada používá do roku 2024 kuny. Dary původně poskytnuté v kunách se převádějí na eura pomocí přibližných směnných kurzů pro každé pololetí období 2019–2024: H1 (0.1340, 0.1335, 0.1332, 0.1329, 0.1326) a H2 (0.1341, 0.1338, 0.1334, 0.1327, 0.1328).",
         "canada": "Zde použité údaje pocházejí od Elections Canada a jsou založeny na datovém souboru „contributions as submitted“. Zahrnují všechny politické dary s peněžní hodnotou přesahující 500 €, které byly zaznamenány od roku 2015. Zahrnuty jsou všechny položky, které jsou součástí zprávy „Statement of Contributions Received“ z volební události „Annual“ pro „Registered parties“.",
         "georgia": "Zde uvedené informace pocházejí z Úřadu pro boj s korupcí (ანტიკორუფციული ბიურო﻿) Gruzie a zahrnují všechny politické dary zaznamenané od roku 2011, které přesahují 1 GEL. Datový soubor obsahuje pouze příspěvky klasifikované jako typ #10 (Finanční dary) nebo typ #16 (Finanční dary od právnických osob).",
-        "norway": "Zde použitá data pocházejí z oficiálních publikací o financování politických stran od Statistics Norway (SSB) a Partifinansiering.no. Uvedené součty jsou agregovány z více nahlášených přijímajících subjektů (například centrálních, regionálních, místních a mládežnických jednotek) do jediného celku za každou stranu, přičemž podkladové mapování příjemců zůstává k dispozici pro transparentnost.\n\nDatová sada pro Norsko je aktualizována v ročním cyklu a odráží tak tempo zveřejňování těchto podkladových údajů."
+        "norway": "Zde použitá data pocházejí z oficiálních publikací o financování politických stran od Statistics Norway (SSB) a Partifinansiering.no. Uvedené součty jsou agregovány z více nahlášených přijímajících subjektů (například centrálních, regionálních, místních a mládežnických jednotek) do jediného celku za každou stranu, přičemž podkladové mapování příjemců zůstává k dispozici pro transparentnost.\n\nDatová sada pro Norsko je aktualizována v ročním cyklu a odráží tak tempo zveřejňování těchto podkladových údajů.",
+        "ukraine": "Zde použité údaje pocházejí z Národní agentury pro prevenci korupce (NAZK) prostřednictvím portálu PolitData. Obsahují všechny záznamy označené v oficiálních zprávách jako „peněžní příspěvky“.\n\nPoznámka k rozsahu dat: Tento součet odráží pouze přímé finanční převody. Nezahrnuje státní financování poskytované parlamentním stranám ani nepeněžní (věcné) příspěvky, jako jsou zboží a služby.\n\nKvůli rozsáhlé ruské invazi bylo povinné vykazování politických stran od začátku roku 2022 do konce roku 2023 z bezpečnostních a logistických důvodů pozastaveno. Po přijetí zákona č. 3337-IX nyní strany zpětně doplňují své zprávy. Údaje za roky 2022–2025 se stále aktualizují, jak NAZK zpracovává tyto podklady."
       },
       "source_link": "Zdroj dat"
     },
@@ -549,7 +550,8 @@
     "RS": "Srbsko",
     "CA": "Kanada",
     "GE": "Gruzie",
-    "NO": "Norsko"
+    "NO": "Norsko",
+    "UA": "Ukrajina"
   },
   "about": {
     "title": "O nás",

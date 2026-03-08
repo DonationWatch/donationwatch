@@ -2,6 +2,8 @@ import { expect } from "@playwright/test";
 
 import { test } from "./util/fixture";
 
+import { getCountryConfig } from "@/utils/data/get-country-config";
+
 test.describe("Tools", () => {
   test.describe("Data export", () => {
     test.beforeEach(async ({ page, baseURL }) => {
@@ -25,7 +27,10 @@ test.describe("Tools", () => {
       page,
       accessibility,
       tools,
+      country,
     }) => {
+      const countryConfig = await getCountryConfig(country);
+
       const { barChartRaceTool } = tools;
 
       await expect(tools.barChartRaceTool.downloadVideoButton).toBeVisible();
@@ -36,7 +41,12 @@ test.describe("Tools", () => {
         expect(url.searchParams).toBeDefined();
       });
 
-      await test.step("Clicking legislative year range updates URL", async () => {
+      await test.step("Clicking legislative year range updates URL", async (step) => {
+        step.skip(
+          !countryConfig.legislativeYears,
+          "not all countries have legislative sessions",
+        );
+
         await barChartRaceTool.legislativeYearButton("2018-2021").click();
 
         const url = new URL(page.url());
@@ -115,13 +125,19 @@ test.describe("Tools", () => {
       await page.goto(`${baseURL}/germany/tools/compare`);
     });
 
-    test(`it works`, async ({ page, accessibility, tools }) => {
+    test(`it works`, async ({ page, accessibility, tools, country }) => {
+      const countryConfig = await getCountryConfig(country);
       const { comparePartiesTool } = tools;
 
       await expect(comparePartiesTool.legislativeYearsFieldset).toBeVisible();
       await accessibility.check();
 
-      await test.step("Clicking legislative year range updates URL", async () => {
+      await test.step("Clicking legislative year range updates URL", async (step) => {
+        step.skip(
+          !countryConfig.legislativeYears,
+          "not all countries have legislative sessions",
+        );
+
         await comparePartiesTool.legislativeYearButton("2018-2021").click();
 
         const url = new URL(page.url());

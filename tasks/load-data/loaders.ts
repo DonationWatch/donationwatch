@@ -12,6 +12,7 @@ import { LvLoader } from "./lv/lv-loader";
 import { NlLoader } from "./nl/nl-loader";
 import { NoLoader } from "./no/no-loader";
 import { RsLoader } from "./rs/rs-loader";
+import { UaLoader } from "./ua/ua-loader";
 import { UkLoader } from "./uk/uk-loader";
 import { Country } from "../../src/utils/countries";
 
@@ -33,4 +34,5 @@ export const loaders: Record<Country, DataLoader> = {
   [Country.canada]: new CaLoader(),
   [Country.georgia]: new GeLoader(),
   [Country.norway]: new NoLoader(),
+  [Country.ukraine]: new UaLoader(),
 };

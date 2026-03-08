@@ -102,11 +102,14 @@ const GlobalSearch = ({
   const [search, setSearch] = useState("");
   const allParties = countryConfig.parties;
   const allYears = countryConfig.years.toReversed();
-  const allLegislativeYears = countryConfig.legislativeYears;
+  const allLegislativeYears = countryConfig.legislativeYears ?? [];
   const { data: donorNames, isSuccess } = useDonorNames(countryConfig);
 
   const searchLower = search.toLowerCase();
-  const searchNorm = search.replace(/\W+/g, "").replace(/\./g, "").toUpperCase();
+  const searchNorm = search
+    .replace(/\W+/g, "")
+    .replace(/\./g, "")
+    .toUpperCase();
 
   const filteredParties = allParties.filter(
     (party) =>
@@ -122,8 +125,8 @@ const GlobalSearch = ({
   );
   const filteredDonors = isSuccess
     ? donorNames
-      .filter(([, s]) => s.includes(searchNorm))
-      .slice(0, MAX_DONOR_LEN)
+        .filter(([, s]) => s.includes(searchNorm))
+        .slice(0, MAX_DONOR_LEN)
     : [];
 
   const selectParty = (party: Party) => {
@@ -152,50 +155,50 @@ const GlobalSearch = ({
     title: string;
     items: (YearItem | YearsItem | PartyItem | DonorItem)[];
   }[] = [
-      {
-        id: "parties",
-        title: tSearch("parties"),
-        items: visibleParties.map((party) => ({
-          type: "party",
-          id: party.id,
-        })),
-      },
-      {
-        id: "year",
-        title: tSearch("years"),
-        items: visibleYears.map(
-          (year) =>
-            ({
-              type: "year",
-              id: year,
-            }) as YearItem,
-        ),
-      },
-      {
-        id: "years",
-        title: tSearch("legislative_years"),
-        items: visibleLegislativeYears.map(
-          (years) =>
-            ({
-              type: "years",
-              id: serializeYears(years),
-              years,
-            }) as YearsItem,
-        ),
-      },
-      {
-        id: "donors",
-        title: tSearch("donors"),
-        items: visibleDonors.map(
-          ([name, search]): DonorItem => ({
-            type: "donor",
-            id: name,
-            name,
-            search,
-          }),
-        ),
-      },
-    ];
+    {
+      id: "parties",
+      title: tSearch("parties"),
+      items: visibleParties.map((party) => ({
+        type: "party",
+        id: party.id,
+      })),
+    },
+    {
+      id: "year",
+      title: tSearch("years"),
+      items: visibleYears.map(
+        (year) =>
+          ({
+            type: "year",
+            id: year,
+          }) as YearItem,
+      ),
+    },
+    {
+      id: "years",
+      title: tSearch("legislative_years"),
+      items: visibleLegislativeYears.map(
+        (years) =>
+          ({
+            type: "years",
+            id: serializeYears(years),
+            years,
+          }) as YearsItem,
+      ),
+    },
+    {
+      id: "donors",
+      title: tSearch("donors"),
+      items: visibleDonors.map(
+        ([name, search]): DonorItem => ({
+          type: "donor",
+          id: name,
+          name,
+          search,
+        }),
+      ),
+    },
+  ];
 
   return (
     <div className="flex h-full flex-col">
