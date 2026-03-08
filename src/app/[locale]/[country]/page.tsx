@@ -282,7 +282,7 @@ export default async function YearsPage(
         />
       </section>
 
-      {countryConfig.legislativeYears.length ? (
+      {countryConfig.legislativeYears?.length ? (
         <section
           className="content-visibility-auto contain-intrinsic-size-[auto_1100px_auto_924px] @container container mx-auto p-4 pb-12 sm:pb-24"
           aria-labelledby="home-history-list"

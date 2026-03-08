@@ -176,7 +176,8 @@
         "croatia": "Siin kasutatud andmed pärinevad Horvaatia Vabariigi Riiklikult Valimiskomisjonilt (DIP) ning hõlmavad kõiki poliitilisi annetusi rahalise väärtusega üle 1 €, mis on dokumenteeritud alates 2019. aastast.\nAndmestik kasutab iga aruandeaasta kohta ainult viimati avaldatud annetusdokumenti (nagu on teatanud izbori), et vältida sama aasta aruande varasemate versioonide duplikaate.\nKõik annetused kuvatakse eurodes, samas kui aluseks olev andmestik kasutab kuni 2024. aastani kunasid. Algselt kunades tehtud annetused teisendatakse eurodeks, kasutades ligikaudseid vahetuskursse iga poolaasta kohta ajavahemikus 2019–2024: H1 (0.1340, 0.1335, 0.1332, 0.1329, 0.1326) ja H2 (0.1341, 0.1338, 0.1334, 0.1327, 0.1328).",
         "canada": "Siin kasutatud andmed pärinevad Elections Canada’lt ja põhinevad andmekogul „contributions as submitted“. See hõlmab kõiki poliitilisi annetusi, mille rahaline väärtus ületab 500 €, dokumenteeritud alates 2015. aastast. Kaasatud on kõik kirjed, mis kuuluvad aruandesse „Statement of Contributions Received“ valimisürituselt „Annual“ registreeritud erakondadele.",
         "georgia": "Siin esitatud teave pärineb Gruusia korruptsioonivastasest büroost (ანტიკორუფციული ბიურო﻿) ja hõlmab kõiki alates 2011. aastast registreeritud poliitilisi annetusi, mis ületavad 1 GEL. Andmekogum hõlmab ainult annetusi, mis on klassifitseeritud kui tüüp #10 (Rahaannetused) või tüüp #16 (Rahaannetused juriidilistelt isikutelt).",
-        "norway": "Siin kasutatud andmed pärinevad Statistics Norway (SSB) ja Partifinansiering.no ametlikest erakondade rahastamise publikatsioonidest. Kuva­tud kogusummad on koondatud mitme raporteeritud saajaüksuse (näiteks kesk-, piirkondlike, kohalike ja noorteüksuste) põhjal üheks kogusummaks erakonna kohta, kusjuures aluseks olev saajate vastendus on läbipaistvuse tagamiseks jätkuvalt kättesaadav.\n\nNorra andmestikku uuendatakse kord aastas, kajastades alusandmete avalikustamise rütmi."
+        "norway": "Siin kasutatud andmed pärinevad Statistics Norway (SSB) ja Partifinansiering.no ametlikest erakondade rahastamise publikatsioonidest. Kuva­tud kogusummad on koondatud mitme raporteeritud saajaüksuse (näiteks kesk-, piirkondlike, kohalike ja noorteüksuste) põhjal üheks kogusummaks erakonna kohta, kusjuures aluseks olev saajate vastendus on läbipaistvuse tagamiseks jätkuvalt kättesaadav.\n\nNorra andmestikku uuendatakse kord aastas, kajastades alusandmete avalikustamise rütmi.",
+        "ukraine": "Siin kasutatud andmed on pärit riiklikust korruptsiooni ennetamise agentuurist (NAZK) PolitData portaali kaudu. Need sisaldavad kõiki ametlikes aruannetes märgitud kirjeid, mis on tähistatud kui „rahalised annetused“.\n\nMärkus andmete ulatuse kohta: See summa kajastab ainult otseseid rahalisi ülekandeid. See ei hõlma riiklikku rahastust parlamendierakondadele ega mitterahalisi (looduslikke) panuseid, nagu kaubad ja teenused.\n\nVene täiemahulise sissetungi tõttu peatati poliitiliste parteide kohustuslik aruandlus 2022. aasta algusest kuni 2023. aasta lõpuni julgeoleku- ja logistilistel põhjustel. Pärast seaduse nr 3337-IX vastuvõtmist täidavad parteid nüüd oma aruandeid tagantjärele. Aastate 2022–2025 andmeid ajakohastatakse endiselt, kuna NAZK töötleb neid esitusi."
       },
       "source_link": "Andmeallikas"
     },
@@ -549,7 +550,8 @@
     "RS": "Serbia",
     "CA": "Kanada",
     "GE": "Gruusia",
-    "NO": "Norra"
+    "NO": "Norra",
+    "UA": "Ukraina"
   },
   "about": {
     "title": "Meie kohta",

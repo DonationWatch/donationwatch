@@ -29,7 +29,14 @@ test.describe("Homepage", () => {
           await expect(homePage.biggestDonations).toBeVisible();
         });
 
-        await test.step("has donations from current legislative session", async () => {
+        await test.step("has donations from current legislative session", async (step) => {
+          const countryConfig = await getCountryConfig(country);
+
+          step.skip(
+            !countryConfig.legislativeYears,
+            "not all countries have legislative sessions",
+          );
+
           await expect(homePage.currentLegislativePeriod.locator).toBeVisible();
 
           const cc = await getCountryConfig(country);

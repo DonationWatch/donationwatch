@@ -166,7 +166,8 @@
         "croatia": "The data used here comes from the State Electoral Commission of the Republic of Croatia (DIP) and includes all political donations with a monetary value exceeding €1, documented since 2019.\nThe dataset uses only the last donation document published for each reporting year (as reported by izbori) to avoid duplicates from earlier versions of the same year’s report.\nAll donations are displayed in Euro, while the underlying dataset uses Kuna until 2024. Donations originally made in Kuna are converted to Euro using approximate exchange rates for each half-year period from 2019 to 2024: H1 (0.1340, 0.1335, 0.1332, 0.1329, 0.1326) and H2 (0.1341, 0.1338, 0.1334, 0.1327, 0.1328).",
         "canada": "The data used here comes from Elections Canada and is based on the \"contributions as submitted\" dataset. It includes all political donations with a monetary value exceeding €500, documented since 2015. All entries that are part of the \"Statement of Contributions Received\" report from the \"Annual\" electoral event to \"Registered parties\" are included.",
         "georgia": "The information presented here is sourced from the Anti-Corruption Bureau (ანტიკორუფციული ბიურო﻿) of Georgia and includes all political donations recorded since 2011 that exceed 1 GEL. The dataset comprises only contributions classified as type #10 (Monetary donations) or type #16 (Monetary donations made by legal entities).",
-        "norway": "The data used here comes from the official party funding publications by Statistics Norway (SSB) and Partifinansiering.no. Totals shown are aggregated from multiple reported receiver entities (such as central, regional, local, and youth units) into a single total per party, with the underlying receiver mapping kept available for transparency.\n\nThe Norway dataset is refreshed on an annual update cycle, reflecting the cadence of the underlying disclosures."
+        "norway": "The data used here comes from the official party funding publications by Statistics Norway (SSB) and Partifinansiering.no. Totals shown are aggregated from multiple reported receiver entities (such as central, regional, local, and youth units) into a single total per party, with the underlying receiver mapping kept available for transparency.\n\nThe Norway dataset is refreshed on an annual update cycle, reflecting the cadence of the underlying disclosures.",
+        "ukraine": "The data used here is sourced from the National Agency on Corruption Prevention (NAZK) via the PolitData portal. It includes all records identified as \"monetary contributions\" in the official reports.\n\nNote on Data Scope: This total reflects direct financial transfers only. It does not include state funding provided to parliamentary parties or in-kind (non-monetary) contributions such as goods and services.\n\nDue to the full-scale Russian invasion, mandatory political party reporting was suspended from early 2022 until late 2023 for security and logistical reasons. Following the adoption of Law 3337-IX, parties are now backfilling their reports. Data for 2022–2025 is still being updated as the NAZK processes these submissions."
       },
       "source_link": "Data source"
     },
@@ -493,7 +494,8 @@
     "RS": "Serbia",
     "CA": "Canada",
     "GE": "Georgia",
-    "NO": "Norway"
+    "NO": "Norway",
+    "UA": "Ukraine"
   },
   "state": {
     "germany": {

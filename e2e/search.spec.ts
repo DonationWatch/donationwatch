@@ -29,7 +29,7 @@ test.describe("Search", () => {
       );
       await expect(dialog.yearResults).toHaveCount(countryConfig.years.length);
       await expect(dialog.legislativeYearsResults).toHaveCount(
-        countryConfig.legislativeYears.length,
+        countryConfig.legislativeYears?.length ?? 0,
       );
       await expect(dialog.donorResults).toHaveCount(15);
 

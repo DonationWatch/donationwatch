@@ -25,6 +25,7 @@ import {
 import { getBuild } from "../utils/loader/build";
 import { DonationField, DonorType } from "../utils/types";
 
+import type { NonEmptyArray } from "../utils/array";
 import type { CountryConfig } from "../utils/countries";
 import type { Donation, Party, ReceiverId } from "../utils/types";
 import type { DonationsDocumentWithoutDonorIds } from "@/lib/api/donations-document";
@@ -301,7 +302,9 @@ export const PartyComparison = ({
   const selectedPartyIds = new Set(partiesParam as ReceiverId[]);
 
   // Year filter state
-  const lastLegislativeYear = lastItem(countryConfig.legislativeYears);
+  const lastLegislativeYear = countryConfig.legislativeYears
+    ? lastItem(countryConfig.legislativeYears)
+    : ([countryConfig.years.at(0)!] as NonEmptyArray<string>);
   const [fromYear, setFromYear] = useQueryState(
     "from",
     parseAsString.withDefault(firstItem(lastLegislativeYear)),

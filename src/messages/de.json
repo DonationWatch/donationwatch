@@ -176,7 +176,8 @@
         "croatia": "Die hier verwendeten Daten stammen von der Staatlichen Wahlkommission der Republik Kroatien (DIP) und umfassen alle politischen Spenden mit einem Geldwert von mehr als 1 €, die seit 2019 dokumentiert sind.\nDer Datensatz verwendet pro Berichtsjahr ausschließlich das zuletzt veröffentlichte Spenden-Dokument (wie von izbori angegeben), um Duplikate aus früheren Versionen desselben Jahresberichts zu vermeiden.\nAlle Spenden werden in Euro angezeigt, während der zugrunde liegende Datensatz bis 2024 Kuna verwendet. Spenden, die ursprünglich in Kuna getätigt wurden, werden anhand ungefährer Wechselkurse für jedes Halbjahr von 2019 bis 2024 in Euro umgerechnet: H1 (0.1340, 0.1335, 0.1332, 0.1329, 0.1326) und H2 (0.1341, 0.1338, 0.1334, 0.1327, 0.1328).",
         "canada": "Die hier verwendeten Daten stammen von Elections Canada und basieren auf dem Datensatz „contributions as submitted“. Er umfasst alle politischen Spenden mit einem Geldwert von über 500 €, die seit 2015 dokumentiert wurden. Alle Einträge, die Teil des Berichts „Statement of Contributions Received“ aus der Wahlveranstaltung „Annual“ an „Registered parties“ sind, sind enthalten.",
         "georgia": "Die hier präsentierten Informationen stammen vom Antikorruptionsbüro (ანტიკორუფციული ბიურო﻿) Georgiens und umfassen alle seit 2011 registrierten politischen Spenden, die 1 GEL übersteigen. Der Datensatz umfasst nur Beiträge, die als Typ #10 (Geldspenden) oder Typ #16 (Geldspenden juristischer Personen) klassifiziert sind.",
-        "norway": "Die hier verwendeten Daten stammen aus den offiziellen Veröffentlichungen zur Parteienfinanzierung von Statistics Norway (SSB) und Partifinansiering.no. Die ausgewiesenen Summen werden aus mehreren gemeldeten Empfängereinheiten (z. B. zentralen, regionalen, lokalen und Jugendorganisationen) zu einem einzigen Gesamtwert pro Partei aggregiert, wobei die zugrunde liegende Zuordnung der Empfänger zur Transparenz weiterhin verfügbar bleibt.\n\nDer Norwegen-Datensatz wird in einem jährlichen Aktualisierungszyklus erneuert und spiegelt damit den Rhythmus der zugrunde liegenden Offenlegungen wider."
+        "norway": "Die hier verwendeten Daten stammen aus den offiziellen Veröffentlichungen zur Parteienfinanzierung von Statistics Norway (SSB) und Partifinansiering.no. Die ausgewiesenen Summen werden aus mehreren gemeldeten Empfängereinheiten (z. B. zentralen, regionalen, lokalen und Jugendorganisationen) zu einem einzigen Gesamtwert pro Partei aggregiert, wobei die zugrunde liegende Zuordnung der Empfänger zur Transparenz weiterhin verfügbar bleibt.\n\nDer Norwegen-Datensatz wird in einem jährlichen Aktualisierungszyklus erneuert und spiegelt damit den Rhythmus der zugrunde liegenden Offenlegungen wider.",
+        "ukraine": "Die hier verwendeten Daten stammen von der Nationalen Agentur für Korruptionsprävention (NAZK) über das PolitData-Portal. Sie umfassen alle Datensätze, die in den offiziellen Berichten als „finanzielle Zuwendungen“ gekennzeichnet sind.\n\nHinweis zum Datenumfang: Diese Gesamtsumme bezieht sich ausschließlich auf direkte Geldtransfers. Sie enthält keine staatlichen Zuschüsse an Parlamentsparteien oder Sachleistungen (nicht-monetäre Beiträge) wie Waren und Dienstleistungen.\n\nAufgrund der umfassenden russischen Invasion wurde die verpflichtende Berichterstattung politischer Parteien von Anfang 2022 bis Ende 2023 aus Sicherheits- und Logistikgründen ausgesetzt. Nach der Verabschiedung des Gesetzes Nr. 3337-IX holen die Parteien ihre Berichte nun nach. Die Daten für die Jahre 2022–2025 werden weiterhin aktualisiert, während die NAZK diese Meldungen bearbeitet."
       },
       "source_link": "Datenquelle"
     },
@@ -549,7 +550,8 @@
     "RS": "Serbien",
     "CA": "Kanada",
     "GE": "Georgien",
-    "NO": "Norwegen"
+    "NO": "Norwegen",
+    "UA": "Ukraine"
   },
   "about": {
     "title": "Über uns",

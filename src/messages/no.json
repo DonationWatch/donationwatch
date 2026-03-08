@@ -176,7 +176,8 @@
         "croatia": "Dataene som brukes her kommer fra Den statlige valgkommisjonen i Republikken Kroatia (DIP) og inkluderer alle politiske donasjoner med en pengeverdi som overstiger 1 €, dokumentert siden 2019.\nDatasettet bruker kun det sist publiserte donasjonsdokumentet for hvert rapporteringsår (slik det er oppgitt av izbori) for å unngå duplikater fra tidligere versjoner av rapporten for samme år.\nAlle donasjoner vises i euro, mens det underliggende datasettet bruker kuna fram til 2024. Donasjoner som opprinnelig er gitt i kuna, konverteres til euro ved hjelp av omtrentlige valutakurser for hvert halvår fra 2019 til 2024: H1 (0.1340, 0.1335, 0.1332, 0.1329, 0.1326) og H2 (0.1341, 0.1338, 0.1334, 0.1327, 0.1328).",
         "canada": "Dataene som brukes her kommer fra Elections Canada og er basert på datasettet \"contributions as submitted\". Det inkluderer alle politiske donasjoner med pengeverdi over €500, dokumentert siden 2015. Alle oppføringer som inngår i rapporten \"Statement of Contributions Received\" fra valgtypen \"Annual\" til \"Registered parties\" er inkludert.",
         "georgia": "Informasjonen som presenteres her er hentet fra Georgias antikorrupsjonsbyrå (ანტიკორუფციული ბიურო﻿) og inkluderer alle politiske donasjoner registrert siden 2011 som overstiger 1 GEL. Datasettet omfatter kun bidrag klassifisert som type #10 (monetære donasjoner) eller type #16 (monetære donasjoner fra juridiske personer).",
-        "norway": "Dataene som brukes her kommer fra de offisielle publikasjonene om partifinansiering fra Statistisk sentralbyrå (SSB) og Partifinansiering.no. Totalene som vises er aggregert fra flere rapporterte mottakerenheter (for eksempel sentrale, regionale, lokale og ungdomsenheter) til én samlet totalsum per parti, mens den underliggende mappingen av mottakere holdes tilgjengelig for åpenhet.\n\nNorgesdatasettet oppdateres årlig, i tråd med publiseringstakten for de underliggende opplysningene."
+        "norway": "Dataene som brukes her kommer fra de offisielle publikasjonene om partifinansiering fra Statistisk sentralbyrå (SSB) og Partifinansiering.no. Totalene som vises er aggregert fra flere rapporterte mottakerenheter (for eksempel sentrale, regionale, lokale og ungdomsenheter) til én samlet totalsum per parti, mens den underliggende mappingen av mottakere holdes tilgjengelig for åpenhet.\n\nNorgesdatasettet oppdateres årlig, i tråd med publiseringstakten for de underliggende opplysningene.",
+        "ukraine": "Dataene som brukes her, er hentet fra Nasjonalt byrå for korrupsjonsforebygging (NAZK) via PolitData-portalen. De inkluderer alle poster identifisert som «økonomiske bidrag» i de offisielle rapportene.\n\nMerknad om datagrunnlag: Dette tallet viser kun direkte pengetransaksjoner. Det inkluderer ikke statlig finansiering til parlamentariske partier eller ikke-monetære bidrag, som varer og tjenester.\n\nPå grunn av den fullskala russiske invasjonen ble den obligatoriske rapporteringen for politiske partier suspendert fra tidlig 2022 til slutten av 2023 av sikkerhets- og logistikkårsaker. Etter vedtakelsen av lov 3337-IX leverer partiene nå inn sine rapporter i ettertid. Data for 2022–2025 oppdateres fortsatt mens NAZK behandler disse innsendelsene."
       },
       "source_link": "Datakilde"
     },
@@ -503,7 +504,8 @@
     "RS": "Serbia",
     "CA": "Canada",
     "GE": "Georgia",
-    "NO": "Norge"
+    "NO": "Norge",
+    "UA": "Ukraina"
   },
   "state": {
     "germany": {

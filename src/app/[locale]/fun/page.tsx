@@ -129,6 +129,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
             lv: "ES ziedojumu dokumentu sajaukums",
             hr: "Zamjena dokumenata o donacijama EU-a",
             no: "EU-donasjonsdokumenter blandet sammen",
+            uk: "Плутанина з документами про пожертвування ЄС",
           }}
           text={{
             en: "The 2025 donations page for European political parties mistakenly links party donations to an older version of the foundations report.",
@@ -139,6 +140,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
             lv: "2025. gada Eiropas politisko partiju ziedojumu lapa kļūdaini norāda uz vecāku fonda ziņojuma versiju.",
             hr: "Stranica o donacijama za 2025. godinu za europske političke stranke pogrešno povezuje donacije stranaka sa starijom verzijom izvješća zaklade.",
             no: "Siden for donasjoner i 2025 for europeiske politiske partier lenker ved en feil til en eldre versjon av stiftelsesrapporten.",
+            uk: "Сторінка пожертвувань для європейських політичних партій за 2025 рік помилково містить посилання на старішу версію звіту про фонди.",
           }}
           date={"2025-11-03"}
         >
@@ -164,6 +166,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
             lv: "Čehijas testa ziedojumi",
             hr: "Češke probne donacije",
             no: "Tsjekkiske testdonasjoner",
+            uk: "Чеські тестові пожертвування",
           }}
           text={{
             en: 'The Czech ÚDHPSH seems to prepare their annual donation dataset with test data. ("Česká zkušební strana" can be translated to "Czech Testing Party").',
@@ -174,6 +177,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
             lv: "Izskatās, ka Čehijas ÚDHPSH sagatavo savu ikgadējo ziedojumu datu kopu ar testa datiem. („Česká zkušební strana“ var tulkot kā „Čehijas testēšanas partija“.)",
             hr: "Čini se da češki ÚDHPSH priprema svoj godišnji skup podataka o donacijama s probnim podacima. („Česká zkušební strana“ može se prevesti kao „Češka probna stranka“.)",
             no: 'Tsjekkias ÚDHPSH ser ut til å forberede sitt årlige donasjonsdatasett med testdata. ("Česká zkušební strana" kan oversettes til "Tsjekkiske testparti").',
+            uk: "Чеський ÚDHPSH, схоже, готує свій щорічний набір даних про пожертвування з тестовими даними. («Česká zkušební strana» можна перекласти як «Чеська тестова партія»).",
           }}
           date={"2025-10-24"}
         >
@@ -212,6 +216,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
             lv: "Nepareizrakstības izaicinājums AEC datu kopā",
             hr: "Izazov s tipfelerima u AEC skupu podataka",
             no: "Typo-utfordring i AEC-datasettet",
+            uk: "Виклик друкарських помилок у наборі даних AEC",
           }}
           text={{
             en: 'While working with the Australian Electoral Commission’s “Detailed Receipts” dataset, we noticed creative spelling in the "received from" field. For example, WESTPAC BAKING CORPORATION appears as if someone traded banking for cakes! We’ve also come across at least eight inventive spelling attempts for the word "association.".',
@@ -222,6 +227,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
             lv: "Strādājot ar Austrālijas Vēlēšanu komisijas „Detailed Receipts” datu kopu, pamanījām radošu pareizrakstību laukā „received from”. Piemēram, WESTPAC BAKING CORPORATION izskatās, it kā kāds būtu banku nomainījis pret kūkām! Esam saskārušies arī vismaz ar astoņiem izgudrojuma mēģinājumiem vārda „association” pareizrakstībā.",
             hr: "Dok smo radili s „Detailed Receipts“ skupom podataka Australske izborne komisije, primijetili smo kreativno pisanje u polju „received from“. Na primjer, WESTPAC BAKING CORPORATION izgleda kao da je netko zamijenio bankarstvo za kolače! Također smo naišli na najmanje osam domišljatih pokušaja pravopisa riječi „association“.",
             no: "Mens vi jobbet med Australian Electoral Commissions 'Detailed Receipts'-datasett, la vi merke til kreativ staving i feltet 'received from'. For eksempel ser WESTPAC BAKING CORPORATION ut som om noen har byttet bankvirksomhet mot kaker! Vi har også kommet over minst åtte oppfinnsomme staveforsøk for ordet 'association'.",
+            uk: "Працюючи з набором даних «Детальні квитанції» Австралійської виборчої комісії, ми помітили творче написання в полі «отримано від». Наприклад, WESTPAC BAKING CORPORATION виглядає так, ніби хтось проміняв банківську справу на випічку! Ми також натрапили щонайменше на вісім винахідливих спроб написання слова «association».",
           }}
           date={"2025-08-08"}
         >
@@ -255,6 +261,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
             lv: "Apvienotās Karalistes vēlēšanu komisijas meklēšanas vietne nav pieejama pēc SSL sertifikāta termiņa beigām",
             hr: "Pretraživač stranica Britanske izborne komisije nedostupan nakon isteka SSL certifikata",
             no: "UK Electoral Commission søkeside nede etter utløp av SSL-sertifikat",
+            uk: "Пошуковий сайт Виборчої комісії Великої Британії не працює після закінчення терміну дії SSL-сертифіката",
           }}
           text={{
             en: "The search portal for the UK Electoral Commission became unavailable due to an expired SSL certificate, blocking secure access for users.",
@@ -265,6 +272,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
             lv: "Apvienotās Karalistes vēlēšanu komisijas meklēšanas portāls kļuva nepieejams, jo SSL sertifikāts bija beidzies, bloķējot drošu piekļuvi lietotājiem.",
             hr: "Pretraživački portal Britanske izborne komisije postao je nedostupan zbog isteka SSL certifikata, čime je blokiran siguran pristup korisnicima.",
             no: "Søkeportalen for UK Electoral Commission ble utilgjengelig på grunn av et utløpt SSL-sertifikat, noe som blokkerte sikker tilgang for brukere.",
+            uk: "Пошуковий портал Виборчої комісії Великої Британії став недоступним через прострочений SSL-сертифікат, що заблокувало безпечний доступ для користувачів.",
           }}
           status={{
             type: "fixed",
@@ -299,6 +307,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
             lv: "Trūkstošie dokumenti Horvātijas datubāzē",
             hr: "Nedostajući dokumenti u hrvatskoj bazi podataka",
             no: "Manglende dokumenter i den kroatiske databasen",
+            uk: "Відсутні документи в хорватській базі даних",
           }}
           text={{
             en: 'The State Electoral Commission of the Republic of Croatia\'s database is missing certain party documents from 2019 and 2020, including lists of donations. These documents were previously linked but now return a "404 Not Found" error.',
@@ -309,6 +318,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
             lv: 'Horvātijas Republikas Valsts vēlēšanu komisijas datubāzē trūkst noteikti partiju dokumenti no 2019. un 2020. gada, tostarp ziedojumu saraksti. Šie dokumenti bija iepriekš saistīti, bet tagad atgriež "404 Nav atrasts" kļūdu.',
             hr: 'Baza podataka Državne izborne komisije Republike Hrvatske nedostaje određeni stranački dokumenti iz 2019. i 2020. godine, uključujući i popise donacija. Ti dokumenti su ranije bili povezani, ali sada vraćaju grešku "404 Nije pronađeno".',
             no: "Databasen til Statens valgkommisjon i Republikken Kroatia mangler visse partidokumenter fra 2019 og 2020, inkludert lister over donasjoner. Disse dokumentene var tidligere",
+            uk: "У базі даних Державної виборчої комісії Республіки Хорватія відсутні певні партійні документи за 2019 і 2020 роки, включаючи списки пожертвувань. Раніше на ці документи були посилання, але зараз вони повертають помилку «404 Не знайдено».",
           }}
           status={{
             type: "fixed",
@@ -337,6 +347,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
             lv: "ES fonda ziedojumu valsts kods izmanto grieķu unikoda rakstzīmes",
             hr: "Šifra države donacije zaklade EU koristi grčke unicode znakove",
             no: "EU-stiftelses donasjonslandskode bruker greske unicode-tegn",
+            uk: "Код країни пожертвування фонду ЄС використовує грецькі символи Юнікоду",
           }}
           text={{
             en:
@@ -349,6 +360,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
             lv: "2021. gada ES dibināšanas dokumentā bija viens ziedojums, kurā Beļģijas ISO valsts koda apzīmēšanai nejauši tika izmantotas grieķu vienkoda zīmes (GREEK CAPITAL LETTER BETA and GREEK CAPITAL LETTER EPSILON). Visur citur tā vietā pareizi izmantotas ASCII rakstzīmes.",
             hr: "Postojala je jedna donacija u temeljnom dokumentu EU-a za 2021. koja je nasumično koristila grčke unicode znakove za predstavljanje ISO koda zemlje za Belgiju (GREEK CAPITAL LETTER BETA i GREEK CAPITAL LETTER EPSILON). Svugdje drugdje ispravno koriste ASCII znakove.",
             no: "Det var en donasjon i 2021 EU-stiftelsesdokumentet som tilfeldig brukte greske unicode-tegn for å representere ISO-landskoden for Belgia (GREEK CAPITAL LETTER BETA and GREEK CAPITAL LETTER EPSILON). Overalt ellers bruker de i stedet korrekt ASCII-tegn.",
+            uk: "У документі про заснування ЄС у 2021 році було одне пожертвування, у якому випадковим чином використовувалися грецькі символи Юнікоду для позначення ISO-коду країни Бельгії (GREEK CAPITAL LETTER BETA та GREEK CAPITAL LETTER EPSILON). В усіх інших випадках вони правильно використовують символи ASCII.",
           }}
           date={"2024-12-10"}
           status={{
@@ -373,6 +385,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
             lv: "Austrālijā bija daži ziedojumi, kas datēti ar 2106. gadu",
             hr: "Australija je imala neke donacije iz 2106",
             no: "Australia hadde noen donasjoner datert til 2106",
+            uk: "Деякі пожертвування в Австралії датовані 2106 роком",
           }}
           text={{
             en: "There seemed to be a typo for in the dataset of the Australian Electoral Commission for some donations in the year 2016 that were dated to 2106.",
@@ -383,6 +396,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
             lv: "Šķiet, ka Austrālijas Vēlēšanu komisijas datubāzē ir pārrakstīšanās kļūda attiecībā uz dažiem ziedojumiem 2016. gadā, kas datēti ar 2106. gadu.",
             hr: "Čini se da postoji tipfeler u skupu podataka Australskog izbornog povjerenstva za neke donacije u 2016. godini koje su bile datirane u 2106. godinu.",
             no: "Det ser ut til å være en skrivefeil i datasettet til Australian Electoral Commission for noen donasjoner i året 2016 som var datert til 2106.",
+            uk: "Здавалося, у наборі даних Австралійської виборчої комісії сталася друкарська помилка для деяких пожертвувань у 2016 році, які були помилково датовані 2106 роком.",
           }}
           status={{
             type: "wontfix",
@@ -408,6 +422,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
             lv: "Austrija mainīja valūtas formātu jaunām rindām",
             hr: "Austrija je promijenila format valute za nove retke",
             no: "Østerrike endret valutaformatet for nye rader",
+            uk: "Австрія змінила формат валюти для нових рядків",
           }}
           text={{
             en: 'For some reason the 2024 donation document from Austria changed it\'s currency format for new rows from "EUR" to "Euro".',
@@ -418,6 +433,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
             lv: "Kādu iemeslu dēļ Austrijas 2024. gada ziedojuma dokumentā jaunajām rindām mainīts valūtas formāts no “EUR” uz “Euro”.",
             hr: 'Iz nekog je razloga dokument o donaciji iz Austrije iz 2024. promijenio format valute za nove retke iz "EUR" u "Euro".',
             no: 'Av en eller annen grunn endret Østerrikes donasjonsdokument for 2024 valutaformatet for nye rader fra "EUR" til "Euro".',
+            uk: "З якоїсь причини австрійський документ про пожертвування за 2024 рік змінив формат валюти для нових рядків з «EUR» на «Euro».",
           }}
           status={{ type: "fixed", owner: "Rechnungshof" }}
           date={"2024-11-08"}
@@ -440,6 +456,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
             lv: "Nepareiza saite uz Rumānijas ziedojumu lapu",
             hr: "Netočna poveznica na stranici za donacije Rumunjske",
             no: "Feil lenke på donasjonssiden til Romania",
+            uk: "Неправильне посилання на сторінці пожертвувань Румунії",
           }}
           text={{
             en: 'Romania links to the donation data of "PDR PARTIDUL DISPORA ROMANA" which points to a 404 page.',
@@ -450,6 +467,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
             lv: "Rumānijas saites uz “PDR PARTIDUL DISPORA ROMANA” ziedojumu datiem norāda uz 404 lapu.",
             hr: 'Rumunjska se povezuje s podacima o donacijama "PDR PARTIDUL DISPORA ROMANA" koji upućuju na stranicu 404.',
             no: 'Romania lenker til donasjonsdataene til "PDR PARTIDUL DISPORA ROMANA" som peker til en 404-side.',
+            uk: "Румунія посилається на дані про пожертвування «PDR PARTIDUL DISPORA ROMANA», які вказують на сторінку 404.",
           }}
           status={{
             type: "reported",
@@ -469,6 +487,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
             lv: "Mainīts datumu formāts jauniem ziedojumiem Vācijā",
             hr: "Promijenjen format datuma za nove donacije u Njemačkoj",
             no: "Endret datoformat for nye donasjoner i Tyskland",
+            uk: "Змінений формат дати для нових пожертвувань у Німеччині",
           }}
           text={{
             en: "The Bundestag has changed the date format for new donations. The month was written out for the newly added donations. This change was later corrected.",
@@ -479,6 +498,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
             lv: "Bundestāgs ir mainījis datumu formātu jauniem ziedojumiem. Jaunizveidotajiem ziedojumiem tika izrakstīts mēnesis. Vēlāk šī izmaiņa tika labota.",
             hr: "Bundestag je promijenio format datuma za nove donacije. Mjesec je ispisan za novododane donacije. Ta je promjena kasnije ispravljena.",
             no: "Bundestag har endret datoformatet for nye donasjoner. Måneden ble skrevet ut for de nylig tilføyde donasjonene. Denne endringen ble senere korrigert.",
+            uk: "Бундестаг змінив формат дати для нових пожертвувань. Для нещодавно доданих пожертвувань розписано місяць. Пізніше ця зміна була виправлена.",
           }}
           date={"2024-04-04"}
         >
@@ -498,6 +518,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
             lv: "Vācijā vienā no Frankfurtes pasta indeksiem bija pārrakstīšanās kļūda.",
             hr: "Njemačka je imala tipfeler u jednom od svojih poštanskih brojeva za Frankfurt",
             no: "Tyskland hadde en skrivefeil i en av postnumrene sine for Frankfurt",
+            uk: "У Німеччині була друкарська помилка в одному з поштових індексів Франкфурта",
           }}
           text={{
             en: `One donation in 2021 had "0329" as its zip for Frankfurt, which is incorrect as it should be "60329".`,
@@ -508,6 +529,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
             lv: "Vienā 2021. gada ziedojumā kā Frankfurtes pasta indekss bija norādīts “0329”, kas ir nepareizi, jo tam vajadzētu būt “60329”.",
             hr: 'Jedna donacija 2021. imala je "0329" kao poštanski broj za Frankfurt, što je netočno jer bi trebalo biti "60329".',
             no: 'En donasjon i 2021 hadde "0329" som postnummer for Frankfurt, noe som er feil da det skulle vært "60329".',
+            uk: "Одне пожертвування в 2021 році мало «0329» у якості поштового індексу Франкфурта, що є неправильним, оскільки має бути «60329».",
           }}
           status={{
             type: "fixed",
@@ -534,6 +556,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
             lv: "Austrijas partijas ziedojumu dokumentā 2022. gadam izlases veidā tiek izmantota macintosh failu kodēšana",
             hr: "Dokument o donaciji austrijske stranke za 2022. nasumično koristi kodiranje datoteka za Macintosh",
             no: "Det østerrikske partiets donasjonsdokument for 2022 bruker tilfeldig macintosh-fil-koding",
+            uk: "Австрійський документ про пожертвування партій за 2022 рік випадково використовує кодування файлів Macintosh",
           }}
           text={{
             en: `All csv files from Austria use utf8 encoding except the one from 2022 which uses Apple Macintosh encoding.`,
@@ -544,6 +567,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
             lv: "Visos Austrijas csv failos tiek izmantota utf8 kodēšana, izņemot 2022. gada failu, kurā izmantota Apple Macintosh kodēšana.",
             hr: "Sve csv datoteke iz Austrije koriste utf8 kodiranje osim one iz 2022. koja koristi Apple Macintosh kodiranje.",
             no: "Alle csv-filer fra Østerrike bruker utf8-koding bortsett fra den fra 2022 som bruker Apple Macintosh-koding.",
+            uk: "Усі csv-файли з Австрії використовують кодування utf8, за винятком файлу 2022 року, який використовує кодування Apple Macintosh.",
           }}
           date={"2024-02-06"}
         >

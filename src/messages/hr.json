@@ -176,7 +176,8 @@
         "croatia": "Podaci koji se ovdje koriste potječu od Državnog izbornog povjerenstva Republike Hrvatske (DIP) i obuhvaćaju sve političke donacije novčane vrijednosti veće od 1 €, dokumentirane od 2019. godine.\nSkup podataka koristi samo posljednji objavljeni dokument o donacijama za svaku izvještajnu godinu (kako navodi izbori) kako bi se izbjegli duplikati iz ranijih verzija izvješća za istu godinu.\nSve donacije prikazane su u eurima, dok temeljni skup podataka koristi kune do 2024. godine. Donacije izvorno u kunama pretvaraju se u eure koristeći približne tečajeve za svako polugodište od 2019. do 2024.: H1 (0.1340, 0.1335, 0.1332, 0.1329, 0.1326) i H2 (0.1341, 0.1338, 0.1334, 0.1327, 0.1328).",
         "canada": "Podaci korišteni ovdje dolaze od Elections Canada i temelje se na skupu podataka „contributions as submitted“. Uključuju sve političke donacije novčane vrijednosti veće od 500 €, dokumentirane od 2015. godine. Uključeni su svi unosi koji su dio izvješća „Statement of Contributions Received“ iz izbornog događaja „Annual“ za „Registered parties“.",
         "georgia": "Informacije prikazane ovdje preuzete su iz Ureda za borbu protiv korupcije (ანტიკორუფციული ბიურო﻿) Gruzije i uključuju sve političke donacije zabilježene od 2011. godine koje prelaze 1 GEL. Skup podataka uključuje samo doprinose klasificirane kao tip #10 (Novčane donacije) ili tip #16 (Novčane donacije pravnih osoba).",
-        "norway": "Ovdje korišteni podaci potječu iz službenih publikacija o financiranju stranaka koje objavljuju Statistics Norway (SSB) i Partifinansiering.no. Prikazani ukupni iznosi agregirani su iz više prijavljenih primateljskih entiteta (kao što su središnje, regionalne, lokalne i omladinske jedinice) u jedan ukupni iznos po stranci, pri čemu je temeljno mapiranje primatelja i dalje dostupno radi transparentnosti.\n\nNorveški skup podataka osvježava se u godišnjem ciklusu ažuriranja, odražavajući dinamiku temeljnih objava."
+        "norway": "Ovdje korišteni podaci potječu iz službenih publikacija o financiranju stranaka koje objavljuju Statistics Norway (SSB) i Partifinansiering.no. Prikazani ukupni iznosi agregirani su iz više prijavljenih primateljskih entiteta (kao što su središnje, regionalne, lokalne i omladinske jedinice) u jedan ukupni iznos po stranci, pri čemu je temeljno mapiranje primatelja i dalje dostupno radi transparentnosti.\n\nNorveški skup podataka osvježava se u godišnjem ciklusu ažuriranja, odražavajući dinamiku temeljnih objava.",
+        "ukraine": "Podaci korišteni ovdje potječu od Nacionalne agencije za prevenciju korupcije (NAZK) putem portala PolitData. Obuhvaćaju sve zapise koji su u službenim izvješćima označeni kao „novčani doprinosi“.\n\nNapomena o opsegu podataka: Ovaj ukupni iznos odnosi se samo na izravne financijske transfere. Ne uključuje državna sredstva osigurana parlamentarnim strankama niti nenovčane (prirodne) doprinose poput robe i usluga.\n\nZbog sveobuhvatne ruske invazije obvezno izvještavanje političkih stranaka bilo je obustavljeno od početka 2022. do kraja 2023. iz sigurnosnih i logističkih razloga. Nakon usvajanja Zakona 3337-IX, stranke sada retroaktivno podnose svoja izvješća. Podaci za razdoblje 2022.–2025. i dalje se ažuriraju dok NAZK obrađuje te prijave."
       },
       "source_link": "Izvor podataka"
     },
@@ -503,7 +504,8 @@
     "RS": "Srbija",
     "CA": "Kanada",
     "GE": "Gruzija",
-    "NO": "Norveška"
+    "NO": "Norveška",
+    "UA": "Ukrajina"
   },
   "state": {
     "germany": {

@@ -12,6 +12,7 @@ import nlFlag from "../../public/flags/netherlands.svg";
 import noFlag from "../../public/flags/norway.svg";
 import rsFlag from "../../public/flags/serbia.svg";
 import chFlag from "../../public/flags/switzerland.svg";
+import uaFlag from "../../public/flags/ua.svg";
 import ukFlag from "../../public/flags/unitedkingdom.svg";
 
 import { Country } from "@/utils/countries";
@@ -32,4 +33,5 @@ export const countryFlags: Record<Country, typeof auFlag> = {
   [Country.canada]: caFlag,
   [Country.georgia]: geFlag,
   [Country.norway]: noFlag,
+  [Country.ukraine]: uaFlag,
 };

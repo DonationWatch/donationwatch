@@ -231,7 +231,7 @@ describe.each(CONST_LOCALES.map((locale) => ({ locale })))(
           const countryYears = countryConfig.years;
 
           // year ranges
-          for (const years of countryConfig.legislativeYears) {
+          for (const years of countryConfig.legislativeYears ?? []) {
             const png = await renderComponent(
               await CountryYearsPageImage(
                 locale,

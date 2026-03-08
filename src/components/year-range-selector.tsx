@@ -67,7 +67,7 @@ export const YearRangeSelector = ({
               All years
             </Button>
           )}
-          {countryConfig.legislativeYears.map((years) => {
+          {countryConfig.legislativeYears?.map((years) => {
             const start = years[0];
             const end = years[years.length - 1];
             const label = `${start}-${end}`;
