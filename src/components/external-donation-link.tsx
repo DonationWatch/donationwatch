@@ -6,6 +6,8 @@ import { Country } from "@/utils/countries";
 const externalUrls: Partial<Record<Country, (id: string) => string>> = {
   [Country.unitedkingdom]: (id: string) =>
     `https://search.electoralcommission.org.uk/English/Donations/${id}`,
+  [Country.latvia]: (id: string) =>
+    `https://info.knab.gov.lv/lv/db/ziedojumi?id=${id}`,
 };
 
 export const ExternalDonationLink = ({

@@ -1,3 +1,4 @@
+import assert from "assert";
 import fs from "fs/promises";
 import path from "path";
 
@@ -163,7 +164,7 @@ export class LvLoader extends DataLoader {
         short: "Apvienotais saraksts",
         code: "AS",
       },
-    "No sirds Latvijai (likvidēta 2019-11-28)": {
+    "No sirds Latvijai (likvidēta 28.11.2019)": {
       color: "#8f181b",
       name: "No sirds Latvijai",
       code: "NOSIRDS",
@@ -428,6 +429,7 @@ export class LvLoader extends DataLoader {
     $("#donations tbody tr").each((idx, tr) => {
       const $tr = $(tr);
 
+      const id = $($tr.find(".party a")).attr("href")?.split("id=")[1];
       const receiver = $($tr.find(".party")).text().trim();
       const amount = $($tr.find(".amount")).text().trim();
       const donor = $($tr.find(".person"))
@@ -437,8 +439,11 @@ export class LvLoader extends DataLoader {
         .trim();
       const date = $($tr.find(".date")).text().trim();
 
-      const donation = {
+      assert(id, "Donation id not found");
+
+      const donation: ExtractedYearData = {
         idx: `${year}-${idx}`,
+        [DonationField.Id]: id,
         [DonationField.Date]: this.normalizeIsoDate(this.parseDate(date)),
         [DonationField.DonorName]: donor,
         [DonationField.Amount]: this.parseAmount(amount),

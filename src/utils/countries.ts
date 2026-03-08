@@ -336,6 +336,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
     hasTimeline: true,
     hasOrigin: false,
     hasDate: true,
+    hasExternalDonationIds: true,
     minPublicDonationAmount: 1.0,
     currency: "EUR",
     source: {
