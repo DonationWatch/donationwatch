@@ -85,7 +85,8 @@
     "country": "Riik",
     "state": "Osariik",
     "summary": "Kokkuvõte",
-    "download_format": "Laadi alla {format}"
+    "download_format": "Laadi alla {format}",
+    "view_source": "Kuva allikas"
   },
   "sort": {
     "asc": "Sorteerimine ülespoole",

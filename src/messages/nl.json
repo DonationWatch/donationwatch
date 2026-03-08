@@ -85,7 +85,8 @@
     "country": "Land",
     "state": "Staat",
     "summary": "Samenvatting",
-    "download_format": "{format} downloaden"
+    "download_format": "{format} downloaden",
+    "view_source": "Bron bekijken"
   },
   "sort": {
     "asc": "Sorteer oplopend",

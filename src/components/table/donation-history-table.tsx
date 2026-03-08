@@ -8,7 +8,11 @@ import {
   type SortingState,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowDownNarrowWide, ArrowUpNarrowWide } from "lucide-react";
+import {
+  ArrowDownNarrowWide,
+  ArrowUpNarrowWide,
+  ExternalLink,
+} from "lucide-react";
 import { useLocale } from "next-intl";
 import { useMemo, useRef, useState } from "react";
 
@@ -32,6 +36,7 @@ import type { HistoryEntry } from "../../utils/data/get-history";
 import type { Donation } from "../../utils/types";
 
 import { DonorName } from "@/components/donor-name";
+import { ExternalDonationLink } from "@/components/external-donation-link";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 const columnHelper = createColumnHelper<HistoryEntry>();
@@ -51,6 +56,7 @@ export const DonationHistoryTable = ({
 }) => {
   const t = useTranslations();
   const tSort = useTranslations("sort");
+  const tCommon = useTranslations("common");
   const locale = useLocale();
   const partiesIdSet = new Set(partiesIds);
   const [sorting, setSorting] = useState<SortingState>([
@@ -97,7 +103,7 @@ export const DonationHistoryTable = ({
                     />
                   </PartyLink>
                 </div>
-                <div className="justify-between space-y-1 sm:flex sm:space-y-0">
+                <div className="space-y-1">
                   <div className="space-x-1 font-semibold">
                     {readonlyDonor ? (
                       <DonorName donor={historyEntry.donor} />
@@ -105,12 +111,25 @@ export const DonationHistoryTable = ({
                       <DonorLink country={country} donor={historyEntry.donor} />
                     )}
                   </div>
-                  <div className="shrink-0 text-sm tabular-nums sm:text-base">
-                    {formatCountryCurrency(
-                      locale,
-                      historyEntry.amount,
-                      country,
-                    )}
+                  <div className="flex items-center justify-between">
+                    <div className="shrink-0 text-sm tabular-nums">
+                      {formatCountryCurrency(
+                        locale,
+                        historyEntry.amount,
+                        country,
+                      )}
+                    </div>
+                    <div className="shrink-0">
+                      <ExternalDonationLink
+                        countryConfig={country}
+                        id={cell.row.original.id}
+                        className={"text-s1 flex items-center gap-1 pr-1"}
+                        title={tCommon("view_source")}
+                      >
+                        <span>{tCommon("view_source")}</span>
+                        <ExternalLink className={"inline"} size={16} />
+                      </ExternalDonationLink>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -174,6 +193,21 @@ export const DonationHistoryTable = ({
         },
         cell: (cell) => formatCountryCurrency(locale, cell.getValue(), country),
       }),
+      country.hasExternalDonationIds
+        ? columnHelper.accessor("id", {
+            header: "",
+            size: 50,
+            cell: (cell) => (
+              <ExternalDonationLink
+                countryConfig={country}
+                id={cell.row.original.id}
+                title={tCommon("view_source")}
+              >
+                <ExternalLink className={"m-1"} size={16} />
+              </ExternalDonationLink>
+            ),
+          })
+        : null,
     ].filter(isNotNullandNotUndefined);
   }, [locale, isMobile]);
 

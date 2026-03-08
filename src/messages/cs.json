@@ -85,7 +85,8 @@
     "country": "Země",
     "state": "Stát",
     "summary": "Souhrn",
-    "download_format": "Stáhnout {format}"
+    "download_format": "Stáhnout {format}",
+    "view_source": "Zobrazit zdroj"
   },
   "sort": {
     "asc": "Řadit vzestupně",

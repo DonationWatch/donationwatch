@@ -105,6 +105,8 @@ export interface CountryConfig {
   hasTimeline: boolean;
   // true if the donation dataset provides donor type information
   hasDonorType?: boolean;
+  // true if the donation dataset provides unique ids that can be used to link to the source data
+  hasExternalDonationIds?: boolean;
 
   knownPartyRequirements?: {
     count: number;
@@ -427,6 +429,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
     hasTimeline: true,
     hasOrigin: false,
     hasDonorType: true,
+    hasExternalDonationIds: true,
     minPublicDonationAmount: 1000,
     currency: "GBP",
     wikiCountry: "en",

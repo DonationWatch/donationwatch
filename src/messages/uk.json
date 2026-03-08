@@ -85,7 +85,8 @@
     "country": "Країна",
     "state": "Регіон/Штат",
     "summary": "Резюме",
-    "download_format": "Завантажити у форматі {format}"
+    "download_format": "Завантажити у форматі {format}",
+    "view_source": "Переглянути джерело"
   },
   "sort": {
     "asc": "Сортувати за зростанням",

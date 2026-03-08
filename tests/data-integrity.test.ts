@@ -49,10 +49,17 @@ describe.each([...COUNTRIES].map((country) => ({ country })))(
       });
     });
 
-    test(`has no similar donors which might be the same`, async () => {
+    test(`has unique donors and ids`, async () => {
       const foundDonations: Record<string, string> = {};
+      const foundDonationIds = new Set<string>();
 
       donations.forEach((donation) => {
+        expect(
+          foundDonationIds.has(donation[DonationField.Id]),
+          `Duplicate donation id ${donation[DonationField.Id]}`,
+        ).toBeFalsy();
+        foundDonationIds.add(donation[DonationField.Id]);
+
         const donorKey = donation[DonationField.DonorName]
           .replace(/[^\p{L}\p{N}]/gu, "")
           .replace(/\./g, "")

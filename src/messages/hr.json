@@ -85,7 +85,8 @@
     "country": "Država",
     "state": "Savezna država",
     "summary": "Sažetak",
-    "download_format": "Preuzmi {format}"
+    "download_format": "Preuzmi {format}",
+    "view_source": "Prikaži izvor"
   },
   "sort": {
     "asc": "Sortiraj uzlazno",

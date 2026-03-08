@@ -85,7 +85,8 @@
     "country": "Country",
     "state": "State",
     "summary": "Summary",
-    "download_format": "Download {format}"
+    "download_format": "Download {format}",
+    "view_source": "View source"
   },
   "sort": {
     "asc": "Sort ascending",

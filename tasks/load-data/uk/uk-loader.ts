@@ -459,7 +459,7 @@ export class UkLoader extends DataLoader {
     };
 
     return {
-      // id: ecRef
+      [DonationField.Id]: ecRef,
       [DonationField.Date]: this.normalizeIsoDate(isoDate),
       [DonationField.Receiver]: regulatedEntityName as ReceiverId,
       [DonationField.Amount]: amount,

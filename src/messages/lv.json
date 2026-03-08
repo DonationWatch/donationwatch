@@ -85,7 +85,8 @@
     "country": "Valsts",
     "state": "Štats",
     "summary": "Kopsavilkums",
-    "download_format": "Lejupielādēt {format}"
+    "download_format": "Lejupielādēt {format}",
+    "view_source": "Skatīt avotu"
   },
   "sort": {
     "asc": "Kārtot augošā secībā",

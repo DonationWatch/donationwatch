@@ -85,7 +85,8 @@
     "country": "Land",
     "state": "Bundesland",
     "summary": "Zusammenfassung",
-    "download_format": "{format} herunterladen"
+    "download_format": "{format} herunterladen",
+    "view_source": "Quelle anzeigen"
   },
   "sort": {
     "asc": "Sortiere aufsteigend",

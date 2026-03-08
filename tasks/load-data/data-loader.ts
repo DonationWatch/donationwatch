@@ -46,6 +46,7 @@ export type ExtractedYearData = Omit<
 > & {
   idx: string;
   [DonationField.Address]: ExtractedDonationAddress;
+  [DonationField.Id]?: string;
 };
 
 /**
@@ -487,7 +488,9 @@ export abstract class DataLoader {
       // iterate donations from the end
       for (let i = donations.length - 1; i >= 0; i--) {
         const donation = donations[i];
-        donation[DonationField.Id] = `${donationYear(donation)}-${i}`;
+        if (donation[DonationField.Id] === "-1") {
+          donation[DonationField.Id] = `${donationYear(donation)}-${i}`;
+        }
       }
     });
 

@@ -85,7 +85,8 @@
     "country": "Land",
     "state": "Stat",
     "summary": "Sammendrag",
-    "download_format": "Last ned {format}"
+    "download_format": "Last ned {format}",
+    "view_source": "Vis kilde"
   },
   "sort": {
     "asc": "Sorter stigende",
