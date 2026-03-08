@@ -1,6 +1,5 @@
-import { RelationKind } from "../../../src/utils/types";
-
 import type { DonorMetaDefinition } from "../../../src/utils/types";
+import { RelationKind } from "../../../src/utils/types";
 
 export const donorMeta: DonorMetaDefinition = {
   donors: {
@@ -235,6 +234,12 @@ export const donorMeta: DonorMetaDefinition = {
     "Greybull Capital LLP": {
       wiki: 50215801,
     },
+    "Legatum Ltd": {
+      wiki: 11829425,
+    },
+    "Benyamin Naeem Habib": {
+      wiki: 60876519,
+    },
   },
   relations: [
     // Flamingo Land
@@ -353,6 +358,12 @@ export const donorMeta: DonorMetaDefinition = {
       ["WESTCOMBE HOMES Ltd", RelationKind.organization],
       ["Kamal Pankhania", RelationKind.owner],
       ["Vraj Pankhania", RelationKind.owner],
+    ],
+
+    // Legatum
+    [
+      ["Legatum Ltd", RelationKind.company],
+      ["Benyamin Naeem Habib", RelationKind.owner],
     ],
   ],
 };
