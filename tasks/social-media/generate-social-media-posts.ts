@@ -51,6 +51,7 @@ const countryTranslations: Record<Country, ConstLocale> = {
   [Country.netherlands]: "nl",
   [Country.georgia]: "en",
   [Country.norway]: "no",
+  [Country.ukraine]: "uk",
 };
 
 const countryFlags: Record<Country, string> = {
@@ -69,6 +70,7 @@ const countryFlags: Record<Country, string> = {
   [Country.netherlands]: "🇳🇱",
   [Country.georgia]: "🇬🇪",
   [Country.norway]: "🇳🇴",
+  [Country.ukraine]: "🇺🇦",
 };
 
 const deltaPrefix = (delta: number): string => (delta > 0 ? `+` : "");
@@ -121,6 +123,12 @@ const messageTranslations = {
     line: "{receiver} {delta} ({count} donasjoner, {sum})",
     hashtags: `#{country} #donasjoner`,
     more: "og {otherParties} andre partier {otherDelta} ({otherCount} donasjoner)",
+  },
+  uk: {
+    title: "Дані про пожертви для {country} оновлено:",
+    line: "{receiver} {delta} ({count} пожертв, {sum})",
+    hashtags: `#{country} #пожертви`,
+    more: "та {otherParties} інших партій {otherDelta} ({otherCount} пожертв)",
   },
 } satisfies Record<ConstLocale, unknown>;
 
