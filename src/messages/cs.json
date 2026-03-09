@@ -569,41 +569,45 @@
     "title": "Otisk"
   },
   "privacy": {
-    "title": "Ochrana údajů",
+    "title": "Ochrana soukromí",
     "last_updated": "Naposledy aktualizováno: {date}",
-    "effective_date": "Datum účinnosti: {date}",
+    "effective_date": "Účinné od: {date}",
+    "controller": {
+      "title": "Správce údajů",
+      "p": "Správcem osobních údajů na těchto webových stránkách je:"
+    },
     "data": {
-      "title": "1. Shromažďování údajů",
-      "p": "Neshromažďujeme žádné osobní údaje návštěvníků našich webových stránek. To zahrnuje:",
-      "li0": "Žádné registrační formuláře",
-      "li1": "Žádné přihlášení k newsletteru",
-      "li2": "Žádné uživatelské účty",
-      "li3": "Žádné cookies pro sledování"
+      "title": "Obecný sběr dat",
+      "p": "Ochranu tvých údajů bereme velmi vážně. Nezískáváme žádné osobní údaje návštěvníků pro účely sledování nebo marketingu. To konkrétně znamená:",
+      "li0": "Žádné registrační formuláře ani uživatelské účty",
+      "li1": "Žádné přihlášky k odběru newsletteru",
+      "li2": "Žádné používání cookies pro sledovací účely"
     },
     "cf": {
-      "title": "2. Služby Cloudflare",
+      "title": "Služby Cloudflare",
       "link": "Zobrazit zásady ochrany osobních údajů Cloudflare",
-      "p": "Využíváme dvě služby Cloudflare:",
+      "p": "Využíváme služby společnosti Cloudflare, Inc. (101 Townsend St, San Francisco, CA 94107, USA), abychom zajistili, že naše webové stránky budou rychlé, bezpečné a spolehlivé.",
+      "p2": "Při používání Cloudflare se zpracovává tvoje IP adresa, aby tě připojila k nejbližšímu serveru. Při tom může dojít k přenosu dat do USA. Cloudflare je certifikována v rámci EU-US Data Privacy Framework (DPF), což zaručuje dodržování evropských standardů ochrany osobních údajů při přenosu dat do USA.",
+      "p3": "Naším oprávněným zájmem (čl. 6 odst. 1 písm. f GDPR) je poskytovat bezpečný a výkonný web. Další podrobnosti nalezneš v zásadách ochrany osobních údajů Cloudflare.",
       "workers": {
-        "summary": "Cloudflare Workers: Platforma bez serveru pro doručování obsahu (nezpracovává uživatelská data)"
+        "summary": "Cloudflare Workers: Serverless platforma pro rychlé poskytování obsahu našich webových stránek."
       },
       "analytics": {
-        "summary": "Cloudflare Web Analytics: Analytický nástroj se zaměřením na soukromí, který:",
-        "li0": "Nepoužívá cookies",
-        "li1": "Shromažďuje pouze agregované metriky"
+        "summary": "Cloudflare Web Analytics: Nástroj pro analýzu šetrný k soukromí, který nepoužívá cookies, nesleduje jednotlivé uživatele napříč weby a shromažďuje pouze agregované metriky (např. čistý počet návštěvníků)."
       }
     },
     "logs": {
-      "title": "3. Automatické serverové protokoly",
-      "p": "Náš hostingový poskytovatel může shromažďovat:",
+      "title": "Automatické serverové logy",
+      "p": "Při návštěvě našich webových stránek náš hostingový poskytovatel automaticky shromažďuje a ukládá informace v tzv. serverových log souborech. Tyto zahrnují:",
       "li0": "IP adresy (anonymizované)",
-      "li1": "Časové značky požadavků",
-      "li2": "Typy prohlížečů/zařízení",
-      "retention": "Tato data se automaticky mažou do 7 dnů."
+      "li1": "Datum a čas požadavku",
+      "li2": "Typ prohlížeče a informace o zařízení",
+      "li3": "Odkazující URL (referrer)",
+      "retention": "Zpracování těchto údajů probíhá na základě našeho oprávněného zájmu (čl. 6 odst. 1 písm. f GDPR) na technické stabilitě, bezpečnosti a bezchybné funkčnosti našich webových stránek. Nedochozí ke spojování s jinými zdroji dat. Data jsou automaticky smazána do 7 dnů."
     },
-    "contact": {
-      "title": "Kontakt",
-      "p": "Pro dotazy týkající se ochrany osobních údajů:"
+    "user_rights": {
+      "title": "Tvoje uživatelská práva",
+      "p": "V souladu s GDPR máš právo kdykoliv bezplatně získat informace o původu, příjemci a účelu uložených osobních údajů. Máš také právo požadovat opravu, blokování nebo vymazání těchto údajů. Jelikož však zpracováváme pouze minimální a anonymizované údaje, obvykle tě nemůžeme osobně identifikovat na základě našich logů. Dále máš právo podat stížnost u příslušného dozorového úřadu pro ochranu osobních údajů. V případě otázek ohledně ochrany soukromí se na nás můžeš kdykoli obrátit."
     }
   },
   "fun": {

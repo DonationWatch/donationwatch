@@ -570,40 +570,44 @@
   },
   "privacy": {
     "title": "Politika privatnosti",
-    "last_updated": "Posljednje ažuriranje: {date}",
-    "effective_date": "Datum stupanja na snagu: {date}",
+    "last_updated": "Posljednje ažurirano: {date}",
+    "effective_date": "Stupa na snagu: {date}",
+    "controller": {
+      "title": "Voditelj obrade podataka",
+      "p": "Za obradu podataka na ovoj web stranici odgovoran je:"
+    },
     "data": {
-      "title": "1. Prikupljanje podataka",
-      "p": "Ne prikupljamo nikakve osobne podatke od posjetitelja naše web stranice. To uključuje:",
-      "li0": "Nema obrazaca za registraciju",
-      "li1": "Nema prijava za newsletter",
-      "li2": "Nema korisničkih računa",
-      "li3": "Nema kolačića za svrhe praćenja"
+      "title": "Opće prikupljanje podataka",
+      "p": "Vrlo ozbiljno shvaćamo zaštitu tvojih podataka. Ne prikupljamo osobne podatke posjetitelja u svrhe praćenja ili marketinga. To konkretno znači:",
+      "li0": "Nema registracijskih obrazaca ni korisničkih računa",
+      "li1": "Nema prijava na newsletter",
+      "li2": "Nema kolačića za praćenje"
     },
     "cf": {
-      "title": "2. Cloudflare usluge",
-      "link": "Pogledajte Cloudflareovu politiku privatnosti",
-      "p": "Koristimo dvije Cloudflare usluge:",
+      "title": "Cloudflare usluge",
+      "link": "Prikaži Cloudflare politiku privatnosti",
+      "p": "Koristimo usluge tvrtke Cloudflare, Inc. (101 Townsend St, San Francisco, CA 94107, SAD) kako bismo osigurali da naša web stranica bude brza, sigurna i pouzdana.",
+      "p2": "Korištenjem Cloudflarea tvoja IP adresa se obrađuje kako bi te se povezalo s najbližim poslužiteljem. Podaci se mogu prenositi u SAD. Cloudflare je certificiran prema EU–US Data Privacy Framework (DPF), što osigurava usklađenost s europskim standardima zaštite podataka.",
+      "p3": "Naš legitimni interes (čl. 6., st. 1., toč. f GDPR-a) jest pružanje sigurne i učinkovite web stranice. Dodatne informacije možeš pronaći u Cloudflare politici privatnosti.",
       "workers": {
-        "summary": "Cloudflare Workers: Serverless platforma za isporuku sadržaja (bez obrade korisničkih podataka)"
+        "summary": "Cloudflare Workers: Platforma bez poslužitelja za brzo isporučivanje sadržaja naše stranice."
       },
       "analytics": {
-        "summary": "Cloudflare Web Analytics: Analitika fokusirana na privatnost koja:",
-        "li0": "Ne koristi kolačiće",
-        "li1": "Prikuplja samo agregirane metrike"
+        "summary": "Cloudflare Web Analytics: Alat za analitiku koji poštuje privatnost, ne koristi kolačiće, ne prati korisnike i prikuplja samo agregirane metrike (npr. ukupni broj posjetitelja)."
       }
     },
     "logs": {
-      "title": "3. Automatski zapisi poslužitelja",
-      "p": "Naš pružatelj hostinga može prikupljati:",
+      "title": "Automatski zapisi poslužitelja",
+      "p": "Prilikom posjete našoj web stranici naš pružatelj hostinga automatski prikuplja i pohranjuje podatke u tzv. zapisima poslužitelja. Oni uključuju:",
       "li0": "IP adrese (anonimizirane)",
-      "li1": "Vremenske oznake zahtjeva",
-      "li2": "Vrste preglednika/uređaja",
-      "retention": "Ovi podaci se automatski brišu unutar 7 dana."
+      "li1": "Datum i vrijeme zahtjeva",
+      "li2": "Vrstu preglednika i informacije o uređaju",
+      "li3": "Referentni URL (referrer)",
+      "retention": "Obrada ovih podataka temelji se na našem legitimnom interesu (čl. 6., st. 1., toč. f GDPR-a) za tehničku stabilnost, sigurnost i ispravan rad web stranice. Podaci se ne kombiniraju s drugim izvorima i automatski se brišu unutar 7 dana."
     },
-    "contact": {
-      "title": "Kontakt",
-      "p": "Za pitanja o privatnosti:"
+    "user_rights": {
+      "title": "Tvoja prava korisnika",
+      "p": "Prema GDPR-u imaš pravo u bilo kojem trenutku besplatno dobiti informacije o porijeklu, primatelju i svrsi tvojih pohranjenih osobnih podataka. Također imaš pravo zatražiti ispravak, blokiranje ili brisanje ovih podataka. Budući da obrađujemo samo minimalne i anonimizirane podatke, obično te ne možemo osobno identificirati. Imaš i pravo podnijeti pritužbu nadležnom tijelu za zaštitu podataka. Za sva pitanja u vezi privatnosti slobodno nam se obrati."
     }
   },
   "fun": {

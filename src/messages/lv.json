@@ -569,41 +569,45 @@
     "title": "Imprint"
   },
   "privacy": {
-    "title": "Datu aizsardzība",
+    "title": "Privātuma politika",
     "last_updated": "Pēdējoreiz atjaunināts: {date}",
     "effective_date": "Stājas spēkā: {date}",
+    "controller": {
+      "title": "Datu pārzinis",
+      "p": "Par datu apstrādi šajā tīmekļa vietnē atbildīga ir:"
+    },
     "data": {
-      "title": "1. Datu vākšana",
-      "p": "Mēs neievācam personisko datu no mūsu vietnes apmeklētājiem. Tas ietver:",
-      "li0": "Nav reģistrācijas veidlapu",
-      "li1": "Nav biļetenu pierakstīšanās",
-      "li2": "Nav lietotāju kontu",
-      "li3": "Nav izsekošanas sīkdatņu"
+      "title": "Vispārīga datu vākšana",
+      "p": "Mēs ļoti nopietni uztveram tavu datu aizsardzību. Mēs nevācam personas datus apmeklētāju izsekošanai vai mārketingam. Tas nozīmē:",
+      "li0": "Nav reģistrācijas formas vai lietotāju kontu",
+      "li1": "Nav biļetenu pieteikšanās",
+      "li2": "Netiek izmantotas sīkdatnes izsekošanas nolūkiem"
     },
     "cf": {
-      "title": "2. Cloudflare pakalpojumi",
+      "title": "Cloudflare pakalpojumi",
       "link": "Skatīt Cloudflare privātuma politiku",
-      "p": "Mēs izmantojam divus Cloudflare pakalpojumus:",
+      "p": "Mēs izmantojam Cloudflare, Inc. (101 Townsend St, Sanfrancisko, CA 94107, ASV) pakalpojumus, lai nodrošinātu, ka mūsu vietne ir ātra, droša un uzticama.",
+      "p2": "Izmantojot Cloudflare, tiek apstrādāta tava IP adrese, lai savienotu tevi ar tuvāko serveri. Dati var tikt pārsūtīti uz ASV. Cloudflare ir sertificēta saskaņā ar ES–ASV datu privātuma ietvaru (DPF), kas nodrošina atbilstību Eiropas datu aizsardzības standartiem.",
+      "p3": "Mūsu likumīgās intereses (GDPR 6. panta 1. punkta f apakšpunkts) ir drošas un efektīvas tīmekļa vietnes nodrošināšana. Vairāk informācijas atradīsi Cloudflare privātuma politikā.",
       "workers": {
-        "summary": "Cloudflare Workers: Serverless platforma satura piegādei (lietotāju datus neapstrādā)"
+        "summary": "Cloudflare Workers: Bezservera platforma, kas nodrošina ātru mūsu vietnes satura piegādi."
       },
       "analytics": {
-        "summary": "Cloudflare Web Analytics: Privātumam draudzīga analīze, kas:",
-        "li0": "Nelieto sīkdatnes",
-        "li1": "Vāc tikai apkopotus rādītājus"
+        "summary": "Cloudflare Web Analytics: Privātumam draudzīgs analītikas rīks, kas neizmanto sīkdatnes, neizseko lietotājus un apkopo tikai apkopotus rādītājus (piemēram, apmeklējumu skaitu)."
       }
     },
     "logs": {
-      "title": "3. Automātiskie servera logi",
-      "p": "Mūsu hostinga pakalpojumu sniedzējs var ievākt:",
+      "title": "Automātiskie servera ieraksti",
+      "p": "Apmeklējot mūsu vietni, mūsu hostinga pakalpojumu sniedzējs automātiski apkopo un glabā informāciju servera žurnālfailos, kas ietver:",
       "li0": "IP adreses (anonimizētas)",
-      "li1": "Pieprasījumu laika zīmogus",
-      "li2": "Pārlūkprogrammu/ierīču tipus",
-      "retention": "Šie dati tiek automātiski dzēsti 7 dienu laikā."
+      "li1": "Pieprasījuma datumu un laiku",
+      "li2": "Pārlūkprogrammas tipu un ierīces informāciju",
+      "li3": "Atsauces URL (referrer)",
+      "retention": "Datu apstrāde notiek, pamatojoties uz mūsu likumīgo interesi (GDPR 6. panta 1. punkta f apakšpunkts) nodrošināt tehnisko stabilitāti, drošību un pareizu tīmekļa vietnes darbību. Dati netiek apvienoti ar citiem avotiem un tiek automātiski dzēsti 7 dienu laikā."
     },
-    "contact": {
-      "title": "Kontakti",
-      "p": "Jautājumi par privātumu:"
+    "user_rights": {
+      "title": "Tavas lietotāja tiesības",
+      "p": "Saskaņā ar GDPR tev ir tiesības jebkurā laikā bez maksas saņemt informāciju par tavu saglabāto personas datu izcelsmi, saņēmējiem un nolūku. Tev ir arī tiesības pieprasīt šo datu labošanu, bloķēšanu vai dzēšanu. Tā kā mēs apstrādājam tikai minimālus un anonimizētus datus, parasti nevaram tevi personīgi identificēt. Tev ir arī tiesības iesniegt sūdzību datu aizsardzības iestādei. Jautājumu gadījumā sazinies ar mums jebkurā laikā."
     }
   },
   "fun": {

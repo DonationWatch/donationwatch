@@ -559,41 +559,45 @@
     "title": "Imprint"
   },
   "privacy": {
-    "title": "Privacy policy",
+    "title": "Privacy Policy",
     "last_updated": "Last updated: {date}",
     "effective_date": "Effective date: {date}",
+    "controller": {
+      "title": "Data Controller",
+      "p": "The entity responsible for data processing on this website is:"
+    },
     "data": {
-      "title": "1. Data Collection",
-      "p": "We do not collect any personal data from visitors to our website. This includes:",
-      "li0": "No registration forms",
-      "li1": "No newsletter signups",
-      "li2": "No user accounts",
-      "li3": "No cookies for tracking purposes"
+      "title": "General Data Collection",
+      "p": "We take the protection of your data very seriously. We do not collect any personal data from visitors for tracking or marketing purposes. This specifically means:",
+      "li0": "No registration forms or user accounts",
+      "li1": "No newsletter sign-ups",
+      "li2": "No cookies used for tracking purposes"
     },
     "cf": {
-      "title": "2. Cloudflare Services",
-      "link": "View cloudflares privacy policy",
-      "p": "We utilize two Cloudflare services:",
+      "title": "Cloudflare Services",
+      "link": "View Cloudflare Privacy Policy",
+      "p": "We use services provided by Cloudflare, Inc. (101 Townsend St, San Francisco, CA 94107, USA) to ensure our website is fast, secure, and reliable.",
+      "p2": "When using Cloudflare, your IP address is processed to connect you to the nearest server. Data may be transferred to the USA. Cloudflare is certified under the EU-US Data Privacy Framework (DPF), ensuring compliance with European data protection standards for data transfers to the USA.",
+      "p3": "Our legitimate interest (Article 6(1)(f) GDPR) lies in providing a secure and high-performance website. Further details can be found in Cloudflare’s Privacy Policy.",
       "workers": {
-        "summary": "Cloudflare Workers: Serverless platform for content delivery (no user data processing)"
+        "summary": "Cloudflare Workers: A serverless platform for fast delivery of our website content."
       },
       "analytics": {
-        "summary": "Cloudflare Web Analytics: Privacy-focused analytics that:",
-        "li0": "Does not use cookies",
-        "li1": "Only collects aggregated metrics"
+        "summary": "Cloudflare Web Analytics: A privacy-friendly analytics tool that does not use cookies, does not track individual users across websites, and collects only aggregated metrics (e.g., total visitor numbers)."
       }
     },
     "logs": {
-      "title": "3. Automatic Server Logs",
-      "p": "Our hosting provider may collect:",
+      "title": "Automatic Server Logs",
+      "p": "When you visit our website, our hosting provider automatically collects and stores information in what are known as server log files. These include:",
       "li0": "IP addresses (anonymized)",
-      "li1": "Request timestamps",
-      "li2": "Browser/device types",
-      "retention": "This data is automatically deleted within 7 days."
+      "li1": "Date and time of the request",
+      "li2": "Browser type and device information",
+      "li3": "Referring URL (referrer)",
+      "retention": "The processing of this data is based on our legitimate interest (Article 6(1)(f) GDPR) in ensuring the technical stability, security, and proper functioning of our site. This data is not merged with other data sources and is automatically deleted within 7 days."
     },
-    "contact": {
-      "title": "Contact",
-      "p": "For privacy questions:"
+    "user_rights": {
+      "title": "Your User Rights",
+      "p": "According to the GDPR, you have the right to receive free information at any time about the origin, recipient, and purpose of your stored personal data. You also have the right to request correction, blocking, or deletion of this data. However, as we process only minimal and anonymized data, we generally cannot personally identify you based on our logs. You also have the right to file a complaint with the competent data protection authority. If you have any questions about data protection, feel free to contact us at any time."
     }
   },
   "fun": {

@@ -569,41 +569,45 @@
     "title": "Jälg"
   },
   "privacy": {
-    "title": "Andmekaitse",
+    "title": "Privaatsuspoliitika",
     "last_updated": "Viimati uuendatud: {date}",
     "effective_date": "Jõustumiskuupäev: {date}",
+    "controller": {
+      "title": "Vastutav töötleja",
+      "p": "Sellel veebisaidil toimuvate andmetöötluste eest vastutab:"
+    },
     "data": {
-      "title": "1. Andmete kogumine",
-      "p": "Me ei kogu veebisaidi külastajatelt isikuandmeid. See hõlmab:",
-      "li0": "Registreerimisvorme ei ole",
-      "li1": "Uudiskirjade tellimisi ei ole",
-      "li2": "Kasutajakontosid ei ole",
-      "li3": "Küpsiseid jälgimiseks ei kasutata"
+      "title": "Üldine andmete kogumine",
+      "p": "Võtame sinu andmete kaitset väga tõsiselt. Me ei kogu isikuandmeid külastajate jälgimiseks ega turunduseks. See tähendab:",
+      "li0": "Registreerimisvorme ega kasutajakontosid ei ole",
+      "li1": "Uudiskirjade registreerimine puudub",
+      "li2": "Küpsiseid ei kasutata jälgimise eesmärgil"
     },
     "cf": {
-      "title": "2. Cloudflare'i teenused",
-      "link": "Vaata Cloudflare'i privaatsuspoliitikat",
-      "p": "Kasutame kaht Cloudflare'i teenust:",
+      "title": "Cloudflare teenused",
+      "link": "Vaata Cloudflare privaatsuspoliitikat",
+      "p": "Kasutame Cloudflare, Inc. (101 Townsend St, San Francisco, CA 94107, USA) teenuseid, et tagada meie veebisaidi kiirus, turvalisus ja töökindlus.",
+      "p2": "Cloudflare kasutamisel töödeldakse sinu IP-aadressi, et ühendada sind lähima serveriga. Andmeid võidakse edastada USA-sse. Cloudflare on sertifitseeritud vastavalt EL–USA andmekaitseraamistikule (DPF), mis tagab vastavuse Euroopa andmekaitsenõuetele.",
+      "p3": "Meie õigustatud huvi (GDPR artikkel 6 lõige 1 punkt f) on tagada turvaline ja hästi toimiv veebisait. Rohkem infot leiad Cloudflare privaatsuspoliitikast.",
       "workers": {
-        "summary": "Cloudflare Workers: Serverivaba platvorm sisu kättetoimetamiseks (kasutajate andmeid ei töödelda)"
+        "summary": "Cloudflare Workers: Serverita platvorm meie saidi sisu kiireks edastamiseks."
       },
       "analytics": {
-        "summary": "Cloudflare Web Analytics: Privaatsust austav analüüsi tööriist, mis:",
-        "li0": "Ei kasuta küpsiseid",
-        "li1": "Kogub ainult agregeeritud mõõdikuid"
+        "summary": "Cloudflare Web Analytics: Privaatsussõbralik analüütikatööriist, mis ei kasuta küpsiseid, ei jälgi kasutajaid ja kogub üksnes koondandmeid (nt külastuste arvu)."
       }
     },
     "logs": {
-      "title": "3. Automaatsed serverilogid",
-      "p": "Meie hostingupakkuja võib koguda:",
-      "li0": "IP-aadresse (anonüümistatud)",
-      "li1": "Päringute ajatemplid",
-      "li2": "Brauseri/seadmetüübid",
-      "retention": "Need andmed kustutatakse automaatselt 7 päeva jooksul."
+      "title": "Automaatsed serverilogid",
+      "p": "Veebilehte külastades salvestab meie majutusteenuse pakkuja automaatselt teavet niinimetatud serverilogides, mis sisaldavad:",
+      "li0": "IP-aadresse (anonüümselt)",
+      "li1": "Päringu kuupäeva ja aega",
+      "li2": "Brauseri tüüpi ja seadme andmeid",
+      "li3": "Viitavat URL-i (referrer)",
+      "retention": "Andmete töötlemine põhineb meie õigustatud huvil (GDPR artikkel 6 lõige 1 punkt f) tagada tehniline stabiilsus, turvalisus ja korrektne toimimine. Andmeid ei liideta teiste allikatega ning need kustutatakse automaatselt 7 päeva jooksul."
     },
-    "contact": {
-      "title": "Kontakt",
-      "p": "Privaatsusküsimuste korral:"
+    "user_rights": {
+      "title": "Sinu kasutajaõigused",
+      "p": "Vastavalt GDPR-ile on sul õigus igal ajal tasuta saada teavet oma isikuandmete päritolu, saajate ja eesmärgi kohta. Samuti on sul õigus taotleda parandamist, blokeerimist või kustutamist. Kuna me töötleme vaid minimaalseid ja anonüümseid andmeid, ei saa me sind üldjuhul isiklikult tuvastada. Sul on ka õigus esitada kaebus andmekaitseasutusele. Küsimuste korral võta meiega ühendust."
     }
   },
   "fun": {

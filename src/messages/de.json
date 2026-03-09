@@ -572,38 +572,42 @@
     "title": "Datenschutz",
     "last_updated": "Zuletzt aktualisiert: {date}",
     "effective_date": "Inkrafttreten: {date}",
+    "controller": {
+      "title": "Verantwortlicher",
+      "p": "Verantwortlich für die Datenverarbeitung auf dieser Website ist:"
+    },
     "data": {
-      "title": "1. Datenerfassung",
-      "p": "Wir erfassen keine personenbezogenen Daten von Besuchern unserer Website. Dies umfasst:",
-      "li0": "Keine Registrierungsformulare",
+      "title": "Allgemeine Datenerfassung",
+      "p": "Wir nehmen den Schutz deiner Daten sehr ernst. Wir erheben keine personenbezogenen Daten von Besuchern zu Tracking- oder Marketingzwecken. Das bedeutet konkret:",
+      "li0": "Keine Registrierungsformulare oder Benutzerkonten",
       "li1": "Keine Newsletter-Anmeldungen",
-      "li2": "Keine Benutzerkonten",
-      "li3": "Keine Cookies zu Tracking-Zwecken"
+      "li2": "Keine Verwendung von Cookies für Tracking-Zwecke"
     },
     "cf": {
-      "title": "2. Cloudflare-Dienste",
+      "title": "Cloudflare-Dienste",
       "link": "Cloudflare-Datenschutzrichtlinie anzeigen",
-      "p": "Wir nutzen zwei Cloudflare-Dienste:",
+      "p": "Wir nutzen Dienste der Cloudflare, Inc. (101 Townsend St, San Francisco, CA 94107, USA), um sicherzustellen, dass unsere Website schnell, sicher und zuverlässig abrufbar ist.",
+      "p2": "Bei der Nutzung von Cloudflare wird deine IP-Adresse verarbeitet, um dich mit dem nächstgelegenen Server zu verbinden. Dabei können Daten in die USA übertragen werden. Cloudflare ist nach dem EU-US Data Privacy Framework (DPF) zertifiziert, was die Einhaltung der europäischen Datenschutzstandards bei der Datenübermittlung in die USA garantiert.",
+      "p3": "Unser berechtigtes Interesse (Art. 6 Abs. 1 lit. f DSGVO) an der Bereitstellung einer sicheren und leistungsfähigen Website. Weitere Details findest du in der Datenschutzerklärung von Cloudflare.",
       "workers": {
-        "summary": "Cloudflare Workers: Serverlose Plattform zur Inhaltsauslieferung (keine Verarbeitung von Nutzerdaten)"
+        "summary": "Cloudflare Workers: Eine serverlose Plattform zur schnellen Bereitstellung unserer Website-Inhalte."
       },
       "analytics": {
-        "summary": "Cloudflare Web Analytics: Datenschutzorientierte Analysen, die:",
-        "li0": "Keine Cookies verwenden",
-        "li1": "Nur aggregierte Metriken erfassen"
+        "summary": "Cloudflare Web Analytics: Ein datenschutzfreundliches Analyse-Tool, das keine Cookies verwendet, keine einzelnen Nutzer über verschiedene Websites hinweg verfolgt und ausschließlich aggregierte Metriken (z. B. reine Besucherzahlen) sammelt."
       }
     },
     "logs": {
-      "title": "3. Automatische Serverprotokolle",
-      "p": "Unser Hosting-Anbieter kann erfassen:",
+      "title": "Automatische Server-Logs",
+      "p": "Beim Besuch unserer Website erhebt und speichert unser Hosting-Provider automatisch Informationen in sogenannten Server-Log-Dateien. Diese umfassen:",
       "li0": "IP-Adressen (anonymisiert)",
-      "li1": "Anfragezeitstempel",
-      "li2": "Browserversionen/Gerätetypen",
-      "retention": "Diese Daten werden automatisch innerhalb von 7 Tagen gelöscht."
+      "li1": "Datum und Uhrzeit der Anfrage",
+      "li2": "Browsertyp und Geräteinformationen",
+      "li3": "Die verweisende URL (Referrer)",
+      "retention": "Die Verarbeitung dieser Daten erfolgt auf Grundlage unseres berechtigten Interesses (Art. 6 Abs. 1 lit. f DSGVO) an der technischen Stabilität, Sicherheit und dem fehlerfreien Betrieb unserer Website. Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen. Die Daten werden innerhalb von 7 Tagen automatisch gelöscht."
     },
-    "contact": {
-      "title": "Kontakt",
-      "p": "Bei Datenschutzfragen:"
+    "user_rights": {
+      "title": "Deine Nutzerrechte",
+      "p": "Gemäß der DSGVO hast du das Recht, jederzeit unentgeltlich Auskunft über Herkunft, Empfänger und Zweck deiner gespeicherten personenbezogenen Daten zu erhalten. Du hast außerdem ein Recht, die Berichtigung, Sperrung oder Löschung dieser Daten zu verlangen. Da wir jedoch nur minimale und anonymisierte Daten verarbeiten, können wir dich anhand unserer Logs in der Regel nicht persönlich identifizieren. Des Weiteren steht dir ein Beschwerderecht bei der zuständigen Datenschutzaufsichtsbehörde zu. Bei Fragen zum Datenschutz kannst du dich jederzeit an uns wenden."
     }
   },
   "fun": {

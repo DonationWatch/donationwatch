@@ -569,41 +569,45 @@
     "title": "Impressum"
   },
   "privacy": {
-    "title": "Personvernerklæring",
+    "title": "Personvern",
     "last_updated": "Sist oppdatert: {date}",
     "effective_date": "Gjelder fra: {date}",
+    "controller": {
+      "title": "Behandlingsansvarlig",
+      "p": "Ansvarlig for databehandlingen på dette nettstedet er:"
+    },
     "data": {
-      "title": "1. Datainnsamling",
-      "p": "Vi samler ikke inn personopplysninger fra besøkende på nettsiden vår. Dette inkluderer:",
-      "li0": "Ingen registreringsskjemaer",
-      "li1": "Ingen nyhetsbrev-registreringer",
-      "li2": "Ingen brukerkontoer",
-      "li3": "Ingen informasjonskapsler (cookies) for sporingsformål"
+      "title": "Generell datainnsamling",
+      "p": "Vi tar beskyttelsen av dine data svært alvorlig. Vi samler ikke inn personopplysninger fra besøkende til sporing eller markedsføring. Dette betyr konkret:",
+      "li0": "Ingen registreringsskjemaer eller brukerkontoer",
+      "li1": "Ingen nyhetsbrev-abonnenter",
+      "li2": "Ingen bruk av informasjonskapsler for sporing"
     },
     "cf": {
-      "title": "2. Cloudflare-tjenester",
-      "link": "Se Cloudflares personvernerklæring",
-      "p": "Vi bruker to Cloudflare-tjenester:",
+      "title": "Cloudflare-tjenester",
+      "link": "Vis Cloudflares personvernerklæring",
+      "p": "Vi bruker tjenester fra Cloudflare, Inc. (101 Townsend St, San Francisco, CA 94107, USA) for å sikre at nettstedet vårt er raskt, trygt og pålitelig.",
+      "p2": "Når du bruker Cloudflare, behandles IP-adressen din for å koble deg til nærmeste server. Data kan overføres til USA. Cloudflare er sertifisert under EU–US Data Privacy Framework (DPF), som sikrer samsvar med europeiske personvernstandarder.",
+      "p3": "Vår berettigede interesse (GDPR art. 6 nr. 1 bokstav f) er å tilby et sikkert og effektivt nettsted. Mer informasjon finner du i Cloudflares personvernerklæring.",
       "workers": {
-        "summary": "Cloudflare Workers: Serverløs plattform for innholdslevering (ingen behandling av brukerdata)"
+        "summary": "Cloudflare Workers: En serverløs plattform for rask levering av nettsideinnhold."
       },
       "analytics": {
-        "summary": "Cloudflare Web Analytics: Personvernfokusert analyse som:",
-        "li0": "Ikke bruker informasjonskapsler",
-        "li1": "Kun samler inn aggregerte målinger"
+        "summary": "Cloudflare Web Analytics: Et personvernvennlig analyserverktøy som ikke bruker informasjonskapsler, ikke sporer brukere, og kun samler inn aggregerte data (for eksempel antall besøkende)."
       }
     },
     "logs": {
-      "title": "3. Automatiske serverlogger",
-      "p": "Vår hostingleverandør kan samle inn:",
+      "title": "Automatiske serverlogger",
+      "p": "Når du besøker nettstedet vårt, samler og lagrer vår hosting-leverandør automatisk informasjon i såkalte serverlogger. Disse inkluderer:",
       "li0": "IP-adresser (anonymisert)",
-      "li1": "Tidspunkt for forespørsler",
-      "li2": "Nettleser-/enhetstyper",
-      "retention": "Disse dataene slettes automatisk innen 7 dager."
+      "li1": "Dato og klokkeslett for forespørselen",
+      "li2": "Nettlesertype og enhetsinformasjon",
+      "li3": "Henvisende URL (referrer)",
+      "retention": "Behandlingen av disse dataene skjer basert på vår berettigede interesse (GDPR art. 6 nr. 1 bokstav f) for teknisk stabilitet, sikkerhet og feilfri drift av nettstedet vårt. Dataene kombineres ikke med andre kilder, og slettes automatisk innen 7 dager."
     },
-    "contact": {
-      "title": "Kontakt",
-      "p": "For spørsmål om personvern:"
+    "user_rights": {
+      "title": "Dine rettigheter",
+      "p": "I henhold til GDPR har du rett til når som helst gratis å be om informasjon om opprinnelse, mottakere og formål med lagrede personopplysninger. Du har også rett til å be om retting, blokkering eller sletting av slike data. Ettersom vi kun behandler minimale og anonymiserte data, kan vi vanligvis ikke identifisere deg personlig. Du har også rett til å klage til relevant datatilsynsmyndighet. Kontakt oss gjerne ved spørsmål om personvern."
     }
   },
   "fun": {

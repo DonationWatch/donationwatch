@@ -569,41 +569,45 @@
     "title": "Imprint"
   },
   "privacy": {
-    "title": "Gegevensbeveiliging",
+    "title": "Privacybeleid",
     "last_updated": "Laatst bijgewerkt: {date}",
     "effective_date": "Ingangsdatum: {date}",
+    "controller": {
+      "title": "Verwerkingsverantwoordelijke",
+      "p": "Verantwoordelijk voor de gegevensverwerking op deze website is:"
+    },
     "data": {
-      "title": "1. Gegevensverzameling",
-      "p": "We verzamelen geen persoonlijke gegevens van bezoekers van onze website. Dit omvat:",
-      "li0": "Geen registratieformulieren",
-      "li1": "Geen nieuwsbriefaanmeldingen",
-      "li2": "Geen gebruikersaccounts",
-      "li3": "Geen cookies voor trackingdoeleinden"
+      "title": "Algemene gegevensverzameling",
+      "p": "Wij nemen de bescherming van je gegevens zeer serieus. Wij verzamelen geen persoonlijke gegevens van bezoekers voor tracking- of marketingdoeleinden. Dit betekent concreet:",
+      "li0": "Geen registratieformulieren of gebruikersaccounts",
+      "li1": "Geen aanmeldingen voor nieuwsbrieven",
+      "li2": "Geen cookies voor trackingdoeleinden"
     },
     "cf": {
-      "title": "2. Cloudflare-diensten",
-      "link": "Bekijk Cloudflare's privacybeleid",
-      "p": "We gebruiken twee Cloudflare-diensten:",
+      "title": "Cloudflare-diensten",
+      "link": "Bekijk het privacybeleid van Cloudflare",
+      "p": "Wij gebruiken diensten van Cloudflare, Inc. (101 Townsend St, San Francisco, CA 94107, VS) om ervoor te zorgen dat onze website snel, veilig en betrouwbaar is.",
+      "p2": "Bij gebruik van Cloudflare wordt je IP-adres verwerkt om verbinding te maken met de dichtstbijzijnde server. Gegevens kunnen naar de VS worden overgedragen. Cloudflare is gecertificeerd onder het EU-VS Data Privacy Framework (DPF), wat naleving van Europese privacyregels bij gegevensoverdracht naar de VS garandeert.",
+      "p3": "Ons gerechtvaardigd belang (art. 6 lid 1 sub f AVG) ligt in het aanbieden van een veilige en goed presterende website. Meer details vind je in het privacybeleid van Cloudflare.",
       "workers": {
-        "summary": "Cloudflare Workers: Serverloos platform voor contentlevering (geen verwerking van gebruikersgegevens)"
+        "summary": "Cloudflare Workers: Een serverloos platform voor snelle levering van onze website-inhoud."
       },
       "analytics": {
-        "summary": "Cloudflare Web Analytics: Privacyvriendelijke analytics die:",
-        "li0": "Geen cookies gebruikt",
-        "li1": "Alleen geaggregeerde statistieken verzamelt"
+        "summary": "Cloudflare Web Analytics: Een privacyvriendelijke analysetool die geen cookies gebruikt, geen individuele gebruikers over websites heen volgt en alleen geaggregeerde statistieken verzamelt (bijv. bezoekersaantallen)."
       }
     },
     "logs": {
-      "title": "3. Automatische serverlogs",
-      "p": "Onze hostingprovider kan verzamelen:",
+      "title": "Automatische serverlogs",
+      "p": "Bij een bezoek aan onze website verzamelt en bewaart onze hostingprovider automatisch informatie in zogenaamde serverlogbestanden. Deze bevatten:",
       "li0": "IP-adressen (geanonimiseerd)",
-      "li1": "Tijdstempels van verzoeken",
-      "li2": "Browser/apparaattypen",
-      "retention": "Deze gegevens worden automatisch binnen 7 dagen verwijderd."
+      "li1": "Datum en tijd van het verzoek",
+      "li2": "Browsertype en apparaatinformatie",
+      "li3": "De verwijzende URL (referrer)",
+      "retention": "De verwerking van deze gegevens vindt plaats op basis van ons gerechtvaardigd belang (art. 6 lid 1 sub f AVG) in technische stabiliteit, veiligheid en foutloze werking van onze website. De gegevens worden niet samengevoegd met andere bronnen en worden binnen 7 dagen automatisch verwijderd."
     },
-    "contact": {
-      "title": "Contact",
-      "p": "Voor privacyvragen:"
+    "user_rights": {
+      "title": "Je gebruikersrechten",
+      "p": "Volgens de AVG heb je het recht om op elk moment gratis informatie te ontvangen over de herkomst, ontvanger en het doel van je opgeslagen persoonsgegevens. Je hebt ook het recht op correctie, blokkering of verwijdering van deze gegevens. Omdat wij alleen minimale en geanonimiseerde gegevens verwerken, kunnen we je meestal niet persoonlijk identificeren aan de hand van onze logs. Je hebt ook het recht om een klacht in te dienen bij de bevoegde autoriteit voor gegevensbescherming. Neem bij vragen over privacy gerust contact met ons op."
     }
   },
   "fun": {
