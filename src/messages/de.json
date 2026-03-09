@@ -22,7 +22,8 @@
     "sources": "Quellen",
     "export": "Datenexport",
     "bar_chart_race": "Balkendiagramm-Rennen",
-    "compare_parties": "Parteien vergleichen"
+    "compare_parties": "Parteien vergleichen",
+    "support_us": "☕ Serverkosten unterstützen"
   },
   "data": {
     "loading": "Inhalt wird geladen...",

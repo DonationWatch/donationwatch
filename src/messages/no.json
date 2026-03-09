@@ -22,7 +22,8 @@
     "sources": "Kilder",
     "export": "Dataeksport",
     "bar_chart_race": "Søylediagram-kappløp",
-    "compare_parties": "Sammenlign partier"
+    "compare_parties": "Sammenlign partier",
+    "support_us": "☕ Støtt serverkostnader"
   },
   "data": {
     "loading": "Innhold lastes...",

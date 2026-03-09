@@ -22,7 +22,8 @@
     "sources": "Sources",
     "export": "Data export",
     "bar_chart_race": "Bar chart race",
-    "compare_parties": "Compare parties"
+    "compare_parties": "Compare parties",
+    "support_us": "☕ Support Server Costs"
   },
   "data": {
     "loading": "Content is loading...",

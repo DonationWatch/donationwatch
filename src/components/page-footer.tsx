@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { Translation } from "./translation";
 import {
+  BMAC_URL,
   BSKY_URL,
   DATA_LICENSE,
   GITHUB_URL,
@@ -142,6 +143,14 @@ export const PageFooter = ({ locale }: { locale: ConstLocale }) => {
           >
             {t("navigation.about")}
           </Link>
+          <a
+            className="hover:text-primary-800 dark:hover:text-primary-400 block"
+            href={BMAC_URL}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {t("navigation.support_us")}
+          </a>
         </div>
       </div>
     </footer>

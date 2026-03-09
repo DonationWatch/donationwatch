@@ -12,6 +12,18 @@ A Next.js application for tracking and visualizing political party donations acr
 - **Code**: Licensed under the [GNU Affero General Public License v3.0](./LICENSE) (AGPL-3.0)
 - **Generated Data** (contents of `src/data/`): Licensed under the [Creative Commons Attribution 4.0 International License](./LICENSE-DATA) (CC BY 4.0)
 
+## Support the Project
+
+*donation.watch* is a passion project built to make global political financing transparent. It is free, open-source, and has no ads or paywalls.
+
+However, running the infrastructure (servers, domains, privacy services) comes with monthly out-of-pocket costs. If you find this dataset useful for your research, journalism, or personal interest, consider chipping in to help cover the server bills:
+
+<a href="https://www.buymeacoffee.com/donation.watch">
+  <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="150" height="45" />
+</a>
+
+*Note: This is purely a voluntary tip to keep the servers running. There are no premium features or commercial services in return.*
+
 ## Getting Started
 
 ### Prerequisites

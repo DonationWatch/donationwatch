@@ -22,7 +22,8 @@
     "sources": "Izvori",
     "export": "Izvoz podataka",
     "bar_chart_race": "Utrka stupčastih grafikona",
-    "compare_parties": "Usporedi stranke"
+    "compare_parties": "Usporedi stranke",
+    "support_us": "☕ Podrži troškove poslužitelja"
   },
   "data": {
     "loading": "Sadržaj se učitava...",

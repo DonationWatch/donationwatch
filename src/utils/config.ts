@@ -26,6 +26,7 @@ export const BSKY_URL = "https://bsky.app/profile/donation.watch";
 export const TWITTER_URL = "https://x.com/donation_watch";
 export const GITHUB_ORG = "https://github.com/DonationWatch";
 export const GITHUB_URL = `${GITHUB_ORG}/donationwatch`;
+export const BMAC_URL = "https://buymeacoffee.com/donation.watch";
 
 export const DEFAULT_COUNTRY = Country.germany;
 

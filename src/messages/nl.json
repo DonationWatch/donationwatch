@@ -22,7 +22,8 @@
     "sources": "Bronnen",
     "export": "Gegevensexport",
     "bar_chart_race": "Staafdiagramrace",
-    "compare_parties": "Vergelijk partijen"
+    "compare_parties": "Vergelijk partijen",
+    "support_us": "☕ Ondersteun serverkosten"
   },
   "data": {
     "loading": "Inhoud wordt geladen...",

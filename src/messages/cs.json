@@ -22,7 +22,8 @@
     "sources": "Zdroje",
     "export": "Export dat",
     "bar_chart_race": "Závod sloupcových grafů",
-    "compare_parties": "Porovnat strany"
+    "compare_parties": "Porovnat strany",
+    "support_us": "☕ Podpořte provoz serveru"
   },
   "data": {
     "loading": "Načítání obsahu...",

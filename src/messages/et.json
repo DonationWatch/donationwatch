@@ -22,7 +22,8 @@
     "sources": "Allikad",
     "export": "Andmete eksport",
     "bar_chart_race": "Tulpdiagrammi võistlus",
-    "compare_parties": "Võrdle erakondi"
+    "compare_parties": "Võrdle erakondi",
+    "support_us": "☕ Toeta serveri kulusid"
   },
   "data": {
     "loading": "Sisu laadimine...",

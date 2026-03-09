@@ -22,7 +22,8 @@
     "sources": "Avoti",
     "export": "Datu eksports",
     "bar_chart_race": "Joslu diagrammas sacensības",
-    "compare_parties": "Salīdzināt partijas"
+    "compare_parties": "Salīdzināt partijas",
+    "support_us": "☕ Atbalstiet servera izmaksas"
   },
   "data": {
     "loading": "Saturs tiek ielādēts...",
