@@ -37,14 +37,31 @@ describe.each([...COUNTRIES].map((country) => ({ country })))(
       });
     });
 
-    test(`has valid dates`, async () => {
+    test(`has valid donation fields`, async () => {
       donations.every((donation) => {
-        expect(donation[DonationField.Date].length).toBeLessThanOrEqual(
-          "2020-01-01".length,
-        );
+        expect(
+          donation[DonationField.DonorName].length,
+          "Donor name is not empty",
+        ).toBeGreaterThan(0);
+
+        expect(
+          donation[DonationField.Amount],
+          "Donation amount is greater than 0",
+        ).toBeGreaterThan(0);
+
+        expect(
+          donation[DonationField.Receiver].length,
+          "Receiver is not empty",
+        ).toBeGreaterThan(0);
+
+        expect(
+          donation[DonationField.Date].length,
+          "Date has correct iso8601 length",
+        ).toBeLessThanOrEqual("2020-01-01".length);
+
         expect(
           new Date(donation[DonationField.Date]).getTime(),
-          `Given date ${donation[DonationField.Date]}`,
+          `${donation[DonationField.Date]} is a valid date `,
         ).not.toBeNaN();
       });
     });
