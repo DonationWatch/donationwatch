@@ -673,7 +673,9 @@ export class EuLoader extends DataLoader {
           [DonationField.Amount]: ["2018", "2019", "2020"].includes(year)
             ? parseFloat(amount.replace(".", "").replace(",", "."))
             : parseFloat(amount.replace(",", "")),
-          [DonationField.DonorName]: donor,
+          [DonationField.DonorName]:
+            // pdf donations mark their redacted donors as empty string
+            donor || this.redactDonor(country),
           [DonationField.Receiver]: partyName as ReceiverId,
           [DonationField.Date]: `${year}`,
           [DonationField.Address]: {
