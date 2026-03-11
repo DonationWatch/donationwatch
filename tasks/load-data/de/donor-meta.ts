@@ -129,9 +129,6 @@ export const donorMeta: DonorMetaDefinition = {
     "Campact e.V.": {
       wiki: 565683,
     },
-    "Dr. Karl Gerhold c/o GETEC Energie Holding GmbH": {
-      wiki: 12741824,
-    },
     "Georg Nemetschek": {
       wiki: 4992515,
     },
@@ -245,6 +242,9 @@ export const donorMeta: DonorMetaDefinition = {
     },
     "Bernd Erich Beetz": {
       wiki: 11768738,
+    },
+    "Dr. Karl Gerhold": {
+      wiki: 12741824,
     },
   },
   relations: [

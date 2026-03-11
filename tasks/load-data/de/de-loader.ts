@@ -392,6 +392,10 @@ export class DeLoader extends DataLoader {
         "Südwestmetall – Verband der Metall- und Elektroindustrie Baden-Württemberg e. V.";
     }
 
+    if (donor.startsWith("Dr. Karl Gerhold")) {
+      return "Dr. Karl Gerhold";
+    }
+
     if (
       donor.includes("Verband der Bayerischen") ||
       // published by Bundestag on 2025-12-29
