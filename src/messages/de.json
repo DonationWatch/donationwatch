@@ -35,7 +35,8 @@
     "all_countries": "Alle Länder",
     "tools": "Werkzeuge",
     "show_all": "Alle anzeigen ({num})",
-    "show_less": "Weniger anzeigen"
+    "show_less": "Weniger anzeigen",
+    "more": "More"
   },
   "search": {
     "filter": "Suche...",

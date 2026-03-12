@@ -35,7 +35,8 @@
     "all_countries": "Kõik riigid",
     "tools": "Tööriistad",
     "show_all": "Kuva kõik ({num})",
-    "show_less": "Kuva vähem"
+    "show_less": "Kuva vähem",
+    "more": "Rohkem"
   },
   "search": {
     "filter": "Otsi...",

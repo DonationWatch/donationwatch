@@ -4,9 +4,13 @@ import {
   ChartBarStacked,
   ChevronRight,
   FileSpreadsheet,
+  Globe,
+  Info,
   Scale,
+  Sparkles,
   UserRound,
   Vote,
+  Github,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -287,24 +291,29 @@ export function AppSidebar({
           </SidebarGroup>
         )}
         <NavSecondary
+          label={tSidebar("more")}
           className="mt-auto"
           items={[
             {
               href: `/${locale}/other-countries`,
               label: t("navigation.other_countries"),
+              icon: Globe,
             },
             {
               href: `/${locale}/fun`,
               label: t("navigation.fun"),
+              icon: Sparkles,
             },
             {
               href: `/${locale}/about`,
               label: t("navigation.about"),
+              icon: Info,
             },
             {
               href: GITHUB_URL,
               label: "GitHub",
               target: "_blank",
+              icon: Github,
             },
           ]}
         />
@@ -315,21 +324,26 @@ export function AppSidebar({
 
 export function NavSecondary({
   items,
+  label,
   ...props
 }: {
+  label?: string;
   items: {
     label: string;
     href: string;
     target?: string;
+    icon?: React.ComponentType;
   }[];
 } & React.ComponentPropsWithoutRef<typeof SidebarGroup>) {
   return (
     <SidebarGroup {...props}>
+      {label ? <SidebarGroupLabel>{label}</SidebarGroupLabel> : null}
       <SidebarMenu>
-        {items.map(({ href, label, target }) => (
+        {items.map(({ href, label, target, icon: Icon }) => (
           <SidebarMenuItem key={href}>
             <SidebarActiveMenuButton activeHref={href} href={href} asChild>
               <Link target={target} prefetch={false} href={href}>
+                {Icon && <Icon />}
                 <span>{label}</span>
               </Link>
             </SidebarActiveMenuButton>

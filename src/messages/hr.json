@@ -35,7 +35,8 @@
     "all_countries": "Sve zemlje",
     "tools": "Alati",
     "show_all": "Prikaži sve ({num})",
-    "show_less": "Prikaži manje"
+    "show_less": "Prikaži manje",
+    "more": "Više"
   },
   "search": {
     "filter": "Pretraživanje...",

@@ -35,7 +35,8 @@
     "all_countries": "Všechny země",
     "tools": "Nástroje",
     "show_all": "Zobrazit vše ({num})",
-    "show_less": "Zobrazit méně"
+    "show_less": "Zobrazit méně",
+    "more": "Více"
   },
   "search": {
     "filter": "Vyhledávání...",

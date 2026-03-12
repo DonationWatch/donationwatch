@@ -35,7 +35,8 @@
     "all_countries": "All countries",
     "tools": "Tools",
     "show_all": "Show all ({num})",
-    "show_less": "Show less"
+    "show_less": "Show less",
+    "more": "More"
   },
   "search": {
     "filter": "Search...",

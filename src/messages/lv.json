@@ -35,7 +35,8 @@
     "all_countries": "Visas valstis",
     "tools": "Rīki",
     "show_all": "Rādīt visu ({num})",
-    "show_less": "Rādīt mazāk"
+    "show_less": "Rādīt mazāk",
+    "more": "Vairāk"
   },
   "search": {
     "filter": "Meklēt...",

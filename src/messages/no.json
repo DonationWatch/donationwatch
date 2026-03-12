@@ -35,7 +35,8 @@
     "all_countries": "Alle land",
     "tools": "Verktøy",
     "show_all": "Vis alle ({num})",
-    "show_less": "Vis færre"
+    "show_less": "Vis færre",
+    "more": "Mer"
   },
   "search": {
     "filter": "Søk...",

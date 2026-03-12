@@ -35,7 +35,8 @@
     "all_countries": "Alle landen",
     "tools": "Hulpmiddelen",
     "show_all": "Alles weergeven ({num})",
-    "show_less": "Minder weergeven"
+    "show_less": "Minder weergeven",
+    "more": "Meer"
   },
   "search": {
     "filter": "Zoeken...",
