@@ -1,6 +1,6 @@
 import { expect, test, beforeEach } from "vitest";
 
-import { DeLoader } from "../../tasks/load-data/de/de-loader";
+import { DeLoader, extractDate } from "../../tasks/load-data/de/de-loader";
 
 import type { ExtractedYearData } from "../../tasks/load-data/data-loader";
 import type { Countries } from "@/utils/countries";
@@ -112,7 +112,7 @@ test.each([
     {
       amount: 75_000,
       name: "Philip Harting Familienstiftung",
-      date: "2025-12-15",
+      date: "2025-12-12",
       receiver: "CDU",
       address: {
         country: "DE",
@@ -212,3 +212,26 @@ test.each([
       : expect.objectContaining(extractedDonation(expected)),
   );
 });
+
+test.each([
+  [["2010", ["23.12.2010"]], "2010-12-23"],
+  [["2010", ["10./13.08.2010"]], "2010-08-13"],
+  [["2010", ["10./12.08.2010"]], "2010-08-12"],
+  [["2013", ["06.-08.08.2013"]], "2013-08-08"],
+  [["2014", ["23./24.09.2014"]], "2014-09-24"],
+  [["2016", ["26.10.2016/", "09.11.2016"]], "2016-11-09"],
+  [["2022", ["31.12."]], "2022-12-31"],
+  [
+    ["2025", ["12.12.2025", "(25.000 ­Euro hiervon am 15.12.2025)"]],
+    "2025-12-12",
+  ],
+  [["2025", ["24./ 26.11.2025"]], "2025-11-26"],
+  [["2025", ["18./20./24.10. 2025"]], "2025-10-24"],
+  [["2024", ["15.1.2024"]], "2024-01-15"],
+  [["2024", ["8.1.2024"]], "2024-01-08"],
+] as [[string, string[]], string][])(
+  `extracts date variant %s`,
+  ([year, html], expected) => {
+    expect(extractDate(year, html)).toBe(expected);
+  },
+);

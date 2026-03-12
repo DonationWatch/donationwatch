@@ -32,22 +32,6 @@ const normalizedReceivers: Record<string, string> = {
   "DIE GERECHTIGKEITS": "TEAM TODENHÖFER",
 };
 
-const monthAliases: Record<string, string> = {
-  Januar: "01",
-  Februar: "02",
-  März: "03",
-  April: "04",
-  Mai: "05",
-  Juni: "06",
-  Juli: "07",
-  August: "08",
-  September: "09",
-  Oktober: "10",
-  November: "11",
-  Dezember: "12",
-};
-const months = Object.keys(monthAliases);
-
 const stripEuroDot = (str: string): string => str.replace(/\./g, "");
 const toEurFloat = (str: string): number => {
   str = str.replace("ca.", "").replace("ca", "").trim();
@@ -68,56 +52,29 @@ const toEurFloat = (str: string): number => {
   return sum;
 };
 
-const toIsoDate = (dateStr: string, year?: string): string => {
-  dateStr = dateStr.replace(/ /g, "");
-  if (dateStr.includes("/")) {
-    console.warn(`got weird date format: ${dateStr}`);
+export const extractDate = (year: string, dateHtml: string[]): string => {
+  if (!dateHtml || dateHtml.length === 0) return "";
 
-    // there are some dates that use format: day1./day2.08.2020
-    if (dateStr[3] === "/") {
-      const remainder = dateStr.substring(7);
-      const date1 = toIsoDate(`${dateStr.substring(0, 3)}${remainder}`);
+  let s = dateHtml.join(" ");
 
-      console.warn(`transformed to: ${date1}`);
-      return date1;
-    } else if (dateStr.at(-1) === "/") {
-      // handle 26.10.2016/
-      console.warn(
-        `transformed to: ${dateStr.substring(0, dateStr.length - 1)}`,
-      );
-      return toIsoDate(dateStr.substring(0, dateStr.length - 1));
-    } else {
-      console.warn("got other weird date", dateStr);
-    }
-  }
+  // remove spaces and hidden characters (like soft hyphens)
+  // eslint-disable-next-line no-misleading-character-class
+  s = s.replace(/[\s\u00AD\u200B\u200C\u200D\uFEFF]/g, "");
 
-  if (dateStr.substring(2, 4) === ".-") {
-    // case 06.-08.08.2013
-    const remainder = dateStr.substring(6);
-    return toIsoDate(`${dateStr.substring(0, 2)}${remainder}`);
-  }
+  // ignore any comments in parentheses
+  s = s.split("(")[0];
 
-  const parts = dateStr.split(".");
-  if (parts.length === 2) {
-    // there is a case where germany reports dates in the format `number. April year`
-    const [day, monthYear] = parts;
-    const [month, year] = monthYear
-      .trim()
-      .split(" ")
-      .map((s) => s.trim());
-    const monthNum = monthAliases[month];
-    if (!monthNum) {
-      throw new Error(`Unknown month: ${month} ${dateStr}`);
-    }
+  // split by slashes or hyphens (joined dates like 10./13.08.2010 or 06.-08.08.2013)
+  const parts = s.split(/[/-]/);
+  const lastPart = parts[parts.length - 1];
 
-    parts[0] = day;
-    parts[1] = monthNum;
-    parts[2] = year;
-  } else if (parts[2].length === 0)
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    parts[2] = year;
-  return parts.toReversed().join("-");
+  const match = lastPart.match(/(\d{1,2})\.(\d{1,2})\.(?:\s*(\d{4}))?/);
+  if (!match) return "";
+
+  const d = match[1].padStart(2, "0");
+  const m = match[2].padStart(2, "0");
+  const y = match[3] || year;
+  return `${y}-${m}-${d}`;
 };
 
 export class DeLoader extends DataLoader {
@@ -595,32 +552,7 @@ export class DeLoader extends DataLoader {
     const donation = data.columns;
     const donor = this.extractDonor(donation[2]);
     const receiver = donation[0][0];
-    let dateString: string;
-
-    if (
-      donation[3] &&
-      months.some((month) => (donation[3][0] as string).includes(month))
-    ) {
-      dateString = donation[3][0];
-    } else {
-      if (donation[3]) {
-        if (/\d\d /.test(donation[3][1])) {
-          // fix ["20.06.20", "23 ", ...]
-          donation[3][0] += donation[3][1];
-        }
-      }
-
-      dateString = donation[3] ? donation[3][0].split(" ")[0] : donation[3][0];
-    }
-
-    // handle 18./20./24.10. 2025 or 24./ 26.11.2025
-    if (donation[3].join("").split("/").length > 1) {
-      const lastDate = donation[3].join("").split("/").pop()!;
-
-      this.log("Found joined year date with multiple slashes: " + lastDate);
-
-      dateString = lastDate.replace(/ /g, "");
-    }
+    const parsedDate = donation[3] ? extractDate(year, donation[3]) : "";
 
     if (
       donation[2]
@@ -633,21 +565,13 @@ export class DeLoader extends DataLoader {
       return;
     }
 
-    if (
-      donor === "Philip Harting Familienstiftung" &&
-      dateString.startsWith("12.12.2025")
-    ) {
-      // WHY DO THEY ALWAYS ADD RANDOM TEXT TO THE DATE FIELDS
-      dateString = "15.12.2025";
-    }
-
     return {
       idx: `r${trId}`,
       [DonationField.Receiver]: receiver as ReceiverId,
       [DonationField.Amount]: toEurFloat(stripEuroDot(donation[1][0])),
       [DonationField.DonorName]: donor,
       [DonationField.Address]: extractAddress(donation[2])!,
-      [DonationField.Date]: this.normalizeIsoDate(toIsoDate(dateString, year)),
+      [DonationField.Date]: this.normalizeIsoDate(parsedDate),
     };
   }
 
