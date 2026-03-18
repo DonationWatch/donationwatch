@@ -1,6 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 
+import { donorMeta } from "./donor-meta";
 import { Country } from "../../../src/utils/countries";
 import {
   AddressField,
@@ -8,7 +9,6 @@ import {
   DonorType,
 } from "../../../src/utils/types";
 import { DataLoader } from "../data-loader";
-import { donorMeta } from "./donor-meta";
 import { timeout } from "../util";
 
 import type { ReceiverId } from "../../../src/utils/types";

@@ -6,11 +6,11 @@ import path from "path";
 
 import { parse } from "csv-parse/sync";
 
+import { donorMeta } from "./donor-meta";
 import { isNotNullandNotUndefined } from "../../../src/utils/array";
 import { Country } from "../../../src/utils/countries";
 import { AddressField, DonationField } from "../../../src/utils/types";
 import { DataLoader } from "../data-loader";
-import { donorMeta } from "./donor-meta";
 
 import type {
   ExtractedDonationAddress,

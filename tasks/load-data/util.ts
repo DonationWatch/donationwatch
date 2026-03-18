@@ -11,6 +11,8 @@ import type {
   DonationsDocumentWithoutDonorIds,
 } from "@/lib/api/donations-document";
 
+export const RANDOM_COLOR_MARKER = "#FF00FF";
+
 export const assertNoDuplicateIds = (
   donations: { [DonationField.Id]: string }[],
 ): void => {
@@ -130,4 +132,41 @@ const donationsToDonationsDocument = (
   });
 
   return document;
+};
+
+const hslToHex = (h: number, s: number, l: number): `#${string}` => {
+  l /= 100;
+  const a = (s * Math.min(l, 1 - l)) / 100;
+  const f = (n: number) => {
+    const k = (n + h / 30) % 12;
+    const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+    return Math.round(255 * color)
+      .toString(16)
+      .padStart(2, "0"); // Convert to Hex and pad
+  };
+  return `#${f(0)}${f(8)}${f(4)}`;
+};
+
+/**
+ * This generates a random but consistent color for a party based on some seed, e.g. party id.
+ * Note: prefer to hardcode a specific color that's associated with the party (e.g. from their logo) if possible, but this can be used as a fallback.
+ * @param seed
+ */
+export const generatePartyColor = (seed: string): `#${string}` => {
+  // 1. Simple, fast string hashing algorithm (djb2)
+  let hash = 0;
+  for (let i = 0; i < seed.length; i++) {
+    hash = seed.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  hash = Math.abs(hash);
+
+  // 2. Map the hash to a Hue (0 to 359)
+  const hue = hash % 360;
+
+  // 3. Lock Saturation and Lightness
+  const saturation = 65;
+  const lightness = 45;
+
+  // 4. Convert and return as HEX
+  return hslToHex(hue, saturation, lightness);
 };

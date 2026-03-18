@@ -156,13 +156,12 @@ export default async function PartyLayout(
       href: `/${locale}/${country}/party/${party.id}/changes`,
       label: t("changes.title"),
     },
-    countryConfig.hasTimeline
-      ? {
-          icon: ChartLine,
-          href: `/${locale}/${country}/party/${party.id}/timeline`,
-          label: t("timeline.title"),
-        }
-      : undefined,
+    // We can show a timeline chart here as the party page chart falls back to year resolution if we have no dates
+    {
+      icon: ChartLine,
+      href: `/${locale}/${country}/party/${party.id}/timeline`,
+      label: t("timeline.title"),
+    },
     countryConfig.hasOrigin
       ? {
           icon: Earth,
@@ -197,10 +196,12 @@ export default async function PartyLayout(
           </div>
           <div className="mb-3">
             <div className="flex-row space-y-2 sm:flex sm:space-y-0 sm:space-x-10">
-              <MetaCard
-                title={t("donation_count")}
-                value={formatNumber(locale, donationCount)}
-              />
+              {countryConfig.hasNoDonors ? null : (
+                <MetaCard
+                  title={t("donation_count")}
+                  value={formatNumber(locale, donationCount)}
+                />
+              )}
               <MetaCard
                 title={t("sum")}
                 value={formatCountryCurrency(
@@ -209,16 +210,18 @@ export default async function PartyLayout(
                   countryConfig,
                 )}
               />
-              {showExtendedMeta && donationCount > 1 && (
-                <MetaCard
-                  title={t("average")}
-                  value={formatCountryCurrency(
-                    locale,
-                    donationSum / donationCount,
-                    countryConfig,
-                  )}
-                />
-              )}
+              {!countryConfig.hasNoDonors &&
+                showExtendedMeta &&
+                donationCount > 1 && (
+                  <MetaCard
+                    title={t("average")}
+                    value={formatCountryCurrency(
+                      locale,
+                      donationSum / donationCount,
+                      countryConfig,
+                    )}
+                  />
+                )}
             </div>
           </div>
           <div className="mb-3">

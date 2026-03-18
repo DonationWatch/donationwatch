@@ -56,13 +56,13 @@ export default async function Page(
     getCountryConfig(country),
   ]);
 
-  if (!countryConfig.hasTimeline) {
+  if (!countryConfig.hasDate) {
     return notFound();
   }
 
   return (
     <Article title={tBarChartRace("title")}>
-      {countryConfig.hasTimeline ? (
+      {countryConfig.hasDate ? (
         <>
           <p className="mb-8 max-w-prose">{tBarChartRace("description")}</p>
           <p className="mb-8 max-w-prose text-sm">{tBarChartRace("note")}</p>

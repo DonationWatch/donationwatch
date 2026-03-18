@@ -27,6 +27,7 @@ export const enum Country {
   georgia = "georgia",
   norway = "norway",
   ukraine = "ukraine",
+  france = "france",
 }
 
 export type CountryCode =
@@ -45,7 +46,8 @@ export type CountryCode =
   | "CA"
   | "GE"
   | "NO"
-  | "UA";
+  | "UA"
+  | "FR";
 
 export type Currency =
   | "EUR"
@@ -76,6 +78,7 @@ export const COUNTRIES = new Set<Country>([
   Country.georgia,
   Country.norway,
   Country.ukraine,
+  Country.france,
 ]);
 
 export interface CountryConfig {
@@ -101,13 +104,15 @@ export interface CountryConfig {
   hasDate: boolean;
   // true if the country has donations with information about their origin
   hasOrigin: boolean;
-  // true if the country can display donations in a timeline
-  hasTimeline: boolean;
   // true if the donation dataset provides donor type information
   hasDonorType?: boolean;
   // true if the donation dataset provides unique ids that can be used to link to the source data
   hasExternalDonationIds?: boolean;
+  // true if country has no donor information at all, only receiver information
+  hasNoDonors?: boolean;
 
+  // Include parties if they have count over this threshold or sum over the threshold.
+  // Use -1 if it should only check the other condition
   knownPartyRequirements?: {
     count: number;
     sum: number;
@@ -137,7 +142,6 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       ["2022", "2023", "2024", "2025"],
       ["2026", "2027", "2028", "2029"],
     ],
-    hasTimeline: true,
     hasOrigin: true,
     hasDate: true,
     minPublicDonationAmount: 35_000,
@@ -187,7 +191,6 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       ["2020", "2021", "2022", "2023", "2024"],
       ["2025", "2026", "2027", "2028", "2029"],
     ],
-    hasTimeline: true,
     hasOrigin: true,
     hasDate: true,
     minPublicDonationAmount: 540,
@@ -222,7 +225,6 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       ["2020", "2021", "2022", "2023"],
       ["2024", "2025", "2026", "2027"],
     ],
-    hasTimeline: true,
     hasOrigin: false,
     hasDate: true,
     minPublicDonationAmount: 5_000,
@@ -248,9 +250,8 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       ["2024", "2025"],
       ["2026", "2027", "2028", "2029", "2030"],
     ],
-    hasTimeline: true,
     hasOrigin: false,
-    hasDate: true,
+    hasDate: false,
     minPublicDonationAmount: 1_000,
     currency: "EUR",
     source: {
@@ -275,7 +276,6 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       ["2020", "2021", "2022", "2023"],
       ["2024", "2025", "2026", "2027"],
     ],
-    hasTimeline: true,
     hasOrigin: false,
     hasDate: true,
     minPublicDonationAmount: 1,
@@ -301,7 +301,6 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       ["2022", "2023", "2024", "2025"],
       ["2026", "2027", "2028", "2029"],
     ],
-    hasTimeline: true,
     hasOrigin: false,
     hasDate: true,
     hasDonorType: true,
@@ -333,7 +332,6 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       ["2019", "2020", "2021", "2022"],
       ["2023", "2024", "2025", "2026"],
     ],
-    hasTimeline: true,
     hasOrigin: false,
     hasDate: true,
     hasExternalDonationIds: true,
@@ -364,7 +362,6 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       ["2020", "2021", "2022", "2023", "2024"],
       ["2025", "2026", "2027", "2028", "2029"],
     ],
-    hasTimeline: false,
     hasOrigin: true,
     hasDate: false,
     minPublicDonationAmount: 1,
@@ -427,7 +424,6 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       ["2025", "2026", "2027", "2028", "2029"],
     ],
     hasDate: true,
-    hasTimeline: true,
     hasOrigin: false,
     hasDonorType: true,
     hasExternalDonationIds: true,
@@ -478,7 +474,6 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       ["2023", "2024", "2025"],
       ["2026", "2027", "2028"],
     ],
-    hasTimeline: true,
     hasOrigin: false,
     hasDate: true,
     hasDonorType: true,
@@ -602,7 +597,6 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       ["2023"],
       ["2024", "2025", "2026", "2027"],
     ],
-    hasTimeline: false,
     hasOrigin: false,
     hasDate: false,
     minPublicDonationAmount: 400,
@@ -627,7 +621,6 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
     id: Country.croatia,
     minYear: "2019",
     preliminaryDataSince: "2025",
-    hasTimeline: true,
     hasOrigin: false,
     hasDate: true,
     minPublicDonationAmount: 1,
@@ -663,7 +656,6 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       ["2022", "2023", "2024", "2025"],
       ["2026", "2027", "2028", "2029"],
     ],
-    hasTimeline: true,
     hasOrigin: true,
     hasDate: true,
     minPublicDonationAmount: 500,
@@ -714,7 +706,6 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
     id: Country.georgia,
     minYear: "2011",
     preliminaryDataSince: "2026",
-    hasTimeline: true,
     hasOrigin: false,
     hasDate: true,
     hasDonorType: true,
@@ -752,7 +743,6 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
     id: Country.norway,
     minYear: "2014",
     preliminaryDataSince: "2024",
-    hasTimeline: false,
     hasOrigin: false,
     hasDate: false,
     hasDonorType: false,
@@ -780,7 +770,6 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
     id: Country.ukraine,
     minYear: "2020",
     preliminaryDataSince: "2021",
-    hasTimeline: true,
     hasOrigin: false,
     hasDate: true,
     hasDonorType: false,
@@ -796,6 +785,45 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
     markers: {
       label: "Президентські вибори",
       dates: [],
+    },
+    states: [],
+  },
+  [Country.france]: {
+    id: Country.france,
+    minYear: "2010",
+    preliminaryDataSince: "2024",
+    hasOrigin: false,
+    hasDate: false,
+    hasDonorType: false,
+    hasNoDonors: true,
+    minPublicDonationAmount: 7500,
+    currency: "EUR",
+    source: {
+      name: "Commission Nationale des Comptes de Campagne et des Financements Politiques (CNCCFP)",
+      url: "https://www.data.gouv.fr/datasets/comptes-des-partis-et-groupements-politiques",
+    },
+    legislativeYears: [
+      ["2008", "2009", "2010", "2011", "2012"],
+      ["2013", "2014", "2015", "2016", "2017"],
+      ["2018", "2019", "2020", "2021", "2022"],
+      ["2023", "2024", "2025", "2026", "2027"],
+    ],
+    code: "FR",
+    wikiCountry: "en",
+    markers: {
+      label: "Élection présidentielle française",
+      dates: [
+        "2012-04-22", // 1st round 2012
+        "2012-05-06", // 2nd round 2012
+        "2017-04-23", // 1st round 2017
+        "2017-05-07", // 2nd round 2017
+        "2022-04-10", // 1st round 2022
+        "2022-04-24", // 2nd round 2022
+      ],
+    },
+    knownPartyRequirements: {
+      sum: 1_000_000,
+      count: -1,
     },
     states: [],
   },

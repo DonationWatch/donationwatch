@@ -88,6 +88,7 @@ const buildPartySums = (country: CountryConfig, donations: Donation[]) => {
         sum: number;
         count: number;
         lastDonation: string;
+        hasYearOnlyDonations?: boolean;
       }
     >
   > = {};
@@ -107,6 +108,10 @@ const buildPartySums = (country: CountryConfig, donations: Donation[]) => {
       count: 0,
       lastDonation: donation[DonationField.Date],
     };
+
+    if (donation[DonationField.Date].length === 4) {
+      rawSums[year][receiver].hasYearOnlyDonations = true;
+    }
 
     rawSums[year][receiver].sum += donation[DonationField.Amount];
     rawSums[year][receiver].count++;
@@ -129,6 +134,7 @@ const buildPartySums = (country: CountryConfig, donations: Donation[]) => {
           count: stats.count,
           average: stats.count === 0 ? 0 : stats.sum / stats.count,
           lastDonation: stats.lastDonation,
+          ...(stats.hasYearOnlyDonations ? { hasYearOnlyDonations: true } : {}),
         };
       }
     });
@@ -522,6 +528,7 @@ const countries: CountryCode[] = [
   "GE",
   "NO",
   "UA",
+  "FR",
 ];
 const codeCountry: Record<CountryCode, Country> = {
   DE: Country.germany,
@@ -540,6 +547,7 @@ const codeCountry: Record<CountryCode, Country> = {
   GE: Country.georgia,
   NO: Country.norway,
   UA: Country.ukraine,
+  FR: Country.france,
 };
 const main = async () => {
   await Promise.all(

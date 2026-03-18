@@ -1,7 +1,6 @@
 "use client";
 import { useLocale } from "next-intl";
 
-
 import { ExpandableReactEchart } from "./expandable-react-echart";
 import { useDonationsByYears } from "../../hooks/use-api";
 import { useChart } from "../../hooks/use-chart";
@@ -67,6 +66,7 @@ export const DonationYearScatterPlot = ({
   > = {};
   const partyIds = new Set(parties.map((p) => p.id));
   let largestAmount = 0;
+  let smallestAmount = Number.POSITIVE_INFINITY;
   const numbers = new Set<number>();
 
   const spans: Record<ReceiverId, { min: number; max: number }> = {};
@@ -76,6 +76,7 @@ export const DonationYearScatterPlot = ({
     if (!years.includes(donationYear(donation))) return;
 
     largestAmount = Math.max(largestAmount, donation[DonationField.Amount]);
+    smallestAmount = Math.min(smallestAmount, donation[DonationField.Amount]);
 
     partyDonations[donation[DonationField.Receiver]] ??= {
       sum: 0,
@@ -153,7 +154,7 @@ export const DonationYearScatterPlot = ({
         left: 45,
         right: 45,
         max: largestAmount,
-        min: country.minPublicDonationAmount,
+        min: smallestAmount,
         axisLabel: {
           formatter: (data) => formatCountryCurrency(locale, data, country),
         },

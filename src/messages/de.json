@@ -74,9 +74,8 @@
     "reset_zoom": "Zoom zurücksetzen"
   },
   "over_min_public_amount": "über {amount}",
-  "over_threshold": "nur Parteien mit ≥ {count} Spenden oder ≥ {sum}",
+  "over_threshold": "{type, select, count {nur Parteien mit ≥ {count} Spenden} sum {nur Parteien mit ≥ {sum}} other {nur Parteien mit ≥ {count} Spenden oder ≥ {sum}}}",
   "prelim_data": "vorläufige Daten seit {year}",
-  "excludes_year_only_donations": "schließt Spenden mit Jahr als Datum aus",
   "common": {
     "date": "Datum",
     "party": "Partei",
@@ -84,6 +83,7 @@
     "amount": "Betrag",
     "anonymizedDonor": "Anonymisierter Spender",
     "redactedDonor": "Geschwärzter Spender",
+    "donorToPartyByYear": "Spender im Jahr {year}",
     "country": "Land",
     "state": "Bundesland",
     "summary": "Zusammenfassung",
@@ -163,7 +163,8 @@
     "what": {
       "title": "Was ist das?",
       "summary": "Parteispenden sind ein wichtiger Bestandteil der Politik. Sie sind ein wichtiger Indikator für die politische Unterstützung.\n\nWir versuchen diese Daten übersichtlich und verständlich darzustellen.",
-      "threshold": "Aufgrund der hohen Anzahl kleinerer politischer Parteien erfassen wir nur Spenden für Parteien, die eine bestimmte Schwelle erreichen. Die aktuelle Schwelle liegt bei {count} Spenden oder einem Gesamtbetrag von {sum} an Beiträgen für diese Partei, unabhängig von der Höhe einzelner Spenden.\"",
+      "threshold": "Aufgrund der hohen Anzahl kleinerer politischer Parteien erfassen wir nur Spenden für Parteien, die eine bestimmte Schwelle erreichen. Die aktuelle Schwelle liegt bei {type, select, count {{count} Spenden} sum {einem Gesamtbetrag von {sum}} other {{count} Spenden oder einem Gesamtbetrag von {sum}}} an Beiträgen für diese Partei, unabhängig von der Höhe einzelner Spenden.",
+      "no_donors": "Aufgrund nationaler Vorschriften veröffentlicht {country} keine Identitäten einzelner politischer Spender. Daher zeigen wir geprüfte Gesamtbeträge pro Partei anstatt einzelner Transaktionsdaten an. Funktionen wie \"Top-Spender\" oder \"Spendersuche\" sind für diese Region deaktiviert.",
       "source": {
         "austria": "Die hier verwendeten Daten stammen vom Rechnungshof Österreich und umfassen sämtliche dort seit 2012 dokumentierten Parteispenden.\n\nBitte beachten Sie: Vor dem 8. Juli 2019 mussten politische Parteien Einzelspenden über 51.000 Euro (bis 2018 über 50.000 Euro) dem Rechnungshof melden. Seit Juli 2019 liegt die Meldegrenze bei 2.500 Euro.\n\nDie Daten der Parteien werden normalerweise quartalsweise aktualisiert.",
         "germany": "Die hier verwendeten Daten stammen vom Deutschen Bundestag und umfassen sämtliche dort seit 2010 dokumentierten Parteispenden über 50.000 € und seit dem 5. März 2024 über 35.000 €.",
@@ -180,7 +181,8 @@
         "canada": "Die hier verwendeten Daten stammen von Elections Canada und basieren auf dem Datensatz „contributions as submitted“. Er umfasst alle politischen Spenden mit einem Geldwert von über 500 €, die seit 2015 dokumentiert wurden. Alle Einträge, die Teil des Berichts „Statement of Contributions Received“ aus der Wahlveranstaltung „Annual“ an „Registered parties“ sind, sind enthalten.",
         "georgia": "Die hier präsentierten Informationen stammen vom Antikorruptionsbüro (ანტიკორუფციული ბიურო﻿) Georgiens und umfassen alle seit 2011 registrierten politischen Spenden, die 1 GEL übersteigen. Der Datensatz umfasst nur Beiträge, die als Typ #10 (Geldspenden) oder Typ #16 (Geldspenden juristischer Personen) klassifiziert sind.",
         "norway": "Die hier verwendeten Daten stammen aus den offiziellen Veröffentlichungen zur Parteienfinanzierung von Statistics Norway (SSB) und Partifinansiering.no. Die ausgewiesenen Summen werden aus mehreren gemeldeten Empfängereinheiten (z. B. zentralen, regionalen, lokalen und Jugendorganisationen) zu einem einzigen Gesamtwert pro Partei aggregiert, wobei die zugrunde liegende Zuordnung der Empfänger zur Transparenz weiterhin verfügbar bleibt.\n\nDer Norwegen-Datensatz wird in einem jährlichen Aktualisierungszyklus erneuert und spiegelt damit den Rhythmus der zugrunde liegenden Offenlegungen wider.",
-        "ukraine": "Die hier verwendeten Daten stammen von der Nationalen Agentur für Korruptionsprävention (NAZK) über das PolitData-Portal. Sie umfassen alle Datensätze, die in den offiziellen Berichten als „finanzielle Zuwendungen“ gekennzeichnet sind.\n\nHinweis zum Datenumfang: Diese Gesamtsumme bezieht sich ausschließlich auf direkte Geldtransfers. Sie enthält keine staatlichen Zuschüsse an Parlamentsparteien oder Sachleistungen (nicht-monetäre Beiträge) wie Waren und Dienstleistungen.\n\nAufgrund der umfassenden russischen Invasion wurde die verpflichtende Berichterstattung politischer Parteien von Anfang 2022 bis Ende 2023 aus Sicherheits- und Logistikgründen ausgesetzt. Nach der Verabschiedung des Gesetzes Nr. 3337-IX holen die Parteien ihre Berichte nun nach. Die Daten für die Jahre 2022–2025 werden weiterhin aktualisiert, während die NAZK diese Meldungen bearbeitet."
+        "ukraine": "Die hier verwendeten Daten stammen von der Nationalen Agentur für Korruptionsprävention (NAZK) über das PolitData-Portal. Sie umfassen alle Datensätze, die in den offiziellen Berichten als „finanzielle Zuwendungen“ gekennzeichnet sind.\n\nHinweis zum Datenumfang: Diese Gesamtsumme bezieht sich ausschließlich auf direkte Geldtransfers. Sie enthält keine staatlichen Zuschüsse an Parlamentsparteien oder Sachleistungen (nicht-monetäre Beiträge) wie Waren und Dienstleistungen.\n\nAufgrund der umfassenden russischen Invasion wurde die verpflichtende Berichterstattung politischer Parteien von Anfang 2022 bis Ende 2023 aus Sicherheits- und Logistikgründen ausgesetzt. Nach der Verabschiedung des Gesetzes Nr. 3337-IX holen die Parteien ihre Berichte nun nach. Die Daten für die Jahre 2022–2025 werden weiterhin aktualisiert, während die NAZK diese Meldungen bearbeitet.",
+        "france": "Die hier verwendeten Daten stammen von der Commission Nationale des Comptes de Campagne et des Financements Politiques (CNCCFP) und umfassen alle politischen Spenden (in Euro angegeben), die im Feld \"Dons_de_personne_physique\" dokumentiert sind.\n\nIm Gegensatz zu anderen Regionen werden die französischen Daten als jährliche Gesamtsumme pro Partei veröffentlicht, und die Identität einzelner Spender ist durch Datenschutzgesetze geschützt."
       },
       "source_link": "Datenquelle"
     },
@@ -283,6 +285,7 @@
   "timeline": {
     "title": "Entwicklung",
     "description": "Sehen Sie sich eine Zeitleiste aller Parteispenden in {country} für {years} an, mit monatlichen Gesamtsummen und Trends über die Jahre hinweg.",
+    "year_resolution_note": "Diese Ansicht ist auf eine jährliche Auflösung standardisiert, da einige Datensätze in diesem Bereich nur das Jahr der Spende angeben. Um einen vollständigen und genauen Vergleich ohne geschätzte Daten zu gewährleisten, werden alle Daten nach Jahren aggregiert.",
     "detail": {
       "title": "Zeitverlauf der Parteispenden",
       "summary": "Betrachten Sie das interaktive Liniendiagramm unten, um die Spendengeschichte jeder politischen Partei im Laufe der Zeit nachzuverfolgen. Die x-Achse repräsentiert die Datumsangaben, während die y-Achse den Betrag der Spenden anzeigt. Jede politische Partei wird durch eine separate Linie dargestellt, die mit jeder Spende wächst."
@@ -300,6 +303,11 @@
     "highest_sum": "Die höchste Spendensumme wurde im {month} mit insgesamt {count} Spenden in Höhe von {sum} erreicht.",
     "most_months": "{party} hat in {count} Monaten Spenden erhalten – das sind die meisten Monate mit Beiträgen unter allen Parteien",
     "month_most_donations": "Der Monat mit der höchsten Spendenzahl war der {month}, in dem insgesamt {count} Einzelspenden eingingen."
+  },
+  "per_year": {
+    "title": "Spenden pro Jahr",
+    "subtitle": "Jährliche Summe der veröffentlichten Spenden an jede Partei in {country}, {years}.",
+    "description": "Dieses gestapelte Balkendiagramm zeigt die jährlichen Spendendaten für mehrere politische Parteien. Die x-Achse zeigt die Jahre, die y-Achse stellt die Spendensummen dar, und jeder Balken ist farblich segmentiert, um die Beiträge der einzelnen Parteien zu veranschaulichen und den Vergleich von Parteispenden innerhalb und zwischen Jahren zu erleichtern."
   },
   "party": {
     "donors": {
@@ -675,7 +683,7 @@
   "other_countries": {
     "title": "Andere Länder"
   },
-  "thanks": "Dank an Organisationen wie {external} für die Bereitstellung wertvoller Informationen über politische Spendenmechanismen.",
+  "thanks": "Mit Dank an Einzelpersonen und Organisationen wie {external} für die Bereitstellung wertvoller Informationen über politische Spendenmechanismen.",
   "export": {
     "title": "Datenexport",
     "p0": "Erhalten Sie den vollständigen Datensatz politischer Spenden für {country}, der auf dieser Website verwendet wird. Der Export enthält normalisierte Spendernamen, Beträge, Daten und Empfängerparteien.",

@@ -3,10 +3,10 @@
 import { BriefcaseBusiness, Building2, Landmark } from "lucide-react";
 
 import { DonorLink } from "./donor-link";
-import { RelationKind } from "../utils/types";
-import { Family } from "./icons/Family";
 import { formatCompactCountryCurrency } from "../utils/formatter";
 import { sumPartySums } from "../utils/math";
+import { RelationKind } from "../utils/types";
+import { Family } from "./icons/Family";
 
 import type { CountryConfig } from "../utils/countries";
 import type { PartyYearsSums } from "../utils/loader/party-years-sums";

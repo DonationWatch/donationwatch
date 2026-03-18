@@ -216,25 +216,29 @@ export function AppSidebar({
                     href={`/${locale}/${countryConfig.id}/tools/data`}
                     asChild
                   >
-                    <a href={`/${locale}/${countryConfig.id}/tools/data`}>
+                    <Link
+                      prefetch={false}
+                      href={`/${locale}/${countryConfig.id}/tools/data`}
+                    >
                       <FileSpreadsheet />
                       <span>{t("navigation.export")}</span>
-                    </a>
+                    </Link>
                   </SidebarActiveMenuButton>
                 </SidebarMenuItem>
-                {countryConfig.hasTimeline ? (
+                {countryConfig.hasDate ? (
                   <SidebarMenuItem>
                     <SidebarActiveMenuButton
                       activeHref={`/${locale}/${countryConfig.id}/tools/bar-chart-race`}
                       href={`/${locale}/${countryConfig.id}/tools/bar-chart-race`}
                       asChild
                     >
-                      <a
+                      <Link
+                        prefetch={false}
                         href={`/${locale}/${countryConfig.id}/tools/bar-chart-race`}
                       >
                         <ChartBarStacked />
                         <span>{t("navigation.bar_chart_race")}</span>
-                      </a>
+                      </Link>
                     </SidebarActiveMenuButton>
                   </SidebarMenuItem>
                 ) : null}
@@ -244,10 +248,13 @@ export function AppSidebar({
                     href={`/${locale}/${countryConfig.id}/tools/compare`}
                     asChild
                   >
-                    <a href={`/${locale}/${countryConfig.id}/tools/compare`}>
+                    <Link
+                      prefetch={false}
+                      href={`/${locale}/${countryConfig.id}/tools/compare`}
+                    >
                       <Scale />
                       <span>{t("navigation.compare_parties")}</span>
-                    </a>
+                    </Link>
                   </SidebarActiveMenuButton>
                 </SidebarMenuItem>
               </SidebarMenu>

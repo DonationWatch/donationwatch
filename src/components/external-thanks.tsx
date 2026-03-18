@@ -1,4 +1,3 @@
-
 import { getTranslations } from "next-intl/server";
 
 import { FormatAnd } from "./formatter";
@@ -39,6 +38,16 @@ const externalThanks: Partial<
     {
       name: "LobbyControl",
       url: "https://www.lobbycontrol.de/",
+    },
+  ],
+  [Country.france]: [
+    {
+      name: "Europolitiko",
+      url: "https://europolitiko.com",
+    },
+    {
+      name: "M. Francisco Roa Bastos",
+      url: "https://www.pantheonsorbonne.fr/page-perso/francisco.roa-bastos%40",
     },
   ],
 };

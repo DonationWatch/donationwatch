@@ -5,9 +5,9 @@ import * as cheerio from "cheerio";
 import puppeteer from "puppeteer";
 
 import { DataLoader } from "../data-loader";
-import { donorMeta } from "./donor-meta";
 import { containsWords, timeout } from "../util";
 import { extractAddress } from "./address";
+import { donorMeta } from "./donor-meta";
 import { isNotNullandNotUndefined } from "../../../src/utils/array";
 import { Country } from "../../../src/utils/countries";
 import { AddressField, DonationField } from "../../../src/utils/types";

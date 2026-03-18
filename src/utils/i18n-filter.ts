@@ -17,6 +17,7 @@ export const SERVER_ONLY_NAMESPACES = [
   "export",
   "compare_parties_page",
   "page_title",
+  "per_year",
 ] as const;
 
 type ServerOnlyNamespace = (typeof SERVER_ONLY_NAMESPACES)[number];

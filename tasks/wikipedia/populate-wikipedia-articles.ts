@@ -1,8 +1,8 @@
+import { loadWikipediaPageExtract, writeWikipediaArticles } from "./util";
 import { getDonations } from "../data/load-donations";
 import { loaders } from "../load-data/loaders";
-import { promptCountries } from "../utils";
-import { loadWikipediaPageExtract, writeWikipediaArticles } from "./util";
 import { timeout } from "../load-data/util";
+import { promptCountries } from "../utils";
 
 import type { Country, CountryConfig } from "@/utils/countries";
 import type { Donation, DonorMetaDefinition } from "@/utils/types";
@@ -56,6 +56,7 @@ const populateDonationWikipediaData = async (
       wikiSummaries.articles[pageId] = article;
       loadedDonorArticles[donorName] = true;
     }
+    await timeout(1000);
   }
 
   for (const party of country.parties) {

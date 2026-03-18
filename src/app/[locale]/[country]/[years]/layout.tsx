@@ -31,6 +31,8 @@ import type { ParamsOf } from "../../../../../.next/types/routes";
 import type { TabItem } from "../../../../components/tabs";
 import type { Metadata } from "next";
 
+import { canShowYearsTimeline } from "@/utils/party";
+
 export const dynamicParams = true;
 
 const CACHED_LAST_YEARS = 3;
@@ -148,13 +150,15 @@ export default async function YearsLayout(
       href: `/${locale}/${country}/${yearsLink}/changes`,
       label: t("changes.title"),
     },
-    {
-      icon: UserRound,
-      href: `/${locale}/${country}/${yearsLink}/donors`,
-      activeHref: `/${locale}/${country}/${yearsLink}/donors`,
-      label: t("donors.title"),
-    },
-    countryConfig.hasTimeline
+    countryConfig.hasNoDonors
+      ? undefined
+      : {
+          icon: UserRound,
+          href: `/${locale}/${country}/${yearsLink}/donors`,
+          activeHref: `/${locale}/${country}/${yearsLink}/donors`,
+          label: t("donors.title"),
+        },
+    canShowYearsTimeline(countryConfig, partySums, years)
       ? {
           icon: ChartLine,
           href: `/${locale}/${country}/${yearsLink}/timeline`,

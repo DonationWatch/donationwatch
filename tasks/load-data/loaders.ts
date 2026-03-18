@@ -6,6 +6,7 @@ import { CzLoader } from "./cz/cz-loader";
 import { DeLoader } from "./de/de-loader";
 import { EeLoader } from "./ee/ee-loader";
 import { EuLoader } from "./eu/eu-loader";
+import { FrLoader } from "./fr/fr-loader";
 import { GeLoader } from "./ge/ge-loader";
 import { HrLoader } from "./hr/hr-loader";
 import { LvLoader } from "./lv/lv-loader";
@@ -35,4 +36,5 @@ export const loaders: Record<Country, DataLoader> = {
   [Country.georgia]: new GeLoader(),
   [Country.norway]: new NoLoader(),
   [Country.ukraine]: new UaLoader(),
+  [Country.france]: new FrLoader(),
 };

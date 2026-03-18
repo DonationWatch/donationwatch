@@ -186,7 +186,10 @@ const GlobalSearch = ({
           }) as YearsItem,
       ),
     },
-    {
+  ];
+
+  if (!countryConfig.hasNoDonors) {
+    groups.push({
       id: "donors",
       title: tSearch("donors"),
       items: visibleDonors.map(
@@ -197,8 +200,8 @@ const GlobalSearch = ({
           search,
         }),
       ),
-    },
-  ];
+    });
+  }
 
   return (
     <div className="flex h-full flex-col">

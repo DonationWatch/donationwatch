@@ -67,7 +67,7 @@ export default async function OriginLayout(
   ]);
 
   if (!countryConfig.hasOrigin) {
-    return redirect("/not-found");
+    return notFound();
   }
 
   if (!hasYearSums(partySums, deserializeYears(params.years))) {

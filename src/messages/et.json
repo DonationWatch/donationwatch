@@ -74,9 +74,8 @@
     "reset_zoom": "Zoomi lähtestamine"
   },
   "over_min_public_amount": "üle {amount}",
-  "over_threshold": "ainult erakonnad, millel on ≥ {count} annetusi või ≥ {sum}",
+  "over_threshold": "{type, select, count {ainult erakonnad, kellel on ≥ {count} annetust} sum {ainult erakonnad, kellel on ≥ {sum}} other {ainult erakonnad, kellel on ≥ {count} annetust või ≥ {sum}}}",
   "prelim_data": "esialgsed andmed alates {year}. aastast",
-  "excludes_year_only_donations": "välistab annetused, mille kuupäevaks on ainult aasta",
   "common": {
     "date": "kuupäev",
     "party": "Partei",
@@ -84,6 +83,7 @@
     "amount": "Summa",
     "anonymizedDonor": "Anonümiseeritud annetaja",
     "redactedDonor": "Varjatud annetaja",
+    "donorToPartyByYear": "Annetajad aastal {year}",
     "country": "Riik",
     "state": "Osariik",
     "summary": "Kokkuvõte",
@@ -163,7 +163,8 @@
     "what": {
       "title": "Mis see on?",
       "summary": "Erakondade annetused on oluline osa poliitikast. Need on oluline poliitilise toetuse näitaja.\n\nMe püüame neid andmeid selgelt ja arusaadavalt esitada.",
-      "threshold": "Tulenevalt väiksemate erakondade suurest arvust jälgime annetusi ainult nendele erakondadele, mis vastavad kindlale künnisele. Praegune künnis on määratud {count} annetusega või kogusummaga {sum}, mis on sellele erakonnale annetatud, olenemata üksikute annetuste suurusest.",
+      "threshold": "Kuna väiksemaid poliitilisi parteisid on palju, jälgime üksnes nende parteide annetusi, mis ületavad teatud künnise. Praegune künnis on määratud {type, select, count {{count} annetust} sum {kokku {sum}} other {{count} annetust või kokku {sum}}} selle partei saadud panustena, sõltumata üksikannete suurusest.",
+      "no_donors": "Riiklike eeskirjade tõttu ei avalikusta {country} üksikute poliitiliste annetajate isikuid. Seetõttu kuvame auditeeritud kogusummasid erakondade kaupa, mitte üksikuid tehinguid. Funktsioonid nagu \"Suurimad annetajad\" või \"Annetaja otsing\" on selles piirkonnas keelatud.",
       "source": {
         "austria": "Siin kasutatud andmed pärinevad Austria Kontrollikojast ja hõlmavad kõiki parteide annetusi, mis on seal dokumenteeritud alates 2012. aastast.\n\nPange tähele: enne 8. juulit 2019 pidid erakonnad teatama kontrollikojale üle 51 000 euro (kuni 2018. aastani üle 50 000 euro) suurustest üksikannetustest. Alates 2019. aasta juulist on aruandluspiiriks 2500 eurot.\n\nErakondade andmeid ajakohastatakse tavaliselt kord kvartalis.\n\nTranslated with DeepL.com (free version)",
         "germany": "Siin kasutatud andmed pärinevad Saksamaa Bundestagist ja hõlmavad kõiki alates 2010. aastast dokumenteeritud üle 50 000 euro ja alates 5. märtsist 2024. aastast üle 35 000 euro suuruseid annetusi erakondadele.",
@@ -180,7 +181,8 @@
         "canada": "Siin kasutatud andmed pärinevad Elections Canada’lt ja põhinevad andmekogul „contributions as submitted“. See hõlmab kõiki poliitilisi annetusi, mille rahaline väärtus ületab 500 €, dokumenteeritud alates 2015. aastast. Kaasatud on kõik kirjed, mis kuuluvad aruandesse „Statement of Contributions Received“ valimisürituselt „Annual“ registreeritud erakondadele.",
         "georgia": "Siin esitatud teave pärineb Gruusia korruptsioonivastasest büroost (ანტიკორუფციული ბიურო﻿) ja hõlmab kõiki alates 2011. aastast registreeritud poliitilisi annetusi, mis ületavad 1 GEL. Andmekogum hõlmab ainult annetusi, mis on klassifitseeritud kui tüüp #10 (Rahaannetused) või tüüp #16 (Rahaannetused juriidilistelt isikutelt).",
         "norway": "Siin kasutatud andmed pärinevad Statistics Norway (SSB) ja Partifinansiering.no ametlikest erakondade rahastamise publikatsioonidest. Kuva­tud kogusummad on koondatud mitme raporteeritud saajaüksuse (näiteks kesk-, piirkondlike, kohalike ja noorteüksuste) põhjal üheks kogusummaks erakonna kohta, kusjuures aluseks olev saajate vastendus on läbipaistvuse tagamiseks jätkuvalt kättesaadav.\n\nNorra andmestikku uuendatakse kord aastas, kajastades alusandmete avalikustamise rütmi.",
-        "ukraine": "Siin kasutatud andmed on pärit riiklikust korruptsiooni ennetamise agentuurist (NAZK) PolitData portaali kaudu. Need sisaldavad kõiki ametlikes aruannetes märgitud kirjeid, mis on tähistatud kui „rahalised annetused“.\n\nMärkus andmete ulatuse kohta: See summa kajastab ainult otseseid rahalisi ülekandeid. See ei hõlma riiklikku rahastust parlamendierakondadele ega mitterahalisi (looduslikke) panuseid, nagu kaubad ja teenused.\n\nVene täiemahulise sissetungi tõttu peatati poliitiliste parteide kohustuslik aruandlus 2022. aasta algusest kuni 2023. aasta lõpuni julgeoleku- ja logistilistel põhjustel. Pärast seaduse nr 3337-IX vastuvõtmist täidavad parteid nüüd oma aruandeid tagantjärele. Aastate 2022–2025 andmeid ajakohastatakse endiselt, kuna NAZK töötleb neid esitusi."
+        "ukraine": "Siin kasutatud andmed on pärit riiklikust korruptsiooni ennetamise agentuurist (NAZK) PolitData portaali kaudu. Need sisaldavad kõiki ametlikes aruannetes märgitud kirjeid, mis on tähistatud kui „rahalised annetused“.\n\nMärkus andmete ulatuse kohta: See summa kajastab ainult otseseid rahalisi ülekandeid. See ei hõlma riiklikku rahastust parlamendierakondadele ega mitterahalisi (looduslikke) panuseid, nagu kaubad ja teenused.\n\nVene täiemahulise sissetungi tõttu peatati poliitiliste parteide kohustuslik aruandlus 2022. aasta algusest kuni 2023. aasta lõpuni julgeoleku- ja logistilistel põhjustel. Pärast seaduse nr 3337-IX vastuvõtmist täidavad parteid nüüd oma aruandeid tagantjärele. Aastate 2022–2025 andmeid ajakohastatakse endiselt, kuna NAZK töötleb neid esitusi.",
+        "france": "Siin kasutatud andmed pärinevad Commission Nationale des Comptes de Campagne et des Financements Politiques (CNCCFP) andmebaasist ning hõlmavad kõiki poliitilisi annetusi (eurodes), mis on dokumenteeritud väljal \"Dons_de_personne_physique\".\n\nErinevalt teistest piirkondadest avaldatakse Prantsuse andmed iga erakonna aastase koondsummana ning üksikute annetajate isikusamasus on privaatsusseadustega kaitstud."
       },
       "source_link": "Andmeallikas"
     },
@@ -283,6 +285,7 @@
   "timeline": {
     "title": "Arendus",
     "description": "Vaadake kõigi poliitiliste parteide annetuste ajatelge riigis {country} aastate {years} kohta, koos igakuiste kogusummade ja aastate lõikes trendidega.",
+    "year_resolution_note": "See vaade on standarditud aastasele täpsusele, kuna mõned kirjed selles vahemikus sisaldavad ainult annetuse aastat. Täieliku ja täpse võrdluse tagamiseks ilma hinnangulisi kuupäevi kasutamata on kõik andmed koondatud aastapõhiselt.",
     "detail": {
       "title": "Erakondade annetuste areng aja jooksul",
       "summary": "Vaadake allolevat interaktiivset joongraafikut, et jälgida iga erakonna annetuste ajalugu aja jooksul. x-telg näitab kuupäevi, y-telg aga annetuste summat. Iga erakond on kujutatud eraldi joonega, mis kasvab iga annetusega."
@@ -300,6 +303,11 @@
     "highest_sum": "{month} oli suurim annetuste kogusumma, kokku {count} annetust summas {sum}.",
     "most_months": "{party} sai annetusi {count} kuu jooksul – enim kuid annetustega kõigi parteide seas.",
     "month_most_donations": "Kõige suurema annetuste arvuga kuu oli {month}, mil laekus kokku {count} üksikannetust."
+  },
+  "per_year": {
+    "title": "Annetused aastate lõikes",
+    "subtitle": "Iga erakonna avaldatud annetuste aastane summa riigis {country}, {years}.",
+    "description": "See kuhjatud tulpdiagramm kujutab iga-aastaseid annetuste andmeid mitmele poliitilisele parteile. X-telg näitab aastaid, Y-telg annetuste summasid ning iga tulp on värvide kaupa jaotatud, et kuvada üksikute parteide panused, võimaldades hõlpsalt võrrelda annetusi nii aasta jooksul kui ka aastate vahel."
   },
   "party": {
     "donors": {
@@ -675,7 +683,7 @@
   "other_countries": {
     "title": "Teised riigid"
   },
-  "thanks": "Täname selliseid organisatsioone nagu {external}, kes pakuvad väärtuslikku teavet poliitiliste annetuste mehhanismide kohta.",
+  "thanks": "Tänu üksikisikutele ja organisatsioonidele, nagu {external}, väärtusliku teabe eest poliitiliste annetuste mehhanismide kohta.",
   "export": {
     "title": "Andmete eksport",
     "p0": "Hankige sellel saidil kasutatav täielik poliitiliste annetuste andmestik riigi {country} kohta. Eksport sisaldab normaliseeritud annetajate nimesid, summasid, kuupäevi ja saajaparteisid.",

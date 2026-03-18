@@ -1,6 +1,7 @@
 import { notFound, redirect } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
+import { InfoAlert } from "../../../../../components/alert";
 import { DonationPerMonthChart } from "../../../../../components/chart/donation-per-month-chart";
 import { DonationSumChart } from "../../../../../components/chart/donation-sum-chart";
 import {
@@ -12,6 +13,7 @@ import {
   ArticleSectionWrapper,
 } from "../../../../../components/layout/article";
 import { LoadingYearBarsPageText } from "../../../../../components/loading-year-bars-page-text";
+import { LoadingYearTimelineYearText } from "../../../../../components/loading-year-timeline-year-text";
 import { LoadingYearTimeseriesText } from "../../../../../components/loading-year-timeseries-text";
 import { getCountryName } from "../../../../../utils/countries";
 import { getCountryConfig } from "../../../../../utils/data/get-country-config";
@@ -27,6 +29,11 @@ import { deserializeYears } from "../../../../../utils/serializers";
 import { isValidCountry, isValidLocale } from "../../../../../utils/validate";
 
 import type { Metadata } from "next";
+
+import {
+  canShowYearsTimeline,
+  yearPartiesHaveYearOnlyDonations,
+} from "@/utils/party";
 
 export async function generateMetadata(
   props: PageProps<"/[locale]/[country]/[years]/timeline">,
@@ -48,6 +55,10 @@ export async function generateMetadata(
       getPartyYearsSums(country),
     ]);
   const years = deserializeYears(params.years);
+
+  if (!canShowYearsTimeline(countryConfig, partySums, years)) {
+    return notFoundMetadata;
+  }
 
   if (!hasYearSums(partySums, years)) {
     return redirect(
@@ -81,68 +92,112 @@ export default async function TimelinePage(
   setRequestLocale(params.locale);
 
   const years = deserializeYears(params.years);
-  const [t, tCountries, countryConfig] = await Promise.all([
+  const [t, tCountries, countryConfig, partyYearSums] = await Promise.all([
     getTranslations({ locale: params.locale }),
     getTranslations({ locale: params.locale, namespace: "countries" }),
     getCountryConfig(params.country),
+    getPartyYearsSums(params.country),
   ]);
+
+  if (!canShowYearsTimeline(countryConfig, partyYearSums, years)) {
+    return notFound();
+  }
+
+  const hasYearOnlyDonations = yearPartiesHaveYearOnlyDonations(
+    partyYearSums,
+    years,
+  );
 
   const parties = getParties(countryConfig, years);
 
+  const resolution =
+    !hasYearOnlyDonations && countryConfig.hasDate ? "month" : "year";
+  const chartStrings =
+    resolution === "month"
+      ? {
+          title: "per_month.title" as const,
+          subtitle: "per_month.subtitle" as const,
+          description: "per_month.description" as const,
+        }
+      : {
+          title: "per_year.title" as const,
+          subtitle: "per_year.subtitle" as const,
+          description: "per_year.description" as const,
+        };
+
   return (
     <Article fullWidth={true}>
-      <ArticleSectionWrapper id={"sec-timeline"}>
-        <ArticleSectionOneColumns>
-          <ArticleSectionColumn>
-            <ArticleSectionTitle
-              as={"h1"}
-              id={"sec-timeline"}
-              title={t("timeline.detail.title")}
-            />
-            <p className="mb-6">{t("timeline.detail.summary")}</p>
-            <LoadingYearTimeseriesText
-              country={countryConfig}
-              parties={parties}
-              years={years}
-            />
-          </ArticleSectionColumn>
-          <ArticleSectionColumn>
-            <DonationSumChart
-              country={countryConfig}
-              title={t("years.title")}
-              subtitle={t("years.subtitle", {
-                country: getCountryName(countryConfig, tCountries),
-                years: formatYearsRange(years),
-              })}
-              years={years}
-              parties={parties}
-            />
-          </ArticleSectionColumn>
-        </ArticleSectionOneColumns>
-      </ArticleSectionWrapper>
+      {resolution === "month" ? (
+        <ArticleSectionWrapper id={"sec-timeline"}>
+          <ArticleSectionOneColumns>
+            <ArticleSectionColumn>
+              <ArticleSectionTitle
+                as={"h1"}
+                id={"sec-timeline"}
+                title={t("timeline.detail.title")}
+              />
+              <p className="mb-6">{t("timeline.detail.summary")}</p>
+              <LoadingYearTimeseriesText
+                country={countryConfig}
+                parties={parties}
+                years={years}
+              />
+            </ArticleSectionColumn>
+            <ArticleSectionColumn>
+              <DonationSumChart
+                country={countryConfig}
+                title={t("years.title")}
+                subtitle={t("years.subtitle", {
+                  country: getCountryName(countryConfig, tCountries),
+                  years: formatYearsRange(years),
+                })}
+                years={years}
+                parties={parties}
+              />
+            </ArticleSectionColumn>
+          </ArticleSectionOneColumns>
+        </ArticleSectionWrapper>
+      ) : null}
       <ArticleSectionWrapper id={"sec-per-month"}>
         <ArticleSectionTwoColumns>
           <ArticleSectionColumn>
             <ArticleSectionTitle
               as={"h2"}
               id={"sec-per-month"}
-              title={t("per_month.title")}
+              title={t(chartStrings.title)}
             />
-            <LoadingYearBarsPageText
-              country={countryConfig}
-              parties={parties}
-              years={years}
-            />
+
+            {resolution === "year" && countryConfig.hasDate && (
+              <div className="mb-6">
+                <InfoAlert text={t("timeline.year_resolution_note")} />
+              </div>
+            )}
+
+            <p className="mb-6">{t(chartStrings.description)}</p>
+            {resolution === "month" ? (
+              <LoadingYearBarsPageText
+                country={countryConfig}
+                parties={parties}
+                years={years}
+              />
+            ) : (
+              <LoadingYearTimelineYearText
+                country={countryConfig}
+                parties={parties}
+                years={years}
+              />
+            )}
           </ArticleSectionColumn>
           <ArticleSectionColumn>
             <div>
               <DonationPerMonthChart
                 country={countryConfig}
-                title={t("per_month.title")}
-                subtitle={t("per_month.subtitle", {
+                title={t(chartStrings.title)}
+                subtitle={t(chartStrings.subtitle, {
                   country: getCountryName(countryConfig, tCountries),
                   years: formatYearsRange(years),
                 })}
+                resolution={resolution}
                 years={years}
                 parties={parties}
               />

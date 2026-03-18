@@ -1,4 +1,4 @@
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { getParty, getCountryName } from "../../../../../../utils/countries";
@@ -60,7 +60,7 @@ export default async function OriginLayout(
   const [countryConfig] = await Promise.all([getCountryConfig(country)]);
 
   if (!countryConfig.hasOrigin) {
-    return redirect("/not-found");
+    return notFound();
   }
 
   return children;
