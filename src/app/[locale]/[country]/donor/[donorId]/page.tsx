@@ -99,7 +99,11 @@ export async function generateMetadata(
     alternates: generateAlternates(`${country}/donor/${donorId}`),
   };
 
-  if (isBiggestDonor) {
+  if (
+    isBiggestDonor &&
+    // skip images if the country has no donors
+    !countryConfig.hasNoDonors
+  ) {
     // add rich metadata for biggest donors as these have pregenerated images
     metadata.openGraph = baseOpenGraph({
       locale,

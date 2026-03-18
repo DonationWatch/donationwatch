@@ -190,6 +190,9 @@ describe.each(CONST_LOCALES.map((locale) => ({ locale })))(
         });
 
         it(`renders biggest donors images`, async () => {
+          // if there are no donors, skip rendering donor images
+          if (countryConfig.hasNoDonors) return;
+
           for (const donor of biggestDonors) {
             const png = await renderComponent(
               await DonorImage(
