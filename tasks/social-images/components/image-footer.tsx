@@ -25,8 +25,8 @@ export const ImageFooter = ({
   const t = getTranslations();
 
   return (
-    <div tw="shrink-0 flex flex-col text-sm text-slate-600 justify-end pr-4 pb-2 font-semibold">
-      <div tw="flex justify-end">
+    <div tw="shrink-0 flex flex-col text-sm text-slate-600 justify-end px-4 pb-2 font-semibold">
+      <div tw="flex justify-start">
         {[
           t("footer.build_since", {
             date: formatDate(locale, new Date(getBuild(country.id).t)),
@@ -41,6 +41,12 @@ export const ImageFooter = ({
           }),
           country.knownPartyRequirements
             ? t("over_threshold", {
+                type:
+                  country.knownPartyRequirements.count === -1
+                    ? "sum"
+                    : country.knownPartyRequirements.sum === -1
+                      ? "count"
+                      : "both",
                 count: country.knownPartyRequirements.count,
                 sum: formatCompactCountryCurrency(
                   locale,
