@@ -74,9 +74,8 @@
     "reset_zoom": "Reset zoom"
   },
   "over_min_public_amount": "over {amount}",
-  "over_threshold": "only parties ≥ {count} donations or ≥ {sum}",
+  "over_threshold": "{type, select, count {only parties ≥ {count} donations} sum {only parties ≥ {sum}} other {only parties ≥ {count} donations or ≥ {sum}}}",
   "prelim_data": "preliminary data since {year}",
-  "excludes_year_only_donations": "excludes donations with year as date",
   "common": {
     "date": "Date",
     "party": "Party",
@@ -84,6 +83,7 @@
     "amount": "Amount",
     "anonymizedDonor": "Anonymized Donor",
     "redactedDonor": "Redacted Donor",
+    "donorToPartyByYear": "Donors in {year}",
     "country": "Country",
     "state": "State",
     "summary": "Summary",
@@ -153,7 +153,8 @@
     "what": {
       "title": "What is this?",
       "summary": "Party donations are an important part of politics. They are an important indicator of political support.\n\nWe try to present this data clearly and comprehensibly.",
-      "threshold": "Due to the high number of minor political parties, we only track donations for parties that meet a specific threshold. The current threshold is set at {count} donations or a total of {sum} in contributions to that party, regardless of the size of individual donations.",
+      "threshold": "Due to the high number of minor political parties, we only track donations for parties that meet a specific threshold. The current threshold is set at {type, select, count {{count} donations} sum {a total of {sum}} other {{count} donations or a total of {sum}}} in contributions to that party, regardless of the size of individual donations.",
+      "no_donors": "Due to national regulations, {country} does not publish the identities of individual political donors. Consequently, we do not displays audited total aggregate amounts per party rather than individual transaction records. Features like \"Top Donors\" or \"Donor Search\" are disabled for this region.",
       "source": {
         "austria": "The data used here comes from the Austrian Court of Audit and includes all party donations documented there since 2012.\n\nPlease note: Before July 8, 2019, political parties had to report individual donations of over 51,000 euros (until 2018 over 50,000 euros) to the ACA. Since July 2019, the reporting limit has been 2,500 euros.\n\nThe parties' data is normally updated on a quarterly basis.",
         "germany": "The data used here comes from the German Bundestag and includes all party donations over €50,000 documented there since 2010 and over €35,000 since March 5, 2024.",
@@ -170,7 +171,8 @@
         "canada": "The data used here comes from Elections Canada and is based on the \"contributions as submitted\" dataset. It includes all political donations with a monetary value exceeding €500, documented since 2015. All entries that are part of the \"Statement of Contributions Received\" report from the \"Annual\" electoral event to \"Registered parties\" are included.",
         "georgia": "The information presented here is sourced from the Anti-Corruption Bureau (ანტიკორუფციული ბიურო﻿) of Georgia and includes all political donations recorded since 2011 that exceed 1 GEL. The dataset comprises only contributions classified as type #10 (Monetary donations) or type #16 (Monetary donations made by legal entities).",
         "norway": "The data used here comes from the official party funding publications by Statistics Norway (SSB) and Partifinansiering.no. Totals shown are aggregated from multiple reported receiver entities (such as central, regional, local, and youth units) into a single total per party, with the underlying receiver mapping kept available for transparency.\n\nThe Norway dataset is refreshed on an annual update cycle, reflecting the cadence of the underlying disclosures.",
-        "ukraine": "The data used here is sourced from the National Agency on Corruption Prevention (NAZK) via the PolitData portal. It includes all records identified as \"monetary contributions\" in the official reports.\n\nNote on Data Scope: This total reflects direct financial transfers only. It does not include state funding provided to parliamentary parties or in-kind (non-monetary) contributions such as goods and services.\n\nDue to the full-scale Russian invasion, mandatory political party reporting was suspended from early 2022 until late 2023 for security and logistical reasons. Following the adoption of Law 3337-IX, parties are now backfilling their reports. Data for 2022–2025 is still being updated as the NAZK processes these submissions."
+        "ukraine": "The data used here is sourced from the National Agency on Corruption Prevention (NAZK) via the PolitData portal. It includes all records identified as \"monetary contributions\" in the official reports.\n\nNote on Data Scope: This total reflects direct financial transfers only. It does not include state funding provided to parliamentary parties or in-kind (non-monetary) contributions such as goods and services.\n\nDue to the full-scale Russian invasion, mandatory political party reporting was suspended from early 2022 until late 2023 for security and logistical reasons. Following the adoption of Law 3337-IX, parties are now backfilling their reports. Data for 2022–2025 is still being updated as the NAZK processes these submissions.",
+        "france": "The data used here comes from the Commission Nationale des Comptes de Campagne et des Financements Politiques (CNCCFP) and includes all political donations (reported in Euro) documented in the \"Dons_de_personne_physique\" field.\n\nUnlike other regions, French data is published as an annual aggregate per party, and the identity of individual donors is protected by privacy laws."
       },
       "source_link": "Data source"
     },
@@ -273,6 +275,7 @@
   "timeline": {
     "title": "Timeline",
     "description": "View a timeline of all political party donations in {country} for {years}, with monthly totals and trends across the years.",
+    "year_resolution_note": "This view is standardized to annual resolution because some records in this range provide only the year of contribution. To ensure a complete and accurate comparison without using estimated dates, all data is aggregated by year.",
     "detail": {
       "title": "Timeline of political party donations",
       "summary": "View the interactive line chart below to track the donation history of each political party over time. The x-axis represents the dates, while the y-axis shows the amount of money donated. Each political party is represented by a distinct line that grows with each donation."
@@ -290,6 +293,11 @@
     "highest_sum": "{month} had the highest total donations, with a combined count of {count} donations amounting to {sum}.",
     "most_months": "{party} received donations in {count} months, the most months with contributions among all parties.",
     "month_most_donations": "The month with the highest donation count was {month}, which received a total of {count} individual donations."
+  },
+  "per_year": {
+    "title": "Donations per year",
+    "subtitle": "Yearly sum of published donations to each party in {country}, {years}.",
+    "description": "This stacked bar chart illustrates annual donation data for multiple political parties. The x-axis shows years, the y-axis represents donation sums, and each bar is segmented by color to display individual party contributions, allowing for easy comparison of party donations within and across years."
   },
   "party": {
     "donors": {
@@ -659,7 +667,7 @@
   "other_countries": {
     "title": "Other countries"
   },
-  "thanks": "With thanks to organizations like {external} for providing valuable information on political donation mechanisms.",
+  "thanks": "With thanks to individuals and organizations like {external} for providing valuable information on political donation mechanisms.",
   "export": {
     "title": "Data export",
     "p0": "Get the complete dataset of political donations for {country} used on this site. The export includes normalized donor names, amounts, dates, and recipient parties.",

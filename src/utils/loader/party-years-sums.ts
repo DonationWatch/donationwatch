@@ -9,6 +9,7 @@ export interface PartyStats {
   count: number;
   average: number;
   lastDonation: string;
+  hasYearOnlyDonations?: boolean;
 }
 
 // [year]: { [party]: PartyStats }

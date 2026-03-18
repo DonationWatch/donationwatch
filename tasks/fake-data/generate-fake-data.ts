@@ -8,6 +8,7 @@ import {
 } from "../../tests/config";
 import { DataLoader } from "../load-data/data-loader";
 import { loaders } from "../load-data/loaders";
+import { generatePartyColor, RANDOM_COLOR_MARKER } from "../load-data/util";
 import { promptCountries } from "../utils";
 import { writeWikipediaArticles } from "../wikipedia/util";
 
@@ -50,19 +51,22 @@ class FakeDataLoader extends DataLoader {
   }
 
   // Fake donorMeta with the test donor as they need a Wikipedia article
-  public readonly donorMeta: DonorMetaDefinition = {
-    donors: {
-      [DONOR_WITH_WIKIPEDIA_ARTICLE]: {
-        wiki: 12345, // Fake wiki ID for testing
-      },
-    },
-    relations: [
-      [
-        [DONOR_WITH_REL_A, RelationKind.family],
-        [DONOR_WITH_REL_B, RelationKind.family],
-      ],
-    ],
-  };
+  public readonly donorMeta: DonorMetaDefinition = COUNTRY_CONFIG[this.country]
+    .hasNoDonors
+    ? { donors: {}, relations: [] }
+    : {
+        donors: {
+          [DONOR_WITH_WIKIPEDIA_ARTICLE]: {
+            wiki: 12345, // Fake wiki ID for testing
+          },
+        },
+        relations: [
+          [
+            [DONOR_WITH_REL_A, RelationKind.family],
+            [DONOR_WITH_REL_B, RelationKind.family],
+          ],
+        ],
+      };
 
   private pickRandomParty(): string {
     const partyKeys = Object.keys(this.parties);
@@ -131,9 +135,15 @@ class FakeDataLoader extends DataLoader {
 
     // Create fake donations
     const donationsPerParty =
-      countryConfig.knownPartyRequirements?.count ?? 100;
+      countryConfig.knownPartyRequirements?.count === -1
+        ? 100
+        : (countryConfig.knownPartyRequirements?.count ?? 100);
 
     Object.keys(this.parties).forEach((partyName) => {
+      if (this.parties[partyName].color === RANDOM_COLOR_MARKER) {
+        this.parties[partyName].color = generatePartyColor(partyName);
+      }
+
       for (let j = 0; j < donationsPerParty; j++) {
         const isEu = countryConfig.code === "EU";
 

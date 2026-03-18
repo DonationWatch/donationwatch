@@ -34,6 +34,8 @@ const countryDonation: Record<Country, () => Promise<Donation[]>> = {
     import("./no/donations").then((module) => module.default),
   [Country.ukraine]: () =>
     import("./ua/donations").then((module) => module.default),
+  [Country.france]: () =>
+    import("./fr/donations").then((module) => module.default),
 };
 
 export const getDonations = async (country: Country): Promise<Donation[]> => countryDonation[country]();

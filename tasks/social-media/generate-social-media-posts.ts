@@ -10,13 +10,13 @@ import {
   ModuleResolutionKind,
 } from "typescript";
 
+import { interpolate } from "./string";
 import { Country, getCountryName, getParty } from "../../src/utils/countries";
 import { getCountryConfig } from "../../src/utils/data/get-country-config";
 import { formatCompactCountryCurrency } from "../../src/utils/formatter";
 import { DonationField } from "../../src/utils/types";
 import { getDonations } from "../data/load-donations";
 import { promptCountries } from "../utils";
-import { interpolate } from "./string";
 
 import type { CountryConfig } from "../../src/utils/countries";
 import type { ConstLocale } from "../../src/utils/locales";

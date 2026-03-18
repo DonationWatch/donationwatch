@@ -1,7 +1,6 @@
 "use client";
 import { useLocale } from "next-intl";
 
-
 import { ExpandableReactEchart } from "./expandable-react-echart";
 import { useDonationsByYears } from "../../hooks/use-api";
 import { useChart } from "../../hooks/use-chart";
@@ -104,12 +103,13 @@ const DonationBarChart = ({
   const partiesSet = new Set<string>(parties.map((p) => p.id));
   const foundParties = new Set<string>([]);
   const partySums: Record<string, number> = {};
-  let hasYearOnlyDonations = false;
 
   donations.forEach((donation: Donation & { [DonationField.Date]: string }) => {
     if (donation[DonationField.Date] === donationYear(donation)) {
-      hasYearOnlyDonations = true;
-      if (resolution === "month") return;
+      if (resolution === "month") {
+        throw new Error("Donation date is only year but resolution is month");
+        return;
+      }
     }
     if (!yearsSet.has(donationYear(donation))) return;
     if (!partiesSet.has(donation[DonationField.Receiver])) return;
@@ -341,7 +341,6 @@ const DonationBarChart = ({
       subtitle={subtitle}
       country={country}
       years={years}
-      noteYearOnlyDonations={hasYearOnlyDonations}
     />
   );
 };

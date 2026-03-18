@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 
-
 import { DynamicStackedPartyDonations } from "./dynamic-stacked-party-line";
 import { ReadonlyTopYearDonationsItem } from "./loading-top-year-donations-item";
 import { MetaCard } from "./meta-card";
@@ -115,15 +114,17 @@ const HighscoreHeader = ({
       </h3>
       <div className="mb-4">
         <div className="flex-row space-y-2 sm:flex sm:space-y-0 sm:space-x-10">
-          <MetaCard
-            title={t("donation_count")}
-            value={formatNumber(locale, count)}
-          />
+          {country.hasNoDonors ? null : (
+            <MetaCard
+              title={t("donation_count")}
+              value={formatNumber(locale, count)}
+            />
+          )}
           <MetaCard
             title={t("sum")}
             value={formatCountryCurrency(locale, sum, country)}
           />
-          {showExtendedMeta && count > 1 && (
+          {!country.hasNoDonors && showExtendedMeta && count > 1 && (
             <MetaCard
               title={t("average")}
               value={formatCountryCurrency(

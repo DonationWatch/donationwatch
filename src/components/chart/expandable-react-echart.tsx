@@ -39,7 +39,6 @@ export const ExpandableReactEchart = ({
   onZrClick,
   onClick,
   maxHeightScreen = false,
-  noteYearOnlyDonations = false,
   footer = true,
 }: ReactEChartsProps & {
   country: CountryConfig;
@@ -52,7 +51,6 @@ export const ExpandableReactEchart = ({
   allowExpand?: boolean;
   years: string[];
   maxHeightScreen?: boolean;
-  noteYearOnlyDonations?: boolean;
   footer?: boolean;
 }): JSX.Element => {
   const t = useTranslations();
@@ -165,10 +163,16 @@ export const ExpandableReactEchart = ({
               }),
               country.knownPartyRequirements
                 ? t("over_threshold", {
+                    type:
+                      country.knownPartyRequirements.count === -1
+                        ? "sum"
+                        : country.knownPartyRequirements.sum === -1
+                          ? "count"
+                          : "both",
                     count: country.knownPartyRequirements.count,
                     sum: formatCompactCountryCurrency(
                       locale,
-                      country.knownPartyRequirements.sum,
+                      Math.max(0, country.knownPartyRequirements.sum),
                       country,
                     ),
                   })
@@ -177,9 +181,6 @@ export const ExpandableReactEchart = ({
                 ? t("prelim_data", {
                     year: country.preliminaryDataSince!,
                   })
-                : undefined,
-              noteYearOnlyDonations
-                ? t("excludes_year_only_donations")
                 : undefined,
             ]
               .filter(isNotNullandNotUndefined)

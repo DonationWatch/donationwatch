@@ -74,9 +74,8 @@
     "reset_zoom": "Resetiraj zum"
   },
   "over_min_public_amount": "preko {amount}",
-  "over_threshold": "samo stranke s ≥ {count} donacija ili ≥ {sum}",
+  "over_threshold": "{type, select, count {samo stranke s ≥ {count} donacija} sum {samo stranke s ≥ {sum}} other {samo stranke s ≥ {count} donacija ili ≥ {sum}}}",
   "prelim_data": "preliminarni podaci od {year}. godine",
-  "excludes_year_only_donations": "isključuje donacije s godinom kao datumom",
   "common": {
     "date": "Datum",
     "party": "Stranka",
@@ -84,6 +83,7 @@
     "amount": "Iznos",
     "anonymizedDonor": "Anonimizirani donator",
     "redactedDonor": "Redigirani donator",
+    "donorToPartyByYear": "Donatori u {year}. godini",
     "country": "Država",
     "state": "Savezna država",
     "summary": "Sažetak",
@@ -163,7 +163,8 @@
     "what": {
       "title": "Što je ovo?",
       "summary": "Donacije strankama važan su dio politike. One su važan pokazatelj političke podrške.\n\nMi pokušavamo ove podatke predstaviti jasno i razumljivo.",
-      "threshold": "Zbog velikog broja manjih političkih stranaka pratimo donacije samo za stranke koje zadovoljavaju određeni prag. Trenutni prag postavljen je na {count} donacija ili ukupni iznos od {sum} doprinosa toj stranci, bez obzira na veličinu pojedinačnih donacija.",
+      "threshold": "Zbog velikog broja manjih političkih stranaka pratimo samo donacije za stranke koje prelaze određeni prag. Trenutni prag postavljen je na {type, select, count {{count} donacija} sum {ukupno {sum}} other {{count} donacija ili ukupno {sum}}} doprinosa toj stranci, bez obzira na veličinu pojedinačnih donacija.",
+      "no_donors": "Zbog nacionalnih propisa {country} ne objavljuje identitete pojedinačnih političkih donatora. Stoga prikazujemo revidirane ukupne iznose po stranci umjesto pojedinačnih transakcija. Značajke poput \"Najveći donatori\" ili \"Pretraga donatora\" onemogućene su za ovu regiju.",
       "source": {
         "austria": "Podaci koji se ovdje koriste dolaze iz austrijskog Revizorskog suda i uključuju sve donacije strankama koje su tamo dokumentirane od 2012. godine.\n\nMolimo imajte na umu: Prije 8. srpnja 2019., političke stranke morale su prijaviti pojedinačne donacije veće od 51.000 eura (do 2018. preko 50.000 eura) ACA-u. Od srpnja 2019. granica za prijavu je 2.500 eura.\n\nPodaci stranaka obično se ažuriraju tromjesečno.",
         "germany": "Podaci koji se ovdje koriste dolaze iz njemačkog Bundestaga i uključuju sve donacije strankama preko 50.000 eura dokumentirane tamo od 2010. godine i preko 35.000 eura od 5. ožujka 2024.",
@@ -180,7 +181,8 @@
         "canada": "Podaci korišteni ovdje dolaze od Elections Canada i temelje se na skupu podataka „contributions as submitted“. Uključuju sve političke donacije novčane vrijednosti veće od 500 €, dokumentirane od 2015. godine. Uključeni su svi unosi koji su dio izvješća „Statement of Contributions Received“ iz izbornog događaja „Annual“ za „Registered parties“.",
         "georgia": "Informacije prikazane ovdje preuzete su iz Ureda za borbu protiv korupcije (ანტიკორუფციული ბიურო﻿) Gruzije i uključuju sve političke donacije zabilježene od 2011. godine koje prelaze 1 GEL. Skup podataka uključuje samo doprinose klasificirane kao tip #10 (Novčane donacije) ili tip #16 (Novčane donacije pravnih osoba).",
         "norway": "Ovdje korišteni podaci potječu iz službenih publikacija o financiranju stranaka koje objavljuju Statistics Norway (SSB) i Partifinansiering.no. Prikazani ukupni iznosi agregirani su iz više prijavljenih primateljskih entiteta (kao što su središnje, regionalne, lokalne i omladinske jedinice) u jedan ukupni iznos po stranci, pri čemu je temeljno mapiranje primatelja i dalje dostupno radi transparentnosti.\n\nNorveški skup podataka osvježava se u godišnjem ciklusu ažuriranja, odražavajući dinamiku temeljnih objava.",
-        "ukraine": "Podaci korišteni ovdje potječu od Nacionalne agencije za prevenciju korupcije (NAZK) putem portala PolitData. Obuhvaćaju sve zapise koji su u službenim izvješćima označeni kao „novčani doprinosi“.\n\nNapomena o opsegu podataka: Ovaj ukupni iznos odnosi se samo na izravne financijske transfere. Ne uključuje državna sredstva osigurana parlamentarnim strankama niti nenovčane (prirodne) doprinose poput robe i usluga.\n\nZbog sveobuhvatne ruske invazije obvezno izvještavanje političkih stranaka bilo je obustavljeno od početka 2022. do kraja 2023. iz sigurnosnih i logističkih razloga. Nakon usvajanja Zakona 3337-IX, stranke sada retroaktivno podnose svoja izvješća. Podaci za razdoblje 2022.–2025. i dalje se ažuriraju dok NAZK obrađuje te prijave."
+        "ukraine": "Podaci korišteni ovdje potječu od Nacionalne agencije za prevenciju korupcije (NAZK) putem portala PolitData. Obuhvaćaju sve zapise koji su u službenim izvješćima označeni kao „novčani doprinosi“.\n\nNapomena o opsegu podataka: Ovaj ukupni iznos odnosi se samo na izravne financijske transfere. Ne uključuje državna sredstva osigurana parlamentarnim strankama niti nenovčane (prirodne) doprinose poput robe i usluga.\n\nZbog sveobuhvatne ruske invazije obvezno izvještavanje političkih stranaka bilo je obustavljeno od početka 2022. do kraja 2023. iz sigurnosnih i logističkih razloga. Nakon usvajanja Zakona 3337-IX, stranke sada retroaktivno podnose svoja izvješća. Podaci za razdoblje 2022.–2025. i dalje se ažuriraju dok NAZK obrađuje te prijave.",
+        "france": "Podaci korišteni ovdje potječu iz Commission Nationale des Comptes de Campagne et des Financements Politiques (CNCCFP) i uključuju sve političke donacije (izražene u eurima) zabilježene u polju \"Dons_de_personne_physique\".\n\nZa razliku od drugih regija, francuski se podaci objavljuju kao godišnji zbroj po stranci, a identitet pojedinih donatora zaštićen je zakonima o privatnosti."
       },
       "source_link": "Izvor podataka"
     },
@@ -283,6 +285,7 @@
   "timeline": {
     "title": "Vremenska crta",
     "description": "Pogledajte vremensku crtu svih donacija političkim strankama u {country} za {years}, s mjesečnim ukupnim iznosima i trendovima kroz godine.",
+    "year_resolution_note": "Ovaj prikaz je standardiziran na godišnju razinu jer neki zapisi u ovom rasponu sadrže samo godinu donacije. Kako bi se omogućila potpuna i točna usporedba bez korištenja procijenjenih datuma, svi su podaci objedinjeni po godinama.",
     "detail": {
       "title": "Vremenska crta donacija političkim strankama",
       "summary": "Pogledajte interaktivni linijski grafikon ispod kako biste pratili povijest donacija svake političke stranke tijekom vremena. X-os predstavlja datume, dok y-os prikazuje iznos doniranog novca. Svaka politička stranka predstavljena je posebnom linijom koja raste sa svakom donacijom."
@@ -300,6 +303,11 @@
     "highest_sum": "{month} je imao najviše ukupne donacije, s kombiniranim brojem od {count} donacija u iznosu od {sum}.",
     "most_months": "{party} je primila donacije u {count} mjeseci, što je najviše mjeseci s prilozima međusvim strankama.",
     "month_most_donations": "Mjesec s najviše donacija bio je {month}, koji je primio ukupno {count} pojedinačnih donacija."
+  },
+  "per_year": {
+    "title": "Donacije po godini",
+    "subtitle": "Godišnji zbroj objavljenih donacija svakoj stranci u {country}, {years}.",
+    "description": "Ovaj složeni stupčasti grafikon prikazuje godišnje podatke o donacijama za više političkih stranaka. X-os pokazuje godine, Y-os predstavlja iznose donacija, a svaki je stupac podijeljen bojama koje prikazuju doprinose pojedinih stranaka, što omogućuje jednostavnu usporedbu donacija unutar i između godina."
   },
   "party": {
     "donors": {
@@ -675,7 +683,7 @@
   "other_countries": {
     "title": "Druge zemlje"
   },
-  "thanks": "Zahvaljujemo organizacijama poput {external} na pružanju vrijednih informacija o mehanizmima političkih donacija.",
+  "thanks": "Zahvaljujemo pojedincima i organizacijama poput {external} na pružanju vrijednih informacija o mehanizmima političkih donacija.",
   "export": {
     "title": "Izvoz podataka",
     "p0": "Preuzmite cjeloviti skup podataka o političkim donacijama za {country} koji se koristi na ovoj stranici. Izvoz uključuje normalizirana imena donatora, iznose, datume i stranke primateljice.",

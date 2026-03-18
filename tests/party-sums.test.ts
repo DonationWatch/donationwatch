@@ -2,6 +2,7 @@ import { expect, test, describe, beforeEach } from "vitest";
 
 import { skipIfFakeEnv } from "./config";
 import euSums from "../src/data/europeanunion/party-sums";
+import frSums from "../src/data/france/party-sums";
 import nlSums from "../src/data/netherlands/party-sums";
 import { hasYearSums } from "../src/utils/loader/party-years-sums";
 
@@ -14,13 +15,16 @@ beforeEach((context) => {
 const hasExpectedDonations = (
   data: PartyYearsSums,
   expected: [string, number][],
+  skipOthers: boolean = false,
 ) => {
-  expect(Object.keys(data).toSorted()).toEqual(
-    expected
-      .filter(([, value]) => value > 0)
-      .map(([key]) => key)
-      .toSorted(),
-  );
+  if (!skipOthers) {
+    expect(Object.keys(data).toSorted()).toEqual(
+      expected
+        .filter(([, value]) => value > 0)
+        .map(([key]) => key)
+        .toSorted(),
+    );
+  }
 
   for (const [key, value] of expected) {
     if (value === 0) continue;
@@ -366,5 +370,28 @@ describe("EU", () => {
       ["ND", 69_000],
       ["ELF", 85000],
     ]);
+  });
+});
+
+describe("FR", () => {
+  test("2021 has expected values", async () => {
+    const data = frSums["2021"];
+
+    // https://www.vie-publique.fr/en-bref/288220-partis-politiques-publication-de-letat-des-comptes-2021
+    hasExpectedDonations(
+      data,
+      [
+        ["910", 4_709_512.95],
+        ["401", 3_630_955.64],
+        ["976", 956_146.29],
+        ["40", 631_047],
+        ["76", 545_939],
+        ["104", 227_900],
+        ["529", 142_485],
+        // not in the blogpost
+        ["1344", 169_564],
+      ],
+      true,
+    );
   });
 });

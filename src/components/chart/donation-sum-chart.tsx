@@ -1,7 +1,6 @@
 "use client";
 import { useLocale } from "next-intl";
 
-
 import { ExpandableReactEchart } from "./expandable-react-echart";
 import { useDonationsByParty, useDonationsByYears } from "../../hooks/use-api";
 import { useChart } from "../../hooks/use-chart";
@@ -171,11 +170,10 @@ const DonationTimeseriesChart = ({
   const partiesSet = new Set<string>(parties.map((p) => p.id));
   const foundParties = new Set<string>([]);
   const partySums: Record<string, number> = {};
-  let hasYearOnlyDonations = false;
 
   donations.forEach((donation: Donation & { [DonationField.Date]: string }) => {
     if (donation[DonationField.Date] === donationYear(donation)) {
-      hasYearOnlyDonations = true;
+      throw new Error("Donation date is only year but expected full date");
       return;
     }
     if (!yearsSet.has(donationYear(donation))) return;
@@ -375,7 +373,6 @@ const DonationTimeseriesChart = ({
       subtitle={subtitle}
       country={country}
       years={years}
-      noteYearOnlyDonations={hasYearOnlyDonations}
     />
   );
 };
@@ -455,14 +452,12 @@ export const DonationStackedTimeseriesChart = ({
   const partiesSet = new Set<string>(parties.map((p) => p.id));
   const foundParties = new Set<string>([]);
   const partySums: Record<string, number> = {};
-  let hasYearOnlyDonations = false;
 
   donations.forEach((donation: Donation & { [DonationField.Date]: string }) => {
     if (
       donation[DonationField.Date] === donationYear(donation) &&
       !donationsHaveYearsOnly
     ) {
-      hasYearOnlyDonations = true;
       return;
     }
     if (!yearsSet.has(donationYear(donation))) return;
@@ -690,7 +685,6 @@ export const DonationStackedTimeseriesChart = ({
       subtitle={subtitle}
       country={country}
       years={years}
-      noteYearOnlyDonations={!donationsHaveYearsOnly && hasYearOnlyDonations}
     />
   );
 };

@@ -84,6 +84,10 @@ export default async function YearPage(
     getPartyYearsSums(country),
   ]);
 
+  if (countryConfig.hasNoDonors) {
+    return notFound();
+  }
+
   if (!hasYearSums(partySums, years)) {
     return redirect(
       `/${params.locale}/${params.country}/${params.years}/overview`,

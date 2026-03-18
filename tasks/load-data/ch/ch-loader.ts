@@ -4,11 +4,11 @@ import path from "path";
 
 import { parse } from "node-xlsx";
 
+import { donorMeta } from "./donor-meta";
 import { isNotNullandNotUndefined } from "../../../src/utils/array";
 import { Country } from "../../../src/utils/countries";
 import { AddressField, DonationField } from "../../../src/utils/types";
 import { DataLoader } from "../data-loader";
-import { donorMeta } from "./donor-meta";
 
 import type { ReceiverId, DonationAddress } from "../../../src/utils/types";
 import type { ExtractedYearData, PartyConfig } from "../data-loader";
@@ -223,8 +223,8 @@ export class ChLoader extends DataLoader {
           ? urheberZuwendungFirma
           : urheberZuwendungName || urheberZuwendungFirstname
             ? [urheberZuwendungFirstname, urheberZuwendungName]
-              .filter(Boolean)
-              .join(" ")
+                .filter(Boolean)
+                .join(" ")
             : undefined;
 
         if (!donor) return;

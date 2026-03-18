@@ -74,9 +74,8 @@
     "reset_zoom": "Tilbakestill zoom"
   },
   "over_min_public_amount": "over {amount}",
-  "over_threshold": "kun partier ≥ {count} donasjoner eller ≥ {sum}",
+  "over_threshold": "{type, select, count {bare partier med ≥ {count} donasjoner} sum {bare partier med ≥ {sum}} other {bare partier med ≥ {count} donasjoner eller ≥ {sum}}}",
   "prelim_data": "foreløpige data siden {year}",
-  "excludes_year_only_donations": "utelater donasjoner med år som dato",
   "common": {
     "date": "Dato",
     "party": "Parti",
@@ -84,6 +83,7 @@
     "amount": "Beløp",
     "anonymizedDonor": "Anonymisert donor",
     "redactedDonor": "Sensurert giver",
+    "donorToPartyByYear": "Donorer i {year}",
     "country": "Land",
     "state": "Stat",
     "summary": "Sammendrag",
@@ -163,7 +163,8 @@
     "what": {
       "title": "Hva er dette?",
       "summary": "Partidonasjoner er en viktig del av politikken. De er en viktig indikator på politisk støtte.\n\nVi prøver å presentere disse dataene tydelig og forståelig.",
-      "threshold": "På grunn av det høye antallet små politiske partier sporer vi bare donasjoner for partier som oppfyller en bestemt terskel. Den nåværende terskelen er satt til {count} donasjoner eller totalt {sum} i bidrag til det partiet, uavhengig av størrelsen på enkeltbidragene.",
+      "threshold": "På grunn av det høye antallet mindre politiske partier sporer vi bare donasjoner til partier som oppfyller en viss terskel. Den nåværende terskelen er satt til {type, select, count {{count} donasjoner} sum {totalt {sum}} other {{count} donasjoner eller totalt {sum}}} i bidrag til partiet, uavhengig av størrelsen på enkeltbidrag.",
+      "no_donors": "På grunn av nasjonale forskrifter offentliggjør ikke {country} identiteten til individuelle politiske givere. Derfor viser vi reviderte samlede beløp per parti i stedet for individuelle transaksjoner. Funksjoner som \"Toppgivere\" eller \"Giversøk\" er deaktivert for denne regionen.",
       "source": {
         "austria": "Dataene som brukes her kommer fra den østerrikske Riksrevisjonen (Austrian Court of Audit) og inkluderer alle partidonasjoner som er dokumentert der siden 2012.\n\nMerk: Før 8. juli 2019 måtte politiske partier rapportere enkeltbidrag over 51 000 euro (fram til 2018 over 50 000 euro) til ACA. Siden juli 2019 har rapporteringsgrensen vært 2 500 euro.\n\nPartienes data oppdateres normalt kvartalsvis.",
         "germany": "Dataene som brukes her kommer fra den tyske Forbundsdagen (Bundestag) og inkluderer alle partidonasjoner over €50 000 dokumentert der siden 2010, samt over €35 000 siden 5. mars 2024.",
@@ -180,7 +181,8 @@
         "canada": "Dataene som brukes her kommer fra Elections Canada og er basert på datasettet \"contributions as submitted\". Det inkluderer alle politiske donasjoner med pengeverdi over €500, dokumentert siden 2015. Alle oppføringer som inngår i rapporten \"Statement of Contributions Received\" fra valgtypen \"Annual\" til \"Registered parties\" er inkludert.",
         "georgia": "Informasjonen som presenteres her er hentet fra Georgias antikorrupsjonsbyrå (ანტიკორუფციული ბიურო﻿) og inkluderer alle politiske donasjoner registrert siden 2011 som overstiger 1 GEL. Datasettet omfatter kun bidrag klassifisert som type #10 (monetære donasjoner) eller type #16 (monetære donasjoner fra juridiske personer).",
         "norway": "Dataene som brukes her kommer fra de offisielle publikasjonene om partifinansiering fra Statistisk sentralbyrå (SSB) og Partifinansiering.no. Totalene som vises er aggregert fra flere rapporterte mottakerenheter (for eksempel sentrale, regionale, lokale og ungdomsenheter) til én samlet totalsum per parti, mens den underliggende mappingen av mottakere holdes tilgjengelig for åpenhet.\n\nNorgesdatasettet oppdateres årlig, i tråd med publiseringstakten for de underliggende opplysningene.",
-        "ukraine": "Dataene som brukes her, er hentet fra Nasjonalt byrå for korrupsjonsforebygging (NAZK) via PolitData-portalen. De inkluderer alle poster identifisert som «økonomiske bidrag» i de offisielle rapportene.\n\nMerknad om datagrunnlag: Dette tallet viser kun direkte pengetransaksjoner. Det inkluderer ikke statlig finansiering til parlamentariske partier eller ikke-monetære bidrag, som varer og tjenester.\n\nPå grunn av den fullskala russiske invasjonen ble den obligatoriske rapporteringen for politiske partier suspendert fra tidlig 2022 til slutten av 2023 av sikkerhets- og logistikkårsaker. Etter vedtakelsen av lov 3337-IX leverer partiene nå inn sine rapporter i ettertid. Data for 2022–2025 oppdateres fortsatt mens NAZK behandler disse innsendelsene."
+        "ukraine": "Dataene som brukes her, er hentet fra Nasjonalt byrå for korrupsjonsforebygging (NAZK) via PolitData-portalen. De inkluderer alle poster identifisert som «økonomiske bidrag» i de offisielle rapportene.\n\nMerknad om datagrunnlag: Dette tallet viser kun direkte pengetransaksjoner. Det inkluderer ikke statlig finansiering til parlamentariske partier eller ikke-monetære bidrag, som varer og tjenester.\n\nPå grunn av den fullskala russiske invasjonen ble den obligatoriske rapporteringen for politiske partier suspendert fra tidlig 2022 til slutten av 2023 av sikkerhets- og logistikkårsaker. Etter vedtakelsen av lov 3337-IX leverer partiene nå inn sine rapporter i ettertid. Data for 2022–2025 oppdateres fortsatt mens NAZK behandler disse innsendelsene.",
+        "france": "Dataene som brukes her kommer fra Commission Nationale des Comptes de Campagne et des Financements Politiques (CNCCFP) og inkluderer alle politiske donasjoner (rapportert i euro) som er dokumentert i feltet \"Dons_de_personne_physique\".\n\nI motsetning til andre regioner publiseres de franske dataene som en årlig samlet oversikt per parti, og identiteten til individuelle givere er beskyttet av personvernlovgivningen."
       },
       "source_link": "Datakilde"
     },
@@ -283,6 +285,7 @@
   "timeline": {
     "title": "Tidslinje",
     "description": "Se en tidslinje over alle politiske partidonasjoner i {country} for {years}, med månedlige totaler og trender på tvers av årene.",
+    "year_resolution_note": "Denne visningen er standardisert til årlig oppløsning fordi noen poster i dette området kun oppgir året for bidraget. For å sikre en fullstendig og nøyaktig sammenligning uten bruk av estimerte datoer, er alle data aggregert etter år.",
     "detail": {
       "title": "Tidslinje over politiske partidonasjoner",
       "summary": "Se det interaktive linjediagrammet nedenfor for å følge donasjonshistorikken for hvert politisk parti over tid. X-aksen viser datoer, mens y-aksen viser donert beløp. Hvert parti er representert med en egen linje som vokser for hver donasjon."
@@ -300,6 +303,11 @@
     "highest_sum": "{month} hadde høyest total donasjonssum, med totalt {count} donasjoner som utgjorde {sum}.",
     "most_months": "{party} mottok donasjoner i {count} måneder, flest måneder med bidrag blant alle partier.",
     "month_most_donations": "Måneden med høyest antall donasjoner var {month}, som mottok totalt {count} enkeltbidrag."
+  },
+  "per_year": {
+    "title": "Donasjoner per år",
+    "subtitle": "Årlig sum av publiserte donasjoner til hvert parti i {country}, {years}.",
+    "description": "Dette stablede stolpediagrammet viser årlige donasjonsdata for flere politiske partier. X-aksen viser år, Y-aksen representerer donasjonssummer, og hver stolpe er delt inn i fargede segmenter som viser bidragene fra de enkelte partiene, noe som gjør det enkelt å sammenligne donasjoner både innenfor og mellom år."
   },
   "party": {
     "donors": {
@@ -675,7 +683,7 @@
   "other_countries": {
     "title": "Andre land"
   },
-  "thanks": "Takk til organisasjoner som {external} for å tilby verdifull informasjon om mekanismer for politiske donasjoner.",
+  "thanks": "Med takk til enkeltpersoner og organisasjoner som {external} for å ha gitt verdifull informasjon om mekanismer for politiske donasjoner.",
   "export": {
     "title": "Dataeksport",
     "p0": "Få hele datasettet med politiske donasjoner for {country} som brukes på dette nettstedet. Eksporten inkluderer normaliserte donornavn, beløp, datoer og mottakerpartier.",

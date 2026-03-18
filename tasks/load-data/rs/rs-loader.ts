@@ -4,6 +4,7 @@ import path from "path";
 
 import { parse } from "csv-parse/sync";
 
+import { donorMeta } from "./donor-meta";
 import { Country } from "../../../src/utils/countries";
 import { AddressField, DonationField } from "../../../src/utils/types";
 import {
@@ -11,7 +12,6 @@ import {
   type ExtractedYearData,
   type PartyConfig,
 } from "../data-loader";
-import { donorMeta } from "./donor-meta";
 
 import type { ReceiverId } from "../../../src/utils/types";
 

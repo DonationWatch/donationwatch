@@ -37,7 +37,12 @@ export const SIDENAV_PERSISTENCE_KEY = "sidebar-open";
 
 // Special keywords for donor names that should be treated specially
 // Should use Unicode Private Use Area (PUA)
+
+// donor was redacted by upstream
 export const REDACTED_DONOR_KEYWORD = "\uE000";
+// donor was anonymized by us due to request
 export const ANONYMIZED_DONOR_KEYWORD = "\uE001";
+// donor to party in year (used for countries that have no individual donors but years, e.g. FR)
+export const DONOR_TO_PARTY_BY_YEAR = "\uE002";
 
 export const DATA_LICENSE = "CC BY 4.0";

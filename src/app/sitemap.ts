@@ -88,12 +88,14 @@ export default async function sitemap(props: {
               (year) => Object.keys(partyYearsSums[year]).length > 0,
             );
 
-            const filterConditionalSubPages = (subPage: string) => {
-              if (subPage.startsWith("origin")) return config.hasOrigin;
-              if (subPage.startsWith("timeline")) return config.hasTimeline;
+            const filterConditionalSubPages =
+              (section: "year" | "party") => (subPage: string) => {
+                if (subPage.startsWith("origin")) return config.hasOrigin;
+                if (section === "year" && subPage.startsWith("timeline"))
+                  return config.hasDate;
 
-              return true;
-            };
+                return true;
+              };
 
             return [
               {
@@ -127,7 +129,7 @@ export default async function sitemap(props: {
                 );
 
                 return partySubPages
-                  .filter(filterConditionalSubPages)
+                  .filter(filterConditionalSubPages("party"))
                   .map((subPage) => ({
                     url: `${partiesBaseUrl}/${subPage}`,
                     lastModified: lastDonation ?? lastModified,
@@ -144,7 +146,7 @@ export default async function sitemap(props: {
                 );
 
                 return yearSubPages
-                  .filter(filterConditionalSubPages)
+                  .filter(filterConditionalSubPages("year"))
                   .map((subPage) => ({
                     url: `${yearsBaseUrl}/${subPage}`,
                     lastModified: lastDonation ?? lastModified,
@@ -163,7 +165,7 @@ export default async function sitemap(props: {
                 );
 
                 return yearSubPages
-                  .filter(filterConditionalSubPages)
+                  .filter(filterConditionalSubPages("year"))
                   .map((subPage) => ({
                     url: `${yearsBaseUrl}/${subPage}`,
                     lastModified: lastDonation ?? lastModified,

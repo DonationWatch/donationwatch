@@ -84,42 +84,53 @@ export default async function TimelinePage(
 
   return (
     <Article fullWidth={true}>
-      <ArticleSectionWrapper id={"sec-timeline"}>
-        <ArticleSectionOneColumns>
-          <ArticleSectionColumn>
-            <ArticleSectionTitle
-              as={"h1"}
-              id={"sec-timeline"}
-              title={t("party.timeline.detail.title", {
-                party: party.short,
-              })}
-            />
-            <p>
-              {t("party.timeline.detail.summary", {
-                party: party.short,
-              })}
-            </p>
-          </ArticleSectionColumn>
-          <ArticleSectionColumn>
-            <DonationPartyChart
-              title={t("party.timeline.chart_title", {
-                party: party.short,
-              })}
-              subtitle={t("party.timeline.subtitle", {
-                party: party.short,
-                country: getCountryName(countryConfig, tCountries),
-              })}
-              country={countryConfig}
-              years={countryConfig.years}
-              party={party}
-              limitToFirstDateYear={true}
-            />
-          </ArticleSectionColumn>
-        </ArticleSectionOneColumns>
-      </ArticleSectionWrapper>
+      {countryConfig.hasDate ? (
+        <ArticleSectionWrapper id={"sec-timeline"}>
+          <ArticleSectionOneColumns>
+            <ArticleSectionColumn>
+              <ArticleSectionTitle
+                as={"h1"}
+                id={"sec-timeline"}
+                title={t("party.timeline.detail.title", {
+                  party: party.short,
+                })}
+              />
+              <p>
+                {t("party.timeline.detail.summary", {
+                  party: party.short,
+                })}
+              </p>
+            </ArticleSectionColumn>
+            <ArticleSectionColumn>
+              <DonationPartyChart
+                title={t("party.timeline.chart_title", {
+                  party: party.short,
+                })}
+                subtitle={t("party.timeline.subtitle", {
+                  party: party.short,
+                  country: getCountryName(countryConfig, tCountries),
+                })}
+                country={countryConfig}
+                years={countryConfig.years}
+                party={party}
+                limitToFirstDateYear={true}
+              />
+            </ArticleSectionColumn>
+          </ArticleSectionOneColumns>
+        </ArticleSectionWrapper>
+      ) : null}
       <ArticleSectionWrapper id={"sec-per-year"}>
         <ArticleSectionTwoColumns>
           <ArticleSectionColumn>
+            {countryConfig.hasDate ? null : (
+              <ArticleSectionTitle
+                as={"h1"}
+                id={"sec-timeline"}
+                title={t("party.timeline.detail.title", {
+                  party: party.short,
+                })}
+              />
+            )}
             <PartyTimelineText country={countryConfig} party={party} />
           </ArticleSectionColumn>
           <ArticleSectionColumn>

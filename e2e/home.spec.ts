@@ -14,6 +14,8 @@ test.describe("Homepage", () => {
       });
 
       test("works", async ({ accessibility, homePage, meta, locale }) => {
+        const countryConfig = await getCountryConfig(country);
+
         await test.step("is accessible", async () => {
           await accessibility.check();
         });
@@ -26,12 +28,12 @@ test.describe("Homepage", () => {
         });
 
         await test.step("has biggest donations text", async () => {
-          await expect(homePage.biggestDonations).toBeVisible();
+          await expect(homePage.biggestDonations).toBeVisible({
+            visible: !countryConfig.hasNoDonors,
+          });
         });
 
         await test.step("has donations from current legislative session", async (step) => {
-          const countryConfig = await getCountryConfig(country);
-
           step.skip(
             !countryConfig.legislativeYears,
             "not all countries have legislative sessions",
@@ -40,7 +42,7 @@ test.describe("Homepage", () => {
           await expect(homePage.currentLegislativePeriod.locator).toBeVisible();
 
           const cc = await getCountryConfig(country);
-          if (cc.hasTimeline) {
+          if (cc.hasDate) {
             await expect(homePage.mostRecentDonations).toBeVisible();
           }
 

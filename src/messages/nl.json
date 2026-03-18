@@ -74,9 +74,8 @@
     "reset_zoom": "Zoom zurücksetzen"
   },
   "over_min_public_amount": "meer dan {amount}",
-  "over_threshold": "alleen partijen met ≥ {count} donaties of ≥ {sum}",
+  "over_threshold": "{type, select, count {alleen partijen met ≥ {count} donaties} sum {alleen partijen met ≥ {sum}} other {alleen partijen met ≥ {count} donaties of ≥ {sum}}}",
   "prelim_data": "voorlopige gegevens sinds {year}",
-  "excludes_year_only_donations": "sluit donaties met alleen jaar als datum uit",
   "common": {
     "date": "Datum",
     "party": "Partij",
@@ -84,6 +83,7 @@
     "amount": "Bedrag",
     "anonymizedDonor": "Geanonimiseerde donor",
     "redactedDonor": "Geanonimiseerde donor",
+    "donorToPartyByYear": "Donateurs in {year}",
     "country": "Land",
     "state": "Staat",
     "summary": "Samenvatting",
@@ -163,7 +163,8 @@
     "what": {
       "title": "Wat is dit?",
       "summary": "Partijgiften zijn een belangrijk onderdeel van de politiek. Ze zijn een belangrijke indicator van politieke steun.\n\nWe proberen deze gegevens duidelijk en begrijpelijk weer te geven.",
-      "threshold": "Vanwege het grote aantal kleinere politieke partijen registreren we alleen donaties voor partijen die aan een specifieke drempel voldoen. De huidige drempel is vastgesteld op {count} donaties of een totaalbedrag van {sum} aan bijdragen aan die partij, ongeacht de grootte van individuele donaties.",
+      "threshold": "Vanwege het grote aantal kleinere politieke partijen volgen we alleen donaties voor partijen die een bepaalde drempel bereiken. De huidige drempel is vastgesteld op {type, select, count {{count} donaties} sum {in totaal {sum}} other {{count} donaties of in totaal {sum}}} aan bijdragen voor die partij, ongeacht de grootte van individuele donaties.",
+      "no_donors": "Vanwege nationale regelgeving publiceert {country} de identiteit van individuele politieke donoren niet. Daarom tonen we gecontroleerde totaalbedragen per partij in plaats van afzonderlijke transacties. Functies zoals \"Topdonoren\" of \"Donorzoekfunctie\" zijn voor deze regio uitgeschakeld.",
       "source": {
         "austria": "De hier gebruikte gegevens zijn afkomstig van de Oostenrijkse Rekenkamer en omvatten alle partijdonaties die daar sinds 2012 zijn gedocumenteerd.\n\nLet op: vóór 8 juli 2019 moesten politieke partijen individuele donaties van meer dan 51.000 euro (tot 2018 meer dan 50.000 euro) melden bij de ACA. Sinds juli 2019 is de rapportagegrens 2.500 euro.\n\nDe gegevens van de partijen worden normaal gesproken elk kwartaal bijgewerkt.",
         "germany": "De hier gebruikte gegevens zijn afkomstig van de Duitse Bondsdag en omvatten alle partijgiften van meer dan 50.000 euro die daar sinds 2010 zijn gedocumenteerd en van meer dan 35.000 euro sinds 5 maart 2024.",
@@ -180,7 +181,8 @@
         "canada": "De hier gebruikte gegevens zijn afkomstig van Elections Canada en zijn gebaseerd op de dataset “contributions as submitted”. Het omvat alle politieke donaties met een geldwaarde van meer dan €500, gedocumenteerd sinds 2015. Alle vermeldingen die deel uitmaken van het rapport “Statement of Contributions Received” van het verkiezingsevenement “Annual” aan “Registered parties” zijn inbegrepen.",
         "georgia": "De hier gepresenteerde informatie is afkomstig van het Bureau voor Anti-Corruptie (ანტიკორუფციული ბიურო﻿) van Georgië en bevat alle politieke donaties die sinds 2011 zijn geregistreerd en meer dan 1 GEL bedragen. De dataset omvat alleen bijdragen die zijn geclassificeerd als type #10 (Geldelijke donaties) of type #16 (Geldelijke donaties van rechtspersonen).",
         "norway": "De hier gebruikte gegevens zijn afkomstig uit de officiële publicaties over partijfinanciering van Statistics Norway (SSB) en Partifinansiering.no. De getoonde totalen zijn geaggregeerd uit meerdere gerapporteerde ontvangende entiteiten (zoals centrale, regionale, lokale en jongerenafdelingen) tot één totaal per partij, waarbij de onderliggende toewijzing van ontvangers beschikbaar blijft voor transparantie.\n\nDe Noorwegen-dataset wordt jaarlijks bijgewerkt en weerspiegelt daarmee het ritme van de onderliggende openbaarmakingen.",
-        "ukraine": "De hier gebruikte gegevens zijn afkomstig van het Nationaal Agentschap voor Corruptiepreventie (NAZK) via het PolitData-portaal. Ze omvatten alle gegevens die in de officiële rapporten zijn aangemerkt als ‘monetaire bijdragen’.\n\nOpmerking over de gegevensomvang: Dit totaal weerspiegelt alleen rechtstreekse financiële overdrachten. Het omvat geen staatsfinanciering voor parlementaire partijen of niet-geldelijke (in natura) bijdragen zoals goederen en diensten.\n\nVanwege de grootschalige Russische invasie werd de verplichte rapportage door politieke partijen van begin 2022 tot eind 2023 om veiligheids- en logistieke redenen opgeschort. Na de goedkeuring van Wet 3337-IX vullen de partijen hun rapporten nu achteraf aan. De gegevens voor 2022–2025 worden nog bijgewerkt terwijl de NAZK deze inzendingen verwerkt."
+        "ukraine": "De hier gebruikte gegevens zijn afkomstig van het Nationaal Agentschap voor Corruptiepreventie (NAZK) via het PolitData-portaal. Ze omvatten alle gegevens die in de officiële rapporten zijn aangemerkt als ‘monetaire bijdragen’.\n\nOpmerking over de gegevensomvang: Dit totaal weerspiegelt alleen rechtstreekse financiële overdrachten. Het omvat geen staatsfinanciering voor parlementaire partijen of niet-geldelijke (in natura) bijdragen zoals goederen en diensten.\n\nVanwege de grootschalige Russische invasie werd de verplichte rapportage door politieke partijen van begin 2022 tot eind 2023 om veiligheids- en logistieke redenen opgeschort. Na de goedkeuring van Wet 3337-IX vullen de partijen hun rapporten nu achteraf aan. De gegevens voor 2022–2025 worden nog bijgewerkt terwijl de NAZK deze inzendingen verwerkt.",
+        "france": "De hier gebruikte gegevens zijn afkomstig van de Commission Nationale des Comptes de Campagne et des Financements Politiques (CNCCFP) en omvatten alle politieke donaties (gerapporteerd in euro) die zijn vermeld in het veld \"Dons_de_personne_physique\".\n\nIn tegenstelling tot andere regio's worden de Franse gegevens als jaarlijkse totalen per partij gepubliceerd en is de identiteit van individuele donoren beschermd door privacywetten."
       },
       "source_link": "Gegevensbron"
     },
@@ -283,6 +285,7 @@
   "timeline": {
     "title": "Ontwikkeling",
     "description": "Bekijk een tijdlijn van alle donaties aan politieke partijen in {country} voor {years}, met maandelijkse totalen en trends door de jaren heen.",
+    "year_resolution_note": "Deze weergave is gestandaardiseerd op een jaarlijkse resolutie, omdat sommige records in dit bereik alleen het jaar van de bijdrage vermelden. Om een volledige en nauwkeurige vergelijking zonder geschatte data te garanderen, worden alle gegevens per jaar samengevoegd.",
     "detail": {
       "title": "Ontwikkeling van partijgiften in de tijd",
       "summary": "Bekijk de interactieve lijngrafiek hieronder om de giftenhistorie van elke politieke partij in de loop der tijd te volgen. De x-as geeft de data weer, terwijl de y-as het aantal giften weergeeft. Elke politieke partij wordt weergegeven door een aparte lijn die groeit met elke gift."
@@ -300,6 +303,11 @@
     "highest_sum": "{month} had de hoogste totale donaties, met een gecombineerde telling van {count} donaties voor een bedrag van {sum}.",
     "most_months": "{party} ontving donaties in {count} maanden, het hoogste aantal maanden met bijdragen van alle partijen.",
     "month_most_donations": "De maand met het hoogste aantal donaties was {month}, waarin in totaal {count} individuele donaties werden ontvangen."
+  },
+  "per_year": {
+    "title": "Donaties per jaar",
+    "subtitle": "Jaarlijkse som van gepubliceerde donaties aan elke partij in {country}, {years}.",
+    "description": "Deze gestapelde staafdiagram toont jaarlijkse donatiegegevens voor meerdere politieke partijen. De x-as toont de jaren, de y-as geeft de donatiebedragen weer, en elke staaf is in kleursegmenten verdeeld om de bijdragen van individuele partijen weer te geven, zodat vergelijkingen binnen en tussen jaren gemakkelijk zijn."
   },
   "party": {
     "donors": {
@@ -675,7 +683,7 @@
   "other_countries": {
     "title": "Andere landen"
   },
-  "thanks": "Met dank aan organisaties zoals {external} voor het verstrekken van waardevolle informatie over mechanismen voor politieke donaties.",
+  "thanks": "Met dank aan personen en organisaties zoals {external} voor het verstrekken van waardevolle informatie over politieke donatiemechanismen.",
   "export": {
     "title": "Gegevensexport",
     "p0": "Download de volledige dataset met politieke donaties voor {country} die op deze site wordt gebruikt. De export bevat genormaliseerde donornamen, bedragen, datums en ontvangende partijen.",

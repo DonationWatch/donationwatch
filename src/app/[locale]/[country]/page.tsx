@@ -12,7 +12,11 @@ import { HistoryComponent } from "../../../components/history-component";
 import { PartiesHero } from "../../../components/parties-hero";
 import { YearsCards } from "../../../components/years-cards";
 import { YearsHeader } from "../../../components/years-header";
-import { COUNTRIES, getReferencingCountryName } from "../../../utils/countries";
+import {
+  COUNTRIES,
+  getCountryName,
+  getReferencingCountryName,
+} from "../../../utils/countries";
 import { getCountryConfig } from "../../../utils/data/get-country-config";
 import {
   formatCompactCountryCurrency,
@@ -65,6 +69,7 @@ export default async function YearsPage(
   const [
     tRefCountries,
     tHome,
+    tCountries,
     countryConfig,
     partySums,
     biggestDonors,
@@ -72,6 +77,7 @@ export default async function YearsPage(
   ] = await Promise.all([
     getTranslations({ locale, namespace: "ref_countries" }),
     getTranslations({ locale, namespace: "home" }),
+    getTranslations({ locale, namespace: "countries" }),
     getCountryConfig(country),
     getPartyYearsSums(country),
     getBiggestDonors(country),
@@ -174,12 +180,27 @@ export default async function YearsPage(
                 <>
                   <br />
                   {tHome("what.threshold", {
+                    type:
+                      countryConfig.knownPartyRequirements.count === -1
+                        ? "sum"
+                        : countryConfig.knownPartyRequirements.sum === -1
+                          ? "count"
+                          : "both",
                     count: countryConfig.knownPartyRequirements.count,
                     sum: formatCompactCountryCurrency(
                       locale,
-                      countryConfig.knownPartyRequirements.sum,
+                      Math.max(0, countryConfig.knownPartyRequirements.sum),
                       countryConfig,
                     ),
+                  })}
+                  <br />
+                </>
+              ) : null}
+              {countryConfig.hasNoDonors ? (
+                <>
+                  <br />
+                  {tHome("what.no_donors", {
+                    country: getCountryName(countryConfig, tCountries),
                   })}
                   <br />
                 </>
@@ -254,33 +275,35 @@ export default async function YearsPage(
         <PartiesHero country={countryConfig} locale={locale} />
       </section>
 
-      <section
-        className="content-visibility-auto contain-intrinsic-size-[auto_1100px_auto_508px] container mx-auto p-4 pb-12 sm:pb-24"
-        aria-labelledby="home-donor-list"
-      >
-        <div className="text-primary-700 dark:text-primary-400 mb-2 text-lg">
-          {tHome("donors.subtitle")}
-        </div>
-        <h2 className="mb-6 text-2xl" id="home-donor-list">
-          {tHome("donors.title")}
-        </h2>
-        <p className="mb-8 lg:w-10/12 lg:text-lg">
-          {tHome("donors.summary", {
-            minYear: countryConfig.minYear,
-          })}
-        </p>
+      {countryConfig.hasNoDonors ? null : (
+        <section
+          className="content-visibility-auto contain-intrinsic-size-[auto_1100px_auto_508px] container mx-auto p-4 pb-12 sm:pb-24"
+          aria-labelledby="home-donor-list"
+        >
+          <div className="text-primary-700 dark:text-primary-400 mb-2 text-lg">
+            {tHome("donors.subtitle")}
+          </div>
+          <h2 className="mb-6 text-2xl" id="home-donor-list">
+            {tHome("donors.title")}
+          </h2>
+          <p className="mb-8 lg:w-10/12 lg:text-lg">
+            {tHome("donors.summary", {
+              minYear: countryConfig.minYear,
+            })}
+          </p>
 
-        <DonorsHero
-          country={countryConfig}
-          locale={locale}
-          biggestDonors={biggestDonors}
-        />
+          <DonorsHero
+            country={countryConfig}
+            locale={locale}
+            biggestDonors={biggestDonors}
+          />
 
-        <BiggestDonationsHero
-          country={countryConfig}
-          biggestDonations={biggestDonations}
-        />
-      </section>
+          <BiggestDonationsHero
+            country={countryConfig}
+            biggestDonations={biggestDonations}
+          />
+        </section>
+      )}
 
       {countryConfig.legislativeYears?.length ? (
         <section

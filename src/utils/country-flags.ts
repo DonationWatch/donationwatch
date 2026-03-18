@@ -5,6 +5,7 @@ import hrFlag from "../../public/flags/croatia.svg";
 import czFlag from "../../public/flags/cz.svg";
 import eeFlag from "../../public/flags/estonia.svg";
 import euFlag from "../../public/flags/eu.svg";
+import frFlag from "../../public/flags/fr.svg";
 import geFlag from "../../public/flags/georgia.svg";
 import deFlag from "../../public/flags/germany.svg";
 import lvFlag from "../../public/flags/lv.svg";
@@ -34,4 +35,5 @@ export const countryFlags: Record<Country, typeof auFlag> = {
   [Country.georgia]: geFlag,
   [Country.norway]: noFlag,
   [Country.ukraine]: uaFlag,
+  [Country.france]: frFlag,
 };

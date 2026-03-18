@@ -1,7 +1,6 @@
 "use client";
 import { useLocale } from "next-intl";
 
-
 import { FormatAnd } from "./formatter";
 import Loading from "./loading";
 import { TextPartyLink } from "./text-party-link";
@@ -119,7 +118,6 @@ export const LoadingYearBarsPageText = ({
 
   return (
     <>
-      <p className="mb-6">{t("per_month.description")}</p>
       {monthWithHighestDonationSum ? (
         <p className="mb-6">
           <Translation

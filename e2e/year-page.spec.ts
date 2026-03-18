@@ -4,6 +4,9 @@ import { test } from "./util/fixture";
 import { COUNTRIES, Country } from "../src/utils/countries";
 import { getCountryConfig } from "../src/utils/data/get-country-config";
 
+import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
+import { canShowYearsTimeline } from "@/utils/party";
+
 const CHECK_YEAR = 2023;
 
 test.describe("Year page", () => {
@@ -99,6 +102,11 @@ test.describe("Year page", () => {
 
         test.describe("donors page", () => {
           test.beforeEach(async ({ page, baseURL }) => {
+            test.skip(
+              Boolean((await getCountryConfig(country)).hasNoDonors),
+              "Country has no donors",
+            );
+
             await page.goto(
               `${baseURL}/${country}/${CHECK_YEAR}/donors/overview`,
             );
@@ -145,9 +153,18 @@ test.describe("Year page", () => {
 
         test.describe("timeline page", () => {
           test.beforeEach(async ({ page, baseURL }) => {
+            const countryConfig = await getCountryConfig(country);
+            const partyYearSums = await getPartyYearsSums(country);
+
             test.skip(
-              !(await getCountryConfig(country)).hasTimeline,
-              "Country does not have timeline",
+              !countryConfig.hasDate,
+              "Country does not have dates and in turn no timeline",
+            );
+            test.skip(
+              !canShowYearsTimeline(countryConfig, partyYearSums, [
+                `${CHECK_YEAR}`,
+              ]),
+              "Timeline cannot be shown for this country and year",
             );
 
             await page.goto(`${baseURL}/${country}/${CHECK_YEAR}/timeline`);

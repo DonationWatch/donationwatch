@@ -662,33 +662,35 @@ export abstract class DataLoader {
       partySumCounts[party].sum += extracted[DonationField.Amount];
     });
 
+    const isAbovePartyRrequirements = (value: {
+      count: number;
+      sum: number;
+    }) => {
+      if (knownPartyRequirements.sum === -1) {
+        return value.count >= knownPartyRequirements.count;
+      }
+      if (knownPartyRequirements.count === -1) {
+        return value.sum >= knownPartyRequirements.sum;
+      }
+
+      return (
+        value.sum >= knownPartyRequirements.sum ||
+        value.count >= knownPartyRequirements.count
+      );
+    };
+
     const missingKeys = Object.entries(partySumCounts)
-      .filter(([, value]) => {
-        return (
-          value.sum >= knownPartyRequirements.sum ||
-          value.count >= knownPartyRequirements.count
-        );
-      })
+      .filter(([, value]) => isAbovePartyRrequirements(value))
       .filter(([party]) => !this.parties[party])
       .map(([party]) => party);
 
     const keptParties = new Set(
       Object.entries(partySumCounts)
-        .filter(([, value]) => {
-          return (
-            value.sum >= knownPartyRequirements.sum ||
-            value.count >= knownPartyRequirements.count
-          );
-        })
+        .filter(([, value]) => isAbovePartyRrequirements(value))
         .map(([party]) => party),
     );
     const droppedParties = Object.entries(partySumCounts)
-      .filter(([, value]) => {
-        return (
-          value.sum < knownPartyRequirements.sum &&
-          value.count < knownPartyRequirements.count
-        );
-      })
+      .filter(([, value]) => !isAbovePartyRrequirements(value))
       .map(([key, value]) => `${key} (sum ${value.sum}, count ${value.count})`);
 
     if (missingKeys.length) {
