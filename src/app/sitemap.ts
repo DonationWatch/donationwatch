@@ -129,6 +129,10 @@ export default async function sitemap(props: {
                 );
 
                 return partySubPages
+                  .filter((subpage) =>
+                    // If there are no donors, don't index the donors page
+                    config.hasNoDonors ? subpage !== "donors" : true,
+                  )
                   .filter(filterConditionalSubPages("party"))
                   .map((subPage) => ({
                     url: `${partiesBaseUrl}/${subPage}`,
@@ -146,6 +150,10 @@ export default async function sitemap(props: {
                 );
 
                 return yearSubPages
+                  .filter((subpage) =>
+                    // If there are no donors, don't index the donors page
+                    config.hasNoDonors ? subpage !== "donors" : true,
+                  )
                   .filter(filterConditionalSubPages("year"))
                   .map((subPage) => ({
                     url: `${yearsBaseUrl}/${subPage}`,
@@ -171,17 +179,19 @@ export default async function sitemap(props: {
                     lastModified: lastDonation ?? lastModified,
                   }));
               }),
-              biggestDonors.map((donor) => {
-                const lastDonation = lastPartyStatsDonation(
-                  config,
-                  donor.partyYearSums,
-                );
+              biggestDonors
+                .filter(() => !config.hasNoDonors)
+                .map((donor) => {
+                  const lastDonation = lastPartyStatsDonation(
+                    config,
+                    donor.partyYearSums,
+                  );
 
-                return {
-                  url: `${BASE_URL}/${locale}/${country}/donor/${donor.id}`,
-                  lastModified: lastDonation ?? lastModified,
-                };
-              }),
+                  return {
+                    url: `${BASE_URL}/${locale}/${country}/donor/${donor.id}`,
+                    lastModified: lastDonation ?? lastModified,
+                  };
+                }),
             ];
           })
           .concat([
