@@ -1,0 +1,752 @@
+{
+  "copyright": "Copyright",
+  "description": "DonationWatch offre un aperçu clair des donateurs et des partis, facilitant la compréhension du financement politique en expliquant des données complexes de manière simple.",
+  "title": "Dons aux partis : {country}",
+  "sum": "Somme",
+  "donation_count": "Nombre de dons",
+  "average": "Moyenne",
+  "donations_by_party": "Dons par parti",
+  "donations_per_year": "Dons par an",
+  "party_donations": "Dons aux partis",
+  "more": "Plus",
+  "data_since": "Depuis {year}",
+  "view_party": "Voir la page du parti {party}",
+  "faq": "Foire aux questions",
+  "navigation": {
+    "fun": "Faits insolites",
+    "about": "À propos",
+    "other_countries": "Autres pays",
+    "imprint": "Mentions légales",
+    "privacy": "Politique de confidentialité",
+    "transparency": "Transparence",
+    "sources": "Sources",
+    "export": "Exportation de données",
+    "bar_chart_race": "Course de graphiques",
+    "compare_parties": "Comparer les partis",
+    "support_us": "☕ Soutenir les coûts du serveur"
+  },
+  "data": {
+    "loading": "Chargement du contenu...",
+    "error": "Erreur lors du chargement des données"
+  },
+  "sidebar": {
+    "toggle": "Afficher/Masquer la barre latérale",
+    "donations": "Dons",
+    "all_countries": "Tous les pays",
+    "tools": "Outils",
+    "show_all": "Tout afficher ({num})",
+    "show_less": "Afficher moins",
+    "more": "Plus"
+  },
+  "search": {
+    "filter": "Rechercher...",
+    "filter_description": "Rechercher des partis, des années ou des donateurs",
+    "parties": "Partis",
+    "years": "Années",
+    "legislative_years": "Années législatives",
+    "empty": "Aucun résultat trouvé",
+    "donors": "Donateurs"
+  },
+  "page_title": {
+    "years": {
+      "description": "En {year}, {parties} partis en {country} ont reçu un total de {sum} provenant de {count} dons supérieurs à {minAmount}. Explorez la répartition détaillée par parti, donateur et les tendances du financement politique.",
+      "overview": "Aperçu des dons aux partis politiques en {country} pour {year}",
+      "changes": "Changements récents dans les dons aux partis en {country} pour {year}",
+      "donors": "Principaux donateurs des partis politiques en {country} pour {year}",
+      "timeline": "Chronologie des dons aux partis politiques en {country} pour {year}",
+      "origin": "Aperçu géographique des dons aux partis en {country} pour {year}"
+    },
+    "party": {
+      "donors": "Principaux donateurs de {party} ({country})",
+      "changes": "Changements récents dans les dons pour {party} ({country})",
+      "timeline": "Chronologie des dons du parti {party} ({country})",
+      "origin": "Aperçu géographique des dons du parti {party} ({country})",
+      "description": "Depuis {year}, le {party} a reçu un total de {count} dons dépassant {minimumAmount}, pour un montant cumulé de {sum}. Explorez les informations détaillées sur les donateurs majeurs et les tendances des dons pour le {party} en {country}."
+    },
+    "donor": {
+      "overview": "Dons de {donor} en {country}",
+      "description": "{donor} a effectué un total de {sum} via {count} dons supérieurs à {minAmount} depuis {minYear}. Ces contributions ont été réparties entre {parties} partis différents. Explorez l'analyse détaillée des schémas de donation et des partis bénéficiaires pour ce donateur en {country}."
+    }
+  },
+  "chart": {
+    "save_as_image": "Enregistrer comme image",
+    "toggle_fullscreen": "Plein écran",
+    "reset_zoom": "Réinitialiser le zoom"
+  },
+  "over_min_public_amount": "plus de {amount}",
+  "over_threshold": "{type, select, count {uniquement partis avec ≥ {count} dons} sum {uniquement partis avec ≥ {sum}} other {uniquement partis avec ≥ {count} dons ou ≥ {sum}}}",
+  "prelim_data": "données préliminaires depuis {year}",
+  "common": {
+    "date": "Date",
+    "party": "Parti",
+    "donor": "Donateur",
+    "amount": "Montant",
+    "anonymizedDonor": "Donateur anonymisé",
+    "redactedDonor": "Donateur masqué",
+    "donorToPartyByYear": "Donateurs en {year}",
+    "country": "Pays",
+    "state": "État/Région",
+    "summary": "Résumé",
+    "download_format": "Télécharger au format {format}",
+    "view_source": "Voir la source"
+  },
+  "sort": {
+    "asc": "Tri croissant",
+    "desc": "Tri décroissant",
+    "clear": "Effacer le tri"
+  },
+  "footer": {
+    "sources": "Sources",
+    "build": "Au {date}",
+    "build_since": "Au {date}, depuis {year}",
+    "published_by": "Publié par {source}",
+    "charts_license": "Graphiques sous licence {license} avec attribution"
+  },
+  "header": {
+    "home": "Accueil",
+    "language_selection": "Choix de la langue",
+    "country_selection": "Choix du pays"
+  },
+  "actions": {
+    "close": "Fermer",
+    "play": "Lecture",
+    "pause": "Pause",
+    "restart": "Recommencer"
+  },
+  "donor_dialog": {
+    "title": "Informations sur le donateur"
+  },
+  "root": {
+    "title": "Traqueur open-source des dons aux partis politiques",
+    "subtitle": "Suivez et explorez les dons politiques dans plusieurs pays. Comprenez qui finance les partis et comment l'argent circule dans le monde.",
+    "stats": {
+      "countries": "Pays couverts",
+      "parties": "Partis politiques",
+      "donations": "Dons individuels",
+      "currencies": "Devises suivies"
+    },
+    "countries": {
+      "title": "Explorer les dons politiques par pays",
+      "subtitle": "Sélectionnez un pays pour accéder aux registres détaillés des dons, aux données de financement des partis et aux informations sur les donateurs."
+    },
+    "why": {
+      "title": "Pourquoi la transparence des dons politiques est cruciale",
+      "p0": "La démocratie dépend de citoyens informés. En rendant les données sur les dons politiques accessibles et faciles à explorer, nous aidons à comprendre les relations financières qui façonnent le paysage politique. La transparence renforce la confiance, la responsabilité et permet aux électeurs de prendre des décisions éclairées."
+    },
+    "open_source": {
+      "title": "Open Source",
+      "p0": "DonationWatch est open source. Vous pouvez explorer le code, signaler des problèmes ou contribuer sur {github}."
+    }
+  },
+  "biggest_donations": {
+    "text": "Depuis {minYear}, le plus gros don unique déclaré en {country} a atteint {amount}, de {donor} à {party} en {year}. Il est suivi par {others}.",
+    "list": "{amount} de {donor} à {receiver}"
+  },
+  "home": {
+    "most_recent": "Dons les plus récents",
+    "hero": {
+      "subtitle": "Traqueur des dons aux partis politiques pour : {country}",
+      "subtitle_no_country": "Traqueur des dons aux partis politiques"
+    },
+    "last_period": "Année la plus récente :",
+    "previous_period": "Dons de l'année précédente.",
+    "what": {
+      "title": "Qu'est-ce que c'est ?",
+      "summary": "Les dons aux partis sont un aspect majeur de la politique et un indicateur important du soutien politique.\n\nNous nous efforçons de présenter ces données de manière claire et compréhensible.",
+      "threshold": "En raison du grand nombre de petits partis, nous ne suivons que ceux qui atteignent un certain seuil. Le seuil actuel est fixé à {type, select, count {{count} dons} sum {un total de {sum}} other {{count} dons ou un total de {sum}}} de contributions pour ce parti, quelle que soit la taille des dons individuels.",
+      "no_donors": "En raison des réglementations nationales, {country} ne publie pas l'identité des donateurs individuels. Par conséquent, nous affichons les montants agrégés audités par parti plutôt que les transactions individuelles. Les fonctions « Principaux donateurs » ou « Recherche de donateurs » sont désactivées pour cette région.",
+      "source": {
+        "austria": "Les données proviennent de la Cour des comptes autrichienne et incluent tous les dons documentés depuis 2012.\n\nNote : Avant le 8 juillet 2019, les partis devaient déclarer les dons de plus de 51 000 € (50 000 € avant 2018). Depuis juillet 2019, la limite de déclaration est de 2 500 €.\n\nLes données sont normalement mises à jour trimestriellement.",
+        "germany": "Les données proviennent du Bundestag allemand et incluent tous les dons supérieurs à 50 000 € documentés depuis 2010 et supérieurs à 35 000 € depuis le 5 mars 2024.",
+        "switzerland": "Les données proviennent du Contrôle fédéral des finances (CDF) et incluent tous les dons politiques documentés depuis 2023.",
+        "netherlands": "Les informations proviennent du gouvernement des Pays-Bas et incluent les dons supérieurs à 1 000 € enregistrés depuis 2022. Pour l'année en cours, seuls les dons supérieurs à 10 000 € sont inclus.\n\nNote : Certains dons n'ont pas de date précise et sont donc exclus des visualisations chronologiques.\n\nLes dons pour le SP et GL peuvent paraître élevés car ces partis exigent que leurs élus reversent une part importante de leur salaire au parti.",
+        "europeanunion": "Les données proviennent de l'Autorité pour les partis politiques européens et les fondations politiques européennes (APPF) depuis 2018. Nous suivons les fondations au même titre que les partis.\n\nComme les données officielles ne comportent pas toujours de dates précises, les séries chronologiques peuvent être limitées.\n\nNote : Des règles de déclaration hebdomadaires s'appliquaient avant les élections européennes de 2024. Depuis juin 2024, seuls les dons de plus de 12 000 € doivent être signalés immédiatement.",
+        "estonia": "Les données proviennent du Comité de surveillance du financement des partis estoniens et incluent tous les dons supérieurs à 1 € depuis 2014, mis à jour trimestriellement.",
+        "czechrepublic": "Les données proviennent du Bureau de contrôle de la gestion des partis politiques et incluent les dons supérieurs à 25 CZK depuis 2018. Les données sont mises à jour annuellement.",
+        "latvia": "Les données proviennent du Bureau de prévention et de lutte contre la corruption (KNAB) et incluent les dons supérieurs à 1 € depuis 2015.",
+        "australia": "Les données proviennent de la Commission électorale australienne (AEC). Notez que le seuil de divulgation est de 15 000 $ et que les données annuelles sont publiées chaque 1er février.",
+        "unitedkingdom": "Les données proviennent de la Commission électorale et incluent les dons supérieurs à 1 000 £ depuis 2010, mis à jour trimestriellement.",
+        "serbia": "Les données proviennent de l'organisation non lucrative « Center for Investigative Journalism of Serbia » (CINS), qui a agrégé les données de l'Agence de lutte contre la corruption de Serbie depuis 2015.",
+        "croatia": "Les données proviennent de la Commission électorale d'État (DIP) depuis 2019. Les montants en Kuna avant 2024 ont été convertis en Euro selon des taux de change semestriels approximatifs.",
+        "canada": "Les données proviennent d'Élections Canada (ensemble de données « contributions telles que soumises ») et incluent les dons supérieurs à 500 € documentés depuis 2015.",
+        "georgia": "Les informations proviennent du Bureau de lutte contre la corruption de Géorgie et incluent les dons supérieurs à 1 GEL depuis 2011 (types #10 et #16).",
+        "norway": "Les données proviennent de Statistiques Norvège (SSB) et Partifinansiering.no. Les montants sont agrégés par parti (unités nationales, régionales et locales combinées).",
+        "ukraine": "Les données proviennent de l'Agence nationale pour la prévention de la corruption (NAZK) via le portail PolitData. Note : En raison de l'invasion russe, les rapports ont été suspendus entre début 2022 et fin 2023 ; les données sont en cours de mise à jour.",
+        "france": "Les données proviennent de la Commission Nationale des Comptes de Campagne et des Financements Politiques (CNCCFP) et incluent les dons des personnes physiques. En France, les données sont publiées sous forme d'agrégat annuel par parti et l'identité des donateurs est protégée par la loi."
+      },
+      "source_link": "Source des données"
+    },
+    "list": {
+      "subtitle": "Législatures",
+      "title": "Législatures passées",
+      "summary": "Notre aperçu par législature compile tous les dons sur l'ensemble d'un mandat. Cliquez sur une carte pour accéder à la période correspondante."
+    },
+    "years": {
+      "title": "Aperçu annuel des dons aux partis",
+      "subtitle": "Sommes agrégées au fil des ans",
+      "more": "Voir toutes les années restantes",
+      "summary": "Explorez notre résumé annuel des contributions. Cliquez sur une carte pour voir le détail de l'année choisie."
+    },
+    "parties": {
+      "title": "Dons par parti",
+      "subtitle": "Détails sur les partis individuels",
+      "more": "Voir tous les partis restants",
+      "summary": "Consultez l'aperçu des dons par parti. Cliquez sur une carte pour accéder aux détails des contributions."
+    },
+    "donors": {
+      "title": "Dons par donateur",
+      "subtitle": "Détails sur les donateurs individuels",
+      "summary": "Découvrez les plus importants contributeurs financiers depuis {minYear}. Cliquez sur un donateur pour voir le détail de ses contributions."
+    }
+  },
+  "stacked_years": {
+    "title": "Montant des dons par an",
+    "subtitle": "Somme agrégée des contributions publiées en {country}, par année depuis {years}."
+  },
+  "years": {
+    "title": "Dons aux partis",
+    "subtitle": "Somme cumulée des dons publiés pour chaque parti en {country}, {years}.",
+    "goto_year": "Aller à l'année {year}",
+    "no_data": {
+      "title": "Aucune donnée disponible",
+      "summary": "Désolé, nous n'avons pas encore de données pour l'année {year}.",
+      "last_year": "Vous pouvez consulter les données de l'année {year}."
+    }
+  },
+  "overview": {
+    "title": "Aperçu",
+    "detail": {
+      "title": "Principaux partis et total des dons",
+      "summary": "Cette liste présente les partis ayant reçu le plus de dons cumulés sur une période donnée, triés par ordre décroissant.",
+      "summary2": "Durant les années {years}, un total de {partyCount} partis ont reçu {donationSum} via {donationCount} dons dépassant {minimumAmount}.",
+      "most_donations": "Le {party} a reçu le plus de dons avec un total de {count} contributions, s'élevant à {sum}.",
+      "highest_sum": "Les 5 partis avec le total de dons le plus élevé sont {parties}."
+    },
+    "scatter": {
+      "title": "Distribution des dons",
+      "subtitle": "Dons individuels par parti, par montant et fréquence, en {country} de {years}.",
+      "summary": "Cette visualisation par nuage de points permet d'analyser la répartition des dons. Chaque point représente un parti ; l'axe X indique le montant et la taille du point reflète la fréquence des dons.",
+      "span": "Le parti {biggestSpanParty} a enregistré l'écart le plus important, avec une différence de {biggestSpanAmount} entre le plus petit et le plus gros don."
+    },
+    "pie": {
+      "title": "Répartition des dons aux partis",
+      "subtitle": "Total des dons publiés pour chaque parti, {country}, {years}."
+    }
+  },
+  "changes": {
+    "title": "Mouvements",
+    "description": "Consultez le tableau détaillé des dons aux partis en {country} depuis {year} (uniquement contributions > {minAmount}), trié par date de transaction.",
+    "detail": {
+      "title": "Dons aux partis par date de transaction",
+      "summary": "Cette page affiche la liste des dons triés chronologiquement, les plus récents en premier."
+    }
+  },
+  "donors": {
+    "title": "Donateurs",
+    "description": "Liste complète des donateurs pour {year} en {country}. Découvrez qui a donné le plus.",
+    "detail": {
+      "title": "Contributions des donateurs aux partis",
+      "subtitle": "Total des contributions publiées par donateur individuel pour chaque parti en {country}, {years}.",
+      "summary": "Cette carte proportionnelle (Treemap) structure les dons : le niveau supérieur représente les donateurs par des rectangles dont la taille est proportionnelle au montant total versé.",
+      "summary2": "Sous chaque donateur, des rectangles indiquent les partis bénéficiaires. Cela permet de visualiser rapidement la diversité du soutien d'un donateur.",
+      "unique_donors": "Le nombre de donateurs distincts pour {years} s'élève à {count}.",
+      "biggest_donor": "Le don cumulé le plus élevé ({amount}) provient de {donor}.",
+      "most_donations": "Avec {count} dons (total : {sum}), {donor} est en tête des donateurs les plus fréquents.",
+      "most_unique_parties": "{donor} a fait des dons à {count} partis différents (total : {sum}), affichant la plus grande diversité de bénéficiaires.",
+      "top_3": "En {years}, les {amount} plus gros donateurs sont {donors}."
+    },
+    "list": {
+      "title": "Classement des donateurs par montant total",
+      "p0": "Cette section classe tous les donateurs des années sélectionnées selon la somme cumulée de leurs dons publiés."
+    },
+    "sankey": {
+      "title": "Diagramme de Sankey"
+    },
+    "histogram": {
+      "title": "Distribution des donateurs par nombre de bénéficiaires uniques",
+      "subtitle": "Nombre de partis politiques distincts ayant reçu des dons de la part de donateurs individuels en {country}, {years}.",
+      "p0": "Ce graphique montre si les donateurs concentrent leur soutien sur un seul parti ou s'ils le répartissent entre plusieurs formations au fil du temps.",
+      "p1": "En {years}, le nombre maximal de partis soutenus par un seul donateur était de {max}. Seul {donors} donateur a soutenu {max} partis. En moyenne, chaque donateur a soutenu {mean} partis (médiane : {median}).",
+      "p2": "Avec {singlePartyDonors} donateurs sur {totalDonors}, soit {percentage}, la majorité n'a soutenu qu'un seul parti.",
+      "tooltip": "{donors} donateurs • {parties} partis uniques",
+      "item": "{donors} donateurs ont donné à {parties} partis"
+    }
+  },
+  "timeline": {
+    "title": "Chronologie",
+    "description": "Suivez l'évolution des dons aux partis en {country} pour {years}, avec les totaux mensuels et les tendances annuelles.",
+    "year_resolution_note": "Cette vue est standardisée à une résolution annuelle car certains registres ne fournissent que l'année de contribution. Pour garantir une comparaison exacte sans dates estimées, toutes les données sont agrégées par an.",
+    "detail": {
+      "title": "Chronologie des dons aux partis politiques",
+      "summary": "Utilisez le graphique interactif pour suivre l'historique des dons. L'axe X représente le temps et l'axe Y le montant cumulé."
+    },
+    "days": "En {country}, sur la période {years}, des dons ont été enregistrés sur {n} jours distincts."
+  },
+  "per_year_party": {
+    "title": "Dons pour {party} par an",
+    "subtitle": "Somme annuelle des dons publiés pour {party} en {country}, {years}."
+  },
+  "per_month": {
+    "title": "Dons par mois",
+    "subtitle": "Somme mensuelle des dons publiés pour chaque parti en {country}, {years}.",
+    "description": "Ce graphique à barres empilées illustre les données mensuelles. Chaque segment de couleur représente la contribution d'un parti spécifique.",
+    "highest_sum": "Le mois de {month} a enregistré le total de dons le plus élevé, avec {count} dons pour un montant de {sum}.",
+    "most_months": "{party} a reçu des dons durant {count} mois, la présence la plus régulière parmi tous les partis.",
+    "month_most_donations": "Le mois avec le plus grand nombre de dons individuels était {month} ({count} dons)."
+  },
+  "per_year": {
+    "title": "Dons par an",
+    "subtitle": "Somme annuelle des dons publiés pour chaque parti en {country}, {years}.",
+    "description": "Ce graphique illustre les données annuelles. L'axe X montre les années et l'axe Y les sommes, permettant de comparer l'évolution du financement entre les partis."
+  },
+  "party": {
+    "donors": {
+      "title": "Donateurs de {party}",
+      "subtitle": "Contributions totales publiées par les donateurs individuels pour le {party} en {country}.",
+      "summary": "Cette page présente tous les dons officiellement déclarés supérieurs à {minSum} pour {party} depuis {minYear}. Les chiffres sont basés sur les publications de {source}."
+    },
+    "donor_types": {
+      "title": "Types de donateurs",
+      "treemap": {
+        "title": "Types de donateurs pour {party}",
+        "description": "Contributions totales publiées pour {party} en {country} par type de donateur."
+      },
+      "p0": "Cette carte groupe les dons par catégorie (ex: individus, entreprises, fonds publics). La taille des rectangles correspond au montant total.",
+      "p1": "Les plus grands blocs indiquent les sommes les plus élevées. Cette vue inclut {count} types de donateurs distincts pour {party}.",
+      "p2": "Ci-dessous, le classement des secteurs par contribution totale :"
+    },
+    "qa": {
+      "sum": {
+        "q": "Combien {party} a-t-il reçu de dons ?",
+        "a": "{party} a reçu un total de {sum} provenant de {count} dons documentés."
+      },
+      "top_donors": {
+        "q": "Qui sont les principaux donateurs de {party} ?",
+        "a": "Les principaux donateurs de {party} sont : {donors}."
+      },
+      "largest_singular": {
+        "q": "Quel a été le plus gros don unique pour {party} ?",
+        "a": "Le don unique le plus important était de {amount}, versé par {donor} le {date}."
+      },
+      "biggest_overall": {
+        "q": "Qui est le plus grand donateur global de {party} ?",
+        "a": "Le plus grand donateur global de {party} est {donor} avec un total de {sum}."
+      },
+      "frequent_donor": {
+        "q": "Qui a fait le plus de dons à {party} ?",
+        "a": "{donor} a effectué le plus grand nombre de dons à {party} avec {count} versements séparés pour un total de {sum}."
+      }
+    },
+    "overview": {
+      "title": "Aperçu des dons : {party}"
+    },
+    "changes": {
+      "detail": {
+        "title": "Dons de {party} par date de transaction",
+        "summary": "Cette page présente une liste des dons reçus par {party}, classés par date de transaction, les contributions les plus récentes apparaissant en haut de la liste. Elle fournit des détails sur les montants perçus par {party} ainsi que sur les donateurs respectifs."
+      }
+    },
+    "timeline": {
+      "chart_title": "Dons pour {party}",
+      "subtitle": "Somme cumulée des dons publiés pour le {party} en {country}.",
+      "detail": {
+        "title": "Chronologie des dons de {party}",
+        "summary": "Explorez le graphique linéaire interactif pour suivre l'historique des dons reçus par {party} au fil du temps. L'axe des abscisses (x) représente les dates, tandis que l'axe des ordonnées (y) indique les montants versés. {party} est représenté par une ligne distincte qui progresse à chaque nouveau don.",
+        "per_year": "Le montant total des dons reçus par {party} varie selon les années. Vous trouverez ci-dessous un aperçu historique des totaux de financement annuels déclarés par le parti. Cette liste retrace la somme de toutes les contributions et aides financières déclarées pour chaque année spécifique :"
+      }
+    }
+  },
+  "origin": {
+    "title": "Origine",
+    "description": "Découvrez d'où proviennent les dons aux partis en {country} pour {years} — répartition par État et contributions internationales.",
+    "detail": {
+      "title": "Origine des dons en un coup d'œil",
+      "description": "Transparence sur l'origine géographique des dons pour {party} en {country} : répartition par État et sources étrangères.",
+      "summary": "Explorez un aperçu clair des origines géographiques des dons. Découvrez quels États ou pays en dehors de {country} apportent leur soutien. Suivez la transparence de la répartition des dons pour mieux comprendre le paysage géographique des contributions.",
+      "country": {
+        "austria": "En Autriche, l'origine des dons n'est enregistrée que depuis 2023. Les dons plus anciens ne peuvent pas être affectés à un État fédéral spécifique."
+      },
+      "sum": "Pour la période {years}, les dons aux partis en {country} totalisaient {sumCountry} de sources nationales et {sumOthers} de l'étranger."
+    },
+    "type": {
+      "map": "Carte"
+    },
+    "party": {
+      "subtitle": "Total des dons publiés pour {party} par État d'origine en {country}."
+    },
+    "country": {
+      "title": "Dons en provenance de {country}",
+      "subtitle": "Total des dons publiés par État d'origine en {country}, {years}.",
+      "summary": "Entre {from} et {until}, des dons ont été enregistrés dans {stateCount} États fédéraux différents. L'État avec le montant le plus élevé est {highestState} ({highestSum}). La majorité des dons ({largesDonationCountNum}) proviennent de {largesDonationCountState}."
+    },
+    "elsewhere": {
+      "title": "Dons hors de {country}",
+      "summary": "Entre les années {from} et {until}, des dons ont été enregistrés en provenance de {countryCount} pays différents. Le pays ayant le montant de don le plus élevé est {highestCountry} avec {highestSum}. La majorité des dons, soit {largesDonationCountNum}, provient de {largesDonationCountState}."
+    }
+  },
+  "donor": {
+    "title": "Dons du donateur",
+    "subtitle": "Total des contributions et bénéficiaires",
+    "active_period": "Période d'activité",
+    "type": "Type de donateur",
+    "summary": "{donor} a effectué un total de {sum} via {count} dons individuels. Le don moyen est de {avg}. Les dons ont été répartis entre {parties} partis.",
+    "oldest": "Le premier don après {minYear} a été fait le {date} pour un montant de {amount} au bénéfice du {party}.",
+    "newest": "Le don le plus récent date du {date}, avec {amount} versés au {party}.",
+    "most_donations": "Les dons les plus fréquents ont été faits à : {list}.",
+    "most_donations_item": "{party} ({count})",
+    "highest_most_donation": "L'année {biggestYear} a été marquée par le montant total le plus élevé ({biggestSum}), tandis que le plus grand nombre de dons individuels ({mostCount}) a été atteint en {mostYear}.",
+    "biggest": "Le don unique le plus important ({amount}) a été versé au {party} le {date}.",
+    "tree_map": "Dons de {name}",
+    "tree_map_subtitle": "Total des dons publiés pour chaque parti en {country}.",
+    "biggest_amounts": "Les dons ont été principalement dirigés vers un groupe restreint de partis. Voici la répartition par montant et pourcentage :",
+    "table": "Cette section offre un aperçu complet de tous les dons de {donor}. Vous pouvez trier le tableau par date, parti ou montant pour analyser les habitudes de contribution au fil du temps.",
+    "timeline": {
+      "title": "Accumulation des dons au fil du temps",
+      "p0": "Cette section montre l'évolution des dons de {donor} depuis {year}. Le graphique visualise le montant cumulé, mettant en évidence la part de chaque parti.",
+      "p1": "Suivez les lignes pour observer les pics ou les changements de stratégie de soutien. C'est un regard transparent sur la distribution des fonds d'un donateur.",
+      "years": "Les dons ont varié au fil des ans. Voici le détail annuel et la part relative de chaque année dans le total des dons de ce donateur.",
+      "chart_subtitle": "Dons cumulés de {donor} aux partis en {country}, par montant et date depuis {minYear}."
+    },
+    "anonymized": {
+      "title": "Enregistrement anonymisé",
+      "description": "L'identité associée à ce don a été supprimée suite à une demande valide au titre du RGPD. Le montant reste inclus dans les calculs totaux pour préserver la transparence financière."
+    },
+    "redacted": {
+      "title": "Enregistrement masqué",
+      "description": "L'identité du donateur a été masquée par l'autorité de publication avant la diffusion des données. Le montant reste inclus dans les totaux par souci de transparence."
+    },
+    "ubo": "Bénéficiaires effectifs (UBO)",
+    "ubo_description": "Un bénéficiaire effectif est la personne qui détient réellement les rênes. Il s'agit des individus qui possèdent ou contrôlent le donateur, généralement en détenant 25 % ou plus des actions ou des droits de vote. Si personne ne remplit ce critère, la direction générale peut être listée pour garantir la responsabilité."
+  },
+  "countries": {
+    "??": "Non spécifié",
+    "DE": "Allemagne",
+    "DK": "Danemark",
+    "CH": "Suisse",
+    "TH": "Thaïlande",
+    "AT": "Autriche",
+    "UK": "Royaume-Uni",
+    "NL": "Pays-Bas",
+    "EU": "Union européenne",
+    "LV": "Lettonie",
+    "ES": "Espagne",
+    "FI": "Finlande",
+    "HR": "Croatie",
+    "BE": "Belgique",
+    "LU": "Luxembourg",
+    "SI": "Slovénie",
+    "EE": "Estonie",
+    "FR": "France",
+    "IE": "Irlande",
+    "IT": "Italie",
+    "PL": "Pologne",
+    "RO": "Roumanie",
+    "CY": "Chypre",
+    "MT": "Malte",
+    "PT": "Portugal",
+    "LT": "Lituanie",
+    "HU": "Hongrie",
+    "CZ": "République tchèque",
+    "SG": "Singapour",
+    "MC": "Monaco",
+    "SE": "Suède",
+    "AD": "Andorre",
+    "IM": "Île de Man",
+    "NO": "Norvège",
+    "LI": "Liechtenstein",
+    "MK": "Macédoine",
+    "AL": "Albanie",
+    "MD": "Moldavie",
+    "SM": "Saint-Marin",
+    "FO": "Îles Féroé",
+    "BA": "Bosnie-Herzégovine",
+    "ME": "Monténégro",
+    "BG": "Bulgarie",
+    "BY": "Biélorussie",
+    "GR": "Grèce",
+    "IS": "Islande",
+    "SK": "Slovaquie",
+    "UA": "Ukraine",
+    "GB": "Royaume-Uni",
+    "RS": "Serbie",
+    "AU": "Australie",
+    "ZA": "Afrique du Sud",
+    "US": "États-Unis",
+    "CA": "Canada",
+    "GE": "Géorgie",
+    "NZ": "Nouvelle-Zélande",
+    "VE": "Venezuela"
+  },
+  "ref_countries": {
+    "DE": "l'Allemagne",
+    "DK": "le Danemark",
+    "CH": "la Suisse",
+    "TH": "la Thaïlande",
+    "AT": "l'Autriche",
+    "UK": "le Royaume-Uni",
+    "NL": "les Pays-Bas",
+    "EU": "l'Union européenne",
+    "LV": "la Lettonie",
+    "ES": "l'Espagne",
+    "FI": "la Finlande",
+    "HR": "la Croatie",
+    "BE": "la Belgique",
+    "LU": "le Luxembourg",
+    "SI": "la Slovénie",
+    "EE": "l'Estonie",
+    "FR": "la France",
+    "IE": "l'Irlande",
+    "IT": "l'Italie",
+    "PL": "la Pologne",
+    "RO": "la Roumanie",
+    "CY": "Chypre",
+    "CZ": "la République tchèque",
+    "AU": "l'Australie",
+    "RS": "la Serbie",
+    "CA": "le Canada",
+    "GE": "la Géorgie",
+    "NO": "la Norvège",
+    "UA": "l'Ukraine"
+  },
+  "state": {
+    "germany": {
+      "BW": "Bade-Wurtemberg",
+      "BY": "Bavière",
+      "BE": "Berlin",
+      "BB": "Brandebourg",
+      "HB": "Brême",
+      "HH": "Hambourg",
+      "HE": "Hesse",
+      "MV": "Mecklembourg-Poméranie-Occidentale",
+      "NI": "Basse-Saxe",
+      "NW": "Rhénanie-du-Nord-Westphalie",
+      "RP": "Rhénanie-Palatinat",
+      "SL": "Sarre",
+      "SN": "Saxe",
+      "ST": "Saxe-Anhalt",
+      "SH": "Schleswig-Holstein",
+      "TH": "Thuringe"
+    },
+    "austria": {
+      "1": "Burgenland",
+      "2": "Carinthie",
+      "3": "Basse-Autriche",
+      "4": "Haute-Autriche",
+      "5": "Salzbourg",
+      "6": "Styrie",
+      "7": "Tyrol",
+      "8": "Vorarlberg",
+      "9": "Vienne"
+    },
+    "canada": {
+      "ON": "Ontario",
+      "QC": "Québec",
+      "NS": "Nouvelle-Écosse",
+      "NB": "Nouveau-Brunswick",
+      "MB": "Manitoba",
+      "BC": "Colombie-Britannique",
+      "PE": "Île-du-Prince-Édouard",
+      "SK": "Saskatchewan",
+      "AB": "Alberta",
+      "NL": "Terre-Neuve-et-Labrador",
+      "NT": "Territoires du Nord-Ouest",
+      "YT": "Yukon",
+      "NU": "Nunavut"
+    }
+  },
+  "about": {
+    "title": "À propos",
+    "description": {
+      "p0": "DonationWatch est né d'une frustration face au manque de lisibilité des données sur le site officiel du Bundestag allemand.",
+      "p1": "Notre objectif est d'améliorer l'accès à ces informations en utilisant les données publiques et en les présentant plus efficacement.",
+      "p2": "Nous avons remarqué que des pays comme l'Autriche, la Suisse et les Pays-Bas publient leurs dons sous divers formats structurés. Pour centraliser ces informations, nous avons inclus ces pays. D'autres seront ajoutés au fur et à mesure du traitement des données.",
+      "p3": "Si vous avez des suggestions ou des retours, n'hésitez pas à",
+      "mail": "nous contacter"
+    },
+    "source": "Toutes les informations visualisées proviennent exclusivement de sources gouvernementales publiques. Aucune donnée privée ou non publiée n'est utilisée. La transparence est notre fondement."
+  },
+  "imprint": {
+    "title": "Mentions légales"
+  },
+  "privacy": {
+    "title": "Politique de confidentialité",
+    "last_updated": "Dernière mise à jour : {date}",
+    "effective_date": "Date d'entrée en vigueur : {date}",
+    "controller": {
+      "title": "Responsable du traitement",
+      "p": "L'entité responsable du traitement des données sur ce site est :"
+    },
+    "data": {
+      "title": "Collecte générale des données",
+      "p": "Nous prenons la protection de vos données très au sérieux. Nous ne collectons aucune donnée personnelle des visiteurs à des fins de suivi ou de marketing. Cela signifie notamment :",
+      "li0": "Pas de formulaires d'inscription ni de comptes utilisateurs",
+      "li1": "Pas d'inscription à une newsletter",
+      "li2": "Aucun cookie utilisé à des fins de pistage"
+    },
+    "cf": {
+      "title": "Services Cloudflare",
+      "link": "Voir la politique de confidentialité de Cloudflare",
+      "p": "Nous utilisons les services de Cloudflare, Inc. pour garantir la rapidité et la sécurité de notre site.",
+      "p2": "Lors de l'utilisation de Cloudflare, votre adresse IP est traitée pour vous connecter au serveur le plus proche. Les données peuvent être transférées aux USA. Cloudflare est certifié selon le cadre de protection des données UE-USA (DPF).",
+      "p3": "Notre intérêt légitime (Art. 6(1)(f) RGPD) est de fournir un site sécurisé et performant.",
+      "workers": {
+        "summary": "Cloudflare Workers : Plateforme sans serveur pour une diffusion rapide de notre contenu."
+      },
+      "analytics": {
+        "summary": "Cloudflare Web Analytics : Outil de mesure d'audience respectueux de la vie privée, sans cookies, collectant uniquement des données agrégées."
+      }
+    },
+    "logs": {
+      "title": "Journaux serveur (Logs)",
+      "p": "Notre hébergeur collecte automatiquement des informations dans des fichiers journaux :",
+      "li0": "Adresses IP (anonymisées)",
+      "li1": "Date et heure de la requête",
+      "li2": "Type de navigateur et appareil",
+      "li3": "URL de référence (referrer)",
+      "retention": "Ces données sont conservées 7 jours pour assurer la stabilité technique et la sécurité (Art. 6(1)(f) RGPD)."
+    },
+    "user_rights": {
+      "title": "Vos droits",
+      "p": "Conformément au RGPD, vous avez un droit d'accès, de rectification et de suppression de vos données. Comme nous traitons des données minimales et anonymisées, nous ne pouvons généralement pas vous identifier personnellement via nos journaux. Vous pouvez introduire une réclamation auprès d'une autorité de contrôle."
+    }
+  },
+  "fun": {
+    "link": "Faits insolites",
+    "title": "Faits insolites sur les données publiques",
+    "p0": "Cette page présente des curiosités relevées lors de notre travail sur les données officielles. Ce ne sont pas des critiques, mais des particularités propres aux grands jeux de données.",
+    "p1": "Nous signalons ces erreurs aux autorités compétentes quand c'est pertinent. Ces organisations sont généralement très ouvertes aux retours.",
+    "reported_fixed": "Signalé à {owner} et corrigé.",
+    "reported_wontfix": "Signalé à {owner}, mais ne peut être modifié.",
+    "reported": "Signalé à {owner}."
+  },
+  "transparency": {
+    "title": "Transparence",
+    "p0": "Nous nous efforçons de fournir des informations claires et cohérentes. Pour cela, nous normalisons certains noms de donateurs afin d'assurer l'uniformité de notre base de données malgré les variations de saisie dans les sources officielles.",
+    "p1": "Par souci de transparence, voici la liste des noms normalisés et leurs variantes rencontrées. Cela explique pourquoi certains noms diffèrent légèrement du document source.",
+    "section": {
+      "filtered_donors": "Donateurs filtrés",
+      "filtered_receivers": "Bénéficiaires filtrés",
+      "aggregated": "Donateurs agrégés"
+    },
+    "filtered_donors": {
+      "p0": "Pour représenter les véritables sources de financement, nous filtrons les transactions qui sont en réalité des contributions gouvernementales plutôt que des dons privés. Nous utilisons des expressions régulières (regexp) pour identifier et exclure ces entrées.",
+      "p1": "Liste des donateurs exclus selon nos critères de filtrage :"
+    },
+    "filtered_receivers": {
+      "p0": "Nous excluons certains bénéficiaires jugés non pertinents pour le suivi des dons politiques (ex: entités purement administratives).",
+      "p1": "Vous trouverez ci-dessous la liste des règles de filtrage appliquées."
+    },
+    "receivers": {
+      "title": "Bénéficiaires agrégés",
+      "p0": "En {country}, les dons peuvent être déclarés à différentes unités locales d'un parti. Pour plus de clarté, nous regroupons ces entités sous le nom du parti national."
+    }
+  },
+  "related": {
+    "donors": "Donateurs similaires"
+  },
+  "detect_country": {
+    "title": "Il semble que vous soyez en {country}.",
+    "description": "Appuyez pour explorer les dons politiques en {country}.",
+    "action": "Voir les dons pour {country}"
+  },
+  "donor_type": {
+    "0": "Autre",
+    "1": "Individu",
+    "2": "Entreprise",
+    "3": "Syndicat",
+    "4": "Fonds public",
+    "5": "Association non déclarée",
+    "6": "Parti politique enregistré",
+    "7": "Trust / Fiducie",
+    "8": "Société de secours mutuel",
+    "9": "Société à responsabilité limitée (LLP)",
+    "10": "Société de crédit immobilier",
+    "11": "Entité juridique à but non lucratif",
+    "12": "Donateur anonymisé"
+  },
+  "other_countries": {
+    "title": "Autres pays"
+  },
+  "thanks": "Merci aux individus et organisations comme {external} pour leurs informations précieuses sur les mécanismes de donation politique.",
+  "export": {
+    "title": "Exportation de données",
+    "p0": "Obtenez le jeu de données complet des dons politiques pour {country}. L'export inclut les noms normalisés, montants, dates et partis bénéficiaires.",
+    "p1": "Important : Il ne s'agit pas des données brutes de {source}, mais des données normalisées et filtrées par notre équipe. Voir la section {transparency}.",
+    "license": "Licence : {license}"
+  },
+  "bar_chart_race": {
+    "title": "Course de graphiques (Bar Chart Race)",
+    "description": "Visualisez l'accumulation des dons au fil du temps. Sélectionnez une période pour voir l'évolution dynamique du financement.",
+    "from": "De",
+    "to": "À",
+    "download_video": "Télécharger la vidéo",
+    "rendering": "Rendu en cours... {percentage}",
+    "no_data": "Aucune donnée disponible pour la période sélectionnée.",
+    "note": "Note : Cette animation est générée par votre navigateur et peut être gourmande en ressources. Le téléchargement lancera l'animation complète.",
+    "individual_years": "Années individuelles",
+    "animation_duration": "Durée de l'animation",
+    "duration_s": "{seconds}s",
+    "custom_range": "Avancé : Période personnalisée",
+    "group_by": {
+      "label": "Grouper par",
+      "receiver": "Parti",
+      "donor": "Donateur"
+    },
+    "chart_title": "Répartition des dons aux partis",
+    "chart_subtitle": "Total des dons publiés pour chaque parti, {country}, {years}."
+  },
+  "compare_parties_page": {
+    "title": "Comparer les partis",
+    "description": "Sélectionnez entre deux et quatre partis pour comparer leurs statistiques de dons côte à côte."
+  },
+  "compare_parties": {
+    "parties": "Partis",
+    "min_select": "Sélectionnez au moins deux partis pour voir la comparaison.",
+    "comparing": "Comparaison de",
+    "years": "Années",
+    "top_3_donors": "Top 3 donateurs",
+    "n_donations": "{count} dons",
+    "donor_type": "Type de donateur",
+    "donor": "Donateur",
+    "overview": {
+      "title": "Aperçu",
+      "description": "Statistiques générales incluant la somme totale et le nombre de dons reçus."
+    },
+    "timeline": {
+      "title": "Chronologie",
+      "description": "Analyse chronologique montrant les premiers et derniers dons, ainsi que les périodes d'activité financière intense."
+    },
+    "top_donations": {
+      "title": "Dons majeurs",
+      "description": "Met en avant la plus grosse transaction unique et les plus gros contributeurs pour chaque parti sélectionné."
+    },
+    "donor_types": {
+      "title": "Types de donateurs",
+      "description": "Analyse du soutien financier par type d'entité (entreprises, individus, syndicats).",
+      "biggest_donor_type": "Principal type de donateur"
+    },
+    "donors": {
+      "title": "Donateurs",
+      "description": "Étude approfondie des individus et organisations soutenant chaque parti, incluant la fréquence et les chevauchements."
+    },
+    "overlapping": {
+      "title": "Donateurs communs ({count})",
+      "description": "Donateurs ayant contribué à plusieurs des partis sélectionnés.",
+      "more": "... et {count} de plus"
+    },
+    "stats": {
+      "sum": "Total des dons",
+      "count": "Nombre de dons",
+      "avg": "Don moyen",
+      "median": "Don médian",
+      "first_year": "Année du premier don",
+      "last_year": "Année du dernier don",
+      "active_year_sum": "Année la plus active (par montant)",
+      "active_year_count": "Année avec le plus de dons",
+      "unique_donors": "Donateurs uniques",
+      "top_donor": "Plus gros donateur",
+      "frequent_donor": "Donateur le plus fréquent",
+      "biggest_donation": "Plus gros don unique"
+    }
+  }
+}

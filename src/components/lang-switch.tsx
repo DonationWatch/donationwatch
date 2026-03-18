@@ -2,7 +2,6 @@
 import { Languages } from "lucide-react";
 import { usePathname } from "next/navigation";
 
-
 import { CONST_LOCALES } from "../utils/locales";
 import {
   DropdownMenu,
@@ -26,6 +25,7 @@ const languagesInTheirLanguage: Record<(typeof CONST_LOCALES)[number], string> =
     hr: "Hrvatski",
     no: "Norsk",
     uk: "Українська",
+    fr: "Français",
   };
 
 export const LangSwitch = () => {

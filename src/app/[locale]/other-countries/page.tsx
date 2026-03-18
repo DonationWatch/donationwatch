@@ -223,6 +223,28 @@ Basert på vår innledende gjennomgang kan Italia, Slovenia og Bosnia-Hercegovin
       source: "Джерело",
     },
   },
+  fr: {
+    p0: `Notre objectif est d'intégrer les données de dons pour tous les pays où elles sont disponibles dans un format exploitable par machine.
+La plupart des formats nous conviennent, notamment le JSON, le CSV, les tableaux HTML et l'XML.
+L'obstacle majeur reste le PDF, qui contient souvent des images numérisées plutôt que du texte extractible.
+La conversion de ces PDF en données structurées nécessite généralement un effort manuel substantiel.`,
+    h1: `Pays que nous ne suivons pas actuellement`,
+    p1: `Nous ne suivons pas encore certains pays car leurs données publiées ne peuvent pas être analysées de manière fiable en raison de limitations de format.
+Selon notre analyse initiale, l'Italie, la Slovénie et la Bosnie-Herzégovine pourraient être plus faciles à intégrer car leurs PDF semblent relativement bien structurés.`,
+    p2: `Nous élargissons continuellement notre couverture. Si vous avez connaissance d'autres pays publiant des données de financement politique, quel que soit le format, n'hésitez pas à nous contacter pour partager un lien ou une source. Une liste documentée de pays (même si les données ne sont disponibles qu'en PDF ou sur des pages web) nous aide à prioriser nos futures intégrations et s'avère utile pour toute personne souhaitant comparer ces informations à l'échelle internationale :`,
+    notes: {
+      [CountryNote.PDF_ONLY]: "Fichiers PDF uniquement",
+      [CountryNote.SWEDEN]:
+        "Les dons sont publiés uniquement sous forme de montants globaux, sans données individuelles par don",
+      [CountryNote.GERMANY]:
+        "Les dons compris entre 10 000 et 35 000 € sont publiés sous forme de scans PDF",
+    },
+    table: {
+      country: "Pays",
+      notes: "Notes",
+      source: "Source",
+    },
+  },
 } as const;
 
 const sources: {
