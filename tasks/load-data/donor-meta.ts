@@ -12,4 +12,4 @@
  * This file is kept for backwards compatibility but should not be used for new code.
  */
 
-export { }
+export {};

@@ -1,25 +1,26 @@
 {
   "name": "donationwatch",
   "version": "1.0.0",
-  "description": "Political party donation tracker - visualizing political donations across multiple countries",
   "private": true,
+  "description": "Political party donation tracker - visualizing political donations across multiple countries",
+  "keywords": [
+    "nextjs",
+    "open-data",
+    "political-donations",
+    "transparency",
+    "visualization"
+  ],
   "homepage": "https://donation.watch",
+  "bugs": {
+    "url": "https://github.com/DonationWatch/donationwatch/issues"
+  },
+  "license": "AGPL-3.0",
+  "author": "numdefined",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/DonationWatch/donationwatch.git"
   },
-  "bugs": {
-    "url": "https://github.com/DonationWatch/donationwatch/issues"
-  },
-  "author": "numdefined",
-  "license": "AGPL-3.0",
-  "keywords": [
-    "political-donations",
-    "transparency",
-    "open-data",
-    "nextjs",
-    "visualization"
-  ],
+  "type": "module",
   "scripts": {
     "build": "next build",
     "build:analyze": "ANALYZE=true next build",
@@ -35,28 +36,22 @@
     "data:wikipedia": "tsx tasks/wikipedia/populate-wikipedia-articles.ts",
     "dev:debug": "NODE_OPTIONS='--inspect' next dev --turbo",
     "dev:turbo": "next dev --turbo",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
     "generate-social-media": "tsx tasks/social-media/generate-social-media-posts.ts",
     "index-now": "tsx tasks/index-now/index-now.ts",
-    "lint": "pnpm lint:tasks && pnpm lint:e2e && pnpm lint:next",
-    "lint:e2e": "eslint e2e",
-    "lint:next": "eslint src",
-    "lint:tasks": "eslint tasks",
+    "lint": "oxlint",
     "og-images": "vitest run ./tasks/social-images/generate-images.test.tsx",
     "og-images:countries": "tsx tasks/social-images/cli-generate-images.ts",
     "pre-deploy": "pnpm run data:postprocess && rm -rf tasks && env && df -h",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
+    "test:i18n": "i18n-check --source en --locales src/messages",
     "test:unit": "vitest run './tests/'",
     "test:unit:fake": "FAKE=true vitest run './tests/'",
     "test:unit:watch": "vitest",
-    "test:i18n": "i18n-check --source en --locales src/messages",
     "upload:images": "tsx tasks/social-images/upload.ts"
   },
-  "type": "module",
-  "engines": {
-    "node": ">= 22"
-  },
-  "packageManager": "pnpm@10.1.0+sha512.c89847b0667ddab50396bbbd008a2a43cf3b581efd59cf5d9aa8923ea1fb4b8106c041d540d08acb095037594d73ebc51e1ec89ee40c88b30b8a66c0fae0ac1b",
   "dependencies": {
     "@base-ui/react": "^1.1.0",
     "@tailwindcss/typography": "^0.5.19",
@@ -79,8 +74,6 @@
   "devDependencies": {
     "@axe-core/playwright": "^4.11.1",
     "@cloudflare/workers-types": "^4.20260307.1",
-    "@eslint/eslintrc": "^3.3.5",
-    "@eslint/js": "^9.39.2",
     "@inquirer/prompts": "^8.3.0",
     "@lingual/i18n-check": "^0.9.2",
     "@next/bundle-analyzer": "^15.5.11",
@@ -107,7 +100,6 @@
     "clsx": "^2.1.1",
     "csv-parse": "^5.6.0",
     "debug": "^4.4.3",
-    "eslint": "^9.39.2",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-playwright": "^2.9.0",
@@ -115,9 +107,9 @@
     "eslint-plugin-react-compiler": "19.1.0-rc.2",
     "jsdom": "^28.1.0",
     "node-xlsx": "^0.24.0",
+    "oxfmt": "^0.41.0",
+    "oxlint": "^1.53.0",
     "postcss": "^8.5.8",
-    "prettier": "^3.8.1",
-    "prettier-plugin-tailwindcss": "^0.7.2",
     "puppeteer": "^24.38.0",
     "satori": "^0.25.0",
     "schema-dts": "^1.1.5",
@@ -125,13 +117,16 @@
     "tailwindcss-content-visibility": "^1.0.2",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.57.0",
     "unzipper": "^0.12.3",
     "vercel": "^46.1.1",
     "vite": "^7.3.1",
     "vitest": "^4.0.18",
     "wrangler": "^4.71.0"
   },
+  "engines": {
+    "node": ">= 22"
+  },
+  "packageManager": "pnpm@10.1.0+sha512.c89847b0667ddab50396bbbd008a2a43cf3b581efd59cf5d9aa8923ea1fb4b8106c041d540d08acb095037594d73ebc51e1ec89ee40c88b30b8a66c0fae0ac1b",
   "pnpm": {
     "minimumReleaseAge": 10080,
     "ignoredBuiltDependencies": [

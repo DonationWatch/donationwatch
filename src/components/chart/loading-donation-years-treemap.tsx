@@ -107,8 +107,7 @@ export const LoadedDonationYearsTreemap = ({
         },
         label: {
           position: "insideTopLeft",
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          formatter(params: any) {
+          formatter(params) {
             return (
               (hasPartyLabel ? `{name|${party.short}}\n` : "") +
               `{value|${formatCountryCurrency(locale, params.value as number, country)}}`
@@ -129,12 +128,11 @@ export const LoadedDonationYearsTreemap = ({
             },
           },
         },
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore Somehow the types are incorrect
+        // @ts-expect-error Somehow the types are incorrect
         tooltip: {
           show: true,
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          formatter: (params: any) => {
+          // @ts-expect-error Somehow the types are incorrect
+          formatter: (params) => {
             if (params.treeAncestors.length !== 3) return "";
 
             const partyPart = `<div class="flex items-center font-semibold"><div class="mr-2 inline-block h-2 w-2 shrink-0 rounded-full border border-solid border-transparent dark:border-slate-600" style="background-color: ${partyColor(
@@ -187,13 +185,16 @@ export const LoadedDonationYearsTreemap = ({
     tooltip: {
       confine: true,
       show: true,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      formatter: (params: any) => {
+      formatter: (params) => {
+        if (Array.isArray(params)) return "";
+
         let content = "";
+        // @ts-expect-error Somehow the types are incorrect
+        const treeAncestors: unknown[] = params.treeAncestors;
 
-        if (params.treeAncestors.length === 1) return "";
+        if (treeAncestors.length === 1) return "";
 
-        if (params.treeAncestors.length === 2) {
+        if (treeAncestors.length === 2) {
           // is "root" level
           content = `<div class="font-semibold">${params.name}</div> <div>${formatCountryCurrency(locale, params.value as number, country)}</div>`;
         }
@@ -219,11 +220,13 @@ export const LoadedDonationYearsTreemap = ({
       },
       label: {
         position: "insideTopLeft",
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        formatter(params: any) {
-          if (params.treeAncestors.length === 1) return "";
+        formatter(params) {
+          // @ts-expect-error Somehow the types are incorrect
+          const treeAncestors: unknown[] = params.treeAncestors;
 
-          if (params.treeAncestors.length === 2) {
+          if (treeAncestors.length === 1) return "";
+
+          if (treeAncestors.length === 2) {
             // is "root" level
             return `{name|${getDonorName(params.name, tCommon)}} {value|${formatCountryCurrency(locale, params.value as number, country)}}`;
           }
@@ -262,12 +265,12 @@ export const LoadedDonationYearsTreemap = ({
       country={country}
       feature="treemap"
       option={option}
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      onClick={(params: any) => {
+      onClick={(params) => {
         if (params.componentType !== "series") return;
         if (params.componentSubType !== "treemap") return;
 
-        const dataId = params.data?.["id"];
+        // @ts-expect-error Somehow the types are incorrect
+        const dataId: string | undefined = params.data?.["id"];
         if (!dataId) return;
 
         if (params.treeAncestors.length === 2) {

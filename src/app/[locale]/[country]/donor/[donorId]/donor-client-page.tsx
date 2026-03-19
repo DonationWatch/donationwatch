@@ -2,7 +2,6 @@
 import { notFound } from "next/navigation";
 import { useLocale } from "next-intl";
 
-
 import { DonationStackedTimeseriesChart } from "../../../../../components/chart/donation-sum-chart";
 import { LoadedDonationYearsTreemap } from "../../../../../components/chart/loading-donation-years-treemap";
 import {

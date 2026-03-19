@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useLocale } from "next-intl";
 
-
 import { useHash } from "../hooks/use-hash";
 import { cn } from "../utils/classname";
 

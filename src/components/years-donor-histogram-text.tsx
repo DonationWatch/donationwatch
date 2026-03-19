@@ -74,7 +74,7 @@ export const HistogramItemDetail = ({
   // re-trigger measure if mobile changes
   useEffect(() => {
     rowVirtualizer?.measure?.();
-  }, [isSm]);
+  }, [isSm, rowVirtualizer]);
 
   return (
     <div

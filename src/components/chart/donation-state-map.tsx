@@ -1,7 +1,6 @@
 "use client";
 import { useLocale } from "next-intl";
 
-
 import { ExpandableReactEchart } from "./expandable-react-echart";
 import { useChart } from "../../hooks/use-chart";
 import { partyColor } from "../../utils/color";
@@ -137,8 +136,7 @@ export const DonationStateMap = ({
           formatter: (params) => {
             return isEu
               ? t(`countries.${params.name as Countries}`)
-              : // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
+              : // @ts-expect-error - The translation key is dynamic, but we ensure that it exists by checking the presence of the state and country fields.
                 t(`state.${country.id}.${params.name}`);
           },
         },
@@ -150,11 +148,8 @@ export const DonationStateMap = ({
 
             let tooltipContent = `<div class="min-w-[200px] text-lg font-semibold leading-normal">${
               isEu
-                ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                  // @ts-ignore
-                  t(`countries.${state}`)
-                : // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                  // @ts-ignore
+                ? t(`countries.${state as Countries}`)
+                : // @ts-expect-error - The translation key is dynamic, but we ensure that it exists by checking the presence of the state and country fields.
                   t(`state.${country.id}.${state}`)
             }</div>`;
 

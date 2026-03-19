@@ -103,8 +103,10 @@ export interface ReactEChartsProps {
   theme?: "light" | "dark";
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type OnZrClickFn = (params: any, chart: EChartsType | undefined) => void;
+export type OnZrClickFn = (
+  params: echarts.ElementEvent,
+  chart: EChartsType | undefined,
+) => void;
 export type OnClickFn = (params: echarts.ECElementEvent) => void;
 
 export interface EChartsPublicApi {
@@ -155,8 +157,7 @@ export const ReactECharts = ({
 
   useEffect(() => {
     featureImports[feature]().then((installFns) => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
+      // @ts-expect-error - incorrect upstream types
       echarts.use(installFns);
 
       setLoadingModules(false);
@@ -167,8 +168,10 @@ export const ReactECharts = ({
     // Initialize chart
     let chart: EChartsType | undefined;
     let resizeObserver: ResizeObserver | undefined;
-    if (!loadingModules && chartRef.current !== null) {
-      chart = echarts.init(chartRef.current, theme);
+    const chartElement = chartRef.current;
+
+    if (!loadingModules && chartElement !== null) {
+      chart = echarts.init(chartElement, theme);
       chartInstance.current = chart;
       chart.setOption({
         animation: false,
@@ -188,8 +191,7 @@ export const ReactECharts = ({
       if (onZrClick) {
         chart.getZr().on("click", (params) => onZrClick(params, chart));
         chart.getZr().on("mousemove", (params) => {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
+          // @ts-expect-error - getModel is typed as private but we need it to get the grid component and check if the mouse is inside the grid.
           const grid = chart!.getModel().getComponent("grid");
 
           const x = params.event?.zrX;
@@ -208,7 +210,7 @@ export const ReactECharts = ({
       resizeObserver = new ResizeObserver(() => {
         chart?.resize();
       });
-      resizeObserver.observe(chartRef.current);
+      resizeObserver.observe(chartElement);
     }
 
     // Add chart resize listener (for window resizes, optional)
@@ -220,14 +222,14 @@ export const ReactECharts = ({
     // Return cleanup function
     return () => {
       window.removeEventListener("resize", resizeChart);
-      if (resizeObserver && chartRef.current) {
-        resizeObserver.unobserve(chartRef.current);
+      if (resizeObserver && chartElement) {
+        resizeObserver.unobserve(chartElement);
         resizeObserver.disconnect();
       }
       chart?.dispose();
       chartInstance.current = undefined;
     };
-  }, [theme, loadingModules]);
+  }, [theme, loadingModules, onZrClick, onZoom, onClick, feature]);
 
   useEffect(() => {
     // Update chart

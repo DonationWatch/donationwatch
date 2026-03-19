@@ -273,7 +273,7 @@ function findWinner(
   return best.party.id;
 }
 
-const jsonFetcher = <T = unknown,>(input: RequestInfo): Promise<T> =>
+const jsonFetcher = <T = unknown>(input: RequestInfo): Promise<T> =>
   fetch(input).then((res) => {
     if (!res.ok) throw new Error(`Network response was not ok: ${res.status}`);
     return res.json();

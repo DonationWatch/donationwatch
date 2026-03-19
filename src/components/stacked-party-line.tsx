@@ -9,6 +9,7 @@ import type {
 } from "../utils/loader/party-years-sums";
 import type { ConstLocale } from "../utils/locales";
 import type { ReceiverId } from "../utils/types";
+import { cn } from "@/utils/classname";
 
 export const StackedPartyDonations = ({
   years,
@@ -48,10 +49,10 @@ export const StackedPartyDonations = ({
   return (
     <div
       aria-hidden="true"
-      className={
-        `flex h-full w-full gap-0.5 *:h-full *:rounded-xs` +
-        (direction === "horizontal" ? "" : " flex-col")
-      }
+      className={cn(
+        `flex h-full w-full gap-0.5 *:h-full *:rounded-xs`,
+        direction === "horizontal" ? "" : "flex-col",
+      )}
     >
       {sortedSums.map(([party, data]) => (
         <div

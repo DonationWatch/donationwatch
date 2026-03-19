@@ -14,7 +14,7 @@ A Next.js application for tracking and visualizing political party donations acr
 
 ## Support the Project
 
-*donation.watch* is a passion project built to make global political financing transparent. It is free, open-source, and has no ads or paywalls.
+_donation.watch_ is a passion project built to make global political financing transparent. It is free, open-source, and has no ads or paywalls.
 
 However, running the infrastructure (servers, domains, privacy services) comes with monthly out-of-pocket costs. If you find this dataset useful for your research, journalism, or personal interest, consider chipping in to help cover the server bills:
 
@@ -22,7 +22,7 @@ However, running the infrastructure (servers, domains, privacy services) comes w
   <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="150" height="45" />
 </a>
 
-*Note: This is purely a voluntary tip to keep the servers running. There are no premium features or commercial services in return.*
+_Note: This is purely a voluntary tip to keep the servers running. There are no premium features or commercial services in return._
 
 ## Getting Started
 
@@ -95,12 +95,12 @@ src/
 
 The application is built around two primary data types defined in `src/utils/types.ts`:
 
-* `Donation` - Represents a single donation
-* `Party` - Represents a political party
+- `Donation` - Represents a single donation
+- `Party` - Represents a political party
 
 There's also `src/utils/countries.ts` containing the static configuration for all supported countries.
 
-* `CountryConfig` - Provides per-country configuration that drives the entire application.
+- `CountryConfig` - Provides per-country configuration that drives the entire application.
 
 ## Data Pipeline
 
@@ -108,8 +108,8 @@ There's also `src/utils/countries.ts` containing the static configuration for al
 
 > [!NOTE]
 > Note on Data Privacy:
-> This repository contains logic to anonymize specific donors upon request. 
-> However, the raw data is sourced from public government records. 
+> This repository contains logic to anonymize specific donors upon request.
+> However, the raw data is sourced from public government records.
 > While https://donation.watch honors removal requests on our hosted platform, we cannot remove data from the official government sources, nor can we enforce this anonymization if you run this scraper independently.
 
 ### Data Loading (`tasks/load-data/`)
@@ -133,6 +133,7 @@ By default, `data:rebuild` only fetches data for the last couple of years to avo
 When working on extraction logic, use `data:rebuild:cached` to reuse previously downloaded assets without hitting the network.
 
 Each country has its own loader (e.g., `de/de-loader.ts`, `uk/uk-loader.ts`) that:
+
 - Fetches donation data from official government or election commission APIs
 - Normalizes the data into the common `Donation` format
 - Caches raw data locally for faster subsequent runs
@@ -147,6 +148,7 @@ pnpm data:postprocess
 ```
 
 The `postprocess.ts` script transforms the raw donation data into optimized JSON files for the frontend:
+
 - Builds party statistics and yearly sums
 - Generates biggest donors and donations rankings
 - Creates donor ID mappings and metadata

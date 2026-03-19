@@ -58,7 +58,7 @@ export const DonationHistoryTable = ({
   const tSort = useTranslations("sort");
   const tCommon = useTranslations("common");
   const locale = useLocale();
-  const partiesIdSet = new Set(partiesIds);
+  const partiesIdSet = useMemo(() => new Set(partiesIds), [partiesIds]);
   const [sorting, setSorting] = useState<SortingState>([
     { id: "date", desc: true },
   ]);
@@ -209,14 +209,14 @@ export const DonationHistoryTable = ({
           })
         : null,
     ].filter(isNotNullandNotUndefined);
-  }, [locale, isMobile]);
+  }, [locale, isMobile, country, readonlyDonor, t, tCommon]);
 
   const history = useMemo(
     () =>
       getHistory(country, donations, years).filter((entry) =>
         partiesIds.length ? partiesIdSet.has(entry.party) : true,
       ),
-    [donations],
+    [donations, country, years, partiesIdSet, partiesIds.length],
   );
   const table = useReactTable<HistoryEntry>({
     columns,

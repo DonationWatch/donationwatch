@@ -2,7 +2,6 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
-
 import type { CountryConfig } from "../utils/countries";
 import type { ConstLocale } from "../utils/locales";
 
