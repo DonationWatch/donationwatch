@@ -313,6 +313,37 @@ export class FrLoader extends DataLoader {
       code: "265",
       color: RANDOM_COLOR_MARKER,
     },
+    "709": {
+      name: "Union des démocrates et indépendants (UDI)",
+      short: "Union des démocrates et indépendants",
+      code: "709",
+      color: "#5f468f",
+      wiki: 37713856,
+    },
+    "563": {
+      name: "Écouter pour agir",
+      short: "Écouter pour agir",
+      code: "563",
+      color: "#c78f30",
+    },
+    "1191": {
+      name: "ABG",
+      short: "ABG",
+      code: "1191",
+      color: RANDOM_COLOR_MARKER,
+    },
+    "712": {
+      name: "La France Droite",
+      short: "La France Droite",
+      code: "712",
+      color: RANDOM_COLOR_MARKER,
+    },
+    "334": {
+      name: "Cotelec",
+      short: "Cotelec",
+      code: "334",
+      color: RANDOM_COLOR_MARKER,
+    },
   };
 
   private readonly yearConfig: Record<
