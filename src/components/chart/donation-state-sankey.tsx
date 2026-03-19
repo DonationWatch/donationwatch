@@ -1,7 +1,6 @@
 "use client";
 import { useLocale } from "next-intl";
 
-
 import { ExpandableReactEchart } from "./expandable-react-echart";
 import { useChart } from "../../hooks/use-chart";
 import { partyColor } from "../../utils/color";
@@ -64,12 +63,10 @@ export const DonationStateSankey = ({
     if (!yearsSet.has(donationYear(donation))) return;
 
     const state = isEu
-      ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
+      ? // @ts-expect-error - The translation key is dynamic, but we ensure that it exists by checking the presence of the state and country fields.
         t(`countries.${donation[DonationField.Address][AddressField.State]!}`)
       : t(
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
+          // @ts-expect-error - The translation key is dynamic, but we ensure that it exists by checking the presence of the state and country fields.
           `state.${country.id}.${donation[DonationField.Address][AddressField.State]!}`,
         );
 
@@ -137,8 +134,7 @@ export const DonationStateSankey = ({
         focus: "adjacency",
       },
       label: {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
+        // @ts-expect-error - incorrectly typed upstream
         normal: {
           formatter: "{b}",
         },

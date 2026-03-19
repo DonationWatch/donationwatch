@@ -2,7 +2,6 @@
 import { useRouter } from "next/navigation";
 import { useLocale } from "next-intl";
 
-
 import { ExpandableReactEchart } from "./expandable-react-echart";
 import { useChart } from "../../hooks/use-chart";
 import { partyColor } from "../../utils/color";

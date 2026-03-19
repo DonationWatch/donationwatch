@@ -1,4 +1,5 @@
 import type { PropsWithChildren, ReactNode } from "react";
+import { cn } from "@/utils/classname";
 
 export const slugify = (text: string): string =>
   text
@@ -27,7 +28,7 @@ export const Article = ({
           <div>
             {title ? (
               <h1
-                className={"mb-6 text-3xl" + (skipTitleOffset ? "" : " mt-14")}
+                className={cn("mb-6 text-3xl", skipTitleOffset ? "" : "mt-14")}
               >
                 {title}
               </h1>

@@ -1,6 +1,5 @@
 "use client";
 
-
 import { TopDonationsItemDetail } from "./loading-top-year-donations-item-detail";
 import { CurrencyRankingItem } from "./ranking-item";
 import { AddressField, DonationField } from "../utils/types";
@@ -55,12 +54,9 @@ export const OriginDonationsItem = ({
       >
         {address[AddressField.State] &&
         address[AddressField.State] !== address[AddressField.Country]
-          ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
+          ? // @ts-expect-error - The translation key is dynamic, but we ensure that it exists by checking the presence of the state and country fields.
             t(`state.${country.id}.${address[AddressField.State]}`)
-          : // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            t(`countries.${address[AddressField.Country]}`)}
+          : t(`countries.${address[AddressField.Country]}`)}
       </CurrencyRankingItem>
     </li>
   );

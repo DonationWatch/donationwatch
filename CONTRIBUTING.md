@@ -16,28 +16,34 @@ Each country has its own data loader located in `tasks/load-data/<country_code>/
 
 ### File Structure
 
-*   `tasks/load-data/<country>/<country>-loader.ts`: Main loader logic.
-    * **Extends**: `DataLoader` class.
-    * must implement the abstract members
+- `tasks/load-data/<country>/<country>-loader.ts`: Main loader logic.
+  - **Extends**: `DataLoader` class.
+  - must implement the abstract members
 
 ### Common Tasks
 
 #### Fixing Data Issues
+
 If you spot incorrect data (e.g., a donor name is garbled or a date is wrong):
+
 1.  Locate the country's loader file (e.g., `tasks/load-data/de/de-loader.ts`).
 2.  Inspect the `transformRawDonation` or `normalizeDonor` methods.
 3.  Add specific rules to handle the edge case.
 
 #### Updating Source URLs
+
 Some official government websites change their URLs frequently (e.g., yearly), while others use stable endpoints. If a loader fails with a 404 error:
+
 1.  Verify the official source URL in a browser.
 2.  If the URL has changed, find the `loadYearDataToCache` method in the corresponding loader.
 3.  Update the `url` variable or the URL construction logic to match the new source location.
 
 #### Testing Your Changes
+
 To test data loader changes, you need to run the ingestion pipeline:
 
 1.  **Rebuild Data**:
+
     ```bash
     # Fetches fresh data (slow, hits external servers)
     pnpm data:rebuild
@@ -45,6 +51,7 @@ To test data loader changes, you need to run the ingestion pipeline:
     # OR uses existing cache (fast, good for logic changes)
     pnpm data:rebuild:cached
     ```
+
 2.  **Post-Process**:
     ```bash
     # Generates the final JSON files for the app
@@ -56,7 +63,7 @@ To test data loader changes, you need to run the ingestion pipeline:
 
 We maintain a metadata file for each country to link donors to Wikipedia and define relationships between donors (e.g., family members, subsidiaries).
 
-*   **Location**: `tasks/load-data/<country>/donor-meta.ts`
+- **Location**: `tasks/load-data/<country>/donor-meta.ts`
 
 ### Adding/Updating Metadata
 
@@ -70,11 +77,11 @@ export const donorMeta: DonorMetaDefinition = {
   donors: {
     "Donor Name": {
       // Wikipedia Page ID (number)
-      wiki: 12345, 
+      wiki: 12345,
     },
     "Another Donor": {
       wiki: 67890,
-    }
+    },
   },
   relations: [
     // Define relationships between donors
@@ -86,8 +93,8 @@ export const donorMeta: DonorMetaDefinition = {
       ["Wealthy Individual", RelationKind.family],
       ["Spouse", RelationKind.family],
       ["Family Trust", RelationKind.company],
-    ]
-  ]
+    ],
+  ],
 };
 ```
 
@@ -107,8 +114,7 @@ pnpm run data:wikipedia
 
 This script reads the `wiki` fields from:
 
-
-*   **Parties**: Each party in our data has an optional `wiki` field (number) representing a Wikipedia page ID.
-*   **Donor Meta**: The donor metadata in `donorMeta.donors` uses the `wiki` field for Wikipedia page IDs.
+- **Parties**: Each party in our data has an optional `wiki` field (number) representing a Wikipedia page ID.
+- **Donor Meta**: The donor metadata in `donorMeta.donors` uses the `wiki` field for Wikipedia page IDs.
 
 When you add or update these `wiki` fields, running the `data:wikipedia` script will fetch and update the corresponding excerpts.

@@ -152,8 +152,7 @@ export const DonationStackedYears = ({
 
           if (!year) return;
 
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
+          // @ts-expect-error - getModel is typed as private but we need it to get the grid component and check if the click was inside the grid.
           const grid = chart.getModel().getComponent("grid");
 
           if (!grid.coordinateSystem.containPoint([x, y])) return;

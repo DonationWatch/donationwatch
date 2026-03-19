@@ -1,7 +1,6 @@
 "use client";
 import { useLocale } from "next-intl";
 
-
 import Loading from "./loading";
 import { PercentageHint } from "./percentage-hint";
 import { RankBadge } from "./ranking-item";

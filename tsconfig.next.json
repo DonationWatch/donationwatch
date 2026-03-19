@@ -5,5 +5,5 @@
   "exclude": ["**/*.test.ts", "tasks"],
   "compilerOptions": {
     "plugins": [{ "name": "next" }]
-  },
+  }
 }

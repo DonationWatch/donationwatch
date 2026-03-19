@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useLocale } from "next-intl";
 
-
 import { PageLogo } from "./page-logo";
 import {
   DropdownMenu,

@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 
-
 import { cn } from "../utils/classname";
 import { type CountryConfig, getParty } from "../utils/countries";
 

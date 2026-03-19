@@ -1,7 +1,6 @@
 "use client";
 import { useLocale } from "next-intl";
 
-
 import type { CountryConfig } from "@/utils/countries";
 import type { Party } from "@/utils/types";
 

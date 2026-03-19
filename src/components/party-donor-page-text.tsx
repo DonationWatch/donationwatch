@@ -1,7 +1,6 @@
 "use client";
 import { useLocale } from "next-intl";
 
-
 import { DonorLink } from "./donor-link";
 import { FormatAnd } from "./formatter";
 import Loading from "./loading";

@@ -207,7 +207,7 @@ export abstract class DataLoader {
 
   protected normalizeDonor(
     donor: string,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // oxlint-disable-next-line @typescript-eslint/no-unused-vars
     _address: ExtractedDonationAddress,
   ): string {
     return (

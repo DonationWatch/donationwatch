@@ -2,7 +2,6 @@
 import { HatGlasses, Info, Lock } from "lucide-react";
 import { useLocale } from "next-intl";
 
-
 import { AbsoluteMultipleColorsGradient } from "../../../../../components/absolute-multiple-colors-gradient";
 import { PageHeader } from "../../../../../components/layout/page-header";
 import Loading from "../../../../../components/loading";

@@ -64,93 +64,92 @@ export const EChartsRacingBars = ({
   const [recordingProgress, setRecordingProgress] = useState(0);
 
   // Process donations into date-based cumulative data
-  const { sortedDates, cumulativeDataByDate, partyIds, firstDate } =
-    useMemo(() => {
-      const isGroupByDonor = groupByField === DonationField.DonorName;
+  const { sortedDates, cumulativeDataByDate, partyIds } = useMemo(() => {
+    const isGroupByDonor = groupByField === DonationField.DonorName;
 
-      // dayDonations[date][groupName][partyId] = amount
-      // groupName is either donor name (when grouping by donor) or party ID (when grouping by receiver)
-      const dayDonations: Record<
-        string,
-        Record<string, Record<string, number>>
-      > = {};
-      const partySet = new Set<string>();
+    // dayDonations[date][groupName][partyId] = amount
+    // groupName is either donor name (when grouping by donor) or party ID (when grouping by receiver)
+    const dayDonations: Record<
+      string,
+      Record<string, Record<string, number>>
+    > = {};
+    const partySet = new Set<string>();
 
-      donations.forEach((donation) => {
-        const donorName = donation[DonationField.DonorName];
-        const receiverId = donation[DonationField.Receiver];
-        const date = donation[DonationField.Date];
-        const amount = donation[DonationField.Amount];
+    donations.forEach((donation) => {
+      const donorName = donation[DonationField.DonorName];
+      const receiverId = donation[DonationField.Receiver];
+      const date = donation[DonationField.Date];
+      const amount = donation[DonationField.Amount];
 
-        partySet.add(receiverId);
+      partySet.add(receiverId);
 
-        // Group by donor: each bar is a donor, segments are parties they donated to
-        // Group by receiver: each bar is a party, segments are donors who gave to them
-        const groupName = isGroupByDonor ? donorName : receiverId;
-        const segmentId = isGroupByDonor ? receiverId : donorName;
+      // Group by donor: each bar is a donor, segments are parties they donated to
+      // Group by receiver: each bar is a party, segments are donors who gave to them
+      const groupName = isGroupByDonor ? donorName : receiverId;
+      const segmentId = isGroupByDonor ? receiverId : donorName;
 
-        dayDonations[date] ??= {};
-        dayDonations[date][groupName] ??= {};
-        dayDonations[date][groupName][segmentId] =
-          (dayDonations[date][groupName][segmentId] || 0) + amount;
-      });
+      dayDonations[date] ??= {};
+      dayDonations[date][groupName] ??= {};
+      dayDonations[date][groupName][segmentId] =
+        (dayDonations[date][groupName][segmentId] || 0) + amount;
+    });
 
-      // Sort dates chronologically
-      const dates = Object.keys(dayDonations).toSorted(
-        (a, b) => new Date(a).getTime() - new Date(b).getTime(),
-      );
+    // Sort dates chronologically
+    const dates = Object.keys(dayDonations).toSorted(
+      (a, b) => new Date(a).getTime() - new Date(b).getTime(),
+    );
 
-      // Calculate cumulative data for each date
-      const cumulative: Record<
-        string,
-        Record<string, Record<string, number>>
-      > = {};
-      const runningTotals: Record<string, Record<string, number>> = {};
+    // Calculate cumulative data for each date
+    const cumulative: Record<
+      string,
+      Record<string, Record<string, number>>
+    > = {};
+    const runningTotals: Record<string, Record<string, number>> = {};
 
-      dates.forEach((date) => {
-        const dailyData = dayDonations[date];
+    dates.forEach((date) => {
+      const dailyData = dayDonations[date];
 
-        Object.entries(dailyData).forEach(([groupName, segmentAmounts]) => {
-          runningTotals[groupName] ??= {};
+      Object.entries(dailyData).forEach(([groupName, segmentAmounts]) => {
+        runningTotals[groupName] ??= {};
 
-          Object.entries(segmentAmounts).forEach(([segmentId, amount]) => {
-            runningTotals[groupName][segmentId] =
-              (runningTotals[groupName][segmentId] || 0) + amount;
-          });
-        });
-
-        // Deep copy the running totals for this date
-        cumulative[date] = {};
-        Object.entries(runningTotals).forEach(([groupName, segmentAmounts]) => {
-          cumulative[date][groupName] = { ...segmentAmounts };
+        Object.entries(segmentAmounts).forEach(([segmentId, amount]) => {
+          runningTotals[groupName][segmentId] =
+            (runningTotals[groupName][segmentId] || 0) + amount;
         });
       });
 
-      // Sample dates if there are too many for the target duration
-      // With 50ms minimum per frame, max frames = totalRuntimeMs / 50
-      const maxFrames = Math.floor(totalRuntimeMs / 50);
-      let finalDates = dates;
+      // Deep copy the running totals for this date
+      cumulative[date] = {};
+      Object.entries(runningTotals).forEach(([groupName, segmentAmounts]) => {
+        cumulative[date][groupName] = { ...segmentAmounts };
+      });
+    });
 
-      if (dates.length > maxFrames) {
-        // Sample evenly spaced dates, always including first and last
-        const sampledDates: string[] = [];
-        const step = (dates.length - 1) / (maxFrames - 1);
+    // Sample dates if there are too many for the target duration
+    // With 50ms minimum per frame, max frames = totalRuntimeMs / 50
+    const maxFrames = Math.floor(totalRuntimeMs / 50);
+    let finalDates = dates;
 
-        for (let i = 0; i < maxFrames; i++) {
-          const index = Math.round(i * step);
-          sampledDates.push(dates[index]);
-        }
+    if (dates.length > maxFrames) {
+      // Sample evenly spaced dates, always including first and last
+      const sampledDates: string[] = [];
+      const step = (dates.length - 1) / (maxFrames - 1);
 
-        finalDates = sampledDates;
+      for (let i = 0; i < maxFrames; i++) {
+        const index = Math.round(i * step);
+        sampledDates.push(dates[index]);
       }
 
-      return {
-        sortedDates: finalDates,
-        cumulativeDataByDate: cumulative,
-        partyIds: Array.from(partySet),
-        firstDate: finalDates[0],
-      };
-    }, [donations, groupByField, totalRuntimeMs]);
+      finalDates = sampledDates;
+    }
+
+    return {
+      sortedDates: finalDates,
+      cumulativeDataByDate: cumulative,
+      partyIds: Array.from(partySet),
+      firstDate: finalDates[0],
+    };
+  }, [donations, groupByField, totalRuntimeMs]);
 
   // Calculate frame interval based on total runtime
   const frameIntervalMs = useMemo(() => {
@@ -500,12 +499,11 @@ export const EChartsRacingBars = ({
     partiesById,
     locale,
     currency,
-    backgroundColor,
     title,
     subtitle,
     sortedDates,
-    firstDate,
     groupByField,
+    animationDurationMs,
   ]);
 
   // Reset animation when data changes (from/to/groupBy)
@@ -681,7 +679,12 @@ export const EChartsRacingBars = ({
       setIsRecording(false);
       setRecordingProgress(0);
     }
-  }, [sortedDates.length, frameIntervalMs]);
+  }, [
+    sortedDates.length,
+    frameIntervalMs,
+    animationDurationMs,
+    countryConfig.id,
+  ]);
 
   return (
     <div className="mx-0 my-auto flex w-full max-w-300 flex-col gap-4">

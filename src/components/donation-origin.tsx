@@ -89,11 +89,9 @@ const CurrentCountryPart = ({
               until: years.at(-1)!,
               stateCount: sums.length,
               highestState: isEU
-                ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                  // @ts-ignore
+                ? // @ts-expect-error - we know that state is defined because it is used in the bucket
                   t(`countries.${largestDonationSum[1].state!}`)
-                : // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                  // @ts-ignore
+                : // @ts-expect-error - we know that state is defined because it is used in the bucket
                   t(`state.${country.id}.${largestDonationSum[1].state!}`),
               highestSum: formatCountryCurrency(
                 locale,
@@ -102,11 +100,9 @@ const CurrentCountryPart = ({
               ),
               largesDonationCountNum: largesDonationCount[1].donations.length,
               largesDonationCountState: isEU
-                ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                  // @ts-ignore
+                ? // @ts-expect-error - we know that state is defined because it is used in the bucket
                   t(`countries.${largesDonationCount[1].state!}`)
-                : // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                  // @ts-ignore
+                : // @ts-expect-error - we know that state is defined because it is used in the bucket
                   t(`state.${country.id}.${largesDonationCount[1].state!}`),
             })}
           </p>
@@ -197,8 +193,6 @@ const OtherCountryPart = ({
               until: years.at(-1)!,
               countryCount: sums.length,
               highestCountry: t(
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
                 `countries.${largesOtherDonationSum[1].donations[0][
                   DonationField.Address
                 ][AddressField.Country]!}`,
@@ -211,8 +205,6 @@ const OtherCountryPart = ({
               largesDonationCountNum:
                 largesOtherDonationCount[1].donations.length,
               largesDonationCountState: t(
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
                 `countries.${
                   largesOtherDonationCount[1].donations[0][
                     DonationField.Address
