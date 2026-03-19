@@ -1,7 +1,7 @@
 "use client";
 import { Expand, X, ZoomOut } from "lucide-react";
 import { useLocale } from "next-intl";
-import { useState, type JSX, useRef } from "react";
+import { useState, useCallback, type JSX, useRef } from "react";
 
 import { DynamicEchart } from "./dynamic-echart";
 import { isNotNullandNotUndefined } from "../../utils/array";
@@ -59,6 +59,10 @@ export const ExpandableReactEchart = ({
 
   const [isExpanded, setIsExpanded] = useState(false);
   const [isZoomed, setIsZoomed] = useState(false);
+
+  const handleZoom = useCallback(() => {
+    setIsZoomed(true);
+  }, []);
 
   const echartsRef = useRef<EChartsPublicApi>(undefined);
 
@@ -138,9 +142,7 @@ export const ExpandableReactEchart = ({
           theme={theme}
           onZrClick={onZrClick}
           onClick={onClick}
-          onZoom={() => {
-            setIsZoomed(true);
-          }}
+          onZoom={handleZoom}
         />
       </div>
       {footer ? (
