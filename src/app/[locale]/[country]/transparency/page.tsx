@@ -1,14 +1,7 @@
-import { notFound } from "next/navigation";
-import { getTranslations, setRequestLocale } from "next-intl/server";
-
-import { Article, ArticleSection } from "../../../../components/layout/article";
-import { getCountryConfig } from "../../../../utils/data/get-country-config";
-import { LOCALES } from "../../../../utils/locales";
-import { generateAlternates } from "../../../../utils/meta";
-import { notFoundMetadata } from "../../../../utils/not-found-metadata";
-import { isValidCountry, isValidLocale } from "../../../../utils/validate";
-
 import type { Metadata } from "next";
+
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { notFound } from "next/navigation";
 
 import {
   AggregatedDonorsList,
@@ -16,7 +9,13 @@ import {
   FilteredReceiversList,
   NormalizedReceiversList,
 } from "@/app/[locale]/[country]/transparency/transparency-list";
+import { Article, ArticleSection } from "@/components/layout/article";
 import { getCountryName } from "@/utils/countries";
+import { getCountryConfig } from "@/utils/data/get-country-config";
+import { LOCALES } from "@/utils/locales";
+import { generateAlternates } from "@/utils/meta";
+import { notFoundMetadata } from "@/utils/not-found-metadata";
+import { isValidCountry, isValidLocale } from "@/utils/validate";
 
 export const dynamicParams = false;
 

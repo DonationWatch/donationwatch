@@ -3,13 +3,13 @@
 import { createHash } from "node:crypto";
 import { access } from "node:fs/promises";
 
-import { DonationField } from "../../src/utils/types";
-
-import type { Donation } from "../../src/utils/types";
 import type {
   DonationsDocument,
   DonationsDocumentWithoutDonorIds,
 } from "@/lib/api/donations-document";
+import type { Donation } from "@/utils/types";
+
+import { DonationField } from "@/utils/types";
 
 export const RANDOM_COLOR_MARKER = "#FF00FF";
 

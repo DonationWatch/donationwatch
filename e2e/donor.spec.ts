@@ -1,10 +1,10 @@
 import { expect } from "@playwright/test";
 
-import { test } from "./util/fixture";
+import { formatAnd } from "@/utils/formatter";
+
 import { hash } from "../tasks/load-data/util";
 import { DONOR_WITH_UBOs, DONOR_WITH_WIKIPEDIA_ARTICLE } from "../tests/config";
-
-import { formatAnd } from "@/utils/formatter";
+import { test } from "./util/fixture";
 
 test.describe("Donor page", () => {
   test("works as expected", async ({

@@ -1,9 +1,9 @@
 "use client";
+import type { ComponentProps } from "react";
+
 import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip";
 
-import { cn } from "../../utils/classname";
-
-import type { ComponentProps } from "react";
+import { cn } from "@/lib/utils";
 
 function TooltipProvider({
   delayDuration = 0,

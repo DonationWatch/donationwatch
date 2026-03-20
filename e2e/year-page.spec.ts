@@ -1,11 +1,11 @@
 import { expect } from "@playwright/test";
 
-import { test } from "./util/fixture";
-import { COUNTRIES, Country } from "../src/utils/countries";
-import { getCountryConfig } from "../src/utils/data/get-country-config";
-
+import { COUNTRIES, Country } from "@/utils/countries";
+import { getCountryConfig } from "@/utils/data/get-country-config";
 import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
 import { canShowYearsTimeline } from "@/utils/party";
+
+import { test } from "./util/fixture";
 
 const CHECK_YEAR = 2023;
 

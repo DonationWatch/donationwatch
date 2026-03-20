@@ -4,7 +4,7 @@ import {
   deserializeYears,
   isSameYearRange,
   serializeYears,
-} from "../src/utils/serializers";
+} from "@/utils/serializers";
 
 test("deserializeYears", () => {
   (

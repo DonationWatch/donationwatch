@@ -1,38 +1,33 @@
-import { ChartLine, Earth, History, UserRound } from "lucide-react";
-import { notFound, redirect } from "next/navigation";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import type { Metadata } from "next";
 
-import { AbsoluteMultipleColorsGradient } from "../../../../../components/absolute-multiple-colors-gradient";
-import { PageHeader } from "../../../../../components/layout/page-header";
-import { MetaCard } from "../../../../../components/meta-card";
-import { LastModifiedSchema } from "../../../../../components/schema";
-import { NavigationTabs } from "../../../../../components/tabs";
-import { WikiQuote } from "../../../../../components/wiki-quote";
-import { isNotNullandNotUndefined } from "../../../../../utils/array";
-import { partyColor } from "../../../../../utils/color";
-import { THUMBNAIL_PREFIX } from "../../../../../utils/config";
-import { findCorrectParty, getParty } from "../../../../../utils/countries";
-import { getCountryConfig } from "../../../../../utils/data/get-country-config";
-import {
-  formatCountryCurrency,
-  formatNumber,
-} from "../../../../../utils/formatter";
+import { ChartLine, Earth, History, UserRound } from "lucide-react";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { notFound, redirect } from "next/navigation";
+
+import type { TabItem } from "@/components/tabs";
+
+import { AbsoluteMultipleColorsGradient } from "@/components/absolute-multiple-colors-gradient";
+import { PageHeader } from "@/components/layout/page-header";
+import { MetaCard } from "@/components/meta-card";
+import { LastModifiedSchema } from "@/components/schema";
+import { NavigationTabs } from "@/components/tabs";
+import { WikiQuote } from "@/components/wiki-quote";
+import { isNotNullandNotUndefined } from "@/utils/array";
+import { partyColor } from "@/utils/color";
+import { THUMBNAIL_PREFIX } from "@/utils/config";
+import { findCorrectParty, getParty } from "@/utils/countries";
+import { getCountryConfig } from "@/utils/data/get-country-config";
+import { formatCountryCurrency, formatNumber } from "@/utils/formatter";
 import {
   getPartyYearsSums,
   lastPartyStatsDonation,
-} from "../../../../../utils/loader/party-years-sums";
-import { baseOpenGraph, baseTwitter } from "../../../../../utils/meta";
-import { notFoundMetadata } from "../../../../../utils/not-found-metadata";
-import { generateCountryTitlePart } from "../../../../../utils/title";
-import {
-  isValidCountry,
-  isValidLocale,
-  isValidParty,
-} from "../../../../../utils/validate";
+} from "@/utils/loader/party-years-sums";
+import { baseOpenGraph, baseTwitter } from "@/utils/meta";
+import { notFoundMetadata } from "@/utils/not-found-metadata";
+import { generateCountryTitlePart } from "@/utils/title";
+import { isValidCountry, isValidLocale, isValidParty } from "@/utils/validate";
 
 import type { ParamsOf } from "../../../../../../.next/types/routes";
-import type { TabItem } from "../../../../../components/tabs";
-import type { Metadata } from "next";
 
 export const dynamicParams = true;
 

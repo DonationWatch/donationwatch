@@ -1,15 +1,15 @@
-import { notFound } from "next/navigation";
-import { getTranslations, setRequestLocale } from "next-intl/server";
-
-import { Article } from "../../../components/layout/article";
-import { NonCountryRootLayout } from "../../../components/ui/non-country-root-layout";
-import { CONTACT_MAIL, IMPRINT } from "../../../utils/config";
-import { LOCALES } from "../../../utils/locales";
-import { generateAlternates } from "../../../utils/meta";
-import { notFoundMetadata } from "../../../utils/not-found-metadata";
-import { isValidLocale } from "../../../utils/validate";
-
 import type { Metadata } from "next";
+
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { notFound } from "next/navigation";
+
+import { Article } from "@/components/layout/article";
+import { NonCountryRootLayout } from "@/components/layout/non-country-root-layout";
+import { CONTACT_MAIL, IMPRINT } from "@/utils/config";
+import { LOCALES } from "@/utils/locales";
+import { generateAlternates } from "@/utils/meta";
+import { notFoundMetadata } from "@/utils/not-found-metadata";
+import { isValidLocale } from "@/utils/validate";
 
 export const dynamicParams = false;
 

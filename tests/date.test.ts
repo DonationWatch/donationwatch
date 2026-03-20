@@ -1,8 +1,8 @@
-import { expect, test, describe } from "vitest";
+import { describe, expect, test } from "vitest";
 
-import { adjustDays } from "../src/utils/date";
+import type { IsoDate } from "@/utils/types";
 
-import type { IsoDate } from "../src/utils/types";
+import { adjustDays } from "@/utils/date";
 
 describe("adjustDays", () => {
   test(`works`, async () => {

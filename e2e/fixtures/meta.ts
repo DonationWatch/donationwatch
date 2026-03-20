@@ -1,7 +1,8 @@
 import { expect } from "@playwright/test";
 
-import { TWITTER_SITE } from "../../src/utils/config";
-import { LOCALES } from "../../src/utils/locales";
+import { TWITTER_SITE } from "@/utils/config";
+import { LOCALES } from "@/utils/locales";
+
 import { PageObject } from "../util/page";
 
 export class Meta extends PageObject {

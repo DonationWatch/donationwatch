@@ -1,17 +1,13 @@
-import { notFound } from "next/navigation";
-import { setRequestLocale } from "next-intl/server";
-
-import { DonationPartyOrigin } from "../../../../../../../components/donation-origin";
-import { getParty } from "../../../../../../../utils/countries";
-import { getCountryConfig } from "../../../../../../../utils/data/get-country-config";
-import { generateAlternates } from "../../../../../../../utils/meta";
-import {
-  isValidCountry,
-  isValidLocale,
-  isValidParty,
-} from "../../../../../../../utils/validate";
-
 import type { Metadata } from "next";
+
+import { setRequestLocale } from "next-intl/server";
+import { notFound } from "next/navigation";
+
+import { DonationPartyOrigin } from "@/components/donations/donation-origin";
+import { getParty } from "@/utils/countries";
+import { getCountryConfig } from "@/utils/data/get-country-config";
+import { generateAlternates } from "@/utils/meta";
+import { isValidCountry, isValidLocale, isValidParty } from "@/utils/validate";
 
 export async function generateMetadata(
   props: PageProps<"/[locale]/[country]/party/[partyId]/origin/overview">,

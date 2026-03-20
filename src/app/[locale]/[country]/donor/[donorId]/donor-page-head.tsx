@@ -2,46 +2,33 @@
 import { HatGlasses, Info, Lock } from "lucide-react";
 import { useLocale } from "next-intl";
 
-import { AbsoluteMultipleColorsGradient } from "../../../../../components/absolute-multiple-colors-gradient";
-import { PageHeader } from "../../../../../components/layout/page-header";
-import Loading from "../../../../../components/loading";
-import { MetaCard, MetaCardTitle } from "../../../../../components/meta-card";
-import { RelatedDonorChip } from "../../../../../components/related-donor-chip";
-import { LastModifiedSchema } from "../../../../../components/schema";
-import { WikiQuote } from "../../../../../components/wiki-quote";
-import { useDonationsByDonorId } from "../../../../../hooks/use-api";
-import { partyColor } from "../../../../../utils/color";
-import { donationYear } from "../../../../../utils/date";
-import {
-  formatAnd,
-  formatCountryCurrency,
-  formatNumber,
-  formatYearsRange,
-} from "../../../../../utils/formatter";
-import {
-  AddressField,
-  DonationField,
-  DonorType,
-} from "../../../../../utils/types";
+import type { Countries, Country, CountryConfig } from "@/utils/countries";
+import type { Donation, DonorMeta, ReceiverId } from "@/utils/types";
 
-import type {
-  Countries,
-  Country,
-  CountryConfig,
-} from "../../../../../utils/countries";
-import type {
-  Donation,
-  DonorMeta,
-  ReceiverId,
-} from "../../../../../utils/types";
-
+import { AbsoluteMultipleColorsGradient } from "@/components/absolute-multiple-colors-gradient";
+import { RelatedDonorChip } from "@/components/donors/related-donor-chip";
+import { PageHeader } from "@/components/layout/page-header";
+import Loading from "@/components/loading/loading";
+import { MetaCard, MetaCardTitle } from "@/components/meta-card";
+import { LastModifiedSchema } from "@/components/schema";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { WikiQuote } from "@/components/wiki-quote";
+import { useDonationsByDonorId } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { partyColor } from "@/utils/color";
+import { donationYear } from "@/utils/date";
 import { getDonorName, isRedactedDonor } from "@/utils/donor";
+import {
+  formatAnd,
+  formatCountryCurrency,
+  formatNumber,
+  formatYearsRange,
+} from "@/utils/formatter";
+import { AddressField, DonationField, DonorType } from "@/utils/types";
 
 export const DonorPageHead = ({
   donorId,

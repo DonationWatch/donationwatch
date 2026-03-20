@@ -2,13 +2,12 @@
 
 import { useLocale } from "next-intl";
 
-import { FormatAnd } from "../../../../components/formatter";
-import { ArticleSection } from "../../../../components/layout/article";
-import Loading from "../../../../components/loading";
-import { useNormalized } from "../../../../hooks/use-api";
+import type { CountryConfig } from "@/utils/countries";
 
-import type { CountryConfig } from "../../../../utils/countries";
-
+import { FormatAnd } from "@/components/formatter";
+import { ArticleSection } from "@/components/layout/article";
+import Loading from "@/components/loading/loading";
+import { useNormalized } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 export const FilteredReceiversList = ({

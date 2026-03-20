@@ -1,9 +1,9 @@
-import { COUNTRIES } from "./countries";
-import { LOCALES_SET } from "./locales";
-
 import type { Country, CountryConfig } from "./countries";
 import type { ConstLocale } from "./locales";
 import type { ReceiverId } from "./types";
+
+import { COUNTRIES } from "./countries";
+import { LOCALES_SET } from "./locales";
 
 export const isValidLocale = (
   locale: string | undefined,

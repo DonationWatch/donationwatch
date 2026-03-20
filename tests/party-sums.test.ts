@@ -1,12 +1,13 @@
-import { expect, test, describe, beforeEach } from "vitest";
+import { beforeEach, describe, expect, test } from "vitest";
 
-import { skipIfFakeEnv } from "./config";
+import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
+
+import { hasYearSums } from "@/utils/loader/party-years-sums";
+
 import euSums from "../src/data/europeanunion/party-sums";
 import frSums from "../src/data/france/party-sums";
 import nlSums from "../src/data/netherlands/party-sums";
-import { hasYearSums } from "../src/utils/loader/party-years-sums";
-
-import type { PartyYearsSums } from "../src/utils/loader/party-years-sums";
+import { skipIfFakeEnv } from "./config";
 
 beforeEach((context) => {
   skipIfFakeEnv(context);

@@ -1,8 +1,8 @@
-import { expect, test, beforeEach, describe } from "vitest";
-
-import { AtLoader } from "../../tasks/load-data/at/at-loader";
+import { beforeEach, describe, expect, test } from "vitest";
 
 import { DonationField } from "@/utils/types";
+
+import { AtLoader } from "../../tasks/load-data/at/at-loader";
 
 let loader: AtLoader;
 

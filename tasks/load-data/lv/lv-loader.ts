@@ -1,21 +1,19 @@
 import assert from "assert";
+import * as cheerio from "cheerio";
 import fs from "fs/promises";
 import path from "path";
-
-import * as cheerio from "cheerio";
 import puppeteer from "puppeteer";
 
-import { donorMeta } from "./donor-meta";
-import { Country } from "../../../src/utils/countries";
-import { AddressField, DonationField } from "../../../src/utils/types";
+import type { ExtractedDonationAddress, ReceiverId } from "@/utils/types";
+
+import { Country } from "@/utils/countries";
+import { AddressField, DonationField } from "@/utils/types";
+
+import type { ExtractedYearData, PartyConfig } from "../data-loader";
+
 import { DataLoader } from "../data-loader";
 import { timeout } from "../util";
-
-import type {
-  ReceiverId,
-  ExtractedDonationAddress,
-} from "../../../src/utils/types";
-import type { ExtractedYearData, PartyConfig } from "../data-loader";
+import { donorMeta } from "./donor-meta";
 
 export class LvLoader extends DataLoader {
   constructor() {

@@ -1,6 +1,6 @@
-import { localeFromAcceptLanguage } from "./locale-from-accept-language";
-
 import type { NextRequest } from "next/server";
+
+import { localeFromAcceptLanguage } from "./locale-from-accept-language";
 
 export const extractYearsRange = (
   pathname: string,

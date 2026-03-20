@@ -1,5 +1,5 @@
-import { Chart } from "./chart";
 import { LocatorObject } from "../../util/locator";
+import { Chart } from "./chart";
 
 export class DonorTypeSection extends LocatorObject {
   public readonly treemap: Chart = new Chart(

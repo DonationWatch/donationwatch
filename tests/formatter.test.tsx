@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
 
-import { FormatAnd } from "../src/components/formatter";
+import { FormatAnd } from "@/components/formatter";
 
 describe("FormatAnd", () => {
   test("renders react nodes", () => {

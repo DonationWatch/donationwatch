@@ -1,8 +1,9 @@
-import { zipMappings } from "./zip-data";
-import { AddressField } from "../../../src/utils/types";
-
-import type { DonationAddress } from "../../../src/utils/types";
 import type { Countries } from "@/utils/countries";
+import type { DonationAddress } from "@/utils/types";
+
+import { AddressField } from "@/utils/types";
+
+import { zipMappings } from "./zip-data";
 
 export const extractAddress = (zip: string): DonationAddress => {
   const address: DonationAddress = { [AddressField.Country]: "AT" };

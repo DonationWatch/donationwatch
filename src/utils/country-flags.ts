@@ -1,3 +1,5 @@
+import { Country } from "@/utils/countries";
+
 import auFlag from "../../public/flags/au.svg";
 import atFlag from "../../public/flags/austria.svg";
 import caFlag from "../../public/flags/canada.svg";
@@ -15,8 +17,6 @@ import rsFlag from "../../public/flags/serbia.svg";
 import chFlag from "../../public/flags/switzerland.svg";
 import uaFlag from "../../public/flags/ua.svg";
 import ukFlag from "../../public/flags/unitedkingdom.svg";
-
-import { Country } from "@/utils/countries";
 
 export const countryFlags: Record<Country, typeof auFlag> = {
   [Country.germany]: deFlag,

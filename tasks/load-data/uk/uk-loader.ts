@@ -1,25 +1,19 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import assert from "assert";
+import { parse } from "csv-parse/sync";
 import fs from "fs/promises";
 import path from "path";
 
-import { parse } from "csv-parse/sync";
+import type { ExtractedDonationAddress, ReceiverId } from "@/utils/types";
 
-import { donorMeta } from "./donor-meta";
-import { Country, COUNTRY_CONFIG } from "../../../src/utils/countries";
-import {
-  AddressField,
-  DonationField,
-  DonorType,
-} from "../../../src/utils/types";
+import { COUNTRY_CONFIG, Country } from "@/utils/countries";
+import { AddressField, DonationField, DonorType } from "@/utils/types";
+
+import type { ExtractedYearData, PartyConfig } from "../data-loader";
+
 import { DataLoader } from "../data-loader";
 import { containsWords } from "../util";
-
-import type {
-  ExtractedDonationAddress,
-  ReceiverId,
-} from "../../../src/utils/types";
-import type { ExtractedYearData, PartyConfig } from "../data-loader";
+import { donorMeta } from "./donor-meta";
 
 const toGBPFloat = (valueString: string) => {
   const ukFormat = valueString.substring(1).replaceAll(/,/g, "");

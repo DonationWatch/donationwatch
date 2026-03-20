@@ -1,6 +1,6 @@
-import { Fragment } from "react";
-
 import type { ReactNode } from "react";
+
+import { Fragment } from "react";
 
 export const splitTranslation = (text: string) => {
   const regex = /\{(\w+)\}/g;

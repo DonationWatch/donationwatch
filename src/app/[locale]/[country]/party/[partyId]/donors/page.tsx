@@ -1,9 +1,11 @@
-import { notFound } from "next/navigation";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import type { Metadata } from "next";
 
-import { LoadingDonationPartyTreemap } from "../../../../../../components/chart/loading-donation-years-treemap";
-import { LoadingPartyDonorTypeTreemap } from "../../../../../../components/chart/loading-donor-types-treemap";
-import { DonorOverviewList } from "../../../../../../components/donor-overview-list";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { notFound } from "next/navigation";
+
+import { LoadingDonationPartyTreemap } from "@/components/charts/loading-donation-years-treemap";
+import { LoadingPartyDonorTypeTreemap } from "@/components/charts/loading-donor-types-treemap";
+import { DonorOverviewList } from "@/components/donors/donor-overview-list";
 import {
   Article,
   ArticleSectionColumn,
@@ -11,25 +13,19 @@ import {
   ArticleSectionTitle,
   ArticleSectionTwoColumns,
   ArticleSectionWrapper,
-} from "../../../../../../components/layout/article";
-import { LoadingPartyDonorTypeText } from "../../../../../../components/part-donor-type-text";
-import { PartyDonorPageText } from "../../../../../../components/party-donor-page-text";
-import { getCountryName, getParty } from "../../../../../../utils/countries";
-import { getCountryConfig } from "../../../../../../utils/data/get-country-config";
+} from "@/components/layout/article";
+import { LoadingPartyDonorTypeText } from "@/components/parties/part-donor-type-text";
+import { PartyDonorPageText } from "@/components/parties/party-donor-page-text";
+import { getCountryName, getParty } from "@/utils/countries";
+import { getCountryConfig } from "@/utils/data/get-country-config";
 import {
   formatCompactCountryCurrency,
   formatCountryCurrency,
-} from "../../../../../../utils/formatter";
-import { getPartyYearsSums } from "../../../../../../utils/loader/party-years-sums";
-import { generateAlternates } from "../../../../../../utils/meta";
-import { notFoundMetadata } from "../../../../../../utils/not-found-metadata";
-import {
-  isValidCountry,
-  isValidLocale,
-  isValidParty,
-} from "../../../../../../utils/validate";
-
-import type { Metadata } from "next";
+} from "@/utils/formatter";
+import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
+import { generateAlternates } from "@/utils/meta";
+import { notFoundMetadata } from "@/utils/not-found-metadata";
+import { isValidCountry, isValidLocale, isValidParty } from "@/utils/validate";
 
 export async function generateMetadata(
   props: PageProps<"/[locale]/[country]/party/[partyId]/donors">,

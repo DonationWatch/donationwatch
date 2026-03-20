@@ -1,34 +1,33 @@
 import assert from "assert";
+import debug from "debug";
 import fs, { constants } from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
 
-import debug from "debug";
-
-import { assertNoDuplicateIds } from "./util";
-import { COUNTRY_CONFIG } from "../../src/utils/countries";
-import { donationYear, fillYears } from "../../src/utils/date";
-import { donationDateSorter } from "../../src/utils/sort";
-import { AddressField, DonationField, DonorType } from "../../src/utils/types";
-import {
-  jsonAsTsModule,
-  jsonAsTsModuleWithType,
-  writeIfChanged,
-} from "../utils";
-
-import type { Country, CountryCode } from "../../src/utils/countries";
+import type { Country, CountryCode } from "@/utils/countries";
 import type {
   Donation,
   DonorMetaDefinition,
   ExtractedDonationAddress,
   Party,
   ReceiverId,
-} from "../../src/utils/types";
+} from "@/utils/types";
 
 import {
   ANONYMIZED_DONOR_KEYWORD,
   REDACTED_DONOR_KEYWORD,
 } from "@/utils/config";
+import { COUNTRY_CONFIG } from "@/utils/countries";
+import { donationYear, fillYears } from "@/utils/date";
+import { donationDateSorter } from "@/utils/sort";
+import { AddressField, DonationField, DonorType } from "@/utils/types";
+
+import {
+  jsonAsTsModule,
+  jsonAsTsModuleWithType,
+  writeIfChanged,
+} from "../utils";
+import { assertNoDuplicateIds } from "./util";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 

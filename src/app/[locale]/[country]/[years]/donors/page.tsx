@@ -1,9 +1,13 @@
-import { notFound, redirect } from "next/navigation";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import type { Metadata } from "next";
 
-import { LoadingDonationYearsTreemap } from "../../../../../components/chart/loading-donation-years-treemap";
-import { LoadingDonorReceiverHistogram } from "../../../../../components/chart/loading-donor-receiver-histogram";
-import { DonorYearOverview } from "../../../../../components/donor-year-overview";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { notFound, redirect } from "next/navigation";
+
+import { LoadingDonationYearsTreemap } from "@/components/charts/loading-donation-years-treemap";
+import { LoadingDonorReceiverHistogram } from "@/components/charts/loading-donor-receiver-histogram";
+import { DonorYearOverview } from "@/components/donors/donor-year-overview";
+import { LoadingYearsDonorHistogramText } from "@/components/donors/years-donor-histogram-text";
+import { YearsDonorPageText } from "@/components/donors/years-donor-page-text";
 import {
   Article,
   ArticleSectionColumn,
@@ -11,23 +15,19 @@ import {
   ArticleSectionTitle,
   ArticleSectionTwoColumns,
   ArticleSectionWrapper,
-} from "../../../../../components/layout/article";
-import { LoadingYearsDonorHistogramText } from "../../../../../components/years-donor-histogram-text";
-import { YearsDonorPageText } from "../../../../../components/years-donor-page-text";
-import { getCountryName } from "../../../../../utils/countries";
-import { getCountryConfig } from "../../../../../utils/data/get-country-config";
-import { getParties } from "../../../../../utils/data/get-parties";
-import { formatYearsRange } from "../../../../../utils/formatter";
+} from "@/components/layout/article";
+import { getCountryName } from "@/utils/countries";
+import { getCountryConfig } from "@/utils/data/get-country-config";
+import { getParties } from "@/utils/data/get-parties";
+import { formatYearsRange } from "@/utils/formatter";
 import {
   getPartyYearsSums,
   hasYearSums,
-} from "../../../../../utils/loader/party-years-sums";
-import { generateAlternates } from "../../../../../utils/meta";
-import { notFoundMetadata } from "../../../../../utils/not-found-metadata";
-import { deserializeYears } from "../../../../../utils/serializers";
-import { isValidCountry, isValidLocale } from "../../../../../utils/validate";
-
-import type { Metadata } from "next";
+} from "@/utils/loader/party-years-sums";
+import { generateAlternates } from "@/utils/meta";
+import { notFoundMetadata } from "@/utils/not-found-metadata";
+import { deserializeYears } from "@/utils/serializers";
+import { isValidCountry, isValidLocale } from "@/utils/validate";
 
 export async function generateMetadata(
   props: PageProps<"/[locale]/[country]/[years]/donors">,

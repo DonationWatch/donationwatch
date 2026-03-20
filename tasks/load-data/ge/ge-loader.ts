@@ -1,25 +1,23 @@
+import type { ReadableStream } from "stream/web";
+
+import { parse } from "csv-parse/sync";
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import fs from "fs";
 import path from "path";
 import { Readable } from "stream";
 import { finished } from "stream/promises";
 
-import { parse } from "csv-parse/sync";
+import type { Countries } from "@/utils/countries";
+import type { ReceiverId } from "@/utils/types";
 
-import { donorMeta } from "./donor-meta";
-import { isNotNullandNotUndefined } from "../../../src/utils/array";
-import { Country } from "../../../src/utils/countries";
-import {
-  AddressField,
-  DonationField,
-  DonorType,
-} from "../../../src/utils/types";
-import { DataLoader } from "../data-loader";
+import { isNotNullandNotUndefined } from "@/utils/array";
+import { Country } from "@/utils/countries";
+import { AddressField, DonationField, DonorType } from "@/utils/types";
 
-import type { Countries } from "../../../src/utils/countries";
-import type { ReceiverId } from "../../../src/utils/types";
 import type { ExtractedYearData, PartyConfig } from "../data-loader";
-import type { ReadableStream } from "stream/web";
+
+import { DataLoader } from "../data-loader";
+import { donorMeta } from "./donor-meta";
 
 type GeDonationType =
   | "#10 - ფულადი შემოწირულებები"

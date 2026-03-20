@@ -1,17 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import fs from "fs/promises";
+import { parse } from "node-xlsx";
 import path from "path";
 
-import { parse } from "node-xlsx";
+import type { DonationAddress, ReceiverId } from "@/utils/types";
 
-import { donorMeta } from "./donor-meta";
-import { isNotNullandNotUndefined } from "../../../src/utils/array";
-import { Country } from "../../../src/utils/countries";
-import { AddressField, DonationField } from "../../../src/utils/types";
-import { DataLoader } from "../data-loader";
+import { isNotNullandNotUndefined } from "@/utils/array";
+import { Country } from "@/utils/countries";
+import { AddressField, DonationField } from "@/utils/types";
 
-import type { ReceiverId, DonationAddress } from "../../../src/utils/types";
 import type { ExtractedYearData, PartyConfig } from "../data-loader";
+
+import { DataLoader } from "../data-loader";
+import { donorMeta } from "./donor-meta";
 
 export class ChLoader extends DataLoader {
   constructor() {

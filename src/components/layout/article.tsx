@@ -1,5 +1,6 @@
 import type { PropsWithChildren, ReactNode } from "react";
-import { cn } from "@/utils/classname";
+
+import { cn } from "@/lib/utils";
 
 export const slugify = (text: string): string =>
   text

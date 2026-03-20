@@ -1,7 +1,8 @@
-import { AddressField, Donation, DonationField, Party } from "../types";
-import { numbersSum } from "../math";
 import type { CountryConfig } from "../countries";
+
 import { donationYear } from "../date";
+import { numbersSum } from "../math";
+import { AddressField, Donation, DonationField, Party } from "../types";
 
 export const getOriginDonations = (
   country: CountryConfig,

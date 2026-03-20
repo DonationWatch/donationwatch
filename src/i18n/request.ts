@@ -1,7 +1,6 @@
 import { getRequestConfig } from "next-intl/server";
 
-import { DEFAULT_LOCALE } from "../utils/locales";
-
+import { DEFAULT_LOCALE } from "@/utils/locales";
 import { isValidLocale } from "@/utils/validate";
 
 export default getRequestConfig(async ({ requestLocale }) => {

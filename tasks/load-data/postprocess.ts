@@ -3,17 +3,32 @@ import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
 
+import type { CountryCode, CountryConfig } from "@/utils/countries";
+import type {
+  PartyStats,
+  PartyYearsSums,
+} from "@/utils/loader/party-years-sums";
+import type {
+  Donation,
+  DonorMeta,
+  DonorMetaDefinition,
+  DonorMetaRelation,
+} from "@/utils/types";
+
 import {
+  BIGGEST_DONATIONS_COUNT,
   DONOR_ID_HASH_LEN,
   MOST_RECENT_HISTORY_SIZE,
-  BIGGEST_DONATIONS_COUNT,
-} from "../../src/utils/config";
-import { Country } from "../../src/utils/countries";
-import { getCountryConfig } from "../../src/utils/data/get-country-config";
-import { getHistory } from "../../src/utils/data/get-history";
-import { donationYear } from "../../src/utils/date";
-import { getWikiArticles } from "../../src/utils/loader/wiki";
-import { donationDateSorter } from "../../src/utils/sort";
+} from "@/utils/config";
+import { Country } from "@/utils/countries";
+import { getCountryConfig } from "@/utils/data/get-country-config";
+import { getHistory } from "@/utils/data/get-history";
+import { donationYear } from "@/utils/date";
+import { getWikiArticles } from "@/utils/loader/wiki";
+import { sumPartySums } from "@/utils/math";
+import { donationDateSorter } from "@/utils/sort";
+import { DonationField } from "@/utils/types";
+
 import { getDonations } from "../data/load-donations";
 import { jsonAsTsModule, jsonAsTsModuleWithType } from "../utils";
 import {
@@ -21,20 +36,6 @@ import {
   donationsToDonationsDocumentWithoutDonorIds,
   hash,
 } from "./util";
-import { sumPartySums } from "../../src/utils/math";
-import { DonationField } from "../../src/utils/types";
-
-import type { CountryCode, CountryConfig } from "../../src/utils/countries";
-import type {
-  PartyStats,
-  PartyYearsSums,
-} from "../../src/utils/loader/party-years-sums";
-import type {
-  Donation,
-  DonorMeta,
-  DonorMetaRelation,
-  DonorMetaDefinition,
-} from "../../src/utils/types";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 

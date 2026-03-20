@@ -1,10 +1,12 @@
+import type { Locator } from "@playwright/test";
+
 import { expect } from "@playwright/test";
 
-import { LocatorObject } from "../../util/locator";
+import type { ChartFeature } from "@/components/charts/echart";
 
-import type { ChartFeature } from "../../../src/components/chart/echart";
 import type { FixtureProps } from "../../util/props";
-import type { Locator } from "@playwright/test";
+
+import { LocatorObject } from "../../util/locator";
 
 export class Chart extends LocatorObject {
   constructor(

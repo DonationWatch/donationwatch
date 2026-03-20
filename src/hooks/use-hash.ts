@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { clientSha1 } from "../utils/hash";
+import { clientSha1 } from "@/utils/hash";
 
 export const useHash = (inputString: string) => {
   const [hash, setHash] = useState<string | null>(null);

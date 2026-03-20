@@ -1,12 +1,13 @@
-import { useTranslations as useNextIntlTranslations } from "next-intl";
-
-import type { SERVER_ONLY_NAMESPACES } from "@/utils/i18n-filter";
 import type {
   Messages,
   NamespaceKeys,
   NestedKeyOf,
   createTranslator,
 } from "next-intl";
+
+import { useTranslations as useNextIntlTranslations } from "next-intl";
+
+import type { SERVER_ONLY_NAMESPACES } from "@/utils/i18n-filter";
 
 type ServerOnlyNamespace = (typeof SERVER_ONLY_NAMESPACES)[number];
 

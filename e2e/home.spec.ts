@@ -1,8 +1,9 @@
 import { expect } from "@playwright/test";
 
+import { COUNTRIES } from "@/utils/countries";
+import { getCountryConfig } from "@/utils/data/get-country-config";
+
 import { test } from "./util/fixture";
-import { COUNTRIES } from "../src/utils/countries";
-import { getCountryConfig } from "../src/utils/data/get-country-config";
 
 test.describe("Homepage", () => {
   COUNTRIES.forEach((country) => {

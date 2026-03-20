@@ -1,32 +1,28 @@
-import { notFound } from "next/navigation";
-import { getTranslations, setRequestLocale } from "next-intl/server";
-
-import { DonorClientPage } from "./donor-client-page";
-import { DonorPageHead } from "./donor-page-head";
-import { THUMBNAIL_PREFIX } from "../../../../../utils/config";
-import { getCountryName } from "../../../../../utils/countries";
-import { getCountryConfig } from "../../../../../utils/data/get-country-config";
-import {
-  formatCompactCountryCurrency,
-  formatCountryCurrency,
-} from "../../../../../utils/formatter";
-import { getBiggestDonors } from "../../../../../utils/loader/biggest-donors";
-import {
-  baseOpenGraph,
-  baseTwitter,
-  generateAlternates,
-} from "../../../../../utils/meta";
-import { notFoundMetadata } from "../../../../../utils/not-found-metadata";
-import { DonationField, DonorType } from "../../../../../utils/types";
-import { isValidCountry, isValidLocale } from "../../../../../utils/validate";
-
 import type { Metadata } from "next";
 
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { notFound } from "next/navigation";
+
+import { THUMBNAIL_PREFIX } from "@/utils/config";
+import { getCountryName } from "@/utils/countries";
+import { getCountryConfig } from "@/utils/data/get-country-config";
 import {
   getDonationsByDonorId,
   getDonorMeta,
 } from "@/utils/data/server-loaders";
 import { getDonationDonorName } from "@/utils/donor";
+import {
+  formatCompactCountryCurrency,
+  formatCountryCurrency,
+} from "@/utils/formatter";
+import { getBiggestDonors } from "@/utils/loader/biggest-donors";
+import { baseOpenGraph, baseTwitter, generateAlternates } from "@/utils/meta";
+import { notFoundMetadata } from "@/utils/not-found-metadata";
+import { DonationField, DonorType } from "@/utils/types";
+import { isValidCountry, isValidLocale } from "@/utils/validate";
+
+import { DonorClientPage } from "./donor-client-page";
+import { DonorPageHead } from "./donor-page-head";
 
 export async function generateMetadata(
   props: PageProps<"/[locale]/[country]/donor/[donorId]">,

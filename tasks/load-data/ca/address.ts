@@ -1,7 +1,7 @@
-// Map first character to province/territory
-import { AddressField } from "../../../src/utils/types";
+import type { DonationAddress } from "@/utils/types";
 
-import type { DonationAddress } from "../../../src/utils/types";
+// Map first character to province/territory
+import { AddressField } from "@/utils/types";
 
 const provinceMap: { [key: string]: string } = {
   A: "NL", // Newfoundland and Labrador

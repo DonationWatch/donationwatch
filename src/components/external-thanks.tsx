@@ -1,11 +1,12 @@
 import { getTranslations } from "next-intl/server";
 
-import { FormatAnd } from "./formatter";
-import { Translation } from "./translation";
-import { Country } from "../utils/countries";
+import type { CountryConfig } from "@/utils/countries";
+import type { ConstLocale } from "@/utils/locales";
 
-import type { CountryConfig } from "../utils/countries";
-import type { ConstLocale } from "../utils/locales";
+import { FormatAnd } from "@/components/formatter";
+import { Country } from "@/utils/countries";
+
+import { Translation } from "./translation";
 
 const externalThanks: Partial<
   Record<Country, { name: string; url: string }[]>

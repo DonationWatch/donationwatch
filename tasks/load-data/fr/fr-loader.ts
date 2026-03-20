@@ -1,15 +1,9 @@
+import { parse as parseCsv } from "csv-parse/sync";
 import fs from "fs/promises";
+import { parse as parseXlsx } from "node-xlsx";
 import cp from "node:child_process";
 import path from "path";
 
-import { parse as parseCsv } from "csv-parse/sync";
-import { parse as parseXlsx } from "node-xlsx";
-
-import { DataLoader } from "../data-loader";
-import { donorMeta } from "./donor-meta";
-import { generatePartyColor, RANDOM_COLOR_MARKER } from "../util";
-
-import type { PartyConfig, ExtractedYearData } from "../data-loader";
 import type { Countries } from "@/utils/countries";
 import type { ReceiverId } from "@/utils/types";
 
@@ -17,6 +11,12 @@ import { isNotNullandNotUndefined } from "@/utils/array";
 import { DONOR_TO_PARTY_BY_YEAR } from "@/utils/config";
 import { Country } from "@/utils/countries";
 import { AddressField, DonationField } from "@/utils/types";
+
+import type { ExtractedYearData, PartyConfig } from "../data-loader";
+
+import { DataLoader } from "../data-loader";
+import { RANDOM_COLOR_MARKER, generatePartyColor } from "../util";
+import { donorMeta } from "./donor-meta";
 
 interface ReportRow {
   partyId: string;

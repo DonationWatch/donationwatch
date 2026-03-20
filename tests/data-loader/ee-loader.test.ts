@@ -1,10 +1,10 @@
-import { expect, test, beforeEach, describe } from "vitest";
+import { beforeEach, describe, expect, test } from "vitest";
 
-import { EeLoader } from "../../tasks/load-data/ee/ee-loader";
+import { DonationField } from "@/utils/types";
 
 import type { EeDonation } from "../../tasks/load-data/ee/ee-loader";
 
-import { DonationField } from "@/utils/types";
+import { EeLoader } from "../../tasks/load-data/ee/ee-loader";
 
 let loader: EeLoader;
 

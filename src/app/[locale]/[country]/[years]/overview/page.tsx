@@ -1,9 +1,15 @@
-import { notFound } from "next/navigation";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import type { Metadata } from "next";
 
-import { DonationYearScatterPlot } from "../../../../../components/chart/donation-year-scatter-plot";
-import { DonationsPieChart } from "../../../../../components/chart/donations-pie-chart";
-import { FormatAnd } from "../../../../../components/formatter";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { notFound } from "next/navigation";
+
+import type { Country } from "@/utils/countries";
+import type { PartySum } from "@/utils/data/get-parties-sum";
+import type { ConstLocale } from "@/utils/locales";
+
+import { DonationYearScatterPlot } from "@/components/charts/donation-year-scatter-plot";
+import { DonationsPieChart } from "@/components/charts/donations-pie-chart";
+import { FormatAnd } from "@/components/formatter";
 import {
   Article,
   ArticleSectionColumn,
@@ -11,34 +17,29 @@ import {
   ArticleSectionTitle,
   ArticleSectionTwoColumns,
   ArticleSectionWrapper,
-} from "../../../../../components/layout/article";
-import { TextPartyLink } from "../../../../../components/text-party-link";
-import { TopPartyYearDonations } from "../../../../../components/top-party-year-donations";
-import { Translation } from "../../../../../components/translation";
-import { YearsHeader } from "../../../../../components/years-header";
-import { getCountryName } from "../../../../../utils/countries";
-import { getCountryConfig } from "../../../../../utils/data/get-country-config";
-import { getParties } from "../../../../../utils/data/get-parties";
-import { getPartiesSum } from "../../../../../utils/data/get-parties-sum";
+} from "@/components/layout/article";
+import { TextPartyLink } from "@/components/parties/text-party-link";
+import { Translation } from "@/components/translation";
+import { TopPartyYearDonations } from "@/components/years/top-party-year-donations";
+import { YearsHeader } from "@/components/years/years-header";
+import { getCountryName } from "@/utils/countries";
+import { getCountryConfig } from "@/utils/data/get-country-config";
+import { getParties } from "@/utils/data/get-parties";
+import { getPartiesSum } from "@/utils/data/get-parties-sum";
 import {
   formatAnd,
   formatCompactCountryCurrency,
   formatCountryCurrency,
   formatYearsRange,
-} from "../../../../../utils/formatter";
+} from "@/utils/formatter";
 import {
   getPartyYearsSums,
   hasYearSums,
-} from "../../../../../utils/loader/party-years-sums";
-import { generateAlternates } from "../../../../../utils/meta";
-import { notFoundMetadata } from "../../../../../utils/not-found-metadata";
-import { deserializeYears } from "../../../../../utils/serializers";
-import { isValidCountry, isValidLocale } from "../../../../../utils/validate";
-
-import type { Country } from "../../../../../utils/countries";
-import type { PartySum } from "../../../../../utils/data/get-parties-sum";
-import type { ConstLocale } from "../../../../../utils/locales";
-import type { Metadata } from "next";
+} from "@/utils/loader/party-years-sums";
+import { generateAlternates } from "@/utils/meta";
+import { notFoundMetadata } from "@/utils/not-found-metadata";
+import { deserializeYears } from "@/utils/serializers";
+import { isValidCountry, isValidLocale } from "@/utils/validate";
 
 export async function generateMetadata(
   props: PageProps<"/[locale]/[country]/[years]/overview">,

@@ -1,9 +1,13 @@
 "use client";
-import { notFound } from "next/navigation";
 import { useLocale } from "next-intl";
+import { notFound } from "next/navigation";
 
-import { DonationStackedTimeseriesChart } from "../../../../../components/chart/donation-sum-chart";
-import { LoadedDonationYearsTreemap } from "../../../../../components/chart/loading-donation-years-treemap";
+import type { Country, CountryConfig } from "@/utils/countries";
+import type { Donation, ReceiverId } from "@/utils/types";
+
+import { DonationStackedTimeseriesChart } from "@/components/charts/donation-sum-chart";
+import { LoadedDonationYearsTreemap } from "@/components/charts/loading-donation-years-treemap";
+import { RankBadge } from "@/components/donations/ranking-item";
 import {
   Article,
   ArticleSectionColumn,
@@ -11,30 +15,25 @@ import {
   ArticleSectionTitle,
   ArticleSectionTwoColumns,
   ArticleSectionWrapper,
-} from "../../../../../components/layout/article";
-import Loading from "../../../../../components/loading";
-import { PercentageHint } from "../../../../../components/percentage-hint";
-import { RankBadge } from "../../../../../components/ranking-item";
-import { DonationHistoryTable } from "../../../../../components/table/donation-history-table";
-import { TextPartyLink } from "../../../../../components/text-party-link";
-import { Translation } from "../../../../../components/translation";
-import { useDonationsByDonorId } from "../../../../../hooks/use-api";
-import { getCountryName, getParty } from "../../../../../utils/countries";
-import { donationYear, fillYears } from "../../../../../utils/date";
+} from "@/components/layout/article";
+import Loading from "@/components/loading/loading";
+import { TextPartyLink } from "@/components/parties/text-party-link";
+import { PercentageHint } from "@/components/percentage-hint";
+import { DonationHistoryTable } from "@/components/table/donation-history-table";
+import { Translation } from "@/components/translation";
+import { useDonationsByDonorId } from "@/hooks/use-api";
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { getCountryName, getParty } from "@/utils/countries";
+import { donationYear, fillYears } from "@/utils/date";
+import { getDonorName } from "@/utils/donor";
 import {
   formatAnd,
   formatCountryCurrency,
   formatDate,
   formatNumber,
   formatPercentFormat,
-} from "../../../../../utils/formatter";
-import { DonationField } from "../../../../../utils/types";
-
-import type { Country, CountryConfig } from "../../../../../utils/countries";
-import type { Donation, ReceiverId } from "../../../../../utils/types";
-
-import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
-import { getDonorName } from "@/utils/donor";
+} from "@/utils/formatter";
+import { DonationField } from "@/utils/types";
 
 const DonorClientPageContent = ({
   countryConfig,

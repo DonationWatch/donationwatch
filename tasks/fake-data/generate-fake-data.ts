@@ -1,18 +1,5 @@
 import debug from "debug";
 
-import {
-  DONOR_WITH_REL_A,
-  DONOR_WITH_REL_B,
-  DONOR_WITH_UBOs,
-  DONOR_WITH_WIKIPEDIA_ARTICLE,
-} from "../../tests/config";
-import { DataLoader } from "../load-data/data-loader";
-import { loaders } from "../load-data/loaders";
-import { generatePartyColor, RANDOM_COLOR_MARKER } from "../load-data/util";
-import { promptCountries } from "../utils";
-import { writeWikipediaArticles } from "../wikipedia/util";
-
-import type { ExtractedYearData, PartyConfig } from "../load-data/data-loader";
 import type {
   Country,
   CountryCode,
@@ -26,6 +13,20 @@ import type {
 import { COUNTRY_CONFIG } from "@/utils/countries";
 import { fillYears } from "@/utils/date";
 import { AddressField, DonationField, RelationKind } from "@/utils/types";
+
+import type { ExtractedYearData, PartyConfig } from "../load-data/data-loader";
+
+import {
+  DONOR_WITH_REL_A,
+  DONOR_WITH_REL_B,
+  DONOR_WITH_UBOs,
+  DONOR_WITH_WIKIPEDIA_ARTICLE,
+} from "../../tests/config";
+import { DataLoader } from "../load-data/data-loader";
+import { loaders } from "../load-data/loaders";
+import { RANDOM_COLOR_MARKER, generatePartyColor } from "../load-data/util";
+import { promptCountries } from "../utils";
+import { writeWikipediaArticles } from "../wikipedia/util";
 
 debug.enable("data-loader:*");
 

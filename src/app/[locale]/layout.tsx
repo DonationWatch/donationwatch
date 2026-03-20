@@ -1,22 +1,22 @@
-import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+
 import {
   getMessages,
   getTranslations,
   setRequestLocale,
 } from "next-intl/server";
+import { notFound } from "next/navigation";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
-import { THUMBNAIL_PREFIX } from "../../utils/config";
-import { filterClientMessages } from "../../utils/i18n-filter";
-import { LOCALES } from "../../utils/locales";
-import { baseOpenGraph, baseTwitter } from "../../utils/meta";
-import { notFoundMetadata } from "../../utils/not-found-metadata";
-import { isValidLocale } from "../../utils/validate";
-import { Providers } from "../providers";
-
-import type { Metadata } from "next";
-
 import { OrganizationSchema } from "@/components/schema";
+import { THUMBNAIL_PREFIX } from "@/utils/config";
+import { filterClientMessages } from "@/utils/i18n-filter";
+import { LOCALES } from "@/utils/locales";
+import { baseOpenGraph, baseTwitter } from "@/utils/meta";
+import { notFoundMetadata } from "@/utils/not-found-metadata";
+import { isValidLocale } from "@/utils/validate";
+
+import { Providers } from "../providers";
 
 export async function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));

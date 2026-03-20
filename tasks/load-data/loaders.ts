@@ -1,3 +1,7 @@
+import { Country } from "@/utils/countries";
+
+import type { DataLoader } from "./data-loader";
+
 import { AtLoader } from "./at/at-loader";
 import { AuLoader } from "./au/au-loader";
 import { CaLoader } from "./ca/ca-loader";
@@ -15,9 +19,6 @@ import { NoLoader } from "./no/no-loader";
 import { RsLoader } from "./rs/rs-loader";
 import { UaLoader } from "./ua/ua-loader";
 import { UkLoader } from "./uk/uk-loader";
-import { Country } from "../../src/utils/countries";
-
-import type { DataLoader } from "./data-loader";
 
 export const loaders: Record<Country, DataLoader> = {
   [Country.germany]: new DeLoader(),

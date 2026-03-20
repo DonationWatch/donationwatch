@@ -1,5 +1,5 @@
-import { NotFoundButton } from "../components/not-found-button";
-import { PageLogo } from "../components/page-logo";
+import { NotFoundButton } from "@/components/layout/not-found-button";
+import { PageLogo } from "@/components/layout/page-logo";
 
 // We don't use translations here as the build seems to embed then into all pages
 

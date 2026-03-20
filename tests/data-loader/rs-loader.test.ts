@@ -1,8 +1,8 @@
-import { expect, test, beforeEach, describe } from "vitest";
-
-import { RsLoader } from "../../tasks/load-data/rs/rs-loader";
+import { beforeEach, describe, expect, test } from "vitest";
 
 import { DonationField } from "@/utils/types";
+
+import { RsLoader } from "../../tasks/load-data/rs/rs-loader";
 
 let loader: RsLoader;
 

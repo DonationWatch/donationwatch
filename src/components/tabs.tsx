@@ -1,7 +1,7 @@
-import { NavigationLink } from "./navigation-link";
-
 import type { LucideIcon } from "lucide-react";
 import type { PropsWithChildren } from "react";
+
+import { NavigationLink } from "@/components/layout/navigation-link";
 
 export interface TabItem {
   icon: LucideIcon;

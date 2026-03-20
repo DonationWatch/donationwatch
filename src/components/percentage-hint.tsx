@@ -1,6 +1,6 @@
-import { formatPercentFormat } from "../utils/formatter";
+import type { ConstLocale } from "@/utils/locales";
 
-import type { ConstLocale } from "../utils/locales";
+import { formatPercentFormat } from "@/utils/formatter";
 
 export const PercentageHint = ({
   locale,

@@ -1,8 +1,8 @@
 import type { Country } from "../countries";
+import type { HistoryEntry } from "../data/get-history";
 import type { Donation, Party } from "../types";
 import type { BigDonor } from "./biggest-donors";
 import type { PartyYearsSums } from "./party-years-sums";
-import type { HistoryEntry } from "../data/get-history";
 
 type DefaultExport<T> = { default: T };
 

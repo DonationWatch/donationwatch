@@ -1,19 +1,19 @@
 import fs from "fs/promises";
+import { afterEach, beforeEach, describe, expect, test } from "vitest";
 
-import { expect, test, beforeEach, afterEach, describe } from "vitest";
+import type { CountryCode } from "@/utils/countries";
+import type { DonorMetaDefinition, ReceiverId } from "@/utils/types";
 
-import { Country } from "../../src/utils/countries";
-import { DataLoader } from "../../tasks/load-data/data-loader";
+import { ANONYMIZED_DONOR_KEYWORD } from "@/utils/config";
+import { Country } from "@/utils/countries";
+import { AddressField, DonationField, DonorType } from "@/utils/types";
 
-import type { CountryCode } from "../../src/utils/countries";
 import type {
   ExtractedYearData,
   PartyConfig,
 } from "../../tasks/load-data/data-loader";
-import type { DonorMetaDefinition, ReceiverId } from "@/utils/types";
 
-import { ANONYMIZED_DONOR_KEYWORD } from "@/utils/config";
-import { AddressField, DonationField, DonorType } from "@/utils/types";
+import { DataLoader } from "../../tasks/load-data/data-loader";
 
 const TEST_PARTIES: Record<string, PartyConfig> = {
   "Party Alpha": {

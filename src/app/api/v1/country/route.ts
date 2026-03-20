@@ -1,6 +1,6 @@
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 
-import { countryCodesToCountry } from "../../../../utils/countries";
+import { countryCodesToCountry } from "@/utils/countries";
 
 export async function GET() {
   const { cf } = getCloudflareContext();

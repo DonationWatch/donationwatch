@@ -1,22 +1,20 @@
 /* eslint-disable @typescript-eslint/no-unused-vars,@typescript-eslint/no-explicit-any */
 import fs from "fs/promises";
+import { parse } from "node-xlsx";
 import path from "path";
 
-import { parse } from "node-xlsx";
+import type { Countries } from "@/utils/countries";
+import type { ExtractedDonationAddress, ReceiverId } from "@/utils/types";
+
+import { Country } from "@/utils/countries";
+import { AddressField, DonationField } from "@/utils/types";
+
+import type { ExtractedYearData, PartyConfig } from "../data-loader";
 
 import { DataLoader } from "../data-loader";
+import { exists } from "../util";
 import { donorMeta } from "./donor-meta";
 import { fromPdfDonations } from "./from-pdf-donations";
-import { Country } from "../../../src/utils/countries";
-import { AddressField, DonationField } from "../../../src/utils/types";
-import { exists } from "../util";
-
-import type { Countries } from "../../../src/utils/countries";
-import type {
-  ExtractedDonationAddress,
-  ReceiverId,
-} from "../../../src/utils/types";
-import type { ExtractedYearData, PartyConfig } from "../data-loader";
 
 const mapCountry = (year: string, country: string | undefined): Countries => {
   if (country === "EL") return "GR";

@@ -1,7 +1,7 @@
-import { DonationHistoryItem } from "./donation-history-item";
-import { getMostRecent } from "../utils/loader/most-recent";
+import type { CountryConfig } from "@/utils/countries";
 
-import type { CountryConfig } from "../utils/countries";
+import { DonationHistoryItem } from "@/components/donations/donation-history-item";
+import { getMostRecent } from "@/utils/loader/most-recent";
 
 export const HistoryComponent = async ({
   country,

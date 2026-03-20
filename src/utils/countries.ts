@@ -1,3 +1,7 @@
+import type { NonEmptyArray } from "@/utils/array";
+import type { StrictNamespacedTranslator } from "@/utils/translator";
+
+import type En from "../messages/en.json";
 import type { LambertConformalConicParams } from "./map";
 import type {
   DonorFilter,
@@ -6,9 +10,6 @@ import type {
   ReceiverFilter,
   ReceiverId,
 } from "./types";
-import type En from "../messages/en.json";
-import type { NonEmptyArray } from "@/utils/array";
-import type { StrictNamespacedTranslator } from "@/utils/translator";
 
 export const enum Country {
   germany = "germany",

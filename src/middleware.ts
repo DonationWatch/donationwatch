@@ -1,12 +1,13 @@
+import type { NextRequest } from "next/server";
+
 import { NextResponse } from "next/server";
+
+import type { ConstLocale } from "./utils/locales";
 
 import { DEFAULT_COUNTRY } from "./utils/config";
 import { COUNTRIES } from "./utils/countries";
 import { LOCALES_SET } from "./utils/locales";
 import { getLocale } from "./utils/middleware";
-
-import type { ConstLocale } from "./utils/locales";
-import type { NextRequest } from "next/server";
 
 const PATHS_WITHOUT_COUNTRY = [
   "about",

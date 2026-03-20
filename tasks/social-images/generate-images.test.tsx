@@ -1,32 +1,34 @@
+import type { JSX } from "react";
+import type { SatoriOptions } from "satori";
+
 import cp from "child_process";
 import fs from "fs/promises";
-import path from "path";
-import { fileURLToPath } from "url";
-
 import { createTranslator } from "next-intl";
+import path from "path";
 import satori from "satori";
-import { it, describe, beforeAll, afterAll } from "vitest";
+import { fileURLToPath } from "url";
+import { afterAll, beforeAll, describe, it } from "vitest";
 
+import type { CountryConfig } from "@/utils/countries";
+import type { BigDonor } from "@/utils/loader/biggest-donors";
+import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
+import type { Donation } from "@/utils/types";
+
+import { COUNTRIES } from "@/utils/countries";
+import { getCountryConfig } from "@/utils/data/get-country-config";
+import { getBiggestDonors } from "@/utils/loader/biggest-donors";
+import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
+import { CONST_LOCALES } from "@/utils/locales";
+
+import type { CreateTranslator } from "./utils";
+
+import { getDonations } from "../data/load-donations";
 import { CountryPageImage } from "./images/country-page-image";
 import { CountryYearsPageImage } from "./images/country-years-page-image";
 import { DonorImage } from "./images/donor-image";
 import { PartyPageImage } from "./images/party-page-image";
 import { RootPageImage } from "./images/root-page-image";
 import { THUMBNAIL_SIZE, toImage } from "./utils";
-import { COUNTRIES } from "../../src/utils/countries";
-import { getCountryConfig } from "../../src/utils/data/get-country-config";
-import { getBiggestDonors } from "../../src/utils/loader/biggest-donors";
-import { getPartyYearsSums } from "../../src/utils/loader/party-years-sums";
-import { CONST_LOCALES } from "../../src/utils/locales";
-import { getDonations } from "../data/load-donations";
-
-import type { CreateTranslator } from "./utils";
-import type { CountryConfig } from "../../src/utils/countries";
-import type { BigDonor } from "../../src/utils/loader/biggest-donors";
-import type { PartyYearsSums } from "../../src/utils/loader/party-years-sums";
-import type { Donation } from "../../src/utils/types";
-import type { JSX } from "react";
-import type { SatoriOptions } from "satori";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OUT_DIR = path.join(__dirname, "../../public/thumbnails");

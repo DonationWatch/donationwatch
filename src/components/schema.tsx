@@ -1,5 +1,6 @@
-import type { ConstLocale } from "../utils/locales";
 import type { FAQPage, Organization, WebPage, WithContext } from "schema-dts";
+
+import type { ConstLocale } from "@/utils/locales";
 
 import { BASE_URL, BSKY_URL, GITHUB_ORG, TWITTER_URL } from "@/utils/config";
 

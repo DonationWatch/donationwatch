@@ -1,21 +1,20 @@
+import { parse } from "csv-parse/sync";
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import fs from "fs/promises";
 import path from "path";
 
-import { parse } from "csv-parse/sync";
+import type { ReceiverId } from "@/utils/types";
 
-import { donorMeta } from "./donor-meta";
-import { Country } from "../../../src/utils/countries";
-import { AddressField, DonationField } from "../../../src/utils/types";
+import { isNotNullandNotUndefined } from "@/utils/array";
+import { Country } from "@/utils/countries";
+import { AddressField, DonationField } from "@/utils/types";
+
 import {
   DataLoader,
   type ExtractedYearData,
   type PartyConfig,
 } from "../data-loader";
-
-import type { ReceiverId } from "../../../src/utils/types";
-
-import { isNotNullandNotUndefined } from "@/utils/array";
+import { donorMeta } from "./donor-meta";
 
 export class RsLoader extends DataLoader {
   private loadedOnce = false;

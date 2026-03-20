@@ -1,7 +1,13 @@
 import { test as base } from "@playwright/test";
 import { createTranslator } from "next-intl";
 
-import { Country } from "../../src/utils/countries";
+import type { ConstLocale } from "@/utils/locales";
+import type { RootTranslator } from "@/utils/translator";
+
+import { Country } from "@/utils/countries";
+
+import type { FixtureProps } from "./props";
+
 import { Accessibility } from "../fixtures/accessibility";
 import { DonorPage } from "../fixtures/donor";
 import { DonorsPage } from "../fixtures/donors";
@@ -16,10 +22,6 @@ import { RootPage } from "../fixtures/root";
 import { TimelinePage } from "../fixtures/timeline";
 import { Tools } from "../fixtures/tools";
 import { YearOverviewPage } from "../fixtures/year-overview";
-
-import type { FixtureProps } from "./props";
-import type { ConstLocale } from "../../src/utils/locales";
-import type { RootTranslator } from "@/utils/translator";
 
 type SharedFixtures = {
   homePage: HomePage;

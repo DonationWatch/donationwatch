@@ -1,6 +1,6 @@
 import { defineConfig, devices } from "@playwright/test";
 
-import { LOCALES } from "./src/utils/locales";
+import { LOCALES } from "@/utils/locales";
 
 const isCI = !!process.env.CI;
 const BASE_URL = "http://localhost:3000";

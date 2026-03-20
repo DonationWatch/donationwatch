@@ -1,9 +1,10 @@
-import { describe, test, expect } from "vitest";
+import { describe, expect, test } from "vitest";
+
+import { COUNTRIES } from "@/utils/countries";
+import { getCountryConfig } from "@/utils/data/get-country-config";
+import { AddressField, DonationField } from "@/utils/types";
 
 import en from "../src/messages/en.json";
-import { COUNTRIES } from "../src/utils/countries";
-import { getCountryConfig } from "../src/utils/data/get-country-config";
-import { AddressField, DonationField } from "../src/utils/types";
 import { getDonations } from "../tasks/data/load-donations";
 
 describe("Party countries are translated", () => {

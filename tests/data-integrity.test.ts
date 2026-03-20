@@ -1,13 +1,14 @@
-import { expect, test, beforeAll, describe } from "vitest";
+import { beforeAll, describe, expect, test } from "vitest";
 
-import { COUNTRIES } from "../src/utils/countries";
-import { getCountryConfig } from "../src/utils/data/get-country-config";
-import { getWikiArticles } from "../src/utils/loader/wiki";
-import { DonationField } from "../src/utils/types";
+import type { CountryConfig } from "@/utils/countries";
+import type { Donation } from "@/utils/types";
+
+import { COUNTRIES } from "@/utils/countries";
+import { getCountryConfig } from "@/utils/data/get-country-config";
+import { getWikiArticles } from "@/utils/loader/wiki";
+import { DonationField } from "@/utils/types";
+
 import { getDonations } from "../tasks/data/load-donations";
-
-import type { CountryConfig } from "../src/utils/countries";
-import type { Donation } from "../src/utils/types";
 
 describe.each([...COUNTRIES].map((country) => ({ country })))(
   `country $country`,

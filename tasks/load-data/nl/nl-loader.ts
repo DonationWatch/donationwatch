@@ -1,22 +1,20 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import assert from "assert";
+import { parse } from "csv-parse/sync";
 import fs from "fs/promises";
 import cp from "node:child_process";
 import path from "path";
 
-import { parse } from "csv-parse/sync";
+import type { ExtractedDonationAddress, ReceiverId } from "@/utils/types";
 
-import { donorMeta } from "./donor-meta";
-import { isNotNullandNotUndefined } from "../../../src/utils/array";
-import { Country } from "../../../src/utils/countries";
-import { AddressField, DonationField } from "../../../src/utils/types";
-import { DataLoader } from "../data-loader";
+import { isNotNullandNotUndefined } from "@/utils/array";
+import { Country } from "@/utils/countries";
+import { AddressField, DonationField } from "@/utils/types";
 
-import type {
-  ExtractedDonationAddress,
-  ReceiverId,
-} from "../../../src/utils/types";
 import type { ExtractedYearData, PartyConfig } from "../data-loader";
+
+import { DataLoader } from "../data-loader";
+import { donorMeta } from "./donor-meta";
 
 export const uboExtractorAfter2025 = (ubo: string): string[] => {
   return ubo.split("\n").filter(Boolean);

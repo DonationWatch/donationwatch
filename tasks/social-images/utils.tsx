@@ -1,14 +1,13 @@
-import path from "path";
-import { fileURLToPath } from "url";
-
-import { Resvg } from "@resvg/resvg-js";
-
 import type {
-  createTranslator,
   Messages,
   NamespaceKeys,
   NestedKeyOf,
+  createTranslator,
 } from "next-intl";
+
+import { Resvg } from "@resvg/resvg-js";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 

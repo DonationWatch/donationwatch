@@ -1,7 +1,8 @@
-import type { Party, ReceiverId } from "../types";
-import { numbersSum } from "../math";
 import type { CountryConfig } from "../countries";
 import type { PartyStats, PartyYearsSums } from "../loader/party-years-sums";
+import type { Party, ReceiverId } from "../types";
+
+import { numbersSum } from "../math";
 
 export const getPartiesSum = (
   country: CountryConfig,

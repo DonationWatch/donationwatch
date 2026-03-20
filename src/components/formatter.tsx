@@ -1,9 +1,10 @@
+import type { ReactNode } from "react";
+
 import { Fragment } from "react";
 
-import { andFormatter } from "../utils/formatter";
+import type { ConstLocale } from "@/utils/locales";
 
-import type { ConstLocale } from "../utils/locales";
-import type { ReactNode } from "react";
+import { andFormatter } from "@/utils/formatter";
 
 const PLACEHOLDER = "__REACT_NODE__";
 

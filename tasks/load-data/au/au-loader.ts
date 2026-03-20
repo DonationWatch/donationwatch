@@ -1,26 +1,23 @@
+import { parse } from "csv-parse";
 import fs from "fs";
 import fsPromises from "fs/promises";
 import path from "path";
-
-import { parse } from "csv-parse";
 import unzipper from "unzipper";
 
-import { donorMeta } from "./donor-meta";
-import { Country } from "../../../src/utils/countries";
-import {
-  AddressField,
-  DonationField,
-  DonorType,
-} from "../../../src/utils/types";
-import { DataLoader } from "../data-loader";
-import { containsWords, Deferred } from "../util";
-
 import type {
+  DonationAddress,
   ExtractedDonationAddress,
   ReceiverId,
-  DonationAddress,
-} from "../../../src/utils/types";
+} from "@/utils/types";
+
+import { Country } from "@/utils/countries";
+import { AddressField, DonationField, DonorType } from "@/utils/types";
+
 import type { ExtractedYearData, PartyConfig } from "../data-loader";
+
+import { DataLoader } from "../data-loader";
+import { Deferred, containsWords } from "../util";
+import { donorMeta } from "./donor-meta";
 
 // convert day/month/year to local ISO date string
 const getLocalISODateString = (date: string): string => {

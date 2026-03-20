@@ -1,0 +1,166 @@
+"use client";
+import type {
+  BarSeriesOption,
+  EChartsOption,
+  MarkAreaComponentOption,
+} from "echarts";
+
+import { useLocale } from "next-intl";
+import { useRouter } from "next/navigation";
+
+import type { CountryConfig } from "@/utils/countries";
+import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
+
+import { useChart } from "@/hooks/use-chart";
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { getCountryName } from "@/utils/countries";
+import {
+  formatCompactCountryCurrency,
+  formatCountryCurrency,
+  formatYearsRange,
+} from "@/utils/formatter";
+
+import { ExpandableReactEchart } from "./expandable-react-echart";
+
+const PER_YEAR_HEIGHT = 20;
+
+export const DonationStackedYears = ({
+  country,
+  partyYearsSums,
+}: {
+  country: CountryConfig;
+  partyYearsSums: PartyYearsSums;
+}) => {
+  const tStackedYears = useTranslations("stacked_years");
+  const tCountries = useTranslations("countries");
+  const locale = useLocale();
+  const router = useRouter();
+  const { backgroundColor, isMobile, isDark } = useChart();
+
+  const series: BarSeriesOption[] = [];
+  const years = Object.keys(partyYearsSums);
+
+  const electionMarkAreas: MarkAreaComponentOption["data"] = [];
+
+  const markerYears = new Set<string>(
+    country.markers.dates.map((date) => date.substring(0, 4)),
+  );
+
+  years.forEach((year) => {
+    if (!markerYears.has(year)) return;
+
+    electionMarkAreas.push([{ yAxis: year }, { yAxis: year }]);
+  });
+
+  series.push(
+    {
+      type: "bar",
+      color: isDark ? "#818cf8" : "#4338ca",
+      barWidth: "45%",
+      data: years.map((year) =>
+        Object.values(partyYearsSums[year])
+          .map((p) => p.sum)
+          .reduce((a, b) => a + b, 0),
+      ),
+    },
+    // Add a markArea for the voting years to have a legend entry
+    {
+      name: `${country.markers.label}`,
+      type: "bar",
+      itemStyle: {
+        color: isDark ? "#3730a380" : "#a5b4fc80",
+      },
+      markArea: {
+        silent: true,
+        itemStyle: {
+          color: isDark ? "#3730a380" : "#a5b4fc80",
+        },
+        data: electionMarkAreas,
+      },
+    },
+  );
+
+  const grid = { top: 20, left: 65, bottom: 60 };
+
+  const option: EChartsOption = {
+    darkMode: isDark,
+    grid,
+    backgroundColor,
+    legend: {
+      bottom: "5px",
+      selectedMode: false,
+      show: true,
+      data: [
+        `${country.markers.label}`, // Add markArea labels to the legend
+      ],
+    },
+    tooltip: {
+      confine: true,
+      show: !isMobile,
+      axisPointer: {
+        type: "shadow",
+      },
+      trigger: "axis",
+      valueFormatter: (value) =>
+        formatCountryCurrency(locale, value as number, country),
+    },
+    xAxis: [
+      {
+        type: "value",
+        triggerEvent: true,
+        axisLabel: {
+          formatter: (value) =>
+            formatCompactCountryCurrency(locale, value, country),
+        },
+      },
+    ],
+    yAxis: {
+      type: "category",
+      data: years,
+      axisTick: {
+        show: false,
+      },
+      axisLabel: {
+        interval: 0,
+      },
+    },
+    series,
+  };
+
+  const chartHeight = grid.top + grid.bottom + PER_YEAR_HEIGHT * years.length;
+
+  return (
+    <div className="flex items-center justify-center">
+      <ExpandableReactEchart
+        height={chartHeight}
+        title={tStackedYears("title")}
+        subtitle={tStackedYears("subtitle", {
+          country: getCountryName(country, tCountries),
+          years: formatYearsRange(country.years),
+        })}
+        country={country}
+        years={years}
+        feature="bar"
+        option={option}
+        allowExpand={true}
+        onZrClick={(params, chart) => {
+          if (!chart) return;
+
+          const x = params.event.zrX;
+          const y = params.event.zrY;
+          const pointInGrid = chart.convertFromPixel("grid", [x, y]);
+          const year = years[pointInGrid[1]];
+
+          if (!year) return;
+
+          // @ts-expect-error - getModel is typed as private but we need it to get the grid component and check if the click was inside the grid.
+          const grid = chart.getModel().getComponent("grid");
+
+          if (!grid.coordinateSystem.containPoint([x, y])) return;
+
+          router.push(`/${locale}/${country.id}/${year}/overview`);
+        }}
+      />
+    </div>
+  );
+};

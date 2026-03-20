@@ -1,19 +1,20 @@
-import { BASE_URL } from "../utils/config";
-import { COUNTRIES } from "../utils/countries";
-import { getCountryConfig } from "../utils/data/get-country-config";
-import { getBiggestDonors } from "../utils/loader/biggest-donors";
-import { getBuild } from "../utils/loader/build";
+import type { MetadataRoute } from "next";
+
+import type { Country, CountryConfig } from "@/utils/countries";
+import type { BigDonor } from "@/utils/loader/biggest-donors";
+import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
+import type { ConstLocale } from "@/utils/locales";
+
+import { BASE_URL } from "@/utils/config";
+import { COUNTRIES } from "@/utils/countries";
+import { getCountryConfig } from "@/utils/data/get-country-config";
+import { getBiggestDonors } from "@/utils/loader/biggest-donors";
+import { getBuild } from "@/utils/loader/build";
 import {
   getPartyYearsSums,
   lastPartyStatsDonation,
-} from "../utils/loader/party-years-sums";
-import { CONST_LOCALES } from "../utils/locales";
-
-import type { Country, CountryConfig } from "../utils/countries";
-import type { BigDonor } from "../utils/loader/biggest-donors";
-import type { PartyYearsSums } from "../utils/loader/party-years-sums";
-import type { ConstLocale } from "../utils/locales";
-import type { MetadataRoute } from "next";
+} from "@/utils/loader/party-years-sums";
+import { CONST_LOCALES } from "@/utils/locales";
 
 const yearSubPages = [
   "overview",

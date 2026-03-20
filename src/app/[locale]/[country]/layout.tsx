@@ -1,19 +1,19 @@
-import { notFound } from "next/navigation";
-import { getTranslations, setRequestLocale } from "next-intl/server";
-
-import { AppSidebar } from "../../../components/app-sidebar";
-import { CountryFooter } from "../../../components/country-footer";
-import { PageFooter } from "../../../components/page-footer";
-import { PageHeader } from "../../../components/page-header";
-import { SidebarInset } from "../../../components/ui/sidebar";
-import { THUMBNAIL_PREFIX } from "../../../utils/config";
-import { COUNTRIES, getCountryName } from "../../../utils/countries";
-import { getCountryConfig } from "../../../utils/data/get-country-config";
-import { baseOpenGraph, baseTwitter } from "../../../utils/meta";
-import { notFoundMetadata } from "../../../utils/not-found-metadata";
-import { isValidCountry, isValidLocale } from "../../../utils/validate";
-
 import type { Metadata } from "next";
+
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { notFound } from "next/navigation";
+
+import { AppSidebar } from "@/components/layout/app-sidebar";
+import { CountryFooter } from "@/components/layout/country-footer";
+import { PageFooter } from "@/components/layout/page-footer";
+import { StickyHeader } from "@/components/layout/sticky-header";
+import { SidebarInset } from "@/components/ui/sidebar";
+import { THUMBNAIL_PREFIX } from "@/utils/config";
+import { COUNTRIES, getCountryName } from "@/utils/countries";
+import { getCountryConfig } from "@/utils/data/get-country-config";
+import { baseOpenGraph, baseTwitter } from "@/utils/meta";
+import { notFoundMetadata } from "@/utils/not-found-metadata";
+import { isValidCountry, isValidLocale } from "@/utils/validate";
 
 export async function generateStaticParams() {
   return [...COUNTRIES].map((country) => ({ country }));
@@ -73,7 +73,7 @@ export default async function CountryRootLayout(
       <AppSidebar countryConfig={countryConfig} />
       <SidebarInset className="min-w-0 flex-1">
         <div className="flex min-h-screen flex-col lg:px-16">
-          <PageHeader />
+          <StickyHeader />
           <main className="relative flex grow flex-col dark:text-white">
             <div className="flex grow flex-col">{children}</div>
             <CountryFooter country={countryConfig} />

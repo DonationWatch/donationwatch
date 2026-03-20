@@ -1,19 +1,19 @@
+import type { Metadata } from "next";
+
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { DataExport } from "../../../../../components/data-export";
-import { Article } from "../../../../../components/layout/article";
-import { getCountryConfig } from "../../../../../utils/data/get-country-config";
-import { LOCALES } from "../../../../../utils/locales";
-import { generateAlternates } from "../../../../../utils/meta";
-import { notFoundMetadata } from "../../../../../utils/not-found-metadata";
-import { isValidCountry, isValidLocale } from "../../../../../utils/validate";
-
-import type { Metadata } from "next";
-import { COUNTRIES, getCountryName } from "@/utils/countries";
+import { DataExport } from "@/components/data-export";
+import { Article } from "@/components/layout/article";
 import { Translation } from "@/components/translation";
-import Link from "next/link";
 import { DATA_LICENSE } from "@/utils/config";
+import { COUNTRIES, getCountryName } from "@/utils/countries";
+import { getCountryConfig } from "@/utils/data/get-country-config";
+import { LOCALES } from "@/utils/locales";
+import { generateAlternates } from "@/utils/meta";
+import { notFoundMetadata } from "@/utils/not-found-metadata";
+import { isValidCountry, isValidLocale } from "@/utils/validate";
 
 export const dynamicParams = false;
 

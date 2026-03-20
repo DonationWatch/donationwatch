@@ -1,18 +1,18 @@
-import { notFound, redirect } from "next/navigation";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import type { Metadata } from "next";
 
-import { getCountryName } from "../../../../../utils/countries";
-import { getCountryConfig } from "../../../../../utils/data/get-country-config";
-import { formatYearsRange } from "../../../../../utils/formatter";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { notFound, redirect } from "next/navigation";
+
+import { getCountryName } from "@/utils/countries";
+import { getCountryConfig } from "@/utils/data/get-country-config";
+import { formatYearsRange } from "@/utils/formatter";
 import {
   getPartyYearsSums,
   hasYearSums,
-} from "../../../../../utils/loader/party-years-sums";
-import { notFoundMetadata } from "../../../../../utils/not-found-metadata";
-import { deserializeYears } from "../../../../../utils/serializers";
-import { isValidCountry, isValidLocale } from "../../../../../utils/validate";
-
-import type { Metadata } from "next";
+} from "@/utils/loader/party-years-sums";
+import { notFoundMetadata } from "@/utils/not-found-metadata";
+import { deserializeYears } from "@/utils/serializers";
+import { isValidCountry, isValidLocale } from "@/utils/validate";
 
 export async function generateMetadata(
   props: LayoutProps<"/[locale]/[country]/[years]/origin">,
