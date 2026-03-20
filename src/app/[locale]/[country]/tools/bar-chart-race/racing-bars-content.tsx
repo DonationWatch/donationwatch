@@ -3,20 +3,16 @@ import { useLocale } from "next-intl";
 import { parseAsString, useQueryState } from "nuqs";
 import { useMemo } from "react";
 
-import { EChartsRacingBars } from "../../../../../components/echarts/echarts-racing-bars";
-import { Button } from "../../../../../components/ui/button";
-import { YearRangeSelector } from "../../../../../components/year-range-selector";
-import {
-  type CountryConfig,
-  getCountryName,
-} from "../../../../../utils/countries";
-import { formatYearsRange } from "../../../../../utils/formatter";
-import { type Donation, DonationField } from "../../../../../utils/types";
-
 import type { NonEmptyArray } from "@/utils/array";
 
+import { EChartsRacingBars } from "@/components/charts/echarts-racing-bars";
+import { Button } from "@/components/ui/button";
+import { YearRangeSelector } from "@/components/years/year-range-selector";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { firstItem, lastItem } from "@/utils/array";
+import { type CountryConfig, getCountryName } from "@/utils/countries";
+import { formatYearsRange } from "@/utils/formatter";
+import { type Donation, DonationField } from "@/utils/types";
 
 export const RacingBarsContent = ({
   countryConfig,

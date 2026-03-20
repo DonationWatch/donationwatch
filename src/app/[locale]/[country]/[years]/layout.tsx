@@ -1,37 +1,38 @@
-import { List, History, UserRound, ChartLine, Earth } from "lucide-react";
-import { notFound, redirect } from "next/navigation";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import type { Metadata } from "next";
 
-import { DynamicAbsoluteMultiplePartySumsGradient } from "../../../../components/dynamic-stacked-party-line";
-import { PageHeader } from "../../../../components/layout/page-header";
-import { LastModifiedSchema } from "../../../../components/schema";
-import { NavigationTabs } from "../../../../components/tabs";
-import { YearsFooterNav } from "../../../../components/years-footer-nav";
-import { YearsHeader } from "../../../../components/years-header";
-import { isNotNullandNotUndefined } from "../../../../utils/array";
-import { THUMBNAIL_PREFIX } from "../../../../utils/config";
-import { getCountryName } from "../../../../utils/countries";
-import { getCountryConfig } from "../../../../utils/data/get-country-config";
-import { formatYearsRange } from "../../../../utils/formatter";
+import { ChartLine, Earth, History, List, UserRound } from "lucide-react";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { notFound, redirect } from "next/navigation";
+
+import type { TabItem } from "@/components/tabs";
+
+import { DynamicAbsoluteMultiplePartySumsGradient } from "@/components/charts/dynamic-stacked-party-line";
+import { PageHeader } from "@/components/layout/page-header";
+import { LastModifiedSchema } from "@/components/schema";
+import { NavigationTabs } from "@/components/tabs";
+import { YearsFooterNav } from "@/components/years/years-footer-nav";
+import { YearsHeader } from "@/components/years/years-header";
+import { isNotNullandNotUndefined } from "@/utils/array";
+import { THUMBNAIL_PREFIX } from "@/utils/config";
+import { getCountryName } from "@/utils/countries";
+import { getCountryConfig } from "@/utils/data/get-country-config";
+import { formatYearsRange } from "@/utils/formatter";
 import {
   getPartyYearsSums,
   hasYearSums,
   lastPartyStatsDonation,
-} from "../../../../utils/loader/party-years-sums";
-import { baseOpenGraph, baseTwitter } from "../../../../utils/meta";
-import { notFoundMetadata } from "../../../../utils/not-found-metadata";
+} from "@/utils/loader/party-years-sums";
+import { baseOpenGraph, baseTwitter } from "@/utils/meta";
+import { notFoundMetadata } from "@/utils/not-found-metadata";
+import { canShowYearsTimeline } from "@/utils/party";
 import {
   deserializeYears,
   hasKnownYearRange,
   serializeYears,
-} from "../../../../utils/serializers";
-import { isValidCountry, isValidLocale } from "../../../../utils/validate";
+} from "@/utils/serializers";
+import { isValidCountry, isValidLocale } from "@/utils/validate";
 
 import type { ParamsOf } from "../../../../../.next/types/routes";
-import type { TabItem } from "../../../../components/tabs";
-import type { Metadata } from "next";
-
-import { canShowYearsTimeline } from "@/utils/party";
 
 export const dynamicParams = true;
 

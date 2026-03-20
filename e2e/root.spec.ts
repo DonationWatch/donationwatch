@@ -1,7 +1,8 @@
 import { expect } from "@playwright/test";
 
+import { COUNTRIES } from "@/utils/countries";
+
 import { test } from "./util/fixture";
-import { COUNTRIES } from "../src/utils/countries";
 
 test.describe("Root page", () => {
   test.beforeEach(async ({ page, rootPage, baseURL }) => {

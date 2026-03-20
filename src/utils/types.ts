@@ -1,5 +1,6 @@
-import type { PartyYearsSums } from "./loader/party-years-sums";
 import type { Countries } from "@/utils/countries";
+
+import type { PartyYearsSums } from "./loader/party-years-sums";
 
 declare const tags: unique symbol;
 export type ReceiverId = string & { [tags]: { receiverId: never } };

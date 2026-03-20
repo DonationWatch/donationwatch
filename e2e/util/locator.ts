@@ -1,6 +1,7 @@
-import type { FixtureProps } from "./props";
 import type { Locator, Page } from "@playwright/test";
-import type { createTranslator, Messages } from "next-intl";
+import type { Messages, createTranslator } from "next-intl";
+
+import type { FixtureProps } from "./props";
 
 export class LocatorObject {
   protected readonly translations: ReturnType<

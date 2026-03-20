@@ -1,28 +1,28 @@
-import { notFound, redirect } from "next/navigation";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import type { Metadata } from "next";
 
-import { DynamicYearDonationHistory } from "../../../../../components/dynamic-donation-history";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { notFound, redirect } from "next/navigation";
+
+import { DynamicYearDonationHistory } from "@/components/donations/dynamic-donation-history";
 import {
   Article,
   ArticleSectionTitle,
   ArticleSectionWrapper,
-} from "../../../../../components/layout/article";
-import { getCountryName } from "../../../../../utils/countries";
-import { getCountryConfig } from "../../../../../utils/data/get-country-config";
+} from "@/components/layout/article";
+import { getCountryName } from "@/utils/countries";
+import { getCountryConfig } from "@/utils/data/get-country-config";
 import {
   formatCompactCountryCurrency,
   formatYearsRange,
-} from "../../../../../utils/formatter";
+} from "@/utils/formatter";
 import {
   getPartyYearsSums,
   hasYearSums,
-} from "../../../../../utils/loader/party-years-sums";
-import { generateAlternates } from "../../../../../utils/meta";
-import { notFoundMetadata } from "../../../../../utils/not-found-metadata";
-import { deserializeYears } from "../../../../../utils/serializers";
-import { isValidCountry, isValidLocale } from "../../../../../utils/validate";
-
-import type { Metadata } from "next";
+} from "@/utils/loader/party-years-sums";
+import { generateAlternates } from "@/utils/meta";
+import { notFoundMetadata } from "@/utils/not-found-metadata";
+import { deserializeYears } from "@/utils/serializers";
+import { isValidCountry, isValidLocale } from "@/utils/validate";
 
 export async function generateMetadata(
   props: PageProps<"/[locale]/[country]/[years]/changes">,

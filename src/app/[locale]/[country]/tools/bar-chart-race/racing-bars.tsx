@@ -1,14 +1,14 @@
 "use client";
 import { Suspense } from "react";
 
-import { RacingBarsContent } from "./racing-bars-content";
-import { useDonationsByYears } from "../../../../../hooks/use-api";
-import { isNotNullandNotUndefined } from "../../../../../utils/array";
-import Loading from "../../loading";
+import type { CountryConfig } from "@/utils/countries";
 
-import type { CountryConfig } from "../../../../../utils/countries";
-
+import { useDonationsByYears } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { isNotNullandNotUndefined } from "@/utils/array";
+
+import Loading from "../../loading";
+import { RacingBarsContent } from "./racing-bars-content";
 
 export const RacingBars = ({
   countryConfig,

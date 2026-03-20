@@ -2,29 +2,32 @@
 
 /* eslint-disable react/no-unknown-property */
 
-import { ImageMetaCard } from "./image-meta-card";
-import { PageLogo } from "../../../src/components/page-logo";
-import { partyColor } from "../../../src/utils/color";
+import type { PropsWithChildren, ReactNode } from "react";
+
+import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
+import type { ConstLocale } from "@/utils/locales";
+import type { Donation, Party, ReceiverId } from "@/utils/types";
+
+import { PageLogo } from "@/components/layout/page-logo";
+import { partyColor } from "@/utils/color";
 import {
   type CountryConfig,
   getCountryName,
   getParty,
-} from "../../../src/utils/countries";
-import { getParties } from "../../../src/utils/data/get-parties";
-import { getPartiesSum } from "../../../src/utils/data/get-parties-sum";
-import { donationYear } from "../../../src/utils/date";
+} from "@/utils/countries";
+import { getParties } from "@/utils/data/get-parties";
+import { getPartiesSum } from "@/utils/data/get-parties-sum";
+import { donationYear } from "@/utils/date";
 import {
   formatCountryCurrency,
   formatNumber,
   formatYearsRange,
-} from "../../../src/utils/formatter";
-import { DonationField } from "../../../src/utils/types";
+} from "@/utils/formatter";
+import { DonationField } from "@/utils/types";
 
-import type { PartyYearsSums } from "../../../src/utils/loader/party-years-sums";
-import type { ConstLocale } from "../../../src/utils/locales";
-import type { Donation, Party, ReceiverId } from "../../../src/utils/types";
 import type { CreateTranslator } from "../utils";
-import type { PropsWithChildren, ReactNode } from "react";
+
+import { ImageMetaCard } from "./image-meta-card";
 
 export const ImageStackedPartyDonations = ({
   country,

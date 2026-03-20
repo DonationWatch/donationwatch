@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import { SearchDialogContext } from "../app/providers";
+import { SearchDialogContext } from "@/app/providers";
 
 export const useSearchDialog = () => {
   const ctx = useContext(SearchDialogContext);

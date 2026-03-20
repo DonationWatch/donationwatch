@@ -1,9 +1,10 @@
 import { expect } from "@playwright/test";
 
-import { test } from "./util/fixture";
-import { Country } from "../src/utils/countries";
-import { getCountryConfig } from "../src/utils/data/get-country-config";
+import { Country } from "@/utils/countries";
+import { getCountryConfig } from "@/utils/data/get-country-config";
+
 import { DONOR_WITH_WIKIPEDIA_ARTICLE } from "../tests/config";
+import { test } from "./util/fixture";
 
 test.describe("Search", () => {
   test("Search opens and filters entries", async ({

@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
 
-import { numbersAvg, numbersMedian, numbersSum } from "../src/utils/math";
+import { numbersAvg, numbersMedian, numbersSum } from "@/utils/math";
 
 type NumbersTest = [number[], number];
 

@@ -1,6 +1,6 @@
-import { RelationKind } from "../../../src/utils/types";
+import type { DonorMetaDefinition } from "@/utils/types";
 
-import type { DonorMetaDefinition } from "../../../src/utils/types";
+import { RelationKind } from "@/utils/types";
 
 export const donorMeta: DonorMetaDefinition = {
   donors: {},

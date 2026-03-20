@@ -1,13 +1,15 @@
-import { donationYear } from "../../../src/utils/date";
+import type { CountryConfig } from "@/utils/countries";
+import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
+import type { ConstLocale } from "@/utils/locales";
+import type { Donation } from "@/utils/types";
+
+import { donationYear } from "@/utils/date";
+
+import type { CreateTranslator } from "../utils";
+
 import { ImageFooter } from "../components/image-footer";
 import { ImageYearsHeader } from "../components/image-years-header";
 import { ThumbnailWrapper } from "../components/utils";
-
-import type { CountryConfig } from "../../../src/utils/countries";
-import type { PartyYearsSums } from "../../../src/utils/loader/party-years-sums";
-import type { ConstLocale } from "../../../src/utils/locales";
-import type { Donation } from "../../../src/utils/types";
-import type { CreateTranslator } from "../utils";
 
 export const CountryYearsPageImage = async (
   locale: ConstLocale,

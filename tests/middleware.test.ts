@@ -1,9 +1,9 @@
-import { test, expect } from "vitest";
-
-import { middleware } from "../src/middleware";
-import { extractYearsRange, getLocale } from "../src/utils/middleware";
-
 import type { NextRequest } from "next/server";
+
+import { expect, test } from "vitest";
+
+import { middleware } from "@/middleware";
+import { extractYearsRange, getLocale } from "@/utils/middleware";
 
 test("redirects with locale if missing", async () => {
   const tests: [

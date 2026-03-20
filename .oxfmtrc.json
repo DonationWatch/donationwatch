@@ -4,5 +4,16 @@
   "ignorePatterns": ["src/data", "tasks/data/**/*.ts", "**/geojson/**/*"],
   "sortTailwindcss": {
     "functions": ["clsx", "cn", "cva", "tw"]
+  },
+  "sortImports": {
+    "groups": [
+      "type-import",
+      ["value-builtin", "value-external"],
+      "type-internal",
+      "value-internal",
+      ["type-parent", "type-sibling", "type-index"],
+      ["value-parent", "value-sibling", "value-index"],
+      "unknown"
+    ]
   }
 }

@@ -1,9 +1,8 @@
 "use client";
 
-import { useWikipediaByPageId } from "../hooks/use-api";
+import type { UnloadedCountryConfig } from "@/utils/countries";
 
-import type { UnloadedCountryConfig } from "../utils/countries";
-
+import { useWikipediaByPageId } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 const WikiQuoteSkeleton = () => (

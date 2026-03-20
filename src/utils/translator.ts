@@ -1,8 +1,8 @@
 import type {
-  createTranslator,
   Messages,
   NamespaceKeys,
   NestedKeyOf,
+  createTranslator,
 } from "next-intl";
 
 export type StrictNamespacedTranslator<

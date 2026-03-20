@@ -1,6 +1,7 @@
 import type { CountryConfig } from "../countries";
-import { Donation, DonationField, ReceiverId } from "../types";
+
 import { donationYear } from "../date";
+import { Donation, DonationField, ReceiverId } from "../types";
 
 export interface HistoryEntry {
   donor: string;

@@ -1,11 +1,11 @@
 import debug from "debug";
 
+import { COUNTRY_CONFIG } from "@/utils/countries";
+import { fillYears } from "@/utils/date";
+
 import { promptCountries, promptYears } from "../utils";
 import { loaders } from "./loaders";
 import { timeout } from "./util";
-
-import { COUNTRY_CONFIG } from "@/utils/countries";
-import { fillYears } from "@/utils/date";
 
 const log = debug(`data-loader:run`);
 

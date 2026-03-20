@@ -1,16 +1,17 @@
 "use client";
 
+import type { Messages } from "next-intl";
+import type { PropsWithChildren } from "react";
+
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { NextIntlClientProvider } from "next-intl";
 import { createContext, useEffect, useMemo, useState } from "react";
 
-import { SidebarProvider } from "../components/ui/sidebar";
-import { SIDENAV_PERSISTENCE_KEY } from "../utils/config";
+import type { ClientMessages } from "@/utils/i18n-filter";
+import type { ConstLocale } from "@/utils/locales";
 
-import type { ClientMessages } from "../utils/i18n-filter";
-import type { ConstLocale } from "../utils/locales";
-import type { Messages } from "next-intl";
-import type { PropsWithChildren } from "react";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { SIDENAV_PERSISTENCE_KEY } from "@/utils/config";
 
 export const Providers = ({
   children,

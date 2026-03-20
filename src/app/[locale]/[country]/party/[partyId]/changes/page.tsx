@@ -1,25 +1,21 @@
-import { notFound } from "next/navigation";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import type { Metadata } from "next";
 
-import { DynamicPartyDonationHistory } from "../../../../../../components/dynamic-donation-history";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { notFound } from "next/navigation";
+
+import { DynamicPartyDonationHistory } from "@/components/donations/dynamic-donation-history";
 import {
   Article,
   ArticleSectionColumn,
   ArticleSectionOneColumns,
   ArticleSectionTitle,
   ArticleSectionWrapper,
-} from "../../../../../../components/layout/article";
-import { getCountryName, getParty } from "../../../../../../utils/countries";
-import { getCountryConfig } from "../../../../../../utils/data/get-country-config";
-import { generateAlternates } from "../../../../../../utils/meta";
-import { notFoundMetadata } from "../../../../../../utils/not-found-metadata";
-import {
-  isValidCountry,
-  isValidLocale,
-  isValidParty,
-} from "../../../../../../utils/validate";
-
-import type { Metadata } from "next";
+} from "@/components/layout/article";
+import { getCountryName, getParty } from "@/utils/countries";
+import { getCountryConfig } from "@/utils/data/get-country-config";
+import { generateAlternates } from "@/utils/meta";
+import { notFoundMetadata } from "@/utils/not-found-metadata";
+import { isValidCountry, isValidLocale, isValidParty } from "@/utils/validate";
 
 export async function generateMetadata(
   props: PageProps<"/[locale]/[country]/party/[partyId]/timeline">,

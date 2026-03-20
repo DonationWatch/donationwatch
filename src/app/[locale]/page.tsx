@@ -1,42 +1,34 @@
+import type { Metadata } from "next";
+
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getTranslations, setRequestLocale } from "next-intl/server";
 
-import { AbsoluteMultipleColorsGradient } from "../../components/absolute-multiple-colors-gradient";
+import type { Country, Currency } from "@/utils/countries";
+
+import { AbsoluteMultipleColorsGradient } from "@/components/absolute-multiple-colors-gradient";
 import {
   Article,
   ArticleSection,
   ArticleSectionColumn,
   ArticleSectionOneColumns,
   ArticleSectionWrapper,
-} from "../../components/layout/article";
-import { Translation } from "../../components/translation";
-import { NonCountryRootLayout } from "../../components/ui/non-country-root-layout";
-import {
-  COUNTRIES,
-  COUNTRY_CONFIG,
-  getCountryName,
-} from "../../utils/countries";
-import { LOCALES } from "../../utils/locales";
-import {
-  baseOpenGraph,
-  baseTwitter,
-  generateAlternates,
-} from "../../utils/meta";
-import { notFoundMetadata } from "../../utils/not-found-metadata";
-import { isValidLocale } from "../../utils/validate";
-
-import type { Currency, Country } from "../../utils/countries";
-import type { Metadata } from "next";
-
-import { DetectedCountry } from "@/components/detected-country";
+} from "@/components/layout/article";
+import { DetectedCountry } from "@/components/layout/detected-country";
+import { NonCountryRootLayout } from "@/components/layout/non-country-root-layout";
 import { MetaCard } from "@/components/meta-card";
-import { THUMBNAIL_PREFIX, GITHUB_URL } from "@/utils/config";
+import { Translation } from "@/components/translation";
+import { GITHUB_URL, THUMBNAIL_PREFIX } from "@/utils/config";
+import { COUNTRIES, COUNTRY_CONFIG, getCountryName } from "@/utils/countries";
 import { countryFlags } from "@/utils/country-flags";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { formatCompactCurrency, formatNumber } from "@/utils/formatter";
 import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
+import { LOCALES } from "@/utils/locales";
+import { baseOpenGraph, baseTwitter, generateAlternates } from "@/utils/meta";
+import { notFoundMetadata } from "@/utils/not-found-metadata";
+import { isValidLocale } from "@/utils/validate";
 
 export const dynamicParams = false;
 export const dynamic = "error";

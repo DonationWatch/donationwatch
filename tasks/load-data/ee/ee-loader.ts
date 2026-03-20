@@ -1,15 +1,16 @@
 import fs from "fs/promises";
 import path from "path";
 
-import { donorMeta } from "./donor-meta";
-import { Country } from "../../../src/utils/countries";
-import { AddressField, DonationField } from "../../../src/utils/types";
-import { DataLoader } from "../data-loader";
-
-import type { ReceiverId } from "../../../src/utils/types";
-import type { ExtractedYearData, PartyConfig } from "../data-loader";
+import type { ReceiverId } from "@/utils/types";
 
 import { isNotNullandNotUndefined } from "@/utils/array";
+import { Country } from "@/utils/countries";
+import { AddressField, DonationField } from "@/utils/types";
+
+import type { ExtractedYearData, PartyConfig } from "../data-loader";
+
+import { DataLoader } from "../data-loader";
+import { donorMeta } from "./donor-meta";
 
 export interface EeDonation {
   date: string;

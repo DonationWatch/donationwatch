@@ -1,19 +1,20 @@
-import { notFound } from "next/navigation";
-import { getTranslations, setRequestLocale } from "next-intl/server";
-
-import { ErrorAlert, InfoAlert, SuccessAlert } from "../../../components/alert";
-import { Article, ArticleSection } from "../../../components/layout/article";
-import { NonCountryRootLayout } from "../../../components/ui/non-country-root-layout";
-import { formatTwoDigitDate } from "../../../utils/formatter";
-import { LOCALES } from "../../../utils/locales";
-import { generateAlternates } from "../../../utils/meta";
-import { notFoundMetadata } from "../../../utils/not-found-metadata";
-import { isValidLocale } from "../../../utils/validate";
-
-import type { ConstLocale } from "../../../utils/locales";
-import type { StrictNamespacedTranslator } from "@/utils/translator";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { notFound } from "next/navigation";
+
+import type { ConstLocale } from "@/utils/locales";
+import type { StrictNamespacedTranslator } from "@/utils/translator";
+
+import { ErrorAlert, InfoAlert, SuccessAlert } from "@/components/alert";
+import { Article, ArticleSection } from "@/components/layout/article";
+import { NonCountryRootLayout } from "@/components/layout/non-country-root-layout";
+import { formatTwoDigitDate } from "@/utils/formatter";
+import { LOCALES } from "@/utils/locales";
+import { generateAlternates } from "@/utils/meta";
+import { notFoundMetadata } from "@/utils/not-found-metadata";
+import { isValidLocale } from "@/utils/validate";
 
 export const dynamicParams = false;
 

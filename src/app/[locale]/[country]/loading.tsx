@@ -1,5 +1,5 @@
-import { AbsoluteMultipleColorsGradient } from "../../../components/absolute-multiple-colors-gradient";
-import Loading from "../../../components/loading";
+import { AbsoluteMultipleColorsGradient } from "@/components/absolute-multiple-colors-gradient";
+import Loading from "@/components/loading/loading";
 
 export default function CountryLoading() {
   return (

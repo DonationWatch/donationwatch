@@ -1,15 +1,16 @@
-import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { notFound } from "next/navigation";
+
+import { Article } from "@/components/layout/article";
+import { getCountryConfig } from "@/utils/data/get-country-config";
+import { LOCALES } from "@/utils/locales";
+import { generateAlternates } from "@/utils/meta";
+import { notFoundMetadata } from "@/utils/not-found-metadata";
+import { isValidCountry, isValidLocale } from "@/utils/validate";
 
 import { RacingBars } from "./racing-bars";
-import { Article } from "../../../../../components/layout/article";
-import { getCountryConfig } from "../../../../../utils/data/get-country-config";
-import { LOCALES } from "../../../../../utils/locales";
-import { generateAlternates } from "../../../../../utils/meta";
-import { notFoundMetadata } from "../../../../../utils/not-found-metadata";
-import { isValidCountry, isValidLocale } from "../../../../../utils/validate";
-
-import type { Metadata } from "next";
 
 export const dynamicParams = false;
 

@@ -1,10 +1,10 @@
-import { expect, test, beforeEach, describe } from "vitest";
+import { beforeEach, describe, expect, test } from "vitest";
 
-import { NoLoader } from "../../tasks/load-data/no/no-loader";
+import { DonationField } from "@/utils/types";
 
 import type { NoDonation } from "../../tasks/load-data/no/no-loader";
 
-import { DonationField } from "@/utils/types";
+import { NoLoader } from "../../tasks/load-data/no/no-loader";
 
 let loader: NoLoader;
 

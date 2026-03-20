@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import "@tanstack/react-table";
+import type { FunctionComponent, SVGAttributes } from "react";
 
-import type messages from "../src/messages/en.json";
 import type { formats } from "@/i18n/request";
 import type { routing } from "@/i18n/routing";
-import type { FunctionComponent, SVGAttributes } from "react";
+
+import type messages from "../src/messages/en.json";
 
 declare module "@tanstack/react-table" {
   interface ColumnMeta<TData extends RowData, TValue> {

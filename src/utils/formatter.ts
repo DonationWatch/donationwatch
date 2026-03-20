@@ -1,9 +1,9 @@
-import { getParty } from "./countries";
-import { createIntlCache } from "./intl-cache";
-
-import type { Currency, CountryConfig } from "./countries";
+import type { CountryConfig, Currency } from "./countries";
 import type { ConstLocale } from "./locales";
 import type { ReceiverId } from "./types";
+
+import { getParty } from "./countries";
+import { createIntlCache } from "./intl-cache";
 
 const currencyFormatter = createIntlCache(
   (locale: ConstLocale, currency: "EUR" | "CHF") =>

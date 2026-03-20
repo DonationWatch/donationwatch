@@ -1,25 +1,25 @@
-import { useQueries, useQuery } from "@tanstack/react-query";
+import type { UseQueryOptions } from "@tanstack/react-query";
+
 import "client-only";
+import { useQueries, useQuery } from "@tanstack/react-query";
 
-import { DONOR_ID_HASH_LEN, QUERY_PARAM_BUILD_TS } from "../utils/config";
-import { getCountryConfig } from "../utils/data/get-country-config";
-import { getBuild } from "../utils/loader/build";
-import { DonationField } from "../utils/types";
-
+import type {
+  DonationsDocument,
+  DonationsDocumentWithoutDonorIds,
+} from "@/lib/api/donations-document";
 import type {
   Country,
   CountryCode,
   CountryConfig,
   UnloadedCountryConfig,
-} from "../utils/countries";
-import type { Donation, Party } from "../utils/types";
-import type {
-  DonationsDocument,
-  DonationsDocumentWithoutDonorIds,
-} from "@/lib/api/donations-document";
-import type { UseQueryOptions } from "@tanstack/react-query";
+} from "@/utils/countries";
+import type { Donation, Party } from "@/utils/types";
 
 import { donationDocumentToDonations } from "@/lib/api/donations-document";
+import { DONOR_ID_HASH_LEN, QUERY_PARAM_BUILD_TS } from "@/utils/config";
+import { getCountryConfig } from "@/utils/data/get-country-config";
+import { getBuild } from "@/utils/loader/build";
+import { DonationField } from "@/utils/types";
 
 const jsonFetcher = <T = unknown>(
   input: RequestInfo,

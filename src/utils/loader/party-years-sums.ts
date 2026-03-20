@@ -1,8 +1,8 @@
-import { getBuild } from "./build";
-import { loadCountryData } from "./country-data-loaders";
-
 import type { Country, CountryConfig } from "../countries";
 import type { ReceiverId } from "../types";
+
+import { getBuild } from "./build";
+import { loadCountryData } from "./country-data-loaders";
 
 export interface PartyStats {
   sum: number;

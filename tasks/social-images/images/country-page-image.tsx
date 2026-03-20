@@ -2,16 +2,18 @@
 
 /* eslint-disable react/no-unknown-property */
 
-import { formatCompactCountryCurrency } from "../../../src/utils/formatter";
+import type { CountryConfig } from "@/utils/countries";
+import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
+import type { ConstLocale } from "@/utils/locales";
+
+import { formatCompactCountryCurrency } from "@/utils/formatter";
+
+import type { CreateTranslator } from "../utils";
+
 import { ImageFooter } from "../components/image-footer";
 import { ImagePageHeader } from "../components/image-years-header";
 import { ThumbnailWrapper } from "../components/utils";
 import { THUMBNAIL_SIZE } from "../utils";
-
-import type { CountryConfig } from "../../../src/utils/countries";
-import type { PartyYearsSums } from "../../../src/utils/loader/party-years-sums";
-import type { ConstLocale } from "../../../src/utils/locales";
-import type { CreateTranslator } from "../utils";
 
 const YEARS_TO_DISPLAY = 5;
 const X_AXIS_TICKS = 5;

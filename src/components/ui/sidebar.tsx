@@ -1,9 +1,15 @@
 "use client";
-import { cva, type VariantProps } from "class-variance-authority";
+import type { ComponentProps } from "react";
+
+import { type VariantProps, cva } from "class-variance-authority";
 import { PanelLeftIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
+
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { useBreakpoint } from "@/hooks/use-media-query";
+import { cn } from "@/lib/utils";
 
 import { Separator } from "./separator";
 import {
@@ -19,12 +25,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "./tooltip";
-import { useBreakpoint } from "../../hooks/use-media-query";
-import { cn } from "../../utils/classname";
-
-import type { ComponentProps } from "react";
-
-import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 // Simple Slot implementation to replace @radix-ui/react-slot
 function Slot({

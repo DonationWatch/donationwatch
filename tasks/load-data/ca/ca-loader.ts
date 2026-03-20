@@ -1,26 +1,25 @@
+import type { ReadableStream } from "stream/web";
+
+import { parse } from "csv-parse";
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import fs from "fs";
 import path from "path";
 import { Readable } from "stream";
 import { finished } from "stream/promises";
-
-import { parse } from "csv-parse";
 import unzipper from "unzipper";
 
-import { Country } from "../../../src/utils/countries";
+import type { Countries } from "@/utils/countries";
+import type { ExtractedDonationAddress, ReceiverId } from "@/utils/types";
+
+import { Country } from "@/utils/countries";
+import { AddressField, DonationField } from "@/utils/types";
+
+import type { ExtractedYearData, PartyConfig } from "../data-loader";
+
 import { DataLoader } from "../data-loader";
+import { Deferred } from "../util";
 import { extractAddress } from "./address";
 import { donorMeta } from "./donor-meta";
-import { AddressField, DonationField } from "../../../src/utils/types";
-import { Deferred } from "../util";
-
-import type { Countries } from "../../../src/utils/countries";
-import type {
-  ExtractedDonationAddress,
-  ReceiverId,
-} from "../../../src/utils/types";
-import type { ExtractedYearData, PartyConfig } from "../data-loader";
-import type { ReadableStream } from "stream/web";
 
 const normalizeDonor = (donor: string): string => {
   // some donors have trailing commas and spaces, remove them, e.g. "Estate of Thomas Robinson, _"

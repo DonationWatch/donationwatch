@@ -1,9 +1,9 @@
-import { BASE_URL, TWITTER_SITE } from "./config";
-import { CONST_LOCALES } from "./locales";
-
 import type { AlternateURLs } from "next/dist/lib/metadata/types/alternative-urls-types";
 import type { OpenGraph } from "next/dist/lib/metadata/types/opengraph-types";
 import type { Twitter } from "next/dist/lib/metadata/types/twitter-types";
+
+import { BASE_URL, TWITTER_SITE } from "./config";
+import { CONST_LOCALES } from "./locales";
 
 export const generateAlternates = (
   path?: string,

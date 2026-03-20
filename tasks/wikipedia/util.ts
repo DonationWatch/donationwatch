@@ -2,9 +2,9 @@ import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
 
-import { jsonAsTsModule } from "../utils";
-
 import type { Country } from "@/utils/countries";
+
+import { jsonAsTsModule } from "../utils";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = path.join(__dirname, "../../src/data");

@@ -1,14 +1,14 @@
-import { loadWikipediaPageExtract, writeWikipediaArticles } from "./util";
-import { getDonations } from "../data/load-donations";
-import { loaders } from "../load-data/loaders";
-import { timeout } from "../load-data/util";
-import { promptCountries } from "../utils";
-
 import type { Country, CountryConfig } from "@/utils/countries";
 import type { Donation, DonorMetaDefinition } from "@/utils/types";
 
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { DonationField } from "@/utils/types";
+
+import { getDonations } from "../data/load-donations";
+import { loaders } from "../load-data/loaders";
+import { timeout } from "../load-data/util";
+import { promptCountries } from "../utils";
+import { loadWikipediaPageExtract, writeWikipediaArticles } from "./util";
 
 const populateDonationWikipediaData = async (
   country: CountryConfig,

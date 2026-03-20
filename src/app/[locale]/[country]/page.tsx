@@ -1,36 +1,36 @@
+import type { Metadata } from "next";
+
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getTranslations, setRequestLocale } from "next-intl/server";
 
-import { AbsoluteMultipleColorsGradient } from "../../../components/absolute-multiple-colors-gradient";
-import { BiggestDonationsHero } from "../../../components/biggest-donations-hero";
-import { DonationStackedYears } from "../../../components/chart/donation-stacked-years";
-import { DetectedCountry } from "../../../components/detected-country";
-import { DonorsHero } from "../../../components/donors-hero";
-import { ExternalThanks } from "../../../components/external-thanks";
-import { HistoryComponent } from "../../../components/history-component";
-import { PartiesHero } from "../../../components/parties-hero";
-import { YearsCards } from "../../../components/years-cards";
-import { YearsHeader } from "../../../components/years-header";
+import { AbsoluteMultipleColorsGradient } from "@/components/absolute-multiple-colors-gradient";
+import { DonationStackedYears } from "@/components/charts/donation-stacked-years";
+import { BiggestDonationsHero } from "@/components/donations/biggest-donations-hero";
+import { DonorsHero } from "@/components/donors/donors-hero";
+import { ExternalThanks } from "@/components/external-thanks";
+import { HistoryComponent } from "@/components/history-component";
+import { DetectedCountry } from "@/components/layout/detected-country";
+import { PartiesHero } from "@/components/parties/parties-hero";
+import { YearsCards } from "@/components/years/years-cards";
+import { YearsHeader } from "@/components/years/years-header";
 import {
   COUNTRIES,
   getCountryName,
   getReferencingCountryName,
-} from "../../../utils/countries";
-import { getCountryConfig } from "../../../utils/data/get-country-config";
+} from "@/utils/countries";
+import { getCountryConfig } from "@/utils/data/get-country-config";
 import {
   formatCompactCountryCurrency,
   formatCountryCurrency,
-} from "../../../utils/formatter";
-import { getBiggestDonors } from "../../../utils/loader/biggest-donors";
-import { loadCountryData } from "../../../utils/loader/country-data-loaders";
-import { getPartyYearsSums } from "../../../utils/loader/party-years-sums";
-import { LOCALES } from "../../../utils/locales";
-import { generateAlternates } from "../../../utils/meta";
-import { notFoundMetadata } from "../../../utils/not-found-metadata";
-import { isValidCountry, isValidLocale } from "../../../utils/validate";
-
-import type { Metadata } from "next";
+} from "@/utils/formatter";
+import { getBiggestDonors } from "@/utils/loader/biggest-donors";
+import { loadCountryData } from "@/utils/loader/country-data-loaders";
+import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
+import { LOCALES } from "@/utils/locales";
+import { generateAlternates } from "@/utils/meta";
+import { notFoundMetadata } from "@/utils/not-found-metadata";
+import { isValidCountry, isValidLocale } from "@/utils/validate";
 
 export const dynamicParams = false;
 export const dynamic = "error";

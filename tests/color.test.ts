@@ -1,8 +1,8 @@
-import { expect, test, describe } from "vitest";
+import { describe, expect, test } from "vitest";
 
-import { partyColor } from "../src/utils/color";
-import { COUNTRIES } from "../src/utils/countries";
-import { getCountryConfig } from "../src/utils/data/get-country-config";
+import { partyColor } from "@/utils/color";
+import { COUNTRIES } from "@/utils/countries";
+import { getCountryConfig } from "@/utils/data/get-country-config";
 
 describe("Color", () => {
   COUNTRIES.forEach((country) => {

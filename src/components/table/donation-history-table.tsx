@@ -1,11 +1,11 @@
 "use client";
 import {
+  type Row,
+  type SortingState,
   createColumnHelper,
   flexRender,
   getCoreRowModel,
   getSortedRowModel,
-  type Row,
-  type SortingState,
   useReactTable,
 } from "@tanstack/react-table";
 import {
@@ -16,28 +16,24 @@ import {
 import { useLocale } from "next-intl";
 import { useMemo, useRef, useState } from "react";
 
-import { useMobile } from "../../hooks/use-media-query";
-import { useVirtual } from "../../hooks/use-virtual";
-import { isNotNullandNotUndefined } from "../../utils/array";
-import { cn } from "../../utils/classname";
-import { getHistory } from "../../utils/data/get-history";
-import { donationYear } from "../../utils/date";
-import {
-  formatCountryCurrency,
-  formatTwoDigitDate,
-} from "../../utils/formatter";
-import { DonationField } from "../../utils/types";
-import { DonorLink } from "../donor-link";
-import { PartyDot } from "../party-dot";
-import { PartyLink } from "../party-link";
+import type { CountryConfig } from "@/utils/countries";
+import type { HistoryEntry } from "@/utils/data/get-history";
+import type { Donation } from "@/utils/types";
 
-import type { CountryConfig } from "../../utils/countries";
-import type { HistoryEntry } from "../../utils/data/get-history";
-import type { Donation } from "../../utils/types";
-
-import { DonorName } from "@/components/donor-name";
-import { ExternalDonationLink } from "@/components/external-donation-link";
+import { ExternalDonationLink } from "@/components/donations/external-donation-link";
+import { DonorLink } from "@/components/donors/donor-link";
+import { DonorName } from "@/components/donors/donor-name";
+import { PartyDot } from "@/components/parties/party-dot";
+import { PartyLink } from "@/components/parties/party-link";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { useMobile } from "@/hooks/use-media-query";
+import { useVirtual } from "@/hooks/use-virtual";
+import { cn } from "@/lib/utils";
+import { isNotNullandNotUndefined } from "@/utils/array";
+import { getHistory } from "@/utils/data/get-history";
+import { donationYear } from "@/utils/date";
+import { formatCountryCurrency, formatTwoDigitDate } from "@/utils/formatter";
+import { DonationField } from "@/utils/types";
 
 const columnHelper = createColumnHelper<HistoryEntry>();
 

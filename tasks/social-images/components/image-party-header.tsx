@@ -1,21 +1,19 @@
 "use client";
 
+import type { CountryConfig } from "@/utils/countries";
+import type { ConstLocale } from "@/utils/locales";
+import type { Donation, Party } from "@/utils/types";
+
+import { partyColor } from "@/utils/color";
+import { getDonorName } from "@/utils/donor";
+import { formatCountryCurrency, formatNumber } from "@/utils/formatter";
+import { DonationField } from "@/utils/types";
+
+import type { CreateTranslator } from "../utils";
+
 /* eslint-disable react/no-unknown-property */
 import { ImageMetaCard } from "./image-meta-card";
 import { ImagePageHeader } from "./image-years-header";
-import { partyColor } from "../../../src/utils/color";
-import {
-  formatCountryCurrency,
-  formatNumber,
-} from "../../../src/utils/formatter";
-import { DonationField } from "../../../src/utils/types";
-
-import type { CountryConfig } from "../../../src/utils/countries";
-import type { ConstLocale } from "../../../src/utils/locales";
-import type { Donation, Party } from "../../../src/utils/types";
-import type { CreateTranslator } from "../utils";
-
-import { getDonorName } from "@/utils/donor";
 
 const RankingItem = ({
   amount,

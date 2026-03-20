@@ -1,16 +1,12 @@
-import { notFound } from "next/navigation";
-import { getTranslations, setRequestLocale } from "next-intl/server";
-
-import { getParty, getCountryName } from "../../../../../../utils/countries";
-import { getCountryConfig } from "../../../../../../utils/data/get-country-config";
-import { notFoundMetadata } from "../../../../../../utils/not-found-metadata";
-import {
-  isValidCountry,
-  isValidLocale,
-  isValidParty,
-} from "../../../../../../utils/validate";
-
 import type { Metadata } from "next";
+
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { notFound } from "next/navigation";
+
+import { getCountryName, getParty } from "@/utils/countries";
+import { getCountryConfig } from "@/utils/data/get-country-config";
+import { notFoundMetadata } from "@/utils/not-found-metadata";
+import { isValidCountry, isValidLocale, isValidParty } from "@/utils/validate";
 
 export async function generateMetadata(
   props: LayoutProps<"/[locale]/[country]/party/[partyId]/origin">,

@@ -1,7 +1,10 @@
-import { notFound } from "next/navigation";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import type { Metadata } from "next";
 
-import { DonationPartyChart } from "../../../../../../components/chart/donation-sum-chart";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { notFound } from "next/navigation";
+
+import { DonationPerMonthChart } from "@/components/charts/donation-per-month-chart";
+import { DonationPartyChart } from "@/components/charts/donation-sum-chart";
 import {
   Article,
   ArticleSectionColumn,
@@ -9,22 +12,14 @@ import {
   ArticleSectionTitle,
   ArticleSectionTwoColumns,
   ArticleSectionWrapper,
-} from "../../../../../../components/layout/article";
-import { getCountryName, getParty } from "../../../../../../utils/countries";
-import { getCountryConfig } from "../../../../../../utils/data/get-country-config";
-import { generateAlternates } from "../../../../../../utils/meta";
-import { notFoundMetadata } from "../../../../../../utils/not-found-metadata";
-import {
-  isValidCountry,
-  isValidLocale,
-  isValidParty,
-} from "../../../../../../utils/validate";
-
-import type { Metadata } from "next";
-
-import { DonationPerMonthChart } from "@/components/chart/donation-per-month-chart";
-import { PartyTimelineText } from "@/components/party-timeline-text";
+} from "@/components/layout/article";
+import { PartyTimelineText } from "@/components/parties/party-timeline-text";
+import { getCountryName, getParty } from "@/utils/countries";
+import { getCountryConfig } from "@/utils/data/get-country-config";
 import { formatYearsRange } from "@/utils/formatter";
+import { generateAlternates } from "@/utils/meta";
+import { notFoundMetadata } from "@/utils/not-found-metadata";
+import { isValidCountry, isValidLocale, isValidParty } from "@/utils/validate";
 
 export async function generateMetadata(
   props: PageProps<"/[locale]/[country]/party/[partyId]/timeline">,

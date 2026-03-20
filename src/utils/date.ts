@@ -1,6 +1,6 @@
-import { DonationField } from "./types";
-
 import type { Donation, IsoDate } from "./types";
+
+import { DonationField } from "./types";
 
 export const dateDiffInDays = (a: Date, b: Date): number => {
   const _MS_PER_DAY = 1000 * 60 * 60 * 24;

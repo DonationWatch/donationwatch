@@ -1,15 +1,17 @@
 "use client";
 
+import type { Country, CountryConfig } from "@/utils/countries";
+import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
+import type { ConstLocale } from "@/utils/locales";
+
 /* eslint-disable react/no-unknown-property */
-import { PageLogo } from "../../../src/components/page-logo";
-import { formatNumber } from "../../../src/utils/formatter";
+import { PageLogo } from "@/components/layout/page-logo";
+import { formatNumber } from "@/utils/formatter";
+
+import type { CreateTranslator } from "../utils";
+
 import { ImageMetaCard } from "../components/image-meta-card";
 import { ThumbnailWrapper } from "../components/utils";
-
-import type { Country, CountryConfig } from "../../../src/utils/countries";
-import type { PartyYearsSums } from "../../../src/utils/loader/party-years-sums";
-import type { ConstLocale } from "../../../src/utils/locales";
-import type { CreateTranslator } from "../utils";
 
 export const RootPageImage = async (
   locale: ConstLocale,

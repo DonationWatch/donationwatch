@@ -2,15 +2,13 @@
 
 /* eslint-disable react/no-unknown-property */
 
-import { isNotNullandNotUndefined } from "../../../src/utils/array";
-import {
-  formatCompactCountryCurrency,
-  formatDate,
-} from "../../../src/utils/formatter";
-import { getBuild } from "../../../src/utils/loader/build";
+import type { CountryConfig } from "@/utils/countries";
+import type { ConstLocale } from "@/utils/locales";
 
-import type { CountryConfig } from "../../../src/utils/countries";
-import type { ConstLocale } from "../../../src/utils/locales";
+import { isNotNullandNotUndefined } from "@/utils/array";
+import { formatCompactCountryCurrency, formatDate } from "@/utils/formatter";
+import { getBuild } from "@/utils/loader/build";
+
 import type { CreateTranslator } from "../utils";
 
 export const ImageFooter = ({

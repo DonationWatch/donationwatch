@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+
 import type { CountryConfig } from "../countries";
 
 export const getParties = (country: CountryConfig, years: string[]) => {

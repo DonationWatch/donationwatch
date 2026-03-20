@@ -1,8 +1,8 @@
 import { expect } from "@playwright/test";
 
-import { test } from "./util/fixture";
-
 import { getCountryConfig } from "@/utils/data/get-country-config";
+
+import { test } from "./util/fixture";
 
 test.describe("Tools", () => {
   test.describe("Data export", () => {

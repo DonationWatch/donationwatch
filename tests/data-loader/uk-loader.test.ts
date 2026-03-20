@@ -1,8 +1,8 @@
-import { expect, test, beforeEach, describe } from "vitest";
-
-import { UkLoader } from "../../tasks/load-data/uk/uk-loader";
+import { beforeEach, describe, expect, test } from "vitest";
 
 import { DonationField, DonorType } from "@/utils/types";
+
+import { UkLoader } from "../../tasks/load-data/uk/uk-loader";
 
 let loader: UkLoader;
 

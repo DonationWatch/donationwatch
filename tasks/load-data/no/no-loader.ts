@@ -1,18 +1,20 @@
 import fs from "fs/promises";
 import path from "path";
 
-import { donorMeta } from "./donor-meta";
-import { Country } from "../../../src/utils/countries";
-import { AddressField, DonationField } from "../../../src/utils/types";
-import { DataLoader } from "../data-loader";
-import { timeout } from "../util";
-
 import type {
   DonationAddress,
-  ReceiverId,
   ExtractedDonationAddress,
-} from "../../../src/utils/types";
+  ReceiverId,
+} from "@/utils/types";
+
+import { Country } from "@/utils/countries";
+import { AddressField, DonationField } from "@/utils/types";
+
 import type { ExtractedYearData, PartyConfig } from "../data-loader";
+
+import { DataLoader } from "../data-loader";
+import { timeout } from "../util";
+import { donorMeta } from "./donor-meta";
 
 export interface NoDonation {
   party: string;

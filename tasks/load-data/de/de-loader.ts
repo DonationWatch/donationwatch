@@ -1,22 +1,20 @@
+import * as cheerio from "cheerio";
 import fs from "fs/promises";
 import path from "path";
-
-import * as cheerio from "cheerio";
 import puppeteer from "puppeteer";
+
+import type { ExtractedDonationAddress, ReceiverId } from "@/utils/types";
+
+import { isNotNullandNotUndefined } from "@/utils/array";
+import { Country } from "@/utils/countries";
+import { AddressField, DonationField } from "@/utils/types";
+
+import type { ExtractedYearData, PartyConfig } from "../data-loader";
 
 import { DataLoader } from "../data-loader";
 import { containsWords, timeout } from "../util";
 import { extractAddress } from "./address";
 import { donorMeta } from "./donor-meta";
-import { isNotNullandNotUndefined } from "../../../src/utils/array";
-import { Country } from "../../../src/utils/countries";
-import { AddressField, DonationField } from "../../../src/utils/types";
-
-import type {
-  ExtractedDonationAddress,
-  ReceiverId,
-} from "../../../src/utils/types";
-import type { ExtractedYearData, PartyConfig } from "../data-loader";
 
 const normalizedReceivers: Record<string, string> = {
   BÜNDNIS: "BÜNDNIS 90 / DIE GRÜNEN",

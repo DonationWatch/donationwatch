@@ -1,20 +1,18 @@
 import assert from "assert";
+import { parse } from "csv-parse/sync";
 import fs from "fs/promises";
 import path from "path";
 
-import { parse } from "csv-parse/sync";
+import type { DonationAddress, ExtractedDonationAddress } from "@/utils/types";
+
+import { Country } from "@/utils/countries";
+import { AddressField, DonationField } from "@/utils/types";
+
+import type { ExtractedYearData, PartyConfig } from "../data-loader";
 
 import { DataLoader } from "../data-loader";
 import { extractAddress } from "./address.js";
 import { donorMeta } from "./donor-meta";
-import { Country } from "../../../src/utils/countries";
-import { AddressField, DonationField } from "../../../src/utils/types";
-
-import type {
-  ExtractedDonationAddress,
-  DonationAddress,
-} from "../../../src/utils/types";
-import type { ExtractedYearData, PartyConfig } from "../data-loader";
 
 const toEurFloat = (valueString: string): number => {
   const usFormat = valueString.replaceAll(/\./g, "").replace(/,/, ".");

@@ -1,14 +1,14 @@
 import cp from "child_process";
+import debug from "debug";
 import path from "path";
 import { fileURLToPath } from "url";
 
-import debug from "debug";
+import type { Country } from "@/utils/countries";
+import type { ConstLocale } from "@/utils/locales";
 
-import { CONST_LOCALES } from "../../src/utils/locales";
+import { CONST_LOCALES } from "@/utils/locales";
+
 import { promptCountries } from "../utils";
-
-import type { Country } from "../../src/utils/countries";
-import type { ConstLocale } from "../../src/utils/locales";
 
 debug.enable("social-images:*");
 const log = debug(`social-images:upload`);

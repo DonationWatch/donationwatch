@@ -1,12 +1,14 @@
-import { DonationField } from "../../../src/utils/types";
+import type { CountryConfig } from "@/utils/countries";
+import type { ConstLocale } from "@/utils/locales";
+import type { Donation, ReceiverId } from "@/utils/types";
+
+import { DonationField } from "@/utils/types";
+
+import type { CreateTranslator } from "../utils";
+
 import { ImageFooter } from "../components/image-footer";
 import { ImagePartyHeader } from "../components/image-party-header";
 import { ThumbnailWrapper } from "../components/utils";
-
-import type { CountryConfig } from "../../../src/utils/countries";
-import type { ConstLocale } from "../../../src/utils/locales";
-import type { Donation, ReceiverId } from "../../../src/utils/types";
-import type { CreateTranslator } from "../utils";
 
 export const PartyPageImage = async (
   locale: ConstLocale,

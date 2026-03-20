@@ -1,7 +1,8 @@
-import { LocatorObject } from "../../util/locator";
+import type { Locator } from "@playwright/test";
 
 import type { FixtureProps } from "../../util/props";
-import type { Locator } from "@playwright/test";
+
+import { LocatorObject } from "../../util/locator";
 
 export class Table extends LocatorObject {
   private readonly columnHeaders: Locator;

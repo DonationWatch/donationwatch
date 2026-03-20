@@ -1,12 +1,13 @@
-import { expect, test, beforeEach } from "vitest";
+import { beforeEach, expect, test } from "vitest";
 
-import { DeLoader, extractDate } from "../../tasks/load-data/de/de-loader";
-
-import type { ExtractedYearData } from "../../tasks/load-data/data-loader";
 import type { Countries } from "@/utils/countries";
 import type { ReceiverId } from "@/utils/types";
 
 import { AddressField, DonationField } from "@/utils/types";
+
+import type { ExtractedYearData } from "../../tasks/load-data/data-loader";
+
+import { DeLoader, extractDate } from "../../tasks/load-data/de/de-loader";
 
 let loader: DeLoader;
 

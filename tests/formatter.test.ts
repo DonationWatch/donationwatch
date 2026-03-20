@@ -1,8 +1,8 @@
 import { expect, test } from "vitest";
 
-import { Country } from "../src/utils/countries";
-import { getCountryConfig } from "../src/utils/data/get-country-config";
-import { dateDiffInDays } from "../src/utils/date";
+import { Country } from "@/utils/countries";
+import { getCountryConfig } from "@/utils/data/get-country-config";
+import { dateDiffInDays } from "@/utils/date";
 import {
   formatCountryCurrency,
   formatDate,
@@ -10,7 +10,7 @@ import {
   formatRelativeDate,
   formatTwoDigitDate,
   formatYearsRange,
-} from "../src/utils/formatter";
+} from "@/utils/formatter";
 
 test("format EUR", async () => {
   const countryConfig = await getCountryConfig(Country.germany);

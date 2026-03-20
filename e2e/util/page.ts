@@ -1,7 +1,9 @@
-import type { FixtureProps } from "./props";
-import type { ConstLocale } from "@/utils/locales";
 import type { Page } from "@playwright/test";
-import type { createTranslator, Messages } from "next-intl";
+import type { Messages, createTranslator } from "next-intl";
+
+import type { ConstLocale } from "@/utils/locales";
+
+import type { FixtureProps } from "./props";
 
 export class PageObject {
   protected readonly page: Page;

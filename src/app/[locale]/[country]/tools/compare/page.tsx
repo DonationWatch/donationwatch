@@ -1,10 +1,10 @@
-import { notFound } from "next/navigation";
-import { getTranslations, setRequestLocale } from "next-intl/server";
-
 import type { Metadata } from "next";
 
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { notFound } from "next/navigation";
+
 import { Article } from "@/components/layout/article";
-import { PartyComparison } from "@/components/party-comparison";
+import { PartyComparison } from "@/components/parties/party-comparison";
 import { COUNTRIES } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { LOCALES } from "@/utils/locales";

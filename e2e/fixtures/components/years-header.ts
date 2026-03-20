@@ -1,9 +1,10 @@
+import type { Locator } from "@playwright/test";
+
 import { expect } from "@playwright/test";
 
-import { LocatorObject } from "../../util/locator";
-
 import type { FixtureProps } from "../../util/props";
-import type { Locator } from "@playwright/test";
+
+import { LocatorObject } from "../../util/locator";
 
 export class YearsHeader extends LocatorObject {
   public readonly yearsHeader: Locator;

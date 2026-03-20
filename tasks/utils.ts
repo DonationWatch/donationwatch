@@ -1,8 +1,7 @@
+import { checkbox } from "@inquirer/prompts";
 import fs from "fs/promises";
 
-import { checkbox } from "@inquirer/prompts";
-
-import { COUNTRIES, COUNTRY_CONFIG } from "../src/utils/countries";
+import { COUNTRIES, COUNTRY_CONFIG } from "@/utils/countries";
 
 export const promptCountries = async (
   message: string,

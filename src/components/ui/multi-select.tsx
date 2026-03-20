@@ -2,15 +2,17 @@
 
 import { CheckIcon, ChevronsUpDownIcon, XIcon } from "lucide-react";
 import {
+  type ComponentPropsWithoutRef,
+  type ReactNode,
   createContext,
   useCallback,
   useContext,
   useEffect,
   useRef,
   useState,
-  type ComponentPropsWithoutRef,
-  type ReactNode,
 } from "react";
+
+import { cn } from "@/lib/utils";
 
 import { Badge } from "./badge";
 import { Button } from "./button";
@@ -24,7 +26,6 @@ import {
   CommandSeparator,
 } from "./command";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
-import { cn } from "../../utils/classname";
 
 type MultiSelectContextType = {
   open: boolean;

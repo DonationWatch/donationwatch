@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
 
-import { generateAlternates } from "../src/utils/meta";
+import { generateAlternates } from "@/utils/meta";
 
 test("generateAlternates", () => {
   expect(generateAlternates()).toEqual({

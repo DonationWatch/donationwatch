@@ -1,6 +1,6 @@
-import { CircleCheck, CircleX, Info } from "lucide-react";
-
 import type { ReactNode } from "react";
+
+import { CircleCheck, CircleX, Info } from "lucide-react";
 
 export const InfoAlert = ({ text }: { text: ReactNode }) => {
   return (

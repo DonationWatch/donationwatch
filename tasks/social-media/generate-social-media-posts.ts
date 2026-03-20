@@ -1,27 +1,27 @@
 import { exec } from "child_process";
-import { promisify } from "util";
-
 import debug from "debug";
 import { createTranslator } from "next-intl";
 import {
-  transpileModule,
   ModuleKind,
-  ScriptTarget,
   ModuleResolutionKind,
+  ScriptTarget,
+  transpileModule,
 } from "typescript";
+import { promisify } from "util";
 
-import { interpolate } from "./string";
-import { Country, getCountryName, getParty } from "../../src/utils/countries";
-import { getCountryConfig } from "../../src/utils/data/get-country-config";
-import { formatCompactCountryCurrency } from "../../src/utils/formatter";
-import { DonationField } from "../../src/utils/types";
+import type { CountryConfig } from "@/utils/countries";
+import type { ConstLocale } from "@/utils/locales";
+import type { StrictNamespacedTranslator } from "@/utils/translator";
+import type { Donation, ReceiverId } from "@/utils/types";
+
+import { Country, getCountryName, getParty } from "@/utils/countries";
+import { getCountryConfig } from "@/utils/data/get-country-config";
+import { formatCompactCountryCurrency } from "@/utils/formatter";
+import { DonationField } from "@/utils/types";
+
 import { getDonations } from "../data/load-donations";
 import { promptCountries } from "../utils";
-
-import type { CountryConfig } from "../../src/utils/countries";
-import type { ConstLocale } from "../../src/utils/locales";
-import type { Donation, ReceiverId } from "../../src/utils/types";
-import type { StrictNamespacedTranslator } from "@/utils/translator";
+import { interpolate } from "./string";
 
 const log = debug(`generate-social-media-posts`);
 
