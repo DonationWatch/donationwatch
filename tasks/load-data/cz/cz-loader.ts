@@ -492,6 +492,13 @@ export class CzLoader extends DataLoader {
       code: "LS",
       color: "#07183a",
     },
+    ČR1: {
+      name: "Česká republika na 1. místě!",
+      short: "Česká republika na 1. místě!",
+      code: "CR1",
+      color: "#de0814",
+      wiki: 76920881,
+    },
   };
 
   constructor() {
