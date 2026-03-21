@@ -182,7 +182,8 @@
         "georgia": "Siin esitatud teave pärineb Gruusia korruptsioonivastasest büroost (ანტიკორუფციული ბიურო﻿) ja hõlmab kõiki alates 2011. aastast registreeritud poliitilisi annetusi, mis ületavad 1 GEL. Andmekogum hõlmab ainult annetusi, mis on klassifitseeritud kui tüüp #10 (Rahaannetused) või tüüp #16 (Rahaannetused juriidilistelt isikutelt).",
         "norway": "Siin kasutatud andmed pärinevad Statistics Norway (SSB) ja Partifinansiering.no ametlikest erakondade rahastamise publikatsioonidest. Kuva­tud kogusummad on koondatud mitme raporteeritud saajaüksuse (näiteks kesk-, piirkondlike, kohalike ja noorteüksuste) põhjal üheks kogusummaks erakonna kohta, kusjuures aluseks olev saajate vastendus on läbipaistvuse tagamiseks jätkuvalt kättesaadav.\n\nNorra andmestikku uuendatakse kord aastas, kajastades alusandmete avalikustamise rütmi.",
         "ukraine": "Siin kasutatud andmed on pärit riiklikust korruptsiooni ennetamise agentuurist (NAZK) PolitData portaali kaudu. Need sisaldavad kõiki ametlikes aruannetes märgitud kirjeid, mis on tähistatud kui „rahalised annetused“.\n\nMärkus andmete ulatuse kohta: See summa kajastab ainult otseseid rahalisi ülekandeid. See ei hõlma riiklikku rahastust parlamendierakondadele ega mitterahalisi (looduslikke) panuseid, nagu kaubad ja teenused.\n\nVene täiemahulise sissetungi tõttu peatati poliitiliste parteide kohustuslik aruandlus 2022. aasta algusest kuni 2023. aasta lõpuni julgeoleku- ja logistilistel põhjustel. Pärast seaduse nr 3337-IX vastuvõtmist täidavad parteid nüüd oma aruandeid tagantjärele. Aastate 2022–2025 andmeid ajakohastatakse endiselt, kuna NAZK töötleb neid esitusi.",
-        "france": "Siin kasutatud andmed pärinevad Commission Nationale des Comptes de Campagne et des Financements Politiques (CNCCFP) andmebaasist ning hõlmavad kõiki poliitilisi annetusi (eurodes), mis on dokumenteeritud väljal \"Dons_de_personne_physique\".\n\nErinevalt teistest piirkondadest avaldatakse Prantsuse andmed iga erakonna aastase koondsummana ning üksikute annetajate isikusamasus on privaatsusseadustega kaitstud."
+        "france": "Siin kasutatud andmed pärinevad Commission Nationale des Comptes de Campagne et des Financements Politiques (CNCCFP) andmebaasist ning hõlmavad kõiki poliitilisi annetusi (eurodes), mis on dokumenteeritud väljal \"Dons_de_personne_physique\".\n\nErinevalt teistest piirkondadest avaldatakse Prantsuse andmed iga erakonna aastase koondsummana ning üksikute annetajate isikusamasus on privaatsusseadustega kaitstud.",
+        "sweden": "Siin kasutatud andmed pärinevad Kammarkollegietist, Rootsi ametlikust erakondade rahastamise riiklikust registrist. Et anda täpne ülevaade puhtalt era- ja rohujuuretasandi toetusest (esitatud SEK-is), hõlmab see koondandmestik otseseid panuseid, mis on dokumenteeritud kategooria 4 (\"Insamling av kontanter\") ja kategooria 5 (\"Bidrag\") all. Erakondade sisesed ülekanded, riiklikud toetused ja loteriitulud on topeltarvestuse vältimiseks ning väliste annetuste täpseks eristamiseks teadlikult välja jäetud. Kõik andmed on rühmitatud poliitilise parteilise kuuluvuse järgi (\"Partitillhörighet\")."
       },
       "source_link": "Andmeallikas"
     },
@@ -562,7 +563,8 @@
     "CA": "Kanada",
     "GE": "Gruusia",
     "NO": "Norra",
-    "UA": "Ukraina"
+    "UA": "Ukraina",
+    "SE": "Rootsi"
   },
   "about": {
     "title": "Meie kohta",
