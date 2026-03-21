@@ -172,7 +172,8 @@
         "georgia": "Les informations proviennent du Bureau de lutte contre la corruption de Géorgie et incluent les dons supérieurs à 1 GEL depuis 2011 (types #10 et #16).",
         "norway": "Les données proviennent de Statistiques Norvège (SSB) et Partifinansiering.no. Les montants sont agrégés par parti (unités nationales, régionales et locales combinées).",
         "ukraine": "Les données proviennent de l'Agence nationale pour la prévention de la corruption (NAZK) via le portail PolitData. Note : En raison de l'invasion russe, les rapports ont été suspendus entre début 2022 et fin 2023 ; les données sont en cours de mise à jour.",
-        "france": "Les données proviennent de la Commission Nationale des Comptes de Campagne et des Financements Politiques (CNCCFP) et incluent les dons des personnes physiques. En France, les données sont publiées sous forme d'agrégat annuel par parti et l'identité des donateurs est protégée par la loi."
+        "france": "Les données proviennent de la Commission Nationale des Comptes de Campagne et des Financements Politiques (CNCCFP) et incluent les dons des personnes physiques. En France, les données sont publiées sous forme d'agrégat annuel par parti et l'identité des donateurs est protégée par la loi.",
+        "sweden": "Les données utilisées ici proviennent du Kammarkollegiet, le registre officiel du gouvernement suédois pour le financement des partis politiques. Afin de fournir une image précise du soutien purement privé et citoyen (déclaré en SEK), cet agrégat inclut les contributions directes documentées dans la catégorie 4 (\"Insamling av kontanter\") et la catégorie 5 (\"Bidrag\"). Les transferts internes entre partis, les subventions publiques et les revenus de loterie ont été expressément exclus afin d’éviter les doubles comptages et d’isoler avec précision les dons externes. Toutes les données sont regroupées par affiliation politique (\"Partitillhörighet\")."
       },
       "source_link": "Source des données"
     },
@@ -506,7 +507,8 @@
     "CA": "le Canada",
     "GE": "la Géorgie",
     "NO": "la Norvège",
-    "UA": "l'Ukraine"
+    "UA": "l'Ukraine",
+    "SE": "la Suède"
   },
   "state": {
     "germany": {

@@ -17,6 +17,7 @@ import { LvLoader } from "./lv/lv-loader";
 import { NlLoader } from "./nl/nl-loader";
 import { NoLoader } from "./no/no-loader";
 import { RsLoader } from "./rs/rs-loader";
+import { SeLoader } from "./se/se-loader";
 import { UaLoader } from "./ua/ua-loader";
 import { UkLoader } from "./uk/uk-loader";
 
@@ -38,4 +39,5 @@ export const loaders: Record<Country, DataLoader> = {
   [Country.norway]: new NoLoader(),
   [Country.ukraine]: new UaLoader(),
   [Country.france]: new FrLoader(),
+  [Country.sweden]: new SeLoader(),
 };

@@ -182,7 +182,8 @@
         "georgia": "Informasjonen som presenteres her er hentet fra Georgias antikorrupsjonsbyrå (ანტიკორუფციული ბიურო﻿) og inkluderer alle politiske donasjoner registrert siden 2011 som overstiger 1 GEL. Datasettet omfatter kun bidrag klassifisert som type #10 (monetære donasjoner) eller type #16 (monetære donasjoner fra juridiske personer).",
         "norway": "Dataene som brukes her kommer fra de offisielle publikasjonene om partifinansiering fra Statistisk sentralbyrå (SSB) og Partifinansiering.no. Totalene som vises er aggregert fra flere rapporterte mottakerenheter (for eksempel sentrale, regionale, lokale og ungdomsenheter) til én samlet totalsum per parti, mens den underliggende mappingen av mottakere holdes tilgjengelig for åpenhet.\n\nNorgesdatasettet oppdateres årlig, i tråd med publiseringstakten for de underliggende opplysningene.",
         "ukraine": "Dataene som brukes her, er hentet fra Nasjonalt byrå for korrupsjonsforebygging (NAZK) via PolitData-portalen. De inkluderer alle poster identifisert som «økonomiske bidrag» i de offisielle rapportene.\n\nMerknad om datagrunnlag: Dette tallet viser kun direkte pengetransaksjoner. Det inkluderer ikke statlig finansiering til parlamentariske partier eller ikke-monetære bidrag, som varer og tjenester.\n\nPå grunn av den fullskala russiske invasjonen ble den obligatoriske rapporteringen for politiske partier suspendert fra tidlig 2022 til slutten av 2023 av sikkerhets- og logistikkårsaker. Etter vedtakelsen av lov 3337-IX leverer partiene nå inn sine rapporter i ettertid. Data for 2022–2025 oppdateres fortsatt mens NAZK behandler disse innsendelsene.",
-        "france": "Dataene som brukes her kommer fra Commission Nationale des Comptes de Campagne et des Financements Politiques (CNCCFP) og inkluderer alle politiske donasjoner (rapportert i euro) som er dokumentert i feltet \"Dons_de_personne_physique\".\n\nI motsetning til andre regioner publiseres de franske dataene som en årlig samlet oversikt per parti, og identiteten til individuelle givere er beskyttet av personvernlovgivningen."
+        "france": "Dataene som brukes her kommer fra Commission Nationale des Comptes de Campagne et des Financements Politiques (CNCCFP) og inkluderer alle politiske donasjoner (rapportert i euro) som er dokumentert i feltet \"Dons_de_personne_physique\".\n\nI motsetning til andre regioner publiseres de franske dataene som en årlig samlet oversikt per parti, og identiteten til individuelle givere er beskyttet av personvernlovgivningen.",
+        "sweden": "Dataene som brukes her, kommer fra Kammarkollegiet, det offisielle svenske statlige registeret for partifinansiering. For å gi et nøyaktig bilde av ren privat og grasrotbasert støtte (rapportert i SEK), inkluderer denne sammenstillingen direkte bidrag dokumentert under kategori 4 (\"Insamling av kontanter\") og kategori 5 (\"Bidrag\"). Interne partioverføringer, statlige subsidier og lotteriinntekter er uttrykkelig utelatt for å forhindre dobbeltelling og for å isolere eksterne donasjoner på en presis måte. Alle data er gruppert etter politisk partitilhørighet (\"Partitillhörighet\")."
       },
       "source_link": "Datakilde"
     },
@@ -516,7 +517,8 @@
     "CA": "Canada",
     "GE": "Georgia",
     "NO": "Norge",
-    "UA": "Ukraina"
+    "UA": "Ukraina",
+    "SE": "Sverige"
   },
   "state": {
     "germany": {

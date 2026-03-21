@@ -21,7 +21,6 @@ export async function generateStaticParams() {
 
 const enum CountryNote {
   PDF_ONLY = "pdf",
-  SWEDEN = "sweden",
   GERMANY = "germany",
 }
 
@@ -37,8 +36,6 @@ Based on our initial review, Italy, Slovenia, and Bosnia and Herzegovina may be 
     p2: `We’re continuously expanding our coverage. If you know of additional countries that publish political donation data in any form, please contact us and share a link or source. An informed list of countries (even when the data is only available as PDFs or on web pages) is helpful both for us to prioritize future integrations and for anyone interested in finding and comparing this information across countries:`,
     notes: {
       [CountryNote.PDF_ONLY]: "PDF files only",
-      [CountryNote.SWEDEN]:
-        "Donations are only published in sum with no individual donation data",
       [CountryNote.GERMANY]:
         "Donations between 10k and 35k are published as PDF scans",
     },
@@ -59,8 +56,6 @@ Basierend auf unserer ersten Prüfung könnten Italien, Slowenien sowie Bosnien 
     p2: `Wir erweitern unsere Abdeckung kontinuierlich. Wenn Sie von weiteren Ländern wissen, die politische Spendendaten in irgendeiner Form veröffentlichen, kontaktieren Sie uns bitte und teilen Sie einen Link oder eine Quelle. Eine gut informierte Länderliste (auch wenn die Daten nur als PDFs oder auf Webseiten verfügbar sind) hilft uns sowohl dabei, zukünftige Integrationen zu priorisieren, als auch allen, die daran interessiert sind, diese Informationen länderübergreifend zu finden und zu vergleichen:`,
     notes: {
       [CountryNote.PDF_ONLY]: "Nur PDF-Dateien",
-      [CountryNote.SWEDEN]:
-        "Spenden werden nur als Gesamtsumme veröffentlicht, ohne Daten zu einzelnen Spenden",
       [CountryNote.GERMANY]:
         "Spenden zwischen 10k und 35k werden als eingescannte PDFs veröffentlicht",
     },
@@ -81,8 +76,6 @@ Na základě naší úvodní kontroly se zdá, že Itálie, Slovinsko a Bosna a 
     p2: `Naše pokrytí průběžně rozšiřujeme. Pokud víte o dalších zemích, které v jakékoli formě zveřejňují údaje o politických darech, kontaktujte nás prosím a sdílejte odkaz nebo zdroj. Informovaný seznam zemí (i když jsou data dostupná pouze jako PDF nebo na webových stránkách) je užitečný jak pro nás při určování priorit budoucích integrací, tak pro každého, kdo má zájem tyto informace napříč zeměmi vyhledávat a porovnávat:`,
     notes: {
       [CountryNote.PDF_ONLY]: "Pouze soubory PDF",
-      [CountryNote.SWEDEN]:
-        "Donace jsou zveřejňovány pouze jako souhrnná částka, bez údajů o jednotlivých darech",
       [CountryNote.GERMANY]:
         "Donace mezi 10k a 35k jsou zveřejňovány jako naskenované PDF",
     },
@@ -103,8 +96,6 @@ Op basis van onze eerste beoordeling lijken Italië, Slovenië en Bosnië en Her
     p2: `We breiden onze dekking voortdurend uit. Als je weet van aanvullende landen die in welke vorm dan ook gegevens over politieke donaties publiceren, neem dan contact met ons op en deel een link of bron. Een goed onderbouwde landenlijst (ook wanneer de gegevens alleen beschikbaar zijn als pdf’s of op webpagina’s) helpt ons zowel om toekomstige integraties te prioriteren als iedereen die geïnteresseerd is in het vinden en vergelijken van deze informatie tussen landen:`,
     notes: {
       [CountryNote.PDF_ONLY]: "Alleen PDF-bestanden",
-      [CountryNote.SWEDEN]:
-        "Donaties worden alleen als totaalsom gepubliceerd, zonder individuele donatiegegevens",
       [CountryNote.GERMANY]:
         "Donaties tussen 10k en 35k worden gepubliceerd als gescande PDF's",
     },
@@ -125,8 +116,6 @@ Balstoties uz mūsu sākotnējo izvērtējumu, Itāliju, Slovēniju un Bosniju u
     p2: `Mēs nepārtraukti paplašinām mūsu pārklājumu. Ja zināt par papildu valstīm, kas jebkādā formā publicē politisko ziedojumu datus, lūdzu, sazinieties ar mums un kopīgojiet saiti vai avotu. Labi informēts valstu saraksts (pat ja dati ir pieejami tikai PDF formātā vai tīmekļa lapās) ir noderīgs gan mums, lai noteiktu prioritātes turpmākajām integrācijām, gan ikvienam, kurš vēlas atrast un salīdzināt šo informāciju starp valstīm:`,
     notes: {
       [CountryNote.PDF_ONLY]: "Tikai PDF faili",
-      [CountryNote.SWEDEN]:
-        "Ziedojumi tiek publicēti tikai kā kopsumma, bez individuālu ziedojumu datiem",
       [CountryNote.GERMANY]:
         "Ziedojumi no 10k līdz 35k tiek publicēti kā ieskenēti PDF",
     },
@@ -147,8 +136,6 @@ Meie esialgse ülevaatuse põhjal võivad Itaalia, Sloveenia ning Bosnia ja Hert
     p2: `Laiendame oma katvust pidevalt. Kui teate täiendavaid riike, mis avaldavad poliitiliste annetuste andmeid mis tahes kujul, võtke palun meiega ühendust ning jagage linki või allikat. Hästi informeeritud riikide loend (isegi siis, kui andmed on kättesaadavad ainult PDF-idena või veebilehtedel) on abiks nii meil tulevaste integratsioonide prioriseerimisel kui ka kõigile, kes soovivad seda teavet riikide lõikes leida ja võrrelda:`,
     notes: {
       [CountryNote.PDF_ONLY]: "Ainult PDF-failid",
-      [CountryNote.SWEDEN]:
-        "Annetused avaldatakse ainult kogusummana, ilma üksikannetusandmeteta",
       [CountryNote.GERMANY]:
         "10k–35k vahemikus annetused avaldatakse skaneeritud PDF-idena",
     },
@@ -169,8 +156,6 @@ Na temelju našeg početnog pregleda, Italiju, Sloveniju te Bosnu i Hercegovinu 
     p2: `Kontinuirano proširujemo našu pokrivenost. Ako znate za dodatne zemlje koje u bilo kojem obliku objavljuju podatke o političkim donacijama, kontaktirajte nas i podijelite poveznicu ili izvor. Dobro informiran popis zemalja (čak i kada su podaci dostupni samo kao PDF-ovi ili na web-stranicama) koristan je i nama za određivanje prioriteta budućih integracija i svima koji su zainteresirani pronaći i usporediti te informacije među zemljama:`,
     notes: {
       [CountryNote.PDF_ONLY]: "Samo PDF datoteke",
-      [CountryNote.SWEDEN]:
-        "Donacije se objavljuju samo kao ukupni iznos, bez podataka o pojedinačnim donacijama",
       [CountryNote.GERMANY]:
         "Donacije između 10k i 35k objavljuju se kao skenirani PDF-ovi",
     },
@@ -191,8 +176,6 @@ Basert på vår innledende gjennomgang kan Italia, Slovenia og Bosnia-Hercegovin
     p2: `Vi utvider dekningen vår kontinuerlig. Hvis du kjenner til flere land som publiserer data om politiske donasjoner i en eller annen form, ta kontakt med oss og del en lenke eller kilde. En oppdatert liste over land (selv når dataene bare er tilgjengelige som PDF-er eller på nettsider) er nyttig både for oss når vi prioriterer fremtidige integrasjoner, og for alle som er interessert i å finne og sammenligne denne informasjonen på tvers av land:`,
     notes: {
       [CountryNote.PDF_ONLY]: "Kun PDF-filer",
-      [CountryNote.SWEDEN]:
-        "Donasjoner publiseres kun som en totalsum, uten data om individuelle donasjoner",
       [CountryNote.GERMANY]:
         "Donasjoner mellom 10k og 35k publiseres som skannede PDF-er",
     },
@@ -213,8 +196,6 @@ Basert på vår innledende gjennomgang kan Italia, Slovenia og Bosnia-Hercegovin
     p2: `Ми постійно розширюємо наше охоплення. Якщо ви знаєте про додаткові країни, які публікують дані про політичні пожертвування в будь-якій формі, будь ласка, зв'яжіться з нами та поділіться посиланням або джерелом. Інформований список країн (навіть якщо дані доступні лише у форматі PDF або на веб-сторінках) корисний як для нас для визначення пріоритетів майбутніх інтеграцій, так і для всіх, хто зацікавлений у пошуку та порівнянні цієї інформації в різних країнах:`,
     notes: {
       [CountryNote.PDF_ONLY]: "Лише PDF-файли",
-      [CountryNote.SWEDEN]:
-        "Пожертвування публікуються лише у вигляді загальної суми без даних про індивідуальні пожертвування",
       [CountryNote.GERMANY]:
         "Пожертвування від 10 тисяч до 35 тисяч публікуються у вигляді відсканованих PDF-файлів",
     },
@@ -235,8 +216,6 @@ Selon notre analyse initiale, l'Italie, la Slovénie et la Bosnie-Herzégovine p
     p2: `Nous élargissons continuellement notre couverture. Si vous avez connaissance d'autres pays publiant des données de financement politique, quel que soit le format, n'hésitez pas à nous contacter pour partager un lien ou une source. Une liste documentée de pays (même si les données ne sont disponibles qu'en PDF ou sur des pages web) nous aide à prioriser nos futures intégrations et s'avère utile pour toute personne souhaitant comparer ces informations à l'échelle internationale :`,
     notes: {
       [CountryNote.PDF_ONLY]: "Fichiers PDF uniquement",
-      [CountryNote.SWEDEN]:
-        "Les dons sont publiés uniquement sous forme de montants globaux, sans données individuelles par don",
       [CountryNote.GERMANY]:
         "Les dons compris entre 10 000 et 35 000 € sont publiés sous forme de scans PDF",
     },
@@ -275,14 +254,6 @@ const sources: {
     source: {
       name: "Valtiontalouden tarkastusvirasto",
       url: "https://www.vaalirahoitusvalvonta.fi/fi/index/puoluerahoitus/Puoluerahoitusvalvonnanilmoitukset/tilinpaatostiedot.html",
-    },
-  },
-  {
-    country: "SE",
-    note: CountryNote.SWEDEN,
-    source: {
-      name: "Kammarkollegiet",
-      url: "https://www.kammarkollegiet.se/vara-tjanster/insyn-i-partiers-finansiering/hitta-statistik-pa-redovisade-intakter/intaktsredovisningar-politiska-aktorer-2018-och-framat",
     },
   },
   {

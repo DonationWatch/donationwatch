@@ -250,11 +250,14 @@ export abstract class DataLoader {
     await fs.mkdir(this.cacheDir, { recursive: true });
   }
 
-  protected async cachedYearData(year: string): Promise<string> {
+  protected async cachedYearData(
+    year: string,
+    encoding: BufferEncoding = "utf8",
+  ): Promise<string> {
     this.log("Reading cache file", year);
     let cached = "";
     try {
-      cached = await fs.readFile(this.cacheFile(year), { encoding: "utf8" });
+      cached = await fs.readFile(this.cacheFile(year), { encoding });
     } catch (error) {
       this.log("Error reading cache file", year, error);
       return "";

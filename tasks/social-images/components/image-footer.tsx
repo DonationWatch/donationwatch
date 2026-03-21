@@ -57,7 +57,7 @@ export const ImageFooter = ({
           .filter(isNotNullandNotUndefined)
           .join(", ")}
       </div>
-      <div tw="flex justify-end">
+      <div tw="flex justify-start">
         {[
           t("footer.published_by", {
             source: country.source.name,

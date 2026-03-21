@@ -29,6 +29,7 @@ export const enum Country {
   norway = "norway",
   ukraine = "ukraine",
   france = "france",
+  sweden = "sweden",
 }
 
 export type CountryCode =
@@ -48,7 +49,8 @@ export type CountryCode =
   | "GE"
   | "NO"
   | "UA"
-  | "FR";
+  | "FR"
+  | "SE";
 
 export type Currency =
   | "EUR"
@@ -60,7 +62,8 @@ export type Currency =
   | "CAD"
   | "GEL"
   | "NOK"
-  | "UAH";
+  | "UAH"
+  | "SEK";
 
 export const COUNTRIES = new Set<Country>([
   Country.germany,
@@ -80,6 +83,7 @@ export const COUNTRIES = new Set<Country>([
   Country.norway,
   Country.ukraine,
   Country.france,
+  Country.sweden,
 ]);
 
 export interface CountryConfig {
@@ -825,6 +829,32 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
     knownPartyRequirements: {
       sum: 900_000,
       count: -1,
+    },
+    states: [],
+  },
+  [Country.sweden]: {
+    id: Country.sweden,
+    minYear: "2018",
+    preliminaryDataSince: "2024",
+    hasOrigin: false,
+    hasDate: false,
+    hasDonorType: false,
+    hasNoDonors: true,
+    minPublicDonationAmount: 1,
+    currency: "SEK",
+    source: {
+      name: "Kammarkollegiet",
+      url: "https://www.kammarkollegiet.se/vara-tjanster/insyn-i-partiers-finansiering/hitta-statistik-pa-redovisade-intakter/intaktsredovisningar-politiska-aktorer-2018-och-framat",
+    },
+    legislativeYears: [
+      ["2019", "2020", "2021", "2022"],
+      ["2023", "2024", "2025", "2026"],
+    ],
+    code: "SE",
+    wikiCountry: "en",
+    markers: {
+      label: "Allmänna val",
+      dates: ["2018-09-09", "2022-09-11", "2026-09-13"],
     },
     states: [],
   },
