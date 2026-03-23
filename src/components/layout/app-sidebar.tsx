@@ -51,6 +51,7 @@ import {
 } from "@/utils/config";
 import { COUNTRY_CONFIG, getCountryName } from "@/utils/countries";
 import { countryFlags } from "@/utils/country-flags";
+import { Features, hasFeature } from "@/utils/features";
 
 import { CountrySwitch } from "./country-switch";
 
@@ -225,7 +226,7 @@ export function AppSidebar({
                     </Link>
                   </SidebarActiveMenuButton>
                 </SidebarMenuItem>
-                {countryConfig.hasDate ? (
+                {hasFeature(countryConfig, Features.Date) ? (
                   <SidebarMenuItem>
                     <SidebarActiveMenuButton
                       activeHref={`/${locale}/${countryConfig.id}/tools/bar-chart-race`}

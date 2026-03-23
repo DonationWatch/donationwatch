@@ -20,6 +20,7 @@ import { LoadingYearTimeseriesText } from "@/components/loading/loading-year-tim
 import { getCountryName } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { getParties } from "@/utils/data/get-parties";
+import { Features, hasFeature } from "@/utils/features";
 import { formatYearsRange } from "@/utils/formatter";
 import {
   getPartyYearsSums,
@@ -110,7 +111,9 @@ export default async function TimelinePage(
   const parties = getParties(countryConfig, years);
 
   const resolution =
-    !hasYearOnlyDonations && countryConfig.hasDate ? "month" : "year";
+    !hasYearOnlyDonations && hasFeature(countryConfig, Features.Date)
+      ? "month"
+      : "year";
   const chartStrings =
     resolution === "month"
       ? {
@@ -166,11 +169,12 @@ export default async function TimelinePage(
               title={t(chartStrings.title)}
             />
 
-            {resolution === "year" && countryConfig.hasDate && (
-              <div className="mb-6">
-                <InfoAlert text={t("timeline.year_resolution_note")} />
-              </div>
-            )}
+            {resolution === "year" &&
+              hasFeature(countryConfig, Features.Date) && (
+                <div className="mb-6">
+                  <InfoAlert text={t("timeline.year_resolution_note")} />
+                </div>
+              )}
 
             <p className="mb-6">{t(chartStrings.description)}</p>
             {resolution === "month" ? (

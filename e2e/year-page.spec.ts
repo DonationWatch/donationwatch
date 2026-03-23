@@ -2,6 +2,7 @@ import { expect } from "@playwright/test";
 
 import { COUNTRIES, Country } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
+import { Features, hasFeature } from "@/utils/features";
 import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
 import { canShowYearsTimeline } from "@/utils/party";
 
@@ -103,7 +104,7 @@ test.describe("Year page", () => {
         test.describe("donors page", () => {
           test.beforeEach(async ({ page, baseURL }) => {
             test.skip(
-              Boolean((await getCountryConfig(country)).hasNoDonors),
+              !hasFeature(await getCountryConfig(country), Features.Donors),
               "Country has no donors",
             );
 
@@ -157,7 +158,7 @@ test.describe("Year page", () => {
             const partyYearSums = await getPartyYearsSums(country);
 
             test.skip(
-              !countryConfig.hasDate,
+              !hasFeature(countryConfig, Features.Date),
               "Country does not have dates and in turn no timeline",
             );
             test.skip(
@@ -199,7 +200,7 @@ test.describe("Year page", () => {
         test.describe("origin page", () => {
           test.beforeEach(async ({ page, baseURL }) => {
             test.skip(
-              !(await getCountryConfig(country)).hasOrigin,
+              !hasFeature(await getCountryConfig(country), Features.Origin),
               "Country does not have origin",
             );
 

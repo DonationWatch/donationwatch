@@ -18,6 +18,7 @@ import { LoadingPartyDonorTypeText } from "@/components/parties/part-donor-type-
 import { PartyDonorPageText } from "@/components/parties/party-donor-page-text";
 import { getCountryName, getParty } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
+import { Features, hasFeature } from "@/utils/features";
 import {
   formatCompactCountryCurrency,
   formatCountryCurrency,
@@ -130,7 +131,7 @@ export default async function DonorPage(
         </ArticleSectionTwoColumns>
       </ArticleSectionWrapper>
 
-      {countryConfig.hasDonorType ? (
+      {hasFeature(countryConfig, Features.DonorType) ? (
         <ArticleSectionWrapper id={"sec-party-donor-types"}>
           <ArticleSectionTwoColumns>
             <ArticleSectionColumn>

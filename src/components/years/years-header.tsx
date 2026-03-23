@@ -16,6 +16,7 @@ import { useClientTranslations as useTranslations } from "@/hooks/use-client-tra
 import { cn } from "@/lib/utils";
 import { getParties } from "@/utils/data/get-parties";
 import { getPartiesSum } from "@/utils/data/get-parties-sum";
+import { Features, hasFeature } from "@/utils/features";
 import {
   formatCountryCurrency,
   formatNumber,
@@ -114,26 +115,28 @@ const HighscoreHeader = ({
       </h3>
       <div className="mb-4">
         <div className="flex-row space-y-2 sm:flex sm:space-y-0 sm:space-x-10">
-          {country.hasNoDonors ? null : (
+          {hasFeature(country, Features.Donors) ? (
             <MetaCard
               title={t("donation_count")}
               value={formatNumber(locale, count)}
             />
-          )}
+          ) : null}
           <MetaCard
             title={t("sum")}
             value={formatCountryCurrency(locale, sum, country)}
           />
-          {!country.hasNoDonors && showExtendedMeta && count > 1 && (
-            <MetaCard
-              title={t("average")}
-              value={formatCountryCurrency(
-                locale,
-                numbersAvg(sumNumbers, count),
-                country,
-              )}
-            />
-          )}
+          {hasFeature(country, Features.Donors) &&
+            showExtendedMeta &&
+            count > 1 && (
+              <MetaCard
+                title={t("average")}
+                value={formatCountryCurrency(
+                  locale,
+                  numbersAvg(sumNumbers, count),
+                  country,
+                )}
+              />
+            )}
         </div>
       </div>
       {withStackedBar ? (

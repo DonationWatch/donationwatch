@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 
 import { getCountryName, getParty } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
+import { Features, hasFeature } from "@/utils/features";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
 import { isValidCountry, isValidLocale, isValidParty } from "@/utils/validate";
 
@@ -55,7 +56,7 @@ export default async function OriginLayout(
 
   const [countryConfig] = await Promise.all([getCountryConfig(country)]);
 
-  if (!countryConfig.hasOrigin) {
+  if (!hasFeature(countryConfig, Features.Origin)) {
     return notFound();
   }
 

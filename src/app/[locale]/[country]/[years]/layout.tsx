@@ -16,6 +16,7 @@ import { isNotNullandNotUndefined } from "@/utils/array";
 import { THUMBNAIL_PREFIX } from "@/utils/config";
 import { getCountryName } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
+import { Features, hasFeature } from "@/utils/features";
 import { formatYearsRange } from "@/utils/formatter";
 import {
   getPartyYearsSums,
@@ -151,14 +152,14 @@ export default async function YearsLayout(
       href: `/${locale}/${country}/${yearsLink}/changes`,
       label: t("changes.title"),
     },
-    countryConfig.hasNoDonors
-      ? undefined
-      : {
+    hasFeature(countryConfig, Features.Donors)
+      ? {
           icon: UserRound,
           href: `/${locale}/${country}/${yearsLink}/donors`,
           activeHref: `/${locale}/${country}/${yearsLink}/donors`,
           label: t("donors.title"),
-        },
+        }
+      : undefined,
     canShowYearsTimeline(countryConfig, partySums, years)
       ? {
           icon: ChartLine,
@@ -166,7 +167,7 @@ export default async function YearsLayout(
           label: t("timeline.title"),
         }
       : undefined,
-    countryConfig.hasOrigin
+    hasFeature(countryConfig, Features.Origin)
       ? {
           icon: Earth,
           href: `/${locale}/${country}/${yearsLink}/origin/overview`,

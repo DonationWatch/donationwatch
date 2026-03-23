@@ -1,6 +1,8 @@
 import type { CountryConfig } from "@/utils/countries";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 
+import { Features, hasFeature } from "@/utils/features";
+
 export const yearPartiesHaveYearOnlyDonations = (
   partySums: PartyYearsSums,
   years: string[],
@@ -23,7 +25,7 @@ export const canShowYearsTimeline = (
   );
 
   if (
-    !countryConfig.hasDate ||
+    !hasFeature(countryConfig, Features.Date) ||
     // if we have years with year donations, we consider this as country without date for the picked range
     containsYearOnlyDonations
   ) {
