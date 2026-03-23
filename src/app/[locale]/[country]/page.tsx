@@ -20,6 +20,7 @@ import {
   getReferencingCountryName,
 } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
+import { Features, hasFeature } from "@/utils/features";
 import {
   formatCompactCountryCurrency,
   formatCountryCurrency,
@@ -196,7 +197,7 @@ export default async function YearsPage(
                   <br />
                 </>
               ) : null}
-              {countryConfig.hasNoDonors ? (
+              {!hasFeature(countryConfig, Features.Donors) ? (
                 <>
                   <br />
                   {tHome("what.no_donors", {
@@ -216,7 +217,7 @@ export default async function YearsPage(
               </a>
             </p>
           </div>
-          {countryConfig.hasDate ? (
+          {hasFeature(countryConfig, Features.Date) ? (
             <section
               aria-labelledby="home-most-recent-donations"
               className="flex items-center justify-center lg:basis-1/2"
@@ -275,7 +276,7 @@ export default async function YearsPage(
         <PartiesHero country={countryConfig} locale={locale} />
       </section>
 
-      {countryConfig.hasNoDonors ? null : (
+      {hasFeature(countryConfig, Features.Donors) ? (
         <section
           className="content-visibility-auto contain-intrinsic-size-[auto_1100px_auto_508px] container mx-auto p-4 pb-12 sm:pb-24"
           aria-labelledby="home-donor-list"
@@ -303,7 +304,7 @@ export default async function YearsPage(
             biggestDonations={biggestDonations}
           />
         </section>
-      )}
+      ) : null}
 
       {countryConfig.legislativeYears?.length ? (
         <section

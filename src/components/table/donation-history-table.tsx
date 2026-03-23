@@ -32,6 +32,7 @@ import { cn } from "@/lib/utils";
 import { isNotNullandNotUndefined } from "@/utils/array";
 import { getHistory } from "@/utils/data/get-history";
 import { donationYear } from "@/utils/date";
+import { Features, hasFeature } from "@/utils/features";
 import { formatCountryCurrency, formatTwoDigitDate } from "@/utils/formatter";
 import { DonationField } from "@/utils/types";
 
@@ -189,7 +190,7 @@ export const DonationHistoryTable = ({
         },
         cell: (cell) => formatCountryCurrency(locale, cell.getValue(), country),
       }),
-      country.hasExternalDonationIds
+      hasFeature(country, Features.ExternalDonationIds)
         ? columnHelper.accessor("id", {
             header: "",
             size: 50,

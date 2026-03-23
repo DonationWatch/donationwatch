@@ -12,6 +12,7 @@ import { useDonationsByYears } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { isNotNullandNotUndefined } from "@/utils/array";
 import { getDonorName } from "@/utils/donor";
+import { Features, hasFeature } from "@/utils/features";
 import { AddressField, DonationField } from "@/utils/types";
 
 function escapeCSVField(field: string): string {
@@ -56,10 +57,10 @@ function generateCSV(
 ): string {
   const headers = ["Date", "Donor Name", "Receiver", "Amount", "Currency"];
 
-  if (country.hasDonorType) {
+  if (hasFeature(country, Features.DonorType)) {
     headers.push("Donor Type");
   }
-  if (country.hasOrigin) {
+  if (hasFeature(country, Features.Origin)) {
     headers.push("Country", "State");
   }
 
@@ -77,12 +78,12 @@ function generateCSV(
       country.currency,
     ];
 
-    if (country.hasDonorType) {
+    if (hasFeature(country, Features.DonorType)) {
       const donorType = donation[DonationField.DonorType];
       row.push(donorType !== undefined ? t(`donor_type.${donorType}`) : "");
     }
 
-    if (country.hasOrigin) {
+    if (hasFeature(country, Features.Origin)) {
       const address = donation[DonationField.Address];
       row.push(
         escapeCSVField(address?.[AddressField.Country] ?? ""),

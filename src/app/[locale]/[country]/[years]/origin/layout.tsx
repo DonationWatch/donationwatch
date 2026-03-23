@@ -5,6 +5,7 @@ import { notFound, redirect } from "next/navigation";
 
 import { getCountryName } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
+import { Features, hasFeature } from "@/utils/features";
 import { formatYearsRange } from "@/utils/formatter";
 import {
   getPartyYearsSums,
@@ -66,7 +67,7 @@ export default async function OriginLayout(
     getPartyYearsSums(country),
   ]);
 
-  if (!countryConfig.hasOrigin) {
+  if (!hasFeature(countryConfig, Features.Origin)) {
     return notFound();
   }
 

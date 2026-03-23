@@ -27,6 +27,7 @@ import { firstItem, lastItem } from "@/utils/array";
 import { partyColor } from "@/utils/color";
 import { QUERY_PARAM_BUILD_TS } from "@/utils/config";
 import { donationYear } from "@/utils/date";
+import { Features, hasFeature } from "@/utils/features";
 import {
   formatCompactCountryCurrency,
   formatCountryCurrency,
@@ -793,7 +794,7 @@ export const PartyComparison = ({
             </div>
           </ArticleSection>
 
-          {countryConfig.hasDonorType && (
+          {hasFeature(countryConfig, Features.DonorType) && (
             <ArticleSection
               title={tCompareParties("donor_types.title")}
               id="sec-compare-donor-types"

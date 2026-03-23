@@ -2,6 +2,7 @@ import { expect } from "@playwright/test";
 
 import { COUNTRIES } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
+import { Features, hasFeature } from "@/utils/features";
 
 import { test } from "./util/fixture";
 
@@ -30,7 +31,7 @@ test.describe("Homepage", () => {
 
         await test.step("has biggest donations text", async () => {
           await expect(homePage.biggestDonations).toBeVisible({
-            visible: !countryConfig.hasNoDonors,
+            visible: hasFeature(countryConfig, Features.Donors),
           });
         });
 
@@ -43,7 +44,7 @@ test.describe("Homepage", () => {
           await expect(homePage.currentLegislativePeriod.locator).toBeVisible();
 
           const cc = await getCountryConfig(country);
-          if (cc.hasDate) {
+          if (hasFeature(cc, Features.Date)) {
             await expect(homePage.mostRecentDonations).toBeVisible();
           }
 

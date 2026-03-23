@@ -21,6 +21,7 @@ import { useClientTranslations as useTranslations } from "@/hooks/use-client-tra
 import { useSearchDialog } from "@/hooks/use-search-dialog";
 import { cn } from "@/lib/utils";
 import { getParty } from "@/utils/countries";
+import { Features, hasFeature } from "@/utils/features";
 import { clientSha1 } from "@/utils/hash";
 import { serializeYears } from "@/utils/serializers";
 
@@ -193,7 +194,7 @@ const GlobalSearch = ({
     },
   ];
 
-  if (!countryConfig.hasNoDonors) {
+  if (hasFeature(countryConfig, Features.Donors)) {
     groups.push({
       id: "donors",
       title: tSearch("donors"),

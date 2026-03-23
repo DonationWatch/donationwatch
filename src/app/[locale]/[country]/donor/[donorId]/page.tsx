@@ -11,6 +11,7 @@ import {
   getDonorMeta,
 } from "@/utils/data/server-loaders";
 import { getDonationDonorName } from "@/utils/donor";
+import { Features, hasFeature } from "@/utils/features";
 import {
   formatCompactCountryCurrency,
   formatCountryCurrency,
@@ -97,8 +98,8 @@ export async function generateMetadata(
 
   if (
     isBiggestDonor &&
-    // skip images if the country has no donors
-    !countryConfig.hasNoDonors
+    // only add images if the country has no donors
+    hasFeature(countryConfig, Features.Donors)
   ) {
     // add rich metadata for biggest donors as these have pregenerated images
     metadata.openGraph = baseOpenGraph({

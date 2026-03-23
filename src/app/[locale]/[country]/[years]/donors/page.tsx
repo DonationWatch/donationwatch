@@ -19,6 +19,7 @@ import {
 import { getCountryName } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { getParties } from "@/utils/data/get-parties";
+import { Features, hasFeature } from "@/utils/features";
 import { formatYearsRange } from "@/utils/formatter";
 import {
   getPartyYearsSums,
@@ -84,7 +85,7 @@ export default async function YearPage(
     getPartyYearsSums(country),
   ]);
 
-  if (countryConfig.hasNoDonors) {
+  if (!hasFeature(countryConfig, Features.Donors)) {
     return notFound();
   }
 

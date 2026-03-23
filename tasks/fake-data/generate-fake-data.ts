@@ -12,6 +12,7 @@ import type {
 
 import { COUNTRY_CONFIG } from "@/utils/countries";
 import { fillYears } from "@/utils/date";
+import { Features, hasFeature } from "@/utils/features";
 import { AddressField, DonationField, RelationKind } from "@/utils/types";
 
 import type { ExtractedYearData, PartyConfig } from "../load-data/data-loader";
@@ -52,10 +53,11 @@ class FakeDataLoader extends DataLoader {
   }
 
   // Fake donorMeta with the test donor as they need a Wikipedia article
-  public readonly donorMeta: DonorMetaDefinition = COUNTRY_CONFIG[this.country]
-    .hasNoDonors
-    ? { donors: {}, relations: [] }
-    : {
+  public readonly donorMeta: DonorMetaDefinition = hasFeature(
+    COUNTRY_CONFIG[this.country],
+    Features.Donors,
+  )
+    ? {
         donors: {
           [DONOR_WITH_WIKIPEDIA_ARTICLE]: {
             wiki: 12345, // Fake wiki ID for testing
@@ -67,7 +69,8 @@ class FakeDataLoader extends DataLoader {
             [DONOR_WITH_REL_B, RelationKind.family],
           ],
         ],
-      };
+      }
+    : { donors: {}, relations: [] };
 
   private pickRandomParty(): string {
     const partyKeys = Object.keys(this.parties);
@@ -160,7 +163,7 @@ class FakeDataLoader extends DataLoader {
           [DonationField.Receiver]: partyName,
           [DonationField.Address]:
             // if country has origin, create a state donation for the first donation
-            countryConfig.hasOrigin && j === 0
+            hasFeature(countryConfig, Features.Origin) && j === 0
               ? {
                   [AddressField.Country]: isEu ? "DE" : countryConfig.code,
                   [AddressField.State]: isEu

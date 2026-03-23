@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 
 import { Article } from "@/components/layout/article";
 import { getCountryConfig } from "@/utils/data/get-country-config";
+import { Features, hasFeature } from "@/utils/features";
 import { LOCALES } from "@/utils/locales";
 import { generateAlternates } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
@@ -57,19 +58,17 @@ export default async function Page(
     getCountryConfig(country),
   ]);
 
-  if (!countryConfig.hasDate) {
+  if (!hasFeature(countryConfig, Features.Date)) {
     return notFound();
   }
 
   return (
     <Article title={tBarChartRace("title")}>
-      {countryConfig.hasDate ? (
-        <>
-          <p className="mb-8 max-w-prose">{tBarChartRace("description")}</p>
-          <p className="mb-8 max-w-prose text-sm">{tBarChartRace("note")}</p>
-          <RacingBars countryConfig={countryConfig} />
-        </>
-      ) : null}
+      <>
+        <p className="mb-8 max-w-prose">{tBarChartRace("description")}</p>
+        <p className="mb-8 max-w-prose text-sm">{tBarChartRace("note")}</p>
+        <RacingBars countryConfig={countryConfig} />
+      </>
     </Article>
   );
 }

@@ -8,6 +8,7 @@ import type { ConstLocale } from "@/utils/locales";
 import { BASE_URL } from "@/utils/config";
 import { COUNTRIES } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
+import { Features, hasFeature } from "@/utils/features";
 import { getBiggestDonors } from "@/utils/loader/biggest-donors";
 import { getBuild } from "@/utils/loader/build";
 import {
@@ -91,9 +92,10 @@ export default async function sitemap(props: {
 
             const filterConditionalSubPages =
               (section: "year" | "party") => (subPage: string) => {
-                if (subPage.startsWith("origin")) return config.hasOrigin;
+                if (subPage.startsWith("origin"))
+                  return hasFeature(config, Features.Origin);
                 if (section === "year" && subPage.startsWith("timeline"))
-                  return config.hasDate;
+                  return hasFeature(config, Features.Date);
 
                 return true;
               };
@@ -132,7 +134,9 @@ export default async function sitemap(props: {
                 return partySubPages
                   .filter((subpage) =>
                     // If there are no donors, don't index the donors page
-                    config.hasNoDonors ? subpage !== "donors" : true,
+                    !hasFeature(config, Features.Donors)
+                      ? subpage !== "donors"
+                      : true,
                   )
                   .filter(filterConditionalSubPages("party"))
                   .map((subPage) => ({
@@ -153,7 +157,9 @@ export default async function sitemap(props: {
                 return yearSubPages
                   .filter((subpage) =>
                     // If there are no donors, don't index the donors page
-                    config.hasNoDonors ? subpage !== "donors" : true,
+                    !hasFeature(config, Features.Donors)
+                      ? subpage !== "donors"
+                      : true,
                   )
                   .filter(filterConditionalSubPages("year"))
                   .map((subPage) => ({
@@ -181,7 +187,7 @@ export default async function sitemap(props: {
                   }));
               }),
               biggestDonors
-                .filter(() => !config.hasNoDonors)
+                .filter(() => hasFeature(config, Features.Donors))
                 .map((donor) => {
                   const lastDonation = lastPartyStatsDonation(
                     config,

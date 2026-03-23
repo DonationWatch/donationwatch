@@ -1,6 +1,8 @@
 import type { NonEmptyArray } from "@/utils/array";
 import type { StrictNamespacedTranslator } from "@/utils/translator";
 
+import { Features } from "@/utils/features";
+
 import type En from "../messages/en.json";
 import type { LambertConformalConicParams } from "./map";
 import type {
@@ -87,50 +89,53 @@ export const COUNTRIES = new Set<Country>([
 ]);
 
 export interface CountryConfig {
-  id: Country;
-  years: string[];
+  readonly id: Country;
+  readonly years: string[];
   // This is sorted by sum. Meaning first entry is the party with the highest sum of donations.
-  parties: Party[];
-  legislativeYears?: NonEmptyArray<NonEmptyArray<string>>;
-  preliminaryDataSince?: string;
-  minPublicDonationAmount: number;
-  source: { name: string; url: string };
-  currency: Currency;
-  code: CountryCode;
-  minYear: string;
-  markers: {
+  readonly parties: Party[];
+  readonly legislativeYears?: NonEmptyArray<NonEmptyArray<string>>;
+
+  // minimum year from which the data isn't complete yet
+  readonly preliminaryDataSince?: string;
+  readonly minPublicDonationAmount: number;
+  readonly source: { name: string; url: string };
+  readonly currency: Currency;
+  readonly code: CountryCode;
+
+  // Minimum year that this country has data for.
+  // Is used to e.g. skip scraping for years that are not available for a country
+  readonly minYear: string;
+
+  // markers in timeseries charts
+  readonly markers: {
     label: string;
     dates: IsoDate[];
   };
+
   // list of iso state codes
-  states: readonly string[];
-  wikiCountry: "en" | "de";
-  // true if the country has donations with a date containing more than the year
-  hasDate: boolean;
-  // true if the country has donations with information about their origin
-  hasOrigin: boolean;
-  // true if the donation dataset provides donor type information
-  hasDonorType?: boolean;
-  // true if the donation dataset provides unique ids that can be used to link to the source data
-  hasExternalDonationIds?: boolean;
-  // true if country has no donor information at all, only receiver information
-  hasNoDonors?: boolean;
+  readonly states: readonly string[];
+
+  // Which wiki language should be used when linking/load a wiki article
+  readonly wikiCountry: "en" | "de";
+
+  // features that the country has, used to determine which information can be shown
+  readonly features: number;
 
   // Include parties if they have count over this threshold or sum over the threshold.
   // Use -1 if it should only check the other condition
-  knownPartyRequirements?: {
+  readonly knownPartyRequirements?: {
     count: number;
     sum: number;
   };
 
   // Lambert Conformal Conic projection parameters for the country
-  projection?: LambertConformalConicParams;
+  readonly projection?: LambertConformalConicParams;
 
   // filter out donations by donor
-  donorFilters?: DonorFilter[];
+  readonly donorFilters?: DonorFilter[];
 
   // filtered out donation receivers
-  receiverFilters?: ReceiverFilter[];
+  readonly receiverFilters?: ReceiverFilter[];
 }
 
 export type UnloadedCountryConfig = Omit<CountryConfig, "years" | "parties">;
@@ -147,8 +152,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       ["2022", "2023", "2024", "2025"],
       ["2026", "2027", "2028", "2029"],
     ],
-    hasOrigin: true,
-    hasDate: true,
+    features: Features.Origin | Features.Date | Features.Donors,
     minPublicDonationAmount: 35_000,
     currency: "EUR",
     source: {
@@ -196,8 +200,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       ["2020", "2021", "2022", "2023", "2024"],
       ["2025", "2026", "2027", "2028", "2029"],
     ],
-    hasOrigin: true,
-    hasDate: true,
+    features: Features.Origin | Features.Date | Features.Donors,
     minPublicDonationAmount: 540,
     currency: "EUR",
     source: {
@@ -230,8 +233,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       ["2020", "2021", "2022", "2023"],
       ["2024", "2025", "2026", "2027"],
     ],
-    hasOrigin: false,
-    hasDate: true,
+    features: Features.Date | Features.Donors,
     minPublicDonationAmount: 5_000,
     currency: "CHF",
     source: {
@@ -255,8 +257,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       ["2024", "2025"],
       ["2026", "2027", "2028", "2029", "2030"],
     ],
-    hasOrigin: false,
-    hasDate: false,
+    features: Features.Donors,
     minPublicDonationAmount: 1_000,
     currency: "EUR",
     source: {
@@ -281,8 +282,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       ["2020", "2021", "2022", "2023"],
       ["2024", "2025", "2026", "2027"],
     ],
-    hasOrigin: false,
-    hasDate: true,
+    features: Features.Date | Features.Donors,
     minPublicDonationAmount: 1,
     currency: "EUR",
     source: {
@@ -306,9 +306,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       ["2022", "2023", "2024", "2025"],
       ["2026", "2027", "2028", "2029"],
     ],
-    hasOrigin: false,
-    hasDate: true,
-    hasDonorType: true,
+    features: Features.Date | Features.Donors | Features.DonorType,
     minPublicDonationAmount: 25, // approx 1 eur
     currency: "CZK",
     source: {
@@ -337,9 +335,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       ["2019", "2020", "2021", "2022"],
       ["2023", "2024", "2025", "2026"],
     ],
-    hasOrigin: false,
-    hasDate: true,
-    hasExternalDonationIds: true,
+    features: Features.Date | Features.Donors | Features.ExternalDonationIds,
     minPublicDonationAmount: 1.0,
     currency: "EUR",
     source: {
@@ -367,8 +363,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       ["2020", "2021", "2022", "2023", "2024"],
       ["2025", "2026", "2027", "2028", "2029"],
     ],
-    hasOrigin: true,
-    hasDate: false,
+    features: Features.Origin | Features.Donors,
     minPublicDonationAmount: 1,
     currency: "EUR",
     source: {
@@ -428,10 +423,11 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       ["2020", "2021", "2022", "2023", "2024"],
       ["2025", "2026", "2027", "2028", "2029"],
     ],
-    hasDate: true,
-    hasOrigin: false,
-    hasDonorType: true,
-    hasExternalDonationIds: true,
+    features:
+      Features.Date |
+      Features.Donors |
+      Features.DonorType |
+      Features.ExternalDonationIds,
     minPublicDonationAmount: 1000,
     currency: "GBP",
     wikiCountry: "en",
@@ -479,9 +475,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       ["2023", "2024", "2025"],
       ["2026", "2027", "2028"],
     ],
-    hasOrigin: false,
-    hasDate: true,
-    hasDonorType: true,
+    features: Features.Date | Features.Donors | Features.DonorType,
     minPublicDonationAmount: 1,
     currency: "AUD",
     source: {
@@ -602,8 +596,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       ["2023"],
       ["2024", "2025", "2026", "2027"],
     ],
-    hasOrigin: false,
-    hasDate: false,
+    features: Features.Donors,
     minPublicDonationAmount: 400,
     currency: "RSD",
     source: {
@@ -626,8 +619,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
     id: Country.croatia,
     minYear: "2019",
     preliminaryDataSince: "2025",
-    hasOrigin: false,
-    hasDate: true,
+    features: Features.Date | Features.Donors,
     minPublicDonationAmount: 1,
     currency: "EUR",
     source: {
@@ -661,8 +653,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       ["2022", "2023", "2024", "2025"],
       ["2026", "2027", "2028", "2029"],
     ],
-    hasOrigin: true,
-    hasDate: true,
+    features: Features.Origin | Features.Date | Features.Donors,
     minPublicDonationAmount: 500,
     currency: "CAD",
     source: {
@@ -711,9 +702,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
     id: Country.georgia,
     minYear: "2011",
     preliminaryDataSince: "2026",
-    hasOrigin: false,
-    hasDate: true,
-    hasDonorType: true,
+    features: Features.Date | Features.Donors | Features.DonorType,
     minPublicDonationAmount: 1,
     currency: "GEL",
     source: {
@@ -748,9 +737,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
     id: Country.norway,
     minYear: "2014",
     preliminaryDataSince: "2024",
-    hasOrigin: false,
-    hasDate: false,
-    hasDonorType: false,
+    features: Features.Donors,
     minPublicDonationAmount: 500,
     currency: "NOK",
     source: {
@@ -775,9 +762,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
     id: Country.ukraine,
     minYear: "2020",
     preliminaryDataSince: "2021",
-    hasOrigin: false,
-    hasDate: true,
-    hasDonorType: false,
+    features: Features.Date | Features.Donors,
     minPublicDonationAmount: 10,
     currency: "UAH",
     source: {
@@ -797,10 +782,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
     id: Country.france,
     minYear: "2010",
     preliminaryDataSince: "2024",
-    hasOrigin: false,
-    hasDate: false,
-    hasDonorType: false,
-    hasNoDonors: true,
+    features: Features.None,
     minPublicDonationAmount: 7500,
     currency: "EUR",
     source: {
@@ -836,10 +818,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
     id: Country.sweden,
     minYear: "2018",
     preliminaryDataSince: "2024",
-    hasOrigin: false,
-    hasDate: false,
-    hasDonorType: false,
-    hasNoDonors: true,
+    features: Features.None,
     minPublicDonationAmount: 1,
     currency: "SEK",
     source: {

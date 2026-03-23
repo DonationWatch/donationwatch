@@ -16,6 +16,7 @@ import type { Donation } from "@/utils/types";
 
 import { COUNTRIES } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
+import { Features, hasFeature } from "@/utils/features";
 import { getBiggestDonors } from "@/utils/loader/biggest-donors";
 import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
 import { CONST_LOCALES } from "@/utils/locales";
@@ -193,7 +194,7 @@ describe.each(CONST_LOCALES.map((locale) => ({ locale })))(
 
         it(`renders biggest donors images`, async () => {
           // if there are no donors, skip rendering donor images
-          if (countryConfig.hasNoDonors) return;
+          if (!hasFeature(countryConfig, Features.Donors)) return;
 
           for (const donor of biggestDonors) {
             const png = await renderComponent(

@@ -17,6 +17,7 @@ import { partyColor } from "@/utils/color";
 import { THUMBNAIL_PREFIX } from "@/utils/config";
 import { findCorrectParty, getParty } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
+import { Features, hasFeature } from "@/utils/features";
 import { formatCountryCurrency, formatNumber } from "@/utils/formatter";
 import {
   getPartyYearsSums,
@@ -157,7 +158,7 @@ export default async function PartyLayout(
       href: `/${locale}/${country}/party/${party.id}/timeline`,
       label: t("timeline.title"),
     },
-    countryConfig.hasOrigin
+    hasFeature(countryConfig, Features.Origin)
       ? {
           icon: Earth,
           href: `/${locale}/${country}/party/${party.id}/origin/overview`,
@@ -191,12 +192,12 @@ export default async function PartyLayout(
           </div>
           <div className="mb-3">
             <div className="flex-row space-y-2 sm:flex sm:space-y-0 sm:space-x-10">
-              {countryConfig.hasNoDonors ? null : (
+              {hasFeature(countryConfig, Features.Donors) ? (
                 <MetaCard
                   title={t("donation_count")}
                   value={formatNumber(locale, donationCount)}
                 />
-              )}
+              ) : null}
               <MetaCard
                 title={t("sum")}
                 value={formatCountryCurrency(
@@ -205,7 +206,7 @@ export default async function PartyLayout(
                   countryConfig,
                 )}
               />
-              {!countryConfig.hasNoDonors &&
+              {hasFeature(countryConfig, Features.Donors) &&
                 showExtendedMeta &&
                 donationCount > 1 && (
                   <MetaCard

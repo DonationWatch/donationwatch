@@ -16,6 +16,7 @@ import {
 import { PartyTimelineText } from "@/components/parties/party-timeline-text";
 import { getCountryName, getParty } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
+import { Features, hasFeature } from "@/utils/features";
 import { formatYearsRange } from "@/utils/formatter";
 import { generateAlternates } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
@@ -79,7 +80,7 @@ export default async function TimelinePage(
 
   return (
     <Article fullWidth={true}>
-      {countryConfig.hasDate ? (
+      {hasFeature(countryConfig, Features.Date) ? (
         <ArticleSectionWrapper id={"sec-timeline"}>
           <ArticleSectionOneColumns>
             <ArticleSectionColumn>
@@ -117,7 +118,7 @@ export default async function TimelinePage(
       <ArticleSectionWrapper id={"sec-per-year"}>
         <ArticleSectionTwoColumns>
           <ArticleSectionColumn>
-            {countryConfig.hasDate ? null : (
+            {hasFeature(countryConfig, Features.Date) ? null : (
               <ArticleSectionTitle
                 as={"h1"}
                 id={"sec-timeline"}
