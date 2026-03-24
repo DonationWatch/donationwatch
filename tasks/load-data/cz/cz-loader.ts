@@ -108,6 +108,7 @@ export class CzLoader extends DataLoader {
       name: "Starostové pro Liberecký kraj",
       code: "SLK",
       short: "SLK",
+      wiki: 52116404,
     },
     KSČM: {
       wiki: 356707,
