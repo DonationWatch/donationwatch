@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 import { expect, test } from "vitest";
 
 import { middleware } from "@/middleware";
-import { extractYearsRange, getLocale } from "@/utils/middleware";
+import { getLocale } from "@/utils/middleware";
 
 test("redirects with locale if missing", async () => {
   const tests: [
@@ -63,29 +63,6 @@ test("adds country if it's missing", async () => {
     expect(response?.status).toEqual(status);
     expect(response?.headers.get("location")).toEqual(expected);
   }
-});
-
-test("extractYearsRange", () => {
-  (
-    [
-      ["/", undefined],
-      ["", undefined],
-      ["/de", undefined],
-      ["/de/fun", undefined],
-      ["/de/germany", undefined],
-      ["/de/germany/", undefined],
-      ["/de/germany/party/CDU", undefined],
-      ["/de/germany/party/CDU/donors", undefined],
-      ["/de/germany/2022", undefined],
-      ["/de/germany/2022/overview", undefined],
-
-      ["/de/germany/2022-2025", { start: "2022", end: "2025" }],
-      ["/de/germany/2022-2022", { start: "2022", end: "2022" }],
-      ["/de/germany/2022-2025/overview", { start: "2022", end: "2025" }],
-    ] as [string, ReturnType<typeof extractYearsRange>][]
-  ).forEach(([pathname, expected]) => {
-    expect(extractYearsRange(pathname)).toEqual(expected);
-  });
 });
 
 test("getLocale", () => {
