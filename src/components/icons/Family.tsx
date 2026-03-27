@@ -1,7 +1,7 @@
 import { createLucideIcon } from "lucide-react";
 
 // https://github.com/lucide-icons/lucide/issues/2456
-export const Family = createLucideIcon("foobar", [
+export const Family = createLucideIcon("family", [
   [
     "path",
     {

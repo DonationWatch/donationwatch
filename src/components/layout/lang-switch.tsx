@@ -44,7 +44,7 @@ export const LangSwitch = () => {
           />
         }
       >
-        <Languages size={18} aria-hidden={true} />
+        <Languages size={18} />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="start">
         <DropdownMenuGroup>

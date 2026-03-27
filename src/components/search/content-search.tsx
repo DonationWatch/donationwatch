@@ -88,7 +88,7 @@ const HeaderSearch = () => {
         aria-label={t("filter_description")}
         title={t("filter")}
       >
-        <Search aria-hidden={true} size={18} />
+        <Search size={18} />
       </button>
       <SearchDialog country={data} isOpen={isOpen} onClose={() => close()} />
     </>
@@ -432,7 +432,7 @@ const SelectableList = ({
     <>
       <div className="p-4">
         <div className="flex items-center rounded-sm border px-3 text-neutral-800 dark:border-slate-800 dark:text-white">
-          <Search aria-hidden={true} className="mr-2 h-4 w-4 shrink-0" />
+          <Search className="mr-2 h-4 w-4 shrink-0" />
           <input
             role={"searchbox"}
             aria-label={tSearch("filter_description")}

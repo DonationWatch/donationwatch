@@ -15,7 +15,14 @@ export class DropdownMenu extends LocatorObject {
   public async open() {
     await this.locator.click();
 
-    const controlsId = await this.locator.getAttribute("aria-controls");
+    let controlsId: string | null = null;
+
+    // wait for aria-controls to be set in the DOM
+    await expect(async () => {
+      controlsId = await this.locator.getAttribute("aria-controls");
+      expect(controlsId).not.toBeNull();
+    }).toPass();
+
     const content = new DropdownContent(
       this.page.locator(`#${controlsId}`),
       this.props,

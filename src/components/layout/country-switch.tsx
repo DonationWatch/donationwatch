@@ -95,7 +95,6 @@ export const CountrySwitch = () => {
                 "shrink-0 rotate-0 transition-transform group-data-[open]:rotate-180"
               }
               size={18}
-              aria-hidden={true}
             />
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56" align="start">
@@ -164,10 +163,7 @@ export const CountrySwitch = () => {
                 }
               >
                 <span>{tSidebar("all_countries")}</span>
-                <span
-                  className="flex basis-1/4 justify-center"
-                  aria-hidden={true}
-                >
+                <span className="flex basis-1/4 justify-center">
                   <Globe />
                 </span>
               </DropdownMenuItem>

@@ -27,7 +27,7 @@ export const NavigationTabs = ({ items }: { items: TabItem[] }) => {
       {items.map((item) => (
         <NavigationLink
           key={item.href}
-          icon={<item.icon size={16} aria-hidden={true} />}
+          icon={<item.icon size={16} />}
           href={item.href}
           activeHref={item.activeHref}
           label={item.label}
