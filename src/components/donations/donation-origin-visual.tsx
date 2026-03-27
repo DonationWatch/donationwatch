@@ -37,13 +37,13 @@ export const DonationOriginVisual = ({
     <>
       <TabList>
         <NavigationTab
-          icon={<Map size={16} aria-hidden={true} />}
+          icon={<Map size={16} />}
           label={t("origin.type.map")}
           isActive={chartType === "map"}
           onClick={() => setChartType("map")}
         />
         <NavigationTab
-          icon={<Workflow size={16} aria-hidden={true} />}
+          icon={<Workflow size={16} />}
           label={t("donors.sankey.title")}
           isActive={chartType === "sankey"}
           onClick={() => setChartType("sankey")}

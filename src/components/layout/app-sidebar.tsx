@@ -4,7 +4,6 @@ import {
   ChartBarStacked,
   ChevronRight,
   FileSpreadsheet,
-  Github,
   Globe,
   Info,
   Scale,
@@ -20,6 +19,7 @@ import { useState } from "react";
 import type { Country, CountryConfig } from "@/utils/countries";
 import type { BigDonor } from "@/utils/loader/biggest-donors";
 
+import { Github } from "@/components/icons/Github";
 import { PartyDot } from "@/components/parties/party-dot";
 import { SidenavSearchTrigger } from "@/components/search/sidenav-search-trigger";
 import {

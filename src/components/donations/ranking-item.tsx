@@ -123,7 +123,7 @@ export const RankingItem = ({
             onToggleExpanded(!expanded);
           }}
         >
-          <div aria-hidden={true} className="shrink-0 p-1">
+          <div className="shrink-0 p-1">
             <ChevronRight size={16} className={expanded ? "rotate-90" : ""} />
           </div>
           <div
