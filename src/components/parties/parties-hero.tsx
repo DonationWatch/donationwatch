@@ -5,8 +5,8 @@ import Link from "next/link";
 
 import type { CountryConfig } from "@/types/country-config";
 import type { ConstLocale } from "@/utils/locales";
-import type { Party } from "@/utils/types";
 
+import { PartyField, type Party } from "@/types/party";
 import { partyColor } from "@/utils/color";
 import { formatCountryCurrency } from "@/utils/formatter";
 
@@ -21,11 +21,11 @@ const PartyLinkPill = ({
   locale: ConstLocale;
   country: CountryConfig;
 }) => {
-  const color = partyColor(party.id, country);
+  const color = partyColor(party[PartyField.Id], country);
   return (
     <li className="basis-full overflow-hidden p-1 sm:basis-1/2 lg:basis-1/4">
       <Link
-        href={`/${locale}/${country.id}/party/${party.id}/donors`}
+        href={`/${locale}/${country.id}/party/${party[PartyField.Id]}/donors`}
         className={`flex rounded-md bg-white p-2 shadow-sm transition-all hover:bg-gray-50 hover:shadow-md hover:saturate-100 dark:bg-gray-900 dark:hover:bg-gray-950`}
       >
         <div
@@ -39,9 +39,9 @@ const PartyLinkPill = ({
           }
         ></div>
         <div className="overflow-hidden pl-2 text-sm">
-          <div className="truncate font-bold">{party.short}</div>
+          <div className="truncate font-bold">{party[PartyField.Short]}</div>
           <div className="tabular-nums">
-            {formatCountryCurrency(locale, party.sum, country)}
+            {formatCountryCurrency(locale, party[PartyField.Sum], country)}
           </div>
         </div>
       </Link>
@@ -57,7 +57,9 @@ export const PartiesHero = ({
   locale: ConstLocale;
 }) => {
   const tHome = useTranslations("home");
-  const allParties = country.parties.toSorted((a, b) => b.sum - a.sum);
+  const allParties = country.parties.toSorted(
+    (a, b) => b[PartyField.Sum] - a[PartyField.Sum],
+  );
 
   return (
     <>
@@ -65,7 +67,7 @@ export const PartiesHero = ({
         {allParties.slice(0, VISIBLE_PARTIES).map((party) => (
           <PartyLinkPill
             country={country}
-            key={party.id}
+            key={party[PartyField.Id]}
             party={party}
             locale={locale}
           />
@@ -79,7 +81,7 @@ export const PartiesHero = ({
           {allParties.slice(VISIBLE_PARTIES).map((party) => (
             <PartyLinkPill
               country={country}
-              key={party.id}
+              key={party[PartyField.Id]}
               party={party}
               locale={locale}
             />

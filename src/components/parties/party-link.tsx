@@ -9,6 +9,7 @@ import type { ReceiverId } from "@/utils/types";
 
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { cn } from "@/lib/utils";
+import { PartyField } from "@/types/party";
 import { getParty } from "@/utils/countries";
 
 export const PartyLink = ({
@@ -34,7 +35,7 @@ export const PartyLink = ({
         className,
       )}
       title={t("view_party", {
-        party: getParty(country, party).short,
+        party: getParty(country, party)[PartyField.Short],
       })}
     >
       {children}

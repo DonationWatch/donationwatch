@@ -2,12 +2,14 @@ import type {
   CountryConfig,
   UnloadedCountryConfig,
 } from "@/types/country-config";
+import type { Party } from "@/types/party";
 import type { StrictNamespacedTranslator } from "@/utils/translator";
 
+import { PartyField } from "@/types/party";
 import { Features } from "@/utils/features";
 
 import type En from "../messages/en.json";
-import type { Party, ReceiverId } from "./types";
+import type { ReceiverId } from "./types";
 
 export const enum Country {
   germany = "germany",
@@ -811,7 +813,7 @@ export const getParty = (
   country: CountryConfig,
   partyId: ReceiverId,
 ): Party => {
-  const party = country.parties.find((p) => p.id === partyId);
+  const party = country.parties.find((p) => p[PartyField.Id] === partyId);
 
   if (!party) {
     console.error(`Unknown party ${partyId} (${country.id})`);
@@ -832,7 +834,7 @@ export const findCorrectParty = (
     .trim();
 
   return country.parties.find(
-    (p) => p.id === (normalizedPartyId as ReceiverId),
+    (p) => p[PartyField.Id] === (normalizedPartyId as ReceiverId),
   );
 };
 

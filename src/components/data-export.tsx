@@ -10,6 +10,7 @@ import type { Donation } from "@/utils/types";
 import { Button } from "@/components/ui/button";
 import { useDonationsByYears } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { PartyField } from "@/types/party";
 import { isNotNullandNotUndefined } from "@/utils/array";
 import { getDonorName } from "@/utils/donor";
 import { Features, hasFeature } from "@/utils/features";
@@ -37,7 +38,9 @@ function generateJSON(
         date: d[DonationField.Date],
         donor: getDonorName(d[DonationField.DonorName], tCommon),
         receiver:
-          country.parties.find((p) => p.id === receiver)?.short ?? receiver,
+          country.parties.find((p) => p[PartyField.Id] === receiver)?.[
+            PartyField.Short
+          ] ?? receiver,
         amount: d[DonationField.Amount],
         currency: country.currency,
         donor_type:
@@ -68,12 +71,14 @@ function generateCSV(
 
   for (const donation of donations) {
     const party = country.parties.find(
-      (p) => p.id === donation[DonationField.Receiver],
+      (p) => p[PartyField.Id] === donation[DonationField.Receiver],
     );
     const row = [
       escapeCSVField(donation[DonationField.Date]),
       escapeCSVField(getDonorName(donation[DonationField.DonorName], tCommon)),
-      escapeCSVField(party?.short ?? donation[DonationField.Receiver]),
+      escapeCSVField(
+        party?.[PartyField.Short] ?? donation[DonationField.Receiver],
+      ),
       String(donation[DonationField.Amount]),
       country.currency,
     ];

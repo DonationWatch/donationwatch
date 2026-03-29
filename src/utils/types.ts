@@ -63,16 +63,6 @@ export interface Donation {
   [DonationField.UBOs]?: string[];
 }
 
-export interface Party {
-  id: ReceiverId;
-  name: string;
-  short: string;
-  sum: number;
-  color: string;
-  years: string[];
-  wiki?: number;
-}
-
 export type IsoDate = `${number}-${number}-${number}`;
 
 // Type for defining that's later post processed into the DonorMeta

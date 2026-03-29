@@ -6,6 +6,7 @@ import type { BigDonor } from "@/utils/loader/biggest-donors";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 import type { ConstLocale } from "@/utils/locales";
 
+import { PartyField } from "@/types/party";
 import { BASE_URL } from "@/utils/config";
 import { COUNTRIES } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
@@ -123,12 +124,12 @@ export default async function sitemap(props: {
                 lastModified,
               },
               config.parties.flatMap((party) => {
-                const partiesBaseUrl = `${BASE_URL}/${locale}/${country}/party/${party.id}`;
+                const partiesBaseUrl = `${BASE_URL}/${locale}/${country}/party/${party[PartyField.Id]}`;
                 const lastDonation = lastPartyStatsDonation(
                   config,
                   partyYearsSums,
                   {
-                    partyId: party.id,
+                    partyId: party[PartyField.Id],
                   },
                 );
 

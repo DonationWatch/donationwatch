@@ -11,6 +11,7 @@ import type { ReceiverId } from "@/utils/types";
 
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { PartyField } from "@/types/party";
 import { partyColor } from "@/utils/color";
 import { getCountryName, getParty } from "@/utils/countries";
 import { formatCountryCurrency, formatYearsRange } from "@/utils/formatter";
@@ -47,12 +48,12 @@ export const DonationsPieChart = ({
   ).map(([partyId, sum]) => {
     const party = getParty(country, partyId as ReceiverId);
     return {
-      id: party.id,
-      name: party.short,
+      id: party[PartyField.Id],
+      name: party[PartyField.Short],
       value: sum,
       colorSaturation: [0.35, 0.5],
       itemStyle: {
-        color: partyColor(party.id, country),
+        color: partyColor(party[PartyField.Id], country),
         borderRadius: 4,
       },
       label: {
@@ -72,13 +73,13 @@ export const DonationsPieChart = ({
           name: {
             fontWeight: "bold",
             padding: [0, 0, 4, 0],
-            textBorderColor: `color-mix(in srgb, ${party.color} 40%, black)`,
+            textBorderColor: `color-mix(in srgb, ${party[PartyField.Color]} 40%, black)`,
             textBorderWidth: 3,
             textShadowBlur: 0,
           },
           value: {
             fontWeight: "bold",
-            textBorderColor: `color-mix(in srgb, ${party.color} 40%, black)`,
+            textBorderColor: `color-mix(in srgb, ${party[PartyField.Color]} 40%, black)`,
             textBorderWidth: 3,
             textShadowBlur: 0,
           },

@@ -24,6 +24,7 @@ import { DonationHistoryTable } from "@/components/table/donation-history-table"
 import { Translation } from "@/components/translation";
 import { useDonationsByDonorId } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { PartyField } from "@/types/party";
 import { getCountryName, getParty } from "@/utils/countries";
 import { donationYear, fillYears } from "@/utils/date";
 import { getDonorName } from "@/utils/donor";
@@ -250,7 +251,7 @@ const DonorClientPageContent = ({
                   locale,
                   mostPartyDonations.map(({ party, count }) =>
                     tDonor("most_donations_item", {
-                      party: getParty(countryConfig, party).short,
+                      party: getParty(countryConfig, party)[PartyField.Short],
                       count: formatNumber(locale, count),
                     }),
                   ),

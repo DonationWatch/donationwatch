@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
+import { PartyField } from "@/types/party";
 import { getCountryName, getParty } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { Features, hasFeature } from "@/utils/features";
@@ -31,11 +32,11 @@ export async function generateMetadata(
 
   return {
     title: tPageTitle("party.origin", {
-      party: party.short,
+      party: party[PartyField.Short],
       country: getCountryName(countryConfig, tCountries),
     }),
     description: t("origin.detail.description", {
-      party: party.short,
+      party: party[PartyField.Short],
       country: getCountryName(countryConfig, tCountries),
     }),
   };

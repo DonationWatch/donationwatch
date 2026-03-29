@@ -2,7 +2,8 @@
 import { useLocale } from "next-intl";
 
 import type { CountryConfig } from "@/types/country-config";
-import type { Donation, Party } from "@/utils/types";
+import type { Party } from "@/types/party";
+import type { Donation } from "@/utils/types";
 
 import { DonorLink } from "@/components/donors/donor-link";
 import { FormatAnd } from "@/components/formatter";
@@ -10,6 +11,7 @@ import Loading from "@/components/loading/loading";
 import { Translation } from "@/components/translation";
 import { useDonationsByYears } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { PartyField } from "@/types/party";
 import { isNotNullandNotUndefined } from "@/utils/array";
 import { donationYear } from "@/utils/date";
 import {
@@ -64,7 +66,7 @@ export const YearsDonorPageText = ({
   };
 
   const yearsSet = new Set<string>(years);
-  const partiesSet = new Set<string>(parties.map((p) => p.id));
+  const partiesSet = new Set<string>(parties.map((p) => p[PartyField.Id]));
   const donations = results
     .flatMap((r) => r.data)
     .filter(isNotNullandNotUndefined);

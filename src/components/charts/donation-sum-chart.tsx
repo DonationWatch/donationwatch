@@ -4,12 +4,14 @@ import type { EChartsOption, LineSeriesOption } from "echarts";
 import { useLocale } from "next-intl";
 
 import type { CountryConfig } from "@/types/country-config";
-import type { Donation, Party, ReceiverId } from "@/utils/types";
+import type { Party } from "@/types/party";
+import type { Donation, ReceiverId } from "@/utils/types";
 
 import Loading from "@/components/loading/loading";
 import { useDonationsByParty, useDonationsByYears } from "@/hooks/use-api";
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { PartyField } from "@/types/party";
 import { isNotNullandNotUndefined } from "@/utils/array";
 import { partyColor } from "@/utils/color";
 import { getParty } from "@/utils/countries";
@@ -144,7 +146,7 @@ const DonationTimeseriesChart = ({
   const partyLines: LineSeriesOption[] = parties.map((party, idx) => ({
     ...symbolConfiguration(idx),
     yAxisIndex: 0,
-    name: party.id,
+    name: party[PartyField.Id],
     type: "line",
     step: "end",
     symbolSize: ([timestamp, value]) => {
@@ -161,7 +163,7 @@ const DonationTimeseriesChart = ({
 
       return 10;
     },
-    color: partyColor(party.id, country) ?? undefined,
+    color: partyColor(party[PartyField.Id], country) ?? undefined,
     data: [],
   }));
 
@@ -169,7 +171,7 @@ const DonationTimeseriesChart = ({
   const maxX = new Date(`${parseInt(rightmostYear, 10) + 1}`).getTime();
 
   const yearsSet = new Set<string>(years);
-  const partiesSet = new Set<string>(parties.map((p) => p.id));
+  const partiesSet = new Set<string>(parties.map((p) => p[PartyField.Id]));
   const foundParties = new Set<string>([]);
   const partySums: Record<string, number> = {};
 
@@ -184,7 +186,7 @@ const DonationTimeseriesChart = ({
     foundParties.add(donation[DonationField.Receiver]);
 
     const idx = parties.findIndex(
-      (p) => p.id === donation[DonationField.Receiver],
+      (p) => p[PartyField.Id] === donation[DonationField.Receiver],
     );
     const previousValue = partyLines[idx].data!.at(-1) as
       | [Date, number, string]
@@ -238,7 +240,7 @@ const DonationTimeseriesChart = ({
       show: true,
       type: "scroll",
       data: parties
-        .map((party) => party.id)
+        .map((party) => party[PartyField.Id])
         .toSorted((a, b) => partySums[b] - partySums[a]),
       top: 20,
       padding: [0, 20],
@@ -313,7 +315,7 @@ const DonationTimeseriesChart = ({
           const delta = sum - previousPartyValue;
 
           const party = getParty(country, param.seriesName as ReceiverId);
-          line += `${param.marker} ${party.short}: ${formatCountryCurrency(locale, sum, country)}`;
+          line += `${param.marker} ${party[PartyField.Short]}: ${formatCountryCurrency(locale, sum, country)}`;
 
           // only add delta if there is a change
           if (delta > 0) {
@@ -414,7 +416,7 @@ export const DonationStackedTimeseriesChart = ({
   const partyLines: LineSeriesOption[] = parties.map((party, idx) => ({
     ...symbolConfiguration(idx),
     yAxisIndex: 0,
-    name: party.id,
+    name: party[PartyField.Id],
     type: "line",
     step: "end",
     stack: "total",
@@ -426,7 +428,8 @@ export const DonationStackedTimeseriesChart = ({
       if (value === 0) return 0;
 
       const previousValue =
-        (partySumsPerDate[date]?.[party.id] ?? params.dataIndex === 0)
+        (partySumsPerDate[date]?.[party[PartyField.Id]] ??
+        params.dataIndex === 0)
           ? 0
           : value;
 
@@ -443,7 +446,7 @@ export const DonationStackedTimeseriesChart = ({
 
       return 10;
     },
-    color: partyColor(party.id, country) ?? undefined,
+    color: partyColor(party[PartyField.Id], country) ?? undefined,
     data: [],
   }));
 
@@ -451,7 +454,7 @@ export const DonationStackedTimeseriesChart = ({
   const maxX = new Date(`${parseInt(rightmostYear, 10) + 1}`).getTime();
 
   const yearsSet = new Set<string>(years);
-  const partiesSet = new Set<string>(parties.map((p) => p.id));
+  const partiesSet = new Set<string>(parties.map((p) => p[PartyField.Id]));
   const foundParties = new Set<string>([]);
   const partySums: Record<string, number> = {};
 
@@ -476,7 +479,7 @@ export const DonationStackedTimeseriesChart = ({
     ] += donation[DonationField.Amount];
     //
     const idx = parties.findIndex(
-      (p) => p.id === donation[DonationField.Receiver],
+      (p) => p[PartyField.Id] === donation[DonationField.Receiver],
     );
     const previousValue = partyLines[idx].data!.at(-1) as
       | [Date, number, string]
@@ -547,7 +550,7 @@ export const DonationStackedTimeseriesChart = ({
       show: true,
       type: "scroll",
       data: parties
-        .map((party) => party.id)
+        .map((party) => party[PartyField.Id])
         .toSorted((a, b) => partySums[b] - partySums[a]),
       top: 20,
       padding: [0, 20],
@@ -620,7 +623,7 @@ export const DonationStackedTimeseriesChart = ({
           const delta = sum - previousPartyValue;
 
           const party = getParty(country, param.seriesName as ReceiverId);
-          line += `${param.marker} <span class="font-medium">${party.short}</span>: ${formatCountryCurrency(locale, sum, country)}`;
+          line += `${param.marker} <span class="font-medium">${party[PartyField.Short]}</span>: ${formatCountryCurrency(locale, sum, country)}`;
 
           // only add delta if there is a change
           if (delta > 0) {

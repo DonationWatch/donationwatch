@@ -1,11 +1,13 @@
 "use client";
 
 import type { CountryConfig } from "@/types/country-config";
-import type { Donation, Party } from "@/utils/types";
+import type { Party } from "@/types/party";
+import type { Donation } from "@/utils/types";
 
 import Loading from "@/components/loading/loading";
 import { useDonationsByYears } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { PartyField } from "@/types/party";
 import { isNotNullandNotUndefined } from "@/utils/array";
 import { getCountryName } from "@/utils/countries";
 import { donationYear } from "@/utils/date";
@@ -33,7 +35,7 @@ export const LoadingYearTimeseriesText = ({
   if (error) return <div>{tData("error")}</div>;
 
   const yearsSet = new Set<string>(years);
-  const partiesSet = new Set<string>(parties.map((p) => p.id));
+  const partiesSet = new Set<string>(parties.map((p) => p[PartyField.Id]));
   const donations = results
     .flatMap((r) => r.data)
     .filter(isNotNullandNotUndefined);

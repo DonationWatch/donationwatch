@@ -16,6 +16,7 @@ import {
 } from "@/components/layout/article";
 import { LoadingPartyDonorTypeText } from "@/components/parties/part-donor-type-text";
 import { PartyDonorPageText } from "@/components/parties/party-donor-page-text";
+import { PartyField } from "@/types/party";
 import { getCountryName, getParty } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { Features, hasFeature } from "@/utils/features";
@@ -64,7 +65,7 @@ export async function generateMetadata(
 
   const description = tPageTitle("party.description", {
     year: countryConfig.minYear,
-    party: party.short,
+    party: party[PartyField.Short],
     count,
     minimumAmount: formatCompactCountryCurrency(
       locale,
@@ -77,7 +78,7 @@ export async function generateMetadata(
 
   return {
     title: tPageTitle("party.donors", {
-      party: party.short,
+      party: party[PartyField.Short],
       country: getCountryName(countryConfig, tCountries),
     }),
     description,
@@ -117,12 +118,12 @@ export default async function DonorPage(
               <LoadingDonationPartyTreemap
                 country={countryConfig}
                 party={party}
-                tooSmallAreaColor={party.color}
+                tooSmallAreaColor={party[PartyField.Color]}
                 title={t("party.donors.title", {
-                  party: party.short,
+                  party: party[PartyField.Short],
                 })}
                 subtitle={t("party.donors.subtitle", {
-                  party: party.short,
+                  party: party[PartyField.Short],
                   country: getCountryName(countryConfig, tCountries),
                 })}
               />
@@ -149,10 +150,10 @@ export default async function DonorPage(
                 country={countryConfig}
                 party={party}
                 title={t("party.donor_types.treemap.title", {
-                  party: party.short,
+                  party: party[PartyField.Short],
                 })}
                 subtitle={t("party.donor_types.treemap.description", {
-                  party: party.short,
+                  party: party[PartyField.Short],
                   country: getCountryName(countryConfig, tCountries),
                 })}
               />

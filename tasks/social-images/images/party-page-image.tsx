@@ -2,6 +2,7 @@ import type { CountryConfig } from "@/types/country-config";
 import type { ConstLocale } from "@/utils/locales";
 import type { Donation, ReceiverId } from "@/utils/types";
 
+import { PartyField } from "@/types/party";
 import { DonationField } from "@/utils/types";
 
 import type { CreateTranslator } from "../utils";
@@ -17,14 +18,17 @@ export const PartyPageImage = async (
   partyId: ReceiverId,
   donations: Donation[],
 ) => {
-  const party = countryConfig.parties.find((p) => p.id === partyId)!;
+  const party = countryConfig.parties.find(
+    (p) => p[PartyField.Id] === partyId,
+  )!;
 
   return (
     <ThumbnailWrapper>
       <ImagePartyHeader
         getTranslations={getTranslations}
         donations={donations.filter(
-          (donation) => donation[DonationField.Receiver] === party.id,
+          (donation) =>
+            donation[DonationField.Receiver] === party[PartyField.Id],
         )}
         country={countryConfig}
         locale={locale}

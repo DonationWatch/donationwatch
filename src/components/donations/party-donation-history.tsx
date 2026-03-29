@@ -1,12 +1,13 @@
 "use client";
 
 import type { CountryConfig } from "@/types/country-config";
-import type { Party } from "@/utils/types";
+import type { Party } from "@/types/party";
 
 import Loading from "@/components/loading/loading";
 import { DonationHistoryTable } from "@/components/table/donation-history-table";
 import { useDonationsByParty, useDonationsByYears } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { PartyField } from "@/types/party";
 import { isNotNullandNotUndefined } from "@/utils/array";
 
 export const PartyDonationHistory = ({
@@ -36,7 +37,7 @@ export const PartyDonationHistory = ({
     <DonationHistoryTable
       donations={data}
       country={country}
-      partiesIds={[party.id]}
+      partiesIds={[party[PartyField.Id]]}
     />
   );
 };

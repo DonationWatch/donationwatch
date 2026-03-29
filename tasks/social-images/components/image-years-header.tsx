@@ -5,11 +5,13 @@
 import type { PropsWithChildren, ReactNode } from "react";
 
 import type { CountryConfig } from "@/types/country-config";
+import type { Party } from "@/types/party";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 import type { ConstLocale } from "@/utils/locales";
-import type { Donation, Party, ReceiverId } from "@/utils/types";
+import type { Donation, ReceiverId } from "@/utils/types";
 
 import { PageLogo } from "@/components/layout/page-logo";
+import { PartyField } from "@/types/party";
 import { partyColor } from "@/utils/color";
 import { getCountryName, getParty } from "@/utils/countries";
 import { getParties } from "@/utils/data/get-parties";
@@ -105,7 +107,7 @@ const ImageRankingItem = ({
           overflow: "hidden",
         }}
       >
-        {party.short}
+        {party[PartyField.Short]}
       </div>
       <div tw="shrink-0 pr-1 ml-2">
         {formatCountryCurrency(locale, amount, country)}

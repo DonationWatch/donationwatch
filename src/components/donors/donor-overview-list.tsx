@@ -3,11 +3,13 @@ import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import { useCallback, useRef, useState } from "react";
 
 import type { CountryConfig } from "@/types/country-config";
-import type { Donation, Party, ReceiverId } from "@/utils/types";
+import type { Party } from "@/types/party";
+import type { Donation, ReceiverId } from "@/utils/types";
 
 import Loading from "@/components/loading/loading";
 import { useDonationsByParty } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { PartyField } from "@/types/party";
 import { donationYear } from "@/utils/date";
 import { DonationField } from "@/utils/types";
 
@@ -121,7 +123,7 @@ export const DonorOverviewList = ({
 
   const partyDonations: Donation[] = [];
   donations.map((donation) => {
-    if (donation[DonationField.Receiver] !== party.id) return;
+    if (donation[DonationField.Receiver] !== party[PartyField.Id]) return;
 
     const year = donationYear(donation);
 
@@ -157,7 +159,7 @@ export const DonorOverviewList = ({
 
     donorRegistry[donor].sum += donation[DonationField.Amount];
     donorRegistry[donor].donations.push({
-      party: party.id,
+      party: party[PartyField.Id],
       donation,
     });
   });

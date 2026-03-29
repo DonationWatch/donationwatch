@@ -1,5 +1,7 @@
 import type { CountryConfig } from "@/types/country-config";
 
+import { PartyField } from "@/types/party";
+
 import type { Country } from "./countries";
 import type { ConstLocale } from "./locales";
 import type { ReceiverId } from "./types";
@@ -23,5 +25,5 @@ export const isValidParty = (
   partyId: string,
   countryConfig: CountryConfig,
 ): partyId is ReceiverId => {
-  return countryConfig.parties.some((p) => p.id === partyId);
+  return countryConfig.parties.some((p) => p[PartyField.Id] === partyId);
 };

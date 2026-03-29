@@ -6,12 +6,14 @@ import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
 
 import type { CountryConfig } from "@/types/country-config";
-import type { Donation, Party, ReceiverId } from "@/utils/types";
+import type { Party } from "@/types/party";
+import type { Donation, ReceiverId } from "@/utils/types";
 
 import Loading from "@/components/loading/loading";
 import { useDonationsByParty } from "@/hooks/use-api";
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { PartyField } from "@/types/party";
 import { donorTypeColor, partyColor } from "@/utils/color";
 import { getParty } from "@/utils/countries";
 import { donationYear } from "@/utils/date";
@@ -48,7 +50,9 @@ export const LoadedDonorTypeTreemap = ({
     }
     if (!parties.length) {
       partiesSet.add(
-        country.parties.find((p) => p.id === donation[DonationField.Receiver])!,
+        country.parties.find(
+          (p) => p[PartyField.Id] === donation[DonationField.Receiver],
+        )!,
       );
     }
   });
@@ -61,7 +65,7 @@ export const LoadedDonorTypeTreemap = ({
 
   if (!donations.length) return null;
 
-  const partyIdsSet = new Set<string>(parties.map((p) => p.id));
+  const partyIdsSet = new Set<string>(parties.map((p) => p[PartyField.Id]));
   const hasPartyLabel = parties.length > 1;
 
   const typeDonations: Partial<Record<DonorType, Donation[]>> = {};
@@ -102,8 +106,8 @@ export const LoadedDonorTypeTreemap = ({
       );
 
       children.push({
-        id: party.id,
-        name: party.short,
+        id: party[PartyField.Id],
+        name: party[PartyField.Short],
         children: Object.entries(donationByDonor).map(([donor, donations]) => {
           return {
             id: donor,
@@ -124,12 +128,12 @@ export const LoadedDonorTypeTreemap = ({
                 name: {
                   fontWeight: "bold",
                   padding: [0, 0, 4, 0],
-                  // textBorderColor: `color-mix(in srgb, ${party.color} 40%, black)`,
+                  // textBorderColor: `color-mix(in srgb, ${party[PartyField.Color]} 40%, black)`,
                   textBorderWidth: 3,
                   textShadowBlur: 0,
                 },
                 value: {
-                  // textBorderColor: `color-mix(in srgb, ${party.color} 40%, black)`,
+                  // textBorderColor: `color-mix(in srgb, ${party[PartyField.Color]} 40%, black)`,
                   textBorderWidth: 3,
                   textShadowBlur: 0,
                 },
@@ -144,7 +148,7 @@ export const LoadedDonorTypeTreemap = ({
           position: "insideTopLeft",
           formatter(params) {
             return (
-              (hasPartyLabel ? `{name|${party.short}}\n` : "") +
+              (hasPartyLabel ? `{name|${party[PartyField.Short]}}\n` : "") +
               `{value|${formatCountryCurrency(locale, params.value as number, country)}}`
             );
           },
@@ -152,12 +156,12 @@ export const LoadedDonorTypeTreemap = ({
             name: {
               fontWeight: "bold",
               padding: [0, 0, 4, 0],
-              // textBorderColor: `color-mix(in srgb, ${party.color} 40%, black)`,
+              // textBorderColor: `color-mix(in srgb, ${party[PartyField.Color]} 40%, black)`,
               textBorderWidth: 3,
               textShadowBlur: 0,
             },
             value: {
-              // textBorderColor: `color-mix(in srgb, ${party.color} 40%, black)`,
+              // textBorderColor: `color-mix(in srgb, ${party[PartyField.Color]} 40%, black)`,
               textBorderWidth: 3,
               textShadowBlur: 0,
             },
@@ -171,10 +175,10 @@ export const LoadedDonorTypeTreemap = ({
             if (params.treeAncestors.length !== 3) return "";
 
             const partyPart = `<div class="flex items-center font-semibold"><div class="mr-2 inline-block h-2 w-2 shrink-0 rounded-full border border-solid border-transparent dark:border-slate-600" style="background-color: ${partyColor(
-              party.id,
+              party[PartyField.Id],
               country,
             )}"></div>
-        <div>${party.short}</div>
+        <div>${party[PartyField.Short]}</div>
       </div></div>`;
 
             return `<div class="max-w-60 text-wrap">${partyPart}<div>${formatCountryCurrency(locale, params.value as number, country)}</div></div>`;

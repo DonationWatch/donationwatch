@@ -1,5 +1,7 @@
 import type { CountryConfig } from "@/types/country-config";
 
+import { PartyField } from "@/types/party";
+
 import type { Currency } from "./countries";
 import type { ConstLocale } from "./locales";
 import type { ReceiverId } from "./types";
@@ -175,5 +177,5 @@ export const formatPartyShortName = (
   country: CountryConfig,
   partyId: ReceiverId,
 ) => {
-  return getParty(country, partyId).short;
+  return getParty(country, partyId)[PartyField.Short];
 };

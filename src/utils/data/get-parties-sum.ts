@@ -1,7 +1,10 @@
 import type { CountryConfig } from "@/types/country-config";
+import type { Party } from "@/types/party";
+
+import { PartyField } from "@/types/party";
 
 import type { PartyStats, PartyYearsSums } from "../loader/party-years-sums";
-import type { Party, ReceiverId } from "../types";
+import type { ReceiverId } from "../types";
 
 import { numbersSum } from "../math";
 
@@ -18,11 +21,11 @@ export const getPartiesSum = (
 } => {
   const sums: Record<ReceiverId, { sum: number; count: number }> =
     Object.fromEntries(
-      parties.map((party) => [party.id, { sum: 0, count: 0 }]),
+      parties.map((party) => [party[PartyField.Id], { sum: 0, count: 0 }]),
     );
   const sum: number[] = [];
   const yearsSet = new Set(years);
-  const partiesSet = new Set(parties.map((p) => p.id));
+  const partiesSet = new Set(parties.map((p) => p[PartyField.Id]));
 
   let donationsCount = 0;
 

@@ -3,8 +3,9 @@ import { useLocale } from "next-intl";
 import { useState } from "react";
 
 import type { CountryConfig } from "@/types/country-config";
+import type { Party } from "@/types/party";
 import type { OriginPartySum } from "@/utils/data/get-origin-donations";
-import type { Donation, Party } from "@/utils/types";
+import type { Donation } from "@/utils/types";
 
 import {
   Article,
@@ -17,6 +18,7 @@ import {
 import Loading from "@/components/loading/loading";
 import { useDonationsByParty, useDonationsByYears } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { PartyField } from "@/types/party";
 import { isNotNullandNotUndefined } from "@/utils/array";
 import { Country, getCountryName } from "@/utils/countries";
 import { getOriginDonations } from "@/utils/data/get-origin-donations";
@@ -303,7 +305,7 @@ export const DonationPartyOrigin = ({
       country={country}
       donations={data.flat()}
       subtitle={t("origin.party.subtitle", {
-        party: party.short,
+        party: party[PartyField.Short],
         country: getCountryName(country, tCountries),
       })}
     />

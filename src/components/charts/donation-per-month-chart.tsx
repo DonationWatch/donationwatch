@@ -4,12 +4,14 @@ import type { BarSeriesOption, EChartsOption } from "echarts";
 import { useLocale } from "next-intl";
 
 import type { CountryConfig } from "@/types/country-config";
-import type { Donation, Party, ReceiverId } from "@/utils/types";
+import type { Party } from "@/types/party";
+import type { Donation, ReceiverId } from "@/utils/types";
 
 import Loading from "@/components/loading/loading";
 import { useDonationsByYears } from "@/hooks/use-api";
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { PartyField } from "@/types/party";
 import { isNotNullandNotUndefined } from "@/utils/array";
 import { partyColor } from "@/utils/color";
 import { getParty } from "@/utils/countries";
@@ -102,7 +104,7 @@ const DonationBarChart = ({
 
   const monthYearData: Record<string, Record<string, number>> = {};
   const yearsSet = new Set<string>(years);
-  const partiesSet = new Set<string>(parties.map((p) => p.id));
+  const partiesSet = new Set<string>(parties.map((p) => p[PartyField.Id]));
   const foundParties = new Set<string>([]);
   const partySums: Record<string, number> = {};
 
@@ -134,7 +136,7 @@ const DonationBarChart = ({
   });
 
   const sortedParties = parties.toSorted(
-    (a, b) => partySums[b.id] - partySums[a.id],
+    (a, b) => partySums[b[PartyField.Id]] - partySums[a[PartyField.Id]],
   );
 
   const partyLines: BarSeriesOption[] = sortedParties.map((party) => {
@@ -144,27 +146,27 @@ const DonationBarChart = ({
 
       if (resolution === "year") {
         monthYearData[year] ??= {};
-        monthYearData[year][party.id] ??= 0;
+        monthYearData[year][party[PartyField.Id]] ??= 0;
       } else {
         for (let month = 1; month <= 12; month++) {
           const monthYear = `${year}-${month.toString().padStart(2, "0")}`;
           monthYearData[monthYear] ??= {};
-          monthYearData[monthYear][party.id] ??= 0;
+          monthYearData[monthYear][party[PartyField.Id]] ??= 0;
         }
       }
     }
 
     return {
-      name: party.id,
+      name: party[PartyField.Id],
       type: "bar",
       stack: "total",
-      color: partyColor(party.id, country) ?? undefined,
+      color: partyColor(party[PartyField.Id], country) ?? undefined,
       data: Object.entries(monthYearData).map(([timeKey, partyData]) => {
         const date =
           resolution === "year"
             ? new Date(`${timeKey}-01-01`)
             : new Date(`${timeKey}-01`);
-        return [date, partyData[party.id] ?? 0];
+        return [date, partyData[party[PartyField.Id]] ?? 0];
       }),
     };
   });
@@ -198,7 +200,7 @@ const DonationBarChart = ({
     legend: {
       show: true,
       type: "scroll",
-      data: sortedParties.map((p) => p.id),
+      data: sortedParties.map((p) => p[PartyField.Id]),
       top: 20,
       left: "center",
       icon: "rect",
@@ -283,7 +285,7 @@ const DonationBarChart = ({
           const party = getParty(country, param.seriesName as ReceiverId);
 
           lines.push(
-            `${param.marker} ${party.short}: ${formatCountryCurrency(locale, sum, country)}`,
+            `${param.marker} ${party[PartyField.Short]}: ${formatCountryCurrency(locale, sum, country)}`,
           );
         }
 

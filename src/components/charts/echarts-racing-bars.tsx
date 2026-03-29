@@ -10,6 +10,7 @@ import type { ConstLocale } from "@/utils/locales";
 
 import { ExpandableReactEchart } from "@/components/charts/expandable-react-echart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { PartyField } from "@/types/party";
 import {
   formatCompactCurrency,
   formatPercentFormat,
@@ -51,7 +52,9 @@ export const EChartsRacingBars = ({
   totalRuntimeMs = DEFAULT_TOTAL_RUNTIME_MS,
 }: EChartsRacingBarsProps) => {
   const partiesById = useMemo(() => {
-    return Object.fromEntries(countryConfig.parties.map((p) => [p.id, p]));
+    return Object.fromEntries(
+      countryConfig.parties.map((p) => [p[PartyField.Id], p]),
+    );
   }, [countryConfig.parties]);
   const t = useTranslations();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -252,7 +255,7 @@ export const EChartsRacingBars = ({
               // Use party color for each bar
               color: (params) => {
                 const groupName = groupNames[params.dataIndex];
-                return partiesById[groupName]?.color || "#cccccc";
+                return partiesById[groupName]?.[PartyField.Color] || "#cccccc";
               },
             },
             label: {
@@ -287,7 +290,7 @@ export const EChartsRacingBars = ({
             return group?.segmentAmounts[partyId] || 0;
           }),
           itemStyle: {
-            color: partiesById[partyId]?.color || "#cccccc",
+            color: partiesById[partyId]?.[PartyField.Color] || "#cccccc",
           },
           label: {
             // Show total on the last series (rightmost segment)
@@ -470,7 +473,9 @@ export const EChartsRacingBars = ({
       yAxis: {
         type: "category",
         data: isGroupByReceiver
-          ? groupNames.map((partyId) => partiesById[partyId]?.short || partyId)
+          ? groupNames.map(
+              (partyId) => partiesById[partyId]?.[PartyField.Short] || partyId,
+            )
           : groupNames,
         inverse: true,
         animationDuration: 300,

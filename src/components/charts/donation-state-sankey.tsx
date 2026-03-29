@@ -5,10 +5,12 @@ import type { SankeyNodeItemOption } from "echarts/types/src/chart/sankey/Sankey
 import { useLocale } from "next-intl";
 
 import type { CountryConfig } from "@/types/country-config";
-import type { Donation, Party, ReceiverId } from "@/utils/types";
+import type { Party } from "@/types/party";
+import type { Donation, ReceiverId } from "@/utils/types";
 
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { PartyField } from "@/types/party";
 import { partyColor } from "@/utils/color";
 import { Country } from "@/utils/countries";
 import { donationYear } from "@/utils/date";
@@ -45,7 +47,7 @@ export const DonationStateSankey = ({
 
   const isEu = country.id === Country.europeanunion;
   const yearsSet = new Set(years);
-  const partiesSet = new Set(parties.map((p) => p.id));
+  const partiesSet = new Set(parties.map((p) => p[PartyField.Id]));
   const foundParties = new Set<ReceiverId>();
   const foundState = new Set<string>();
 

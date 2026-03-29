@@ -2,6 +2,7 @@ import type { CountryConfig } from "@/types/country-config";
 import type { Country } from "@/utils/countries";
 import type { Donation, DonorMetaDefinition } from "@/utils/types";
 
+import { PartyField } from "@/types/party";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { DonationField } from "@/utils/types";
 
@@ -62,9 +63,12 @@ const populateDonationWikipediaData = async (
 
   for (const party of country.parties) {
     // skip if party has no wiki page
-    if (!party.wiki) continue;
+    if (!party[PartyField.Wiki]) continue;
 
-    const result = await loadWikipediaPageExtract(wikiCountry, party.wiki);
+    const result = await loadWikipediaPageExtract(
+      wikiCountry,
+      party[PartyField.Wiki],
+    );
     await timeout(1000);
     if (result) {
       const [pageId, article] = result;

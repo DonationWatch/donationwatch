@@ -14,6 +14,7 @@ import {
   ArticleSectionWrapper,
 } from "@/components/layout/article";
 import { PartyTimelineText } from "@/components/parties/party-timeline-text";
+import { PartyField } from "@/types/party";
 import { getCountryName, getParty } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { Features, hasFeature } from "@/utils/features";
@@ -45,11 +46,11 @@ export async function generateMetadata(
 
   return {
     title: tPageTitle("party.timeline", {
-      party: party.short,
+      party: party[PartyField.Short],
       country: getCountryName(countryConfig, tCountries),
     }),
     description: t("party.timeline.detail.summary", {
-      party: party.short,
+      party: party[PartyField.Short],
     }),
     alternates: generateAlternates(`${country}/party/${partyId}/timeline`),
   };
@@ -88,22 +89,22 @@ export default async function TimelinePage(
                 as={"h1"}
                 id={"sec-timeline"}
                 title={t("party.timeline.detail.title", {
-                  party: party.short,
+                  party: party[PartyField.Short],
                 })}
               />
               <p>
                 {t("party.timeline.detail.summary", {
-                  party: party.short,
+                  party: party[PartyField.Short],
                 })}
               </p>
             </ArticleSectionColumn>
             <ArticleSectionColumn>
               <DonationPartyChart
                 title={t("party.timeline.chart_title", {
-                  party: party.short,
+                  party: party[PartyField.Short],
                 })}
                 subtitle={t("party.timeline.subtitle", {
-                  party: party.short,
+                  party: party[PartyField.Short],
                   country: getCountryName(countryConfig, tCountries),
                 })}
                 country={countryConfig}
@@ -123,7 +124,7 @@ export default async function TimelinePage(
                 as={"h1"}
                 id={"sec-timeline"}
                 title={t("party.timeline.detail.title", {
-                  party: party.short,
+                  party: party[PartyField.Short],
                 })}
               />
             )}
@@ -133,13 +134,13 @@ export default async function TimelinePage(
             <DonationPerMonthChart
               country={countryConfig}
               title={t("per_year_party.title", {
-                party: party.short,
+                party: party[PartyField.Short],
               })}
               resolution={"year"}
               subtitle={t("per_year_party.subtitle", {
                 country: getCountryName(countryConfig, tCountries),
                 years: formatYearsRange(countryConfig.years),
-                party: party.short,
+                party: party[PartyField.Short],
               })}
               years={countryConfig.years}
               parties={[party]}

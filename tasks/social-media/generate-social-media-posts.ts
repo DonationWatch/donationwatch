@@ -14,6 +14,7 @@ import type { ConstLocale } from "@/utils/locales";
 import type { StrictNamespacedTranslator } from "@/utils/translator";
 import type { Donation, ReceiverId } from "@/utils/types";
 
+import { PartyField } from "@/types/party";
 import { Country, getCountryName, getParty } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { formatCompactCountryCurrency } from "@/utils/formatter";
@@ -256,7 +257,9 @@ const main = async () => {
 
     partyDiffs.slice(0, PARTIES_TO_LIST_FULLY).forEach(([receiver, data]) => {
       message += `- ${interpolate(messageTranslations[lang].line, {
-        receiver: getParty(countryConfig, receiver as ReceiverId).short,
+        receiver: getParty(countryConfig, receiver as ReceiverId)[
+          PartyField.Short
+        ],
         delta:
           deltaPrefix(data.delta) +
           formatCompactCountryCurrency(lang, data.delta, countryConfig),

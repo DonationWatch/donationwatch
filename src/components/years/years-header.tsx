@@ -5,9 +5,9 @@ import type { PropsWithChildren } from "react";
 import Link from "next/link";
 
 import type { CountryConfig } from "@/types/country-config";
+import type { Party } from "@/types/party";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 import type { ConstLocale } from "@/utils/locales";
-import type { Party } from "@/utils/types";
 
 import { DynamicStackedPartyDonations } from "@/components/charts/dynamic-stacked-party-line";
 import { ReadonlyTopYearDonationsItem } from "@/components/loading/loading-top-year-donations-item";

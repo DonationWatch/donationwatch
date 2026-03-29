@@ -1,8 +1,10 @@
 import type { CountryConfig } from "@/types/country-config";
 
+import { Party, PartyField } from "@/types/party";
+
 import { donationYear } from "../date";
 import { numbersSum } from "../math";
-import { AddressField, Donation, DonationField, Party } from "../types";
+import { AddressField, Donation, DonationField } from "../types";
 
 export const getOriginDonations = (
   country: CountryConfig,
@@ -25,7 +27,7 @@ export const getOriginDonations = (
   const sum: number[] = [];
   let donationsCount = 0;
   const yearsSet = new Set(years);
-  const partiesSet = new Set(parties.map((p) => p.id));
+  const partiesSet = new Set(parties.map((p) => p[PartyField.Id]));
 
   donations.forEach((donation) => {
     if (!yearsSet.has(donationYear(donation))) return;

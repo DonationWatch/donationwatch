@@ -1,12 +1,8 @@
+import type { Party } from "@/types/party";
 import type { NonEmptyArray } from "@/utils/array";
 import type { Country, CountryCode, Currency } from "@/utils/countries";
 import type { LambertConformalConicParams } from "@/utils/map";
-import type {
-  DonorFilter,
-  IsoDate,
-  Party,
-  ReceiverFilter,
-} from "@/utils/types";
+import type { DonorFilter, IsoDate, ReceiverFilter } from "@/utils/types";
 
 // This is the raw country config containing everything relevant to the country.
 // This will get stripped down before being available to the next app.

@@ -3,8 +3,9 @@ import { useLocale } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 
 import type { CountryConfig } from "@/types/country-config";
+import type { Party } from "@/types/party";
 import type { ConstLocale } from "@/utils/locales";
-import type { Donation, Party } from "@/utils/types";
+import type { Donation } from "@/utils/types";
 
 import { RankingItem } from "@/components/donations/ranking-item";
 import { DonorLink } from "@/components/donors/donor-link";
@@ -13,6 +14,7 @@ import { useDonationsByYears } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { useBreakpoint } from "@/hooks/use-media-query";
 import { useVirtual } from "@/hooks/use-virtual";
+import { PartyField } from "@/types/party";
 import { isNotNullandNotUndefined } from "@/utils/array";
 import { donationYear } from "@/utils/date";
 import {
@@ -265,7 +267,9 @@ const LoadedYearsDonorHistogramText = ({
     }
     if (!parties.length) {
       partiesSet.add(
-        country.parties.find((p) => p.id === donation[DonationField.Receiver])!,
+        country.parties.find(
+          (p) => p[PartyField.Id] === donation[DonationField.Receiver],
+        )!,
       );
     }
   });
@@ -275,7 +279,7 @@ const LoadedYearsDonorHistogramText = ({
 
   if (!donations.length) return null;
 
-  const partyIdsSet = new Set<string>(parties.map((p) => p.id));
+  const partyIdsSet = new Set<string>(parties.map((p) => p[PartyField.Id]));
 
   const donorSums: Record<string, number> = {};
 

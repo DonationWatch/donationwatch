@@ -1,5 +1,6 @@
 import { describe, expect, test } from "vitest";
 
+import { PartyField } from "@/types/party";
 import { COUNTRIES } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { AddressField, DonationField } from "@/utils/types";
@@ -37,28 +38,28 @@ describe("Party config fields are unique", () => {
 
       countryConfig.parties.forEach((party) => {
         expect(
-          ids.has(party.id),
-          `Duplicate id ${party.id} in ${country}`,
+          ids.has(party[PartyField.Id]),
+          `Duplicate id ${party[PartyField.Id]} in ${country}`,
         ).toBe(false);
-        ids.add(party.id);
+        ids.add(party[PartyField.Id]);
 
         expect(
-          colors.has(party.color),
-          `Duplicate color ${party.color} in ${country}`,
+          colors.has(party[PartyField.Color]),
+          `Duplicate color ${party[PartyField.Color]} in ${country}`,
         ).toBe(false);
-        colors.add(party.color);
+        colors.add(party[PartyField.Color]);
 
         expect(
-          shortNames.has(party.short),
-          `Duplicate short name ${party.short} in ${country}`,
+          shortNames.has(party[PartyField.Short]),
+          `Duplicate short name ${party[PartyField.Short]} in ${country}`,
         ).toBe(false);
-        shortNames.add(party.short);
+        shortNames.add(party[PartyField.Short]);
 
         expect(
-          names.has(party.name),
-          `Duplicate name ${party.name} in ${country}`,
+          names.has(party[PartyField.Name]),
+          `Duplicate name ${party[PartyField.Name]} in ${country}`,
         ).toBe(false);
-        names.add(party.name);
+        names.add(party[PartyField.Name]);
       });
     });
   });

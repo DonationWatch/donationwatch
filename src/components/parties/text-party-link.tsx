@@ -4,6 +4,7 @@ import type { ReceiverId } from "@/utils/types";
 
 import { PartyDot } from "@/components/parties/party-dot";
 import { PartyLink } from "@/components/parties/party-link";
+import { PartyField } from "@/types/party";
 import { getParty } from "@/utils/countries";
 
 export const TextPartyLink = ({
@@ -26,7 +27,7 @@ export const TextPartyLink = ({
       locale={locale}
     >
       <PartyDot
-        party={party.id}
+        party={party[PartyField.Id]}
         country={country}
         nameClassName={truncated ? "truncate" : ""}
       />

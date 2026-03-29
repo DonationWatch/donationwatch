@@ -14,6 +14,7 @@ import type { BigDonor } from "@/utils/loader/biggest-donors";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 import type { Donation } from "@/utils/types";
 
+import { PartyField } from "@/types/party";
 import { COUNTRIES } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { Features, hasFeature } from "@/utils/features";
@@ -221,13 +222,13 @@ describe.each(CONST_LOCALES.map((locale) => ({ locale })))(
                 locale,
                 getTranslations,
                 countryConfig,
-                party.id,
+                party[PartyField.Id],
                 donations,
               ),
             );
 
             await fs.writeFile(
-              path.join(PARTY_OUT_DIR, `${party.id}.png`),
+              path.join(PARTY_OUT_DIR, `${party[PartyField.Id]}.png`),
               png,
             );
           }

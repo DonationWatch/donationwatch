@@ -2,11 +2,12 @@
 import { useLocale } from "next-intl";
 
 import type { CountryConfig } from "@/types/country-config";
-import type { Party } from "@/utils/types";
+import type { Party } from "@/types/party";
 
 import Loading from "@/components/loading/loading";
 import { useDonationsByParty } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { PartyField } from "@/types/party";
 import { donationYear } from "@/utils/date";
 import { formatCountryCurrency, formatPercentFormat } from "@/utils/formatter";
 import { DonationField } from "@/utils/types";
@@ -31,7 +32,7 @@ export const PartyTimelineText = ({
   const perYearSums: Record<string, number> = {};
 
   donations.forEach((donation) => {
-    if (donation[DonationField.Receiver] !== party.id) return;
+    if (donation[DonationField.Receiver] !== party[PartyField.Id]) return;
 
     const year = donationYear(donation);
     sum += donation[DonationField.Amount];
@@ -42,7 +43,9 @@ export const PartyTimelineText = ({
   return (
     <>
       <p className="mb-6">
-        {t("party.timeline.detail.per_year", { party: party.short })}
+        {t("party.timeline.detail.per_year", {
+          party: party[PartyField.Short],
+        })}
       </p>
       <ul className="mx-2 py-2 text-sm *:py-1">
         {Object.entries(perYearSums).map(([year, yearSum]) => {

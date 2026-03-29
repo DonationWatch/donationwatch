@@ -1,9 +1,11 @@
 "use client";
 
 import type { CountryConfig } from "@/types/country-config";
+import type { Party } from "@/types/party";
 import type { ConstLocale } from "@/utils/locales";
-import type { Donation, Party } from "@/utils/types";
+import type { Donation } from "@/utils/types";
 
+import { PartyField } from "@/types/party";
 import { partyColor } from "@/utils/color";
 import { getDonorName } from "@/utils/donor";
 import { formatCountryCurrency, formatNumber } from "@/utils/formatter";
@@ -63,7 +65,7 @@ export const ImagePartyHeader = ({
   const tCommon = getTranslations("common");
 
   const partyDonations = donations.filter(
-    (donation) => donation[DonationField.Receiver] === party.id,
+    (donation) => donation[DonationField.Receiver] === party[PartyField.Id],
   );
 
   const donorRegistry: Record<
@@ -86,7 +88,7 @@ export const ImagePartyHeader = ({
     donorRegistry[donation[DonationField.DonorName]].sum +=
       donation[DonationField.Amount];
     donorRegistry[donation[DonationField.DonorName]].donations.push({
-      party: party.id,
+      party: party[PartyField.Id],
       donation,
     });
   });
@@ -112,11 +114,11 @@ export const ImagePartyHeader = ({
               overflow: "hidden",
             }}
           >
-            {party.short}
+            {party[PartyField.Short]}
           </div>
-          {party.name !== party.short ? (
+          {party[PartyField.Name] !== party[PartyField.Short] ? (
             <div tw="text-base text-slate-600 text-lg font-semibold leading-none">
-              {party.name}
+              {party[PartyField.Name]}
             </div>
           ) : null}
         </div>
@@ -130,7 +132,11 @@ export const ImagePartyHeader = ({
             </div>
             <ImageMetaCard
               title={t("sum")}
-              value={formatCountryCurrency(locale, party.sum, country)}
+              value={formatCountryCurrency(
+                locale,
+                party[PartyField.Sum],
+                country,
+              )}
             />
           </div>
         </div>
@@ -139,7 +145,7 @@ export const ImagePartyHeader = ({
             tw="w-full h-[12px]"
             style={{
               border: "1px solid #fff",
-              backgroundColor: partyColor(party.id, country),
+              backgroundColor: partyColor(party[PartyField.Id], country),
             }}
           ></div>
         </div>

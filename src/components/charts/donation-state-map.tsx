@@ -4,11 +4,13 @@ import type { EChartsOption } from "echarts";
 import { useLocale } from "next-intl";
 
 import type { CountryConfig } from "@/types/country-config";
+import type { Party } from "@/types/party";
 import type { Countries } from "@/utils/countries";
-import type { Donation, Party, ReceiverId } from "@/utils/types";
+import type { Donation, ReceiverId } from "@/utils/types";
 
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { PartyField } from "@/types/party";
 import { partyColor } from "@/utils/color";
 import { Country } from "@/utils/countries";
 import { donationYear } from "@/utils/date";
@@ -42,7 +44,7 @@ export const DonationStateMap = ({
   const stateDonations: Record<string, number> = {};
 
   const yearsSet = new Set(years);
-  const partiesSet = new Set(parties.map((p) => p.id));
+  const partiesSet = new Set(parties.map((p) => p[PartyField.Id]));
   const foundParties = new Set<string>();
 
   const statePartyDonations = country.states.reduce<

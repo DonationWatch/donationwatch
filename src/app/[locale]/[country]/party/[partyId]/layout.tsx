@@ -12,6 +12,7 @@ import { MetaCard } from "@/components/meta-card";
 import { LastModifiedSchema } from "@/components/schema";
 import { NavigationTabs } from "@/components/tabs";
 import { WikiQuote } from "@/components/wiki-quote";
+import { PartyField } from "@/types/party";
 import { isNotNullandNotUndefined } from "@/utils/array";
 import { partyColor } from "@/utils/color";
 import { THUMBNAIL_PREFIX } from "@/utils/config";
@@ -46,10 +47,10 @@ export async function generateStaticParams({
 
   const countryConfig = await getCountryConfig(country);
   return countryConfig.parties
-    .toSorted((a, b) => b.sum - a.sum)
+    .toSorted((a, b) => b[PartyField.Sum] - a[PartyField.Sum])
     .slice(0, CACHED_PARTIES_COUNT)
     .map((party) => ({
-      partyId: party.id,
+      partyId: party[PartyField.Id],
     }));
 }
 
@@ -79,10 +80,10 @@ export async function generateMetadata(
 
   const title = {
     template: `%s | DonationWatch`,
-    default: `${party.short} | ${countryPart} | DonationWatch`,
+    default: `${party[PartyField.Short]} | ${countryPart} | DonationWatch`,
   };
 
-  const imageUrl = `${THUMBNAIL_PREFIX}/${locale}/${country}/parties/${party.id}.png`;
+  const imageUrl = `${THUMBNAIL_PREFIX}/${locale}/${country}/parties/${party[PartyField.Id]}.png`;
 
   return {
     title,
@@ -120,7 +121,7 @@ export default async function PartyLayout(
   if (!isValidParty(partyId, countryConfig)) {
     const correctParty = findCorrectParty(countryConfig, partyId);
     if (correctParty) {
-      redirect(`/${locale}/${country}/party/${correctParty.id}`);
+      redirect(`/${locale}/${country}/party/${correctParty[PartyField.Id]}`);
     }
     return notFound();
   }
@@ -131,7 +132,7 @@ export default async function PartyLayout(
   let donationSum = 0;
 
   Object.values(partyYearsSums).forEach((partyYearSums) => {
-    const sums = partyYearSums[party.id];
+    const sums = partyYearSums[party[PartyField.Id]];
 
     if (!sums) return;
 
@@ -140,28 +141,28 @@ export default async function PartyLayout(
   });
 
   const showExtendedMeta = true;
-  const wikiPageId = party.wiki;
+  const wikiPageId = party[PartyField.Wiki];
   const tabItems: TabItem[] = [
     {
       icon: UserRound,
-      href: `/${locale}/${country}/party/${party.id}/donors`,
+      href: `/${locale}/${country}/party/${party[PartyField.Id]}/donors`,
       label: t("donors.title"),
     },
     {
       icon: History,
-      href: `/${locale}/${country}/party/${party.id}/changes`,
+      href: `/${locale}/${country}/party/${party[PartyField.Id]}/changes`,
       label: t("changes.title"),
     },
     // We can show a timeline chart here as the party page chart falls back to year resolution if we have no dates
     {
       icon: ChartLine,
-      href: `/${locale}/${country}/party/${party.id}/timeline`,
+      href: `/${locale}/${country}/party/${party[PartyField.Id]}/timeline`,
       label: t("timeline.title"),
     },
     hasFeature(countryConfig, Features.Origin)
       ? {
           icon: Earth,
-          href: `/${locale}/${country}/party/${party.id}/origin/overview`,
+          href: `/${locale}/${country}/party/${party[PartyField.Id]}/origin/overview`,
           label: t("origin.title"),
         }
       : undefined,
@@ -175,7 +176,12 @@ export default async function PartyLayout(
     <>
       {lastDonation ? <LastModifiedSchema dateModified={lastDonation} /> : null}
       <AbsoluteMultipleColorsGradient
-        colors={[{ color: partyColor(party.id, countryConfig), width: 100 }]}
+        colors={[
+          {
+            color: partyColor(party[PartyField.Id], countryConfig),
+            width: 100,
+          },
+        ]}
       />
       <PageHeader>
         <section aria-labelledby="hero-label">
@@ -184,10 +190,10 @@ export default async function PartyLayout(
               {t("years.title")}
             </h2>
             <h3 className="text-3xl font-semibold sm:text-4xl" id="hero-label">
-              {party.short}
+              {party[PartyField.Short]}
             </h3>
-            {party.short !== party.name ? (
-              <h4 className="mt-1 text-lg">{party.name}</h4>
+            {party[PartyField.Short] !== party[PartyField.Name] ? (
+              <h4 className="mt-1 text-lg">{party[PartyField.Name]}</h4>
             ) : null}
           </div>
           <div className="mb-3">

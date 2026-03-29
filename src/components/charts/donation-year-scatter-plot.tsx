@@ -9,13 +9,15 @@ import type {
 import { useLocale } from "next-intl";
 
 import type { CountryConfig } from "@/types/country-config";
-import type { Donation, Party, ReceiverId } from "@/utils/types";
+import type { Party } from "@/types/party";
+import type { Donation, ReceiverId } from "@/utils/types";
 
 import Loading from "@/components/loading/loading";
 import { TextPartyLink } from "@/components/parties/text-party-link";
 import { useDonationsByYears } from "@/hooks/use-api";
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { PartyField } from "@/types/party";
 import { isNotNullandNotUndefined } from "@/utils/array";
 import { partyColor } from "@/utils/color";
 import { getParty } from "@/utils/countries";
@@ -63,7 +65,7 @@ export const DonationYearScatterPlot = ({
     string,
     { sum: number; donations: Donation[]; slots: Record<number, number> }
   > = {};
-  const partyIds = new Set(parties.map((p) => p.id));
+  const partyIds = new Set(parties.map((p) => p[PartyField.Id]));
   let largestAmount = 0;
   let smallestAmount = Number.POSITIVE_INFINITY;
   const numbers = new Set<number>();
@@ -140,7 +142,7 @@ export const DonationYearScatterPlot = ({
         top: `${idx * heightPerRow + grid.top + 4}`,
         left: 10,
         right: 10,
-        text: party.short,
+        text: party[PartyField.Short],
         textStyle: {
           fontSize: 14,
         },
@@ -165,10 +167,10 @@ export const DonationYearScatterPlot = ({
         data: donations.map((d) => [
           d[DonationField.Amount],
           slots[d[DonationField.Amount]],
-          party.id,
+          party[PartyField.Id],
         ]),
         symbolSize: (dataItem) => Math.min(30, 12 + (slots[dataItem[0]] - 1)),
-        color: partyColor(party.id, country),
+        color: partyColor(party[PartyField.Id], country),
       });
     });
   const option: EChartsOption = {

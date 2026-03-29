@@ -13,7 +13,7 @@ import type { DonationsDocumentWithoutDonorIds } from "@/lib/api/donations-docum
 import type { CountryConfig } from "@/types/country-config";
 import type { NonEmptyArray } from "@/utils/array";
 import type { RootTranslator } from "@/utils/translator";
-import type { Donation, Party, ReceiverId } from "@/utils/types";
+import type { Donation, ReceiverId } from "@/utils/types";
 
 import { DonorLink } from "@/components/donors/donor-link";
 import { ArticleSection } from "@/components/layout/article";
@@ -23,6 +23,7 @@ import { Button } from "@/components/ui/button";
 import { YearRangeSelector } from "@/components/years/year-range-selector";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { donationDocumentToDonations } from "@/lib/api/donations-document";
+import { PartyField, type Party } from "@/types/party";
 import { firstItem, lastItem } from "@/utils/array";
 import { partyColor } from "@/utils/color";
 import { QUERY_PARAM_BUILD_TS } from "@/utils/config";
@@ -73,7 +74,7 @@ function computePartyStats(
   t: RootTranslator,
 ): PartyStats {
   const partyDonations = donations.filter(
-    (d) => d[DonationField.Receiver] === party.id,
+    (d) => d[DonationField.Receiver] === party[PartyField.Id],
   );
 
   let totalSum = 0;
@@ -223,9 +224,9 @@ function computeOverlappingDonors(
       const donor = donation[DonationField.DonorName];
       const amount = donation[DonationField.Amount];
       donorData[donor] ??= {};
-      donorData[donor][stats.party.id] ??= { sum: 0, count: 0 };
-      donorData[donor][stats.party.id].sum += amount;
-      donorData[donor][stats.party.id].count += 1;
+      donorData[donor][stats.party[PartyField.Id]] ??= { sum: 0, count: 0 };
+      donorData[donor][stats.party[PartyField.Id]].sum += amount;
+      donorData[donor][stats.party[PartyField.Id]].count += 1;
     }
   }
 
@@ -271,7 +272,7 @@ function findWinner(
   }
 
   if (tied || !best) return undefined;
-  return best.party.id;
+  return best.party[PartyField.Id];
 }
 
 const jsonFetcher = <T = unknown>(input: RequestInfo): Promise<T> =>
@@ -321,15 +322,20 @@ export const PartyComparison = ({
   const build = getBuild(countryConfig.id).t;
 
   const selectedParties = countryConfig.parties.filter((p) =>
-    selectedPartyIds.has(p.id),
+    selectedPartyIds.has(p[PartyField.Id]),
   );
 
   const results = useQueries<UseQueryOptions<Donation[]>[]>({
     queries: selectedParties.map((party) => ({
-      queryKey: [countryConfig.id, "donations", "by-party", party.id],
+      queryKey: [
+        countryConfig.id,
+        "donations",
+        "by-party",
+        party[PartyField.Id],
+      ],
       queryFn: () =>
         jsonFetcher<DonationsDocumentWithoutDonorIds>(
-          `/data/${countryConfig.id}/donations/by-party/${party.id}.json?${QUERY_PARAM_BUILD_TS}=${build}`,
+          `/data/${countryConfig.id}/donations/by-party/${party[PartyField.Id]}.json?${QUERY_PARAM_BUILD_TS}=${build}`,
         ).then((doc) => donationDocumentToDonations(doc)),
     })),
   });
@@ -550,17 +556,20 @@ export const PartyComparison = ({
         </legend>
         <div className="flex flex-wrap gap-2">
           {countryConfig.parties.map((party) => {
-            const isSelected = selectedPartyIds.has(party.id);
+            const isSelected = selectedPartyIds.has(party[PartyField.Id]);
             return (
               <Button
                 variant={isSelected ? "default" : "outline"}
-                key={party.id}
-                onClick={() => toggleParty(party.id)}
+                key={party[PartyField.Id]}
+                onClick={() => toggleParty(party[PartyField.Id])}
                 disabled={
                   !isSelected && selectedPartyIds.size >= MAX_PARTY_SELECTION
                 }
               >
-                <PartyDot party={party.id} country={countryConfig} />
+                <PartyDot
+                  party={party[PartyField.Id]}
+                  country={countryConfig}
+                />
               </Button>
             );
           })}
@@ -598,8 +607,8 @@ export const PartyComparison = ({
                     <PartyDot
                       className={"overflow-hidden"}
                       nameClassName={"truncate"}
-                      key={s.party.id}
-                      party={s.party.id}
+                      key={s.party[PartyField.Id]}
+                      party={s.party[PartyField.Id]}
                       country={countryConfig}
                     />
                   ))}
@@ -673,7 +682,7 @@ export const PartyComparison = ({
                         </th>
                         {allStats.map((s) => (
                           <th
-                            key={s.party.id}
+                            key={s.party[PartyField.Id]}
                             className="bg-background sticky top-[72px] z-10 px-4 py-3"
                           >
                             <PartyHeader
@@ -697,7 +706,7 @@ export const PartyComparison = ({
                             const donor = stats.topDonors[rank];
                             return (
                               <td
-                                key={stats.party.id}
+                                key={stats.party[PartyField.Id]}
                                 className="px-4 py-2 text-right"
                               >
                                 {donor ? (
@@ -744,21 +753,21 @@ export const PartyComparison = ({
                             const donor = stats.topDonors[rank];
                             return (
                               <div
-                                key={stats.party.id}
+                                key={stats.party[PartyField.Id]}
                                 className="flex min-w-0 gap-3"
                               >
                                 <div
                                   className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full"
                                   style={{
                                     backgroundColor: partyColor(
-                                      stats.party.id,
+                                      stats.party[PartyField.Id],
                                       countryConfig,
                                     ),
                                   }}
                                 />
                                 <div className="min-w-0 flex-1">
                                   <div className="text-muted-foreground mb-1 text-xs font-semibold">
-                                    {stats.party.short}
+                                    {stats.party[PartyField.Short]}
                                   </div>
                                   {donor ? (
                                     <>
@@ -854,7 +863,7 @@ export const PartyComparison = ({
                               </th>
                               {allStats.map((s) => (
                                 <th
-                                  key={s.party.id}
+                                  key={s.party[PartyField.Id]}
                                   className="bg-background sticky top-[72px] z-10 px-4 py-3"
                                 >
                                   <PartyHeader
@@ -880,7 +889,7 @@ export const PartyComparison = ({
                                   );
                                   return (
                                     <td
-                                      key={s.party.id}
+                                      key={s.party[PartyField.Id]}
                                       className="px-4 py-2 text-right tabular-nums"
                                     >
                                       {entry ? (
@@ -921,21 +930,21 @@ export const PartyComparison = ({
                                 );
                                 return (
                                   <div
-                                    key={stats.party.id}
+                                    key={stats.party[PartyField.Id]}
                                     className="flex gap-3"
                                   >
                                     <div
                                       className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full"
                                       style={{
                                         backgroundColor: partyColor(
-                                          stats.party.id,
+                                          stats.party[PartyField.Id],
                                           countryConfig,
                                         ),
                                       }}
                                     />
                                     <div className="min-w-0 flex-1">
                                       <div className="text-muted-foreground mb-1 text-xs font-semibold">
-                                        {stats.party.short}
+                                        {stats.party[PartyField.Short]}
                                       </div>
                                       <div className="font-medium tabular-nums">
                                         {entry ? (
@@ -1006,7 +1015,7 @@ export const PartyComparison = ({
                           </th>
                           {allStats.map((s) => (
                             <th
-                              key={s.party.id}
+                              key={s.party[PartyField.Id]}
                               className="bg-background sticky top-[72px] z-10 px-4 py-2"
                             >
                               <PartyHeader
@@ -1053,10 +1062,11 @@ export const PartyComparison = ({
                                 </div>
                               </td>
                               {allStats.map((s) => {
-                                const data = donor.perParty[s.party.id];
+                                const data =
+                                  donor.perParty[s.party[PartyField.Id]];
                                 return (
                                   <td
-                                    key={s.party.id}
+                                    key={s.party[PartyField.Id]}
                                     className="px-4 py-2 text-right"
                                   >
                                     {data ? (
@@ -1124,24 +1134,24 @@ export const PartyComparison = ({
 
                         <div className="mt-3 grid gap-4">
                           {allStats.map((s) => {
-                            const data = donor.perParty[s.party.id];
+                            const data = donor.perParty[s.party[PartyField.Id]];
                             return (
                               <div
-                                key={s.party.id}
+                                key={s.party[PartyField.Id]}
                                 className="flex min-w-0 gap-3"
                               >
                                 <div
                                   className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full"
                                   style={{
                                     backgroundColor: partyColor(
-                                      s.party.id,
+                                      s.party[PartyField.Id],
                                       countryConfig,
                                     ),
                                   }}
                                 />
                                 <div className="min-w-0 flex-1">
                                   <div className="text-muted-foreground mb-1 text-xs font-semibold">
-                                    {s.party.short}
+                                    {s.party[PartyField.Short]}
                                   </div>
                                   <div className="min-w-0 font-medium tabular-nums">
                                     {data ? (
@@ -1206,9 +1216,9 @@ const PartyHeader = ({
   <div className="flex items-center justify-end gap-1.5">
     <span
       className="inline-block h-2.5 w-2.5 shrink-0 rounded-full"
-      style={{ backgroundColor: partyColor(party.id, country) }}
+      style={{ backgroundColor: partyColor(party[PartyField.Id], country) }}
     />
-    <span className="font-semibold">{party.short}</span>
+    <span className="font-semibold">{party[PartyField.Short]}</span>
   </div>
 );
 
@@ -1231,7 +1241,7 @@ const ComparisonTable = ({
             <th className="bg-background sticky top-[72px] left-0 z-20 w-48 px-4 py-3 text-left font-medium" />
             {stats.map((s) => (
               <th
-                key={s.party.id}
+                key={s.party[PartyField.Id]}
                 className="bg-background sticky top-[72px] z-10 px-4 py-3"
               >
                 <PartyHeader party={s.party} country={countryConfig} />
@@ -1249,10 +1259,10 @@ const ComparisonTable = ({
                 {row.label}
               </td>
               {stats.map((s) => {
-                const isWinner = row.winner === s.party.id;
+                const isWinner = row.winner === s.party[PartyField.Id];
                 return (
                   <td
-                    key={s.party.id}
+                    key={s.party[PartyField.Id]}
                     className={`px-4 py-2.5 font-medium ${
                       isWinner
                         ? "bg-amber-50 text-amber-700 dark:bg-amber-950/30 dark:text-amber-400"
@@ -1285,18 +1295,24 @@ const ComparisonTable = ({
           </h4>
           <div className="mt-3 grid gap-4">
             {stats.map((s) => {
-              const isWinner = row.winner === s.party.id;
+              const isWinner = row.winner === s.party[PartyField.Id];
               return (
-                <div key={s.party.id} className="flex min-w-0 gap-3">
+                <div
+                  key={s.party[PartyField.Id]}
+                  className="flex min-w-0 gap-3"
+                >
                   <div
                     className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full"
                     style={{
-                      backgroundColor: partyColor(s.party.id, countryConfig),
+                      backgroundColor: partyColor(
+                        s.party[PartyField.Id],
+                        countryConfig,
+                      ),
                     }}
                   />
                   <div className="min-w-0 flex-1">
                     <div className="text-muted-foreground mb-1 flex items-center justify-between text-xs font-semibold">
-                      <span>{s.party.short}</span>
+                      <span>{s.party[PartyField.Short]}</span>
                       {isWinner && (
                         <Trophy className="h-3.5 w-3.5 text-amber-500" />
                       )}

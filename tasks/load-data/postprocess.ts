@@ -16,6 +16,7 @@ import type {
   DonorMetaRelation,
 } from "@/utils/types";
 
+import { PartyField } from "@/types/party";
 import {
   BIGGEST_DONATIONS_COUNT,
   DONOR_ID_HASH_LEN,
@@ -96,7 +97,7 @@ const buildPartySums = (country: CountryConfig, donations: Donation[]) => {
   > = {};
 
   const yearsSet = new Set(country.years);
-  const partiesSet = new Set(country.parties.map((p) => p.id));
+  const partiesSet = new Set(country.parties.map((p) => p[PartyField.Id]));
 
   donations.forEach((donation) => {
     const year = donationYear(donation);
@@ -125,13 +126,13 @@ const buildPartySums = (country: CountryConfig, donations: Donation[]) => {
   country.years.forEach((year) => {
     const partyStatsForYear: Record<string, PartyStats> = {};
     const parties = country.parties.filter((party) =>
-      party.years.includes(year),
+      party[PartyField.Years].includes(year),
     );
 
     parties.forEach((party) => {
-      const stats = rawSums[year]?.[party.id];
+      const stats = rawSums[year]?.[party[PartyField.Id]];
       if (stats) {
-        partyStatsForYear[party.id] = {
+        partyStatsForYear[party[PartyField.Id]] = {
           sum: stats.sum,
           count: stats.count,
           average: stats.count === 0 ? 0 : stats.sum / stats.count,
@@ -409,7 +410,7 @@ const prebuildStaticDonationJsons = async (
     perYear[year] ??= [];
   });
   country.parties.forEach((party) => {
-    perParty[party.id] ??= [];
+    perParty[party[PartyField.Id]] ??= [];
   });
 
   for (const donation of donations) {

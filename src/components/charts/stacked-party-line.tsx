@@ -8,6 +8,7 @@ import type { ReceiverId } from "@/utils/types";
 
 import { AbsoluteMultipleColorsGradient } from "@/components/absolute-multiple-colors-gradient";
 import { cn } from "@/lib/utils";
+import { PartyField } from "@/types/party";
 import { partyColor } from "@/utils/color";
 import { getParty } from "@/utils/countries";
 import { formatCountryCurrency } from "@/utils/formatter";
@@ -58,7 +59,7 @@ export const StackedPartyDonations = ({
       {sortedSums.map(([party, data]) => (
         <div
           key={party}
-          title={`${getParty(country, party).short}: ${formatCountryCurrency(locale, data, country)}`}
+          title={`${getParty(country, party)[PartyField.Short]}: ${formatCountryCurrency(locale, data, country)}`}
           style={{
             backgroundColor: partyColor(party, country),
             [direction === "horizontal" ? "width" : "height"]:

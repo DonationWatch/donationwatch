@@ -8,6 +8,7 @@ import type {
   CountryConfig,
   UnloadedCountryConfig,
 } from "@/types/country-config";
+import type { Party } from "@/types/party";
 import type { Country, CountryCode } from "@/utils/countries";
 import type {
   Donation,
@@ -16,6 +17,7 @@ import type {
   ReceiverId,
 } from "@/utils/types";
 
+import { PartyField } from "@/types/party";
 import {
   ANONYMIZED_DONOR_KEYWORD,
   REDACTED_DONOR_KEYWORD,
@@ -516,17 +518,17 @@ export abstract class DataLoader {
       parties: Array.from(parties)
         // sort by party sum descending
         .toSorted((a, b) => partySums[b] - partySums[a])
-        .map((party) => {
+        .map<Party>((party) => {
           const config = this.partyConfig(party);
 
           return {
-            id: config.code as ReceiverId,
-            name: config.name,
-            short: config.short,
-            color: config.color,
-            wiki: config.wiki,
-            sum: partySums[party],
-            years: [...(partyYears[party] ?? [])].map(String),
+            [PartyField.Id]: config.code as ReceiverId,
+            [PartyField.Name]: config.name,
+            [PartyField.Short]: config.short,
+            [PartyField.Color]: config.color,
+            [PartyField.Wiki]: config.wiki,
+            [PartyField.Sum]: partySums[party],
+            [PartyField.Years]: [...(partyYears[party] ?? [])].map(String),
           };
         }),
     };

@@ -3,7 +3,8 @@ import { Map, Workflow } from "lucide-react";
 import { useState } from "react";
 
 import type { CountryConfig } from "@/types/country-config";
-import type { Donation, Party } from "@/utils/types";
+import type { Party } from "@/types/party";
+import type { Donation } from "@/utils/types";
 
 import { DonationStateMap } from "@/components/charts/donation-state-map";
 import { DonationStateSankey } from "@/components/charts/donation-state-sankey";

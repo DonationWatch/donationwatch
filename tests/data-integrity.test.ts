@@ -3,6 +3,7 @@ import { beforeAll, describe, expect, test } from "vitest";
 import type { CountryConfig } from "@/types/country-config";
 import type { Donation } from "@/utils/types";
 
+import { PartyField } from "@/types/party";
 import { COUNTRIES } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { getWikiArticles } from "@/utils/loader/wiki";
@@ -28,7 +29,10 @@ describe.each([...COUNTRIES].map((country) => ({ country })))(
     test("has wikipedia articles loaded", async () => {
       const articles = Object.keys(wikipediaArticles.articles);
 
-      countryConfig.parties.every(({ name, wiki }) => {
+      countryConfig.parties.every((party) => {
+        const name = party[PartyField.Name];
+        const wiki = party[PartyField.Wiki];
+
         if (!wiki) return;
 
         expect(

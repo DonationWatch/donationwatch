@@ -5,12 +5,14 @@ import type { CallbackDataParams } from "echarts/types/dist/shared";
 import { useLocale } from "next-intl";
 
 import type { CountryConfig } from "@/types/country-config";
-import type { Donation, Party } from "@/utils/types";
+import type { Party } from "@/types/party";
+import type { Donation } from "@/utils/types";
 
 import Loading from "@/components/loading/loading";
 import { useDonationsByYears } from "@/hooks/use-api";
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { PartyField } from "@/types/party";
 import { isNotNullandNotUndefined } from "@/utils/array";
 import { donationYear } from "@/utils/date";
 import { formatNumber } from "@/utils/formatter";
@@ -48,7 +50,9 @@ export const LoadedDonorReceiverHistogram = ({
     }
     if (!parties.length) {
       partiesSet.add(
-        country.parties.find((p) => p.id === donation[DonationField.Receiver])!,
+        country.parties.find(
+          (p) => p[PartyField.Id] === donation[DonationField.Receiver],
+        )!,
       );
     }
   });
@@ -60,7 +64,7 @@ export const LoadedDonorReceiverHistogram = ({
 
   if (!donations.length) return null;
 
-  const partyIdsSet = new Set<string>(parties.map((p) => p.id));
+  const partyIdsSet = new Set<string>(parties.map((p) => p[PartyField.Id]));
 
   donations.forEach((donation) => {
     if (!yearsSet.has(donationYear(donation))) return;

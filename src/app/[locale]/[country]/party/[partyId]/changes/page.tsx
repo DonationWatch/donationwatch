@@ -11,6 +11,7 @@ import {
   ArticleSectionTitle,
   ArticleSectionWrapper,
 } from "@/components/layout/article";
+import { PartyField } from "@/types/party";
 import { getCountryName, getParty } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { generateAlternates } from "@/utils/meta";
@@ -40,11 +41,11 @@ export async function generateMetadata(
 
   return {
     title: tPageTitle("party.changes", {
-      party: party.short,
+      party: party[PartyField.Short],
       country: getCountryName(countryConfig, tCountries),
     }),
     description: t("party.changes.detail.summary", {
-      party: party.short,
+      party: party[PartyField.Short],
     }),
     alternates: generateAlternates(`${country}/party/${partyId}/changes`),
   };
@@ -79,12 +80,12 @@ export default async function ChangesPage(
               as={"h1"}
               id={"sec-years-changes"}
               title={t("party.changes.detail.title", {
-                party: party.short,
+                party: party[PartyField.Short],
               })}
             />
             <p className="mb-6">
               {t("party.changes.detail.summary", {
-                party: party.short,
+                party: party[PartyField.Short],
               })}
             </p>
             <DynamicPartyDonationHistory

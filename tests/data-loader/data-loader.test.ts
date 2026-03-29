@@ -4,6 +4,7 @@ import { afterEach, beforeEach, describe, expect, test } from "vitest";
 import type { CountryCode } from "@/utils/countries";
 import type { DonorMetaDefinition, ReceiverId } from "@/utils/types";
 
+import { PartyField } from "@/types/party";
 import { ANONYMIZED_DONOR_KEYWORD } from "@/utils/config";
 import { Country } from "@/utils/countries";
 import { AddressField, DonationField, DonorType } from "@/utils/types";
@@ -212,10 +213,10 @@ describe("data loader", () => {
     const result = loader.processYearData(donations);
 
     expect(result.countryConfig.parties).toHaveLength(2);
-    expect(result.countryConfig.parties[0].id).toBe("BETA");
-    expect(result.countryConfig.parties[0].sum).toBe(200_000);
-    expect(result.countryConfig.parties[1].id).toBe("ALPHA");
-    expect(result.countryConfig.parties[1].sum).toBe(100_000);
+    expect(result.countryConfig.parties[0][PartyField.Id]).toBe("BETA");
+    expect(result.countryConfig.parties[0][PartyField.Sum]).toBe(200_000);
+    expect(result.countryConfig.parties[1][PartyField.Id]).toBe("ALPHA");
+    expect(result.countryConfig.parties[1][PartyField.Sum]).toBe(100_000);
   });
 
   test("processYearData assigns unique ids per donation", () => {

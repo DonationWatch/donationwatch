@@ -44,6 +44,7 @@ import {
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { PartyField } from "@/types/party";
 import {
   GITHUB_URL,
   SIDENAV_DONORS_VISIBLE,
@@ -129,13 +130,13 @@ export function AppSidebar({
                               : SIDENAV_PARTIES_VISIBLE,
                           )
                           .map((party) => (
-                            <SidebarMenuSubItem key={party.id}>
+                            <SidebarMenuSubItem key={party[PartyField.Id]}>
                               <SidebarActiveMenuSubButton
-                                activeHref={`/${locale}/${countryConfig.id}/party/${party.id}/`}
-                                href={`/${locale}/${countryConfig.id}/party/${party.id}/donors`}
+                                activeHref={`/${locale}/${countryConfig.id}/party/${party[PartyField.Id]}/`}
+                                href={`/${locale}/${countryConfig.id}/party/${party[PartyField.Id]}/donors`}
                               >
                                 <PartyDot
-                                  party={party.id}
+                                  party={party[PartyField.Id]}
                                   country={countryConfig}
                                   nameClassName={"truncate"}
                                 />

@@ -7,8 +7,9 @@ import { useParams, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 import type { CountryConfig } from "@/types/country-config";
+import type { Party } from "@/types/party";
 import type { Country } from "@/utils/countries";
-import type { Party, ReceiverId } from "@/utils/types";
+import type { ReceiverId } from "@/utils/types";
 
 import { PartyDot } from "@/components/parties/party-dot";
 import {
@@ -21,6 +22,7 @@ import { useCountryConfig, useDonorNames } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { useSearchDialog } from "@/hooks/use-search-dialog";
 import { cn } from "@/lib/utils";
+import { PartyField } from "@/types/party";
 import { getParty } from "@/utils/countries";
 import { Features, hasFeature } from "@/utils/features";
 import { clientSha1 } from "@/utils/hash";
@@ -120,9 +122,9 @@ const GlobalSearch = ({
 
   const filteredParties = allParties.filter(
     (party) =>
-      party.id.toLowerCase().includes(searchLower) ||
-      party.name.toLowerCase().includes(searchLower) ||
-      party.short.toLowerCase().includes(searchLower),
+      party[PartyField.Id].toLowerCase().includes(searchLower) ||
+      party[PartyField.Name].toLowerCase().includes(searchLower) ||
+      party[PartyField.Short].toLowerCase().includes(searchLower),
   );
   const filteredYears = allYears.filter((year) =>
     year.toLowerCase().includes(searchLower),
@@ -138,9 +140,12 @@ const GlobalSearch = ({
 
   const selectParty = (party: Party) => {
     onClose();
-    router.push(`/${locale}/${countryConfig.id}/party/${party.id}`, {
-      scroll: true,
-    });
+    router.push(
+      `/${locale}/${countryConfig.id}/party/${party[PartyField.Id]}`,
+      {
+        scroll: true,
+      },
+    );
   };
   const selectDonor = (donorId: string) => {
     onClose();
@@ -167,7 +172,7 @@ const GlobalSearch = ({
       title: tSearch("parties"),
       items: visibleParties.map((party) => ({
         type: "party",
-        id: party.id,
+        id: party[PartyField.Id],
       })),
     },
     {

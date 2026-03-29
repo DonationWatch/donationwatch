@@ -2,13 +2,14 @@
 import { useLocale } from "next-intl";
 
 import type { CountryConfig } from "@/types/country-config";
-import type { Party } from "@/utils/types";
+import type { Party } from "@/types/party";
 
 import { RankBadge } from "@/components/donations/ranking-item";
 import Loading from "@/components/loading/loading";
 import { PercentageHint } from "@/components/percentage-hint";
 import { useDonationsByParty } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { PartyField } from "@/types/party";
 import { formatCountryCurrency } from "@/utils/formatter";
 import { DonationField, DonorType } from "@/utils/types";
 
@@ -37,7 +38,7 @@ export const LoadingPartyDonorTypeText = ({
   let totalSum = 0;
 
   donations.forEach((donation) => {
-    if (donation[DonationField.Receiver] !== party.id) return;
+    if (donation[DonationField.Receiver] !== party[PartyField.Id]) return;
 
     const donorType = donation[DonationField.DonorType] ?? DonorType.Other;
 
@@ -59,7 +60,7 @@ export const LoadingPartyDonorTypeText = ({
         <br />
         {t("party.donor_types.p1", {
           count: sortedEntries.length,
-          party: party.short,
+          party: party[PartyField.Short],
         })}
       </p>
       <p>{t("party.donor_types.p2")}</p>

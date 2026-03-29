@@ -4,7 +4,8 @@ import type { ReactNode } from "react";
 import { useLocale } from "next-intl";
 
 import type { CountryConfig } from "@/types/country-config";
-import type { Donation, Party } from "@/utils/types";
+import type { Party } from "@/types/party";
+import type { Donation } from "@/utils/types";
 
 import { DonorLink } from "@/components/donors/donor-link";
 import { FormatAnd } from "@/components/formatter";
@@ -14,6 +15,7 @@ import { FaqSchema } from "@/components/schema";
 import { Translation } from "@/components/translation";
 import { useDonationsByParty } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { PartyField } from "@/types/party";
 import { isNotNullandNotUndefined } from "@/utils/array";
 import { donationYear } from "@/utils/date";
 import {
@@ -51,7 +53,7 @@ export const PartyDonorPageText = ({
 
   const partyDonations: Donation[] = [];
   donations.map((donation) => {
-    if (donation[DonationField.Receiver] !== party.id) return;
+    if (donation[DonationField.Receiver] !== party[PartyField.Id]) return;
 
     const year = donationYear(donation);
 
@@ -124,9 +126,9 @@ export const PartyDonorPageText = ({
     answerHTML?: ReactNode;
   }[] = [
     {
-      question: t("party.qa.sum.q", { party: party.short }),
+      question: t("party.qa.sum.q", { party: party[PartyField.Short] }),
       answer: t("party.qa.sum.a", {
-        party: party.short,
+        party: party[PartyField.Short],
         sum: formatCountryCurrency(locale, sum, country),
         count: partyDonations.length,
         minYear: formatYear(
@@ -141,9 +143,9 @@ export const PartyDonorPageText = ({
       }),
     },
     {
-      question: t("party.qa.top_donors.q", { party: party.short }),
+      question: t("party.qa.top_donors.q", { party: party[PartyField.Short] }),
       answer: t("party.qa.top_donors.a", {
-        party: party.short,
+        party: party[PartyField.Short],
         donors: formatAnd(
           locale,
           topDonors.map(
@@ -156,7 +158,7 @@ export const PartyDonorPageText = ({
         <Translation
           text={t.raw("party.qa.top_donors.a")}
           variables={{
-            party: party.short,
+            party: party[PartyField.Short],
             donors: (
               <FormatAnd
                 locale={locale}
@@ -175,7 +177,7 @@ export const PartyDonorPageText = ({
     biggestSingularDonation
       ? {
           question: t("party.qa.largest_singular.q", {
-            party: party.short,
+            party: party[PartyField.Short],
           }),
           answer: t("party.qa.largest_singular.a", {
             amount: formatCountryCurrency(
@@ -216,10 +218,10 @@ export const PartyDonorPageText = ({
     biggestDonor
       ? {
           question: t("party.qa.biggest_overall.q", {
-            party: party.short,
+            party: party[PartyField.Short],
           }),
           answer: t("party.qa.biggest_overall.a", {
-            party: party.short,
+            party: party[PartyField.Short],
             donor: biggestDonor.name,
             sum: formatCountryCurrency(locale, biggestDonor.sum, country),
           }),
@@ -228,7 +230,7 @@ export const PartyDonorPageText = ({
             <Translation
               text={t.raw("party.qa.biggest_overall.a")}
               variables={{
-                party: party.short,
+                party: party[PartyField.Short],
                 donor: (
                   <DonorLink country={country} donor={biggestDonor.name} />
                 ),
@@ -241,10 +243,10 @@ export const PartyDonorPageText = ({
     frequentDonor
       ? {
           question: t("party.qa.frequent_donor.q", {
-            party: party.short,
+            party: party[PartyField.Short],
           }),
           answer: t("party.qa.frequent_donor.a", {
-            party: party.short,
+            party: party[PartyField.Short],
             donor: frequentDonor.name,
             count: frequentDonor.count,
             sum: formatCountryCurrency(
@@ -257,7 +259,7 @@ export const PartyDonorPageText = ({
             <Translation
               text={t.raw("party.qa.frequent_donor.a")}
               variables={{
-                party: party.short,
+                party: party[PartyField.Short],
                 donor: (
                   <DonorLink country={country} donor={frequentDonor.name} />
                 ),
@@ -280,11 +282,11 @@ export const PartyDonorPageText = ({
       <ArticleSectionTitle
         as={"h1"}
         id={"sec-party-donors"}
-        title={t("party.donors.title", { party: party.short })}
+        title={t("party.donors.title", { party: party[PartyField.Short] })}
       />
       <p className="mb-6">
         {t("party.donors.summary", {
-          party: party.short,
+          party: party[PartyField.Short],
           minYear: formatYear(
             locale,
             new Date(firstDonation[DonationField.Date]),
