@@ -1,8 +1,10 @@
 "use client";
 
 import { useLocale } from "next-intl";
+import dynamic from "next/dynamic";
 
-import type { CountryConfig } from "@/utils/countries";
+import type { UseNormalizedData } from "@/hooks/use-api";
+import type { CountryConfig } from "@/types/country-config";
 
 import { FormatAnd } from "@/components/formatter";
 import { ArticleSection } from "@/components/layout/article";
@@ -10,17 +12,125 @@ import Loading from "@/components/loading/loading";
 import { useNormalized } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
-export const FilteredReceiversList = ({
+// We use a dynamic component as we don't care about server rendering + client hydrating this content
+export const DynamicTransparencyPageContent = dynamic(
+  () => Promise.resolve(TransparencyPageContent),
+  { ssr: false },
+);
+
+const TransparencyPageContent = ({
   countryConfig,
+  texts,
 }: {
   countryConfig: CountryConfig;
+  texts: {
+    filteredReceivers: { title: string; p0: string; p1: string };
+    filteredDonors: { title: string; p0: string; p1: string };
+    normalizedReceivers: { title: string; p0: string };
+    aggregatedDonors: { title: string; p0: string; p1: string };
+  };
 }) => {
   const tData = useTranslations("data");
-  const locale = useLocale();
   const { data, error, isLoading } = useNormalized(countryConfig);
 
   if (isLoading) return <Loading />;
   if (error || !data) return tData("error");
+
+  return (
+    <>
+      <TransparencyReceiverFiltersList
+        data={data}
+        title={texts.filteredReceivers.title}
+        p0={texts.filteredReceivers.p0}
+        p1={texts.filteredReceivers.p1}
+      />
+
+      <TransparencyDonorFiltersList
+        data={data}
+        title={texts.filteredDonors.title}
+        p0={texts.filteredDonors.p0}
+        p1={texts.filteredDonors.p1}
+      />
+
+      <NormalizedReceiversList
+        data={data}
+        title={texts.normalizedReceivers.title}
+        description={texts.normalizedReceivers.p0}
+      />
+
+      <ArticleSection title={texts.aggregatedDonors.title}>
+        <p>{texts.aggregatedDonors.p0}</p>
+        <p>{texts.aggregatedDonors.p1}</p>
+        <AggregatedDonorsList data={data} />
+      </ArticleSection>
+    </>
+  );
+};
+
+const TransparencyReceiverFiltersList = ({
+  data,
+  title,
+  p0,
+  p1,
+}: {
+  data: UseNormalizedData;
+  title: string;
+  p0: string;
+  p1: string;
+}) => {
+  if (!data.receiverFilters) return null;
+
+  return (
+    <ArticleSection title={title}>
+      <p>{p0}</p>
+      <ul className="list-inside list-disc text-sm">
+        {data.receiverFilters.map((filter, idx) => (
+          <li key={`filter-${idx}`}>
+            <span className="rounded bg-neutral-200 px-1 py-0.5 font-mono dark:bg-neutral-900">
+              {filter.toString()}
+            </span>
+          </li>
+        ))}
+      </ul>
+      <p>{p1}</p>
+      <FilteredReceiversList data={data} />
+    </ArticleSection>
+  );
+};
+
+const TransparencyDonorFiltersList = ({
+  data,
+  title,
+  p0,
+  p1,
+}: {
+  data: UseNormalizedData;
+  title: string;
+  p0: string;
+  p1: string;
+}) => {
+  if (!data.donorFilters) return null;
+
+  return (
+    <ArticleSection title={title}>
+      <p>{p0}</p>
+      <ul className="list-inside list-disc text-sm">
+        {data.donorFilters.map((filter, idx) => (
+          <li key={`filter-${idx}`}>
+            <span className="rounded bg-neutral-200 px-1 py-0.5 font-mono dark:bg-neutral-900">
+              {filter.toString()}
+            </span>
+          </li>
+        ))}
+      </ul>
+      <p>{p1}</p>
+      <FilteredDonorsList data={data} />
+    </ArticleSection>
+  );
+};
+
+const FilteredReceiversList = ({ data }: { data: UseNormalizedData }) => {
+  const locale = useLocale();
 
   return (
     <p className="text-sm">
@@ -34,17 +144,8 @@ export const FilteredReceiversList = ({
   );
 };
 
-export const FilteredDonorsList = ({
-  countryConfig,
-}: {
-  countryConfig: CountryConfig;
-}) => {
-  const tData = useTranslations("data");
+const FilteredDonorsList = ({ data }: { data: UseNormalizedData }) => {
   const locale = useLocale();
-  const { data, error, isLoading } = useNormalized(countryConfig);
-
-  if (isLoading) return <Loading />;
-  if (error || !data) return tData("error");
 
   return (
     <p className="text-sm">
@@ -58,20 +159,16 @@ export const FilteredDonorsList = ({
   );
 };
 
-export const NormalizedReceiversList = ({
+const NormalizedReceiversList = ({
+  data,
   title,
   description,
-  countryConfig,
 }: {
+  data: UseNormalizedData;
   title: string;
   description: string;
-  countryConfig: CountryConfig;
 }) => {
   const locale = useLocale();
-  const { data, error, isLoading } = useNormalized(countryConfig);
-
-  if (isLoading) return null; // Don't show anything while loading for this conditional section? Or maybe separate loading state?
-  if (error || !data) return null;
 
   if (!data.normalizedReceivers.length) return null;
 
@@ -102,17 +199,8 @@ export const NormalizedReceiversList = ({
   );
 };
 
-export const AggregatedDonorsList = ({
-  countryConfig,
-}: {
-  countryConfig: CountryConfig;
-}) => {
-  const tData = useTranslations("data");
+const AggregatedDonorsList = ({ data }: { data: UseNormalizedData }) => {
   const locale = useLocale();
-  const { data, error, isLoading } = useNormalized(countryConfig);
-
-  if (isLoading) return <Loading />;
-  if (error || !data) return tData("error");
 
   return (
     <ul data-testid="transparency-list" className="text-sm">

@@ -1,4 +1,4 @@
-import type { CountryConfig } from "../countries";
+import type { CountryConfig } from "@/types/country-config";
 
 import { donationYear } from "../date";
 import { numbersSum } from "../math";

@@ -6,7 +6,8 @@ import { useLocale } from "next-intl";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
-import type { Country, CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
+import type { Country } from "@/utils/countries";
 import type { Party, ReceiverId } from "@/utils/types";
 
 import { PartyDot } from "@/components/parties/party-dot";

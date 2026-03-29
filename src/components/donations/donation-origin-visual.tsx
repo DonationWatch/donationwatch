@@ -2,6 +2,7 @@
 import { Map, Workflow } from "lucide-react";
 import { useState } from "react";
 
+import type { CountryConfig } from "@/types/country-config";
 import type { Donation, Party } from "@/utils/types";
 
 import { DonationStateMap } from "@/components/charts/donation-state-map";
@@ -10,7 +11,7 @@ import { DynamicGeoJsonLoader } from "@/components/charts/dynamic-geojson-loader
 import { NavigationTab } from "@/components/layout/navigation-tab";
 import { TabList } from "@/components/tabs";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
-import { type CountryConfig, getCountryName } from "@/utils/countries";
+import { getCountryName } from "@/utils/countries";
 
 type ChartType = "map" | "sankey";
 const DEFAULT_TYPE: ChartType = "map";

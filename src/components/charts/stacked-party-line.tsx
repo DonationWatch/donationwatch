@@ -1,3 +1,4 @@
+import type { CountryConfig } from "@/types/country-config";
 import type {
   PartyStats,
   PartyYearsSums,
@@ -8,7 +9,7 @@ import type { ReceiverId } from "@/utils/types";
 import { AbsoluteMultipleColorsGradient } from "@/components/absolute-multiple-colors-gradient";
 import { cn } from "@/lib/utils";
 import { partyColor } from "@/utils/color";
-import { type CountryConfig, getParty } from "@/utils/countries";
+import { getParty } from "@/utils/countries";
 import { formatCountryCurrency } from "@/utils/formatter";
 
 export const StackedPartyDonations = ({

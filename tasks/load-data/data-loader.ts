@@ -4,12 +4,15 @@ import fs, { constants } from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
 
+import type {
+  CountryConfig,
+  UnloadedCountryConfig,
+} from "@/types/country-config";
 import type { Country, CountryCode } from "@/utils/countries";
 import type {
   Donation,
   DonorMetaDefinition,
   ExtractedDonationAddress,
-  Party,
   ReceiverId,
 } from "@/utils/types";
 
@@ -53,11 +56,10 @@ export type ExtractedYearData = Omit<
  */
 interface ProcessedDonationData {
   donations: Donation[];
-  donationData: {
-    years: string[];
-    parties: Party[];
-  };
+  countryConfig: CountryConfig;
   transparencyData: {
+    donorFilters?: UnloadedCountryConfig["donorFilters"];
+    receiverFilters?: UnloadedCountryConfig["receiverFilters"];
     filteredDonors: string[];
     filteredReceivers: string[];
     normalizedDonors: [string, string[]][];
@@ -119,7 +121,7 @@ export abstract class DataLoader {
   private readonly donationsDataPath: string;
   private readonly transparencyDataPath: string;
   private readonly donorMetaPath: string;
-  private readonly configPath: string;
+  private readonly countryConfigPath: string;
   private readonly buildMetaPath: string;
   protected readonly anonymizedDonorsPath: string;
 
@@ -146,7 +148,7 @@ export abstract class DataLoader {
     this.donorMetaPath = path.join(this.taskDataDir, "donor-meta.ts");
     this.transparencyDataPath = path.join(this.taskDataDir, "transparency.ts");
 
-    this.configPath = path.join(this.dataDir, "config.ts");
+    this.countryConfigPath = path.join(this.dataDir, "country-config.ts");
     this.buildMetaPath = path.join(this.dataDir, "build.ts");
 
     this.anonymizedDonorsPath = path.join(
@@ -286,7 +288,7 @@ export abstract class DataLoader {
   public processYearData(
     extractedData: ExtractedYearData[],
   ): ProcessedDonationData {
-    const countryConfig = COUNTRY_CONFIG[this.country];
+    const rawUnloadedCountryConfig = COUNTRY_CONFIG[this.country];
     const parties = new Set<string>([]);
     const partySums: Record<string, number> = {};
     const partyYears: Record<string, Set<string>> = {};
@@ -301,7 +303,7 @@ export abstract class DataLoader {
         // Uses absolute value to also filter out negative donations below the threshold
         if (
           Math.abs(d[DonationField.Amount]) <
-          countryConfig.minPublicDonationAmount
+          rawUnloadedCountryConfig.minPublicDonationAmount
         ) {
           return false;
         }
@@ -312,12 +314,12 @@ export abstract class DataLoader {
 
     const filteredOutDonors = new Set<string>();
     const filteredOutReceivers = new Set<string>();
-    const donorFilters = (countryConfig.donorFilters ?? []).map(
+    const donorFiltersRegex = (rawUnloadedCountryConfig.donorFilters ?? []).map(
       (filter) => new RegExp(filter, "i"),
     );
-    const receiverFilters = (countryConfig.receiverFilters ?? []).map(
-      (filter) => new RegExp(filter, "i"),
-    );
+    const receiverFilterRegex = (
+      rawUnloadedCountryConfig.receiverFilters ?? []
+    ).map((filter) => new RegExp(filter, "i"));
 
     const normalizedReceivers: Record<string, Set<string>> = {};
 
@@ -372,7 +374,7 @@ export abstract class DataLoader {
           const receiver = d[DonationField.Receiver];
 
           // filter if ignored receiver
-          if (!applyDonorReceiverFilters(receiver, receiverFilters)) {
+          if (!applyDonorReceiverFilters(receiver, receiverFilterRegex)) {
             filteredOutReceivers.add(receiver);
             return false;
           }
@@ -402,7 +404,7 @@ export abstract class DataLoader {
       );
 
       // filter if ignored donor
-      if (!applyDonorReceiverFilters(donorName, donorFilters)) {
+      if (!applyDonorReceiverFilters(donorName, donorFiltersRegex)) {
         filteredOutDonors.add(donorName);
         return;
       }
@@ -531,10 +533,19 @@ export abstract class DataLoader {
 
     assertNoDuplicateIds(donations);
 
+    const { donorFilters, receiverFilters, ...countryConfig } =
+      rawUnloadedCountryConfig;
+
     return {
       donations,
-      donationData,
+      countryConfig: {
+        ...countryConfig,
+        years: donationData.years,
+        parties: donationData.parties,
+      },
       transparencyData: {
+        donorFilters,
+        receiverFilters,
         filteredDonors: [...filteredOutDonors].toSorted(([a], [b]) =>
           b.localeCompare(a),
         ),
@@ -588,17 +599,12 @@ export abstract class DataLoader {
         }),
       ),
       writeIfChanged(
-        this.configPath,
-        jsonAsTsModuleWithType(JSON.stringify(processedData.donationData), {
-          name: `{
-    years: string[];
-    parties: Party[];
-  }`,
-          as: `{
-    years: string[];
-    parties: Party[];
-  }`,
-          import: 'import type { Party } from "../../../src/utils/types";',
+        this.countryConfigPath,
+        jsonAsTsModuleWithType(JSON.stringify(processedData.countryConfig), {
+          name: `CountryConfig`,
+          as: `CountryConfig`,
+          import:
+            'import type { CountryConfig } from "@/types/country-config";',
         }),
       ),
     ]);

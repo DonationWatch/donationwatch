@@ -1,4 +1,6 @@
-import type { Country, CountryConfig } from "../countries";
+import type { CountryConfig } from "@/types/country-config";
+
+import type { Country } from "../countries";
 import type { ReceiverId } from "../types";
 
 import { getBuild } from "./build";

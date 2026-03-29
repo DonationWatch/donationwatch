@@ -1,6 +1,7 @@
 import type { MarkLineComponentOption } from "echarts";
 
-import type { CountryConfig } from "./countries";
+import type { CountryConfig } from "@/types/country-config";
+
 import type { IsoDate } from "./types";
 
 const electionIcon = (color: string) =>

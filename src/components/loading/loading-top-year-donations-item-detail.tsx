@@ -2,7 +2,7 @@
 import { useLocale } from "next-intl";
 import { useEffect, useMemo, useRef } from "react";
 
-import type { CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
 import type { Donation, ReceiverId } from "@/utils/types";
 
 import { RankingItemLine } from "@/components/donations/ranking-item-line";

@@ -1,4 +1,4 @@
-import type { CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
 import type { ConstLocale } from "@/utils/locales";
 import type { Donation, ReceiverId } from "@/utils/types";
 

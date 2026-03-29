@@ -1,4 +1,4 @@
-import type { CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
 
 export const enum Features {
   // default value, no special features supported

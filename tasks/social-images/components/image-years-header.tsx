@@ -4,17 +4,14 @@
 
 import type { PropsWithChildren, ReactNode } from "react";
 
+import type { CountryConfig } from "@/types/country-config";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 import type { ConstLocale } from "@/utils/locales";
 import type { Donation, Party, ReceiverId } from "@/utils/types";
 
 import { PageLogo } from "@/components/layout/page-logo";
 import { partyColor } from "@/utils/color";
-import {
-  type CountryConfig,
-  getCountryName,
-  getParty,
-} from "@/utils/countries";
+import { getCountryName, getParty } from "@/utils/countries";
 import { getParties } from "@/utils/data/get-parties";
 import { getPartiesSum } from "@/utils/data/get-parties-sum";
 import { donationYear } from "@/utils/date";

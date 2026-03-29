@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 import { ArrowRight } from "lucide-react";
 
-import type { CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
 
 import { CurrencyRankingItem } from "@/components/donations/ranking-item";
 import { DonorLink } from "@/components/donors/donor-link";

@@ -8,6 +8,7 @@ import type {
 
 import { useLocale } from "next-intl";
 
+import type { CountryConfig } from "@/types/country-config";
 import type { Donation, Party, ReceiverId } from "@/utils/types";
 
 import Loading from "@/components/loading/loading";
@@ -17,7 +18,7 @@ import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { isNotNullandNotUndefined } from "@/utils/array";
 import { partyColor } from "@/utils/color";
-import { type CountryConfig, getParty } from "@/utils/countries";
+import { getParty } from "@/utils/countries";
 import { donationYear } from "@/utils/date";
 import { formatCountryCurrency, formatPartyShortName } from "@/utils/formatter";
 import { DonationField } from "@/utils/types";

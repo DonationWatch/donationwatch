@@ -1,4 +1,5 @@
-import type { Country, CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
+import type { Country } from "@/utils/countries";
 import type { Donation, DonorMetaDefinition } from "@/utils/types";
 
 import { getCountryConfig } from "@/utils/data/get-country-config";

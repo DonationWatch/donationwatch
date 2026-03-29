@@ -1,4 +1,4 @@
-import type { CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
 import type { ReceiverId } from "@/utils/types";
 
 import { cn } from "@/lib/utils";

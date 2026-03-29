@@ -1,4 +1,4 @@
-import type { CountryConfig } from "../countries";
+import type { CountryConfig } from "@/types/country-config";
 
 import { donationYear } from "../date";
 import { Donation, DonationField, ReceiverId } from "../types";

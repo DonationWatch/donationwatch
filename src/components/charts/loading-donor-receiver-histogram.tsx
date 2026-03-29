@@ -4,7 +4,7 @@ import type { CallbackDataParams } from "echarts/types/dist/shared";
 
 import { useLocale } from "next-intl";
 
-import type { CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
 import type { Donation, Party } from "@/utils/types";
 
 import Loading from "@/components/loading/loading";

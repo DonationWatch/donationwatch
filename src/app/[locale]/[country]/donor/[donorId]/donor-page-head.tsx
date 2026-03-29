@@ -2,7 +2,8 @@
 import { HatGlasses, Info, Lock } from "lucide-react";
 import { useLocale } from "next-intl";
 
-import type { Countries, Country, CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
+import type { Countries, Country } from "@/utils/countries";
 import type { Donation, DonorMeta, ReceiverId } from "@/utils/types";
 
 import { AbsoluteMultipleColorsGradient } from "@/components/absolute-multiple-colors-gradient";

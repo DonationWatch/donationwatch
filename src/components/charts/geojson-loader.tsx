@@ -7,7 +7,7 @@ import { VisualMapComponent } from "echarts/components";
 import * as echarts from "echarts/core";
 import { useEffect, useState } from "react";
 
-import type { CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
 
 import { Country } from "@/utils/countries";
 

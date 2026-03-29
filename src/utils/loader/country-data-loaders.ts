@@ -1,6 +1,8 @@
+import type { CountryConfig } from "@/types/country-config";
+
 import type { Country } from "../countries";
 import type { HistoryEntry } from "../data/get-history";
-import type { Donation, Party } from "../types";
+import type { Donation } from "../types";
 import type { BigDonor } from "./biggest-donors";
 import type { PartyYearsSums } from "./party-years-sums";
 
@@ -10,12 +12,7 @@ interface CountryLoaders {
   partySums: (country: Country) => Promise<DefaultExport<PartyYearsSums>>;
   mostRecent: (country: Country) => Promise<DefaultExport<HistoryEntry[]>>;
   biggestDonors: (country: Country) => Promise<DefaultExport<BigDonor[]>>;
-  yearParties: (country: Country) => Promise<
-    DefaultExport<{
-      years: string[];
-      parties: Party[];
-    }>
-  >;
+  countryConfig: (country: Country) => Promise<DefaultExport<CountryConfig>>;
   biggestDonations: (country: Country) => Promise<DefaultExport<Donation[]>>;
 }
 
@@ -25,7 +22,8 @@ const loaders: CountryLoaders = {
   mostRecent: (country: Country) => import(`../../data/${country}/most-recent`),
   biggestDonors: (country: Country) =>
     import(`../../data/${country}/biggest-donors`),
-  yearParties: (country: Country) => import(`../../data/${country}/config`),
+  countryConfig: (country: Country) =>
+    import(`../../data/${country}/country-config`),
   biggestDonations: (country: Country) =>
     import(`../../data/${country}/biggest-donations`),
 };

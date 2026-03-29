@@ -4,12 +4,13 @@ import type { SankeyNodeItemOption } from "echarts/types/src/chart/sankey/Sankey
 
 import { useLocale } from "next-intl";
 
+import type { CountryConfig } from "@/types/country-config";
 import type { Donation, Party, ReceiverId } from "@/utils/types";
 
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { partyColor } from "@/utils/color";
-import { Country, type CountryConfig } from "@/utils/countries";
+import { Country } from "@/utils/countries";
 import { donationYear } from "@/utils/date";
 import { formatCountryCurrency, formatPartyShortName } from "@/utils/formatter";
 import { sourceId, targetId } from "@/utils/graph";

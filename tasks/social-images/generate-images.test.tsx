@@ -9,7 +9,7 @@ import satori from "satori";
 import { fileURLToPath } from "url";
 import { afterAll, beforeAll, describe, it } from "vitest";
 
-import type { CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
 import type { BigDonor } from "@/utils/loader/biggest-donors";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 import type { Donation } from "@/utils/types";

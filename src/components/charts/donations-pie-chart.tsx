@@ -5,17 +5,14 @@ import type { TreemapSeriesNodeItemOption } from "echarts/types/src/chart/treema
 import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
 
+import type { CountryConfig } from "@/types/country-config";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 import type { ReceiverId } from "@/utils/types";
 
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { partyColor } from "@/utils/color";
-import {
-  type CountryConfig,
-  getCountryName,
-  getParty,
-} from "@/utils/countries";
+import { getCountryName, getParty } from "@/utils/countries";
 import { formatCountryCurrency, formatYearsRange } from "@/utils/formatter";
 
 import { ExpandableReactEchart } from "./expandable-react-echart";

@@ -3,7 +3,8 @@ import type { EChartsOption } from "echarts";
 
 import { useLocale } from "next-intl";
 
-import type { Countries, CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
+import type { Countries } from "@/utils/countries";
 import type { Donation, Party, ReceiverId } from "@/utils/types";
 
 import { useChart } from "@/hooks/use-chart";

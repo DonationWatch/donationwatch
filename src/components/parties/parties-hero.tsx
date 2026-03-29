@@ -3,7 +3,7 @@ import type { CSSProperties } from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 
-import type { CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
 import type { ConstLocale } from "@/utils/locales";
 import type { Party } from "@/utils/types";
 

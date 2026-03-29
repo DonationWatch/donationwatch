@@ -3,7 +3,7 @@ import type { Messages, createTranslator } from "next-intl";
 
 import { DownloadIcon } from "lucide-react";
 
-import type { CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
 import type { StrictNamespacedTranslator } from "@/utils/translator";
 import type { Donation } from "@/utils/types";
 

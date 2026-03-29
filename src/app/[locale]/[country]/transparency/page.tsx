@@ -3,13 +3,8 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
-import {
-  AggregatedDonorsList,
-  FilteredDonorsList,
-  FilteredReceiversList,
-  NormalizedReceiversList,
-} from "@/app/[locale]/[country]/transparency/transparency-list";
-import { Article, ArticleSection } from "@/components/layout/article";
+import { DynamicTransparencyPageContent } from "@/app/[locale]/[country]/transparency/transparency-list";
+import { Article } from "@/components/layout/article";
 import { getCountryName } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { LOCALES } from "@/utils/locales";
@@ -65,53 +60,32 @@ export default async function Page(
 
   return (
     <Article title={tTransparency("title")}>
-      {countryConfig.receiverFilters ? (
-        <ArticleSection title={tTransparency("section.filtered_receivers")}>
-          <p>{tTransparency("filtered_receivers.p0")}</p>
-          <ul className="list-inside list-disc text-sm">
-            {countryConfig.receiverFilters.map((filter, idx) => (
-              <li key={`filter-${idx}`}>
-                <span className="rounded bg-neutral-200 px-1 py-0.5 font-mono dark:bg-neutral-900">
-                  {filter.toString()}
-                </span>
-              </li>
-            ))}
-          </ul>
-          <p>{tTransparency("filtered_receivers.p1")}</p>
-          <FilteredReceiversList countryConfig={countryConfig} />
-        </ArticleSection>
-      ) : null}
-
-      {countryConfig.donorFilters ? (
-        <ArticleSection title={tTransparency("section.filtered_donors")}>
-          <p>{tTransparency("filtered_donors.p0")}</p>
-          <ul className="list-inside list-disc text-sm">
-            {countryConfig.donorFilters.map((filter, idx) => (
-              <li key={`filter-${idx}`}>
-                <span className="rounded bg-neutral-200 px-1 py-0.5 font-mono dark:bg-neutral-900">
-                  {filter.toString()}
-                </span>
-              </li>
-            ))}
-          </ul>
-          <p>{tTransparency("filtered_donors.p1")}</p>
-          <FilteredDonorsList countryConfig={countryConfig} />
-        </ArticleSection>
-      ) : null}
-
-      <NormalizedReceiversList
-        title={tTransparency("receivers.title")}
-        description={tTransparency("receivers.p0", {
-          country: getCountryName(countryConfig, tCountries),
-        })}
+      <DynamicTransparencyPageContent
         countryConfig={countryConfig}
+        texts={{
+          filteredReceivers: {
+            title: tTransparency("section.filtered_receivers"),
+            p0: tTransparency("filtered_receivers.p0"),
+            p1: tTransparency("filtered_receivers.p1"),
+          },
+          filteredDonors: {
+            title: tTransparency("section.filtered_donors"),
+            p0: tTransparency("filtered_donors.p0"),
+            p1: tTransparency("filtered_donors.p1"),
+          },
+          normalizedReceivers: {
+            title: tTransparency("receivers.title"),
+            p0: tTransparency("receivers.p0", {
+              country: getCountryName(countryConfig, tCountries),
+            }),
+          },
+          aggregatedDonors: {
+            title: tTransparency("section.aggregated"),
+            p0: tTransparency("p0"),
+            p1: tTransparency("p1"),
+          },
+        }}
       />
-
-      <ArticleSection title={tTransparency("section.aggregated")}>
-        <p>{tTransparency("p0")}</p>
-        <p>{tTransparency("p1")}</p>
-        <AggregatedDonorsList countryConfig={countryConfig} />
-      </ArticleSection>
     </Article>
   );
 }

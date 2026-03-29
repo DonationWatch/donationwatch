@@ -2,7 +2,8 @@
 import { ArrowUpRight } from "lucide-react";
 import { useLocale } from "next-intl";
 
-import type { CountryCode, CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
+import type { CountryCode } from "@/utils/countries";
 
 import { useDetectedCountry } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";

@@ -1,6 +1,8 @@
+import type { CountryConfig } from "@/types/country-config";
+
 import type { DonorType, ReceiverId } from "./types";
 
-import { type CountryConfig, getParty } from "./countries";
+import { getParty } from "./countries";
 
 export const partyColor = (partyId: ReceiverId, country: CountryConfig) => {
   return getParty(country, partyId).color;

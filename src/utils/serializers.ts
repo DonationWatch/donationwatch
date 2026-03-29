@@ -1,4 +1,4 @@
-import type { CountryConfig } from "./countries";
+import type { CountryConfig } from "@/types/country-config";
 
 const YEAR_DELIMITER = "-";
 

@@ -10,8 +10,8 @@ import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
 import { useMemo } from "react";
 
 import type { DonationsDocumentWithoutDonorIds } from "@/lib/api/donations-document";
+import type { CountryConfig } from "@/types/country-config";
 import type { NonEmptyArray } from "@/utils/array";
-import type { CountryConfig } from "@/utils/countries";
 import type { RootTranslator } from "@/utils/translator";
 import type { Donation, Party, ReceiverId } from "@/utils/types";
 

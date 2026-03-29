@@ -1,6 +1,7 @@
+import type { CountryConfig } from "@/types/country-config";
 import type { StrictNamespacedTranslator } from "@/utils/translator";
 
-import { type CountryConfig, getCountryName } from "./countries";
+import { getCountryName } from "./countries";
 
 export const generateCountryTitlePart = (
   country: CountryConfig,

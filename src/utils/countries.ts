@@ -1,17 +1,13 @@
-import type { NonEmptyArray } from "@/utils/array";
+import type {
+  CountryConfig,
+  UnloadedCountryConfig,
+} from "@/types/country-config";
 import type { StrictNamespacedTranslator } from "@/utils/translator";
 
 import { Features } from "@/utils/features";
 
 import type En from "../messages/en.json";
-import type { LambertConformalConicParams } from "./map";
-import type {
-  DonorFilter,
-  IsoDate,
-  Party,
-  ReceiverFilter,
-  ReceiverId,
-} from "./types";
+import type { Party, ReceiverId } from "./types";
 
 export const enum Country {
   germany = "germany",
@@ -88,58 +84,8 @@ export const COUNTRIES = new Set<Country>([
   Country.sweden,
 ]);
 
-export interface CountryConfig {
-  readonly id: Country;
-  readonly years: string[];
-  // This is sorted by sum. Meaning first entry is the party with the highest sum of donations.
-  readonly parties: Party[];
-  readonly legislativeYears?: NonEmptyArray<NonEmptyArray<string>>;
-
-  // minimum year from which the data isn't complete yet
-  readonly preliminaryDataSince?: string;
-  readonly minPublicDonationAmount: number;
-  readonly source: { name: string; url: string };
-  readonly currency: Currency;
-  readonly code: CountryCode;
-
-  // Minimum year that this country has data for.
-  // Is used to e.g. skip scraping for years that are not available for a country
-  readonly minYear: string;
-
-  // markers in timeseries charts
-  readonly markers: {
-    label: string;
-    dates: IsoDate[];
-  };
-
-  // list of iso state codes
-  readonly states: readonly string[];
-
-  // Which wiki language should be used when linking/load a wiki article
-  readonly wikiCountry: "en" | "de";
-
-  // features that the country has, used to determine which information can be shown
-  readonly features: number;
-
-  // Include parties if they have count over this threshold or sum over the threshold.
-  // Use -1 if it should only check the other condition
-  readonly knownPartyRequirements?: {
-    count: number;
-    sum: number;
-  };
-
-  // Lambert Conformal Conic projection parameters for the country
-  readonly projection?: LambertConformalConicParams;
-
-  // filter out donations by donor
-  readonly donorFilters?: DonorFilter[];
-
-  // filtered out donation receivers
-  readonly receiverFilters?: ReceiverFilter[];
-}
-
-export type UnloadedCountryConfig = Omit<CountryConfig, "years" | "parties">;
-
+// This is the static config of each country.
+// During build in the data-loader it'll be joined with years and parties to be usable in the next app.
 export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
   [Country.germany]: {
     id: Country.germany,

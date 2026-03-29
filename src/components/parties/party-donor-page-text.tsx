@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 
 import { useLocale } from "next-intl";
 
-import type { CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
 import type { Donation, Party } from "@/utils/types";
 
 import { DonorLink } from "@/components/donors/donor-link";

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
-import type { Country, CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
+import type { Country } from "@/utils/countries";
 import type { BigDonor } from "@/utils/loader/biggest-donors";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 import type { ConstLocale } from "@/utils/locales";

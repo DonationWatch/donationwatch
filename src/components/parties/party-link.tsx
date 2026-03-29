@@ -3,12 +3,13 @@ import type { PropsWithChildren } from "react";
 
 import Link from "next/link";
 
+import type { CountryConfig } from "@/types/country-config";
 import type { ConstLocale } from "@/utils/locales";
 import type { ReceiverId } from "@/utils/types";
 
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { cn } from "@/lib/utils";
-import { type CountryConfig, getParty } from "@/utils/countries";
+import { getParty } from "@/utils/countries";
 
 export const PartyLink = ({
   locale,

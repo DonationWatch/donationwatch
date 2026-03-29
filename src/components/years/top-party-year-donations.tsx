@@ -2,7 +2,7 @@
 import { useLocale } from "next-intl";
 import { useState } from "react";
 
-import type { CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
 import type { PartySum } from "@/utils/data/get-parties-sum";
 import type { Donation } from "@/utils/types";
 
