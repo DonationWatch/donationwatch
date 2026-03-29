@@ -2,7 +2,8 @@
 import { useLocale } from "next-intl";
 import { notFound } from "next/navigation";
 
-import type { Country, CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
+import type { Country } from "@/utils/countries";
 import type { Donation, ReceiverId } from "@/utils/types";
 
 import { DonationStackedTimeseriesChart } from "@/components/charts/donation-sum-chart";

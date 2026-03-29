@@ -2,7 +2,7 @@
 
 /* eslint-disable react/no-unknown-property */
 
-import type { CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 import type { ConstLocale } from "@/utils/locales";
 

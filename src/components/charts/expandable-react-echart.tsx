@@ -5,7 +5,7 @@ import { Expand, X, ZoomOut } from "lucide-react";
 import { useLocale } from "next-intl";
 import { type JSX, useCallback, useRef, useState } from "react";
 
-import type { CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
 
 import { PageLogo } from "@/components/layout/page-logo";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";

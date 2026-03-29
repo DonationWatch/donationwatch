@@ -1,4 +1,4 @@
-import type { CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 
 import { Features, hasFeature } from "@/utils/features";

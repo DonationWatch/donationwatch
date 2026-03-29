@@ -16,7 +16,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-import type { Country, CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
+import type { Country } from "@/utils/countries";
 import type { BigDonor } from "@/utils/loader/biggest-donors";
 
 import { Github } from "@/components/icons/Github";

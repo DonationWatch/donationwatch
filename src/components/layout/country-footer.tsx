@@ -2,7 +2,7 @@
 import { useLocale } from "next-intl";
 import Link from "next/link";
 
-import type { CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
 
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { formatDate } from "@/utils/formatter";

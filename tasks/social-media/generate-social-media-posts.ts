@@ -9,7 +9,7 @@ import {
 } from "typescript";
 import { promisify } from "util";
 
-import type { CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
 import type { ConstLocale } from "@/utils/locales";
 import type { StrictNamespacedTranslator } from "@/utils/translator";
 import type { Donation, ReceiverId } from "@/utils/types";
@@ -53,6 +53,7 @@ const countryTranslations: Record<Country, ConstLocale> = {
   [Country.norway]: "no",
   [Country.ukraine]: "uk",
   [Country.france]: "fr",
+  [Country.sweden]: "en",
 };
 
 const countryFlags: Record<Country, string> = {
@@ -73,6 +74,7 @@ const countryFlags: Record<Country, string> = {
   [Country.norway]: "🇳🇴",
   [Country.ukraine]: "🇺🇦",
   [Country.france]: "🇫🇷",
+  [Country.sweden]: "🇸🇪",
 };
 
 const deltaPrefix = (delta: number): string => (delta > 0 ? `+` : "");

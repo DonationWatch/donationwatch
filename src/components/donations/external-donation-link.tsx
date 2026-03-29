@@ -1,6 +1,6 @@
 import type { ComponentProps, PropsWithChildren } from "react";
 
-import type { CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
 
 import { Country } from "@/utils/countries";
 

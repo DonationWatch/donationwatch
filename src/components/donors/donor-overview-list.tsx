@@ -2,7 +2,7 @@
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import { useCallback, useRef, useState } from "react";
 
-import type { CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
 import type { Donation, Party, ReceiverId } from "@/utils/types";
 
 import Loading from "@/components/loading/loading";

@@ -1,6 +1,6 @@
 "use client";
 
-import type { CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
 import type { Donation } from "@/utils/types";
 
 import { CurrencyRankingItem } from "@/components/donations/ranking-item";

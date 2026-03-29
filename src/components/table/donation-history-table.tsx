@@ -16,7 +16,7 @@ import {
 import { useLocale } from "next-intl";
 import { useMemo, useRef, useState } from "react";
 
-import type { CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
 import type { HistoryEntry } from "@/utils/data/get-history";
 import type { Donation } from "@/utils/types";
 

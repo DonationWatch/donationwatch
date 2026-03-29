@@ -2,6 +2,7 @@
 import { useLocale } from "next-intl";
 import { useState } from "react";
 
+import type { CountryConfig } from "@/types/country-config";
 import type { OriginPartySum } from "@/utils/data/get-origin-donations";
 import type { Donation, Party } from "@/utils/types";
 
@@ -17,7 +18,7 @@ import Loading from "@/components/loading/loading";
 import { useDonationsByParty, useDonationsByYears } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { isNotNullandNotUndefined } from "@/utils/array";
-import { Country, type CountryConfig, getCountryName } from "@/utils/countries";
+import { Country, getCountryName } from "@/utils/countries";
 import { getOriginDonations } from "@/utils/data/get-origin-donations";
 import { formatCountryCurrency, formatYearsRange } from "@/utils/formatter";
 import { AddressField, DonationField } from "@/utils/types";

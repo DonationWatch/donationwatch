@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
 
-import type { CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
 import type { ConstLocale } from "@/utils/locales";
 
 import { RankBadge } from "@/components/donations/ranking-item";

@@ -8,11 +8,10 @@ import type {
   DonationsDocumentWithoutDonorIds,
 } from "@/lib/api/donations-document";
 import type {
-  Country,
-  CountryCode,
   CountryConfig,
   UnloadedCountryConfig,
-} from "@/utils/countries";
+} from "@/types/country-config";
+import type { Country, CountryCode } from "@/utils/countries";
 import type { Donation, Party } from "@/utils/types";
 
 import { donationDocumentToDonations } from "@/lib/api/donations-document";
@@ -61,10 +60,7 @@ export const useCountryConfig = (country: Country) => {
   });
 };
 
-export const useDonationsByParty = (
-  country: UnloadedCountryConfig,
-  party: Party,
-) => {
+export const useDonationsByParty = (country: CountryConfig, party: Party) => {
   const build = getBuild(country.id).t;
 
   return useQuery<Donation[]>({
@@ -76,15 +72,19 @@ export const useDonationsByParty = (
   });
 };
 
-export const useNormalized = (country: UnloadedCountryConfig) => {
+export interface UseNormalizedData {
+  donorFilters?: UnloadedCountryConfig["donorFilters"];
+  receiverFilters?: UnloadedCountryConfig["receiverFilters"];
+  filteredDonors: string[];
+  filteredReceivers: string[];
+  normalizedDonors: [string, string[]][];
+  normalizedReceivers: [string, string[]][];
+}
+
+export const useNormalized = (country: CountryConfig) => {
   const build = getBuild(country.id).t;
 
-  return useQuery<{
-    filteredDonors: string[];
-    filteredReceivers: string[];
-    normalizedDonors: [string, string[]][];
-    normalizedReceivers: [string, string[]][];
-  }>({
+  return useQuery<UseNormalizedData>({
     queryKey: [country.id, "normalized"],
     queryFn: () =>
       jsonFetcher(
@@ -93,7 +93,7 @@ export const useNormalized = (country: UnloadedCountryConfig) => {
   });
 };
 
-export const useDonorNames = (country: UnloadedCountryConfig) => {
+export const useDonorNames = (country: CountryConfig) => {
   const build = getBuild(country.id).t;
 
   return useQuery({
@@ -111,7 +111,7 @@ export const useDonorNames = (country: UnloadedCountryConfig) => {
 };
 
 export const useDonationsByDonorId = (
-  country: UnloadedCountryConfig,
+  country: CountryConfig,
   donorId: string,
 ) => {
   const build = getBuild(country.id).t;
@@ -147,7 +147,7 @@ export const useDonationsByDonorId = (
 };
 
 export const useWikipediaByPageId = (
-  country: UnloadedCountryConfig,
+  country: CountryConfig,
   pageId: number,
 ) => {
   const build = getBuild(country.id).t;

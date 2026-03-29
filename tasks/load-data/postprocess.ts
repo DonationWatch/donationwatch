@@ -3,7 +3,8 @@ import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
 
-import type { CountryCode, CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
+import type { CountryCode } from "@/utils/countries";
 import type {
   PartyStats,
   PartyYearsSums,

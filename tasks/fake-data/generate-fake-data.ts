@@ -1,10 +1,7 @@
 import debug from "debug";
 
-import type {
-  Country,
-  CountryCode,
-  UnloadedCountryConfig,
-} from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
+import type { Country, CountryCode } from "@/utils/countries";
 import type {
   DonorMetaDefinition,
   ExtractedDonationAddress,
@@ -184,7 +181,7 @@ const useCountries = await promptCountries(
 );
 
 const generateFakeWikipediaArticles = async (
-  countryConfig: UnloadedCountryConfig,
+  countryConfig: Pick<CountryConfig, "id" | "code" | "minYear">,
   donorMeta: DonorMetaDefinition,
 ) => {
   const fakeText = "This is a fake Wikipedia article for testing purposes.";

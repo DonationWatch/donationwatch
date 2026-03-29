@@ -8,7 +8,7 @@ import type {
 import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
 
-import type { CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 
 import { useChart } from "@/hooks/use-chart";

@@ -1,6 +1,6 @@
 "use client";
 
-import type { UnloadedCountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
 
 import { useWikipediaByPageId } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
@@ -20,7 +20,7 @@ export const WikiQuote = ({
   country,
 }: {
   pageId: number;
-  country: UnloadedCountryConfig;
+  country: CountryConfig;
 }) => {
   const t = useTranslations("data");
   const { data, error, isLoading } = useWikipediaByPageId(country, pageId);

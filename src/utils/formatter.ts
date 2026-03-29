@@ -1,4 +1,6 @@
-import type { CountryConfig, Currency } from "./countries";
+import type { CountryConfig } from "@/types/country-config";
+
+import type { Currency } from "./countries";
 import type { ConstLocale } from "./locales";
 import type { ReceiverId } from "./types";
 

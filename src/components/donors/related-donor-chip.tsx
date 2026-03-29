@@ -4,7 +4,7 @@ import type { JSX } from "react";
 
 import { BriefcaseBusiness, Building2, Landmark } from "lucide-react";
 
-import type { CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 import type { ConstLocale } from "@/utils/locales";
 

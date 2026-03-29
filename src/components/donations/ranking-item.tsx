@@ -3,7 +3,7 @@ import type { PropsWithChildren, ReactNode } from "react";
 import { ChevronRight } from "lucide-react";
 import { useLocale } from "next-intl";
 
-import type { CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
 
 import { PercentageHint } from "@/components/percentage-hint";
 import { formatCountryCurrency } from "@/utils/formatter";

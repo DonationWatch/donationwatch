@@ -3,6 +3,7 @@ import { useLocale } from "next-intl";
 import { parseAsString, useQueryState } from "nuqs";
 import { useMemo } from "react";
 
+import type { CountryConfig } from "@/types/country-config";
 import type { NonEmptyArray } from "@/utils/array";
 
 import { EChartsRacingBars } from "@/components/charts/echarts-racing-bars";
@@ -10,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { YearRangeSelector } from "@/components/years/year-range-selector";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { firstItem, lastItem } from "@/utils/array";
-import { type CountryConfig, getCountryName } from "@/utils/countries";
+import { getCountryName } from "@/utils/countries";
 import { formatYearsRange } from "@/utils/formatter";
 import { type Donation, DonationField } from "@/utils/types";
 

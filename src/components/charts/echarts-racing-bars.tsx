@@ -4,7 +4,8 @@ import type { BarSeriesOption, EChartsOption } from "echarts";
 import { Download, Pause, Play, RotateCcw } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import type { CountryConfig, Currency } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
+import type { Currency } from "@/utils/countries";
 import type { ConstLocale } from "@/utils/locales";
 
 import { ExpandableReactEchart } from "@/components/charts/expandable-react-echart";

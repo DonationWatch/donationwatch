@@ -1,4 +1,5 @@
-import type { CountryConfig } from "../countries";
+import type { CountryConfig } from "@/types/country-config";
+
 import type { PartyStats, PartyYearsSums } from "../loader/party-years-sums";
 import type { Party, ReceiverId } from "../types";
 

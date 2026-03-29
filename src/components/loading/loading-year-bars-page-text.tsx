@@ -1,7 +1,7 @@
 "use client";
 import { useLocale } from "next-intl";
 
-import type { CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
 import type { Donation, Party, ReceiverId } from "@/utils/types";
 
 import { FormatAnd } from "@/components/formatter";

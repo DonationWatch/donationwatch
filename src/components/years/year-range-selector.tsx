@@ -1,7 +1,7 @@
 import { CheckIcon, ChevronDownIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import type { CountryConfig } from "@/utils/countries";
+import type { CountryConfig } from "@/types/country-config";
 
 import { Button } from "@/components/ui/button";
 import {
