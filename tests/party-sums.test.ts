@@ -372,6 +372,16 @@ describe("EU", () => {
       ["ELF", 85000],
     ]);
   });
+
+  test("2026 has expected values", async () => {
+    const data = euSums["2026"];
+
+    hasExpectedDonations(data, [
+      // parties
+      // foundations
+      ["WMCES", 15_260.44],
+    ]);
+  });
 });
 
 describe("FR", () => {

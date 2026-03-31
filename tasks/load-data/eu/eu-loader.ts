@@ -591,10 +591,13 @@ export class EuLoader extends DataLoader {
 
       return yearData;
     },
+    "2026": (year, sheets) => {
+      return this.yearExtractors["2025"](year, sheets);
+    },
   };
 
   async extractYearData(year: string): Promise<ExtractedYearData[]> {
-    if (["2021", "2022", "2023", "2024", "2025"].includes(year)) {
+    if (["2021", "2022", "2023", "2024", "2025", "2026"].includes(year)) {
       const partySheets = (await exists(this.partiesCacheFile(year)))
         ? parse(this.partiesCacheFile(year), {
             cellDates: true,
@@ -717,6 +720,11 @@ export class EuLoader extends DataLoader {
         "https://www.appf.europa.eu/cmsdata/303917/2025%20PARTIES%20Donations%20table%20as%20of%202026-03-09.xlsx",
       foundations:
         "https://www.appf.europa.eu/cmsdata/303598/2025%20FOUNDATIONS%20Donations%20table%20as%20of%202026-03-02.xlsx",
+    },
+    "2026": {
+      parties: undefined,
+      foundations:
+        "https://www.appf.europa.eu/cmsdata/304875/2026%20FOUNDATIONS%20Donations%20table%20as%20of%202026-03-31.xlsx",
     },
   };
 
