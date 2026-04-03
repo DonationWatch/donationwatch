@@ -534,6 +534,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       "^Hon David Coleman MP$",
       "^NSW Nurses & Midwives Association$",
       "^Clean Energy Council Limited$",
+      "^Hon Scott Buchholz MP$",
     ],
   },
   [Country.serbia]: {
