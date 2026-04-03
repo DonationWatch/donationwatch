@@ -321,9 +321,7 @@ describe("EU", () => {
       ["FEPS", 19_000],
       ["EDP", 250],
       ["IED", 500],
-      // It's unclear in the IDF sheet which donor gave what amount/not fully filled out.
-      // TODO: contact APPF
-      ["IDF", 2_000],
+      ["IDF", 4_000],
     ]);
   });
 

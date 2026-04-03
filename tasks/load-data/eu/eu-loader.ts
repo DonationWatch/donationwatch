@@ -21,7 +21,7 @@ const mapCountry = (year: string, country: string | undefined): Countries => {
   if (year === "2021") {
     // some unicode madness
     if (country === "ΒΕ") return "BE";
-    return (country as Countries) ?? "??";
+    return (country as Countries) || "??";
   }
   if (country === undefined) return "??";
 
@@ -29,6 +29,8 @@ const mapCountry = (year: string, country: string | undefined): Countries => {
     .trim()
     // remove trailing *
     .replace(/\*$/, "");
+
+  if (country === "") return "??";
 
   const mappings: Record<string, Countries> = {
     Latvia: "LV",
@@ -99,10 +101,22 @@ const normalizeParty = (party: string): string => {
   return normalized;
 };
 
-const cleanRow = (row: unknown[]) =>
-  row.map((item) => {
-    return typeof item === "string" ? item.trim() : item;
-  });
+// Remove the empty string cells from the right
+const trimRow = (row: any[]) => {
+  const reversed = row
+    .toReversed()
+    .map((cell) => (typeof cell === "string" ? cell.trim() : cell));
+
+  const firstFilled = reversed.findIndex((cell) => cell !== "");
+
+  if (firstFilled === -1) return [];
+
+  return reversed.slice(firstFilled).toReversed();
+};
+
+const stringOrUndefined = (value: string): string | undefined => {
+  return value === "" ? undefined : value;
+};
 
 const partyIdAlias: Record<string, string> = {
   IDP: "ID",
@@ -338,7 +352,9 @@ export class EuLoader extends DataLoader {
       (sheet.data as any[]).forEach((row, idx) => {
         if (idx < 6) return;
 
-        row = cleanRow(row);
+        row = trimRow(row);
+
+        if (!row.length) return;
 
         if (
           row.length === 1 &&
@@ -365,6 +381,7 @@ export class EuLoader extends DataLoader {
                 string,
                 number,
               ];
+
               yearData.push({
                 idx: `${idx}`,
                 [DonationField.Amount]: value,
@@ -373,7 +390,9 @@ export class EuLoader extends DataLoader {
                   currentParty,
                 ) as ReceiverId,
                 [DonationField.Date]: `${year}`,
-                [DonationField.Address]: [mapCountry(year, country)],
+                [DonationField.Address]: {
+                  [AddressField.Country]: mapCountry(year, country),
+                },
               });
             });
 
@@ -383,6 +402,9 @@ export class EuLoader extends DataLoader {
           }
 
           if (row.length === 4) {
+            // empty donations are marked by a minus name, country
+            if (row[0] === "-" && row[2] === "-" && row[3] === 0) return;
+
             donations.push(row);
             return;
           }
@@ -414,9 +436,9 @@ export class EuLoader extends DataLoader {
         const donations: string[][] = [];
 
         (partySheet.data as any[]).forEach((row, idx) => {
-          if (row.length === 0) return;
+          row = trimRow(row);
 
-          row = cleanRow(row);
+          if (!row.length) return;
 
           if (row.length === 3 && row[0] === "Donor") {
             donorHeaderIdx = idx;
@@ -491,11 +513,13 @@ export class EuLoader extends DataLoader {
         const donations: string[][] = [];
 
         (partySheet.data as any[]).forEach((row, idx) => {
-          if (row.length === 0) return;
+          row = trimRow(row);
 
-          row = cleanRow(row);
+          if (!row.length) return;
 
           const firstRowString = typeof row[0] === "string";
+
+          if (firstRowString && row[0].startsWith("Sub-Total")) return;
 
           if (
             firstRowString &&
@@ -507,7 +531,6 @@ export class EuLoader extends DataLoader {
           }
           if (donorHeaderIdx !== undefined) {
             // skip sub total
-            if (firstRowString && row[0].startsWith("Sub-Total")) return;
             if (
               firstRowString &&
               row[0].startsWith("Donations from Legal Persons")
@@ -521,6 +544,7 @@ export class EuLoader extends DataLoader {
             ) {
               // is in donor block
               donorHeaderIdx = undefined;
+
               donations.forEach(([donor, country, amount], idx) => {
                 yearData.push({
                   idx: `${idx}`,
@@ -533,10 +557,14 @@ export class EuLoader extends DataLoader {
                   },
                 });
               });
-            } else if (firstRowString && row[0].startsWith("Donor")) {
-              // is header row
-              return;
-            } else if (row.length === 3 && firstRowString) {
+            } else if (
+              row.length === 3 &&
+              firstRowString &&
+              typeof row[2] === "number"
+            ) {
+              // There's a case in the 2023 doc where they missed the Total label for total amount lines
+              if (row[0] === "" && row[1] === "") return;
+
               donations.push(row);
               return;
             }
@@ -558,15 +586,17 @@ export class EuLoader extends DataLoader {
       (sheet.data as any[]).forEach((row, idx, rows) => {
         if (idx < 13) return;
 
+        row = trimRow(row);
+
+        if (!row.length) return;
+
         const isPartyLine =
-          row.length === 1 &&
-          rows[idx + 1].length === 0 &&
-          rows[idx + 1].length === 0;
+          row.length === 1 && trimRow(rows[idx + 1]).length === 0;
 
         const isDonationLine = row.length === 3;
 
         const isPartyHeader =
-          row.length === 3 && (row[0] === "Donor " || row[0] === "Contributor");
+          row.length === 3 && (row[0] === "Donor" || row[0] === "Contributor");
 
         if (isPartyHeader) return;
 
@@ -601,11 +631,15 @@ export class EuLoader extends DataLoader {
       const partySheets = (await exists(this.partiesCacheFile(year)))
         ? parse(this.partiesCacheFile(year), {
             cellDates: true,
+            blankrows: true,
+            defval: "",
           })
         : [{ name: "", data: [] }];
       const foundationSheets = (await exists(this.foundationsCacheFile(year)))
         ? parse(this.foundationsCacheFile(year), {
             cellDates: true,
+            blankrows: true,
+            defval: "",
           })
         : [{ name: "", data: [] }];
 
@@ -618,7 +652,7 @@ export class EuLoader extends DataLoader {
               ...d,
               [DonationField.DonorName]:
                 // the 2022 docs were redacted and removed some donor names
-                d[DonationField.DonorName] ??
+                stringOrUndefined(d[DonationField.DonorName]) ??
                 this.redactDonor(
                   d[DonationField.Address][AddressField.Country],
                 ),
@@ -638,7 +672,7 @@ export class EuLoader extends DataLoader {
               ...d,
               [DonationField.DonorName]:
                 // the 2022 docs were redacted and removed some donor names
-                d[DonationField.DonorName] ??
+                stringOrUndefined(d[DonationField.DonorName]) ??
                 this.redactDonor(
                   d[DonationField.Address][AddressField.Country],
                 ),
@@ -705,9 +739,9 @@ export class EuLoader extends DataLoader {
     },
     "2023": {
       parties:
-        "https://www.appf.europa.eu/cmsdata/291884/2023%20PARTIES%20Contributions%20and%20Donations.xlsx",
+        "https://www.appf.europa.eu/cmsdata/302877/2023%20PARTIES%20Contributions%20and%20Donations_redacted.xlsx",
       foundations:
-        "https://www.appf.europa.eu/cmsdata/294306/2023%20FOUNDATIONS%20Contributions%20and%20Donations.xlsx",
+        "https://www.appf.europa.eu/cmsdata/302879/2023%20FOUNDATIONS%20Contributions%20and%20Donations_redacted.xlsx",
     },
     "2024": {
       parties:
