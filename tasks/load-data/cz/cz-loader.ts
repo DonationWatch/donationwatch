@@ -500,6 +500,50 @@ export class CzLoader extends DataLoader {
       color: "#de0814",
       wiki: 76920881,
     },
+    HPH: {
+      name: "Hnutí pro Havířov",
+      short: "Hnutí pro Havířov",
+      code: "HPH",
+      color: "#194691",
+    },
+    "8žije": {
+      name: "Osmička žije",
+      short: "Osmička žije",
+      code: "8ZIJE",
+      color: "#1b1b1b",
+    },
+    JaSaN: {
+      name: "Jasný Signál Nezávislých",
+      short: "JaSaN",
+      code: "JASAN",
+      color: "#cd1719",
+    },
+    "Stačilo!": {
+      name: "Stačilo!",
+      short: "Stačilo!",
+      code: "STACILO",
+      wiki: 76034197,
+      color: "#d52414",
+    },
+    Voluntia: {
+      name: "Libertariánská strana Voluntia",
+      short: "Voluntia",
+      code: "VOLUNTIA",
+      color: "#fed801",
+    },
+    "PRAHA SOBĚ": {
+      name: "Pražská městská strana PRAHA SOBĚ",
+      short: "PRAHA SOBĚ",
+      code: "PRAHASOBE",
+      color: "#fee000",
+    },
+    GEN: {
+      name: "Generace, ekonomika, naděje",
+      short: "GEN",
+      code: "GEN",
+      color: "#69509c",
+      wiki: 80202718,
+    },
   };
 
   constructor() {
