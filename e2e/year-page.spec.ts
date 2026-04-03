@@ -72,6 +72,13 @@ test.describe("Year page", () => {
                 await item.toggle();
                 await item.expectDetailVisible(false);
               });
+              await test.step("expand it again and follow to the donor page", async () => {
+                await item.toggle();
+                await item.expectDetailVisible();
+
+                await item.detail.locator("a").first().click();
+                await expect(item.locator).toBeHidden();
+              });
             });
           });
         });

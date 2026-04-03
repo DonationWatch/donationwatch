@@ -75,7 +75,9 @@ export const HistogramItemDetail = ({
   // re-trigger measure if mobile changes
   useEffect(() => {
     rowVirtualizer?.measure?.();
-  }, [isSm, rowVirtualizer]);
+    // We can't have rowVirtualizer in the list of dependency due to its always being recreated and in turn causing the effect to fire
+    // oxlint-disable-next-line eslint-plugin-react-hooks/exhaustive-deps
+  }, [isSm]);
 
   return (
     <div
