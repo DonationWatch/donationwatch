@@ -88,6 +88,8 @@
 body,
 html {
   background-color: var(--color-background);
+  /* Ensure scrollbars don't jump the content around */
+  scrollbar-gutter: stable;
 }
 
 @media (prefers-color-scheme: dark) {
