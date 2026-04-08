@@ -759,7 +759,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       ],
     },
     knownPartyRequirements: {
-      sum: 900_000,
+      sum: 800_000,
       count: -1,
     },
     states: [],

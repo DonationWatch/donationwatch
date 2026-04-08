@@ -344,6 +344,32 @@ export class FrLoader extends DataLoader {
       code: "334",
       color: RANDOM_COLOR_MARKER,
     },
+    "808": {
+      name: "Ensemble – Mouvement pour une Alternative de Gauche, Écologiste et Solidaire",
+      short: "Ensemble !",
+      code: "808",
+      color: "#f23232",
+      wiki: 47671374,
+    },
+    "531": {
+      name: "Association PSLE - Nouveau Centre",
+      short: "Association PSLE - Nouveau Centre",
+      code: "531",
+      color: RANDOM_COLOR_MARKER,
+    },
+    "1351": {
+      name: "Révolution permanente (RP)",
+      short: "Révolution permanente",
+      code: "1351",
+      color: "#c12627",
+      wiki: 78707314,
+    },
+    "853": {
+      name: "Toulouse Métropole Ensemble",
+      short: "Toulouse Métropole Ensemble",
+      code: "853",
+      color: RANDOM_COLOR_MARKER,
+    },
   };
 
   private readonly yearConfig: Record<
