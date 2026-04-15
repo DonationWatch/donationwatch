@@ -189,7 +189,7 @@ export class AtLoader extends DataLoader {
         [DonationField.Address]: extractAddress(zip),
       };
     },
-    2024: (col, idx, idxOffset = 0) => {
+    2024: (col, idx, idxOffset = 1) => {
       if (idx <= idxOffset) return;
 
       const [receiverParty, , date, name, zip, amount, , receiverName] = col;

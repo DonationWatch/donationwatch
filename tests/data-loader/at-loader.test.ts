@@ -89,7 +89,7 @@ describe("AT loader extractors", () => {
         "EUR",
         "",
       ],
-      1,
+      2,
       {
         amount: 60000,
         name: "Green Donor",
@@ -101,7 +101,7 @@ describe("AT loader extractors", () => {
       "2024 format with Euro currency variation",
       "2024",
       ["ÖVP", "", "15.04.24", "Test Person", "5020", "80.000,00", "Euro", ""],
-      1,
+      2,
       {
         amount: 80000,
         name: "Test Person",

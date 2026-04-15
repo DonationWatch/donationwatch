@@ -26,6 +26,24 @@ describe.each([...COUNTRIES].map((country) => ({ country })))(
       ]);
     });
 
+    test("there's no year with 0 donations from the first to the last year", async () => {
+      expect(donations.length).toBeGreaterThan(0);
+
+      const years = new Set(
+        donations.map((d) =>
+          parseInt(d[DonationField.Date].substring(0, 4), 10),
+        ),
+      );
+
+      const yearsArray = Array.from(years);
+      const minYear = Math.min(...yearsArray);
+      const maxYear = Math.max(...yearsArray);
+
+      for (let year = minYear; year <= maxYear; year++) {
+        expect(years.has(year), `Missing data for year ${year}`).toBe(true);
+      }
+    });
+
     test("has wikipedia articles loaded", async () => {
       const articles = Object.keys(wikipediaArticles.articles);
 
