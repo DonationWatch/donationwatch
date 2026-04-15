@@ -379,7 +379,7 @@ describe("EU", () => {
     hasExpectedDonations(data, [
       // parties
       // foundations
-      ["WMCES", 15_260.44],
+      ["WMCES", 33260.44],
     ]);
   });
 });
