@@ -1,5 +1,8 @@
 "use strict";
 
+import type { Page } from "@playwright/test";
+
+import { chromium } from "@playwright/test";
 import { createHash } from "node:crypto";
 import { access } from "node:fs/promises";
 
@@ -169,4 +172,31 @@ export const generatePartyColor = (seed: string): `#${string}` => {
 
   // 4. Convert and return as HEX
   return hslToHex(hue, saturation, lightness);
+};
+
+export const spawnBrowser = async <T>(
+  callback: (page: Page) => Promise<T>,
+): Promise<T> => {
+  const before = performance.now();
+  try {
+    const browser = await chromium.launch();
+    const context = await browser.newContext({
+      viewport: {
+        width: 1080,
+        height: 1024,
+      },
+    });
+    const page = await context.newPage();
+
+    try {
+      return await callback(page);
+    } finally {
+      await page.close();
+      await context.close();
+      await browser.close();
+    }
+  } finally {
+    const after = performance.now();
+    console.log(`spawning browser took ${after - before}`);
+  }
 };
