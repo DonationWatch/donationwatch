@@ -2,7 +2,6 @@ import assert from "assert";
 import * as cheerio from "cheerio";
 import fs from "fs/promises";
 import path from "path";
-import puppeteer from "puppeteer";
 
 import type { ExtractedDonationAddress, ReceiverId } from "@/utils/types";
 
@@ -12,7 +11,7 @@ import { AddressField, DonationField } from "@/utils/types";
 import type { ExtractedYearData, PartyConfig } from "../data-loader";
 
 import { DataLoader } from "../data-loader";
-import { timeout } from "../util";
+import { spawnBrowser, timeout } from "../util";
 import { donorMeta } from "./donor-meta";
 
 export class LvLoader extends DataLoader {
@@ -388,28 +387,21 @@ export class LvLoader extends DataLoader {
 
     this.log(`Loading donation page for year ${year}: ${url}`);
 
-    const browser = await puppeteer.launch({
-      headless: true,
-      defaultViewport: {
-        width: 1080,
-        height: 1024,
-      },
+    const { html } = await spawnBrowser(async (page) => {
+      const response = await page.goto(url);
+      try {
+        await page.waitForSelector(".pageSizeDiv");
+        // wait a second because they have some js animation that takes a while to finish
+        await timeout(1000);
+      } catch {
+        throw new Error(`Unable to load ${url}: ${response?.status()}`);
+      }
+
+      const html = await page.evaluate(
+        () => document.documentElement.outerHTML,
+      );
+      return { html };
     });
-    const page = await browser.newPage();
-
-    // Navigate the page to a URL
-    const response = await page.goto(url);
-    try {
-      await page.waitForSelector(".pageSizeDiv");
-      // wait a second because they have some js animation that takes a while to finish
-      await timeout(1000);
-    } catch {
-      throw new Error(`Unable to load ${url}: ${response?.status()}`);
-    }
-
-    const html = await page.evaluate(() => document.documentElement.outerHTML);
-
-    await browser.close();
 
     await fs.writeFile(this.cacheFile(year), html, {
       encoding: "utf8",
