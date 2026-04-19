@@ -4,7 +4,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 import type { CountryConfig } from "@/types/country-config";
-import type { CountryCode } from "@/utils/countries";
+import type { CountryCode, Currency } from "@/utils/countries";
 import type {
   PartyStats,
   PartyYearsSums,
@@ -22,7 +22,7 @@ import {
   DONOR_ID_HASH_LEN,
   MOST_RECENT_HISTORY_SIZE,
 } from "@/utils/config";
-import { Country } from "@/utils/countries";
+import { Country, COUNTRIES } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { getHistory } from "@/utils/data/get-history";
 import { donationYear } from "@/utils/date";
@@ -213,6 +213,39 @@ const prebuildWikipediaJsons = async (country: CountryConfig) => {
       JSON.stringify({ extract: article }),
     );
   }
+};
+
+const buildDataIndex = async (countries: Country[]) => {
+  const dataDir = path.join(__dirname, "../../public/data");
+
+  // load all country configs
+  const configs: {
+    id: Country;
+    currency: Currency;
+    years: string[];
+    parties: { id: string; name: string }[];
+  }[] = [];
+
+  for (const country of countries) {
+    const config = await getCountryConfig(country);
+    configs.push({
+      id: country,
+      currency: config.currency,
+      years: config.years,
+      parties: config.parties.map((p) => ({
+        id: p[PartyField.Id],
+        name: p[PartyField.Name],
+      })),
+    });
+  }
+
+  await fs.writeFile(
+    path.join(dataDir, `index.json`),
+    JSON.stringify({
+      last_updated: new Date().toISOString(),
+      configs,
+    }),
+  );
 };
 
 const postprocessGeojson = async () => {
@@ -567,6 +600,7 @@ const main = async () => {
     }),
   );
 
+  await buildDataIndex([...COUNTRIES]);
   await postprocessGeojson();
 };
 
