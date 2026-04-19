@@ -76,6 +76,6 @@ export async function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     // skip api, next/static requests, and static asset extensions
-    "/((?!api|_next|favicon.ico|sitemap.xml|sitemap_index.xml|robots.txt|b505b06a6ef745df9fb702d2c8ab9fee.txt|sitemap/[a-z]{2}\\.xml|.+\\.(?:png|ico|jpg|json|svg)$).*)",
+    "/((?!api|_next|.well-known|schema|llms.txt|favicon.ico|sitemap-global.xml|sitemap.xml|sitemap_index.xml|robots.txt|b505b06a6ef745df9fb702d2c8ab9fee.txt|sitemap/[a-z]{2}\\.xml|.+\\.(?:png|ico|jpg|json|svg)$).*)",
   ],
 };

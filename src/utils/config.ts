@@ -3,8 +3,9 @@ import { Country } from "./countries";
 export const IS_PROD = process.env.NODE_ENV === "production";
 export const IS_TEST = process.env.NODE_ENV === "test";
 
-export const BASE_URL =
-  IS_PROD || IS_TEST ? "https://donation.watch" : "http://localhost:3000";
+export const PROD_URL = "https://donation.watch";
+
+export const BASE_URL = IS_PROD || IS_TEST ? PROD_URL : "http://localhost:3000";
 
 export const THUMBNAIL_PREFIX =
   IS_PROD || IS_TEST ? "https://thumb.donation.watch" : "http://localhost:3000";
@@ -46,3 +47,8 @@ export const ANONYMIZED_DONOR_KEYWORD = "\uE001";
 export const DONOR_TO_PARTY_BY_YEAR = "\uE002";
 
 export const DATA_LICENSE = "CC BY 4.0";
+
+export const LLMS_URL = `${PROD_URL}/llms.txt`;
+export const OPENAPI_URL = `${PROD_URL}/schema/openapi.json`;
+export const DISCOVERY_INDEX_URL = `${PROD_URL}/data/index.json`;
+export const API_CATALOG_URL = `${PROD_URL}/.well-known/api-catalog.json`;

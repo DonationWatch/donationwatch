@@ -59,6 +59,9 @@ next-env.d.ts
 /public/*.txt
 /public/data
 /public/thumbnails
+/public/.well-known
+/public/schema
+/public/sitemap-global.xml
 /public/geojson/**
 /tasks/load-data/**/.donations-cache/**
 /tasks/data/**/donations.ts

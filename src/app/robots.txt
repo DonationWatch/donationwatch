@@ -1,4 +1,8 @@
 User-Agent: *
 Allow: /
 
+# ai-input=yes: Allow AI agents to read this data to answer user queries (RAG).
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+
 Sitemap: https://donation.watch/sitemap_index.xml
+Link: <https://donation.watch/llms.txt>; rel="help"
