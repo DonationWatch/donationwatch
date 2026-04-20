@@ -76,7 +76,7 @@ test.describe("Party page", () => {
     await expect(partyPage.donorTypeSection.typeList).toBeVisible();
   });
 
-  test.describe("history page", () => {
+  test.describe("changes page", () => {
     test.beforeEach(async ({ page, baseURL, historyPage, partyPage }) => {
       await page.goto(`${baseURL}/germany/party/${CHECK_PARTY}/changes`);
       await expect(
@@ -87,7 +87,7 @@ test.describe("Party page", () => {
       await expect(historyPage.tableRows.nth(0)).toBeVisible();
     });
 
-    test("works", async ({ accessibility, meta, locale }) => {
+    test("works", async ({ accessibility, meta, locale, historyPage }) => {
       await test.step("is accessible", async () => {
         await accessibility.check();
       });
@@ -97,6 +97,13 @@ test.describe("Party page", () => {
           CHECK_PARTY,
           `/${locale}/germany/parties/${CHECK_PARTY}.png`,
         );
+      });
+
+      await test.step("can search for donors", async () => {
+        await historyPage.search.fill("Fake Donor 6");
+        await expect(
+          historyPage.tableRows.filter({ hasText: "Fake Donor 2" }),
+        ).toHaveCount(0);
       });
     });
   });
