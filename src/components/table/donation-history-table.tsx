@@ -1,10 +1,12 @@
 "use client";
 import {
+  type FilterFn,
   type Row,
   type SortingState,
   createColumnHelper,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
@@ -12,11 +14,13 @@ import {
   ArrowDownNarrowWide,
   ArrowUpNarrowWide,
   ExternalLink,
+  Search,
 } from "lucide-react";
 import { useLocale } from "next-intl";
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, useCallback } from "react";
 
 import type { CountryConfig } from "@/types/country-config";
+import type { Party } from "@/types/party";
 import type { HistoryEntry } from "@/utils/data/get-history";
 import type { Donation } from "@/utils/types";
 
@@ -29,6 +33,7 @@ import { useClientTranslations as useTranslations } from "@/hooks/use-client-tra
 import { useMobile } from "@/hooks/use-media-query";
 import { useVirtual } from "@/hooks/use-virtual";
 import { cn } from "@/lib/utils";
+import { PartyField } from "@/types/party";
 import { isNotNullandNotUndefined } from "@/utils/array";
 import { getHistory } from "@/utils/data/get-history";
 import { donationYear } from "@/utils/date";
@@ -54,11 +59,43 @@ export const DonationHistoryTable = ({
   const t = useTranslations();
   const tSort = useTranslations("sort");
   const tCommon = useTranslations("common");
+  const tSearch = useTranslations("search");
   const locale = useLocale();
   const partiesIdSet = useMemo(() => new Set(partiesIds), [partiesIds]);
   const [sorting, setSorting] = useState<SortingState>([
     { id: "date", desc: true },
   ]);
+  const [globalFilter, setGlobalFilter] = useState("");
+
+  const partyNameMap = useMemo(() => {
+    const map = new Map<string, { name: string; short: string }>();
+    country.parties.forEach((party: Party) => {
+      map.set(String(party[PartyField.Id]), {
+        name: party[PartyField.Name],
+        short: party[PartyField.Short],
+      });
+    });
+    return map;
+  }, [country.parties]);
+
+  const globalFilterFn = useCallback<FilterFn<HistoryEntry>>(
+    (row, _columnId, filterValue: string) => {
+      const q = filterValue.trim().toLowerCase();
+      if (!q) return true;
+      const donor = row.original.donor?.toLowerCase() ?? "";
+      const partyId = String(row.original.party);
+      const partyName = (
+        partyNameMap.get(partyId)?.name ?? partyId
+      ).toLowerCase();
+      const partyShort = (
+        partyNameMap.get(partyId)?.short ?? partyId
+      ).toLowerCase();
+      return (
+        donor.includes(q) || partyName.includes(q) || partyShort.includes(q)
+      );
+    },
+    [partyNameMap],
+  );
 
   const tableContainerRef = useRef<HTMLDivElement>(null);
   const isMobile = useMobile();
@@ -220,15 +257,19 @@ export const DonationHistoryTable = ({
     data: history,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    globalFilterFn,
     state: {
       sorting,
+      globalFilter,
     },
     onSortingChange: setSorting,
+    onGlobalFilterChange: setGlobalFilter,
   });
   const { rows } = table.getRowModel();
 
   const rowVirtualizer = useVirtual({
-    count: history.length,
+    count: rows.length,
     estimateSize: () => 33, //estimate row height for accurate scrollbar dragging
     getScrollElement: () => tableContainerRef.current,
     //measure dynamic row height, except in firefox because it measures table border height incorrectly
@@ -241,116 +282,136 @@ export const DonationHistoryTable = ({
   });
 
   return (
-    <div
-      className="h-[80vh] min-h-[600px]"
-      style={{
-        overflow: "auto", //our scrollable table container
-        position: "relative", //needed for sticky header
-      }}
-      ref={tableContainerRef}
-    >
-      <table className="grid">
-        {isMobile ? null : (
-          <thead className="sticky top-0 z-1 grid border-b border-slate-200 bg-white dark:border-slate-950 dark:bg-slate-900">
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id} className="flex w-full">
-                {headerGroup.headers.map((header) => (
-                  <th
-                    className={cn(
-                      header.column.columnDef.meta?.fill ? "grow" : undefined,
-                    )}
-                    key={header.id}
-                    style={{
-                      width: header.getSize(),
-                    }}
-                  >
-                    {header.isPlaceholder ? null : (
-                      <div
-                        tabIndex={0}
-                        role="button"
-                        className={cn(
-                          header.column.columnDef.meta?.className,
-                          "flex items-center space-x-1 px-2 py-1",
-                          header.column.getCanSort()
-                            ? "cursor-pointer select-none"
-                            : "",
-                        )}
-                        onClick={header.column.getToggleSortingHandler()}
-                        onKeyDown={(ev) => {
-                          if (ev.key !== "Enter") return;
-
-                          // on enter trigger the click action
-                          ev.stopPropagation();
-                          header.column.getToggleSortingHandler()?.(ev);
-                        }}
-                        title={
-                          header.column.getCanSort()
-                            ? header.column.getNextSortingOrder() === "asc"
-                              ? tSort("asc")
-                              : header.column.getNextSortingOrder() === "desc"
-                                ? tSort("desc")
-                                : tSort("clear")
-                            : undefined
-                        }
-                      >
-                        <span>
-                          {flexRender(
-                            header.column.columnDef.header,
-                            header.getContext(),
+    <div className="flex flex-col gap-2">
+      <div className="relative md:max-w-sm">
+        <Search
+          size={16}
+          className="pointer-events-none absolute top-1/2 left-2.5 -translate-y-1/2 text-slate-400"
+        />
+        <input
+          type="search"
+          name="donations-search"
+          value={globalFilter}
+          onChange={(e) => setGlobalFilter(e.target.value)}
+          placeholder={tSearch("filter")}
+          aria-label={tSearch("filter")}
+          className="w-full rounded-md border border-slate-200 bg-white py-1.5 pr-3 pl-8 text-sm outline-none placeholder:text-slate-500 focus:border-slate-400 dark:border-slate-700 dark:bg-slate-900 dark:placeholder:text-slate-400 dark:focus:border-slate-500"
+        />
+      </div>
+      <div
+        className="h-[80vh] min-h-[600px]"
+        style={{
+          overflow: "auto", //our scrollable table container
+          position: "relative", //needed for sticky header
+        }}
+        ref={tableContainerRef}
+      >
+        <table className="grid">
+          {isMobile ? null : (
+            <thead className="sticky top-0 z-1 grid border-b border-slate-200 bg-white dark:border-slate-950 dark:bg-slate-900">
+              {table.getHeaderGroups().map((headerGroup) => (
+                <tr key={headerGroup.id} className="flex w-full">
+                  {headerGroup.headers.map((header) => (
+                    <th
+                      className={cn(
+                        header.column.columnDef.meta?.fill ? "grow" : undefined,
+                      )}
+                      key={header.id}
+                      style={{
+                        width: header.getSize(),
+                      }}
+                    >
+                      {header.isPlaceholder ? null : (
+                        <div
+                          tabIndex={0}
+                          role="button"
+                          className={cn(
+                            header.column.columnDef.meta?.className,
+                            "flex items-center space-x-1 px-2 py-1",
+                            header.column.getCanSort()
+                              ? "cursor-pointer select-none"
+                              : "",
                           )}
-                        </span>
-                        {{
-                          asc: <ArrowDownNarrowWide size={16} />,
-                          desc: <ArrowUpNarrowWide size={16} />,
-                        }[header.column.getIsSorted() as string] ?? null}
-                      </div>
-                    )}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-        )}
-        <tbody
-          className="relative grid"
-          style={{
-            height: `${rowVirtualizer.getTotalSize()}px`, //tells scrollbar how big the table is
-          }}
-        >
-          {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-            const row = rows[virtualRow.index] as Row<HistoryEntry>;
-            return (
-              <tr
-                data-index={virtualRow.index} //needed for dynamic row height measurement
-                ref={(node) => {
-                  rowVirtualizer.measureElement(node);
-                }} //measure dynamic row height
-                key={row.id}
-                className="absolute flex w-full border-b border-slate-200 even:bg-white dark:border-slate-950 dark:even:bg-slate-900"
-                style={{
-                  transform: `translateY(${virtualRow.start}px)`, //this should always be a `style` as it changes on scroll
-                }}
-              >
-                {row.getVisibleCells().map((cell) => (
-                  <td
-                    key={cell.id}
-                    className={cn(
-                      "flex items-center px-2 py-1",
-                      cell.column.columnDef.meta?.className,
-                      cell.column.columnDef.meta?.fill ? "grow" : undefined,
-                    )}
-                    style={{
-                      width: cell.column.getSize(),
-                    }}
-                  >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+                          onClick={header.column.getToggleSortingHandler()}
+                          onKeyDown={(ev) => {
+                            if (ev.key !== "Enter") return;
+
+                            // on enter trigger the click action
+                            ev.stopPropagation();
+                            header.column.getToggleSortingHandler()?.(ev);
+                          }}
+                          title={
+                            header.column.getCanSort()
+                              ? header.column.getNextSortingOrder() === "asc"
+                                ? tSort("asc")
+                                : header.column.getNextSortingOrder() === "desc"
+                                  ? tSort("desc")
+                                  : tSort("clear")
+                              : undefined
+                          }
+                        >
+                          <span>
+                            {flexRender(
+                              header.column.columnDef.header,
+                              header.getContext(),
+                            )}
+                          </span>
+                          {{
+                            asc: <ArrowDownNarrowWide size={16} />,
+                            desc: <ArrowUpNarrowWide size={16} />,
+                          }[header.column.getIsSorted() as string] ?? null}
+                        </div>
+                      )}
+                    </th>
+                  ))}
+                </tr>
+              ))}
+            </thead>
+          )}
+          <tbody
+            className="relative grid"
+            style={{
+              height: `${rowVirtualizer.getTotalSize()}px`, //tells scrollbar how big the table is
+            }}
+          >
+            {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+              const row = rows[virtualRow.index] as Row<HistoryEntry>;
+              return (
+                <tr
+                  data-index={virtualRow.index} //needed for dynamic row height measurement
+                  ref={(node) => {
+                    rowVirtualizer.measureElement(node);
+                  }} //measure dynamic row height
+                  key={row.id}
+                  className="absolute flex w-full border-b border-slate-200 even:bg-white dark:border-slate-950 dark:even:bg-slate-900"
+                  style={{
+                    transform: `translateY(${virtualRow.start}px)`, //this should always be a `style` as it changes on scroll
+                  }}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <td
+                      key={cell.id}
+                      className={cn(
+                        "flex items-center px-2 py-1",
+                        cell.column.columnDef.meta?.className,
+                        cell.column.columnDef.meta?.fill ? "grow" : undefined,
+                      )}
+                      style={{
+                        width: cell.column.getSize(),
+                      }}
+                    >
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext(),
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import { expect } from "@playwright/test";
 
+import { PartyField } from "@/types/party";
 import { COUNTRIES, Country } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { Features, hasFeature } from "@/utils/features";
@@ -94,7 +95,12 @@ test.describe("Year page", () => {
             await expect(historyPage.tableRows.nth(0)).toBeVisible();
           });
 
-          test("works", async ({ accessibility, meta, locale }) => {
+          test("works", async ({
+            accessibility,
+            meta,
+            locale,
+            historyPage,
+          }) => {
             await test.step("is accessible", async () => {
               await accessibility.check();
             });
@@ -104,6 +110,26 @@ test.describe("Year page", () => {
                 `${CHECK_YEAR}`,
                 `/${locale}/${country}/years/${CHECK_YEAR}.png`,
               );
+            });
+
+            await test.step("can search for donors", async () => {
+              await historyPage.search.fill("Fake Donor 6");
+              await expect(
+                historyPage.tableRows.filter({ hasText: "Fake Donor 2" }),
+              ).toHaveCount(0);
+            });
+
+            await test.step("can search for parties", async () => {
+              const config = await getCountryConfig(country);
+              const partyToSearch = config.parties.at(0)!;
+              const otherParty = config.parties.at(1)!;
+
+              await historyPage.search.fill(partyToSearch[PartyField.Name]);
+              await expect(
+                historyPage.tableRows.filter({
+                  hasText: otherParty[PartyField.Name],
+                }),
+              ).toHaveCount(0);
             });
           });
         });
