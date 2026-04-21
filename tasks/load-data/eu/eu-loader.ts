@@ -88,6 +88,10 @@ const normalizeParty = (party: string): string => {
     return "Coppieters Foundation";
   }
 
+  if (normalized === "New Direction") {
+    return "New Direction - The Foundation for European Reform";
+  }
+
   if (normalized === "Europe of Sovereign Nations") {
     return "Europe of Sovereign Nations Group";
   }
@@ -758,7 +762,7 @@ export class EuLoader extends DataLoader {
     "2026": {
       parties: undefined,
       foundations:
-        "https://www.appf.europa.eu/cmsdata/305286/2026%20FOUNDATIONS%20Donations%20table%20as%20of%202026-04-14.xlsx",
+        "https://www.appf.europa.eu/cmsdata/305611/2026%20FOUNDATIONS%20Donations%20table%20as%20of%202026-04-21.xlsx",
     },
   };
 
