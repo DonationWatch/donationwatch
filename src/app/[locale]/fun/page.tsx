@@ -114,6 +114,44 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
         }
       >
         <FunFact
+          locale={locale}
+          t={tFun}
+          date={"2026-04-21"}
+          status={{
+            owner: "The National Cyber Security Centre (NCSC)",
+            type: "fixed",
+          }}
+          title={{
+            en: "Election Security: The 'Western Britain' Anomaly",
+            de: "Wahlsicherheit: Die 'West-Britannien' Anomalie",
+            et: "Valimiste turvalisus: 'Lääne-Britannia' anomaalia",
+            nl: "Verkiezingsbeveiliging: De 'West-Brittannië' anomalie",
+            cs: "Volební bezpečnost: Anomálie 'Západní Británie'",
+            lv: "Vēlēšanu drošība: 'Rietumbritānijas' anomālija",
+            hr: "Sigurnost izbora: Anomalija 'Zapadne Britanije'",
+            no: "Valgsikkerhet: 'Vest-Storbritannia'-anomalien",
+            uk: "Безпека виборів: Аномалія 'Західної Британії'",
+            fr: "Sécurité électorale : L'anomalie de la 'Bretagne occidentale'",
+          }}
+          text={{
+            en: "With the 2026 Senedd elections just days away, we detected a suspicious domain using Russian metadata describing Wales as 'Western Britain.' In a display of active evasion, the operators scrubbed the code live while we were investigating. The site has since been blacklisted as a dangerous phishing threat.",
+            de: "Nur wenige Tage vor den Senedd-Wahlen 2026 haben wir eine verdächtige Domain entdeckt, die russische Metadaten verwendete und Wales als 'West-Britannien' bezeichnete. Während unserer Untersuchung löschten die Betreiber den Code live. Die Seite wurde inzwischen als gefährliche Phishing-Drohung blockiert.",
+            et: "Kuna 2026. aasta Seneddi valimisteni on jäänud vaid loetud päevad, avastasime kahtlase domeeni, mis kasutas venekeelseid metaandmeid Walesi kohta 'Lääne-Britannia'. Meie uurimise ajal eemaldasid haldajad koodi reaalajas. Sait on nüüdseks märgitud ohtlikuks andmepüügiühvarduseks.",
+            nl: "Met de Senedd-verkiezingen van 2026 in aantocht, ontdekten we een verdacht domein met Russische metadata die Wales omschreef als 'West-Brittannië'. De beheerders wishen de code live tijdens ons onderzoek. De site is sindsdien op de zwarte lijst gezet als een gevaarlijke phishing-dreiging.",
+            cs: "Jen pár dní před volbami do Seneddu 2026 jsme zachytili podezřelou doménu s ruskými metadaty popisujícími Wales jako 'Západní Británii'. Provozovatelé kód živě odstranili přímo během našeho šetření. Stránka byla následně zablokována jako nebezpečný phishing.",
+            lv: "Tā kā līdz 2026. gada Seneda vēlēšanām palikušas tikai dažas dienas, mēs atklājām aizdomīgu domēnu, kurā izmantoti krievu valodas metadati, Velsu dēvējot par 'Rietumbritāniju'. Mūsu izmeklēšanas laikā uzturētāji kodu izdzēsa tiešraidē. Kopš tā laika vietne ir bloķēta kā bīstams pikšķerēšanas drauds.",
+            hr: "S obzirom na to da su izbori za Senedd 2026. pred vratima, otkrili smo sumnjivu domenu koja koristi ruske metapodatke opisujući Wales kao 'Zapadnu Britaniju'. Operateri su uklonili kod uživo dok smo istraživali stranicu. U međuvremenu je blokirana kao opasna phishing prijetnja.",
+            no: "Med Senedd-valget i 2026 bare dager unna, oppdaget vi et mistenkelig domene som brukte russiske metadata som beskrev Wales som 'Vest-Storbritannia'. Operatørene slettet koden live mens vi undersøkte siden. Den er siden blitt svartelistet som en farlig phishing-trussel.",
+            uk: "За лічені дні до виборів до Сенедду 2026 року ми виявили підозрілий домен, який використовував російські метадані, де Уельс називався 'Західною Британією'. Оператори видалили код наживо прямо під час нашого розслідування. Відтоді сайт було заблоковано як небезпечну фішингову загрозу.",
+            fr: "À quelques jours des élections au Senedd de 2026, nous avons détecté un domaine suspect utilisant des métadonnées en russe décrivant le Pays de Galles comme la 'Bretagne occidentale'. Les opérateurs ont effacé le code en direct pendant notre enquête. Le site est désormais bloqué en tant que menace de phishing.",
+          }}
+        >
+          <pre>
+            {`<meta property="og:description" content="Сделано только для аудитории в западной части Британии.">`}
+          </pre>
+        </FunFact>
+
+        <FunFact
           t={tFun}
           locale={locale}
           status={{
