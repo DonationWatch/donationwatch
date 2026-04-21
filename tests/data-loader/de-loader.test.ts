@@ -170,7 +170,7 @@ test.each([
     },
     {
       amount: 180_000,
-      name: "Deutsche Vermögensberatung  ­ Aktiengesellschaft DVAG",
+      name: "Deutsche Vermögensberatung ­ Aktiengesellschaft DVAG",
       date: "2025-10-24",
       receiver: "CDU",
       address: {
@@ -202,6 +202,37 @@ test.each([
         country: "DE",
         state: "NW",
         zip: "45128",
+      },
+    },
+  ],
+
+  [
+    "trailing name whitespace paragraph",
+    "2026",
+    {
+      tr: 0,
+      columns: [
+        ["MLPD"],
+        ["58.500,00"],
+        [
+          "Barbara Schilke",
+          "Gerüstbauerring 18",
+          "18190 Rostock",
+          "           ",
+        ],
+        ["15.04.2026"],
+        ["21.04.2026"],
+      ],
+    },
+    {
+      amount: 58_500,
+      name: "Barbara Schilke",
+      date: "2026-04-15",
+      receiver: "MLPD",
+      address: {
+        country: "DE",
+        state: "MV",
+        zip: "18190",
       },
     },
   ],

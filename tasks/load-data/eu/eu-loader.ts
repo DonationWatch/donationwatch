@@ -12,7 +12,7 @@ import { AddressField, DonationField } from "@/utils/types";
 import type { ExtractedYearData, PartyConfig } from "../data-loader";
 
 import { DataLoader } from "../data-loader";
-import { exists } from "../util";
+import { exists, trimRow } from "../util";
 import { donorMeta } from "./donor-meta";
 import { fromPdfDonations } from "./from-pdf-donations";
 
@@ -103,19 +103,6 @@ const normalizeParty = (party: string): string => {
     normalized = "Identity and Democracy Party";
 
   return normalized;
-};
-
-// Remove the empty string cells from the right
-const trimRow = (row: any[]) => {
-  const reversed = row
-    .toReversed()
-    .map((cell) => (typeof cell === "string" ? cell.trim() : cell));
-
-  const firstFilled = reversed.findIndex((cell) => cell !== "");
-
-  if (firstFilled === -1) return [];
-
-  return reversed.slice(firstFilled).toReversed();
 };
 
 const stringOrUndefined = (value: string): string | undefined => {

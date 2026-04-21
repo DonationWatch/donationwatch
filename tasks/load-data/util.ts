@@ -200,3 +200,16 @@ export const spawnBrowser = async <T>(
     console.log(`spawning browser took ${after - before}`);
   }
 };
+
+// Remove the empty string cells from the right
+export const trimRow = <T>(row: T[]) => {
+  const reversed = row
+    .toReversed()
+    .map((cell) => (typeof cell === "string" ? cell.trim() : cell));
+
+  const firstFilled = reversed.findIndex((cell) => cell !== "");
+
+  if (firstFilled === -1) return [];
+
+  return reversed.slice(firstFilled).toReversed();
+};

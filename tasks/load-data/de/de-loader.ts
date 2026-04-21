@@ -11,7 +11,7 @@ import { AddressField, DonationField } from "@/utils/types";
 import type { ExtractedYearData, PartyConfig } from "../data-loader";
 
 import { DataLoader } from "../data-loader";
-import { containsWords, spawnBrowser, timeout } from "../util";
+import { containsWords, spawnBrowser, timeout, trimRow } from "../util";
 import { extractAddress } from "./address";
 import { donorMeta } from "./donor-meta";
 
@@ -542,7 +542,9 @@ export class DeLoader extends DataLoader {
   ): ExtractedYearData | undefined {
     const trId = data.tr;
     const donation = data.columns;
-    const donor = this.extractDonor(donation[2]);
+
+    const donorCell = trimRow(donation[2]);
+    const donor = this.extractDonor(donorCell);
     const receiver = donation[0][0];
     const parsedDate = donation[3] ? extractDate(year, donation[3]) : "";
 
@@ -562,7 +564,7 @@ export class DeLoader extends DataLoader {
       [DonationField.Receiver]: receiver as ReceiverId,
       [DonationField.Amount]: toEurFloat(stripEuroDot(donation[1][0])),
       [DonationField.DonorName]: donor,
-      [DonationField.Address]: extractAddress(donation[2])!,
+      [DonationField.Address]: extractAddress(donorCell)!,
       [DonationField.Date]: this.normalizeIsoDate(parsedDate),
     };
   }
