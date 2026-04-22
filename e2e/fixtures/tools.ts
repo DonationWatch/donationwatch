@@ -1,5 +1,6 @@
 import { LocatorObject } from "../util/locator";
 import { PageObject } from "../util/page";
+import { DropdownMenu } from "./components/dropdown";
 
 class YearRangeFilterTool extends LocatorObject {
   public get legislativeYearsFieldset() {
@@ -68,11 +69,17 @@ class YearRangeFilterTool extends LocatorObject {
 }
 
 class DataExportTool extends LocatorObject {
-  public downloadCSV = this.locator.getByText(
-    this.translations("common.download_format", { format: "CSV" }),
-  );
-  public downloadJSON = this.locator.getByText(
-    this.translations("common.download_format", { format: "JSON" }),
+  public downloadCSV = this.locator.getByRole("button", {
+    name: this.translations("common.download_format", { format: "CSV" }),
+  });
+  public downloadJSON = this.locator.getByRole("button", {
+    name: this.translations("common.download_format", { format: "JSON" }),
+  });
+  public copyCitation = new DropdownMenu(
+    this.locator.getByRole("button", {
+      name: this.translations("citation.action"),
+    }),
+    this.props,
   );
 }
 class BarChartRaceTool extends YearRangeFilterTool {

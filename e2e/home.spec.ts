@@ -1,5 +1,6 @@
 import { expect } from "@playwright/test";
 
+import { SITE_NAME } from "@/utils/config";
 import { COUNTRIES } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { Features, hasFeature } from "@/utils/features";
@@ -24,7 +25,7 @@ test.describe("Homepage", () => {
 
         await test.step("has correct meta", async () => {
           await meta.expectConfigured(
-            "DonationWatch",
+            SITE_NAME,
             `/${locale}/${country}/cover.png`,
           );
         });

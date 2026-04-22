@@ -766,5 +766,11 @@
       "frequent_donor": "Kõige sagedasem annetaja",
       "biggest_donation": "Suurim üksik annetus"
     }
+  },
+  "citation": {
+    "action": "Tsiteeri",
+    "success": "{style} stiilis viide kopeeritud lõikelauale.",
+    "data": "DonationWatch – {country} poliitiliste annetuste andmed",
+    "apa": "DonationWatch. ({year}). {title} [Andmestik]. Vaadatud {date}, aadressilt {url}"
   }
 }

@@ -2,13 +2,19 @@ import type { FAQPage, Organization, WebPage, WithContext } from "schema-dts";
 
 import type { ConstLocale } from "@/utils/locales";
 
-import { BASE_URL, BSKY_URL, GITHUB_ORG, TWITTER_URL } from "@/utils/config";
+import {
+  BASE_URL,
+  BSKY_URL,
+  GITHUB_ORG,
+  SITE_NAME,
+  TWITTER_URL,
+} from "@/utils/config";
 
 export const OrganizationSchema = () => {
   const jsonLd: WithContext<Organization> = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "DonationWatch",
+    name: SITE_NAME,
     logo: "https://donation.watch/apple-icon.png",
     url: BASE_URL,
     sameAs: [BSKY_URL, TWITTER_URL, GITHUB_ORG],

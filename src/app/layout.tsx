@@ -2,11 +2,11 @@ import "./globals.css";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
-import { BASE_URL } from "@/utils/config";
+import { BASE_URL, SITE_NAME } from "@/utils/config";
 import { baseOpenGraph, baseTwitter } from "@/utils/meta";
 
 export const metadata: Metadata = {
-  title: "DonationWatch",
+  title: SITE_NAME,
   metadataBase: new URL(BASE_URL),
   openGraph: baseOpenGraph(),
   twitter: baseTwitter(),

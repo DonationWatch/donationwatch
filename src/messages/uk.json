@@ -750,5 +750,11 @@
       "frequent_donor": "Найчастіший донор",
       "biggest_donation": "Найбільша одноразова пожертва"
     }
+  },
+  "citation": {
+    "action": "Цитувати",
+    "success": "Цитату у стилі {style} скопійовано до буфера обміну.",
+    "data": "DonationWatch – дані про політичні пожертви в {country}",
+    "apa": "DonationWatch. ({year}). {title} [Набір даних]. Отримано {date}, з {url}"
   }
 }

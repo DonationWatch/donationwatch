@@ -766,5 +766,11 @@
       "frequent_donor": "Mest hyppige giver",
       "biggest_donation": "Største enkeltstående donasjon"
     }
+  },
+  "citation": {
+    "action": "Siter",
+    "success": "{style}-stil-sitat kopiert til utklippstavlen.",
+    "data": "DonationWatch – data om politiske donasjoner i {country}",
+    "apa": "DonationWatch. ({year}). {title} [Datasett]. Hentet {date}, fra {url}"
   }
 }

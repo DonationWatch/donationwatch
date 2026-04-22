@@ -9,6 +9,7 @@ import { Country } from "@/utils/countries";
 import type { FixtureProps } from "./props";
 
 import { Accessibility } from "../fixtures/accessibility";
+import { ClipboardAccess } from "../fixtures/clipboard-access";
 import { DonorPage } from "../fixtures/donor";
 import { DonorsPage } from "../fixtures/donors";
 import { GlobalSearch } from "../fixtures/global-search";
@@ -20,6 +21,7 @@ import { OriginPage } from "../fixtures/origin";
 import { PartyPage } from "../fixtures/party";
 import { RootPage } from "../fixtures/root";
 import { TimelinePage } from "../fixtures/timeline";
+import { Toasts } from "../fixtures/toast";
 import { Tools } from "../fixtures/tools";
 import { YearOverviewPage } from "../fixtures/year-overview";
 
@@ -46,16 +48,19 @@ type SharedFixtures = {
   locale: ConstLocale;
   meta: Meta;
   navigation: Navigation;
+  clipboardAccess: ClipboardAccess;
+  toasts: Toasts;
 
   props: FixtureProps;
 };
 
 export const test = base.extend<SharedFixtures>({
-  props: async ({ page, translations, locale }, use) =>
+  props: async ({ context, page, translations, locale }, use) =>
     use({
       page,
       translations,
       locale,
+      context,
     }),
   translations: async ({ locale }, use) => {
     const currentLocale = locale ?? "en";
@@ -106,6 +111,14 @@ export const test = base.extend<SharedFixtures>({
   },
   navigation: async ({ props }, use) => {
     await use(new Navigation(props));
+  },
+  clipboardAccess: async ({ props }, use) => {
+    const access = new ClipboardAccess(props);
+    await access.register();
+    await use(access);
+  },
+  toasts: async ({ props }, use) => {
+    await use(new Toasts(props));
   },
   tools: async ({ props }, use) => {
     await use(new Tools(props));

@@ -9,6 +9,7 @@ import { notFound } from "next/navigation";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import { OrganizationSchema } from "@/components/schema";
+import { Toaster } from "@/components/ui/sonner";
 import { THUMBNAIL_PREFIX } from "@/utils/config";
 import { filterClientMessages } from "@/utils/i18n-filter";
 import { LOCALES } from "@/utils/locales";
@@ -69,6 +70,7 @@ export default async function LangLayout(props: LayoutProps<"/[locale]">) {
             {children}
           </Providers>
         </NuqsAdapter>
+        <Toaster position={"top-center"} />
       </body>
     </html>
   );

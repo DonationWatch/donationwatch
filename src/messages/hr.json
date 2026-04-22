@@ -766,5 +766,11 @@
       "frequent_donor": "Najčešći donator",
       "biggest_donation": "Najveća pojedinačna donacija"
     }
+  },
+  "citation": {
+    "action": "Citiraj",
+    "success": "Citat u stilu {style} kopiran u međuspremnik.",
+    "data": "DonationWatch – podaci o političkim donacijama u {country}",
+    "apa": "DonationWatch. ({year}). {title} [Skup podataka]. Preuzeto {date}, s {url}"
   }
 }

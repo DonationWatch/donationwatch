@@ -766,5 +766,11 @@
       "frequent_donor": "Biežākais ziedotājs",
       "biggest_donation": "Lielākais vienreizējais ziedojums"
     }
+  },
+  "citation": {
+    "action": "Citēt",
+    "success": "{style} stila citāts nokopēts starpliktuvē.",
+    "data": "DonationWatch – {country} politisko ziedojumu dati",
+    "apa": "DonationWatch. ({year}). {title} [Datu kopa]. Skatīts {date}, no {url}"
   }
 }

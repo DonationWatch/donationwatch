@@ -4,14 +4,19 @@ import type { Messages, createTranslator } from "next-intl";
 import { DownloadIcon } from "lucide-react";
 
 import type { CountryConfig } from "@/types/country-config";
+import type { ConstLocale } from "@/utils/locales";
 import type { StrictNamespacedTranslator } from "@/utils/translator";
 import type { Donation } from "@/utils/types";
 
+import Loading from "@/app/[locale]/[country]/loading";
+import { CitationGenerator } from "@/components/citation/citation-generator";
 import { Button } from "@/components/ui/button";
 import { useDonationsByYears } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
 import { isNotNullandNotUndefined } from "@/utils/array";
+import { PROD_URL } from "@/utils/config";
+import { getCountryName } from "@/utils/countries";
 import { getDonorName } from "@/utils/donor";
 import { Features, hasFeature } from "@/utils/features";
 import { AddressField, DonationField } from "@/utils/types";
@@ -120,12 +125,15 @@ function downloadCSV(
 
 interface DataExportProps {
   country: CountryConfig;
+  locale: ConstLocale;
 }
 
-export function DataExport({ country }: DataExportProps) {
+export function DataExport({ country, locale }: DataExportProps) {
   const t = useTranslations();
+  const tCountries = useTranslations("countries");
   const tData = useTranslations("data");
   const tCommon = useTranslations("common");
+  const tCitation = useTranslations("citation");
 
   const results = useDonationsByYears(country, country.years);
 
@@ -149,17 +157,16 @@ export function DataExport({ country }: DataExportProps) {
     );
   };
 
-  const canDownload = !isLoading && !hasError;
+  if (isLoading) return <Loading />;
+  if (hasError) return <div>{tData("error")}</div>;
 
   return (
-    <>
-      {/* Status and Download */}
+    <div className="flex flex-wrap items-center justify-between gap-4">
       <div className="flex flex-wrap items-center gap-4">
         <Button
           variant={"default"}
           type="button"
           onClick={() => handleDownload("csv")}
-          disabled={!canDownload}
           className="bg-primary-600 hover:bg-primary-700 disabled:bg-primary-600/50 flex cursor-pointer items-center gap-2 rounded-md px-4 py-2 text-white disabled:cursor-not-allowed"
         >
           <DownloadIcon className="size-4" />
@@ -172,7 +179,6 @@ export function DataExport({ country }: DataExportProps) {
           variant={"default"}
           type="button"
           onClick={() => handleDownload("json")}
-          disabled={!canDownload}
           className="bg-primary-600 hover:bg-primary-700 disabled:bg-primary-600/50 flex cursor-pointer items-center gap-2 rounded-md px-4 py-2 text-white disabled:cursor-not-allowed"
         >
           <DownloadIcon className="size-4" />
@@ -180,15 +186,14 @@ export function DataExport({ country }: DataExportProps) {
             format: "JSON",
           })}
         </Button>
-
-        <span className="text-sm">
-          {isLoading ? (
-            tData("loading")
-          ) : hasError ? (
-            <span className="text-red-500">{tData("error")}</span>
-          ) : null}
-        </span>
       </div>
-    </>
+      <CitationGenerator
+        locale={locale}
+        title={tCitation("data", {
+          country: getCountryName(country, tCountries),
+        })}
+        url={`${PROD_URL}/${locale}/${country.id}`}
+      />
+    </div>
   );
 }

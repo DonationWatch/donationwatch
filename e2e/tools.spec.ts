@@ -1,5 +1,6 @@
 import { expect } from "@playwright/test";
 
+import { PROD_URL, SITE_NAME } from "@/utils/config";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 
 import { test } from "./util/fixture";
@@ -10,11 +11,72 @@ test.describe("Tools", () => {
       await page.goto(`${baseURL}/germany/tools/data`);
     });
 
-    test(`has download buttons`, async ({ accessibility, tools }) => {
-      await expect(tools.dataExport.downloadCSV).toBeEnabled();
-      await expect(tools.dataExport.downloadJSON).toBeEnabled();
+    test(`has actions`, async ({
+      accessibility,
+      tools,
+      clipboardAccess,
+      toasts,
+      translations,
+      locale,
+    }) => {
+      await test.step("download action", async () => {
+        await expect(tools.dataExport.downloadCSV).toBeEnabled();
+        await expect(tools.dataExport.downloadJSON).toBeEnabled();
+      });
 
       await accessibility.check();
+
+      await test.step("copy citation action", async () => {
+        const now = new Date();
+        const isoDate = now.toISOString().substring(0, "2020-01-01".length);
+        const year = now.getFullYear();
+        const country = translations("countries.DE");
+        const formattedDate = new Intl.DateTimeFormat(locale, {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        }).format(now);
+        const title = translations("citation.data", {
+          country,
+        });
+
+        await test.step("APA style", async () => {
+          const menu = await tools.dataExport.copyCitation.open();
+          await menu.selectItemByName("APA");
+          await expect(toasts.getToast("success")).toHaveText(
+            translations("citation.success", { style: "APA" }),
+          );
+
+          expect(await clipboardAccess.read()).toBe(
+            translations("citation.apa", {
+              title,
+              year,
+              date: formattedDate,
+              url: `${PROD_URL}/en/germany`,
+            }),
+          );
+        });
+
+        // wait for toasts to be gone
+        await toasts.expectVisible(0);
+
+        await test.step("BibLaTeX style", async () => {
+          const menu = await tools.dataExport.copyCitation.open();
+          await menu.selectItemByName("BibLaTeX");
+          await expect(toasts.getToast("success")).toHaveText(
+            translations("citation.success", { style: "BibLaTeX" }),
+          );
+
+          expect(await clipboardAccess.read())
+            .toBe(`@dataset{DonationWatch${year}Data,
+\ttitle = {${title}},
+\tauthor = {{${SITE_NAME}}},
+\tdate = {${year}},
+\turl = {${PROD_URL}/en/germany},
+\turldate = {${isoDate}}
+}`);
+        });
+      });
     });
   });
 

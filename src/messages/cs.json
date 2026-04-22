@@ -766,5 +766,11 @@
       "frequent_donor": "Nejčastější dárce",
       "biggest_donation": "Největší jednotlivý dar"
     }
+  },
+  "citation": {
+    "action": "Citovat",
+    "success": "Citace ve stylu {style} zkopírována do schránky.",
+    "data": "DonationWatch – data o politických darech v {country}",
+    "apa": "DonationWatch. ({year}). {title} [Datová sada]. Získáno {date}, z {url}"
   }
 }

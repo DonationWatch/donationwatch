@@ -1,9 +1,14 @@
-import { CONTACT_MAIL, DATA_LICENSE, OPENAPI_URL } from "@/utils/config";
+import {
+  CONTACT_MAIL,
+  DATA_LICENSE,
+  OPENAPI_URL,
+  SITE_NAME,
+} from "@/utils/config";
 
 export const buildWellKnownAi = () => {
   return {
     api_spec: OPENAPI_URL,
-    name: "DonationWatch",
+    name: SITE_NAME,
     description:
       "Comprehensive political donation data for multiple countries.",
     contact_email: CONTACT_MAIL,

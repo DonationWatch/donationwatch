@@ -2,7 +2,7 @@ import type { AlternateURLs } from "next/dist/lib/metadata/types/alternative-url
 import type { OpenGraph } from "next/dist/lib/metadata/types/opengraph-types";
 import type { Twitter } from "next/dist/lib/metadata/types/twitter-types";
 
-import { BASE_URL, TWITTER_SITE } from "./config";
+import { BASE_URL, SITE_NAME, TWITTER_SITE } from "./config";
 import { CONST_LOCALES } from "./locales";
 
 export const generateAlternates = (
@@ -23,7 +23,7 @@ export const generateAlternates = (
 
 export const baseOpenGraph = (openGraph?: OpenGraph): OpenGraph => {
   return {
-    siteName: "DonationWatch",
+    siteName: SITE_NAME,
     type: "website",
     ...openGraph,
   };

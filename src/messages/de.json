@@ -766,5 +766,11 @@
       "frequent_donor": "Häufigster Spender",
       "biggest_donation": "Größte Einzelspende"
     }
+  },
+  "citation": {
+    "action": "Zitieren",
+    "success": "{style}-Stil-Zitat in die Zwischenablage kopiert.",
+    "data": "DonationWatch – Daten zu politischen Spenden in {country}",
+    "apa": "DonationWatch. ({year}). {title} [Datensatz]. Abgerufen am {date}, von {url}"
   }
 }

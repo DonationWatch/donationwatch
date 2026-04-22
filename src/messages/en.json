@@ -750,5 +750,11 @@
       "frequent_donor": "Most frequent donor",
       "biggest_donation": "Largest single donation"
     }
+  },
+  "citation": {
+    "action": "Cite",
+    "success": "{style} style citation copied to clipboard.",
+    "data": "DonationWatch - {country} political donations data",
+    "apa": "DonationWatch. ({year}). {title} [Data set]. Retrieved {date}, from {url}"
   }
 }

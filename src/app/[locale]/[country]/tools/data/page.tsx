@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { CitationGenerator } from "@/components/citation/citation-generator";
 import { DataExport } from "@/components/data-export";
 import { Article } from "@/components/layout/article";
 import { Translation } from "@/components/translation";
@@ -130,7 +131,7 @@ export default async function Page(
             />
           }
         </p>
-        <DataExport country={countryConfig} />
+        <DataExport country={countryConfig} locale={locale} />
       </div>
     </Article>
   );

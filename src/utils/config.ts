@@ -15,6 +15,7 @@ export const TWITTER_SITE = "@donation_watch";
 export const MOST_RECENT_HISTORY_SIZE = 4;
 export const BIGGEST_DONATIONS_COUNT = 4;
 
+export const SITE_NAME = "DonationWatch";
 export const CONTACT_MAIL = "contact@donation.watch";
 
 export const IMPRINT = ``;

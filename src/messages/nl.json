@@ -766,5 +766,11 @@
       "frequent_donor": "Meest frequente donor",
       "biggest_donation": "Grootste enkele donatie"
     }
+  },
+  "citation": {
+    "action": "Citeren",
+    "success": "Citaat in {style}-stijl gekopieerd naar klembord.",
+    "data": "DonationWatch – gegevens over politieke donaties in {country}",
+    "apa": "DonationWatch. ({year}). {title} [Dataset]. Geraadpleegd op {date}, van {url}"
   }
 }
