@@ -427,7 +427,7 @@ export class DeLoader extends DataLoader {
     if (donor.startsWith("Wilfried Pabst")) {
       donor = "Wilfried Pabst";
     }
-    if (donor === "General Logistics Systems Germany GmbH + Co OHG") {
+    if (donor.includes("General Logistics Systems Germany GmbH")) {
       donor = "GLS Germany GmbH + Co OHG";
     }
 
