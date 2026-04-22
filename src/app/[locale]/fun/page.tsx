@@ -66,7 +66,7 @@ const FunFact = ({
         </h3>
         <p>{text[locale]}</p>
         {children ? (
-          <pre className="font-mono text-sm whitespace-pre-line">
+          <pre className="font-mono text-sm whitespace-pre-wrap">
             {children}
           </pre>
         ) : null}
@@ -146,9 +146,7 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
             fr: "À quelques jours des élections au Senedd de 2026, nous avons détecté un domaine suspect utilisant des métadonnées en russe décrivant le Pays de Galles comme la 'Bretagne occidentale'. Les opérateurs ont effacé le code en direct pendant notre enquête. Le site est désormais bloqué en tant que menace de phishing.",
           }}
         >
-          <pre>
-            {`<meta property="og:description" content="Сделано только для аудитории в западной части Британии.">`}
-          </pre>
+          {`<meta property="og:description" content="Сделано только для аудитории в западной части Британии.">`}
         </FunFact>
 
         <FunFact
@@ -185,15 +183,13 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
           }}
           date={"2025-11-03"}
         >
-          <pre>
-            {`<a
+          {`<a
   href="/cmsdata/293644/2025 FOUNDATIONS Donations table as of 2025-03-11.pdf"
   target="_blank"
 >
   2025 PARTIES Donations
 </a>
 `}
-          </pre>
         </FunFact>
         <FunFact
           t={tFun}
@@ -224,28 +220,26 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
           }}
           date={"2025-10-24"}
         >
-          <pre>
-            {JSON.stringify(
-              {
-                shortName: "ČZS",
-                longName: "Česká zkušební strana",
-                donations: [
-                  {
-                    money: 1500,
-                    lastName: "Druhý",
-                    firstName: "Tester",
-                  },
-                  {
-                    money: 300,
-                    lastName: "Testovač",
-                    firstName: "Testovací",
-                  },
-                ],
-              },
-              null,
-              " ",
-            )}
-          </pre>
+          {JSON.stringify(
+            {
+              shortName: "ČZS",
+              longName: "Česká zkušební strana",
+              donations: [
+                {
+                  money: 1500,
+                  lastName: "Druhý",
+                  firstName: "Tester",
+                },
+                {
+                  money: 300,
+                  lastName: "Testovač",
+                  firstName: "Testovací",
+                },
+              ],
+            },
+            null,
+            " ",
+          )}
         </FunFact>
         <FunFact
           t={tFun}
