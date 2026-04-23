@@ -52,4 +52,4 @@ export const DATA_LICENSE = "CC BY 4.0";
 export const LLMS_URL = `${PROD_URL}/llms.txt`;
 export const OPENAPI_URL = `${PROD_URL}/schema/openapi.json`;
 export const DISCOVERY_INDEX_URL = `${PROD_URL}/data/index.json`;
-export const API_CATALOG_URL = `${PROD_URL}/.well-known/api-catalog.json`;
+export const API_CATALOG_URL = `${PROD_URL}/.well-known/api-catalog`;

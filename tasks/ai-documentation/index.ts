@@ -15,7 +15,7 @@ const schemaDir = path.join(publicDir, "schema");
 
 const llmsTxtFile = path.join(__dirname, "../../public/llms.txt");
 const schemaFile = path.join(schemaDir, "openapi.json");
-const catalogFile = path.join(wellKnownDir, "api-catalog.json");
+const catalogFile = path.join(wellKnownDir, "api-catalog");
 const aiFile = path.join(wellKnownDir, "ai");
 const globalSitemapFile = path.join(publicDir, "sitemap-global.xml");
 
