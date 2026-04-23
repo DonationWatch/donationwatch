@@ -48,9 +48,24 @@ const isShortMatch = (short: string, string: string) => {
   );
 };
 
+const companyDonors = new Set<string>([
+  "PricewaterhouseCoopers",
+  "Ernst & Young",
+  "KPMG Australia",
+  "Manildra Group",
+  "Deloitte Touche Tohmatsu",
+  "Holding Redlich",
+  "Commonwealth Bank of Australia",
+  "MSD",
+  "Randazzo C & G Development",
+  "Origin Energy",
+  "TG Public Affairs",
+]);
+
 const classifyDonorType = (donor: string): DonorType | undefined => {
-  // Classify companies based on Australian corporate naming patterns
   if (
+    companyDonors.has(donor) ||
+    // Classify companies based on Australian corporate naming patterns
     /\bpty\b/i.test(donor) ||
     /\bltd\.?$/i.test(donor) ||
     /\bcorporation\b/i.test(donor) ||
