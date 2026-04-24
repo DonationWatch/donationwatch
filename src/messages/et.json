@@ -212,7 +212,8 @@
   },
   "stacked_years": {
     "title": "Annetuse summa aastas",
-    "subtitle": "Avaldatud annetuste koondsumma riigis {country} aastate lõikes alates {years}."
+    "subtitle": "Avaldatud annetuste koondsumma riigis {country} aastate lõikes alates {years}.",
+    "preliminary": "Katkendlikud ribad tähistavad esialgset teavet, mis võib täieneda hilisemate avalikustamisuuendustega."
   },
   "years": {
     "title": "Partei annetused",

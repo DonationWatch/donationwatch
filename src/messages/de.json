@@ -212,7 +212,8 @@
   },
   "stacked_years": {
     "title": "Spendenhöhe pro Jahr",
-    "subtitle": "Aggregierte Summe der veröffentlichten Beiträge in {country}, nach Jahr ab {years}."
+    "subtitle": "Aggregierte Summe der veröffentlichten Beiträge in {country}, nach Jahr ab {years}.",
+    "preliminary": "Gestrichelte Balken weisen auf vorläufige Daten hin, die weiteren Aktualisierungen der Offenlegung unterliegen."
   },
   "years": {
     "title": "Parteispenden",

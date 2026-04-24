@@ -212,7 +212,8 @@
   },
   "stacked_years": {
     "title": "Donasjonsbeløp per år",
-    "subtitle": "Aggregert sum av publiserte bidrag i {country}, per år fra {years}."
+    "subtitle": "Aggregert sum av publiserte bidrag i {country}, per år fra {years}.",
+    "preliminary": "Stiplede søyler indikerer foreløpige data som kan bli oppdatert med ytterligere offentliggjøringer."
   },
   "years": {
     "title": "Partidonasjoner",

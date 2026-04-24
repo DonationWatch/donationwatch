@@ -40,6 +40,7 @@ export const DonationStackedYears = ({
   const series: BarSeriesOption[] = [];
   const years = Object.keys(partyYearsSums);
 
+  const preliminarySince = country.preliminaryDataSince;
   const electionMarkAreas: MarkAreaComponentOption["data"] = [];
 
   const markerYears = new Set<string>(
@@ -57,11 +58,25 @@ export const DonationStackedYears = ({
       type: "bar",
       color: isDark ? "#818cf8" : "#4338ca",
       barWidth: "45%",
-      data: years.map((year) =>
-        Object.values(partyYearsSums[year])
+      data: years.map((year) => ({
+        itemStyle: {
+          borderRadius: [0, 1, 1, 0],
+          decal: preliminarySince
+            ? preliminarySince <= year
+              ? {
+                  color: isDark ? "#4338ca" : "#a5b4fc",
+                  symbol: "rect",
+                  dashArrayX: [1, 0], // continuous line
+                  dashArrayY: [4, 6],
+                  rotation: Math.PI / 4,
+                }
+              : undefined
+            : undefined,
+        },
+        value: Object.values(partyYearsSums[year])
           .map((p) => p.sum)
           .reduce((a, b) => a + b, 0),
-      ),
+      })),
     },
     // Add a markArea for the voting years to have a legend entry
     {
@@ -129,15 +144,21 @@ export const DonationStackedYears = ({
 
   const chartHeight = grid.top + grid.bottom + PER_YEAR_HEIGHT * years.length;
 
+  let subtitle = tStackedYears("subtitle", {
+    country: getCountryName(country, tCountries),
+    years: formatYearsRange(country.years),
+  });
+
+  if (preliminarySince) {
+    subtitle += ` ${tStackedYears("preliminary")}`;
+  }
+
   return (
     <div className="flex items-center justify-center">
       <ExpandableReactEchart
         height={chartHeight}
         title={tStackedYears("title")}
-        subtitle={tStackedYears("subtitle", {
-          country: getCountryName(country, tCountries),
-          years: formatYearsRange(country.years),
-        })}
+        subtitle={subtitle}
         country={country}
         years={years}
         feature="bar"

@@ -212,7 +212,8 @@
   },
   "stacked_years": {
     "title": "Ziedojuma summa gadā",
-    "subtitle": "Apvienotā publicēto ieguldījumu summa {country} pa gadiem no {years}."
+    "subtitle": "Apvienotā publicēto ieguldījumu summa {country} pa gadiem no {years}.",
+    "preliminary": "Pārtrauktās joslas norāda uz provizoriskajiem datiem, kas var tikt papildināti ar turpmākiem atklāšanas atjauninājumiem."
   },
   "years": {
     "title": "Partiju ziedojumi",

@@ -202,7 +202,8 @@
   },
   "stacked_years": {
     "title": "Donation amount per year",
-    "subtitle": "Aggregated sum of published contributions in {country}, by year from {years}."
+    "subtitle": "Aggregated sum of published contributions in {country}, by year from {years}.",
+    "preliminary": "Dashed bars indicate preliminary data subject to further disclosure updates."
   },
   "years": {
     "title": "Party donations",

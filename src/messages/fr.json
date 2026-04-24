@@ -202,7 +202,8 @@
   },
   "stacked_years": {
     "title": "Montant des dons par an",
-    "subtitle": "Somme agrégée des contributions publiées en {country}, par année depuis {years}."
+    "subtitle": "Somme agrégée des contributions publiées en {country}, par année depuis {years}.",
+    "preliminary": "Les barres en pointillés indiquent des données préliminaires susceptibles d'être mises à jour lors d'ultérieures divulgations."
   },
   "years": {
     "title": "Dons aux partis",

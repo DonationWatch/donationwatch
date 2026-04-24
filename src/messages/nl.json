@@ -212,7 +212,8 @@
   },
   "stacked_years": {
     "title": "Donatiebedrag per jaar",
-    "subtitle": "Geaggregeerde som van gepubliceerde bijdragen in {country}, per jaar vanaf {years}."
+    "subtitle": "Geaggregeerde som van gepubliceerde bijdragen in {country}, per jaar vanaf {years}.",
+    "preliminary": "Gestreepte balken geven voorlopige gegevens aan die onderhevig zijn aan verdere updates van de openbaarmaking."
   },
   "years": {
     "title": "Partijgiften",

@@ -212,7 +212,8 @@
   },
   "stacked_years": {
     "title": "Výše příspěvku za rok",
-    "subtitle": "Agregovaný součet zveřejněných příspěvků v {country}, podle roku od {years}."
+    "subtitle": "Agregovaný součet zveřejněných příspěvků v {country}, podle roku od {years}.",
+    "preliminary": "Přerušované sloupce označují předběžná data, která podléhají dalším aktualizacím zveřejnění."
   },
   "years": {
     "title": "Dary stranám",

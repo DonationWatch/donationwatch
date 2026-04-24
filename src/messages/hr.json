@@ -212,7 +212,8 @@
   },
   "stacked_years": {
     "title": "Iznos donacija po godini",
-    "subtitle": "Zbrojeni iznos objavljenih doprinosa u {country}, po godinama od {years}."
+    "subtitle": "Zbrojeni iznos objavljenih doprinosa u {country}, po godinama od {years}.",
+    "preliminary": "Isprekidani stupci označavaju preliminarne podatke koji podliježu daljnjim ažuriranjima objavljivanja."
   },
   "years": {
     "title": "Donacije strankama",
