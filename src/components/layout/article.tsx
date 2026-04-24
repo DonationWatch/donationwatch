@@ -14,14 +14,18 @@ export const Article = ({
   subtitle,
   skipTitleOffset = false,
   fullWidth = false,
+  className = "",
 }: PropsWithChildren<{
   title?: string;
   subtitle?: ReactNode;
   skipTitleOffset?: boolean;
   fullWidth?: boolean;
+  className?: string;
 }>) => {
   return (
-    <article className="container mx-auto flex justify-between p-4">
+    <article
+      className={"container mx-auto flex justify-between p-4 " + className}
+    >
       <div
         className={`mx-auto mb-16 w-full space-y-6 ${fullWidth ? "" : "lg:w-10/12"}`}
       >
@@ -107,7 +111,7 @@ export const ArticleSectionTitle = ({
 }) => {
   const Tag = as;
   return (
-    <Tag id={id} className="mb-4 pt-6 text-2xl font-semibold">
+    <Tag id={id} className="mb-4 pt-6 text-2xl">
       <a href={`#${id}`}>{title}</a>
     </Tag>
   );
