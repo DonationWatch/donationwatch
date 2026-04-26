@@ -135,10 +135,22 @@ class FakeDataLoader extends DataLoader {
     });
 
     // Create fake donations
+    const knownPartyRequirements = countryConfig.knownPartyRequirements;
     const donationsPerParty =
-      countryConfig.knownPartyRequirements?.count === -1
+      knownPartyRequirements?.count === -1
         ? 100
-        : (countryConfig.knownPartyRequirements?.count ?? 100);
+        : (knownPartyRequirements?.count ?? 100);
+
+    const minAmount = countryConfig.minPublicDonationAmount + 1;
+    const amountPerDonation =
+      knownPartyRequirements?.count === -1 &&
+      knownPartyRequirements?.sum !== -1 &&
+      knownPartyRequirements?.sum !== undefined
+        ? Math.max(
+            minAmount,
+            Math.ceil(knownPartyRequirements.sum / donationsPerParty) + 1,
+          )
+        : minAmount;
 
     Object.keys(this.parties).forEach((partyName) => {
       if (this.parties[partyName].color === RANDOM_COLOR_MARKER) {
@@ -156,7 +168,7 @@ class FakeDataLoader extends DataLoader {
           ).padStart(2, "0")}-${String(
             Math.floor(Math.random() * 28) + 1,
           ).padStart(2, "0")}`,
-          [DonationField.Amount]: countryConfig.minPublicDonationAmount + 1,
+          [DonationField.Amount]: amountPerDonation,
           [DonationField.Receiver]: partyName,
           [DonationField.Address]:
             // if country has origin, create a state donation for the first donation
