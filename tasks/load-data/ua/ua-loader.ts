@@ -224,6 +224,39 @@ export class UaLoader extends DataLoader {
       color: "#24609b",
       code: IGNORE_CODE(),
     },
+    "СИЛА НАЦІЇ": {
+      name: "Сила Нації",
+      short: "Сила Нації",
+      color: "#085A8A",
+      code: IGNORE_CODE(),
+    },
+    "СИЛА ЛЮДЕЙ": {
+      name: "Сила людей",
+      short: "Сила людей",
+      color: "#3face2",
+      code: IGNORE_CODE(),
+    },
+    "РЕСПУБЛІКАНСЬКА ПЛАТФОРМА": {
+      name: "Республіканська платформа",
+      short: "Республіканська платформа",
+      wiki: 2016410,
+      color: "#0066ff",
+      code: IGNORE_CODE(),
+    },
+    "ПАРТІЯ ІГОРЯ КОЛИХАЄВА «НАМ ТУТ ЖИТИ!": {
+      name: "Партія Ігоря Колихаєва «Нам тут жити»",
+      short: "Нам тут жити",
+      wiki: 69128414,
+      code: IGNORE_CODE(),
+      color: "#1d2868",
+    },
+    "ДЕМОКРАТИЧНА СОКИРА": {
+      name: "Демократична Сокира",
+      short: "Демократична Сокира",
+      wiki: 63244538,
+      color: "#84171c",
+      code: IGNORE_CODE(),
+    },
   };
   private loadedOnce = false;
   private extractedOnce = false;
