@@ -728,6 +728,10 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       dates: [],
     },
     states: [],
+    knownPartyRequirements: {
+      sum: 100_000,
+      count: -1,
+    },
   },
   [Country.france]: {
     id: Country.france,

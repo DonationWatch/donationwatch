@@ -1,8 +1,8 @@
-import fs from "fs/promises";
+import fs, { constants } from "fs/promises";
 import path from "path";
 
 import type { Countries } from "@/utils/countries";
-import type { ExtractedDonationAddress, ReceiverId } from "@/utils/types";
+import type { ReceiverId } from "@/utils/types";
 
 import { isNotNullandNotUndefined } from "@/utils/array";
 import { Country } from "@/utils/countries";
@@ -11,7 +11,7 @@ import { AddressField, DonationField } from "@/utils/types";
 import type { ExtractedYearData, PartyConfig } from "../data-loader";
 
 import { DataLoader } from "../data-loader";
-import { timeout } from "../util";
+import { generatePartyColor, timeout } from "../util";
 import { donorMeta } from "./donor-meta";
 
 interface AddressModel {
@@ -102,6 +102,26 @@ interface PaymentReportModel {
 let codeCounter = 0;
 const IGNORE_CODE = () => `OVERWRITE_WITH_UPSTREAM_ID_${codeCounter++}`;
 
+// util for parallel execution with concurrency limit
+const inParallel = async <T, R>(
+  items: T[],
+  concurrency: number,
+  fn: (item: T) => Promise<R>,
+): Promise<R[]> => {
+  const results: R[] = [];
+  const chunks = [];
+  for (let i = 0; i < items.length; i += concurrency) {
+    chunks.push(items.slice(i, i + concurrency));
+  }
+
+  for (const chunk of chunks) {
+    const chunkResults = await Promise.all(chunk.map(fn));
+    results.push(...chunkResults);
+    await timeout(500); // small delay between chunks
+  }
+  return results;
+};
+
 export class UaLoader extends DataLoader {
   parties: Record<string, PartyConfig> = {
     "БЛОК КЕРНЕСА – УСПІШНИЙ ХАРКІВ!": {
@@ -150,6 +170,60 @@ export class UaLoader extends DataLoader {
       code: IGNORE_CODE(),
       color: "#d7c449",
     },
+    "ЗА МАЙБУТНЄ": {
+      name: "За майбутнє",
+      short: "За майбутнє",
+      wiki: 37165794,
+      code: IGNORE_CODE(),
+      color: "#5c068c",
+    },
+    "НАШ КРАЙ": {
+      name: "Наш край",
+      short: "Наш край",
+      color: "#005cb9",
+      wiki: 47995770,
+      code: IGNORE_CODE(),
+    },
+    БДЖОЛА: {
+      name: "Бджола",
+      short: "Бджола",
+      color: "#F4821F",
+      code: IGNORE_CODE(),
+    },
+    "УКРАЇНСЬКА СТРАТЕГІЯ ГРОЙСМАНА": {
+      name: "Українська Стратегія Гройсмана",
+      short: "Українська Стратегія Гройсмана",
+      wiki: 64192738,
+      color: "#134478",
+      code: IGNORE_CODE(),
+    },
+    "УКРАЇНСЬКА ГАЛИЦЬКА ПАРТІЯ": {
+      name: "Украї́нська Га́лицька па́ртія",
+      short: "Украї́нська Га́лицька па́ртія",
+      color: "#0c519e",
+      wiki: 66114674,
+      code: IGNORE_CODE(),
+    },
+    НАРОДОВЛАДДЯ: {
+      name: "Народовладдя",
+      short: "Народовладдя",
+      color: "#000000",
+      code: IGNORE_CODE(),
+    },
+    "АГРАРНА ПАРТІЯ УКРАЇНИ": {
+      name: "Агра́рна па́ртія Украї́ни",
+      short: "Агра́рна па́ртія Украї́ни",
+      wiki: 3734325,
+      color: "#86c041",
+      code: IGNORE_CODE(),
+    },
+    "Політична партія «НАРОДНИЙ ФРОНТ»": {
+      name: "Народний фронт",
+      short: "Народний фронт",
+      wiki: 43789446,
+      color: "#24609b",
+      code: IGNORE_CODE(),
+    },
   };
   private loadedOnce = false;
   private extractedOnce = false;
@@ -175,141 +249,129 @@ export class UaLoader extends DataLoader {
     this.loadedOnce = true;
 
     const API_BASE = "https://politdata.nazk.gov.ua/api/v2";
-    const partiesListUrl = `${API_BASE}/parties`;
-    // const partiesListCacheFile = path.join(this.cacheDir, `parties-list.json`);
 
-    this.log("Fetching", partiesListUrl);
-
-    // process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "0";
-
-    let hasListItems = true;
+    // fetch all parties
     const partiesList: PartyModel[] = [];
-    while (hasListItems) {
-      this.log(`Fetching parties list, current count: ${partiesList.length}`);
-      const res = await fetch(partiesListUrl, {
+    let page = 1;
+    let hasMore = true;
+    const PAGE_SIZE = 100;
+
+    this.log("Fetching parties list...");
+    while (hasMore) {
+      this.log(
+        `Fetching parties list page ${page}, total so far: ${partiesList.length}`,
+      );
+      const res = await fetch(`${API_BASE}/parties`, {
         method: "POST",
-        // set payload
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           filters: null,
           order: null,
-          pager: { page: 1, size: 10 },
+          pager: { page, size: PAGE_SIZE },
         }),
       });
-
-      if (!res.ok) {
-        throw new Error(
-          `Failed to fetch parties list: ${res.status} ${res.statusText}`,
-        );
-      }
-
-      const json: { results: { count: number; list: PartyModel[] } } =
-        await res.json();
+      if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
+      const json = (await res.json()) as {
+        results: { count: number; list: PartyModel[] };
+      };
 
       partiesList.push(...json.results.list);
-      hasListItems =
+      hasMore =
         partiesList.length < json.results.count && json.results.list.length > 0;
-
-      await timeout(1000);
+      page++;
+      if (hasMore) await timeout(500);
     }
-
-    // await fs.writeFile(
-    //   partiesListCacheFile,
-    //   JSON.stringify(partiesList, null, " "),
-    //   {
-    //     encoding: "utf8",
-    //   },
-    // );
-
-    const partiesResultList = partiesList;
-    // const partiesResultList = JSON.parse(
-    //   await fs.readFile(partiesListCacheFile, "utf-8"),
-    // ) as PartyModel[];
 
     const partyReports: {
       party: PartyModel;
       reports: PaymentReportModel[];
     }[] = [];
 
-    for (const party of partiesResultList) {
-      // fetch party reports
-      const reportFileName = path.join(
-        this.cacheDir,
-        `${party.id}-reports.json`,
-      );
-
-      const partyUrl = `${API_BASE}/party/${party.id}/reports`;
-      this.log(`Fetching party reports for ${party.name}: ${partyUrl}`);
-      await timeout(1000);
-      const res = await fetch(partyUrl, {
-        method: "POST",
-      });
-
-      if (!res.ok) {
-        this.log(
-          `Failed to fetch party reports for ${party.name}: ${res.status} ${res.statusText}`,
+    // fetch reports for each party
+    this.log(`Fetching reports for ${partiesList.length} parties...`);
+    const partiesWithReports = await inParallel(
+      partiesList,
+      5,
+      async (party) => {
+        const reportCacheFile = path.join(
+          this.cacheDir,
+          `${party.id}-reports.json`,
         );
-        continue;
-      }
 
-      const json = (await res.json()) as {
-        results: { list: PartyReportModel[] };
-      };
-      await fs.writeFile(reportFileName, JSON.stringify(json, null, " "), {
-        encoding: "utf8",
-      });
-    }
+        try {
+          await fs.access(reportCacheFile, constants.F_OK);
+          const cached = JSON.parse(
+            await fs.readFile(reportCacheFile, "utf-8"),
+          );
+          return {
+            party,
+            reports: cached.results.list as PartyReportModel[],
+          };
+        } catch (e) {
+          this.log(`Failed to read cache for ${party.name}, re-fetching...`, e);
+        }
 
-    // fetch payments for each report of each party
-    for (const party of partiesResultList) {
-      const reportFileName = path.join(
-        this.cacheDir,
-        `${party.id}-reports.json`,
-      );
-      const reports = JSON.parse(
-        await fs.readFile(reportFileName, "utf-8"),
-      ) as { results: { list: PartyReportModel[] } };
+        try {
+          const res = await fetch(`${API_BASE}/party/${party.id}/reports`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+          });
+          if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
+          const json = (await res.json()) as {
+            results: { list: PartyReportModel[] };
+          };
+          await fs.writeFile(reportCacheFile, JSON.stringify(json, null, " "), {
+            encoding: "utf8",
+          });
+          return { party, reports: json.results.list };
+        } catch (error) {
+          this.log(`Failed to fetch reports for ${party.name}:`, error);
+          return { party, reports: [] };
+        }
+      },
+    );
 
-      const yearReports = reports.results.list;
+    // fetch payments for each report
+    this.log("Fetching payments for all reports...");
+    for (const { party, reports } of partiesWithReports) {
+      if (reports.length === 0) continue;
 
       const reportPayments: PaymentReportModel[] = [];
 
-      for (const report of yearReports) {
-        const paymentsUrl = `${API_BASE}/party/report/${report.id}/payments/monetary_contributions`;
-        await timeout(1000);
-        const res = await fetch(paymentsUrl, {
-          method: "POST",
-        });
-
-        if (!res.ok) {
-          this.log(
-            `Failed to fetch payments for report ${report.id} of party ${party.name}: ${res.status} ${res.statusText}`,
+      this.log(
+        `Fetching payments for ${party.name} (${reports.length} reports)...`,
+      );
+      const payments = await inParallel(reports, 10, async (report) => {
+        try {
+          const res = await fetch(
+            `${API_BASE}/party/report/${report.id}/payments/monetary_contributions`,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+            },
           );
-          continue;
-        }
-
-        const json = (await res.json()) as {
-          results: { list: PaymentReportModel[] };
-        };
-
-        if (!json.results.list.length) {
+          if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
+          const json = (await res.json()) as {
+            results: { list: PaymentReportModel[] };
+          };
+          return json.results.list;
+        } catch (error) {
           this.log(
-            `No payments found for report ${report.id} of party ${party.name}, skipping...`,
+            `Failed to fetch payments for report ${report.id} of ${party.name}:`,
+            error,
           );
-          continue;
+          return [];
         }
-
-        reportPayments.push(...json.results.list);
-      }
-
-      if (reportPayments.length === 0) {
-        this.log(`No payments found for party ${party.name}, skipping...`);
-        continue;
-      }
-
-      partyReports.push({
-        party,
-        reports: reportPayments,
       });
+
+      reportPayments.push(...payments.flat());
+
+      if (reportPayments.length > 0) {
+        partyReports.push({
+          party,
+          reports: reportPayments,
+        });
+      }
     }
 
     // write party reports to cache
@@ -347,10 +409,7 @@ export class UaLoader extends DataLoader {
             ...{
               name: partyName,
               short: partyName,
-              color: ("#" +
-                Math.floor(Math.random() * 16777215)
-                  .toString(16)
-                  .padStart(6, "0")) as `#${string}`,
+              color: generatePartyColor(partyName),
             },
             ...this.parties[partyName],
             // patch our party code with the upstream id
@@ -395,15 +454,6 @@ export class UaLoader extends DataLoader {
       .replace(/^"(.*)"$/, "$1")
       // remove wrapping «»
       .replace(/^«(.*)»$/, "$1");
-
-    return normalized;
-  }
-
-  protected override normalizeDonor(
-    donor: string,
-    _address: ExtractedDonationAddress,
-  ): string {
-    const normalized = super.normalizeDonor(donor, _address);
 
     return normalized;
   }
