@@ -219,6 +219,7 @@
     "title": "Parteispenden",
     "subtitle": "Kumulierte Summe der veröffentlichten Spenden an jede Partei in {country}, {years}.",
     "goto_year": "Zu {year} springen",
+    "no_date_omitted": "Schließt {count} Spenden ({sum}) aus, bei denen die Quelle nur ein Jahr angegeben hat.",
     "no_data": {
       "title": "Keine Daten verfügbar",
       "summary": "Es tut uns leid, aber wir haben noch keine Spendendaten für {year}.",

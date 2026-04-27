@@ -219,6 +219,7 @@
     "title": "Dary stranám",
     "subtitle": "Kumulativní součet zveřejněných darů každé straně v {country}, {years}.",
     "goto_year": "Přejít na {year}",
+    "no_date_omitted": "Nezahrnuje {count} darů ({sum}), u kterých zdroj uvedl pouze rok.",
     "no_data": {
       "title": "Žádná data k dispozici",
       "summary": "Je nám líto, ale zatím nemáme žádné údaje o darech pro rok {year}.",

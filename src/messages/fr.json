@@ -209,6 +209,7 @@
     "title": "Dons aux partis",
     "subtitle": "Somme cumulée des dons publiés pour chaque parti en {country}, {years}.",
     "goto_year": "Aller à l'année {year}",
+    "no_date_omitted": "Exclut {count} dons ({sum}) pour lesquels la source n'a fourni qu'une année.",
     "no_data": {
       "title": "Aucune donnée disponible",
       "summary": "Désolé, nous n'avons pas encore de données pour l'année {year}.",
