@@ -219,6 +219,7 @@
     "title": "Partidonasjoner",
     "subtitle": "Akkumulert sum av publiserte donasjoner til hvert parti i {country}, {years}.",
     "goto_year": "Gå til år {year}",
+    "no_date_omitted": "Utelater {count} donasjoner ({sum}) der kilden kun oppga et år.",
     "no_data": {
       "title": "Ingen data tilgjengelig",
       "summary": "Beklager, men det finnes ennå ingen donasjonsdata for {year}.",

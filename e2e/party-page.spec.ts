@@ -131,6 +131,15 @@ test.describe("Party page", () => {
         );
       });
     });
+
+    test("is showing the timeseries chart for australia ALP where a couple donations miss a date", async ({
+      timelinePage,
+      page,
+      baseURL,
+    }) => {
+      await page.goto(`${baseURL}/australia/party/ALP/timeline`);
+      await timelinePage.timelineChart.expectHasFeature();
+    });
   });
 
   test.describe("origin page", () => {

@@ -209,6 +209,7 @@
     "title": "Party donations",
     "subtitle": "Cumulative sum of published donations to each party in {country}, {years}.",
     "goto_year": "Go to year {year}",
+    "no_date_omitted": "Excludes {count} donations ({sum}) where the source provided only a year.",
     "no_data": {
       "title": "No data available",
       "summary": "We're sorry, but we don't have any donation data for {year} yet.",

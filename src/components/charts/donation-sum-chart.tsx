@@ -10,7 +10,10 @@ import type { Donation, ReceiverId } from "@/utils/types";
 import Loading from "@/components/loading/loading";
 import { useDonationsByParty, useDonationsByYears } from "@/hooks/use-api";
 import { useChart } from "@/hooks/use-chart";
-import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import {
+  useClientTranslations,
+  useClientTranslations as useTranslations,
+} from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
 import { isNotNullandNotUndefined } from "@/utils/array";
 import { partyColor } from "@/utils/color";
@@ -134,6 +137,7 @@ const DonationTimeseriesChart = ({
 }) => {
   const locale = useLocale();
   const { backgroundColor, isMobile, isDark } = useChart();
+  const tYears = useClientTranslations("years");
 
   const leftmostYear = limitToFirstDateYear
     ? donations[0][DonationField.Date].substring(0, 4)
@@ -174,10 +178,17 @@ const DonationTimeseriesChart = ({
   const partiesSet = new Set<string>(parties.map((p) => p[PartyField.Id]));
   const foundParties = new Set<string>([]);
   const partySums: Record<string, number> = {};
+  let filteredYearDonationSum = 0;
+  let filteredYearDonationCount = 0;
 
   donations.forEach((donation: Donation & { [DonationField.Date]: string }) => {
     if (donation[DonationField.Date] === donationYear(donation)) {
-      throw new Error("Donation date is only year but expected full date");
+      console.warn(
+        "Donation date is only year but expected full date",
+        donation[DonationField.Date],
+      );
+      filteredYearDonationCount++;
+      filteredYearDonationSum += donation[DonationField.Amount];
       return;
     }
     if (!yearsSet.has(donationYear(donation))) return;
@@ -366,6 +377,22 @@ const DonationTimeseriesChart = ({
     ],
   };
 
+  const filteredEntriesSubtitle =
+    filteredYearDonationCount > 0
+      ? tYears("no_date_omitted", {
+          sum: formatCompactCountryCurrency(
+            locale,
+            filteredYearDonationSum,
+            country,
+          ),
+          count: filteredYearDonationCount,
+        })
+      : undefined;
+
+  const fullSubtitle = filteredEntriesSubtitle
+    ? `${subtitle} ${filteredEntriesSubtitle}`
+    : subtitle;
+
   return (
     <ExpandableReactEchart
       height={550}
@@ -374,7 +401,7 @@ const DonationTimeseriesChart = ({
       feature="line"
       option={option}
       title={chartTitle}
-      subtitle={subtitle}
+      subtitle={fullSubtitle}
       country={country}
       years={years}
     />

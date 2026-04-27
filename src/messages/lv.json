@@ -219,6 +219,7 @@
     "title": "Partiju ziedojumi",
     "subtitle": "Kopējā publicēto ziedojumu summa katrai partijai {country}, {years}.",
     "goto_year": "Pāriet uz {year}. gadu.",
+    "no_date_omitted": "Izslēdz {count} ziedojumus ({sum}), kuriem avots norādīja tikai gadu.",
     "no_data": {
       "title": "Nav pieejamu datu",
       "summary": "Atvainojamies, bet mums vēl nav ziedojumu datu par {year}. gadu.",

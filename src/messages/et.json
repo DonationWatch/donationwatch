@@ -219,6 +219,7 @@
     "title": "Partei annetused",
     "subtitle": "Avaldatud annetuste kumulatiivne summa igale parteile riigis {country}, {years}.",
     "goto_year": "Hüpe aastasse {year}",
+    "no_date_omitted": "Välistab {count} annetust ({sum}), mille puhul allikas esitas ainult aasta.",
     "no_data": {
       "title": "Andmed pole saadaval",
       "summary": "Vabandame, kuid meil pole veel {year}. aasta annetuste andmeid.",

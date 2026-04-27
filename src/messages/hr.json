@@ -219,6 +219,7 @@
     "title": "Donacije strankama",
     "subtitle": "Kumulativni zbroj objavljenih donacija svakoj stranci u {country}, {years}.",
     "goto_year": "Idi na godinu {year}",
+    "no_date_omitted": "Isključuje {count} donacija ({sum}) za koje je izvor naveo samo godinu.",
     "no_data": {
       "title": "Nema dostupnih podataka",
       "summary": "Žao nam je, ali još nemamo podatke o donacijama za {year}. godinu.",

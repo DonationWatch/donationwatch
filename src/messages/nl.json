@@ -219,6 +219,7 @@
     "title": "Partijgiften",
     "subtitle": "Cumulatieve som van gepubliceerde donaties aan elke partij in {country}, {years}.",
     "goto_year": "Spring naar {year}",
+    "no_date_omitted": "Exclusief {count} donaties ({sum}) waarbij de bron alleen een jaar opgaf.",
     "no_data": {
       "title": "Geen gegevens beschikbaar",
       "summary": "Het spijt ons, maar we hebben nog geen donatiegegevens voor {year}.",
