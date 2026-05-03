@@ -747,7 +747,8 @@ export class EuLoader extends DataLoader {
         "https://www.appf.europa.eu/cmsdata/303598/2025%20FOUNDATIONS%20Donations%20table%20as%20of%202026-03-02.xlsx",
     },
     "2026": {
-      parties: undefined,
+      parties:
+        "https://www.appf.europa.eu/cmsdata/305929/2026%20PARTIES%20Donations%20table%20as%20of%202026-04-29.xlsx",
       foundations:
         "https://www.appf.europa.eu/cmsdata/305611/2026%20FOUNDATIONS%20Donations%20table%20as%20of%202026-04-21.xlsx",
     },
