@@ -6,13 +6,17 @@ import path from "path";
 
 import type { ExtractedDonationAddress, ReceiverId } from "@/utils/types";
 
-import { COUNTRY_CONFIG, Country } from "@/utils/countries";
+import { Country } from "@/utils/countries";
 import { AddressField, DonationField, DonorType } from "@/utils/types";
 
 import type { ExtractedYearData, PartyConfig } from "../data-loader";
 
 import { DataLoader } from "../data-loader";
-import { containsWords } from "../util";
+import {
+  containsWords,
+  generatePartyColor,
+  RANDOM_COLOR_MARKER,
+} from "../util";
 import { donorMeta } from "./donor-meta";
 
 const toGBPFloat = (valueString: string) => {
@@ -361,6 +365,195 @@ export class UkLoader extends DataLoader {
       code: "OPENPARTY",
       color: "#f87988",
     },
+    "Advance Together": {
+      name: "Advance Together",
+      short: "Advance",
+      code: "ADVANCE",
+      color: "#f82a8f",
+      wiki: 58552565,
+    },
+    "The New Party": {
+      name: "The New Party",
+      short: "The New Party",
+      code: "NEWPARTY",
+      color: "#343634",
+      wiki: 1759397,
+    },
+    "Jury Team": {
+      name: "Jury Team",
+      short: "Jury Team",
+      code: "JURYTEAM",
+      color: "#121212",
+      wiki: 21872098,
+    },
+    "Cannabis is Safer than Alcohol": {
+      name: "Cannabis is Safer than Alcohol",
+      short: "CISTA",
+      code: "CISTA",
+      color: "#f84651",
+      wiki: 46182492,
+    },
+    "The Independent Group for Change": {
+      name: "The Independent Group for Change",
+      short: "The Independent Group for Change",
+      code: "CHANGEUK",
+      color: "#000000",
+      wiki: 60004953,
+    },
+    "Pro Democracy: Libertas.eu": {
+      name: "Pro Democracy: Libertas.eu",
+      short: "Pro Democracy: Libertas.eu",
+      code: "LIBERTASEU",
+      color: "#373b66",
+    },
+    "Independent Labour Group": {
+      name: "Independent Labour Group",
+      short: "ILP",
+      code: "ILP",
+      color: "#cc0000",
+      wiki: 239528,
+    },
+    "All People's Party": {
+      name: "All People's Party",
+      short: "All People's Party",
+      code: "APP",
+      color: "#030303",
+      wiki: 56036126,
+    },
+    "All For Unity": {
+      name: "All For Unity",
+      short: "All For Unity",
+      code: "ALL4UNITY",
+      color: "#0027b8",
+      wiki: 66438227,
+    },
+    "Scottish Libertarian Party": {
+      name: "Scottish Libertarian Party",
+      short: "Scottish Libertarians",
+      code: "SCOTLIB",
+      color: "#005fa5",
+      wiki: 50429322,
+    },
+    NO2EU: {
+      name: "NO2EU",
+      short: "NO2EU",
+      code: "NO2EU",
+      color: "#040404",
+      wiki: 22480956,
+    },
+    "Tower Hamlets First": {
+      name: "Tower Hamlets First",
+      short: "Tower Hamlets First",
+      code: "TOWERHAMLETSFIRST",
+      color: "#e33d32",
+      wiki: 42850137,
+    },
+    "Independent Kidderminster Hospital and Health Concern": {
+      name: "Independent Kidderminster Hospital and Health Concern",
+      short: "Independent Kidderminster Hospital and Health Concern",
+      code: "HEALTHCONCERN",
+      color: "#83a0b6",
+      wiki: 457572,
+    },
+    "Veterans and People’s Party": {
+      name: "Veterans and People’s Party",
+      short: "Veterans and People’s Party",
+      code: "VPP",
+      color: "#c0a062",
+      wiki: 60724048,
+    },
+    "Duma Polska = Polish Pride": {
+      name: "Duma Polska = Polish Pride",
+      short: "Duma Polska = Polish Pride",
+      code: "DUMAPOLSKA",
+      color: "#575757",
+    },
+    "Freedom and Responsibility": {
+      name: "Freedom and Responsibility",
+      short: "Freedom and Responsibility",
+      code: "FREERESP",
+      color: "#003744",
+    },
+    "We Demand A Referendum Now": {
+      name: "We Demand A Referendum Now",
+      short: "We Demand A Referendum Now",
+      code: "WDARN",
+      color: "#4e2583",
+      wiki: 37049480,
+    },
+    "The Radical Party": {
+      name: "The Radical Party",
+      short: "The Radical Party",
+      code: "RADICALPARTY",
+      color: "#a82a1c",
+    },
+    "Socialist Alliance": {
+      name: "Socialist Alliance",
+      short: "Socialist Alliance",
+      code: "SOCALLIANCE",
+      color: "#ab2323",
+    },
+    "Don't Cook Party": {
+      name: "Don't Cook Party",
+      short: "Don't Cook Party",
+      code: "DONTCOOK",
+      color: "#de0c0a",
+    },
+    'Christian Party "Proclaiming Christ\'s Lordship"': {
+      name: 'Christian Party "Proclaiming Christ\'s Lordship"',
+      short: 'Christian Party "Proclaiming Christ\'s Lordship"',
+      code: "CHRISTIANPARTY",
+      color: "#3a0b71",
+    },
+    Life: {
+      name: "Life",
+      short: "Life",
+      code: "LIFE",
+      color: RANDOM_COLOR_MARKER,
+    },
+    "Fulham Group": {
+      name: "Fulham Group",
+      short: "Fulham Group",
+      code: "FULHAMGRP",
+      color: RANDOM_COLOR_MARKER,
+    },
+    "The Buckinghamshire Campaign for Democracy": {
+      name: "The Buckinghamshire Campaign for Democracy",
+      short: "The Buckinghamshire Campaign for Democracy",
+      code: "BCFD",
+      color: RANDOM_COLOR_MARKER,
+    },
+    "Solihull and Meriden Residents Association": {
+      name: "Solihull and Meriden Residents Association",
+      short: "Solihull and Meriden Residents Association",
+      code: "SMRA",
+      color: RANDOM_COLOR_MARKER,
+    },
+    Trust: {
+      name: "Trust",
+      short: "Trust",
+      code: "TRUST",
+      color: "#0092c8",
+      wiki: 26760381,
+    },
+    "Democracy 2015": {
+      name: "Democracy 2015",
+      short: "Democracy 2015",
+      code: "DEMOCRACY15",
+      color: RANDOM_COLOR_MARKER,
+    },
+    "Both Unions Party of Northern Ireland": {
+      name: "Both Unions Party of Northern Ireland",
+      short: "Both Unions Party of Northern Ireland",
+      code: "BOTHUNIONSNIRL",
+      color: RANDOM_COLOR_MARKER,
+    },
+    "Hersham Village Society": {
+      name: "Hersham Village Society",
+      short: "Hersham Village Society",
+      code: "HERSHAMSOC",
+      color: RANDOM_COLOR_MARKER,
+    },
   };
 
   donorMeta = donorMeta;
@@ -494,12 +687,22 @@ export class UkLoader extends DataLoader {
     return path.join(this.cacheDir, `donations-${year}.csv`);
   }
 
+  protected override normalizeReceiver(receiver: string): string {
+    const normalized = super
+      .normalizeReceiver(receiver)
+      // remove [De-registered DD/MM/YY] from the name
+      .replace(/\s*\[De-registered.*]$/, "");
+
+    return normalized;
+  }
+
   protected override normalizeDonor(
     receiver: string,
     address: ExtractedDonationAddress,
   ): string {
     receiver = super.normalizeDonor(receiver, address);
     receiver = receiver
+      .replace(" Deceased", "")
       .replace(/^Mr /, "")
       .replace(/^Mrs /, "")
       .replace(/^Ms /, "")

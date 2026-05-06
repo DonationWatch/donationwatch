@@ -377,6 +377,10 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       Features.DonorType |
       Features.ExternalDonationIds,
     minPublicDonationAmount: 1000,
+    knownPartyRequirements: {
+      sum: 10_000,
+      count: -1,
+    },
     currency: "GBP",
     wikiCountry: "en",
     source: {
@@ -402,14 +406,6 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       "parliamentary office.*",
       ".*parliament",
       ".*assembly",
-    ],
-    receiverFilters: [
-      ".*De-registered.*",
-      // can't find any information on these parties
-      "^Life$",
-      "^Both Unions Party of Northern Ireland$",
-      "^Hersham Village Society$",
-      "^Solihull and Meriden Residents Association$",
     ],
   },
   [Country.australia]: {

@@ -32,7 +32,11 @@ import {
   jsonAsTsModuleWithType,
   writeIfChanged,
 } from "../utils";
-import { assertNoDuplicateIds } from "./util";
+import {
+  assertNoDuplicateIds,
+  generatePartyColor,
+  RANDOM_COLOR_MARKER,
+} from "./util";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -391,103 +395,105 @@ export abstract class DataLoader {
     const donorMappings: Record<string, string> = {};
     const normalizedDonors: Record<string, string[]> = {};
 
-    this.expectNoUnknownParties(extractedDonations).forEach((extracted) => {
-      const { idx, ...extractedDonation } = extracted;
+    this.expectNoUnknownParties(extractedDonations, donorFiltersRegex).forEach(
+      (extracted) => {
+        const { idx, ...extractedDonation } = extracted;
 
-      // normalize name
-      extractedDonation[DonationField.DonorName] = this.preNormalizeDonor(
-        extractedDonation[DonationField.DonorName],
-      );
-      const donorName = this.preNormalizeDonor(
-        this.normalizeDonor(
+        // normalize name
+        extractedDonation[DonationField.DonorName] = this.preNormalizeDonor(
           extractedDonation[DonationField.DonorName],
-          extractedDonation[DonationField.Address],
-        ),
-      );
-
-      // filter if ignored donor
-      if (!applyDonorReceiverFilters(donorName, donorFiltersRegex)) {
-        filteredOutDonors.add(donorName);
-        return;
-      }
-
-      const extractedYear = donationYear(extracted);
-      parties.add(extracted[DonationField.Receiver]);
-      yearsSet.add(extractedYear);
-
-      partySums[extracted[DonationField.Receiver]] ??= 0;
-      partySums[extracted[DonationField.Receiver]] +=
-        extracted[DonationField.Amount];
-      partyYears[extracted[DonationField.Receiver]] ??= new Set();
-      partyYears[extracted[DonationField.Receiver]].add(extractedYear);
-
-      const donorKey = this.generateDonorKey(donorName);
-      const knownDonorName = donorMappings[donorKey] ?? donorName;
-      donorMappings[donorKey] = knownDonorName;
-
-      if (donorMappings[donorKey] !== donorName) {
-        normalizedDonors[knownDonorName] ??= [];
-        if (
-          !normalizedDonors[knownDonorName].includes(
-            extractedDonation[DonationField.DonorName],
-          )
-        ) {
-          normalizedDonors[knownDonorName].push(
-            extractedDonation[DonationField.DonorName],
-          );
-        }
-      } else if (donorName !== extractedDonation[DonationField.DonorName]) {
-        normalizedDonors[knownDonorName] ??= [];
-        if (
-          !normalizedDonors[knownDonorName].includes(
-            extractedDonation[DonationField.DonorName],
-          )
-        ) {
-          normalizedDonors[knownDonorName].push(
-            extractedDonation[DonationField.DonorName],
-          );
-        }
-      }
-
-      const donation: Donation = {
-        // we use -1 as a placeholder for the id, we will generate them later
-        [DonationField.Id]: "-1",
-        ...extractedDonation,
-        [DonationField.DonorName]: knownDonorName,
-        [DonationField.Receiver]: this.partyConfig(
-          extractedDonation[DonationField.Receiver],
-        ).code as ReceiverId,
-        [DonationField.Address]: {
-          [AddressField.Country]:
-            extractedDonation[DonationField.Address][AddressField.Country],
-          [AddressField.State]:
-            extractedDonation[DonationField.Address][AddressField.State],
-        },
-      };
-
-      // if state is missing, only keep country in the address
-      if (!donation[DonationField.Address][AddressField.State]) {
-        delete donation[DonationField.Address][AddressField.State];
-      }
-
-      // normalize date if needed
-      if (donation[DonationField.Date].length > 4) {
-        donation[DonationField.Date] = this.normalizeIsoDate(
-          donation[DonationField.Date],
         );
-      }
+        const donorName = this.preNormalizeDonor(
+          this.normalizeDonor(
+            extractedDonation[DonationField.DonorName],
+            extractedDonation[DonationField.Address],
+          ),
+        );
 
-      // check if date is actually a valid date
-      const date = new Date(donation[DonationField.Date]);
-      assert(
-        !isNaN(date.getTime()),
-        `Date is valid: ${donation[DonationField.Date]} (${date.getTime()})`,
-      );
+        // filter if ignored donor
+        if (!applyDonorReceiverFilters(donorName, donorFiltersRegex)) {
+          filteredOutDonors.add(donorName);
+          return;
+        }
 
-      yearDonations[extractedYear] ??= [];
-      yearDonations[extractedYear].push(donation);
-      donations.push(donation);
-    });
+        const extractedYear = donationYear(extracted);
+        parties.add(extracted[DonationField.Receiver]);
+        yearsSet.add(extractedYear);
+
+        partySums[extracted[DonationField.Receiver]] ??= 0;
+        partySums[extracted[DonationField.Receiver]] +=
+          extracted[DonationField.Amount];
+        partyYears[extracted[DonationField.Receiver]] ??= new Set();
+        partyYears[extracted[DonationField.Receiver]].add(extractedYear);
+
+        const donorKey = this.generateDonorKey(donorName);
+        const knownDonorName = donorMappings[donorKey] ?? donorName;
+        donorMappings[donorKey] = knownDonorName;
+
+        if (donorMappings[donorKey] !== donorName) {
+          normalizedDonors[knownDonorName] ??= [];
+          if (
+            !normalizedDonors[knownDonorName].includes(
+              extractedDonation[DonationField.DonorName],
+            )
+          ) {
+            normalizedDonors[knownDonorName].push(
+              extractedDonation[DonationField.DonorName],
+            );
+          }
+        } else if (donorName !== extractedDonation[DonationField.DonorName]) {
+          normalizedDonors[knownDonorName] ??= [];
+          if (
+            !normalizedDonors[knownDonorName].includes(
+              extractedDonation[DonationField.DonorName],
+            )
+          ) {
+            normalizedDonors[knownDonorName].push(
+              extractedDonation[DonationField.DonorName],
+            );
+          }
+        }
+
+        const donation: Donation = {
+          // we use -1 as a placeholder for the id, we will generate them later
+          [DonationField.Id]: "-1",
+          ...extractedDonation,
+          [DonationField.DonorName]: knownDonorName,
+          [DonationField.Receiver]: this.partyConfig(
+            extractedDonation[DonationField.Receiver],
+          ).code as ReceiverId,
+          [DonationField.Address]: {
+            [AddressField.Country]:
+              extractedDonation[DonationField.Address][AddressField.Country],
+            [AddressField.State]:
+              extractedDonation[DonationField.Address][AddressField.State],
+          },
+        };
+
+        // if state is missing, only keep country in the address
+        if (!donation[DonationField.Address][AddressField.State]) {
+          delete donation[DonationField.Address][AddressField.State];
+        }
+
+        // normalize date if needed
+        if (donation[DonationField.Date].length > 4) {
+          donation[DonationField.Date] = this.normalizeIsoDate(
+            donation[DonationField.Date],
+          );
+        }
+
+        // check if date is actually a valid date
+        const date = new Date(donation[DonationField.Date]);
+        assert(
+          !isNaN(date.getTime()),
+          `Date is valid: ${donation[DonationField.Date]} (${date.getTime()})`,
+        );
+
+        yearDonations[extractedYear] ??= [];
+        yearDonations[extractedYear].push(donation);
+        donations.push(donation);
+      },
+    );
 
     // generate ids by combining the year and index of each donations sorted by oldest -> newest
     Object.values(yearDonations).forEach((donations) => {
@@ -520,6 +526,10 @@ export abstract class DataLoader {
         .toSorted((a, b) => partySums[b] - partySums[a])
         .map<Party>((party) => {
           const config = this.partyConfig(party);
+
+          if (config.color === RANDOM_COLOR_MARKER) {
+            config.color = generatePartyColor(config.code);
+          }
 
           return {
             [PartyField.Id]: config.code as ReceiverId,
@@ -656,6 +666,7 @@ export abstract class DataLoader {
 
   private expectNoUnknownParties(
     extractedDonations: ExtractedYearData[],
+    donorFiltersRegex: RegExp[],
   ): ExtractedYearData[] {
     const knownPartyRequirements = COUNTRY_CONFIG[this.country]
       .knownPartyRequirements ?? {
@@ -667,6 +678,16 @@ export abstract class DataLoader {
 
     extractedDonations.forEach((extracted) => {
       const party = extracted[DonationField.Receiver];
+
+      // Skip counting this donation if it's from an ignored donor
+      if (
+        !applyDonorReceiverFilters(
+          extracted[DonationField.DonorName],
+          donorFiltersRegex,
+        )
+      )
+        return;
+
       partySumCounts[party] ??= { count: 0, sum: 0 };
       partySumCounts[party].count++;
       partySumCounts[party].sum += extracted[DonationField.Amount];

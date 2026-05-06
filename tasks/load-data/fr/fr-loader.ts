@@ -15,7 +15,7 @@ import { AddressField, DonationField } from "@/utils/types";
 import type { ExtractedYearData, PartyConfig } from "../data-loader";
 
 import { DataLoader } from "../data-loader";
-import { RANDOM_COLOR_MARKER, generatePartyColor } from "../util";
+import { RANDOM_COLOR_MARKER } from "../util";
 import { donorMeta } from "./donor-meta";
 
 interface ReportRow {
@@ -636,10 +636,6 @@ export class FrLoader extends DataLoader {
             color: "#11ccee",
           };
           party = this.parties[row.partyId];
-        }
-
-        if (party.color === RANDOM_COLOR_MARKER) {
-          party.color = generatePartyColor(row.partyId);
         }
 
         if (row.currency !== "EUR") {

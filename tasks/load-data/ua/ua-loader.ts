@@ -11,7 +11,7 @@ import { AddressField, DonationField } from "@/utils/types";
 import type { ExtractedYearData, PartyConfig } from "../data-loader";
 
 import { DataLoader } from "../data-loader";
-import { generatePartyColor, timeout } from "../util";
+import { RANDOM_COLOR_MARKER, timeout } from "../util";
 import { donorMeta } from "./donor-meta";
 
 interface AddressModel {
@@ -442,7 +442,7 @@ export class UaLoader extends DataLoader {
             ...{
               name: partyName,
               short: partyName,
-              color: generatePartyColor(partyName),
+              color: RANDOM_COLOR_MARKER,
             },
             ...this.parties[partyName],
             // patch our party code with the upstream id
