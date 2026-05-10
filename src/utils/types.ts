@@ -36,15 +36,29 @@ export const enum DonorType {
   AnonymizedDonor,
 }
 
+export const enum DonationType {
+  // Private monetary donations
+  Money,
+  // Regular member dues
+  MembershipFee,
+  // One-time entry fees
+  JoiningFee,
+  // In-kind / Non-cash donations
+  PropertyOrService,
+  // State subsidies (e.g., Short Money, Cranborne Money)
+  PublicFunds,
+}
+
 export const enum DonationField {
   Id,
   Date,
-  DonorType,
+  DonationType,
   DonorName,
   Amount,
   Receiver,
   Address,
   DonorIndex,
+  DonorType,
   // Ultimate Beneficial Owners
   // see https://en.wikipedia.org/wiki/Beneficial_ownership
   UBOs,
@@ -61,6 +75,8 @@ export interface Donation {
   [DonationField.Receiver]: ReceiverId;
   [DonationField.DonorType]?: DonorType;
   [DonationField.UBOs]?: string[];
+  // being unset = DonationTypes.Money
+  [DonationField.DonationType]?: DonationType;
 }
 
 export type IsoDate = `${number}-${number}-${number}`;

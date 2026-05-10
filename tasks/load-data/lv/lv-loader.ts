@@ -6,13 +6,33 @@ import path from "path";
 import type { ExtractedDonationAddress, ReceiverId } from "@/utils/types";
 
 import { Country } from "@/utils/countries";
-import { AddressField, DonationField } from "@/utils/types";
+import { DonationType, AddressField, DonationField } from "@/utils/types";
 
 import type { ExtractedYearData, PartyConfig } from "../data-loader";
 
 import { DataLoader } from "../data-loader";
 import { spawnBrowser, timeout } from "../util";
 import { donorMeta } from "./donor-meta";
+
+const knabTypeMapping: Record<
+  string,
+  {
+    // the type id that their api needs for this type
+    knabTypeId: string;
+    donationType: DonationType;
+  }
+> = {
+  Nauda: { knabTypeId: "1", donationType: DonationType.Money },
+  "Manta vai pakalpojums": {
+    knabTypeId: "2",
+    donationType: DonationType.PropertyOrService,
+  },
+  "Iestāšanās maksa": {
+    knabTypeId: "4",
+    donationType: DonationType.JoiningFee,
+  },
+  "Biedra nauda": { knabTypeId: "5", donationType: DonationType.MembershipFee },
+};
 
 export class LvLoader extends DataLoader {
   constructor() {
@@ -90,7 +110,7 @@ export class LvLoader extends DataLoader {
       code: "SC",
       short: "Saskaņas Centrs",
     },
-    'Politiskā partija "Tautas varas spēks"': {
+    "Tautas varas spēks": {
       color: "#56021C",
       name: "Tautas varas spēks",
       code: "TVS",
@@ -161,7 +181,7 @@ export class LvLoader extends DataLoader {
         short: "Apvienotais saraksts",
         code: "AS",
       },
-    "No sirds Latvijai (likvidēta 28.11.2019)": {
+    "No sirds Latvijai": {
       color: "#8f181b",
       name: "No sirds Latvijai",
       code: "NOSIRDS",
@@ -195,7 +215,7 @@ export class LvLoader extends DataLoader {
       code: "RICIBAS",
       short: "Rīcības partija",
     },
-    'Politiskā partija "Par Cilvēcīgu Latviju"': {
+    "Par Cilvēcīgu Latviju": {
       wiki: 50687809,
       color: "#01acb4",
       name: "Par cilvēcīgu Latviju",
@@ -242,7 +262,7 @@ export class LvLoader extends DataLoader {
       code: "NACIONALISTI",
       short: "Latviešu Nacionālisti",
     },
-    'Politiskā partija "Latvijas Reģionu Apvienība"': {
+    "Latvijas Reģionu Apvienība": {
       wiki: 44031407,
       color: "#9d1d32",
       name: "Latvijas Reģionu apvienība",
@@ -256,7 +276,7 @@ export class LvLoader extends DataLoader {
       code: "P21",
       short: "P21",
     },
-    'Politiskā partija "Stabilitātei!"': {
+    "Stabilitātei!": {
       wiki: 70940864,
       color: "#f77d02",
       name: "Stabilitātei!",
@@ -284,7 +304,7 @@ export class LvLoader extends DataLoader {
       code: "SV",
       short: "SV",
     },
-    'Politiskā partija "KOPĀ LATVIJAI"': {
+    "KOPĀ LATVIJAI": {
       color: "#9e3039",
       name: "Kopā Latvijai",
       code: "KOPA",
@@ -370,81 +390,115 @@ export class LvLoader extends DataLoader {
       short: "Austošā Saule Latvijai",
       code: "AUSTSAULE",
       color: "#9c2434",
-      wiki: 608626,
+      wiki: 80912390,
+    },
+    "Reģionu alianse": {
+      name: "Reģionu alianse",
+      short: "Reģionu alianse",
+      code: "RA",
+      color: "#2c2d6c",
+    },
+    "Gods kalpot mūsu Latvijai": {
+      name: "Gods kalpot mūsu Latvijai",
+      short: "Gods kalpot mūsu Latvijai",
+      code: "GKL",
+      color: "#690021",
+    },
+    "Daugavpils - mana pils": {
+      name: "Daugavpils - mana pils",
+      short: "Daugavpils - mana pils",
+      code: "DAUGAVPILS",
+      color: "#600320",
     },
   };
 
   donorMeta = donorMeta;
 
-  cacheFile(year: string) {
-    return path.join(this.cacheDir, `donations-${year}.html`);
+  cacheFile(yearTypeId: `${string}-${string}`) {
+    return path.join(this.cacheDir, `donations-${yearTypeId}.html`);
   }
 
   async loadYearDataToCache(year: string): Promise<void> {
     const dateFrom = `01.01.${year}`;
     const dateTo = `31.12.${year}`;
-    const url = `https://info.knab.gov.lv/lv/db/ziedojumi/?party_id-hidden=&party_id=&type_id=1&donator=&date_from=${dateFrom}&date_to=${dateTo}&amount_from=&amount_to=&search=to+look+for&order=&dir=&all_pages=1&recordsPerPage=all`;
 
-    this.log(`Loading donation page for year ${year}: ${url}`);
+    for (const [typeName, mapping] of Object.entries(knabTypeMapping)) {
+      const url = `https://info.knab.gov.lv/lv/db/ziedojumi/?party_id-hidden=&party_id=&type_id=${mapping.knabTypeId}&donator=&date_from=${dateFrom}&date_to=${dateTo}&amount_from=&amount_to=&search=to+look+for&order=&dir=&all_pages=1&recordsPerPage=all`;
 
-    const { html } = await spawnBrowser(async (page) => {
-      const response = await page.goto(url);
-      try {
-        await page.waitForSelector(".pageSizeDiv");
-        // wait a second because they have some js animation that takes a while to finish
-        await timeout(1000);
-      } catch {
-        throw new Error(`Unable to load ${url}: ${response?.status()}`);
-      }
+      this.log(`Loading "${typeName}" donation page for year ${year}: ${url}`);
 
-      const html = await page.evaluate(
-        () => document.documentElement.outerHTML,
+      const { html } = await spawnBrowser(async (page) => {
+        const response = await page.goto(url);
+        try {
+          await page.waitForSelector(".pageSizeDiv");
+          // wait a second because they have some js animation that takes a while to finish
+          await timeout(1000);
+        } catch {
+          throw new Error(`Unable to load ${url}: ${response?.status()}`);
+        }
+
+        const html = await page.evaluate(
+          () => document.documentElement.outerHTML,
+        );
+        return { html };
+      });
+
+      await fs.writeFile(
+        this.cacheFile(`${year}-${mapping.knabTypeId}`),
+        html,
+        {
+          encoding: "utf8",
+        },
       );
-      return { html };
-    });
-
-    await fs.writeFile(this.cacheFile(year), html, {
-      encoding: "utf8",
-    });
+    }
   }
 
   async extractYearData(year: string): Promise<ExtractedYearData[]> {
-    const html = await this.cachedYearData(year);
-
-    this.log(`Extracting donation data for year ${year}`);
-
-    const $ = cheerio.load(html);
     const donations: ExtractedYearData[] = [];
 
-    $("#donations tbody tr").each((idx, tr) => {
-      const $tr = $(tr);
+    for (const [typeName, mapping] of Object.entries(knabTypeMapping)) {
+      const html = await this.cachedYearData(`${year}-${mapping.knabTypeId}`);
 
-      const id = $($tr.find(".party a")).attr("href")?.split("id=")[1];
-      const receiver = $($tr.find(".party")).text().trim();
-      const amount = $($tr.find(".amount")).text().trim();
-      const donor = $($tr.find(".person"))
-        .contents()
-        .filter((idx) => idx === 0)
-        .text()
-        .trim();
-      const date = $($tr.find(".date")).text().trim();
+      this.log(`Extracting ${typeName} donation data for year ${year}`);
 
-      assert(id, "Donation id not found");
+      const $ = cheerio.load(html);
 
-      const donation: ExtractedYearData = {
-        idx: `${year}-${idx}`,
-        [DonationField.Id]: id,
-        [DonationField.Date]: this.normalizeIsoDate(this.parseDate(date)),
-        [DonationField.DonorName]: donor,
-        [DonationField.Amount]: this.parseAmount(amount),
-        [DonationField.Receiver]: receiver as ReceiverId,
-        [DonationField.Address]: {
-          [AddressField.Country]: "LV",
-        } as ExtractedDonationAddress,
-      };
+      $("#donations tbody tr").each((idx, tr) => {
+        const $tr = $(tr);
 
-      donations.push(donation);
-    });
+        const id = $($tr.find(".party a")).attr("href")?.split("id=")[1];
+        const receiver = $($tr.find(".party")).text().trim();
+        const amount = $($tr.find(".amount")).text().trim();
+        const type = $($tr.find(".type")).text().trim();
+        const donor = $($tr.find(".person"))
+          .contents()
+          .filter((idx) => idx === 0)
+          .text()
+          .trim();
+        const date = $($tr.find(".date")).text().trim();
+
+        assert(id, "Donation id not found");
+        assert(
+          knabTypeMapping[type],
+          `Donation type can be mapped from KNAB type: ${type}`,
+        );
+
+        const donation: ExtractedYearData = {
+          idx: `${year}-${mapping.knabTypeId}-${idx}`,
+          [DonationField.Id]: id,
+          [DonationField.Date]: this.normalizeIsoDate(this.parseDate(date)),
+          [DonationField.DonorName]: donor,
+          [DonationField.Amount]: this.parseAmount(amount),
+          [DonationField.Receiver]: receiver as ReceiverId,
+          [DonationField.DonationType]: knabTypeMapping[type].donationType,
+          [DonationField.Address]: {
+            [AddressField.Country]: "LV",
+          } as ExtractedDonationAddress,
+        };
+
+        donations.push(donation);
+      });
+    }
 
     return donations;
   }
@@ -461,10 +515,14 @@ export class LvLoader extends DataLoader {
   protected override normalizeReceiver(receiver: string): string {
     receiver = super
       .normalizeReceiver(receiver)
+      // remove (likvidēta 18.01.2021)
+      .replace(/\s*\(likvidēta\s*\d{2}\.\d{2}\.\d{4}\)\s*/g, "")
+      // remove Politiskā partija prefix
+      .replace(/^Politiskā partija\s+/, "")
       // remove leading and trailing " if exists
       .replace(/^"(.+)"$/, "$1");
 
-    if (receiver === 'Politiskā partija "Republika"') {
+    if (receiver === "Republika") {
       // They've renamed Republika in feb 2026
       return "Mēs mainām noteikumus";
     }

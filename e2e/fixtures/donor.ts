@@ -1,4 +1,5 @@
 import { PageObject } from "../util/page";
+import { Chart } from "./components/chart";
 import { Table } from "./components/donation-history-table";
 
 export class DonorPage extends PageObject {
@@ -11,5 +12,13 @@ export class DonorPage extends PageObject {
   public readonly pageTitle = this.page.locator("#sec-donor-overview");
   public readonly uboText = this.page.locator(
     'section[aria-labelledby="ubo-heading"] p',
+  );
+  public readonly donationTypes = this.page.locator(
+    'section[aria-labelledby="sec-donor-donation-types"]',
+  );
+  public readonly donationTypeSankey = new Chart(
+    "sankey",
+    this.donationTypes.getByTestId("chart"),
+    this.props,
   );
 }

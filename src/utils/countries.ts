@@ -283,7 +283,11 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       ["2019", "2020", "2021", "2022"],
       ["2023", "2024", "2025", "2026"],
     ],
-    features: Features.Date | Features.Donors | Features.ExternalDonationIds,
+    features:
+      Features.Date |
+      Features.Donors |
+      Features.ExternalDonationIds |
+      Features.DonationType,
     minPublicDonationAmount: 1.0,
     currency: "EUR",
     source: {
@@ -375,7 +379,8 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       Features.Date |
       Features.Donors |
       Features.DonorType |
-      Features.ExternalDonationIds,
+      Features.ExternalDonationIds |
+      Features.DonationType,
     minPublicDonationAmount: 1000,
     knownPartyRequirements: {
       sum: 10_000,

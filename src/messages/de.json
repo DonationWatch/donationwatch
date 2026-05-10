@@ -88,7 +88,8 @@
     "state": "Bundesland",
     "summary": "Zusammenfassung",
     "download_format": "{format} herunterladen",
-    "view_source": "Quelle anzeigen"
+    "view_source": "Quelle anzeigen",
+    "donation_type": "Spendenart"
   },
   "sort": {
     "asc": "Sortiere aufsteigend",
@@ -475,7 +476,16 @@
       "description": "Die Identität der Spenderin bzw. des Spenders wurde von der veröffentlichenden Behörde vor der Veröffentlichung dieser Daten geschwärzt. Der Spendenbetrag bleibt in den Berechnungen der Gesamtfinanzierung enthalten, um die finanzielle Transparenz zu wahren."
     },
     "ubo": "Wirtschaftlich Berechtigte (WBs)",
-    "ubo_description": "Ein wirtschaftlich Berechtigter (WB) ist die Person, die tatsächlich die Fäden zieht. Es handelt sich um die Personen, die letztendlich den Spender besitzen oder kontrollieren, typischerweise durch das Halten von 25% oder mehr seiner Anteile oder Stimmrechte. Wenn keine einzelne Person diese Schwelle erreicht, können Führungskräfte (wie Geschäftsführer) als \"Pseudo-WBs\" aufgeführt werden, um die Rechenschaftspflicht sicherzustellen."
+    "ubo_description": "Ein wirtschaftlich Berechtigter (WB) ist die Person, die tatsächlich die Fäden zieht. Es handelt sich um die Personen, die letztendlich den Spender besitzen oder kontrollieren, typischerweise durch das Halten von 25% oder mehr seiner Anteile oder Stimmrechte. Wenn keine einzelne Person diese Schwelle erreicht, können Führungskräfte (wie Geschäftsführer) als \"Pseudo-WBs\" aufgeführt werden, um die Rechenschaftspflicht sicherzustellen.",
+    "donation_type": {
+      "title": "Spendenarten",
+      "subtitle": "Das Diagramm und die folgende Liste zeigen, welche Arten von Spenden {donor} getätigt hat und welche Parteien welchen Betrag pro Art erhalten haben.",
+      "summary": "Vom Gesamtbetrag {total}",
+      "summary_item": "wurden {amount} als {type} gegeben",
+      "graph": {
+        "subtitle": "Wie die Beiträge von {donor} nach Art auf die einzelnen Parteien verteilt werden"
+      }
+    }
   },
   "countries": {
     "??": "Nicht angegeben",
@@ -683,6 +693,13 @@
     "10": "Bausparkasse",
     "11": "Gemeinnützige juristische Person",
     "12": "Anonymisierter Spender"
+  },
+  "donation_type": {
+    "0": "Geldspende",
+    "1": "Mitgliedsbeitrag",
+    "2": "Aufnahmegebühr",
+    "3": "Sachspende",
+    "4": "öffentliche Förderung"
   },
   "other_countries": {
     "title": "Andere Länder"

@@ -13,6 +13,8 @@ export const enum Features {
   ExternalDonationIds = 1 << 3,
   // has donations with donor names
   Donors = 1 << 4,
+  // has donations with donation type information (e.g. cash, in-kind, etc.)
+  DonationType = 1 << 5,
 }
 
 export const hasFeature = (

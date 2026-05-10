@@ -10,7 +10,12 @@ import type {
 import { COUNTRY_CONFIG } from "@/utils/countries";
 import { fillYears } from "@/utils/date";
 import { Features, hasFeature } from "@/utils/features";
-import { AddressField, DonationField, RelationKind } from "@/utils/types";
+import {
+  AddressField,
+  DonationField,
+  DonationType,
+  RelationKind,
+} from "@/utils/types";
 
 import type { ExtractedYearData, PartyConfig } from "../load-data/data-loader";
 
@@ -180,6 +185,10 @@ class FakeDataLoader extends DataLoader {
                     : countryConfig.states.at(0),
                 }
               : { [AddressField.Country]: "??" },
+          // if country has donationType feature, create dummy ones
+          ...(hasFeature(countryConfig, Features.DonationType)
+            ? { [DonationField.DonationType]: DonationType.Money }
+            : {}),
         } as ExtractedYearData);
       }
     });

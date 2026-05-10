@@ -88,7 +88,8 @@
     "state": "État/Région",
     "summary": "Résumé",
     "download_format": "Télécharger au format {format}",
-    "view_source": "Voir la source"
+    "view_source": "Voir la source",
+    "donation_type": "Type de don"
   },
   "sort": {
     "asc": "Tri croissant",
@@ -419,7 +420,16 @@
       "description": "L'identité du donateur a été masquée par l'autorité de publication avant la diffusion des données. Le montant reste inclus dans les totaux par souci de transparence."
     },
     "ubo": "Bénéficiaires effectifs (UBO)",
-    "ubo_description": "Un bénéficiaire effectif est la personne qui détient réellement les rênes. Il s'agit des individus qui possèdent ou contrôlent le donateur, généralement en détenant 25 % ou plus des actions ou des droits de vote. Si personne ne remplit ce critère, la direction générale peut être listée pour garantir la responsabilité."
+    "ubo_description": "Un bénéficiaire effectif est la personne qui détient réellement les rênes. Il s'agit des individus qui possèdent ou contrôlent le donateur, généralement en détenant 25 % ou plus des actions ou des droits de vote. Si personne ne remplit ce critère, la direction générale peut être listée pour garantir la responsabilité.",
+    "donation_type": {
+      "title": "Types de dons",
+      "subtitle": "Le graphique et la liste suivante détaillent les types de dons effectués par {donor} et les montants reçus par chaque parti pour chaque type.",
+      "summary": "Sur le total {total}",
+      "summary_item": "{amount} a été donné sous forme de {type}",
+      "graph": {
+        "subtitle": "Comment les contributions de {donor} sont réparties entre chaque parti par type"
+      }
+    }
   },
   "countries": {
     "??": "Non spécifié",
@@ -667,6 +677,13 @@
     "10": "Société de crédit immobilier",
     "11": "Entité juridique à but non lucratif",
     "12": "Donateur anonymisé"
+  },
+  "donation_type": {
+    "0": "don en espèces",
+    "1": "cotisation",
+    "2": "droit d'adhésion",
+    "3": "don en nature",
+    "4": "financement public"
   },
   "other_countries": {
     "title": "Autres pays"

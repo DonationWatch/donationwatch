@@ -88,7 +88,8 @@
     "state": "Staat",
     "summary": "Samenvatting",
     "download_format": "{format} downloaden",
-    "view_source": "Bron bekijken"
+    "view_source": "Bron bekijken",
+    "donation_type": "Donatietype"
   },
   "sort": {
     "asc": "Sorteer oplopend",
@@ -475,7 +476,16 @@
       "description": "De identiteit van de donor is door de publicerende instantie geredigeerd vóór de publicatie van deze gegevens. Het donatiebedrag blijft opgenomen in de berekeningen van de totale financiering om financiële transparantie te waarborgen."
     },
     "ubo": "Uiteindelijk belanghebbenden (UBO's)",
-    "ubo_description": "Een Uiteindelijk Belanghebbende (UBO) is de persoon die feitelijk aan de touwtjes trekt. Het zijn de individuen die uiteindelijk de donor bezitten of controleren, doorgaans door 25% of meer van de aandelen of stemrechten te houden. Als geen enkele persoon aan deze drempel voldoet, kan het hoger management (zoals directeuren) worden vermeld als \"pseudo-UBO's\" om verantwoordelijkheid te waarborgen."
+    "ubo_description": "Een Uiteindelijk Belanghebbende (UBO) is de persoon die feitelijk aan de touwtjes trekt. Het zijn de individuen die uiteindelijk de donor bezitten of controleren, doorgaans door 25% of meer van de aandelen of stemrechten te houden. Als geen enkele persoon aan deze drempel voldoet, kan het hoger management (zoals directeuren) worden vermeld als \"pseudo-UBO's\" om verantwoordelijkheid te waarborgen.",
+    "donation_type": {
+      "title": "Donatietype",
+      "subtitle": "Het diagram en de onderstaande lijst geven een overzicht van de soorten donaties die {donor} heeft gedaan en welke partijen welk bedrag per type hebben ontvangen.",
+      "summary": "Van het totaal {total}",
+      "summary_item": "werd {amount} gegeven als {type}",
+      "graph": {
+        "subtitle": "Hoe de bijdragen van {donor} per type naar elke partij stromen"
+      }
+    }
   },
   "countries": {
     "??": "Niet gespecificeerd",
@@ -683,6 +693,13 @@
     "10": "Bouwvereniging",
     "11": "Niet-winstgevende rechtspersoon",
     "12": "Geanonimiseerde donor"
+  },
+  "donation_type": {
+    "0": "geldelijke donatie",
+    "1": "lidmaatschapsbijdrage",
+    "2": "inschrijfgeld",
+    "3": "gift in natura",
+    "4": "overheidsfinanciering"
   },
   "other_countries": {
     "title": "Andere landen"

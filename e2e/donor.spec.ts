@@ -64,4 +64,16 @@ test.describe("Donor page", () => {
       await accessibility.check();
     });
   });
+
+  test("country with DonationType feature shows donation type section", async ({
+    baseURL,
+    page,
+    donorPage,
+  }) => {
+    await page.goto(
+      `${baseURL}/latvia/donor/${hash(DONOR_WITH_WIKIPEDIA_ARTICLE)}`,
+    );
+
+    await donorPage.donationTypeSankey.expectHasFeature();
+  });
 });
