@@ -7,16 +7,17 @@ import path from "path";
 import type { ExtractedDonationAddress, ReceiverId } from "@/utils/types";
 
 import { Country } from "@/utils/countries";
-import { AddressField, DonationField, DonorType } from "@/utils/types";
+import {
+  AddressField,
+  DonationField,
+  DonationType,
+  DonorType,
+} from "@/utils/types";
 
 import type { ExtractedYearData, PartyConfig } from "../data-loader";
 
 import { DataLoader } from "../data-loader";
-import {
-  containsWords,
-  generatePartyColor,
-  RANDOM_COLOR_MARKER,
-} from "../util";
+import { containsWords, RANDOM_COLOR_MARKER } from "../util";
 import { donorMeta } from "./donor-meta";
 
 const toGBPFloat = (valueString: string) => {
@@ -36,6 +37,17 @@ const toIsoDate = (stringValue: string, idx: number) => {
   );
 
   return `${yearPart}-${monthPart}-${dayPart}`;
+};
+
+// Mapping of electoral commission donation types to our owns
+const ecDonationTypeToDonationType: Record<string, DonationType> = {
+  Cash: DonationType.Money,
+  "Non Cash": DonationType.PropertyOrService,
+  "Public Funds": DonationType.PublicFunds,
+  Visit: DonationType.PropertyOrService,
+  "Exempt Trust": DonationType.Money,
+  "Permissible Donor Exempt Trust": DonationType.Money,
+  "Total value not reported individually": DonationType.Money,
 };
 
 export class UkLoader extends DataLoader {
@@ -601,7 +613,7 @@ export class UkLoader extends DataLoader {
       RegulatedDoneeType,
       CompanyRegistrationNumber,
       Postcode,
-      DonationType,
+      donationType,
       NatureOfDonation,
       PurposeOfVisit,
       DonationAction,
@@ -621,8 +633,8 @@ export class UkLoader extends DataLoader {
 
     if (
       DonorStatus === "Impermissible Donor" ||
-      DonationType === "Impermissible Donor" ||
-      DonationType === "Unidentified Donor" ||
+      donationType === "Impermissible Donor" ||
+      donationType === "Unidentified Donor" ||
       typeof acceptedDate !== "string" ||
       acceptedDate.trim().length === 0
     ) {
@@ -654,6 +666,8 @@ export class UkLoader extends DataLoader {
       [DonationField.DonorType]:
         donorTypeMapping[DonorStatus] ?? DonorType.Other,
       [DonationField.Address]: { [AddressField.Country]: "UK" },
+      [DonationField.DonationType]:
+        ecDonationTypeToDonationType[donationType] ?? DonationType.Money,
     };
   }
 

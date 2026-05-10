@@ -88,7 +88,8 @@
     "state": "Osariik",
     "summary": "Kokkuvõte",
     "download_format": "Laadi alla {format}",
-    "view_source": "Kuva allikas"
+    "view_source": "Kuva allikas",
+    "donation_type": "Annetuse liik"
   },
   "sort": {
     "asc": "Sorteerimine ülespoole",
@@ -475,7 +476,16 @@
       "description": "Avaldav asutus varjas annetaja isikuandmed enne nende andmete avaldamist. Annetuse summa on siiski kogurahastuse arvutustes arvesse võetud, et säilitada finantsläbipaistvus."
     },
     "ubo": "Tegelikud kasusaajad (TK)",
-    "ubo_description": "Tegelik kasusaaja (TK) on isik, kes tegelikult niite tõmbab. Need on üksikisikud, kes lõpuks omavad või kontrollivad annetajat, tavaliselt omades 25% või rohkem tema aktsiatest või hääleõigustest. Kui ükski üksikisik ei vasta sellele künnisväärtusele, võidakse kõrgem juhtkond (nagu direktorid) loetleda \"pseudo-TK-dena\", et tagada vastutus."
+    "ubo_description": "Tegelik kasusaaja (TK) on isik, kes tegelikult niite tõmbab. Need on üksikisikud, kes lõpuks omavad või kontrollivad annetajat, tavaliselt omades 25% või rohkem tema aktsiatest või hääleõigustest. Kui ükski üksikisik ei vasta sellele künnisväärtusele, võidakse kõrgem juhtkond (nagu direktorid) loetleda \"pseudo-TK-dena\", et tagada vastutus.",
+    "donation_type": {
+      "title": "Annetuste liigid",
+      "subtitle": "Diagramm ja järgnev loend näitavad, milliseid annetusi {donor} tegi ja millised erakonnad said iga liigi eest kui palju.",
+      "summary": "Kogu summast {total}",
+      "summary_item": "{amount} anti {type} kujul",
+      "graph": {
+        "subtitle": "Kuidas {donor} sissemaksed liigi järgi iga erakonna vahel jagunevad"
+      }
+    }
   },
   "countries": {
     "??": "Ei ole täpsustatud",
@@ -683,6 +693,13 @@
     "10": "Hoonetusselts",
     "11": "Mittetulunduslik juriidiline isik",
     "12": "Anonümiseeritud annetaja"
+  },
+  "donation_type": {
+    "0": "rahaline annetus",
+    "1": "liikmemaks",
+    "2": "sisseastumismaks",
+    "3": "mitterahaline annetus",
+    "4": "avalik rahastus"
   },
   "other_countries": {
     "title": "Teised riigid"

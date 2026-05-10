@@ -88,7 +88,8 @@
     "state": "State",
     "summary": "Summary",
     "download_format": "Download {format}",
-    "view_source": "View source"
+    "view_source": "View source",
+    "donation_type": "Donation type"
   },
   "sort": {
     "asc": "Sort ascending",
@@ -419,7 +420,16 @@
       "description": "The donor's identity was redacted by the publishing authority prior to the release of this data. The donation amount remains included in the total funding calculations to maintain financial transparency."
     },
     "ubo": "Ultimate beneficial owners (UBOs)",
-    "ubo_description": "An Ultimate Beneficial Owner (UBO) is the person who actually pulls the strings. They are the individuals who ultimately own or control the donor, typically by holding 25% or more of its shares or voting rights. If no single person meets this threshold, senior management (like Directors) may be listed as \"pseudo-UBOs\" to ensure accountability."
+    "ubo_description": "An Ultimate Beneficial Owner (UBO) is the person who actually pulls the strings. They are the individuals who ultimately own or control the donor, typically by holding 25% or more of its shares or voting rights. If no single person meets this threshold, senior management (like Directors) may be listed as \"pseudo-UBOs\" to ensure accountability.",
+    "donation_type": {
+      "title": "Donation types",
+      "subtitle": "The chart and the following list break down what kinds of donations {donor} made and which parties received what amount for each type.",
+      "summary": "Out of the total {total}",
+      "summary_item": "{amount} was given as {type}",
+      "graph": {
+        "subtitle": "How {donor} contributions flow to each party by type"
+      }
+    }
   },
   "countries": {
     "??": "Not specified",
@@ -667,6 +677,13 @@
     "10": "Building Society",
     "11": "Non Profit Legal Entity",
     "12": "Anonymized Donor"
+  },
+  "donation_type": {
+    "0": "monetary donation",
+    "1": "membership fee",
+    "2": "joining fee",
+    "3": "in-kind donation",
+    "4": "public funding"
   },
   "other_countries": {
     "title": "Other countries"

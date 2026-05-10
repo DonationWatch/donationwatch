@@ -1,13 +1,13 @@
 "use client";
 import {
-  type FilterFn,
-  type Row,
-  type SortingState,
   createColumnHelper,
+  type FilterFn,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getSortedRowModel,
+  type Row,
+  type SortingState,
   useReactTable,
 } from "@tanstack/react-table";
 import {
@@ -17,13 +17,14 @@ import {
   Search,
 } from "lucide-react";
 import { useLocale } from "next-intl";
-import { useMemo, useRef, useState, useCallback } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 
 import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { HistoryEntry } from "@/utils/data/get-history";
 import type { Donation } from "@/utils/types";
 
+import { DonationTypeLabel } from "@/components/donations/donation-type";
 import { ExternalDonationLink } from "@/components/donations/external-donation-link";
 import { DonorLink } from "@/components/donors/donor-link";
 import { DonorName } from "@/components/donors/donor-name";
@@ -39,7 +40,7 @@ import { getHistory } from "@/utils/data/get-history";
 import { donationYear } from "@/utils/date";
 import { Features, hasFeature } from "@/utils/features";
 import { formatCountryCurrency, formatTwoDigitDate } from "@/utils/formatter";
-import { DonationField } from "@/utils/types";
+import { DonationField, DonationType } from "@/utils/types";
 
 const columnHelper = createColumnHelper<HistoryEntry>();
 
@@ -145,6 +146,16 @@ export const DonationHistoryTable = ({
                       <DonorLink country={country} donor={historyEntry.donor} />
                     )}
                   </div>
+                  {hasFeature(country, Features.DonationType) ? (
+                    <DonationTypeLabel
+                      donationType={
+                        historyEntry.donationType ?? DonationType.Money
+                      }
+                      label={t(
+                        `donation_type.${historyEntry.donationType ?? DonationType.Money}`,
+                      )}
+                    />
+                  ) : null}
                   <div className="flex items-center justify-between">
                     <div className="shrink-0 text-sm tabular-nums">
                       {formatCountryCurrency(
@@ -157,7 +168,9 @@ export const DonationHistoryTable = ({
                       <ExternalDonationLink
                         countryConfig={country}
                         id={cell.row.original.id}
-                        className={"text-s1 flex items-center gap-1 pr-1"}
+                        className={
+                          "text-s1 flex items-center gap-1 pr-1 text-sm"
+                        }
                         title={tCommon("view_source")}
                       >
                         <span>{tCommon("view_source")}</span>
@@ -207,6 +220,22 @@ export const DonationHistoryTable = ({
           </PartyLink>
         ),
       }),
+      hasFeature(country, Features.DonationType)
+        ? columnHelper.accessor("donationType", {
+            header: t("common.donation_type"),
+            size: 150,
+            cell: (cell) => {
+              const donationType = cell.getValue() ?? DonationType.Money;
+
+              return (
+                <DonationTypeLabel
+                  donationType={donationType}
+                  label={t(`donation_type.${donationType}`)}
+                />
+              );
+            },
+          })
+        : undefined,
       columnHelper.accessor("donor", {
         header: t("common.donor"),
         meta: {

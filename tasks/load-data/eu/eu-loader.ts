@@ -248,7 +248,6 @@ export class EuLoader extends DataLoader {
       code: "TE",
       short: "Transform Europe",
       color: "#e41e26",
-      wiki: 11775051,
     },
 
     "Foundation for European Progressive Studies": {
@@ -256,7 +255,7 @@ export class EuLoader extends DataLoader {
       code: "FEPS",
       short: "FEPS",
       color: "#BA0909",
-      wiki: 11593315,
+      wiki: 79520036,
     },
 
     "Institute of European Democrats": {
@@ -278,7 +277,7 @@ export class EuLoader extends DataLoader {
       code: "PATRIOTS",
       short: "Patriots.eu",
       color: "#242f80",
-      wiki: 8624459,
+      wiki: 44882868,
     },
 
     "European Christian Political Party": {

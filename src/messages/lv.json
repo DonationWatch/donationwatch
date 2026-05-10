@@ -88,7 +88,8 @@
     "state": "Štats",
     "summary": "Kopsavilkums",
     "download_format": "Lejupielādēt {format}",
-    "view_source": "Skatīt avotu"
+    "view_source": "Skatīt avotu",
+    "donation_type": "Ziedojuma veids"
   },
   "sort": {
     "asc": "Kārtot augošā secībā",
@@ -475,7 +476,16 @@
       "description": "Donora identitāti pirms šo datu publicēšanas rediģēja publicējošā iestāde. Ziedojuma summa joprojām ir iekļauta kopējā finansējuma aprēķinos, lai saglabātu finanšu caurspīdīgumu."
     },
     "ubo": "Patiesie labuma guvēji (PLG)",
-    "ubo_description": "Patiesais labuma guvējs (PLG) ir persona, kas faktiski vada procesus. Tie ir indivīdi, kas galu galā pieder vai kontrolē ziedotāju, parasti turot 25% vai vairāk no tā akcijām vai balsstiesībām. Ja neviens atsevišķs cilvēks neatbilst šim slieksnim, augstākā vadība (piemēram, direktori) var tikt norādīti kā \"pseudo-PLG\", lai nodrošinātu atbildību."
+    "ubo_description": "Patiesais labuma guvējs (PLG) ir persona, kas faktiski vada procesus. Tie ir indivīdi, kas galu galā pieder vai kontrolē ziedotāju, parasti turot 25% vai vairāk no tā akcijām vai balsstiesībām. Ja neviens atsevišķs cilvēks neatbilst šim slieksnim, augstākā vadība (piemēram, direktori) var tikt norādīti kā \"pseudo-PLG\", lai nodrošinātu atbildību.",
+    "donation_type": {
+      "title": "Ziedojumu veidi",
+      "subtitle": "Diagramma un zemāk esošais saraksts parāda, kāda veida ziedojumus {donor} veica un kuras partijas saņēma kādu summu katram veidam.",
+      "summary": "No kopējā {total}",
+      "summary_item": "{amount} tika ziedots kā {type}",
+      "graph": {
+        "subtitle": "Kā {donor} iemaksas pēc veida tiek sadalītas starp partijām"
+      }
+    }
   },
   "countries": {
     "??": "Nav norādīts",
@@ -683,6 +693,13 @@
     "10": "Celtniecības biedrība",
     "11": "Nepeļņas juridiska persona",
     "12": "Anonimizēts ziedotājs"
+  },
+  "donation_type": {
+    "0": "naudas ziedojums",
+    "1": "biedra nauda",
+    "2": "iestāšanās maksa",
+    "3": "mantisks ziedojums",
+    "4": "publiskais finansējums"
   },
   "other_countries": {
     "title": "Citas valstis"

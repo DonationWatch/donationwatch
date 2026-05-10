@@ -308,7 +308,7 @@ export class AuLoader extends DataLoader {
       code: "DPDA",
       short: "Drew Pavlou Democratic Alliance",
       color: "#4abfac",
-      wiki: 70195843,
+      wiki: 64012935,
     },
     "Australian Christian Lobby": {
       name: "Australian Christian Lobby",

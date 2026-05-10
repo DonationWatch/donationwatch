@@ -88,7 +88,8 @@
     "state": "Stat",
     "summary": "Sammendrag",
     "download_format": "Last ned {format}",
-    "view_source": "Vis kilde"
+    "view_source": "Vis kilde",
+    "donation_type": "Donasjonstype"
   },
   "sort": {
     "asc": "Sorter stigende",
@@ -429,7 +430,16 @@
       "description": "Giverens identitet ble sladdet av den publiserende myndigheten før disse dataene ble offentliggjort. Donasjonsbeløpet er fortsatt inkludert i beregningene av total finansiering for å ivareta finansiell åpenhet."
     },
     "ubo": "Reelle rettighetshavere (RRH)",
-    "ubo_description": "En reell rettighetshaver (RRH) er personen som faktisk styrer. Det er de personene som til syvende og sist eier eller kontrollerer giveren, vanligvis ved å inneha 25 % eller mer av aksjene eller stemmerettighetene. Hvis ingen enkeltperson oppfyller denne terskelen, kan toppledelsen (som direktører) bli oppført som \"pseudo-RRH-er\" for å sikre ansvarlighet."
+    "ubo_description": "En reell rettighetshaver (RRH) er personen som faktisk styrer. Det er de personene som til syvende og sist eier eller kontrollerer giveren, vanligvis ved å inneha 25 % eller mer av aksjene eller stemmerettighetene. Hvis ingen enkeltperson oppfyller denne terskelen, kan toppledelsen (som direktører) bli oppført som \"pseudo-RRH-er\" for å sikre ansvarlighet.",
+    "donation_type": {
+      "title": "Donasjonstyper",
+      "subtitle": "Diagrammet og den følgende listen viser hvilke typer donasjoner {donor} har gitt, og hvilke partier som mottok hvilket beløp for hver type.",
+      "summary": "Av totalt {total}",
+      "summary_item": "{amount} ble gitt som {type}",
+      "graph": {
+        "subtitle": "Hvordan bidragene fra {donor} fordeles på hvert parti etter type"
+      }
+    }
   },
   "countries": {
     "??": "Ikke spesifisert",
@@ -683,6 +693,13 @@
     "10": "Boligbyggelag",
     "11": "Ideell juridisk enhet",
     "12": "Anonymisert donor"
+  },
+  "donation_type": {
+    "0": "pengedonasjon",
+    "1": "medlemskontingent",
+    "2": "innmeldingsavgift",
+    "3": "tingsinnskudd",
+    "4": "offentlig støtte"
   },
   "other_countries": {
     "title": "Andre land"

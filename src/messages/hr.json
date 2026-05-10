@@ -88,7 +88,8 @@
     "state": "Savezna država",
     "summary": "Sažetak",
     "download_format": "Preuzmi {format}",
-    "view_source": "Prikaži izvor"
+    "view_source": "Prikaži izvor",
+    "donation_type": "Vrsta donacije"
   },
   "sort": {
     "asc": "Sortiraj uzlazno",
@@ -429,7 +430,16 @@
       "description": "Identitet donatora redigirala je nadležna institucija prije objave ovih podataka. Iznos donacije i dalje je uključen u izračune ukupnog financiranja kako bi se očuvala financijska transparentnost."
     },
     "ubo": "Stvarni vlasnici (SV)",
-    "ubo_description": "Stvarni vlasnik (SV) je osoba koja zapravo vuče konce. To su pojedinci koji u konačnici posjeduju ili kontroliraju donatora, obično držeći 25% ili više njegovih dionica ili glasačkih prava. Ako nijedna pojedinačna osoba ne ispunjava ovaj prag, viši menadžment (poput direktora) može biti naveden kao \"pseudo-SV\" kako bi se osigurala odgovornost."
+    "ubo_description": "Stvarni vlasnik (SV) je osoba koja zapravo vuče konce. To su pojedinci koji u konačnici posjeduju ili kontroliraju donatora, obično držeći 25% ili više njegovih dionica ili glasačkih prava. Ako nijedna pojedinačna osoba ne ispunjava ovaj prag, viši menadžment (poput direktora) može biti naveden kao \"pseudo-SV\" kako bi se osigurala odgovornost.",
+    "donation_type": {
+      "title": "Vrste donacija",
+      "subtitle": "Grafikon i sljedeći popis prikazuju koje je vrste donacija {donor} dao i koje su stranke primile koji iznos za svaku vrstu.",
+      "summary": "Od ukupnog iznosa {total}",
+      "summary_item": "{amount} je dano kao {type}",
+      "graph": {
+        "subtitle": "Kako se doprinosi od {donor} prema vrsti raspoređuju na svaku stranku"
+      }
+    }
   },
   "countries": {
     "??": "Nije navedeno",
@@ -683,6 +693,13 @@
     "10": "Stambena štedionica",
     "11": "Neprofitna pravna osoba",
     "12": "Anonimizirani donator"
+  },
+  "donation_type": {
+    "0": "novčana donacija",
+    "1": "članarina",
+    "2": "pristupnina",
+    "3": "donacija u naravi",
+    "4": "javno financiranje"
   },
   "other_countries": {
     "title": "Druge zemlje"

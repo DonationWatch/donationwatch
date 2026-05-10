@@ -1,6 +1,8 @@
+import fs from "node:fs/promises";
+import path from "path";
+import { fileURLToPath } from "url";
 import { beforeAll, describe, expect, test } from "vitest";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Donation } from "@/utils/types";
 
 import { PartyField } from "@/types/party";
@@ -11,19 +13,23 @@ import { DonationField } from "@/utils/types";
 
 import { getDonations } from "../tasks/data/load-donations";
 
-describe.each([...COUNTRIES].map((country) => ({ country })))(
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const countryConfigs = await Promise.all(
+  [...COUNTRIES].map(async (country) => ({
+    country,
+    countryConfig: await getCountryConfig(country),
+    wikipediaArticles: await getWikiArticles(country),
+  })),
+);
+
+describe.each(countryConfigs)(
   `country $country`,
-  ({ country }) => {
+  ({ country, countryConfig, wikipediaArticles }) => {
     let donations: Donation[];
-    let wikipediaArticles: { articles: Record<number, string> };
-    let countryConfig: CountryConfig;
+    const articles = new Set(Object.keys(wikipediaArticles.articles));
 
     beforeAll(async () => {
-      [donations, wikipediaArticles, countryConfig] = await Promise.all([
-        getDonations(country),
-        getWikiArticles(country),
-        getCountryConfig(country),
-      ]);
+      [donations] = await Promise.all([getDonations(country)]);
     });
 
     test("there's no year with 0 donations from the first to the last year", async () => {
@@ -44,20 +50,29 @@ describe.each([...COUNTRIES].map((country) => ({ country })))(
       }
     });
 
-    test("has wikipedia articles loaded", async () => {
-      const articles = Object.keys(wikipediaArticles.articles);
+    test.describe("parties", () => {
+      test.each(countryConfig.parties)(
+        `$${PartyField.Name} has wikipedia articles loaded`,
+        async (party) => {
+          const name = party[PartyField.Name];
+          const wiki = party[PartyField.Wiki];
 
-      countryConfig.parties.every((party) => {
-        const name = party[PartyField.Name];
-        const wiki = party[PartyField.Wiki];
+          if (!wiki) return;
 
-        if (!wiki) return;
+          expect(articles.has(`${wiki}`), `Missing article for ${name}`).toBe(
+            true,
+          );
 
-        expect(
-          articles.includes(`${wiki}`),
-          `Missing article for ${name}`,
-        ).toBe(true);
-      });
+          await expect(
+            fs.access(
+              path.join(
+                __dirname,
+                `../public/data/${country}/wikipedia/by-pageId/${wiki}.json`,
+              ),
+            ),
+          ).resolves.not.toThrow();
+        },
+      );
     });
 
     test(`has valid donation fields`, async () => {

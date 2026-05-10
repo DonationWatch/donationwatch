@@ -371,7 +371,7 @@ export class CzLoader extends DataLoader {
       short: "Švýcarská demokracie",
       code: "SD",
       color: "#c20e1a",
-      wiki: 69079654,
+      wiki: 80726259,
     },
     "SD-SN": {
       name: "Spojení demokraté - Sdružení nezávislých",

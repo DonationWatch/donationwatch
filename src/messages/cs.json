@@ -88,7 +88,8 @@
     "state": "Stát",
     "summary": "Souhrn",
     "download_format": "Stáhnout {format}",
-    "view_source": "Zobrazit zdroj"
+    "view_source": "Zobrazit zdroj",
+    "donation_type": "Typ daru"
   },
   "sort": {
     "asc": "Řadit vzestupně",
@@ -475,7 +476,16 @@
       "description": "Identita dárce byla před zveřejněním těchto údajů redigována zveřejňujícím orgánem. Výše daru zůstává zahrnuta ve výpočtech celkového financování, aby byla zachována finanční transparentnost."
     },
     "ubo": "Konečný skutečný vlastník (KSV)",
-    "ubo_description": "Konečný skutečný vlastník (KSV) je osoba, která skutečně táhne za nitky. Jedná se o jednotlivce, kteří v konečném důsledku vlastní nebo kontrolují dárce, typicky držením 25 % nebo více jeho akcií nebo hlasovacích práv. Pokud žádná jednotlivá osoba nesplňuje tuto hranici, může být vrcholný management (například ředitelé) uveden jako \"pseudo-KSV\" k zajištění odpovědnosti."
+    "ubo_description": "Konečný skutečný vlastník (KSV) je osoba, která skutečně táhne za nitky. Jedná se o jednotlivce, kteří v konečném důsledku vlastní nebo kontrolují dárce, typicky držením 25 % nebo více jeho akcií nebo hlasovacích práv. Pokud žádná jednotlivá osoba nesplňuje tuto hranici, může být vrcholný management (například ředitelé) uveden jako \"pseudo-KSV\" k zajištění odpovědnosti.",
+    "donation_type": {
+      "title": "Typy darů",
+      "subtitle": "Graf a následující seznam ukazují, jaké druhy darů {donor} poskytl a které strany obdržely jakou částku pro každý typ.",
+      "summary": "Z celkové částky {total}",
+      "summary_item": "{amount} bylo poskytnuto jako {type}",
+      "graph": {
+        "subtitle": "Jak příspěvky od {donor} proudí k jednotlivým stranám podle typu"
+      }
+    }
   },
   "countries": {
     "??": "Neuvedeno",
@@ -683,6 +693,13 @@
     "10": "Stavební spořitelna",
     "11": "Nezisková právnická osoba",
     "12": "Anonymizovaný dárce"
+  },
+  "donation_type": {
+    "0": "peněžní dar",
+    "1": "členský příspěvek",
+    "2": "vstupní poplatek",
+    "3": "věcný dar",
+    "4": "veřejné financování"
   },
   "other_countries": {
     "title": "Ostatní země"

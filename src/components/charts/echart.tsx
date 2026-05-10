@@ -92,6 +92,9 @@ const featureImports: Record<
   },
   sankey: () => {
     return Promise.all([
+      import("echarts/lib/component/graphic/install").then(
+        (mod) => mod.install,
+      ),
       import("echarts/lib/chart/sankey/install").then((mod) => mod.install),
     ]);
   },

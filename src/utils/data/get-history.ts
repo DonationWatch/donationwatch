@@ -1,7 +1,7 @@
 import type { CountryConfig } from "@/types/country-config";
 
 import { donationYear } from "../date";
-import { Donation, DonationField, ReceiverId } from "../types";
+import { Donation, DonationField, DonationType, ReceiverId } from "../types";
 
 export interface HistoryEntry {
   donor: string;
@@ -9,6 +9,7 @@ export interface HistoryEntry {
   date: string;
   party: ReceiverId;
   id: string;
+  donationType?: DonationType;
 }
 
 export const getHistory = (
@@ -30,6 +31,7 @@ export const getHistory = (
       amount: donation[DonationField.Amount],
       date: donation[DonationField.Date],
       party: donation[DonationField.Receiver],
+      donationType: donation[DonationField.DonationType],
     });
   });
 
