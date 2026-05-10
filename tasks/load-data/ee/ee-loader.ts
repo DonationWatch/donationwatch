@@ -1,3 +1,4 @@
+import assert from "assert";
 import fs from "fs/promises";
 import path from "path";
 
@@ -5,16 +6,25 @@ import type { ReceiverId } from "@/utils/types";
 
 import { isNotNullandNotUndefined } from "@/utils/array";
 import { Country } from "@/utils/countries";
-import { AddressField, DonationField } from "@/utils/types";
+import { AddressField, DonationField, DonationType } from "@/utils/types";
 
 import type { ExtractedYearData, PartyConfig } from "../data-loader";
 
 import { DataLoader } from "../data-loader";
 import { donorMeta } from "./donor-meta";
 
+type EeReceiptCategory =
+  | "Rahaline annetus"
+  | "Liikmemaks"
+  | "Riigitoetus"
+  | "Pangalaen"
+  | "Tulu erakonna varalt";
+
+const trackedTypes = new Set<EeReceiptCategory>(["Rahaline annetus"]);
+
 export interface EeDonation {
   date: string;
-  receipt_category: string;
+  receipt_category: EeReceiptCategory;
   name: string;
   birthdate: string;
   amount: number;
@@ -32,6 +42,15 @@ const toIsoDate = (date: string): string => {
   const [day, month, year] = date.split(".");
   return `${year}-${month}-${day}`;
 };
+
+const receiptCategoryMapping: Partial<Record<EeReceiptCategory, DonationType>> =
+  {
+    "Rahaline annetus": DonationType.Money,
+    // Liikmemaks: DonationType.MembershipFee,
+    // Riigitoetus: DonationType.PublicFunds,
+    // Pangalaen: DonationType.Loan,
+    // "Tulu erakonna varalt": DonationType.CommercialIncome,
+  };
 
 export class EeLoader extends DataLoader {
   constructor() {
@@ -163,6 +182,12 @@ export class EeLoader extends DataLoader {
       wiki: 18700145,
       color: "#fe0000",
     },
+    "Eesti Vabaduspartei - Põllumeeste Kogu": {
+      name: "Eesti Vabaduspartei - Põllumeeste Kogu",
+      short: "Vabaduspartei",
+      code: "VABADUS",
+      color: "#683b15",
+    },
   };
 
   donorMeta = donorMeta;
@@ -226,7 +251,7 @@ export class EeLoader extends DataLoader {
         const receipts = await this.fetchErjkApi<
           {
             date: string;
-            receipt_category: string;
+            receipt_category: EeReceiptCategory;
             name: string;
             birthdate: string;
             amount: number;
@@ -234,8 +259,6 @@ export class EeLoader extends DataLoader {
         >(`quarterly-reports/${quarter.report_id}?report_type=receipts`);
 
         receipts.forEach((receipt) => {
-          if (receipt.receipt_category !== "Rahaline annetus") return;
-
           donations.push({
             ...receipt,
             party: party.party_name,
@@ -257,6 +280,13 @@ export class EeLoader extends DataLoader {
     recipe: EeDonation,
     idx: number,
   ): ExtractedYearData | undefined {
+    if (!trackedTypes.has(recipe.receipt_category)) return;
+
+    assert(
+      typeof receiptCategoryMapping[recipe.receipt_category] === "number",
+      `Recipe has a known category: ${recipe.receipt_category}`,
+    );
+
     return {
       idx: `r${idx}`,
       [DonationField.Amount]: recipe.amount,
@@ -264,6 +294,8 @@ export class EeLoader extends DataLoader {
       [DonationField.Date]: this.normalizeIsoDate(toIsoDate(recipe.date)),
       [DonationField.Address]: { [AddressField.Country]: "EE" },
       [DonationField.Receiver]: recipe.party as ReceiverId,
+      [DonationField.DonationType]:
+        receiptCategoryMapping[recipe.receipt_category],
     };
   }
 
