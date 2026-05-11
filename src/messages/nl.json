@@ -238,7 +238,7 @@
     },
     "scatter": {
       "title": "Giftenverdeling",
-      "subtitle": "Individuele donaties aan elke partij, naar bedrag en frequentie, in {country} vanaf {years}.",
+      "subtitle": "Individuele donaties aan elke partij op basis van bedrag en frequentie in {country} vanaf {years}. Weergegeven op een logaritmische schaal om de verdeling over verschillende grootteordes te tonen.",
       "summary": "Het overzicht van de verdeling van partijgiften geeft een beknopte analyse van de verdeling van giften over verschillende politieke partijen. Elk punt vertegenwoordigt een partij, waarbij de x-as de donatiebedragen aangeeft en de spreidingsplot de donatiefrequentie.",
       "span": "De {biggestSpanParty}-partij registreerde de grootste donatiemarge, met een verschil van {biggestSpanAmount} tussen de kleinste en de grootste donatie."
     },

@@ -238,7 +238,7 @@
     },
     "scatter": {
       "title": "Spendenverteilung",
-      "subtitle": "Einzelne Spenden an jede Partei nach Betrag und Häufigkeit in {country} von {years}.",
+      "subtitle": "Individuelle Spenden an jede Partei nach Betrag und Häufigkeit in {country} von {years}. Auf einer logarithmischen Skala dargestellt, um die Verteilung über verschiedene Größenordnungen zu zeigen.",
       "summary": "Die Übersicht über die Parteispendenverteilung bietet eine knappe Analyse der Spendenverteilung zwischen verschiedenen politischen Parteien. Jeder Punkt steht für eine Partei, wobei die x-Achse die Spendenbeträge und die Streuungsgröße die Spendenhäufigkeit angibt.",
       "span": "Bei der Partei {biggestSpanParty} wurde die größte Spendenspanne verzeichnet, mit einem Unterschied von {biggestSpanAmount} zwischen der kleinsten und größten Spende."
     },

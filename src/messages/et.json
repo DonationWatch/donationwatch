@@ -238,7 +238,7 @@
     },
     "scatter": {
       "title": "Annetuste jaotamine",
-      "subtitle": "Individuaalsed annetused igale parteile summade ja sageduse järgi riigis {country} alates {years}.",
+      "subtitle": "Individuaalsed annetused igale erakonnale summa ja sageduse järgi {country} alates {years}. Kujutatud logaritmilisel skaalal, et näidata jaotust erinevate suurusjärkude lõikes.",
       "summary": "Ülevaade erakondade annetuste jagunemisest annab ülevaatliku analüüsi annetuste jagunemisest erinevate erakondade vahel. Iga punkt tähistab ühte erakonda, x-telg näitab annetuste summasid ja hajuvusdiagramm annetuste sagedust.",
       "span": "Suurima annetuste vahega oli {biggestSpanParty} erakond, kus väikseima ja suurima annetuse vahe oli {biggestSpanAmount}."
     },

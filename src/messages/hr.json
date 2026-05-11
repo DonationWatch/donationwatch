@@ -238,7 +238,7 @@
     },
     "scatter": {
       "title": "Raspodjela donacija",
-      "subtitle": "Pojedinačne donacije svakoj stranci prema iznosu i učestalosti u {country} od {years}.",
+      "subtitle": "Individualne donacije svakoj stranci prema iznosu i učestalosti u {country} od {years}. Prikazano na logaritamskoj skali radi prikaza raspodjele kroz različite redove veličine.",
       "summary": "Pregled raspodjele donacija strankama pruža sažetu analizu raspodjele donacija među različitim političkim strankama. Kroz vizualizaciju točkastog dijagrama, svaka točka predstavlja stranku, s x-osi koja označava iznose donacija, a veličina točke odražava učestalost donacija.",
       "span": "Stranka {biggestSpanParty} zabilježila je najveću razliku u donacijama, s razlikom od {biggestSpanAmount} između najmanje i najveće donacije."
     },

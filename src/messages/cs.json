@@ -238,7 +238,7 @@
     },
     "scatter": {
       "title": "Distribuce darů",
-      "subtitle": "Individuální dary každé straně podle částky a četnosti v {country} od {years}.",
+      "subtitle": "Individuální dary každé straně podle výše a četnosti v {country} od {years}. Vyneseno na logaritmické škále pro zobrazení rozložení napříč různými řády velikosti.",
       "summary": "Přehled distribuce darů stran nabízí stručnou analýzu rozložení darů mezi různými politickými stranami. Každý bod představuje stranu, kde osa x ukazuje částky darů a rozptyl udává četnost darů.",
       "span": "Největší rozdíl v darech zaznamenala strana {biggestSpanParty}, kde rozdíl mezi nejmenším a největším darem činil {biggestSpanAmount}."
     },

@@ -238,7 +238,7 @@
     },
     "scatter": {
       "title": "Ziedojumu sadale",
-      "subtitle": "Individuālie ziedojumi katrai partijai pēc summas un biežuma {country} no {years}.",
+      "subtitle": "Individuālie ziedojumi katrai partijai pēc summas un biežuma {country} no {years}. Attēlots logaritmiskā skalā, lai parādītu sadalījumu dažādās lieluma kārtās.",
       "summary": "Pārskats par partiju ziedojumu sadalījumu sniedz kodolīgu analīzi par ziedojumu sadalījumu starp dažādām politiskajām partijām. Katrs punkts attēlo partiju, x ass norāda ziedojumu summas, bet izkliedes diagramma - ziedojumu biežumu.",
       "span": "Vislielākā ziedojumu starpība bija {biggestSpanParty} partijai - starpība starp mazāko un lielāko ziedojumu bija {biggestSpanAmount}."
     },

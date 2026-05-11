@@ -238,7 +238,7 @@
     },
     "scatter": {
       "title": "Donasjonsfordeling",
-      "subtitle": "Enkeltbidrag til hvert parti, etter beløp og frekvens, i {country} fra {years}.",
+      "subtitle": "Individuelle donasjoner til hvert parti etter beløp og hyppighet i {country} fra {years}. Plottet på en logaritmisk skala for å vise fordelingen over varierende størrelsesordener.",
       "summary": "Oversikten over donasjonsfordeling gir en kort analyse av hvordan donasjoner er fordelt mellom ulike politiske partier. I et spredningsdiagram representerer hvert punkt et parti, der x-aksen viser donasjonsbeløp og størrelsen på punktet reflekterer donasjonsfrekvens.",
       "span": "{biggestSpanParty}-partiet hadde det største spenn i donasjoner, med en forskjell på {biggestSpanAmount} mellom den minste og største donasjonen."
     },

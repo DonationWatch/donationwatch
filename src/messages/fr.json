@@ -228,7 +228,7 @@
     },
     "scatter": {
       "title": "Distribution des dons",
-      "subtitle": "Dons individuels par parti, par montant et fréquence, en {country} de {years}.",
+      "subtitle": "Dons individuels à chaque parti par montant et fréquence en {country} de {years}. Représenté sur une échelle logarithmique pour illustrer la distribution à travers différents ordres de grandeur.",
       "summary": "Cette visualisation par nuage de points permet d'analyser la répartition des dons. Chaque point représente un parti ; l'axe X indique le montant et la taille du point reflète la fréquence des dons.",
       "span": "Le parti {biggestSpanParty} a enregistré l'écart le plus important, avec une différence de {biggestSpanAmount} entre le plus petit et le plus gros don."
     },

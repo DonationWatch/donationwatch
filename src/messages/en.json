@@ -228,7 +228,7 @@
     },
     "scatter": {
       "title": "Donation distribution",
-      "subtitle": "Individual donations to each party, by amount and frequency, in {country} from {years}.",
+      "subtitle": "Individual donations to each party by amount and frequency in {country} from {years}. Plotted on a logarithmic scale to show distribution across varying orders of magnitude.",
       "summary": "The party donation distribution overview provides a succinct analysis of donation distributions among various political parties. Through a scatter plot visualization, each point represents a party, with the x-axis indicating donation amounts and scatter size reflecting donation frequency.",
       "span": "The {biggestSpanParty} party recorded the largest donation margin, with a difference of {biggestSpanAmount} between the smallest and largest donation."
     },
