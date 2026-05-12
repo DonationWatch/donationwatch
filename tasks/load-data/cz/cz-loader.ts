@@ -544,6 +544,13 @@ export class CzLoader extends DataLoader {
       color: "#69509c",
       wiki: 80202718,
     },
+    Generace: {
+      name: "Hnutí Generace",
+      short: "Generace",
+      code: "GENERACE",
+      color: "#00B4C4",
+      wiki: 78524998,
+    },
   };
 
   constructor() {
