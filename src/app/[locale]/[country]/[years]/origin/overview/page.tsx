@@ -3,12 +3,13 @@ import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
-import { DonationYearOrigin } from "@/components/donations/donation-origin";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { getParties } from "@/utils/data/get-parties";
 import { generateAlternates } from "@/utils/meta";
 import { deserializeYears } from "@/utils/serializers";
 import { isValidCountry, isValidLocale } from "@/utils/validate";
+
+import { YearsOriginClientPage } from "./_components/years-origin-client-page";
 
 export async function generateMetadata(
   props: PageProps<"/[locale]/[country]/[years]/origin/overview">,
@@ -38,7 +39,7 @@ export default async function OverviewPage(
   const parties = getParties(countryConfig, years);
 
   return (
-    <DonationYearOrigin
+    <YearsOriginClientPage
       country={countryConfig}
       parties={parties}
       years={years}

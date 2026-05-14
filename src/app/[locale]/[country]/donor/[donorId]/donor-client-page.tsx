@@ -9,6 +9,7 @@ import { Article } from "@/components/layout/article";
 import Loading from "@/components/loading/loading";
 import { useDonationsByDonorId } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { useScrollToHash } from "@/hooks/use-scroll-to-hash";
 import { Features, hasFeature } from "@/utils/features";
 
 import { DonorClientPageContent } from "./_components/donor-client-page-content";
@@ -25,40 +26,46 @@ export const DonorClientPage = ({
   country: Country;
 }) => {
   const t = useTranslations("data");
-  const { data, isLoading, error } = useDonationsByDonorId(
+  const { data, isLoading, error, isSuccess } = useDonationsByDonorId(
     countryConfig,
     donorId,
   );
 
-  if (isLoading)
-    return (
-      <div className="flex h-screen items-center justify-center">
-        <Loading />
-      </div>
-    );
-
-  if (error || !data) return t("error");
-
-  if (!data || !data.length) {
-    return notFound();
-  }
+  useScrollToHash(isSuccess);
 
   return (
     <Article fullWidth={true}>
-      <DonorClientPageContent
-        donorId={donorId}
-        countryConfig={countryConfig}
-        donations={data}
-      />
-      <DonorDonationTimeline
-        donorId={donorId}
-        countryConfig={countryConfig}
-        donations={data}
-      />
-      {hasFeature(countryConfig, Features.DonationType) ? (
-        <DonorDonationTypes countryConfig={countryConfig} donations={data} />
-      ) : null}
-      <DonorDonationTable countryConfig={countryConfig} donations={data} />
+      {isLoading ? (
+        <div className="flex h-screen items-center justify-center">
+          <Loading />
+        </div>
+      ) : error || !data || !data.length ? (
+        error || !data ? (
+          t("error")
+        ) : (
+          notFound()
+        )
+      ) : (
+        <>
+          <DonorClientPageContent
+            donorId={donorId}
+            countryConfig={countryConfig}
+            donations={data}
+          />
+          <DonorDonationTimeline
+            donorId={donorId}
+            countryConfig={countryConfig}
+            donations={data}
+          />
+          {hasFeature(countryConfig, Features.DonationType) ? (
+            <DonorDonationTypes
+              countryConfig={countryConfig}
+              donations={data}
+            />
+          ) : null}
+          <DonorDonationTable countryConfig={countryConfig} donations={data} />
+        </>
+      )}
     </Article>
   );
 };

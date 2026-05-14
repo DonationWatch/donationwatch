@@ -7,15 +7,9 @@ import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Donation, ReceiverId } from "@/utils/types";
 
-import Loading from "@/components/loading/loading";
-import { useDonationsByParty, useDonationsByYears } from "@/hooks/use-api";
 import { useChart } from "@/hooks/use-chart";
-import {
-  useClientTranslations,
-  useClientTranslations as useTranslations,
-} from "@/hooks/use-client-translations";
+import { useClientTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
-import { isNotNullandNotUndefined } from "@/utils/array";
 import { partyColor } from "@/utils/color";
 import { getParty } from "@/utils/countries";
 import { donationYear } from "@/utils/date";
@@ -51,6 +45,7 @@ export const DonationSumChart = ({
   years,
   parties,
   limitToFirstDateYear,
+  donations,
 }: {
   country: CountryConfig;
   years: string[];
@@ -58,19 +53,8 @@ export const DonationSumChart = ({
   title: string;
   subtitle: string;
   limitToFirstDateYear?: boolean;
+  donations: Donation[];
 }) => {
-  const t = useTranslations("data");
-  const results = useDonationsByYears(country, years);
-  const error = results.some((r) => r.error);
-  const isLoading = results.some((r) => r.isLoading);
-
-  if (isLoading) return <Loading />;
-  if (error) return t("error");
-
-  const donations = results
-    .flatMap((r) => r.data)
-    .filter(isNotNullandNotUndefined);
-
   return (
     <DonationTimeseriesChart
       donations={donations}
@@ -91,6 +75,7 @@ export const DonationPartyChart = ({
   years,
   party,
   limitToFirstDateYear,
+  donations,
 }: {
   country: CountryConfig;
   years: string[];
@@ -98,16 +83,11 @@ export const DonationPartyChart = ({
   title: string;
   subtitle: string;
   limitToFirstDateYear?: boolean;
+  donations: Donation[];
 }) => {
-  const t = useTranslations("data");
-  const { data, error, isLoading } = useDonationsByParty(country, party);
-
-  if (isLoading) return <Loading />;
-  if (error || !data) return t("error");
-
   return (
     <DonationTimeseriesChart
-      donations={data.flat()}
+      donations={donations}
       country={country}
       years={years}
       parties={[party]}

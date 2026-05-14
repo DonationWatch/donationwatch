@@ -319,6 +319,10 @@
       "subtitle": "Totale gepubliceerde bijdragen van individuele donateurs aan de {party} in {country}.",
       "summary": "Deze pagina toont alle officieel bekendgemaakte donaties boven {minSum} aan {party} sinds {minYear}, gegroepeerd per donor om totale bijdragen over tijd te tonen. Alle cijfers zijn gebaseerd op officiële bekendmakingen gepubliceerd door {source}, getoond zowel als een treemap voor visuele vergelijking als een uitklapbare lijst van de onderliggende transacties."
     },
+    "donor_list": {
+      "title": "Topdonateurs aan {party} op basis van totale bijdragen",
+      "p0": "Verken de organisaties en individuen die bijdragen aan {party}. Deze lijst is geordend op cumulatief gedoneerd bedrag en toont zowel het totaalbedrag als het relatieve percentage van de totale financiering van de partij. U kunt elk item uitklappen om een volledige chronologische geschiedenis van individuele donaties van die specifieke bron te bekijken."
+    },
     "donor_types": {
       "title": "Donortypes",
       "treemap": {

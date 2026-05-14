@@ -9,8 +9,6 @@ import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Donation, ReceiverId } from "@/utils/types";
 
-import Loading from "@/components/loading/loading";
-import { useDonationsByParty } from "@/hooks/use-api";
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
@@ -336,25 +334,20 @@ export const LoadingPartyDonorTypeTreemap = ({
   party,
   title,
   subtitle,
+  donations,
 }: {
   country: CountryConfig;
   party: Party;
   title: string;
   subtitle: string;
+  donations: Donation[];
 }) => {
-  const t = useTranslations("data");
-
-  const { data, error, isLoading } = useDonationsByParty(country, party);
-
-  if (isLoading) return <Loading />;
-  if (error || !data) return <div>{t("error")}</div>;
-
   return (
     <LoadedDonorTypeTreemap
       country={country}
       title={title}
       subtitle={subtitle}
-      donations={data}
+      donations={donations}
       parties={[party]}
       years={[]}
     />

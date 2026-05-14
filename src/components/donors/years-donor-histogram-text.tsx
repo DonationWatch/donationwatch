@@ -9,13 +9,10 @@ import type { Donation } from "@/utils/types";
 
 import { RankingItem } from "@/components/donations/ranking-item";
 import { DonorLink } from "@/components/donors/donor-link";
-import Loading from "@/components/loading/loading";
-import { useDonationsByYears } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { useBreakpoint } from "@/hooks/use-media-query";
 import { useVirtual } from "@/hooks/use-virtual";
 import { PartyField } from "@/types/party";
-import { isNotNullandNotUndefined } from "@/utils/array";
 import { donationYear } from "@/utils/date";
 import {
   formatCountryCurrency,
@@ -334,27 +331,18 @@ const LoadedYearsDonorHistogramText = ({
   );
 };
 
-export const LoadingYearsDonorHistogramText = ({
+export const YearsDonorHistogramText = ({
   years,
   country,
   parties,
+  donations,
 }: {
   years: string[];
   country: CountryConfig;
   parties: Party[];
+  donations: Donation[];
 }) => {
-  const t = useTranslations("data");
   const locale = useLocale();
-  const results = useDonationsByYears(country, years);
-  const error = results.some((r) => r.error);
-  const isLoading = results.some((r) => r.isLoading);
-
-  if (isLoading) return <Loading />;
-  if (error) return <div>{t("error")}</div>;
-
-  const donations = results
-    .flatMap((r) => r.data)
-    .filter(isNotNullandNotUndefined);
 
   return (
     <LoadedYearsDonorHistogramText

@@ -7,12 +7,8 @@ import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Donation, ReceiverId } from "@/utils/types";
 
-import Loading from "@/components/loading/loading";
-import { useDonationsByYears } from "@/hooks/use-api";
 import { useChart } from "@/hooks/use-chart";
-import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
-import { isNotNullandNotUndefined } from "@/utils/array";
 import { partyColor } from "@/utils/color";
 import { getParty } from "@/utils/countries";
 import { donationYear } from "@/utils/date";
@@ -39,6 +35,7 @@ export const DonationPerMonthChart = ({
   parties,
   limitToFirstDateYear,
   resolution,
+  donations,
 }: {
   country: CountryConfig;
   years: string[];
@@ -47,19 +44,8 @@ export const DonationPerMonthChart = ({
   subtitle: string;
   limitToFirstDateYear?: boolean;
   resolution?: DonationPerMonthResolution;
+  donations: Donation[];
 }) => {
-  const t = useTranslations("data");
-  const results = useDonationsByYears(country, years);
-  const error = results.some((r) => r.error);
-  const isLoading = results.some((r) => r.isLoading);
-
-  if (isLoading) return <Loading />;
-  if (error) return <div>{t("error")}</div>;
-
-  const donations = results
-    .flatMap((r) => r.data)
-    .filter(isNotNullandNotUndefined);
-
   return (
     <DonationBarChart
       donations={donations}

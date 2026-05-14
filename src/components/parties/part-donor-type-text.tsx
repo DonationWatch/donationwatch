@@ -3,11 +3,10 @@ import { useLocale } from "next-intl";
 
 import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
+import type { Donation } from "@/utils/types";
 
 import { RankBadge } from "@/components/donations/ranking-item";
-import Loading from "@/components/loading/loading";
 import { PercentageHint } from "@/components/percentage-hint";
-import { useDonationsByParty } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
 import { formatCountryCurrency } from "@/utils/formatter";
@@ -16,22 +15,14 @@ import { DonationField, DonorType } from "@/utils/types";
 export const LoadingPartyDonorTypeText = ({
   party,
   country,
+  donations,
 }: {
   country: CountryConfig;
   party: Party;
+  donations: Donation[];
 }) => {
   const t = useTranslations();
-  const tData = useTranslations("data");
   const locale = useLocale();
-
-  const {
-    data: donations,
-    error,
-    isLoading,
-  } = useDonationsByParty(country, party);
-
-  if (isLoading) return <Loading />;
-  if (error || !donations) return <div>{tData("error")}</div>;
 
   const sumByType: Partial<Record<DonorType, { sum: number; count: number }>> =
     {};

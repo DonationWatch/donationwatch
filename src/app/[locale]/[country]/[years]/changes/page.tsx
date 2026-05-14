@@ -3,12 +3,7 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound, redirect } from "next/navigation";
 
-import { DynamicYearDonationHistory } from "@/components/donations/dynamic-donation-history";
-import {
-  Article,
-  ArticleSectionTitle,
-  ArticleSectionWrapper,
-} from "@/components/layout/article";
+import { Article } from "@/components/layout/article";
 import { getCountryName } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import {
@@ -23,6 +18,8 @@ import { generateAlternates } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
 import { deserializeYears } from "@/utils/serializers";
 import { isValidCountry, isValidLocale } from "@/utils/validate";
+
+import { YearsChangesClientPage } from "./_components/years-changes-client-page";
 
 export async function generateMetadata(
   props: PageProps<"/[locale]/[country]/[years]/changes">,
@@ -95,15 +92,12 @@ export default async function ChangesPage(
 
   return (
     <Article fullWidth={true}>
-      <ArticleSectionWrapper id={"sec-years-donors"}>
-        <ArticleSectionTitle
-          as={"h1"}
-          id={"sec-years-changes"}
-          title={t("changes.detail.title")}
-        />
-        <p className="mb-6">{t("changes.detail.summary")}</p>
-        <DynamicYearDonationHistory years={years} country={countryConfig} />
-      </ArticleSectionWrapper>
+      <YearsChangesClientPage
+        country={countryConfig}
+        years={years}
+        title={t("changes.detail.title")}
+        summary={t("changes.detail.summary")}
+      />
     </Article>
   );
 }

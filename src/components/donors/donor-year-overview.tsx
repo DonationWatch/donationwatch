@@ -5,10 +5,6 @@ import { useCallback, useRef, useState } from "react";
 import type { CountryConfig } from "@/types/country-config";
 import type { Donation, ReceiverId } from "@/utils/types";
 
-import Loading from "@/components/loading/loading";
-import { useDonationsByYears } from "@/hooks/use-api";
-import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
-import { isNotNullandNotUndefined } from "@/utils/array";
 import { donationYear } from "@/utils/date";
 import { DonationField } from "@/utils/types";
 
@@ -134,22 +130,12 @@ const DonorYearOverviewContent = ({
 export const DonorYearOverview = ({
   country,
   years,
+  donations,
 }: {
   years: string[];
   country: CountryConfig;
+  donations: Donation[];
 }) => {
-  const tData = useTranslations("data");
-  const results = useDonationsByYears(country, years);
-  const error = results.some((r) => r.error);
-  const isLoading = results.some((r) => r.isLoading);
-
-  if (isLoading) return <Loading />;
-  if (error) return <div>{tData("error")}</div>;
-
-  const donations = results
-    .flatMap((r) => r.data)
-    .filter(isNotNullandNotUndefined);
-
   return (
     <DonorYearOverviewContent
       donations={donations}

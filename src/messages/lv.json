@@ -319,6 +319,10 @@
       "subtitle": "Kopējais publicēto individuālo ziedotāju ieguldījums partijai {party} {country}.",
       "summary": "Šī lapa prezentē visas oficiāli atklātās ziedojumus virs {minSum} partijai {party} kopš {minYear}, grupētus pēc ziedotājiem, lai parādītu kopējās iemaksas laika gaitā. Visi skaitļi ir balstīti uz oficiālajām atklāsmēm, ko publicējusi {source}, parādīti gan kā treemap vizuālajam salīdzinājumam, gan kā izvēršams pamatā esošo transakciju saraksts."
     },
+    "donor_list": {
+      "title": "Lielākie {party} ziedotāji pēc kopējiem ieguldījumiem",
+      "p0": "Iepazīstieties ar organizācijām un personām, kas ziedo {party}. Šis saraksts ir sakārtots pēc kopējās ziedotās summas un parāda gan kopējo summu, gan relatīvo procentuālo daļu no partijas kopējā finansējuma. Jebkuru ierakstu var izvērst, lai skatītu pilnu hronoloģisku individuālo ziedojumu vēsturi no konkrētā avota."
+    },
     "donor_types": {
       "title": "Ziedotāju veidi",
       "treemap": {

@@ -3,25 +3,16 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
-import { DonationPerMonthChart } from "@/components/charts/donation-per-month-chart";
-import { DonationPartyChart } from "@/components/charts/donation-sum-chart";
-import {
-  Article,
-  ArticleSectionColumn,
-  ArticleSectionOneColumns,
-  ArticleSectionTitle,
-  ArticleSectionTwoColumns,
-  ArticleSectionWrapper,
-} from "@/components/layout/article";
-import { PartyTimelineText } from "@/components/parties/party-timeline-text";
+import { Article } from "@/components/layout/article";
 import { PartyField } from "@/types/party";
 import { getCountryName, getParty } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
-import { Features, hasFeature } from "@/utils/features";
 import { formatYearsRange } from "@/utils/formatter";
 import { generateAlternates } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
 import { isValidCountry, isValidLocale, isValidParty } from "@/utils/validate";
+
+import { PartyTimelineClientPage } from "./_components/party-timeline-client-page";
 
 export async function generateMetadata(
   props: PageProps<"/[locale]/[country]/party/[partyId]/timeline">,
@@ -81,73 +72,31 @@ export default async function TimelinePage(
 
   return (
     <Article fullWidth={true}>
-      {hasFeature(countryConfig, Features.Date) ? (
-        <ArticleSectionWrapper id={"sec-timeline"}>
-          <ArticleSectionOneColumns>
-            <ArticleSectionColumn>
-              <ArticleSectionTitle
-                as={"h1"}
-                id={"sec-timeline"}
-                title={t("party.timeline.detail.title", {
-                  party: party[PartyField.Short],
-                })}
-              />
-              <p>
-                {t("party.timeline.detail.summary", {
-                  party: party[PartyField.Short],
-                })}
-              </p>
-            </ArticleSectionColumn>
-            <ArticleSectionColumn>
-              <DonationPartyChart
-                title={t("party.timeline.chart_title", {
-                  party: party[PartyField.Short],
-                })}
-                subtitle={t("party.timeline.subtitle", {
-                  party: party[PartyField.Short],
-                  country: getCountryName(countryConfig, tCountries),
-                })}
-                country={countryConfig}
-                years={countryConfig.years}
-                party={party}
-                limitToFirstDateYear={true}
-              />
-            </ArticleSectionColumn>
-          </ArticleSectionOneColumns>
-        </ArticleSectionWrapper>
-      ) : null}
-      <ArticleSectionWrapper id={"sec-per-year"}>
-        <ArticleSectionTwoColumns>
-          <ArticleSectionColumn>
-            {hasFeature(countryConfig, Features.Date) ? null : (
-              <ArticleSectionTitle
-                as={"h1"}
-                id={"sec-timeline"}
-                title={t("party.timeline.detail.title", {
-                  party: party[PartyField.Short],
-                })}
-              />
-            )}
-            <PartyTimelineText country={countryConfig} party={party} />
-          </ArticleSectionColumn>
-          <ArticleSectionColumn>
-            <DonationPerMonthChart
-              country={countryConfig}
-              title={t("per_year_party.title", {
-                party: party[PartyField.Short],
-              })}
-              resolution={"year"}
-              subtitle={t("per_year_party.subtitle", {
-                country: getCountryName(countryConfig, tCountries),
-                years: formatYearsRange(countryConfig.years),
-                party: party[PartyField.Short],
-              })}
-              years={countryConfig.years}
-              parties={[party]}
-            />
-          </ArticleSectionColumn>
-        </ArticleSectionTwoColumns>
-      </ArticleSectionWrapper>
+      <PartyTimelineClientPage
+        country={countryConfig}
+        party={party}
+        timelineTitle={t("party.timeline.detail.title", {
+          party: party[PartyField.Short],
+        })}
+        timelineSummary={t("party.timeline.detail.summary", {
+          party: party[PartyField.Short],
+        })}
+        chartTitle={t("party.timeline.chart_title", {
+          party: party[PartyField.Short],
+        })}
+        chartSubtitle={t("party.timeline.subtitle", {
+          party: party[PartyField.Short],
+          country: getCountryName(countryConfig, tCountries),
+        })}
+        perYearTitle={t("per_year_party.title", {
+          party: party[PartyField.Short],
+        })}
+        perYearSubtitle={t("per_year_party.subtitle", {
+          country: getCountryName(countryConfig, tCountries),
+          years: formatYearsRange(countryConfig.years),
+          party: party[PartyField.Short],
+        })}
+      />
     </Article>
   );
 }

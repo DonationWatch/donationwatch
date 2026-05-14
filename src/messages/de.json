@@ -319,6 +319,10 @@
       "subtitle": "Gesamtsumme der veröffentlichten Beiträge von Einzelspendern an die {party} in {country}.",
       "summary": "Diese Seite zeigt alle offiziell gemeldeten Spenden über {minSum} an {party} seit {minYear}, gruppiert nach Spendern, um die Gesamtbeiträge über die Zeit zu zeigen. Alle Zahlen basieren auf offiziellen Veröffentlichungen der {source} und werden sowohl als Treemap für den visuellen Vergleich als auch als erweiterbare Liste der zugrundeliegenden Transaktionen dargestellt."
     },
+    "donor_list": {
+      "title": "Top-Spender an {party} nach Gesamtbeiträgen",
+      "p0": "Erkunden Sie die Organisationen und Einzelpersonen, die {party} unterstützen. Diese Liste ist nach dem kumulierten Spendenbetrag sortiert und zeigt sowohl die Gesamtsumme als auch den relativen Anteil an der Gesamtfinanzierung der Partei. Sie können jeden Eintrag erweitern, um eine vollständige chronologische Historie der einzelnen Spenden dieser Quelle einzusehen."
+    },
     "donor_types": {
       "title": "Spendentypen",
       "treemap": {

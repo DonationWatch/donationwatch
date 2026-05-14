@@ -309,6 +309,10 @@
       "subtitle": "Contributions totales publiées par les donateurs individuels pour le {party} en {country}.",
       "summary": "Cette page présente tous les dons officiellement déclarés supérieurs à {minSum} pour {party} depuis {minYear}. Les chiffres sont basés sur les publications de {source}."
     },
+    "donor_list": {
+      "title": "Principaux donateurs de {party} par contributions totales",
+      "p0": "Explorez les entités et les individus contribuant à {party}. Cette liste est classée par montant cumulé des dons et affiche à la fois la somme totale et le pourcentage relatif du financement global du parti. Vous pouvez développer chaque entrée pour consulter l'historique chronologique complet des dons individuels provenant de cette source spécifique."
+    },
     "donor_types": {
       "title": "Types de donateurs",
       "treemap": {

@@ -3,20 +3,7 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound, redirect } from "next/navigation";
 
-import { InfoAlert } from "@/components/alert";
-import { DonationPerMonthChart } from "@/components/charts/donation-per-month-chart";
-import { DonationSumChart } from "@/components/charts/donation-sum-chart";
-import {
-  Article,
-  ArticleSectionColumn,
-  ArticleSectionOneColumns,
-  ArticleSectionTitle,
-  ArticleSectionTwoColumns,
-  ArticleSectionWrapper,
-} from "@/components/layout/article";
-import { LoadingYearBarsPageText } from "@/components/loading/loading-year-bars-page-text";
-import { LoadingYearTimelineYearText } from "@/components/loading/loading-year-timeline-year-text";
-import { LoadingYearTimeseriesText } from "@/components/loading/loading-year-timeseries-text";
+import { Article } from "@/components/layout/article";
 import { getCountryName } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { getParties } from "@/utils/data/get-parties";
@@ -34,6 +21,8 @@ import {
 } from "@/utils/party";
 import { deserializeYears } from "@/utils/serializers";
 import { isValidCountry, isValidLocale } from "@/utils/validate";
+
+import { YearsTimelineClientPage } from "./_components/years-timeline-client-page";
 
 export async function generateMetadata(
   props: PageProps<"/[locale]/[country]/[years]/timeline">,
@@ -129,85 +118,26 @@ export default async function TimelinePage(
 
   return (
     <Article fullWidth={true}>
-      {resolution === "month" ? (
-        <ArticleSectionWrapper id={"sec-timeline"}>
-          <ArticleSectionOneColumns>
-            <ArticleSectionColumn>
-              <ArticleSectionTitle
-                as={"h1"}
-                id={"sec-timeline"}
-                title={t("timeline.detail.title")}
-              />
-              <p className="mb-6">{t("timeline.detail.summary")}</p>
-              <LoadingYearTimeseriesText
-                country={countryConfig}
-                parties={parties}
-                years={years}
-              />
-            </ArticleSectionColumn>
-            <ArticleSectionColumn>
-              <DonationSumChart
-                country={countryConfig}
-                title={t("years.title")}
-                subtitle={t("years.subtitle", {
-                  country: getCountryName(countryConfig, tCountries),
-                  years: formatYearsRange(years),
-                })}
-                years={years}
-                parties={parties}
-              />
-            </ArticleSectionColumn>
-          </ArticleSectionOneColumns>
-        </ArticleSectionWrapper>
-      ) : null}
-      <ArticleSectionWrapper id={"sec-per-month"}>
-        <ArticleSectionTwoColumns>
-          <ArticleSectionColumn>
-            <ArticleSectionTitle
-              as={"h2"}
-              id={"sec-per-month"}
-              title={t(chartStrings.title)}
-            />
-
-            {resolution === "year" &&
-              hasFeature(countryConfig, Features.Date) && (
-                <div className="mb-6">
-                  <InfoAlert text={t("timeline.year_resolution_note")} />
-                </div>
-              )}
-
-            <p className="mb-6">{t(chartStrings.description)}</p>
-            {resolution === "month" ? (
-              <LoadingYearBarsPageText
-                country={countryConfig}
-                parties={parties}
-                years={years}
-              />
-            ) : (
-              <LoadingYearTimelineYearText
-                country={countryConfig}
-                parties={parties}
-                years={years}
-              />
-            )}
-          </ArticleSectionColumn>
-          <ArticleSectionColumn>
-            <div>
-              <DonationPerMonthChart
-                country={countryConfig}
-                title={t(chartStrings.title)}
-                subtitle={t(chartStrings.subtitle, {
-                  country: getCountryName(countryConfig, tCountries),
-                  years: formatYearsRange(years),
-                })}
-                resolution={resolution}
-                years={years}
-                parties={parties}
-              />
-            </div>
-          </ArticleSectionColumn>
-        </ArticleSectionTwoColumns>
-      </ArticleSectionWrapper>
+      <YearsTimelineClientPage
+        country={countryConfig}
+        years={years}
+        parties={parties}
+        resolution={resolution}
+        timelineTitle={t("timeline.detail.title")}
+        timelineSummary={t("timeline.detail.summary")}
+        sumChartTitle={t("years.title")}
+        sumChartSubtitle={t("years.subtitle", {
+          country: getCountryName(countryConfig, tCountries),
+          years: formatYearsRange(years),
+        })}
+        perMonthTitle={t(chartStrings.title)}
+        perMonthDescription={t(chartStrings.description)}
+        perMonthSubtitle={t(chartStrings.subtitle, {
+          country: getCountryName(countryConfig, tCountries),
+          years: formatYearsRange(years),
+        })}
+        yearResolutionNote={t("timeline.year_resolution_note")}
+      />
     </Article>
   );
 }

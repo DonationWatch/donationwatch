@@ -3,23 +3,10 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
-import { LoadingDonationPartyTreemap } from "@/components/charts/loading-donation-years-treemap";
-import { LoadingPartyDonorTypeTreemap } from "@/components/charts/loading-donor-types-treemap";
-import { DonorOverviewList } from "@/components/donors/donor-overview-list";
-import {
-  Article,
-  ArticleSectionColumn,
-  ArticleSectionOneColumns,
-  ArticleSectionTitle,
-  ArticleSectionTwoColumns,
-  ArticleSectionWrapper,
-} from "@/components/layout/article";
-import { LoadingPartyDonorTypeText } from "@/components/parties/part-donor-type-text";
-import { PartyDonorPageText } from "@/components/parties/party-donor-page-text";
+import { Article } from "@/components/layout/article";
 import { PartyField } from "@/types/party";
 import { getCountryName, getParty } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
-import { Features, hasFeature } from "@/utils/features";
 import {
   formatCompactCountryCurrency,
   formatCountryCurrency,
@@ -28,6 +15,8 @@ import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
 import { generateAlternates } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
 import { isValidCountry, isValidLocale, isValidParty } from "@/utils/validate";
+
+import { PartyDonorsClientPage } from "./_components/party-donors-client-page";
 
 export async function generateMetadata(
   props: PageProps<"/[locale]/[country]/party/[partyId]/donors">,
@@ -108,67 +97,32 @@ export default async function DonorPage(
 
   return (
     <Article fullWidth={true}>
-      <ArticleSectionWrapper id={"sec-party-donors"}>
-        <ArticleSectionTwoColumns>
-          <ArticleSectionColumn>
-            <PartyDonorPageText party={party} country={countryConfig} />
-          </ArticleSectionColumn>
-          <ArticleSectionColumn>
-            <div>
-              <LoadingDonationPartyTreemap
-                country={countryConfig}
-                party={party}
-                tooSmallAreaColor={party[PartyField.Color]}
-                title={t("party.donors.title", {
-                  party: party[PartyField.Short],
-                })}
-                subtitle={t("party.donors.subtitle", {
-                  party: party[PartyField.Short],
-                  country: getCountryName(countryConfig, tCountries),
-                })}
-              />
-            </div>
-          </ArticleSectionColumn>
-        </ArticleSectionTwoColumns>
-      </ArticleSectionWrapper>
-
-      {hasFeature(countryConfig, Features.DonorType) ? (
-        <ArticleSectionWrapper id={"sec-party-donor-types"}>
-          <ArticleSectionTwoColumns>
-            <ArticleSectionColumn>
-              <ArticleSectionTitle
-                id={"sec-party-donor-types"}
-                title={t("party.donor_types.title")}
-              />
-              <LoadingPartyDonorTypeText
-                country={countryConfig}
-                party={party}
-              />
-            </ArticleSectionColumn>
-            <ArticleSectionColumn>
-              <LoadingPartyDonorTypeTreemap
-                country={countryConfig}
-                party={party}
-                title={t("party.donor_types.treemap.title", {
-                  party: party[PartyField.Short],
-                })}
-                subtitle={t("party.donor_types.treemap.description", {
-                  party: party[PartyField.Short],
-                  country: getCountryName(countryConfig, tCountries),
-                })}
-              />
-            </ArticleSectionColumn>
-          </ArticleSectionTwoColumns>
-        </ArticleSectionWrapper>
-      ) : null}
-
-      <ArticleSectionWrapper id={"sec-donor-list"}>
-        <ArticleSectionOneColumns>
-          <ArticleSectionColumn>
-            <DonorOverviewList countryConfig={countryConfig} party={party} />
-          </ArticleSectionColumn>
-        </ArticleSectionOneColumns>
-      </ArticleSectionWrapper>
+      <PartyDonorsClientPage
+        country={countryConfig}
+        party={party}
+        treemapTitle={t("party.donors.title", {
+          party: party[PartyField.Short],
+        })}
+        treemapSubtitle={t("party.donors.subtitle", {
+          party: party[PartyField.Short],
+          country: getCountryName(countryConfig, tCountries),
+        })}
+        donorTypesTitle={t("party.donor_types.title")}
+        donorTypesTreemapTitle={t("party.donor_types.treemap.title", {
+          party: party[PartyField.Short],
+        })}
+        donorTypesTreemapSubtitle={t("party.donor_types.treemap.description", {
+          party: party[PartyField.Short],
+          country: getCountryName(countryConfig, tCountries),
+        })}
+        listTitle={t("party.donor_list.title", {
+          party: party[PartyField.Short],
+        })}
+        listP0={t("party.donor_list.p0", {
+          party: party[PartyField.Short],
+          country: getCountryName(countryConfig, tCountries),
+        })}
+      />
     </Article>
   );
 }

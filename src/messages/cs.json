@@ -319,6 +319,10 @@
       "subtitle": "Celkové zveřejněné příspěvky jednotlivých dárců straně {party} v {country}.",
       "summary": "Tato stránka prezentuje všechny oficiálně zveřejněné dary nad {minSum} pro {party} od roku {minYear}, seskupené podle dárců pro zobrazení celkových příspěvků v čase. Všechny údaje jsou založeny na oficiálních zveřejněních publikovaných {source}, zobrazené jak jako treemap pro vizuální srovnání, tak jako rozbalitelný seznam podkladových transakcí."
     },
+    "donor_list": {
+      "title": "Největší dárci strany {party} podle celkových příspěvků",
+      "p0": "Prozkoumejte subjekty a jednotlivce přispívající straně {party}. Tento seznam je seřazen podle kumulativní výše darované částky a zobrazuje jak celkovou sumu, tak relativní procentuální podíl na celkovém financování strany. Každou položku lze rozbalit a zobrazit úplnou chronologickou historii jednotlivých darů z daného zdroje."
+    },
     "donor_types": {
       "title": "Typy dárců",
       "treemap": {
