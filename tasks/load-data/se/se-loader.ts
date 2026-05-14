@@ -257,6 +257,18 @@ export class SeLoader extends DataLoader {
       code: "543",
       color: "#804595",
     },
+    "1116": {
+      name: "Waxholmspartiet - Borgerligt Alternativ",
+      short: "Waxholmspartiet - Borgerligt Alternativ",
+      code: "1116",
+      color: "#cacaca",
+    },
+    "1750": {
+      name: "Lokalpartiet Malung-Sälen",
+      short: "Lokalpartiet Malung-Sälen",
+      code: "1750",
+      color: "#2f5666",
+    },
   };
   donorMeta = donorMeta;
 
