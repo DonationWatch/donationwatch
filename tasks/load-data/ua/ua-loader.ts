@@ -257,6 +257,13 @@ export class UaLoader extends DataLoader {
       color: "#84171c",
       code: IGNORE_CODE(),
     },
+    "УКРАЇНА НАШ ДІМ": {
+      name: "Україна – наш дім",
+      short: "Україна – наш дім",
+      wiki: 69350808,
+      code: IGNORE_CODE(),
+      color: "#F4C711",
+    },
   };
   private loadedOnce = false;
   private extractedOnce = false;
