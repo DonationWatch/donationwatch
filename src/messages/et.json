@@ -319,6 +319,10 @@
       "subtitle": "Kokku avaldatud individuaalsete annetajate panused erakonnale {party} riigis {country}.",
       "summary": "See lehekülg esitab kõik ametlikult avalikustatud annetused üle {minSum} parteile {party} alates {minYear}, grupeerituna annetajate kaupa, et näidata kogupanuseid aja jooksul. Kõik arvud põhinevad ametlikel avalikustamistel, mille on avaldanud {source}, näidatud nii puukaardina visuaalseks võrdluseks kui ka laiendatava aluseks olevate tehingute loendina."
     },
+    "donor_list": {
+      "title": "Suurimad {party} toetajad koguannetuste järgi",
+      "p0": "Tutvuge organisatsioonide ja isikutega, kes toetavad {party}. See nimekiri on järjestatud kumulatiivse annetuse summa alusel ning näitab nii kogusummat kui ka suhtelist protsenti partei üldisest rahastamisest. Iga kirjet saab laiendada, et vaadata täielikku kronoloogilist ajalugu konkreetsest allikast pärinevate üksikute annetuste kohta."
+    },
     "donor_types": {
       "title": "Annetajate tüübid",
       "treemap": {

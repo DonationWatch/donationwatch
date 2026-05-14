@@ -15,11 +15,8 @@ import {
   ArticleSectionTwoColumns,
   ArticleSectionWrapper,
 } from "@/components/layout/article";
-import Loading from "@/components/loading/loading";
-import { useDonationsByParty, useDonationsByYears } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
-import { isNotNullandNotUndefined } from "@/utils/array";
 import { Country, getCountryName } from "@/utils/countries";
 import { getOriginDonations } from "@/utils/data/get-origin-donations";
 import { formatCountryCurrency, formatYearsRange } from "@/utils/formatter";
@@ -248,24 +245,15 @@ export const DonationYearOrigin = ({
   country,
   years,
   parties,
+  donations,
 }: {
   years: string[];
   parties: Party[];
   country: CountryConfig;
+  donations: Donation[];
 }) => {
   const t = useTranslations();
   const tCountries = useTranslations("countries");
-  const tData = useTranslations("data");
-  const results = useDonationsByYears(country, years);
-  const error = results.some((r) => r.error);
-  const isLoading = results.some((r) => r.isLoading);
-
-  if (isLoading) return <Loading />;
-  if (error) return <div>{tData("error")}</div>;
-
-  const donations = results
-    .flatMap((r) => r.data)
-    .filter(isNotNullandNotUndefined);
 
   return (
     <DonationOrigin
@@ -285,25 +273,22 @@ export const DonationPartyOrigin = ({
   country,
   years,
   party,
+  donations,
 }: {
   years: string[];
   party: Party;
   country: CountryConfig;
+  donations: Donation[];
 }) => {
   const t = useTranslations();
   const tCountries = useTranslations("countries");
-  const tData = useTranslations("data");
-  const { data, error, isLoading } = useDonationsByParty(country, party);
-
-  if (isLoading) return <Loading />;
-  if (error || !data) return <div>{tData("error")}</div>;
 
   return (
     <DonationOrigin
       years={years}
       parties={[party]}
       country={country}
-      donations={data.flat()}
+      donations={donations}
       subtitle={t("origin.party.subtitle", {
         party: party[PartyField.Short],
         country: getCountryName(country, tCountries),

@@ -3,19 +3,7 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound, redirect } from "next/navigation";
 
-import { LoadingDonationYearsTreemap } from "@/components/charts/loading-donation-years-treemap";
-import { LoadingDonorReceiverHistogram } from "@/components/charts/loading-donor-receiver-histogram";
-import { DonorYearOverview } from "@/components/donors/donor-year-overview";
-import { LoadingYearsDonorHistogramText } from "@/components/donors/years-donor-histogram-text";
-import { YearsDonorPageText } from "@/components/donors/years-donor-page-text";
-import {
-  Article,
-  ArticleSectionColumn,
-  ArticleSectionOneColumns,
-  ArticleSectionTitle,
-  ArticleSectionTwoColumns,
-  ArticleSectionWrapper,
-} from "@/components/layout/article";
+import { Article } from "@/components/layout/article";
 import { getCountryName } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { getParties } from "@/utils/data/get-parties";
@@ -29,6 +17,8 @@ import { generateAlternates } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
 import { deserializeYears } from "@/utils/serializers";
 import { isValidCountry, isValidLocale } from "@/utils/validate";
+
+import { YearsDonorsClientPage } from "./_components/years-donors-client-page";
 
 export async function generateMetadata(
   props: PageProps<"/[locale]/[country]/[years]/donors">,
@@ -99,82 +89,28 @@ export default async function YearPage(
 
   return (
     <Article fullWidth={true}>
-      <ArticleSectionWrapper id={"sec-years-donors"}>
-        <ArticleSectionTwoColumns>
-          <ArticleSectionColumn>
-            <ArticleSectionTitle
-              as={"h1"}
-              id={"sec-years-donors"}
-              title={t("donors.detail.title")}
-            />
-            <p className="mb-6">{t("donors.detail.summary")}</p>
-            <p className="mb-6">{t("donors.detail.summary2")}</p>
-            <YearsDonorPageText
-              country={countryConfig}
-              years={years}
-              parties={parties}
-            />
-          </ArticleSectionColumn>
-          <ArticleSectionColumn>
-            <div>
-              <LoadingDonationYearsTreemap
-                country={countryConfig}
-                years={years}
-                parties={parties}
-                title={t("donors.detail.title")}
-                subtitle={t("donors.detail.subtitle", {
-                  country: getCountryName(countryConfig, tCountries),
-                  years: formatYearsRange(years),
-                })}
-              />
-            </div>
-          </ArticleSectionColumn>
-        </ArticleSectionTwoColumns>
-      </ArticleSectionWrapper>
-      <ArticleSectionWrapper id={"sec-histogram"}>
-        <ArticleSectionTwoColumns>
-          <ArticleSectionColumn>
-            <ArticleSectionTitle
-              as={"h2"}
-              id={"sec-histogram"}
-              title={t("donors.histogram.title")}
-            />
-            <p className="mb-6">{t("donors.histogram.p0")}</p>
-            <LoadingYearsDonorHistogramText
-              country={countryConfig}
-              years={years}
-              parties={parties}
-            />
-          </ArticleSectionColumn>
-          <ArticleSectionColumn>
-            <div>
-              <LoadingDonorReceiverHistogram
-                country={countryConfig}
-                years={years}
-                parties={parties}
-                title={t("donors.histogram.title")}
-                subtitle={t("donors.histogram.subtitle", {
-                  country: getCountryName(countryConfig, tCountries),
-                  years: formatYearsRange(years),
-                })}
-              />
-            </div>
-          </ArticleSectionColumn>
-        </ArticleSectionTwoColumns>
-      </ArticleSectionWrapper>
-      <ArticleSectionWrapper id={"sec-donor-list"}>
-        <ArticleSectionOneColumns>
-          <ArticleSectionColumn>
-            <ArticleSectionTitle
-              as={"h2"}
-              id={"sec-donor-list"}
-              title={t("donors.list.title")}
-            />
-            <p className="mb-6">{t("donors.list.p0")}</p>
-            <DonorYearOverview country={countryConfig} years={years} />
-          </ArticleSectionColumn>
-        </ArticleSectionOneColumns>
-      </ArticleSectionWrapper>
+      <YearsDonorsClientPage
+        country={countryConfig}
+        years={years}
+        parties={parties}
+        sectionTitle={t("donors.detail.title")}
+        summary={t("donors.detail.summary")}
+        summary2={t("donors.detail.summary2")}
+        treemapTitle={t("donors.detail.title")}
+        treemapSubtitle={t("donors.detail.subtitle", {
+          country: getCountryName(countryConfig, tCountries),
+          years: formatYearsRange(years),
+        })}
+        histogramSectionTitle={t("donors.histogram.title")}
+        histogramP0={t("donors.histogram.p0")}
+        histogramTitle={t("donors.histogram.title")}
+        histogramSubtitle={t("donors.histogram.subtitle", {
+          country: getCountryName(countryConfig, tCountries),
+          years: formatYearsRange(years),
+        })}
+        listTitle={t("donors.list.title")}
+        listP0={t("donors.list.p0")}
+      />
     </Article>
   );
 }

@@ -7,12 +7,9 @@ import type { Donation } from "@/utils/types";
 
 import { DonorLink } from "@/components/donors/donor-link";
 import { FormatAnd } from "@/components/formatter";
-import Loading from "@/components/loading/loading";
 import { Translation } from "@/components/translation";
-import { useDonationsByYears } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
-import { isNotNullandNotUndefined } from "@/utils/array";
 import { donationYear } from "@/utils/date";
 import {
   formatAnd,
@@ -27,20 +24,15 @@ export const YearsDonorPageText = ({
   years,
   country,
   parties,
+  donations,
 }: {
   years: string[];
   country: CountryConfig;
   parties: Party[];
+  donations: Donation[];
 }) => {
   const t = useTranslations();
-  const tData = useTranslations("data");
   const locale = useLocale();
-  const results = useDonationsByYears(country, years);
-  const error = results.some((r) => r.error);
-  const isLoading = results.some((r) => r.isLoading);
-
-  if (isLoading) return <Loading />;
-  if (error) return <div>{tData("error")}</div>;
 
   const biggestDonor: { donor: string; amount: number } = {
     donor: "",
@@ -67,9 +59,6 @@ export const YearsDonorPageText = ({
 
   const yearsSet = new Set<string>(years);
   const partiesSet = new Set<string>(parties.map((p) => p[PartyField.Id]));
-  const donations = results
-    .flatMap((r) => r.data)
-    .filter(isNotNullandNotUndefined);
   const donorDonations: Record<string, Donation[]> = {};
 
   donations.forEach((donation) => {

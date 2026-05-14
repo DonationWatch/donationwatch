@@ -3,11 +3,12 @@ import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
-import { DonationPartyOrigin } from "@/components/donations/donation-origin";
 import { getParty } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { generateAlternates } from "@/utils/meta";
 import { isValidCountry, isValidLocale, isValidParty } from "@/utils/validate";
+
+import { PartyOriginClientPage } from "./_components/party-origin-client-page";
 
 export async function generateMetadata(
   props: PageProps<"/[locale]/[country]/party/[partyId]/origin/overview">,
@@ -45,6 +46,10 @@ export default async function OverviewPage(
   }
 
   return (
-    <DonationPartyOrigin country={countryConfig} party={party} years={years} />
+    <PartyOriginClientPage
+      country={countryConfig}
+      party={party}
+      years={years}
+    />
   );
 }

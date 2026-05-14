@@ -6,42 +6,30 @@ import type { Party } from "@/types/party";
 import type { Donation, ReceiverId } from "@/utils/types";
 
 import { FormatAnd } from "@/components/formatter";
-import Loading from "@/components/loading/loading";
 import { TextPartyLink } from "@/components/parties/text-party-link";
 import { Translation } from "@/components/translation";
-import { useDonationsByYears } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
-import { isNotNullandNotUndefined } from "@/utils/array";
 import { donationYear } from "@/utils/date";
 import { formatCountryCurrency, formatMonthYear } from "@/utils/formatter";
 import { DonationField } from "@/utils/types";
 
-export const LoadingYearBarsPageText = ({
+export const YearBarsPageText = ({
   parties,
   years,
   country,
+  donations,
 }: {
   country: CountryConfig;
   parties: Party[];
   years: string[];
+  donations: Donation[];
 }) => {
   const t = useTranslations();
-  const tData = useTranslations("data");
   const locale = useLocale();
-  const results = useDonationsByYears(country, years);
-
-  const error = results.some((r) => r.error);
-  const isLoading = results.some((r) => r.isLoading);
-
-  if (isLoading) return <Loading />;
-  if (error) return <div>{tData("error")}</div>;
 
   const yearsSet = new Set<string>(years);
   const partiesSet = new Set<string>(parties.map((p) => p[PartyField.Id]));
-  const donations = results
-    .flatMap((r) => r.data)
-    .filter(isNotNullandNotUndefined);
 
   const monthYearData: Record<string, Record<string, number>> = {};
   const partyMonths: Record<ReceiverId, Set<string>> = {};

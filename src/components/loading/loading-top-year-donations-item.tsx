@@ -9,10 +9,7 @@ import { CurrencyRankingItem } from "@/components/donations/ranking-item";
 import { PartyDot } from "@/components/parties/party-dot";
 import { PartyLink } from "@/components/parties/party-link";
 
-import {
-  LoadedTopDonationsItemDetail,
-  LoadingTopYearDonationsItemDetail,
-} from "./loading-top-year-donations-item-detail";
+import { LoadedTopDonationsItemDetail } from "./loading-top-year-donations-item-detail";
 
 export const ReadonlyTopYearDonationsItem = ({
   partyId,
@@ -47,17 +44,18 @@ export const ReadonlyTopYearDonationsItem = ({
   );
 };
 
-export const LoadingTopYearDonationsItem = ({
+export const LoadedTopYearDonationsItem = ({
   partyId,
   amount,
   rank,
   sum,
   country,
-  years = [],
   expanded,
   onToggleExpanded,
+  donations,
   locale,
 }: {
+  locale: ConstLocale;
   partyId: ReceiverId;
   amount: number;
   rank: number;
@@ -66,7 +64,7 @@ export const LoadingTopYearDonationsItem = ({
   years?: string[];
   expanded: boolean;
   onToggleExpanded: (expanded: boolean) => void;
-  locale: ConstLocale;
+  donations: Donation[];
 }) => {
   return (
     <CurrencyRankingItem
@@ -88,47 +86,6 @@ export const LoadingTopYearDonationsItem = ({
           <ArrowRight size={16} />
         </PartyLink>
       }
-      detail={
-        <LoadingTopYearDonationsItemDetail
-          country={country}
-          years={years}
-          partyId={partyId}
-        />
-      }
-    >
-      <PartyDot party={partyId} country={country} />
-    </CurrencyRankingItem>
-  );
-};
-
-export const LoadedTopYearDonationsItem = ({
-  partyId,
-  amount,
-  rank,
-  sum,
-  country,
-  expanded,
-  onToggleExpanded,
-  donations,
-}: {
-  partyId: ReceiverId;
-  amount: number;
-  rank: number;
-  sum: number;
-  country: CountryConfig;
-  years?: string[];
-  expanded: boolean;
-  onToggleExpanded: (expanded: boolean) => void;
-  donations: Donation[];
-}) => {
-  return (
-    <CurrencyRankingItem
-      amount={amount}
-      rank={rank}
-      sum={sum}
-      country={country}
-      expanded={expanded}
-      onToggleExpanded={onToggleExpanded}
       detail={
         <LoadedTopDonationsItemDetail
           country={country}

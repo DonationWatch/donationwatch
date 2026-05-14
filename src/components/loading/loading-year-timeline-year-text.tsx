@@ -3,39 +3,27 @@ import { useLocale } from "next-intl";
 
 import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
+import type { Donation } from "@/utils/types";
 
-import Loading from "@/components/loading/loading";
-import { useDonationsByYears } from "@/hooks/use-api";
-import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
-import { isNotNullandNotUndefined } from "@/utils/array";
 import { donationYear } from "@/utils/date";
 import { formatCountryCurrency, formatPercentFormat } from "@/utils/formatter";
 import { DonationField } from "@/utils/types";
 
-export const LoadingYearTimelineYearText = ({
+export const YearTimelineYearText = ({
   parties,
   years,
   country,
+  donations,
 }: {
   country: CountryConfig;
   parties: Party[];
   years: string[];
+  donations: Donation[];
 }) => {
-  const tData = useTranslations("data");
   const locale = useLocale();
-  const results = useDonationsByYears(country, years);
-
-  const error = results.some((r) => r.error);
-  const isLoading = results.some((r) => r.isLoading);
-
-  if (isLoading) return <Loading />;
-  if (error) return <div>{tData("error")}</div>;
 
   const partiesSet = new Set<string>(parties.map((p) => p[PartyField.Id]));
-  const donations = results
-    .flatMap((r) => r.data)
-    .filter(isNotNullandNotUndefined);
 
   let total = 0;
   const perYearSums: Record<string, number> = {};

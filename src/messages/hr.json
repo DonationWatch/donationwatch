@@ -319,6 +319,10 @@
       "subtitle": "Ukupni objavljeni doprinosi pojedinačnih donatora stranci {party} u {country}.",
       "summary": "Ova stranica prikazuje sve službeno objavljene donacije iznad {minSum} za {party} od {minYear}, grupirane po donatorima kako bi se prikazali ukupni doprinosi kroz vrijeme. Sve brojke su temeljene na službenim objavama objavljenima od strane {source}, prikazane i kao treemap za vizualnu usporedbu i kao proširivi popis temeljnih transakcija."
     },
+    "donor_list": {
+      "title": "Najveći donatori stranke {party} prema ukupnim doprinosima",
+      "p0": "Istražite subjekte i pojedince koji doprinose stranci {party}. Ovaj popis je poredан prema kumulativnom iznosu donacija i prikazuje kako ukupnu sumu, tako i relativni postotak ukupnog financiranja stranke. Svaki unos možete proširiti kako biste pregledali potpunu kronološku povijest pojedinačnih donacija iz tog specifičnog izvora."
+    },
     "donor_types": {
       "title": "Vrste donatora",
       "treemap": {

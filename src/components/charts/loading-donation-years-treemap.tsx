@@ -9,12 +9,9 @@ import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Donation, ReceiverId } from "@/utils/types";
 
-import Loading from "@/components/loading/loading";
-import { useDonationsByParty, useDonationsByYears } from "@/hooks/use-api";
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
-import { isNotNullandNotUndefined } from "@/utils/array";
 import { partyColor } from "@/utils/color";
 import { getParty } from "@/utils/countries";
 import { donationYear } from "@/utils/date";
@@ -296,13 +293,14 @@ export const LoadedDonationYearsTreemap = ({
   );
 };
 
-export const LoadingDonationYearsTreemap = ({
+export const DonationYearsTreemap = ({
   country,
   years,
   parties,
   tooSmallAreaColor = "#6366f1",
   title,
   subtitle,
+  donations,
 }: {
   country: CountryConfig;
   years: string[];
@@ -310,19 +308,8 @@ export const LoadingDonationYearsTreemap = ({
   tooSmallAreaColor?: string;
   title: string;
   subtitle: string;
+  donations: Donation[];
 }) => {
-  const t = useTranslations("data");
-  const results = useDonationsByYears(country, years);
-  const error = results.some((r) => r.error);
-  const isLoading = results.some((r) => r.isLoading);
-
-  if (isLoading) return <Loading />;
-  if (error) return <div>{t("error")}</div>;
-
-  const donations = results
-    .flatMap((r) => r.data)
-    .filter(isNotNullandNotUndefined);
-
   return (
     <LoadedDonationYearsTreemap
       country={country}
@@ -342,26 +329,21 @@ export const LoadingDonationPartyTreemap = ({
   tooSmallAreaColor = "#6366f1",
   title,
   subtitle,
+  donations,
 }: {
   country: CountryConfig;
   party: Party;
   tooSmallAreaColor?: string;
   title: string;
   subtitle: string;
+  donations: Donation[];
 }) => {
-  const t = useTranslations("data");
-
-  const { data, error, isLoading } = useDonationsByParty(country, party);
-
-  if (isLoading) return <Loading />;
-  if (error || !data) return <div>{t("error")}</div>;
-
   return (
     <LoadedDonationYearsTreemap
       country={country}
       title={title}
       subtitle={subtitle}
-      donations={data}
+      donations={donations}
       tooSmallAreaColor={tooSmallAreaColor}
       parties={[party]}
       years={[]}

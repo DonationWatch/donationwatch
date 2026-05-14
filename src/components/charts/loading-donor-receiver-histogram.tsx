@@ -8,12 +8,9 @@ import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Donation } from "@/utils/types";
 
-import Loading from "@/components/loading/loading";
-import { useDonationsByYears } from "@/hooks/use-api";
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
-import { isNotNullandNotUndefined } from "@/utils/array";
 import { donationYear } from "@/utils/date";
 import { formatNumber } from "@/utils/formatter";
 import { DonationField } from "@/utils/types";
@@ -195,12 +192,13 @@ export const LoadedDonorReceiverHistogram = ({
   );
 };
 
-export const LoadingDonorReceiverHistogram = ({
+export const DonorReceiverHistogram = ({
   country,
   years,
   parties,
   title,
   subtitle,
+  donations,
 }: {
   country: CountryConfig;
   years: string[];
@@ -208,19 +206,8 @@ export const LoadingDonorReceiverHistogram = ({
   tooSmallAreaColor?: string;
   title: string;
   subtitle: string;
+  donations: Donation[];
 }) => {
-  const t = useTranslations("data");
-  const results = useDonationsByYears(country, years);
-  const error = results.some((r) => r.error);
-  const isLoading = results.some((r) => r.isLoading);
-
-  if (isLoading) return <Loading />;
-  if (error) return <div>{t("error")}</div>;
-
-  const donations = results
-    .flatMap((r) => r.data)
-    .filter(isNotNullandNotUndefined);
-
   return (
     <LoadedDonorReceiverHistogram
       country={country}

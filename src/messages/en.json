@@ -309,6 +309,10 @@
       "subtitle": "Total published contributions by individual donors to the {party} in {country}.",
       "summary": "This page presents all officially disclosed donations over {minSum} to {party} since {minYear}, grouped by donor to show total contributions over time. All figures are based on official disclosures published by the {source}, shown both as a treemap for visual comparison and as an expandable list of the underlying transactions."
     },
+    "donor_list": {
+      "title": "Top donors to {party} by total contributions",
+      "p0": "Explore the entities and individuals contributing to {party}. This list is ordered by the cumulative amount donated, showing both the total sum and the relative percentage of the party’s overall funding. You can expand any entry to view a full chronological history of individual donations from that specific source."
+    },
     "donor_types": {
       "title": "Donor types",
       "treemap": {

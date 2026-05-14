@@ -319,6 +319,10 @@
       "subtitle": "Totale publiserte bidrag fra givere til {party} i {country}.",
       "summary": "Denne siden viser alle offisielt offentliggjorte donasjoner over {minSum} til {party} siden {minYear}, gruppert etter giver for å vise totalbidrag over tid. Alle tall er basert på offisielle offentliggjøringer publisert av {source}, vist både som treemap for visuell sammenligning og som en utvidbar liste over de underliggende transaksjonene."
     },
+    "donor_list": {
+      "title": "Største givere til {party} etter totale bidrag",
+      "p0": "Utforsk organisasjoner og enkeltpersoner som bidrar til {party}. Denne listen er sortert etter det kumulative beløpet som er donert, og viser både totalsummen og den relative prosentandelen av partiets samlede finansiering. Du kan utvide en hvilken som helst oppføring for å se en fullstendig kronologisk historikk over individuelle donasjoner fra den bestemte kilden."
+    },
     "donor_types": {
       "title": "Givertyper",
       "treemap": {

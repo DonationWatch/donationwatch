@@ -3,13 +3,9 @@ import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import { useCallback, useRef, useState } from "react";
 
 import type { CountryConfig } from "@/types/country-config";
-import type { Party } from "@/types/party";
 import type { Donation, ReceiverId } from "@/utils/types";
 
-import Loading from "@/components/loading/loading";
-import { useDonationsByParty } from "@/hooks/use-api";
-import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
-import { PartyField } from "@/types/party";
+import { type Party, PartyField } from "@/types/party";
 import { donationYear } from "@/utils/date";
 import { DonationField } from "@/utils/types";
 
@@ -104,16 +100,12 @@ const DonorOverviewListContent = ({
 export const DonorOverviewList = ({
   countryConfig,
   party,
+  donations: data,
 }: {
   countryConfig: CountryConfig;
   party: Party;
+  donations: Donation[];
 }) => {
-  const tData = useTranslations("data");
-  const { data, error, isLoading } = useDonationsByParty(countryConfig, party);
-
-  if (isLoading) return <Loading />;
-  if (error || !data) return <div>{tData("error")}</div>;
-
   const donations = data;
 
   let sum = 0;

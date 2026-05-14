@@ -3,9 +3,8 @@ import { useLocale } from "next-intl";
 
 import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
+import type { Donation } from "@/utils/types";
 
-import Loading from "@/components/loading/loading";
-import { useDonationsByParty } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
 import { donationYear } from "@/utils/date";
@@ -15,20 +14,16 @@ import { DonationField } from "@/utils/types";
 export const PartyTimelineText = ({
   party,
   country,
+  donations,
 }: {
   country: CountryConfig;
   party: Party;
+  donations: Donation[];
 }) => {
   const t = useTranslations();
-  const tData = useTranslations("data");
   const locale = useLocale();
-  const { data, error, isLoading } = useDonationsByParty(country, party);
-
-  if (isLoading) return <Loading />;
-  if (error || !data) return <div>{tData("error")}</div>;
 
   let sum = 0;
-  const donations = data;
   const perYearSums: Record<string, number> = {};
 
   donations.forEach((donation) => {

@@ -12,13 +12,10 @@ import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Donation, ReceiverId } from "@/utils/types";
 
-import Loading from "@/components/loading/loading";
 import { TextPartyLink } from "@/components/parties/text-party-link";
-import { useDonationsByYears } from "@/hooks/use-api";
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
-import { isNotNullandNotUndefined } from "@/utils/array";
 import { partyColor } from "@/utils/color";
 import { getParty } from "@/utils/countries";
 import { donationYear } from "@/utils/date";
@@ -34,28 +31,20 @@ export const DonationYearScatterPlot = ({
   subtitle,
   years,
   parties,
+  donations,
 }: {
   country: CountryConfig;
   years: string[];
   parties: Party[];
   title: string;
   subtitle: string;
+  donations: Donation[];
 }) => {
   const t = useTranslations();
-  const tData = useTranslations("data");
   const locale = useLocale();
   const { backgroundColor } = useChart();
 
-  const results = useDonationsByYears(country, years);
-  const error = results.some((r) => r.error);
-  const isLoading = results.some((r) => r.isLoading);
-
-  if (isLoading) return <Loading />;
-  if (error) return <div>{tData("error")}</div>;
-
-  const donations = results
-    .flatMap((r) => r.data)
-    .filter(isNotNullandNotUndefined);
+  const partyIds = new Set(parties.map((p) => p[PartyField.Id]));
 
   const titles: TitleComponentOption[] = [];
   const singleAxis: SingleAxisComponentOption[] = [];
@@ -65,7 +54,6 @@ export const DonationYearScatterPlot = ({
     string,
     { sum: number; donations: Donation[]; slots: Record<number, number> }
   > = {};
-  const partyIds = new Set(parties.map((p) => p[PartyField.Id]));
   let largestAmount = 0;
   let smallestAmount = Number.POSITIVE_INFINITY;
   const numbers = new Set<number>();

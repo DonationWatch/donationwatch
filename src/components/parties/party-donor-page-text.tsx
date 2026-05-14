@@ -10,10 +10,8 @@ import type { Donation } from "@/utils/types";
 import { DonorLink } from "@/components/donors/donor-link";
 import { FormatAnd } from "@/components/formatter";
 import { ArticleSectionTitle } from "@/components/layout/article";
-import Loading from "@/components/loading/loading";
 import { FaqSchema } from "@/components/schema";
 import { Translation } from "@/components/translation";
-import { useDonationsByParty } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
 import { isNotNullandNotUndefined } from "@/utils/array";
@@ -32,17 +30,14 @@ const TOP_DONORS_TO_SHOW = 5;
 export const PartyDonorPageText = ({
   party,
   country,
+  donations: data,
 }: {
   country: CountryConfig;
   party: Party;
+  donations: Donation[];
 }) => {
   const t = useTranslations();
-  const tData = useTranslations("data");
   const locale = useLocale();
-  const { data, error, isLoading } = useDonationsByParty(country, party);
-
-  if (isLoading) return <Loading />;
-  if (error || !data) return <div>{tData("error")}</div>;
 
   let sum = 0;
   const donations = data;

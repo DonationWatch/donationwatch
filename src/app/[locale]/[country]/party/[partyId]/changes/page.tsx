@@ -3,20 +3,15 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
-import { DynamicPartyDonationHistory } from "@/components/donations/dynamic-donation-history";
-import {
-  Article,
-  ArticleSectionColumn,
-  ArticleSectionOneColumns,
-  ArticleSectionTitle,
-  ArticleSectionWrapper,
-} from "@/components/layout/article";
+import { Article } from "@/components/layout/article";
 import { PartyField } from "@/types/party";
 import { getCountryName, getParty } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { generateAlternates } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
 import { isValidCountry, isValidLocale, isValidParty } from "@/utils/validate";
+
+import { PartyChangesClientPage } from "./_components/party-changes-client-page";
 
 export async function generateMetadata(
   props: PageProps<"/[locale]/[country]/party/[partyId]/timeline">,
@@ -73,28 +68,16 @@ export default async function ChangesPage(
 
   return (
     <Article fullWidth={true}>
-      <ArticleSectionWrapper id={"sec-years-changes"}>
-        <ArticleSectionOneColumns>
-          <ArticleSectionColumn>
-            <ArticleSectionTitle
-              as={"h1"}
-              id={"sec-years-changes"}
-              title={t("party.changes.detail.title", {
-                party: party[PartyField.Short],
-              })}
-            />
-            <p className="mb-6">
-              {t("party.changes.detail.summary", {
-                party: party[PartyField.Short],
-              })}
-            </p>
-            <DynamicPartyDonationHistory
-              country={countryConfig}
-              party={party}
-            />
-          </ArticleSectionColumn>
-        </ArticleSectionOneColumns>
-      </ArticleSectionWrapper>
+      <PartyChangesClientPage
+        country={countryConfig}
+        party={party}
+        title={t("party.changes.detail.title", {
+          party: party[PartyField.Short],
+        })}
+        summary={t("party.changes.detail.summary", {
+          party: party[PartyField.Short],
+        })}
+      />
     </Article>
   );
 }
