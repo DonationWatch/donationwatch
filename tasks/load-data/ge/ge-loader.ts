@@ -1,11 +1,5 @@
-import type { ReadableStream } from "stream/web";
-
-import { parse } from "csv-parse/sync";
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import fs from "fs";
+import fs from "fs/promises";
 import path from "path";
-import { Readable } from "stream";
-import { finished } from "stream/promises";
 
 import type { Countries } from "@/utils/countries";
 import type { ReceiverId } from "@/utils/types";
@@ -45,19 +39,40 @@ const legalFormMappings: Record<GeLegalForm, DonorType> = {
   შპს: DonorType.Company,
 };
 
-type GeRow = [
-  donationRecipient: string,
-  date: string,
-  nameTitle: string,
-  numberCode: string,
-  amount: `${number}`,
-  legalForm: GeLegalForm,
-  donationType: GeDonationType,
-];
+interface GeJsonDonor {
+  type: string;
+  legal_form: GeLegalForm;
+  name: string;
+  number: string;
+  person_id: string;
+  person_name: string;
+  person_surname: string;
+  legal_name: string;
+  legal_id: string;
+}
+
+interface GeJsonPolitician {
+  name: string;
+  name_en: string | null;
+}
+
+interface GeJsonItem {
+  form_id: GeDonationType;
+  amount: string;
+  date: string;
+  donor: GeJsonDonor;
+  politician: GeJsonPolitician;
+  verified_amount: string;
+}
+
+interface GeJsonResponse {
+  data: GeJsonItem[];
+  draw: number;
+  recordsFiltered: number;
+  recordsTotal: number;
+}
 
 export class GeLoader extends DataLoader {
-  private loadedOnce = false;
-
   constructor() {
     super("GE", Country.georgia);
   }
@@ -149,6 +164,12 @@ export class GeLoader extends DataLoader {
       code: "AGHMASHENEBELI",
       wiki: 55266516,
       color: "#ff0000",
+    },
+    "სოციალ-დემოკრატიული პარტია": {
+      name: "სოციალ-დემოკრატიული პარტია",
+      short: "Social Democratic Party",
+      code: "SDP",
+      color: "#ff0001",
     },
     "სოციალ-დემოკრატები საქართველოს განვითარებისთვის": {
       name: "სოციალ-დემოკრატები საქართველოს განვითარებისთვის",
@@ -511,93 +532,151 @@ export class GeLoader extends DataLoader {
       code: "NDM",
       color: "#ff0033",
     },
+    "თავისუფლების მოედანი": {
+      name: "თავისუფლების მოედანი",
+      short: "Freedom Square",
+      code: "FREEDOMSQUARE",
+      color: "#118dc0",
+      wiki: 77676113,
+    },
+    "ერთიანი ნეიტრალური საქართველო": {
+      name: "ერთიანი ნეიტრალური საქართველო",
+      short: "United Neutral Georgia",
+      code: "UNITEDNEUTRAL",
+      color: "#003166",
+    },
   };
 
   donorMeta = donorMeta;
 
-  cacheFile() {
-    return path.join(this.cacheDir, `donations.csv`);
+  cacheFile(year: string) {
+    return path.join(this.cacheDir, `donations-${year}.json`);
   }
 
-  async loadYearDataToCache(): Promise<void> {
-    if (this.loadedOnce) {
+  async loadYearDataToCache(year: string): Promise<void> {
+    const allData: GeJsonItem[] = [];
+    let start = 0;
+    const length = 5000;
+    let recordsTotal = 0;
+    let draw = 1;
+
+    do {
+      const url = new URL("https://monitoring.sao.ge/ka/donations");
+      url.searchParams.set("l", "0");
+      url.searchParams.set("y", year);
+      url.searchParams.set("draw", String(draw++));
+      url.searchParams.set("start", String(start));
+      url.searchParams.set("length", String(length));
+      url.searchParams.set("_", String(Date.now()));
+
+      // Add column parameters as expected by DataTables
+      const columns = [
+        "politician.name",
+        "date",
+        "donor.person_name",
+        "donor.person_id",
+        "verified_amount",
+        "donor.legal_form",
+        "form_id",
+        "donor.person_surname",
+        "donor.legal_name",
+        "donor.legal_id",
+      ];
+
+      columns.forEach((col, idx) => {
+        url.searchParams.set(`columns[${idx}][data]`, col);
+        url.searchParams.set(`columns[${idx}][name]`, col);
+        url.searchParams.set(`columns[${idx}][searchable]`, "true");
+        url.searchParams.set(`columns[${idx}][orderable]`, "true");
+        url.searchParams.set(`columns[${idx}][search][value]`, "");
+        url.searchParams.set(`columns[${idx}][search][regex]`, "false");
+      });
+
+      url.searchParams.set("order[0][column]", "1");
+      url.searchParams.set("order[0][dir]", "desc");
+      url.searchParams.set("search[value]", "");
+      url.searchParams.set("search[regex]", "false");
+
       this.log(
-        "Skipping year data load, already ran and loaded everything at once",
+        `Loading year ${year} data from ${url.toString()} (start: ${start})`,
       );
-      return;
-    }
 
-    this.loadedOnce = true;
+      const res = await fetch(url.toString(), {
+        headers: {
+          Accept: "application/json, text/javascript, */*; q=0.01",
+          "X-Requested-With": "XMLHttpRequest",
+        },
+      });
 
-    const url =
-      "https://monitoring.sao.ge/ka/donations?draw=1&columns%5B0%5D%5Bdata%5D=politician.name&columns%5B0%5D%5Bname%5D=politician.name&columns%5B0%5D%5Bsearchable%5D=true&columns%5B0%5D%5Borderable%5D=true&columns%5B0%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B0%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B1%5D%5Bdata%5D=date&columns%5B1%5D%5Bname%5D=date&columns%5B1%5D%5Bsearchable%5D=true&columns%5B1%5D%5Borderable%5D=true&columns%5B1%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B1%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B2%5D%5Bdata%5D=donor.name&columns%5B2%5D%5Bname%5D=donor.person_name&columns%5B2%5D%5Bsearchable%5D=true&columns%5B2%5D%5Borderable%5D=true&columns%5B2%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B2%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B3%5D%5Bdata%5D=donor.number&columns%5B3%5D%5Bname%5D=donor.person_id&columns%5B3%5D%5Bsearchable%5D=true&columns%5B3%5D%5Borderable%5D=true&columns%5B3%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B3%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B4%5D%5Bdata%5D=verified_amount&columns%5B4%5D%5Bname%5D=verified_amount&columns%5B4%5D%5Bsearchable%5D=true&columns%5B4%5D%5Borderable%5D=true&columns%5B4%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B4%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B5%5D%5Bdata%5D=donor.legal_form&columns%5B5%5D%5Bname%5D=donor.legal_form&columns%5B5%5D%5Bsearchable%5D=false&columns%5B5%5D%5Borderable%5D=true&columns%5B5%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B5%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B6%5D%5Bdata%5D=form_id&columns%5B6%5D%5Bname%5D=form_id&columns%5B6%5D%5Bsearchable%5D=true&columns%5B6%5D%5Borderable%5D=true&columns%5B6%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B6%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B7%5D%5Bdata%5D=donor.name&columns%5B7%5D%5Bname%5D=donor.person_surname&columns%5B7%5D%5Bsearchable%5D=true&columns%5B7%5D%5Borderable%5D=true&columns%5B7%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B7%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B8%5D%5Bdata%5D=donor.name&columns%5B8%5D%5Bname%5D=donor.legal_name&columns%5B8%5D%5Bsearchable%5D=true&columns%5B8%5D%5Borderable%5D=true&columns%5B8%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B8%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B9%5D%5Bdata%5D=donor.number&columns%5B9%5D%5Bname%5D=donor.legal_id&columns%5B9%5D%5Bsearchable%5D=true&columns%5B9%5D%5Borderable%5D=true&columns%5B9%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B9%5D%5Bsearch%5D%5Bregex%5D=false&order%5B0%5D%5Bcolumn%5D=1&order%5B0%5D%5Bdir%5D=desc&start=0&length=25&search%5Bvalue%5D=&search%5Bregex%5D=false&action=csv&l=0";
-    this.log(`Loading year data from ${url}`);
-    const res = await fetch(url);
+      if (!res.ok) {
+        throw new Error(
+          `Failed to fetch data from ${url.toString()}: ${res.statusText}`,
+        );
+      }
 
-    if (!res.ok || !res.body) {
-      throw new Error(`Failed to fetch data from ${url}`);
-    }
+      const json = (await res.json()) as GeJsonResponse;
 
-    await finished(
-      Readable.fromWeb(res.body as unknown as ReadableStream<Uint8Array>).pipe(
-        fs.createWriteStream(this.cacheFile()),
-      ),
-    );
+      if (!json.data || !Array.isArray(json.data)) {
+        throw new Error(`Invalid JSON response from ${url.toString()}`);
+      }
+
+      allData.push(...json.data);
+      recordsTotal = json.recordsTotal;
+      start += length;
+
+      this.log(`Fetched ${allData.length} / ${recordsTotal} items`);
+    } while (start < recordsTotal);
+
+    await fs.writeFile(this.cacheFile(year), JSON.stringify(allData, null, 2));
   }
 
   async extractYearData(year: string): Promise<ExtractedYearData[]> {
-    const csv = await this.cachedYearData(year);
-    const rows = parse(csv, {
-      bom: true,
-      fromLine: 2,
-      skip_empty_lines: true,
-      columns: false,
-    }) as GeRow[];
+    const content = await this.cachedYearData(year);
+    if (!content) return [];
 
-    return rows
-      .map((row, idx) => {
-        const [
-          donationRecipient,
-          date,
-          nameTitle,
-          numberCode,
-          amount,
-          legalForm,
-          donationType,
-        ] = row;
+    const items = JSON.parse(content) as GeJsonItem[];
 
+    return items
+      .map((item, idx) => {
         // we only care about #10 - Monetary donations and #16 - Monetary donations made by legal entities
         if (
           !(
-            donationType === "#10 - ფულადი შემოწირულებები" ||
-            donationType ===
+            item.form_id === "#10 - ფულადი შემოწირულებები" ||
+            item.form_id ===
               "#16 - იურიდიული პირის მიერ განხორციელებული ფულადი შემოწირულებები"
           )
         )
           return;
 
+        const date = toIsoDate(item.date);
         if (!date.startsWith(year)) return;
 
-        const floatAmount = parseFloat(amount);
+        const amount = parseFloat(item.amount);
 
         return {
           idx: `r${idx}`,
-          [DonationField.Date]: toIsoDate(date),
-          [DonationField.Amount]: floatAmount,
-          [DonationField.DonorName]: nameTitle,
+          [DonationField.Date]: date,
+          [DonationField.Amount]: amount,
+          [DonationField.DonorName]: item.donor.name.trim(),
           [DonationField.Address]: {
             [AddressField.Country]: "GE" as Countries,
           },
-          [DonationField.Receiver]: donationRecipient as ReceiverId,
-          [DonationField.DonorType]: legalFormMappings[legalForm],
+          [DonationField.Receiver]: item.politician.name.trim() as ReceiverId,
+          [DonationField.DonorType]: legalFormMappings[item.donor.legal_form],
         };
       })
       .filter(isNotNullandNotUndefined);
   }
 }
 
-// convert 2025-10-03 00:00:00 to iso8601
+// convert DD/MM/YYYY to YYYY-MM-DD
 const toIsoDate = (date: string): string => {
+  const parts = date.split("/");
+  if (parts.length === 3) {
+    const [day, month, year] = parts;
+    return `${year}-${month}-${day}`;
+  }
+  // Fallback for old format if it still exists
   const [datePart] = date.split(" ");
   return datePart;
 };
