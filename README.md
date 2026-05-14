@@ -12,6 +12,10 @@ A Next.js application for tracking and visualizing political party donations acr
 - **Code**: Licensed under the [GNU Affero General Public License v3.0](./LICENSE) (AGPL-3.0)
 - **Generated Data** (contents of `src/data/`): Licensed under the [Creative Commons Attribution 4.0 International License](./LICENSE-DATA) (CC BY 4.0)
 
+## Contributing
+
+We welcome contributions! However, we require all contributors to sign a Contributor License Agreement (CLA) via CLA Assistant. This ensures the project's long-term sustainability and our ability to fund infrastructure through a premium API. For more details, please see our [Contributing Guide](CONTRIBUTING.md).
+
 ## Support the Project
 
 _donation.watch_ is a passion project built to make global political financing transparent. It is free, open-source, and has no ads or paywalls.

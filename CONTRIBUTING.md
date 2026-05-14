@@ -2,6 +2,16 @@
 
 Thank you for your interest in contributing to DonationWatch! This guide will help you understand how to work on different parts of the project.
 
+## Contributor License Agreement
+
+To ensure the project's long-term sustainability and our ability to fund infrastructure through a premium API, we require all contributors to sign a Contributor License Agreement (CLA).
+
+Don't worry, **you retain full copyright to your work**. The CLA simply grants us the necessary rights to keep the project's free web version alive and sustainable.
+
+When you open your first Pull Request, the `@cla-assistant` bot will automatically comment with a link to review and sign the agreement. You can also preview the CLA text here: [https://gist.github.com/CLAassistant/bd1ea8ec8aa0357414e8](https://gist.github.com/CLAassistant/bd1ea8ec8aa0357414e8).
+
+TL;DR: You still own your code. You're just giving us permission to use it, including in our premium services, so we can pay the Cloudflare bills.
+
 ## implementing Fixes & Features in the App
 
 The main application is a standard [Next.js](https://nextjs.org/) project located in the `src/` directory.
