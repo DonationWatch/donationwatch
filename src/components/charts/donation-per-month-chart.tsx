@@ -1,12 +1,11 @@
 "use client";
 import type { BarSeriesOption, EChartsOption } from "echarts";
 
-import { useLocale } from "next-intl";
-
 import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Donation, ReceiverId } from "@/utils/types";
 
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useChart } from "@/hooks/use-chart";
 import { PartyField } from "@/types/party";
 import { partyColor } from "@/utils/color";
@@ -79,7 +78,7 @@ const DonationBarChart = ({
   limitToFirstDateYear?: boolean;
   resolution?: DonationPerMonthResolution;
 }) => {
-  const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
   const { backgroundColor, isMobile, isDark } = useChart();
 
   const leftmostYear = limitToFirstDateYear
@@ -219,8 +218,8 @@ const DonationBarChart = ({
         filterMode: "none",
         labelFormatter: (value) =>
           resolution === "year"
-            ? formatYear(locale, value)
-            : formatTwoDigitDate(locale, value),
+            ? formatYear(browserBasedLocale, value)
+            : formatTwoDigitDate(browserBasedLocale, value),
         bottom: 20,
         // zoom to min 5 months or 3 years
         minValueSpan:
@@ -239,15 +238,15 @@ const DonationBarChart = ({
           formatter(params) {
             if (params.axisDimension === "y") {
               return formatCompactCountryCurrency(
-                locale,
+                browserBasedLocale,
                 params.value as number,
                 country,
               );
             } else if (params.axisDimension === "x") {
               const date = new Date(params.value);
               return resolution === "year"
-                ? formatYear(locale, date)
-                : formatMonthYear(locale, date);
+                ? formatYear(browserBasedLocale, date)
+                : formatMonthYear(browserBasedLocale, date);
             }
 
             return "";
@@ -271,7 +270,7 @@ const DonationBarChart = ({
           const party = getParty(country, param.seriesName as ReceiverId);
 
           lines.push(
-            `${param.marker} ${party[PartyField.Short]}: ${formatCountryCurrency(locale, sum, country)}`,
+            `${param.marker} ${party[PartyField.Short]}: ${formatCountryCurrency(browserBasedLocale, sum, country)}`,
           );
         }
 
@@ -280,10 +279,10 @@ const DonationBarChart = ({
         const date = (params[0].data as [Date])[0] as Date;
         const dateLabel =
           resolution === "year"
-            ? formatYear(locale, date)
-            : formatMonthYear(locale, date);
+            ? formatYear(browserBasedLocale, date)
+            : formatMonthYear(browserBasedLocale, date);
 
-        return `<div class="mb-1 text-sm leading-none text-grey-500">${dateLabel}</div><div class="font-semibold text-lg">${formatCountryCurrency(locale, allSum, country)}</div>${lines.join("<br/>")}`;
+        return `<div class="mb-1 text-sm leading-none text-grey-500">${dateLabel}</div><div class="font-semibold text-lg">${formatCountryCurrency(browserBasedLocale, allSum, country)}</div>${lines.join("<br/>")}`;
       },
     },
     xAxis: {
@@ -300,7 +299,7 @@ const DonationBarChart = ({
         type: "value",
         axisLabel: {
           formatter: (value) =>
-            formatCompactCountryCurrency(locale, value, country),
+            formatCompactCountryCurrency(browserBasedLocale, value, country),
         },
       },
     ],

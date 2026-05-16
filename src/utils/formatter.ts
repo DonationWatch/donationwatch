@@ -3,21 +3,25 @@ import type { CountryConfig } from "@/types/country-config";
 import { PartyField } from "@/types/party";
 
 import type { Currency } from "./countries";
-import type { ConstLocale } from "./locales";
+import type {
+  BrowserBasedLocale,
+  ImageLocale,
+  MetadataLocale,
+} from "./locales";
 import type { ReceiverId } from "./types";
 
 import { getParty } from "./countries";
 import { createIntlCache } from "./intl-cache";
 
 const currencyFormatter = createIntlCache(
-  (locale: ConstLocale, currency: "EUR" | "CHF") =>
+  (locale: BrowserBasedLocale, currency: "EUR" | "CHF") =>
     new Intl.NumberFormat(locale, {
       style: "currency",
       currency,
     }),
 );
 const currencyCompactFormatter = createIntlCache(
-  (locale: ConstLocale, currency: "EUR" | "CHF") =>
+  (locale: BrowserBasedLocale | ImageLocale, currency: "EUR" | "CHF") =>
     new Intl.NumberFormat(locale, {
       style: "currency",
       notation: "compact",
@@ -26,7 +30,7 @@ const currencyCompactFormatter = createIntlCache(
 );
 
 export const formatCountryCurrency = (
-  locale: ConstLocale,
+  locale: BrowserBasedLocale | ImageLocale | MetadataLocale,
   amount: number,
   country: CountryConfig,
 ) => {
@@ -34,7 +38,7 @@ export const formatCountryCurrency = (
 };
 
 export const formatCurrency = (
-  locale: ConstLocale,
+  locale: BrowserBasedLocale | ImageLocale | MetadataLocale,
   amount: number,
   currency: Currency,
 ) => {
@@ -42,7 +46,7 @@ export const formatCurrency = (
 };
 
 export const formatCompactCountryCurrency = (
-  locale: ConstLocale,
+  locale: BrowserBasedLocale | ImageLocale | MetadataLocale,
   amount: number,
   country: CountryConfig,
 ) => {
@@ -50,7 +54,7 @@ export const formatCompactCountryCurrency = (
 };
 
 export const formatCompactCurrency = (
-  locale: ConstLocale,
+  locale: BrowserBasedLocale | ImageLocale | MetadataLocale,
   amount: number,
   currency: Currency,
 ) => {
@@ -63,7 +67,10 @@ const dateFormatter = createIntlCache(
       dateStyle: "long",
     }),
 );
-export const formatDate = (locale: ConstLocale, date: Date | number) => {
+export const formatDate = (
+  locale: BrowserBasedLocale | ImageLocale,
+  date: Date | number,
+) => {
   return dateFormatter(locale).format(date);
 };
 
@@ -74,23 +81,26 @@ const yearFormatter = createIntlCache(
     }),
 );
 
-export const formatYear = (locale: ConstLocale, date: Date | number) => {
+export const formatYear = (locale: BrowserBasedLocale, date: Date | number) => {
   return yearFormatter(locale).format(date);
 };
 
 const monthYearFormatter = createIntlCache(
-  (locale: ConstLocale) =>
+  (locale: BrowserBasedLocale) =>
     new Intl.DateTimeFormat(locale, {
       month: "long",
       year: "numeric",
     }),
 );
-export const formatMonthYear = (locale: ConstLocale, date: Date | number) => {
+export const formatMonthYear = (
+  locale: BrowserBasedLocale,
+  date: Date | number,
+) => {
   return monthYearFormatter(locale).format(date);
 };
 
 const twoDigitDateFormatter = createIntlCache(
-  (locale: ConstLocale) =>
+  (locale: BrowserBasedLocale | ImageLocale) =>
     new Intl.DateTimeFormat(locale, {
       year: "2-digit",
       month: "2-digit",
@@ -98,20 +108,20 @@ const twoDigitDateFormatter = createIntlCache(
     }),
 );
 export const formatTwoDigitDate = (
-  locale: ConstLocale,
+  locale: BrowserBasedLocale | ImageLocale,
   date: Date | number,
 ) => {
   return twoDigitDateFormatter(locale).format(date);
 };
 
 const relativeDateFormatter = createIntlCache(
-  (locale: ConstLocale) =>
+  (locale: BrowserBasedLocale | ImageLocale) =>
     new Intl.RelativeTimeFormat(locale, {
       style: "short",
     }),
 );
 export const formatRelativeDate = (
-  locale: ConstLocale,
+  locale: BrowserBasedLocale | ImageLocale,
   diff: number,
   unit: Intl.RelativeTimeFormatUnit,
 ) => {
@@ -121,14 +131,17 @@ export const formatRelativeDate = (
 };
 
 const percentFormatter = createIntlCache(
-  (locale: ConstLocale) =>
+  (locale: BrowserBasedLocale | ImageLocale) =>
     new Intl.NumberFormat(locale, {
       style: "percent",
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }),
 );
-export const formatPercentFormat = (locale: ConstLocale, value: number) => {
+export const formatPercentFormat = (
+  locale: BrowserBasedLocale | ImageLocale,
+  value: number,
+) => {
   return percentFormatter(locale).format(value);
 };
 
@@ -139,23 +152,29 @@ export const andFormatter = createIntlCache(
       type: "conjunction",
     }),
 );
-export const formatAnd = (locale: ConstLocale, values: string[]): string => {
+export const formatAnd = (
+  locale: BrowserBasedLocale | ImageLocale,
+  values: string[],
+): string => {
   return andFormatter(locale).format(values);
 };
 
 const numberFormatter = createIntlCache(
-  (locale: ConstLocale) => new Intl.NumberFormat(locale),
+  (locale: BrowserBasedLocale | ImageLocale) => new Intl.NumberFormat(locale),
 );
-export const formatNumber = (locale: ConstLocale, value: number): string => {
+export const formatNumber = (
+  locale: BrowserBasedLocale | ImageLocale,
+  value: number,
+): string => {
   return numberFormatter(locale).format(value);
 };
 
 const oneFractionNumberFormatter = createIntlCache(
-  (locale: ConstLocale) =>
+  (locale: BrowserBasedLocale | ImageLocale) =>
     new Intl.NumberFormat(locale, { maximumFractionDigits: 1 }),
 );
 export const formatOneFractionNumber = (
-  locale: ConstLocale,
+  locale: BrowserBasedLocale | ImageLocale,
   value: number,
 ): string => {
   return oneFractionNumberFormatter(locale).format(value);

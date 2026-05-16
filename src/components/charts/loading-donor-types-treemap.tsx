@@ -9,6 +9,7 @@ import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Donation, ReceiverId } from "@/utils/types";
 
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
@@ -38,6 +39,7 @@ export const LoadedDonorTypeTreemap = ({
 }) => {
   const t = useTranslations();
   const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
 
   const yearsSet = new Set<string>(years);
   const partiesSet = new Set<Party>(parties);
@@ -117,7 +119,7 @@ export const LoadedDonorTypeTreemap = ({
             label: {
               position: "insideTopLeft",
               formatter(params) {
-                return `{name|${donor}}\n{value|${formatCountryCurrency(locale, params.value as number, country)}}`;
+                return `{name|${donor}}\n{value|${formatCountryCurrency(browserBasedLocale, params.value as number, country)}}`;
               },
               itemStyle: {
                 color: donorTypeColor(type as unknown as DonorType),
@@ -147,7 +149,7 @@ export const LoadedDonorTypeTreemap = ({
           formatter(params) {
             return (
               (hasPartyLabel ? `{name|${party[PartyField.Short]}}\n` : "") +
-              `{value|${formatCountryCurrency(locale, params.value as number, country)}}`
+              `{value|${formatCountryCurrency(browserBasedLocale, params.value as number, country)}}`
             );
           },
           rich: {
@@ -179,7 +181,7 @@ export const LoadedDonorTypeTreemap = ({
         <div>${party[PartyField.Short]}</div>
       </div></div>`;
 
-            return `<div class="max-w-60 text-wrap">${partyPart}<div>${formatCountryCurrency(locale, params.value as number, country)}</div></div>`;
+            return `<div class="max-w-60 text-wrap">${partyPart}<div>${formatCountryCurrency(browserBasedLocale, params.value as number, country)}</div></div>`;
           },
         },
       });
@@ -235,13 +237,13 @@ export const LoadedDonorTypeTreemap = ({
           const categoryName = t(
             `donor_type.${params.name as unknown as DonorType}`,
           );
-          content = `<div class="font-semibold">${categoryName}</div> <div>${formatCountryCurrency(locale, params.value as number, country)}</div>`;
+          content = `<div class="font-semibold">${categoryName}</div> <div>${formatCountryCurrency(browserBasedLocale, params.value as number, country)}</div>`;
         }
 
         if (treeAncestors.length === 3) return "";
 
         if (treeAncestors.length === 4) {
-          content = `<div class="font-semibold">${params.name}</div> <div>${formatCountryCurrency(locale, params.value as number, country)}</div>`;
+          content = `<div class="font-semibold">${params.name}</div> <div>${formatCountryCurrency(browserBasedLocale, params.value as number, country)}</div>`;
         }
 
         return `<div class="max-w-60 text-wrap">${content}</div>`;
@@ -273,7 +275,7 @@ export const LoadedDonorTypeTreemap = ({
 
           if (treeAncestors.length === 2) {
             // is "root" level
-            return `{name|${t(`donor_type.${params.name as unknown as DonorType}`)}} {value|${formatCountryCurrency(locale, params.value as number, country)}}`;
+            return `{name|${t(`donor_type.${params.name as unknown as DonorType}`)}} {value|${formatCountryCurrency(browserBasedLocale, params.value as number, country)}}`;
           }
 
           return ``;

@@ -1,5 +1,5 @@
 import type { CountryConfig } from "@/types/country-config";
-import type { ConstLocale } from "@/utils/locales";
+import type { ImageLocale } from "@/utils/locales";
 import type { Donation, ReceiverId } from "@/utils/types";
 
 import { PartyField } from "@/types/party";
@@ -12,7 +12,7 @@ import { ImagePartyHeader } from "../components/image-party-header";
 import { ThumbnailWrapper } from "../components/utils";
 
 export const PartyPageImage = async (
-  locale: ConstLocale,
+  locale: ImageLocale,
   getTranslations: CreateTranslator,
   countryConfig: CountryConfig,
   partyId: ReceiverId,

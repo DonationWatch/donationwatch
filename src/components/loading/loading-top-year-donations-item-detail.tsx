@@ -10,6 +10,7 @@ import { DonorLink } from "@/components/donors/donor-link";
 import { PartyDot } from "@/components/parties/party-dot";
 import { PartyLink } from "@/components/parties/party-link";
 import { useDonationsByYears } from "@/hooks/use-api";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { useBreakpoint } from "@/hooks/use-media-query";
 import { useVirtual } from "@/hooks/use-virtual";
@@ -109,6 +110,7 @@ export const TopDonationsItemDetail = ({
   const t = useTranslations();
   const tCommon = useTranslations("common");
   const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
   const parentRef = useRef<HTMLDivElement>(null);
   const isSm = useBreakpoint("sm");
 
@@ -158,7 +160,7 @@ export const TopDonationsItemDetail = ({
                 label={getDonationDonorName(donation, tCommon)}
                 date={donation[DonationField.Date]}
                 amount={donation[DonationField.Amount]}
-                locale={locale}
+                locale={browserBasedLocale}
                 country={country}
               >
                 <div className="flex items-center space-x-1 truncate">

@@ -9,6 +9,10 @@ import type { Country, Currency } from "@/utils/countries";
 
 import { AbsoluteMultipleColorsGradient } from "@/components/absolute-multiple-colors-gradient";
 import {
+  FormattedCompactCurrency,
+  FormattedNumber,
+} from "@/components/browser-based-formatter";
+import {
   Article,
   ArticleSection,
   ArticleSectionColumn,
@@ -23,7 +27,6 @@ import { GITHUB_URL, THUMBNAIL_PREFIX } from "@/utils/config";
 import { COUNTRIES, COUNTRY_CONFIG, getCountryName } from "@/utils/countries";
 import { countryFlags } from "@/utils/country-flags";
 import { getCountryConfig } from "@/utils/data/get-country-config";
-import { formatCompactCurrency, formatNumber } from "@/utils/formatter";
 import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
 import { LOCALES } from "@/utils/locales";
 import { baseOpenGraph, baseTwitter, generateAlternates } from "@/utils/meta";
@@ -145,19 +148,19 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
                 <div className="text-center">
                   <MetaCard
                     title={tRoot("stats.countries")}
-                    value={formatNumber(locale, trackedCountries)}
+                    value={<FormattedNumber value={trackedCountries} />}
                   />
                 </div>
                 <div className="text-center">
                   <MetaCard
                     title={tRoot("stats.parties")}
-                    value={formatNumber(locale, trackedParties)}
+                    value={<FormattedNumber value={trackedParties} />}
                   />
                 </div>
                 <div className="text-center">
                   <MetaCard
                     title={tRoot("stats.donations")}
-                    value={formatNumber(locale, trackedDonations)}
+                    value={<FormattedNumber value={trackedDonations} />}
                   />
                 </div>
                 <div className="text-center">
@@ -210,11 +213,10 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
                         {countryName}
                       </div>
                       <div className="text-xs text-slate-500 xl:text-sm dark:text-slate-300">
-                        {formatCompactCurrency(
-                          locale,
-                          sumPerCountry[countryId] ?? 0,
-                          config.currency,
-                        )}
+                        <FormattedCompactCurrency
+                          value={sumPerCountry[countryId] ?? 0}
+                          currency={config.currency}
+                        />
                       </div>
                     </div>
                   </Link>

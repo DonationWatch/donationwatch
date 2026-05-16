@@ -16,6 +16,7 @@ import {
 import { TextPartyLink } from "@/components/parties/text-party-link";
 import { PercentageHint } from "@/components/percentage-hint";
 import { Translation } from "@/components/translation";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
 import { getCountryName, getParty } from "@/utils/countries";
@@ -41,6 +42,7 @@ export const DonorClientPageContent = ({
   const tCountries = useTranslations("countries");
   const tCommon = useTranslations("common");
   const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
   const donorName = getDonorName(
     donations.at(0)?.[DonationField.DonorName] ?? "",
     tCommon,
@@ -136,11 +138,19 @@ export const DonorClientPageContent = ({
           <p className="mb-6">
             {tDonor("summary", {
               donor: donorName,
-              sum: formatCountryCurrency(locale, sum, countryConfig),
-              count: formatNumber(locale, donations.length),
-              avg: formatCountryCurrency(locale, avg, countryConfig),
+              sum: formatCountryCurrency(
+                browserBasedLocale,
+                sum,
+                countryConfig,
+              ),
+              count: formatNumber(browserBasedLocale, donations.length),
+              avg: formatCountryCurrency(
+                browserBasedLocale,
+                avg,
+                countryConfig,
+              ),
               parties: formatNumber(
-                locale,
+                browserBasedLocale,
                 Object.keys(donationParties).length,
               ),
             })}
@@ -165,13 +175,13 @@ export const DonorClientPageContent = ({
                   <div className="ml-2 flex tabular-nums">
                     <span className="lg:mr-1">
                       {formatCountryCurrency(
-                        locale,
+                        browserBasedLocale,
                         partyDonation.sum,
                         countryConfig,
                       )}
                     </span>
                     <PercentageHint
-                      locale={locale}
+                      browserBasedLocale={browserBasedLocale}
                       percentage={partyDonation.sum / sum}
                     />
                   </div>
@@ -186,11 +196,11 @@ export const DonorClientPageContent = ({
                   variables={{
                     minYear: countryConfig.minYear,
                     date: formatDate(
-                      locale,
+                      browserBasedLocale,
                       new Date(oldestDonation[DonationField.Date]),
                     ),
                     amount: formatCountryCurrency(
-                      locale,
+                      browserBasedLocale,
                       oldestDonation[DonationField.Amount],
                       countryConfig,
                     ),
@@ -214,11 +224,11 @@ export const DonorClientPageContent = ({
                   text={tDonor.raw("newest")}
                   variables={{
                     date: formatDate(
-                      locale,
+                      browserBasedLocale,
                       new Date(newestDonation[DonationField.Date]),
                     ),
                     amount: formatCountryCurrency(
-                      locale,
+                      browserBasedLocale,
                       newestDonation[DonationField.Amount],
                       countryConfig,
                     ),
@@ -240,11 +250,11 @@ export const DonorClientPageContent = ({
               text={tDonor.raw("most_donations")}
               variables={{
                 list: formatAnd(
-                  locale,
+                  browserBasedLocale,
                   mostPartyDonations.map(({ party, count }) =>
                     tDonor("most_donations_item", {
                       party: getParty(countryConfig, party)[PartyField.Short],
-                      count: formatNumber(locale, count),
+                      count: formatNumber(browserBasedLocale, count),
                     }),
                   ),
                 ),
@@ -256,12 +266,15 @@ export const DonorClientPageContent = ({
                 {tDonor("highest_most_donation", {
                   biggestYear: biggestYear.year,
                   biggestSum: formatCountryCurrency(
-                    locale,
+                    browserBasedLocale,
                     biggestYear.sum,
                     countryConfig,
                   ),
                   mostYear: mostDonationsYear.year,
-                  mostCount: formatNumber(locale, mostDonationsYear.count),
+                  mostCount: formatNumber(
+                    browserBasedLocale,
+                    mostDonationsYear.count,
+                  ),
                 })}
               </>
             ) : null}
@@ -272,12 +285,12 @@ export const DonorClientPageContent = ({
                   text={tDonor.raw("biggest")}
                   variables={{
                     amount: formatCountryCurrency(
-                      locale,
+                      browserBasedLocale,
                       biggestDonation[DonationField.Amount],
                       countryConfig,
                     ),
                     date: formatDate(
-                      locale,
+                      browserBasedLocale,
                       new Date(biggestDonation[DonationField.Date]),
                     ),
                     party: (

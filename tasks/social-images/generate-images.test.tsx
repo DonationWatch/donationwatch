@@ -12,9 +12,11 @@ import { afterAll, beforeAll, describe, it } from "vitest";
 import type { CountryConfig } from "@/types/country-config";
 import type { BigDonor } from "@/utils/loader/biggest-donors";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
+import type { ImageLocale } from "@/utils/locales";
 import type { Donation } from "@/utils/types";
 
 import { PartyField } from "@/types/party";
+import { makeBrand } from "@/utils/brand";
 import { COUNTRIES } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { Features, hasFeature } from "@/utils/features";
@@ -95,189 +97,186 @@ const renderComponent = async (component: JSX.Element) => {
   return toImage(svg);
 };
 
-describe.each(CONST_LOCALES.map((locale) => ({ locale })))(
-  "language $locale",
-  ({ locale }) => {
-    const LOCALE_OUT_DIR = path.join(OUT_DIR, locale);
-    let getTranslations: CreateTranslator;
+describe.each(
+  CONST_LOCALES.map((locale) => ({ locale: makeBrand<ImageLocale>(locale) })),
+)("language $locale", ({ locale }) => {
+  const LOCALE_OUT_DIR = path.join(OUT_DIR, locale);
+  let getTranslations: CreateTranslator;
 
-    beforeAll(async () => {
-      await fs.mkdir(LOCALE_OUT_DIR, { recursive: true });
+  beforeAll(async () => {
+    await fs.mkdir(LOCALE_OUT_DIR, { recursive: true });
 
-      const messages = (
-        await import(`../../src/messages/${locale}.json`, {
-          with: { type: "json" },
-        })
-      ).default;
+    const messages = (
+      await import(`../../src/messages/${locale}.json`, {
+        with: { type: "json" },
+      })
+    ).default;
 
-      getTranslations = (namespace?: string) =>
-        createTranslator({
-          locale,
-          namespace,
-          messages,
-        });
-    });
-
-    afterAll(async () => {
-      const command = `oxipng -o 2 --strip safe ${path.join(LOCALE_OUT_DIR, `cover.png`)}`;
-      console.log(`Optimizing cover with command: ${command}`);
-      cp.execSync(command, {
-        stdio: "inherit",
+    getTranslations = (namespace?: string) =>
+      createTranslator({
+        locale,
+        namespace,
+        messages,
       });
+  });
+
+  afterAll(async () => {
+    const command = `oxipng -o 2 --strip safe ${path.join(LOCALE_OUT_DIR, `cover.png`)}`;
+    console.log(`Optimizing cover with command: ${command}`);
+    cp.execSync(command, {
+      stdio: "inherit",
     });
+  });
 
-    it("renders root page image", async () => {
-      const countriesArray = [...COUNTRIES];
+  it("renders root page image", async () => {
+    const countriesArray = [...COUNTRIES];
 
-      const countryDatas = await Promise.all(
-        countriesArray.map((country) =>
-          Promise.all([
-            country,
-            getCountryConfig(country),
-            getPartyYearsSums(country),
-          ]),
-        ),
-      );
+    const countryDatas = await Promise.all(
+      countriesArray.map((country) =>
+        Promise.all([
+          country,
+          getCountryConfig(country),
+          getPartyYearsSums(country),
+        ]),
+      ),
+    );
 
-      const png = await renderComponent(
-        await RootPageImage(locale, getTranslations, countryDatas),
-      );
+    const png = await renderComponent(
+      await RootPageImage(locale, getTranslations, countryDatas),
+    );
 
-      await fs.writeFile(path.join(LOCALE_OUT_DIR, `cover.png`), png);
-    });
+    await fs.writeFile(path.join(LOCALE_OUT_DIR, `cover.png`), png);
+  });
 
-    describe.each([...COUNTRIES].map((country) => ({ country })))(
-      `country $country`,
-      ({ country }) => {
-        const COUNTRY_OUT_DIR = path.join(LOCALE_OUT_DIR, country);
-        const PARTY_OUT_DIR = path.join(COUNTRY_OUT_DIR, "parties");
-        const YEARS_OUT_DIR = path.join(COUNTRY_OUT_DIR, "years");
-        const DONOR_OUT_DIR = path.join(COUNTRY_OUT_DIR, "donors");
-        let donations: Donation[];
-        let countryConfig: CountryConfig;
-        let yearSums: PartyYearsSums;
-        let biggestDonors: BigDonor[];
+  describe.each([...COUNTRIES].map((country) => ({ country })))(
+    `country $country`,
+    ({ country }) => {
+      const COUNTRY_OUT_DIR = path.join(LOCALE_OUT_DIR, country);
+      const PARTY_OUT_DIR = path.join(COUNTRY_OUT_DIR, "parties");
+      const YEARS_OUT_DIR = path.join(COUNTRY_OUT_DIR, "years");
+      const DONOR_OUT_DIR = path.join(COUNTRY_OUT_DIR, "donors");
+      let donations: Donation[];
+      let countryConfig: CountryConfig;
+      let yearSums: PartyYearsSums;
+      let biggestDonors: BigDonor[];
 
-        beforeAll(async () => {
-          await fs.rm(COUNTRY_OUT_DIR, { recursive: true, force: true });
-          await fs.mkdir(PARTY_OUT_DIR, { recursive: true });
-          await fs.mkdir(YEARS_OUT_DIR, { recursive: true });
-          await fs.mkdir(DONOR_OUT_DIR, { recursive: true });
-          [countryConfig, donations, yearSums, biggestDonors] =
-            await Promise.all([
-              await getCountryConfig(country),
-              await getDonations(country),
-              await getPartyYearsSums(country),
-              await getBiggestDonors(country),
-            ]);
+      beforeAll(async () => {
+        await fs.rm(COUNTRY_OUT_DIR, { recursive: true, force: true });
+        await fs.mkdir(PARTY_OUT_DIR, { recursive: true });
+        await fs.mkdir(YEARS_OUT_DIR, { recursive: true });
+        await fs.mkdir(DONOR_OUT_DIR, { recursive: true });
+        [countryConfig, donations, yearSums, biggestDonors] = await Promise.all(
+          [
+            await getCountryConfig(country),
+            await getDonations(country),
+            await getPartyYearsSums(country),
+            await getBiggestDonors(country),
+          ],
+        );
+      });
+
+      afterAll(async () => {
+        const command = `oxipng -o 2 --strip safe ${COUNTRY_OUT_DIR}/**/*.png`;
+        console.log(`Optimizing images with command: ${command}`);
+        cp.execSync(command, {
+          stdio: "inherit",
         });
+      });
 
-        afterAll(async () => {
-          const command = `oxipng -o 2 --strip safe ${COUNTRY_OUT_DIR}/**/*.png`;
-          console.log(`Optimizing images with command: ${command}`);
-          cp.execSync(command, {
-            stdio: "inherit",
-          });
-        });
+      it(`renders country page image`, async () => {
+        const png = await renderComponent(
+          await CountryPageImage(
+            locale,
+            getTranslations,
+            countryConfig,
+            yearSums,
+          ),
+        );
 
-        it(`renders country page image`, async () => {
+        await fs.writeFile(path.join(COUNTRY_OUT_DIR, `cover.png`), png);
+      });
+
+      it(`renders biggest donors images`, async () => {
+        // if there are no donors, skip rendering donor images
+        if (!hasFeature(countryConfig, Features.Donors)) return;
+
+        for (const donor of biggestDonors) {
           const png = await renderComponent(
-            await CountryPageImage(
+            await DonorImage(
               locale,
               getTranslations,
               countryConfig,
+              donor,
+              donations,
+            ),
+          );
+
+          await fs.writeFile(path.join(DONOR_OUT_DIR, `${donor.id}.png`), png);
+        }
+      });
+
+      it(`renders country party pages image`, async () => {
+        for (const party of countryConfig.parties) {
+          const png = await renderComponent(
+            await PartyPageImage(
+              locale,
+              getTranslations,
+              countryConfig,
+              party[PartyField.Id],
+              donations,
+            ),
+          );
+
+          await fs.writeFile(
+            path.join(PARTY_OUT_DIR, `${party[PartyField.Id]}.png`),
+            png,
+          );
+        }
+      });
+
+      it(`renders country years pages image`, async () => {
+        const countryYears = countryConfig.years;
+
+        // year ranges
+        for (const years of countryConfig.legislativeYears ?? []) {
+          const png = await renderComponent(
+            await CountryYearsPageImage(
+              locale,
+              getTranslations,
+              countryConfig,
+              donations,
+              years,
               yearSums,
             ),
           );
 
-          await fs.writeFile(path.join(COUNTRY_OUT_DIR, `cover.png`), png);
-        });
+          await fs.writeFile(
+            path.join(YEARS_OUT_DIR, `${years.at(0)}-${years.at(-1)}.png`),
+            png,
+          );
+        }
 
-        it(`renders biggest donors images`, async () => {
-          // if there are no donors, skip rendering donor images
-          if (!hasFeature(countryConfig, Features.Donors)) return;
-
-          for (const donor of biggestDonors) {
-            const png = await renderComponent(
-              await DonorImage(
-                locale,
-                getTranslations,
-                countryConfig,
-                donor,
-                donations,
-              ),
-            );
-
-            await fs.writeFile(
-              path.join(DONOR_OUT_DIR, `${donor.id}.png`),
-              png,
-            );
-          }
-        });
-
-        it(`renders country party pages image`, async () => {
-          for (const party of countryConfig.parties) {
-            const png = await renderComponent(
-              await PartyPageImage(
-                locale,
-                getTranslations,
-                countryConfig,
-                party[PartyField.Id],
-                donations,
-              ),
-            );
-
-            await fs.writeFile(
-              path.join(PARTY_OUT_DIR, `${party[PartyField.Id]}.png`),
-              png,
-            );
-          }
-        });
-
-        it(`renders country years pages image`, async () => {
-          const countryYears = countryConfig.years;
-
-          // year ranges
-          for (const years of countryConfig.legislativeYears ?? []) {
-            const png = await renderComponent(
-              await CountryYearsPageImage(
-                locale,
-                getTranslations,
-                countryConfig,
-                donations,
-                years,
-                yearSums,
-              ),
-            );
-
-            await fs.writeFile(
-              path.join(YEARS_OUT_DIR, `${years.at(0)}-${years.at(-1)}.png`),
-              png,
-            );
+        // singular years
+        for (const year of countryYears) {
+          // check if year is in the future and skip
+          if (year > `${new Date().getFullYear()}`) {
+            continue;
           }
 
-          // singular years
-          for (const year of countryYears) {
-            // check if year is in the future and skip
-            if (year > `${new Date().getFullYear()}`) {
-              continue;
-            }
+          const png = await renderComponent(
+            await CountryYearsPageImage(
+              locale,
+              getTranslations,
+              countryConfig,
+              donations,
+              [year],
+              yearSums,
+            ),
+          );
 
-            const png = await renderComponent(
-              await CountryYearsPageImage(
-                locale,
-                getTranslations,
-                countryConfig,
-                donations,
-                [year],
-                yearSums,
-              ),
-            );
-
-            await fs.writeFile(path.join(YEARS_OUT_DIR, `${year}.png`), png);
-          }
-        });
-      },
-    );
-  },
-);
+          await fs.writeFile(path.join(YEARS_OUT_DIR, `${year}.png`), png);
+        }
+      });
+    },
+  );
+});

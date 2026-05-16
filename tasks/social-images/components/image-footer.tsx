@@ -3,7 +3,7 @@
 /* eslint-disable react/no-unknown-property */
 
 import type { CountryConfig } from "@/types/country-config";
-import type { ConstLocale } from "@/utils/locales";
+import type { ImageLocale } from "@/utils/locales";
 
 import { isNotNullandNotUndefined } from "@/utils/array";
 import { formatCompactCountryCurrency, formatDate } from "@/utils/formatter";
@@ -17,7 +17,7 @@ export const ImageFooter = ({
   locale,
 }: {
   getTranslations: CreateTranslator;
-  locale: ConstLocale;
+  locale: ImageLocale;
   country: CountryConfig;
 }) => {
   const t = getTranslations();

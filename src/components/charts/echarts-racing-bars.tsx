@@ -2,13 +2,14 @@
 import type { BarSeriesOption, EChartsOption } from "echarts";
 
 import { Download, Pause, Play, RotateCcw } from "lucide-react";
+import { useLocale } from "next-intl";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import type { CountryConfig } from "@/types/country-config";
 import type { Currency } from "@/utils/countries";
-import type { ConstLocale } from "@/utils/locales";
 
 import { ExpandableReactEchart } from "@/components/charts/expandable-react-echart";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
 import {
@@ -24,7 +25,6 @@ interface EChartsRacingBarsProps {
   donations: Donation[];
   years: string[];
   groupByField: DonationField.DonorName | DonationField.Receiver;
-  locale: ConstLocale;
   currency: Currency;
   title: string;
   subtitle: string;
@@ -45,12 +45,13 @@ export const EChartsRacingBars = ({
   donations,
   years,
   groupByField,
-  locale,
   currency,
   title,
   subtitle,
   totalRuntimeMs = DEFAULT_TOTAL_RUNTIME_MS,
 }: EChartsRacingBarsProps) => {
+  const browserBasedLocale = useBrowserBasedLocale();
+  const locale = useLocale();
   const partiesById = useMemo(() => {
     return Object.fromEntries(
       countryConfig.parties.map((p) => [p[PartyField.Id], p]),
@@ -268,7 +269,11 @@ export const EChartsRacingBars = ({
                   (g) => g.groupName === groupName,
                 );
                 const total = group?.total || 0;
-                return formatCompactCurrency(locale, total, currency);
+                return formatCompactCurrency(
+                  browserBasedLocale,
+                  total,
+                  currency,
+                );
               },
               fontSize: 14,
               color: "#fff",
@@ -301,7 +306,7 @@ export const EChartsRacingBars = ({
               const groupName = groupNames[params.dataIndex];
               const group = sortedGroups.find((g) => g.groupName === groupName);
               const total = group?.total || 0;
-              return formatCompactCurrency(locale, total, currency);
+              return formatCompactCurrency(browserBasedLocale, total, currency);
             },
             fontSize: 14,
             color: "#fff",
@@ -316,7 +321,7 @@ export const EChartsRacingBars = ({
     const currentDate =
       currentDateIndex >= 0 ? sortedDates[currentDateIndex] : null;
     const formattedCurrentDate = currentDate
-      ? formatTwoDigitDate(locale, new Date(currentDate))
+      ? formatTwoDigitDate(browserBasedLocale, new Date(currentDate))
       : "";
 
     return {
@@ -400,12 +405,15 @@ export const EChartsRacingBars = ({
           style: {
             text: `${
               sortedDates[0]
-                ? formatTwoDigitDate(locale, new Date(sortedDates[0]))
+                ? formatTwoDigitDate(
+                    browserBasedLocale,
+                    new Date(sortedDates[0]),
+                  )
                 : ""
             } - ${
               sortedDates[sortedDates.length - 1]
                 ? formatTwoDigitDate(
-                    locale,
+                    browserBasedLocale,
                     new Date(sortedDates[sortedDates.length - 1]),
                   )
                 : ""
@@ -465,7 +473,7 @@ export const EChartsRacingBars = ({
         },
         axisLabel: {
           formatter: (value: number) =>
-            formatCompactCurrency(locale, value, currency),
+            formatCompactCurrency(browserBasedLocale, value, currency),
           color: "rgba(255, 255, 255, 0.7)",
           fontSize: 14,
         },
@@ -756,7 +764,10 @@ export const EChartsRacingBars = ({
           {isRecording ? (
             <span className="mr-4 tabular-nums">
               {t("bar_chart_race.rendering", {
-                percentage: formatPercentFormat(locale, recordingProgress),
+                percentage: formatPercentFormat(
+                  browserBasedLocale,
+                  recordingProgress,
+                ),
               })}
             </span>
           ) : null}

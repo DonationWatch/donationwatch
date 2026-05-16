@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import type { CountryConfig } from "@/types/country-config";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { getCountryName } from "@/utils/countries";
@@ -34,6 +35,7 @@ export const DonationStackedYears = ({
   const tStackedYears = useTranslations("stacked_years");
   const tCountries = useTranslations("countries");
   const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
   const router = useRouter();
   const { backgroundColor, isMobile, isDark } = useChart();
 
@@ -117,7 +119,7 @@ export const DonationStackedYears = ({
       },
       trigger: "axis",
       valueFormatter: (value) =>
-        formatCountryCurrency(locale, value as number, country),
+        formatCountryCurrency(browserBasedLocale, value as number, country),
     },
     xAxis: [
       {
@@ -125,7 +127,7 @@ export const DonationStackedYears = ({
         triggerEvent: true,
         axisLabel: {
           formatter: (value) =>
-            formatCompactCountryCurrency(locale, value, country),
+            formatCompactCountryCurrency(browserBasedLocale, value, country),
         },
       },
     ],

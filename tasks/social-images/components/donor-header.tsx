@@ -7,7 +7,7 @@ import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { PartySum } from "@/utils/data/get-parties-sum";
 import type { BigDonor } from "@/utils/loader/biggest-donors";
-import type { ConstLocale } from "@/utils/locales";
+import type { ImageLocale } from "@/utils/locales";
 import type { Donation, ReceiverId } from "@/utils/types";
 
 import { PageLogo } from "@/components/layout/page-logo";
@@ -35,7 +35,7 @@ export const ImageStackedPartyDonations = ({
 }: {
   years: string[];
   donor?: string;
-  locale: ConstLocale;
+  locale: ImageLocale;
   country: CountryConfig;
   donations: Donation[];
 }) => {
@@ -93,7 +93,7 @@ const ImageRankingItem = ({
   party: Party;
   amount: number;
   sum: number;
-  locale: ConstLocale;
+  locale: ImageLocale;
   country: CountryConfig;
 }) => {
   return (
@@ -122,7 +122,7 @@ export const ImagePageHeader = ({
   children,
 }: PropsWithChildren<{
   getTranslations: CreateTranslator;
-  locale: ConstLocale;
+  locale: ImageLocale;
   right?: string | ReactNode;
   country: CountryConfig;
 }>) => {
@@ -161,7 +161,7 @@ export const DonorHeader = ({
   donations,
 }: {
   getTranslations: CreateTranslator;
-  locale: ConstLocale;
+  locale: ImageLocale;
   country: CountryConfig;
   donations: Donation[];
   donor: BigDonor;

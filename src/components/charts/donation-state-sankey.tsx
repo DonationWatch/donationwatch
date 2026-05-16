@@ -2,12 +2,11 @@
 import type { EChartsOption } from "echarts";
 import type { SankeyNodeItemOption } from "echarts/types/src/chart/sankey/SankeySeries.js";
 
-import { useLocale } from "next-intl";
-
 import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Donation, ReceiverId } from "@/utils/types";
 
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
@@ -42,7 +41,7 @@ export const DonationStateSankey = ({
   donations: Donation[];
 }) => {
   const t = useTranslations();
-  const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
   const { backgroundColor } = useChart();
 
   const isEu = country.id === Country.europeanunion;
@@ -100,12 +99,12 @@ export const DonationStateSankey = ({
       confine: true,
       show: true,
       valueFormatter: (value) =>
-        formatCountryCurrency(locale, value as number, country),
+        formatCountryCurrency(browserBasedLocale, value as number, country),
       formatter: (params) => {
         if (Array.isArray(params)) return "";
 
         const formattedCurrency = formatCountryCurrency(
-          locale,
+          browserBasedLocale,
           params.value as number,
           country,
         );

@@ -6,9 +6,9 @@ import Link from "next/link";
 import type { CountryConfig } from "@/types/country-config";
 import type { ConstLocale } from "@/utils/locales";
 
+import { FormattedCountryCurrency } from "@/components/browser-based-formatter";
 import { PartyField, type Party } from "@/types/party";
 import { partyColor } from "@/utils/color";
-import { formatCountryCurrency } from "@/utils/formatter";
 
 const VISIBLE_PARTIES = 4;
 
@@ -41,7 +41,10 @@ const PartyLinkPill = ({
         <div className="overflow-hidden pl-2 text-sm">
           <div className="truncate font-bold">{party[PartyField.Short]}</div>
           <div className="tabular-nums">
-            {formatCountryCurrency(locale, party[PartyField.Sum], country)}
+            <FormattedCountryCurrency
+              country={country}
+              value={party[PartyField.Sum]}
+            />
           </div>
         </div>
       </Link>

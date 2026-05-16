@@ -168,11 +168,10 @@ class FakeDataLoader extends DataLoader {
         extracted.push({
           idx: `fake-${year}-${idx++}`,
           [DonationField.DonorName]: `Fake Donor ${j + 1}`,
-          [DonationField.Date]: `${year}-${String(
-            Math.floor(Math.random() * 12) + 1,
-          ).padStart(2, "0")}-${String(
-            Math.floor(Math.random() * 28) + 1,
-          ).padStart(2, "0")}`,
+          [DonationField.Date]: `${year}-${String(((j + 11) % 12) + 1).padStart(
+            2,
+            "0",
+          )}-${String(26 - (j % 26)).padStart(2, "0")}`,
           [DonationField.Amount]: amountPerDonation,
           [DonationField.Receiver]: partyName,
           [DonationField.Address]:

@@ -8,6 +8,7 @@ import type { Donation } from "@/utils/types";
 import { DonorLink } from "@/components/donors/donor-link";
 import { FormatAnd } from "@/components/formatter";
 import { Translation } from "@/components/translation";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
 import { donationYear } from "@/utils/date";
@@ -33,6 +34,7 @@ export const YearsDonorPageText = ({
 }) => {
   const t = useTranslations();
   const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
 
   const biggestDonor: { donor: string; amount: number } = {
     donor: "",
@@ -133,7 +135,7 @@ export const YearsDonorPageText = ({
     <>
       <p className="mb-6">
         {t("donors.detail.unique_donors", {
-          years: formatAnd(locale, years),
+          years: formatAnd(browserBasedLocale, years),
           count: Object.keys(donorDonations).length,
         })}
       </p>
@@ -151,7 +153,12 @@ export const YearsDonorPageText = ({
                   items={topDonors.map((d, i) => (
                     <span key={i}>
                       <DonorLink country={country} donor={d.donor} /> (
-                      {formatCountryCurrency(locale, d.amount, country)})
+                      {formatCountryCurrency(
+                        browserBasedLocale,
+                        d.amount,
+                        country,
+                      )}
+                      )
                     </span>
                   ))}
                 />
@@ -167,7 +174,7 @@ export const YearsDonorPageText = ({
             text={t.raw("donors.detail.biggest_donor")}
             variables={{
               amount: formatCountryCurrency(
-                locale,
+                browserBasedLocale,
                 biggestDonor.amount,
                 country,
               ),
@@ -183,7 +190,7 @@ export const YearsDonorPageText = ({
             variables={{
               count: mostDonationsDonor.count,
               sum: formatCountryCurrency(
-                locale,
+                browserBasedLocale,
                 mostDonationsDonor.sum,
                 country,
               ),
@@ -202,7 +209,7 @@ export const YearsDonorPageText = ({
             variables={{
               count: mostUniquePartiesDonor.count,
               sum: formatCountryCurrency(
-                locale,
+                browserBasedLocale,
                 mostUniquePartiesDonor.sum,
                 country,
               ),

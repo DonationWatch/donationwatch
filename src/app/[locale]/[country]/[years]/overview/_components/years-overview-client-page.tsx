@@ -23,6 +23,7 @@ import { TextPartyLink } from "@/components/parties/text-party-link";
 import { Translation } from "@/components/translation";
 import { LoadedTopPartyDonations } from "@/components/years/top-party-year-donations";
 import { useDonationsByYears } from "@/hooks/use-api";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { useScrollToHash } from "@/hooks/use-scroll-to-hash";
 import { isNotNullandNotUndefined } from "@/utils/array";
@@ -59,6 +60,7 @@ export const YearsOverviewClientPage = ({
   const t = useTranslations();
   const tData = useTranslations("data");
   const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
   const results = useDonationsByYears(country, years);
   const isLoading = results.some((r) => r.isLoading);
   const error = results.some((r) => r.error);
@@ -102,15 +104,19 @@ export const YearsOverviewClientPage = ({
             <p className="mb-6">{summary}</p>
             <p className="mb-6">
               {t("overview.detail.summary2", {
-                years: formatAnd(locale, years),
+                years: formatAnd(browserBasedLocale, years),
                 partyCount: sums.length,
                 donationCount: count,
                 minimumAmount: formatCompactCountryCurrency(
-                  locale,
+                  browserBasedLocale,
                   country.minPublicDonationAmount,
                   country,
                 ),
-                donationSum: formatCountryCurrency(locale, sum, country),
+                donationSum: formatCountryCurrency(
+                  browserBasedLocale,
+                  sum,
+                  country,
+                ),
               })}
             </p>
             {topDonationSums.length ? (
@@ -118,7 +124,7 @@ export const YearsOverviewClientPage = ({
                 <Translation
                   text={t.raw("overview.detail.highest_sum")}
                   variables={{
-                    years: formatAnd(locale, years),
+                    years: formatAnd(browserBasedLocale, years),
                     parties: (
                       <FormatAnd
                         locale={locale}
@@ -129,7 +135,13 @@ export const YearsOverviewClientPage = ({
                               party={receiverId}
                               locale={locale}
                             />
-                            ({formatCountryCurrency(locale, sum.sum, country)})
+                            (
+                            {formatCountryCurrency(
+                              browserBasedLocale,
+                              sum.sum,
+                              country,
+                            )}
+                            )
                           </span>
                         ))}
                       />
@@ -152,7 +164,7 @@ export const YearsOverviewClientPage = ({
                     ),
                     count: mostDonations[1].count,
                     sum: formatCountryCurrency(
-                      locale,
+                      browserBasedLocale,
                       mostDonations[1].sum,
                       country,
                     ),

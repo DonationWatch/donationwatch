@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from "react";
 
 import type { CountryConfig } from "@/types/country-config";
-import type { ConstLocale } from "@/utils/locales";
+import type { BrowserBasedLocale } from "@/utils/locales";
 
 import { RankBadge } from "@/components/donations/ranking-item";
 import { PercentageHint } from "@/components/percentage-hint";
@@ -18,7 +18,7 @@ export const NonInteractableRankingItem = ({
   amount: number;
   rank: number;
   sum: number;
-  locale: ConstLocale;
+  locale: BrowserBasedLocale;
   country: CountryConfig;
 }>) => {
   return (
@@ -34,7 +34,7 @@ export const NonInteractableRankingItem = ({
         <span className="mr-1">
           {formatCountryCurrency(locale, amount, country)}
         </span>
-        <PercentageHint locale={locale} percentage={amount / sum} />
+        <PercentageHint browserBasedLocale={locale} percentage={amount / sum} />
       </div>
     </section>
   );

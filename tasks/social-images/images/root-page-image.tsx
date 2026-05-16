@@ -3,7 +3,7 @@
 import type { CountryConfig } from "@/types/country-config";
 import type { Country } from "@/utils/countries";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
-import type { ConstLocale } from "@/utils/locales";
+import type { ImageLocale } from "@/utils/locales";
 
 /* eslint-disable react/no-unknown-property */
 import { PageLogo } from "@/components/layout/page-logo";
@@ -15,7 +15,7 @@ import { ImageMetaCard } from "../components/image-meta-card";
 import { ThumbnailWrapper } from "../components/utils";
 
 export const RootPageImage = async (
-  locale: ConstLocale,
+  locale: ImageLocale,
   getTranslations: CreateTranslator,
   countryDatas: [Country, CountryConfig, PartyYearsSums][],
 ) => {

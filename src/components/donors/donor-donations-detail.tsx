@@ -8,6 +8,7 @@ import type { Donation, ReceiverId } from "@/utils/types";
 import { RankingItemLine } from "@/components/donations/ranking-item-line";
 import { PartyDot } from "@/components/parties/party-dot";
 import { PartyLink } from "@/components/parties/party-link";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { donationYear } from "@/utils/date";
 import { DonationField } from "@/utils/types";
 
@@ -25,6 +26,7 @@ export const DonorDonationsDetail = ({
   onVisibleChanged?: () => void;
 }) => {
   const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
 
   useEffect(() => {
     onVisibleChanged?.();
@@ -40,7 +42,7 @@ export const DonorDonationsDetail = ({
       key={donation[DonationField.Id]}
       date={donation[DonationField.Date]}
       amount={donation[DonationField.Amount]}
-      locale={locale}
+      locale={browserBasedLocale}
       country={country}
     >
       <PartyLink party={party} country={country} locale={locale}>

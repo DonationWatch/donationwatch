@@ -4,7 +4,7 @@
 
 import type { CountryConfig } from "@/types/country-config";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
-import type { ConstLocale } from "@/utils/locales";
+import type { ImageLocale } from "@/utils/locales";
 
 import { formatCompactCountryCurrency } from "@/utils/formatter";
 
@@ -27,7 +27,7 @@ const CHART_CONTENT_WIDTH =
   CHART_WIDTH - Y_AXIS_LABEL_WIDTH - Y_AXIS_VALUE_WIDTH;
 
 export const CountryPageImage = async (
-  locale: ConstLocale,
+  locale: ImageLocale,
   getTranslations: CreateTranslator,
   countryConfig: CountryConfig,
   partyYearSums: PartyYearsSums,

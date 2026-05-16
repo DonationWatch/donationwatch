@@ -1,5 +1,4 @@
-"client-only";
-
+import "client-only";
 import { useEffect } from "react";
 
 /**

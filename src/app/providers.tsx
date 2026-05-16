@@ -8,9 +8,10 @@ import { NextIntlClientProvider } from "next-intl";
 import { createContext, useEffect, useMemo, useState } from "react";
 
 import type { ClientMessages } from "@/utils/i18n-filter";
-import type { ConstLocale } from "@/utils/locales";
+import type { BrowserBasedLocale, ConstLocale } from "@/utils/locales";
 
 import { SidebarProvider } from "@/components/ui/sidebar";
+import { makeBrand } from "@/utils/brand";
 import { SIDENAV_PERSISTENCE_KEY } from "@/utils/config";
 
 export const Providers = ({
@@ -40,11 +41,13 @@ export const Providers = ({
       locale={locale}
       messages={messages as unknown as Messages}
     >
-      <QueryClientProvider client={queryClient}>
-        <SidebarLocalStorageProvider>
-          <SearchDialogProvider>{children}</SearchDialogProvider>
-        </SidebarLocalStorageProvider>
-      </QueryClientProvider>
+      <BrowserBasedLocaleProvider locale={locale}>
+        <QueryClientProvider client={queryClient}>
+          <SidebarLocalStorageProvider>
+            <SearchDialogProvider>{children}</SearchDialogProvider>
+          </SidebarLocalStorageProvider>
+        </QueryClientProvider>
+      </BrowserBasedLocaleProvider>
     </NextIntlClientProvider>
   );
 };
@@ -76,6 +79,33 @@ export function SidebarLocalStorageProvider({ children }: PropsWithChildren) {
     </SidebarProvider>
   );
 }
+
+export const BrowserBasedLocaleContext =
+  createContext<BrowserBasedLocale | null>(null);
+
+export const BrowserBasedLocaleProvider = ({
+  children,
+  locale,
+}: PropsWithChildren<{ locale: ConstLocale }>) => {
+  // We use the base locale as the initial state to ensure hydration matches the server-side render.
+  const [browserBasedLocale, setBrowserBasedLocale] =
+    useState<BrowserBasedLocale>(() => makeBrand<BrowserBasedLocale>(locale));
+
+  useEffect(() => {
+    // navigator is only available in the browser.
+    const navigatorLanguage = navigator.language;
+
+    if (navigatorLanguage.startsWith(locale)) {
+      setBrowserBasedLocale(makeBrand<BrowserBasedLocale>(navigatorLanguage));
+    }
+  }, [locale]);
+
+  return (
+    <BrowserBasedLocaleContext.Provider value={browserBasedLocale}>
+      {children}
+    </BrowserBasedLocaleContext.Provider>
+  );
+};
 
 type SearchDialogContextValue = {
   isOpen: boolean;

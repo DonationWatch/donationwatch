@@ -13,6 +13,7 @@ import type { Party } from "@/types/party";
 import type { Donation, ReceiverId } from "@/utils/types";
 
 import { TextPartyLink } from "@/components/parties/text-party-link";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
@@ -42,6 +43,7 @@ export const DonationYearScatterPlot = ({
 }) => {
   const t = useTranslations();
   const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
   const { backgroundColor } = useChart();
 
   const partyIds = new Set(parties.map((p) => p[PartyField.Id]));
@@ -145,7 +147,8 @@ export const DonationYearScatterPlot = ({
         max: largestAmount,
         min: smallestAmount,
         axisLabel: {
-          formatter: (data) => formatCountryCurrency(locale, data, country),
+          formatter: (data) =>
+            formatCountryCurrency(browserBasedLocale, data, country),
         },
       });
       series.push({
@@ -183,7 +186,7 @@ export const DonationYearScatterPlot = ({
       </div></div>`;
 
         const formattedCurrency = formatCountryCurrency(
-          locale,
+          browserBasedLocale,
           amount,
           country,
         );
@@ -211,7 +214,7 @@ ${partyPart}
             text={t.raw("overview.scatter.span")}
             variables={{
               biggestSpanAmount: formatCountryCurrency(
-                locale,
+                browserBasedLocale,
                 biggestSpan,
                 country,
               ),

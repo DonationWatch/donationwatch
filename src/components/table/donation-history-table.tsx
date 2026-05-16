@@ -30,6 +30,7 @@ import { DonorLink } from "@/components/donors/donor-link";
 import { DonorName } from "@/components/donors/donor-name";
 import { PartyDot } from "@/components/parties/party-dot";
 import { PartyLink } from "@/components/parties/party-link";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { useMobile } from "@/hooks/use-media-query";
 import { useVirtual } from "@/hooks/use-virtual";
@@ -62,6 +63,7 @@ export const DonationHistoryTable = ({
   const tCommon = useTranslations("common");
   const tSearch = useTranslations("search");
   const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
   const partiesIdSet = useMemo(() => new Set(partiesIds), [partiesIds]);
   const [sorting, setSorting] = useState<SortingState>([
     { id: "date", desc: true },
@@ -120,7 +122,7 @@ export const DonationHistoryTable = ({
                       {historyEntry.date !==
                       donationYear({ [DonationField.Date]: historyEntry.date })
                         ? formatTwoDigitDate(
-                            locale,
+                            browserBasedLocale,
                             new Date(historyEntry.date),
                           )
                         : historyEntry.date}
@@ -159,7 +161,7 @@ export const DonationHistoryTable = ({
                   <div className="flex items-center justify-between">
                     <div className="shrink-0 text-sm tabular-nums">
                       {formatCountryCurrency(
-                        locale,
+                        browserBasedLocale,
                         historyEntry.amount,
                         country,
                       )}
@@ -198,7 +200,7 @@ export const DonationHistoryTable = ({
           if (date === donationYear({ [DonationField.Date]: date }))
             return date;
 
-          return formatTwoDigitDate(locale, new Date(date));
+          return formatTwoDigitDate(browserBasedLocale, new Date(date));
         },
       }),
       columnHelper.accessor("party", {
@@ -254,7 +256,8 @@ export const DonationHistoryTable = ({
         meta: {
           className: "justify-end tabular-nums",
         },
-        cell: (cell) => formatCountryCurrency(locale, cell.getValue(), country),
+        cell: (cell) =>
+          formatCountryCurrency(browserBasedLocale, cell.getValue(), country),
       }),
       hasFeature(country, Features.ExternalDonationIds)
         ? columnHelper.accessor("id", {

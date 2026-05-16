@@ -1,12 +1,14 @@
 "use client";
+import { useLocale } from "next-intl";
 import Link from "next/link";
 
 import type { CountryConfig } from "@/types/country-config";
 import type { BigDonor } from "@/utils/loader/biggest-donors";
-import type { ConstLocale } from "@/utils/locales";
+import type { BrowserBasedLocale, ConstLocale } from "@/utils/locales";
 
 import { DynamicStackedPartyDonations } from "@/components/charts/dynamic-stacked-party-line";
 import { DonorName } from "@/components/donors/donor-name";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useHash } from "@/hooks/use-hash";
 import { formatCountryCurrency } from "@/utils/formatter";
 
@@ -16,9 +18,11 @@ export const BigDonorPill = ({
   country,
   donor,
   locale,
+  browserBasedLocale,
 }: {
   donor: Omit<BigDonor, "id"> & { id?: string };
   locale: ConstLocale;
+  browserBasedLocale: BrowserBasedLocale;
   country: CountryConfig;
 }) => {
   const { hash } = useHash(donor.name);
@@ -36,7 +40,6 @@ export const BigDonorPill = ({
           <DynamicStackedPartyDonations
             country={country}
             years={country.years}
-            locale={locale}
             partyYearsSums={donor.partyYearSums}
             direction={"vertical"}
           />
@@ -46,7 +49,7 @@ export const BigDonorPill = ({
             <DonorName donor={donor.name} />
           </div>
           <div className="tabular-nums">
-            {formatCountryCurrency(locale, donor.sum, country)}
+            {formatCountryCurrency(browserBasedLocale, donor.sum, country)}
           </div>
         </div>
       </Link>
@@ -56,21 +59,23 @@ export const BigDonorPill = ({
 
 export const DonorsHero = ({
   country,
-  locale,
   biggestDonors,
 }: {
-  locale: ConstLocale;
   country: CountryConfig;
   biggestDonors: BigDonor[];
 }) => {
+  const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
+
   return (
     <ul className="flex flex-wrap pt-4">
       {biggestDonors.slice(0, TOP_DONORS_TO_SHOW).map((bigDonor) => (
         <BigDonorPill
+          locale={locale}
+          browserBasedLocale={browserBasedLocale}
           donor={bigDonor}
           country={country}
           key={bigDonor.id}
-          locale={locale}
         />
       ))}
     </ul>

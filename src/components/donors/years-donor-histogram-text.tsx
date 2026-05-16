@@ -1,14 +1,13 @@
 "use client";
-import { useLocale } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 
 import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
-import type { ConstLocale } from "@/utils/locales";
 import type { Donation } from "@/utils/types";
 
 import { RankingItem } from "@/components/donations/ranking-item";
 import { DonorLink } from "@/components/donors/donor-link";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { useBreakpoint } from "@/hooks/use-media-query";
 import { useVirtual } from "@/hooks/use-virtual";
@@ -27,15 +26,14 @@ type DonorHistogram = Record<number, Record<string, number>>;
 const HistogramItemDetailLine = ({
   country,
   amount,
-  locale,
   donor,
 }: {
-  locale: ConstLocale;
   country: CountryConfig;
   amount: number;
   donor: string;
 }) => {
-  const fmtAmount = formatCountryCurrency(locale, amount, country);
+  const browserBasedLocale = useBrowserBasedLocale();
+  const fmtAmount = formatCountryCurrency(browserBasedLocale, amount, country);
 
   return (
     <div className="mb-2 grow flex-wrap items-center justify-between space-y-2 overflow-hidden border-t border-gray-950/10 px-1 py-1.5 leading-none first:border-t-0 odd:bg-white/5 sm:mb-0 sm:flex sm:flex-nowrap sm:space-y-0 dark:odd:bg-slate-900/5">
@@ -52,11 +50,9 @@ const HistogramItemDetailLine = ({
 export const HistogramItemDetail = ({
   country,
   sums,
-  locale,
 }: {
   country: CountryConfig;
   sums: { donor: string; sum: number }[];
-  locale: ConstLocale;
 }) => {
   const t = useTranslations();
   const parentRef = useRef<HTMLDivElement>(null);
@@ -101,7 +97,6 @@ export const HistogramItemDetail = ({
               }}
             >
               <HistogramItemDetailLine
-                locale={locale}
                 country={country}
                 donor={donor}
                 amount={sum}
@@ -124,7 +119,7 @@ const DonorHistogramTextText = ({
   years: string[];
 }) => {
   const t = useTranslations();
-  const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
 
   const sortedBuckets = Object.entries(histogram)
     .map(([receiversCount, donors]) => ({
@@ -164,8 +159,8 @@ const DonorHistogramTextText = ({
           years: formatYearsRange(years),
           max: maxBucket?.receiversCount ?? 0,
           donors: maxBucket?.donorCount ?? 0,
-          median: formatOneFractionNumber(locale, median),
-          mean: formatOneFractionNumber(locale, mean),
+          median: formatOneFractionNumber(browserBasedLocale, median),
+          mean: formatOneFractionNumber(browserBasedLocale, mean),
         })}
       </p>
       <p className="mb-6"></p>
@@ -173,7 +168,7 @@ const DonorHistogramTextText = ({
         <p className="mb-6">
           {t("donors.histogram.p2", {
             percentage: formatPercentFormat(
-              locale,
+              browserBasedLocale,
               justOne.donorCount / donorsCount,
             ),
             singlePartyDonors: justOne.donorCount,
@@ -188,10 +183,8 @@ const DonorHistogramTextText = ({
 const DonorHistogramTextList = ({
   countDonorSums,
   country,
-  locale,
 }: {
   country: CountryConfig;
-  locale: ConstLocale;
   countDonorSums: {
     receiversCount: string;
     donorSums: {
@@ -223,11 +216,7 @@ const DonorHistogramTextList = ({
               expanded={expandedBuckets.includes(receiversCount)}
               onToggleExpanded={() => onToggleExpanded(receiversCount)}
               detail={
-                <HistogramItemDetail
-                  locale={locale}
-                  country={country}
-                  sums={donorSums}
-                />
+                <HistogramItemDetail country={country} sums={donorSums} />
               }
             >
               {t("donors.histogram.item", {
@@ -247,13 +236,11 @@ const LoadedYearsDonorHistogramText = ({
   country,
   parties,
   donations,
-  locale,
 }: {
   years: string[];
   country: CountryConfig;
   parties: Party[];
   donations: Donation[];
-  locale: ConstLocale;
 }) => {
   const yearsSet = new Set<string>(years);
   const partiesSet = new Set<Party>(parties);
@@ -324,7 +311,6 @@ const LoadedYearsDonorHistogramText = ({
       />
       <DonorHistogramTextList
         country={country}
-        locale={locale}
         countDonorSums={countDonorSums}
       />
     </>
@@ -342,11 +328,8 @@ export const YearsDonorHistogramText = ({
   parties: Party[];
   donations: Donation[];
 }) => {
-  const locale = useLocale();
-
   return (
     <LoadedYearsDonorHistogramText
-      locale={locale}
       donations={donations}
       country={country}
       parties={parties}

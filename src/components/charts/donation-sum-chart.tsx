@@ -1,12 +1,11 @@
 "use client";
 import type { EChartsOption, LineSeriesOption } from "echarts";
 
-import { useLocale } from "next-intl";
-
 import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Donation, ReceiverId } from "@/utils/types";
 
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
@@ -115,7 +114,7 @@ const DonationTimeseriesChart = ({
   subtitle: string;
   limitToFirstDateYear?: boolean;
 }) => {
-  const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
   const { backgroundColor, isMobile, isDark } = useChart();
   const tYears = useClientTranslations("years");
 
@@ -257,7 +256,8 @@ const DonationTimeseriesChart = ({
         type: "slider",
         xAxisIndex: [0],
         filterMode: "none",
-        labelFormatter: (value) => formatTwoDigitDate(locale, value),
+        labelFormatter: (value) =>
+          formatTwoDigitDate(browserBasedLocale, value),
         bottom: 20,
         // zoom to min 5 days
         minValueSpan: 1000 * 60 * 60 * 24 * 5,
@@ -273,12 +273,15 @@ const DonationTimeseriesChart = ({
           formatter: (params) => {
             if (params.axisDimension === "y") {
               return formatCompactCountryCurrency(
-                locale,
+                browserBasedLocale,
                 params.value as number,
                 country,
               );
             } else if (params.axisDimension === "x") {
-              return formatMonthYear(locale, new Date(params.value));
+              return formatMonthYear(
+                browserBasedLocale,
+                new Date(params.value),
+              );
             }
 
             return "";
@@ -306,11 +309,11 @@ const DonationTimeseriesChart = ({
           const delta = sum - previousPartyValue;
 
           const party = getParty(country, param.seriesName as ReceiverId);
-          line += `${param.marker} ${party[PartyField.Short]}: ${formatCountryCurrency(locale, sum, country)}`;
+          line += `${param.marker} ${party[PartyField.Short]}: ${formatCountryCurrency(browserBasedLocale, sum, country)}`;
 
           // only add delta if there is a change
           if (delta > 0) {
-            line += ` (+${formatCountryCurrency(locale, delta, country)})`;
+            line += ` (+${formatCountryCurrency(browserBasedLocale, delta, country)})`;
           }
 
           lines.push(line);
@@ -319,7 +322,7 @@ const DonationTimeseriesChart = ({
         if (!lines.length) return "";
 
         return `<div style="font-size:14px;color:#666;font-weight:600;line-height:1;margin-bottom:5px">${formatDate(
-          locale,
+          browserBasedLocale,
           (params[0].data as LineDatum)[0],
         )}</div>${lines.join("<br/>")}`;
       },
@@ -337,7 +340,7 @@ const DonationTimeseriesChart = ({
         type: "value",
         axisLabel: {
           formatter: (value) =>
-            formatCompactCountryCurrency(locale, value, country),
+            formatCompactCountryCurrency(browserBasedLocale, value, country),
         },
       },
     ],
@@ -361,7 +364,7 @@ const DonationTimeseriesChart = ({
     filteredYearDonationCount > 0
       ? tYears("no_date_omitted", {
           sum: formatCompactCountryCurrency(
-            locale,
+            browserBasedLocale,
             filteredYearDonationSum,
             country,
           ),
@@ -407,7 +410,7 @@ export const DonationStackedTimeseriesChart = ({
   limitToFirstDateYear?: boolean;
   donationsHaveYearsOnly?: boolean;
 }) => {
-  const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
   const { backgroundColor, isMobile, isDark } = useChart();
 
   const leftmostYear = limitToFirstDateYear
@@ -582,7 +585,8 @@ export const DonationStackedTimeseriesChart = ({
         type: "slider",
         xAxisIndex: [0],
         filterMode: "none",
-        labelFormatter: (value) => formatTwoDigitDate(locale, value),
+        labelFormatter: (value) =>
+          formatTwoDigitDate(browserBasedLocale, value),
         bottom: 20,
         minValueSpan,
       },
@@ -597,12 +601,15 @@ export const DonationStackedTimeseriesChart = ({
           formatter: (params) => {
             if (params.axisDimension === "y") {
               return formatCompactCountryCurrency(
-                locale,
+                browserBasedLocale,
                 params.value as number,
                 country,
               );
             } else if (params.axisDimension === "x") {
-              return formatMonthYear(locale, new Date(params.value));
+              return formatMonthYear(
+                browserBasedLocale,
+                new Date(params.value),
+              );
             }
 
             return "";
@@ -630,11 +637,11 @@ export const DonationStackedTimeseriesChart = ({
           const delta = sum - previousPartyValue;
 
           const party = getParty(country, param.seriesName as ReceiverId);
-          line += `${param.marker} <span class="font-medium">${party[PartyField.Short]}</span>: ${formatCountryCurrency(locale, sum, country)}`;
+          line += `${param.marker} <span class="font-medium">${party[PartyField.Short]}</span>: ${formatCountryCurrency(browserBasedLocale, sum, country)}`;
 
           // only add delta if there is a change
           if (delta > 0) {
-            line += ` (+${formatCountryCurrency(locale, delta, country)})`;
+            line += ` (+${formatCountryCurrency(browserBasedLocale, delta, country)})`;
           }
 
           lines.push(line);
@@ -644,8 +651,8 @@ export const DonationStackedTimeseriesChart = ({
 
         const date = (params[0].data as LineDatum)[0];
         const formattedDate = donationsHaveYearsOnly
-          ? formatYear(locale, date)
-          : formatDate(locale, date);
+          ? formatYear(browserBasedLocale, date)
+          : formatDate(browserBasedLocale, date);
 
         return `<div class="text-sm font-semibold mb-2">${formattedDate}</div>${lines.join("<br/>")}`;
       },
@@ -666,7 +673,7 @@ export const DonationStackedTimeseriesChart = ({
         type: "value",
         axisLabel: {
           formatter: (value) =>
-            formatCompactCountryCurrency(locale, value, country),
+            formatCompactCountryCurrency(browserBasedLocale, value, country),
         },
       },
     ],

@@ -9,6 +9,7 @@ import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Donation, ReceiverId } from "@/utils/types";
 
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
@@ -42,6 +43,7 @@ export const LoadedDonationYearsTreemap = ({
   const t = useTranslations();
   const tCommon = useTranslations("common");
   const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
 
   const yearsSet = new Set<string>(years);
   const partiesSet = new Set<Party>(parties);
@@ -113,7 +115,7 @@ export const LoadedDonationYearsTreemap = ({
           formatter(params) {
             return (
               (hasPartyLabel ? `{name|${party[PartyField.Short]}}\n` : "") +
-              `{value|${formatCountryCurrency(locale, params.value as number, country)}}`
+              `{value|${formatCountryCurrency(browserBasedLocale, params.value as number, country)}}`
             );
           },
           rich: {
@@ -145,7 +147,7 @@ export const LoadedDonationYearsTreemap = ({
         <div>${party[PartyField.Short]}</div>
       </div></div>`;
 
-            return `<div class="max-w-60 text-wrap">${partyPart}<div>${formatCountryCurrency(locale, params.value as number, country)}</div></div>`;
+            return `<div class="max-w-60 text-wrap">${partyPart}<div>${formatCountryCurrency(browserBasedLocale, params.value as number, country)}</div></div>`;
           },
         },
       });
@@ -199,7 +201,7 @@ export const LoadedDonationYearsTreemap = ({
 
         if (treeAncestors.length === 2) {
           // is "root" level
-          content = `<div class="font-semibold">${params.name}</div> <div>${formatCountryCurrency(locale, params.value as number, country)}</div>`;
+          content = `<div class="font-semibold">${params.name}</div> <div>${formatCountryCurrency(browserBasedLocale, params.value as number, country)}</div>`;
         }
 
         return `<div class="max-w-60 text-wrap">${content}</div>`;
@@ -231,7 +233,7 @@ export const LoadedDonationYearsTreemap = ({
 
           if (treeAncestors.length === 2) {
             // is "root" level
-            return `{name|${getDonorName(params.name, tCommon)}} {value|${formatCountryCurrency(locale, params.value as number, country)}}`;
+            return `{name|${getDonorName(params.name, tCommon)}} {value|${formatCountryCurrency(browserBasedLocale, params.value as number, country)}}`;
           }
 
           return ``;

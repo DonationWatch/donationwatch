@@ -1,9 +1,9 @@
+import type { Brand } from "@/utils/brand";
 import type { Countries } from "@/utils/countries";
 
 import type { PartyYearsSums } from "./loader/party-years-sums";
 
-declare const tags: unique symbol;
-export type ReceiverId = string & { [tags]: { receiverId: never } };
+export type ReceiverId = Brand<string, "ReceiverId">;
 
 export const enum AddressField {
   Country,

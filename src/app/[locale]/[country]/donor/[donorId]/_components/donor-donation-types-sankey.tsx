@@ -3,12 +3,11 @@
 import type { EChartsOption } from "echarts";
 import type { SankeyNodeItemOption } from "echarts/types/src/chart/sankey/SankeySeries.js";
 
-import { useLocale } from "next-intl";
-
 import type { CountryConfig } from "@/types/country-config";
 import type { Donation, ReceiverId } from "@/utils/types";
 
 import { ExpandableReactEchart } from "@/components/charts/expandable-react-echart";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
@@ -35,7 +34,7 @@ export const DonorDonationTypesSankey = ({
   donations: Donation[];
   donorName: string;
 }) => {
-  const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
   const { backgroundColor, isDark } = useChart();
   const tDonationType = useTranslations("donation_type");
   const tDonor = useTranslations("donor");
@@ -84,7 +83,7 @@ export const DonorDonationTypesSankey = ({
         color: "#4338ca",
       },
       label: {
-        formatter: `${truncate(donorName, 22)}\n${formatCompactCountryCurrency(locale, totalSum, countryConfig)}`,
+        formatter: `${truncate(donorName, 22)}\n${formatCompactCountryCurrency(browserBasedLocale, totalSum, countryConfig)}`,
       },
     },
   ];
@@ -102,7 +101,7 @@ export const DonorDonationTypesSankey = ({
       name: partyShortName,
       itemStyle: { color: partyColor(receiver, countryConfig) },
       label: {
-        formatter: `${truncate(partyShortName, 22)}\n${formatCompactCountryCurrency(locale, partySum[receiver]!, countryConfig)}`,
+        formatter: `${truncate(partyShortName, 22)}\n${formatCompactCountryCurrency(browserBasedLocale, partySum[receiver]!, countryConfig)}`,
       },
     });
 
@@ -121,7 +120,7 @@ export const DonorDonationTypesSankey = ({
         name: `${capitalizedType} (${partyShortName})`,
         itemStyle: { color: chartColorFor(type) },
         label: {
-          formatter: `${truncate(capitalizedType, 22)}\n${formatCompactCountryCurrency(locale, amount!, countryConfig)}`,
+          formatter: `${truncate(capitalizedType, 22)}\n${formatCompactCountryCurrency(browserBasedLocale, amount!, countryConfig)}`,
         },
       });
     }
@@ -159,7 +158,7 @@ export const DonorDonationTypesSankey = ({
       formatter: (params) => {
         if (Array.isArray(params)) return "";
         const value = formatCountryCurrency(
-          locale,
+          browserBasedLocale,
           params.value as number,
           countryConfig,
         );

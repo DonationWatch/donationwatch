@@ -9,6 +9,7 @@ import type { CountryConfig } from "@/types/country-config";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 import type { ReceiverId } from "@/utils/types";
 
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
@@ -30,6 +31,7 @@ export const DonationsPieChart = ({
   const t = useTranslations();
   const tCountries = useTranslations("countries");
   const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
   const router = useRouter();
   const { backgroundColor, isMobile } = useChart();
   const partySums: Record<string, number> = {};
@@ -64,7 +66,7 @@ export const DonationsPieChart = ({
 
           if (params.treeAncestors.length === 2) {
             // is "root" level
-            return `{name|${params.name}}\n{value|${formatCountryCurrency(locale, params.value as number, country)}}`;
+            return `{name|${params.name}}\n{value|${formatCountryCurrency(browserBasedLocale, params.value as number, country)}}`;
           }
 
           return ``;
@@ -98,7 +100,7 @@ export const DonationsPieChart = ({
       confine: true,
       trigger: "item",
       valueFormatter: (value) =>
-        formatCountryCurrency(locale, value as number, country),
+        formatCountryCurrency(browserBasedLocale, value as number, country),
     },
     series: [
       {
@@ -116,7 +118,7 @@ export const DonationsPieChart = ({
         label: {
           position: "insideTopLeft",
           formatter: (params) => {
-            return `{amount|${formatCountryCurrency(locale, params.value as number, country)}}`;
+            return `{amount|${formatCountryCurrency(browserBasedLocale, params.value as number, country)}}`;
           },
           rich: {
             amount: {

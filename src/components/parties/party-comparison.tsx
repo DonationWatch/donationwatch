@@ -5,7 +5,6 @@ import type { ReactNode } from "react";
 
 import { useQueries } from "@tanstack/react-query";
 import { Trophy } from "lucide-react";
-import { useLocale } from "next-intl";
 import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
 import { useMemo } from "react";
 
@@ -21,6 +20,7 @@ import Loading from "@/components/loading/loading";
 import { PartyDot } from "@/components/parties/party-dot";
 import { Button } from "@/components/ui/button";
 import { YearRangeSelector } from "@/components/years/year-range-selector";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { donationDocumentToDonations } from "@/lib/api/donations-document";
 import { PartyField, type Party } from "@/types/party";
@@ -296,7 +296,7 @@ export const PartyComparison = ({
   const t = useTranslations();
   const tCompareParties = useTranslations("compare_parties");
   const tData = useTranslations("data");
-  const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
   const [partiesParam, setPartiesParam] = useQueryState(
     "parties",
     parseAsArrayOf(parseAsString).withDefault([]),
@@ -412,22 +412,25 @@ export const PartyComparison = ({
   const overviewRows: ComparisonRow[] = [
     {
       label: tCompareParties("stats.sum"),
-      values: (s) => formatCountryCurrency(locale, s.totalSum, countryConfig),
+      values: (s) =>
+        formatCountryCurrency(browserBasedLocale, s.totalSum, countryConfig),
       winner: winners.totalSum,
     },
     {
       label: tCompareParties("stats.count"),
-      values: (s) => formatNumber(locale, s.count),
+      values: (s) => formatNumber(browserBasedLocale, s.count),
       winner: winners.count,
     },
     {
       label: tCompareParties("stats.avg"),
-      values: (s) => formatCountryCurrency(locale, s.average, countryConfig),
+      values: (s) =>
+        formatCountryCurrency(browserBasedLocale, s.average, countryConfig),
       winner: winners.average,
     },
     {
       label: tCompareParties("stats.median"),
-      values: (s) => formatCountryCurrency(locale, s.median, countryConfig),
+      values: (s) =>
+        formatCountryCurrency(browserBasedLocale, s.median, countryConfig),
       winner: winners.median,
     },
   ];
@@ -448,7 +451,7 @@ export const PartyComparison = ({
           <TwoLineCell
             primary={s.mostActiveYear.year}
             secondary={formatCountryCurrency(
-              locale,
+              browserBasedLocale,
               s.mostActiveYear.sum,
               countryConfig,
             )}
@@ -465,7 +468,10 @@ export const PartyComparison = ({
           <TwoLineCell
             primary={s.yearWithMostDonations.year}
             secondary={tCompareParties("n_donations", {
-              count: formatNumber(locale, s.yearWithMostDonations.count),
+              count: formatNumber(
+                browserBasedLocale,
+                s.yearWithMostDonations.count,
+              ),
             })}
           />
         ) : (
@@ -478,7 +484,7 @@ export const PartyComparison = ({
   const donorRows: ComparisonRow[] = [
     {
       label: tCompareParties("stats.unique_donors"),
-      values: (s) => formatNumber(locale, s.uniqueDonors.size),
+      values: (s) => formatNumber(browserBasedLocale, s.uniqueDonors.size),
       winner: winners.uniqueDonors,
     },
     {
@@ -490,7 +496,7 @@ export const PartyComparison = ({
               <DonorLink country={countryConfig} donor={s.topDonor.name} />
             }
             secondary={formatCountryCurrency(
-              locale,
+              browserBasedLocale,
               s.topDonor.sum,
               countryConfig,
             )}
@@ -512,7 +518,10 @@ export const PartyComparison = ({
               />
             }
             secondary={tCompareParties("n_donations", {
-              count: formatNumber(locale, s.mostFrequentDonor.count),
+              count: formatNumber(
+                browserBasedLocale,
+                s.mostFrequentDonor.count,
+              ),
             })}
           />
         ) : (
@@ -529,7 +538,7 @@ export const PartyComparison = ({
         s.largestDonation ? (
           <TwoLineCell
             primary={formatCountryCurrency(
-              locale,
+              browserBasedLocale,
               s.largestDonation[DonationField.Amount],
               countryConfig,
             )}
@@ -719,7 +728,7 @@ export const PartyComparison = ({
                                     </div>
                                     <div className="text-muted-foreground text-xs tabular-nums">
                                       {formatCountryCurrency(
-                                        locale,
+                                        browserBasedLocale,
                                         donor.sum,
                                         countryConfig,
                                       )}
@@ -779,7 +788,7 @@ export const PartyComparison = ({
                                       </div>
                                       <div className="text-muted-foreground text-xs font-medium tabular-nums">
                                         {formatCountryCurrency(
-                                          locale,
+                                          browserBasedLocale,
                                           donor.sum,
                                           countryConfig,
                                         )}
@@ -822,10 +831,10 @@ export const PartyComparison = ({
                         <TwoLineCell
                           primary={top.label}
                           secondary={`${formatCountryCurrency(
-                            locale,
+                            browserBasedLocale,
                             top.sum,
                             countryConfig,
-                          )} · ${formatPercentFormat(locale, top.percentage)}`}
+                          )} · ${formatPercentFormat(browserBasedLocale, top.percentage)}`}
                         />
                       ) : (
                         NO_DATA_TEXT
@@ -895,11 +904,11 @@ export const PartyComparison = ({
                                       {entry ? (
                                         <TwoLineCell
                                           primary={formatPercentFormat(
-                                            locale,
+                                            browserBasedLocale,
                                             entry.percentage,
                                           )}
                                           secondary={formatCountryCurrency(
-                                            locale,
+                                            browserBasedLocale,
                                             entry.sum,
                                             countryConfig,
                                           )}
@@ -950,11 +959,11 @@ export const PartyComparison = ({
                                         {entry ? (
                                           <TwoLineCell
                                             primary={formatPercentFormat(
-                                              locale,
+                                              browserBasedLocale,
                                               entry.percentage,
                                             )}
                                             secondary={formatCountryCurrency(
-                                              locale,
+                                              browserBasedLocale,
                                               entry.sum,
                                               countryConfig,
                                             )}
@@ -998,7 +1007,10 @@ export const PartyComparison = ({
               <div className="mt-6">
                 <h3 className="mb-3 text-lg font-semibold">
                   {tCompareParties("overlapping.title", {
-                    count: formatNumber(locale, overlappingDonors.length),
+                    count: formatNumber(
+                      browserBasedLocale,
+                      overlappingDonors.length,
+                    ),
                   })}
                 </h3>
                 <p className="text-muted-foreground mb-4 text-sm">
@@ -1043,14 +1055,14 @@ export const PartyComparison = ({
                                 </div>
                                 <div className="text-muted-foreground text-xs tabular-nums">
                                   {formatCompactCountryCurrency(
-                                    locale,
+                                    browserBasedLocale,
                                     donor.totalSum,
                                     countryConfig,
                                   )}
                                   {" · "}
                                   {tCompareParties("n_donations", {
                                     count: formatNumber(
-                                      locale,
+                                      browserBasedLocale,
                                       donor.totalSum > 0
                                         ? Object.values(donor.perParty).reduce(
                                             (acc, d) => acc + d.count,
@@ -1072,7 +1084,7 @@ export const PartyComparison = ({
                                     {data ? (
                                       <TwoLineCell
                                         primary={formatCountryCurrency(
-                                          locale,
+                                          browserBasedLocale,
                                           data.sum,
                                           countryConfig,
                                         )}
@@ -1080,7 +1092,7 @@ export const PartyComparison = ({
                                           "n_donations",
                                           {
                                             count: formatNumber(
-                                              locale,
+                                              browserBasedLocale,
                                               data.count,
                                             ),
                                           },
@@ -1113,14 +1125,14 @@ export const PartyComparison = ({
                           </h4>
                           <div className="text-muted-foreground mt-0.5 text-xs font-medium tabular-nums">
                             {formatCompactCountryCurrency(
-                              locale,
+                              browserBasedLocale,
                               donor.totalSum,
                               countryConfig,
                             )}
                             {" · "}
                             {tCompareParties("n_donations", {
                               count: formatNumber(
-                                locale,
+                                browserBasedLocale,
                                 donor.totalSum > 0
                                   ? Object.values(donor.perParty).reduce(
                                       (acc, d) => acc + d.count,
@@ -1157,7 +1169,7 @@ export const PartyComparison = ({
                                     {data ? (
                                       <TwoLineCell
                                         primary={formatCountryCurrency(
-                                          locale,
+                                          browserBasedLocale,
                                           data.sum,
                                           countryConfig,
                                         )}
@@ -1165,7 +1177,7 @@ export const PartyComparison = ({
                                           "n_donations",
                                           {
                                             count: formatNumber(
-                                              locale,
+                                              browserBasedLocale,
                                               data.count,
                                             ),
                                           },
@@ -1190,7 +1202,7 @@ export const PartyComparison = ({
                   <p className="text-muted-foreground px-4 py-2 text-sm">
                     {tCompareParties("overlapping.more", {
                       count: formatNumber(
-                        locale,
+                        browserBasedLocale,
                         overlappingDonors.length - OVERLAP_MAX,
                       ),
                     })}

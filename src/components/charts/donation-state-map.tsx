@@ -1,13 +1,12 @@
 "use client";
 import type { EChartsOption } from "echarts";
 
-import { useLocale } from "next-intl";
-
 import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Countries } from "@/utils/countries";
 import type { Donation, ReceiverId } from "@/utils/types";
 
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
@@ -36,7 +35,7 @@ export const DonationStateMap = ({
   donations: Donation[];
 }) => {
   const t = useTranslations();
-  const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
   const { isMobile, backgroundColor, isDark } = useChart();
   const countryCode = country.code;
   const isEu = country.id === Country.europeanunion;
@@ -94,7 +93,7 @@ export const DonationStateMap = ({
       right: 20,
       orient: isMobile ? "horizontal" : "vertical",
       formatter: (value) =>
-        formatCountryCurrency(locale, value as number, country),
+        formatCountryCurrency(browserBasedLocale, value as number, country),
       inRange: {
         color: [
           "#fff",
@@ -156,7 +155,7 @@ export const DonationStateMap = ({
 
             tooltipContent += `<div class="flex justify-between"><div class="font-semibold leading-normal">${t(
               "sum",
-            )}</div>${formatCountryCurrency(locale, Number.isNaN(value) ? 0 : value, country)}</div>`;
+            )}</div>${formatCountryCurrency(browserBasedLocale, Number.isNaN(value) ? 0 : value, country)}</div>`;
 
             const donations = (
               Object.entries(statePartyDonations[params.name] ?? {}) as [
@@ -174,7 +173,7 @@ export const DonationStateMap = ({
                     )}"></div>
                     <div>${formatPartyShortName(country, party)}</div>
                   </div> 
-                  ${formatCountryCurrency(locale, sum, country)}
+                  ${formatCountryCurrency(browserBasedLocale, sum, country)}
                 </div>`;
               });
 

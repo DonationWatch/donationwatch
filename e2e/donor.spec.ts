@@ -1,5 +1,8 @@
 import { expect } from "@playwright/test";
 
+import type { BrowserBasedLocale } from "@/utils/locales";
+
+import { makeBrand } from "@/utils/brand";
 import { formatAnd } from "@/utils/formatter";
 
 import { hash } from "../tasks/load-data/util";
@@ -57,7 +60,11 @@ test.describe("Donor page", () => {
     await page.goto(`${baseURL}/germany/donor/${hash(DONOR_WITH_UBOs)}`);
 
     await expect(donorPage.uboText).toHaveText(
-      formatAnd(locale, ["Fake UBO 1", "Fake UBO 2"]),
+      // Branded as BrowserBasedLocale to satisfy formatter types in tests.
+      formatAnd(makeBrand<BrowserBasedLocale>(locale), [
+        "Fake UBO 1",
+        "Fake UBO 2",
+      ]),
     );
 
     await test.step("is accessible", async () => {

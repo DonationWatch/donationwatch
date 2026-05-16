@@ -8,6 +8,7 @@ import type { Donation, ReceiverId } from "@/utils/types";
 import { FormatAnd } from "@/components/formatter";
 import { TextPartyLink } from "@/components/parties/text-party-link";
 import { Translation } from "@/components/translation";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
 import { donationYear } from "@/utils/date";
@@ -27,6 +28,7 @@ export const YearBarsPageText = ({
 }) => {
   const t = useTranslations();
   const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
 
   const yearsSet = new Set<string>(years);
   const partiesSet = new Set<string>(parties.map((p) => p[PartyField.Id]));
@@ -113,11 +115,11 @@ export const YearBarsPageText = ({
             text={t.raw("per_month.highest_sum")}
             variables={{
               month: formatMonthYear(
-                locale,
+                browserBasedLocale,
                 new Date(monthWithHighestDonationSum.date),
               ),
               sum: formatCountryCurrency(
-                locale,
+                browserBasedLocale,
                 monthWithHighestDonationSum.sum,
                 country,
               ),
@@ -155,7 +157,7 @@ export const YearBarsPageText = ({
             text={t.raw("per_month.month_most_donations")}
             variables={{
               month: formatMonthYear(
-                locale,
+                browserBasedLocale,
                 new Date(monthWithMostDonations.date),
               ),
               count: monthWithMostDonations.count,
