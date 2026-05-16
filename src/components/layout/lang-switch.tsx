@@ -20,7 +20,7 @@ const languagesInTheirLanguage: Record<(typeof CONST_LOCALES)[number], string> =
     nl: "Nederlands",
     cs: "Čeština",
     lv: "Latviešu",
-    et: "Eestlane",
+    et: "Eesti",
     hr: "Hrvatski",
     no: "Norsk",
     uk: "Українська",
