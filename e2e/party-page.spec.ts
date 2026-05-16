@@ -106,6 +106,33 @@ test.describe("Party page", () => {
         ).toHaveCount(0);
       });
     });
+
+    test("shows date based on the navigator language", async ({
+      page,
+      baseURL,
+      historyPage,
+      browser,
+    }) => {
+      await page.goto(`${baseURL}/germany/party/${CHECK_PARTY}/changes`);
+      const dateCell = historyPage.tableRows.first().locator("td").nth(0);
+
+      await test.step("en useragent uses en-US format", async () => {
+        await expect(dateCell).toHaveText("12/26/26");
+      });
+
+      await test.step("en-GB useragent uses en-GB format", async () => {
+        const context = await browser.newContext({ locale: "en-GB" });
+        const gbPage = await context.newPage();
+        await gbPage.goto(`${baseURL}/germany/party/${CHECK_PARTY}/changes`);
+        const gbDateCell = gbPage
+          .locator("table tbody tr")
+          .first()
+          .locator("td")
+          .nth(0);
+        await expect(gbDateCell).toHaveText("26/12/26");
+        await context.close();
+      });
+    });
   });
 
   test.describe("timeline page", () => {

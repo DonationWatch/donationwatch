@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
 
 import type { CountryConfig } from "@/types/country-config";
-import type { ConstLocale } from "@/utils/locales";
+import type { BrowserBasedLocale, ConstLocale } from "@/utils/locales";
 import type { Donation, ReceiverId } from "@/utils/types";
 
 import { NonInteractableRankingItem } from "@/components/donations/noninteractable-ranking-item";
@@ -23,7 +23,7 @@ export const ReadonlyTopYearDonationsItem = ({
   amount: number;
   rank: number;
   sum: number;
-  locale: ConstLocale;
+  locale: BrowserBasedLocale;
   country: CountryConfig;
 }) => {
   return (

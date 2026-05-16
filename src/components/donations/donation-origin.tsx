@@ -1,5 +1,4 @@
 "use client";
-import { useLocale } from "next-intl";
 import { useState } from "react";
 
 import type { CountryConfig } from "@/types/country-config";
@@ -15,6 +14,7 @@ import {
   ArticleSectionTwoColumns,
   ArticleSectionWrapper,
 } from "@/components/layout/article";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
 import { Country, getCountryName } from "@/utils/countries";
@@ -44,7 +44,7 @@ const CurrentCountryPart = ({
 }) => {
   const t = useTranslations();
   const tCountries = useTranslations("countries");
-  const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
   const [expandedDonors, setExpandedDonors] = useState<string[]>([]);
   const onToggleExpanded = (state: string) => {
     setExpandedDonors((prev) =>
@@ -90,7 +90,7 @@ const CurrentCountryPart = ({
                 : // @ts-expect-error - we know that state is defined because it is used in the bucket
                   t(`state.${country.id}.${largestDonationSum[1].state!}`),
               highestSum: formatCountryCurrency(
-                locale,
+                browserBasedLocale,
                 largestDonationSum[1].sum,
                 country,
               ),
@@ -148,7 +148,7 @@ const OtherCountryPart = ({
 }) => {
   const t = useTranslations();
   const tCountries = useTranslations("countries");
-  const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
   const [expandedCountries, setExpandedCountries] = useState<string[]>([]);
   const onToggleExpanded = (state: string) => {
     setExpandedCountries((prev) =>
@@ -194,7 +194,7 @@ const OtherCountryPart = ({
                 ][AddressField.Country]!}`,
               ),
               highestSum: formatCountryCurrency(
-                locale,
+                browserBasedLocale,
                 largesOtherDonationSum[1].sum,
                 country,
               ),
@@ -312,7 +312,7 @@ const DonationOrigin = ({
 }) => {
   const t = useTranslations();
   const tCountries = useTranslations("countries");
-  const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
   const { sum, sums } = getOriginDonations(country, donations, parties, years);
 
   const isEu = country.id === Country.europeanunion;
@@ -374,8 +374,16 @@ const DonationOrigin = ({
                     ? formatYearsRange(years)
                     : (years.at(0) as string),
                 country: getCountryName(country, tCountries),
-                sumCountry: formatCountryCurrency(locale, sumCountry, country),
-                sumOthers: formatCountryCurrency(locale, sumOthers, country),
+                sumCountry: formatCountryCurrency(
+                  browserBasedLocale,
+                  sumCountry,
+                  country,
+                ),
+                sumOthers: formatCountryCurrency(
+                  browserBasedLocale,
+                  sumOthers,
+                  country,
+                ),
               })}
             </p>
           </ArticleSectionColumn>

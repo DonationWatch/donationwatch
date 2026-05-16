@@ -5,8 +5,8 @@ import type { CountryConfig } from "@/types/country-config";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 import type { ConstLocale } from "@/utils/locales";
 
+import { FormattedCompactCountryCurrency } from "@/components/browser-based-formatter";
 import { DynamicStackedPartyDonations } from "@/components/charts/dynamic-stacked-party-line";
-import { formatCompactCountryCurrency } from "@/utils/formatter";
 
 const VISIBLE_PARTIES = 6;
 
@@ -32,13 +32,12 @@ const YearCard = ({
       >
         <div className="mt-1 flex w-full justify-between">
           <span className="font-semibold">{year}</span>
-          {formatCompactCountryCurrency(locale, sum, country)}
+          <FormattedCompactCountryCurrency value={sum} country={country} />
         </div>
         <div className="mt-1 h-1">
           <DynamicStackedPartyDonations
             country={country}
             years={[year]}
-            locale={locale}
             partyYearsSums={partyYearsSums}
           />
         </div>

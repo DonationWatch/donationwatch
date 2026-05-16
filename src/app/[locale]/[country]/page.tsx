@@ -5,6 +5,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { AbsoluteMultipleColorsGradient } from "@/components/absolute-multiple-colors-gradient";
+import {
+  FormattedCompactCountryCurrency,
+  FormattedCountryCurrency,
+} from "@/components/browser-based-formatter";
 import { DonationStackedYears } from "@/components/charts/donation-stacked-years";
 import { BiggestDonationsHero } from "@/components/donations/biggest-donations-hero";
 import { DonorsHero } from "@/components/donors/donors-hero";
@@ -12,6 +16,7 @@ import { ExternalThanks } from "@/components/external-thanks";
 import { HistoryComponent } from "@/components/history-component";
 import { DetectedCountry } from "@/components/layout/detected-country";
 import { PartiesHero } from "@/components/parties/parties-hero";
+import { Translation } from "@/components/translation";
 import { YearsCards } from "@/components/years/years-cards";
 import { YearsHeader } from "@/components/years/years-header";
 import {
@@ -21,10 +26,6 @@ import {
 } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { Features, hasFeature } from "@/utils/features";
-import {
-  formatCompactCountryCurrency,
-  formatCountryCurrency,
-} from "@/utils/formatter";
 import { getBiggestDonors } from "@/utils/loader/biggest-donors";
 import { loadCountryData } from "@/utils/loader/country-data-loaders";
 import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
@@ -149,14 +150,15 @@ export default async function YearsPage(
               >
                 <div className="flex items-center justify-between">
                   <span className="font-semibold">{previousYear}</span>
-                  {formatCountryCurrency(
-                    locale,
-                    Object.values(partySums[previousYear]).reduce(
-                      (all, stats) => all + stats.sum,
-                      0,
-                    ),
-                    countryConfig,
-                  )}
+                  {
+                    <FormattedCountryCurrency
+                      country={countryConfig}
+                      value={Object.values(partySums[previousYear]).reduce(
+                        (all, stats) => all + stats.sum,
+                        0,
+                      )}
+                    />
+                  }
                 </div>
               </Link>
             ) : null}
@@ -180,20 +182,27 @@ export default async function YearsPage(
               {countryConfig.knownPartyRequirements ? (
                 <>
                   <br />
-                  {tHome("what.threshold", {
-                    type:
-                      countryConfig.knownPartyRequirements.count === -1
-                        ? "sum"
-                        : countryConfig.knownPartyRequirements.sum === -1
-                          ? "count"
-                          : "both",
-                    count: countryConfig.knownPartyRequirements.count,
-                    sum: formatCompactCountryCurrency(
-                      locale,
-                      Math.max(0, countryConfig.knownPartyRequirements.sum),
-                      countryConfig,
-                    ),
-                  })}
+                  <Translation
+                    text={tHome.raw("what.threshold")}
+                    variables={{
+                      type:
+                        countryConfig.knownPartyRequirements.count === -1
+                          ? "sum"
+                          : countryConfig.knownPartyRequirements.sum === -1
+                            ? "count"
+                            : "both",
+                      count: countryConfig.knownPartyRequirements.count,
+                      sum: (
+                        <FormattedCompactCountryCurrency
+                          country={countryConfig}
+                          value={Math.max(
+                            0,
+                            countryConfig.knownPartyRequirements.sum,
+                          )}
+                        />
+                      ),
+                    }}
+                  />
                   <br />
                 </>
               ) : null}
@@ -293,11 +302,7 @@ export default async function YearsPage(
             })}
           </p>
 
-          <DonorsHero
-            country={countryConfig}
-            locale={locale}
-            biggestDonors={biggestDonors}
-          />
+          <DonorsHero country={countryConfig} biggestDonors={biggestDonors} />
 
           <BiggestDonationsHero
             country={countryConfig}

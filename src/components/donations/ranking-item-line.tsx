@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from "react";
 
 import type { CountryConfig } from "@/types/country-config";
-import type { ConstLocale } from "@/utils/locales";
+import type { BrowserBasedLocale } from "@/utils/locales";
 
 import { cn } from "@/lib/utils";
 import { donationYear } from "@/utils/date";
@@ -21,7 +21,7 @@ export const RankingItemLine = ({
   label: string;
   date: string;
   amount: number;
-  locale: ConstLocale;
+  locale: BrowserBasedLocale;
   country: CountryConfig;
   year: string;
   className?: string;

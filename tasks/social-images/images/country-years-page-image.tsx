@@ -1,6 +1,6 @@
 import type { CountryConfig } from "@/types/country-config";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
-import type { ConstLocale } from "@/utils/locales";
+import type { ImageLocale } from "@/utils/locales";
 import type { Donation } from "@/utils/types";
 
 import { donationYear } from "@/utils/date";
@@ -12,7 +12,7 @@ import { ImageYearsHeader } from "../components/image-years-header";
 import { ThumbnailWrapper } from "../components/utils";
 
 export const CountryYearsPageImage = async (
-  locale: ConstLocale,
+  locale: ImageLocale,
   getTranslations: CreateTranslator,
   countryConfig: CountryConfig,
   donations: Donation[],

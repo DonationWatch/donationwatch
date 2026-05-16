@@ -20,7 +20,11 @@ import { getBiggestDonors } from "@/utils/loader/biggest-donors";
 import { baseOpenGraph, baseTwitter, generateAlternates } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
 import { DonationField, DonorType } from "@/utils/types";
-import { isValidCountry, isValidLocale } from "@/utils/validate";
+import {
+  isValidCountry,
+  isValidLocale,
+  isValidMetadataLocale,
+} from "@/utils/validate";
 
 import { DonorClientPage } from "./donor-client-page";
 import { DonorPageHead } from "./donor-page-head";
@@ -30,7 +34,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const params = await props.params;
 
-  if (!isValidLocale(params.locale)) return notFoundMetadata;
+  if (!isValidMetadataLocale(params.locale)) return notFoundMetadata;
   if (!isValidCountry(params.country)) return notFoundMetadata;
   setRequestLocale(params.locale);
 

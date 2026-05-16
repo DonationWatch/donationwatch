@@ -2,12 +2,11 @@
 import type { EChartsOption } from "echarts";
 import type { CallbackDataParams } from "echarts/types/dist/shared";
 
-import { useLocale } from "next-intl";
-
 import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Donation } from "@/utils/types";
 
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
@@ -34,7 +33,7 @@ export const LoadedDonorReceiverHistogram = ({
   years?: string[];
 }) => {
   const t = useTranslations();
-  const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
 
   const yearsSet = new Set<string>(years);
   const partiesSet = new Set<Party>(parties);
@@ -127,8 +126,8 @@ export const LoadedDonorReceiverHistogram = ({
         const donorCount = data[1] || 0;
 
         return t("donors.histogram.tooltip", {
-          donors: formatNumber(locale, donorCount),
-          parties: formatNumber(locale, receiversCount),
+          donors: formatNumber(browserBasedLocale, donorCount),
+          parties: formatNumber(browserBasedLocale, receiversCount),
         });
       },
     },
@@ -142,7 +141,7 @@ export const LoadedDonorReceiverHistogram = ({
         // type: "log",
         // logBase: 4,
         axisLabel: {
-          formatter: (value: number) => formatNumber(locale, value),
+          formatter: (value: number) => formatNumber(browserBasedLocale, value),
         },
         minorSplitLine: {
           show: true,

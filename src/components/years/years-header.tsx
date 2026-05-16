@@ -12,6 +12,7 @@ import type { ConstLocale } from "@/utils/locales";
 import { DynamicStackedPartyDonations } from "@/components/charts/dynamic-stacked-party-line";
 import { ReadonlyTopYearDonationsItem } from "@/components/loading/loading-top-year-donations-item";
 import { MetaCard } from "@/components/meta-card";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { cn } from "@/lib/utils";
 import { getParties } from "@/utils/data/get-parties";
@@ -89,6 +90,7 @@ const HighscoreHeader = ({
   titleBeforeYears?: boolean;
 }) => {
   const t = useTranslations();
+  const browserBasedLocale = useBrowserBasedLocale();
 
   const { count, sum, sums, sumNumbers } = getPartiesSum(
     country,
@@ -118,12 +120,12 @@ const HighscoreHeader = ({
           {hasFeature(country, Features.Donors) ? (
             <MetaCard
               title={t("donation_count")}
-              value={formatNumber(locale, count)}
+              value={formatNumber(browserBasedLocale, count)}
             />
           ) : null}
           <MetaCard
             title={t("sum")}
-            value={formatCountryCurrency(locale, sum, country)}
+            value={formatCountryCurrency(browserBasedLocale, sum, country)}
           />
           {hasFeature(country, Features.Donors) &&
             showExtendedMeta &&
@@ -131,7 +133,7 @@ const HighscoreHeader = ({
               <MetaCard
                 title={t("average")}
                 value={formatCountryCurrency(
-                  locale,
+                  browserBasedLocale,
                   numbersAvg(sumNumbers, count),
                   country,
                 )}
@@ -144,7 +146,6 @@ const HighscoreHeader = ({
           <DynamicStackedPartyDonations
             country={country}
             years={years}
-            locale={locale}
             partyYearsSums={partyYearsSums}
           />
         </div>
@@ -158,7 +159,7 @@ const HighscoreHeader = ({
               partyId={party}
               amount={data.sum}
               sum={sum}
-              locale={locale}
+              locale={browserBasedLocale}
               country={country}
             />
           ))}

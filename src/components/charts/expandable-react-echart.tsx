@@ -2,12 +2,12 @@
 import type { LucideIcon } from "lucide-react";
 
 import { Expand, X, ZoomOut } from "lucide-react";
-import { useLocale } from "next-intl";
 import { type JSX, useCallback, useRef, useState } from "react";
 
 import type { CountryConfig } from "@/types/country-config";
 
 import { PageLogo } from "@/components/layout/page-logo";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { isNotNullandNotUndefined } from "@/utils/array";
 import {
@@ -57,7 +57,7 @@ export const ExpandableReactEchart = ({
 }): JSX.Element => {
   const t = useTranslations();
   const tChart = useTranslations("chart");
-  const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
 
   const [isExpanded, setIsExpanded] = useState(false);
   const [isZoomed, setIsZoomed] = useState(false);
@@ -142,7 +142,7 @@ export const ExpandableReactEchart = ({
           option={option}
           settings={settings}
           theme={theme}
-          locale={locale}
+          locale={browserBasedLocale}
           onZrClick={onZrClick}
           onClick={onClick}
           onZoom={handleZoom}
@@ -153,7 +153,7 @@ export const ExpandableReactEchart = ({
           <div className="opacity-80">
             {t("footer.build", {
               date: formatTwoDigitDate(
-                locale,
+                browserBasedLocale,
                 new Date(getBuild(country.id).t),
               ),
             })}
@@ -161,7 +161,7 @@ export const ExpandableReactEchart = ({
             {[
               t("over_min_public_amount", {
                 amount: formatCompactCountryCurrency(
-                  locale,
+                  browserBasedLocale,
                   country.minPublicDonationAmount,
                   country,
                 ),
@@ -176,7 +176,7 @@ export const ExpandableReactEchart = ({
                           : "both",
                     count: country.knownPartyRequirements.count,
                     sum: formatCompactCountryCurrency(
-                      locale,
+                      browserBasedLocale,
                       Math.max(0, country.knownPartyRequirements.sum),
                       country,
                     ),

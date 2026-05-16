@@ -1,5 +1,5 @@
 "use client";
-import { useLocale } from "next-intl";
+
 import { parseAsString, useQueryState } from "nuqs";
 import { useMemo } from "react";
 
@@ -24,7 +24,6 @@ export const RacingBarsContent = ({
 }) => {
   const tCountries = useTranslations("countries");
   const tBarChartRace = useTranslations("bar_chart_race");
-  const locale = useLocale();
 
   const lastLegislativeYear = lastItem(
     countryConfig.legislativeYears ?? [
@@ -177,7 +176,6 @@ export const RacingBarsContent = ({
           years={validSelectedYears}
           donations={filteredDonations}
           groupByField={groupByField}
-          locale={locale}
           currency={countryConfig.currency}
           title={tBarChartRace("chart_title")}
           subtitle={tBarChartRace("chart_subtitle", {

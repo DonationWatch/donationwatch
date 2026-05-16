@@ -8,6 +8,7 @@ import { DonorLink } from "@/components/donors/donor-link";
 import { FormatAnd } from "@/components/formatter";
 import { TextPartyLink } from "@/components/parties/text-party-link";
 import { Translation } from "@/components/translation";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { getCountryName } from "@/utils/countries";
 import { donationYear } from "@/utils/date";
@@ -26,6 +27,7 @@ export const BiggestDonationsHero = ({
   const tCountries = useTranslations("countries");
   const tCommon = useTranslations("common");
   const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
 
   if (!biggestDonations.length) return null;
 
@@ -40,7 +42,7 @@ export const BiggestDonationsHero = ({
           minYear: country.minYear,
           country: getCountryName(country, tCountries),
           amount: formatCountryCurrency(
-            locale,
+            browserBasedLocale,
             biggestDonation[DonationField.Amount],
             country,
           ),
@@ -67,7 +69,7 @@ export const BiggestDonationsHero = ({
                   text={tBiggestDonations.raw("list")}
                   variables={{
                     amount: formatCountryCurrency(
-                      locale,
+                      browserBasedLocale,
                       donation[DonationField.Amount],
                       country,
                     ),

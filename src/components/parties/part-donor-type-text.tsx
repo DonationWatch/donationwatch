@@ -1,12 +1,11 @@
 "use client";
-import { useLocale } from "next-intl";
-
 import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Donation } from "@/utils/types";
 
 import { RankBadge } from "@/components/donations/ranking-item";
 import { PercentageHint } from "@/components/percentage-hint";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
 import { formatCountryCurrency } from "@/utils/formatter";
@@ -22,7 +21,7 @@ export const LoadingPartyDonorTypeText = ({
   donations: Donation[];
 }) => {
   const t = useTranslations();
-  const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
 
   const sumByType: Partial<Record<DonorType, { sum: number; count: number }>> =
     {};
@@ -70,10 +69,14 @@ export const LoadingPartyDonorTypeText = ({
               </div>
               <div className="ml-2 flex tabular-nums">
                 <span className="lg:mr-1">
-                  {formatCountryCurrency(locale, stats.sum, country)}
+                  {formatCountryCurrency(
+                    browserBasedLocale,
+                    stats.sum,
+                    country,
+                  )}
                 </span>
                 <PercentageHint
-                  locale={locale}
+                  browserBasedLocale={browserBasedLocale}
                   percentage={stats.sum / totalSum}
                 />
               </div>

@@ -23,7 +23,11 @@ import {
 import { generateAlternates } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
 import { deserializeYears } from "@/utils/serializers";
-import { isValidCountry, isValidLocale } from "@/utils/validate";
+import {
+  isValidCountry,
+  isValidLocale,
+  isValidMetadataLocale,
+} from "@/utils/validate";
 
 import { YearsOverviewClientPage } from "./_components/years-overview-client-page";
 
@@ -32,7 +36,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const params = await props.params;
 
-  if (!isValidLocale(params.locale)) return notFoundMetadata;
+  if (!isValidMetadataLocale(params.locale)) return notFoundMetadata;
   if (!isValidCountry(params.country)) return notFoundMetadata;
   setRequestLocale(params.locale);
 

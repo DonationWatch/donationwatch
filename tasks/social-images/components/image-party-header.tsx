@@ -2,7 +2,7 @@
 
 import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
-import type { ConstLocale } from "@/utils/locales";
+import type { ImageLocale } from "@/utils/locales";
 import type { Donation } from "@/utils/types";
 
 import { PartyField } from "@/types/party";
@@ -26,7 +26,7 @@ const RankingItem = ({
   name: string;
   amount: number;
   sum: number;
-  locale: ConstLocale;
+  locale: ImageLocale;
   country: CountryConfig;
 }) => {
   return (
@@ -58,7 +58,7 @@ export const ImagePartyHeader = ({
   getTranslations: CreateTranslator;
   country: CountryConfig;
   party: Party;
-  locale: ConstLocale;
+  locale: ImageLocale;
   donations: Donation[];
 }) => {
   const t = getTranslations();

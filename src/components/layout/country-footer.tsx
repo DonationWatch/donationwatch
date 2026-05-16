@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import type { CountryConfig } from "@/types/country-config";
 
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { formatDate } from "@/utils/formatter";
 import { getBuild } from "@/utils/loader/build";
@@ -13,6 +14,7 @@ import { PageLogo } from "./page-logo";
 export const CountryFooter = ({ country }: { country: CountryConfig }) => {
   const t = useTranslations();
   const locale = useLocale();
+  const browserLocale = useBrowserBasedLocale();
 
   return (
     <section className="container mx-auto shrink-0 px-4 text-gray-600 dark:text-gray-400">
@@ -28,9 +30,9 @@ export const CountryFooter = ({ country }: { country: CountryConfig }) => {
           </Link>
         </div>
 
-        <div className="px-2 text-sm sm:p-2">
+        <div className="px-2 text-sm sm:p-2" suppressHydrationWarning>
           {t("footer.build", {
-            date: formatDate(locale, new Date(getBuild(country.id).t)),
+            date: formatDate(browserLocale, new Date(getBuild(country.id).t)),
           })}
         </div>
 

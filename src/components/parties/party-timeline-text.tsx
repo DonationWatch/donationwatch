@@ -1,10 +1,10 @@
 "use client";
-import { useLocale } from "next-intl";
 
 import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Donation } from "@/utils/types";
 
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
 import { donationYear } from "@/utils/date";
@@ -21,7 +21,7 @@ export const PartyTimelineText = ({
   donations: Donation[];
 }) => {
   const t = useTranslations();
-  const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
 
   let sum = 0;
   const perYearSums: Record<string, number> = {};
@@ -51,13 +51,15 @@ export const PartyTimelineText = ({
             >
               <span>{year}</span>
               <span className="tabular-nums">
-                <span>{formatCountryCurrency(locale, yearSum, country)}</span>{" "}
+                <span>
+                  {formatCountryCurrency(browserBasedLocale, yearSum, country)}
+                </span>{" "}
                 <span
                   className={
                     "hidden w-14 text-right text-gray-500 lg:inline-block dark:text-gray-400"
                   }
                 >
-                  ({formatPercentFormat(locale, yearSum / sum)})
+                  ({formatPercentFormat(browserBasedLocale, yearSum / sum)})
                 </span>
               </span>
             </li>

@@ -6,10 +6,10 @@ import { BriefcaseBusiness, Building2, Landmark } from "lucide-react";
 
 import type { CountryConfig } from "@/types/country-config";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
-import type { ConstLocale } from "@/utils/locales";
 
 import { DonorLink } from "@/components/donors/donor-link";
 import { Family } from "@/components/icons/Family";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { formatCompactCountryCurrency } from "@/utils/formatter";
 import { sumPartySums } from "@/utils/math";
 import { RelationKind } from "@/utils/types";
@@ -24,16 +24,15 @@ const kindIcons: Record<RelationKind, JSX.Element> = {
 export const RelatedDonorChip = ({
   name,
   kind,
-  locale,
   country,
   sums,
 }: {
   name: string;
   kind: RelationKind;
-  locale: ConstLocale;
   country: CountryConfig;
   sums?: PartyYearsSums;
 }) => {
+  const browserBasedLocale = useBrowserBasedLocale();
   const sum = sumPartySums(sums ?? {});
 
   return (
@@ -48,7 +47,7 @@ export const RelatedDonorChip = ({
       <span>{name}</span>
       {sums ? (
         <span className="bg-primary/10 ml-2 rounded-full px-1.5 py-0.5 text-xs">
-          {formatCompactCountryCurrency(locale, sum, country)}
+          {formatCompactCountryCurrency(browserBasedLocale, sum, country)}
         </span>
       ) : null}
     </DonorLink>

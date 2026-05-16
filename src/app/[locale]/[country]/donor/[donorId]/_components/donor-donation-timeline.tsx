@@ -1,7 +1,5 @@
 "use client";
 
-import { useLocale } from "next-intl";
-
 import type { CountryConfig } from "@/types/country-config";
 import type { Donation, ReceiverId } from "@/utils/types";
 
@@ -12,6 +10,7 @@ import {
   ArticleSectionTwoColumns,
   ArticleSectionWrapper,
 } from "@/components/layout/article";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { getCountryName, getParty } from "@/utils/countries";
 import { donationYear, fillYears } from "@/utils/date";
@@ -30,7 +29,7 @@ export const DonorDonationTimeline = ({
   const tCountries = useTranslations("countries");
   const tDonor = useTranslations("donor");
   const tCommon = useTranslations("common");
-  const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
   const firstYear = donationYear(donations[0]);
   const lastYear = donationYear(donations[donations.length - 1]);
   const donorName = getDonorName(
@@ -80,14 +79,18 @@ export const DonorDonationTimeline = ({
                   <span>{year}</span>
                   <span className="tabular-nums">
                     <span>
-                      {formatCountryCurrency(locale, yearSum, countryConfig)}
+                      {formatCountryCurrency(
+                        browserBasedLocale,
+                        yearSum,
+                        countryConfig,
+                      )}
                     </span>{" "}
                     <span
                       className={
                         "hidden w-14 text-right text-gray-500 lg:inline-block dark:text-gray-400"
                       }
                     >
-                      ({formatPercentFormat(locale, yearSum / sum)})
+                      ({formatPercentFormat(browserBasedLocale, yearSum / sum)})
                     </span>
                   </span>
                 </div>

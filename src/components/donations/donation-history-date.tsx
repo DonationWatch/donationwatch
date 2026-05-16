@@ -1,19 +1,18 @@
 "use client";
-import { useLocale } from "next-intl";
-
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { dateDiffInDays, donationYear } from "@/utils/date";
 import { formatDate, formatRelativeDate } from "@/utils/formatter";
 import { DonationField } from "@/utils/types";
 
 export const DonationHistoryDate = ({ date }: { date: string }) => {
   const now = Date.now();
-  const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
 
   if (date === donationYear({ [DonationField.Date]: date }))
     return <div className="shrink-0 text-sm">{date}</div>;
 
   const dateDate = new Date(date);
-  const fmtDate = formatDate(locale, dateDate);
+  const fmtDate = formatDate(browserBasedLocale, dateDate);
   const dateDiff = dateDiffInDays(new Date(now), dateDate);
 
   return (
@@ -22,7 +21,7 @@ export const DonationHistoryDate = ({ date }: { date: string }) => {
 
       {dateDiff !== 0 ? (
         <span className="hidden lg:inline">
-          &nbsp;({formatRelativeDate(locale, dateDiff, "days")})
+          &nbsp;({formatRelativeDate(browserBasedLocale, dateDiff, "days")})
         </span>
       ) : null}
     </div>

@@ -12,6 +12,7 @@ import { FormatAnd } from "@/components/formatter";
 import { ArticleSectionTitle } from "@/components/layout/article";
 import { FaqSchema } from "@/components/schema";
 import { Translation } from "@/components/translation";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
 import { isNotNullandNotUndefined } from "@/utils/array";
@@ -38,6 +39,7 @@ export const PartyDonorPageText = ({
 }) => {
   const t = useTranslations();
   const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
 
   let sum = 0;
   const donations = data;
@@ -124,14 +126,14 @@ export const PartyDonorPageText = ({
       question: t("party.qa.sum.q", { party: party[PartyField.Short] }),
       answer: t("party.qa.sum.a", {
         party: party[PartyField.Short],
-        sum: formatCountryCurrency(locale, sum, country),
+        sum: formatCountryCurrency(browserBasedLocale, sum, country),
         count: partyDonations.length,
         minYear: formatYear(
-          locale,
+          browserBasedLocale,
           new Date(firstDonation[DonationField.Date]),
         ),
         minSum: formatCompactCountryCurrency(
-          locale,
+          browserBasedLocale,
           country.minPublicDonationAmount,
           country,
         ),
@@ -142,10 +144,10 @@ export const PartyDonorPageText = ({
       answer: t("party.qa.top_donors.a", {
         party: party[PartyField.Short],
         donors: formatAnd(
-          locale,
+          browserBasedLocale,
           topDonors.map(
             (d) =>
-              `${d.name} (${formatCountryCurrency(locale, d.sum, country)})`,
+              `${d.name} (${formatCountryCurrency(browserBasedLocale, d.sum, country)})`,
           ),
         ),
       }),
@@ -160,7 +162,7 @@ export const PartyDonorPageText = ({
                 items={topDonors.map((d, i) => (
                   <span key={i}>
                     <DonorLink country={country} donor={d.name} /> (
-                    {formatCountryCurrency(locale, d.sum, country)})
+                    {formatCountryCurrency(browserBasedLocale, d.sum, country)})
                   </span>
                 ))}
               />
@@ -176,13 +178,13 @@ export const PartyDonorPageText = ({
           }),
           answer: t("party.qa.largest_singular.a", {
             amount: formatCountryCurrency(
-              locale,
+              browserBasedLocale,
               biggestSingularDonation[DonationField.Amount],
               country,
             ),
             donor: biggestSingularDonation[DonationField.DonorName],
             date: formatDate(
-              locale,
+              browserBasedLocale,
               new Date(biggestSingularDonation[DonationField.Date]),
             ),
           }),
@@ -191,7 +193,7 @@ export const PartyDonorPageText = ({
               text={t.raw("party.qa.largest_singular.a")}
               variables={{
                 amount: formatCountryCurrency(
-                  locale,
+                  browserBasedLocale,
                   biggestSingularDonation[DonationField.Amount],
                   country,
                 ),
@@ -202,7 +204,7 @@ export const PartyDonorPageText = ({
                   />
                 ),
                 date: formatDate(
-                  locale,
+                  browserBasedLocale,
                   new Date(biggestSingularDonation[DonationField.Date]),
                 ),
               }}
@@ -218,7 +220,11 @@ export const PartyDonorPageText = ({
           answer: t("party.qa.biggest_overall.a", {
             party: party[PartyField.Short],
             donor: biggestDonor.name,
-            sum: formatCountryCurrency(locale, biggestDonor.sum, country),
+            sum: formatCountryCurrency(
+              browserBasedLocale,
+              biggestDonor.sum,
+              country,
+            ),
           }),
 
           answerHTML: (
@@ -229,7 +235,11 @@ export const PartyDonorPageText = ({
                 donor: (
                   <DonorLink country={country} donor={biggestDonor.name} />
                 ),
-                sum: formatCountryCurrency(locale, biggestDonor.sum, country),
+                sum: formatCountryCurrency(
+                  browserBasedLocale,
+                  biggestDonor.sum,
+                  country,
+                ),
               }}
             />
           ),
@@ -245,7 +255,7 @@ export const PartyDonorPageText = ({
             donor: frequentDonor.name,
             count: frequentDonor.count,
             sum: formatCountryCurrency(
-              locale,
+              browserBasedLocale,
               donorDonations[frequentDonor.name],
               country,
             ),
@@ -260,7 +270,7 @@ export const PartyDonorPageText = ({
                 ),
                 count: frequentDonor.count,
                 sum: formatCountryCurrency(
-                  locale,
+                  browserBasedLocale,
                   donorDonations[frequentDonor.name],
                   country,
                 ),
@@ -283,11 +293,11 @@ export const PartyDonorPageText = ({
         {t("party.donors.summary", {
           party: party[PartyField.Short],
           minYear: formatYear(
-            locale,
+            browserBasedLocale,
             new Date(firstDonation[DonationField.Date]),
           ),
           minSum: formatCompactCountryCurrency(
-            locale,
+            browserBasedLocale,
             country.minPublicDonationAmount,
             country,
           ),

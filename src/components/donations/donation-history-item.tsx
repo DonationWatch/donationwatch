@@ -1,3 +1,5 @@
+"use client";
+
 import { useLocale } from "next-intl";
 
 import type { CountryConfig } from "@/types/country-config";
@@ -6,6 +8,7 @@ import type { ReceiverId } from "@/utils/types";
 import { DonorLink } from "@/components/donors/donor-link";
 import { PartyDot } from "@/components/parties/party-dot";
 import { PartyLink } from "@/components/parties/party-link";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { formatCountryCurrency } from "@/utils/formatter";
 
 import { DynamicDonationHistoryDate } from "./dynamic-donation-history-date";
@@ -24,7 +27,8 @@ export const DonationHistoryItem = ({
   country: CountryConfig;
 }) => {
   const locale = useLocale();
-  const fmtAmount = formatCountryCurrency(locale, amount, country);
+  const browserBasedLocale = useBrowserBasedLocale();
+  const fmtAmount = formatCountryCurrency(browserBasedLocale, amount, country);
 
   return (
     <li

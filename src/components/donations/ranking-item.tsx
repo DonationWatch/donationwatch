@@ -1,11 +1,11 @@
 import type { PropsWithChildren, ReactNode } from "react";
 
 import { ChevronRight } from "lucide-react";
-import { useLocale } from "next-intl";
 
 import type { CountryConfig } from "@/types/country-config";
 
 import { PercentageHint } from "@/components/percentage-hint";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { formatCountryCurrency } from "@/utils/formatter";
 
 const colorClasses: Record<number, string> = {
@@ -50,7 +50,7 @@ export const CurrencyRankingItem = ({
   onToggleExpanded: (expanded: boolean) => void;
   openAction?: ReactNode;
 }>) => {
-  const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
 
   return (
     <RankingItem
@@ -64,9 +64,12 @@ export const CurrencyRankingItem = ({
       right={
         <>
           <span className="lg:mr-1">
-            {formatCountryCurrency(locale, amount, country)}
+            {formatCountryCurrency(browserBasedLocale, amount, country)}
           </span>
-          <PercentageHint locale={locale} percentage={amount / sum} />
+          <PercentageHint
+            browserBasedLocale={browserBasedLocale}
+            percentage={amount / sum}
+          />
         </>
       }
     >

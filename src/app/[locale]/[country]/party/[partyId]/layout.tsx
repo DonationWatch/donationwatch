@@ -7,6 +7,10 @@ import { notFound, redirect } from "next/navigation";
 import type { TabItem } from "@/components/tabs";
 
 import { AbsoluteMultipleColorsGradient } from "@/components/absolute-multiple-colors-gradient";
+import {
+  FormattedCountryCurrency,
+  FormattedNumber,
+} from "@/components/browser-based-formatter";
 import { PageHeader } from "@/components/layout/page-header";
 import { MetaCard } from "@/components/meta-card";
 import { LastModifiedSchema } from "@/components/schema";
@@ -19,7 +23,6 @@ import { THUMBNAIL_PREFIX } from "@/utils/config";
 import { findCorrectParty, getParty } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { Features, hasFeature } from "@/utils/features";
-import { formatCountryCurrency, formatNumber } from "@/utils/formatter";
 import {
   getPartyYearsSums,
   lastPartyStatsDonation,
@@ -201,27 +204,29 @@ export default async function PartyLayout(
               {hasFeature(countryConfig, Features.Donors) ? (
                 <MetaCard
                   title={t("donation_count")}
-                  value={formatNumber(locale, donationCount)}
+                  value={<FormattedNumber value={donationCount} />}
                 />
               ) : null}
               <MetaCard
                 title={t("sum")}
-                value={formatCountryCurrency(
-                  locale,
-                  donationSum,
-                  countryConfig,
-                )}
+                value={
+                  <FormattedCountryCurrency
+                    country={countryConfig}
+                    value={donationSum}
+                  />
+                }
               />
               {hasFeature(countryConfig, Features.Donors) &&
                 showExtendedMeta &&
                 donationCount > 1 && (
                   <MetaCard
                     title={t("average")}
-                    value={formatCountryCurrency(
-                      locale,
-                      donationSum / donationCount,
-                      countryConfig,
-                    )}
+                    value={
+                      <FormattedCountryCurrency
+                        country={countryConfig}
+                        value={donationSum / donationCount}
+                      />
+                    }
                   />
                 )}
             </div>

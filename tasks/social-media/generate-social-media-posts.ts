@@ -10,11 +10,12 @@ import {
 import { promisify } from "util";
 
 import type { CountryConfig } from "@/types/country-config";
-import type { ConstLocale } from "@/utils/locales";
+import type { BrowserBasedLocale, ConstLocale } from "@/utils/locales";
 import type { StrictNamespacedTranslator } from "@/utils/translator";
 import type { Donation, ReceiverId } from "@/utils/types";
 
 import { PartyField } from "@/types/party";
+import { makeBrand } from "@/utils/brand";
 import { Country, getCountryName, getParty } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { formatCompactCountryCurrency } from "@/utils/formatter";
@@ -236,6 +237,9 @@ const main = async () => {
     log("Found party diffs:", partyDiffs);
 
     const lang = countryTranslations[country];
+    // We cast the base language to a BrowserBasedLocale for compatibility with formatters.
+    // In this Node.js context, we don't have a navigator, so we stick to the base language.
+    const browserLang = makeBrand<BrowserBasedLocale>(lang);
 
     const messages = await import(`../../src/messages/${lang}.json`, {
       with: { type: "json" },
@@ -262,9 +266,9 @@ const main = async () => {
         ],
         delta:
           deltaPrefix(data.delta) +
-          formatCompactCountryCurrency(lang, data.delta, countryConfig),
+          formatCompactCountryCurrency(browserLang, data.delta, countryConfig),
         count: deltaPrefix(data.count) + data.count,
-        sum: formatCompactCountryCurrency(lang, data.sum, countryConfig),
+        sum: formatCompactCountryCurrency(browserLang, data.sum, countryConfig),
       })}\n`;
     });
 
@@ -281,7 +285,7 @@ const main = async () => {
         otherParties: otherParties.length,
         otherDelta:
           deltaPrefix(otherDelta) +
-          formatCompactCountryCurrency(lang, otherDelta, countryConfig),
+          formatCompactCountryCurrency(browserLang, otherDelta, countryConfig),
         otherCount: deltaPrefix(otherCount) + otherCount,
       })}`;
     }

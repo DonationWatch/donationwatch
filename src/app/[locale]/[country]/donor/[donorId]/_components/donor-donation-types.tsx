@@ -14,6 +14,7 @@ import {
 } from "@/components/layout/article";
 import { TextPartyLink } from "@/components/parties/text-party-link";
 import { Translation } from "@/components/translation";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { getDonorName } from "@/utils/donor";
 import { formatCountryCurrency, formatPercentFormat } from "@/utils/formatter";
@@ -33,6 +34,7 @@ export const DonorDonationTypes = ({
   const tDonor = useTranslations("donor");
   const tDonationType = useTranslations("donation_type");
   const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
   const donorName = getDonorName(
     donations.at(0)?.[DonationField.DonorName] ?? "",
     tCommon,
@@ -86,7 +88,7 @@ export const DonorDonationTypes = ({
                       .map((type) =>
                         tDonor("donation_type.summary_item", {
                           amount: formatCountryCurrency(
-                            locale,
+                            browserBasedLocale,
                             typeSum[type] ?? 0,
                             countryConfig,
                           ),
@@ -109,9 +111,18 @@ export const DonorDonationTypes = ({
                     <div className="mb-1 flex items-center justify-between text-sm font-semibold">
                       <span>{capitalize(tDonationType(`${type}`))}</span>
                       <span className="tabular-nums">
-                        {formatCountryCurrency(locale, sum, countryConfig)}{" "}
+                        {formatCountryCurrency(
+                          browserBasedLocale,
+                          sum,
+                          countryConfig,
+                        )}{" "}
                         <span className="text-gray-500 dark:text-gray-400">
-                          ({formatPercentFormat(locale, sum / totalSum)})
+                          (
+                          {formatPercentFormat(
+                            browserBasedLocale,
+                            sum / totalSum,
+                          )}
+                          )
                         </span>
                       </span>
                     </div>
@@ -130,7 +141,7 @@ export const DonorDonationTypes = ({
                             />
                             <span className="tabular-nums">
                               {formatCountryCurrency(
-                                locale,
+                                browserBasedLocale,
                                 partySum,
                                 countryConfig,
                               )}

@@ -1,12 +1,14 @@
+"use client";
+
 import type { CountryConfig } from "@/types/country-config";
 import type {
   PartyStats,
   PartyYearsSums,
 } from "@/utils/loader/party-years-sums";
-import type { ConstLocale } from "@/utils/locales";
 import type { ReceiverId } from "@/utils/types";
 
 import { AbsoluteMultipleColorsGradient } from "@/components/absolute-multiple-colors-gradient";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { cn } from "@/lib/utils";
 import { PartyField } from "@/types/party";
 import { partyColor } from "@/utils/color";
@@ -16,17 +18,15 @@ import { formatCountryCurrency } from "@/utils/formatter";
 export const StackedPartyDonations = ({
   years,
   country,
-  // TODO: handle donator support
-  locale,
   partyYearsSums,
   direction = "horizontal",
 }: {
   country: CountryConfig;
   years: string[];
-  locale: ConstLocale;
   partyYearsSums: PartyYearsSums;
   direction?: "horizontal" | "vertical";
 }) => {
+  const browserBasedLocale = useBrowserBasedLocale();
   const sums: Record<ReceiverId, number> = {};
   let sum = 0;
 
@@ -59,7 +59,7 @@ export const StackedPartyDonations = ({
       {sortedSums.map(([party, data]) => (
         <div
           key={party}
-          title={`${getParty(country, party)[PartyField.Short]}: ${formatCountryCurrency(locale, data, country)}`}
+          title={`${getParty(country, party)[PartyField.Short]}: ${formatCountryCurrency(browserBasedLocale, data, country)}`}
           style={{
             backgroundColor: partyColor(party, country),
             [direction === "horizontal" ? "width" : "height"]:

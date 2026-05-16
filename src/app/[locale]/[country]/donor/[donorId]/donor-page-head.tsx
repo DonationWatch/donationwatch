@@ -1,6 +1,5 @@
 "use client";
 import { HatGlasses, Info, Lock } from "lucide-react";
-import { useLocale } from "next-intl";
 
 import type { CountryConfig } from "@/types/country-config";
 import type { Countries, Country } from "@/utils/countries";
@@ -19,6 +18,7 @@ import {
 } from "@/components/ui/tooltip";
 import { WikiQuote } from "@/components/wiki-quote";
 import { useDonationsByDonorId } from "@/hooks/use-api";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { partyColor } from "@/utils/color";
 import { donationYear } from "@/utils/date";
@@ -152,7 +152,7 @@ const DonorPageHeadContent = ({
 }) => {
   const t = useTranslations();
   const tCommon = useTranslations("common");
-  const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
   const wikiPageId = donorMeta.wiki;
 
   const rawDonorName = donations.at(0)?.[DonationField.DonorName] ?? "";
@@ -257,16 +257,24 @@ const DonorPageHeadContent = ({
             <div className="flex-row space-y-2 sm:flex sm:space-y-0 sm:space-x-10">
               <MetaCard
                 title={t("donation_count")}
-                value={formatNumber(locale, donations.length)}
+                value={formatNumber(browserBasedLocale, donations.length)}
               />
               <MetaCard
                 title={t("sum")}
-                value={formatCountryCurrency(locale, sum, countryConfig)}
+                value={formatCountryCurrency(
+                  browserBasedLocale,
+                  sum,
+                  countryConfig,
+                )}
               />
               {donations.length > 1 ? (
                 <MetaCard
                   title={t("average")}
-                  value={formatCountryCurrency(locale, avg, countryConfig)}
+                  value={formatCountryCurrency(
+                    browserBasedLocale,
+                    avg,
+                    countryConfig,
+                  )}
                 />
               ) : null}
               <MetaCard
@@ -286,7 +294,6 @@ const DonorPageHeadContent = ({
                 <div className="mt-2 flex flex-wrap gap-2">
                   {donorMeta.relations.map(([name, kind, sums]) => (
                     <RelatedDonorChip
-                      locale={locale}
                       key={name}
                       name={name}
                       kind={kind}
@@ -308,7 +315,9 @@ const DonorPageHeadContent = ({
                     </>
                   }
                 />
-                <p className="mt-2">{formatAnd(locale, [...ubos])}</p>
+                <p className="mt-2">
+                  {formatAnd(browserBasedLocale, [...ubos])}
+                </p>
               </section>
             ) : null}
           </div>
