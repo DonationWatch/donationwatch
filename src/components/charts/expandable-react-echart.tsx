@@ -142,6 +142,7 @@ export const ExpandableReactEchart = ({
           option={option}
           settings={settings}
           theme={theme}
+          locale={locale}
           onZrClick={onZrClick}
           onClick={onClick}
           onZoom={handleZoom}

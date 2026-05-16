@@ -16,6 +16,7 @@ import * as echarts from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
 import { useEffect, useImperativeHandle, useRef, useState } from "react";
 
+import { echartsEmptyLocale } from "@/components/charts/echart-empty-locale";
 import Loading from "@/components/loading/loading";
 
 echarts.use([
@@ -116,6 +117,45 @@ export interface EChartsPublicApi {
   resetZoom: () => void;
 }
 
+const registeredLocales = new Set<string>();
+
+// Populate echart time translations based on the locale
+const registerLocale = (locale: string) => {
+  if (registeredLocales.has(locale)) return;
+
+  const months = Array.from({ length: 12 }, (_, i) =>
+    new Intl.DateTimeFormat(locale, { month: "long" }).format(
+      new Date(2021, i, 1),
+    ),
+  );
+  const monthsAbbr = Array.from({ length: 12 }, (_, i) =>
+    new Intl.DateTimeFormat(locale, { month: "short" }).format(
+      new Date(2021, i, 1),
+    ),
+  );
+  const days = Array.from({ length: 7 }, (_, i) =>
+    new Intl.DateTimeFormat(locale, { weekday: "long" }).format(
+      new Date(2021, 5, 6 + i),
+    ),
+  );
+  const daysAbbr = Array.from({ length: 7 }, (_, i) =>
+    new Intl.DateTimeFormat(locale, { weekday: "short" }).format(
+      new Date(2021, 5, 6 + i),
+    ),
+  );
+
+  echarts.registerLocale(locale, {
+    ...echartsEmptyLocale,
+    time: {
+      month: months,
+      monthAbbr: monthsAbbr,
+      dayOfWeek: days,
+      dayOfWeekAbbr: daysAbbr,
+    },
+  });
+  registeredLocales.add(locale);
+};
+
 export const ReactECharts = ({
   onZrClick,
   onClick,
@@ -124,12 +164,14 @@ export const ReactECharts = ({
   option,
   settings,
   theme,
+  locale,
   ref,
 }: ReactEChartsProps & {
   feature?: ChartFeature;
   onZrClick?: OnZrClickFn;
   onClick?: OnClickFn;
   onZoom?: () => void;
+  locale?: string;
   ref?: Ref<EChartsPublicApi | undefined>;
 }): JSX.Element => {
   const [loadingModules, setLoadingModules] = useState<boolean>(true);
@@ -174,7 +216,10 @@ export const ReactECharts = ({
     const chartElement = chartRef.current;
 
     if (!loadingModules && chartElement !== null) {
-      chart = echarts.init(chartElement, theme);
+      if (locale) {
+        registerLocale(locale);
+      }
+      chart = echarts.init(chartElement, theme, { locale });
       chartInstance.current = chart;
       chart.setOption({
         animation: false,
@@ -232,7 +277,7 @@ export const ReactECharts = ({
       chart?.dispose();
       chartInstance.current = undefined;
     };
-  }, [theme, loadingModules, onZrClick, onZoom, onClick, feature]);
+  }, [theme, loadingModules, onZrClick, onZoom, onClick, feature, locale]);
 
   useEffect(() => {
     // Update chart
