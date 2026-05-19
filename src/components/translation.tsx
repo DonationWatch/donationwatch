@@ -2,8 +2,8 @@ import type { ReactNode } from "react";
 
 import { Fragment } from "react";
 
-export const splitTranslation = (text: string) => {
-  const regex = /\{(\w+)\}/g;
+export const splitPlaceholderTranslation = (text: string) => {
+  const regex = /__VAR__(\w+)__/g;
   const parts: {
     id: number;
     type: "static" | "variable";
@@ -40,21 +40,51 @@ export const splitTranslation = (text: string) => {
   return parts;
 };
 
-export const Translation = ({
-  text,
+type TranslationProps<T extends (key: never, ...args: never[]) => string> = {
+  t: T;
+  translationId: Parameters<T>[0];
+  variables: Record<string, string | number | ReactNode>;
+};
+
+export const Translation = <
+  T extends (key: never, ...args: never[]) => string,
+>({
   variables,
-}: {
-  text: string;
-  variables?: Record<string, string | number | ReactNode>;
-}) => {
-  if (!variables) return text;
+  t,
+  translationId,
+}: TranslationProps<T>) => {
+  const processedVariables: Record<string, unknown> = {};
+  const reactNodeVariables: Record<string, ReactNode> = {};
 
-  const parts = splitTranslation(text);
+  if (variables) {
+    for (const [key, val] of Object.entries(variables)) {
+      if (val && (typeof val === "object" || typeof val === "function")) {
+        processedVariables[key] = `__VAR__${key}__`;
+        reactNodeVariables[key] = val as ReactNode;
+      } else {
+        processedVariables[key] = val;
+      }
+    }
+  }
 
-  return parts.map((part) => {
-    if (part.type === "static")
-      return <Fragment key={part.id}>{part.value}</Fragment>;
+  const resolvedString = (
+    t as unknown as (key: string, variables?: Record<string, unknown>) => string
+  )(translationId as string, processedVariables);
 
-    return <Fragment key={part.id}>{variables[part.value]}</Fragment>;
-  });
+  const parts = splitPlaceholderTranslation(resolvedString);
+
+  return (
+    <>
+      {parts.map((part) => {
+        if (part.type === "static")
+          return <Fragment key={part.id}>{part.value}</Fragment>;
+
+        return (
+          <Fragment key={part.id}>
+            {reactNodeVariables[part.value] ?? variables[part.value]}
+          </Fragment>
+        );
+      })}
+    </>
+  );
 };

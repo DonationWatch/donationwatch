@@ -122,7 +122,8 @@ export const YearsOverviewClientPage = ({
             {topDonationSums.length ? (
               <p className="mb-6">
                 <Translation
-                  text={t.raw("overview.detail.highest_sum")}
+                  t={t}
+                  translationId={"overview.detail.highest_sum"}
                   variables={{
                     years: formatAnd(browserBasedLocale, years),
                     parties: (
@@ -153,7 +154,8 @@ export const YearsOverviewClientPage = ({
             {mostDonations && (
               <p className="mb-6">
                 <Translation
-                  text={t.raw("overview.detail.most_donations")}
+                  t={t}
+                  translationId={"overview.detail.most_donations"}
                   variables={{
                     party: (
                       <TextPartyLink

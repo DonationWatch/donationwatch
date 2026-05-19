@@ -153,7 +153,8 @@ export const PartyDonorPageText = ({
       }),
       answerHTML: (
         <Translation
-          text={t.raw("party.qa.top_donors.a")}
+          t={t}
+          translationId={"party.qa.top_donors.a"}
           variables={{
             party: party[PartyField.Short],
             donors: (
@@ -190,7 +191,8 @@ export const PartyDonorPageText = ({
           }),
           answerHTML: (
             <Translation
-              text={t.raw("party.qa.largest_singular.a")}
+              t={t}
+              translationId={"party.qa.largest_singular.a"}
               variables={{
                 amount: formatCountryCurrency(
                   browserBasedLocale,
@@ -229,7 +231,8 @@ export const PartyDonorPageText = ({
 
           answerHTML: (
             <Translation
-              text={t.raw("party.qa.biggest_overall.a")}
+              t={t}
+              translationId={"party.qa.biggest_overall.a"}
               variables={{
                 party: party[PartyField.Short],
                 donor: (
@@ -262,7 +265,8 @@ export const PartyDonorPageText = ({
           }),
           answerHTML: (
             <Translation
-              text={t.raw("party.qa.frequent_donor.a")}
+              t={t}
+              translationId={"party.qa.frequent_donor.a"}
               variables={{
                 party: party[PartyField.Short],
                 donor: (

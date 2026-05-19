@@ -183,7 +183,8 @@ export default async function YearsPage(
                 <>
                   <br />
                   <Translation
-                    text={tHome.raw("what.threshold")}
+                    t={tHome}
+                    translationId="what.threshold"
                     variables={{
                       type:
                         countryConfig.knownPartyRequirements.count === -1

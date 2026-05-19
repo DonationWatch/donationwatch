@@ -143,7 +143,8 @@ export const YearsDonorPageText = ({
       {topDonors.length > 0 ? (
         <p className="mb-6">
           <Translation
-            text={t.raw("donors.detail.top_3")}
+            t={t}
+            translationId={"donors.detail.top_3"}
             variables={{
               amount: topDonors.length,
               years: formatYearsRange(years),
@@ -171,7 +172,8 @@ export const YearsDonorPageText = ({
       {biggestDonor.amount > 0 ? (
         <p className="mb-6">
           <Translation
-            text={t.raw("donors.detail.biggest_donor")}
+            t={t}
+            translationId={"donors.detail.biggest_donor"}
             variables={{
               amount: formatCountryCurrency(
                 browserBasedLocale,
@@ -186,7 +188,8 @@ export const YearsDonorPageText = ({
       {mostDonationsDonor.sum > 0 ? (
         <p className="mb-6">
           <Translation
-            text={t.raw("donors.detail.most_donations")}
+            t={t}
+            translationId={"donors.detail.most_donations"}
             variables={{
               count: mostDonationsDonor.count,
               sum: formatCountryCurrency(
@@ -205,7 +208,8 @@ export const YearsDonorPageText = ({
       {mostUniquePartiesDonor.count > 1 ? (
         <p>
           <Translation
-            text={t.raw("donors.detail.most_unique_parties")}
+            t={t}
+            translationId={"donors.detail.most_unique_parties"}
             variables={{
               count: mostUniquePartiesDonor.count,
               sum: formatCountryCurrency(

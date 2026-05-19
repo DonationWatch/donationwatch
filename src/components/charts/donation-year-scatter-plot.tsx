@@ -211,7 +211,8 @@ ${partyPart}
       {typeof biggestSpanParty === "string" ? (
         <p className="mb-6">
           <Translation
-            text={t.raw("overview.scatter.span")}
+            t={t}
+            translationId={"overview.scatter.span"}
             variables={{
               biggestSpanAmount: formatCountryCurrency(
                 browserBasedLocale,

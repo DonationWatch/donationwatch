@@ -78,7 +78,8 @@ export const DonorDonationTypes = ({
           </p>
           <p className="mb-4">
             <Translation
-              text={tDonor.raw("donation_type.summary")}
+              t={tDonor}
+              translationId={"donation_type.summary"}
               variables={{
                 total: (
                   <FormatAnd

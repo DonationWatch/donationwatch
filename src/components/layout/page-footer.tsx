@@ -28,7 +28,8 @@ export const PageFooter = ({ locale }: { locale: ConstLocale }) => {
           DonationWatch
           <div className="mt-1 text-xs">
             <Translation
-              text={t.raw("footer.charts_license")}
+              t={t}
+              translationId={"footer.charts_license"}
               variables={{
                 license: (
                   <a

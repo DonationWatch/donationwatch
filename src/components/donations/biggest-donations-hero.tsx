@@ -37,7 +37,8 @@ export const BiggestDonationsHero = ({
   return (
     <p className="mt-12 lg:w-10/12" data-testid="biggest-donations">
       <Translation
-        text={tBiggestDonations.raw("text")}
+        t={tBiggestDonations}
+        translationId={"text"}
         variables={{
           minYear: country.minYear,
           country: getCountryName(country, tCountries),
@@ -66,7 +67,8 @@ export const BiggestDonationsHero = ({
               items={biggestDonations.slice(1).map((donation) => (
                 <Translation
                   key={donation[DonationField.Id]}
-                  text={tBiggestDonations.raw("list")}
+                  t={tBiggestDonations}
+                  translationId={"list"}
                   variables={{
                     amount: formatCountryCurrency(
                       browserBasedLocale,

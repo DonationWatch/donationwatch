@@ -112,7 +112,8 @@ export const YearBarsPageText = ({
       {monthWithHighestDonationSum ? (
         <p className="mb-6">
           <Translation
-            text={t.raw("per_month.highest_sum")}
+            t={t}
+            translationId={"per_month.highest_sum"}
             variables={{
               month: formatMonthYear(
                 browserBasedLocale,
@@ -131,7 +132,8 @@ export const YearBarsPageText = ({
       {partiesWithMostMonths?.length ? (
         <p className="mb-6">
           <Translation
-            text={t.raw("per_month.most_months")}
+            t={t}
+            translationId={"per_month.most_months"}
             variables={{
               party: (
                 <FormatAnd
@@ -154,7 +156,8 @@ export const YearBarsPageText = ({
       {monthWithMostDonations ? (
         <p>
           <Translation
-            text={t.raw("per_month.month_most_donations")}
+            t={t}
+            translationId={"per_month.month_most_donations"}
             variables={{
               month: formatMonthYear(
                 browserBasedLocale,

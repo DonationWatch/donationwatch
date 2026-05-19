@@ -192,7 +192,8 @@ export const DonorClientPageContent = ({
             {oldestDonation ? (
               <>
                 <Translation
-                  text={tDonor.raw("oldest")}
+                  t={tDonor}
+                  translationId={"oldest"}
                   variables={{
                     minYear: countryConfig.minYear,
                     date: formatDate(
@@ -221,7 +222,8 @@ export const DonorClientPageContent = ({
               oldestDonation?.[DonationField.Id] ? (
               <>
                 <Translation
-                  text={tDonor.raw("newest")}
+                  t={tDonor}
+                  translationId={"newest"}
                   variables={{
                     date: formatDate(
                       browserBasedLocale,
@@ -247,7 +249,8 @@ export const DonorClientPageContent = ({
           </p>
           <p className="mb-6">
             <Translation
-              text={tDonor.raw("most_donations")}
+              t={tDonor}
+              translationId={"most_donations"}
               variables={{
                 list: formatAnd(
                   browserBasedLocale,
@@ -282,7 +285,8 @@ export const DonorClientPageContent = ({
               <>
                 <br />
                 <Translation
-                  text={tDonor.raw("biggest")}
+                  t={tDonor}
+                  translationId={"biggest"}
                   variables={{
                     amount: formatCountryCurrency(
                       browserBasedLocale,

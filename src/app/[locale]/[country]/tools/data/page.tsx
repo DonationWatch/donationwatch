@@ -69,7 +69,8 @@ export default async function Page(
       <div className="space-y-6">
         <p>
           <Translation
-            text={tExport.raw("p0")}
+            t={tExport}
+            translationId={"p0"}
             variables={{
               country: getCountryName(countryConfig, tCountries),
               license: (
@@ -87,7 +88,8 @@ export default async function Page(
         </p>
         <p>
           <Translation
-            text={tExport.raw("p1")}
+            t={tExport}
+            translationId={"p1"}
             variables={{
               source: (
                 <a
@@ -115,7 +117,8 @@ export default async function Page(
         <p>
           {
             <Translation
-              text={tExport.raw("license")}
+              t={tExport}
+              translationId={"license"}
               variables={{
                 license: (
                   <a

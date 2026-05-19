@@ -232,7 +232,8 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
         <ArticleSection title={tRoot("open_source.title")} id="open-source">
           <p className="text-gray-700 dark:text-gray-300">
             <Translation
-              text={tRoot.raw("open_source.p0")}
+              t={tRoot}
+              translationId={"open_source.p0"}
               variables={{
                 github: (
                   <a

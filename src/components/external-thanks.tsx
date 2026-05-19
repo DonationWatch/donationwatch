@@ -71,7 +71,8 @@ export const ExternalThanks = async ({
       <div className="border-t border-t-gray-200 dark:border-t-gray-800"></div>
       <div className="px-2">
         <Translation
-          text={t.raw("thanks")}
+          t={t}
+          translationId={"thanks"}
           variables={{
             external: (
               <FormatAnd
