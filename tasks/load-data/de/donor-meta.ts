@@ -246,6 +246,9 @@ export const donorMeta: DonorMetaDefinition = {
     "Dr. Karl Gerhold": {
       wiki: 12741824,
     },
+    "Hartmut Issmer": {
+      wiki: 13230948,
+    },
   },
   relations: [
     // Quandt/Klatten Family – BMW Major Shareholders

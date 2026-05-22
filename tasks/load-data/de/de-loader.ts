@@ -489,6 +489,11 @@ export class DeLoader extends DataLoader {
       donor = "Dr. Theiss Naturwaren GmbH";
     }
 
+    // according to https://www.oedp-hessen.de/aktuelles/pressemitteilungen/nachrichtendetails/news/von-wegen-unabhaengig-afd-immer-tiefer-im-rechtsra it's a typo in the upstream data, normalize it
+    if (donor === "Harmut Issmer" || donor.includes("Hartmut Issmer")) {
+      donor = "Hartmut Issmer";
+    }
+
     if (donor.endsWith("Aktiengesellschaft")) {
       return donor.replace(/ Aktiengesellschaft$/, " AG");
     }
