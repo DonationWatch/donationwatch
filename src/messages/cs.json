@@ -61,7 +61,7 @@
       "changes": "Nedávné změny v darech strany {party} {country}",
       "timeline": "Časová osa darů strany {party} {country}",
       "origin": "Geografický přehled darů strany {party} {country}",
-      "description": "Od roku {year} obdržela {party} celkem {count} darů převyšujících {minimumAmount}, v celkové výši {sum}. Prozkoumejte podrobné informace o hlavních dárcích a trendech darování {party} v {country}."
+      "description": "Od roku {year} obdržela {party} {count} darů nad {minimumAmount} v celkové výši {sum}. Prozkoumejte data o dárcích a trendy v {country}."
     },
     "donor": {
       "overview": "Dary od {donor} v {country}",

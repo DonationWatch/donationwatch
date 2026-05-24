@@ -61,7 +61,7 @@
       "changes": "{party} annetuste viimased muudatused {country}",
       "timeline": "{party} parteiannetuste ajajoon {country}",
       "origin": "{party} parteiannetuste geograafiline ülevaade {country}",
-      "description": "Alates {year} on {party} saanud kokku {count} annetust, mis ületavad {minimumAmount}, kogusummas {sum}. Uurige üksikasjalikku teavet suurannetajate ja annetuste trendide kohta {party} jaoks riigis {country}."
+      "description": "Alates {year}. aastast on {party} saanud {count} annetust üle {minimumAmount}, kokku {sum}. Uurige annetajate andmeid ja trende {country}."
     },
     "donor": {
       "overview": "{donor} annetused {country}s",

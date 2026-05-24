@@ -61,7 +61,7 @@
       "changes": "Changements récents dans les dons pour {party} ({country})",
       "timeline": "Chronologie des dons du parti {party} ({country})",
       "origin": "Aperçu géographique des dons du parti {party} ({country})",
-      "description": "Depuis {year}, le {party} a reçu un total de {count} dons dépassant {minimumAmount}, pour un montant cumulé de {sum}. Explorez les informations détaillées sur les donateurs majeurs et les tendances des dons pour le {party} en {country}."
+      "description": "Depuis {year}, {party} a reçu {count} dons supérieurs à {minimumAmount}, pour un total de {sum}. Explorez les données sur les donateurs et les tendances en {country}."
     },
     "donor": {
       "overview": "Dons de {donor} en {country}",

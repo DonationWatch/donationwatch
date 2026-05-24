@@ -8,17 +8,15 @@ import {
   Info,
   Scale,
   Sparkles,
-  UserRound,
   Vote,
 } from "lucide-react";
 import { useLocale } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import type { CountryConfig } from "@/types/country-config";
 import type { Country } from "@/utils/countries";
-import type { BigDonor } from "@/utils/loader/biggest-donors";
 
 import { Github } from "@/components/icons/Github";
 import { PartyDot } from "@/components/parties/party-dot";
@@ -47,7 +45,6 @@ import { useClientTranslations as useTranslations } from "@/hooks/use-client-tra
 import { PartyField } from "@/types/party";
 import {
   GITHUB_URL,
-  SIDENAV_DONORS_VISIBLE,
   SIDENAV_PARTIES_VISIBLE,
   SIDENAV_YEARS_VISIBLE,
 } from "@/utils/config";
@@ -59,10 +56,8 @@ import { CountrySwitch } from "./country-switch";
 
 export function AppSidebar({
   countryConfig,
-  biggestDonors,
 }: {
   countryConfig?: CountryConfig;
-  biggestDonors?: BigDonor[];
 }) {
   const [showAllParties, setShowAllParties] = useState(false);
   const t = useTranslations();
@@ -70,6 +65,10 @@ export function AppSidebar({
   const tSearch = useTranslations("search");
   const tSidebar = useTranslations("sidebar");
   const locale = useLocale();
+
+  useEffect(() => {
+    document.documentElement.classList.remove("sidebar-collapsed");
+  }, []);
 
   return (
     <Sidebar>
@@ -176,37 +175,6 @@ export function AppSidebar({
                       </SidebarMenuSub>
                     </CollapsibleContent>
                   </Collapsible>
-                  {biggestDonors ? (
-                    <Collapsible
-                      defaultOpen={true}
-                      render={<SidebarMenuItem className="group/collapsible" />}
-                    >
-                      <CollapsibleTrigger render={<SidebarMenuButton />}>
-                        <UserRound />
-                        <span>{tSearch("donors")}</span>
-                        <ChevronRight className="ml-auto transition-transform duration-200 group-data-[open]/collapsible:rotate-90" />
-                      </CollapsibleTrigger>
-                      <CollapsibleContent>
-                        <SidebarMenuSub>
-                          {biggestDonors
-                            ?.slice(0, SIDENAV_DONORS_VISIBLE)
-                            .map((donor) => (
-                              <SidebarMenuSubItem key={donor.id}>
-                                <SidebarActiveMenuSubButton
-                                  activeHref={`/${locale}/${countryConfig.id}/donor/${donor.id}`}
-                                  href={`/${locale}/${countryConfig.id}/donor/${donor.id}`}
-                                  title={donor.name}
-                                >
-                                  <span className={"truncate"}>
-                                    {donor.name}
-                                  </span>
-                                </SidebarActiveMenuSubButton>
-                              </SidebarMenuSubItem>
-                            ))}
-                        </SidebarMenuSub>
-                      </CollapsibleContent>
-                    </Collapsible>
-                  ) : null}
                 </SidebarMenu>
               </SidebarGroupContent>
             </SidebarGroup>

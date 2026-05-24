@@ -53,28 +53,33 @@ export const Providers = ({
 };
 
 export function SidebarLocalStorageProvider({ children }: PropsWithChildren) {
-  const [open, setOpen] = useState<boolean | null>(null);
+  const [open, setOpen] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      const saved = window.localStorage.getItem(SIDENAV_PERSISTENCE_KEY);
+      if (saved !== null) {
+        return saved === "true";
+      }
+    }
+    return true;
+  });
+  const [isMounted, setIsMounted] = useState<boolean>(false);
 
   // Read initial value from localStorage
   useEffect(() => {
-    const saved = window.localStorage.getItem(SIDENAV_PERSISTENCE_KEY);
-    if (saved === null) {
-      setOpen(true); // default
-    } else {
-      setOpen(saved === "true");
-    }
+    setIsMounted(true);
   }, []);
 
   // Persist on change
   useEffect(() => {
-    if (open === null) return;
     window.localStorage.setItem(SIDENAV_PERSISTENCE_KEY, String(open));
   }, [open]);
 
-  if (open === null) return null; // or skeleton to avoid flash
-
   return (
-    <SidebarProvider open={open} onOpenChange={setOpen}>
+    <SidebarProvider
+      open={open}
+      onOpenChange={setOpen}
+      className={!isMounted ? "![&_*]:transition-none" : ""}
+    >
       {children}
     </SidebarProvider>
   );

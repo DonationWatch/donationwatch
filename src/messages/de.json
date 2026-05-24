@@ -61,7 +61,7 @@
       "changes": "Aktuelle Änderungen der {party}-Spenden {country}",
       "timeline": "Zeitstrahl der {party}-Parteispenden {country}",
       "origin": "Geografische Übersicht der {party}-Parteispenden {country}",
-      "description": "Seit {year} hat die {party} insgesamt {count} Spenden über {minimumAmount} erhalten, was einer Gesamtsumme von {sum} entspricht. Entdecken Sie detaillierte Informationen über Großspender und Spendentendenzen an die {party} in {country}."
+      "description": "Seit {year} hat {party} {count} Spenden über {minimumAmount} erhalten, insgesamt {sum}. Entdecken Sie Spenderdaten und Trends in {country}."
     },
     "donor": {
       "overview": "Spenden von {donor} in {country}",

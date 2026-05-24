@@ -134,3 +134,8 @@ html {
 .card--action {
   @apply cursor-pointer hover:bg-gray-50 hover:shadow-md dark:hover:bg-gray-950;
 }
+
+/* Instantly hide the expanded sidebar skeleton if document is marked as collapsed */
+html.sidebar-collapsed aside[data-state="expanded"] {
+  display: none !important;
+}

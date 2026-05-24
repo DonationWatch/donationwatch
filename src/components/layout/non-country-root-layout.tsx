@@ -2,7 +2,7 @@ import type { PropsWithChildren } from "react";
 
 import type { ConstLocale } from "@/utils/locales";
 
-import { AppSidebar } from "@/components/layout/app-sidebar";
+import { DynamicAppSidebar as AppSidebar } from "@/components/layout/dynamic-app-sidebar";
 import { PageFooter } from "@/components/layout/page-footer";
 import { StickyHeader } from "@/components/layout/sticky-header";
 import { SidebarInset } from "@/components/ui/sidebar";

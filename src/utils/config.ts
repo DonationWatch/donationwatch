@@ -34,7 +34,6 @@ export const DEFAULT_COUNTRY = Country.germany;
 
 export const SIDENAV_YEARS_VISIBLE = 3;
 export const SIDENAV_PARTIES_VISIBLE = 5;
-export const SIDENAV_DONORS_VISIBLE = 5;
 export const SIDENAV_PERSISTENCE_KEY = "sidebar-open";
 
 // Special keywords for donor names that should be treated specially
