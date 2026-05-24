@@ -61,7 +61,7 @@
       "changes": "Recente wijzigingen in {party}-donaties {country}",
       "timeline": "Tijdlijn van {party}-partijdonaties {country}",
       "origin": "Geografisch overzicht van {party}-partijdonaties {country}",
-      "description": "Sinds {year} heeft de {party} in totaal {count} donaties ontvangen van meer dan {minimumAmount}, met een cumulatief bedrag van {sum}. Ontdek gedetailleerde informatie over grote donoren en donatietrends aan de {party} in {country}."
+      "description": "Sinds {year} heeft {party} {count} donaties van meer dan {minimumAmount} ontvangen, met een totaal van {sum}. Bekijk donorgegevens en trends in {country}."
     },
     "donor": {
       "overview": "Donaties van {donor} in {country}",

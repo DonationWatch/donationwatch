@@ -7,10 +7,7 @@ import { Article } from "@/components/layout/article";
 import { PartyField } from "@/types/party";
 import { getCountryName, getParty } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
-import {
-  formatCompactCountryCurrency,
-  formatCountryCurrency,
-} from "@/utils/formatter";
+import { formatCompactCountryCurrency } from "@/utils/formatter";
 import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
 import { generateAlternates } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
@@ -66,7 +63,7 @@ export async function generateMetadata(
       countryConfig.minPublicDonationAmount,
       countryConfig,
     ),
-    sum: formatCountryCurrency(locale, sum, countryConfig),
+    sum: formatCompactCountryCurrency(locale, sum, countryConfig),
     country: getCountryName(countryConfig, tCountries),
   });
 

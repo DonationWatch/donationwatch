@@ -61,7 +61,7 @@
       "changes": "Nedavne promjene u donacijama {party} {country}",
       "timeline": "Vremenska crta donacija stranke {party} {country}",
       "origin": "Geografski pregled donacija stranke {party} {country}",
-      "description": "Od {year}. godine, {party} je primila ukupno {count} donacija većih od {minimumAmount}, u ukupnom iznosu od {sum}. Istražite detaljne informacije o glavnim donatorima i trendovima donacija za {party} u {country}."
+      "description": "Od {year}. zabilježeno je {count} donacija za {party} većih od {minimumAmount}, u ukupnom iznosu od {sum}. Istražite podatke o donatorima i trendove u {country}."
     },
     "donor": {
       "overview": "Donacije od {donor} u {country}",

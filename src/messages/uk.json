@@ -61,7 +61,7 @@
       "changes": "Останні зміни у пожертвах {party} у {country}",
       "timeline": "Хронологія пожертв партії {party} у {country}",
       "origin": "Географічний огляд пожертв партії {party} у {country}",
-      "description": "З {year} року партія {party} отримала загалом {count} пожертв на суму понад {minimumAmount}, що становить сукупну суму {sum}. Ознайомтеся з детальною інформацією про великих донорів та тенденції пожертвувань для {party} у {country}."
+      "description": "Починаючи з {year} року, {party} отримала {count} пожертв понад {minimumAmount} на загальну суму {sum}. Досліджуйте дані про донорів і тенденції в {country}."
     },
     "donor": {
       "overview": "Пожертви від {donor} у {country}",

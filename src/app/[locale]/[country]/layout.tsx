@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
-import { AppSidebar } from "@/components/layout/app-sidebar";
 import { CountryFooter } from "@/components/layout/country-footer";
+import { DynamicAppSidebar as AppSidebar } from "@/components/layout/dynamic-app-sidebar";
 import { PageFooter } from "@/components/layout/page-footer";
 import { StickyHeader } from "@/components/layout/sticky-header";
 import { SidebarInset } from "@/components/ui/sidebar";

@@ -61,7 +61,7 @@
       "changes": "Jaunākās izmaiņas {party} ziedojumos {country}",
       "timeline": "{party} partijas ziedojumu laika grafiks {country}",
       "origin": "{party} partijas ziedojumu ģeogrāfiskais pārskats {country}",
-      "description": "Kopš {year} partija {party} ir saņēmusi kopumā {count} ziedojumus, kas pārsniedz {minimumAmount}, kopsummā {sum}. Izpētiet detalizētu informāciju par lielākajiem ziedotājiem un ziedojumu tendencēm partijai {party} valstī {country}."
+      "description": "Kopš {year}. gada {party} ir saņēmusi {count} ziedojumus virs {minimumAmount}, kuru kopējā summa ir {sum}. Izpētiet ziedotāju datus un tendences {country}."
     },
     "donor": {
       "overview": "{donor} ziedojumi {country}",

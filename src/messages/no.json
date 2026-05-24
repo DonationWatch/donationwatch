@@ -61,7 +61,7 @@
       "changes": "Siste endringer i donasjoner til {party} i {country}",
       "timeline": "Tidslinje for donasjoner til {party} i {country}",
       "origin": "Geografisk oversikt over donasjoner til {party} i {country}",
-      "description": "Siden {year} har {party} mottatt totalt {count} donasjoner over {minimumAmount}, som til sammen utgjør {sum}. Utforsk detaljert informasjon om de største giverne og donasjonstrender til {party} i {country}."
+      "description": "Siden {year} har {party} mottatt {count} donasjoner over {minimumAmount}, med en totalsum på {sum}. Utforsk giverdata og trender i {country}."
     },
     "donor": {
       "overview": "Donasjoner fra {donor} i {country}",

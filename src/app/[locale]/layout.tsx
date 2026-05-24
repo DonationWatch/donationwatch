@@ -10,7 +10,7 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import { OrganizationSchema } from "@/components/schema";
 import { Toaster } from "@/components/ui/sonner";
-import { THUMBNAIL_PREFIX } from "@/utils/config";
+import { SIDENAV_PERSISTENCE_KEY, THUMBNAIL_PREFIX } from "@/utils/config";
 import { filterClientMessages } from "@/utils/i18n-filter";
 import { LOCALES } from "@/utils/locales";
 import { baseOpenGraph, baseTwitter } from "@/utils/meta";
@@ -60,9 +60,20 @@ export default async function LangLayout(props: LayoutProps<"/[locale]">) {
   const messages = await getMessages({ locale });
 
   return (
-    <html lang={locale} className="scroll-pt-15">
+    <html lang={locale} className="scroll-pt-15" suppressHydrationWarning>
       <head>
         <OrganizationSchema />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if (localStorage.getItem('${SIDENAV_PERSISTENCE_KEY}') === 'false') {
+                  document.documentElement.classList.add('sidebar-collapsed');
+                }
+              } catch (e) {}
+            `,
+          }}
+        />
       </head>
       <body className="min-h-screen w-full">
         <NuqsAdapter>
