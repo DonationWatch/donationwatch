@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { Server } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import Image from "next/image";
 import Link from "next/link";
@@ -23,6 +24,7 @@ import { DetectedCountry } from "@/components/layout/detected-country";
 import { NonCountryRootLayout } from "@/components/layout/non-country-root-layout";
 import { MetaCard } from "@/components/meta-card";
 import { Translation } from "@/components/translation";
+import { Button } from "@/components/ui/button";
 import { GITHUB_URL, THUMBNAIL_PREFIX } from "@/utils/config";
 import { COUNTRIES, COUNTRY_CONFIG, getCountryName } from "@/utils/countries";
 import { countryFlags } from "@/utils/country-flags";
@@ -229,26 +231,47 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
           <p className="text-gray-700 dark:text-gray-300">{tRoot("why.p0")}</p>
         </ArticleSection>
 
-        <ArticleSection title={tRoot("open_source.title")} id="open-source">
-          <p className="text-gray-700 dark:text-gray-300">
-            <Translation
-              t={tRoot}
-              translationId={"open_source.p0"}
-              variables={{
-                github: (
-                  <a
-                    href={GITHUB_URL}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-primary-600 hover:text-primary-800 dark:text-primary-400 dark:hover:text-primary-300 underline"
-                  >
-                    GitHub
-                  </a>
-                ),
-              }}
-            />
-          </p>
-        </ArticleSection>
+        <div className="grid gap-8 lg:grid-cols-2">
+          <ArticleSection
+            title={"Enterprise API (Beta)"}
+            id="enterprise-api-beta"
+          >
+            <p className="mb-6 text-gray-700 dark:text-gray-300">
+              Need programmatic access to cross-registry entity mappings? We are
+              currently engineering a high-availability REST API with OpenAPI
+              specifications, designed specifically for institutional compliance
+              and risk analysis teams.
+            </p>
+            <div>
+              <Button variant={"outline"} asChild={true}>
+                <Link href={`/${locale}/enterprise`}>
+                  <Server />
+                  Join the Waitlist
+                </Link>
+              </Button>
+            </div>
+          </ArticleSection>
+          <ArticleSection title={tRoot("open_source.title")} id="open-source">
+            <p className="text-gray-700 dark:text-gray-300">
+              <Translation
+                t={tRoot}
+                translationId={"open_source.p0"}
+                variables={{
+                  github: (
+                    <a
+                      href={GITHUB_URL}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-primary-600 hover:text-primary-800 dark:text-primary-400 dark:hover:text-primary-300 underline"
+                    >
+                      GitHub
+                    </a>
+                  ),
+                }}
+              />
+            </p>
+          </ArticleSection>
+        </div>
       </Article>
     </NonCountryRootLayout>
   );

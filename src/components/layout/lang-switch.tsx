@@ -10,6 +10,11 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { CONST_LOCALES } from "@/utils/locales";
 
@@ -35,17 +40,26 @@ export const LangSwitch = () => {
 
   return (
     <DropdownMenu modal={false}>
-      <DropdownMenuTrigger
-        render={
-          <button
-            aria-label={t("header.language_selection")}
-            title={t("header.language_selection")}
-            className="group flex size-10 cursor-pointer items-center justify-center rounded-full p-1 hover:bg-neutral-600/10"
-          />
-        }
-      >
-        <Languages size={18} />
-      </DropdownMenuTrigger>
+      <Tooltip>
+        <TooltipTrigger
+          render={
+            <DropdownMenuTrigger
+              render={
+                <button
+                  aria-label={t("header.language_selection")}
+                  title={t("header.language_selection")}
+                  className="group flex size-10 cursor-pointer items-center justify-center rounded-full p-1 hover:bg-neutral-600/10"
+                >
+                  <Languages size={18} />
+                </button>
+              }
+            />
+          }
+        />
+        <TooltipContent sideOffset={10} side={"left"}>
+          {t("header.language_selection")}
+        </TooltipContent>
+      </Tooltip>
       <DropdownMenuContent className="w-56" align="start">
         <DropdownMenuGroup>
           <DropdownMenuLabel>

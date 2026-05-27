@@ -7,6 +7,7 @@ import {
   Globe,
   Info,
   Scale,
+  Server,
   Sparkles,
   Vote,
 } from "lucide-react";
@@ -288,6 +289,11 @@ export function AppSidebar({
               icon: Info,
             },
             {
+              href: `/${locale}/enterprise`,
+              label: t("navigation.enterprise"),
+              icon: Server,
+            },
+            {
               href: GITHUB_URL,
               label: "GitHub",
               target: "_blank",
@@ -295,6 +301,17 @@ export function AppSidebar({
             },
           ]}
         />
+        <SidebarGroup className="mt-2 pt-0 lg:hidden">
+          <SidebarGroupContent className="px-2">
+            <Link
+              href={`/${locale}/enterprise`}
+              prefetch={false}
+              className="block rounded-none border border-zinc-300 bg-white px-3 py-1.5 text-center font-mono text-[10px] font-bold tracking-widest text-zinc-900 uppercase transition-colors hover:bg-black hover:text-white md:text-xs dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-100 dark:hover:bg-white dark:hover:text-black"
+            >
+              Enterprise API
+            </Link>
+          </SidebarGroupContent>
+        </SidebarGroup>
       </SidebarContent>
     </Sidebar>
   );

@@ -23,7 +23,8 @@
     "export": "Exportation de données",
     "bar_chart_race": "Course de graphiques",
     "compare_parties": "Comparer les partis",
-    "support_us": "☕ Soutenir les coûts du serveur"
+    "support_us": "☕ Soutenir les coûts du serveur",
+    "enterprise": "API d’entreprise"
   },
   "data": {
     "loading": "Chargement du contenu...",
@@ -779,5 +780,58 @@
     "success": "Citation au format {style} copiée dans le presse-papiers.",
     "data": "DonationWatch – données sur les dons politiques en {country}",
     "apa": "DonationWatch. ({year}). {title} [Ensemble de données]. Consulté le {date}, depuis {url}"
+  },
+  "enterprise": {
+    "title": "Enterprise",
+    "heading": "Des données de financement politique de niveau entreprise.",
+    "p0": "Suivez les dons politiques au-delà des frontières. Des API de financement propres et entièrement enrichies, construites sur des enregistrements de transactions normalisés provenant de commissions électorales du monde entier.",
+    "draft_schema": "* Remarque : version préliminaire du schéma v1. La structure de la réponse est susceptible de changer en fonction des retours de la bêta.",
+    "engine_specs": {
+      "title": "// SPÉCIFICATIONS ET POINTS FORTS DU MOTEUR",
+      "s0": {
+        "title": "1. Enregistrements de transactions standardisés",
+        "description": "Ne perdez plus de temps avec des CSV désordonnés et des formats gouvernementaux changeants. Accédez à des entrées de dons proprement mappées et normalisées à travers plusieurs registres internationaux."
+      },
+      "s1": {
+        "title": "2. API REST enrichies et spécifications OpenAPI",
+        "description": "Dites adieu aux scrapers web fragiles. Accédez à des points de terminaison JSON fiables avec un filtrage avancé par donateur, parti, date et montant."
+      },
+      "s2": {
+        "title": "3. Fiabilité SLA",
+        "description": "Conçu pour les workflows institutionnels. Clés API dédiées, limites de débit pour des volumes élevés et disponibilité cible de 99,9 %."
+      }
+    },
+    "monitoring": {
+      "title": "Surveillé par :",
+      "financial": "Institutions financières",
+      "government": "Autorités fiscales gouvernementales",
+      "universities": "Universités de premier plan",
+      "newsrooms": "Rédactions d'investigation"
+    },
+    "register": {
+      "title": "Inscription à la bêta privée",
+      "p0": "Le moteur de données sous-jacent est actuellement en cours de transition vers une API REST à haute disponibilité pour un usage commercial. Soumettez ci-dessous vos besoins en requêtes pour rejoindre la liste d’attente et obtenir un accès prioritaire à la version v1."
+    },
+    "form": {
+      "successTitle": "Demande d'accès enregistrée",
+      "successMessageTemplate": "Merci d’avoir soumis les spécifications de votre requête. Nous examinerons les besoins en données de votre organisation et vous contacterons concernant un accès prioritaire aux points de terminaison commerciaux v1.",
+      "submitAnotherButton": "< Soumettre une autre demande",
+      "formTitle": "Demande d'accès à la bêta",
+      "labelFullName": "Nom complet",
+      "labelWorkEmail": "E-mail professionnel",
+      "labelOrganization": "Organisation",
+      "labelQueryRequest": "Point de terminaison cible / Demande de requête",
+      "consentText": "J’accepte la politique de confidentialité et consens à être contacté au sujet de l’API Enterprise.",
+      "buttonProcessing": "Traitement de la demande...",
+      "buttonSubmit": "Soumettre la demande",
+      "errorFailedSubmit": "Échec de l’envoi de l’inscription à la liste d’attente.",
+      "errorUnexpected": "Une erreur inattendue s’est produite. Veuillez réessayer.",
+      "turnstileLabel": "Faites-nous savoir que vous êtes humain"
+    }
+  },
+  "errors": {
+    "required": "Ce champ est obligatoire.",
+    "empty": "Ce champ ne peut pas être vide.",
+    "email": "Veuillez saisir une adresse e-mail valide."
   }
 }

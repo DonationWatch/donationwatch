@@ -23,7 +23,8 @@
     "export": "Data export",
     "bar_chart_race": "Bar chart race",
     "compare_parties": "Compare parties",
-    "support_us": "☕ Support Server Costs"
+    "support_us": "☕ Support Server Costs",
+    "enterprise": "Enterprise API"
   },
   "data": {
     "loading": "Content is loading...",
@@ -779,5 +780,58 @@
     "success": "{style} style citation copied to clipboard.",
     "data": "DonationWatch - {country} political donations data",
     "apa": "DonationWatch. ({year}). {title} [Data set]. Retrieved {date}, from {url}"
+  },
+  "enterprise": {
+    "title": "Enterprise",
+    "heading": "Enterprise-Grade Political Funding Data.",
+    "p0": "Track political donations across borders. Clean, fully-hydrated funding APIs built on normalized transaction records from global electoral commissions.",
+    "draft_schema": "* Note: Draft v1 schema. Response structure is subject to change based on beta feedback.",
+    "engine_specs": {
+      "title": "// ENGINE SPECIFICATIONS & STRENGTHS",
+      "s0": {
+        "title": "1. Standardized Transaction Records",
+        "description": "Stop fighting with messy CSVs and changing government formats. Access cleanly mapped donation entries normalized across multiple international registries."
+      },
+      "s1": {
+        "title": "2. Hydrated REST APIs & OpenAPI Specs",
+        "description": "Say goodbye to brittle web scrapers. Access reliable JSON endpoints with advanced filtering by donor, party, date, and magnitude."
+      },
+      "s2": {
+        "title": "3. SLA Reliability",
+        "description": "Built for institutional workflows. Dedicated API keys, high-volume rate limits, and 99.9% targeted uptime."
+      }
+    },
+    "monitoring": {
+      "title": "Monitored By:",
+      "financial": "Financial institutions",
+      "government": "Government tax authorities",
+      "universities": "Top-tier universities",
+      "newsrooms": "Investigative newsrooms"
+    },
+    "register": {
+      "title": "Private Beta Registration",
+      "p0": "The underlying data engine is currently being transitioned into a high-availability REST API for commercial use. Submit your query requirements below to join the waitlist and gain priority access to the v1 release."
+    },
+    "form": {
+      "successTitle": "Access Request Registered",
+      "successMessageTemplate": "Thank you for submitting your query specifications. We will review your organization's data requirements and contact you regarding priority access to the v1 commercial endpoints.",
+      "submitAnotherButton": "< Submit another request",
+      "formTitle": "Beta Access Application",
+      "labelFullName": "Full Name",
+      "labelWorkEmail": "Work Email",
+      "labelOrganization": "Organization",
+      "labelQueryRequest": "Target Endpoint / Query Request",
+      "consentText": "I agree to the privacy policy and consent to being contacted regarding the Enterprise API.",
+      "buttonProcessing": "Processing request...",
+      "buttonSubmit": "Submit Request",
+      "errorFailedSubmit": "Failed to submit waitlist registration.",
+      "errorUnexpected": "An unexpected error occurred. Please try again.",
+      "turnstileLabel": "Let us know you are human"
+    }
+  },
+  "errors": {
+    "required": "This field is required.",
+    "empty": "This field cannot be empty.",
+    "email": "Please enter a valid email address."
   }
 }

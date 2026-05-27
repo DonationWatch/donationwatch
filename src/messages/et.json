@@ -23,7 +23,8 @@
     "export": "Andmete eksport",
     "bar_chart_race": "Tulpdiagrammi võistlus",
     "compare_parties": "Võrdle erakondi",
-    "support_us": "☕ Toeta serveri kulusid"
+    "support_us": "☕ Toeta serveri kulusid",
+    "enterprise": "Ettevõtte API"
   },
   "data": {
     "loading": "Sisu laadimine...",
@@ -795,5 +796,58 @@
     "success": "{style} stiilis viide kopeeritud lõikelauale.",
     "data": "DonationWatch – {country} poliitiliste annetuste andmed",
     "apa": "DonationWatch. ({year}). {title} [Andmestik]. Vaadatud {date}, aadressilt {url}"
+  },
+  "enterprise": {
+    "title": "Enterprise",
+    "heading": "Ettevõtte tasemel poliitilise rahastuse andmed.",
+    "p0": "Jälgige poliitilisi annetusi üle riigipiiride. Puhtad, täielikult rikastatud rahastuse API-d, mis põhinevad normaliseeritud tehingukirjetel ülemaailmsetest valimiskomisjonidest.",
+    "draft_schema": "* Märkus: v1 skeemi mustand. Vastuse struktuur võib beetatagasiside põhjal muutuda.",
+    "engine_specs": {
+      "title": "// MOOTORI SPETSIFIKATSIOONID JA TUGEVUSED",
+      "s0": {
+        "title": "1. Standardiseeritud tehingukirjed",
+        "description": "Lõpetage võitlus segaste CSV-failide ja muutuvate riiklike vormingutega. Saage ligipääs puhtalt kaardistatud annetuskannetele, mis on normaliseeritud mitme rahvusvahelise registri lõikes."
+      },
+      "s1": {
+        "title": "2. Rikastatud REST API-d ja OpenAPI spetsifikatsioonid",
+        "description": "Öelge hüvasti hapratele veebiskreiperitele. Pääsete ligi usaldusväärsetele JSON-lõpp-punktidele täiustatud filtreerimisega annetaja, erakonna, kuupäeva ja summa järgi."
+      },
+      "s2": {
+        "title": "3. SLA töökindlus",
+        "description": "Loodud institutsionaalsete töövoogude jaoks. Eraldi API-võtmed, suure mahuga päringupiirangud ja sihitud tööaeg 99,9%."
+      }
+    },
+    "monitoring": {
+      "title": "Jälgivad:",
+      "financial": "Finantsasutused",
+      "government": "Riiklikud maksuametid",
+      "universities": "Tipptasemel ülikoolid",
+      "newsrooms": "Uurivad toimetused"
+    },
+    "register": {
+      "title": "Privaatse beetaversiooni registreerimine",
+      "p0": "Aluseks olevat andmemootorit viiakse praegu üle kõrge käideldavusega REST API-ks kommertskasutuseks. Esitage allpool oma päringunõuded, et liituda ootenimekirjaga ja saada prioriteetne ligipääs v1 väljalaskele."
+    },
+    "form": {
+      "successTitle": "Ligipääsutaotlus registreeritud",
+      "successMessageTemplate": "Täname, et esitasite oma päringu spetsifikatsioonid. Vaatame üle teie organisatsiooni andmenõuded ja võtame teiega ühendust seoses prioriteetse ligipääsuga v1 kommertslikele lõpp-punktidele.",
+      "submitAnotherButton": "< Esita veel üks taotlus",
+      "formTitle": "Beetajuurdepääsu taotlus",
+      "labelFullName": "Täisnimi",
+      "labelWorkEmail": "Töömeil",
+      "labelOrganization": "Organisatsioon",
+      "labelQueryRequest": "Siht-lõpp-punkt / Päringutaotlus",
+      "consentText": "Nõustun privaatsuspoliitikaga ja annan nõusoleku, et minuga võetakse ühendust seoses Enterprise API-ga.",
+      "buttonProcessing": "Taotluse töötlemine...",
+      "buttonSubmit": "Esita taotlus",
+      "errorFailedSubmit": "Ootenimekirja registreerimise esitamine ebaõnnestus.",
+      "errorUnexpected": "Tekkis ootamatu viga. Palun proovige uuesti.",
+      "turnstileLabel": "Andke meile teada, et olete inimene"
+    }
+  },
+  "errors": {
+    "required": "See väli on kohustuslik.",
+    "empty": "See väli ei tohi olla tühi.",
+    "email": "Palun sisestage kehtiv e-posti aadress."
   }
 }

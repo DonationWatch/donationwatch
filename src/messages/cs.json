@@ -23,7 +23,8 @@
     "export": "Export dat",
     "bar_chart_race": "Závod sloupcových grafů",
     "compare_parties": "Porovnat strany",
-    "support_us": "☕ Podpořte provoz serveru"
+    "support_us": "☕ Podpořte provoz serveru",
+    "enterprise": "Podnikové API"
   },
   "data": {
     "loading": "Načítání obsahu...",
@@ -795,5 +796,58 @@
     "success": "Citace ve stylu {style} zkopírována do schránky.",
     "data": "DonationWatch – data o politických darech v {country}",
     "apa": "DonationWatch. ({year}). {title} [Datová sada]. Získáno {date}, z {url}"
+  },
+  "enterprise": {
+    "title": "Enterprise",
+    "heading": "Data o politickém financování na úrovni Enterprise.",
+    "p0": "Sledujte politické dary napříč hranicemi. Čistá, plně obohacená funding API postavená na normalizovaných transakčních záznamech z globálních volebních komisí.",
+    "draft_schema": "* Poznámka: Návrh schématu v1. Struktura odpovědi se může změnit na základě zpětné vazby z bety.",
+    "engine_specs": {
+      "title": "// SPECIFIKACE ENGINE A SILNÉ STRÁNKY",
+      "s0": {
+        "title": "1. Standardizované transakční záznamy",
+        "description": "Přestaňte bojovat s nepřehlednými CSV a měnícími se vládními formáty. Získejte přístup k čistě mapovaným záznamům o darech normalizovaným napříč více mezinárodními registry."
+      },
+      "s1": {
+        "title": "2. Obohacená REST API a specifikace OpenAPI",
+        "description": "Rozlučte se s křehkými webovými scrapery. Získejte přístup ke spolehlivým koncovým bodům JSON s pokročilým filtrováním podle dárce, strany, data a výše."
+      },
+      "s2": {
+        "title": "3. Spolehlivost SLA",
+        "description": "Vytvořeno pro institucionální workflow. Vyhrazené API klíče, limity pro vysoký objem požadavků a cílová dostupnost 99,9 %."
+      }
+    },
+    "monitoring": {
+      "title": "Sledují:",
+      "financial": "Finanční instituce",
+      "government": "Vládní daňové úřady",
+      "universities": "Přední univerzity",
+      "newsrooms": "Investigativní redakce"
+    },
+    "register": {
+      "title": "Registrace do soukromé bety",
+      "p0": "Základní datový engine je momentálně převáděn do vysoce dostupného REST API pro komerční využití. Odešlete níže své požadavky na dotazy, připojte se na čekací listinu a získejte přednostní přístup k vydání v1."
+    },
+    "form": {
+      "successTitle": "Žádost o přístup zaregistrována",
+      "successMessageTemplate": "Děkujeme za odeslání specifikací vašich dotazů. Prověříme datové požadavky vaší organizace a budeme vás kontaktovat ohledně přednostního přístupu ke komerčním endpointům v1.",
+      "submitAnotherButton": "< Odeslat další žádost",
+      "formTitle": "Žádost o beta přístup",
+      "labelFullName": "Celé jméno",
+      "labelWorkEmail": "Pracovní e-mail",
+      "labelOrganization": "Organizace",
+      "labelQueryRequest": "Cílový endpoint / Požadavek na dotaz",
+      "consentText": "Souhlasím se zásadami ochrany osobních údajů a souhlasím s tím, aby mě někdo kontaktoval ohledně Enterprise API.",
+      "buttonProcessing": "Zpracováváme žádost...",
+      "buttonSubmit": "Odeslat žádost",
+      "errorFailedSubmit": "Registraci na čekací listinu se nepodařilo odeslat.",
+      "errorUnexpected": "Došlo k neočekávané chybě. Zkuste to prosím znovu.",
+      "turnstileLabel": "Dejte nám vědět, že jste člověk"
+    }
+  },
+  "errors": {
+    "required": "Toto pole je povinné.",
+    "empty": "Toto pole nesmí být prázdné.",
+    "email": "Zadejte prosím platnou e-mailovou adresu."
   }
 }

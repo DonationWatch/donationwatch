@@ -1,7 +1,41 @@
+import { Server } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import Link from "next/link";
+
 import { SidebarTriggerButtons } from "@/components/layout/sidebar-trigger-buttons";
 import { DynamicContentSearch } from "@/components/search/dynamic-content-search";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 import { LangSwitch } from "./lang-switch";
+
+const EnterpriseApiButton = () => {
+  const locale = useLocale();
+  const t = useTranslations();
+
+  return (
+    <Tooltip>
+      <TooltipTrigger
+        render={
+          <Link
+            href={`/${locale}/enterprise`}
+            prefetch={false}
+            aria-label={t("navigation.enterprise")}
+            className="bg-primary-700 hover:bg-primary-500 flex size-10 shrink-0 items-center justify-center rounded-full p-1 font-semibold text-white"
+          >
+            <Server />
+          </Link>
+        }
+      />
+      <TooltipContent sideOffset={10} side={"left"}>
+        {t("navigation.enterprise")}
+      </TooltipContent>
+    </Tooltip>
+  );
+};
 
 export const StickyHeader = () => {
   return (
@@ -14,10 +48,11 @@ export const StickyHeader = () => {
             </div>
           </div>
 
-          <div>
-            <div className="pointer-events-auto flex items-center gap-1 rounded-full border-slate-200 bg-white/60 p-1 shadow backdrop-blur-sm lg:flex-col dark:border-slate-50/6 dark:bg-slate-900/60">
-              <DynamicContentSearch />
+          <div className="pointer-events-auto flex items-center gap-2">
+            <div className="flex items-center gap-1 rounded-full border-slate-200 bg-white/60 p-1 shadow backdrop-blur-sm lg:flex-col dark:border-slate-50/6 dark:bg-slate-900/60">
+              <EnterpriseApiButton />
               <LangSwitch />
+              <DynamicContentSearch />
             </div>
           </div>
         </div>

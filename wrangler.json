@@ -12,6 +12,9 @@
   "vars": {
     "NODE_VERSION": "22"
   },
+  "secrets": {
+    "required": ["TURNSTILE_SECRET_KEY"]
+  },
   "observability": {
     "enabled": true,
     "traces": {
@@ -24,10 +27,23 @@
     }
   },
   "kv_namespaces": [],
+  "send_email": [
+    {
+      "name": "ENTERPRISE_EMAIL",
+      "allowed_sender_addresses": ["enterprise@donation.watch"]
+    }
+  ],
   "placement": {
     "mode": "smart"
   },
   "limits": {
     "cpu_ms": 1000
-  }
+  },
+  "d1_databases": [
+    {
+      "binding": "DONATION_WATCH_WAITLIST_DB",
+      "database_name": "donation-watch-waitlist",
+      "database_id": "baa59aa6-f607-4ff1-9533-b6b51c2a37fa"
+    }
+  ]
 }

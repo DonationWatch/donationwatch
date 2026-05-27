@@ -18,6 +18,11 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { useCountryConfig, useDonorNames } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { useSearchDialog } from "@/hooks/use-search-dialog";
@@ -85,14 +90,23 @@ const HeaderSearch = () => {
 
   return (
     <>
-      <button
-        className="flex size-10 cursor-pointer items-center justify-center rounded-full p-1 hover:bg-neutral-600/10"
-        onClick={() => open()}
-        aria-label={t("filter_description")}
-        title={t("filter")}
-      >
-        <Search size={18} />
-      </button>
+      <Tooltip>
+        <TooltipTrigger
+          render={
+            <button
+              className="flex size-10 cursor-pointer items-center justify-center rounded-full p-1 hover:bg-neutral-600/10"
+              onClick={() => open()}
+              aria-label={t("filter_description")}
+              title={t("filter")}
+            >
+              <Search size={18} />
+            </button>
+          }
+        />
+        <TooltipContent sideOffset={10} side={"left"}>
+          {t("filter")}
+        </TooltipContent>
+      </Tooltip>
       <SearchDialog country={data} isOpen={isOpen} onClose={() => close()} />
     </>
   );

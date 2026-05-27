@@ -23,7 +23,8 @@
     "export": "Datenexport",
     "bar_chart_race": "Balkendiagramm-Rennen",
     "compare_parties": "Parteien vergleichen",
-    "support_us": "☕ Serverkosten unterstützen"
+    "support_us": "☕ Serverkosten unterstützen",
+    "enterprise": "Unternehmens-API"
   },
   "data": {
     "loading": "Inhalt wird geladen...",
@@ -795,5 +796,59 @@
     "success": "{style}-Stil-Zitat in die Zwischenablage kopiert.",
     "data": "DonationWatch – Daten zu politischen Spenden in {country}",
     "apa": "DonationWatch. ({year}). {title} [Datensatz]. Abgerufen am {date}, von {url}"
+  },
+
+  "enterprise": {
+    "title": "Enterprise",
+    "heading": "Politische Finanzierungsdaten auf Enterprise-Niveau.",
+    "p0": "Verfolgen Sie politische Spenden grenzüberschreitend. Saubere, vollständig angereicherte Funding-APIs, aufgebaut auf normalisierten Transaktionsdatensätzen aus globalen Wahlkommissionen.",
+    "draft_schema": "* Hinweis: Entwurf des v1-Schemas. Die Struktur der Antwort kann sich auf Basis des Beta-Feedbacks ändern.",
+    "engine_specs": {
+      "title": "// TECHNISCHE SPEZIFIKATIONEN & STÄRKEN",
+      "s0": {
+        "title": "1. Standardisierte Transaktionsdatensätze",
+        "description": "Hören Sie auf, mit unübersichtlichen CSV-Dateien und wechselnden Regierungsformaten zu kämpfen. Greifen Sie auf sauber zugeordnete Spendeneinträge zu, die über mehrere internationale Register hinweg normalisiert wurden."
+      },
+      "s1": {
+        "title": "2. Aufbereitete REST-APIs & OpenAPI-Spezifikationen",
+        "description": "Verabschieden Sie sich von fragilen Web-Scrapern. Greifen Sie auf zuverlässige JSON-Endpunkte mit erweiterten Filtern nach Spender, Partei, Datum und Höhe zu."
+      },
+      "s2": {
+        "title": "3. SLA-Zuverlässigkeit",
+        "description": "Für institutionelle Workflows entwickelt. Dedizierte API-Schlüssel, Ratenlimits für hohe Volumen und eine angestrebte Verfügbarkeit von 99,9 %."
+      }
+    },
+    "monitoring": {
+      "title": "Überwacht von:",
+      "financial": "Finanzinstitute",
+      "government": "Staatliche Steuerbehörden",
+      "universities": "Führende Universitäten",
+      "newsrooms": "Investigative Redaktionen"
+    },
+    "register": {
+      "title": "Registrierung für die private Beta",
+      "p0": "Die zugrunde liegende Daten-Engine wird derzeit in eine hochverfügbare REST-API für die kommerzielle Nutzung überführt. Reichen Sie unten Ihre Abfrageanforderungen ein, um der Warteliste beizutreten und bevorzugten Zugang zur v1-Version zu erhalten."
+    },
+    "form": {
+      "successTitle": "Zugriffsanfrage registriert",
+      "successMessageTemplate": "Vielen Dank für die Übermittlung Ihrer Abfragespezifikationen. Wir prüfen die Datenanforderungen Ihrer Organisation und kontaktieren Sie bezüglich des priorisierten Zugangs zu den kommerziellen v1-Endpunkten.",
+      "submitAnotherButton": "< Weitere Anfrage einreichen",
+      "formTitle": "Bewerbung für Beta-Zugang",
+      "labelFullName": "Vollständiger Name",
+      "labelWorkEmail": "Geschäftliche E-Mail",
+      "labelOrganization": "Organisation",
+      "labelQueryRequest": "Ziel-Endpunkt / Abfrageanfrage",
+      "consentText": "Ich stimme der Datenschutzrichtlinie zu und willige ein, bezüglich der Enterprise-API kontaktiert zu werden.",
+      "buttonProcessing": "Anfrage wird verarbeitet...",
+      "buttonSubmit": "Anfrage absenden",
+      "errorFailedSubmit": "Die Wartelistenregistrierung konnte nicht übermittelt werden.",
+      "errorUnexpected": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+      "turnstileLabel": "Lassen Sie uns wissen, dass Sie ein Mensch sind"
+    }
+  },
+  "errors": {
+    "required": "Dieses Feld ist erforderlich.",
+    "empty": "Dieses Feld darf nicht leer sein.",
+    "email": "Bitte geben Sie eine gültige E-Mail-Adresse ein."
   }
 }

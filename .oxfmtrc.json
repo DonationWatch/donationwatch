@@ -1,7 +1,12 @@
 {
   "$schema": "./node_modules/oxfmt/configuration_schema.json",
   "printWidth": 80,
-  "ignorePatterns": ["src/data", "tasks/data/**/*.ts", "**/geojson/**/*"],
+  "ignorePatterns": [
+    "src/data",
+    "tasks/data/**/*.ts",
+    "**/geojson/**/*",
+    "cloudflare-env.d.ts"
+  ],
   "sortTailwindcss": {
     "functions": ["clsx", "cn", "cva", "tw"]
   },

@@ -23,7 +23,8 @@
     "export": "Dataeksport",
     "bar_chart_race": "Søylediagram-kappløp",
     "compare_parties": "Sammenlign partier",
-    "support_us": "☕ Støtt serverkostnader"
+    "support_us": "☕ Støtt serverkostnader",
+    "enterprise": "Bedrifts-API"
   },
   "data": {
     "loading": "Innhold lastes...",
@@ -795,5 +796,58 @@
     "success": "{style}-stil-sitat kopiert til utklippstavlen.",
     "data": "DonationWatch – data om politiske donasjoner i {country}",
     "apa": "DonationWatch. ({year}). {title} [Datasett]. Hentet {date}, fra {url}"
+  },
+  "enterprise": {
+    "title": "Enterprise",
+    "heading": "Politiske finansieringsdata på enterprise-nivå.",
+    "p0": "Spor politiske donasjoner på tvers av landegrenser. Ryddige, fullt berikede finansierings-API-er bygget på normaliserte transaksjonsregistre fra globale valgkommisjoner.",
+    "draft_schema": "* Merk: Utkast til v1-skjema. Responsstrukturen kan bli endret basert på tilbakemeldinger fra betaen.",
+    "engine_specs": {
+      "title": "// MOTORSPESIFIKASJONER OG STYRKER",
+      "s0": {
+        "title": "1. Standardiserte transaksjonsregistre",
+        "description": "Slipp å kjempe med rotete CSV-filer og skiftende offentlige formater. Få tilgang til rent mappede donasjonsoppføringer normalisert på tvers av flere internasjonale registre."
+      },
+      "s1": {
+        "title": "2. Berikede REST-API-er og OpenAPI-spesifikasjoner",
+        "description": "Si farvel til skjøre webskrapere. Få tilgang til pålitelige JSON-endepunkter med avansert filtrering etter donor, parti, dato og beløp."
+      },
+      "s2": {
+        "title": "3. SLA-pålitelighet",
+        "description": "Bygget for institusjonelle arbeidsflyter. Dedikerte API-nøkler, rategrenser for høyt volum og målrettet oppetid på 99,9 %."
+      }
+    },
+    "monitoring": {
+      "title": "Overvåkes av:",
+      "financial": "Finansinstitusjoner",
+      "government": "Statlige skattemyndigheter",
+      "universities": "Ledende universiteter",
+      "newsrooms": "Undersøkende redaksjoner"
+    },
+    "register": {
+      "title": "Registrering for privat beta",
+      "p0": "Den underliggende datamotoren blir for tiden overført til et REST-API med høy tilgjengelighet for kommersiell bruk. Send inn kravene til spørringene dine nedenfor for å bli med på ventelisten og få prioritert tilgang til v1-lanseringen."
+    },
+    "form": {
+      "successTitle": "Tilgangsforespørsel registrert",
+      "successMessageTemplate": "Takk for at du sendte inn spesifikasjonene for spørringen din. Vi vil gjennomgå organisasjonens datakrav og kontakte deg angående prioritert tilgang til de kommersielle v1-endepunktene.",
+      "submitAnotherButton": "< Send inn en ny forespørsel",
+      "formTitle": "Søknad om beta-tilgang",
+      "labelFullName": "Fullt navn",
+      "labelWorkEmail": "Jobb-e-post",
+      "labelOrganization": "Organisasjon",
+      "labelQueryRequest": "Mål-endepunkt / Spørringsforespørsel",
+      "consentText": "Jeg godtar personvernerklæringen og samtykker til å bli kontaktet angående Enterprise API.",
+      "buttonProcessing": "Behandler forespørsel...",
+      "buttonSubmit": "Send inn forespørsel",
+      "errorFailedSubmit": "Kunne ikke sende inn registrering til ventelisten.",
+      "errorUnexpected": "Det oppsto en uventet feil. Prøv igjen.",
+      "turnstileLabel": "La oss vite at du er et menneske"
+    }
+  },
+  "errors": {
+    "required": "Dette feltet er påkrevd.",
+    "empty": "Dette feltet kan ikke være tomt.",
+    "email": "Vennligst oppgi en gyldig e-postadresse."
   }
 }

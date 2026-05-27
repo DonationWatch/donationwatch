@@ -1,6 +1,5 @@
 import {
   API_CATALOG_URL,
-  CONTACT_MAIL,
   DATA_LICENSE,
   DISCOVERY_INDEX_URL,
   OPENAPI_URL,
@@ -16,7 +15,7 @@ This API and data structure are **Experimental** and optimized specifically for 
 - **Breaking Changes:** Schemas and file paths are subject to change without notice.
 - **Intended Use:** Research, investigative journalism, and agentic workflows.
 - **Non-Intended Use:** Production KYC, banking compliance, or automated regulatory reporting. 
-- **Stable Access:** For production-grade, SLA-backed data feeds (KYC/Banking), contact: ${CONTACT_MAIL}.
+- **Enterprise API (Beta):** For production-grade, SLA-backed REST endpoints with full OpenAPI schemas (designed specifically for institutional compliance), join the commercial waitlist at: [https://donation.watch/en/enterprise](https://donation.watch/en/enterprise).
 
 ## Discovery Architecture
 Agents should follow this path to resolve data:

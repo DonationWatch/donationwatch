@@ -108,6 +108,10 @@ export default async function sitemap(props: {
                 lastModified,
               },
               {
+                url: `${BASE_URL}/${locale}/enterprise`,
+                lastModified,
+              },
+              {
                 url: `${BASE_URL}/${locale}/${country}`,
                 lastModified,
               },

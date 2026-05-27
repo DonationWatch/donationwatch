@@ -23,7 +23,8 @@
     "export": "Datu eksports",
     "bar_chart_race": "Joslu diagrammas sacensības",
     "compare_parties": "Salīdzināt partijas",
-    "support_us": "☕ Atbalstiet servera izmaksas"
+    "support_us": "☕ Atbalstiet servera izmaksas",
+    "enterprise": "Uzņēmuma API"
   },
   "data": {
     "loading": "Saturs tiek ielādēts...",
@@ -795,5 +796,58 @@
     "success": "{style} stila citāts nokopēts starpliktuvē.",
     "data": "DonationWatch – {country} politisko ziedojumu dati",
     "apa": "DonationWatch. ({year}). {title} [Datu kopa]. Skatīts {date}, no {url}"
+  },
+  "enterprise": {
+    "title": "Enterprise",
+    "heading": "Uzņēmuma līmeņa politiskā finansējuma dati.",
+    "p0": "Izsekojiet politiskajiem ziedojumiem pāri robežām. Tīras, pilnībā bagātinātas finansējuma API, kas balstītas uz normalizētiem darījumu ierakstiem no pasaules vēlēšanu komisijām.",
+    "draft_schema": "* Piezīme: v1 shēmas melnraksts. Atbildes struktūra var mainīties, pamatojoties uz beta atsauksmēm.",
+    "engine_specs": {
+      "title": "// DZINĒJA SPECIFIKĀCIJAS UN PRIEKŠROCĪBAS",
+      "s0": {
+        "title": "1. Standartizēti darījumu ieraksti",
+        "description": "Pārtrauciet cīnīties ar nekārtīgiem CSV failiem un mainīgiem valdības formātiem. Piekļūstiet tīri kartētiem ziedojumu ierakstiem, kas normalizēti vairākos starptautiskos reģistros."
+      },
+      "s1": {
+        "title": "2. Papildinātas REST API un OpenAPI specifikācijas",
+        "description": "Atvadieties no trausliem tīmekļa skrāperiem. Piekļūstiet uzticamiem JSON galapunktiem ar paplašinātu filtrēšanu pēc ziedotāja, partijas, datuma un summas."
+      },
+      "s2": {
+        "title": "3. SLA uzticamība",
+        "description": "Izstrādāts institucionālām darbplūsmām. Atsevišķas API atslēgas, liela apjoma pieprasījumu limiti un mērķa darbspējas laiks 99,9%."
+      }
+    },
+    "monitoring": {
+      "title": "Uzrauga:",
+      "financial": "Finanšu iestādes",
+      "government": "Valsts nodokļu iestādes",
+      "universities": "Vadošās universitātes",
+      "newsrooms": "Pētnieciskās žurnālistikas redakcijas"
+    },
+    "register": {
+      "title": "Privātās beta versijas reģistrācija",
+      "p0": "Pamatā esošais datu dzinējs pašlaik tiek pārveidots par augstas pieejamības REST API komerciālai lietošanai. Iesniedziet zemāk savas vaicājumu prasības, lai pievienotos gaidīšanas sarakstam un iegūtu prioritāru piekļuvi v1 laidienam."
+    },
+    "form": {
+      "successTitle": "Piekļuves pieprasījums reģistrēts",
+      "successMessageTemplate": "Paldies, ka iesniedzāt sava vaicājuma specifikācijas. Mēs izskatīsim jūsu organizācijas datu prasības un sazināsimies ar jums par prioritāru piekļuvi komerciālajiem v1 galapunktiem.",
+      "submitAnotherButton": "< Iesniegt vēl vienu pieprasījumu",
+      "formTitle": "Pieteikums beta piekļuvei",
+      "labelFullName": "Pilns vārds",
+      "labelWorkEmail": "Darba e-pasts",
+      "labelOrganization": "Organizācija",
+      "labelQueryRequest": "Mērķa galapunkts / Vaicājuma pieprasījums",
+      "consentText": "Es piekrītu privātuma politikai un piekrītu, ka ar mani sazināsies saistībā ar Enterprise API.",
+      "buttonProcessing": "Pieprasījums tiek apstrādāts...",
+      "buttonSubmit": "Iesniegt pieprasījumu",
+      "errorFailedSubmit": "Neizdevās iesniegt reģistrāciju gaidīšanas sarakstam.",
+      "errorUnexpected": "Radās neparedzēta kļūda. Lūdzu, mēģiniet vēlreiz.",
+      "turnstileLabel": "Dodiet mums ziņu, ka esat cilvēks"
+    }
+  },
+  "errors": {
+    "required": "Šis lauks ir obligāts.",
+    "empty": "Šis lauks nedrīkst būt tukšs.",
+    "email": "Lūdzu, ievadiet derīgu e-pasta adresi."
   }
 }

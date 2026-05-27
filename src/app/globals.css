@@ -90,6 +90,9 @@ html {
   background-color: var(--color-background);
   /* Ensure scrollbars don't jump the content around */
   scrollbar-gutter: stable;
+
+  /* Let selection use branded colors */
+  @apply selection:bg-primary-900 selection:text-white;
 }
 
 @media (prefers-color-scheme: dark) {

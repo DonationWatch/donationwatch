@@ -18,7 +18,7 @@ describe("EE loader transformRawDonation", () => {
       "valid donation above minimum",
       {
         date: "15.03.2024",
-        receipt_category: "Rahaline annetus",
+        receipt_category: "Rahaline annetus" as const,
         name: "JAAN TAMM",
         birthdate: "01.01.1970",
         amount: 5000,
@@ -36,7 +36,7 @@ describe("EE loader transformRawDonation", () => {
       "valid donation with different party",
       {
         date: "01.12.2023",
-        receipt_category: "Rahaline annetus",
+        receipt_category: "Rahaline annetus" as const,
         name: "MARI METS",
         birthdate: "15.06.1980",
         amount: 10000,

@@ -18,6 +18,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { COUNTRIES, COUNTRY_CONFIG, getCountryName } from "@/utils/countries";
 import { countryFlags } from "@/utils/country-flags";
@@ -43,17 +48,26 @@ export const RootLink = ({
   const rootHref = activeCountry ? `/${locale}/${activeCountry}` : `/${locale}`;
 
   return (
-    <Link
-      prefetch={false}
-      title={t("header.home")}
-      href={rootHref}
-      className={
-        "bg-primary-700 hover:bg-primary-500 flex size-8 shrink-0 items-center justify-center font-semibold text-white " +
-        (className ?? "")
-      }
-    >
-      {children}
-    </Link>
+    <Tooltip>
+      <TooltipTrigger
+        render={
+          <Link
+            prefetch={false}
+            title={t("header.home")}
+            href={rootHref}
+            className={
+              "bg-primary-700 hover:bg-primary-500 flex size-8 shrink-0 items-center justify-center font-semibold text-white " +
+              (className ?? "")
+            }
+          >
+            {children}
+          </Link>
+        }
+      />
+      <TooltipContent sideOffset={10} side={"right"}>
+        {t("header.home")}
+      </TooltipContent>
+    </Tooltip>
   );
 };
 

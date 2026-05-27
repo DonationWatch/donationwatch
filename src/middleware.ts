@@ -15,6 +15,7 @@ const PATHS_WITHOUT_COUNTRY = [
   "fun",
   "privacy",
   "other-countries",
+  "enterprise",
 ];
 
 const countriesArray = [...COUNTRIES];

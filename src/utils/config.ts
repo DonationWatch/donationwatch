@@ -17,6 +17,7 @@ export const BIGGEST_DONATIONS_COUNT = 4;
 
 export const SITE_NAME = "DonationWatch";
 export const CONTACT_MAIL = "contact@donation.watch";
+export const ENTERPRISE_MAIL = "enterprise@donation.watch";
 
 export const IMPRINT = ``;
 
@@ -52,3 +53,5 @@ export const LLMS_URL = `${PROD_URL}/llms.txt`;
 export const OPENAPI_URL = `${PROD_URL}/schema/openapi.json`;
 export const DISCOVERY_INDEX_URL = `${PROD_URL}/data/index.json`;
 export const API_CATALOG_URL = `${PROD_URL}/.well-known/api-catalog`;
+
+export const TURNSTILE_PUBLIC_KEY = "0x4AAAAAADRM9xYdQb8lUoE-";

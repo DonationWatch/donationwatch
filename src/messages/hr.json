@@ -23,7 +23,8 @@
     "export": "Izvoz podataka",
     "bar_chart_race": "Utrka stupčastih grafikona",
     "compare_parties": "Usporedi stranke",
-    "support_us": "☕ Podrži troškove poslužitelja"
+    "support_us": "☕ Podrži troškove poslužitelja",
+    "enterprise": "API za poduzeća"
   },
   "data": {
     "loading": "Sadržaj se učitava...",
@@ -795,5 +796,58 @@
     "success": "Citat u stilu {style} kopiran u međuspremnik.",
     "data": "DonationWatch – podaci o političkim donacijama u {country}",
     "apa": "DonationWatch. ({year}). {title} [Skup podataka]. Preuzeto {date}, s {url}"
+  },
+  "enterprise": {
+    "title": "Enterprise",
+    "heading": "Podaci o političkom financiranju na razini Enterprisea.",
+    "p0": "Pratite političke donacije preko granica. Čisti, potpuno obogaćeni API-ji za financiranje izgrađeni na normaliziranim transakcijskim zapisima iz globalnih izbornih povjerenstava.",
+    "draft_schema": "* Napomena: Nacrt sheme v1. Struktura odgovora podložna je promjenama na temelju povratnih informacija iz bete.",
+    "engine_specs": {
+      "title": "// SPECIFIKACIJE I PREDNOSTI SUSTAVA",
+      "s0": {
+        "title": "1. Standardizirani transakcijski zapisi",
+        "description": "Prestanite se boriti s neurednim CSV datotekama i promjenjivim državnim formatima. Pristupite uredno mapiranim zapisima donacija normaliziranima kroz više međunarodnih registara."
+      },
+      "s1": {
+        "title": "2. Obogaćeni REST API-ji i OpenAPI specifikacije",
+        "description": "Recite zbogom krhkim web scraperima. Pristupite pouzdanim JSON krajnjim točkama uz napredno filtriranje prema donatoru, stranci, datumu i iznosu."
+      },
+      "s2": {
+        "title": "3. SLA pouzdanost",
+        "description": "Izgrađeno za institucionalne radne procese. Namjenski API ključevi, ograničenja za velike količine zahtjeva i ciljana dostupnost od 99,9%."
+      }
+    },
+    "monitoring": {
+      "title": "Prate:",
+      "financial": "Financijske institucije",
+      "government": "Državna porezna tijela",
+      "universities": "Vrhunska sveučilišta",
+      "newsrooms": "Istraživačke redakcije"
+    },
+    "register": {
+      "title": "Registracija za privatnu betu",
+      "p0": "Temeljni podatkovni sustav trenutno se prebacuje u REST API visoke dostupnosti za komercijalnu upotrebu. Pošaljite svoje zahtjeve za upite u nastavku kako biste se pridružili listi čekanja i ostvarili prioritetni pristup izdanju v1."
+    },
+    "form": {
+      "successTitle": "Zahtjev za pristup je registriran",
+      "successMessageTemplate": "Hvala vam što ste poslali specifikacije svog upita. Pregledat ćemo podatkovne zahtjeve vaše organizacije i kontaktirati vas u vezi s prioritetnim pristupom komercijalnim endpointima v1.",
+      "submitAnotherButton": "< Pošalji još jedan zahtjev",
+      "formTitle": "Prijava za beta pristup",
+      "labelFullName": "Puno ime",
+      "labelWorkEmail": "Poslovni e-mail",
+      "labelOrganization": "Organizacija",
+      "labelQueryRequest": "Ciljni endpoint / Zahtjev za upit",
+      "consentText": "Slažem se s pravilima privatnosti i pristajem da me se kontaktira u vezi s Enterprise API-jem.",
+      "buttonProcessing": "Obrada zahtjeva...",
+      "buttonSubmit": "Pošalji zahtjev",
+      "errorFailedSubmit": "Slanje registracije za listu čekanja nije uspjelo.",
+      "errorUnexpected": "Došlo je do neočekivane pogreške. Pokušajte ponovno.",
+      "turnstileLabel": "Recite nam da ste čovjek"
+    }
+  },
+  "errors": {
+    "required": "Ovo polje je obavezno.",
+    "empty": "Ovo polje ne smije biti prazno.",
+    "email": "Unesite valjanu adresu e-pošte."
   }
 }
