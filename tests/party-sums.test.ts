@@ -381,8 +381,9 @@ describe("EU", () => {
       // parties
       ["ALDE", 36_000],
       // foundations
-      ["WMCES", 15_260.44],
+      ["WMCES", 33_110.87],
       ["ND", 18_000],
+      ["ELF", 18_000],
     ]);
   });
 });
