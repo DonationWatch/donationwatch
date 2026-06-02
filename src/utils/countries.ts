@@ -210,7 +210,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
     currency: "EUR",
     source: {
       name: "Rijksoverheid",
-      url: "https://www.rijksoverheid.nl/documenten?trefwoord=%22giften+aan+politieke+partijen%22&startdatum=&einddatum=&onderdeel=Alle+ministeries&type=Alle+documenten",
+      url: "https://www.rijksoverheid.nl/documenten?q=giften+aan+politieke+partijen",
     },
     code: "NL",
     wikiCountry: "en",
