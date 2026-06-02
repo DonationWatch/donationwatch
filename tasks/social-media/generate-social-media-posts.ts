@@ -1,6 +1,5 @@
 import { exec } from "child_process";
 import debug from "debug";
-import { createTranslator } from "next-intl";
 import {
   ModuleKind,
   ModuleResolutionKind,
@@ -10,20 +9,18 @@ import {
 import { promisify } from "util";
 
 import type { CountryConfig } from "@/types/country-config";
-import type { BrowserBasedLocale, ConstLocale } from "@/utils/locales";
-import type { StrictNamespacedTranslator } from "@/utils/translator";
+import type { Currency } from "@/utils/countries";
+import type { ConstLocale } from "@/utils/locales";
 import type { Donation, ReceiverId } from "@/utils/types";
 
 import { PartyField } from "@/types/party";
-import { makeBrand } from "@/utils/brand";
-import { Country, getCountryName, getParty } from "@/utils/countries";
+import { getParty, Country } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
-import { formatCompactCountryCurrency } from "@/utils/formatter";
+import { Features, hasFeature } from "@/utils/features";
 import { DonationField } from "@/utils/types";
 
 import { getDonations } from "../data/load-donations";
 import { promptCountries } from "../utils";
-import { interpolate } from "./string";
 
 const log = debug(`generate-social-media-posts`);
 
@@ -35,9 +32,29 @@ const countries = await promptCountries(
   "What country to generate a social media post for?",
 );
 
-const PARTIES_TO_LIST_FULLY = 3;
+const countryLanguage: Record<Country, ConstLocale | string> = {
+  [Country.germany]: "de-DE",
+  [Country.canada]: "en-CA",
+  [Country.austria]: "de-AT",
+  [Country.croatia]: "hr-HR",
+  [Country.serbia]: "sr-RS",
+  [Country.latvia]: "lv-LV",
+  [Country.estonia]: "et-EE",
+  [Country.australia]: "en-AU",
+  [Country.europeanunion]: "en",
+  [Country.czechrepublic]: "cs-CZ",
+  [Country.switzerland]: "de-CH",
+  [Country.unitedkingdom]: "en-GB",
+  [Country.netherlands]: "nl-NL",
+  [Country.georgia]: "ka-GE",
+  [Country.norway]: "nb-NO",
+  [Country.ukraine]: "uk-UA",
+  [Country.france]: "fr-FR",
+  [Country.sweden]: "sv-SE",
+};
 
-const countryTranslations: Record<Country, ConstLocale> = {
+// Mapping of our countries to the "best" language in the url, that we support
+const ourLanguage: Record<Country, ConstLocale> = {
   [Country.germany]: "de",
   [Country.canada]: "en",
   [Country.austria]: "de",
@@ -56,99 +73,6 @@ const countryTranslations: Record<Country, ConstLocale> = {
   [Country.ukraine]: "uk",
   [Country.france]: "fr",
   [Country.sweden]: "en",
-};
-
-const countryFlags: Record<Country, string> = {
-  [Country.germany]: "🇩🇪",
-  [Country.canada]: "🇨🇦",
-  [Country.austria]: "🇦🇹",
-  [Country.croatia]: "🇭🇷",
-  [Country.serbia]: "🇷🇸",
-  [Country.latvia]: "🇱🇻",
-  [Country.estonia]: "🇪🇪",
-  [Country.australia]: "🇦🇺",
-  [Country.europeanunion]: "🇪🇺",
-  [Country.czechrepublic]: "🇨🇿",
-  [Country.switzerland]: "🇨🇭",
-  [Country.unitedkingdom]: "🇬🇧",
-  [Country.netherlands]: "🇳🇱",
-  [Country.georgia]: "🇬🇪",
-  [Country.norway]: "🇳🇴",
-  [Country.ukraine]: "🇺🇦",
-  [Country.france]: "🇫🇷",
-  [Country.sweden]: "🇸🇪",
-};
-
-const deltaPrefix = (delta: number): string => (delta > 0 ? `+` : "");
-
-const messageTranslations = {
-  en: {
-    title: "The donation data for {country} got refreshed:",
-    line: "{receiver} {delta} ({count} donations, {sum})",
-    hashtags: `#{country} #donations`,
-    more: "and {otherParties} other parties {otherDelta} ({otherCount} donations)",
-  },
-  de: {
-    title: "Die Spendendaten für {country} wurden aktualisiert:",
-    line: "{receiver} {delta} ({count} Spenden, {sum})",
-    hashtags: "#{country} #Spenden",
-    more: "und {otherParties} weitere Parteien {otherDelta} ({otherCount} Spenden)",
-  },
-  cs: {
-    title: "Údaje o darech pro {country} byly aktualizovány:",
-    line: "{receiver} {delta} ({count} darů, {sum})",
-    hashtags: `#{country} #dary`,
-    more: "a {otherParties} dalších stran {otherDelta} ({otherCount} darů)",
-  },
-  nl: {
-    title: "De donatiegegevens voor {country} zijn bijgewerkt:",
-    line: "{receiver} {delta} ({count} donaties, {sum})",
-    hashtags: `#{country} #donaties`,
-    more: "en nog {otherParties} partijen {otherDelta} ({otherCount} donaties)",
-  },
-  lv: {
-    title: "{country} ziedojumu dati ir atjaunināt:",
-    line: "{receiver} {delta} ({count} ziedojumi, {sum})",
-    hashtags: `#{country} #ziedojumi`,
-    more: "un vēl {otherParties} partijas {otherDelta} ({otherCount} ziedojumi)",
-  },
-  et: {
-    title: "{country} annetuste andmed on uuendatud:",
-    line: "{receiver} {delta} ({count} annetust, {sum})",
-    hashtags: `#{country} #annetused`,
-    more: "ja veel {otherParties} parteid {otherDelta} ({otherCount} annetust)",
-  },
-  hr: {
-    title: "Podaci o donacijama za {country} su ažurirani:",
-    line: "{receiver} +{delta} (+{count} donacija, {sum})",
-    hashtags: `#{country} #donacije`,
-    more: "i još {otherParties} stranaka +{otherDelta} ({otherCount} donacija)",
-  },
-  no: {
-    title: "Donasjonsdataene for {country} ble oppdatert:",
-    line: "{receiver} {delta} ({count} donasjoner, {sum})",
-    hashtags: `#{country} #donasjoner`,
-    more: "og {otherParties} andre partier {otherDelta} ({otherCount} donasjoner)",
-  },
-  uk: {
-    title: "Дані про пожертви для {country} оновлено:",
-    line: "{receiver} {delta} ({count} пожертв, {sum})",
-    hashtags: `#{country} #пожертви`,
-    more: "та {otherParties} інших партій {otherDelta} ({otherCount} пожертв)",
-  },
-  fr: {
-    title: "Les données de dons pour {country} ont été actualisées :",
-    line: "{receiver} {delta} ({count} dons, {sum})",
-    hashtags: "#{country} #financementpolitique #transparence",
-    more: "et {otherParties} autres partis {otherDelta} ({otherCount} dons)",
-  },
-} satisfies Record<ConstLocale, unknown>;
-
-const toHashTag = (text: string): string => {
-  return text
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "")
-    .replace(/^[^a-z]+/, "");
 };
 
 const getDonationsFromLastGitRevision = async (
@@ -187,23 +111,131 @@ const getDonationsFromLastGitRevision = async (
   return moduleObject.exports.default;
 };
 
-type FlatPartySum = Record<
-  string,
-  {
-    sum: number;
-    count: number;
-    delta: number;
+interface LLMUpdateContext {
+  country: Country;
+  currency: Currency;
+  overallTotalNewFunds: number;
+  parties: {
+    partyName: string;
+    metrics: {
+      newDonationSum: number;
+      newDonationCount?: number;
+      averageDonation?: number;
+      medianDonation?: number;
+      topDonorConcentrationPercent?: number;
+    };
+    largestDonationsThisUpdate?: {
+      donorName: string;
+      amount: number;
+      date: string;
+    }[];
+  }[];
+}
+
+const getMedian = (values: number[]): number => {
+  if (values.length === 0) return 0;
+  const sorted = [...values].sort((a, b) => a - b);
+  const mid = Math.floor(sorted.length / 2);
+  if (sorted.length % 2 !== 0) {
+    return sorted[mid];
   }
->;
+  return (sorted[mid - 1] + sorted[mid]) / 2;
+};
 
-const calculatePartySums = (donations: Donation[]): FlatPartySum => {
-  return donations.reduce<FlatPartySum>((acc, donation) => {
-    acc[donation[DonationField.Receiver]] ??= { sum: 0, count: 0, delta: 0 };
-    acc[donation[DonationField.Receiver]].sum += donation[DonationField.Amount];
-    acc[donation[DonationField.Receiver]].count++;
+const calculatePartySums = (
+  currentDonations: Donation[],
+  lastDonations: Donation[],
+  countryConfig: CountryConfig,
+): LLMUpdateContext["parties"] => {
+  const lastDonationIds = new Set(
+    lastDonations.map((d) => d[DonationField.Id]),
+  );
 
-    return acc;
-  }, {});
+  const newDonations = currentDonations.filter(
+    (d) => !lastDonationIds.has(d[DonationField.Id]),
+  );
+
+  const allPartyIds = new Set<ReceiverId>([
+    ...currentDonations.map((d) => d[DonationField.Receiver]),
+    ...lastDonations.map((d) => d[DonationField.Receiver]),
+  ]);
+
+  const partiesMetrics: LLMUpdateContext["parties"] = [];
+
+  for (const partyId of allPartyIds) {
+    const newDonationsForParty = newDonations.filter(
+      (d) => d[DonationField.Receiver] === partyId,
+    );
+
+    const newDonationCount = newDonationsForParty.length;
+    if (newDonationCount === 0) {
+      continue;
+    }
+
+    const newDonationSum = newDonationsForParty.reduce(
+      (sum, d) => sum + d[DonationField.Amount],
+      0,
+    );
+
+    const party = getParty(countryConfig, partyId);
+    const partyName = party ? party[PartyField.Name] : partyId;
+
+    if (!hasFeature(countryConfig, Features.Donors)) {
+      partiesMetrics.push({
+        partyName,
+        metrics: {
+          newDonationSum,
+        },
+      });
+    } else {
+      const averageDonation =
+        newDonationCount > 0 ? newDonationSum / newDonationCount : 0;
+
+      const donationAmounts = newDonationsForParty.map(
+        (d) => d[DonationField.Amount],
+      );
+      const medianDonation = getMedian(donationAmounts);
+
+      const largestDonationsThisUpdate = [...newDonationsForParty]
+        .sort((a, b) => b[DonationField.Amount] - a[DonationField.Amount])
+        .slice(0, 5)
+        .map((d) => ({
+          donorName: d[DonationField.DonorName],
+          amount: d[DonationField.Amount],
+          date: d[DonationField.Date],
+        }));
+
+      // Top donor concentration (percentage of new funds from single largest donor, aggregated by donor name)
+      const donorSums: Record<string, number> = {};
+      for (const d of newDonationsForParty) {
+        const name = d[DonationField.DonorName];
+        donorSums[name] = (donorSums[name] || 0) + d[DonationField.Amount];
+      }
+      const maxDonorSum = Object.values(donorSums).reduce(
+        (max, sum) => (sum > max ? sum : max),
+        0,
+      );
+      const topDonorConcentrationPercent =
+        newDonationSum > 0 ? (maxDonorSum / newDonationSum) * 100 : 0;
+
+      partiesMetrics.push({
+        partyName,
+        metrics: {
+          newDonationSum,
+          newDonationCount,
+          averageDonation,
+          medianDonation,
+          topDonorConcentrationPercent,
+        },
+        largestDonationsThisUpdate,
+      });
+    }
+  }
+
+  // Sort parties by newDonationSum descending
+  return partiesMetrics.sort(
+    (a, b) => b.metrics.newDonationSum - a.metrics.newDonationSum,
+  );
 };
 
 const main = async () => {
@@ -214,91 +246,60 @@ const main = async () => {
     const getDonationsFromLastRevision =
       await getDonationsFromLastGitRevision(countryConfig);
 
-    const currentPartySums = calculatePartySums(currentDonations);
-    const lastPartySums = calculatePartySums(getDonationsFromLastRevision);
+    const lastDonationIds = new Set(
+      getDonationsFromLastRevision.map((d) => d[DonationField.Id]),
+    );
 
-    // calculate the difference
-    const partySumsDiff: FlatPartySum = {};
-    for (const partyId in currentPartySums) {
-      const currentSum = currentPartySums[partyId];
-      const lastSum = lastPartySums[partyId] || { sum: 0, count: 0 };
+    const newDonations = currentDonations.filter(
+      (d) => !lastDonationIds.has(d[DonationField.Id]),
+    );
 
-      partySumsDiff[partyId] = {
-        sum: currentSum.sum,
-        delta: currentSum.sum - lastSum.sum,
-        count: currentSum.count - lastSum.count,
-      };
-    }
+    const overallTotalNewFunds = newDonations.reduce(
+      (sum, d) => sum + d[DonationField.Amount],
+      0,
+    );
 
-    const partyDiffs = Object.entries(partySumsDiff)
-      .filter(([, data]) => data.delta !== 0)
-      .toSorted(([, a], [, b]) => b.delta - a.delta);
+    const partiesMetrics = calculatePartySums(
+      currentDonations,
+      getDonationsFromLastRevision,
+      countryConfig,
+    );
 
-    log("Found party diffs:", partyDiffs);
+    const lang = countryLanguage[country];
 
-    const lang = countryTranslations[country];
-    // We cast the base language to a BrowserBasedLocale for compatibility with formatters.
-    // In this Node.js context, we don't have a navigator, so we stick to the base language.
-    const browserLang = makeBrand<BrowserBasedLocale>(lang);
+    const llmContext: LLMUpdateContext = {
+      country,
+      currency: countryConfig.currency,
+      overallTotalNewFunds,
+      parties: partiesMetrics,
+    };
 
-    const messages = await import(`../../src/messages/${lang}.json`, {
-      with: { type: "json" },
-    }).then((mod) => mod.default);
+    const prompt = `You are an automated, neutral AI social media content generator for donation.watch.
+Generate a concise, high-quality social media post (e.g., for X/Twitter) in the local language of the country (${lang}) based on the following structured update payload:
 
-    const tCountries: StrictNamespacedTranslator<"countries"> =
-      createTranslator({
-        locale: lang,
-        messages,
-        namespace: "countries",
-      });
+${JSON.stringify(llmContext, null, 2)}
 
-    let message = `${countryFlags[countryConfig.id]} ${interpolate(
-      messageTranslations[lang].title,
-      {
-        country: getCountryName(countryConfig, tCountries),
-      },
-    )}\n`;
+Instructions for Generation:
+1. Be extremely concise, direct, and avoid any redundancy. Keep the post short and punchy.
+2. Blend metrics naturally and ONLY mention them if they add useful, non-obvious context.
+3. Handle single donation cases elegantly:
+   - If a party has only 1 donation: Do NOT mention average or median values, and do NOT mention the "100% top donor concentration". Simply say: "[Party Name] received a single donation of [Amount] from [Donor Name] on [Date]."
+4. Handle multiple donation cases concisely:
+   - Blend metrics naturally into narrative sentences (e.g., "[Party Name] received €6,010 across 8 donations, with a median of €140.").
+   - Explain donor concentration naturally (e.g. "A single donor, [Donor Name], contributed 83% of their new funds (€5,000)") ONLY when it is high (e.g. > 50%) and there are multiple donations.
+5. Maintain strict neutrality, objectivity, and factual accuracy. donation.watch is an independent tracking platform.
+6. Do not include any additional emojis other than the specified country flag
+7. Avoid all typical AI slop, promotional buzzwords, verbosity, and stylistic indicators such as em dashes (—), exclamations, or lists of slogans.
+8. Include appropriate hashtags (e.g. #donations, #transparency).
+9. End with the link: https://donation.watch/${ourLanguage[countryConfig.id]}/${countryConfig.id}`;
 
-    partyDiffs.slice(0, PARTIES_TO_LIST_FULLY).forEach(([receiver, data]) => {
-      message += `- ${interpolate(messageTranslations[lang].line, {
-        receiver: getParty(countryConfig, receiver as ReceiverId)[
-          PartyField.Short
-        ],
-        delta:
-          deltaPrefix(data.delta) +
-          formatCompactCountryCurrency(browserLang, data.delta, countryConfig),
-        count: deltaPrefix(data.count) + data.count,
-        sum: formatCompactCountryCurrency(browserLang, data.sum, countryConfig),
-      })}\n`;
-    });
-
-    if (partyDiffs.length > PARTIES_TO_LIST_FULLY) {
-      const otherParties = partyDiffs.slice(PARTIES_TO_LIST_FULLY);
-      let otherDelta = 0;
-      let otherCount = 0;
-      otherParties.forEach(([, data]) => {
-        otherDelta += data.delta;
-        otherCount += data.count;
-      });
-
-      message += `${interpolate(messageTranslations[lang].more, {
-        otherParties: otherParties.length,
-        otherDelta:
-          deltaPrefix(otherDelta) +
-          formatCompactCountryCurrency(browserLang, otherDelta, countryConfig),
-        otherCount: deltaPrefix(otherCount) + otherCount,
-      })}`;
-    }
-
-    message += `\n${interpolate(messageTranslations[lang].hashtags, {
-      country: toHashTag(getCountryName(countryConfig, tCountries)),
-    })}`;
-
-    message += `\nhttps://donation.watch/${lang}/${countryConfig.id}`;
-
-    console.log("\n###\n");
-    console.log(message);
-    console.log("\n###\n");
+    console.log("\n########################################");
+    console.log(
+      "### PROMPT FOR LLM GENERATION (" + countryConfig.code + ") ###",
+    );
+    console.log("########################################\n");
+    console.log(prompt);
+    console.log("\n########################################\n");
   }
 };
 
