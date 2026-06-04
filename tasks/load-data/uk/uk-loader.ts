@@ -566,6 +566,13 @@ export class UkLoader extends DataLoader {
       code: "HERSHAMSOC",
       color: RANDOM_COLOR_MARKER,
     },
+    "Advance UK": {
+      name: "Advance UK",
+      short: "Advance UK",
+      code: "ADVANCEUK",
+      color: "#012169",
+      wiki: 80323199,
+    },
   };
 
   donorMeta = donorMeta;

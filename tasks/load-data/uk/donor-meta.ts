@@ -241,6 +241,9 @@ export const donorMeta: DonorMetaDefinition = {
     "Benyamin Naeem Habib": {
       wiki: 60876519,
     },
+    "Ben Peter Delo": {
+      wiki: 58740076,
+    },
   },
   relations: [
     // Flamingo Land
