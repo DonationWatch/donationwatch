@@ -498,6 +498,10 @@ export class DeLoader extends DataLoader {
       return donor.replace(/ Aktiengesellschaft$/, " AG");
     }
 
+    if (donor.includes("MMI Leisure & Capital Management GmbH")) {
+      return "MMI Leisure & Capital Management GmbH";
+    }
+
     if (
       containsWords(donor, "Hans Helmuth Schmidt") &&
       address[AddressField.Zip] === "52353"

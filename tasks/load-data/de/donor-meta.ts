@@ -317,5 +317,10 @@ export const donorMeta: DonorMetaDefinition = {
       ["Andrea Dumberger", RelationKind.family],
       ["Klaus Dumberger", RelationKind.family],
     ],
+
+    [
+      ["Ingo Horst Wilhelm Hillen", RelationKind.owner],
+      ["MMI Leisure & Capital Management GmbH", RelationKind.company],
+    ],
   ],
 };
