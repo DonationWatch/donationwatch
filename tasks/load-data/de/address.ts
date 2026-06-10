@@ -61,6 +61,10 @@ export const extractAddress = (
   if (text.includes("Österreich")) {
     return { [AddressField.Country]: "AT" };
   }
+  // For some reason they forgot to add the country :<
+  if (text.endsWith("Stockholm")) {
+    return { [AddressField.Country]: "SE" };
+  }
   if (text.includes("Niederlande")) {
     return { [AddressField.Country]: "NL" };
   }
