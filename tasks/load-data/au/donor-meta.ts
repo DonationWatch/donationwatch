@@ -5,7 +5,7 @@ import { RelationKind } from "@/utils/types";
 export const donorMeta: DonorMetaDefinition = {
   donors: {
     "Mineralogy Pty Ltd": { wiki: 31572969 },
-    "Pratt Holdings P/L": { wiki: 13529427 },
+    "Pratt Holdings Pty Ltd": { wiki: 13529427 },
     "The Pratt Foundation": { wiki: 7407174 },
     "Queensland Nickel Pty Ltd": {
       wiki: 49107758,
