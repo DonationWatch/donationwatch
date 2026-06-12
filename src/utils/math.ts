@@ -1,5 +1,7 @@
 import type { PartyYearsSums } from "./loader/party-years-sums";
 
+import { PartyStatField } from "./loader/party-years-sums";
+
 export const numbersSum = (numbers: number[]): number =>
   numbers.reduce((sum, value) => sum + value, 0);
 
@@ -26,7 +28,7 @@ export const sumPartySums = (sums: PartyYearsSums) => {
 
   Object.values(sums ?? {}).forEach((yearSums) => {
     Object.values(yearSums).forEach((partySums) => {
-      sum += partySums.sum;
+      sum += partySums[PartyStatField.Sum];
     });
   });
 

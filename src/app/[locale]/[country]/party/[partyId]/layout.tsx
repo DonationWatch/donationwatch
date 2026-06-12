@@ -26,6 +26,7 @@ import { Features, hasFeature } from "@/utils/features";
 import {
   getPartyYearsSums,
   lastPartyStatsDonation,
+  PartyStatField,
 } from "@/utils/loader/party-years-sums";
 import { baseOpenGraph, baseTwitter } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
@@ -139,8 +140,8 @@ export default async function PartyLayout(
 
     if (!sums) return;
 
-    donationCount += sums.count;
-    donationSum += sums.sum;
+    donationCount += sums[PartyStatField.Count];
+    donationSum += sums[PartyStatField.Sum];
   });
 
   const showExtendedMeta = true;

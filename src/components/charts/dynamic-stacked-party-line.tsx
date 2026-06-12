@@ -1,31 +1,44 @@
-"use client";
-import dynamic from "next/dynamic";
+import type { CountryConfig } from "@/types/country-config";
+import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 
-export const DynamicStackedPartyDonations = dynamic(
-  () => import("./stacked-party-line").then((mod) => mod.StackedPartyDonations),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="h-full w-full rounded-xs bg-gray-200 dark:bg-gray-700"></div>
-    ),
-  },
-);
+import {
+  ClientAbsoluteMultiplePartySumsGradient,
+  ClientStackedPartyDonations,
+} from "./client-dynamic-stacked-party-line";
+import { partyYearsSumsToStackedConfig } from "./stacked-party-line-config";
 
-export const DynamicAbsoluteMultiplePartySumsGradient = dynamic(
-  () =>
-    import("./stacked-party-line").then(
-      (mod) => mod.AbsoluteMultiplePartySumsGradient,
-    ),
-  {
-    ssr: false,
-    loading: () => (
-      <>
-        <div className="pointer-events-none absolute inset-0 z-0 lg:-mx-16">
-          <div className="h-1.5 w-full rounded-xs bg-gray-200 dark:bg-gray-700"></div>
-        </div>
-        {/*offset for page head on mobile */}
-        <div className="mb-8 lg:mb-0"></div>
-      </>
-    ),
-  },
-);
+export const DynamicStackedPartyDonations = ({
+  country,
+  years,
+  partyYearsSums,
+  direction,
+}: {
+  country: CountryConfig;
+  years: string[];
+  partyYearsSums: PartyYearsSums;
+  direction?: "horizontal" | "vertical";
+}) => {
+  const data = partyYearsSumsToStackedConfig(years, partyYearsSums);
+  return (
+    <ClientStackedPartyDonations
+      country={country}
+      data={data}
+      direction={direction}
+    />
+  );
+};
+
+export const DynamicAbsoluteMultiplePartySumsGradient = ({
+  country,
+  years,
+  partyYearsSums,
+}: {
+  country: CountryConfig;
+  years: string[];
+  partyYearsSums: PartyYearsSums;
+}) => {
+  const data = partyYearsSumsToStackedConfig(years, partyYearsSums);
+  return (
+    <ClientAbsoluteMultiplePartySumsGradient country={country} data={data} />
+  );
+};

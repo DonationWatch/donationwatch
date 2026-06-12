@@ -13,3 +13,11 @@ export const firstItem = <T>(array: NonEmptyArray<T>): T => {
 export const lastItem = <T>(array: NonEmptyArray<T>): T => {
   return array[array.length - 1];
 };
+
+export function assertNonEmptyArray<T>(
+  arr: T[],
+): asserts arr is NonEmptyArray<T> {
+  if (arr.length === 0) {
+    throw new Error("Assertion failed: The array is empty.");
+  }
+}

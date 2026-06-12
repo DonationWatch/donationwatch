@@ -1,13 +1,16 @@
+"use client";
+
 import { ArrowRight } from "lucide-react";
 
 import type { CountryConfig } from "@/types/country-config";
-import type { BrowserBasedLocale, ConstLocale } from "@/utils/locales";
+import type { ConstLocale } from "@/utils/locales";
 import type { Donation, ReceiverId } from "@/utils/types";
 
 import { NonInteractableRankingItem } from "@/components/donations/noninteractable-ranking-item";
 import { CurrencyRankingItem } from "@/components/donations/ranking-item";
 import { PartyDot } from "@/components/parties/party-dot";
 import { PartyLink } from "@/components/parties/party-link";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 
 import { LoadedTopDonationsItemDetail } from "./loading-top-year-donations-item-detail";
 
@@ -16,16 +19,16 @@ export const ReadonlyTopYearDonationsItem = ({
   amount,
   rank,
   sum,
-  locale,
   country,
 }: {
   partyId: ReceiverId;
   amount: number;
   rank: number;
   sum: number;
-  locale: BrowserBasedLocale;
   country: CountryConfig;
 }) => {
+  const locale = useBrowserBasedLocale();
+
   return (
     <NonInteractableRankingItem
       amount={amount}

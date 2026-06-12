@@ -220,7 +220,10 @@ export const buildOpenapiDocument = (): OpenAPIV3_1.Document => {
             [PartyField.Years]: {
               type: "array",
               items: { type: "string" },
-              description: "Years: List of years with donations",
+              description: "Years: range of years with donations (from, to)",
+              minItems: 2,
+              maxItems: 2,
+              example: ["1990", "2026"],
             },
             [PartyField.Wiki]: {
               type: "integer",

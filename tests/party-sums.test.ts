@@ -1,8 +1,11 @@
 import { beforeEach, describe, expect, test } from "vitest";
 
-import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
+import type {
+  PartyStats,
+  PartyYearsSums,
+} from "@/utils/loader/party-years-sums";
 
-import { hasYearSums } from "@/utils/loader/party-years-sums";
+import { hasYearSums, PartyStatField } from "@/utils/loader/party-years-sums";
 
 import euSums from "../src/data/europeanunion/party-sums";
 import frSums from "../src/data/france/party-sums";
@@ -14,7 +17,7 @@ beforeEach((context) => {
 });
 
 const hasExpectedDonations = (
-  data: PartyYearsSums,
+  data: Record<string, PartyStats>,
   expected: [string, number][],
   skipOthers: boolean = false,
 ) => {
@@ -30,7 +33,9 @@ const hasExpectedDonations = (
   for (const [key, value] of expected) {
     if (value === 0) continue;
 
-    expect(data[key as string].sum, key).toBeCloseTo(value as number);
+    expect(data[key as string][PartyStatField.Sum], key).toBeCloseTo(
+      value as number,
+    );
   }
 };
 
@@ -143,7 +148,11 @@ describe("NL", () => {
 
 describe("EU", () => {
   test("hasYearSums", async () => {
-    const stat = { sum: 0, count: 0, average: 0, lastDonation: "2020-01-01" };
+    const stat = {
+      [PartyStatField.Sum]: 0,
+      [PartyStatField.Count]: 0,
+      [PartyStatField.LastDonation]: "2020-01-01",
+    };
 
     const tests: [PartyYearsSums, string[], boolean][] = [
       [

@@ -6,12 +6,18 @@ import type { ReceiverId } from "../types";
 import { getBuild } from "./build";
 import { loadCountryData } from "./country-data-loaders";
 
+export const enum PartyStatField {
+  Sum,
+  Count,
+  LastDonation,
+  HasYearOnlyDonations,
+}
+
 export interface PartyStats {
-  sum: number;
-  count: number;
-  average: number;
-  lastDonation: string;
-  hasYearOnlyDonations?: boolean;
+  [PartyStatField.Sum]: number;
+  [PartyStatField.Count]: number;
+  [PartyStatField.LastDonation]: string;
+  [PartyStatField.HasYearOnlyDonations]?: boolean;
 }
 
 // [year]: { [party]: PartyStats }
@@ -49,9 +55,12 @@ export const lastPartyStatsDonation = (
       }
 
       const partyStats = yearSums[party];
-      if (partyStats.lastDonation) {
-        if (!lastDonation || partyStats.lastDonation > lastDonation) {
-          lastDonation = partyStats.lastDonation;
+      if (partyStats[PartyStatField.LastDonation]) {
+        if (
+          !lastDonation ||
+          partyStats[PartyStatField.LastDonation] > lastDonation
+        ) {
+          lastDonation = partyStats[PartyStatField.LastDonation];
         }
       }
     }

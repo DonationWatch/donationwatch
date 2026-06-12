@@ -18,6 +18,7 @@ import type {
 } from "@/utils/types";
 
 import { PartyField } from "@/types/party";
+import { assertNonEmptyArray, firstItem, lastItem } from "@/utils/array";
 import {
   ANONYMIZED_DONOR_KEYWORD,
   REDACTED_DONOR_KEYWORD,
@@ -531,6 +532,9 @@ export abstract class DataLoader {
             config.color = generatePartyColor(config.code);
           }
 
+          const years = [...(partyYears[party] ?? [])].toSorted();
+          assertNonEmptyArray(years);
+
           return {
             [PartyField.Id]: config.code as ReceiverId,
             [PartyField.Name]: config.name,
@@ -538,7 +542,7 @@ export abstract class DataLoader {
             [PartyField.Color]: config.color,
             [PartyField.Wiki]: config.wiki,
             [PartyField.Sum]: partySums[party],
-            [PartyField.Years]: [...(partyYears[party] ?? [])].map(String),
+            [PartyField.Years]: [firstItem(years), lastItem(years)],
           };
         }),
     };

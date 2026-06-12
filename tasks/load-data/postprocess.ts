@@ -17,6 +17,7 @@ import type {
 } from "@/utils/types";
 
 import { PartyField } from "@/types/party";
+import { firstItem, lastItem } from "@/utils/array";
 import {
   BIGGEST_DONATIONS_COUNT,
   DONOR_ID_HASH_LEN,
@@ -26,6 +27,7 @@ import { Country, COUNTRIES } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { getHistory } from "@/utils/data/get-history";
 import { donationYear } from "@/utils/date";
+import { PartyStatField } from "@/utils/loader/party-years-sums";
 import { getWikiArticles } from "@/utils/loader/wiki";
 import { sumPartySums } from "@/utils/math";
 import { donationDateSorter } from "@/utils/sort";
@@ -81,7 +83,7 @@ const buildMostRecentDonations = (
 };
 
 const buildPartySums = (country: CountryConfig, donations: Donation[]) => {
-  const result: Record<string, Record<string, PartyStats>> = {};
+  const result: PartyYearsSums = {};
 
   const rawSums: Record<
     string,
@@ -125,19 +127,22 @@ const buildPartySums = (country: CountryConfig, donations: Donation[]) => {
 
   country.years.forEach((year) => {
     const partyStatsForYear: Record<string, PartyStats> = {};
-    const parties = country.parties.filter((party) =>
-      party[PartyField.Years].includes(year),
+    const parties = country.parties.filter(
+      (party) =>
+        firstItem(party[PartyField.Years]) <= year &&
+        year <= lastItem(party[PartyField.Years]),
     );
 
     parties.forEach((party) => {
       const stats = rawSums[year]?.[party[PartyField.Id]];
       if (stats) {
         partyStatsForYear[party[PartyField.Id]] = {
-          sum: stats.sum,
-          count: stats.count,
-          average: stats.count === 0 ? 0 : stats.sum / stats.count,
-          lastDonation: stats.lastDonation,
-          ...(stats.hasYearOnlyDonations ? { hasYearOnlyDonations: true } : {}),
+          [PartyStatField.Sum]: stats.sum,
+          [PartyStatField.Count]: stats.count,
+          [PartyStatField.LastDonation]: stats.lastDonation,
+          ...(stats.hasYearOnlyDonations
+            ? { [PartyStatField.HasYearOnlyDonations]: true }
+            : {}),
         };
       }
     });
@@ -167,16 +172,17 @@ const buildBiggestDonors = (country: CountryConfig, donations: Donation[]) => {
     result[donorId].partyYearSums ??= {};
     result[donorId].partyYearSums[year] ??= {};
     result[donorId].partyYearSums[year][donation[DonationField.Receiver]] ??= {
-      sum: 0,
-      count: 0,
-      average: 0,
-      lastDonation: donation[DonationField.Date],
+      [PartyStatField.Sum]: 0,
+      [PartyStatField.Count]: 0,
+      [PartyStatField.LastDonation]: donation[DonationField.Date],
     };
 
-    result[donorId].partyYearSums[year][donation[DonationField.Receiver]].sum +=
-      donation[DonationField.Amount];
-    result[donorId].partyYearSums[year][donation[DonationField.Receiver]]
-      .count++;
+    result[donorId].partyYearSums[year][donation[DonationField.Receiver]][
+      PartyStatField.Sum
+    ] += donation[DonationField.Amount];
+    result[donorId].partyYearSums[year][donation[DonationField.Receiver]][
+      PartyStatField.Count
+    ]++;
   });
 
   return Object.entries(result)
@@ -352,22 +358,25 @@ const prebuildDonorMeta = async (
     donorPartySums[donor] ??= {};
     donorPartySums[donor][year] ??= {};
     donorPartySums[donor][year][receiver] ??= {
-      sum: 0,
-      count: 0,
-      average: 0,
-      lastDonation: donation[DonationField.Date],
+      [PartyStatField.Sum]: 0,
+      [PartyStatField.Count]: 0,
+      [PartyStatField.LastDonation]: donation[DonationField.Date],
     };
 
-    donorPartySums[donor][year][donation[DonationField.Receiver]].sum +=
-      donation[DonationField.Amount];
-    donorPartySums[donor][year][donation[DonationField.Receiver]].count++;
+    donorPartySums[donor][year][donation[DonationField.Receiver]][
+      PartyStatField.Sum
+    ] += donation[DonationField.Amount];
+    donorPartySums[donor][year][donation[DonationField.Receiver]][
+      PartyStatField.Count
+    ]++;
     if (
-      donorPartySums[donor][year][donation[DonationField.Receiver]]
-        .lastDonation < donation[DonationField.Date]
+      donorPartySums[donor][year][donation[DonationField.Receiver]][
+        PartyStatField.LastDonation
+      ] < donation[DonationField.Date]
     ) {
-      donorPartySums[donor][year][
-        donation[DonationField.Receiver]
-      ].lastDonation = donation[DonationField.Date];
+      donorPartySums[donor][year][donation[DonationField.Receiver]][
+        PartyStatField.LastDonation
+      ] = donation[DonationField.Date];
     }
   });
 
@@ -506,7 +515,14 @@ const postprocess = async (
     ),
     fs.writeFile(
       path.join(dataDir, "party-sums.ts"),
-      jsonAsTsModule(JSON.stringify(buildPartySums(countryConfig, donations))),
+      jsonAsTsModuleWithType(
+        JSON.stringify(buildPartySums(countryConfig, donations)),
+        {
+          name: "PartyYearsSums",
+          import:
+            "import {PartyYearsSums} from '../../utils/loader/party-years-sums';",
+        },
+      ),
     ),
     fs.writeFile(
       path.join(dataDir, "biggest-donors.ts"),

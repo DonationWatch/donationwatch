@@ -8,6 +8,7 @@ import type { ImageLocale } from "@/utils/locales";
 /* eslint-disable react/no-unknown-property */
 import { PageLogo } from "@/components/layout/page-logo";
 import { formatNumber } from "@/utils/formatter";
+import { PartyStatField } from "@/utils/loader/party-years-sums";
 
 import type { CreateTranslator } from "../utils";
 
@@ -28,7 +29,7 @@ export const RootPageImage = async (
 
     Object.values(partyYearsSums).forEach((partyYearSum) => {
       Object.values(partyYearSum).forEach((stats) => {
-        trackedDonations += stats.count;
+        trackedDonations += stats[PartyStatField.Count];
       });
     });
   });

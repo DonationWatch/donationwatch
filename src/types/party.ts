@@ -16,6 +16,6 @@ export interface Party {
   [PartyField.Short]: string;
   [PartyField.Sum]: number;
   [PartyField.Color]: string;
-  [PartyField.Years]: string[];
+  [PartyField.Years]: [from: string, to: string];
   [PartyField.Wiki]?: number;
 }

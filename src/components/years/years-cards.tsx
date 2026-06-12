@@ -7,6 +7,7 @@ import type { ConstLocale } from "@/utils/locales";
 
 import { FormattedCompactCountryCurrency } from "@/components/browser-based-formatter";
 import { DynamicStackedPartyDonations } from "@/components/charts/dynamic-stacked-party-line";
+import { PartyStatField } from "@/utils/loader/party-years-sums";
 
 const VISIBLE_PARTIES = 6;
 
@@ -66,9 +67,10 @@ export const YearsCards = ({
 
           return (
             sum +
-            Object.values(yearSums).reduce((all, stats) => {
-              return all + stats.sum;
-            }, 0)
+            Object.values(yearSums).reduce(
+              (all, stats) => all + stats[PartyStatField.Sum],
+              0,
+            )
           );
         },
         0,
