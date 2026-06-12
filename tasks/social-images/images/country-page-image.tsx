@@ -7,6 +7,7 @@ import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 import type { ImageLocale } from "@/utils/locales";
 
 import { formatCompactCountryCurrency } from "@/utils/formatter";
+import { PartyStatField } from "@/utils/loader/party-years-sums";
 
 import type { CreateTranslator } from "../utils";
 
@@ -41,9 +42,10 @@ export const CountryPageImage = async (
       : countryConfig.years;
 
   const yearSums = yearsToDisplay.toReversed().map<[string, number]>((year) => {
-    const sum = Object.values(partyYearSums[year]).reduce((acc, curr) => {
-      return acc + curr.sum;
-    }, 0);
+    const sum = Object.values(partyYearSums[year]).reduce(
+      (acc, curr) => acc + curr[PartyStatField.Sum],
+      0,
+    );
     maxValue = Math.max(maxValue, sum);
     return [year, sum];
   });

@@ -16,6 +16,7 @@ import { PartyField } from "@/types/party";
 import { partyColor } from "@/utils/color";
 import { getCountryName, getParty } from "@/utils/countries";
 import { formatCountryCurrency, formatYearsRange } from "@/utils/formatter";
+import { PartyStatField } from "@/utils/loader/party-years-sums";
 
 import { ExpandableReactEchart } from "./expandable-react-echart";
 
@@ -41,7 +42,7 @@ export const DonationsPieChart = ({
 
     Object.entries(yearSums).forEach(([party, partySum]) => {
       partySums[party] ??= 0;
-      partySums[party] += partySum.sum;
+      partySums[party] += partySum[PartyStatField.Sum];
     });
   });
 

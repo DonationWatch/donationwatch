@@ -29,7 +29,10 @@ import { GITHUB_URL, THUMBNAIL_PREFIX } from "@/utils/config";
 import { COUNTRIES, COUNTRY_CONFIG, getCountryName } from "@/utils/countries";
 import { countryFlags } from "@/utils/country-flags";
 import { getCountryConfig } from "@/utils/data/get-country-config";
-import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
+import {
+  getPartyYearsSums,
+  PartyStatField,
+} from "@/utils/loader/party-years-sums";
 import { LOCALES } from "@/utils/locales";
 import { baseOpenGraph, baseTwitter, generateAlternates } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
@@ -109,9 +112,9 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
 
     Object.entries(partyYearsSums).forEach(([, partyStats]) => {
       Object.values(partyStats).forEach((stats) => {
-        trackedDonations += stats.count;
-        currencyTotals[config.currency]! += stats.sum;
-        sumPerCountry[config.id]! += stats.sum;
+        trackedDonations += stats[PartyStatField.Count];
+        currencyTotals[config.currency]! += stats[PartyStatField.Sum];
+        sumPerCountry[config.id]! += stats[PartyStatField.Sum];
       });
     });
   });

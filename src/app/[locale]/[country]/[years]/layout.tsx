@@ -202,7 +202,6 @@ export default async function YearsLayout(
           readonly={true}
           country={countryConfig}
           partySums={partySums}
-          withStackedBar={false}
         />
       </PageHeader>
 

@@ -1,11 +1,6 @@
 "use client";
 
 import type { CountryConfig } from "@/types/country-config";
-import type {
-  PartyStats,
-  PartyYearsSums,
-} from "@/utils/loader/party-years-sums";
-import type { ReceiverId } from "@/utils/types";
 
 import { AbsoluteMultipleColorsGradient } from "@/components/absolute-multiple-colors-gradient";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
@@ -15,38 +10,19 @@ import { partyColor } from "@/utils/color";
 import { getParty } from "@/utils/countries";
 import { formatCountryCurrency } from "@/utils/formatter";
 
+import type { StackedPartiesConfig } from "./stacked-party-line-config";
+
 export const StackedPartyDonations = ({
-  years,
+  data,
   country,
-  partyYearsSums,
   direction = "horizontal",
 }: {
+  data: StackedPartiesConfig;
   country: CountryConfig;
-  years: string[];
-  partyYearsSums: PartyYearsSums;
   direction?: "horizontal" | "vertical";
 }) => {
   const browserBasedLocale = useBrowserBasedLocale();
-  const sums: Record<ReceiverId, number> = {};
-  let sum = 0;
-
-  const yearsSet = new Set(years);
-
-  Object.entries(partyYearsSums).forEach(([year, yearSums]) => {
-    if (!yearsSet.has(year)) return;
-
-    (Object.entries(yearSums) as [ReceiverId, PartyStats][]).forEach(
-      ([party, partySum]) => {
-        sums[party] ??= 0;
-        sum += partySum.sum;
-        sums[party] += partySum.sum;
-      },
-    );
-  });
-
-  const sortedSums = (Object.entries(sums) as [ReceiverId, number][])
-    .filter(([, data]) => data > 0)
-    .toSorted(([, dataA], [, dataB]) => dataB - dataA);
+  const { sum, sums } = data;
 
   return (
     <div
@@ -56,7 +32,7 @@ export const StackedPartyDonations = ({
         direction === "horizontal" ? "" : "flex-col",
       )}
     >
-      {sortedSums.map(([party, data]) => (
+      {sums.map(([party, data]) => (
         <div
           key={party}
           title={`${getParty(country, party)[PartyField.Short]}: ${formatCountryCurrency(browserBasedLocale, data, country)}`}
@@ -72,36 +48,17 @@ export const StackedPartyDonations = ({
 };
 
 export const AbsoluteMultiplePartySumsGradient = ({
-  partyYearsSums,
-  years,
+  data,
   country,
 }: {
-  partyYearsSums: PartyYearsSums;
-  years: string[];
+  data: StackedPartiesConfig;
   country: CountryConfig;
 }) => {
-  const sums: Record<string, number> = {};
-  let sum = 0;
-
-  const yearsSet = new Set(years);
-
-  Object.entries(partyYearsSums).forEach(([year, yearSums]) => {
-    if (!yearsSet.has(year)) return;
-
-    Object.entries(yearSums).forEach(([party, partySum]) => {
-      sums[party] ??= 0;
-      sum += partySum.sum;
-      sums[party] += partySum.sum;
-    });
-  });
-
-  const sortedSums = (Object.entries(sums) as [ReceiverId, number][])
-    .filter(([, data]) => data > 0)
-    .toSorted(([, dataA], [, dataB]) => dataB - dataA);
+  const { sum, sums } = data;
 
   return (
     <AbsoluteMultipleColorsGradient
-      colors={sortedSums.map(([party, data]) => ({
+      colors={sums.map(([party, data]) => ({
         color: partyColor(party, country),
         width: 100 * (data / sum),
       }))}

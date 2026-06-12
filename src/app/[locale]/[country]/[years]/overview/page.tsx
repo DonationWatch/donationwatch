@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import type { Country } from "@/utils/countries";
 import type { ConstLocale } from "@/utils/locales";
 
+import { DynamicStackedPartyDonations } from "@/components/charts/dynamic-stacked-party-line";
 import { Article } from "@/components/layout/article";
 import { YearsHeader } from "@/components/years/years-header";
 import { getCountryName } from "@/utils/countries";
@@ -138,7 +139,15 @@ export default async function OverviewPage(props: {
                   locale={locale}
                   years={[lastYearWithData[0]]}
                   partySums={partyYearSums}
-                />
+                >
+                  <div className="h-2.5">
+                    <DynamicStackedPartyDonations
+                      country={countryConfig}
+                      years={[lastYearWithData[0]]}
+                      partyYearsSums={partyYearSums}
+                    />
+                  </div>
+                </YearsHeader>
               ) : null}
             </>
           }

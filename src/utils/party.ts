@@ -2,6 +2,7 @@ import type { CountryConfig } from "@/types/country-config";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 
 import { Features, hasFeature } from "@/utils/features";
+import { PartyStatField } from "@/utils/loader/party-years-sums";
 
 export const yearPartiesHaveYearOnlyDonations = (
   partySums: PartyYearsSums,
@@ -9,7 +10,7 @@ export const yearPartiesHaveYearOnlyDonations = (
 ): boolean => {
   return years.some((year) =>
     Object.values(partySums[year] ?? []).some(
-      (partyStats) => partyStats.hasYearOnlyDonations,
+      (partyStats) => partyStats[PartyStatField.HasYearOnlyDonations],
     ),
   );
 };

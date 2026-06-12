@@ -3,9 +3,13 @@ import type { Party } from "@/types/party";
 
 import { PartyField } from "@/types/party";
 
-import type { PartyStats, PartyYearsSums } from "../loader/party-years-sums";
 import type { ReceiverId } from "../types";
 
+import {
+  PartyStatField,
+  PartyStats,
+  PartyYearsSums,
+} from "../loader/party-years-sums";
 import { numbersSum } from "../math";
 
 export const getPartiesSum = (
@@ -36,10 +40,10 @@ export const getPartiesSum = (
       ([party, stats]) => {
         if (!partiesSet.has(party)) return;
 
-        donationsCount += stats.count;
-        sum.push(stats.sum);
-        sums[party].sum += stats.sum;
-        sums[party].count += stats.count;
+        donationsCount += stats[PartyStatField.Count];
+        sum.push(stats[PartyStatField.Sum]);
+        sums[party].sum += stats[PartyStatField.Sum];
+        sums[party].count += stats[PartyStatField.Count];
       },
     );
   });

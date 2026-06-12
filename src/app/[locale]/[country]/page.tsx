@@ -10,6 +10,7 @@ import {
   FormattedCountryCurrency,
 } from "@/components/browser-based-formatter";
 import { DonationStackedYears } from "@/components/charts/donation-stacked-years";
+import { DynamicStackedPartyDonations } from "@/components/charts/dynamic-stacked-party-line";
 import { BiggestDonationsHero } from "@/components/donations/biggest-donations-hero";
 import { DonorsHero } from "@/components/donors/donors-hero";
 import { ExternalThanks } from "@/components/external-thanks";
@@ -28,7 +29,10 @@ import { getCountryConfig } from "@/utils/data/get-country-config";
 import { Features, hasFeature } from "@/utils/features";
 import { getBiggestDonors } from "@/utils/loader/biggest-donors";
 import { loadCountryData } from "@/utils/loader/country-data-loaders";
-import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
+import {
+  getPartyYearsSums,
+  PartyStatField,
+} from "@/utils/loader/party-years-sums";
 import { LOCALES } from "@/utils/locales";
 import { generateAlternates } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
@@ -89,7 +93,7 @@ export default async function YearsPage(
   // Get years that actually have donations by checking partySums
   const yearsWithDonations = Object.entries(partySums)
     .filter(([, partyStats]) =>
-      Object.values(partyStats).some((stat) => stat.sum > 0),
+      Object.values(partyStats).some((stat) => stat[PartyStatField.Sum] > 0),
     )
     .toSorted(([a], [b]) => parseInt(b, 10) - parseInt(a, 10))
     .map(([year]) => year);
@@ -129,17 +133,27 @@ export default async function YearsPage(
             </div>
           </div>
           <div className="">
-            <section aria-labelledby="last-period-title">
-              <YearsHeader
-                className="card card--action"
-                title={tHome("last_period")}
-                idPrefix={"last-period-"}
-                locale={locale}
-                years={[`${currentYear}`]}
-                country={countryConfig}
-                partySums={partySums}
-              />
-            </section>
+            {currentYear ? (
+              <section aria-labelledby="last-period-title">
+                <YearsHeader
+                  className="card card--action"
+                  title={tHome("last_period")}
+                  idPrefix={"last-period-"}
+                  locale={locale}
+                  years={[`${currentYear}`]}
+                  country={countryConfig}
+                  partySums={partySums}
+                >
+                  <div className="h-2.5">
+                    <DynamicStackedPartyDonations
+                      country={countryConfig}
+                      years={[`${currentYear}`]}
+                      partyYearsSums={partySums}
+                    />
+                  </div>
+                </YearsHeader>
+              </section>
+            ) : null}
             {currentYear !== previousYear && previousYear ? (
               <Link
                 aria-label={tHome("previous_period")}
@@ -154,7 +168,7 @@ export default async function YearsPage(
                     <FormattedCountryCurrency
                       country={countryConfig}
                       value={Object.values(partySums[previousYear]).reduce(
-                        (all, stats) => all + stats.sum,
+                        (all, stats) => all + stats[PartyStatField.Sum],
                         0,
                       )}
                     />
@@ -326,17 +340,27 @@ export default async function YearsPage(
           <p className="mb-8 lg:w-10/12 lg:text-lg">{tHome("list.summary")}</p>
 
           <div className="grid gap-4 @3xl:grid-cols-2">
-            {countryConfig.legislativeYears.map((years, idx) => (
-              <YearsHeader
-                className="card card--action"
-                key={idx}
-                country={countryConfig}
-                idPrefix="list-"
-                locale={locale}
-                years={years}
-                partySums={partySums}
-              />
-            ))}
+            {countryConfig.legislativeYears.map((years, idx) => {
+              return (
+                <YearsHeader
+                  className="card card--action"
+                  key={idx}
+                  country={countryConfig}
+                  idPrefix="list-"
+                  locale={locale}
+                  years={years}
+                  partySums={partySums}
+                >
+                  <div className="h-2.5">
+                    <DynamicStackedPartyDonations
+                      country={countryConfig}
+                      years={years}
+                      partyYearsSums={partySums}
+                    />
+                  </div>
+                </YearsHeader>
+              );
+            })}
           </div>
         </section>
       ) : null}

@@ -8,7 +8,10 @@ import { PartyField } from "@/types/party";
 import { getCountryName, getParty } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { formatCompactCountryCurrency } from "@/utils/formatter";
-import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
+import {
+  getPartyYearsSums,
+  PartyStatField,
+} from "@/utils/loader/party-years-sums";
 import { generateAlternates } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
 import {
@@ -49,8 +52,8 @@ export async function generateMetadata(
     for (const [party, yearSum] of Object.entries(partySum)) {
       if (party !== partyId) continue;
 
-      sum += yearSum.sum;
-      count += yearSum.count;
+      sum += yearSum[PartyStatField.Sum];
+      count += yearSum[PartyStatField.Count];
     }
   }
 
