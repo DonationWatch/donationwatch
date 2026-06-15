@@ -7,6 +7,7 @@ import { notFound, redirect } from "next/navigation";
 import type { TabItem } from "@/components/tabs";
 
 import { DynamicAbsoluteMultiplePartySumsGradient } from "@/components/charts/dynamic-stacked-party-line";
+import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
 import { PageHeader } from "@/components/layout/page-header";
 import { LastModifiedSchema } from "@/components/schema";
 import { NavigationTabs } from "@/components/tabs";
@@ -18,6 +19,8 @@ import { getCountryName } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { Features, hasFeature } from "@/utils/features";
 import { formatYearsRange } from "@/utils/formatter";
+import { getMessagesForLocale } from "@/utils/i18n-loader";
+import { pick } from "@/utils/i18n-pick";
 import {
   getPartyYearsSums,
   hasYearSums,
@@ -129,10 +132,11 @@ export default async function YearsLayout(
   const { locale, country } = params;
   const years = deserializeYears(params.years);
 
-  const [t, countryConfig, partySums] = await Promise.all([
+  const [t, countryConfig, partySums, messages] = await Promise.all([
     getTranslations({ locale }),
     getCountryConfig(country),
     getPartyYearsSums(country),
+    getMessagesForLocale(locale),
   ]);
 
   if (!years.length || !hasKnownYearRange(years, countryConfig)) {
@@ -181,8 +185,25 @@ export default async function YearsLayout(
     year: years.at(-1)!,
   });
 
+  const pageMessages = pick(messages, [
+    "overview",
+    "changes",
+    "donors",
+    "timeline",
+    "origin",
+    "stacked_years",
+    "years",
+    "chart",
+    "state",
+    "countries",
+    "ref_countries",
+    "data",
+    "donation_type",
+    "per_month",
+  ]);
+
   return (
-    <>
+    <ScopedClientIntlProvider messages={pageMessages}>
       {lastDonation ? <LastModifiedSchema dateModified={lastDonation} /> : null}
       <DynamicAbsoluteMultiplePartySumsGradient
         partyYearsSums={partySums}
@@ -218,6 +239,6 @@ export default async function YearsLayout(
       <div className="container mx-auto px-4">
         <YearsFooterNav years={years} locale={locale} country={countryConfig} />
       </div>
-    </>
+    </ScopedClientIntlProvider>
   );
 }

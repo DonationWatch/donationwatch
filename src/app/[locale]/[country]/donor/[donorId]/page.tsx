@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
+import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
 import { THUMBNAIL_PREFIX } from "@/utils/config";
 import { getCountryName } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
@@ -16,6 +17,8 @@ import {
   formatCompactCountryCurrency,
   formatCountryCurrency,
 } from "@/utils/formatter";
+import { getMessagesForLocale } from "@/utils/i18n-loader";
+import { pick } from "@/utils/i18n-pick";
 import { getBiggestDonors } from "@/utils/loader/biggest-donors";
 import { baseOpenGraph, baseTwitter, generateAlternates } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
@@ -142,13 +145,29 @@ export default async function DonorPageLayout(
 
   const { country, donorId } = params;
 
-  const [countryConfig, donorMeta] = await Promise.all([
+  const [countryConfig, donorMeta, messages] = await Promise.all([
     getCountryConfig(country),
     getDonorMeta(country, donorId),
+    getMessagesForLocale(params.locale),
+  ]);
+
+  const pageMessages = pick(messages, [
+    "donor",
+    "biggest_donations",
+    "countries",
+    "data",
+    "chart",
+    "sort",
+    "common",
+    "search",
+    "donor_type",
+    "years",
+    "donation_type",
+    "changes",
   ]);
 
   return (
-    <>
+    <ScopedClientIntlProvider messages={pageMessages}>
       <DonorPageHead
         donorId={donorId}
         country={country}
@@ -160,6 +179,6 @@ export default async function DonorPageLayout(
         country={country}
         countryConfig={countryConfig}
       />
-    </>
+    </ScopedClientIntlProvider>
   );
 }

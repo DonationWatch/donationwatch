@@ -11,7 +11,7 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { OrganizationSchema } from "@/components/schema";
 import { Toaster } from "@/components/ui/sonner";
 import { SIDENAV_PERSISTENCE_KEY, THUMBNAIL_PREFIX } from "@/utils/config";
-import { filterClientMessages } from "@/utils/i18n-filter";
+import { filterLayoutMessages } from "@/utils/i18n-filter";
 import { LOCALES } from "@/utils/locales";
 import { baseOpenGraph, baseTwitter } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
@@ -77,7 +77,7 @@ export default async function LangLayout(props: LayoutProps<"/[locale]">) {
       </head>
       <body className="min-h-screen w-full">
         <NuqsAdapter>
-          <Providers locale={locale} messages={filterClientMessages(messages)}>
+          <Providers locale={locale} messages={filterLayoutMessages(messages)}>
             {children}
           </Providers>
         </NuqsAdapter>

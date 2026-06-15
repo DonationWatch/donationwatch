@@ -12,6 +12,7 @@ import { Accessibility } from "../fixtures/accessibility";
 import { ClipboardAccess } from "../fixtures/clipboard-access";
 import { DonorPage } from "../fixtures/donor";
 import { DonorsPage } from "../fixtures/donors";
+import { EnterprisePage } from "../fixtures/enterprise";
 import { GlobalSearch } from "../fixtures/global-search";
 import { HistoryPage } from "../fixtures/history";
 import { HomePage } from "../fixtures/home";
@@ -39,6 +40,7 @@ type SharedFixtures = {
   donorPage: DonorPage;
   partyPage: PartyPage;
   partyDonorsPage: DonorsPage;
+  enterprisePage: EnterprisePage;
 
   tools: Tools;
 
@@ -55,6 +57,37 @@ type SharedFixtures = {
 };
 
 export const test = base.extend<SharedFixtures>({
+  page: async ({ page }, use) => {
+    const consoleErrors: string[] = [];
+
+    const handleConsole = (msg: { text: () => string }) => {
+      const text = msg.text();
+      if (text.includes("MISSING_MESSAGE")) {
+        consoleErrors.push(`Console error: ${text}`);
+      }
+    };
+
+    const handlePageError = (exception: Error) => {
+      const text = exception.message;
+      if (text.includes("MISSING_MESSAGE")) {
+        consoleErrors.push(`Page exception: ${text}`);
+      }
+    };
+
+    page.on("console", handleConsole);
+    page.on("pageerror", handlePageError);
+
+    await use(page);
+
+    page.off("console", handleConsole);
+    page.off("pageerror", handlePageError);
+
+    if (consoleErrors.length > 0) {
+      throw new Error(
+        `Test failed due to missing translation(s) in console:\n${consoleErrors.join("\n")}`,
+      );
+    }
+  },
   props: async ({ context, page, translations, locale }, use) =>
     use({
       page,
@@ -125,6 +158,9 @@ export const test = base.extend<SharedFixtures>({
   },
   rootPage: async ({ props }, use) => {
     await use(new RootPage(props));
+  },
+  enterprisePage: async ({ props }, use) => {
+    await use(new EnterprisePage(props));
   },
   country: [Country.germany, { option: true }],
 });
