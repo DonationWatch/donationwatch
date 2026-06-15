@@ -6,11 +6,14 @@ import { notFound } from "next/navigation";
 
 import { CitationGenerator } from "@/components/citation/citation-generator";
 import { DataExport } from "@/components/data-export";
+import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
 import { Article } from "@/components/layout/article";
 import { Translation } from "@/components/translation";
 import { DATA_LICENSE } from "@/utils/config";
 import { COUNTRIES, getCountryName } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
+import { getMessagesForLocale } from "@/utils/i18n-loader";
+import { pick } from "@/utils/i18n-pick";
 import { LOCALES } from "@/utils/locales";
 import { generateAlternates } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
@@ -57,74 +60,32 @@ export default async function Page(
 
   const { locale, country } = params;
 
-  const [tExport, tCountries, tNavigation, countryConfig] = await Promise.all([
-    getTranslations({ locale, namespace: "export" }),
-    getTranslations({ locale, namespace: "countries" }),
-    getTranslations({ locale, namespace: "navigation" }),
-    getCountryConfig(country),
-  ]);
+  const [tExport, tCountries, tNavigation, countryConfig, messages] =
+    await Promise.all([
+      getTranslations({ locale, namespace: "export" }),
+      getTranslations({ locale, namespace: "countries" }),
+      getTranslations({ locale, namespace: "navigation" }),
+      getCountryConfig(country),
+      getMessagesForLocale(params.locale),
+    ]);
+
+  const pageMessages = pick(messages, ["export", "citation", "donor_type"]);
 
   return (
-    <Article title={tExport("title")}>
-      <div className="space-y-6">
-        <p>
-          <Translation
-            t={tExport}
-            translationId={"p0"}
-            variables={{
-              country: getCountryName(countryConfig, tCountries),
-              license: (
-                <a
-                  href="https://creativecommons.org/licenses/by/4.0/deed.en"
-                  target="_blank"
-                  rel={"noopener noreferrer"}
-                  className="hover:text-primary-800 dark:hover:text-primary-400 underline"
-                >
-                  {DATA_LICENSE}
-                </a>
-              ),
-            }}
-          />
-        </p>
-        <p>
-          <Translation
-            t={tExport}
-            translationId={"p1"}
-            variables={{
-              source: (
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={countryConfig.source.url}
-                  className="hover:text-primary-800 dark:hover:text-primary-400 underline"
-                >
-                  {countryConfig.source.name}
-                </a>
-              ),
-              transparency: (
-                <Link
-                  href={`/${locale}/${countryConfig.id}/transparency`}
-                  prefetch={false}
-                  rel="nofollow"
-                  className="hover:text-primary-800 dark:hover:text-primary-400 underline"
-                >
-                  {tNavigation("transparency")}
-                </Link>
-              ),
-            }}
-          />
-        </p>
-        <p>
-          {
+    <ScopedClientIntlProvider messages={pageMessages}>
+      <Article title={tExport("title")}>
+        <div className="space-y-6">
+          <p>
             <Translation
               t={tExport}
-              translationId={"license"}
+              translationId={"p0"}
               variables={{
+                country: getCountryName(countryConfig, tCountries),
                 license: (
                   <a
-                    href="https://creativecommons.org/licenses/by/4.0/"
+                    href="https://creativecommons.org/licenses/by/4.0/deed.en"
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel={"noopener noreferrer"}
                     className="hover:text-primary-800 dark:hover:text-primary-400 underline"
                   >
                     {DATA_LICENSE}
@@ -132,10 +93,58 @@ export default async function Page(
                 ),
               }}
             />
-          }
-        </p>
-        <DataExport country={countryConfig} locale={locale} />
-      </div>
-    </Article>
+          </p>
+          <p>
+            <Translation
+              t={tExport}
+              translationId={"p1"}
+              variables={{
+                source: (
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={countryConfig.source.url}
+                    className="hover:text-primary-800 dark:hover:text-primary-400 underline"
+                  >
+                    {countryConfig.source.name}
+                  </a>
+                ),
+                transparency: (
+                  <Link
+                    href={`/${locale}/${countryConfig.id}/transparency`}
+                    prefetch={false}
+                    rel="nofollow"
+                    className="hover:text-primary-800 dark:hover:text-primary-400 underline"
+                  >
+                    {tNavigation("transparency")}
+                  </Link>
+                ),
+              }}
+            />
+          </p>
+          <p>
+            {
+              <Translation
+                t={tExport}
+                translationId={"license"}
+                variables={{
+                  license: (
+                    <a
+                      href="https://creativecommons.org/licenses/by/4.0/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-primary-800 dark:hover:text-primary-400 underline"
+                    >
+                      {DATA_LICENSE}
+                    </a>
+                  ),
+                }}
+              />
+            }
+          </p>
+          <DataExport country={countryConfig} locale={locale} />
+        </div>
+      </Article>
+    </ScopedClientIntlProvider>
   );
 }

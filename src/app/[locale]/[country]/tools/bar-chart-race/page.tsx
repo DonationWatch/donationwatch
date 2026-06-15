@@ -3,9 +3,12 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
+import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
 import { Article } from "@/components/layout/article";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { Features, hasFeature } from "@/utils/features";
+import { getMessagesForLocale } from "@/utils/i18n-loader";
+import { pick } from "@/utils/i18n-pick";
 import { LOCALES } from "@/utils/locales";
 import { generateAlternates } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
@@ -53,22 +56,27 @@ export default async function Page(
 
   const { country } = params;
 
-  const [tBarChartRace, countryConfig] = await Promise.all([
+  const [tBarChartRace, countryConfig, messages] = await Promise.all([
     getTranslations({ locale: params.locale, namespace: "bar_chart_race" }),
     getCountryConfig(country),
+    getMessagesForLocale(params.locale),
   ]);
 
   if (!hasFeature(countryConfig, Features.Date)) {
     return notFound();
   }
 
+  const pageMessages = pick(messages, ["bar_chart_race", "chart", "actions"]);
+
   return (
-    <Article title={tBarChartRace("title")}>
-      <>
-        <p className="mb-8 max-w-prose">{tBarChartRace("description")}</p>
-        <p className="mb-8 max-w-prose text-sm">{tBarChartRace("note")}</p>
-        <RacingBars countryConfig={countryConfig} />
-      </>
-    </Article>
+    <ScopedClientIntlProvider messages={pageMessages}>
+      <Article title={tBarChartRace("title")}>
+        <>
+          <p className="mb-8 max-w-prose">{tBarChartRace("description")}</p>
+          <p className="mb-8 max-w-prose text-sm">{tBarChartRace("note")}</p>
+          <RacingBars countryConfig={countryConfig} />
+        </>
+      </Article>
+    </ScopedClientIntlProvider>
   );
 }

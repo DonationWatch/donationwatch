@@ -15,6 +15,7 @@ import { BiggestDonationsHero } from "@/components/donations/biggest-donations-h
 import { DonorsHero } from "@/components/donors/donors-hero";
 import { ExternalThanks } from "@/components/external-thanks";
 import { HistoryComponent } from "@/components/history-component";
+import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
 import { DetectedCountry } from "@/components/layout/detected-country";
 import { PartiesHero } from "@/components/parties/parties-hero";
 import { Translation } from "@/components/translation";
@@ -27,6 +28,8 @@ import {
 } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { Features, hasFeature } from "@/utils/features";
+import { getMessagesForLocale } from "@/utils/i18n-loader";
+import { pick } from "@/utils/i18n-pick";
 import { getBiggestDonors } from "@/utils/loader/biggest-donors";
 import { loadCountryData } from "@/utils/loader/country-data-loaders";
 import {
@@ -80,6 +83,7 @@ export default async function YearsPage(
     partySums,
     biggestDonors,
     biggestDonations,
+    messages,
   ] = await Promise.all([
     getTranslations({ locale, namespace: "ref_countries" }),
     getTranslations({ locale, namespace: "home" }),
@@ -88,6 +92,7 @@ export default async function YearsPage(
     getPartyYearsSums(country),
     getBiggestDonors(country),
     loadCountryData(country, "biggestDonations"),
+    getMessagesForLocale(locale),
   ]);
 
   // Get years that actually have donations by checking partySums
@@ -101,8 +106,17 @@ export default async function YearsPage(
   const currentYear = yearsWithDonations[0];
   const previousYear = yearsWithDonations[1];
 
+  const pageMessages = pick(messages, [
+    "home",
+    "biggest_donations",
+    "countries",
+    "ref_countries",
+    "stacked_years",
+    "chart",
+  ]);
+
   return (
-    <>
+    <ScopedClientIntlProvider messages={pageMessages}>
       <AbsoluteMultipleColorsGradient
         colors={[{ color: "#3730a3", width: 100 }]}
       />
@@ -366,6 +380,6 @@ export default async function YearsPage(
       ) : null}
 
       <ExternalThanks country={countryConfig} locale={locale} />
-    </>
+    </ScopedClientIntlProvider>
   );
 }

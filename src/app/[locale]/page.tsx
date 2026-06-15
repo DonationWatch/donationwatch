@@ -13,6 +13,7 @@ import {
   FormattedCompactCurrency,
   FormattedNumber,
 } from "@/components/browser-based-formatter";
+import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
 import {
   Article,
   ArticleSection,
@@ -29,6 +30,8 @@ import { GITHUB_URL, THUMBNAIL_PREFIX } from "@/utils/config";
 import { COUNTRIES, COUNTRY_CONFIG, getCountryName } from "@/utils/countries";
 import { countryFlags } from "@/utils/country-flags";
 import { getCountryConfig } from "@/utils/data/get-country-config";
+import { getMessagesForLocale } from "@/utils/i18n-loader";
+import { pick } from "@/utils/i18n-pick";
 import {
   getPartyYearsSums,
   PartyStatField,
@@ -82,10 +85,11 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
   setRequestLocale(params.locale);
 
   const { locale } = params;
-  const [t, tCountries, tRoot] = await Promise.all([
+  const [t, tCountries, tRoot, messages] = await Promise.all([
     getTranslations({ locale }),
     getTranslations({ locale, namespace: "countries" }),
     getTranslations({ locale, namespace: "root" }),
+    getMessagesForLocale(locale),
   ]);
   const countriesArray = [...COUNTRIES];
 
@@ -119,163 +123,169 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
     });
   });
 
-  return (
-    <NonCountryRootLayout locale={locale}>
-      <AbsoluteMultipleColorsGradient
-        colors={[{ color: "#3730a3", width: 100 }]}
-      />
+  const pageMessages = pick(messages, ["root"]);
 
-      <header
-        aria-labelledby="hero-title"
-        className="relative flex min-h-64 flex-row items-center justify-center p-4 pt-14 sm:py-10 sm:pt-20"
-      >
-        <div className="z-1 container mx-auto lg:text-center">
-          <h1 className="mb-2 text-4xl font-bold sm:text-5xl" id="hero-title">
-            DonationWatch
-          </h1>
-          <p className="mb-4 text-xl sm:text-2xl">{tRoot("title")}</p>
-          <p className="mx-auto mb-4 text-base sm:text-lg lg:max-w-2xl">
-            {tRoot("subtitle")}
-          </p>
-          <div className="flex justify-center">
-            <div className="inline-block text-left">
-              <DetectedCountry />
+  return (
+    <ScopedClientIntlProvider messages={pageMessages}>
+      <NonCountryRootLayout locale={locale}>
+        <AbsoluteMultipleColorsGradient
+          colors={[{ color: "#3730a3", width: 100 }]}
+        />
+
+        <header
+          aria-labelledby="hero-title"
+          className="relative flex min-h-64 flex-row items-center justify-center p-4 pt-14 sm:py-10 sm:pt-20"
+        >
+          <div className="z-1 container mx-auto lg:text-center">
+            <h1 className="mb-2 text-4xl font-bold sm:text-5xl" id="hero-title">
+              DonationWatch
+            </h1>
+            <p className="mb-4 text-xl sm:text-2xl">{tRoot("title")}</p>
+            <p className="mx-auto mb-4 text-base sm:text-lg lg:max-w-2xl">
+              {tRoot("subtitle")}
+            </p>
+            <div className="flex justify-center">
+              <div className="inline-block text-left">
+                <DetectedCountry />
+              </div>
             </div>
           </div>
-        </div>
-      </header>
+        </header>
 
-      <Article fullWidth skipTitleOffset>
-        <ArticleSectionWrapper id="stats">
-          <ArticleSectionOneColumns>
-            <ArticleSectionColumn>
-              <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-                <div className="text-center">
-                  <MetaCard
-                    title={tRoot("stats.countries")}
-                    value={<FormattedNumber value={trackedCountries} />}
-                  />
+        <Article fullWidth skipTitleOffset>
+          <ArticleSectionWrapper id="stats">
+            <ArticleSectionOneColumns>
+              <ArticleSectionColumn>
+                <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+                  <div className="text-center">
+                    <MetaCard
+                      title={tRoot("stats.countries")}
+                      value={<FormattedNumber value={trackedCountries} />}
+                    />
+                  </div>
+                  <div className="text-center">
+                    <MetaCard
+                      title={tRoot("stats.parties")}
+                      value={<FormattedNumber value={trackedParties} />}
+                    />
+                  </div>
+                  <div className="text-center">
+                    <MetaCard
+                      title={tRoot("stats.donations")}
+                      value={<FormattedNumber value={trackedDonations} />}
+                    />
+                  </div>
+                  <div className="text-center">
+                    <MetaCard
+                      title={tRoot("stats.currencies")}
+                      value={Object.keys(currencyTotals).length}
+                    />
+                  </div>
                 </div>
-                <div className="text-center">
-                  <MetaCard
-                    title={tRoot("stats.parties")}
-                    value={<FormattedNumber value={trackedParties} />}
-                  />
-                </div>
-                <div className="text-center">
-                  <MetaCard
-                    title={tRoot("stats.donations")}
-                    value={<FormattedNumber value={trackedDonations} />}
-                  />
-                </div>
-                <div className="text-center">
-                  <MetaCard
-                    title={tRoot("stats.currencies")}
-                    value={Object.keys(currencyTotals).length}
-                  />
-                </div>
-              </div>
-            </ArticleSectionColumn>
-          </ArticleSectionOneColumns>
-        </ArticleSectionWrapper>
+              </ArticleSectionColumn>
+            </ArticleSectionOneColumns>
+          </ArticleSectionWrapper>
 
-        <ArticleSection title={tRoot("countries.title")} id="countries">
-          <p className="mb-6 text-gray-600 dark:text-gray-400">
-            {tRoot("countries.subtitle")}
-          </p>
-          <nav
-            aria-label={t("header.country_selection")}
-            className="grid grid-cols-2 gap-2 lg:grid-cols-3 xl:gap-4 2xl:grid-cols-5"
-          >
-            {countriesArray
-              .toSorted((a, b) => {
-                const nameA = getCountryName(COUNTRY_CONFIG[a], tCountries);
-                const nameB = getCountryName(COUNTRY_CONFIG[b], tCountries);
-                return nameA.localeCompare(nameB, locale);
-              })
-              .map((countryId) => {
-                const config = COUNTRY_CONFIG[countryId];
-                const countryName = getCountryName(config, tCountries);
+          <ArticleSection title={tRoot("countries.title")} id="countries">
+            <p className="mb-6 text-gray-600 dark:text-gray-400">
+              {tRoot("countries.subtitle")}
+            </p>
+            <nav
+              aria-label={t("header.country_selection")}
+              className="grid grid-cols-2 gap-2 lg:grid-cols-3 xl:gap-4 2xl:grid-cols-5"
+            >
+              {countriesArray
+                .toSorted((a, b) => {
+                  const nameA = getCountryName(COUNTRY_CONFIG[a], tCountries);
+                  const nameB = getCountryName(COUNTRY_CONFIG[b], tCountries);
+                  return nameA.localeCompare(nameB, locale);
+                })
+                .map((countryId) => {
+                  const config = COUNTRY_CONFIG[countryId];
+                  const countryName = getCountryName(config, tCountries);
 
-                return (
-                  <Link
-                    prefetch={false}
-                    key={countryId}
-                    href={`/${locale}/${countryId}`}
-                    className="group flex gap-2 rounded border border-gray-200 px-2 py-1 transition-colors hover:border-gray-300 hover:bg-gray-50 xl:p-2 dark:border-gray-700 dark:hover:border-gray-600 dark:hover:bg-gray-800/50"
-                  >
-                    <div className="flex w-8 shrink-0 items-center justify-center 2xl:w-16">
-                      <Image
-                        aria-hidden="true"
-                        height={18}
-                        className="max-h-full rounded-xs"
-                        src={countryFlags[countryId]}
-                        alt=""
-                      />
-                    </div>
-                    <div className="grow overflow-hidden">
-                      <div className="group-hover:text-primary-600 dark:group-hover:text-primary-400 truncate text-sm font-medium xl:text-base">
-                        {countryName}
-                      </div>
-                      <div className="text-xs text-slate-500 xl:text-sm dark:text-slate-300">
-                        <FormattedCompactCurrency
-                          value={sumPerCountry[countryId] ?? 0}
-                          currency={config.currency}
+                  return (
+                    <Link
+                      prefetch={false}
+                      key={countryId}
+                      href={`/${locale}/${countryId}`}
+                      className="group flex gap-2 rounded border border-gray-200 px-2 py-1 transition-colors hover:border-gray-300 hover:bg-gray-50 xl:p-2 dark:border-gray-700 dark:hover:border-gray-600 dark:hover:bg-gray-800/50"
+                    >
+                      <div className="flex w-8 shrink-0 items-center justify-center 2xl:w-16">
+                        <Image
+                          aria-hidden="true"
+                          height={18}
+                          className="max-h-full rounded-xs"
+                          src={countryFlags[countryId]}
+                          alt=""
                         />
                       </div>
-                    </div>
-                  </Link>
-                );
-              })}
-          </nav>
-        </ArticleSection>
-
-        <ArticleSection title={tRoot("why.title")} id="why-transparency">
-          <p className="text-gray-700 dark:text-gray-300">{tRoot("why.p0")}</p>
-        </ArticleSection>
-
-        <div className="grid gap-8 lg:grid-cols-2">
-          <ArticleSection
-            title={"Enterprise API (Beta)"}
-            id="enterprise-api-beta"
-          >
-            <p className="mb-6 text-gray-700 dark:text-gray-300">
-              Need programmatic access to cross-registry entity mappings? We are
-              currently engineering a high-availability REST API with OpenAPI
-              specifications, designed specifically for institutional compliance
-              and risk analysis teams.
-            </p>
-            <div>
-              <Button variant={"outline"} asChild={true}>
-                <Link href={`/${locale}/enterprise`}>
-                  <Server />
-                  Join the Waitlist
-                </Link>
-              </Button>
-            </div>
+                      <div className="grow overflow-hidden">
+                        <div className="group-hover:text-primary-600 dark:group-hover:text-primary-400 truncate text-sm font-medium xl:text-base">
+                          {countryName}
+                        </div>
+                        <div className="text-xs text-slate-500 xl:text-sm dark:text-slate-300">
+                          <FormattedCompactCurrency
+                            value={sumPerCountry[countryId] ?? 0}
+                            currency={config.currency}
+                          />
+                        </div>
+                      </div>
+                    </Link>
+                  );
+                })}
+            </nav>
           </ArticleSection>
-          <ArticleSection title={tRoot("open_source.title")} id="open-source">
+
+          <ArticleSection title={tRoot("why.title")} id="why-transparency">
             <p className="text-gray-700 dark:text-gray-300">
-              <Translation
-                t={tRoot}
-                translationId={"open_source.p0"}
-                variables={{
-                  github: (
-                    <a
-                      href={GITHUB_URL}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-primary-600 hover:text-primary-800 dark:text-primary-400 dark:hover:text-primary-300 underline"
-                    >
-                      GitHub
-                    </a>
-                  ),
-                }}
-              />
+              {tRoot("why.p0")}
             </p>
           </ArticleSection>
-        </div>
-      </Article>
-    </NonCountryRootLayout>
+
+          <div className="grid gap-8 lg:grid-cols-2">
+            <ArticleSection
+              title={"Enterprise API (Beta)"}
+              id="enterprise-api-beta"
+            >
+              <p className="mb-6 text-gray-700 dark:text-gray-300">
+                Need programmatic access to cross-registry entity mappings? We
+                are currently engineering a high-availability REST API with
+                OpenAPI specifications, designed specifically for institutional
+                compliance and risk analysis teams.
+              </p>
+              <div>
+                <Button variant={"outline"} asChild={true}>
+                  <Link href={`/${locale}/enterprise`}>
+                    <Server />
+                    Join the Waitlist
+                  </Link>
+                </Button>
+              </div>
+            </ArticleSection>
+            <ArticleSection title={tRoot("open_source.title")} id="open-source">
+              <p className="text-gray-700 dark:text-gray-300">
+                <Translation
+                  t={tRoot}
+                  translationId={"open_source.p0"}
+                  variables={{
+                    github: (
+                      <a
+                        href={GITHUB_URL}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-primary-600 hover:text-primary-800 dark:text-primary-400 dark:hover:text-primary-300 underline"
+                      >
+                        GitHub
+                      </a>
+                    ),
+                  }}
+                />
+              </p>
+            </ArticleSection>
+          </div>
+        </Article>
+      </NonCountryRootLayout>
+    </ScopedClientIntlProvider>
   );
 }

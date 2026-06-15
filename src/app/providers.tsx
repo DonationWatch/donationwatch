@@ -7,7 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { NextIntlClientProvider } from "next-intl";
 import { createContext, useEffect, useMemo, useState } from "react";
 
-import type { ClientMessages } from "@/utils/i18n-filter";
+import type { LayoutMessages } from "@/utils/i18n-filter";
 import type { BrowserBasedLocale, ConstLocale } from "@/utils/locales";
 
 import { SidebarProvider } from "@/components/ui/sidebar";
@@ -20,7 +20,7 @@ export const Providers = ({
   messages,
 }: PropsWithChildren<{
   locale: ConstLocale;
-  messages: ClientMessages;
+  messages: LayoutMessages;
 }>) => {
   const [queryClient] = useState(
     () =>
@@ -39,6 +39,7 @@ export const Providers = ({
   return (
     <NextIntlClientProvider
       locale={locale}
+      timeZone="UTC"
       messages={messages as unknown as Messages}
     >
       <BrowserBasedLocaleProvider locale={locale}>

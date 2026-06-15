@@ -11,6 +11,7 @@ import {
   FormattedCountryCurrency,
   FormattedNumber,
 } from "@/components/browser-based-formatter";
+import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
 import { PageHeader } from "@/components/layout/page-header";
 import { MetaCard } from "@/components/meta-card";
 import { LastModifiedSchema } from "@/components/schema";
@@ -23,6 +24,8 @@ import { THUMBNAIL_PREFIX } from "@/utils/config";
 import { findCorrectParty, getParty } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { Features, hasFeature } from "@/utils/features";
+import { getMessagesForLocale } from "@/utils/i18n-loader";
+import { pick } from "@/utils/i18n-pick";
 import {
   getPartyYearsSums,
   lastPartyStatsDonation,
@@ -115,12 +118,14 @@ export default async function PartyLayout(
 
   const { children } = props;
 
-  const [t, countryConfig, partyYearsSums, tCommon] = await Promise.all([
-    getTranslations({ locale }),
-    getCountryConfig(country),
-    getPartyYearsSums(country),
-    getTranslations({ locale, namespace: "common" }),
-  ]);
+  const [t, countryConfig, partyYearsSums, tCommon, messages] =
+    await Promise.all([
+      getTranslations({ locale }),
+      getCountryConfig(country),
+      getPartyYearsSums(country),
+      getTranslations({ locale, namespace: "common" }),
+      getMessagesForLocale(locale),
+    ]);
 
   if (!isValidParty(partyId, countryConfig)) {
     const correctParty = findCorrectParty(countryConfig, partyId);
@@ -176,8 +181,27 @@ export default async function PartyLayout(
     partyId,
   });
 
+  const pageMessages = pick(messages, [
+    "party",
+    "changes",
+    "donors",
+    "origin",
+    "timeline",
+    "per_year_party",
+    "per_month",
+    "per_year",
+    "chart",
+    "state",
+    "countries",
+    "ref_countries",
+    "data",
+    "donor_type",
+    "years",
+    "donation_type",
+  ]);
+
   return (
-    <>
+    <ScopedClientIntlProvider messages={pageMessages}>
       {lastDonation ? <LastModifiedSchema dateModified={lastDonation} /> : null}
       <AbsoluteMultipleColorsGradient
         colors={[
@@ -247,6 +271,6 @@ export default async function PartyLayout(
         </div>
       </div>
       {children}
-    </>
+    </ScopedClientIntlProvider>
   );
 }
