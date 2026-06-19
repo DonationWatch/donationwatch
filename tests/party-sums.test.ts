@@ -135,13 +135,14 @@ describe("NL", () => {
     const data = nlSums["2026"];
 
     hasExpectedDonations(data, [
-      ["D66", 280_090.0],
+      ["D66", 430_090.0],
       ["VVD", 235_000.0],
       ["GL", 10_000],
       ["PVDA", 20_000],
+      ["CDA", 10_000],
       ["FVD", 12_500],
       ["PVDD", 200_000.0],
-      ["SP", 99_979.06],
+      ["SP", 102_685.19],
     ]);
   });
 });
@@ -388,7 +389,7 @@ describe("EU", () => {
 
     hasExpectedDonations(data, [
       // parties
-      ["ALDE", 54_000],
+      ["ALDE", 72_000],
       // foundations
       ["WMCES", 33_110.87],
       ["ND", 36_000],
