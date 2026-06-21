@@ -72,7 +72,8 @@
   "chart": {
     "save_as_image": "Uložit jako obrázek",
     "toggle_fullscreen": "Přepnutí na celou obrazovku",
-    "reset_zoom": "Obnovení zoomu"
+    "reset_zoom": "Obnovení zoomu",
+    "filtered": "filtrovaná datová sada"
   },
   "over_min_public_amount": "více než {amount}",
   "over_threshold": "{type, select, count {pouze strany s ≥ {count} dary} sum {pouze strany s ≥ {sum}} other {pouze strany s ≥ {count} dary nebo ≥ {sum}}}",
@@ -131,6 +132,10 @@
   "root": {
     "title": "Open source sledovač darů politickým stranám",
     "subtitle": "Sledujte a prozkoumejte politické dary napříč více zeměmi. Pochopte, kdo financuje politické strany a jak peníze proudí po celém světě.",
+    "enterprise": {
+      "title": "Enterprise API (Beta)",
+      "p0": "Potřebujete programový přístup k mapování entit napříč registry? V současné době vyvíjíme vysoce dostupné REST API s OpenAPI specifikacemi, navržené speciálně pro týmy institucionální compliance a analýzy rizik."
+    },
     "stats": {
       "countries": "Pokryté země",
       "parties": "Politické strany",
@@ -849,5 +854,25 @@
     "required": "Toto pole je povinné.",
     "empty": "Toto pole nesmí být prázdné.",
     "email": "Zadejte prosím platnou e-mailovou adresu."
+  },
+  "filter": {
+    "title": "Filtry",
+    "description": "Upřesněte data o darech podle let, stran a typu.",
+    "select_all": "Vybrat vše",
+    "select_none": "Zrušit výběr",
+    "reset": "Resetovat",
+    "parties": "Strany",
+    "donation_types": "Typy darů",
+    "donor_types": "Typy dárců",
+    "years": {
+      "title": "Rozsah let",
+      "from": "Od",
+      "to": "Do"
+    },
+    "empty": {
+      "title": "Nebyly nalezeny žádné dary",
+      "p0": "Nebyly nalezeny žádné dary odpovídající vašemu aktuálnímu nastavení filtrů. Zkuste filtry upravit nebo je resetovat.",
+      "reset": "Obnovit filtry"
+    }
   }
 }

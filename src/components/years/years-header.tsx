@@ -56,14 +56,14 @@ const Wrapper = ({
   );
 };
 
-const HighscoreHeader = ({
+export const HighscoreHeader = ({
   className,
   years,
   locale,
   count,
   sum,
   sums,
-  sumNumbers,
+  avg,
   showTop3,
   idPrefix = "",
   showExtendedMeta = false,
@@ -78,7 +78,7 @@ const HighscoreHeader = ({
   count: number;
   sum: number;
   sums: [ReceiverId, { count: number; sum: number }][];
-  sumNumbers: number[];
+  avg: number;
   idPrefix: string;
   locale: ConstLocale;
   years: string[];
@@ -124,10 +124,7 @@ const HighscoreHeader = ({
               <MetaCard
                 title={t("average")}
                 value={
-                  <FormattedCountryCurrency
-                    value={numbersAvg(sumNumbers, count)}
-                    country={country}
-                  />
+                  <FormattedCountryCurrency value={avg} country={country} />
                 }
               />
             )}
@@ -152,7 +149,7 @@ const HighscoreHeader = ({
   );
 };
 
-export const YearsHeader = ({
+export const UnfilteredYearsHeader = ({
   locale,
   years,
   idPrefix = "",
@@ -193,7 +190,7 @@ export const YearsHeader = ({
       count={count}
       sum={sum}
       sums={sums}
-      sumNumbers={sumNumbers}
+      avg={numbersAvg(sumNumbers, count)}
       idPrefix={idPrefix}
       locale={locale}
       years={years}

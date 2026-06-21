@@ -9,6 +9,7 @@ import type { CountryConfig } from "@/types/country-config";
 import { PageLogo } from "@/components/layout/page-logo";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { useFilterEngine } from "@/hooks/use-filter-engine";
 import { isNotNullandNotUndefined } from "@/utils/array";
 import {
   formatCompactCountryCurrency,
@@ -58,6 +59,7 @@ export const ExpandableReactEchart = ({
   const t = useTranslations();
   const tChart = useTranslations("chart");
   const browserBasedLocale = useBrowserBasedLocale();
+  const { isFiltered } = useFilterEngine();
 
   const [isExpanded, setIsExpanded] = useState(false);
   const [isZoomed, setIsZoomed] = useState(false);
@@ -187,6 +189,7 @@ export const ExpandableReactEchart = ({
                     year: country.preliminaryDataSince!,
                   })
                 : undefined,
+              isFiltered ? tChart("filtered") : undefined,
             ]
               .filter(isNotNullandNotUndefined)
               .join(", ")}

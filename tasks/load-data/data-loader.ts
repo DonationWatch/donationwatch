@@ -25,8 +25,14 @@ import {
 } from "@/utils/config";
 import { COUNTRY_CONFIG } from "@/utils/countries";
 import { donationYear, fillYears } from "@/utils/date";
+import { Features, hasFeature } from "@/utils/features";
 import { donationDateSorter } from "@/utils/sort";
-import { AddressField, DonationField, DonorType } from "@/utils/types";
+import {
+  DonationType,
+  AddressField,
+  DonationField,
+  DonorType,
+} from "@/utils/types";
 
 import {
   jsonAsTsModule,
@@ -300,6 +306,15 @@ export abstract class DataLoader {
     const partySums: Record<string, number> = {};
     const partyYears: Record<string, Set<string>> = {};
 
+    const hasDonationType = hasFeature(
+      rawUnloadedCountryConfig,
+      Features.DonationType,
+    );
+    const hasDonorType = hasFeature(
+      rawUnloadedCountryConfig,
+      Features.DonorType,
+    );
+
     let extractedDonations = extractedData
       .filter((d) => {
         // Filter out donations before minimumProcessedYear
@@ -396,6 +411,9 @@ export abstract class DataLoader {
     const donorMappings: Record<string, string> = {};
     const normalizedDonors: Record<string, string[]> = {};
 
+    const foundDonorTypes = new Set<DonorType>();
+    const foundDonationTypes = new Set<DonationType>();
+
     this.expectNoUnknownParties(extractedDonations, donorFiltersRegex).forEach(
       (extracted) => {
         const { idx, ...extractedDonation } = extracted;
@@ -453,6 +471,17 @@ export abstract class DataLoader {
               extractedDonation[DonationField.DonorName],
             );
           }
+        }
+
+        if (hasDonationType) {
+          foundDonationTypes.add(
+            extractedDonation[DonationField.DonationType] ?? DonationType.Money,
+          );
+        }
+        if (hasDonorType) {
+          foundDonorTypes.add(
+            extractedDonation[DonationField.DonorType] ?? DonorType.Other,
+          );
         }
 
         const donation: Donation = {
@@ -558,6 +587,12 @@ export abstract class DataLoader {
         ...countryConfig,
         years: donationData.years,
         parties: donationData.parties,
+        ...(hasDonationType
+          ? { usedDonationTypes: [...foundDonationTypes].toSorted() }
+          : undefined),
+        ...(hasDonorType
+          ? { usedDonorTypes: [...foundDonorTypes].toSorted() }
+          : undefined),
       },
       transparencyData: {
         donorFilters,

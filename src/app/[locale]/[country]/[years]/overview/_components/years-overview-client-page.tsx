@@ -1,15 +1,17 @@
 "use client";
 
 import { useLocale } from "next-intl";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
 import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { PartySum } from "@/utils/data/get-parties-sum";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
+import type { ReceiverId } from "@/utils/types";
 
 import { DonationYearScatterPlot } from "@/components/charts/donation-year-scatter-plot";
 import { DonationsPieChart } from "@/components/charts/donations-pie-chart";
+import { FilterEmptyState } from "@/components/filter/filter-empty-state";
 import { FormatAnd } from "@/components/formatter";
 import {
   ArticleSectionColumn,
@@ -25,14 +27,18 @@ import { LoadedTopPartyDonations } from "@/components/years/top-party-year-donat
 import { useDonationsByYears } from "@/hooks/use-api";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { useFilterEngine } from "@/hooks/use-filter-engine";
 import { useScrollToHash } from "@/hooks/use-scroll-to-hash";
+import { PartyField } from "@/types/party";
 import { isNotNullandNotUndefined } from "@/utils/array";
+import { getParties } from "@/utils/data/get-parties";
 import { getPartiesSum } from "@/utils/data/get-parties-sum";
 import {
   formatAnd,
   formatCompactCountryCurrency,
   formatCountryCurrency,
 } from "@/utils/formatter";
+import { DonationField } from "@/utils/types";
 
 interface YearsOverviewClientPageProps {
   country: CountryConfig;
@@ -49,7 +55,7 @@ interface YearsOverviewClientPageProps {
 export const YearsOverviewClientPage = ({
   country,
   years,
-  parties,
+  parties: initialParties,
   partyYearSums,
   sectionTitle,
   summary,
@@ -61,6 +67,24 @@ export const YearsOverviewClientPage = ({
   const tData = useTranslations("data");
   const locale = useLocale();
   const browserBasedLocale = useBrowserBasedLocale();
+
+  const {
+    isFiltered,
+    filteredYears,
+    filteredDonations,
+    setDonations,
+    activeFilters,
+    controls,
+  } = useFilterEngine();
+
+  const activeYears = useMemo(() => {
+    return isFiltered ? years.filter((y) => filteredYears.includes(y)) : years;
+  }, [years, isFiltered, filteredYears]);
+
+  const activeParties = useMemo(() => {
+    return getParties(country, activeYears);
+  }, [country, activeYears]);
+
   const results = useDonationsByYears(country, years);
   const isLoading = results.some((r) => r.isLoading);
   const error = results.some((r) => r.error);
@@ -68,13 +92,72 @@ export const YearsOverviewClientPage = ({
 
   useScrollToHash(isSuccess);
 
-  const donations = useMemo(() => {
-    return results.flatMap((r) => r.data).filter(isNotNullandNotUndefined);
+  const rawDonations = useMemo(() => {
+    return results
+      .flatMap((r) => r.data ?? [])
+      .filter(isNotNullandNotUndefined);
   }, [results]);
 
+  useEffect(() => {
+    if (isSuccess && !error) {
+      setDonations(rawDonations);
+    }
+  }, [isSuccess, error, rawDonations, setDonations]);
+
+  const ssrStats = useMemo(() => {
+    return getPartiesSum(country, partyYearSums, activeParties, activeYears);
+  }, [country, partyYearSums, activeParties, activeYears]);
+
   const { sum, sums, count } = useMemo(() => {
-    return getPartiesSum(country, partyYearSums, parties, years);
-  }, [country, partyYearSums, parties, years]);
+    if (filteredDonations && filteredDonations.length > 0) {
+      const partyStatsMap: Record<ReceiverId, { sum: number; count: number }> =
+        {};
+
+      initialParties.forEach((party) => {
+        const partyId = party[PartyField.Id];
+        if (activeFilters.activePartyIds.has(partyId)) {
+          partyStatsMap[partyId] = { sum: 0, count: 0 };
+        }
+      });
+
+      let totalSum = 0;
+      let totalCount = 0;
+
+      for (let i = 0; i < filteredDonations.length; i++) {
+        const d = filteredDonations[i];
+        const partyId = d[DonationField.Receiver];
+        const stats = partyStatsMap[partyId];
+        if (stats) {
+          const amount = d[DonationField.Amount];
+          stats.sum += amount;
+          stats.count += 1;
+          totalSum += amount;
+          totalCount += 1;
+        }
+      }
+
+      const sortedSums = (Object.entries(partyStatsMap) as PartySum[]).toSorted(
+        ([, dataA], [, dataB]) => dataB.sum - dataA.sum,
+      );
+
+      return {
+        sum: totalSum,
+        sums: sortedSums,
+        count: totalCount,
+      };
+    }
+
+    return {
+      sum: ssrStats.sum,
+      sums: ssrStats.sums,
+      count: ssrStats.count,
+    };
+  }, [
+    filteredDonations,
+    ssrStats,
+    initialParties,
+    activeFilters.activePartyIds,
+  ]);
 
   const mostDonations = useMemo(() => {
     let most: PartySum | undefined;
@@ -91,6 +174,10 @@ export const YearsOverviewClientPage = ({
   if (isLoading) return <Loading />;
   if (error) return <div>{tData("error")}</div>;
 
+  if (isFiltered && filteredDonations.length === 0) {
+    return <FilterEmptyState onReset={controls.resetFilters} />;
+  }
+
   return (
     <>
       <ArticleSectionWrapper id={"sec-years-overview"}>
@@ -104,7 +191,7 @@ export const YearsOverviewClientPage = ({
             <p className="mb-6">{summary}</p>
             <p className="mb-6">
               {t("overview.detail.summary2", {
-                years: formatAnd(browserBasedLocale, years),
+                years: formatAnd(browserBasedLocale, activeYears),
                 partyCount: sums.length,
                 donationCount: count,
                 minimumAmount: formatCompactCountryCurrency(
@@ -125,7 +212,7 @@ export const YearsOverviewClientPage = ({
                   t={t}
                   translationId={"overview.detail.highest_sum"}
                   variables={{
-                    years: formatAnd(browserBasedLocale, years),
+                    years: formatAnd(browserBasedLocale, activeYears),
                     parties: (
                       <FormatAnd
                         locale={locale}
@@ -176,7 +263,7 @@ export const YearsOverviewClientPage = ({
             )}
             <LoadedTopPartyDonations
               locale={locale}
-              donations={donations}
+              donations={filteredDonations}
               country={country}
               sums={sums}
               sum={sum}
@@ -185,9 +272,10 @@ export const YearsOverviewClientPage = ({
           <ArticleSectionColumn>
             <div>
               <DonationsPieChart
-                years={years}
+                years={activeYears}
                 country={country}
                 partyYearsSums={partyYearSums}
+                sums={sums}
               />
             </div>
           </ArticleSectionColumn>
@@ -205,12 +293,12 @@ export const YearsOverviewClientPage = ({
               />
               <p className="mb-6">{scatterSummary}</p>
               <DonationYearScatterPlot
-                years={years}
+                years={activeYears}
                 country={country}
-                parties={parties}
+                parties={activeParties}
                 title={scatterTitle}
                 subtitle={scatterSubtitle}
-                donations={donations}
+                donations={filteredDonations}
               />
             </ArticleSectionColumn>
           </ArticleSectionOneColumns>

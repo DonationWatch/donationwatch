@@ -72,7 +72,8 @@
   "chart": {
     "save_as_image": "Lagre som bilde",
     "toggle_fullscreen": "Bytt fullskjerm",
-    "reset_zoom": "Tilbakestill zoom"
+    "reset_zoom": "Tilbakestill zoom",
+    "filtered": "filtrert datasett"
   },
   "over_min_public_amount": "over {amount}",
   "over_threshold": "{type, select, count {bare partier med ≥ {count} donasjoner} sum {bare partier med ≥ {sum}} other {bare partier med ≥ {count} donasjoner eller ≥ {sum}}}",
@@ -131,6 +132,10 @@
   "root": {
     "title": "Åpen kildekode-sporer for donasjoner til politiske partier",
     "subtitle": "Spor og utforsk politiske donasjoner på tvers av flere land. Forstå hvem som finansierer politiske partier og hvordan penger flyter globalt.",
+    "enterprise": {
+      "title": "Enterprise API (Beta)",
+      "p0": "Trenger du programmatisk tilgang til enhetskartlegging på tvers av registre? Vi utvikler for tiden en høyt tilgjengelig REST-API med OpenAPI-spesifikasjoner, spesielt designet for institusjonelle compliance- og risikoteam."
+    },
     "stats": {
       "countries": "Land dekket",
       "parties": "Politiske partier",
@@ -849,5 +854,25 @@
     "required": "Dette feltet er påkrevd.",
     "empty": "Dette feltet kan ikke være tomt.",
     "email": "Vennligst oppgi en gyldig e-postadresse."
+  },
+  "filter": {
+    "title": "Filtre",
+    "description": "Avgrens donasjonsdata etter år, partier og type.",
+    "select_all": "Velg alle",
+    "select_none": "Velg ingen",
+    "reset": "Tilbakestill",
+    "parties": "Partier",
+    "donation_types": "Donasjonstyper",
+    "donor_types": "Donortyper",
+    "years": {
+      "title": "Årsintervall",
+      "from": "Fra",
+      "to": "Til"
+    },
+    "empty": {
+      "title": "Ingen donasjoner funnet",
+      "p0": "Det finnes ingen donasjoner som samsvarer med din nåværende filterkonfigurasjon. Prøv å justere filtrene eller tilbakestille dem.",
+      "reset": "Tilbakestill filtre"
+    }
   }
 }

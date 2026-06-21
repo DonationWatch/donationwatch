@@ -65,6 +65,7 @@ export function AppSidebar({
   const tCountries = useTranslations("countries");
   const tSearch = useTranslations("search");
   const tSidebar = useTranslations("sidebar");
+  const tActions = useTranslations("actions");
   const locale = useLocale();
 
   useEffect(() => {
@@ -72,7 +73,11 @@ export function AppSidebar({
   }, []);
 
   return (
-    <Sidebar>
+    <Sidebar
+      translations={{
+        close: tActions("close"),
+      }}
+    >
       <SidebarHeader className="border-sidebar-border h-15 flex-row items-center border-b px-4">
         <CountrySwitch />
       </SidebarHeader>

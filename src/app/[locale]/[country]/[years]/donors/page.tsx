@@ -6,7 +6,6 @@ import { notFound, redirect } from "next/navigation";
 import { Article } from "@/components/layout/article";
 import { getCountryName } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
-import { getParties } from "@/utils/data/get-parties";
 import { Features, hasFeature } from "@/utils/features";
 import { formatYearsRange } from "@/utils/formatter";
 import {
@@ -85,14 +84,11 @@ export default async function YearPage(
     );
   }
 
-  const parties = getParties(countryConfig, years);
-
   return (
     <Article fullWidth={true}>
       <YearsDonorsClientPage
         country={countryConfig}
         years={years}
-        parties={parties}
         sectionTitle={t("donors.detail.title")}
         summary={t("donors.detail.summary")}
         summary2={t("donors.detail.summary2")}

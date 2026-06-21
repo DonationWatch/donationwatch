@@ -20,6 +20,7 @@ import { WikiQuote } from "@/components/wiki-quote";
 import { useDonationsByDonorId } from "@/hooks/use-api";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { useFilterEngine } from "@/hooks/use-filter-engine";
 import { partyColor } from "@/utils/color";
 import { donationYear } from "@/utils/date";
 import { getDonorName, isRedactedDonor } from "@/utils/donor";
@@ -154,6 +155,8 @@ const DonorPageHeadContent = ({
   const tCommon = useTranslations("common");
   const browserBasedLocale = useBrowserBasedLocale();
   const wikiPageId = donorMeta.wiki;
+  const { filteredDonations } = useFilterEngine();
+  const activeDonations = filteredDonations;
 
   const rawDonorName = donations.at(0)?.[DonationField.DonorName] ?? "";
   const donorName = getDonorName(rawDonorName, tCommon);
@@ -161,12 +164,15 @@ const DonorPageHeadContent = ({
 
   let sum: number = 0;
   const sums: Record<string, number> = {};
-  const firstYear = donationYear(donations[0]);
-  const lastYear = donationYear(donations[donations.length - 1]);
+  const firstYear = donationYear(activeDonations[0] ?? donations[0]);
+  const lastYear = donationYear(
+    activeDonations[activeDonations.length - 1] ??
+      donations[donations.length - 1],
+  );
   let lastDonation: string | undefined = undefined;
   const ubos = new Set<string>();
 
-  donations.forEach((donation) => {
+  activeDonations.forEach((donation) => {
     sums[donation[DonationField.Receiver]] ??= 0;
     sums[donation[DonationField.Receiver]] += donation[DonationField.Amount];
     sum += donation[DonationField.Amount];
@@ -178,7 +184,7 @@ const DonorPageHeadContent = ({
     donation[DonationField.UBOs]?.forEach((ubo) => ubos.add(ubo));
   });
 
-  const avg = sum / donations.length;
+  const avg = activeDonations.length > 0 ? sum / activeDonations.length : 0;
 
   const sortedSums = (Object.entries(sums) as [ReceiverId, number][])
     .filter(([, data]) => data > 0)
@@ -257,7 +263,7 @@ const DonorPageHeadContent = ({
             <div className="flex-row space-y-2 sm:flex sm:space-y-0 sm:space-x-10">
               <MetaCard
                 title={t("donation_count")}
-                value={formatNumber(browserBasedLocale, donations.length)}
+                value={formatNumber(browserBasedLocale, activeDonations.length)}
               />
               <MetaCard
                 title={t("sum")}
@@ -267,7 +273,7 @@ const DonorPageHeadContent = ({
                   countryConfig,
                 )}
               />
-              {donations.length > 1 ? (
+              {activeDonations.length > 1 ? (
                 <MetaCard
                   title={t("average")}
                   value={formatCountryCurrency(

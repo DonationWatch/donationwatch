@@ -1,11 +1,14 @@
 "use client";
 
+import { useEffect, useMemo } from "react";
+
 import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 
 import { InfoAlert } from "@/components/alert";
 import { DonationPerMonthChart } from "@/components/charts/donation-per-month-chart";
 import { DonationSumChart } from "@/components/charts/donation-sum-chart";
+import { FilterEmptyState } from "@/components/filter/filter-empty-state";
 import {
   ArticleSectionColumn,
   ArticleSectionOneColumns,
@@ -19,8 +22,10 @@ import { YearTimelineYearText } from "@/components/loading/loading-year-timeline
 import { YearTimeseriesText } from "@/components/loading/loading-year-timeseries-text";
 import { useDonationsByYears } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { useFilterEngine } from "@/hooks/use-filter-engine";
 import { useScrollToHash } from "@/hooks/use-scroll-to-hash";
 import { isNotNullandNotUndefined } from "@/utils/array";
+import { getParties } from "@/utils/data/get-parties";
 import { Features, hasFeature } from "@/utils/features";
 
 interface YearsTimelineClientPageProps {
@@ -41,7 +46,6 @@ interface YearsTimelineClientPageProps {
 export const YearsTimelineClientPage = ({
   country,
   years,
-  parties,
   resolution,
   timelineTitle,
   timelineSummary,
@@ -53,6 +57,23 @@ export const YearsTimelineClientPage = ({
   yearResolutionNote,
 }: YearsTimelineClientPageProps) => {
   const tData = useTranslations("data");
+
+  const {
+    isFiltered,
+    filteredYears,
+    filteredDonations,
+    setDonations,
+    controls,
+  } = useFilterEngine();
+
+  const activeYears = useMemo(() => {
+    return isFiltered ? years.filter((y) => filteredYears.includes(y)) : years;
+  }, [years, isFiltered, filteredYears]);
+
+  const activeParties = useMemo(() => {
+    return getParties(country, activeYears);
+  }, [country, activeYears]);
+
   const results = useDonationsByYears(country, years);
   const isLoading = results.some((r) => r.isLoading);
   const error = results.some((r) => r.error);
@@ -60,12 +81,24 @@ export const YearsTimelineClientPage = ({
 
   useScrollToHash(isSuccess);
 
+  const rawDonations = useMemo(() => {
+    return results
+      .flatMap((r) => r.data ?? [])
+      .filter(isNotNullandNotUndefined);
+  }, [results]);
+
+  useEffect(() => {
+    if (isSuccess && !error) {
+      setDonations(rawDonations);
+    }
+  }, [isSuccess, error, rawDonations, setDonations]);
+
   if (isLoading) return <Loading />;
   if (error) return <div>{tData("error")}</div>;
 
-  const donations = results
-    .flatMap((r) => r.data)
-    .filter(isNotNullandNotUndefined);
+  if (isFiltered && filteredDonations.length === 0) {
+    return <FilterEmptyState onReset={controls.resetFilters} />;
+  }
 
   return (
     <>
@@ -81,9 +114,9 @@ export const YearsTimelineClientPage = ({
               <p className="mb-6">{timelineSummary}</p>
               <YearTimeseriesText
                 country={country}
-                parties={parties}
-                years={years}
-                donations={donations}
+                parties={activeParties}
+                years={activeYears}
+                donations={filteredDonations}
               />
             </ArticleSectionColumn>
             <ArticleSectionColumn>
@@ -91,9 +124,9 @@ export const YearsTimelineClientPage = ({
                 country={country}
                 title={sumChartTitle}
                 subtitle={sumChartSubtitle}
-                years={years}
-                parties={parties}
-                donations={donations}
+                years={activeYears}
+                parties={activeParties}
+                donations={filteredDonations}
               />
             </ArticleSectionColumn>
           </ArticleSectionOneColumns>
@@ -118,16 +151,16 @@ export const YearsTimelineClientPage = ({
             {resolution === "month" ? (
               <YearBarsPageText
                 country={country}
-                parties={parties}
-                years={years}
-                donations={donations}
+                parties={activeParties}
+                years={activeYears}
+                donations={filteredDonations}
               />
             ) : (
               <YearTimelineYearText
                 country={country}
-                parties={parties}
-                years={years}
-                donations={donations}
+                parties={activeParties}
+                years={activeYears}
+                donations={filteredDonations}
               />
             )}
           </ArticleSectionColumn>
@@ -138,9 +171,9 @@ export const YearsTimelineClientPage = ({
                 title={perMonthTitle}
                 subtitle={perMonthSubtitle}
                 resolution={resolution}
-                years={years}
-                parties={parties}
-                donations={donations}
+                years={activeYears}
+                parties={activeParties}
+                donations={filteredDonations}
               />
             </div>
           </ArticleSectionColumn>

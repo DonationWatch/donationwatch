@@ -30,6 +30,11 @@ export const DonorDonationTimeline = ({
   const tDonor = useTranslations("donor");
   const tCommon = useTranslations("common");
   const browserBasedLocale = useBrowserBasedLocale();
+
+  if (!donations || donations.length === 0) {
+    return null;
+  }
+
   const firstYear = donationYear(donations[0]);
   const lastYear = donationYear(donations[donations.length - 1]);
   const donorName = getDonorName(

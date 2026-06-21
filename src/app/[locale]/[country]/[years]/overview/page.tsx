@@ -8,7 +8,7 @@ import type { ConstLocale } from "@/utils/locales";
 
 import { DynamicStackedPartyDonations } from "@/components/charts/dynamic-stacked-party-line";
 import { Article } from "@/components/layout/article";
-import { YearsHeader } from "@/components/years/years-header";
+import { FilteredYearsHeader } from "@/components/years/filtered-years-header";
 import { getCountryName } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { getParties } from "@/utils/data/get-parties";
@@ -132,7 +132,7 @@ export default async function OverviewPage(props: {
                   : null}
               </p>
               {lastYearWithData ? (
-                <YearsHeader
+                <FilteredYearsHeader
                   className="card card--action mt-8"
                   country={countryConfig}
                   idPrefix="list-"
@@ -147,7 +147,7 @@ export default async function OverviewPage(props: {
                       partyYearsSums={partyYearSums}
                     />
                   </div>
-                </YearsHeader>
+                </FilteredYearsHeader>
               ) : null}
             </>
           }

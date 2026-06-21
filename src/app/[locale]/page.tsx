@@ -245,22 +245,23 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
 
           <div className="grid gap-8 lg:grid-cols-2">
             <ArticleSection
-              title={"Enterprise API (Beta)"}
+              title={tRoot("enterprise.title")}
               id="enterprise-api-beta"
             >
               <p className="mb-6 text-gray-700 dark:text-gray-300">
-                Need programmatic access to cross-registry entity mappings? We
-                are currently engineering a high-availability REST API with
-                OpenAPI specifications, designed specifically for institutional
-                compliance and risk analysis teams.
+                {tRoot("enterprise.p0")}
               </p>
               <div>
-                <Button variant={"outline"} asChild={true}>
-                  <Link href={`/${locale}/enterprise`}>
-                    <Server />
-                    Join the Waitlist
-                  </Link>
-                </Button>
+                <Button
+                  variant={"outline"}
+                  nativeButton={false}
+                  render={
+                    <Link href={`/${locale}/enterprise`}>
+                      <Server />
+                      Join the Waitlist
+                    </Link>
+                  }
+                />
               </div>
             </ArticleSection>
             <ArticleSection title={tRoot("open_source.title")} id="open-source">

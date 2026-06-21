@@ -6,6 +6,7 @@ import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
 
 import type { CountryConfig } from "@/types/country-config";
+import type { PartySum } from "@/utils/data/get-parties-sum";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 import type { ReceiverId } from "@/utils/types";
 
@@ -24,10 +25,12 @@ export const DonationsPieChart = ({
   country,
   partyYearsSums,
   years,
+  sums,
 }: {
   country: CountryConfig;
-  partyYearsSums: PartyYearsSums;
+  partyYearsSums?: PartyYearsSums;
   years: string[];
+  sums?: PartySum[];
 }) => {
   const t = useTranslations();
   const tCountries = useTranslations("countries");
@@ -37,14 +40,20 @@ export const DonationsPieChart = ({
   const { backgroundColor, isMobile } = useChart();
   const partySums: Record<string, number> = {};
 
-  Object.entries(partyYearsSums).forEach(([year, yearSums]) => {
-    if (!years.includes(year)) return;
-
-    Object.entries(yearSums).forEach(([party, partySum]) => {
-      partySums[party] ??= 0;
-      partySums[party] += partySum[PartyStatField.Sum];
+  if (sums) {
+    sums.forEach(([partyId, data]) => {
+      partySums[partyId] = data.sum;
     });
-  });
+  } else if (partyYearsSums) {
+    Object.entries(partyYearsSums).forEach(([year, yearSums]) => {
+      if (!years.includes(year)) return;
+
+      Object.entries(yearSums).forEach(([party, partySum]) => {
+        partySums[party] ??= 0;
+        partySums[party] += partySum[PartyStatField.Sum];
+      });
+    });
+  }
 
   const treemapData: TreemapSeriesNodeItemOption[] = Object.entries(
     partySums,

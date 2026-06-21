@@ -72,7 +72,8 @@
   "chart": {
     "save_as_image": "Als Bild speichern",
     "toggle_fullscreen": "Vollbildmodus umschalten",
-    "reset_zoom": "Zoom zurücksetzen"
+    "reset_zoom": "Zoom zurücksetzen",
+    "filtered": "gefilterter Datensatz"
   },
   "over_min_public_amount": "über {amount}",
   "over_threshold": "{type, select, count {nur Parteien mit ≥ {count} Spenden} sum {nur Parteien mit ≥ {sum}} other {nur Parteien mit ≥ {count} Spenden oder ≥ {sum}}}",
@@ -131,6 +132,10 @@
   "root": {
     "title": "Open-Source-Tracker für Parteispenden",
     "subtitle": "Verfolge und erkunde politische Spenden in mehreren Ländern. Verstehe, wer politische Parteien finanziert und wie Geld weltweit fließt.",
+    "enterprise": {
+      "title": "Enterprise-API (Beta)",
+      "p0": "Benötigen Sie programmatischen Zugriff auf registerübergreifende Zuordnungen von Entitäten? Wir entwickeln derzeit eine hochverfügbare REST-API mit OpenAPI-Spezifikationen, die speziell für Teams in den Bereichen Compliance und Risikoanalyse in Institutionen konzipiert ist."
+    },
     "stats": {
       "countries": "Abgedeckte Länder",
       "parties": "Politische Parteien",
@@ -850,5 +855,25 @@
     "required": "Dieses Feld ist erforderlich.",
     "empty": "Dieses Feld darf nicht leer sein.",
     "email": "Bitte geben Sie eine gültige E-Mail-Adresse ein."
+  },
+  "filter": {
+    "title": "Filter",
+    "description": "Spenden-Daten nach Jahren, Parteien und Typ filtern.",
+    "select_all": "Alle auswählen",
+    "select_none": "Nichts auswählen",
+    "reset": "Zurücksetzen",
+    "parties": "Parteien",
+    "donation_types": "Spendentypen",
+    "donor_types": "Spenderarten",
+    "years": {
+      "title": "Jahresbereich",
+      "from": "Von",
+      "to": "Bis"
+    },
+    "empty": {
+      "title": "Keine Spenden gefunden",
+      "p0": "Es wurden keine Spenden gefunden, die Ihrer aktuellen Filterkonfiguration entsprechen. Versuchen Sie, Ihre Filter anzupassen oder zurückzusetzen.",
+      "reset": "Filter zurücksetzen"
+    }
   }
 }

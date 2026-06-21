@@ -78,13 +78,14 @@ export const PageFooter = ({ locale }: { locale: ConstLocale }) => {
             <Button
               variant="secondary"
               size="xs"
-              asChild
+              nativeButton={false}
               className="border-none bg-yellow-400 px-2 text-black shadow-sm hover:bg-yellow-500 dark:bg-yellow-400 dark:hover:bg-yellow-500"
-            >
-              <a href={BMAC_URL} target="_blank" rel="noreferrer">
-                {t("navigation.support_us")}
-              </a>
-            </Button>
+              render={
+                <a href={BMAC_URL} target="_blank" rel="noreferrer">
+                  {t("navigation.support_us")}
+                </a>
+              }
+            />
           </div>
         </div>
       </div>

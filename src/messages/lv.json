@@ -72,7 +72,8 @@
   "chart": {
     "save_as_image": "Saglabāt kā attēlu",
     "toggle_fullscreen": "Pārslēgšanās uz pilnekrāna režīmu",
-    "reset_zoom": "Atiestatīt tālummaiņu"
+    "reset_zoom": "Atiestatīt tālummaiņu",
+    "filtered": "filtrēts datu kopums"
   },
   "over_min_public_amount": "vairāk nekā {amount}",
   "over_threshold": "{type, select, count {tikai partijas ar ≥ {count} ziedojumiem} sum {tikai partijas ar ≥ {sum}} other {tikai partijas ar ≥ {count} ziedojumiem vai ≥ {sum}}}",
@@ -131,6 +132,10 @@
   "root": {
     "title": "Atvērtā pirmkoda politisko partiju ziedojumu izsekotājs",
     "subtitle": "Izseko un izpēti politiskos ziedojumus vairākās valstīs. Saprotiet, kas finansē politiskās partijas un kā nauda plūst visā pasaulē.",
+    "enterprise": {
+      "title": "Uzņēmuma API (Beta)",
+      "p0": "Vai jums ir nepieciešama programmatiska piekļuve starpreģistru entītiju kartēšanai? Pašlaik izstrādājam augstas pieejamības REST API ar OpenAPI specifikācijām, kas īpaši paredzēta institucionālajām atbilstības un riska analīzes komandām."
+    },
     "stats": {
       "countries": "Aptvertās valstis",
       "parties": "Politiskās partijas",
@@ -849,5 +854,25 @@
     "required": "Šis lauks ir obligāts.",
     "empty": "Šis lauks nedrīkst būt tukšs.",
     "email": "Lūdzu, ievadiet derīgu e-pasta adresi."
+  },
+  "filter": {
+    "title": "Filtri",
+    "description": "Precizējiet ziedojumu datus pēc gadiem, partijām un tipa.",
+    "select_all": "Atlasīt visu",
+    "select_none": "Noņemt atlasi",
+    "reset": "Atiestatīt",
+    "parties": "Partijas",
+    "donation_types": "Ziedojumu veidi",
+    "donor_types": "Ziedotāju veidi",
+    "years": {
+      "title": "Gadu diapazons",
+      "from": "No",
+      "to": "Līdz"
+    },
+    "empty": {
+      "title": "Ziedojumi nav atrasti",
+      "p0": "Nav atrasti ziedojumi, kas atbilst jūsu pašreizējai filtru konfigurācijai. Mēģiniet pielāgot filtrus vai tos atiestatīt.",
+      "reset": "Atiestatīt filtrus"
+    }
   }
 }

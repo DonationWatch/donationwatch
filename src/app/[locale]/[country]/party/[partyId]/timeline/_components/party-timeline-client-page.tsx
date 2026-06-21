@@ -1,10 +1,13 @@
 "use client";
 
+import { useMemo, useEffect } from "react";
+
 import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 
 import { DonationPerMonthChart } from "@/components/charts/donation-per-month-chart";
 import { DonationPartyChart } from "@/components/charts/donation-sum-chart";
+import { FilterEmptyState } from "@/components/filter/filter-empty-state";
 import {
   ArticleSectionColumn,
   ArticleSectionOneColumns,
@@ -16,6 +19,7 @@ import Loading from "@/components/loading/loading";
 import { PartyTimelineText } from "@/components/parties/party-timeline-text";
 import { useDonationsByParty } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { useFilterEngine } from "@/hooks/use-filter-engine";
 import { useScrollToHash } from "@/hooks/use-scroll-to-hash";
 import { Features, hasFeature } from "@/utils/features";
 
@@ -41,15 +45,40 @@ export const PartyTimelineClientPage = ({
   perYearSubtitle,
 }: PartyTimelineClientPageProps) => {
   const tData = useTranslations("data");
+
+  const {
+    isFiltered,
+    filteredYears,
+    filteredDonations,
+    setDonations,
+    controls,
+  } = useFilterEngine();
+
+  const activeYears = useMemo(() => {
+    return isFiltered
+      ? country.years.filter((y) => filteredYears.includes(y))
+      : country.years;
+  }, [country.years, isFiltered, filteredYears]);
+
   const { data, error, isLoading, isSuccess } = useDonationsByParty(
     country,
     party,
   );
 
+  useEffect(() => {
+    if (isSuccess && !error) {
+      setDonations(data ?? []);
+    }
+  }, [isSuccess, error, data, setDonations]);
+
   useScrollToHash(isSuccess);
 
   if (isLoading) return <Loading />;
   if (error || !data) return <div>{tData("error")}</div>;
+
+  if (isFiltered && filteredDonations.length === 0) {
+    return <FilterEmptyState onReset={controls.resetFilters} />;
+  }
 
   return (
     <>
@@ -69,10 +98,10 @@ export const PartyTimelineClientPage = ({
                 title={chartTitle}
                 subtitle={chartSubtitle}
                 country={country}
-                years={country.years}
+                years={activeYears}
                 party={party}
                 limitToFirstDateYear={true}
-                donations={data}
+                donations={filteredDonations}
               />
             </ArticleSectionColumn>
           </ArticleSectionOneColumns>
@@ -91,17 +120,17 @@ export const PartyTimelineClientPage = ({
             <PartyTimelineText
               country={country}
               party={party}
-              donations={data}
+              donations={filteredDonations}
             />
           </ArticleSectionColumn>
           <ArticleSectionColumn>
             <DonationPerMonthChart
-              donations={data}
+              donations={filteredDonations}
               country={country}
               title={perYearTitle}
               resolution={"year"}
               subtitle={perYearSubtitle}
-              years={country.years}
+              years={activeYears}
               parties={[party]}
             />
           </ArticleSectionColumn>

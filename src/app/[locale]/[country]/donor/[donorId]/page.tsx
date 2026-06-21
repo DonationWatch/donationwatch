@@ -164,6 +164,7 @@ export default async function DonorPageLayout(
     "years",
     "donation_type",
     "changes",
+    "state",
   ]);
 
   return (

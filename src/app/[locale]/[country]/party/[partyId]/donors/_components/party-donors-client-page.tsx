@@ -1,11 +1,14 @@
 "use client";
 
+import { useEffect } from "react";
+
 import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 
 import { LoadingDonationPartyTreemap } from "@/components/charts/loading-donation-years-treemap";
 import { LoadingPartyDonorTypeTreemap } from "@/components/charts/loading-donor-types-treemap";
 import { DonorOverviewList } from "@/components/donors/donor-overview-list";
+import { FilterEmptyState } from "@/components/filter/filter-empty-state";
 import {
   ArticleSectionColumn,
   ArticleSectionOneColumns,
@@ -18,6 +21,7 @@ import { LoadingPartyDonorTypeText } from "@/components/parties/part-donor-type-
 import { PartyDonorPageText } from "@/components/parties/party-donor-page-text";
 import { useDonationsByParty } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { useFilterEngine } from "@/hooks/use-filter-engine";
 import { useScrollToHash } from "@/hooks/use-scroll-to-hash";
 import { PartyField } from "@/types/party";
 import { Features, hasFeature } from "@/utils/features";
@@ -51,6 +55,15 @@ export const PartyDonorsClientPage = ({
     party,
   );
 
+  const { isFiltered, filteredDonations, setDonations, controls } =
+    useFilterEngine();
+
+  useEffect(() => {
+    if (isSuccess && !error) {
+      setDonations(data ?? []);
+    }
+  }, [isSuccess, error, data, setDonations]);
+
   useScrollToHash(isSuccess);
 
   if (isLoading) {
@@ -61,6 +74,10 @@ export const PartyDonorsClientPage = ({
     return <div>{tData("error")}</div>;
   }
 
+  if (isFiltered && filteredDonations.length === 0) {
+    return <FilterEmptyState onReset={controls.resetFilters} />;
+  }
+
   return (
     <>
       <ArticleSectionWrapper id={"sec-party-donors"}>
@@ -69,7 +86,7 @@ export const PartyDonorsClientPage = ({
             <PartyDonorPageText
               party={party}
               country={country}
-              donations={data}
+              donations={filteredDonations}
             />
           </ArticleSectionColumn>
           <ArticleSectionColumn>
@@ -80,7 +97,7 @@ export const PartyDonorsClientPage = ({
                 tooSmallAreaColor={party[PartyField.Color]}
                 title={treemapTitle}
                 subtitle={treemapSubtitle}
-                donations={data}
+                donations={filteredDonations}
               />
             </div>
           </ArticleSectionColumn>
@@ -98,7 +115,7 @@ export const PartyDonorsClientPage = ({
               <LoadingPartyDonorTypeText
                 country={country}
                 party={party}
-                donations={data}
+                donations={filteredDonations}
               />
             </ArticleSectionColumn>
             <ArticleSectionColumn>
@@ -107,7 +124,7 @@ export const PartyDonorsClientPage = ({
                 party={party}
                 title={donorTypesTreemapTitle}
                 subtitle={donorTypesTreemapSubtitle}
-                donations={data}
+                donations={filteredDonations}
               />
             </ArticleSectionColumn>
           </ArticleSectionTwoColumns>
@@ -122,7 +139,7 @@ export const PartyDonorsClientPage = ({
             <DonorOverviewList
               countryConfig={country}
               party={party}
-              donations={data}
+              donations={filteredDonations}
             />
           </ArticleSectionColumn>
         </ArticleSectionOneColumns>
