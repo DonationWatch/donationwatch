@@ -118,6 +118,8 @@ const DonationTimeseriesChart = ({
   const { backgroundColor, isMobile, isDark } = useChart();
   const tYears = useClientTranslations("years");
 
+  if (!donations.length) return null;
+
   const leftmostYear = limitToFirstDateYear
     ? donations[0][DonationField.Date].substring(0, 4)
     : years.at(0)!;

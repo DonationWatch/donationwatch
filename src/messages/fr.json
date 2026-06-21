@@ -72,7 +72,8 @@
   "chart": {
     "save_as_image": "Enregistrer comme image",
     "toggle_fullscreen": "Plein écran",
-    "reset_zoom": "Réinitialiser le zoom"
+    "reset_zoom": "Réinitialiser le zoom",
+    "filtered": "ensemble de données filtré"
   },
   "over_min_public_amount": "plus de {amount}",
   "over_threshold": "{type, select, count {uniquement partis avec ≥ {count} dons} sum {uniquement partis avec ≥ {sum}} other {uniquement partis avec ≥ {count} dons ou ≥ {sum}}}",
@@ -121,6 +122,10 @@
   "root": {
     "title": "Traqueur open-source des dons aux partis politiques",
     "subtitle": "Suivez et explorez les dons politiques dans plusieurs pays. Comprenez qui finance les partis et comment l'argent circule dans le monde.",
+    "enterprise": {
+      "title": "API Enterprise (Bêta)",
+      "p0": "Avez-vous besoin d'un accès programmatique aux correspondances d'entités entre registres ? Nous développons actuellement une API REST hautement disponible avec des spécifications OpenAPI, spécialement conçue pour les équipes de conformité et d'analyse des risques au sein des institutions."
+    },
     "stats": {
       "countries": "Pays couverts",
       "parties": "Partis politiques",
@@ -833,5 +838,25 @@
     "required": "Ce champ est obligatoire.",
     "empty": "Ce champ ne peut pas être vide.",
     "email": "Veuillez saisir une adresse e-mail valide."
+  },
+  "filter": {
+    "title": "Filtres",
+    "description": "Affinez les données de dons par années, partis et type.",
+    "select_all": "Tout sélectionner",
+    "select_none": "Tout désélectionner",
+    "reset": "Réinitialiser",
+    "parties": "Partis",
+    "donation_types": "Types de dons",
+    "donor_types": "Types de donateurs",
+    "years": {
+      "title": "Plage d’années",
+      "from": "De",
+      "to": "À"
+    },
+    "empty": {
+      "title": "Aucun don trouvé",
+      "p0": "Aucun don ne correspond à votre configuration actuelle de filtres. Essayez d’ajuster ou de réinitialiser vos filtres.",
+      "reset": "Réinitialiser les filtres"
+    }
   }
 }

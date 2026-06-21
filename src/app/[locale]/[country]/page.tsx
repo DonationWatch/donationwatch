@@ -20,7 +20,7 @@ import { DetectedCountry } from "@/components/layout/detected-country";
 import { PartiesHero } from "@/components/parties/parties-hero";
 import { Translation } from "@/components/translation";
 import { YearsCards } from "@/components/years/years-cards";
-import { YearsHeader } from "@/components/years/years-header";
+import { UnfilteredYearsHeader } from "@/components/years/years-header";
 import {
   COUNTRIES,
   getCountryName,
@@ -149,7 +149,7 @@ export default async function YearsPage(
           <div className="">
             {currentYear ? (
               <section aria-labelledby="last-period-title">
-                <YearsHeader
+                <UnfilteredYearsHeader
                   className="card card--action"
                   title={tHome("last_period")}
                   idPrefix={"last-period-"}
@@ -165,7 +165,7 @@ export default async function YearsPage(
                       partyYearsSums={partySums}
                     />
                   </div>
-                </YearsHeader>
+                </UnfilteredYearsHeader>
               </section>
             ) : null}
             {currentYear !== previousYear && previousYear ? (
@@ -356,7 +356,7 @@ export default async function YearsPage(
           <div className="grid gap-4 @3xl:grid-cols-2">
             {countryConfig.legislativeYears.map((years, idx) => {
               return (
-                <YearsHeader
+                <UnfilteredYearsHeader
                   className="card card--action"
                   key={idx}
                   country={countryConfig}
@@ -372,7 +372,7 @@ export default async function YearsPage(
                       partyYearsSums={partySums}
                     />
                   </div>
-                </YearsHeader>
+                </UnfilteredYearsHeader>
               );
             })}
           </div>

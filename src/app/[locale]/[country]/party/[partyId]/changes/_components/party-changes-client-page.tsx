@@ -1,9 +1,12 @@
 "use client";
 
+import { useEffect } from "react";
+
 import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 
 import { PartyDonationHistory } from "@/components/donations/party-donation-history";
+import { FilterEmptyState } from "@/components/filter/filter-empty-state";
 import {
   ArticleSectionColumn,
   ArticleSectionOneColumns,
@@ -13,6 +16,7 @@ import {
 import Loading from "@/components/loading/loading";
 import { useDonationsByParty } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { useFilterEngine } from "@/hooks/use-filter-engine";
 import { useScrollToHash } from "@/hooks/use-scroll-to-hash";
 
 interface PartyChangesClientPageProps {
@@ -34,6 +38,15 @@ export const PartyChangesClientPage = ({
     party,
   );
 
+  const { isFiltered, filteredDonations, setDonations, controls } =
+    useFilterEngine();
+
+  useEffect(() => {
+    if (isSuccess && !error) {
+      setDonations(data ?? []);
+    }
+  }, [isSuccess, error, data, setDonations]);
+
   useScrollToHash(isSuccess);
 
   return (
@@ -50,11 +63,13 @@ export const PartyChangesClientPage = ({
             <Loading heightClass="h-[80vh]" />
           ) : error || !data ? (
             <div>{tData("error")}</div>
+          ) : isFiltered && filteredDonations.length === 0 ? (
+            <FilterEmptyState onReset={controls.resetFilters} />
           ) : (
             <PartyDonationHistory
               country={country}
               party={party}
-              donations={data}
+              donations={filteredDonations}
             />
           )}
         </ArticleSectionColumn>

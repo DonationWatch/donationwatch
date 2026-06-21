@@ -7,13 +7,8 @@ import { notFound, redirect } from "next/navigation";
 import type { TabItem } from "@/components/tabs";
 
 import { AbsoluteMultipleColorsGradient } from "@/components/absolute-multiple-colors-gradient";
-import {
-  FormattedCountryCurrency,
-  FormattedNumber,
-} from "@/components/browser-based-formatter";
 import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
 import { PageHeader } from "@/components/layout/page-header";
-import { MetaCard } from "@/components/meta-card";
 import { LastModifiedSchema } from "@/components/schema";
 import { NavigationTabs } from "@/components/tabs";
 import { WikiQuote } from "@/components/wiki-quote";
@@ -29,7 +24,6 @@ import { pick } from "@/utils/i18n-pick";
 import {
   getPartyYearsSums,
   lastPartyStatsDonation,
-  PartyStatField,
 } from "@/utils/loader/party-years-sums";
 import { baseOpenGraph, baseTwitter } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
@@ -37,6 +31,8 @@ import { generateCountryTitlePart } from "@/utils/title";
 import { isValidCountry, isValidLocale, isValidParty } from "@/utils/validate";
 
 import type { ParamsOf } from "../../../../../../.next/types/routes";
+
+import { PartyClientPageHead } from "./party-client-page-head";
 
 export const dynamicParams = true;
 
@@ -137,19 +133,6 @@ export default async function PartyLayout(
 
   const party = getParty(countryConfig, partyId);
 
-  let donationCount = 0;
-  let donationSum = 0;
-
-  Object.values(partyYearsSums).forEach((partyYearSums) => {
-    const sums = partyYearSums[party[PartyField.Id]];
-
-    if (!sums) return;
-
-    donationCount += sums[PartyStatField.Count];
-    donationSum += sums[PartyStatField.Sum];
-  });
-
-  const showExtendedMeta = true;
   const wikiPageId = party[PartyField.Wiki];
   const tabItems: TabItem[] = [
     {
@@ -213,49 +196,11 @@ export default async function PartyLayout(
       />
       <PageHeader>
         <section aria-labelledby="hero-label">
-          <div className="mb-4">
-            <h2 className="mb-2 text-slate-500 dark:text-slate-300">
-              {t("years.title")}
-            </h2>
-            <h3 className="text-3xl font-semibold sm:text-4xl" id="hero-label">
-              {party[PartyField.Short]}
-            </h3>
-            {party[PartyField.Short] !== party[PartyField.Name] ? (
-              <h4 className="mt-1 text-lg">{party[PartyField.Name]}</h4>
-            ) : null}
-          </div>
-          <div className="mb-3">
-            <div className="flex-row space-y-2 sm:flex sm:space-y-0 sm:space-x-10">
-              {hasFeature(countryConfig, Features.Donors) ? (
-                <MetaCard
-                  title={t("donation_count")}
-                  value={<FormattedNumber value={donationCount} />}
-                />
-              ) : null}
-              <MetaCard
-                title={t("sum")}
-                value={
-                  <FormattedCountryCurrency
-                    country={countryConfig}
-                    value={donationSum}
-                  />
-                }
-              />
-              {hasFeature(countryConfig, Features.Donors) &&
-                showExtendedMeta &&
-                donationCount > 1 && (
-                  <MetaCard
-                    title={t("average")}
-                    value={
-                      <FormattedCountryCurrency
-                        country={countryConfig}
-                        value={donationSum / donationCount}
-                      />
-                    }
-                  />
-                )}
-            </div>
-          </div>
+          <PartyClientPageHead
+            party={party}
+            partyYearsSums={partyYearsSums}
+            countryConfig={countryConfig}
+          />
           <div className="mb-3">
             {wikiPageId && (
               <section aria-label={tCommon("summary")} className="pt-4 sm:px-4">

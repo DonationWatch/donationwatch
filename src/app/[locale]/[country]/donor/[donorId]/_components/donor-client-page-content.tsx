@@ -43,6 +43,11 @@ export const DonorClientPageContent = ({
   const tCommon = useTranslations("common");
   const locale = useLocale();
   const browserBasedLocale = useBrowserBasedLocale();
+
+  if (!donations || donations.length === 0) {
+    return null;
+  }
+
   const donorName = getDonorName(
     donations.at(0)?.[DonationField.DonorName] ?? "",
     tCommon,

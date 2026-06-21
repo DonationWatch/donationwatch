@@ -23,6 +23,11 @@ export const DonorDonationTable = ({
 }) => {
   const t = useTranslations();
   const tCommon = useTranslations("common");
+
+  if (!donations || donations.length === 0) {
+    return null;
+  }
+
   const donorName = getDonorName(
     donations.at(0)?.[DonationField.DonorName] ?? "",
     tCommon,

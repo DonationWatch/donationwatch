@@ -72,7 +72,8 @@
   "chart": {
     "save_as_image": "Opslaan als afbeelding",
     "toggle_fullscreen": "Volledig scherm inschakelen",
-    "reset_zoom": "Zoom zurücksetzen"
+    "reset_zoom": "Zoom zurücksetzen",
+    "filtered": "gefilterde dataset"
   },
   "over_min_public_amount": "meer dan {amount}",
   "over_threshold": "{type, select, count {alleen partijen met ≥ {count} donaties} sum {alleen partijen met ≥ {sum}} other {alleen partijen met ≥ {count} donaties of ≥ {sum}}}",
@@ -131,6 +132,10 @@
   "root": {
     "title": "Open-source tracker voor donaties aan politieke partijen",
     "subtitle": "Volg en verken politieke donaties in meerdere landen. Begrijp wie politieke partijen financiert en hoe geld wereldwijd stroomt.",
+    "enterprise": {
+      "title": "Enterprise API (Beta)",
+      "p0": "Heeft u programmatische toegang nodig tot entiteitskoppelingen over meerdere registers? We ontwikkelen momenteel een hoog beschikbare REST-API met OpenAPI-specificaties, speciaal ontworpen voor institutionele compliance- en risicoteams."
+    },
     "stats": {
       "countries": "Gedekte landen",
       "parties": "Politieke partijen",
@@ -849,5 +854,25 @@
     "required": "Dit veld is verplicht.",
     "empty": "Dit veld mag niet leeg zijn.",
     "email": "Voer een geldig e-mailadres in."
+  },
+  "filter": {
+    "title": "Filters",
+    "description": "Verfijn donatiegegevens op jaren, partijen en type.",
+    "select_all": "Alles selecteren",
+    "select_none": "Niets selecteren",
+    "reset": "Resetten",
+    "parties": "Partijen",
+    "donation_types": "Donatietypen",
+    "donor_types": "Donortypen",
+    "years": {
+      "title": "Jaarbereik",
+      "from": "Van",
+      "to": "Tot"
+    },
+    "empty": {
+      "title": "Geen donaties gevonden",
+      "p0": "Er zijn geen donaties die overeenkomen met je huidige filterinstellingen. Probeer je filters aan te passen of te resetten.",
+      "reset": "Filters resetten"
+    }
   }
 }

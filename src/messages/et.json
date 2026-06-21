@@ -72,7 +72,8 @@
   "chart": {
     "save_as_image": "Salvesta pildina",
     "toggle_fullscreen": "Üleminek täisekraani režiimi",
-    "reset_zoom": "Zoomi lähtestamine"
+    "reset_zoom": "Zoomi lähtestamine",
+    "filtered": "filtreeritud andmestik"
   },
   "over_min_public_amount": "üle {amount}",
   "over_threshold": "{type, select, count {ainult erakonnad, kellel on ≥ {count} annetust} sum {ainult erakonnad, kellel on ≥ {sum}} other {ainult erakonnad, kellel on ≥ {count} annetust või ≥ {sum}}}",
@@ -131,6 +132,10 @@
   "root": {
     "title": "Avatud lähtekoodiga poliitiliste parteide annetuste jälgija",
     "subtitle": "Jälgi ja uuri poliitilisi annetusi mitmes riigis. Mõista, kes rahastab poliitilisi parteisid ja kuidas raha üle maailma liigub.",
+    "enterprise": {
+      "title": "Ettevõtte API (beeta)",
+      "p0": "Kas vajate programmipõhist juurdepääsu registriteülestele üksuste vastendustele? Arendame praegu kõrge käideldavusega REST API-t OpenAPI spetsifikatsioonidega, mis on loodud spetsiaalselt institutsionaalsete vastavus- ja riskianalüüsi meeskondade jaoks."
+    },
     "stats": {
       "countries": "Kaasatud riigid",
       "parties": "Poliitilised parteid",
@@ -849,5 +854,25 @@
     "required": "See väli on kohustuslik.",
     "empty": "See väli ei tohi olla tühi.",
     "email": "Palun sisestage kehtiv e-posti aadress."
+  },
+  "filter": {
+    "title": "Filtrid",
+    "description": "Täpsustage annetuste andmeid aastate, erakondade ja tüübi järgi.",
+    "select_all": "Vali kõik",
+    "select_none": "Tühista valik",
+    "reset": "Lähtesta",
+    "parties": "Erakonnad",
+    "donation_types": "Annetuse tüübid",
+    "donor_types": "Annetajate tüübid",
+    "years": {
+      "title": "Aastavahemik",
+      "from": "Alates",
+      "to": "Kuni"
+    },
+    "empty": {
+      "title": "Annetusi ei leitud",
+      "p0": "Teie praegusele filtrikonfiguratsioonile vastavaid annetusi ei leitud. Proovige filtreid kohandada või lähtestada.",
+      "reset": "Lähtesta filtrid"
+    }
   }
 }

@@ -4,6 +4,7 @@ import type { ComponentProps } from "react";
 import { Dialog as SheetPrimitive } from "@base-ui/react/dialog";
 import { XIcon } from "lucide-react";
 
+import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 function Sheet({ ...props }: ComponentProps<typeof SheetPrimitive.Root>) {
@@ -48,13 +49,17 @@ function SheetContent({
   className,
   children,
   side = "right",
+  hideOverlay = false,
+  translations,
   ...props
 }: ComponentProps<typeof SheetPrimitive.Popup> & {
   side?: "top" | "right" | "bottom" | "left";
+  hideOverlay?: boolean;
+  translations: { close: string };
 }) {
   return (
     <SheetPortal>
-      <SheetOverlay />
+      {!hideOverlay && <SheetOverlay />}
       <SheetPrimitive.Popup
         data-slot="sheet-content"
         className={cn(
@@ -73,9 +78,14 @@ function SheetContent({
         {...props}
       >
         {children}
-        <SheetPrimitive.Close className="ring-offset-background focus:ring-ring data-[open]:bg-secondary absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none">
-          <XIcon className="size-4" />
-          <span className="sr-only">Close</span>
+        <SheetPrimitive.Close
+          className={cn(
+            buttonVariants({ variant: "ghost", size: "icon" }),
+            "absolute top-4 right-4",
+          )}
+        >
+          <XIcon size={16} />
+          <span className="sr-only">{translations.close}</span>
         </SheetPrimitive.Close>
       </SheetPrimitive.Popup>
     </SheetPortal>

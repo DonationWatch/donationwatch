@@ -72,7 +72,8 @@
   "chart": {
     "save_as_image": "Save as image",
     "toggle_fullscreen": "Toggle fullscreen",
-    "reset_zoom": "Reset zoom"
+    "reset_zoom": "Reset zoom",
+    "filtered": "filtered dataset"
   },
   "over_min_public_amount": "over {amount}",
   "over_threshold": "{type, select, count {only parties ≥ {count} donations} sum {only parties ≥ {sum}} other {only parties ≥ {count} donations or ≥ {sum}}}",
@@ -121,6 +122,10 @@
   "root": {
     "title": "Open source political party donations tracker",
     "subtitle": "Track and explore political donations across multiple countries. Understand who funds political parties and how money flows worldwide.",
+    "enterprise": {
+      "title": "Enterprise API (Beta)",
+      "p0": "Need programmatic access to cross-registry entity mappings? We are currently engineering a high-availability REST API with OpenAPI specifications, designed specifically for institutional compliance and risk analysis teams."
+    },
     "stats": {
       "countries": "Countries covered",
       "parties": "Political parties",
@@ -833,5 +838,25 @@
     "required": "This field is required.",
     "empty": "This field cannot be empty.",
     "email": "Please enter a valid email address."
+  },
+  "filter": {
+    "title": "Filters",
+    "description": "Refine donation data by years, parties, and type.",
+    "select_all": "Select all",
+    "select_none": "Select none",
+    "reset": "Reset",
+    "parties": "Parties",
+    "donation_types": "Donation types",
+    "donor_types": "Donor types",
+    "years": {
+      "title": "Year range",
+      "from": "From",
+      "to": "To"
+    },
+    "empty": {
+      "title": "No donations found",
+      "p0": "There are no donations matching your current filter configuration. Try adjusting your filters or resetting them.",
+      "reset": "Reset Filters"
+    }
   }
 }

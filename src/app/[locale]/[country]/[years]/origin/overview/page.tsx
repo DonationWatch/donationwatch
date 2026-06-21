@@ -4,7 +4,6 @@ import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 import { getCountryConfig } from "@/utils/data/get-country-config";
-import { getParties } from "@/utils/data/get-parties";
 import { generateAlternates } from "@/utils/meta";
 import { deserializeYears } from "@/utils/serializers";
 import { isValidCountry, isValidLocale } from "@/utils/validate";
@@ -36,13 +35,5 @@ export default async function OverviewPage(
 
   const [countryConfig] = await Promise.all([getCountryConfig(params.country)]);
 
-  const parties = getParties(countryConfig, years);
-
-  return (
-    <YearsOriginClientPage
-      country={countryConfig}
-      parties={parties}
-      years={years}
-    />
-  );
+  return <YearsOriginClientPage country={countryConfig} years={years} />;
 }

@@ -1,8 +1,11 @@
 "use client";
 
+import { useEffect, useMemo } from "react";
+
 import type { CountryConfig } from "@/types/country-config";
 
 import { YearDonationHistory } from "@/components/donations/party-donation-history";
+import { FilterEmptyState } from "@/components/filter/filter-empty-state";
 import {
   ArticleSectionTitle,
   ArticleSectionWrapper,
@@ -10,6 +13,7 @@ import {
 import Loading from "@/components/loading/loading";
 import { useDonationsByYears } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { useFilterEngine } from "@/hooks/use-filter-engine";
 import { useScrollToHash } from "@/hooks/use-scroll-to-hash";
 import { isNotNullandNotUndefined } from "@/utils/array";
 
@@ -27,10 +31,32 @@ export const YearsChangesClientPage = ({
   summary,
 }: YearsChangesClientPageProps) => {
   const tData = useTranslations("data");
+
   const results = useDonationsByYears(country, years);
   const isLoading = results.some((r) => r.isLoading);
   const error = results.some((r) => r.error);
   const isSuccess = results.every((r) => r.isSuccess);
+
+  const {
+    isFiltered,
+    filteredYears,
+    filteredDonations,
+    setDonations,
+    controls,
+  } = useFilterEngine();
+
+  useEffect(() => {
+    if (isSuccess && !error) {
+      const allData = results
+        .flatMap((r) => r.data)
+        .filter(isNotNullandNotUndefined);
+      setDonations(allData);
+    }
+  }, [isSuccess, error, results, setDonations]);
+
+  const activeYears = useMemo(() => {
+    return isFiltered ? years.filter((y) => filteredYears.includes(y)) : years;
+  }, [years, isFiltered, filteredYears]);
 
   useScrollToHash(isSuccess);
 
@@ -42,13 +68,13 @@ export const YearsChangesClientPage = ({
         <Loading heightClass="h-[80vh]" />
       ) : error ? (
         <div>{tData("error")}</div>
+      ) : isFiltered && filteredDonations.length === 0 ? (
+        <FilterEmptyState onReset={controls.resetFilters} />
       ) : (
         <YearDonationHistory
-          years={years}
+          years={activeYears}
           country={country}
-          donations={results
-            .flatMap((r) => r.data)
-            .filter(isNotNullandNotUndefined)}
+          donations={filteredDonations}
         />
       )}
     </ArticleSectionWrapper>

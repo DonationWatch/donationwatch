@@ -13,6 +13,7 @@ import { ClipboardAccess } from "../fixtures/clipboard-access";
 import { DonorPage } from "../fixtures/donor";
 import { DonorsPage } from "../fixtures/donors";
 import { EnterprisePage } from "../fixtures/enterprise";
+import { FilterSheet } from "../fixtures/filter-sheet";
 import { GlobalSearch } from "../fixtures/global-search";
 import { HistoryPage } from "../fixtures/history";
 import { HomePage } from "../fixtures/home";
@@ -54,6 +55,8 @@ type SharedFixtures = {
   toasts: Toasts;
 
   props: FixtureProps;
+
+  filterSheet: FilterSheet;
 };
 
 export const test = base.extend<SharedFixtures>({
@@ -158,6 +161,9 @@ export const test = base.extend<SharedFixtures>({
   },
   rootPage: async ({ props }, use) => {
     await use(new RootPage(props));
+  },
+  filterSheet: async ({ props }, use) => {
+    await use(new FilterSheet(props));
   },
   enterprisePage: async ({ props }, use) => {
     await use(new EnterprisePage(props));

@@ -169,11 +169,13 @@ function Sidebar({
   collapsible = "offcanvas",
   className,
   children,
+  translations,
   ...props
 }: React.ComponentProps<"div"> & {
   side?: "left" | "right";
   variant?: "sidebar" | "floating" | "inset";
   collapsible?: "offcanvas" | "icon" | "none";
+  translations: { close: string };
 }) {
   const { isMobile, state, openMobile, setOpenMobile } = useSidebar();
 
@@ -206,6 +208,7 @@ function Sidebar({
             } as React.CSSProperties
           }
           side={side}
+          translations={translations}
         >
           <SheetHeader className="sr-only">
             <SheetTitle>Sidebar</SheetTitle>

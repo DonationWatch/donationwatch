@@ -11,8 +11,9 @@ import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
 import { PageHeader } from "@/components/layout/page-header";
 import { LastModifiedSchema } from "@/components/schema";
 import { NavigationTabs } from "@/components/tabs";
+import { FilteredYearsHeader } from "@/components/years/filtered-years-header";
+import { YearsFilterSync } from "@/components/years/years-filter-sync";
 import { YearsFooterNav } from "@/components/years/years-footer-nav";
-import { YearsHeader } from "@/components/years/years-header";
 import { isNotNullandNotUndefined } from "@/utils/array";
 import { THUMBNAIL_PREFIX } from "@/utils/config";
 import { getCountryName } from "@/utils/countries";
@@ -204,6 +205,7 @@ export default async function YearsLayout(
 
   return (
     <ScopedClientIntlProvider messages={pageMessages}>
+      <YearsFilterSync yearsParam={params.years} />
       {lastDonation ? <LastModifiedSchema dateModified={lastDonation} /> : null}
       <DynamicAbsoluteMultiplePartySumsGradient
         partyYearsSums={partySums}
@@ -212,7 +214,7 @@ export default async function YearsLayout(
       />
 
       <PageHeader>
-        <YearsHeader
+        <FilteredYearsHeader
           titleBeforeYears={true}
           title={t("years.title")}
           idPrefix="hero-"

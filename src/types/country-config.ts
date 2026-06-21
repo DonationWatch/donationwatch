@@ -2,7 +2,13 @@ import type { Party } from "@/types/party";
 import type { NonEmptyArray } from "@/utils/array";
 import type { Country, CountryCode, Currency } from "@/utils/countries";
 import type { LambertConformalConicParams } from "@/utils/map";
-import type { DonorFilter, IsoDate, ReceiverFilter } from "@/utils/types";
+import type {
+  DonationType,
+  DonorFilter,
+  DonorType,
+  IsoDate,
+  ReceiverFilter,
+} from "@/utils/types";
 
 // This is the raw country config containing everything relevant to the country.
 // This will get stripped down before being available to the next app.
@@ -51,6 +57,11 @@ export interface UnloadedCountryConfig {
 
   // filtered out donation receivers
   readonly receiverFilters?: ReceiverFilter[];
+
+  // bitmask of the donor types that are used in the country
+  readonly usedDonorTypes?: DonorType[];
+  // bitmask of the donation types that are used in the country
+  readonly usedDonationTypes?: DonationType[];
 }
 
 // This is the config type that's available to the next app

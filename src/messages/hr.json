@@ -72,7 +72,8 @@
   "chart": {
     "save_as_image": "Spremi kao sliku",
     "toggle_fullscreen": "Prebaci na puni zaslon",
-    "reset_zoom": "Resetiraj zum"
+    "reset_zoom": "Resetiraj zum",
+    "filtered": "filtrirani skup podataka"
   },
   "over_min_public_amount": "preko {amount}",
   "over_threshold": "{type, select, count {samo stranke s ≥ {count} donacija} sum {samo stranke s ≥ {sum}} other {samo stranke s ≥ {count} donacija ili ≥ {sum}}}",
@@ -131,6 +132,10 @@
   "root": {
     "title": "Praćenje donacija političkim strankama otvorenog koda",
     "subtitle": "Pratite i istražite političke donacije u više zemalja. Saznajte tko financira političke stranke i kako novac teče diljem svijeta.",
+    "enterprise": {
+      "title": "Enterprise API (Beta)",
+      "p0": "Trebate li programski pristup mapiranju entiteta između registara? Trenutno razvijamo visoko dostupni REST API s OpenAPI specifikacijama, posebno dizajniran za timove za usklađenost i analizu rizika u institucijama."
+    },
     "stats": {
       "countries": "Obuhvaćene zemlje",
       "parties": "Političke stranke",
@@ -849,5 +854,25 @@
     "required": "Ovo polje je obavezno.",
     "empty": "Ovo polje ne smije biti prazno.",
     "email": "Unesite valjanu adresu e-pošte."
+  },
+  "filter": {
+    "title": "Filteri",
+    "description": "Precizirajte podatke o donacijama prema godinama, strankama i tipu.",
+    "select_all": "Odaberi sve",
+    "select_none": "Poništi odabir",
+    "reset": "Poništi",
+    "parties": "Stranke",
+    "donation_types": "Vrste donacija",
+    "donor_types": "Vrste donatora",
+    "years": {
+      "title": "Raspon godina",
+      "from": "Od",
+      "to": "Do"
+    },
+    "empty": {
+      "title": "Nema pronađenih donacija",
+      "p0": "Nema donacija koje odgovaraju vašoj trenutačnoj konfiguraciji filtara. Pokušajte prilagoditi filtre ili ih resetirati.",
+      "reset": "Resetiraj filtre"
+    }
   }
 }
