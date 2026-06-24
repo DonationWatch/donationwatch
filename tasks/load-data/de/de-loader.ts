@@ -25,8 +25,12 @@ const normalizedReceivers: Record<string, string> = {
   DIEBASIS: "BASIS",
   "PARTEI BÜNDNIS SAHRA WAGENKNECHT": "BÜNDNIS SAHRA WAGENKNECHT",
   BSW: "BÜNDNIS SAHRA WAGENKNECHT",
+  "BÜNDNIS SAHRA WAGENKNECHT -­ VERNUNFT UND GERECHTIGKEIT":
+    "BÜNDNIS SAHRA WAGENKNECHT",
   "DIE GERECHTIGKEITSPARTEI - TEAM TODENHÖFER": "TEAM TODENHÖFER",
   "DIE GERECHTIGKEITS": "TEAM TODENHÖFER",
+  "DIE GERECHTIG­KEITSPARTEI - TEAM TODEN­HÖFER": "TEAM TODENHÖFER",
+  "DIE GERECHTIGKEITS­PARTEI - TEAM TODENHÖFER": "TEAM TODENHÖFER",
 };
 
 const stripEuroDot = (str: string): string => str.replace(/\./g, "");
@@ -473,6 +477,10 @@ export class DeLoader extends DataLoader {
       return "Dr. Karl Gerhold c/o GETEC";
     }
 
+    if (donor.startsWith("Christoph Meyer c/o FDP")) {
+      return "Christoph Meyer";
+    }
+
     if (donor.startsWith("Christian Oldendorff Via Valpetrosa 10")) {
       return "Christian Oldendorff";
     }
@@ -515,7 +523,7 @@ export class DeLoader extends DataLoader {
     return donor;
   }
 
-  private parseHtmlToRawDonations(
+  public parseHtmlToRawDonations(
     html: string,
   ): { tr: number; columns: string[][] }[] {
     const $ = cheerio.load(html);
@@ -527,16 +535,22 @@ export class DeLoader extends DataLoader {
         .find("td")
         .each((tdI, td) => {
           const tdContent: string[] = [];
-          $(td)
-            .find("p")
-            .contents()
-            .each((cI, content) => {
-              if (content.type === "tag" && content.name === "br") {
-                // skip brs
+          let justSawBr = true;
+          const p = $(td).find("p");
+          p.find("a").remove();
+          p.contents().each((cI, content) => {
+            if (content.type === "tag" && content.name === "br") {
+              justSawBr = true;
+            } else {
+              const text = $(content).text();
+              if (justSawBr || tdContent.length === 0) {
+                tdContent.push(text);
+                justSawBr = false;
               } else {
-                tdContent.push($(content).text());
+                tdContent[tdContent.length - 1] += text;
               }
-            });
+            }
+          });
           rawDonation.push(tdContent);
         });
       rawDonationData.push({ tr: trI, columns: rawDonation });

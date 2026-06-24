@@ -267,3 +267,102 @@ test.each([
     expect(extractDate(year, html)).toBe(expected);
   },
 );
+
+test("parses HTML with span in td and appends to the last text node", () => {
+  const html = `
+    <div class="bt-standard-content">
+      <table>
+        <tbody>
+          <tr>
+            <td><p>CDU</p></td>
+            <td><p>50.000 Euro</p></td>
+            <td>
+              <p>Bauwert AG<br>Lamer Str. 9<br>93444 <span>Bad Kötzting</span></p>
+            </td>
+            <td><p>19.06.2026</p></td>
+            <td><p>22.06.2026</p></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  `;
+  const parsed = loader.parseHtmlToRawDonations(html);
+  expect(parsed).toEqual([
+    {
+      tr: 0,
+      columns: [
+        ["CDU"],
+        ["50.000 Euro"],
+        ["Bauwert AG", "Lamer Str. 9", "93444 Bad Kötzting"],
+        ["19.06.2026"],
+        ["22.06.2026"],
+      ],
+    },
+  ]);
+});
+
+test("parses HTML with span after br in td and does not append to the previous text node", () => {
+  const html = `
+    <div class="bt-standard-content">
+      <table>
+        <tbody>
+          <tr>
+            <td><p>FDP</p></td>
+            <td><p>50.001 Euro</p></td>
+            <td>
+              <p>Christoph Meyer<br>c/o FDP<br>Reinhardtstraße 14<br><span>10117 Berlin</span></p>
+            </td>
+            <td><p>10.12.2024</p></td>
+            <td><p>11.12.2024 Drs. 20/14692</p></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  `;
+  const parsed = loader.parseHtmlToRawDonations(html);
+  expect(parsed).toEqual([
+    {
+      tr: 0,
+      columns: [
+        ["FDP"],
+        ["50.001 Euro"],
+        ["Christoph Meyer", "c/o FDP", "Reinhardtstraße 14", "10117 Berlin"],
+        ["10.12.2024"],
+        ["11.12.2024 Drs. 20/14692"],
+      ],
+    },
+  ]);
+});
+
+test("parses HTML and ignores anchors (links)", () => {
+  const html = `
+    <div class="bt-standard-content">
+      <table>
+        <tbody>
+          <tr>
+            <td><p>CDU</p></td>
+            <td><p>55.886,41<sup><a href="#sup1" class="a-link --inline --icon --icon-richtextInternal"><span class="a-link__label">1</span><span class="a-link__label --hidden">(Interner Link)</span></a></sup></p></td>
+            <td>
+              <p>Bauwert AG<br>Lamer Str. 9<br>93444 Bad Kötzting</p>
+            </td>
+            <td><p>19.06.2026</p></td>
+            <td><p>22.06.2026</p></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  `;
+  const parsed = loader.parseHtmlToRawDonations(html);
+  expect(parsed).toEqual([
+    {
+      tr: 0,
+      columns: [
+        ["CDU"],
+        ["55.886,41"],
+        ["Bauwert AG", "Lamer Str. 9", "93444 Bad Kötzting"],
+        ["19.06.2026"],
+        ["22.06.2026"],
+      ],
+    },
+  ]);
+});

@@ -249,6 +249,9 @@ export const donorMeta: DonorMetaDefinition = {
     "Hartmut Issmer": {
       wiki: 13230948,
     },
+    "Christoph Meyer": {
+      wiki: 3272719,
+    },
   },
   relations: [
     // Quandt/Klatten Family – BMW Major Shareholders
