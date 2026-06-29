@@ -527,7 +527,7 @@ export class NlLoader extends DataLoader {
 
   yearFiles: Record<string, string> = {
     2026: "https://www.rijksoverheid.nl/site/binaries/site-content/collections/documents/2026/01/21/overzicht-substantiele-giften-aan-politieke-partijen-2026/overzicht-substantiele-giften-aan-politieke-partijen-2026-versie-16-juni-2026.ods",
-    2025: "https://www.rijksoverheid.nl/site/binaries/site-content/collections/documents/2025/01/31/overzicht-substantiele-giften-aan-politieke-partijen-2025/Overzicht+substanti%C3%ABle+giften+aan+politieke+partijen+2025+versie+21-01-2026.ods",
+    2025: "https://www.rijksoverheid.nl/site/binaries/site-content/collections/documents/2025/01/31/overzicht-substantiele-giften-aan-politieke-partijen-2025/overzicht-substantiele-giften-aan-politieke-partijen-2025-versie-29-06-2026.ods",
     2024: "https://www.rijksoverheid.nl/site/binaries/site-content/collections/documents/2025/10/22/overzicht-van-giften-aan-politieke-partijen-en-hun-neveninstellingen-in-2024/overzicht-giften-aan-politieke-partijen-2024.ods",
     2023: "https://www.rijksoverheid.nl/site/binaries/site-content/collections/documents/2024/10/22/overzicht-giften-aan-politieke-partijen-2023/1+Overzicht+giften+2023.ods",
     2022: "https://www.rijksoverheid.nl/site/binaries/site-content/collections/documents/2023/09/25/overzicht-van-giften-aan-politieke-partijen-en-hun-neveninstellingen-2022/Overzicht+giften+2022.ods",
