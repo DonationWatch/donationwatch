@@ -539,6 +539,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       "^Clean Energy Council$",
       "^Senator the Hon Penny Wong$",
       "^Hon Mark Butler MP$",
+      "^ANIMALS AUSTRALIA$",
     ],
   },
   [Country.serbia]: {
