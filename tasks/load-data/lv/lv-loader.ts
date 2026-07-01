@@ -410,6 +410,13 @@ export class LvLoader extends DataLoader {
       code: "DAUGAVPILS",
       color: "#600320",
     },
+    "Gobzema saraksts": {
+      name: "Gobzema saraksts",
+      short: "Gobzema saraksts",
+      code: "GOBZEMASARAKSTS",
+      color: "#0e1b3a",
+      wiki: 66677152,
+    },
   };
 
   donorMeta = donorMeta;
