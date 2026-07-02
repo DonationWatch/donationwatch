@@ -545,6 +545,12 @@ export class GeLoader extends DataLoader {
       code: "UNITEDNEUTRAL",
       color: "#003166",
     },
+    "სოლიდარობა მშვიდობისთვის": {
+      name: "სოლიდარობა მშვიდობისთვის",
+      short: "Solidarity For Peace",
+      code: "SOIDARITYFORPEACE",
+      color: "#eb6b3f",
+    },
   };
 
   donorMeta = donorMeta;
