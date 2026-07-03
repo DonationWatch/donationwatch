@@ -120,13 +120,6 @@ export class EeLoader extends DataLoader {
       short: "EÜVP",
       wiki: 18700145,
     },
-    "KOOS organisatsioon osutab suveräänsusele": {
-      color: "#005baa",
-      name: "KOOS organisatsioon osutab suveräänsusele",
-      code: "KOOS",
-      short: "Koos",
-      wiki: 73170344,
-    },
     "Eesti Iseseisvuspartei": {
       color: "#0080cc",
       name: "Eesti Iseseisvuspartei",
@@ -188,6 +181,13 @@ export class EeLoader extends DataLoader {
       code: "VABADUS",
       color: "#683b15",
     },
+    "KOOS Erakond": {
+      name: "KOOS Erakond",
+      short: "Koos",
+      code: "KOOS",
+      color: "#005baa",
+      wiki: 73170344,
+    },
   };
 
   donorMeta = donorMeta;
@@ -218,6 +218,10 @@ export class EeLoader extends DataLoader {
 
     if (party.includes("Eesti Konservatiivne Rahvaerakond")) {
       return "Eesti Konservatiivne Rahvaerakond";
+    }
+
+    if (party === "KOOS organisatsioon osutab suveräänsusele") {
+      return "KOOS Erakond";
     }
 
     return party;
