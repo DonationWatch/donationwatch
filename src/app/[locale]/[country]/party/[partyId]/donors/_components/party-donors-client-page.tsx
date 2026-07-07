@@ -21,7 +21,10 @@ import { LoadingPartyDonorTypeText } from "@/components/parties/part-donor-type-
 import { PartyDonorPageText } from "@/components/parties/party-donor-page-text";
 import { useDonationsByParty } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
-import { useFilterEngine } from "@/hooks/use-filter-engine";
+import {
+  hasPendingFilterDonationSync,
+  useFilterEngine,
+} from "@/hooks/use-filter-engine";
 import { useScrollToHash } from "@/hooks/use-scroll-to-hash";
 import { PartyField } from "@/types/party";
 import { Features, hasFeature } from "@/utils/features";
@@ -64,9 +67,15 @@ export const PartyDonorsClientPage = ({
     }
   }, [isSuccess, error, data, setDonations]);
 
+  const isSyncing = hasPendingFilterDonationSync({
+    dataDonations: isSuccess ? data : undefined,
+    filterDonations: filteredDonations,
+    isFiltered,
+  });
+
   useScrollToHash(isSuccess);
 
-  if (isLoading) {
+  if (isLoading || isSyncing) {
     return <Loading heightClass="h-[80vh]" />;
   }
 

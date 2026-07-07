@@ -13,7 +13,10 @@ import {
 import Loading from "@/components/loading/loading";
 import { useDonationsByYears } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
-import { useFilterEngine } from "@/hooks/use-filter-engine";
+import {
+  hasPendingFilterDonationSync,
+  useFilterEngine,
+} from "@/hooks/use-filter-engine";
 import { useScrollToHash } from "@/hooks/use-scroll-to-hash";
 import { isNotNullandNotUndefined } from "@/utils/array";
 
@@ -45,14 +48,23 @@ export const YearsChangesClientPage = ({
     controls,
   } = useFilterEngine();
 
+  const rawDonations = useMemo(() => {
+    return results
+      .flatMap((r) => r.data ?? [])
+      .filter(isNotNullandNotUndefined);
+  }, [results]);
+
   useEffect(() => {
     if (isSuccess && !error) {
-      const allData = results
-        .flatMap((r) => r.data)
-        .filter(isNotNullandNotUndefined);
-      setDonations(allData);
+      setDonations(rawDonations);
     }
-  }, [isSuccess, error, results, setDonations]);
+  }, [isSuccess, error, rawDonations, setDonations]);
+
+  const isSyncing = hasPendingFilterDonationSync({
+    dataDonations: isSuccess ? rawDonations : undefined,
+    filterDonations: filteredDonations,
+    isFiltered,
+  });
 
   const activeYears = useMemo(() => {
     return isFiltered ? years.filter((y) => filteredYears.includes(y)) : years;
@@ -64,7 +76,7 @@ export const YearsChangesClientPage = ({
     <ArticleSectionWrapper id={"sec-years-changes"}>
       <ArticleSectionTitle as={"h1"} id={"sec-years-changes"} title={title} />
       <p className="mb-6">{summary}</p>
-      {isLoading ? (
+      {isLoading || isSyncing ? (
         <Loading heightClass="h-[80vh]" />
       ) : error ? (
         <div>{tData("error")}</div>

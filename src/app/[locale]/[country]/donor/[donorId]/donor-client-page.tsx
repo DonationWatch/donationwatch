@@ -10,7 +10,10 @@ import { Article } from "@/components/layout/article";
 import Loading from "@/components/loading/loading";
 import { useDonationsByDonorId } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
-import { useFilterEngine } from "@/hooks/use-filter-engine";
+import {
+  hasPendingFilterDonationSync,
+  useFilterEngine,
+} from "@/hooks/use-filter-engine";
 import { useScrollToHash } from "@/hooks/use-scroll-to-hash";
 import { donationYear } from "@/utils/date";
 import { Features, hasFeature } from "@/utils/features";
@@ -77,6 +80,12 @@ export const DonorClientPage = ({
     }
   }, [isSuccess, error, data, setDonations]);
 
+  const isSyncing = hasPendingFilterDonationSync({
+    dataDonations: isSuccess ? data : undefined,
+    filterDonations: filteredDonations,
+    isFiltered,
+  });
+
   if (!filteredDonations || filteredDonations.length === 0) {
     if (isFiltered) {
       return (
@@ -85,7 +94,7 @@ export const DonorClientPage = ({
         </Article>
       );
     }
-    if (!isLoading && data && data.length > 0) {
+    if (isSyncing) {
       return (
         <Article fullWidth={true}>
           <div className="flex h-screen items-center justify-center">

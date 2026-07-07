@@ -1,4 +1,5 @@
 "use client";
+import { useVirtualizer } from "@tanstack/react-virtual";
 import { useLocale } from "next-intl";
 import { useEffect, useMemo, useRef } from "react";
 
@@ -13,7 +14,6 @@ import { useDonationsByYears } from "@/hooks/use-api";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { useBreakpoint } from "@/hooks/use-media-query";
-import { useVirtual } from "@/hooks/use-virtual";
 import { isNotNullandNotUndefined } from "@/utils/array";
 import { donationYear } from "@/utils/date";
 import { getDonationDonorName } from "@/utils/donor";
@@ -114,11 +114,13 @@ export const TopDonationsItemDetail = ({
   const parentRef = useRef<HTMLDivElement>(null);
   const isSm = useBreakpoint("sm");
 
-  const rowVirtualizer = useVirtual({
+  const rowVirtualizer = useVirtualizer({
     count: donations.length,
     getScrollElement: () => parentRef.current,
     estimateSize: () => (isSm ? 32 : 81) + 1,
     overscan: 5,
+    directDomUpdates: true,
+    directDomUpdatesMode: "transform",
   });
 
   const sortedDonations = useMemo(() => donations.toReversed(), [donations]);
@@ -138,9 +140,7 @@ export const TopDonationsItemDetail = ({
       <ul
         className="relative w-full"
         aria-label={t("party_donations")}
-        style={{
-          height: `${rowVirtualizer.getTotalSize()}px`,
-        }}
+        ref={rowVirtualizer.containerRef}
       >
         {rowVirtualizer.getVirtualItems().map((virtualItem) => {
           const donation = sortedDonations[virtualItem.index];
@@ -148,11 +148,9 @@ export const TopDonationsItemDetail = ({
           return (
             <li
               key={virtualItem.key}
+              ref={rowVirtualizer.measureElement}
+              data-index={virtualItem.index}
               className="absolute top-0 right-0 left-0 flex w-full items-center justify-between space-x-2 border-t border-gray-950/10 first:border-t-0"
-              style={{
-                height: `${virtualItem.size}px`,
-                transform: `translateY(${virtualItem.start}px)`,
-              }}
             >
               <RankingItemLine
                 className="overflow-hidden pr-2"

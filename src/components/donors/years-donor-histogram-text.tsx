@@ -1,4 +1,5 @@
 "use client";
+import { useVirtualizer } from "@tanstack/react-virtual";
 import { useEffect, useRef, useState } from "react";
 
 import type { CountryConfig } from "@/types/country-config";
@@ -10,7 +11,6 @@ import { DonorLink } from "@/components/donors/donor-link";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { useBreakpoint } from "@/hooks/use-media-query";
-import { useVirtual } from "@/hooks/use-virtual";
 import { PartyField } from "@/types/party";
 import { donationYear } from "@/utils/date";
 import {
@@ -58,11 +58,13 @@ export const HistogramItemDetail = ({
   const parentRef = useRef<HTMLDivElement>(null);
   const isSm = useBreakpoint("sm");
 
-  const rowVirtualizer = useVirtual({
+  const rowVirtualizer = useVirtualizer({
     count: sums.length,
     getScrollElement: () => parentRef.current,
     estimateSize: () => (isSm ? 28 : 81) + 1,
     overscan: 5,
+    directDomUpdates: true,
+    directDomUpdatesMode: "transform",
   });
 
   // re-trigger measure if mobile changes
@@ -80,9 +82,7 @@ export const HistogramItemDetail = ({
       <ul
         className="relative w-full"
         aria-label={t("party_donations")}
-        style={{
-          height: `${rowVirtualizer.getTotalSize()}px`,
-        }}
+        ref={rowVirtualizer.containerRef}
       >
         {rowVirtualizer.getVirtualItems().map((virtualItem) => {
           const { donor, sum } = sums[virtualItem.index];
@@ -90,11 +90,9 @@ export const HistogramItemDetail = ({
           return (
             <li
               key={virtualItem.key}
+              ref={rowVirtualizer.measureElement}
+              data-index={virtualItem.index}
               className="absolute top-0 right-0 left-0 flex w-full items-center justify-between space-x-2 border-t border-gray-950/10 first:border-t-0"
-              style={{
-                height: `${virtualItem.size}px`,
-                transform: `translateY(${virtualItem.start}px)`,
-              }}
             >
               <HistogramItemDetailLine
                 country={country}

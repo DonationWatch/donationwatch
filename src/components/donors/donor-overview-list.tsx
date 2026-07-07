@@ -25,6 +25,9 @@ const DonorOverviewListContent = ({
     donations: { party: ReceiverId; donation: Donation }[];
   }[];
 }) => {
+  // useWindowVirtualizer doesn't support directDomUpdates yet, so we opt out of React Compiler
+  // see https://github.com/TanStack/virtual/issues/736
+  "use no memo";
   const [expandedDonors, setExpandedDonors] = useState<string[]>([]);
 
   const parentRef = useRef<HTMLDivElement>(null);

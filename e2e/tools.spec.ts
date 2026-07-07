@@ -111,60 +111,74 @@ test.describe("Tools", () => {
 
         await barChartRaceTool.legislativeYearButton("2018-2021").click();
 
-        const url = new URL(page.url());
-        expect(url.searchParams.get("from")).toBe("2018");
-        expect(url.searchParams.get("to")).toBe("2021");
+        await expect
+          .poll(() => new URL(page.url()).searchParams.get("from"))
+          .toBe("2018");
+        await expect
+          .poll(() => new URL(page.url()).searchParams.get("to"))
+          .toBe("2021");
       });
 
       await test.step("Clicking individual year updates URL", async () => {
         await barChartRaceTool.individualYearButton(2020).click();
 
-        const url = new URL(page.url());
-        expect(url.searchParams.get("from")).toBe("2020");
-        expect(url.searchParams.get("to")).toBe("2020");
+        await expect
+          .poll(() => new URL(page.url()).searchParams.get("from"))
+          .toBe("2020");
+        await expect
+          .poll(() => new URL(page.url()).searchParams.get("to"))
+          .toBe("2020");
       });
 
       await test.step("Clicking group by receiver updates URL", async () => {
         await barChartRaceTool.receiverButton.click();
 
-        const url = new URL(page.url());
-        expect(url.searchParams.get("groupBy")).toBe("receiver");
+        await expect
+          .poll(() => new URL(page.url()).searchParams.get("groupBy"))
+          .toBe("receiver");
       });
 
       await test.step("Clicking group by donor updates URL", async () => {
         await barChartRaceTool.donorButton.click();
 
-        const url = new URL(page.url());
-        expect(url.searchParams.get("groupBy")).toBe(null);
+        await expect
+          .poll(() => new URL(page.url()).searchParams.get("groupBy"))
+          .toBe(null);
       });
 
       await test.step("Clicking 30s animation duration updates URL", async () => {
         await barChartRaceTool.animationDurationButton("30s").click();
 
-        const url = new URL(page.url());
-        expect(url.searchParams.get("duration")).toBe("30000");
+        await expect
+          .poll(() => new URL(page.url()).searchParams.get("duration"))
+          .toBe("30000");
       });
 
       await test.step("Clicking 60s animation duration updates URL", async () => {
         await barChartRaceTool.animationDurationButton("60s").click();
 
-        const url = new URL(page.url());
-        expect(url.searchParams.get("duration")).toBe("60000");
+        await expect
+          .poll(() => new URL(page.url()).searchParams.get("duration"))
+          .toBe("60000");
       });
 
       await test.step("Clicking 10s animation duration updates URL to default", async () => {
         await barChartRaceTool.animationDurationButton("10s").click();
 
-        const url = new URL(page.url());
-        expect(url.searchParams.get("duration")).toBe(null);
+        await expect
+          .poll(() => new URL(page.url()).searchParams.get("duration"))
+          .toBe(null);
       });
 
       await test.step("Clicking different individual year updates URL", async () => {
         await barChartRaceTool.individualYearButton(2023).click();
 
-        const url = new URL(page.url());
-        expect(url.searchParams.get("from")).toBe("2023");
-        expect(url.searchParams.get("to")).toBe("2023");
+        await expect
+          .poll(() => new URL(page.url()).searchParams.get("from"))
+          .toBe("2023");
+        await expect
+          .poll(() => new URL(page.url()).searchParams.get("to"))
+          .toBe("2023");
       });
 
       await test.step("Opening advanced and selecting range updates URL", async () => {
@@ -176,8 +190,9 @@ test.describe("Tools", () => {
         await barChartRaceTool.toYearDropdown.click();
         await barChartRaceTool.toYearOption(2021).click();
 
-        const url = new URL(page.url());
-        expect(url.searchParams.get("to")).toBe("2021");
+        await expect
+          .poll(() => new URL(page.url()).searchParams.get("to"))
+          .toBe("2021");
       });
     });
   });
@@ -202,25 +217,34 @@ test.describe("Tools", () => {
 
         await comparePartiesTool.legislativeYearButton("2018-2021").click();
 
-        const url = new URL(page.url());
-        expect(url.searchParams.get("from")).toBe("2018");
-        expect(url.searchParams.get("to")).toBe("2021");
+        await expect
+          .poll(() => new URL(page.url()).searchParams.get("from"))
+          .toBe("2018");
+        await expect
+          .poll(() => new URL(page.url()).searchParams.get("to"))
+          .toBe("2021");
       });
 
       await test.step("Clicking individual year updates URL", async () => {
         await comparePartiesTool.individualYearButton(2020).click();
 
-        const url = new URL(page.url());
-        expect(url.searchParams.get("from")).toBe("2020");
-        expect(url.searchParams.get("to")).toBe("2020");
+        await expect
+          .poll(() => new URL(page.url()).searchParams.get("from"))
+          .toBe("2020");
+        await expect
+          .poll(() => new URL(page.url()).searchParams.get("to"))
+          .toBe("2020");
       });
 
       await test.step("Clicking different individual year updates URL", async () => {
         await comparePartiesTool.individualYearButton(2023).click();
 
-        const url = new URL(page.url());
-        expect(url.searchParams.get("from")).toBe("2023");
-        expect(url.searchParams.get("to")).toBe("2023");
+        await expect
+          .poll(() => new URL(page.url()).searchParams.get("from"))
+          .toBe("2023");
+        await expect
+          .poll(() => new URL(page.url()).searchParams.get("to"))
+          .toBe("2023");
       });
 
       await test.step("Opening advanced and selecting range updates URL", async () => {
@@ -232,9 +256,12 @@ test.describe("Tools", () => {
         await comparePartiesTool.toYearDropdown.click();
         await comparePartiesTool.toYearOption(2021).click();
 
-        const url = new URL(page.url());
-        expect(url.searchParams.get("from")).toBe("2018");
-        expect(url.searchParams.get("to")).toBe("2021");
+        await expect
+          .poll(() => new URL(page.url()).searchParams.get("from"))
+          .toBe("2018");
+        await expect
+          .poll(() => new URL(page.url()).searchParams.get("to"))
+          .toBe("2021");
       });
 
       await test.step("pick parties to compare", async () => {
