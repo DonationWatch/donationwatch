@@ -178,8 +178,13 @@ const FilterNuqsSync = memo(
         [setParams],
       );
 
+      const lastParamsRef = useRef<NuqsParams | null>(null);
+
       useEffect(() => {
-        onParamsChange(params);
+        if (!areNuqsParamsEqual(lastParamsRef.current, params)) {
+          lastParamsRef.current = params;
+          onParamsChange(params);
+        }
       }, [params, onParamsChange]);
 
       return null;
@@ -187,12 +192,23 @@ const FilterNuqsSync = memo(
   ),
 );
 
+const areNuqsParamsEqual = (a: NuqsParams | null, b: NuqsParams): boolean => {
+  return (
+    !!a &&
+    a.from === b.from &&
+    a.to === b.to &&
+    areArraysEqual(a.parties, b.parties) &&
+    areArraysEqual(a.types, b.types) &&
+    areArraysEqual(a.donorTypes, b.donorTypes)
+  );
+};
+
 const areArraysEqual = <T,>(a: T[] | null, b: T[] | null): boolean => {
-  const arrA = a ?? [];
-  const arrB = b ?? [];
-  if (arrA.length !== arrB.length) return false;
-  const setA = new Set(arrA);
-  return arrB.every((x) => setA.has(x));
+  if (a === null && b === null) return true;
+  if (a === null || b === null) return false;
+  if (a.length !== b.length) return false;
+  const setA = new Set(a);
+  return b.every((x) => setA.has(x));
 };
 
 export const FilterProvider = ({
@@ -286,91 +302,27 @@ export const FilterProvider = ({
     setUrlParams(params);
   }, []);
 
-  const { from, to, parties, types, donorTypes } = urlParams;
-
-  // Local pending states for bridging Next.js transition lag
-  const [pendingFrom, setPendingFrom] = useState<number | undefined>(undefined);
-  const [pendingTo, setPendingTo] = useState<number | undefined>(undefined);
-  const [pendingParties, setPendingParties] = useState<
-    string[] | null | undefined
-  >(undefined);
-  const [pendingTypes, setPendingTypes] = useState<
-    DonationType[] | null | undefined
-  >(undefined);
-  const [pendingDonorTypes, setPendingDonorTypes] = useState<
-    DonorType[] | null | undefined
-  >(undefined);
-
-  // Sync: when URL catches up with pending state, clear the pending state after a short delay to ensure router stability
-  useEffect(() => {
-    if (pendingFrom !== undefined) {
-      const urlVal = from ?? minYear;
-      if (urlVal === pendingFrom) {
-        const timer = setTimeout(() => setPendingFrom(undefined), 300);
-        return () => clearTimeout(timer);
-      }
-    }
-  }, [from, pendingFrom, minYear]);
+  const [localFilters, setLocalFilters] = useState<NuqsParams>({
+    from: null,
+    to: null,
+    parties: null,
+    types: null,
+    donorTypes: null,
+  });
 
   useEffect(() => {
-    if (pendingTo !== undefined) {
-      const urlVal = to ?? maxYear;
-      if (urlVal === pendingTo) {
-        const timer = setTimeout(() => setPendingTo(undefined), 300);
-        return () => clearTimeout(timer);
-      }
-    }
-  }, [to, pendingTo, maxYear]);
+    setLocalFilters((prev) => {
+      if (areNuqsParamsEqual(prev, urlParams)) return prev;
+      return urlParams;
+    });
+  }, [urlParams]);
 
-  useEffect(() => {
-    if (pendingParties !== undefined) {
-      if (areArraysEqual(parties, pendingParties)) {
-        const timer = setTimeout(() => setPendingParties(undefined), 300);
-        return () => clearTimeout(timer);
-      }
-    }
-  }, [parties, pendingParties]);
+  const updateFilter = useCallback((updates: Partial<NuqsParams>) => {
+    setLocalFilters((prev) => ({ ...prev, ...updates }));
+    void nuqsRef.current?.setParams(updates);
+  }, []);
 
-  useEffect(() => {
-    if (pendingTypes !== undefined) {
-      if (areArraysEqual(types, pendingTypes)) {
-        const timer = setTimeout(() => setPendingTypes(undefined), 300);
-        return () => clearTimeout(timer);
-      }
-    }
-  }, [types, pendingTypes]);
-
-  useEffect(() => {
-    if (pendingDonorTypes !== undefined) {
-      if (areArraysEqual(donorTypes, pendingDonorTypes)) {
-        const timer = setTimeout(() => setPendingDonorTypes(undefined), 300);
-        return () => clearTimeout(timer);
-      }
-    }
-  }, [donorTypes, pendingDonorTypes]);
-
-  const parsedFilters = useMemo(
-    () => ({
-      from: pendingFrom !== undefined ? pendingFrom : from,
-      to: pendingTo !== undefined ? pendingTo : to,
-      parties: pendingParties !== undefined ? pendingParties : parties,
-      types: pendingTypes !== undefined ? pendingTypes : types,
-      donorTypes:
-        pendingDonorTypes !== undefined ? pendingDonorTypes : donorTypes,
-    }),
-    [
-      pendingFrom,
-      from,
-      pendingTo,
-      to,
-      pendingParties,
-      parties,
-      pendingTypes,
-      types,
-      pendingDonorTypes,
-      donorTypes,
-    ],
-  );
+  const parsedFilters = localFilters;
 
   const activeFromVal = parsedFilters.from ?? minYear;
   const activeToVal = parsedFilters.to ?? maxYear;
@@ -560,27 +512,25 @@ export const FilterProvider = ({
   const setYearRange = useCallback(
     (fromVal: number, toVal: number) => {
       const isFullRange = fromVal <= minYear && toVal >= maxYear;
-      setPendingFrom(fromVal);
-      setPendingTo(toVal);
-      void nuqsRef.current?.setParams({
+      updateFilter({
         from: isFullRange ? null : fromVal,
         to: isFullRange ? null : toVal,
       });
     },
-    [minYear, maxYear],
+    [minYear, maxYear, updateFilter],
   );
 
   const toggleParty = useCallback(
     (partyId: ReceiverId) => {
       let next: Set<ReceiverId>;
-      if (!parsedFilters.parties) {
+      if (!localFilters.parties) {
         next = new Set(
           bounds.availableParties
             .map((p) => p[PartyField.Id])
             .filter((id) => id !== partyId),
         );
       } else {
-        next = new Set(parsedFilters.parties as ReceiverId[]);
+        next = new Set(localFilters.parties as ReceiverId[]);
         if (next.has(partyId)) {
           next.delete(partyId);
         } else {
@@ -589,19 +539,18 @@ export const FilterProvider = ({
       }
       const val =
         next.size === bounds.availableParties.length ? null : Array.from(next);
-      setPendingParties(val);
-      void nuqsRef.current?.setParams({ parties: val });
+      updateFilter({ parties: val });
     },
-    [parsedFilters.parties, bounds.availableParties],
+    [localFilters.parties, bounds.availableParties, updateFilter],
   );
 
   const toggleDonationType = useCallback(
     (type: DonationType) => {
       let next: Set<DonationType>;
-      if (!parsedFilters.types) {
+      if (!localFilters.types) {
         next = new Set(bounds.availableDonationTypes.filter((t) => t !== type));
       } else {
-        next = new Set(parsedFilters.types);
+        next = new Set(localFilters.types);
         if (next.has(type)) {
           next.delete(type);
         } else {
@@ -612,10 +561,9 @@ export const FilterProvider = ({
         next.size === bounds.availableDonationTypes.length
           ? null
           : Array.from(next);
-      setPendingTypes(val);
-      void nuqsRef.current?.setParams({ types: val });
+      updateFilter({ types: val });
     },
-    [parsedFilters.types, bounds.availableDonationTypes],
+    [localFilters.types, bounds.availableDonationTypes, updateFilter],
   );
 
   const setSelectedParties = useCallback(
@@ -626,10 +574,9 @@ export const FilterProvider = ({
           : partyIds.length === bounds.availableParties.length
             ? null
             : partyIds;
-      setPendingParties(val);
-      void nuqsRef.current?.setParams({ parties: val });
+      updateFilter({ parties: val });
     },
-    [bounds.availableParties.length],
+    [bounds.availableParties.length, updateFilter],
   );
 
   const setSelectedDonationTypes = useCallback(
@@ -640,19 +587,18 @@ export const FilterProvider = ({
           : typesVal.length === bounds.availableDonationTypes.length
             ? null
             : typesVal;
-      setPendingTypes(val);
-      void nuqsRef.current?.setParams({ types: val });
+      updateFilter({ types: val });
     },
-    [bounds.availableDonationTypes.length],
+    [bounds.availableDonationTypes.length, updateFilter],
   );
 
   const toggleDonorType = useCallback(
     (type: DonorType) => {
       let next: Set<DonorType>;
-      if (!parsedFilters.donorTypes) {
+      if (!localFilters.donorTypes) {
         next = new Set(bounds.availableDonorTypes.filter((t) => t !== type));
       } else {
-        next = new Set(parsedFilters.donorTypes);
+        next = new Set(localFilters.donorTypes);
         if (next.has(type)) {
           next.delete(type);
         } else {
@@ -663,10 +609,9 @@ export const FilterProvider = ({
         next.size === bounds.availableDonorTypes.length
           ? null
           : Array.from(next);
-      setPendingDonorTypes(val);
-      void nuqsRef.current?.setParams({ donorTypes: val });
+      updateFilter({ donorTypes: val });
     },
-    [parsedFilters.donorTypes, bounds.availableDonorTypes],
+    [localFilters.donorTypes, bounds.availableDonorTypes, updateFilter],
   );
 
   const setSelectedDonorTypes = useCallback(
@@ -677,26 +622,20 @@ export const FilterProvider = ({
           : typesVal.length === bounds.availableDonorTypes.length
             ? null
             : typesVal;
-      setPendingDonorTypes(val);
-      void nuqsRef.current?.setParams({ donorTypes: val });
+      updateFilter({ donorTypes: val });
     },
-    [bounds.availableDonorTypes.length],
+    [bounds.availableDonorTypes.length, updateFilter],
   );
 
   const resetFilters = useCallback(() => {
-    setPendingFrom(minYear);
-    setPendingTo(maxYear);
-    setPendingParties(null);
-    setPendingTypes(null);
-    setPendingDonorTypes(null);
-    void nuqsRef.current?.setParams({
+    updateFilter({
       from: null,
       to: null,
       parties: null,
       types: null,
       donorTypes: null,
     });
-  }, [minYear, maxYear]);
+  }, [updateFilter]);
 
   const activeFilters = useMemo<FilterState>(
     () => ({

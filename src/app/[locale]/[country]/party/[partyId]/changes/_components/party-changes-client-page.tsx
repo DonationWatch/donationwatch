@@ -16,7 +16,10 @@ import {
 import Loading from "@/components/loading/loading";
 import { useDonationsByParty } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
-import { useFilterEngine } from "@/hooks/use-filter-engine";
+import {
+  hasPendingFilterDonationSync,
+  useFilterEngine,
+} from "@/hooks/use-filter-engine";
 import { useScrollToHash } from "@/hooks/use-scroll-to-hash";
 
 interface PartyChangesClientPageProps {
@@ -41,6 +44,12 @@ export const PartyChangesClientPage = ({
   const { isFiltered, filteredDonations, setDonations, controls } =
     useFilterEngine();
 
+  const isSyncing = hasPendingFilterDonationSync({
+    dataDonations: isSuccess ? data : undefined,
+    filterDonations: filteredDonations,
+    isFiltered,
+  });
+
   useEffect(() => {
     if (isSuccess && !error) {
       setDonations(data ?? []);
@@ -59,7 +68,7 @@ export const PartyChangesClientPage = ({
             title={title}
           />
           <p className="mb-6">{summary}</p>
-          {isLoading ? (
+          {isLoading || isSyncing ? (
             <Loading heightClass="h-[80vh]" />
           ) : error || !data ? (
             <div>{tData("error")}</div>

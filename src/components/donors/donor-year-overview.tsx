@@ -20,6 +20,9 @@ const DonorYearOverviewContent = ({
   years: string[];
   country: CountryConfig;
 }) => {
+  // useWindowVirtualizer doesn't support directDomUpdates yet, so we opt out of React Compiler
+  // see https://github.com/TanStack/virtual/issues/736
+  "use no memo";
   const donorRegistry: Record<
     string,
     {

@@ -8,10 +8,8 @@ import type { UnloadedCountryConfig } from "@/types/country-config";
 
 import {
   FilterSheetSection,
-  FilterSheetSectionCounter,
-  FilterSheetSectionFooterButtons,
+  FilterChecklistSection,
 } from "@/components/filter/filter-sheet-section";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   Combobox,
   ComboboxInput,
@@ -79,6 +77,16 @@ const DonationFilterSheetBase = ({
     const clampedTo = Math.max(clampedFrom, Math.min(bounds.maxYear, to));
     controls.setYearRange(clampedFrom, clampedTo);
   };
+
+  const activePartiesSet = useMemo(
+    () =>
+      new Set(
+        bounds.availableParties.filter((p) =>
+          activeFilters.activePartyIds.has(p[PartyField.Id]),
+        ),
+      ),
+    [bounds.availableParties, activeFilters.activePartyIds],
+  );
 
   return (
     <Sheet modal={"trap-focus"} open={isOpen} onOpenChange={setIsOpen}>
@@ -177,180 +185,85 @@ const DonationFilterSheetBase = ({
             </FilterSheetSection>
           )}
 
-          {bounds.availableParties.length > 1 && (
-            <FilterSheetSection
-              title={tFilter("parties")}
-              badge={
-                <FilterSheetSectionCounter
-                  value={activeFilters.activePartyIds.size}
-                  max={bounds.availableParties.length}
-                />
-              }
-              isOpen={isPartiesOpen}
-              onToggle={() => setIsPartiesOpen(!isPartiesOpen)}
-            >
-              <div className="max-h-72 overflow-x-hidden overflow-y-auto pr-2">
-                <div className="flex flex-col gap-2">
-                  {bounds.availableParties.map((party) => {
-                    const partyId = party[PartyField.Id];
-                    const isChecked = activeFilters.activePartyIds.has(partyId);
-
-                    return (
-                      <label
-                        className={"flex items-center gap-2"}
-                        key={partyId}
-                      >
-                        <Checkbox
-                          className="shrink-0 after:inset-0"
-                          checked={isChecked}
-                          onCheckedChange={() => controls.toggleParty(partyId)}
-                        />
-                        <div className="flex grow items-center gap-2.5">
-                          <span
-                            className="size-3.5 shrink-0 rounded-full border border-slate-950/20"
-                            style={{
-                              backgroundColor: party[PartyField.Color],
-                            }}
-                          />
-                          <span className="text-sm">
-                            {party[PartyField.Name]}
-                          </span>
-                        </div>
-                      </label>
-                    );
-                  })}
+          <FilterChecklistSection
+            title={tFilter("parties")}
+            items={bounds.availableParties}
+            activeItems={activePartiesSet}
+            onToggleItem={(party) => controls.toggleParty(party[PartyField.Id])}
+            onSelectAll={() => {
+              const allIds = bounds.availableParties.map(
+                (p) => p[PartyField.Id],
+              );
+              controls.setSelectedParties(allIds);
+            }}
+            onSelectNone={() => controls.setSelectedParties([])}
+            isOpen={isPartiesOpen}
+            onToggleOpen={() => setIsPartiesOpen(!isPartiesOpen)}
+            renderItem={(party) => ({
+              key: party[PartyField.Id],
+              label: (
+                <div className="flex grow items-center gap-2.5">
+                  <span
+                    className="size-3.5 shrink-0 rounded-full border border-slate-950/20"
+                    style={{ backgroundColor: party[PartyField.Color] }}
+                  />
+                  <span className="text-sm">{party[PartyField.Name]}</span>
                 </div>
-              </div>
-              <FilterSheetSectionFooterButtons
-                selectAllDisabled={
-                  activeFilters.activePartyIds.size ===
-                  bounds.availableParties.length
-                }
-                selectAll={() => {
-                  const allIds = bounds.availableParties.map(
-                    (p) => p[PartyField.Id],
-                  );
-                  controls.setSelectedParties(allIds);
-                }}
-                selectNoneDisabled={activeFilters.activePartyIds.size === 0}
-                selectNone={() => controls.setSelectedParties([])}
-              />
-            </FilterSheetSection>
+              ),
+            })}
+          />
+
+          {hasFeature(countryConfig, Features.DonationType) && (
+            <FilterChecklistSection
+              title={tFilter("donation_types")}
+              items={bounds.availableDonationTypes}
+              activeItems={activeFilters.activeDonationTypes}
+              onToggleItem={controls.toggleDonationType}
+              onSelectAll={() => {
+                controls.setSelectedDonationTypes(
+                  bounds.availableDonationTypes,
+                );
+              }}
+              onSelectNone={() => controls.setSelectedDonationTypes([])}
+              isOpen={isTypesOpen}
+              onToggleOpen={() => setIsTypesOpen(!isTypesOpen)}
+              renderItem={(type) => ({
+                key: `${type}`,
+                label: (
+                  <div className="flex grow items-center gap-2.5">
+                    <span className="text-sm tracking-tight">
+                      {capitalize(tDonationType(`${type}`))}
+                    </span>
+                  </div>
+                ),
+              })}
+            />
           )}
 
-          {hasFeature(countryConfig, Features.DonationType) &&
-            bounds.availableDonationTypes.length > 1 && (
-              <FilterSheetSection
-                title={tFilter("donation_types")}
-                badge={
-                  <FilterSheetSectionCounter
-                    value={activeFilters.activeDonationTypes.size}
-                    max={bounds.availableDonationTypes.length}
-                  />
-                }
-                isOpen={isTypesOpen}
-                onToggle={() => setIsTypesOpen(!isTypesOpen)}
-              >
-                <div className="max-h-72 overflow-x-hidden overflow-y-auto">
-                  <div className="flex flex-col gap-2">
-                    {bounds.availableDonationTypes.map((type) => {
-                      const isChecked =
-                        activeFilters.activeDonationTypes.has(type);
-                      return (
-                        <label
-                          className="flex cursor-pointer items-center gap-2"
-                          key={type}
-                        >
-                          <Checkbox
-                            className="shrink-0 after:inset-0"
-                            checked={isChecked}
-                            onCheckedChange={() =>
-                              controls.toggleDonationType(type)
-                            }
-                          />
-                          <div className="flex grow items-center gap-2.5">
-                            <span className="text-sm tracking-tight">
-                              {capitalize(tDonationType(`${type}`))}
-                            </span>
-                          </div>
-                        </label>
-                      );
-                    })}
+          {hasFeature(countryConfig, Features.DonorType) && (
+            <FilterChecklistSection
+              title={tFilter("donor_types")}
+              items={bounds.availableDonorTypes}
+              activeItems={activeFilters.activeDonorTypes}
+              onToggleItem={controls.toggleDonorType}
+              onSelectAll={() => {
+                controls.setSelectedDonorTypes(bounds.availableDonorTypes);
+              }}
+              onSelectNone={() => controls.setSelectedDonorTypes([])}
+              isOpen={isDonorTypesOpen}
+              onToggleOpen={() => setIsDonorTypesOpen(!isDonorTypesOpen)}
+              renderItem={(type) => ({
+                key: `${type}`,
+                label: (
+                  <div className="flex grow items-center gap-2.5">
+                    <span className="text-sm tracking-tight">
+                      {tDonorType(`${type}`)}
+                    </span>
                   </div>
-                </div>
-                <FilterSheetSectionFooterButtons
-                  selectAllDisabled={
-                    activeFilters.activeDonationTypes.size ===
-                    bounds.availableDonationTypes.length
-                  }
-                  selectAll={() => {
-                    controls.setSelectedDonationTypes(
-                      bounds.availableDonationTypes,
-                    );
-                  }}
-                  selectNoneDisabled={
-                    activeFilters.activeDonationTypes.size === 0
-                  }
-                  selectNone={() => controls.setSelectedDonationTypes([])}
-                />
-              </FilterSheetSection>
-            )}
-
-          {hasFeature(countryConfig, Features.DonorType) &&
-            bounds.availableDonorTypes.length > 1 && (
-              <FilterSheetSection
-                title={tFilter("donor_types")}
-                badge={
-                  <FilterSheetSectionCounter
-                    value={activeFilters.activeDonorTypes.size}
-                    max={bounds.availableDonorTypes.length}
-                  />
-                }
-                isOpen={isDonorTypesOpen}
-                onToggle={() => setIsDonorTypesOpen(!isDonorTypesOpen)}
-              >
-                <div className="max-h-72 overflow-x-hidden overflow-y-auto pr-2">
-                  <div className="flex flex-col gap-2">
-                    {bounds.availableDonorTypes.map((type) => {
-                      const isChecked =
-                        activeFilters.activeDonorTypes.has(type);
-
-                      return (
-                        <label
-                          className="flex cursor-pointer items-center gap-2"
-                          key={type}
-                        >
-                          <Checkbox
-                            className="shrink-0 after:inset-0"
-                            checked={isChecked}
-                            onCheckedChange={() =>
-                              controls.toggleDonorType(type)
-                            }
-                          />
-                          <div className="flex grow items-center gap-2.5">
-                            <span className="text-sm tracking-tight">
-                              {tDonorType(`${type}`)}
-                            </span>
-                          </div>
-                        </label>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                <FilterSheetSectionFooterButtons
-                  selectAllDisabled={
-                    activeFilters.activeDonorTypes.size ===
-                    bounds.availableDonorTypes.length
-                  }
-                  selectAll={() => {
-                    controls.setSelectedDonorTypes(bounds.availableDonorTypes);
-                  }}
-                  selectNoneDisabled={activeFilters.activeDonorTypes.size === 0}
-                  selectNone={() => controls.setSelectedDonorTypes([])}
-                />
-              </FilterSheetSection>
-            )}
+                ),
+              })}
+            />
+          )}
         </div>
         <SheetFooter>
           <Button

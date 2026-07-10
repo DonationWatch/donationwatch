@@ -20,7 +20,10 @@ import {
 import Loading from "@/components/loading/loading";
 import { useDonationsByYears } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
-import { useFilterEngine } from "@/hooks/use-filter-engine";
+import {
+  hasPendingFilterDonationSync,
+  useFilterEngine,
+} from "@/hooks/use-filter-engine";
 import { useScrollToHash } from "@/hooks/use-scroll-to-hash";
 import { isNotNullandNotUndefined } from "@/utils/array";
 import { getParties } from "@/utils/data/get-parties";
@@ -93,7 +96,13 @@ export const YearsDonorsClientPage = ({
     }
   }, [isSuccess, error, rawDonations, setDonations]);
 
-  if (isLoading) return <Loading />;
+  const isSyncing = hasPendingFilterDonationSync({
+    dataDonations: isSuccess ? rawDonations : undefined,
+    filterDonations: filteredDonations,
+    isFiltered,
+  });
+
+  if (isLoading || isSyncing) return <Loading />;
   if (error) return <div>{tData("error")}</div>;
 
   if (isFiltered && filteredDonations.length === 0) {

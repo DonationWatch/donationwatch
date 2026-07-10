@@ -10,6 +10,7 @@ import {
   type SortingState,
   useReactTable,
 } from "@tanstack/react-table";
+import { useVirtualizer } from "@tanstack/react-virtual";
 import {
   ArrowDownNarrowWide,
   ArrowUpNarrowWide,
@@ -17,7 +18,7 @@ import {
   Search,
 } from "lucide-react";
 import { useLocale } from "next-intl";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
@@ -33,7 +34,6 @@ import { PartyLink } from "@/components/parties/party-link";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { useMobile } from "@/hooks/use-media-query";
-import { useVirtual } from "@/hooks/use-virtual";
 import { cn } from "@/lib/utils";
 import { PartyField } from "@/types/party";
 import { isNotNullandNotUndefined } from "@/utils/array";
@@ -100,7 +100,9 @@ export const DonationHistoryTable = ({
     [partyNameMap],
   );
 
-  const tableContainerRef = useRef<HTMLDivElement>(null);
+  const [tableContainer, setTableContainer] = useState<HTMLDivElement | null>(
+    null,
+  );
   const isMobile = useMobile();
 
   const columns = useMemo(() => {
@@ -300,10 +302,10 @@ export const DonationHistoryTable = ({
   });
   const { rows } = table.getRowModel();
 
-  const rowVirtualizer = useVirtual({
+  const rowVirtualizer = useVirtualizer({
     count: rows.length,
     estimateSize: () => 33, //estimate row height for accurate scrollbar dragging
-    getScrollElement: () => tableContainerRef.current,
+    getScrollElement: () => tableContainer,
     //measure dynamic row height, except in firefox because it measures table border height incorrectly
     measureElement:
       typeof window !== "undefined" &&
@@ -311,6 +313,8 @@ export const DonationHistoryTable = ({
         ? (element) => element?.getBoundingClientRect().height
         : undefined,
     overscan: 5,
+    directDomUpdates: true,
+    directDomUpdatesMode: "transform",
   });
 
   return (
@@ -336,7 +340,7 @@ export const DonationHistoryTable = ({
           overflow: "auto", //our scrollable table container
           position: "relative", //needed for sticky header
         }}
-        ref={tableContainerRef}
+        ref={setTableContainer}
       >
         <table className="grid">
           {isMobile ? null : (
@@ -400,12 +404,7 @@ export const DonationHistoryTable = ({
               ))}
             </thead>
           )}
-          <tbody
-            className="relative grid"
-            style={{
-              height: `${rowVirtualizer.getTotalSize()}px`, //tells scrollbar how big the table is
-            }}
-          >
+          <tbody className="relative grid" ref={rowVirtualizer.containerRef}>
             {rowVirtualizer.getVirtualItems().map((virtualRow) => {
               const row = rows[virtualRow.index] as Row<HistoryEntry>;
               return (
@@ -415,10 +414,7 @@ export const DonationHistoryTable = ({
                     rowVirtualizer.measureElement(node);
                   }} //measure dynamic row height
                   key={row.id}
-                  className="absolute flex w-full border-b border-slate-200 even:bg-white dark:border-slate-950 dark:even:bg-slate-900"
-                  style={{
-                    transform: `translateY(${virtualRow.start}px)`, //this should always be a `style` as it changes on scroll
-                  }}
+                  className="absolute top-0 left-0 flex w-full border-b border-slate-200 even:bg-white dark:border-slate-950 dark:even:bg-slate-900"
                 >
                   {row.getVisibleCells().map((cell) => (
                     <td
