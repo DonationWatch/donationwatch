@@ -7,6 +7,7 @@ import { Features, hasFeature } from "@/utils/features";
 import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
 import { canShowYearsTimeline } from "@/utils/party";
 
+import { DONOR_WITH_WIKIPEDIA_ARTICLE } from "../tests/config";
 import { test } from "./util/fixture";
 
 const CHECK_YEAR = 2023;
@@ -150,7 +151,13 @@ test.describe("Year page", () => {
             ).toBeVisible();
           });
 
-          test("works", async ({ donorsPage, accessibility, meta, locale }) => {
+          test("works", async ({
+            donorsPage,
+            accessibility,
+            meta,
+            locale,
+            translations,
+          }) => {
             await test.step("is accessible", async () => {
               await accessibility.check();
             });
@@ -175,6 +182,39 @@ test.describe("Year page", () => {
             });
 
             await expect(donorsPage.donorList).toBeVisible();
+
+            await test.step("can search for donors", async () => {
+              await expect(donorsPage.search).toBeVisible();
+              await expect(donorsPage.rankingItems.first()).toBeVisible();
+
+              const filterDonorName = DONOR_WITH_WIKIPEDIA_ARTICLE;
+
+              await test.step("search for the donor's name", async () => {
+                await donorsPage.search.fill(filterDonorName);
+              });
+
+              await test.step("the filtered donor should be visible and be the only one", async () => {
+                await expect(donorsPage.rankingItems).toHaveCount(1);
+                await expect(donorsPage.rankingItems.nth(0)).toContainText(
+                  filterDonorName,
+                );
+              });
+
+              await test.step("search for a nonexistent donor", async () => {
+                await donorsPage.search.fill("NonexistentDonorXYZ");
+                await expect(donorsPage.rankingItems).toHaveCount(0);
+                await expect(
+                  donorsPage.donorList.getByText(translations("search.empty")),
+                ).toBeVisible();
+              });
+
+              await test.step("clear search", async () => {
+                await donorsPage.search.fill("");
+                await expect
+                  .poll(() => donorsPage.rankingItems.count())
+                  .toBeGreaterThan(1);
+              });
+            });
 
             await test.step("has histogram", async () => {
               await donorsPage.histogramChart.expectHasFeature();

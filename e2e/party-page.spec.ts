@@ -36,6 +36,7 @@ test.describe("Party page", () => {
       accessibility,
       meta,
       locale,
+      translations,
     }) => {
       await test.step("is accessible", async () => {
         await accessibility.check();
@@ -65,6 +66,42 @@ test.describe("Party page", () => {
         await test.step("collapse the first ranking item", async () => {
           await item.toggle();
           await item.expectDetailVisible(false);
+        });
+      });
+
+      await test.step("can search for donors", async () => {
+        await expect(donorsPage.search).toBeVisible();
+        await expect(donorsPage.rankingItems.first()).toBeVisible();
+
+        const filterDonorName = "Fake Donor 26";
+
+        await test.step("search for the first donor's name", async () => {
+          await donorsPage.search.fill(filterDonorName);
+        });
+
+        await test.step("the first donor should still be visible", async () => {
+          await expect(donorsPage.rankingItems).toHaveCount(1);
+          await expect(donorsPage.rankingItems.nth(0)).toContainText(
+            filterDonorName,
+          );
+        });
+
+        await test.step("search for a nonexistent donor", async () => {
+          await donorsPage.search.fill("NonexistentDonorXYZ");
+          await expect(donorsPage.rankingItems).toHaveCount(0);
+          await expect(
+            donorsPage.donorList.getByText(translations("search.empty")),
+          ).toBeVisible();
+        });
+
+        await test.step("clear search", async () => {
+          await donorsPage.search.fill("");
+          await expect
+            .poll(() => donorsPage.rankingItems.count())
+            .toBeGreaterThan(1);
+          await expect(
+            donorsPage.rankingItems.filter({ hasText: filterDonorName }),
+          ).toBeVisible();
         });
       });
     });

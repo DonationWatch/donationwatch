@@ -1,10 +1,11 @@
-"use client";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
-import { useCallback, useRef, useState } from "react";
+import { Search } from "lucide-react";
+import { useCallback, useMemo, useRef, useState } from "react";
 
 import type { CountryConfig } from "@/types/country-config";
 import type { Donation, ReceiverId } from "@/utils/types";
 
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { type Party, PartyField } from "@/types/party";
 import { donationYear } from "@/utils/date";
 import { DonationField } from "@/utils/types";
@@ -29,12 +30,24 @@ const DonorOverviewListContent = ({
   // see https://github.com/TanStack/virtual/issues/736
   "use no memo";
   const [expandedDonors, setExpandedDonors] = useState<string[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const tSearch = useTranslations("search");
+
+  const donorsWithRank = useMemo(() => {
+    return donors.map((d, index) => ({ ...d, originalRank: index + 1 }));
+  }, [donors]);
+
+  const filteredDonors = useMemo(() => {
+    const q = searchQuery.toLowerCase().trim();
+    if (!q) return donorsWithRank;
+    return donorsWithRank.filter((d) => d.name.toLowerCase().includes(q));
+  }, [donorsWithRank, searchQuery]);
 
   const parentRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
 
   const rowVirtualizer = useWindowVirtualizer({
-    count: donors.length,
+    count: filteredDonors.length,
     estimateSize: () => 32,
     overscan: 5,
     scrollMargin:
@@ -51,51 +64,75 @@ const DonorOverviewListContent = ({
   );
 
   return (
-    <div className="@container mb-8" ref={parentRef}>
-      <ul
-        className="relative w-full"
-        ref={listRef}
-        style={{
-          height: `${rowVirtualizer.getTotalSize()}px`,
-        }}
-      >
-        {rowVirtualizer.getVirtualItems().map((virtualItem) => {
-          const entry = donors[virtualItem.index];
-          return (
-            <li
-              data-index={virtualItem.index}
-              key={virtualItem.key}
-              className="absolute top-0 left-0 flex w-full justify-between space-x-2 overflow-x-hidden"
-              style={{
-                transform: `translateY(${virtualItem.start - rowVirtualizer.options.scrollMargin}px)`,
-              }}
-            >
-              <DonorOverviewItem
-                name={entry.name}
-                country={countryConfig}
-                amount={entry.sum}
-                rank={virtualItem.index + 1}
-                sum={sum}
-                expanded={expandedDonors.includes(entry.name)}
-                onToggleExpanded={(expanded) => {
-                  setExpandedDonors((prev) => {
-                    onVisibleChanged(virtualItem.index);
+    <div className="mb-8 flex flex-col gap-4" ref={parentRef}>
+      <div className="relative w-full md:max-w-sm">
+        <Search
+          size={16}
+          className="pointer-events-none absolute top-1/2 left-2.5 -translate-y-1/2 text-slate-400"
+        />
+        <input
+          type="search"
+          name="donor-search"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder={tSearch("filter")}
+          aria-label={tSearch("filter")}
+          className="w-full rounded-md border border-slate-200 bg-white py-1.5 pr-3 pl-8 text-sm outline-none placeholder:text-slate-500 focus:border-slate-400 dark:border-slate-700 dark:bg-slate-900 dark:placeholder:text-slate-400 dark:focus:border-slate-500"
+        />
+      </div>
 
-                    if (expanded) return [...prev, entry.name];
-                    return prev.filter((id) => id !== entry.name);
-                  });
-                }}
-                detail={
-                  <DynamicDonorDonationsDetail
-                    donor={entry}
+      {filteredDonors.length === 0 ? (
+        <div className="py-8 text-center text-sm text-slate-500 dark:text-slate-400">
+          {tSearch("empty")}
+        </div>
+      ) : (
+        <div className="@container">
+          <ul
+            className="relative w-full"
+            ref={listRef}
+            style={{
+              height: `${rowVirtualizer.getTotalSize()}px`,
+            }}
+          >
+            {rowVirtualizer.getVirtualItems().map((virtualItem) => {
+              const entry = filteredDonors[virtualItem.index];
+              return (
+                <li
+                  data-index={virtualItem.index}
+                  key={virtualItem.key}
+                  className="border-border hover:bg-muted/50 absolute top-0 left-0 flex w-full justify-between space-x-2 overflow-x-hidden border-b"
+                  style={{
+                    transform: `translateY(${virtualItem.start - rowVirtualizer.options.scrollMargin}px)`,
+                  }}
+                >
+                  <DonorOverviewItem
+                    name={entry.name}
                     country={countryConfig}
+                    amount={entry.sum}
+                    rank={entry.originalRank}
+                    sum={sum}
+                    expanded={expandedDonors.includes(entry.name)}
+                    onToggleExpanded={(expanded) => {
+                      setExpandedDonors((prev) => {
+                        onVisibleChanged(virtualItem.index);
+
+                        if (expanded) return [...prev, entry.name];
+                        return prev.filter((id) => id !== entry.name);
+                      });
+                    }}
+                    detail={
+                      <DynamicDonorDonationsDetail
+                        donor={entry}
+                        country={countryConfig}
+                      />
+                    }
                   />
-                }
-              />
-            </li>
-          );
-        })}
-      </ul>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };
