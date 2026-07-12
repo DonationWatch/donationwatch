@@ -23,6 +23,7 @@ export class DonorsPage extends PageObject {
   public readonly donorList = this.page
     .locator('[aria-labelledby="sec-donor-list"]')
     .describe("Donor list");
+  public readonly search = this.donorList.getByRole("searchbox");
 
   public getRankingItemByIndex(index: number) {
     return new RankingItem(this.rankingItems.nth(index), this.props);

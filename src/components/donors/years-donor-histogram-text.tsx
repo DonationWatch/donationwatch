@@ -36,7 +36,7 @@ const HistogramItemDetailLine = ({
   const fmtAmount = formatCountryCurrency(browserBasedLocale, amount, country);
 
   return (
-    <div className="mb-2 grow flex-wrap items-center justify-between space-y-2 overflow-hidden border-t border-gray-950/10 px-1 py-1.5 leading-none first:border-t-0 odd:bg-white/5 sm:mb-0 sm:flex sm:flex-nowrap sm:space-y-0 dark:odd:bg-slate-900/5">
+    <div className="border-border mb-2 grow flex-wrap items-center justify-between space-y-2 overflow-hidden border-t px-1 py-1.5 leading-none first:border-t-0 odd:bg-white/5 sm:mb-0 sm:flex sm:flex-nowrap sm:space-y-0 dark:odd:bg-slate-900/5">
       <div className="order-last flex grow basis-full justify-between overflow-hidden font-semibold sm:order-none sm:basis-auto">
         <DonorLink className="truncate" donor={donor} country={country} />
       </div>
@@ -92,7 +92,7 @@ export const HistogramItemDetail = ({
               key={virtualItem.key}
               ref={rowVirtualizer.measureElement}
               data-index={virtualItem.index}
-              className="absolute top-0 right-0 left-0 flex w-full items-center justify-between space-x-2 border-t border-gray-950/10 first:border-t-0"
+              className="border-border absolute top-0 right-0 left-0 flex w-full items-center justify-between space-x-2 border-t first:border-t-0"
             >
               <HistogramItemDetailLine
                 country={country}

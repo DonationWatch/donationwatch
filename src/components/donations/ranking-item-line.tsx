@@ -32,7 +32,7 @@ export const RankingItemLine = ({
     <section
       aria-label={`${fmtAmount} ${label}`}
       className={cn(
-        "mb-2 grow flex-wrap items-center justify-between space-y-2 border-t border-gray-950/10 px-1 py-1.5 leading-none first:border-t-0 odd:bg-white/5 sm:mb-0 sm:flex sm:flex-nowrap sm:space-y-0 dark:odd:bg-slate-900/5",
+        "border-border mb-2 grow flex-wrap items-center justify-between space-y-2 border-t px-1 py-1.5 leading-none first:border-t-0 odd:bg-white/5 sm:mb-0 sm:flex sm:flex-nowrap sm:space-y-0 dark:odd:bg-slate-900/5",
         className,
       )}
     >

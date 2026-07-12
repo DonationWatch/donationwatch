@@ -24,7 +24,7 @@ import { Skeleton } from "./skeleton";
 const TopDonationsItemDetailSkeleton = () => {
   return (
     <div className="py-1.5" aria-label="Loading donations">
-      <div className="items-center justify-between border-t border-gray-950/10 first:border-t-0 sm:flex sm:space-x-2">
+      <div className="border-border items-center justify-between border-t first:border-t-0 sm:flex sm:space-x-2">
         <div className="mb-2 grow flex-wrap justify-between space-y-2 px-1 py-1.5 leading-none sm:mb-0 sm:flex sm:space-y-0">
           <Skeleton className="h-4 w-16 basis-1/2 sm:mr-2 sm:basis-auto" />
           <div className="grow basis-full sm:order-none sm:mt-1.5 sm:basis-auto">
@@ -150,7 +150,7 @@ export const TopDonationsItemDetail = ({
               key={virtualItem.key}
               ref={rowVirtualizer.measureElement}
               data-index={virtualItem.index}
-              className="absolute top-0 right-0 left-0 flex w-full items-center justify-between space-x-2 border-t border-gray-950/10 first:border-t-0"
+              className="border-border absolute top-0 right-0 left-0 flex w-full items-center justify-between space-x-2 border-t first:border-t-0"
             >
               <RankingItemLine
                 className="overflow-hidden pr-2"
