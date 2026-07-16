@@ -98,6 +98,9 @@
     "desc": "Sort descending",
     "clear": "Clear sorting"
   },
+  "old_data_warning": {
+    "description": "Latest donation: {date}.\nSubsequent records are pending official release."
+  },
   "footer": {
     "sources": "Sources",
     "build": "As of {date}",

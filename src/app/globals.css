@@ -141,6 +141,10 @@ html {
   @apply block rounded-sm bg-white p-4 shadow-sm transition dark:bg-gray-900;
 }
 
+.card--warn {
+  @apply bg-amber-500/10 dark:bg-amber-500/15;
+}
+
 .card--action {
   @apply cursor-pointer hover:bg-gray-50 hover:shadow-md dark:hover:bg-gray-950;
 }

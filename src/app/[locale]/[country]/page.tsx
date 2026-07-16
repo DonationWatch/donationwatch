@@ -17,6 +17,7 @@ import { ExternalThanks } from "@/components/external-thanks";
 import { HistoryComponent } from "@/components/history-component";
 import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
 import { DetectedCountry } from "@/components/layout/detected-country";
+import { OldDataWarning } from "@/components/old-data-warning";
 import { PartiesHero } from "@/components/parties/parties-hero";
 import { Translation } from "@/components/translation";
 import { YearsCards } from "@/components/years/years-cards";
@@ -140,7 +141,10 @@ export default async function YearsPage(
                 })}
               </div>
             </h1>
-            <div>
+            <div className="space-y-2">
+              <div className="lg:inline-block">
+                <OldDataWarning countryConfig={countryConfig} />
+              </div>
               <div className="lg:inline-block">
                 <DetectedCountry country={countryConfig} />
               </div>

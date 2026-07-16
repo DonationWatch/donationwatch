@@ -55,3 +55,6 @@ export const DISCOVERY_INDEX_URL = `${PROD_URL}/data/index.json`;
 export const API_CATALOG_URL = `${PROD_URL}/.well-known/api-catalog`;
 
 export const TURNSTILE_PUBLIC_KEY = "0x4AAAAAADRM9xYdQb8lUoE-";
+
+// If the last donation for a country is older than this, show indicator to avoid confusion.
+export const OLD_DATA_MONTHS_THRESHOLD = 6;

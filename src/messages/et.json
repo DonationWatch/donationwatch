@@ -98,6 +98,9 @@
     "desc": "Sorteerimine kahanevas järjestuses",
     "clear": "Tühista sorteerimine"
   },
+  "old_data_warning": {
+    "description": "Viimane annetus: {date}.\nJärgnevad kirjed ootavad ametlikku avaldamist."
+  },
   "footer": {
     "sources": "Allikad",
     "build": "Seisund {date}",

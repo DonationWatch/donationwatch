@@ -98,6 +98,9 @@
     "desc": "Tri décroissant",
     "clear": "Effacer le tri"
   },
+  "old_data_warning": {
+    "description": "Dernier don : {date}.\nLes enregistrements suivants sont en attente de publication officielle."
+  },
   "footer": {
     "sources": "Sources",
     "build": "Au {date}",

@@ -69,6 +69,7 @@ export const LAYOUT_NAMESPACES = [
   "prelim_data",
   "donor_dialog",
   "filter",
+  "old_data_warning",
 ] as const;
 
 type LayoutNamespace = (typeof LAYOUT_NAMESPACES)[number];
