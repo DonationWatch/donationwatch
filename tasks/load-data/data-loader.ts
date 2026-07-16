@@ -578,6 +578,13 @@ export abstract class DataLoader {
 
     assertNoDuplicateIds(donations);
 
+    const lastDonationDate = donations.reduce<string | undefined>((acc, d) => {
+      const date = d[DonationField.Date];
+      if (!date) return acc;
+      if (!acc) return date;
+      return date > acc ? date : acc;
+    }, undefined);
+
     const { donorFilters, receiverFilters, ...countryConfig } =
       rawUnloadedCountryConfig;
 
@@ -587,6 +594,7 @@ export abstract class DataLoader {
         ...countryConfig,
         years: donationData.years,
         parties: donationData.parties,
+        lastDonationDate,
         ...(hasDonationType
           ? { usedDonationTypes: [...foundDonationTypes].toSorted() }
           : undefined),

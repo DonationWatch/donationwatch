@@ -98,6 +98,9 @@
     "desc": "Řadit sestupně",
     "clear": "Zrušit řazení"
   },
+  "old_data_warning": {
+    "description": "Poslední dar: {date}.\nNásledující záznamy čekají na oficiální zveřejnění."
+  },
   "footer": {
     "sources": "Zdroje",
     "build": "Stav {date}",

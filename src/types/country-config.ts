@@ -18,6 +18,7 @@ export interface UnloadedCountryConfig {
 
   // minimum year from which the data isn't complete yet
   readonly preliminaryDataSince?: string;
+  readonly lastDonationDate?: string;
   readonly minPublicDonationAmount: number;
   readonly source: { name: string; url: string };
   readonly currency: Currency;

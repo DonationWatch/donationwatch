@@ -98,6 +98,9 @@
     "desc": "Sorter synkende",
     "clear": "Fjern sortering"
   },
+  "old_data_warning": {
+    "description": "Siste donasjon: {date}.\nPåfølgende oppføringer venter på offisiell publisering."
+  },
   "footer": {
     "sources": "Kilder",
     "build": "Per {date}",

@@ -98,6 +98,9 @@
     "desc": "Sortiere absteigend",
     "clear": "Sortierung aufheben"
   },
+  "old_data_warning": {
+    "description": "Letzte Spende: {date}.\nNachfolgende Datensätze warten auf die offizielle Veröffentlichung."
+  },
   "footer": {
     "sources": "Quellen",
     "build": "Stand {date}",

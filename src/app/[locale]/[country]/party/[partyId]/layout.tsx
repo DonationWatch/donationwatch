@@ -181,6 +181,8 @@ export default async function PartyLayout(
     "donor_type",
     "years",
     "donation_type",
+    "old_data_warning",
+    "common",
   ]);
 
   return (

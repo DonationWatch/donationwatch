@@ -98,6 +98,9 @@
     "desc": "Kārtot dilstoši",
     "clear": "Atcelt šķirošanu"
   },
+  "old_data_warning": {
+    "description": "Pēdējais ziedojums: {date}.\nTurpmākie ieraksti gaida oficiālu publiskošanu."
+  },
   "footer": {
     "sources": "Avoti",
     "build": "Stāvoklis {date}",

@@ -98,6 +98,9 @@
     "desc": "Sortiraj silazno",
     "clear": "Poništi sortiranje"
   },
+  "old_data_warning": {
+    "description": "Posljednja donacija: {date}.\nSljedeći zapisi čekaju službenu objavu."
+  },
   "footer": {
     "sources": "Izvori",
     "build": "Stanje na dan {date}",

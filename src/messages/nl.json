@@ -98,6 +98,9 @@
     "desc": "Sorteer aflopend",
     "clear": "Wis sortering"
   },
+  "old_data_warning": {
+    "description": "Laatste donatie: {date}.\nVolgende gegevens wachten op officiële publicatie."
+  },
   "footer": {
     "sources": "Bronnen",
     "build": "Status {date}",
