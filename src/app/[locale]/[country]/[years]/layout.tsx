@@ -15,7 +15,11 @@ import { FilteredYearsHeader } from "@/components/years/filtered-years-header";
 import { YearsFilterSync } from "@/components/years/years-filter-sync";
 import { YearsFooterNav } from "@/components/years/years-footer-nav";
 import { isNotNullandNotUndefined } from "@/utils/array";
-import { THUMBNAIL_PREFIX } from "@/utils/config";
+import {
+  CACHED_LAST_LEGISLATIVE_YEARS,
+  CACHED_LAST_YEARS,
+  THUMBNAIL_PREFIX,
+} from "@/utils/config";
 import { getCountryName } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { Features, hasFeature } from "@/utils/features";
@@ -40,9 +44,6 @@ import { isValidCountry, isValidLocale } from "@/utils/validate";
 import type { ParamsOf } from "../../../../../.next/types/routes";
 
 export const dynamicParams = true;
-
-const CACHED_LAST_YEARS = 3;
-const CACHED_LAST_LEGISLATIVE_YEARS = 1;
 
 const sortYearsDesc = (a: string, b: string) =>
   parseInt(b, 10) - parseInt(a, 10);

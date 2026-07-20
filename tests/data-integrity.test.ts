@@ -52,9 +52,9 @@ describe.each(countryConfigs)(
 
     test.describe("parties", () => {
       test.each(countryConfig.parties)(
-        `$${PartyField.Name} has wikipedia articles loaded`,
+        `$${PartyField.Short} has wikipedia articles loaded`,
         async (party) => {
-          const name = party[PartyField.Name];
+          const name = party[PartyField.Short];
           const wiki = party[PartyField.Wiki];
 
           if (!wiki) return;

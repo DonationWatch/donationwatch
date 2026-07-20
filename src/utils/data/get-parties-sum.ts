@@ -60,6 +60,19 @@ export const getPartiesSum = (
   };
 };
 
+export const getSinglePartyYearsSums = (
+  partyYearSums: PartyYearsSums,
+  partyId: ReceiverId,
+): Record<string, PartyStats> => {
+  const result: Record<string, PartyStats> = {};
+  for (const [year, partySums] of Object.entries(partyYearSums)) {
+    if (partySums[partyId]) {
+      result[year] = partySums[partyId];
+    }
+  }
+  return result;
+};
+
 export type PartySum = [
   ReceiverId,
   {

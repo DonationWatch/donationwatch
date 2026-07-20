@@ -1,8 +1,13 @@
 import type { CountryConfig } from "@/types/country-config";
+import type { Party } from "@/types/party";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 
+import { PartyField } from "@/types/party";
 import { Features, hasFeature } from "@/utils/features";
 import { PartyStatField } from "@/utils/loader/party-years-sums";
+
+export const getLongName = (party: Party): string =>
+  party[PartyField.Name] ?? party[PartyField.Short];
 
 export const yearPartiesHaveYearOnlyDonations = (
   partySums: PartyYearsSums,

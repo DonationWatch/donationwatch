@@ -13,10 +13,10 @@ import type { Currency } from "@/utils/countries";
 import type { ConstLocale } from "@/utils/locales";
 import type { Donation, ReceiverId } from "@/utils/types";
 
-import { PartyField } from "@/types/party";
 import { getParty, Country } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { Features, hasFeature } from "@/utils/features";
+import { getLongName } from "@/utils/party";
 import { DonationField } from "@/utils/types";
 
 import { getDonations } from "../data/load-donations";
@@ -178,7 +178,7 @@ const calculatePartySums = (
     );
 
     const party = getParty(countryConfig, partyId);
-    const partyName = party ? party[PartyField.Name] : partyId;
+    const partyName = party ? getLongName(party) : partyId;
 
     if (!hasFeature(countryConfig, Features.Donors)) {
       partiesMetrics.push({

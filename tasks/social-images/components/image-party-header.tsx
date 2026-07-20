@@ -9,6 +9,7 @@ import { PartyField } from "@/types/party";
 import { partyColor } from "@/utils/color";
 import { getDonorName } from "@/utils/donor";
 import { formatCountryCurrency, formatNumber } from "@/utils/formatter";
+import { getLongName } from "@/utils/party";
 import { DonationField } from "@/utils/types";
 
 import type { CreateTranslator } from "../utils";
@@ -116,9 +117,9 @@ export const ImagePartyHeader = ({
           >
             {party[PartyField.Short]}
           </div>
-          {party[PartyField.Name] !== party[PartyField.Short] ? (
+          {getLongName(party) !== party[PartyField.Short] ? (
             <div tw="text-base text-slate-600 text-lg font-semibold leading-none">
-              {party[PartyField.Name]}
+              {getLongName(party)}
             </div>
           ) : null}
         </div>
