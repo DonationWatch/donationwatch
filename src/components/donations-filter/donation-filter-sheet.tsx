@@ -207,7 +207,7 @@ const DonationFilterSheetBase = ({
                     className="size-3.5 shrink-0 rounded-full border border-slate-950/20"
                     style={{ backgroundColor: party[PartyField.Color] }}
                   />
-                  <span className="text-sm">{party[PartyField.Name]}</span>
+                  <span className="text-sm">{party[PartyField.Short]}</span>
                 </div>
               ),
             })}

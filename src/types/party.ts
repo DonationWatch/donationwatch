@@ -12,7 +12,9 @@ export const enum PartyField {
 
 export interface Party {
   [PartyField.Id]: ReceiverId;
-  [PartyField.Name]: string;
+  // Full party name, if unset use short
+  [PartyField.Name]?: string;
+  // Shorter party name
   [PartyField.Short]: string;
   [PartyField.Sum]: number;
   [PartyField.Color]: string;

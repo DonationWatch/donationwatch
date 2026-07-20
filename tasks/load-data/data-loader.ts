@@ -566,12 +566,15 @@ export abstract class DataLoader {
 
           return {
             [PartyField.Id]: config.code as ReceiverId,
-            [PartyField.Name]: config.name,
             [PartyField.Short]: config.short,
             [PartyField.Color]: config.color,
             [PartyField.Wiki]: config.wiki,
             [PartyField.Sum]: partySums[party],
             [PartyField.Years]: [firstItem(years), lastItem(years)],
+            // Add long name if it's different from short name
+            ...(config.name !== config.short
+              ? { [PartyField.Name]: config.name }
+              : undefined),
           };
         }),
     };

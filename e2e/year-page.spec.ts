@@ -1,11 +1,10 @@
 import { expect } from "@playwright/test";
 
-import { PartyField } from "@/types/party";
 import { COUNTRIES, Country } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { Features, hasFeature } from "@/utils/features";
 import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
-import { canShowYearsTimeline } from "@/utils/party";
+import { canShowYearsTimeline, getLongName } from "@/utils/party";
 
 import { DONOR_WITH_WIKIPEDIA_ARTICLE } from "../tests/config";
 import { test } from "./util/fixture";
@@ -125,10 +124,10 @@ test.describe("Year page", () => {
               const partyToSearch = config.parties.at(0)!;
               const otherParty = config.parties.at(1)!;
 
-              await historyPage.search.fill(partyToSearch[PartyField.Name]);
+              await historyPage.search.fill(getLongName(partyToSearch));
               await expect(
                 historyPage.tableRows.filter({
-                  hasText: otherParty[PartyField.Name],
+                  hasText: getLongName(otherParty),
                 }),
               ).toHaveCount(0);
             });

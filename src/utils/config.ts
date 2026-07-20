@@ -58,3 +58,8 @@ export const TURNSTILE_PUBLIC_KEY = "0x4AAAAAADRM9xYdQb8lUoE-";
 
 // If the last donation for a country is older than this, show indicator to avoid confusion.
 export const OLD_DATA_MONTHS_THRESHOLD = 6;
+
+// Cache/static params settings
+export const CACHED_LAST_YEARS = 2;
+export const CACHED_LAST_LEGISLATIVE_YEARS = 1;
+export const CACHED_PARTIES_COUNT = 8;

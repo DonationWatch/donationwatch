@@ -15,9 +15,10 @@ import { WikiQuote } from "@/components/wiki-quote";
 import { PartyField } from "@/types/party";
 import { isNotNullandNotUndefined } from "@/utils/array";
 import { partyColor } from "@/utils/color";
-import { THUMBNAIL_PREFIX } from "@/utils/config";
+import { CACHED_PARTIES_COUNT, THUMBNAIL_PREFIX } from "@/utils/config";
 import { findCorrectParty, getParty } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
+import { getSinglePartyYearsSums } from "@/utils/data/get-parties-sum";
 import { Features, hasFeature } from "@/utils/features";
 import { getMessagesForLocale } from "@/utils/i18n-loader";
 import { pick } from "@/utils/i18n-pick";
@@ -35,8 +36,6 @@ import type { ParamsOf } from "../../../../../../.next/types/routes";
 import { PartyClientPageHead } from "./party-client-page-head";
 
 export const dynamicParams = true;
-
-const CACHED_PARTIES_COUNT = 10;
 
 export async function generateStaticParams({
   params,
@@ -132,6 +131,10 @@ export default async function PartyLayout(
   }
 
   const party = getParty(countryConfig, partyId);
+  const singlePartyYearsSums = getSinglePartyYearsSums(
+    partyYearsSums,
+    party[PartyField.Id],
+  );
 
   const wikiPageId = party[PartyField.Wiki];
   const tabItems: TabItem[] = [
@@ -200,7 +203,7 @@ export default async function PartyLayout(
         <section aria-labelledby="hero-label">
           <PartyClientPageHead
             party={party}
-            partyYearsSums={partyYearsSums}
+            partyYearsSums={singlePartyYearsSums}
             countryConfig={countryConfig}
           />
           <div className="mb-3">

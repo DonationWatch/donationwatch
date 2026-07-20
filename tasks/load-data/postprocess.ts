@@ -30,6 +30,7 @@ import { donationYear } from "@/utils/date";
 import { PartyStatField } from "@/utils/loader/party-years-sums";
 import { getWikiArticles } from "@/utils/loader/wiki";
 import { sumPartySums } from "@/utils/math";
+import { getLongName } from "@/utils/party";
 import { donationDateSorter } from "@/utils/sort";
 import { DonationField } from "@/utils/types";
 
@@ -240,7 +241,7 @@ const buildDataIndex = async (countries: Country[]) => {
       years: config.years,
       parties: config.parties.map((p) => ({
         id: p[PartyField.Id],
-        name: p[PartyField.Name],
+        name: getLongName(p),
       })),
     });
   }

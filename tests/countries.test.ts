@@ -3,6 +3,7 @@ import { describe, expect, test } from "vitest";
 import { PartyField } from "@/types/party";
 import { COUNTRIES } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
+import { getLongName } from "@/utils/party";
 import { AddressField, DonationField } from "@/utils/types";
 
 import en from "../src/messages/en.json";
@@ -56,10 +57,10 @@ describe("Party config fields are unique", () => {
         shortNames.add(party[PartyField.Short]);
 
         expect(
-          names.has(party[PartyField.Name]),
-          `Duplicate name ${party[PartyField.Name]} in ${country}`,
+          names.has(getLongName(party)),
+          `Duplicate name ${getLongName(party)} in ${country}`,
         ).toBe(false);
-        names.add(party[PartyField.Name]);
+        names.add(getLongName(party));
       });
     });
   });

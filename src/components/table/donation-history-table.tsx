@@ -41,6 +41,7 @@ import { getHistory } from "@/utils/data/get-history";
 import { donationYear } from "@/utils/date";
 import { Features, hasFeature } from "@/utils/features";
 import { formatCountryCurrency, formatTwoDigitDate } from "@/utils/formatter";
+import { getLongName } from "@/utils/party";
 import { DonationField, DonationType } from "@/utils/types";
 
 const columnHelper = createColumnHelper<HistoryEntry>();
@@ -74,7 +75,7 @@ export const DonationHistoryTable = ({
     const map = new Map<string, { name: string; short: string }>();
     country.parties.forEach((party: Party) => {
       map.set(String(party[PartyField.Id]), {
-        name: party[PartyField.Name],
+        name: getLongName(party),
         short: party[PartyField.Short],
       });
     });

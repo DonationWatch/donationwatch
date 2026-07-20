@@ -4,7 +4,7 @@ import { useEffect, useMemo } from "react";
 
 import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
-import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
+import type { PartyStats } from "@/utils/loader/party-years-sums";
 
 import { MetaCard } from "@/components/meta-card";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
@@ -14,6 +14,7 @@ import { PartyField } from "@/types/party";
 import { Features, hasFeature } from "@/utils/features";
 import { formatCountryCurrency, formatNumber } from "@/utils/formatter";
 import { PartyStatField } from "@/utils/loader/party-years-sums";
+import { getLongName } from "@/utils/party";
 
 export const PartyClientPageHead = ({
   party,
@@ -21,7 +22,7 @@ export const PartyClientPageHead = ({
   countryConfig,
 }: {
   party: Party;
-  partyYearsSums: PartyYearsSums;
+  partyYearsSums: Record<string, PartyStats>;
   countryConfig: CountryConfig;
 }) => {
   const locale = useBrowserBasedLocale();
@@ -38,11 +39,8 @@ export const PartyClientPageHead = ({
   useEffect(() => {
     const sumsByYear: Record<number, number> = {};
 
-    Object.entries(partyYearsSums).forEach(([yearStr, yearSums]) => {
-      const pSum = yearSums[party[PartyField.Id]];
-      if (pSum) {
-        sumsByYear[parseInt(yearStr, 10)] = pSum[PartyStatField.Sum];
-      }
+    Object.entries(partyYearsSums).forEach(([yearStr, pSum]) => {
+      sumsByYear[parseInt(yearStr, 10)] = pSum[PartyStatField.Sum];
     });
 
     const activeYears = Object.keys(sumsByYear)
@@ -73,11 +71,8 @@ export const PartyClientPageHead = ({
     let sum = 0;
     const filteredYearsSet = new Set(filteredYears);
 
-    Object.entries(partyYearsSums).forEach(([yearStr, yearSums]) => {
+    Object.entries(partyYearsSums).forEach(([yearStr, sumsObj]) => {
       if (isFiltered && !filteredYearsSet.has(yearStr)) return;
-
-      const sumsObj = yearSums[party[PartyField.Id]];
-      if (!sumsObj) return;
 
       count += sumsObj[PartyStatField.Count];
       sum += sumsObj[PartyStatField.Sum];
@@ -104,8 +99,8 @@ export const PartyClientPageHead = ({
         <h3 className="text-3xl font-semibold sm:text-4xl" id="hero-label">
           {party[PartyField.Short]}
         </h3>
-        {party[PartyField.Short] !== party[PartyField.Name] ? (
-          <h4 className="mt-1 text-lg">{party[PartyField.Name]}</h4>
+        {party[PartyField.Short] !== getLongName(party) ? (
+          <h4 className="mt-1 text-lg">{getLongName(party)}</h4>
         ) : null}
       </div>
       <div className="mb-3">

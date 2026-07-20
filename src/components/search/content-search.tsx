@@ -31,6 +31,7 @@ import { PartyField } from "@/types/party";
 import { getParty } from "@/utils/countries";
 import { Features, hasFeature } from "@/utils/features";
 import { clientSha1 } from "@/utils/hash";
+import { getLongName } from "@/utils/party";
 import { serializeYears } from "@/utils/serializers";
 
 const MAX_DONOR_LEN = 15;
@@ -137,7 +138,7 @@ const GlobalSearch = ({
   const filteredParties = allParties.filter(
     (party) =>
       party[PartyField.Id].toLowerCase().includes(searchLower) ||
-      party[PartyField.Name].toLowerCase().includes(searchLower) ||
+      getLongName(party).toLowerCase().includes(searchLower) ||
       party[PartyField.Short].toLowerCase().includes(searchLower),
   );
   const filteredYears = allYears.filter((year) =>
