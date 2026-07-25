@@ -4,8 +4,9 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 import { Article } from "@/components/layout/article";
+import { getParty } from "@/config/parties";
 import { PartyField } from "@/types/party";
-import { getCountryName, getParty } from "@/utils/countries";
+import { getCountryName } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { formatYearsRange } from "@/utils/formatter";
 import { generateAlternates } from "@/utils/meta";
@@ -33,7 +34,7 @@ export async function generateMetadata(
   ]);
 
   if (!isValidParty(partyId, countryConfig)) return notFoundMetadata;
-  const party = getParty(countryConfig, partyId);
+  const party = getParty(countryConfig.id, partyId);
 
   return {
     title: tPageTitle("party.timeline", {
@@ -64,7 +65,7 @@ export default async function TimelinePage(
   ]);
 
   if (!isValidParty(partyId, countryConfig)) return notFound();
-  const party = getParty(countryConfig, partyId);
+  const party = getParty(countryConfig.id, partyId);
 
   if (!party) {
     return notFound();
@@ -73,7 +74,6 @@ export default async function TimelinePage(
   return (
     <Article fullWidth={true}>
       <PartyTimelineClientPage
-        country={countryConfig}
         party={party}
         timelineTitle={t("party.timeline.detail.title", {
           party: party[PartyField.Short],

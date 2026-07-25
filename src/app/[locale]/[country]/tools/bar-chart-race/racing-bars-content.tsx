@@ -3,10 +3,10 @@
 import { parseAsString, useQueryState } from "nuqs";
 import { useMemo } from "react";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { NonEmptyArray } from "@/utils/array";
 
 import { EChartsRacingBars } from "@/components/charts/echarts-racing-bars";
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { Button } from "@/components/ui/button";
 import { YearRangeSelector } from "@/components/years/year-range-selector";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
@@ -16,12 +16,11 @@ import { formatYearsRange } from "@/utils/formatter";
 import { type Donation, DonationField } from "@/utils/types";
 
 export const RacingBarsContent = ({
-  countryConfig,
   allDonations,
 }: {
-  countryConfig: CountryConfig;
   allDonations: Donation[];
 }) => {
+  const countryConfig = useRequiredCountryConfig();
   const tCountries = useTranslations("countries");
   const tBarChartRace = useTranslations("bar_chart_race");
 
@@ -172,7 +171,6 @@ export const RacingBarsContent = ({
       {filteredDonations.length ? (
         <EChartsRacingBars
           key={`${fromYear}-${toYear}-${groupByParam}-${durationParam}`}
-          countryConfig={countryConfig}
           years={validSelectedYears}
           donations={filteredDonations}
           groupByField={groupByField}

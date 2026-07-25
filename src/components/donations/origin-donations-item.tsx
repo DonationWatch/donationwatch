@@ -1,16 +1,15 @@
 "use client";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Donation } from "@/utils/types";
 
 import { CurrencyRankingItem } from "@/components/donations/ranking-item";
 import { TopDonationsItemDetail } from "@/components/loading/loading-top-year-donations-item-detail";
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { AddressField, DonationField } from "@/utils/types";
 
 export const OriginDonationsItem = ({
   id,
-  country,
   amount,
   rank,
   sum,
@@ -24,10 +23,10 @@ export const OriginDonationsItem = ({
   sum: number;
   donations: Donation[];
   readonly?: boolean;
-  country: CountryConfig;
   expanded: boolean;
   onToggleExpanded: (expanded: boolean) => void;
 }) => {
+  const country = useRequiredCountryConfig();
   const t = useTranslations();
   const address = donations.at(0)?.[DonationField.Address];
 
@@ -46,7 +45,6 @@ export const OriginDonationsItem = ({
         detail={
           <TopDonationsItemDetail
             showDonationParty={true}
-            country={country}
             donations={donations}
           />
         }

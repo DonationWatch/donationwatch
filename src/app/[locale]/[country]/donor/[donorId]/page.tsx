@@ -145,8 +145,7 @@ export default async function DonorPageLayout(
 
   const { country, donorId } = params;
 
-  const [countryConfig, donorMeta, messages] = await Promise.all([
-    getCountryConfig(country),
+  const [donorMeta, messages] = await Promise.all([
     getDonorMeta(country, donorId),
     getMessagesForLocale(params.locale),
   ]);
@@ -172,14 +171,9 @@ export default async function DonorPageLayout(
       <DonorPageHead
         donorId={donorId}
         country={country}
-        countryConfig={countryConfig}
         donorMeta={donorMeta}
       />
-      <DonorClientPage
-        donorId={donorId}
-        country={country}
-        countryConfig={countryConfig}
-      />
+      <DonorClientPage donorId={donorId} />
     </ScopedClientIntlProvider>
   );
 }

@@ -5,9 +5,8 @@ import type { PropsWithChildren } from "react";
 import { useLocale } from "next-intl";
 import Link from "next/link";
 
-import type { CountryConfig } from "@/types/country-config";
-
 import { DonorName } from "@/components/donors/donor-name";
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { useHash } from "@/hooks/use-hash";
 import { cn } from "@/lib/utils";
@@ -15,13 +14,12 @@ import { cn } from "@/lib/utils";
 export const DonorLink = ({
   children,
   donor,
-  country,
   className,
 }: PropsWithChildren<{
   donor: string;
   className?: string;
-  country: CountryConfig;
 }>) => {
+  const country = useRequiredCountryConfig();
   const t = useTranslations();
   const locale = useLocale();
   const { hash, isHashing, error } = useHash(donor);

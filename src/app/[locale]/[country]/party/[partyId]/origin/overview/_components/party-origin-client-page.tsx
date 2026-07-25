@@ -2,28 +2,27 @@
 
 import { useEffect, useMemo } from "react";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 
 import { DonationPartyOrigin } from "@/components/donations/donation-origin";
 import { FilterEmptyState } from "@/components/filter/filter-empty-state";
 import Loading from "@/components/loading/loading";
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useDonationsByParty } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { useFilterEngine } from "@/hooks/use-filter-engine";
 import { useScrollToHash } from "@/hooks/use-scroll-to-hash";
 
 interface PartyOriginClientPageProps {
-  country: CountryConfig;
   party: Party;
   years: string[];
 }
 
 export const PartyOriginClientPage = ({
-  country,
   party,
   years,
 }: PartyOriginClientPageProps) => {
+  const country = useRequiredCountryConfig();
   const tData = useTranslations("data");
   const { data, error, isLoading, isSuccess } = useDonationsByParty(
     country,
@@ -59,7 +58,6 @@ export const PartyOriginClientPage = ({
 
   return (
     <DonationPartyOrigin
-      country={country}
       party={party}
       years={activeYears}
       donations={filteredDonations.flat()}

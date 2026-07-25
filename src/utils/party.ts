@@ -1,10 +1,12 @@
 import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
+import type { ReceiverId } from "@/utils/types";
 
 import { PartyField } from "@/types/party";
+import { PartyStatField } from "@/types/party-stats";
 import { Features, hasFeature } from "@/utils/features";
-import { PartyStatField } from "@/utils/loader/party-years-sums";
+import { getBuild } from "@/utils/loader/build";
 
 export const getLongName = (party: Party): string =>
   party[PartyField.Name] ?? party[PartyField.Short];
@@ -41,4 +43,64 @@ export const canShowYearsTimeline = (
   }
 
   return true;
+};
+
+export const hasYearSums = (partySums: PartyYearsSums, years: string[]) => {
+  const yearSet = new Set(years);
+  for (const [year, sums] of Object.entries(partySums)) {
+    if (yearSet.has(year) && Object.keys(sums).length > 0) {
+      return true;
+    }
+  }
+  return false;
+};
+
+export const lastPartyStatsDonation = (
+  country: CountryConfig,
+  sums: PartyYearsSums,
+  filter?: { year?: string; partyId?: ReceiverId },
+): string | undefined => {
+  let lastDonation: string | undefined = undefined;
+
+  const hasYearFilter = filter?.year !== undefined;
+  const hasPartyIdFilter = filter?.partyId !== undefined;
+
+  for (const year in sums) {
+    if (hasYearFilter && year !== filter.year) {
+      continue;
+    }
+
+    const yearSums = sums[year];
+    for (const party in yearSums) {
+      if (hasPartyIdFilter && party !== filter.partyId) {
+        continue;
+      }
+
+      const partyStats = yearSums[party];
+      if (partyStats[PartyStatField.LastDonation]) {
+        if (
+          !lastDonation ||
+          partyStats[PartyStatField.LastDonation] > lastDonation
+        ) {
+          lastDonation = partyStats[PartyStatField.LastDonation];
+        }
+      }
+    }
+  }
+
+  if (lastDonation?.length === 4) {
+    // is just a year, pad it to the end of the year
+    lastDonation += "-12-31";
+  }
+
+  const buildIsoString = new Date(getBuild(country.id).t)
+    .toISOString()
+    .substring(0, "2020-01-01".length);
+
+  if (lastDonation && lastDonation > buildIsoString) {
+    // if the last donation is after the build date, use the build date
+    lastDonation = buildIsoString;
+  }
+
+  return lastDonation;
 };

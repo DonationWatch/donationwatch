@@ -1,5 +1,6 @@
 import { expect } from "@playwright/test";
 
+import { getPartiesSync } from "@/config/parties";
 import { COUNTRIES, Country } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { Features, hasFeature } from "@/utils/features";
@@ -120,9 +121,9 @@ test.describe("Year page", () => {
             });
 
             await test.step("can search for parties", async () => {
-              const config = await getCountryConfig(country);
-              const partyToSearch = config.parties.at(0)!;
-              const otherParty = config.parties.at(1)!;
+              const parties = getPartiesSync(country);
+              const partyToSearch = parties.at(0)!;
+              const otherParty = parties.at(1)!;
 
               await historyPage.search.fill(getLongName(partyToSearch));
               await expect(

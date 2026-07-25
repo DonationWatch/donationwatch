@@ -8,9 +8,9 @@ import type { ConstLocale } from "@/utils/locales";
 import type { StrictNamespacedTranslator } from "@/utils/translator";
 
 import { ErrorAlert, InfoAlert, SuccessAlert } from "@/components/alert";
-import { FormattedTwoDigitDate } from "@/components/browser-based-formatter";
 import { Article, ArticleSection } from "@/components/layout/article";
 import { NonCountryRootLayout } from "@/components/layout/non-country-root-layout";
+import { formatMediumDate } from "@/utils/formatter";
 import { LOCALES } from "@/utils/locales";
 import { generateAlternates } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
@@ -61,9 +61,7 @@ const FunFact = ({
   return (
     <ArticleSection title={title[locale]}>
       <div className="space-y-4">
-        <h3 className="text-sm">
-          <FormattedTwoDigitDate date={new Date(date)} />
-        </h3>
+        <h3 className="text-sm">{formatMediumDate(locale, new Date(date))}</h3>
         <p className="whitespace-pre-wrap">{text[locale]}</p>
         {children ? (
           <pre className="rounded-sm border border-slate-300 p-4 font-mono text-sm whitespace-pre-wrap lg:p-6 dark:border-slate-700">

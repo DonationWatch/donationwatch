@@ -1,16 +1,13 @@
 import type { CountryConfig } from "@/types/country-config";
 
-import { PartyField } from "@/types/party";
-
 import type { Currency } from "./countries";
 import type {
   BrowserBasedLocale,
+  ConstLocale,
   ImageLocale,
   MetadataLocale,
 } from "./locales";
-import type { ReceiverId } from "./types";
 
-import { getParty } from "./countries";
 import { createIntlCache } from "./intl-cache";
 
 const currencyFormatter = createIntlCache(
@@ -68,10 +65,23 @@ const dateFormatter = createIntlCache(
     }),
 );
 export const formatDate = (
-  locale: BrowserBasedLocale | ImageLocale,
+  locale: ConstLocale | BrowserBasedLocale | ImageLocale,
   date: Date | number,
 ) => {
   return dateFormatter(locale).format(date);
+};
+
+const mediumDateFormatter = createIntlCache(
+  (locale: ConstLocale) =>
+    new Intl.DateTimeFormat(locale, {
+      dateStyle: "medium",
+    }),
+);
+// dateStyle: "medium" spells out the month, so it's unambiguous across
+// locales (unlike numeric dates) - safe to format with the routing locale
+// directly, no browser-locale correction needed.
+export const formatMediumDate = (locale: ConstLocale, date: Date | number) => {
+  return mediumDateFormatter(locale).format(date);
 };
 
 const yearFormatter = createIntlCache(
@@ -190,11 +200,4 @@ export const formatYearsRange = (years: string[]): string => {
   if (first === last) return `${first}`;
 
   return `${first} - ${last}`;
-};
-
-export const formatPartyShortName = (
-  country: CountryConfig,
-  partyId: ReceiverId,
-) => {
-  return getParty(country, partyId)[PartyField.Short];
 };

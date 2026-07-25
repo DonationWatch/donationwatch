@@ -1,22 +1,22 @@
 "use client";
 import type { BarSeriesOption, EChartsOption } from "echarts";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Donation, ReceiverId } from "@/utils/types";
 
+import {
+  usePartiesMap,
+  useRequiredCountryConfig,
+} from "@/components/providers/country-provider";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useChart } from "@/hooks/use-chart";
 import { PartyField } from "@/types/party";
-import { partyColor } from "@/utils/color";
-import { getParty } from "@/utils/countries";
 import { donationYear } from "@/utils/date";
 import { buildElectionTimelineMarkArea } from "@/utils/election-marker";
 import {
   formatCompactCountryCurrency,
   formatCountryCurrency,
   formatMonthYear,
-  formatPartyShortName,
   formatTwoDigitDate,
   formatYear,
 } from "@/utils/formatter";
@@ -27,7 +27,6 @@ import { ExpandableReactEchart } from "./expandable-react-echart";
 export type DonationPerMonthResolution = "month" | "year";
 
 export const DonationPerMonthChart = ({
-  country,
   title: chartTitle,
   subtitle,
   years,
@@ -36,7 +35,6 @@ export const DonationPerMonthChart = ({
   resolution,
   donations,
 }: {
-  country: CountryConfig;
   years: string[];
   parties: Party[];
   title: string;
@@ -48,7 +46,6 @@ export const DonationPerMonthChart = ({
   return (
     <DonationBarChart
       donations={donations}
-      country={country}
       years={years}
       parties={parties}
       title={chartTitle}
@@ -60,7 +57,6 @@ export const DonationPerMonthChart = ({
 };
 
 const DonationBarChart = ({
-  country,
   title: chartTitle,
   subtitle,
   years,
@@ -70,7 +66,6 @@ const DonationBarChart = ({
   resolution = "month",
 }: {
   donations: Donation[];
-  country: CountryConfig;
   years: string[];
   parties: Party[];
   title: string;
@@ -78,8 +73,10 @@ const DonationBarChart = ({
   limitToFirstDateYear?: boolean;
   resolution?: DonationPerMonthResolution;
 }) => {
+  const country = useRequiredCountryConfig();
   const browserBasedLocale = useBrowserBasedLocale();
   const { backgroundColor, isMobile, isDark } = useChart();
+  const partiesMap = usePartiesMap();
 
   const leftmostYear = limitToFirstDateYear
     ? donations[0][DonationField.Date].substring(0, 4)
@@ -145,7 +142,7 @@ const DonationBarChart = ({
       name: party[PartyField.Id],
       type: "bar",
       stack: "total",
-      color: partyColor(party[PartyField.Id], country) ?? undefined,
+      color: party[PartyField.Color],
       data: Object.entries(monthYearData).map(([timeKey, partyData]) => {
         const date =
           resolution === "year"
@@ -199,7 +196,7 @@ const DonationBarChart = ({
         overflow: "truncate",
       },
       formatter: (partyId) =>
-        formatPartyShortName(country, partyId as ReceiverId),
+        partiesMap[partyId as ReceiverId][PartyField.Short],
     },
     dataZoom: [
       {
@@ -267,7 +264,7 @@ const DonationBarChart = ({
 
           allSum += sum;
 
-          const party = getParty(country, param.seriesName as ReceiverId);
+          const party = partiesMap[param.seriesName as ReceiverId];
 
           lines.push(
             `${param.marker} ${party[PartyField.Short]}: ${formatCountryCurrency(browserBasedLocale, sum, country)}`,
@@ -328,7 +325,6 @@ const DonationBarChart = ({
       option={option}
       title={chartTitle}
       subtitle={subtitle}
-      country={country}
       years={years}
     />
   );

@@ -4,7 +4,6 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { CitationGenerator } from "@/components/citation/citation-generator";
 import { DataExport } from "@/components/data-export";
 import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
 import { Article } from "@/components/layout/article";
@@ -142,7 +141,7 @@ export default async function Page(
               />
             }
           </p>
-          <DataExport country={countryConfig} locale={locale} />
+          <DataExport locale={locale} />
         </div>
       </Article>
     </ScopedClientIntlProvider>

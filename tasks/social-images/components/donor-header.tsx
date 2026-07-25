@@ -11,9 +11,9 @@ import type { ImageLocale } from "@/utils/locales";
 import type { Donation, ReceiverId } from "@/utils/types";
 
 import { PageLogo } from "@/components/layout/page-logo";
+import { getParty } from "@/config/parties";
 import { PartyField } from "@/types/party";
-import { partyColor } from "@/utils/color";
-import { getCountryName, getParty } from "@/utils/countries";
+import { getCountryName } from "@/utils/countries";
 import { donationYear } from "@/utils/date";
 import { getDonorName } from "@/utils/donor";
 import {
@@ -75,7 +75,7 @@ export const ImageStackedPartyDonations = ({
             style={{
               borderRadius: "2px",
               display: "flex",
-              backgroundColor: partyColor(party, country),
+              backgroundColor: getParty(country.id, party)[PartyField.Color],
             }}
           ></div>
         </div>
@@ -243,7 +243,7 @@ export const DonorHeader = ({
           {sums.slice(0, 3).map(([party, data]) => (
             <ImageRankingItem
               key={party}
-              party={getParty(country, party)}
+              party={getParty(country.id, party)}
               amount={data.sum}
               sum={sum}
               locale={locale}

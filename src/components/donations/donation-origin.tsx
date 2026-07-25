@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { OriginPartySum } from "@/utils/data/get-origin-donations";
 import type { Donation } from "@/utils/types";
@@ -14,6 +13,7 @@ import {
   ArticleSectionTwoColumns,
   ArticleSectionWrapper,
 } from "@/components/layout/article";
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
@@ -31,10 +31,8 @@ const CurrentCountryPart = ({
   sum,
   years,
   parties,
-  country,
   subtitle,
 }: {
-  country: CountryConfig;
   sums: OriginPartySum[];
   donations: Donation[];
   years: string[];
@@ -42,6 +40,7 @@ const CurrentCountryPart = ({
   sum: number;
   subtitle: string;
 }) => {
+  const country = useRequiredCountryConfig();
   const t = useTranslations();
   const tCountries = useTranslations("countries");
   const browserBasedLocale = useBrowserBasedLocale();
@@ -112,7 +111,6 @@ const CurrentCountryPart = ({
                 amount={data.sum}
                 sum={sum}
                 donations={data.donations}
-                country={country}
                 expanded={expandedDonors.includes(data.state!)}
                 onToggleExpanded={() => onToggleExpanded(data.state!)}
               />
@@ -123,7 +121,6 @@ const CurrentCountryPart = ({
           <div>
             <DonationOriginVisual
               donations={donations}
-              country={country}
               years={years}
               parties={parties}
               subtitle={subtitle}
@@ -139,13 +136,12 @@ const OtherCountryPart = ({
   sums,
   sum,
   years,
-  country,
 }: {
-  country: CountryConfig;
   sums: OriginPartySum[];
   years: string[];
   sum: number;
 }) => {
+  const country = useRequiredCountryConfig();
   const t = useTranslations();
   const tCountries = useTranslations("countries");
   const browserBasedLocale = useBrowserBasedLocale();
@@ -219,7 +215,6 @@ const OtherCountryPart = ({
                 amount={data.sum}
                 sum={sum}
                 donations={data.donations}
-                country={country}
                 expanded={expandedCountries.includes(
                   data.donations.at(0)![DonationField.Address][
                     AddressField.Country
@@ -242,16 +237,15 @@ const OtherCountryPart = ({
 };
 
 export const DonationYearOrigin = ({
-  country,
   years,
   parties,
   donations,
 }: {
   years: string[];
   parties: Party[];
-  country: CountryConfig;
   donations: Donation[];
 }) => {
+  const country = useRequiredCountryConfig();
   const t = useTranslations();
   const tCountries = useTranslations("countries");
 
@@ -259,7 +253,6 @@ export const DonationYearOrigin = ({
     <DonationOrigin
       years={years}
       parties={parties}
-      country={country}
       donations={donations}
       subtitle={t("origin.country.subtitle", {
         country: getCountryName(country, tCountries),
@@ -270,16 +263,15 @@ export const DonationYearOrigin = ({
 };
 
 export const DonationPartyOrigin = ({
-  country,
   years,
   party,
   donations,
 }: {
   years: string[];
   party: Party;
-  country: CountryConfig;
   donations: Donation[];
 }) => {
+  const country = useRequiredCountryConfig();
   const t = useTranslations();
   const tCountries = useTranslations("countries");
 
@@ -287,7 +279,6 @@ export const DonationPartyOrigin = ({
     <DonationOrigin
       years={years}
       parties={[party]}
-      country={country}
       donations={donations}
       subtitle={t("origin.party.subtitle", {
         party: party[PartyField.Short],
@@ -298,7 +289,6 @@ export const DonationPartyOrigin = ({
 };
 
 const DonationOrigin = ({
-  country,
   years,
   parties,
   donations,
@@ -306,10 +296,10 @@ const DonationOrigin = ({
 }: {
   years: string[];
   parties: Party[];
-  country: CountryConfig;
   donations: Donation[];
   subtitle: string;
 }) => {
+  const country = useRequiredCountryConfig();
   const t = useTranslations();
   const tCountries = useTranslations("countries");
   const browserBasedLocale = useBrowserBasedLocale();
@@ -391,19 +381,13 @@ const DonationOrigin = ({
       </ArticleSectionWrapper>
       <CurrentCountryPart
         donations={donations}
-        country={country}
         sums={countryDonationSums}
         years={years}
         parties={parties}
         sum={sum}
         subtitle={subtitle}
       />
-      <OtherCountryPart
-        country={country}
-        sums={otherDonationSums}
-        years={years}
-        sum={sum}
-      />
+      <OtherCountryPart sums={otherDonationSums} years={years} sum={sum} />
     </Article>
   );
 };

@@ -4,14 +4,13 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 import { Article } from "@/components/layout/article";
+import { getParty } from "@/config/parties";
 import { PartyField } from "@/types/party";
-import { getCountryName, getParty } from "@/utils/countries";
+import { PartyStatField } from "@/types/party-stats";
+import { getCountryName } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { formatCompactCountryCurrency } from "@/utils/formatter";
-import {
-  getPartyYearsSums,
-  PartyStatField,
-} from "@/utils/loader/party-years-sums";
+import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
 import { generateAlternates } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
 import {
@@ -43,7 +42,7 @@ export async function generateMetadata(
 
   if (!isValidParty(partyId, countryConfig)) return notFoundMetadata;
 
-  const party = getParty(countryConfig, partyId);
+  const party = getParty(countryConfig.id, partyId);
 
   let sum = 0;
   let count = 0;
@@ -98,12 +97,11 @@ export default async function DonorPage(
   ]);
 
   if (!isValidParty(partyId, countryConfig)) return notFound();
-  const party = getParty(countryConfig, partyId);
+  const party = getParty(countryConfig.id, partyId);
 
   return (
     <Article fullWidth={true}>
       <PartyDonorsClientPage
-        country={countryConfig}
         party={party}
         treemapTitle={t("party.donors.title", {
           party: party[PartyField.Short],

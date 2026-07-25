@@ -6,29 +6,25 @@ import { useLocale } from "next-intl";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
-import type { CountryConfig } from "@/types/country-config";
-import type { Party } from "@/types/party";
 import type { Country } from "@/utils/countries";
 import type { ReceiverId } from "@/utils/types";
 
 import { PartyDot } from "@/components/parties/party-dot";
+import {
+  useParties,
+  useRequiredCountryConfig,
+} from "@/components/providers/country-provider";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { useCountryConfig, useDonorNames } from "@/hooks/use-api";
+import { useDonorNames } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { useSearchDialog } from "@/hooks/use-search-dialog";
 import { cn } from "@/lib/utils";
 import { PartyField } from "@/types/party";
-import { getParty } from "@/utils/countries";
 import { Features, hasFeature } from "@/utils/features";
 import { clientSha1 } from "@/utils/hash";
 import { getLongName } from "@/utils/party";
@@ -37,19 +33,13 @@ import { serializeYears } from "@/utils/serializers";
 const MAX_DONOR_LEN = 15;
 
 export const CountryHeaderSearch = () => {
-  const { country: activeCountry } = useParams<{ country: Country }>();
-
-  if (!activeCountry) return null;
-
   return <HeaderSearch />;
 };
 
 const SearchDialog = ({
-  country,
   onClose,
   isOpen,
 }: {
-  country: CountryConfig;
   isOpen: boolean;
   onClose: () => void;
 }) => {
@@ -71,9 +61,7 @@ const SearchDialog = ({
           <DialogTitle>{t("filter_description")}</DialogTitle>
         </DialogHeader>
         <div className="flex grow flex-col overflow-hidden">
-          {isOpen ? (
-            <GlobalSearch countryConfig={country} onClose={onClose} />
-          ) : null}
+          {isOpen ? <GlobalSearch onClose={onClose} /> : null}
         </div>
       </DialogContent>
     </Dialog>
@@ -85,46 +73,31 @@ const HeaderSearch = () => {
   const { country: activeCountry } = useParams<{ country: Country }>();
   const { isOpen, open, close } = useSearchDialog();
 
-  const { data, error, isLoading } = useCountryConfig(activeCountry);
-
-  if (isLoading || error || !data) return <div className="size-10 p-1"></div>;
+  if (!activeCountry) return null;
 
   return (
     <>
-      <Tooltip>
-        <TooltipTrigger
-          render={
-            <button
-              className="flex size-10 cursor-pointer items-center justify-center rounded-full p-1 hover:bg-neutral-600/10"
-              onClick={() => open()}
-              aria-label={t("filter_description")}
-              title={t("filter")}
-            >
-              <Search size={18} />
-            </button>
-          }
-        />
-        <TooltipContent sideOffset={10} side={"left"}>
-          {t("filter")}
-        </TooltipContent>
-      </Tooltip>
-      <SearchDialog country={data} isOpen={isOpen} onClose={() => close()} />
+      <button
+        className="flex size-10 cursor-pointer items-center justify-center rounded-full p-1 hover:bg-neutral-600/10"
+        onClick={() => open()}
+        aria-label={t("filter_description")}
+        title={t("filter")}
+      >
+        <Search size={18} />
+      </button>
+      <SearchDialog isOpen={isOpen} onClose={() => close()} />
     </>
   );
 };
 
-const GlobalSearch = ({
-  countryConfig,
-  onClose,
-}: {
-  countryConfig: CountryConfig;
-  onClose: () => void;
-}) => {
+const GlobalSearch = ({ onClose }: { onClose: () => void }) => {
+  const countryConfig = useRequiredCountryConfig();
   const tSearch = useTranslations("search");
   const locale = useLocale();
+  const allParties = useParties();
+
   const router = useRouter();
   const [search, setSearch] = useState("");
-  const allParties = countryConfig.parties;
   const allYears = countryConfig.years.toReversed();
   const allLegislativeYears = countryConfig.legislativeYears ?? [];
   const { data: donorNames, isSuccess } = useDonorNames(countryConfig);
@@ -153,14 +126,11 @@ const GlobalSearch = ({
         .slice(0, MAX_DONOR_LEN)
     : [];
 
-  const selectParty = (party: Party) => {
+  const selectParty = (partyId: ReceiverId) => {
     onClose();
-    router.push(
-      `/${locale}/${countryConfig.id}/party/${party[PartyField.Id]}`,
-      {
-        scroll: true,
-      },
-    );
+    router.push(`/${locale}/${countryConfig.id}/party/${partyId}`, {
+      scroll: true,
+    });
   };
   const selectDonor = (donorId: string) => {
     onClose();
@@ -240,7 +210,7 @@ const GlobalSearch = ({
         render={(item) => {
           switch (item.type) {
             case "party": {
-              return <PartyDot party={item.id} country={countryConfig} />;
+              return <PartyDot party={item.id} />;
             }
             case "year": {
               return <span>{item.id}</span>;
@@ -263,7 +233,7 @@ const GlobalSearch = ({
         onSelect={(item) => {
           switch (item.type) {
             case "party": {
-              selectParty(getParty(countryConfig, item.id));
+              selectParty(item.id);
               break;
             }
             case "year": {

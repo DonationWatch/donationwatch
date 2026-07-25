@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 import type { CountryConfig } from "@/types/country-config";
+import type { Party } from "@/types/party";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 import type { ConstLocale } from "@/utils/locales";
 import type { ReceiverId } from "@/utils/types";
@@ -15,7 +16,7 @@ import {
 import { ReadonlyTopYearDonationsItem } from "@/components/loading/loading-top-year-donations-item";
 import { MetaCard } from "@/components/meta-card";
 import { cn } from "@/lib/utils";
-import { getParties } from "@/utils/data/get-parties";
+import { getPartiesByYears } from "@/utils/data/get-parties-by-years";
 import { getPartiesSum } from "@/utils/data/get-parties-sum";
 import { Features, hasFeature } from "@/utils/features";
 import { formatYearsRange } from "@/utils/formatter";
@@ -116,16 +117,14 @@ export const HighscoreHeader = ({
           ) : null}
           <MetaCard
             title={t("sum")}
-            value={<FormattedCountryCurrency value={sum} country={country} />}
+            value={<FormattedCountryCurrency value={sum} />}
           />
           {hasFeature(country, Features.Donors) &&
             showExtendedMeta &&
             count > 1 && (
               <MetaCard
                 title={t("average")}
-                value={
-                  <FormattedCountryCurrency value={avg} country={country} />
-                }
+                value={<FormattedCountryCurrency value={avg} />}
               />
             )}
         </div>
@@ -140,7 +139,6 @@ export const HighscoreHeader = ({
               partyId={party}
               amount={data.sum}
               sum={sum}
-              country={country}
             />
           ))}
         </div>
@@ -162,6 +160,7 @@ export const UnfilteredYearsHeader = ({
   children,
   className,
   titleBeforeYears = false,
+  parties,
 }: PropsWithChildren<{
   idPrefix?: string;
   locale: ConstLocale;
@@ -174,12 +173,13 @@ export const UnfilteredYearsHeader = ({
   partySums: PartyYearsSums;
   className?: string;
   titleBeforeYears?: boolean;
+  parties: Party[];
 }>) => {
-  const parties = getParties(country, years);
+  const yearParties = getPartiesByYears(years, parties);
   const { count, sum, sums, sumNumbers } = getPartiesSum(
     country,
     partySums,
-    parties,
+    yearParties,
     years,
   );
 

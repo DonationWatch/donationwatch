@@ -21,6 +21,7 @@ import { COUNTRIES } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { Features, hasFeature } from "@/utils/features";
 import { getBiggestDonors } from "@/utils/loader/biggest-donors";
+import { getParties } from "@/utils/loader/parties";
 import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
 import { CONST_LOCALES } from "@/utils/locales";
 
@@ -165,6 +166,7 @@ describe.each(
         await fs.mkdir(PARTY_OUT_DIR, { recursive: true });
         await fs.mkdir(YEARS_OUT_DIR, { recursive: true });
         await fs.mkdir(DONOR_OUT_DIR, { recursive: true });
+
         [countryConfig, donations, yearSums, biggestDonors] = await Promise.all(
           [
             await getCountryConfig(country),
@@ -214,9 +216,8 @@ describe.each(
           await fs.writeFile(path.join(DONOR_OUT_DIR, `${donor.id}.png`), png);
         }
       });
-
       it(`renders country party pages image`, async () => {
-        for (const party of countryConfig.parties) {
+        for (const party of await getParties(countryConfig.id)) {
           const png = await renderComponent(
             await PartyPageImage(
               locale,

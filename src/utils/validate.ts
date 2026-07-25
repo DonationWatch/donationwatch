@@ -1,6 +1,6 @@
 import type { CountryConfig } from "@/types/country-config";
 
-import { PartyField } from "@/types/party";
+import { getParty } from "@/config/parties";
 
 import type { Country } from "./countries";
 import type { ConstLocale, MetadataLocale } from "./locales";
@@ -29,7 +29,10 @@ export const isValidCountry = (country: string): country is Country => {
 
 export const isValidParty = (
   partyId: string,
-  countryConfig: CountryConfig,
+  countryConfig: CountryConfig | Country,
 ): partyId is ReceiverId => {
-  return countryConfig.parties.some((p) => p[PartyField.Id] === partyId);
+  const countryId =
+    typeof countryConfig === "string" ? countryConfig : countryConfig.id;
+
+  return getParty(countryId, partyId as ReceiverId) !== undefined;
 };

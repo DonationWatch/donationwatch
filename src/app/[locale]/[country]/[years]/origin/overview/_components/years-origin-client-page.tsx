@@ -2,28 +2,30 @@
 
 import { useMemo, useEffect } from "react";
 
-import type { CountryConfig } from "@/types/country-config";
-
 import { DonationYearOrigin } from "@/components/donations/donation-origin";
 import { FilterEmptyState } from "@/components/filter/filter-empty-state";
 import Loading from "@/components/loading/loading";
+import {
+  useParties,
+  useRequiredCountryConfig,
+} from "@/components/providers/country-provider";
 import { useDonationsByYears } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { useFilterEngine } from "@/hooks/use-filter-engine";
 import { useScrollToHash } from "@/hooks/use-scroll-to-hash";
 import { isNotNullandNotUndefined } from "@/utils/array";
-import { getParties } from "@/utils/data/get-parties";
+import { getPartiesByYears } from "@/utils/data/get-parties-by-years";
 
 interface YearsOriginClientPageProps {
-  country: CountryConfig;
   years: string[];
 }
 
 export const YearsOriginClientPage = ({
-  country,
   years,
 }: YearsOriginClientPageProps) => {
+  const country = useRequiredCountryConfig();
   const tData = useTranslations("data");
+  const parties = useParties();
 
   const {
     isFiltered,
@@ -38,8 +40,8 @@ export const YearsOriginClientPage = ({
   }, [years, isFiltered, filteredYears]);
 
   const activeParties = useMemo(() => {
-    return getParties(country, activeYears);
-  }, [country, activeYears]);
+    return getPartiesByYears(activeYears, parties);
+  }, [activeYears, parties]);
 
   const results = useDonationsByYears(country, years);
   const isLoading = results.some((r) => r.isLoading);
@@ -69,7 +71,6 @@ export const YearsOriginClientPage = ({
 
   return (
     <DonationYearOrigin
-      country={country}
       parties={activeParties}
       years={activeYears}
       donations={filteredDonations}

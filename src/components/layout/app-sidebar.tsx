@@ -21,6 +21,10 @@ import type { Country } from "@/utils/countries";
 
 import { Github } from "@/components/icons/Github";
 import { PartyDot } from "@/components/parties/party-dot";
+import {
+  useOptionalCountryConfig,
+  useParties,
+} from "@/components/providers/country-provider";
 import { SidenavSearchTrigger } from "@/components/search/sidenav-search-trigger";
 import {
   Collapsible,
@@ -55,15 +59,175 @@ import { Features, hasFeature } from "@/utils/features";
 
 import { CountrySwitch } from "./country-switch";
 
-export function AppSidebar({
+function CountryConfigSidebarContent({
   countryConfig,
 }: {
-  countryConfig?: CountryConfig;
+  countryConfig: CountryConfig;
 }) {
+  const t = useTranslations();
+  const tSidebar = useTranslations("sidebar");
+  const tSearch = useTranslations("search");
+  const locale = useLocale();
+  const parties = useParties();
   const [showAllParties, setShowAllParties] = useState(false);
+
+  return (
+    <>
+      <SidebarGroup>
+        <SidenavSearchTrigger />
+        <SidebarGroupLabel>{tSidebar("donations")}</SidebarGroupLabel>
+        <SidebarGroupContent>
+          <SidebarMenu>
+            <Collapsible
+              defaultOpen={true}
+              render={<SidebarMenuItem className="group/collapsible" />}
+            >
+              <CollapsibleTrigger render={<SidebarMenuButton />}>
+                <CalendarDays />
+                <span>{tSearch("years")}</span>
+                <ChevronRight className="ml-auto transition-transform duration-200 group-data-[open]/collapsible:rotate-90" />
+              </CollapsibleTrigger>
+              <CollapsibleContent>
+                <SidebarMenuSub>
+                  {countryConfig.years
+                    .toReversed()
+                    .slice(0, SIDENAV_YEARS_VISIBLE)
+                    .map((year) => (
+                      <SidebarMenuSubItem key={year}>
+                        <SidebarActiveMenuSubButton
+                          activeHref={`/${locale}/${countryConfig.id}/${year}`}
+                          href={`/${locale}/${countryConfig.id}/${year}/overview`}
+                        >
+                          {year}
+                        </SidebarActiveMenuSubButton>
+                      </SidebarMenuSubItem>
+                    ))}
+                </SidebarMenuSub>
+              </CollapsibleContent>
+            </Collapsible>
+            <Collapsible
+              defaultOpen={true}
+              render={<SidebarMenuItem className="group/collapsible" />}
+            >
+              <CollapsibleTrigger render={<SidebarMenuButton />}>
+                <Vote />
+                <span>{tSearch("parties")}</span>
+                <ChevronRight className="ml-auto transition-transform duration-200 group-data-[open]/collapsible:rotate-90" />
+              </CollapsibleTrigger>
+              <CollapsibleContent>
+                <SidebarMenuSub>
+                  {parties
+                    .slice(
+                      0,
+                      showAllParties ? undefined : SIDENAV_PARTIES_VISIBLE,
+                    )
+                    .map((party) => (
+                      <SidebarMenuSubItem key={party[PartyField.Id]}>
+                        <SidebarActiveMenuSubButton
+                          activeHref={`/${locale}/${countryConfig.id}/party/${party[PartyField.Id]}/`}
+                          href={`/${locale}/${countryConfig.id}/party/${party[PartyField.Id]}/donors`}
+                        >
+                          <PartyDot
+                            party={party[PartyField.Id]}
+                            nameClassName={"truncate"}
+                          />
+                        </SidebarActiveMenuSubButton>
+                      </SidebarMenuSubItem>
+                    ))}
+                  {!showAllParties &&
+                    parties.length > SIDENAV_PARTIES_VISIBLE && (
+                      <SidebarMenuSubItem>
+                        <SidebarMenuButton
+                          onClick={() => setShowAllParties(true)}
+                          className="hover:text-foreground cursor-pointer dark:text-gray-200"
+                        >
+                          <span className="text-xs">
+                            {tSidebar("show_all", {
+                              num: parties.length,
+                            })}
+                          </span>
+                        </SidebarMenuButton>
+                      </SidebarMenuSubItem>
+                    )}
+                  {showAllParties &&
+                    parties.length > SIDENAV_PARTIES_VISIBLE && (
+                      <SidebarMenuSubItem>
+                        <SidebarMenuButton
+                          onClick={() => setShowAllParties(false)}
+                          className="hover:text-foreground cursor-pointer dark:text-gray-200"
+                        >
+                          <span className="text-xs">
+                            {tSidebar("show_less")}
+                          </span>
+                        </SidebarMenuButton>
+                      </SidebarMenuSubItem>
+                    )}
+                </SidebarMenuSub>
+              </CollapsibleContent>
+            </Collapsible>
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
+      <SidebarGroup>
+        <SidebarGroupLabel>{tSidebar("tools")}</SidebarGroupLabel>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarActiveMenuButton
+              activeHref={`/${locale}/${countryConfig.id}/tools/data`}
+              href={`/${locale}/${countryConfig.id}/tools/data`}
+              asChild
+            >
+              <Link
+                prefetch={false}
+                href={`/${locale}/${countryConfig.id}/tools/data`}
+              >
+                <FileSpreadsheet />
+                <span>{t("navigation.export")}</span>
+              </Link>
+            </SidebarActiveMenuButton>
+          </SidebarMenuItem>
+          {hasFeature(countryConfig, Features.Date) ? (
+            <SidebarMenuItem>
+              <SidebarActiveMenuButton
+                activeHref={`/${locale}/${countryConfig.id}/tools/bar-chart-race`}
+                href={`/${locale}/${countryConfig.id}/tools/bar-chart-race`}
+                asChild
+              >
+                <Link
+                  prefetch={false}
+                  href={`/${locale}/${countryConfig.id}/tools/bar-chart-race`}
+                >
+                  <ChartBarStacked />
+                  <span>{t("navigation.bar_chart_race")}</span>
+                </Link>
+              </SidebarActiveMenuButton>
+            </SidebarMenuItem>
+          ) : null}
+          <SidebarMenuItem>
+            <SidebarActiveMenuButton
+              activeHref={`/${locale}/${countryConfig.id}/tools/compare`}
+              href={`/${locale}/${countryConfig.id}/tools/compare`}
+              asChild
+            >
+              <Link
+                prefetch={false}
+                href={`/${locale}/${countryConfig.id}/tools/compare`}
+              >
+                <Scale />
+                <span>{t("navigation.compare_parties")}</span>
+              </Link>
+            </SidebarActiveMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarGroup>
+    </>
+  );
+}
+
+export function AppSidebar() {
+  const countryConfig = useOptionalCountryConfig();
   const t = useTranslations();
   const tCountries = useTranslations("countries");
-  const tSearch = useTranslations("search");
   const tSidebar = useTranslations("sidebar");
   const tActions = useTranslations("actions");
   const locale = useLocale();
@@ -83,160 +247,7 @@ export function AppSidebar({
       </SidebarHeader>
       <SidebarContent>
         {countryConfig ? (
-          <>
-            <SidebarGroup>
-              <SidenavSearchTrigger />
-              <SidebarGroupLabel>{tSidebar("donations")}</SidebarGroupLabel>
-              <SidebarGroupContent>
-                <SidebarMenu>
-                  <Collapsible
-                    defaultOpen={true}
-                    render={<SidebarMenuItem className="group/collapsible" />}
-                  >
-                    <CollapsibleTrigger render={<SidebarMenuButton />}>
-                      <CalendarDays />
-                      <span>{tSearch("years")}</span>
-                      <ChevronRight className="ml-auto transition-transform duration-200 group-data-[open]/collapsible:rotate-90" />
-                    </CollapsibleTrigger>
-                    <CollapsibleContent>
-                      <SidebarMenuSub>
-                        {countryConfig.years
-                          .toReversed()
-                          .slice(0, SIDENAV_YEARS_VISIBLE)
-                          .map((year) => (
-                            <SidebarMenuSubItem key={year}>
-                              <SidebarActiveMenuSubButton
-                                activeHref={`/${locale}/${countryConfig.id}/${year}`}
-                                href={`/${locale}/${countryConfig.id}/${year}/overview`}
-                              >
-                                {year}
-                              </SidebarActiveMenuSubButton>
-                            </SidebarMenuSubItem>
-                          ))}
-                      </SidebarMenuSub>
-                    </CollapsibleContent>
-                  </Collapsible>
-                  <Collapsible
-                    defaultOpen={true}
-                    render={<SidebarMenuItem className="group/collapsible" />}
-                  >
-                    <CollapsibleTrigger render={<SidebarMenuButton />}>
-                      <Vote />
-                      <span>{tSearch("parties")}</span>
-                      <ChevronRight className="ml-auto transition-transform duration-200 group-data-[open]/collapsible:rotate-90" />
-                    </CollapsibleTrigger>
-                    <CollapsibleContent>
-                      <SidebarMenuSub>
-                        {countryConfig.parties
-                          .slice(
-                            0,
-                            showAllParties
-                              ? undefined
-                              : SIDENAV_PARTIES_VISIBLE,
-                          )
-                          .map((party) => (
-                            <SidebarMenuSubItem key={party[PartyField.Id]}>
-                              <SidebarActiveMenuSubButton
-                                activeHref={`/${locale}/${countryConfig.id}/party/${party[PartyField.Id]}/`}
-                                href={`/${locale}/${countryConfig.id}/party/${party[PartyField.Id]}/donors`}
-                              >
-                                <PartyDot
-                                  party={party[PartyField.Id]}
-                                  country={countryConfig}
-                                  nameClassName={"truncate"}
-                                />
-                              </SidebarActiveMenuSubButton>
-                            </SidebarMenuSubItem>
-                          ))}
-                        {!showAllParties &&
-                          countryConfig.parties.length >
-                            SIDENAV_PARTIES_VISIBLE && (
-                            <SidebarMenuSubItem>
-                              <SidebarMenuButton
-                                onClick={() => setShowAllParties(true)}
-                                className="hover:text-foreground cursor-pointer dark:text-gray-200"
-                              >
-                                <span className="text-xs">
-                                  {tSidebar("show_all", {
-                                    num: countryConfig.parties.length,
-                                  })}
-                                </span>
-                              </SidebarMenuButton>
-                            </SidebarMenuSubItem>
-                          )}
-                        {showAllParties &&
-                          countryConfig.parties.length >
-                            SIDENAV_PARTIES_VISIBLE && (
-                            <SidebarMenuSubItem>
-                              <SidebarMenuButton
-                                onClick={() => setShowAllParties(false)}
-                                className="hover:text-foreground cursor-pointer dark:text-gray-200"
-                              >
-                                <span className="text-xs">
-                                  {tSidebar("show_less")}
-                                </span>
-                              </SidebarMenuButton>
-                            </SidebarMenuSubItem>
-                          )}
-                      </SidebarMenuSub>
-                    </CollapsibleContent>
-                  </Collapsible>
-                </SidebarMenu>
-              </SidebarGroupContent>
-            </SidebarGroup>
-            <SidebarGroup>
-              <SidebarGroupLabel>{tSidebar("tools")}</SidebarGroupLabel>
-              <SidebarMenu>
-                <SidebarMenuItem>
-                  <SidebarActiveMenuButton
-                    activeHref={`/${locale}/${countryConfig.id}/tools/data`}
-                    href={`/${locale}/${countryConfig.id}/tools/data`}
-                    asChild
-                  >
-                    <Link
-                      prefetch={false}
-                      href={`/${locale}/${countryConfig.id}/tools/data`}
-                    >
-                      <FileSpreadsheet />
-                      <span>{t("navigation.export")}</span>
-                    </Link>
-                  </SidebarActiveMenuButton>
-                </SidebarMenuItem>
-                {hasFeature(countryConfig, Features.Date) ? (
-                  <SidebarMenuItem>
-                    <SidebarActiveMenuButton
-                      activeHref={`/${locale}/${countryConfig.id}/tools/bar-chart-race`}
-                      href={`/${locale}/${countryConfig.id}/tools/bar-chart-race`}
-                      asChild
-                    >
-                      <Link
-                        prefetch={false}
-                        href={`/${locale}/${countryConfig.id}/tools/bar-chart-race`}
-                      >
-                        <ChartBarStacked />
-                        <span>{t("navigation.bar_chart_race")}</span>
-                      </Link>
-                    </SidebarActiveMenuButton>
-                  </SidebarMenuItem>
-                ) : null}
-                <SidebarMenuItem>
-                  <SidebarActiveMenuButton
-                    activeHref={`/${locale}/${countryConfig.id}/tools/compare`}
-                    href={`/${locale}/${countryConfig.id}/tools/compare`}
-                    asChild
-                  >
-                    <Link
-                      prefetch={false}
-                      href={`/${locale}/${countryConfig.id}/tools/compare`}
-                    >
-                      <Scale />
-                      <span>{t("navigation.compare_parties")}</span>
-                    </Link>
-                  </SidebarActiveMenuButton>
-                </SidebarMenuItem>
-              </SidebarMenu>
-            </SidebarGroup>
-          </>
+          <CountryConfigSidebarContent countryConfig={countryConfig} />
         ) : (
           <SidebarGroup>
             <SidebarGroupLabel>{tSidebar("all_countries")}</SidebarGroupLabel>

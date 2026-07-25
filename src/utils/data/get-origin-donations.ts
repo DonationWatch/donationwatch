@@ -9,7 +9,7 @@ import { AddressField, Donation, DonationField } from "../types";
 export const getOriginDonations = (
   country: CountryConfig,
   donations: Donation[],
-  parties?: Party[],
+  parties: Party[],
   years?: string[],
 ): {
   count: number;
@@ -17,7 +17,6 @@ export const getOriginDonations = (
   sum: number;
   sumNumbers: number[];
 } => {
-  parties ??= country.parties;
   years ??= country.years;
 
   const sums: Record<

@@ -2,8 +2,6 @@
 
 import { useEffect, useMemo } from "react";
 
-import type { CountryConfig } from "@/types/country-config";
-
 import { YearDonationHistory } from "@/components/donations/party-donation-history";
 import { FilterEmptyState } from "@/components/filter/filter-empty-state";
 import {
@@ -11,6 +9,7 @@ import {
   ArticleSectionWrapper,
 } from "@/components/layout/article";
 import Loading from "@/components/loading/loading";
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useDonationsByYears } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import {
@@ -21,18 +20,17 @@ import { useScrollToHash } from "@/hooks/use-scroll-to-hash";
 import { isNotNullandNotUndefined } from "@/utils/array";
 
 interface YearsChangesClientPageProps {
-  country: CountryConfig;
   years: string[];
   title: string;
   summary: string;
 }
 
 export const YearsChangesClientPage = ({
-  country,
   years,
   title,
   summary,
 }: YearsChangesClientPageProps) => {
+  const country = useRequiredCountryConfig();
   const tData = useTranslations("data");
 
   const results = useDonationsByYears(country, years);
@@ -85,7 +83,6 @@ export const YearsChangesClientPage = ({
       ) : (
         <YearDonationHistory
           years={activeYears}
-          country={country}
           donations={filteredDonations}
         />
       )}

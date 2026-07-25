@@ -1,14 +1,4 @@
-import type { CountryConfig } from "@/types/country-config";
-
-import { PartyField } from "@/types/party";
-
-import type { DonorType, ReceiverId } from "./types";
-
-import { getParty } from "./countries";
-
-export const partyColor = (partyId: ReceiverId, country: CountryConfig) => {
-  return getParty(country, partyId)[PartyField.Color];
-};
+import type { DonorType } from "./types";
 
 const chartColors = [
   "#5070dd",

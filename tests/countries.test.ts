@@ -2,7 +2,7 @@ import { describe, expect, test } from "vitest";
 
 import { PartyField } from "@/types/party";
 import { COUNTRIES } from "@/utils/countries";
-import { getCountryConfig } from "@/utils/data/get-country-config";
+import { getParties } from "@/utils/loader/parties";
 import { getLongName } from "@/utils/party";
 import { AddressField, DonationField } from "@/utils/types";
 
@@ -35,9 +35,9 @@ describe("Party config fields are unique", () => {
       const colors = new Set<string>();
       const shortNames = new Set<string>();
       const names = new Set<string>();
-      const countryConfig = await getCountryConfig(country);
+      const parties = await getParties(country);
 
-      countryConfig.parties.forEach((party) => {
+      parties.forEach((party) => {
         expect(
           ids.has(party[PartyField.Id]),
           `Duplicate id ${party[PartyField.Id]} in ${country}`,

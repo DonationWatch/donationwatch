@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 
 import { LoadingDonationPartyTreemap } from "@/components/charts/loading-donation-years-treemap";
@@ -19,6 +18,7 @@ import {
 import Loading from "@/components/loading/loading";
 import { LoadingPartyDonorTypeText } from "@/components/parties/part-donor-type-text";
 import { PartyDonorPageText } from "@/components/parties/party-donor-page-text";
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useDonationsByParty } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import {
@@ -30,7 +30,6 @@ import { PartyField } from "@/types/party";
 import { Features, hasFeature } from "@/utils/features";
 
 interface PartyDonorsClientPageProps {
-  country: CountryConfig;
   party: Party;
   treemapTitle: string;
   treemapSubtitle: string;
@@ -42,7 +41,6 @@ interface PartyDonorsClientPageProps {
 }
 
 export const PartyDonorsClientPage = ({
-  country,
   party,
   treemapTitle,
   treemapSubtitle,
@@ -52,6 +50,7 @@ export const PartyDonorsClientPage = ({
   listTitle,
   listP0,
 }: PartyDonorsClientPageProps) => {
+  const country = useRequiredCountryConfig();
   const tData = useTranslations("data");
   const { data, error, isLoading, isSuccess } = useDonationsByParty(
     country,
@@ -92,16 +91,11 @@ export const PartyDonorsClientPage = ({
       <ArticleSectionWrapper id={"sec-party-donors"}>
         <ArticleSectionTwoColumns>
           <ArticleSectionColumn>
-            <PartyDonorPageText
-              party={party}
-              country={country}
-              donations={filteredDonations}
-            />
+            <PartyDonorPageText party={party} donations={filteredDonations} />
           </ArticleSectionColumn>
           <ArticleSectionColumn>
             <div>
               <LoadingDonationPartyTreemap
-                country={country}
                 party={party}
                 tooSmallAreaColor={party[PartyField.Color]}
                 title={treemapTitle}
@@ -122,14 +116,12 @@ export const PartyDonorsClientPage = ({
                 title={donorTypesTitle}
               />
               <LoadingPartyDonorTypeText
-                country={country}
                 party={party}
                 donations={filteredDonations}
               />
             </ArticleSectionColumn>
             <ArticleSectionColumn>
               <LoadingPartyDonorTypeTreemap
-                country={country}
                 party={party}
                 title={donorTypesTreemapTitle}
                 subtitle={donorTypesTreemapSubtitle}

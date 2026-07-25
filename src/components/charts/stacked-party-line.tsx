@@ -1,47 +1,57 @@
 "use client";
 
-import type { CountryConfig } from "@/types/country-config";
-
 import { AbsoluteMultipleColorsGradient } from "@/components/absolute-multiple-colors-gradient";
+import {
+  usePartiesMap,
+  useRequiredCountryConfig,
+} from "@/components/providers/country-provider";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { cn } from "@/lib/utils";
 import { PartyField } from "@/types/party";
-import { partyColor } from "@/utils/color";
-import { getParty } from "@/utils/countries";
 import { formatCountryCurrency } from "@/utils/formatter";
 
 import type { StackedPartiesConfig } from "./stacked-party-line-config";
 
 export const StackedPartyDonations = ({
   data,
-  country,
   direction = "horizontal",
 }: {
   data: StackedPartiesConfig;
-  country: CountryConfig;
   direction?: "horizontal" | "vertical";
 }) => {
   const browserBasedLocale = useBrowserBasedLocale();
+  const country = useRequiredCountryConfig();
+  const partiesMap = usePartiesMap();
+
   const { sum, sums } = data;
+
+  if (!sum || sums.length === 0) return null;
+
+  const totalTitle = sums
+    .map(
+      ([party, amount]) =>
+        `${partiesMap[party][PartyField.Short]}: ${formatCountryCurrency(browserBasedLocale, amount, country)}`,
+    )
+    .join("\n");
 
   return (
     <div
       aria-hidden="true"
+      title={totalTitle}
       className={cn(
-        `flex h-full w-full gap-0.5 *:h-full *:rounded-xs`,
+        "flex h-full w-full gap-0.5 *:h-full *:rounded-xs",
         direction === "horizontal" ? "" : "flex-col",
       )}
     >
-      {sums.map(([party, data]) => (
+      {sums.map(([party, amount]) => (
         <div
           key={party}
-          title={`${getParty(country, party)[PartyField.Short]}: ${formatCountryCurrency(browserBasedLocale, data, country)}`}
           style={{
-            backgroundColor: partyColor(party, country),
+            backgroundColor: partiesMap[party][PartyField.Color],
             [direction === "horizontal" ? "width" : "height"]:
-              `${100 * (data / sum)}%`,
+              `${((amount / sum) * 100).toFixed(2)}%`,
           }}
-        ></div>
+        />
       ))}
     </div>
   );
@@ -49,18 +59,20 @@ export const StackedPartyDonations = ({
 
 export const AbsoluteMultiplePartySumsGradient = ({
   data,
-  country,
 }: {
   data: StackedPartiesConfig;
-  country: CountryConfig;
 }) => {
+  const partiesMap = usePartiesMap();
+
   const { sum, sums } = data;
+
+  if (!sum || sums.length === 0) return null;
 
   return (
     <AbsoluteMultipleColorsGradient
       colors={sums.map(([party, data]) => ({
-        color: partyColor(party, country),
-        width: 100 * (data / sum),
+        color: partiesMap[party][PartyField.Color],
+        width: Number(((data / sum) * 100).toFixed(2)),
       }))}
     />
   );

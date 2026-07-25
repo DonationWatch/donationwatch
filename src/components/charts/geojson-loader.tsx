@@ -7,8 +7,7 @@ import { VisualMapComponent } from "echarts/components";
 import * as echarts from "echarts/core";
 import { useEffect, useState } from "react";
 
-import type { CountryConfig } from "@/types/country-config";
-
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { Country } from "@/utils/countries";
 
 echarts.use([VisualMapComponent, MapChart]);
@@ -24,12 +23,8 @@ const mapLoader: Partial<Record<Country, () => Promise<unknown>>> = {
     import("../../../public/geojson/canada").then((mod) => mod.default),
 };
 
-export const GeoJsonLoader = ({
-  children,
-  country,
-}: PropsWithChildren<{
-  country: CountryConfig;
-}>) => {
+export const GeoJsonLoader = ({ children }: PropsWithChildren) => {
+  const country = useRequiredCountryConfig();
   const [mapLoaded, setMapLoaded] = useState(false);
 
   useEffect(() => {

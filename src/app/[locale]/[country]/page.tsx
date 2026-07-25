@@ -11,6 +11,7 @@ import {
 } from "@/components/browser-based-formatter";
 import { DonationStackedYears } from "@/components/charts/donation-stacked-years";
 import { DynamicStackedPartyDonations } from "@/components/charts/dynamic-stacked-party-line";
+import { partyYearsSumsToStackedConfig } from "@/components/charts/stacked-party-line-config";
 import { BiggestDonationsHero } from "@/components/donations/biggest-donations-hero";
 import { DonorsHero } from "@/components/donors/donors-hero";
 import { ExternalThanks } from "@/components/external-thanks";
@@ -22,6 +23,8 @@ import { PartiesHero } from "@/components/parties/parties-hero";
 import { Translation } from "@/components/translation";
 import { YearsCards } from "@/components/years/years-cards";
 import { UnfilteredYearsHeader } from "@/components/years/years-header";
+import { PartyStatField } from "@/types/party-stats";
+import { TOP_DONORS_TO_SHOW } from "@/utils/config";
 import {
   COUNTRIES,
   getCountryName,
@@ -33,10 +36,8 @@ import { getMessagesForLocale } from "@/utils/i18n-loader";
 import { pick } from "@/utils/i18n-pick";
 import { getBiggestDonors } from "@/utils/loader/biggest-donors";
 import { loadCountryData } from "@/utils/loader/country-data-loaders";
-import {
-  getPartyYearsSums,
-  PartyStatField,
-} from "@/utils/loader/party-years-sums";
+import { getParties } from "@/utils/loader/parties";
+import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
 import { LOCALES } from "@/utils/locales";
 import { generateAlternates } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
@@ -85,6 +86,7 @@ export default async function YearsPage(
     biggestDonors,
     biggestDonations,
     messages,
+    parties,
   ] = await Promise.all([
     getTranslations({ locale, namespace: "ref_countries" }),
     getTranslations({ locale, namespace: "home" }),
@@ -94,6 +96,7 @@ export default async function YearsPage(
     getBiggestDonors(country),
     loadCountryData(country, "biggestDonations"),
     getMessagesForLocale(locale),
+    getParties(country),
   ]);
 
   // Get years that actually have donations by checking partySums
@@ -143,10 +146,10 @@ export default async function YearsPage(
             </h1>
             <div className="space-y-2">
               <div className="lg:inline-block">
-                <OldDataWarning countryConfig={countryConfig} />
+                <OldDataWarning />
               </div>
               <div className="lg:inline-block">
-                <DetectedCountry country={countryConfig} />
+                <DetectedCountry countryCode={countryConfig.code} />
               </div>
             </div>
           </div>
@@ -161,10 +164,10 @@ export default async function YearsPage(
                   years={[`${currentYear}`]}
                   country={countryConfig}
                   partySums={partySums}
+                  parties={parties}
                 >
                   <div className="h-2.5">
                     <DynamicStackedPartyDonations
-                      country={countryConfig}
                       years={[`${currentYear}`]}
                       partyYearsSums={partySums}
                     />
@@ -184,7 +187,6 @@ export default async function YearsPage(
                   <span className="font-semibold">{previousYear}</span>
                   {
                     <FormattedCountryCurrency
-                      country={countryConfig}
                       value={Object.values(partySums[previousYear]).reduce(
                         (all, stats) => all + stats[PartyStatField.Sum],
                         0,
@@ -227,7 +229,6 @@ export default async function YearsPage(
                       count: countryConfig.knownPartyRequirements.count,
                       sum: (
                         <FormattedCompactCountryCurrency
-                          country={countryConfig}
                           value={Math.max(
                             0,
                             countryConfig.knownPartyRequirements.sum,
@@ -287,10 +288,7 @@ export default async function YearsPage(
         </h2>
 
         <div className="grid gap-8 @4xl:grid-cols-2">
-          <DonationStackedYears
-            country={countryConfig}
-            partyYearsSums={partySums}
-          />
+          <DonationStackedYears partyYearsSums={partySums} />
           <div>
             <p className="mb-8 lg:text-lg">{tHome("years.summary")}</p>
 
@@ -335,12 +333,22 @@ export default async function YearsPage(
             })}
           </p>
 
-          <DonorsHero country={countryConfig} biggestDonors={biggestDonors} />
-
-          <BiggestDonationsHero
+          <DonorsHero
             country={countryConfig}
-            biggestDonations={biggestDonations}
+            biggestDonors={biggestDonors
+              .slice(0, TOP_DONORS_TO_SHOW)
+              .map((donor) => ({
+                id: donor.id,
+                name: donor.name,
+                sum: donor.sum,
+                stackedConfig: partyYearsSumsToStackedConfig(
+                  countryConfig.years,
+                  donor.partyYearSums,
+                ),
+              }))}
           />
+
+          <BiggestDonationsHero biggestDonations={biggestDonations} />
         </section>
       ) : null}
 
@@ -368,10 +376,10 @@ export default async function YearsPage(
                   locale={locale}
                   years={years}
                   partySums={partySums}
+                  parties={parties}
                 >
                   <div className="h-2.5">
                     <DynamicStackedPartyDonations
-                      country={countryConfig}
                       years={years}
                       partyYearsSums={partySums}
                     />

@@ -1,6 +1,5 @@
 "use client";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Donation } from "@/utils/types";
 
 import {
@@ -9,6 +8,7 @@ import {
   ArticleSectionTitle,
   ArticleSectionWrapper,
 } from "@/components/layout/article";
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { DonationHistoryTable } from "@/components/table/donation-history-table";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { getDonorName } from "@/utils/donor";
@@ -16,11 +16,10 @@ import { DonationField } from "@/utils/types";
 
 export const DonorDonationTable = ({
   donations,
-  countryConfig,
 }: {
-  countryConfig: CountryConfig;
   donations: Donation[];
 }) => {
+  const countryConfig = useRequiredCountryConfig();
   const t = useTranslations();
   const tCommon = useTranslations("common");
 
@@ -51,7 +50,6 @@ export const DonorDonationTable = ({
           <DonationHistoryTable
             readonlyDonor={true}
             donations={donations}
-            country={countryConfig}
             years={countryConfig.years}
             partiesIds={[]}
           />

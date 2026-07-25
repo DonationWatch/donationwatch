@@ -10,12 +10,10 @@ import {
   formatCompactCountryCurrency,
   formatYearsRange,
 } from "@/utils/formatter";
-import {
-  getPartyYearsSums,
-  hasYearSums,
-} from "@/utils/loader/party-years-sums";
+import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
 import { generateAlternates } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
+import { hasYearSums } from "@/utils/party";
 import { deserializeYears } from "@/utils/serializers";
 import {
   isValidCountry,
@@ -82,9 +80,8 @@ export default async function ChangesPage(
   const { locale, country } = params;
   const years = deserializeYears(params.years);
 
-  const [t, countryConfig, partySums] = await Promise.all([
+  const [t, partySums] = await Promise.all([
     getTranslations({ locale }),
-    getCountryConfig(country),
     getPartyYearsSums(country),
   ]);
 
@@ -97,7 +94,6 @@ export default async function ChangesPage(
   return (
     <Article fullWidth={true}>
       <YearsChangesClientPage
-        country={countryConfig}
         years={years}
         title={t("changes.detail.title")}
         summary={t("changes.detail.summary")}

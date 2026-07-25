@@ -1,12 +1,12 @@
 "use client";
 import { useLocale } from "next-intl";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Donation, ReceiverId } from "@/utils/types";
 
 import { FormatAnd } from "@/components/formatter";
 import { TextPartyLink } from "@/components/parties/text-party-link";
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { Translation } from "@/components/translation";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
@@ -18,14 +18,13 @@ import { DonationField } from "@/utils/types";
 export const YearBarsPageText = ({
   parties,
   years,
-  country,
   donations,
 }: {
-  country: CountryConfig;
   parties: Party[];
   years: string[];
   donations: Donation[];
 }) => {
+  const country = useRequiredCountryConfig();
   const t = useTranslations();
   const locale = useLocale();
   const browserBasedLocale = useBrowserBasedLocale();
@@ -142,7 +141,6 @@ export const YearBarsPageText = ({
                     <TextPartyLink
                       key={partyId}
                       party={partyId}
-                      country={country}
                       locale={locale}
                     />
                   ))}

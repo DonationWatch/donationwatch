@@ -6,17 +6,16 @@ import { notFound, redirect } from "next/navigation";
 import { Article } from "@/components/layout/article";
 import { getCountryName } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
-import { getParties } from "@/utils/data/get-parties";
+import { getPartiesByYears } from "@/utils/data/get-parties-by-years";
 import { Features, hasFeature } from "@/utils/features";
 import { formatYearsRange } from "@/utils/formatter";
-import {
-  getPartyYearsSums,
-  hasYearSums,
-} from "@/utils/loader/party-years-sums";
+import { getParties } from "@/utils/loader/parties";
+import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
 import { generateAlternates } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
 import {
   canShowYearsTimeline,
+  hasYearSums,
   yearPartiesHaveYearOnlyDonations,
 } from "@/utils/party";
 import { deserializeYears } from "@/utils/serializers";
@@ -81,12 +80,14 @@ export default async function TimelinePage(
   setRequestLocale(params.locale);
 
   const years = deserializeYears(params.years);
-  const [t, tCountries, countryConfig, partyYearSums] = await Promise.all([
-    getTranslations({ locale: params.locale }),
-    getTranslations({ locale: params.locale, namespace: "countries" }),
-    getCountryConfig(params.country),
-    getPartyYearsSums(params.country),
-  ]);
+  const [t, tCountries, countryConfig, partyYearSums, allParties] =
+    await Promise.all([
+      getTranslations({ locale: params.locale }),
+      getTranslations({ locale: params.locale, namespace: "countries" }),
+      getCountryConfig(params.country),
+      getPartyYearsSums(params.country),
+      getParties(params.country),
+    ]);
 
   if (!canShowYearsTimeline(countryConfig, partyYearSums, years)) {
     return notFound();
@@ -97,7 +98,7 @@ export default async function TimelinePage(
     years,
   );
 
-  const parties = getParties(countryConfig, years);
+  const parties = getPartiesByYears(years, allParties);
 
   const resolution =
     !hasYearOnlyDonations && hasFeature(countryConfig, Features.Date)
@@ -119,7 +120,6 @@ export default async function TimelinePage(
   return (
     <Article fullWidth={true}>
       <YearsTimelineClientPage
-        country={countryConfig}
         years={years}
         parties={parties}
         resolution={resolution}

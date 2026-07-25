@@ -1,12 +1,12 @@
 "use client";
 import { useLocale } from "next-intl";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Donation } from "@/utils/types";
 
 import { DonorLink } from "@/components/donors/donor-link";
 import { FormatAnd } from "@/components/formatter";
 import { TextPartyLink } from "@/components/parties/text-party-link";
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { Translation } from "@/components/translation";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
@@ -17,12 +17,11 @@ import { formatCountryCurrency } from "@/utils/formatter";
 import { DonationField } from "@/utils/types";
 
 export const BiggestDonationsHero = ({
-  country,
   biggestDonations,
 }: {
-  country: CountryConfig;
   biggestDonations: Donation[];
 }) => {
+  const country = useRequiredCountryConfig();
   const tBiggestDonations = useTranslations("biggest_donations");
   const tCountries = useTranslations("countries");
   const tCommon = useTranslations("common");
@@ -49,16 +48,12 @@ export const BiggestDonationsHero = ({
           ),
           year: biggestDonationYear,
           donor: (
-            <DonorLink
-              country={country}
-              donor={getDonationDonorName(biggestDonation, tCommon)}
-            />
+            <DonorLink donor={getDonationDonorName(biggestDonation, tCommon)} />
           ),
           party: (
             <TextPartyLink
               locale={locale}
               party={biggestDonation[DonationField.Receiver]}
-              country={country}
             />
           ),
           others: (
@@ -77,7 +72,6 @@ export const BiggestDonationsHero = ({
                     ),
                     donor: (
                       <DonorLink
-                        country={country}
                         donor={getDonationDonorName(donation, tCommon)}
                       />
                     ),
@@ -85,7 +79,6 @@ export const BiggestDonationsHero = ({
                       <TextPartyLink
                         locale={locale}
                         party={donation[DonationField.Receiver]}
-                        country={country}
                       />
                     ),
                   }}

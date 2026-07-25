@@ -4,36 +4,24 @@ import Link from "next/link";
 
 import { SidebarTriggerButtons } from "@/components/layout/sidebar-trigger-buttons";
 import { DynamicContentSearch } from "@/components/search/dynamic-content-search";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 
 import { LangSwitch } from "./lang-switch";
 
 const EnterpriseApiButton = () => {
   const locale = useLocale();
   const t = useTranslations();
+  const label = t("navigation.enterprise");
 
   return (
-    <Tooltip>
-      <TooltipTrigger
-        render={
-          <Link
-            href={`/${locale}/enterprise`}
-            prefetch={false}
-            aria-label={t("navigation.enterprise")}
-            className="bg-primary-700 hover:bg-primary-500 flex size-10 shrink-0 items-center justify-center rounded-full p-1 font-semibold text-white"
-          >
-            <Server />
-          </Link>
-        }
-      />
-      <TooltipContent sideOffset={10} side={"left"}>
-        {t("navigation.enterprise")}
-      </TooltipContent>
-    </Tooltip>
+    <Link
+      href={`/${locale}/enterprise`}
+      prefetch={false}
+      aria-label={label}
+      title={label}
+      className="bg-primary-700 hover:bg-primary-500 flex size-10 shrink-0 items-center justify-center rounded-full p-1 font-semibold text-white"
+    >
+      <Server />
+    </Link>
   );
 };
 

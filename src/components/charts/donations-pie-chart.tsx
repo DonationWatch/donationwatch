@@ -5,39 +5,41 @@ import type { TreemapSeriesNodeItemOption } from "echarts/types/src/chart/treema
 import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { PartySum } from "@/utils/data/get-parties-sum";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 import type { ReceiverId } from "@/utils/types";
 
+import {
+  usePartiesMap,
+  useRequiredCountryConfig,
+} from "@/components/providers/country-provider";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
-import { partyColor } from "@/utils/color";
-import { getCountryName, getParty } from "@/utils/countries";
+import { PartyStatField } from "@/types/party-stats";
+import { getCountryName } from "@/utils/countries";
 import { formatCountryCurrency, formatYearsRange } from "@/utils/formatter";
-import { PartyStatField } from "@/utils/loader/party-years-sums";
 
 import { ExpandableReactEchart } from "./expandable-react-echart";
 
 export const DonationsPieChart = ({
-  country,
   partyYearsSums,
   years,
   sums,
 }: {
-  country: CountryConfig;
   partyYearsSums?: PartyYearsSums;
   years: string[];
   sums?: PartySum[];
 }) => {
+  const country = useRequiredCountryConfig();
   const t = useTranslations();
   const tCountries = useTranslations("countries");
   const locale = useLocale();
   const browserBasedLocale = useBrowserBasedLocale();
   const router = useRouter();
   const { backgroundColor, isMobile } = useChart();
+  const partiesMap = usePartiesMap();
   const partySums: Record<string, number> = {};
 
   if (sums) {
@@ -58,14 +60,14 @@ export const DonationsPieChart = ({
   const treemapData: TreemapSeriesNodeItemOption[] = Object.entries(
     partySums,
   ).map(([partyId, sum]) => {
-    const party = getParty(country, partyId as ReceiverId);
+    const party = partiesMap[partyId as ReceiverId];
     return {
       id: party[PartyField.Id],
       name: party[PartyField.Short],
       value: sum,
       colorSaturation: [0.35, 0.5],
       itemStyle: {
-        color: partyColor(party[PartyField.Id], country),
+        color: party[PartyField.Color],
         borderRadius: 4,
       },
       label: {
@@ -160,7 +162,6 @@ export const DonationsPieChart = ({
         country: getCountryName(country, tCountries),
         years: formatYearsRange(years),
       })}
-      country={country}
       years={years}
       feature="treemap"
       option={option}

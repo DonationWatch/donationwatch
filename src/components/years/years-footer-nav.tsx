@@ -2,22 +2,21 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { ConstLocale } from "@/utils/locales";
 
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
 const YearsFooterLink = ({
   next,
   year,
   locale,
-  country,
 }: {
   year: number;
   locale: ConstLocale;
-  country: CountryConfig;
   next?: boolean;
 }) => {
+  const country = useRequiredCountryConfig();
   const t = useTranslations("years");
   return (
     <Link
@@ -35,13 +34,12 @@ const YearsFooterLink = ({
 
 export const YearsFooterNav = ({
   years,
-  country,
   locale,
 }: {
   years: string[];
   locale: ConstLocale;
-  country: CountryConfig;
 }) => {
+  const country = useRequiredCountryConfig();
   const firstYearNumber = parseInt(years.at(0)!, 10);
   const lastYearNumber = parseInt(years.at(-1)!, 10);
 
@@ -69,17 +67,12 @@ export const YearsFooterNav = ({
       <div className="border-t border-t-gray-200 dark:border-t-gray-800"></div>
       <div className="flex justify-between py-4">
         {canGoBack ? (
-          <YearsFooterLink country={country} locale={locale} year={prevYear} />
+          <YearsFooterLink locale={locale} year={prevYear} />
         ) : (
           <div></div>
         )}
         {canGoNext ? (
-          <YearsFooterLink
-            country={country}
-            locale={locale}
-            year={nextYear}
-            next={true}
-          />
+          <YearsFooterLink locale={locale} year={nextYear} next={true} />
         ) : (
           <div></div>
         )}

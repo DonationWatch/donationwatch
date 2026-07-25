@@ -1,9 +1,9 @@
 "use client";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Donation } from "@/utils/types";
 
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { PartyField } from "@/types/party";
 import { donationYear } from "@/utils/date";
@@ -13,14 +13,13 @@ import { DonationField } from "@/utils/types";
 export const YearTimelineYearText = ({
   parties,
   years,
-  country,
   donations,
 }: {
-  country: CountryConfig;
   parties: Party[];
   years: string[];
   donations: Donation[];
 }) => {
+  const country = useRequiredCountryConfig();
   const browserBasedLocale = useBrowserBasedLocale();
 
   const partiesSet = new Set<string>(parties.map((p) => p[PartyField.Id]));

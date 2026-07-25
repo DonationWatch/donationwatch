@@ -2,7 +2,6 @@
 
 import { useLocale } from "next-intl";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Donation, ReceiverId } from "@/utils/types";
 
 import { LoadedDonationYearsTreemap } from "@/components/charts/loading-donation-years-treemap";
@@ -15,11 +14,16 @@ import {
 } from "@/components/layout/article";
 import { TextPartyLink } from "@/components/parties/text-party-link";
 import { PercentageHint } from "@/components/percentage-hint";
+import {
+  useParties,
+  usePartiesMap,
+  useRequiredCountryConfig,
+} from "@/components/providers/country-provider";
 import { Translation } from "@/components/translation";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
-import { getCountryName, getParty } from "@/utils/countries";
+import { getCountryName } from "@/utils/countries";
 import { donationYear } from "@/utils/date";
 import { getDonorName } from "@/utils/donor";
 import {
@@ -31,18 +35,18 @@ import {
 import { DonationField } from "@/utils/types";
 
 export const DonorClientPageContent = ({
-  countryConfig,
   donations,
 }: {
-  donorId: string;
-  countryConfig: CountryConfig;
   donations: Donation[];
 }) => {
+  const countryConfig = useRequiredCountryConfig();
   const tDonor = useTranslations("donor");
   const tCountries = useTranslations("countries");
   const tCommon = useTranslations("common");
   const locale = useLocale();
   const browserBasedLocale = useBrowserBasedLocale();
+  const parties = useParties();
+  const partiesMap = usePartiesMap();
 
   if (!donations || donations.length === 0) {
     return null;
@@ -174,7 +178,6 @@ export const DonorClientPageContent = ({
                     <TextPartyLink
                       party={partyDonation.party}
                       locale={locale}
-                      country={countryConfig}
                     />
                   </div>
                   <div className="ml-2 flex tabular-nums">
@@ -213,7 +216,6 @@ export const DonorClientPageContent = ({
                     party: (
                       <TextPartyLink
                         party={oldestDonation[DonationField.Receiver]}
-                        country={countryConfig}
                         locale={locale}
                       />
                     ),
@@ -242,7 +244,6 @@ export const DonorClientPageContent = ({
                     party: (
                       <TextPartyLink
                         party={newestDonation[DonationField.Receiver]}
-                        country={countryConfig}
                         locale={locale}
                       />
                     ),
@@ -261,7 +262,7 @@ export const DonorClientPageContent = ({
                   browserBasedLocale,
                   mostPartyDonations.map(({ party, count }) =>
                     tDonor("most_donations_item", {
-                      party: getParty(countryConfig, party)[PartyField.Short],
+                      party: partiesMap[party][PartyField.Short],
                       count: formatNumber(browserBasedLocale, count),
                     }),
                   ),
@@ -305,7 +306,6 @@ export const DonorClientPageContent = ({
                     party: (
                       <TextPartyLink
                         party={biggestDonation[DonationField.Receiver]}
-                        country={countryConfig}
                         locale={locale}
                       />
                     ),
@@ -318,7 +318,6 @@ export const DonorClientPageContent = ({
         <ArticleSectionColumn>
           <div>
             <LoadedDonationYearsTreemap
-              country={countryConfig}
               title={tDonor("tree_map", {
                 name: donorName,
               })}
@@ -326,8 +325,8 @@ export const DonorClientPageContent = ({
                 donor: donorName,
                 country: getCountryName(countryConfig, tCountries),
               })}
-              parties={countryConfig.parties}
               donations={donations}
+              parties={parties}
             />
           </div>
         </ArticleSectionColumn>

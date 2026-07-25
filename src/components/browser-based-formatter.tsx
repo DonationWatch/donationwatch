@@ -1,22 +1,15 @@
 "use client";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Currency } from "@/utils/countries";
 
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import {
   formatCompactCountryCurrency,
   formatCompactCurrency,
   formatCountryCurrency,
   formatNumber,
-  formatTwoDigitDate,
 } from "@/utils/formatter";
-
-export const FormattedTwoDigitDate = ({ date }: { date: Date }) => {
-  const browserBasedLocale = useBrowserBasedLocale();
-
-  return formatTwoDigitDate(browserBasedLocale, date);
-};
 
 export const FormattedCompactCurrency = ({
   value,
@@ -32,23 +25,17 @@ export const FormattedCompactCurrency = ({
 
 export const FormattedCompactCountryCurrency = ({
   value,
-  country,
 }: {
   value: number;
-  country: CountryConfig;
 }) => {
+  const country = useRequiredCountryConfig();
   const browserBasedLocale = useBrowserBasedLocale();
 
   return formatCompactCountryCurrency(browserBasedLocale, value, country);
 };
 
-export const FormattedCountryCurrency = ({
-  value,
-  country,
-}: {
-  value: number;
-  country: CountryConfig;
-}) => {
+export const FormattedCountryCurrency = ({ value }: { value: number }) => {
+  const country = useRequiredCountryConfig();
   const browserBasedLocale = useBrowserBasedLocale();
 
   return formatCountryCurrency(browserBasedLocale, value, country);

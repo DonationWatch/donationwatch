@@ -1,5 +1,6 @@
 import { expect } from "@playwright/test";
 
+import { getPartiesSync } from "@/config/parties";
 import { Country } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 
@@ -26,7 +27,7 @@ test.describe("Search", () => {
 
       await expect(dialog.locator).toBeAttached();
       await expect(dialog.partyResults).toHaveCount(
-        countryConfig.parties.length,
+        getPartiesSync(countryConfig.id).length,
       );
       await expect(dialog.yearResults).toHaveCount(countryConfig.years.length);
       await expect(dialog.legislativeYearsResults).toHaveCount(

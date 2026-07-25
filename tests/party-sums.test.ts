@@ -1,11 +1,10 @@
 import { beforeEach, describe, expect, test } from "vitest";
 
-import type {
-  PartyStats,
-  PartyYearsSums,
-} from "@/utils/loader/party-years-sums";
+import type { PartyStats } from "@/types/party-stats";
+import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 
-import { hasYearSums, PartyStatField } from "@/utils/loader/party-years-sums";
+import { PartyStatField } from "@/types/party-stats";
+import { hasYearSums } from "@/utils/party";
 
 import euSums from "../src/data/europeanunion/party-sums";
 import frSums from "../src/data/france/party-sums";

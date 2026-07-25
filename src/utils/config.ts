@@ -63,3 +63,6 @@ export const OLD_DATA_MONTHS_THRESHOLD = 6;
 export const CACHED_LAST_YEARS = 2;
 export const CACHED_LAST_LEGISLATIVE_YEARS = 1;
 export const CACHED_PARTIES_COUNT = 8;
+
+// How many top donors are visible on the country home page
+export const TOP_DONORS_TO_SHOW = 8;

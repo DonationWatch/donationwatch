@@ -2,12 +2,12 @@
 
 import { useLocale } from "next-intl";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { ReceiverId } from "@/utils/types";
 
 import { DonorLink } from "@/components/donors/donor-link";
 import { PartyDot } from "@/components/parties/party-dot";
 import { PartyLink } from "@/components/parties/party-link";
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { formatCountryCurrency } from "@/utils/formatter";
 
@@ -18,14 +18,13 @@ export const DonationHistoryItem = ({
   amount,
   party,
   donor,
-  country,
 }: {
   date: string;
   party: ReceiverId;
   donor: string;
   amount: number;
-  country: CountryConfig;
 }) => {
+  const country = useRequiredCountryConfig();
   const locale = useLocale();
   const browserBasedLocale = useBrowserBasedLocale();
   const fmtAmount = formatCountryCurrency(browserBasedLocale, amount, country);
@@ -41,20 +40,18 @@ export const DonationHistoryItem = ({
           <PartyLink
             className="overflow-hidden px-2"
             party={party}
-            country={country}
             locale={locale}
           >
             <PartyDot
               className="overflow-hidden text-sm"
               nameClassName="truncate"
               party={party}
-              country={country}
             />
           </PartyLink>
         </div>
         <div className="justify-between space-y-1 sm:flex sm:space-y-0">
           <div className="truncate">
-            <DonorLink country={country} donor={donor} />
+            <DonorLink donor={donor} />
           </div>
           <div className="shrink-0 text-sm font-semibold sm:ml-2 sm:text-base">
             {fmtAmount}

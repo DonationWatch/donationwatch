@@ -2,14 +2,17 @@
 
 import type { PropsWithChildren } from "react";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 import type { ConstLocale } from "@/utils/locales";
 import type { ReceiverId } from "@/utils/types";
 
+import {
+  useParties,
+  useRequiredCountryConfig,
+} from "@/components/providers/country-provider";
 import { HighscoreHeader } from "@/components/years/years-header";
 import { useFilterEngine } from "@/hooks/use-filter-engine";
-import { getParties } from "@/utils/data/get-parties";
+import { getPartiesByYears } from "@/utils/data/get-parties-by-years";
 import { getPartiesSum } from "@/utils/data/get-parties-sum";
 import { numbersAvg } from "@/utils/math";
 
@@ -20,7 +23,6 @@ export const FilteredYearsHeader = ({
   showTop3 = true,
   showExtendedMeta = false,
   readonly = false,
-  country,
   title,
   partySums,
   children,
@@ -33,14 +35,15 @@ export const FilteredYearsHeader = ({
   showTop3?: boolean;
   showExtendedMeta?: boolean;
   readonly?: boolean;
-  country: CountryConfig;
   title?: string;
   partySums: PartyYearsSums;
   className?: string;
   titleBeforeYears?: boolean;
 }>) => {
+  const country = useRequiredCountryConfig();
   const filterEngine = useFilterEngine();
-  const parties = getParties(country, years);
+  const allParties = useParties();
+  const parties = getPartiesByYears(years, allParties);
   const {
     count: staticCount,
     sum: staticSum,

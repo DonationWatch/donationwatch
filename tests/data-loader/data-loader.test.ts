@@ -212,11 +212,11 @@ describe("data loader", () => {
 
     const result = loader.processYearData(donations);
 
-    expect(result.countryConfig.parties).toHaveLength(2);
-    expect(result.countryConfig.parties[0][PartyField.Id]).toBe("BETA");
-    expect(result.countryConfig.parties[0][PartyField.Sum]).toBe(200_000);
-    expect(result.countryConfig.parties[1][PartyField.Id]).toBe("ALPHA");
-    expect(result.countryConfig.parties[1][PartyField.Sum]).toBe(100_000);
+    expect(result.parties).toHaveLength(2);
+    expect(result.parties[0][PartyField.Id]).toBe("BETA");
+    expect(result.parties[0][PartyField.Sum]).toBe(200_000);
+    expect(result.parties[1][PartyField.Id]).toBe("ALPHA");
+    expect(result.parties[1][PartyField.Sum]).toBe(100_000);
   });
 
   test("processYearData assigns unique ids per donation", () => {

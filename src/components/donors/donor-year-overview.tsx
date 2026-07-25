@@ -3,9 +3,9 @@ import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import { Search } from "lucide-react";
 import { useCallback, useMemo, useRef, useState } from "react";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Donation, ReceiverId } from "@/utils/types";
 
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { donationYear } from "@/utils/date";
 import { DonationField } from "@/utils/types";
@@ -16,11 +16,9 @@ import { DynamicDonorDonationsDetail } from "./dynamic-donor-donations-detail";
 const DonorYearOverviewContent = ({
   donations,
   years,
-  country,
 }: {
   donations: Donation[];
   years: string[];
-  country: CountryConfig;
 }) => {
   // useWindowVirtualizer doesn't support directDomUpdates yet, so we opt out of React Compiler
   // see https://github.com/TanStack/virtual/issues/736
@@ -34,6 +32,7 @@ const DonorYearOverviewContent = ({
     }
   > = {};
 
+  const country = useRequiredCountryConfig();
   const [expandedDonors, setExpandedDonors] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const tSearch = useTranslations("search");
@@ -151,12 +150,7 @@ const DonorYearOverviewContent = ({
                         return prev.filter((id) => id !== donor.name);
                       });
                     }}
-                    detail={
-                      <DynamicDonorDonationsDetail
-                        donor={donor}
-                        country={country}
-                      />
-                    }
+                    detail={<DynamicDonorDonationsDetail donor={donor} />}
                   />
                 </li>
               );
@@ -169,19 +163,11 @@ const DonorYearOverviewContent = ({
 };
 
 export const DonorYearOverview = ({
-  country,
   years,
   donations,
 }: {
   years: string[];
-  country: CountryConfig;
   donations: Donation[];
 }) => {
-  return (
-    <DonorYearOverviewContent
-      donations={donations}
-      years={years}
-      country={country}
-    />
-  );
+  return <DonorYearOverviewContent donations={donations} years={years} />;
 };

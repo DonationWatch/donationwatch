@@ -2,7 +2,6 @@
 
 import { useLocale } from "next-intl";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Donation, ReceiverId } from "@/utils/types";
 
 import { FormatAnd } from "@/components/formatter";
@@ -13,6 +12,7 @@ import {
   ArticleSectionWrapper,
 } from "@/components/layout/article";
 import { TextPartyLink } from "@/components/parties/text-party-link";
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { Translation } from "@/components/translation";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
@@ -24,12 +24,11 @@ import { DonationField, DonationType } from "@/utils/types";
 import { DonorDonationTypesSankey } from "./donor-donation-types-sankey";
 
 export const DonorDonationTypes = ({
-  countryConfig,
   donations,
 }: {
-  countryConfig: CountryConfig;
   donations: Donation[];
 }) => {
+  const countryConfig = useRequiredCountryConfig();
   const tCommon = useTranslations("common");
   const tDonor = useTranslations("donor");
   const tDonationType = useTranslations("donation_type");
@@ -143,7 +142,6 @@ export const DonorDonationTypes = ({
                             <TextPartyLink
                               party={receiverId as ReceiverId}
                               locale={locale}
-                              country={countryConfig}
                             />
                             <span className="tabular-nums">
                               {formatCountryCurrency(
@@ -162,7 +160,6 @@ export const DonorDonationTypes = ({
         </ArticleSectionColumn>
         <ArticleSectionColumn>
           <DonorDonationTypesSankey
-            countryConfig={countryConfig}
             donations={donations}
             donorName={donorName}
           />

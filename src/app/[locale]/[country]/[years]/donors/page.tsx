@@ -8,12 +8,10 @@ import { getCountryName } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { Features, hasFeature } from "@/utils/features";
 import { formatYearsRange } from "@/utils/formatter";
-import {
-  getPartyYearsSums,
-  hasYearSums,
-} from "@/utils/loader/party-years-sums";
+import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
 import { generateAlternates } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
+import { hasYearSums } from "@/utils/party";
 import { deserializeYears } from "@/utils/serializers";
 import { isValidCountry, isValidLocale } from "@/utils/validate";
 
@@ -87,7 +85,6 @@ export default async function YearPage(
   return (
     <Article fullWidth={true}>
       <YearsDonorsClientPage
-        country={countryConfig}
         years={years}
         sectionTitle={t("donors.detail.title")}
         summary={t("donors.detail.summary")}

@@ -8,8 +8,7 @@ import type {
 import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
 
-import type { CountryConfig } from "@/types/country-config";
-
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
@@ -27,12 +26,11 @@ import { ExpandableReactEchart } from "./expandable-react-echart";
 const PER_YEAR_HEIGHT = 20;
 
 export const ClientDonationStackedYears = ({
-  country,
   data,
 }: {
-  country: CountryConfig;
   data: DonationStackedYearsData;
 }) => {
+  const country = useRequiredCountryConfig();
   const tStackedYears = useTranslations("stacked_years");
   const tCountries = useTranslations("countries");
   const locale = useLocale();
@@ -160,7 +158,6 @@ export const ClientDonationStackedYears = ({
         height={chartHeight}
         title={tStackedYears("title")}
         subtitle={subtitle}
-        country={country}
         years={years}
         feature="bar"
         option={option}

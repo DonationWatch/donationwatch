@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo } from "react";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 
 import { InfoAlert } from "@/components/alert";
@@ -20,16 +19,19 @@ import Loading from "@/components/loading/loading";
 import { YearBarsPageText } from "@/components/loading/loading-year-bars-page-text";
 import { YearTimelineYearText } from "@/components/loading/loading-year-timeline-year-text";
 import { YearTimeseriesText } from "@/components/loading/loading-year-timeseries-text";
+import {
+  useParties,
+  useRequiredCountryConfig,
+} from "@/components/providers/country-provider";
 import { useDonationsByYears } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { useFilterEngine } from "@/hooks/use-filter-engine";
 import { useScrollToHash } from "@/hooks/use-scroll-to-hash";
 import { isNotNullandNotUndefined } from "@/utils/array";
-import { getParties } from "@/utils/data/get-parties";
+import { getPartiesByYears } from "@/utils/data/get-parties-by-years";
 import { Features, hasFeature } from "@/utils/features";
 
 interface YearsTimelineClientPageProps {
-  country: CountryConfig;
   years: string[];
   parties: Party[];
   resolution: "month" | "year";
@@ -44,7 +46,6 @@ interface YearsTimelineClientPageProps {
 }
 
 export const YearsTimelineClientPage = ({
-  country,
   years,
   resolution,
   timelineTitle,
@@ -56,7 +57,9 @@ export const YearsTimelineClientPage = ({
   perMonthSubtitle,
   yearResolutionNote,
 }: YearsTimelineClientPageProps) => {
+  const country = useRequiredCountryConfig();
   const tData = useTranslations("data");
+  const parties = useParties();
 
   const {
     isFiltered,
@@ -71,8 +74,8 @@ export const YearsTimelineClientPage = ({
   }, [years, isFiltered, filteredYears]);
 
   const activeParties = useMemo(() => {
-    return getParties(country, activeYears);
-  }, [country, activeYears]);
+    return getPartiesByYears(activeYears, parties);
+  }, [activeYears, parties]);
 
   const results = useDonationsByYears(country, years);
   const isLoading = results.some((r) => r.isLoading);
@@ -113,7 +116,6 @@ export const YearsTimelineClientPage = ({
               />
               <p className="mb-6">{timelineSummary}</p>
               <YearTimeseriesText
-                country={country}
                 parties={activeParties}
                 years={activeYears}
                 donations={filteredDonations}
@@ -121,7 +123,6 @@ export const YearsTimelineClientPage = ({
             </ArticleSectionColumn>
             <ArticleSectionColumn>
               <DonationSumChart
-                country={country}
                 title={sumChartTitle}
                 subtitle={sumChartSubtitle}
                 years={activeYears}
@@ -150,14 +151,12 @@ export const YearsTimelineClientPage = ({
             <p className="mb-6">{perMonthDescription}</p>
             {resolution === "month" ? (
               <YearBarsPageText
-                country={country}
                 parties={activeParties}
                 years={activeYears}
                 donations={filteredDonations}
               />
             ) : (
               <YearTimelineYearText
-                country={country}
                 parties={activeParties}
                 years={activeYears}
                 donations={filteredDonations}
@@ -167,7 +166,6 @@ export const YearsTimelineClientPage = ({
           <ArticleSectionColumn>
             <div>
               <DonationPerMonthChart
-                country={country}
                 title={perMonthTitle}
                 subtitle={perMonthSubtitle}
                 resolution={resolution}

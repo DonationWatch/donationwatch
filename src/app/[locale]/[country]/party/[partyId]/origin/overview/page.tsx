@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
-import { getParty } from "@/utils/countries";
+import { getParty } from "@/config/parties";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { generateAlternates } from "@/utils/meta";
 import { isValidCountry, isValidLocale, isValidParty } from "@/utils/validate";
@@ -38,18 +38,12 @@ export default async function OverviewPage(
   const [countryConfig] = await Promise.all([getCountryConfig(country)]);
 
   if (!isValidParty(partyId, countryConfig)) return notFound();
-  const party = getParty(countryConfig, partyId);
+  const party = getParty(countryConfig.id, partyId);
   const years = countryConfig.years;
 
   if (!party) {
     return notFound();
   }
 
-  return (
-    <PartyOriginClientPage
-      country={countryConfig}
-      party={party}
-      years={years}
-    />
-  );
+  return <PartyOriginClientPage party={party} years={years} />;
 }

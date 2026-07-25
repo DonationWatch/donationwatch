@@ -3,6 +3,7 @@ import type { Messages, createTranslator } from "next-intl";
 
 import { DownloadIcon } from "lucide-react";
 
+import type { PartiesMap } from "@/components/providers/country-provider";
 import type { CountryConfig } from "@/types/country-config";
 import type { ConstLocale } from "@/utils/locales";
 import type { StrictNamespacedTranslator } from "@/utils/translator";
@@ -10,6 +11,10 @@ import type { Donation } from "@/utils/types";
 
 import Loading from "@/app/[locale]/[country]/loading";
 import { CitationGenerator } from "@/components/citation/citation-generator";
+import {
+  usePartiesMap,
+  useRequiredCountryConfig,
+} from "@/components/providers/country-provider";
 import { Button } from "@/components/ui/button";
 import { useDonationsByYears } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
@@ -31,6 +36,7 @@ function escapeCSVField(field: string): string {
 function generateJSON(
   donations: Donation[],
   country: CountryConfig,
+  partiesMap: PartiesMap,
   t: ReturnType<typeof createTranslator<Messages>>,
   tCommon: StrictNamespacedTranslator<"common">,
 ): string {
@@ -42,10 +48,7 @@ function generateJSON(
       return {
         date: d[DonationField.Date],
         donor: getDonorName(d[DonationField.DonorName], tCommon),
-        receiver:
-          country.parties.find((p) => p[PartyField.Id] === receiver)?.[
-            PartyField.Short
-          ] ?? receiver,
+        receiver: partiesMap[receiver][PartyField.Short],
         amount: d[DonationField.Amount],
         currency: country.currency,
         donor_type:
@@ -60,6 +63,7 @@ function generateJSON(
 function generateCSV(
   donations: Donation[],
   country: CountryConfig,
+  partiesMap: PartiesMap,
   t: ReturnType<typeof createTranslator<Messages>>,
   tCommon: StrictNamespacedTranslator<"common">,
 ): string {
@@ -75,9 +79,7 @@ function generateCSV(
   const rows: string[] = [headers.join(",")];
 
   for (const donation of donations) {
-    const party = country.parties.find(
-      (p) => p[PartyField.Id] === donation[DonationField.Receiver],
-    );
+    const party = partiesMap[donation[DonationField.Receiver]];
     const row = [
       escapeCSVField(donation[DonationField.Date]),
       escapeCSVField(getDonorName(donation[DonationField.DonorName], tCommon)),
@@ -124,16 +126,17 @@ function downloadCSV(
 }
 
 interface DataExportProps {
-  country: CountryConfig;
   locale: ConstLocale;
 }
 
-export function DataExport({ country, locale }: DataExportProps) {
+export function DataExport({ locale }: DataExportProps) {
+  const country = useRequiredCountryConfig();
   const t = useTranslations();
   const tCountries = useTranslations("countries");
   const tData = useTranslations("data");
   const tCommon = useTranslations("common");
   const tCitation = useTranslations("citation");
+  const partiesMap = usePartiesMap();
 
   const results = useDonationsByYears(country, country.years);
 
@@ -147,8 +150,8 @@ export function DataExport({ country, locale }: DataExportProps) {
     const extension = format === "csv" ? "csv" : "json";
     const fileContent =
       format === "csv"
-        ? generateCSV(donations, country, t, tCommon)
-        : generateJSON(donations, country, t, tCommon);
+        ? generateCSV(donations, country, partiesMap, t, tCommon)
+        : generateJSON(donations, country, partiesMap, t, tCommon);
 
     downloadCSV(
       format === "csv" ? "text/csv" : "application/json",

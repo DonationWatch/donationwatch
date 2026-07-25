@@ -39,7 +39,6 @@ export const DonorOverviewItem = ({
       openAction={
         <DonorLink
           className="m-0.5 ml-2 shrink-0 cursor-pointer rounded-full p-1.5 hover:bg-stone-200 dark:hover:bg-neutral-50/10"
-          country={country}
           donor={name}
         >
           <ArrowRight size={16} />

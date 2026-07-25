@@ -2,7 +2,6 @@
 
 import { ArrowRight } from "lucide-react";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { ConstLocale } from "@/utils/locales";
 import type { Donation, ReceiverId } from "@/utils/types";
 
@@ -10,6 +9,7 @@ import { NonInteractableRankingItem } from "@/components/donations/noninteractab
 import { CurrencyRankingItem } from "@/components/donations/ranking-item";
 import { PartyDot } from "@/components/parties/party-dot";
 import { PartyLink } from "@/components/parties/party-link";
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 
 import { LoadedTopDonationsItemDetail } from "./loading-top-year-donations-item-detail";
@@ -19,14 +19,13 @@ export const ReadonlyTopYearDonationsItem = ({
   amount,
   rank,
   sum,
-  country,
 }: {
   partyId: ReceiverId;
   amount: number;
   rank: number;
   sum: number;
-  country: CountryConfig;
 }) => {
+  const country = useRequiredCountryConfig();
   const locale = useBrowserBasedLocale();
 
   return (
@@ -41,7 +40,6 @@ export const ReadonlyTopYearDonationsItem = ({
         className="overflow-hidden"
         nameClassName="truncate"
         party={partyId}
-        country={country}
       />
     </NonInteractableRankingItem>
   );
@@ -52,7 +50,6 @@ export const LoadedTopYearDonationsItem = ({
   amount,
   rank,
   sum,
-  country,
   expanded,
   onToggleExpanded,
   donations,
@@ -63,12 +60,12 @@ export const LoadedTopYearDonationsItem = ({
   amount: number;
   rank: number;
   sum: number;
-  country: CountryConfig;
   years?: string[];
   expanded: boolean;
   onToggleExpanded: (expanded: boolean) => void;
   donations: Donation[];
 }) => {
+  const country = useRequiredCountryConfig();
   return (
     <CurrencyRankingItem
       amount={amount}
@@ -83,21 +80,16 @@ export const LoadedTopYearDonationsItem = ({
             "m-0.5 ml-2 shrink-0 cursor-pointer rounded-full p-1.5 hover:bg-stone-200 dark:hover:bg-neutral-50/10"
           }
           party={partyId}
-          country={country}
           locale={locale}
         >
           <ArrowRight size={16} />
         </PartyLink>
       }
       detail={
-        <LoadedTopDonationsItemDetail
-          country={country}
-          donations={donations}
-          partyId={partyId}
-        />
+        <LoadedTopDonationsItemDetail donations={donations} partyId={partyId} />
       }
     >
-      <PartyDot party={partyId} country={country} />
+      <PartyDot party={partyId} />
     </CurrencyRankingItem>
   );
 };

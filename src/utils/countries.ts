@@ -1,15 +1,9 @@
-import type {
-  CountryConfig,
-  UnloadedCountryConfig,
-} from "@/types/country-config";
-import type { Party } from "@/types/party";
+import type { UnloadedCountryConfig } from "@/types/country-config";
 import type { StrictNamespacedTranslator } from "@/utils/translator";
 
-import { PartyField } from "@/types/party";
 import { Features } from "@/utils/features";
 
 import type En from "../messages/en.json";
-import type { ReceiverId } from "./types";
 
 export const enum Country {
   germany = "germany",
@@ -818,35 +812,6 @@ export const getReferencingCountryName = (
   t: StrictNamespacedTranslator<"ref_countries">,
 ): string => {
   return t(country.code);
-};
-
-export const getParty = (
-  country: CountryConfig,
-  partyId: ReceiverId,
-): Party => {
-  const party = country.parties.find((p) => p[PartyField.Id] === partyId);
-
-  if (!party) {
-    console.error(`Unknown party ${partyId} (${country.id})`);
-  }
-
-  // Note: theoretically this can be undefined but we usually handle it before it reaches any code that requires the party
-  return party as Party;
-};
-
-export const findCorrectParty = (
-  country: CountryConfig,
-  possiblePartyId: string,
-): Party | undefined => {
-  const normalizedPartyId = possiblePartyId
-    .toUpperCase()
-    // remove anything that's not letter or number
-    .replace(/[^A-Z0-9]/g, "")
-    .trim();
-
-  return country.parties.find(
-    (p) => p[PartyField.Id] === (normalizedPartyId as ReceiverId),
-  );
 };
 
 export type Countries = keyof typeof En.countries;

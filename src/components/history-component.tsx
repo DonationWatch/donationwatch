@@ -19,7 +19,6 @@ export const HistoryComponent = async ({
           party={party}
           donor={donor}
           date={date}
-          country={country}
         />
       ))}
     </ul>

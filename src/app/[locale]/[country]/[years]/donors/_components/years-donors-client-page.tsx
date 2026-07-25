@@ -2,8 +2,6 @@
 
 import { useMemo, useEffect } from "react";
 
-import type { CountryConfig } from "@/types/country-config";
-
 import { DonationYearsTreemap } from "@/components/charts/loading-donation-years-treemap";
 import { DonorReceiverHistogram } from "@/components/charts/loading-donor-receiver-histogram";
 import { DonorYearOverview } from "@/components/donors/donor-year-overview";
@@ -18,6 +16,10 @@ import {
   ArticleSectionWrapper,
 } from "@/components/layout/article";
 import Loading from "@/components/loading/loading";
+import {
+  useParties,
+  useRequiredCountryConfig,
+} from "@/components/providers/country-provider";
 import { useDonationsByYears } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import {
@@ -26,10 +28,9 @@ import {
 } from "@/hooks/use-filter-engine";
 import { useScrollToHash } from "@/hooks/use-scroll-to-hash";
 import { isNotNullandNotUndefined } from "@/utils/array";
-import { getParties } from "@/utils/data/get-parties";
+import { getPartiesByYears } from "@/utils/data/get-parties-by-years";
 
 interface YearsDonorsClientPageProps {
-  country: CountryConfig;
   years: string[];
   treemapTitle: string;
   treemapSubtitle: string;
@@ -45,7 +46,6 @@ interface YearsDonorsClientPageProps {
 }
 
 export const YearsDonorsClientPage = ({
-  country,
   years,
   treemapTitle,
   treemapSubtitle,
@@ -59,6 +59,8 @@ export const YearsDonorsClientPage = ({
   listTitle,
   listP0,
 }: YearsDonorsClientPageProps) => {
+  const country = useRequiredCountryConfig();
+  const parties = useParties();
   const tData = useTranslations("data");
 
   const {
@@ -74,8 +76,8 @@ export const YearsDonorsClientPage = ({
   }, [years, isFiltered, filteredYears]);
 
   const activeParties = useMemo(() => {
-    return getParties(country, activeYears);
-  }, [country, activeYears]);
+    return getPartiesByYears(activeYears, parties);
+  }, [activeYears, parties]);
 
   const results = useDonationsByYears(country, years);
   const isLoading = results.some((r) => r.isLoading);
@@ -121,7 +123,6 @@ export const YearsDonorsClientPage = ({
             <p className="mb-6">{summary}</p>
             <p className="mb-6">{summary2}</p>
             <YearsDonorPageText
-              country={country}
               years={activeYears}
               parties={activeParties}
               donations={filteredDonations}
@@ -130,7 +131,6 @@ export const YearsDonorsClientPage = ({
           <ArticleSectionColumn>
             <div>
               <DonationYearsTreemap
-                country={country}
                 years={activeYears}
                 parties={activeParties}
                 title={treemapTitle}
@@ -151,7 +151,6 @@ export const YearsDonorsClientPage = ({
             />
             <p className="mb-6">{histogramP0}</p>
             <YearsDonorHistogramText
-              country={country}
               years={activeYears}
               parties={activeParties}
               donations={filteredDonations}
@@ -160,7 +159,6 @@ export const YearsDonorsClientPage = ({
           <ArticleSectionColumn>
             <div>
               <DonorReceiverHistogram
-                country={country}
                 years={activeYears}
                 parties={activeParties}
                 title={histogramTitle}
@@ -181,7 +179,6 @@ export const YearsDonorsClientPage = ({
             />
             <p className="mb-6">{listP0}</p>
             <DonorYearOverview
-              country={country}
               years={activeYears}
               donations={filteredDonations}
             />

@@ -3,15 +3,18 @@
 import type { EChartsOption } from "echarts";
 import type { SankeyNodeItemOption } from "echarts/types/src/chart/sankey/SankeySeries.js";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Donation, ReceiverId } from "@/utils/types";
 
 import { ExpandableReactEchart } from "@/components/charts/expandable-react-echart";
+import {
+  usePartiesMap,
+  useRequiredCountryConfig,
+} from "@/components/providers/country-provider";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
-import { chartColorFor, partyColor } from "@/utils/color";
+import { chartColorFor } from "@/utils/color";
 import {
   formatCompactCountryCurrency,
   formatCountryCurrency,
@@ -26,19 +29,19 @@ const partyTypeNodeId = (partyId: string, type: DonationType) =>
   `pt:${partyId}:${type}`;
 
 export const DonorDonationTypesSankey = ({
-  countryConfig,
   donations,
   donorName,
 }: {
-  countryConfig: CountryConfig;
   donations: Donation[];
   donorName: string;
 }) => {
+  const countryConfig = useRequiredCountryConfig();
   const browserBasedLocale = useBrowserBasedLocale();
   const { backgroundColor, isDark } = useChart();
   const tDonationType = useTranslations("donation_type");
   const tDonor = useTranslations("donor");
   const tCommon = useTranslations("common");
+  const partiesMap = usePartiesMap();
 
   // --- Build aggregations ---
   // partySum: party → total
@@ -91,15 +94,12 @@ export const DonorDonationTypesSankey = ({
   // Middle & Right: group party and its unique type nodes together
   // so that with nodeSort: false, they remain vertically clustered.
   for (const receiver of receiverIds) {
-    const partyShortName =
-      countryConfig.parties.find((p) => p[PartyField.Id] === receiver)?.[
-        PartyField.Short
-      ] ?? receiver;
+    const partyShortName = partiesMap[receiver][PartyField.Short];
 
     nodes.push({
       id: partyNodeId(receiver),
       name: partyShortName,
-      itemStyle: { color: partyColor(receiver, countryConfig) },
+      itemStyle: { color: partiesMap[receiver][PartyField.Color] },
       label: {
         formatter: `${truncate(partyShortName, 22)}\n${formatCompactCountryCurrency(browserBasedLocale, partySum[receiver]!, countryConfig)}`,
       },
@@ -232,7 +232,6 @@ export const DonorDonationTypesSankey = ({
       option={option}
       title={tDonor("donation_type.title")}
       subtitle={tDonor("donation_type.graph.subtitle", { donor: donorName })}
-      country={countryConfig}
       years={[]}
       allowExpand={true}
     />

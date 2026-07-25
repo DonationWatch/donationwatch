@@ -1,4 +1,3 @@
-import type { Party } from "@/types/party";
 import type { NonEmptyArray } from "@/utils/array";
 import type { Country, CountryCode, Currency } from "@/utils/countries";
 import type { LambertConformalConicParams } from "@/utils/map";
@@ -71,6 +70,4 @@ export type CountryConfig = Omit<
   "donorFilters" | "receiverFilters"
 > & {
   readonly years: string[];
-  // This is sorted by sum. Meaning first entry is the party with the highest sum of donations.
-  readonly parties: Party[];
 };

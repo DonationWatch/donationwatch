@@ -3,95 +3,31 @@ import { useVirtualizer } from "@tanstack/react-virtual";
 import { useLocale } from "next-intl";
 import { useEffect, useMemo, useRef } from "react";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Donation, ReceiverId } from "@/utils/types";
 
 import { RankingItemLine } from "@/components/donations/ranking-item-line";
 import { DonorLink } from "@/components/donors/donor-link";
 import { PartyDot } from "@/components/parties/party-dot";
 import { PartyLink } from "@/components/parties/party-link";
-import { useDonationsByYears } from "@/hooks/use-api";
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { useBreakpoint } from "@/hooks/use-media-query";
-import { isNotNullandNotUndefined } from "@/utils/array";
 import { donationYear } from "@/utils/date";
 import { getDonationDonorName } from "@/utils/donor";
 import { DonationField } from "@/utils/types";
 
-import { Skeleton } from "./skeleton";
-
-const TopDonationsItemDetailSkeleton = () => {
-  return (
-    <div className="py-1.5" aria-label="Loading donations">
-      <div className="border-border items-center justify-between border-t first:border-t-0 sm:flex sm:space-x-2">
-        <div className="mb-2 grow flex-wrap justify-between space-y-2 px-1 py-1.5 leading-none sm:mb-0 sm:flex sm:space-y-0">
-          <Skeleton className="h-4 w-16 basis-1/2 sm:mr-2 sm:basis-auto" />
-          <div className="grow basis-full sm:order-none sm:mt-1.5 sm:basis-auto">
-            <Skeleton className="order-last h-4 w-40" emphasis />
-          </div>
-          <Skeleton className="h-4 w-20 shrink-0 basis-1/2 sm:basis-auto" />
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export const LoadingTopYearDonationsItemDetail = ({
-  showDonationParty = false,
-  country,
-  years,
-  partyId,
-}: {
-  showDonationParty?: boolean;
-  country: CountryConfig;
-  years: string[];
-  partyId: ReceiverId;
-}) => {
-  const t = useTranslations("data");
-  const results = useDonationsByYears(country, years);
-  const error = results.some((r) => r.error);
-  const isLoading = results.some((r) => r.isLoading);
-
-  if (isLoading)
-    return (
-      <div
-        className="cursor-wait"
-        aria-label={t("loading")}
-        title={t("loading")}
-      >
-        <TopDonationsItemDetailSkeleton />
-      </div>
-    );
-  if (error) return <div>{t("error")}</div>;
-
-  const donations = results
-    .flatMap((r) => r.data)
-    .filter(isNotNullandNotUndefined);
-
-  return (
-    <TopDonationsItemDetail
-      country={country}
-      donations={donations.filter((d) => d[DonationField.Receiver] === partyId)}
-      showDonationParty={showDonationParty}
-    />
-  );
-};
-
 export const LoadedTopDonationsItemDetail = ({
   showDonationParty = false,
-  country,
   partyId,
   donations,
 }: {
   showDonationParty?: boolean;
-  country: CountryConfig;
   partyId: ReceiverId;
   donations: Donation[];
 }) => {
   return (
     <TopDonationsItemDetail
-      country={country}
       donations={donations.filter((d) => d[DonationField.Receiver] === partyId)}
       showDonationParty={showDonationParty}
     />
@@ -100,13 +36,12 @@ export const LoadedTopDonationsItemDetail = ({
 
 export const TopDonationsItemDetail = ({
   showDonationParty = false,
-  country,
   donations,
 }: {
   showDonationParty?: boolean;
-  country: CountryConfig;
   donations: Donation[];
 }) => {
+  const country = useRequiredCountryConfig();
   const t = useTranslations();
   const tCommon = useTranslations("common");
   const locale = useLocale();
@@ -165,20 +100,15 @@ export const TopDonationsItemDetail = ({
                   <DonorLink
                     className="truncate"
                     donor={donation[DonationField.DonorName]}
-                    country={country}
                   />
                 </div>
                 {showDonationParty && (
                   <PartyLink
                     className="mx-2 shrink-0"
                     party={donation[DonationField.Receiver]}
-                    country={country}
                     locale={locale}
                   >
-                    <PartyDot
-                      party={donation[DonationField.Receiver]}
-                      country={country}
-                    />
+                    <PartyDot party={donation[DonationField.Receiver]} />
                   </PartyLink>
                 )}
               </RankingItemLine>

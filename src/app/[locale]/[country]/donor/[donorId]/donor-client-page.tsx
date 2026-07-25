@@ -2,12 +2,10 @@
 import { notFound } from "next/navigation";
 import { useEffect } from "react";
 
-import type { CountryConfig } from "@/types/country-config";
-import type { Country } from "@/utils/countries";
-
 import { FilterEmptyState } from "@/components/filter/filter-empty-state";
 import { Article } from "@/components/layout/article";
 import Loading from "@/components/loading/loading";
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useDonationsByDonorId } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import {
@@ -24,14 +22,8 @@ import { DonorDonationTable } from "./_components/donor-donation-table";
 import { DonorDonationTimeline } from "./_components/donor-donation-timeline";
 import { DonorDonationTypes } from "./_components/donor-donation-types";
 
-export const DonorClientPage = ({
-  donorId,
-  countryConfig,
-}: {
-  donorId: string;
-  countryConfig: CountryConfig;
-  country: Country;
-}) => {
+export const DonorClientPage = ({ donorId }: { donorId: string }) => {
+  const countryConfig = useRequiredCountryConfig();
   const t = useTranslations("data");
   const {
     isFiltered,
@@ -119,26 +111,12 @@ export const DonorClientPage = ({
         )
       ) : (
         <>
-          <DonorClientPageContent
-            donorId={donorId}
-            countryConfig={countryConfig}
-            donations={filteredDonations}
-          />
-          <DonorDonationTimeline
-            donorId={donorId}
-            countryConfig={countryConfig}
-            donations={filteredDonations}
-          />
+          <DonorClientPageContent donations={filteredDonations} />
+          <DonorDonationTimeline donations={filteredDonations} />
           {hasFeature(countryConfig, Features.DonationType) ? (
-            <DonorDonationTypes
-              countryConfig={countryConfig}
-              donations={filteredDonations}
-            />
+            <DonorDonationTypes donations={filteredDonations} />
           ) : null}
-          <DonorDonationTable
-            countryConfig={countryConfig}
-            donations={filteredDonations}
-          />
+          <DonorDonationTable donations={filteredDonations} />
         </>
       )}
     </Article>

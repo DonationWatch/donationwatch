@@ -2,29 +2,28 @@
 
 import { useEffect, useMemo } from "react";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
-import type { PartyStats } from "@/utils/loader/party-years-sums";
+import type { PartyStats } from "@/types/party-stats";
 
 import { MetaCard } from "@/components/meta-card";
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { useFilterEngine } from "@/hooks/use-filter-engine";
 import { PartyField } from "@/types/party";
+import { PartyStatField } from "@/types/party-stats";
 import { Features, hasFeature } from "@/utils/features";
 import { formatCountryCurrency, formatNumber } from "@/utils/formatter";
-import { PartyStatField } from "@/utils/loader/party-years-sums";
 import { getLongName } from "@/utils/party";
 
 export const PartyClientPageHead = ({
   party,
   partyYearsSums,
-  countryConfig,
 }: {
   party: Party;
   partyYearsSums: Record<string, PartyStats>;
-  countryConfig: CountryConfig;
 }) => {
+  const countryConfig = useRequiredCountryConfig();
   const locale = useBrowserBasedLocale();
   const t = useTranslations();
   const {
