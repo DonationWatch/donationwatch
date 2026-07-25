@@ -252,6 +252,12 @@ export class CaLoader extends DataLoader {
       short: "United Party (UP)",
       color: "#044C7C",
     },
+    "Reforge Party": {
+      name: "Reforge Party",
+      short: "Reforge Party",
+      code: "REFORGE",
+      color: "#156275",
+    },
   };
 
   donorMeta = donorMeta;
