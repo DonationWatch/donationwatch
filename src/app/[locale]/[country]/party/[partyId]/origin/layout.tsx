@@ -3,8 +3,9 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
+import { getParty } from "@/config/parties";
 import { PartyField } from "@/types/party";
-import { getCountryName, getParty } from "@/utils/countries";
+import { getCountryName } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { Features, hasFeature } from "@/utils/features";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
@@ -28,7 +29,7 @@ export async function generateMetadata(
   ]);
 
   if (!isValidParty(partyId, countryConfig)) return notFoundMetadata;
-  const party = getParty(countryConfig, partyId);
+  const party = getParty(countryConfig.id, partyId);
 
   return {
     title: tPageTitle("party.origin", {

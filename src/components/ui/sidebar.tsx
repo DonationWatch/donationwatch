@@ -277,32 +277,23 @@ function SidebarTrigger({
   const t = useTranslations("sidebar");
 
   return (
-    <Tooltip>
-      <TooltipTrigger
-        render={
-          <button
-            data-sidebar="trigger"
-            data-slot="sidebar-trigger"
-            className={cn(
-              "flex size-10 cursor-pointer items-center justify-center rounded-full p-1 hover:bg-neutral-600/10",
-              className,
-            )}
-            title={t("toggle")}
-            aria-label={t("toggle")}
-            onClick={(event) => {
-              onClick?.(event);
-              toggleSidebar();
-            }}
-            {...props}
-          >
-            <PanelLeftIcon size={18} />
-          </button>
-        }
-      />
-      <TooltipContent sideOffset={10} side={"right"}>
-        {t("toggle")}
-      </TooltipContent>
-    </Tooltip>
+    <button
+      data-sidebar="trigger"
+      data-slot="sidebar-trigger"
+      className={cn(
+        "flex size-10 cursor-pointer items-center justify-center rounded-full p-1 hover:bg-neutral-600/10",
+        className,
+      )}
+      title={t("toggle")}
+      aria-label={t("toggle")}
+      onClick={(event) => {
+        onClick?.(event);
+        toggleSidebar();
+      }}
+      {...props}
+    >
+      <PanelLeftIcon size={18} />
+    </button>
   );
 }
 

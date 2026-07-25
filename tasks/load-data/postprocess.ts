@@ -4,11 +4,10 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 import type { CountryConfig } from "@/types/country-config";
+import type { Party } from "@/types/party";
+import type { PartyStats } from "@/types/party-stats";
 import type { CountryCode, Currency } from "@/utils/countries";
-import type {
-  PartyStats,
-  PartyYearsSums,
-} from "@/utils/loader/party-years-sums";
+import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 import type {
   Donation,
   DonorMeta,
@@ -17,6 +16,7 @@ import type {
 } from "@/utils/types";
 
 import { PartyField } from "@/types/party";
+import { PartyStatField } from "@/types/party-stats";
 import { firstItem, lastItem } from "@/utils/array";
 import {
   BIGGEST_DONATIONS_COUNT,
@@ -27,7 +27,6 @@ import { Country, COUNTRIES } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { getHistory } from "@/utils/data/get-history";
 import { donationYear } from "@/utils/date";
-import { PartyStatField } from "@/utils/loader/party-years-sums";
 import { getWikiArticles } from "@/utils/loader/wiki";
 import { sumPartySums } from "@/utils/math";
 import { getLongName } from "@/utils/party";
@@ -83,7 +82,16 @@ const buildMostRecentDonations = (
     .toReversed();
 };
 
-const buildPartySums = (country: CountryConfig, donations: Donation[]) => {
+const getPartiesForCountry = async (country: Country): Promise<Party[]> => {
+  const partiesModule = await import(`../../src/data/${country}/parties.ts`);
+  return partiesModule.default;
+};
+
+const buildPartySums = (
+  country: CountryConfig,
+  parties: Party[],
+  donations: Donation[],
+) => {
   const result: PartyYearsSums = {};
 
   const rawSums: Record<
@@ -100,7 +108,7 @@ const buildPartySums = (country: CountryConfig, donations: Donation[]) => {
   > = {};
 
   const yearsSet = new Set(country.years);
-  const partiesSet = new Set(country.parties.map((p) => p[PartyField.Id]));
+  const partiesSet = new Set(parties.map((p) => p[PartyField.Id]));
 
   donations.forEach((donation) => {
     const year = donationYear(donation);
@@ -128,13 +136,13 @@ const buildPartySums = (country: CountryConfig, donations: Donation[]) => {
 
   country.years.forEach((year) => {
     const partyStatsForYear: Record<string, PartyStats> = {};
-    const parties = country.parties.filter(
-      (party) =>
+    const activeParties = parties.filter(
+      (party: Party) =>
         firstItem(party[PartyField.Years]) <= year &&
         year <= lastItem(party[PartyField.Years]),
     );
 
-    parties.forEach((party) => {
+    activeParties.forEach((party) => {
       const stats = rawSums[year]?.[party[PartyField.Id]];
       if (stats) {
         partyStatsForYear[party[PartyField.Id]] = {
@@ -235,11 +243,12 @@ const buildDataIndex = async (countries: Country[]) => {
 
   for (const country of countries) {
     const config = await getCountryConfig(country);
+    const parties = await getPartiesForCountry(country);
     configs.push({
       id: country,
       currency: config.currency,
       years: config.years,
-      parties: config.parties.map((p) => ({
+      parties: parties.map((p) => ({
         id: p[PartyField.Id],
         name: getLongName(p),
       })),
@@ -434,6 +443,7 @@ const prebuildDonorMeta = async (
 
 const prebuildStaticDonationJsons = async (
   country: CountryConfig,
+  parties: Party[],
   donations: Donation[],
 ) => {
   const publicDataDir = path.join(__dirname, "../../public/data", country.id);
@@ -452,7 +462,7 @@ const prebuildStaticDonationJsons = async (
   country.years.forEach((year) => {
     perYear[year] ??= [];
   });
-  country.parties.forEach((party) => {
+  parties.forEach((party) => {
     perParty[party[PartyField.Id]] ??= [];
   });
 
@@ -499,6 +509,7 @@ const postprocess = async (
   countryConfig: CountryConfig,
   donations: Donation[],
 ) => {
+  const parties = await getPartiesForCountry(countryConfig.id);
   const dataDir = path.join(__dirname, "../../src/data", countryConfig.id);
 
   await Promise.all([
@@ -517,7 +528,7 @@ const postprocess = async (
     fs.writeFile(
       path.join(dataDir, "party-sums.ts"),
       jsonAsTsModuleWithType(
-        JSON.stringify(buildPartySums(countryConfig, donations)),
+        JSON.stringify(buildPartySums(countryConfig, parties, donations)),
         {
           name: "PartyYearsSums",
           import:
@@ -556,7 +567,7 @@ const postprocess = async (
   await fs.mkdir(publicDataDir, { recursive: true });
 
   await Promise.all([
-    prebuildStaticDonationJsons(countryConfig, donations),
+    prebuildStaticDonationJsons(countryConfig, parties, donations),
     prebuiltDonorIds(countryConfig, donations),
     prebuildWikipediaJsons(countryConfig),
     prebuildStaticNormalizationJsons(countryConfig),

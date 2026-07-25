@@ -1,6 +1,6 @@
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 
-import { PartyStatField } from "@/utils/loader/party-years-sums";
+import { PartyStatField } from "@/types/party-stats";
 
 export interface DonationStackedYearsData {
   years: string[];

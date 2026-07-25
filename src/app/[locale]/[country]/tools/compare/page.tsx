@@ -7,7 +7,6 @@ import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
 import { Article } from "@/components/layout/article";
 import { PartyComparison } from "@/components/parties/party-comparison";
 import { COUNTRIES } from "@/utils/countries";
-import { getCountryConfig } from "@/utils/data/get-country-config";
 import { getMessagesForLocale } from "@/utils/i18n-loader";
 import { pick } from "@/utils/i18n-pick";
 import { LOCALES } from "@/utils/locales";
@@ -54,10 +53,7 @@ export default async function Page(
   if (!isValidCountry(params.country)) return notFound();
   setRequestLocale(params.locale);
 
-  const { country } = params;
-
-  const [countryConfig, tCompareParties, messages] = await Promise.all([
-    getCountryConfig(country),
+  const [tCompareParties, messages] = await Promise.all([
     getTranslations({
       locale: params.locale,
       namespace: "compare_parties_page",
@@ -77,7 +73,7 @@ export default async function Page(
     <ScopedClientIntlProvider messages={pageMessages}>
       <Article title={tCompareParties("title")}>
         <p className="mb-8 max-w-prose">{tCompareParties("description")}</p>
-        <PartyComparison countryConfig={countryConfig} />
+        <PartyComparison />
       </Article>
     </ScopedClientIntlProvider>
   );

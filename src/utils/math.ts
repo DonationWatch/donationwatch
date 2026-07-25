@@ -1,6 +1,6 @@
-import type { PartyYearsSums } from "./loader/party-years-sums";
+import { PartyStatField } from "@/types/party-stats";
 
-import { PartyStatField } from "./loader/party-years-sums";
+import type { PartyYearsSums } from "./loader/party-years-sums";
 
 export const numbersSum = (numbers: number[]): number =>
   numbers.reduce((sum, value) => sum + value, 0);

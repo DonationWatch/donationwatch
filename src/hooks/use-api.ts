@@ -12,13 +12,12 @@ import type {
   UnloadedCountryConfig,
 } from "@/types/country-config";
 import type { Party } from "@/types/party";
-import type { Country, CountryCode } from "@/utils/countries";
+import type { CountryCode } from "@/utils/countries";
 import type { Donation } from "@/utils/types";
 
 import { donationDocumentToDonations } from "@/lib/api/donations-document";
 import { PartyField } from "@/types/party";
 import { DONOR_ID_HASH_LEN, QUERY_PARAM_BUILD_TS } from "@/utils/config";
-import { getCountryConfig } from "@/utils/data/get-country-config";
 import { getBuild } from "@/utils/loader/build";
 import { DonationField } from "@/utils/types";
 
@@ -52,13 +51,6 @@ export const useDonationsByYears = (
             ).then((document) => donationDocumentToDonations(document)),
         };
       }),
-  });
-};
-
-export const useCountryConfig = (country: Country) => {
-  return useQuery<CountryConfig>({
-    queryKey: [country, "config"],
-    queryFn: () => getCountryConfig(country),
   });
 };
 

@@ -6,8 +6,8 @@ import type { CountryConfig } from "@/types/country-config";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 import type { ImageLocale } from "@/utils/locales";
 
+import { PartyStatField } from "@/types/party-stats";
 import { formatCompactCountryCurrency } from "@/utils/formatter";
-import { PartyStatField } from "@/utils/loader/party-years-sums";
 
 import type { CreateTranslator } from "../utils";
 

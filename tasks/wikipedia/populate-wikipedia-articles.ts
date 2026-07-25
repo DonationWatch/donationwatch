@@ -4,6 +4,7 @@ import type { Donation, DonorMetaDefinition } from "@/utils/types";
 
 import { PartyField } from "@/types/party";
 import { getCountryConfig } from "@/utils/data/get-country-config";
+import { getParties } from "@/utils/loader/parties";
 import { DonationField } from "@/utils/types";
 
 import { getDonations } from "../data/load-donations";
@@ -61,7 +62,7 @@ const populateDonationWikipediaData = async (
     await timeout(1000);
   }
 
-  for (const party of country.parties) {
+  for (const party of await getParties(country.id)) {
     // skip if party has no wiki page
     if (!party[PartyField.Wiki]) continue;
 

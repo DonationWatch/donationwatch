@@ -2,14 +2,11 @@ import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 
 import { PartyField } from "@/types/party";
+import { PartyStatField, PartyStats } from "@/types/party-stats";
 
+import type { PartyYearsSums } from "../loader/party-years-sums";
 import type { ReceiverId } from "../types";
 
-import {
-  PartyStatField,
-  PartyStats,
-  PartyYearsSums,
-} from "../loader/party-years-sums";
 import { numbersSum } from "../math";
 
 export const getPartiesSum = (

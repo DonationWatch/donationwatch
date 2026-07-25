@@ -2,10 +2,10 @@
 import type { EChartsOption } from "echarts";
 import type { CallbackDataParams } from "echarts/types/dist/shared";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Donation } from "@/utils/types";
 
+import { usePartiesMap } from "@/components/providers/country-provider";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
@@ -18,14 +18,12 @@ import { ExpandableReactEchart } from "./expandable-react-echart";
 
 // Bar chart that represents a histogram of x axis being the amount of distinct receivers per donor
 export const LoadedDonorReceiverHistogram = ({
-  country,
   title,
   subtitle,
   donations,
   parties = [],
   years = [],
 }: {
-  country: CountryConfig;
   title: string;
   subtitle: string;
   donations: Donation[];
@@ -34,6 +32,7 @@ export const LoadedDonorReceiverHistogram = ({
 }) => {
   const t = useTranslations();
   const browserBasedLocale = useBrowserBasedLocale();
+  const partiesMap = usePartiesMap();
 
   const yearsSet = new Set<string>(years);
   const partiesSet = new Set<Party>(parties);
@@ -45,11 +44,7 @@ export const LoadedDonorReceiverHistogram = ({
       yearsSet.add(donationYear(donation));
     }
     if (!parties.length) {
-      partiesSet.add(
-        country.parties.find(
-          (p) => p[PartyField.Id] === donation[DonationField.Receiver],
-        )!,
-      );
+      partiesSet.add(partiesMap[donation[DonationField.Receiver]]);
     }
   });
 
@@ -184,7 +179,6 @@ export const LoadedDonorReceiverHistogram = ({
       subtitle={subtitle}
       years={years}
       allowExpand={true}
-      country={country}
       feature="bar"
       option={option}
     />
@@ -192,14 +186,12 @@ export const LoadedDonorReceiverHistogram = ({
 };
 
 export const DonorReceiverHistogram = ({
-  country,
   years,
   parties,
   title,
   subtitle,
   donations,
 }: {
-  country: CountryConfig;
   years: string[];
   parties: Party[];
   tooSmallAreaColor?: string;
@@ -209,7 +201,6 @@ export const DonorReceiverHistogram = ({
 }) => {
   return (
     <LoadedDonorReceiverHistogram
-      country={country}
       title={title}
       subtitle={subtitle}
       donations={donations}

@@ -5,6 +5,7 @@ import { describe, expect, test, vi, beforeEach, afterEach } from "vitest";
 import type { CountryConfig } from "@/types/country-config";
 
 import { OldDataWarning, checkOldData } from "@/components/old-data-warning";
+import { CountryProvider } from "@/components/providers/country-provider";
 import { OLD_DATA_MONTHS_THRESHOLD } from "@/utils/config";
 
 // Mock hooks completely without calling importOriginal to avoid "client-only" errors
@@ -109,7 +110,9 @@ describe("OldDataWarning Rendering", () => {
 
   test("renders warning banner if dataset is older than threshold", () => {
     const { container } = render(
-      <OldDataWarning countryConfig={mockCountryConfig} />,
+      <CountryProvider countryConfig={mockCountryConfig}>
+        <OldDataWarning />
+      </CountryProvider>,
     );
 
     expect(container.innerHTML).toContain(
@@ -124,7 +127,9 @@ describe("OldDataWarning Rendering", () => {
     };
 
     const { container } = render(
-      <OldDataWarning countryConfig={recentConfig} />,
+      <CountryProvider countryConfig={recentConfig}>
+        <OldDataWarning />
+      </CountryProvider>,
     );
 
     expect(container.firstChild).toBeNull();

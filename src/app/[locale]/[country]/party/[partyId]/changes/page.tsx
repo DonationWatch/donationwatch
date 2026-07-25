@@ -4,8 +4,9 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 import { Article } from "@/components/layout/article";
+import { getParty } from "@/config/parties";
 import { PartyField } from "@/types/party";
-import { getCountryName, getParty } from "@/utils/countries";
+import { getCountryName } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { generateAlternates } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
@@ -32,7 +33,7 @@ export async function generateMetadata(
   ]);
 
   if (!isValidParty(partyId, countryConfig)) return notFoundMetadata;
-  const party = getParty(countryConfig, partyId);
+  const party = getParty(countryConfig.id, partyId);
 
   return {
     title: tPageTitle("party.changes", {
@@ -64,12 +65,11 @@ export default async function ChangesPage(
 
   if (!isValidParty(partyId, countryConfig)) return notFound();
 
-  const party = getParty(countryConfig, partyId);
+  const party = getParty(countryConfig.id, partyId);
 
   return (
     <Article fullWidth={true}>
       <PartyChangesClientPage
-        country={countryConfig}
         party={party}
         title={t("party.changes.detail.title", {
           party: party[PartyField.Short],

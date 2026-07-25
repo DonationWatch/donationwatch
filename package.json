@@ -73,6 +73,7 @@
     "nuqs": "^2.9.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "server-only": "file:stubs/server-only",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.6.0",
     "zod": "^4.4.3"

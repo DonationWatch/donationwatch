@@ -8,43 +8,44 @@ import type {
 
 import { useLocale } from "next-intl";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Donation, ReceiverId } from "@/utils/types";
 
 import { TextPartyLink } from "@/components/parties/text-party-link";
+import {
+  usePartiesMap,
+  useRequiredCountryConfig,
+} from "@/components/providers/country-provider";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
-import { partyColor } from "@/utils/color";
-import { getParty } from "@/utils/countries";
 import { donationYear } from "@/utils/date";
-import { formatCountryCurrency, formatPartyShortName } from "@/utils/formatter";
+import { formatCountryCurrency } from "@/utils/formatter";
 import { DonationField } from "@/utils/types";
 
 import { Translation } from "../translation";
 import { ExpandableReactEchart } from "./expandable-react-echart";
 
 export const DonationYearScatterPlot = ({
-  country,
   title: chartTitle,
   subtitle,
   years,
   parties,
   donations,
 }: {
-  country: CountryConfig;
   years: string[];
   parties: Party[];
   title: string;
   subtitle: string;
   donations: Donation[];
 }) => {
+  const country = useRequiredCountryConfig();
   const t = useTranslations();
   const locale = useLocale();
   const browserBasedLocale = useBrowserBasedLocale();
   const { backgroundColor } = useChart();
+  const partiesMap = usePartiesMap();
 
   const partyIds = new Set(parties.map((p) => p[PartyField.Id]));
 
@@ -127,7 +128,7 @@ export const DonationYearScatterPlot = ({
     .filter(([, { donations }]) => donations.length > 0)
     .toSorted(([, a], [, b]) => b.sum - a.sum)
     .forEach(([partyId, { donations, slots }], idx) => {
-      const party = getParty(country, partyId as ReceiverId);
+      const party = partiesMap[partyId as ReceiverId];
       titles.push({
         top: `${idx * heightPerRow + grid.top + 4}`,
         left: 10,
@@ -161,7 +162,7 @@ export const DonationYearScatterPlot = ({
           party[PartyField.Id],
         ]),
         symbolSize: (dataItem) => Math.min(30, 12 + (slots[dataItem[0]] - 1)),
-        color: partyColor(party[PartyField.Id], country),
+        color: party[PartyField.Color],
       });
     });
   const option: EChartsOption = {
@@ -178,11 +179,8 @@ export const DonationYearScatterPlot = ({
           number,
           ReceiverId,
         ];
-        const partyPart = `<div class="flex items-center font-semibold"><div class="mr-2 inline-block h-2 w-2 shrink-0 rounded-full border border-solid border-transparent dark:border-slate-600" style="background-color: ${partyColor(
-          partyId,
-          country,
-        )}"></div>
-        <div>${formatPartyShortName(country, partyId)}</div>
+        const partyPart = `<div class="flex items-center font-semibold"><div class="mr-2 inline-block h-2 w-2 shrink-0 rounded-full border border-solid border-transparent dark:border-slate-600" style="background-color: ${partiesMap[partyId][PartyField.Color]}"></div>
+        <div>${partiesMap[partyId][PartyField.Short]}</div>
       </div></div>`;
 
         const formattedCurrency = formatCountryCurrency(
@@ -220,11 +218,7 @@ ${partyPart}
                 country,
               ),
               biggestSpanParty: (
-                <TextPartyLink
-                  party={biggestSpanParty}
-                  country={country}
-                  locale={locale}
-                />
+                <TextPartyLink party={biggestSpanParty} locale={locale} />
               ),
             }}
           />
@@ -238,7 +232,6 @@ ${partyPart}
           title={chartTitle}
           subtitle={subtitle}
           years={years}
-          country={country}
         />
       </div>
     </>

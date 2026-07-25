@@ -2,7 +2,6 @@
 import { ArrowUpRight } from "lucide-react";
 import { useLocale } from "next-intl";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { CountryCode } from "@/utils/countries";
 
 import { useDetectedCountry } from "@/hooks/use-api";
@@ -55,7 +54,11 @@ const DetectedCountryFallback = () => {
   );
 };
 
-export const DetectedCountry = ({ country }: { country?: CountryConfig }) => {
+export const DetectedCountry = ({
+  countryCode,
+}: {
+  countryCode?: CountryCode;
+}) => {
   const { data, isLoading, error } = useDetectedCountry();
 
   const notDoneLoadingComponent = <DetectedCountryFallback />;
@@ -63,7 +66,8 @@ export const DetectedCountry = ({ country }: { country?: CountryConfig }) => {
   if (isLoading) return notDoneLoadingComponent;
   if (error) return notDoneLoadingComponent;
   if (!data?.country) return notDoneLoadingComponent;
-  if (country && data.country === country.code) return notDoneLoadingComponent;
+  if (countryCode && data.country === countryCode)
+    return notDoneLoadingComponent;
 
   return <DetectedCountryContent detectedCountryCode={data.country} />;
 };

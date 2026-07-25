@@ -1,12 +1,12 @@
 "use client";
 import { useLocale } from "next-intl";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Donation } from "@/utils/types";
 
 import { DonorLink } from "@/components/donors/donor-link";
 import { FormatAnd } from "@/components/formatter";
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { Translation } from "@/components/translation";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
@@ -23,15 +23,14 @@ const TOP_DONORS_TO_SHOW = 5;
 
 export const YearsDonorPageText = ({
   years,
-  country,
   parties,
   donations,
 }: {
   years: string[];
-  country: CountryConfig;
   parties: Party[];
   donations: Donation[];
 }) => {
+  const country = useRequiredCountryConfig();
   const t = useTranslations();
   const locale = useLocale();
   const browserBasedLocale = useBrowserBasedLocale();
@@ -153,7 +152,7 @@ export const YearsDonorPageText = ({
                   locale={locale}
                   items={topDonors.map((d, i) => (
                     <span key={i}>
-                      <DonorLink country={country} donor={d.donor} /> (
+                      <DonorLink donor={d.donor} /> (
                       {formatCountryCurrency(
                         browserBasedLocale,
                         d.amount,
@@ -180,7 +179,7 @@ export const YearsDonorPageText = ({
                 biggestDonor.amount,
                 country,
               ),
-              donor: <DonorLink country={country} donor={biggestDonor.donor} />,
+              donor: <DonorLink donor={biggestDonor.donor} />,
             }}
           />
         </p>
@@ -197,9 +196,7 @@ export const YearsDonorPageText = ({
                 mostDonationsDonor.sum,
                 country,
               ),
-              donor: (
-                <DonorLink country={country} donor={mostDonationsDonor.donor} />
-              ),
+              donor: <DonorLink donor={mostDonationsDonor.donor} />,
             }}
           />
         </p>
@@ -217,12 +214,7 @@ export const YearsDonorPageText = ({
                 mostUniquePartiesDonor.sum,
                 country,
               ),
-              donor: (
-                <DonorLink
-                  country={country}
-                  donor={mostUniquePartiesDonor.donor}
-                />
-              ),
+              donor: <DonorLink donor={mostUniquePartiesDonor.donor} />,
             }}
           />
         </p>

@@ -1,42 +1,45 @@
 "use client";
 import type { EChartsOption } from "echarts";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Countries } from "@/utils/countries";
 import type { Donation, ReceiverId } from "@/utils/types";
 
+import {
+  usePartiesMap,
+  useRequiredCountryConfig,
+} from "@/components/providers/country-provider";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
-import { partyColor } from "@/utils/color";
 import { Country } from "@/utils/countries";
 import { donationYear } from "@/utils/date";
-import { formatCountryCurrency, formatPartyShortName } from "@/utils/formatter";
+import { formatCountryCurrency } from "@/utils/formatter";
 import { createLambertConformalConicProjection } from "@/utils/map";
 import { AddressField, DonationField } from "@/utils/types";
 
 import { ExpandableReactEchart } from "./expandable-react-echart";
 
 export const DonationStateMap = ({
-  country,
   donations,
   title: chartTitle,
   subtitle,
   parties,
   years,
 }: {
-  country: CountryConfig;
   parties: Party[];
   years: string[];
   title: string;
   subtitle: string;
   donations: Donation[];
 }) => {
+  const country = useRequiredCountryConfig();
   const t = useTranslations();
   const browserBasedLocale = useBrowserBasedLocale();
   const { isMobile, backgroundColor, isDark } = useChart();
+  const partiesMap = usePartiesMap();
+
   const countryCode = country.code;
   const isEu = country.id === Country.europeanunion;
 
@@ -167,11 +170,8 @@ export const DonationStateMap = ({
               .map(([party, sum]) => {
                 return `<div>
                   <div class="flex items-center font-semibold">
-                    <div class="mr-2 inline-block h-2 w-2 shrink-0 rounded-full border border-solid border-transparent dark:border-slate-600" style="background-color: ${partyColor(
-                      party,
-                      country,
-                    )}"></div>
-                    <div>${formatPartyShortName(country, party)}</div>
+                    <div class="mr-2 inline-block h-2 w-2 shrink-0 rounded-full border border-solid border-transparent dark:border-slate-600" style="background-color: ${partiesMap[party][PartyField.Color]}"></div>
+                    <div>${partiesMap[party][PartyField.Short]}</div>
                   </div> 
                   ${formatCountryCurrency(browserBasedLocale, sum, country)}
                 </div>`;
@@ -206,7 +206,6 @@ export const DonationStateMap = ({
       title={chartTitle}
       subtitle={subtitle}
       years={years}
-      country={country}
     />
   );
 };

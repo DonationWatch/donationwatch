@@ -1,7 +1,6 @@
 "use client";
 import { HatGlasses, Info, Lock } from "lucide-react";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Countries, Country } from "@/utils/countries";
 import type { Donation, DonorMeta, ReceiverId } from "@/utils/types";
 
@@ -10,6 +9,10 @@ import { RelatedDonorChip } from "@/components/donors/related-donor-chip";
 import { PageHeader } from "@/components/layout/page-header";
 import Loading from "@/components/loading/loading";
 import { MetaCard, MetaCardTitle } from "@/components/meta-card";
+import {
+  usePartiesMap,
+  useRequiredCountryConfig,
+} from "@/components/providers/country-provider";
 import { LastModifiedSchema } from "@/components/schema";
 import {
   Tooltip,
@@ -21,7 +24,7 @@ import { useDonationsByDonorId } from "@/hooks/use-api";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { useFilterEngine } from "@/hooks/use-filter-engine";
-import { partyColor } from "@/utils/color";
+import { PartyField } from "@/types/party";
 import { donationYear } from "@/utils/date";
 import { getDonorName, isRedactedDonor } from "@/utils/donor";
 import {
@@ -34,14 +37,13 @@ import { AddressField, DonationField, DonorType } from "@/utils/types";
 
 export const DonorPageHead = ({
   donorId,
-  countryConfig,
   donorMeta,
 }: {
   donorId: string;
-  countryConfig: CountryConfig;
   country: Country;
   donorMeta: DonorMeta;
 }) => {
+  const countryConfig = useRequiredCountryConfig();
   const t = useTranslations("data");
   const { data, isLoading, error } = useDonationsByDonorId(
     countryConfig,
@@ -62,13 +64,7 @@ export const DonorPageHead = ({
     return null;
   }
 
-  return (
-    <DonorPageHeadContent
-      countryConfig={countryConfig}
-      donations={data}
-      donorMeta={donorMeta}
-    />
-  );
+  return <DonorPageHeadContent donations={data} donorMeta={donorMeta} />;
 };
 
 const DonorTypeTooltip = ({ donorType }: { donorType: DonorType }) => {
@@ -143,19 +139,20 @@ const UBOsTooltip = () => {
 };
 
 const DonorPageHeadContent = ({
-  countryConfig,
   donations,
   donorMeta,
 }: {
-  countryConfig: CountryConfig;
   donations: Donation[];
   donorMeta: DonorMeta;
 }) => {
+  const countryConfig = useRequiredCountryConfig();
   const t = useTranslations();
   const tCommon = useTranslations("common");
   const browserBasedLocale = useBrowserBasedLocale();
-  const wikiPageId = donorMeta.wiki;
   const { filteredDonations } = useFilterEngine();
+  const partiesMap = usePartiesMap();
+
+  const wikiPageId = donorMeta.wiki;
   const activeDonations = filteredDonations;
 
   const rawDonorName = donations.at(0)?.[DonationField.DonorName] ?? "";
@@ -221,7 +218,7 @@ const DonorPageHeadContent = ({
 
       <AbsoluteMultipleColorsGradient
         colors={sortedSums.map(([party, data]) => ({
-          color: partyColor(party, countryConfig),
+          color: partiesMap[party][PartyField.Color],
           width: 100 * (data / sum),
         }))}
       />
@@ -303,7 +300,6 @@ const DonorPageHeadContent = ({
                       key={name}
                       name={name}
                       kind={kind}
-                      country={countryConfig}
                       sums={sums}
                     />
                   ))}
@@ -330,7 +326,7 @@ const DonorPageHeadContent = ({
           <div className="mb-3">
             {wikiPageId && (
               <section aria-label={tCommon("summary")} className="pt-4 sm:px-4">
-                <WikiQuote pageId={wikiPageId} country={countryConfig} />
+                <WikiQuote pageId={wikiPageId} />
               </section>
             )}
           </div>

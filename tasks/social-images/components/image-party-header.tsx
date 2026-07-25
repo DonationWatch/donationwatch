@@ -6,7 +6,6 @@ import type { ImageLocale } from "@/utils/locales";
 import type { Donation } from "@/utils/types";
 
 import { PartyField } from "@/types/party";
-import { partyColor } from "@/utils/color";
 import { getDonorName } from "@/utils/donor";
 import { formatCountryCurrency, formatNumber } from "@/utils/formatter";
 import { getLongName } from "@/utils/party";
@@ -146,7 +145,7 @@ export const ImagePartyHeader = ({
             tw="w-full h-[12px]"
             style={{
               border: "1px solid #fff",
-              backgroundColor: partyColor(party[PartyField.Id], country),
+              backgroundColor: party[PartyField.Color],
             }}
           ></div>
         </div>

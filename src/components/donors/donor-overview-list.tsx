@@ -120,12 +120,7 @@ const DonorOverviewListContent = ({
                         return prev.filter((id) => id !== entry.name);
                       });
                     }}
-                    detail={
-                      <DynamicDonorDonationsDetail
-                        donor={entry}
-                        country={countryConfig}
-                      />
-                    }
+                    detail={<DynamicDonorDonationsDetail donor={entry} />}
                   />
                 </li>
               );

@@ -5,6 +5,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound, redirect } from "next/navigation";
 
 import type { TabItem } from "@/components/tabs";
+import type { Country } from "@/utils/countries";
 
 import { AbsoluteMultipleColorsGradient } from "@/components/absolute-multiple-colors-gradient";
 import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
@@ -12,22 +13,19 @@ import { PageHeader } from "@/components/layout/page-header";
 import { LastModifiedSchema } from "@/components/schema";
 import { NavigationTabs } from "@/components/tabs";
 import { WikiQuote } from "@/components/wiki-quote";
+import { findCorrectParty, getPartiesSync, getParty } from "@/config/parties";
 import { PartyField } from "@/types/party";
 import { isNotNullandNotUndefined } from "@/utils/array";
-import { partyColor } from "@/utils/color";
 import { CACHED_PARTIES_COUNT, THUMBNAIL_PREFIX } from "@/utils/config";
-import { findCorrectParty, getParty } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { getSinglePartyYearsSums } from "@/utils/data/get-parties-sum";
 import { Features, hasFeature } from "@/utils/features";
 import { getMessagesForLocale } from "@/utils/i18n-loader";
 import { pick } from "@/utils/i18n-pick";
-import {
-  getPartyYearsSums,
-  lastPartyStatsDonation,
-} from "@/utils/loader/party-years-sums";
+import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
 import { baseOpenGraph, baseTwitter } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
+import { lastPartyStatsDonation } from "@/utils/party";
 import { generateCountryTitlePart } from "@/utils/title";
 import { isValidCountry, isValidLocale, isValidParty } from "@/utils/validate";
 
@@ -43,12 +41,10 @@ export async function generateStaticParams({
   params: ParamsOf<"/[locale]/[country]/party/[partyId]">;
 }) {
   if (!isValidLocale(params.locale)) return [];
-  if (!isValidCountry(params.country)) return [];
-
   const { country } = params;
 
-  const countryConfig = await getCountryConfig(country);
-  return countryConfig.parties
+  const parties = getPartiesSync(country as Country);
+  return parties
     .toSorted((a, b) => b[PartyField.Sum] - a[PartyField.Sum])
     .slice(0, CACHED_PARTIES_COUNT)
     .map((party) => ({
@@ -72,7 +68,7 @@ export async function generateMetadata(
 
   if (!isValidParty(partyId, countryConfig)) return notFoundMetadata;
 
-  const party = getParty(countryConfig, partyId);
+  const party = getParty(countryConfig.id, partyId);
 
   if (!party) {
     return notFoundMetadata;
@@ -123,14 +119,14 @@ export default async function PartyLayout(
     ]);
 
   if (!isValidParty(partyId, countryConfig)) {
-    const correctParty = findCorrectParty(countryConfig, partyId);
+    const correctParty = findCorrectParty(countryConfig.id, partyId);
     if (correctParty) {
       redirect(`/${locale}/${country}/party/${correctParty[PartyField.Id]}`);
     }
     return notFound();
   }
 
-  const party = getParty(countryConfig, partyId);
+  const party = getParty(countryConfig.id, partyId);
   const singlePartyYearsSums = getSinglePartyYearsSums(
     partyYearsSums,
     party[PartyField.Id],
@@ -194,7 +190,7 @@ export default async function PartyLayout(
       <AbsoluteMultipleColorsGradient
         colors={[
           {
-            color: partyColor(party[PartyField.Id], countryConfig),
+            color: party[PartyField.Color],
             width: 100,
           },
         ]}
@@ -204,12 +200,11 @@ export default async function PartyLayout(
           <PartyClientPageHead
             party={party}
             partyYearsSums={singlePartyYearsSums}
-            countryConfig={countryConfig}
           />
           <div className="mb-3">
             {wikiPageId && (
               <section aria-label={tCommon("summary")} className="pt-4 sm:px-4">
-                <WikiQuote pageId={wikiPageId} country={countryConfig} />
+                <WikiQuote pageId={wikiPageId} />
               </section>
             )}
           </div>

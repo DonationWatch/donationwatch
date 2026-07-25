@@ -17,10 +17,13 @@ import {
 } from "react";
 import { z } from "zod";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Donation, ReceiverId } from "@/utils/types";
 
+import {
+  useParties,
+  useRequiredCountryConfig,
+} from "@/components/providers/country-provider";
 import { PartyField } from "@/types/party";
 import { Features, hasFeature } from "@/utils/features";
 import { DonationField, DonationType, DonorType } from "@/utils/types";
@@ -212,15 +215,16 @@ const areArraysEqual = <T,>(a: T[] | null, b: T[] | null): boolean => {
 };
 
 export const FilterProvider = ({
-  countryConfig,
   donations: initialDonations = [],
   accentColor = "#3730a3",
   children,
 }: PropsWithChildren<{
-  countryConfig: CountryConfig;
   donations?: Donation[];
   accentColor?: string;
 }>) => {
+  const countryConfig = useRequiredCountryConfig();
+  const countryParties = useParties();
+
   const sortedYears = useMemo(
     () =>
       countryConfig.years
@@ -385,10 +389,8 @@ export const FilterProvider = ({
       maxYear,
       availableParties:
         donations.length > 0
-          ? countryConfig.parties.filter((p) =>
-              presentPartyIds.has(p[PartyField.Id]),
-            )
-          : countryConfig.parties,
+          ? countryParties.filter((p) => presentPartyIds.has(p[PartyField.Id]))
+          : countryParties,
       availableDonationTypes:
         donations.length > 0
           ? baseDonationTypes.filter((t) => presentDonationTypes.has(t))
@@ -398,7 +400,7 @@ export const FilterProvider = ({
           ? baseDonorTypes.filter((t) => presentDonorTypes.has(t))
           : baseDonorTypes,
     };
-  }, [minYear, maxYear, countryConfig.parties, donations]);
+  }, [minYear, maxYear, countryParties, donations]);
 
   const activePartyIds = useMemo(() => {
     if (!parsedFilters.parties) {

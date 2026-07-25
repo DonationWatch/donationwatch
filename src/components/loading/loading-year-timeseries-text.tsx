@@ -1,9 +1,9 @@
 "use client";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Donation } from "@/utils/types";
 
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
 import { getCountryName } from "@/utils/countries";
@@ -14,14 +14,13 @@ import { DonationField } from "@/utils/types";
 export const YearTimeseriesText = ({
   parties,
   years,
-  country,
   donations,
 }: {
-  country: CountryConfig;
   parties: Party[];
   years: string[];
   donations: Donation[];
 }) => {
+  const country = useRequiredCountryConfig();
   const t = useTranslations();
   const tCountries = useTranslations("countries");
 

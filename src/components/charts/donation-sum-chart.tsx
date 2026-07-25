@@ -1,16 +1,17 @@
 "use client";
 import type { EChartsOption, LineSeriesOption } from "echarts";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Donation, ReceiverId } from "@/utils/types";
 
+import {
+  usePartiesMap,
+  useRequiredCountryConfig,
+} from "@/components/providers/country-provider";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
-import { partyColor } from "@/utils/color";
-import { getParty } from "@/utils/countries";
 import { donationYear } from "@/utils/date";
 import { buildElectionTimelineMarkArea } from "@/utils/election-marker";
 import {
@@ -18,7 +19,6 @@ import {
   formatCountryCurrency,
   formatDate,
   formatMonthYear,
-  formatPartyShortName,
   formatTwoDigitDate,
   formatYear,
 } from "@/utils/formatter";
@@ -38,7 +38,6 @@ const symbolConfiguration = (idx: number) => {
 type LineDatum = [number, number];
 
 export const DonationSumChart = ({
-  country,
   title: chartTitle,
   subtitle,
   years,
@@ -46,7 +45,6 @@ export const DonationSumChart = ({
   limitToFirstDateYear,
   donations,
 }: {
-  country: CountryConfig;
   years: string[];
   parties: Party[];
   title: string;
@@ -57,7 +55,6 @@ export const DonationSumChart = ({
   return (
     <DonationTimeseriesChart
       donations={donations}
-      country={country}
       years={years}
       parties={parties}
       title={chartTitle}
@@ -68,7 +65,6 @@ export const DonationSumChart = ({
 };
 
 export const DonationPartyChart = ({
-  country,
   title: chartTitle,
   subtitle,
   years,
@@ -76,7 +72,6 @@ export const DonationPartyChart = ({
   limitToFirstDateYear,
   donations,
 }: {
-  country: CountryConfig;
   years: string[];
   party: Party;
   title: string;
@@ -87,7 +82,6 @@ export const DonationPartyChart = ({
   return (
     <DonationTimeseriesChart
       donations={donations}
-      country={country}
       years={years}
       parties={[party]}
       title={chartTitle}
@@ -98,7 +92,6 @@ export const DonationPartyChart = ({
 };
 
 const DonationTimeseriesChart = ({
-  country,
   title: chartTitle,
   subtitle,
   years,
@@ -107,16 +100,17 @@ const DonationTimeseriesChart = ({
   donations,
 }: {
   donations: Donation[];
-  country: CountryConfig;
   years: string[];
   parties: Party[];
   title: string;
   subtitle: string;
   limitToFirstDateYear?: boolean;
 }) => {
+  const country = useRequiredCountryConfig();
   const browserBasedLocale = useBrowserBasedLocale();
   const { backgroundColor, isMobile, isDark } = useChart();
   const tYears = useClientTranslations("years");
+  const partiesMap = usePartiesMap();
 
   if (!donations.length) return null;
 
@@ -148,7 +142,7 @@ const DonationTimeseriesChart = ({
 
       return 10;
     },
-    color: partyColor(party[PartyField.Id], country) ?? undefined,
+    color: party[PartyField.Color] ?? undefined,
     data: [],
   }));
 
@@ -244,7 +238,7 @@ const DonationTimeseriesChart = ({
         overflow: "truncate",
       },
       formatter: (partyId) =>
-        formatPartyShortName(country, partyId as ReceiverId),
+        partiesMap[partyId as ReceiverId][PartyField.Short],
     },
     dataZoom: [
       {
@@ -310,7 +304,7 @@ const DonationTimeseriesChart = ({
             (partyLine.data![param.dataIndex - 1] as LineDatum)?.[1] ?? 0;
           const delta = sum - previousPartyValue;
 
-          const party = getParty(country, param.seriesName as ReceiverId);
+          const party = partiesMap[param.seriesName as ReceiverId];
           line += `${param.marker} ${party[PartyField.Short]}: ${formatCountryCurrency(browserBasedLocale, sum, country)}`;
 
           // only add delta if there is a change
@@ -387,14 +381,12 @@ const DonationTimeseriesChart = ({
       option={option}
       title={chartTitle}
       subtitle={fullSubtitle}
-      country={country}
       years={years}
     />
   );
 };
 
 export const DonationStackedTimeseriesChart = ({
-  country,
   title: chartTitle,
   subtitle,
   years,
@@ -404,7 +396,6 @@ export const DonationStackedTimeseriesChart = ({
   donationsHaveYearsOnly = false,
 }: {
   donations: Donation[];
-  country: CountryConfig;
   years: string[];
   parties: Party[];
   title: string;
@@ -412,8 +403,10 @@ export const DonationStackedTimeseriesChart = ({
   limitToFirstDateYear?: boolean;
   donationsHaveYearsOnly?: boolean;
 }) => {
+  const country = useRequiredCountryConfig();
   const browserBasedLocale = useBrowserBasedLocale();
   const { backgroundColor, isMobile, isDark } = useChart();
+  const partiesMap = usePartiesMap();
 
   const leftmostYear = limitToFirstDateYear
     ? donations[0][DonationField.Date].substring(0, 4)
@@ -458,7 +451,7 @@ export const DonationStackedTimeseriesChart = ({
 
       return 10;
     },
-    color: partyColor(party[PartyField.Id], country) ?? undefined,
+    color: party[PartyField.Color] ?? undefined,
     data: [],
   }));
 
@@ -574,7 +567,7 @@ export const DonationStackedTimeseriesChart = ({
         overflow: "truncate",
       },
       formatter: (partyId) =>
-        formatPartyShortName(country, partyId as ReceiverId),
+        partiesMap[partyId as ReceiverId][PartyField.Short],
     },
     dataZoom: [
       {
@@ -638,7 +631,7 @@ export const DonationStackedTimeseriesChart = ({
             (partyLine.data![param.dataIndex - 1] as LineDatum)?.[1] ?? 0;
           const delta = sum - previousPartyValue;
 
-          const party = getParty(country, param.seriesName as ReceiverId);
+          const party = partiesMap[param.seriesName as ReceiverId];
           line += `${param.marker} <span class="font-medium">${party[PartyField.Short]}</span>: ${formatCountryCurrency(browserBasedLocale, sum, country)}`;
 
           // only add delta if there is a change
@@ -704,7 +697,6 @@ export const DonationStackedTimeseriesChart = ({
       option={option}
       title={chartTitle}
       subtitle={subtitle}
-      country={country}
       years={years}
     />
   );

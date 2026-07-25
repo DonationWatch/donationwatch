@@ -2,8 +2,6 @@
 
 import dynamic from "next/dynamic";
 
-import type { CountryConfig } from "@/types/country-config";
-
 const AppSidebarSkeleton = () => (
   <aside
     className="group peer text-sidebar-foreground hidden lg:block"
@@ -25,10 +23,6 @@ const AppSidebarDynamic = dynamic(
   },
 );
 
-export function DynamicAppSidebar({
-  countryConfig,
-}: {
-  countryConfig?: CountryConfig;
-}) {
-  return <AppSidebarDynamic countryConfig={countryConfig} />;
+export function DynamicAppSidebar() {
+  return <AppSidebarDynamic />;
 }

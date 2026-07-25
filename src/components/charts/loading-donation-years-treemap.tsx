@@ -5,16 +5,17 @@ import type { TreemapSeriesNodeItemOption } from "echarts/types/src/chart/treema
 import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Donation, ReceiverId } from "@/utils/types";
 
+import {
+  usePartiesMap,
+  useRequiredCountryConfig,
+} from "@/components/providers/country-provider";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
-import { partyColor } from "@/utils/color";
-import { getParty } from "@/utils/countries";
 import { donationYear } from "@/utils/date";
 import { getDonorName } from "@/utils/donor";
 import { formatCountryCurrency } from "@/utils/formatter";
@@ -24,7 +25,6 @@ import { DonationField } from "@/utils/types";
 import { ExpandableReactEchart } from "./expandable-react-echart";
 
 export const LoadedDonationYearsTreemap = ({
-  country,
   tooSmallAreaColor = "#6366f1",
   title,
   subtitle,
@@ -32,7 +32,6 @@ export const LoadedDonationYearsTreemap = ({
   parties = [],
   years = [],
 }: {
-  country: CountryConfig;
   tooSmallAreaColor?: string;
   title: string;
   subtitle: string;
@@ -40,10 +39,12 @@ export const LoadedDonationYearsTreemap = ({
   parties?: Party[];
   years?: string[];
 }) => {
+  const country = useRequiredCountryConfig();
   const t = useTranslations();
   const tCommon = useTranslations("common");
   const locale = useLocale();
   const browserBasedLocale = useBrowserBasedLocale();
+  const partiesMap = usePartiesMap();
 
   const yearsSet = new Set<string>(years);
   const partiesSet = new Set<Party>(parties);
@@ -53,11 +54,7 @@ export const LoadedDonationYearsTreemap = ({
       yearsSet.add(donationYear(donation));
     }
     if (!parties.length) {
-      partiesSet.add(
-        country.parties.find(
-          (p) => p[PartyField.Id] === donation[DonationField.Receiver],
-        )!,
-      );
+      partiesSet.add(partiesMap[donation[DonationField.Receiver]]);
     }
   });
 
@@ -100,7 +97,7 @@ export const LoadedDonationYearsTreemap = ({
         (sum, donation) => sum + donation[DonationField.Amount],
         0,
       );
-      const party = getParty(country, receiver as ReceiverId);
+      const party = partiesMap[receiver as ReceiverId];
 
       children.push({
         id: party[PartyField.Id],
@@ -140,10 +137,9 @@ export const LoadedDonationYearsTreemap = ({
           formatter: (params) => {
             if (params.treeAncestors.length !== 3) return "";
 
-            const partyPart = `<div class="flex items-center font-semibold"><div class="mr-2 inline-block h-2 w-2 shrink-0 rounded-full border border-solid border-transparent dark:border-slate-600" style="background-color: ${partyColor(
-              party[PartyField.Id],
-              country,
-            )}"></div>
+            const partyPart = `<div class="flex items-center font-semibold"><div class="mr-2 inline-block h-2 w-2 shrink-0 rounded-full border border-solid border-transparent dark:border-slate-600" style="background-color: ${
+              party[PartyField.Color]
+            }"></div>
         <div>${party[PartyField.Short]}</div>
       </div></div>`;
 
@@ -267,7 +263,6 @@ export const LoadedDonationYearsTreemap = ({
       subtitle={subtitle}
       years={years}
       allowExpand={true}
-      country={country}
       feature="treemap"
       option={option}
       onClick={(params) => {
@@ -296,7 +291,6 @@ export const LoadedDonationYearsTreemap = ({
 };
 
 export const DonationYearsTreemap = ({
-  country,
   years,
   parties,
   tooSmallAreaColor = "#6366f1",
@@ -304,7 +298,6 @@ export const DonationYearsTreemap = ({
   subtitle,
   donations,
 }: {
-  country: CountryConfig;
   years: string[];
   parties: Party[];
   tooSmallAreaColor?: string;
@@ -314,7 +307,6 @@ export const DonationYearsTreemap = ({
 }) => {
   return (
     <LoadedDonationYearsTreemap
-      country={country}
       title={title}
       subtitle={subtitle}
       donations={donations}
@@ -326,14 +318,12 @@ export const DonationYearsTreemap = ({
 };
 
 export const LoadingDonationPartyTreemap = ({
-  country,
   party,
   tooSmallAreaColor = "#6366f1",
   title,
   subtitle,
   donations,
 }: {
-  country: CountryConfig;
   party: Party;
   tooSmallAreaColor?: string;
   title: string;
@@ -342,7 +332,6 @@ export const LoadingDonationPartyTreemap = ({
 }) => {
   return (
     <LoadedDonationYearsTreemap
-      country={country}
       title={title}
       subtitle={subtitle}
       donations={donations}

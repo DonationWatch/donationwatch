@@ -1,6 +1,5 @@
 "use client";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Donation, ReceiverId } from "@/utils/types";
 
 import { DonationStackedTimeseriesChart } from "@/components/charts/donation-sum-chart";
@@ -10,26 +9,29 @@ import {
   ArticleSectionTwoColumns,
   ArticleSectionWrapper,
 } from "@/components/layout/article";
+import {
+  usePartiesMap,
+  useRequiredCountryConfig,
+} from "@/components/providers/country-provider";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
-import { getCountryName, getParty } from "@/utils/countries";
+import { getCountryName } from "@/utils/countries";
 import { donationYear, fillYears } from "@/utils/date";
 import { getDonorName } from "@/utils/donor";
 import { formatCountryCurrency, formatPercentFormat } from "@/utils/formatter";
 import { DonationField } from "@/utils/types";
 
 export const DonorDonationTimeline = ({
-  countryConfig,
   donations,
 }: {
-  donorId: string;
-  countryConfig: CountryConfig;
   donations: Donation[];
 }) => {
+  const countryConfig = useRequiredCountryConfig();
   const tCountries = useTranslations("countries");
   const tDonor = useTranslations("donor");
   const tCommon = useTranslations("common");
   const browserBasedLocale = useBrowserBasedLocale();
+  const partiesMap = usePartiesMap();
 
   if (!donations || donations.length === 0) {
     return null;
@@ -108,7 +110,6 @@ export const DonorDonationTimeline = ({
           <div>
             <DonationStackedTimeseriesChart
               donations={donations}
-              country={countryConfig}
               donationsHaveYearsOnly={donationsHaveYearsOnly}
               title={tDonor("timeline.title")}
               subtitle={tDonor("timeline.chart_subtitle", {
@@ -117,7 +118,7 @@ export const DonorDonationTimeline = ({
                 minYear: firstYear,
               })}
               years={fillYears(firstYear, lastYear)}
-              parties={[...parties].map((id) => getParty(countryConfig, id))}
+              parties={[...parties].map((id) => partiesMap[id])}
             />
           </div>
         </ArticleSectionColumn>

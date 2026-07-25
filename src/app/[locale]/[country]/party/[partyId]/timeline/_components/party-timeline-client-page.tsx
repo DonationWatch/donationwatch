@@ -2,7 +2,6 @@
 
 import { useMemo, useEffect } from "react";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 
 import { DonationPerMonthChart } from "@/components/charts/donation-per-month-chart";
@@ -17,6 +16,7 @@ import {
 } from "@/components/layout/article";
 import Loading from "@/components/loading/loading";
 import { PartyTimelineText } from "@/components/parties/party-timeline-text";
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useDonationsByParty } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { useFilterEngine } from "@/hooks/use-filter-engine";
@@ -24,7 +24,6 @@ import { useScrollToHash } from "@/hooks/use-scroll-to-hash";
 import { Features, hasFeature } from "@/utils/features";
 
 interface PartyTimelineClientPageProps {
-  country: CountryConfig;
   party: Party;
   timelineTitle: string;
   timelineSummary: string;
@@ -35,7 +34,6 @@ interface PartyTimelineClientPageProps {
 }
 
 export const PartyTimelineClientPage = ({
-  country,
   party,
   timelineTitle,
   timelineSummary,
@@ -44,6 +42,7 @@ export const PartyTimelineClientPage = ({
   perYearTitle,
   perYearSubtitle,
 }: PartyTimelineClientPageProps) => {
+  const country = useRequiredCountryConfig();
   const tData = useTranslations("data");
 
   const {
@@ -97,7 +96,6 @@ export const PartyTimelineClientPage = ({
               <DonationPartyChart
                 title={chartTitle}
                 subtitle={chartSubtitle}
-                country={country}
                 years={activeYears}
                 party={party}
                 limitToFirstDateYear={true}
@@ -117,16 +115,11 @@ export const PartyTimelineClientPage = ({
                 title={timelineTitle}
               />
             )}
-            <PartyTimelineText
-              country={country}
-              party={party}
-              donations={filteredDonations}
-            />
+            <PartyTimelineText party={party} donations={filteredDonations} />
           </ArticleSectionColumn>
           <ArticleSectionColumn>
             <DonationPerMonthChart
               donations={filteredDonations}
-              country={country}
               title={perYearTitle}
               resolution={"year"}
               subtitle={perYearSubtitle}

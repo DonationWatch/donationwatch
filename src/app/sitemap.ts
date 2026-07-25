@@ -6,6 +6,7 @@ import type { BigDonor } from "@/utils/loader/biggest-donors";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 import type { ConstLocale } from "@/utils/locales";
 
+import { getPartiesSync } from "@/config/parties";
 import { PartyField } from "@/types/party";
 import { BASE_URL } from "@/utils/config";
 import { COUNTRIES } from "@/utils/countries";
@@ -13,11 +14,9 @@ import { getCountryConfig } from "@/utils/data/get-country-config";
 import { Features, hasFeature } from "@/utils/features";
 import { getBiggestDonors } from "@/utils/loader/biggest-donors";
 import { getBuild } from "@/utils/loader/build";
-import {
-  getPartyYearsSums,
-  lastPartyStatsDonation,
-} from "@/utils/loader/party-years-sums";
+import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
 import { CONST_LOCALES } from "@/utils/locales";
+import { lastPartyStatsDonation } from "@/utils/party";
 
 const yearSubPages = [
   "overview",
@@ -127,7 +126,7 @@ export default async function sitemap(props: {
                 url: `${BASE_URL}/${locale}/${country}/tools/compare`,
                 lastModified,
               },
-              config.parties.flatMap((party) => {
+              getPartiesSync(country).flatMap((party) => {
                 const partiesBaseUrl = `${BASE_URL}/${locale}/${country}/party/${party[PartyField.Id]}`;
                 const lastDonation = lastPartyStatsDonation(
                   config,

@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { PartySum } from "@/utils/data/get-parties-sum";
 import type { ConstLocale } from "@/utils/locales";
 import type { Donation } from "@/utils/types";
@@ -13,14 +12,12 @@ export const LoadedTopPartyDonations = ({
   locale,
   sum,
   sums,
-  country,
   donations,
 }: {
   locale: ConstLocale;
   donations: Donation[];
   sums: PartySum[];
   sum: number;
-  country: CountryConfig;
 }) => {
   const [expandedParties, setExpandedParties] = useState<string[]>([]);
   const onToggleExpanded = (state: string) => {
@@ -42,7 +39,6 @@ export const LoadedTopPartyDonations = ({
           donations={donations}
           amount={data.sum}
           sum={sum}
-          country={country}
           expanded={expandedParties.includes(party)}
           onToggleExpanded={() => onToggleExpanded(party)}
         />

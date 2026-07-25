@@ -2,12 +2,15 @@
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useEffect, useRef, useState } from "react";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Donation } from "@/utils/types";
 
 import { RankingItem } from "@/components/donations/ranking-item";
 import { DonorLink } from "@/components/donors/donor-link";
+import {
+  usePartiesMap,
+  useRequiredCountryConfig,
+} from "@/components/providers/country-provider";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { useBreakpoint } from "@/hooks/use-media-query";
@@ -24,21 +27,20 @@ import { DonationField } from "@/utils/types";
 type DonorHistogram = Record<number, Record<string, number>>;
 
 const HistogramItemDetailLine = ({
-  country,
   amount,
   donor,
 }: {
-  country: CountryConfig;
   amount: number;
   donor: string;
 }) => {
+  const country = useRequiredCountryConfig();
   const browserBasedLocale = useBrowserBasedLocale();
   const fmtAmount = formatCountryCurrency(browserBasedLocale, amount, country);
 
   return (
     <div className="border-border mb-2 grow flex-wrap items-center justify-between space-y-2 overflow-hidden border-t px-1 py-1.5 leading-none first:border-t-0 odd:bg-white/5 sm:mb-0 sm:flex sm:flex-nowrap sm:space-y-0 dark:odd:bg-slate-900/5">
       <div className="order-last flex grow basis-full justify-between overflow-hidden font-semibold sm:order-none sm:basis-auto">
-        <DonorLink className="truncate" donor={donor} country={country} />
+        <DonorLink className="truncate" donor={donor} />
       </div>
       <div className="shrink-0 basis-1/2 pr-2 tabular-nums sm:basis-auto sm:text-right">
         {fmtAmount}
@@ -48,10 +50,8 @@ const HistogramItemDetailLine = ({
 };
 
 export const HistogramItemDetail = ({
-  country,
   sums,
 }: {
-  country: CountryConfig;
   sums: { donor: string; sum: number }[];
 }) => {
   const t = useTranslations();
@@ -94,11 +94,7 @@ export const HistogramItemDetail = ({
               data-index={virtualItem.index}
               className="border-border absolute top-0 right-0 left-0 flex w-full items-center justify-between space-x-2 border-t first:border-t-0"
             >
-              <HistogramItemDetailLine
-                country={country}
-                donor={donor}
-                amount={sum}
-              />
+              <HistogramItemDetailLine donor={donor} amount={sum} />
             </li>
           );
         })}
@@ -180,9 +176,7 @@ const DonorHistogramTextText = ({
 
 const DonorHistogramTextList = ({
   countDonorSums,
-  country,
 }: {
-  country: CountryConfig;
   countDonorSums: {
     receiversCount: string;
     donorSums: {
@@ -191,6 +185,7 @@ const DonorHistogramTextList = ({
     }[];
   }[];
 }) => {
+  const country = useRequiredCountryConfig();
   const t = useTranslations();
   const [expandedBuckets, setExpandedBuckets] = useState<string[]>([]);
   const onToggleExpanded = (state: string) => {
@@ -213,9 +208,7 @@ const DonorHistogramTextList = ({
               country={country}
               expanded={expandedBuckets.includes(receiversCount)}
               onToggleExpanded={() => onToggleExpanded(receiversCount)}
-              detail={
-                <HistogramItemDetail country={country} sums={donorSums} />
-              }
+              detail={<HistogramItemDetail sums={donorSums} />}
             >
               {t("donors.histogram.item", {
                 donors: donorSums.length,
@@ -231,15 +224,14 @@ const DonorHistogramTextList = ({
 
 const LoadedYearsDonorHistogramText = ({
   years,
-  country,
   parties,
   donations,
 }: {
   years: string[];
-  country: CountryConfig;
   parties: Party[];
   donations: Donation[];
 }) => {
+  const partiesMap = usePartiesMap();
   const yearsSet = new Set<string>(years);
   const partiesSet = new Set<Party>(parties);
 
@@ -250,11 +242,7 @@ const LoadedYearsDonorHistogramText = ({
       yearsSet.add(donationYear(donation));
     }
     if (!parties.length) {
-      partiesSet.add(
-        country.parties.find(
-          (p) => p[PartyField.Id] === donation[DonationField.Receiver],
-        )!,
-      );
+      partiesSet.add(partiesMap[donation[DonationField.Receiver]]);
     }
   });
 
@@ -307,29 +295,23 @@ const LoadedYearsDonorHistogramText = ({
         histogram={buckets}
         years={years}
       />
-      <DonorHistogramTextList
-        country={country}
-        countDonorSums={countDonorSums}
-      />
+      <DonorHistogramTextList countDonorSums={countDonorSums} />
     </>
   );
 };
 
 export const YearsDonorHistogramText = ({
   years,
-  country,
   parties,
   donations,
 }: {
   years: string[];
-  country: CountryConfig;
   parties: Party[];
   donations: Donation[];
 }) => {
   return (
     <LoadedYearsDonorHistogramText
       donations={donations}
-      country={country}
       parties={parties}
       years={years}
     />

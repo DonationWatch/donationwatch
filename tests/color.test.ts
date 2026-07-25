@@ -1,18 +1,15 @@
 import { describe, expect, test } from "vitest";
 
 import { PartyField } from "@/types/party";
-import { partyColor } from "@/utils/color";
 import { COUNTRIES } from "@/utils/countries";
-import { getCountryConfig } from "@/utils/data/get-country-config";
+import { getParties } from "@/utils/loader/parties";
 
 describe("Color", () => {
   COUNTRIES.forEach((country) => {
     test(`${country} has a color for each party`, async () => {
-      const countryConfig = await getCountryConfig(country);
-      countryConfig.parties.forEach((party) =>
-        expect(partyColor(party[PartyField.Id], countryConfig)).toBeTypeOf(
-          "string",
-        ),
+      const parties = await getParties(country);
+      parties.forEach((party) =>
+        expect(party[PartyField.Color]).toBeTypeOf("string"),
       );
     });
   });

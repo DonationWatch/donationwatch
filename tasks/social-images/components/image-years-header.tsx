@@ -11,10 +11,10 @@ import type { ImageLocale } from "@/utils/locales";
 import type { Donation, ReceiverId } from "@/utils/types";
 
 import { PageLogo } from "@/components/layout/page-logo";
+import { getPartiesSync, getParty } from "@/config/parties";
 import { PartyField } from "@/types/party";
-import { partyColor } from "@/utils/color";
-import { getCountryName, getParty } from "@/utils/countries";
-import { getParties } from "@/utils/data/get-parties";
+import { getCountryName } from "@/utils/countries";
+import { getPartiesByYears } from "@/utils/data/get-parties-by-years";
 import { getPartiesSum } from "@/utils/data/get-parties-sum";
 import { donationYear } from "@/utils/date";
 import {
@@ -76,7 +76,7 @@ export const ImageStackedPartyDonations = ({
             style={{
               borderRadius: "2px",
               display: "flex",
-              backgroundColor: partyColor(party, country),
+              backgroundColor: getParty(country.id, party)[PartyField.Color],
             }}
           ></div>
         </div>
@@ -170,7 +170,7 @@ export const ImageYearsHeader = ({
   partyYearSums: PartyYearsSums;
 }) => {
   const t = getTranslations();
-  const parties = getParties(country, years);
+  const parties = getPartiesByYears(years, getPartiesSync(country.id));
   const { count, sum, sums } = getPartiesSum(
     country,
     partyYearSums,
@@ -224,7 +224,7 @@ export const ImageYearsHeader = ({
           {sums.slice(0, 3).map(([party, data]) => (
             <ImageRankingItem
               key={party}
-              party={getParty(country, party)}
+              party={getParty(country.id, party)}
               amount={data.sum}
               sum={sum}
               locale={locale}

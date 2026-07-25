@@ -74,7 +74,7 @@ export default async function Page(
         <>
           <p className="mb-8 max-w-prose">{tBarChartRace("description")}</p>
           <p className="mb-8 max-w-prose text-sm">{tBarChartRace("note")}</p>
-          <RacingBars countryConfig={countryConfig} />
+          <RacingBars />
         </>
       </Article>
     </ScopedClientIntlProvider>

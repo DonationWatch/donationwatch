@@ -1,10 +1,10 @@
 "use client";
-import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Donation } from "@/utils/types";
 
 import { RankBadge } from "@/components/donations/ranking-item";
 import { PercentageHint } from "@/components/percentage-hint";
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
@@ -13,13 +13,12 @@ import { DonationField, DonorType } from "@/utils/types";
 
 export const LoadingPartyDonorTypeText = ({
   party,
-  country,
   donations,
 }: {
-  country: CountryConfig;
   party: Party;
   donations: Donation[];
 }) => {
+  const country = useRequiredCountryConfig();
   const t = useTranslations();
   const browserBasedLocale = useBrowserBasedLocale();
 

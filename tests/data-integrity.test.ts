@@ -8,6 +8,7 @@ import type { Donation } from "@/utils/types";
 import { PartyField } from "@/types/party";
 import { COUNTRIES } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
+import { getParties } from "@/utils/loader/parties";
 import { getWikiArticles } from "@/utils/loader/wiki";
 import { DonationField } from "@/utils/types";
 
@@ -18,13 +19,14 @@ const countryConfigs = await Promise.all(
   [...COUNTRIES].map(async (country) => ({
     country,
     countryConfig: await getCountryConfig(country),
+    parties: await getParties(country),
     wikipediaArticles: await getWikiArticles(country),
   })),
 );
 
 describe.each(countryConfigs)(
   `country $country`,
-  ({ country, countryConfig, wikipediaArticles }) => {
+  ({ country, parties, wikipediaArticles }) => {
     let donations: Donation[];
     const articles = new Set(Object.keys(wikipediaArticles.articles));
 
@@ -51,7 +53,7 @@ describe.each(countryConfigs)(
     });
 
     test.describe("parties", () => {
-      test.each(countryConfig.parties)(
+      test.each(parties)(
         `$${PartyField.Short} has wikipedia articles loaded`,
         async (party) => {
           const name = party[PartyField.Short];

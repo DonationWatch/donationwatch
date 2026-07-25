@@ -9,20 +9,19 @@ import type { ConstLocale } from "@/utils/locales";
 import { DynamicStackedPartyDonations } from "@/components/charts/dynamic-stacked-party-line";
 import { Article } from "@/components/layout/article";
 import { FilteredYearsHeader } from "@/components/years/filtered-years-header";
+import { getPartiesSync } from "@/config/parties";
 import { getCountryName } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
-import { getParties } from "@/utils/data/get-parties";
+import { getPartiesByYears } from "@/utils/data/get-parties-by-years";
 import { getPartiesSum } from "@/utils/data/get-parties-sum";
 import {
   formatCompactCountryCurrency,
   formatYearsRange,
 } from "@/utils/formatter";
-import {
-  getPartyYearsSums,
-  hasYearSums,
-} from "@/utils/loader/party-years-sums";
+import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
 import { generateAlternates } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
+import { hasYearSums } from "@/utils/party";
 import { deserializeYears } from "@/utils/serializers";
 import {
   isValidCountry,
@@ -55,7 +54,10 @@ export async function generateMetadata(
   const countryName = getCountryName(countryConfig, tCountries);
   const deserializedYears = deserializeYears(years);
   const yearRange = formatYearsRange(deserializedYears);
-  const parties = getParties(countryConfig, deserializedYears);
+  const parties = getPartiesByYears(
+    deserializedYears,
+    getPartiesSync(countryConfig.id),
+  );
   const { sum, count } = getPartiesSum(
     countryConfig,
     partyYearSums,
@@ -134,7 +136,6 @@ export default async function OverviewPage(props: {
               {lastYearWithData ? (
                 <FilteredYearsHeader
                   className="card card--action mt-8"
-                  country={countryConfig}
                   idPrefix="list-"
                   locale={locale}
                   years={[lastYearWithData[0]]}
@@ -142,7 +143,6 @@ export default async function OverviewPage(props: {
                 >
                   <div className="h-2.5">
                     <DynamicStackedPartyDonations
-                      country={countryConfig}
                       years={[lastYearWithData[0]]}
                       partyYearsSums={partyYearSums}
                     />
@@ -156,12 +156,12 @@ export default async function OverviewPage(props: {
     );
   }
 
-  const parties = getParties(countryConfig, years);
+  const parties = getPartiesByYears(years, getPartiesSync(countryConfig.id));
 
   return (
     <Article fullWidth={true}>
       <YearsOverviewClientPage
-        country={countryConfig}
+        country={params.country}
         years={years}
         parties={parties}
         partyYearSums={partyYearSums}

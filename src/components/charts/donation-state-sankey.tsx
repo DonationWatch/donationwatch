@@ -2,18 +2,20 @@
 import type { EChartsOption } from "echarts";
 import type { SankeyNodeItemOption } from "echarts/types/src/chart/sankey/SankeySeries.js";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Donation, ReceiverId } from "@/utils/types";
 
+import {
+  usePartiesMap,
+  useRequiredCountryConfig,
+} from "@/components/providers/country-provider";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useChart } from "@/hooks/use-chart";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
-import { partyColor } from "@/utils/color";
 import { Country } from "@/utils/countries";
 import { donationYear } from "@/utils/date";
-import { formatCountryCurrency, formatPartyShortName } from "@/utils/formatter";
+import { formatCountryCurrency } from "@/utils/formatter";
 import { sourceId, targetId } from "@/utils/graph";
 import { AddressField, DonationField } from "@/utils/types";
 
@@ -26,23 +28,23 @@ interface Edge {
 }
 
 export const DonationStateSankey = ({
-  country,
   donations,
   title: chartTitle,
   subtitle,
   parties,
   years,
 }: {
-  country: CountryConfig;
   parties: Party[];
   years: string[];
   title: string;
   subtitle: string;
   donations: Donation[];
 }) => {
+  const country = useRequiredCountryConfig();
   const t = useTranslations();
   const browserBasedLocale = useBrowserBasedLocale();
   const { backgroundColor } = useChart();
+  const partiesMap = usePartiesMap();
 
   const isEu = country.id === Country.europeanunion;
   const yearsSet = new Set(years);
@@ -112,11 +114,8 @@ export const DonationStateSankey = ({
         if (params.dataType === "edge") {
           const from = (params.data as Edge).source.substring(1);
           const party = (params.data as Edge).target.substring(1) as ReceiverId;
-          const partyPart = `<div class="flex items-center font-semibold"><div class="mr-2 inline-block h-2 w-2 shrink-0 rounded-full border border-solid border-transparent dark:border-slate-600" style="background-color: ${partyColor(
-            party,
-            country,
-          )}"></div>
-        <div>${formatPartyShortName(country, party)}</div>
+          const partyPart = `<div class="flex items-center font-semibold"><div class="mr-2 inline-block h-2 w-2 shrink-0 rounded-full border border-solid border-transparent dark:border-slate-600" style="background-color: ${partiesMap[party][PartyField.Color]}"></div>
+        <div>${partiesMap[party][PartyField.Short]}</div>
       </div></div>`;
 
           return `<div><div>${from}</div>${partyPart}<div class="font-semibold">${formattedCurrency}</div></div>`;
@@ -151,9 +150,9 @@ export const DonationStateSankey = ({
         })),
         ...Array.from(foundParties).map((party) => ({
           id: targetId(party),
-          name: formatPartyShortName(country, party),
+          name: partiesMap[party][PartyField.Short],
           itemStyle: {
-            color: partyColor(party, country),
+            color: partiesMap[party][PartyField.Color],
           },
         })),
       ] as SankeyNodeItemOption[],
@@ -168,7 +167,6 @@ export const DonationStateSankey = ({
       option={option}
       title={chartTitle}
       subtitle={subtitle}
-      country={country}
       years={years}
     />
   );

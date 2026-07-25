@@ -42,76 +42,15 @@ export const Providers = ({
       timeZone="UTC"
       messages={messages as unknown as Messages}
     >
-      <BrowserBasedLocaleProvider locale={locale}>
-        <QueryClientProvider client={queryClient}>
-          <SidebarLocalStorageProvider>
-            <SearchDialogProvider>{children}</SearchDialogProvider>
-          </SidebarLocalStorageProvider>
-        </QueryClientProvider>
-      </BrowserBasedLocaleProvider>
+      <QueryClientProvider client={queryClient}>
+        <AppUIProvider locale={locale}>{children}</AppUIProvider>
+      </QueryClientProvider>
     </NextIntlClientProvider>
   );
 };
 
-export function SidebarLocalStorageProvider({ children }: PropsWithChildren) {
-  const [open, setOpen] = useState<boolean>(() => {
-    if (typeof window !== "undefined") {
-      const saved = window.localStorage.getItem(SIDENAV_PERSISTENCE_KEY);
-      if (saved !== null) {
-        return saved === "true";
-      }
-    }
-    return true;
-  });
-  const [isMounted, setIsMounted] = useState<boolean>(false);
-
-  // Read initial value from localStorage
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  // Persist on change
-  useEffect(() => {
-    window.localStorage.setItem(SIDENAV_PERSISTENCE_KEY, String(open));
-  }, [open]);
-
-  return (
-    <SidebarProvider
-      open={open}
-      onOpenChange={setOpen}
-      className={!isMounted ? "![&_*]:transition-none" : ""}
-    >
-      {children}
-    </SidebarProvider>
-  );
-}
-
 export const BrowserBasedLocaleContext =
   createContext<BrowserBasedLocale | null>(null);
-
-export const BrowserBasedLocaleProvider = ({
-  children,
-  locale,
-}: PropsWithChildren<{ locale: ConstLocale }>) => {
-  // We use the base locale as the initial state to ensure hydration matches the server-side render.
-  const [browserBasedLocale, setBrowserBasedLocale] =
-    useState<BrowserBasedLocale>(() => makeBrand<BrowserBasedLocale>(locale));
-
-  useEffect(() => {
-    // navigator is only available in the browser.
-    const navigatorLanguage = navigator.language;
-
-    if (navigatorLanguage.startsWith(locale)) {
-      setBrowserBasedLocale(makeBrand<BrowserBasedLocale>(navigatorLanguage));
-    }
-  }, [locale]);
-
-  return (
-    <BrowserBasedLocaleContext.Provider value={browserBasedLocale}>
-      {children}
-    </BrowserBasedLocaleContext.Provider>
-  );
-};
 
 type SearchDialogContextValue = {
   isOpen: boolean;
@@ -122,21 +61,63 @@ type SearchDialogContextValue = {
 export const SearchDialogContext =
   createContext<SearchDialogContextValue | null>(null);
 
-export const SearchDialogProvider = ({ children }: PropsWithChildren) => {
-  const [isOpen, setIsOpen] = useState(false);
+function AppUIProvider({
+  children,
+  locale,
+}: PropsWithChildren<{ locale: ConstLocale }>) {
+  // Locale State
+  const [browserBasedLocale, setBrowserBasedLocale] =
+    useState<BrowserBasedLocale>(() => makeBrand<BrowserBasedLocale>(locale));
 
-  const value = useMemo(
+  useEffect(() => {
+    const navigatorLanguage = navigator.language;
+    if (navigatorLanguage.startsWith(locale)) {
+      setBrowserBasedLocale(makeBrand<BrowserBasedLocale>(navigatorLanguage));
+    }
+  }, [locale]);
+
+  // Search Dialog State
+  const [searchOpen, setSearchOpen] = useState(false);
+  const searchDialogValue = useMemo(
     () => ({
-      isOpen,
-      open: () => setIsOpen(true),
-      close: () => setIsOpen(false),
+      isOpen: searchOpen,
+      open: () => setSearchOpen(true),
+      close: () => setSearchOpen(false),
     }),
-    [isOpen],
+    [searchOpen],
   );
+
+  // Sidebar Local Storage State
+  const [sidebarOpen, setSidebarOpen] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      const saved = window.localStorage.getItem(SIDENAV_PERSISTENCE_KEY);
+      if (saved !== null) {
+        return saved === "true";
+      }
+    }
+    return true;
+  });
+  const [isMounted, setIsMounted] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem(SIDENAV_PERSISTENCE_KEY, String(sidebarOpen));
+  }, [sidebarOpen]);
 
   return (
-    <SearchDialogContext.Provider value={value}>
-      {children}
-    </SearchDialogContext.Provider>
+    <BrowserBasedLocaleContext.Provider value={browserBasedLocale}>
+      <SearchDialogContext.Provider value={searchDialogValue}>
+        <SidebarProvider
+          open={sidebarOpen}
+          onOpenChange={setSidebarOpen}
+          className={!isMounted ? "![&_*]:transition-none" : ""}
+        >
+          {children}
+        </SidebarProvider>
+      </SearchDialogContext.Provider>
+    </BrowserBasedLocaleContext.Provider>
   );
-};
+}

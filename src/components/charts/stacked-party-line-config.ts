@@ -1,10 +1,8 @@
-import type {
-  PartyStats,
-  PartyYearsSums,
-} from "@/utils/loader/party-years-sums";
+import type { PartyStats } from "@/types/party-stats";
+import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 import type { ReceiverId } from "@/utils/types";
 
-import { PartyStatField } from "@/utils/loader/party-years-sums";
+import { PartyStatField } from "@/types/party-stats";
 
 export interface StackedPartiesConfig {
   sum: number;

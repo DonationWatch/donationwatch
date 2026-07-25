@@ -1,8 +1,7 @@
 "use client";
 import { Suspense } from "react";
 
-import type { CountryConfig } from "@/types/country-config";
-
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useDonationsByYears } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { isNotNullandNotUndefined } from "@/utils/array";
@@ -10,11 +9,8 @@ import { isNotNullandNotUndefined } from "@/utils/array";
 import Loading from "../../loading";
 import { RacingBarsContent } from "./racing-bars-content";
 
-export const RacingBars = ({
-  countryConfig,
-}: {
-  countryConfig: CountryConfig;
-}) => {
+export const RacingBars = () => {
+  const countryConfig = useRequiredCountryConfig();
   const t = useTranslations("data");
 
   // Always load ALL years
@@ -32,10 +28,7 @@ export const RacingBars = ({
 
   return (
     <Suspense fallback={<Loading />}>
-      <RacingBarsContent
-        countryConfig={countryConfig}
-        allDonations={allDonations}
-      />
+      <RacingBarsContent allDonations={allDonations} />
     </Suspense>
   );
 };

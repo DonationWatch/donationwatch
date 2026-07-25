@@ -2,8 +2,7 @@
 
 import { Snail } from "lucide-react";
 
-import type { CountryConfig } from "@/types/country-config";
-
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { OLD_DATA_MONTHS_THRESHOLD } from "@/utils/config";
@@ -33,11 +32,8 @@ export const checkOldData = (lastDonationDate?: string) => {
   return { isOld, lastDate, lastDonationDate };
 };
 
-export const OldDataWarning = ({
-  countryConfig,
-}: {
-  countryConfig: CountryConfig;
-}) => {
+export const OldDataWarning = () => {
+  const countryConfig = useRequiredCountryConfig();
   const locale = useBrowserBasedLocale();
   const t = useTranslations("old_data_warning");
   const tCountries = useTranslations("countries");

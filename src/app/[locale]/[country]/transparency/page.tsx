@@ -69,7 +69,6 @@ export default async function Page(
     <ScopedClientIntlProvider messages={pageMessages}>
       <Article title={tTransparency("title")}>
         <DynamicTransparencyPageContent
-          countryConfig={countryConfig}
           texts={{
             filteredReceivers: {
               title: tTransparency("section.filtered_receivers"),

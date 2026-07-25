@@ -10,11 +10,6 @@ import { useContext } from "react";
 import type { FilterContextValue } from "@/components/filter/filter-context";
 
 import { FilterContext } from "@/components/filter/filter-context";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { useClientTranslations } from "@/hooks/use-client-translations";
 import { cn } from "@/lib/utils";
 
@@ -29,11 +24,13 @@ const FilterTriggerButton = ({
 }) => {
   const tFilter = useClientTranslations("filter");
   const isActive = yearFilter?.isFiltered;
+  const label = tFilter("title");
 
-  const content = (
+  return (
     <button
       {...props}
-      aria-label={tFilter("title")}
+      aria-label={label}
+      title={label}
       className={cn(
         "relative flex h-10 cursor-pointer items-center justify-center transition-all",
         isActive
@@ -54,15 +51,6 @@ const FilterTriggerButton = ({
         <span className="ring-primary-700 dark:ring-primary-700 absolute top-1.5 left-2.5 size-2.5 rounded-full bg-white ring-2" />
       ) : null}
     </button>
-  );
-
-  return (
-    <Tooltip>
-      <TooltipTrigger render={content} />
-      <TooltipContent sideOffset={10} side={"left"}>
-        {tFilter("title")}
-      </TooltipContent>
-    </Tooltip>
   );
 };
 

@@ -3,13 +3,13 @@ import type { ReactNode } from "react";
 
 import { useLocale } from "next-intl";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Donation } from "@/utils/types";
 
 import { DonorLink } from "@/components/donors/donor-link";
 import { FormatAnd } from "@/components/formatter";
 import { ArticleSectionTitle } from "@/components/layout/article";
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { FaqSchema } from "@/components/schema";
 import { Translation } from "@/components/translation";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
@@ -30,13 +30,12 @@ const TOP_DONORS_TO_SHOW = 5;
 
 export const PartyDonorPageText = ({
   party,
-  country,
   donations: data,
 }: {
-  country: CountryConfig;
   party: Party;
   donations: Donation[];
 }) => {
+  const country = useRequiredCountryConfig();
   const t = useTranslations();
   const locale = useLocale();
   const browserBasedLocale = useBrowserBasedLocale();
@@ -162,7 +161,7 @@ export const PartyDonorPageText = ({
                 locale={locale}
                 items={topDonors.map((d, i) => (
                   <span key={i}>
-                    <DonorLink country={country} donor={d.name} /> (
+                    <DonorLink donor={d.name} /> (
                     {formatCountryCurrency(browserBasedLocale, d.sum, country)})
                   </span>
                 ))}
@@ -201,7 +200,6 @@ export const PartyDonorPageText = ({
                 ),
                 donor: (
                   <DonorLink
-                    country={country}
                     donor={biggestSingularDonation[DonationField.DonorName]}
                   />
                 ),
@@ -235,9 +233,7 @@ export const PartyDonorPageText = ({
               translationId={"party.qa.biggest_overall.a"}
               variables={{
                 party: party[PartyField.Short],
-                donor: (
-                  <DonorLink country={country} donor={biggestDonor.name} />
-                ),
+                donor: <DonorLink donor={biggestDonor.name} />,
                 sum: formatCountryCurrency(
                   browserBasedLocale,
                   biggestDonor.sum,
@@ -269,9 +265,7 @@ export const PartyDonorPageText = ({
               translationId={"party.qa.frequent_donor.a"}
               variables={{
                 party: party[PartyField.Short],
-                donor: (
-                  <DonorLink country={country} donor={frequentDonor.name} />
-                ),
+                donor: <DonorLink donor={frequentDonor.name} />,
                 count: frequentDonor.count,
                 sum: formatCountryCurrency(
                   browserBasedLocale,

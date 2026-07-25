@@ -26,16 +26,15 @@ import { NonCountryRootLayout } from "@/components/layout/non-country-root-layou
 import { MetaCard } from "@/components/meta-card";
 import { Translation } from "@/components/translation";
 import { Button } from "@/components/ui/button";
+import { getPartiesSync } from "@/config/parties";
+import { PartyStatField } from "@/types/party-stats";
 import { GITHUB_URL, THUMBNAIL_PREFIX } from "@/utils/config";
 import { COUNTRIES, COUNTRY_CONFIG, getCountryName } from "@/utils/countries";
 import { countryFlags } from "@/utils/country-flags";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { getMessagesForLocale } from "@/utils/i18n-loader";
 import { pick } from "@/utils/i18n-pick";
-import {
-  getPartyYearsSums,
-  PartyStatField,
-} from "@/utils/loader/party-years-sums";
+import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
 import { LOCALES } from "@/utils/locales";
 import { baseOpenGraph, baseTwitter, generateAlternates } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
@@ -110,7 +109,7 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
   let trackedDonations = 0;
 
   countryDatas.forEach(([, config, partyYearsSums]) => {
-    trackedParties += config.parties.length;
+    trackedParties += getPartiesSync(config.id).length;
     currencyTotals[config.currency] ??= 0;
     sumPerCountry[config.id] ??= 0;
 

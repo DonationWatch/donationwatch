@@ -4,9 +4,8 @@ import type { LucideIcon } from "lucide-react";
 import { Expand, X, ZoomOut } from "lucide-react";
 import { type JSX, useCallback, useRef, useState } from "react";
 
-import type { CountryConfig } from "@/types/country-config";
-
 import { PageLogo } from "@/components/layout/page-logo";
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { useFilterEngine } from "@/hooks/use-filter-engine";
@@ -30,7 +29,6 @@ import { DynamicEchart } from "./dynamic-echart";
 
 export const ExpandableReactEchart = ({
   years,
-  country,
   title,
   subtitle,
   feature,
@@ -44,7 +42,6 @@ export const ExpandableReactEchart = ({
   maxHeightScreen = false,
   footer = true,
 }: ReactEChartsProps & {
-  country: CountryConfig;
   title?: string;
   height: number;
   subtitle?: string;
@@ -56,6 +53,7 @@ export const ExpandableReactEchart = ({
   maxHeightScreen?: boolean;
   footer?: boolean;
 }): JSX.Element => {
+  const country = useRequiredCountryConfig();
   const t = useTranslations();
   const tChart = useTranslations("chart");
   const browserBasedLocale = useBrowserBasedLocale();

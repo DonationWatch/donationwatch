@@ -2,7 +2,6 @@
 import { Map, Workflow } from "lucide-react";
 import { useState } from "react";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { Donation } from "@/utils/types";
 
@@ -10,6 +9,7 @@ import { DonationStateMap } from "@/components/charts/donation-state-map";
 import { DonationStateSankey } from "@/components/charts/donation-state-sankey";
 import { DynamicGeoJsonLoader } from "@/components/charts/dynamic-geojson-loader";
 import { NavigationTab } from "@/components/layout/navigation-tab";
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { TabList } from "@/components/tabs";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { getCountryName } from "@/utils/countries";
@@ -19,17 +19,16 @@ const DEFAULT_TYPE: ChartType = "map";
 
 export const DonationOriginVisual = ({
   donations,
-  country,
   years,
   parties,
   subtitle,
 }: {
-  country: CountryConfig;
   donations: Donation[];
   years: string[];
   parties: Party[];
   subtitle: string;
 }) => {
+  const country = useRequiredCountryConfig();
   const t = useTranslations();
   const tCountries = useTranslations("countries");
 
@@ -54,9 +53,8 @@ export const DonationOriginVisual = ({
 
       <div className="my-4">
         {chartType === "map" ? (
-          <DynamicGeoJsonLoader country={country}>
+          <DynamicGeoJsonLoader>
             <DonationStateMap
-              country={country}
               donations={donations}
               years={years}
               parties={parties}
@@ -69,7 +67,6 @@ export const DonationOriginVisual = ({
         ) : (
           <DonationStateSankey
             donations={donations}
-            country={country}
             parties={parties}
             years={years}
             title={t("origin.country.title", {

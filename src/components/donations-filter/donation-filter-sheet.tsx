@@ -4,12 +4,11 @@ import { RotateCcw } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useState, useMemo } from "react";
 
-import type { UnloadedCountryConfig } from "@/types/country-config";
-
 import {
   FilterSheetSection,
   FilterChecklistSection,
 } from "@/components/filter/filter-sheet-section";
+import { useOptionalCountryConfig } from "@/components/providers/country-provider";
 import {
   Combobox,
   ComboboxInput,
@@ -33,11 +32,8 @@ import { capitalize } from "@/utils/string";
 
 import { Button } from "../ui/button";
 
-const DonationFilterSheetBase = ({
-  countryConfig,
-}: {
-  countryConfig: UnloadedCountryConfig;
-}) => {
+const DonationFilterSheetBase = () => {
+  const countryConfig = useOptionalCountryConfig();
   const tActions = useClientTranslations("actions");
   const tFilter = useClientTranslations("filter");
   const tDonationType = useClientTranslations("donation_type");
@@ -51,6 +47,8 @@ const DonationFilterSheetBase = ({
   const [isPartiesOpen, setIsPartiesOpen] = useState(true);
   const [isTypesOpen, setIsTypesOpen] = useState(false);
   const [isDonorTypesOpen, setIsDonorTypesOpen] = useState(false);
+
+  if (!countryConfig) return null;
 
   const fromYearsOptions = useMemo(() => {
     const list = [];

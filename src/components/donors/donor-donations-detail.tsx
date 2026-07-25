@@ -2,18 +2,17 @@
 import { useLocale } from "next-intl";
 import { useEffect } from "react";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Donation, ReceiverId } from "@/utils/types";
 
 import { RankingItemLine } from "@/components/donations/ranking-item-line";
 import { PartyDot } from "@/components/parties/party-dot";
 import { PartyLink } from "@/components/parties/party-link";
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { donationYear } from "@/utils/date";
 import { DonationField } from "@/utils/types";
 
 export const DonorDonationsDetail = ({
-  country,
   donor,
   onVisibleChanged,
 }: {
@@ -22,9 +21,9 @@ export const DonorDonationsDetail = ({
     name: string;
     donations: { party: ReceiverId; donation: Donation }[];
   };
-  country: CountryConfig;
   onVisibleChanged?: () => void;
 }) => {
+  const country = useRequiredCountryConfig();
   const locale = useLocale();
   const browserBasedLocale = useBrowserBasedLocale();
 
@@ -45,8 +44,8 @@ export const DonorDonationsDetail = ({
       locale={browserBasedLocale}
       country={country}
     >
-      <PartyLink party={party} country={country} locale={locale}>
-        <PartyDot party={party} country={country} />
+      <PartyLink party={party} locale={locale}>
+        <PartyDot party={party} />
       </PartyLink>
     </RankingItemLine>
   ));

@@ -4,11 +4,11 @@ import { useLocale } from "next-intl";
 import dynamic from "next/dynamic";
 
 import type { UseNormalizedData } from "@/hooks/use-api";
-import type { CountryConfig } from "@/types/country-config";
 
 import { FormatAnd } from "@/components/formatter";
 import { ArticleSection } from "@/components/layout/article";
 import Loading from "@/components/loading/loading";
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useNormalized } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
@@ -19,10 +19,8 @@ export const DynamicTransparencyPageContent = dynamic(
 );
 
 const TransparencyPageContent = ({
-  countryConfig,
   texts,
 }: {
-  countryConfig: CountryConfig;
   texts: {
     filteredReceivers: { title: string; p0: string; p1: string };
     filteredDonors: { title: string; p0: string; p1: string };
@@ -30,6 +28,7 @@ const TransparencyPageContent = ({
     aggregatedDonors: { title: string; p0: string; p1: string };
   };
 }) => {
+  const countryConfig = useRequiredCountryConfig();
   const tData = useTranslations("data");
   const { data, error, isLoading } = useNormalized(countryConfig);
 

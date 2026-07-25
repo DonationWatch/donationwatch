@@ -3,8 +3,8 @@
 import { useLocale } from "next-intl";
 import { useEffect, useMemo } from "react";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
+import type { Country } from "@/utils/countries";
 import type { PartySum } from "@/utils/data/get-parties-sum";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 import type { ReceiverId } from "@/utils/types";
@@ -22,6 +22,10 @@ import {
 } from "@/components/layout/article";
 import Loading from "@/components/loading/loading";
 import { TextPartyLink } from "@/components/parties/text-party-link";
+import {
+  useParties,
+  useRequiredCountryConfig,
+} from "@/components/providers/country-provider";
 import { Translation } from "@/components/translation";
 import { LoadedTopPartyDonations } from "@/components/years/top-party-year-donations";
 import { useDonationsByYears } from "@/hooks/use-api";
@@ -31,7 +35,7 @@ import { useFilterEngine } from "@/hooks/use-filter-engine";
 import { useScrollToHash } from "@/hooks/use-scroll-to-hash";
 import { PartyField } from "@/types/party";
 import { isNotNullandNotUndefined } from "@/utils/array";
-import { getParties } from "@/utils/data/get-parties";
+import { getPartiesByYears } from "@/utils/data/get-parties-by-years";
 import { getPartiesSum } from "@/utils/data/get-parties-sum";
 import {
   formatAnd,
@@ -41,7 +45,7 @@ import {
 import { DonationField } from "@/utils/types";
 
 interface YearsOverviewClientPageProps {
-  country: CountryConfig;
+  country: Country;
   years: string[];
   parties: Party[];
   partyYearSums: PartyYearsSums;
@@ -53,7 +57,6 @@ interface YearsOverviewClientPageProps {
 }
 
 export const YearsOverviewClientPage = ({
-  country,
   years,
   parties: initialParties,
   partyYearSums,
@@ -63,10 +66,12 @@ export const YearsOverviewClientPage = ({
   scatterSummary,
   scatterSubtitle,
 }: YearsOverviewClientPageProps) => {
+  const countryConfig = useRequiredCountryConfig();
   const t = useTranslations();
   const tData = useTranslations("data");
   const locale = useLocale();
   const browserBasedLocale = useBrowserBasedLocale();
+  const parties = useParties();
 
   const {
     isFiltered,
@@ -82,10 +87,10 @@ export const YearsOverviewClientPage = ({
   }, [years, isFiltered, filteredYears]);
 
   const activeParties = useMemo(() => {
-    return getParties(country, activeYears);
-  }, [country, activeYears]);
+    return getPartiesByYears(activeYears, parties);
+  }, [activeYears, parties]);
 
-  const results = useDonationsByYears(country, years);
+  const results = useDonationsByYears(countryConfig, years);
   const isLoading = results.some((r) => r.isLoading);
   const error = results.some((r) => r.error);
   const isSuccess = results.every((r) => r.isSuccess);
@@ -105,8 +110,13 @@ export const YearsOverviewClientPage = ({
   }, [isSuccess, error, rawDonations, setDonations]);
 
   const ssrStats = useMemo(() => {
-    return getPartiesSum(country, partyYearSums, activeParties, activeYears);
-  }, [country, partyYearSums, activeParties, activeYears]);
+    return getPartiesSum(
+      countryConfig,
+      partyYearSums,
+      activeParties,
+      activeYears,
+    );
+  }, [countryConfig, partyYearSums, activeParties, activeYears]);
 
   const { sum, sums, count } = useMemo(() => {
     if (filteredDonations && filteredDonations.length > 0) {
@@ -196,13 +206,13 @@ export const YearsOverviewClientPage = ({
                 donationCount: count,
                 minimumAmount: formatCompactCountryCurrency(
                   browserBasedLocale,
-                  country.minPublicDonationAmount,
-                  country,
+                  countryConfig.minPublicDonationAmount,
+                  countryConfig,
                 ),
                 donationSum: formatCountryCurrency(
                   browserBasedLocale,
                   sum,
-                  country,
+                  countryConfig,
                 ),
               })}
             </p>
@@ -218,16 +228,12 @@ export const YearsOverviewClientPage = ({
                         locale={locale}
                         items={topDonationSums.map(([receiverId, sum]) => (
                           <span key={receiverId}>
-                            <TextPartyLink
-                              country={country}
-                              party={receiverId}
-                              locale={locale}
-                            />
+                            <TextPartyLink party={receiverId} locale={locale} />
                             (
                             {formatCountryCurrency(
                               browserBasedLocale,
                               sum.sum,
-                              country,
+                              countryConfig,
                             )}
                             )
                           </span>
@@ -245,17 +251,13 @@ export const YearsOverviewClientPage = ({
                   translationId={"overview.detail.most_donations"}
                   variables={{
                     party: (
-                      <TextPartyLink
-                        party={mostDonations[0]}
-                        country={country}
-                        locale={locale}
-                      />
+                      <TextPartyLink party={mostDonations[0]} locale={locale} />
                     ),
                     count: mostDonations[1].count,
                     sum: formatCountryCurrency(
                       browserBasedLocale,
                       mostDonations[1].sum,
-                      country,
+                      countryConfig,
                     ),
                   }}
                 />
@@ -264,7 +266,6 @@ export const YearsOverviewClientPage = ({
             <LoadedTopPartyDonations
               locale={locale}
               donations={filteredDonations}
-              country={country}
               sums={sums}
               sum={sum}
             />
@@ -273,7 +274,6 @@ export const YearsOverviewClientPage = ({
             <div>
               <DonationsPieChart
                 years={activeYears}
-                country={country}
                 partyYearsSums={partyYearSums}
                 sums={sums}
               />
@@ -294,7 +294,6 @@ export const YearsOverviewClientPage = ({
               <p className="mb-6">{scatterSummary}</p>
               <DonationYearScatterPlot
                 years={activeYears}
-                country={country}
                 parties={activeParties}
                 title={scatterTitle}
                 subtitle={scatterSubtitle}

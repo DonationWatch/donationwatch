@@ -1,24 +1,38 @@
+"use client";
+
 import { useLocale } from "next-intl";
 import Link from "next/link";
 
+import type { StackedPartiesConfig } from "@/components/charts/stacked-party-line-config";
 import type { CountryConfig } from "@/types/country-config";
-import type { BigDonor } from "@/utils/loader/biggest-donors";
 import type { ConstLocale } from "@/utils/locales";
 
-import { FormattedCountryCurrency } from "@/components/browser-based-formatter";
-import { DynamicStackedPartyDonations } from "@/components/charts/dynamic-stacked-party-line";
+import { StackedPartyDonations } from "@/components/charts/stacked-party-line";
 import { DonorName } from "@/components/donors/donor-name";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
+import { formatCountryCurrency } from "@/utils/formatter";
 
-const TOP_DONORS_TO_SHOW = 8;
+// Only the fields BigDonorPill needs to render, with the heavy per-year
+// PartyYearsSums already reduced to StackedPartiesConfig by the caller -
+// keeps the unused Count/LastDonation/HasYearOnlyDonations breakdown off
+// the server <> client boundary entirely.
+export interface DonorHeroItem {
+  id: string;
+  name: string;
+  sum: number;
+  stackedConfig: StackedPartiesConfig;
+}
 
 export const BigDonorPill = ({
   country,
   donor,
   locale,
+  sum,
 }: {
-  donor: BigDonor;
+  donor: DonorHeroItem;
   locale: ConstLocale;
   country: CountryConfig;
+  sum: string;
 }) => {
   return (
     <li className="basis-full overflow-hidden p-1 sm:basis-1/2 lg:basis-1/4">
@@ -28,10 +42,8 @@ export const BigDonorPill = ({
         href={`/${locale}/${country.id}/donor/${donor.id}`}
       >
         <div className="w-2 shrink-0 overflow-hidden rounded-full">
-          <DynamicStackedPartyDonations
-            country={country}
-            years={country.years}
-            partyYearsSums={donor.partyYearSums}
+          <StackedPartyDonations
+            data={donor.stackedConfig}
             direction={"vertical"}
           />
         </div>
@@ -39,9 +51,7 @@ export const BigDonorPill = ({
           <div className="truncate font-semibold">
             <DonorName donor={donor.name} />
           </div>
-          <div className="tabular-nums">
-            <FormattedCountryCurrency value={donor.sum} country={country} />
-          </div>
+          <div className="tabular-nums">{sum}</div>
         </div>
       </Link>
     </li>
@@ -53,18 +63,23 @@ export const DonorsHero = ({
   biggestDonors,
 }: {
   country: CountryConfig;
-  biggestDonors: BigDonor[];
+  // Already sliced to TOP_DONORS_TO_SHOW by the caller, so the unused rest
+  // of the list never crosses the RSC boundary into this client component's
+  // hydration payload.
+  biggestDonors: DonorHeroItem[];
 }) => {
   const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
 
   return (
     <ul className="flex flex-wrap pt-4">
-      {biggestDonors.slice(0, TOP_DONORS_TO_SHOW).map((bigDonor) => (
+      {biggestDonors.map((bigDonor) => (
         <BigDonorPill
           locale={locale}
           donor={bigDonor}
           country={country}
           key={bigDonor.id}
+          sum={formatCountryCurrency(browserBasedLocale, bigDonor.sum, country)}
         />
       ))}
     </ul>

@@ -1,20 +1,27 @@
-"use client";
-import { useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 import type { CountryConfig } from "@/types/country-config";
+import type { Country } from "@/utils/countries";
+import type { ConstLocale } from "@/utils/locales";
 
-import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
-import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { formatDate } from "@/utils/formatter";
 import { getBuild } from "@/utils/loader/build";
 
 import { PageLogo } from "./page-logo";
 
-export const CountryFooter = ({ country }: { country: CountryConfig }) => {
+export interface CountryFooterProps {
+  locale: ConstLocale;
+  country: Country;
+  source: CountryConfig["source"];
+}
+
+export const CountryFooter = ({
+  locale,
+  country,
+  source,
+}: CountryFooterProps) => {
   const t = useTranslations();
-  const locale = useLocale();
-  const browserLocale = useBrowserBasedLocale();
 
   return (
     <section className="container mx-auto shrink-0 px-4 text-gray-600 dark:text-gray-400">
@@ -22,7 +29,7 @@ export const CountryFooter = ({ country }: { country: CountryConfig }) => {
         <div className="sm:justify-self-start">
           <Link
             prefetch={false}
-            href={`/${locale}/${country.id}`}
+            href={`/${locale}/${country}`}
             className="group hover:text-primary-700 dark:hover:text-primary-400 flex items-center space-x-1 p-2 dark:text-white"
           >
             <PageLogo size={16} />
@@ -32,7 +39,7 @@ export const CountryFooter = ({ country }: { country: CountryConfig }) => {
 
         <div className="px-2 text-sm sm:p-2" suppressHydrationWarning>
           {t("footer.build", {
-            date: formatDate(browserLocale, new Date(getBuild(country.id).t)),
+            date: formatDate(locale, new Date(getBuild(country).t)),
           })}
         </div>
 
@@ -40,14 +47,14 @@ export const CountryFooter = ({ country }: { country: CountryConfig }) => {
           <a
             className="hover:text-primary-800 dark:hover:text-primary-400 p-2 text-sm"
             target="_blank"
-            href={country.source.url}
+            href={source.url}
             rel="noreferrer"
           >
             {t("navigation.sources")}
           </a>
           <Link
             className="hover:text-primary-800 dark:hover:text-primary-400 p-2 text-sm"
-            href={`/${locale}/${country.id}/transparency`}
+            href={`/${locale}/${country}/transparency`}
             prefetch={false}
             rel="nofollow"
           >

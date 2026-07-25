@@ -5,10 +5,14 @@ import { Download, Pause, Play, RotateCcw } from "lucide-react";
 import { useLocale } from "next-intl";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Currency } from "@/utils/countries";
+import type { Donation, ReceiverId } from "@/utils/types";
 
 import { ExpandableReactEchart } from "@/components/charts/expandable-react-echart";
+import {
+  usePartiesMap,
+  useRequiredCountryConfig,
+} from "@/components/providers/country-provider";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { PartyField } from "@/types/party";
@@ -17,7 +21,7 @@ import {
   formatPercentFormat,
   formatTwoDigitDate,
 } from "@/utils/formatter";
-import { type Donation, DonationField } from "@/utils/types";
+import { DonationField } from "@/utils/types";
 
 import { Button } from "../ui/button";
 
@@ -28,7 +32,6 @@ interface EChartsRacingBarsProps {
   currency: Currency;
   title: string;
   subtitle: string;
-  countryConfig: CountryConfig;
   /** Total runtime of the animation in milliseconds (default: 10000ms = 10s) */
   totalRuntimeMs?: number;
 }
@@ -41,7 +44,6 @@ const CHART_HEIGHT = 650;
 const backgroundColor = "#111827";
 
 export const EChartsRacingBars = ({
-  countryConfig,
   donations,
   years,
   groupByField,
@@ -50,13 +52,10 @@ export const EChartsRacingBars = ({
   subtitle,
   totalRuntimeMs = DEFAULT_TOTAL_RUNTIME_MS,
 }: EChartsRacingBarsProps) => {
+  const countryConfig = useRequiredCountryConfig();
   const browserBasedLocale = useBrowserBasedLocale();
   const locale = useLocale();
-  const partiesById = useMemo(() => {
-    return Object.fromEntries(
-      countryConfig.parties.map((p) => [p[PartyField.Id], p]),
-    );
-  }, [countryConfig.parties]);
+  const partiesById = usePartiesMap();
   const t = useTranslations();
   const containerRef = useRef<HTMLDivElement>(null);
   const animationIntervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -79,7 +78,7 @@ export const EChartsRacingBars = ({
       string,
       Record<string, Record<string, number>>
     > = {};
-    const partySet = new Set<string>();
+    const partySet = new Set<ReceiverId>();
 
     donations.forEach((donation) => {
       const donorName = donation[DonationField.DonorName];
@@ -256,7 +255,10 @@ export const EChartsRacingBars = ({
               // Use party color for each bar
               color: (params) => {
                 const groupName = groupNames[params.dataIndex];
-                return partiesById[groupName]?.[PartyField.Color] || "#cccccc";
+                return (
+                  partiesById[groupName as ReceiverId]?.[PartyField.Color] ||
+                  "#cccccc"
+                );
               },
             },
             label: {
@@ -482,7 +484,9 @@ export const EChartsRacingBars = ({
         type: "category",
         data: isGroupByReceiver
           ? groupNames.map(
-              (partyId) => partiesById[partyId]?.[PartyField.Short] || partyId,
+              (partyId) =>
+                partiesById[partyId as ReceiverId]?.[PartyField.Short] ||
+                partyId,
             )
           : groupNames,
         inverse: true,
@@ -726,7 +730,6 @@ export const EChartsRacingBars = ({
             maxHeightScreen={false}
             allowExpand={false}
             footer={false}
-            country={countryConfig}
             years={years}
             feature="bar"
             option={chartOption}

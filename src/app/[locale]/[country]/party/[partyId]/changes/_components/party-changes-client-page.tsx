@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 
 import { PartyDonationHistory } from "@/components/donations/party-donation-history";
@@ -14,6 +13,7 @@ import {
   ArticleSectionWrapper,
 } from "@/components/layout/article";
 import Loading from "@/components/loading/loading";
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useDonationsByParty } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import {
@@ -23,18 +23,17 @@ import {
 import { useScrollToHash } from "@/hooks/use-scroll-to-hash";
 
 interface PartyChangesClientPageProps {
-  country: CountryConfig;
   party: Party;
   title: string;
   summary: string;
 }
 
 export const PartyChangesClientPage = ({
-  country,
   party,
   title,
   summary,
 }: PartyChangesClientPageProps) => {
+  const country = useRequiredCountryConfig();
   const tData = useTranslations("data");
   const { data, error, isLoading, isSuccess } = useDonationsByParty(
     country,
@@ -75,11 +74,7 @@ export const PartyChangesClientPage = ({
           ) : isFiltered && filteredDonations.length === 0 ? (
             <FilterEmptyState onReset={controls.resetFilters} />
           ) : (
-            <PartyDonationHistory
-              country={country}
-              party={party}
-              donations={filteredDonations}
-            />
+            <PartyDonationHistory party={party} donations={filteredDonations} />
           )}
         </ArticleSectionColumn>
       </ArticleSectionOneColumns>

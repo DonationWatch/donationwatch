@@ -20,7 +20,6 @@ import {
 import { useLocale } from "next-intl";
 import { useCallback, useMemo, useState } from "react";
 
-import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { HistoryEntry } from "@/utils/data/get-history";
 import type { Donation } from "@/utils/types";
@@ -31,6 +30,10 @@ import { DonorLink } from "@/components/donors/donor-link";
 import { DonorName } from "@/components/donors/donor-name";
 import { PartyDot } from "@/components/parties/party-dot";
 import { PartyLink } from "@/components/parties/party-link";
+import {
+  useParties,
+  useRequiredCountryConfig,
+} from "@/components/providers/country-provider";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { useMobile } from "@/hooks/use-media-query";
@@ -47,24 +50,24 @@ import { DonationField, DonationType } from "@/utils/types";
 const columnHelper = createColumnHelper<HistoryEntry>();
 
 export const DonationHistoryTable = ({
-  country,
   years,
   partiesIds,
   donations,
   readonlyDonor = false,
 }: {
-  country: CountryConfig;
   years?: string[];
   partiesIds: string[];
   donations: Donation[];
   readonlyDonor?: boolean;
 }) => {
+  const country = useRequiredCountryConfig();
   const t = useTranslations();
   const tSort = useTranslations("sort");
   const tCommon = useTranslations("common");
   const tSearch = useTranslations("search");
   const locale = useLocale();
   const browserBasedLocale = useBrowserBasedLocale();
+  const parties = useParties();
   const partiesIdSet = useMemo(() => new Set(partiesIds), [partiesIds]);
   const [sorting, setSorting] = useState<SortingState>([
     { id: "date", desc: true },
@@ -73,14 +76,14 @@ export const DonationHistoryTable = ({
 
   const partyNameMap = useMemo(() => {
     const map = new Map<string, { name: string; short: string }>();
-    country.parties.forEach((party: Party) => {
+    parties.forEach((party: Party) => {
       map.set(String(party[PartyField.Id]), {
         name: getLongName(party),
         short: party[PartyField.Short],
       });
     });
     return map;
-  }, [country.parties]);
+  }, [country.id]);
 
   const globalFilterFn = useCallback<FilterFn<HistoryEntry>>(
     (row, _columnId, filterValue: string) => {
@@ -131,16 +134,8 @@ export const DonationHistoryTable = ({
                         : historyEntry.date}
                     </div>
                   }
-                  <PartyLink
-                    party={historyEntry.party}
-                    country={country}
-                    locale={locale}
-                  >
-                    <PartyDot
-                      className="text-sm"
-                      party={historyEntry.party}
-                      country={country}
-                    />
+                  <PartyLink party={historyEntry.party} locale={locale}>
+                    <PartyDot className="text-sm" party={historyEntry.party} />
                   </PartyLink>
                 </div>
                 <div className="space-y-1">
@@ -148,7 +143,7 @@ export const DonationHistoryTable = ({
                     {readonlyDonor ? (
                       <DonorName donor={historyEntry.donor} />
                     ) : (
-                      <DonorLink country={country} donor={historyEntry.donor} />
+                      <DonorLink donor={historyEntry.donor} />
                     )}
                   </div>
                   {hasFeature(country, Features.DonationType) ? (
@@ -213,14 +208,12 @@ export const DonationHistoryTable = ({
           <PartyLink
             className="overflow-x-hidden"
             party={cell.getValue()}
-            country={country}
             locale={locale}
           >
             <PartyDot
               className="overflow-x-hidden"
               nameClassName="truncate"
               party={cell.getValue()}
-              country={country}
             />
           </PartyLink>
         ),
@@ -250,7 +243,7 @@ export const DonationHistoryTable = ({
           readonlyDonor ? (
             <DonorName donor={cell.row.original.donor} />
           ) : (
-            <DonorLink country={country} donor={cell.row.original.donor} />
+            <DonorLink donor={cell.row.original.donor} />
           ),
       }),
       columnHelper.accessor("amount", {

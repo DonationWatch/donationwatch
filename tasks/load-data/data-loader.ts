@@ -69,6 +69,7 @@ export type ExtractedYearData = Omit<
  */
 interface ProcessedDonationData {
   donations: Donation[];
+  parties: Party[];
   countryConfig: CountryConfig;
   transparencyData: {
     donorFilters?: UnloadedCountryConfig["donorFilters"];
@@ -135,6 +136,7 @@ export abstract class DataLoader {
   private readonly transparencyDataPath: string;
   private readonly donorMetaPath: string;
   private readonly countryConfigPath: string;
+  private readonly partiesDataPath: string;
   private readonly buildMetaPath: string;
   protected readonly anonymizedDonorsPath: string;
 
@@ -162,6 +164,7 @@ export abstract class DataLoader {
     this.transparencyDataPath = path.join(this.taskDataDir, "transparency.ts");
 
     this.countryConfigPath = path.join(this.dataDir, "country-config.ts");
+    this.partiesDataPath = path.join(this.dataDir, "parties.ts");
     this.buildMetaPath = path.join(this.dataDir, "build.ts");
 
     this.anonymizedDonorsPath = path.join(
@@ -593,10 +596,10 @@ export abstract class DataLoader {
 
     return {
       donations,
+      parties: donationData.parties,
       countryConfig: {
         ...countryConfig,
         years: donationData.years,
-        parties: donationData.parties,
         lastDonationDate,
         ...(hasDonationType
           ? { usedDonationTypes: [...foundDonationTypes].toSorted() }
@@ -667,6 +670,14 @@ export abstract class DataLoader {
           as: `CountryConfig`,
           import:
             'import type { CountryConfig } from "@/types/country-config";',
+        }),
+      ),
+      writeIfChanged(
+        this.partiesDataPath,
+        jsonAsTsModuleWithType(JSON.stringify(processedData.parties), {
+          name: `Party[]`,
+          as: `Party[]`,
+          import: 'import type { Party } from "@/types/party";',
         }),
       ),
     ]);

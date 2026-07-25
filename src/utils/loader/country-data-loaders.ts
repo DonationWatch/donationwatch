@@ -1,4 +1,6 @@
+import "server-only";
 import type { CountryConfig } from "@/types/country-config";
+import type { Party } from "@/types/party";
 
 import type { Country } from "../countries";
 import type { HistoryEntry } from "../data/get-history";
@@ -13,6 +15,7 @@ interface CountryLoaders {
   mostRecent: (country: Country) => Promise<DefaultExport<HistoryEntry[]>>;
   biggestDonors: (country: Country) => Promise<DefaultExport<BigDonor[]>>;
   countryConfig: (country: Country) => Promise<DefaultExport<CountryConfig>>;
+  parties: (country: Country) => Promise<DefaultExport<Party[]>>;
   biggestDonations: (country: Country) => Promise<DefaultExport<Donation[]>>;
 }
 
@@ -24,6 +27,7 @@ const loaders: CountryLoaders = {
     import(`../../data/${country}/biggest-donors`),
   countryConfig: (country: Country) =>
     import(`../../data/${country}/country-config`),
+  parties: (country: Country) => import(`../../data/${country}/parties`),
   biggestDonations: (country: Country) =>
     import(`../../data/${country}/biggest-donations`),
 };

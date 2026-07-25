@@ -26,14 +26,14 @@ import { Features, hasFeature } from "@/utils/features";
 import { formatYearsRange } from "@/utils/formatter";
 import { getMessagesForLocale } from "@/utils/i18n-loader";
 import { pick } from "@/utils/i18n-pick";
-import {
-  getPartyYearsSums,
-  hasYearSums,
-  lastPartyStatsDonation,
-} from "@/utils/loader/party-years-sums";
+import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
 import { baseOpenGraph, baseTwitter } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
-import { canShowYearsTimeline } from "@/utils/party";
+import {
+  canShowYearsTimeline,
+  hasYearSums,
+  lastPartyStatsDonation,
+} from "@/utils/party";
 import {
   deserializeYears,
   hasKnownYearRange,
@@ -211,7 +211,6 @@ export default async function YearsLayout(
       <DynamicAbsoluteMultiplePartySumsGradient
         partyYearsSums={partySums}
         years={years}
-        country={countryConfig}
       />
 
       <PageHeader>
@@ -224,7 +223,6 @@ export default async function YearsLayout(
           showTop3={false}
           showExtendedMeta={true}
           readonly={true}
-          country={countryConfig}
           partySums={partySums}
         />
       </PageHeader>
@@ -240,7 +238,7 @@ export default async function YearsLayout(
       {children}
 
       <div className="container mx-auto px-4">
-        <YearsFooterNav years={years} locale={locale} country={countryConfig} />
+        <YearsFooterNav years={years} locale={locale} />
       </div>
     </ScopedClientIntlProvider>
   );

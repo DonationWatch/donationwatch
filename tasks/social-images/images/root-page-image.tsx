@@ -7,8 +7,9 @@ import type { ImageLocale } from "@/utils/locales";
 
 /* eslint-disable react/no-unknown-property */
 import { PageLogo } from "@/components/layout/page-logo";
+import { getPartiesSync } from "@/config/parties";
+import { PartyStatField } from "@/types/party-stats";
 import { formatNumber } from "@/utils/formatter";
-import { PartyStatField } from "@/utils/loader/party-years-sums";
 
 import type { CreateTranslator } from "../utils";
 
@@ -25,7 +26,7 @@ export const RootPageImage = async (
   let trackedDonations = 0;
 
   countryDatas.forEach(([, countryConfig, partyYearsSums]) => {
-    trackedParties += countryConfig.parties.length;
+    trackedParties += getPartiesSync(countryConfig.id).length;
 
     Object.values(partyYearsSums).forEach((partyYearSum) => {
       Object.values(partyYearSum).forEach((stats) => {

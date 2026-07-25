@@ -1,7 +1,6 @@
 "use client";
 
-import type { CountryConfig } from "@/types/country-config";
-
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useWikipediaByPageId } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
@@ -15,13 +14,8 @@ const WikiQuoteSkeleton = () => (
   </div>
 );
 
-export const WikiQuote = ({
-  pageId,
-  country,
-}: {
-  pageId: number;
-  country: CountryConfig;
-}) => {
+export const WikiQuote = ({ pageId }: { pageId: number }) => {
+  const country = useRequiredCountryConfig();
   const t = useTranslations("data");
   const { data, error, isLoading } = useWikipediaByPageId(country, pageId);
 
