@@ -594,6 +594,7 @@ const countries: CountryCode[] = [
   "UA",
   "FR",
   "SE",
+  "ZA",
 ];
 const codeCountry: Record<CountryCode, Country> = {
   DE: Country.germany,
@@ -614,6 +615,7 @@ const codeCountry: Record<CountryCode, Country> = {
   UA: Country.ukraine,
   FR: Country.france,
   SE: Country.sweden,
+  ZA: Country.southafrica,
 };
 const main = async () => {
   await Promise.all(

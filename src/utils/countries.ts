@@ -24,6 +24,7 @@ export const enum Country {
   ukraine = "ukraine",
   france = "france",
   sweden = "sweden",
+  southafrica = "southafrica",
 }
 
 export type CountryCode =
@@ -44,7 +45,8 @@ export type CountryCode =
   | "NO"
   | "UA"
   | "FR"
-  | "SE";
+  | "SE"
+  | "ZA";
 
 export type Currency =
   | "EUR"
@@ -57,7 +59,8 @@ export type Currency =
   | "GEL"
   | "NOK"
   | "UAH"
-  | "SEK";
+  | "SEK"
+  | "ZAR";
 
 export const COUNTRIES = new Set<Country>([
   Country.germany,
@@ -78,6 +81,7 @@ export const COUNTRIES = new Set<Country>([
   Country.ukraine,
   Country.france,
   Country.sweden,
+  Country.southafrica,
 ]);
 
 // This is the static config of each country.
@@ -787,6 +791,29 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
     markers: {
       label: "Allmänna val",
       dates: ["2018-09-09", "2022-09-11", "2026-09-13"],
+    },
+    states: [],
+  },
+  [Country.southafrica]: {
+    id: Country.southafrica,
+    minYear: "2021",
+    preliminaryDataSince: "2025",
+    features: Features.Date | Features.Donors | Features.DonationType,
+    minPublicDonationAmount: 100_000,
+    currency: "ZAR",
+    legislativeYears: [
+      ["2020", "2021", "2022", "2023", "2024"],
+      ["2025", "2026", "2027", "2028", "2029"],
+    ],
+    code: "ZA",
+    wikiCountry: "en",
+    source: {
+      name: "Electoral Commission of South Africa (IEC)",
+      url: "https://results.elections.org.za/home/downloads/party-funding-reports",
+    },
+    markers: {
+      label: "South African general election ",
+      dates: ["2024-05-29", "2019-05-08"],
     },
     states: [],
   },

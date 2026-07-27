@@ -20,6 +20,7 @@ import { RsLoader } from "./rs/rs-loader";
 import { SeLoader } from "./se/se-loader";
 import { UaLoader } from "./ua/ua-loader";
 import { UkLoader } from "./uk/uk-loader";
+import { ZaLoader } from "./za/za-loader";
 
 export const loaders: Record<Country, DataLoader> = {
   [Country.germany]: new DeLoader(),
@@ -40,4 +41,5 @@ export const loaders: Record<Country, DataLoader> = {
   [Country.ukraine]: new UaLoader(),
   [Country.france]: new FrLoader(),
   [Country.sweden]: new SeLoader(),
+  [Country.southafrica]: new ZaLoader(),
 };
