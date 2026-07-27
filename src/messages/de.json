@@ -193,7 +193,8 @@
         "norway": "Die hier verwendeten Daten stammen aus den offiziellen Veröffentlichungen zur Parteienfinanzierung von Statistics Norway (SSB) und Partifinansiering.no. Die ausgewiesenen Summen werden aus mehreren gemeldeten Empfängereinheiten (z. B. zentralen, regionalen, lokalen und Jugendorganisationen) zu einem einzigen Gesamtwert pro Partei aggregiert, wobei die zugrunde liegende Zuordnung der Empfänger zur Transparenz weiterhin verfügbar bleibt.\n\nDer Norwegen-Datensatz wird in einem jährlichen Aktualisierungszyklus erneuert und spiegelt damit den Rhythmus der zugrunde liegenden Offenlegungen wider.",
         "ukraine": "Die hier verwendeten Daten stammen von der Nationalen Agentur für Korruptionsprävention (NAZK) über das PolitData-Portal. Sie umfassen alle Datensätze, die in den offiziellen Berichten als „finanzielle Zuwendungen“ gekennzeichnet sind.\n\nHinweis zum Datenumfang: Diese Gesamtsumme bezieht sich ausschließlich auf direkte Geldtransfers. Sie enthält keine staatlichen Zuschüsse an Parlamentsparteien oder Sachleistungen (nicht-monetäre Beiträge) wie Waren und Dienstleistungen.\n\nAufgrund der umfassenden russischen Invasion wurde die verpflichtende Berichterstattung politischer Parteien von Anfang 2022 bis Ende 2023 aus Sicherheits- und Logistikgründen ausgesetzt. Nach der Verabschiedung des Gesetzes Nr. 3337-IX holen die Parteien ihre Berichte nun nach. Die Daten für die Jahre 2022–2025 werden weiterhin aktualisiert, während die NAZK diese Meldungen bearbeitet.",
         "france": "Die hier verwendeten Daten stammen von der Commission Nationale des Comptes de Campagne et des Financements Politiques (CNCCFP) und umfassen alle politischen Spenden (in Euro angegeben), die im Feld \"Dons_de_personne_physique\" dokumentiert sind.\n\nIm Gegensatz zu anderen Regionen werden die französischen Daten als jährliche Gesamtsumme pro Partei veröffentlicht, und die Identität einzelner Spender ist durch Datenschutzgesetze geschützt.",
-        "sweden": "Die hier verwendeten Daten stammen vom Kammarkollegiet, dem offiziellen schwedischen Regierungsregister für Parteienfinanzierung. Um ein genaues Bild rein privater und basisnaher Unterstützung zu vermitteln (angegeben in SEK), umfasst diese Aggregation direkte Beiträge, die unter Kategorie 4 (\"Insamling av kontanter\") und Kategorie 5 (\"Bidrag\") dokumentiert sind. Innerparteiliche Transfers, staatliche Zuschüsse und Lotterieeinnahmen wurden ausdrücklich ausgeschlossen, um Doppelzählungen zu vermeiden und externe Spenden präzise zu isolieren. Alle Daten sind nach politischer Parteizugehörigkeit (\"Partitillhörighet\") gruppiert."
+        "sweden": "Die hier verwendeten Daten stammen vom Kammarkollegiet, dem offiziellen schwedischen Regierungsregister für Parteienfinanzierung. Um ein genaues Bild rein privater und basisnaher Unterstützung zu vermitteln (angegeben in SEK), umfasst diese Aggregation direkte Beiträge, die unter Kategorie 4 (\"Insamling av kontanter\") und Kategorie 5 (\"Bidrag\") dokumentiert sind. Innerparteiliche Transfers, staatliche Zuschüsse und Lotterieeinnahmen wurden ausdrücklich ausgeschlossen, um Doppelzählungen zu vermeiden und externe Spenden präzise zu isolieren. Alle Daten sind nach politischer Parteizugehörigkeit (\"Partitillhörighet\") gruppiert.",
+        "southafrica": "Die hier verwendeten Daten stammen von der Electoral Commission of South Africa (IEC) und umfassen alle seit 2021 veröffentlichten Parteienfinanzierungserklärungen (Abschnitt 9(1)), einschließlich gültiger Nachmeldungen. Indirekte Beiträge zum Multi-Party Democracy Fund und doppelte Offenlegungen von Spenderseite (Abschnitt 9(2)) sind ausgenommen.\\n\\nHinweis zu den Schwellenwerten: Politische Parteien mussten Spenden von über 100.000 ZAR pro Spender und Jahr melden, bis die gesetzliche Offenlegungsgrenze zum 1. April 2024 auf 200.000 ZAR angehoben wurde."
       },
       "source_link": "Datenquelle"
     },
@@ -589,7 +590,8 @@
     "GE": "Georgien",
     "NO": "Norwegen",
     "UA": "Ukraine",
-    "SE": "Schweden"
+    "SE": "Schweden",
+    "ZA": "South Africa"
   },
   "about": {
     "title": "Über uns",
@@ -805,7 +807,6 @@
     "data": "DonationWatch – Daten zu politischen Spenden in {country}",
     "apa": "DonationWatch. ({year}). {title} [Datensatz]. Abgerufen am {date}, von {url}"
   },
-
   "enterprise": {
     "title": "Enterprise",
     "heading": "Politische Finanzierungsdaten auf Enterprise-Niveau.",

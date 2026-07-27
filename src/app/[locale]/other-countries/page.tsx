@@ -296,14 +296,6 @@ const sources: {
       url: "https://www.ajpes.si/jolp/default.asp",
     },
   },
-  {
-    country: "ZA",
-    note: CountryNote.PDF_ONLY,
-    source: {
-      name: "Electoral Commission of South Africa (IEC)",
-      url: "https://www.elections.org.za/pw/Downloads/Documents-Library-Annual-Reports-IEC",
-    },
-  },
 ];
 
 export async function generateMetadata(

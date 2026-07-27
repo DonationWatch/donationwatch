@@ -18,6 +18,7 @@ import seFlag from "../../public/flags/sweden.svg";
 import chFlag from "../../public/flags/switzerland.svg";
 import uaFlag from "../../public/flags/ua.svg";
 import ukFlag from "../../public/flags/unitedkingdom.svg";
+import zaFlag from "../../public/flags/za.svg";
 
 export const countryFlags: Record<Country, typeof auFlag> = {
   [Country.germany]: deFlag,
@@ -38,4 +39,5 @@ export const countryFlags: Record<Country, typeof auFlag> = {
   [Country.ukraine]: uaFlag,
   [Country.france]: frFlag,
   [Country.sweden]: seFlag,
+  [Country.southafrica]: zaFlag,
 };

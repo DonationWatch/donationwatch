@@ -193,7 +193,8 @@
         "norway": "Ovdje korišteni podaci potječu iz službenih publikacija o financiranju stranaka koje objavljuju Statistics Norway (SSB) i Partifinansiering.no. Prikazani ukupni iznosi agregirani su iz više prijavljenih primateljskih entiteta (kao što su središnje, regionalne, lokalne i omladinske jedinice) u jedan ukupni iznos po stranci, pri čemu je temeljno mapiranje primatelja i dalje dostupno radi transparentnosti.\n\nNorveški skup podataka osvježava se u godišnjem ciklusu ažuriranja, odražavajući dinamiku temeljnih objava.",
         "ukraine": "Podaci korišteni ovdje potječu od Nacionalne agencije za prevenciju korupcije (NAZK) putem portala PolitData. Obuhvaćaju sve zapise koji su u službenim izvješćima označeni kao „novčani doprinosi“.\n\nNapomena o opsegu podataka: Ovaj ukupni iznos odnosi se samo na izravne financijske transfere. Ne uključuje državna sredstva osigurana parlamentarnim strankama niti nenovčane (prirodne) doprinose poput robe i usluga.\n\nZbog sveobuhvatne ruske invazije obvezno izvještavanje političkih stranaka bilo je obustavljeno od početka 2022. do kraja 2023. iz sigurnosnih i logističkih razloga. Nakon usvajanja Zakona 3337-IX, stranke sada retroaktivno podnose svoja izvješća. Podaci za razdoblje 2022.–2025. i dalje se ažuriraju dok NAZK obrađuje te prijave.",
         "france": "Podaci korišteni ovdje potječu iz Commission Nationale des Comptes de Campagne et des Financements Politiques (CNCCFP) i uključuju sve političke donacije (izražene u eurima) zabilježene u polju \"Dons_de_personne_physique\".\n\nZa razliku od drugih regija, francuski se podaci objavljuju kao godišnji zbroj po stranci, a identitet pojedinih donatora zaštićen je zakonima o privatnosti.",
-        "sweden": "Ovdje korišteni podaci potječu iz Kammarkollegieta, službenog švedskog državnog registra financiranja političkih stranaka. Kako bi se pružila točna slika isključivo privatne i građanske podrške (prikazane u SEK), ovaj zbir uključuje izravne doprinose evidentirane u kategoriji 4 (\"Insamling av kontanter\") i kategoriji 5 (\"Bidrag\"). Unutarstranački prijenosi, državne subvencije i prihodi od lutrije izričito su isključeni kako bi se spriječilo dvostruko brojanje i precizno izdvojile vanjske donacije. Svi podaci grupirani su prema političkoj stranačkoj pripadnosti (\"Partitillhörighet\")."
+        "sweden": "Ovdje korišteni podaci potječu iz Kammarkollegieta, službenog švedskog državnog registra financiranja političkih stranaka. Kako bi se pružila točna slika isključivo privatne i građanske podrške (prikazane u SEK), ovaj zbir uključuje izravne doprinose evidentirane u kategoriji 4 (\"Insamling av kontanter\") i kategoriji 5 (\"Bidrag\"). Unutarstranački prijenosi, državne subvencije i prihodi od lutrije izričito su isključeni kako bi se spriječilo dvostruko brojanje i precizno izdvojile vanjske donacije. Svi podaci grupirani su prema političkoj stranačkoj pripadnosti (\"Partitillhörighet\").",
+        "southafrica": "The data used here comes from the Electoral Commission of South Africa (IEC) and includes all published political party funding declarations (Section 9(1)) since 2021, including valid late submissions. Indirect contributions to the Multi-Party Democracy Fund and duplicate donor-side disclosures (Section 9(2)) are excluded.\\n\\nNote on thresholds: Political parties were required to report donations exceeding ZAR 100,000 per donor per year until 1 April 2024, when the legal disclosure threshold was increased to ZAR 200,000."
       },
       "source_link": "Izvor podataka"
     },
@@ -543,7 +544,8 @@
     "GE": "Gruzija",
     "NO": "Norveška",
     "UA": "Ukrajina",
-    "SE": "Švedska"
+    "SE": "Švedska",
+    "ZA": "South Africa"
   },
   "state": {
     "germany": {

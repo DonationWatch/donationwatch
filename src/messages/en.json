@@ -183,7 +183,8 @@
         "norway": "The data used here comes from the official party funding publications by Statistics Norway (SSB) and Partifinansiering.no. Totals shown are aggregated from multiple reported receiver entities (such as central, regional, local, and youth units) into a single total per party, with the underlying receiver mapping kept available for transparency.\n\nThe Norway dataset is refreshed on an annual update cycle, reflecting the cadence of the underlying disclosures.",
         "ukraine": "The data used here is sourced from the National Agency on Corruption Prevention (NAZK) via the PolitData portal. It includes all records identified as \"monetary contributions\" in the official reports.\n\nNote on Data Scope: This total reflects direct financial transfers only. It does not include state funding provided to parliamentary parties or in-kind (non-monetary) contributions such as goods and services.\n\nDue to the full-scale Russian invasion, mandatory political party reporting was suspended from early 2022 until late 2023 for security and logistical reasons. Following the adoption of Law 3337-IX, parties are now backfilling their reports. Data for 2022–2025 is still being updated as the NAZK processes these submissions.",
         "france": "The data used here comes from the Commission Nationale des Comptes de Campagne et des Financements Politiques (CNCCFP) and includes all political donations (reported in Euro) documented in the \"Dons_de_personne_physique\" field.\n\nUnlike other regions, French data is published as an annual aggregate per party, and the identity of individual donors is protected by privacy laws.",
-        "sweden": "The data used here is sourced from Kammarkollegiet, the official Swedish government registry for party financing. To provide an accurate picture of pure private and grassroots support (reported in SEK), this aggregate includes direct contributions documented under Category 4 (\"Insamling av kontanter\") and Category 5 (\"Bidrag\"). Internal party transfers, state subsidies, and lottery revenues have been specifically excluded to prevent double-counting and to accurately isolate external donations. All data is grouped by political party affiliation (\"Partitillhörighet\")."
+        "sweden": "The data used here is sourced from Kammarkollegiet, the official Swedish government registry for party financing. To provide an accurate picture of pure private and grassroots support (reported in SEK), this aggregate includes direct contributions documented under Category 4 (\"Insamling av kontanter\") and Category 5 (\"Bidrag\"). Internal party transfers, state subsidies, and lottery revenues have been specifically excluded to prevent double-counting and to accurately isolate external donations. All data is grouped by political party affiliation (\"Partitillhörighet\").",
+        "southafrica": "The data used here comes from the Electoral Commission of South Africa (IEC) and includes all published political party funding declarations (Section 9(1)) since 2021, including valid late submissions. Indirect contributions to the Multi-Party Democracy Fund and duplicate donor-side disclosures (Section 9(2)) are excluded.\n\nNote on thresholds: Political parties were required to report donations exceeding ZAR 100,000 per donor per year until 1 April 2024, when the legal disclosure threshold was increased to ZAR 200,000."
       },
       "source_link": "Data source"
     },
@@ -533,7 +534,8 @@
     "GE": "Georgia",
     "NO": "Norway",
     "UA": "Ukraine",
-    "SE": "Sweden"
+    "SE": "Sweden",
+    "ZA": "South Africa"
   },
   "state": {
     "germany": {

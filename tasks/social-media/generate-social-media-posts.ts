@@ -57,6 +57,7 @@ const countryTranslations: Record<Country, ConstLocale> = {
   [Country.ukraine]: "uk",
   [Country.france]: "fr",
   [Country.sweden]: "en",
+  [Country.southafrica]: "en",
 };
 
 const countryFlags: Record<Country, string> = {
@@ -78,6 +79,7 @@ const countryFlags: Record<Country, string> = {
   [Country.ukraine]: "🇺🇦",
   [Country.france]: "🇫🇷",
   [Country.sweden]: "🇸🇪",
+  [Country.southafrica]: "🇿🇦",
 };
 
 const deltaPrefix = (delta: number): string => (delta > 0 ? `+` : "");

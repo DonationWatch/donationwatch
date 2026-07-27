@@ -12,6 +12,7 @@ import BuildLatvia from "../../data/latvia/build";
 import BuildNetherlands from "../../data/netherlands/build";
 import BuildNorway from "../../data/norway/build";
 import BuildSerbia from "../../data/serbia/build";
+import BuildSouthAfrica from "../../data/southafrica/build";
 import BuildSweden from "../../data/sweden/build";
 import BuildSwitzerland from "../../data/switzerland/build";
 import BuildUkraine from "../../data/ukraine/build";
@@ -37,6 +38,7 @@ const countryDonation: Record<Country, { t: number }> = {
   [Country.ukraine]: BuildUkraine,
   [Country.france]: BuildFrance,
   [Country.sweden]: BuildSweden,
+  [Country.southafrica]: BuildSouthAfrica,
 };
 
 export const getBuild = (country: Country): { t: number } => {

@@ -17,6 +17,7 @@ import latvia from "@/data/latvia/parties";
 import netherlands from "@/data/netherlands/parties";
 import norway from "@/data/norway/parties";
 import serbia from "@/data/serbia/parties";
+import southafrica from "@/data/southafrica/parties";
 import sweden from "@/data/sweden/parties";
 import switzerland from "@/data/switzerland/parties";
 import ukraine from "@/data/ukraine/parties";
@@ -38,6 +39,7 @@ export const PARTIES: Record<Country, Party[]> = {
   netherlands,
   norway,
   serbia,
+  southafrica,
   sweden,
   switzerland,
   ukraine,
