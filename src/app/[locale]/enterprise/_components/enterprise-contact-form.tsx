@@ -4,6 +4,7 @@ import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { useForm } from "@tanstack/react-form";
 import { ArrowRight, Check, Loader2 } from "lucide-react";
 import React, { useState, useRef } from "react";
+import * as v from "valibot";
 
 import { Button } from "@/components/ui/button";
 import { useClientTranslations } from "@/hooks/use-client-translations";
@@ -153,10 +154,10 @@ export const EnterpriseContactForm = ({
           name="name"
           validators={{
             onChange: ({ value }) => {
-              const res = contactFormSchema.shape.name.safeParse(value);
+              const res = v.safeParse(contactFormSchema.entries.name, value);
               return res.success
                 ? undefined
-                : translateError(res.error.issues[0].message);
+                : translateError(res.issues[0].message);
             },
           }}
         >
@@ -191,10 +192,10 @@ export const EnterpriseContactForm = ({
           name="email"
           validators={{
             onChange: ({ value }) => {
-              const res = contactFormSchema.shape.email.safeParse(value);
+              const res = v.safeParse(contactFormSchema.entries.email, value);
               return res.success
                 ? undefined
-                : translateError(res.error.issues[0].message);
+                : translateError(res.issues[0].message);
             },
           }}
         >
@@ -229,10 +230,13 @@ export const EnterpriseContactForm = ({
           name="organization"
           validators={{
             onChange: ({ value }) => {
-              const res = contactFormSchema.shape.organization.safeParse(value);
+              const res = v.safeParse(
+                contactFormSchema.entries.organization,
+                value,
+              );
               return res.success
                 ? undefined
-                : translateError(res.error.issues[0].message);
+                : translateError(res.issues[0].message);
             },
           }}
         >
@@ -290,11 +294,13 @@ export const EnterpriseContactForm = ({
           name="turnstileToken"
           validators={{
             onChange: ({ value }) => {
-              const res =
-                contactFormSchema.shape.turnstileToken.safeParse(value);
+              const res = v.safeParse(
+                contactFormSchema.entries.turnstileToken,
+                value,
+              );
               return res.success
                 ? undefined
-                : translateError(res.error.issues[0].message);
+                : translateError(res.issues[0].message);
             },
           }}
         >
@@ -327,10 +333,10 @@ export const EnterpriseContactForm = ({
           name="consent"
           validators={{
             onChange: ({ value }) => {
-              const res = contactFormSchema.shape.consent.safeParse(value);
+              const res = v.safeParse(contactFormSchema.entries.consent, value);
               return res.success
                 ? undefined
-                : translateError(res.error.issues[0].message);
+                : translateError(res.issues[0].message);
             },
           }}
         >
