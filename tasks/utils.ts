@@ -1,13 +1,33 @@
 import { checkbox } from "@inquirer/prompts";
+import assert from "assert";
 import fs from "fs/promises";
 
-import { COUNTRIES, COUNTRY_CONFIG } from "@/utils/countries";
+import {
+  COUNTRIES,
+  COUNTRY_CONFIG,
+  countryCodesToCountry,
+} from "@/utils/countries";
 
+// Non-interactive override for scripting/agents: skips the checkbox prompt entirely.
+// Example: COUNTRIES=ZA,SE pnpm run data:rebuild:cached
 export const promptCountries = async (
   message: string,
   autoSelectAll: boolean = process.env["CI"] === "true",
-) =>
-  autoSelectAll
+) => {
+  const envCountries = process.env["COUNTRIES"];
+  if (envCountries) {
+    return envCountries
+      .split(",")
+      .map((code) => code.trim().toUpperCase())
+      .filter(Boolean)
+      .map((code) => {
+        const country = countryCodesToCountry[code];
+        assert(country, `Unknown country code in COUNTRIES env var: ${code}`);
+        return country;
+      });
+  }
+
+  return autoSelectAll
     ? [...COUNTRIES]
     : await checkbox({
         message,
@@ -24,14 +44,31 @@ export const promptCountries = async (
             checked: true,
           })),
       });
+};
 
+// Non-interactive override for scripting/agents: skips the checkbox prompt entirely.
+// Example: YEARS=2024,2025 pnpm run data:rebuild:cached, or YEARS=all for the full available range.
 export const promptYears = async (
   message: string,
   years: string[],
   preselectedYears: string[] = [],
   autoSelectAll: boolean = process.env["CI"] === "true",
-) =>
-  autoSelectAll
+) => {
+  const envYears = process.env["YEARS"];
+  if (envYears) {
+    if (envYears.trim().toLowerCase() === "all") return [...years];
+
+    const selectedYears = envYears
+      .split(",")
+      .map((year) => year.trim())
+      .filter(Boolean);
+    selectedYears.forEach((year) =>
+      assert(years.includes(year), `Unknown year in YEARS env var: ${year}`),
+    );
+    return selectedYears;
+  }
+
+  return autoSelectAll
     ? [...preselectedYears]
     : await checkbox({
         message,
@@ -42,6 +79,7 @@ export const promptYears = async (
           checked: preselectedYears.includes(y),
         })),
       });
+};
 
 export const jsonAsTsModule = (jsonString: string): string => {
   return `const data = JSON.parse(${JSON.stringify(jsonString)});export default data;`;

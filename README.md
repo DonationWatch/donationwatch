@@ -125,7 +125,7 @@ The data pipeline consists of two main steps:
 To work with real data, you need to fetch it from the sources.
 
 ```bash
-# Fetch data from remote sources (default: last 2 years)
+# Fetch data from remote sources (default: last 3 years)
 pnpm data:rebuild
 
 # Use previously cached data (skip fetching)
@@ -141,6 +141,8 @@ Each country has its own loader (e.g., `de/de-loader.ts`, `uk/uk-loader.ts`) tha
 - Fetches donation data from official government or election commission APIs
 - Normalizes the data into the common `Donation` format
 - Caches raw data locally for faster subsequent runs
+
+> Adding support for a brand-new country? See [CONTRIBUTING.md § Adding a New Country](CONTRIBUTING.md#adding-a-new-country) for the full step-by-step guide.
 
 > [!IMPORTANT]
 > The data loaders (step 1) only download and normalize the raw data. You **must** run the postprocessing script (step 2) afterwards to generate the final JSON files used by the application regarding aggregated statistics, rankings, and metadata.

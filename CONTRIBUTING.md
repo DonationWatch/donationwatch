@@ -20,6 +20,12 @@ The main application is a standard [Next.js](https://nextjs.org/) project locate
 2.  **Run**: Use `pnpm dev:turbo` to start the development server.
 3.  **Data**: The app relies on JSON files in `src/data/`. Running `pnpm data:fake` gives you sample data to work with immediately.
 
+## Adding a New Country
+
+Adding a new country is a bigger task than fixing an existing loader (below) — it touches country registration, the flag, translations across every locale file, and a brand-new `DataLoader` subclass, several of which have easy-to-get-wrong steps (never hand-draw the flag SVG, never guess party colors or Wikipedia page IDs).
+
+If you're working with an AI coding agent that supports the Agent Skills format (e.g. Claude Code), point it at [`.agents/skills/add-country-data/SKILL.md`](.agents/skills/add-country-data/SKILL.md) — it walks through the full workflow step by step, including the exact files to touch, the party-discovery trick built into the loader's own error messages, and the gotchas seen across existing loaders. Without an agent, the same file is plain Markdown and works as a manual checklist.
+
 ## Working on Data Loaders
 
 Each country has its own data loader located in `tasks/load-data/<country_code>/`. These loaders are responsible for scraping or fetching raw data from official sources and normalizing it.
