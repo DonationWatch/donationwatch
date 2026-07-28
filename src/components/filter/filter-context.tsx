@@ -15,7 +15,7 @@ import {
   useRef,
   memo,
 } from "react";
-import { z } from "zod";
+import * as v from "valibot";
 
 import type { Party } from "@/types/party";
 import type { Donation, ReceiverId } from "@/utils/types";
@@ -35,8 +35,8 @@ const partiesParser = createParser({
     if (!query || query === "__ALL__") return null;
     if (query === "__NONE__") return [];
     const items = query.split(",");
-    const result = z.array(z.string()).safeParse(items);
-    return result.success ? result.data : null;
+    const result = v.safeParse(v.array(v.string()), items);
+    return result.success ? result.output : null;
   },
   serialize: (value) => {
     if (!value) return "__ALL__";
@@ -53,8 +53,8 @@ const typesParser = createParser({
       .split(",")
       .map(Number)
       .filter((n) => !Number.isNaN(n));
-    const result = z.array(z.number().int()).safeParse(items);
-    return result.success ? (result.data as DonationType[]) : null;
+    const result = v.safeParse(v.array(v.pipe(v.number(), v.integer())), items);
+    return result.success ? (result.output as DonationType[]) : null;
   },
   serialize: (value) => {
     if (!value) return "__ALL__";
@@ -71,8 +71,8 @@ const donorTypesParser = createParser({
       .split(",")
       .map(Number)
       .filter((n) => !Number.isNaN(n));
-    const result = z.array(z.number().int()).safeParse(items);
-    return result.success ? (result.data as DonorType[]) : null;
+    const result = v.safeParse(v.array(v.pipe(v.number(), v.integer())), items);
+    return result.success ? (result.output as DonorType[]) : null;
   },
   serialize: (value) => {
     if (!value) return "__ALL__";

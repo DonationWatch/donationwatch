@@ -1,12 +1,17 @@
-import { z } from "zod";
+import * as v from "valibot";
 
-export const contactFormSchema = z.object({
-  name: z.string().trim().min(1, "errors.empty"),
-  email: z.string().trim().min(1, "errors.empty").email("errors.email"),
-  organization: z.string().trim().min(1, "errors.empty"),
-  queryRequest: z.string().optional().default(""),
-  consent: z.literal(true, { message: "errors.required" }),
-  turnstileToken: z.string().trim().min(1, "errors.empty"),
+export const contactFormSchema = v.object({
+  name: v.pipe(v.string(), v.trim(), v.minLength(1, "errors.empty")),
+  email: v.pipe(
+    v.string(),
+    v.trim(),
+    v.minLength(1, "errors.empty"),
+    v.email("errors.email"),
+  ),
+  organization: v.pipe(v.string(), v.trim(), v.minLength(1, "errors.empty")),
+  queryRequest: v.optional(v.string(), ""),
+  consent: v.literal(true, "errors.required"),
+  turnstileToken: v.pipe(v.string(), v.trim(), v.minLength(1, "errors.empty")),
 });
 
-export type ContactFormData = z.infer<typeof contactFormSchema>;
+export type ContactFormData = v.InferOutput<typeof contactFormSchema>;

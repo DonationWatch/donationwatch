@@ -2,6 +2,7 @@
 
 import "server-only";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
+import * as v from "valibot";
 
 import { ENTERPRISE_MAIL } from "@/utils/config";
 
@@ -38,8 +39,8 @@ export async function submitContactAction(
       );
     }
 
-    // Server-side Zod validation
-    const payload = contactFormSchema.parse(data);
+    // Server-side Valibot validation
+    const payload = v.parse(contactFormSchema, data);
 
     // 1. Verify Turnstile Token
     const turnstileSecret = env.TURNSTILE_SECRET_KEY;
@@ -115,8 +116,8 @@ Query Request: ${payload.queryRequest || "None specified"}
   } catch (error: any) {
     console.error("Contact Form Action Error:", error);
 
-    // Custom Zod schema error formatting
-    if (error.name === "ZodError") {
+    // Custom Valibot schema error formatting
+    if (v.isValiError(error)) {
       return {
         success: false,
         message: "Provided input data is invalid.",
