@@ -1,4 +1,3 @@
-import Analyzer from "@next/bundle-analyzer";
 import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
 import createNextIntlPlugin from "next-intl/plugin";
 
@@ -6,19 +5,17 @@ const withNextIntl = createNextIntlPlugin();
 
 const env = process.env.NODE_ENV;
 const isProd = env === "production";
-const isAnalyze = process.env.ANALYZE === "true";
 
 initOpenNextCloudflareForDev();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   poweredByHeader: false,
+  reactCompiler: isProd,
   images: {
     unoptimized: true,
   },
-  experimental: {
-    reactCompiler: isProd,
-  },
+  experimental: {},
   compiler: isProd
     ? {
         reactRemoveProperties: isProd,
@@ -82,6 +79,4 @@ const nextConfig = {
   },
 };
 
-export default withNextIntl(
-  isAnalyze ? Analyzer({ enabled: true })(nextConfig) : nextConfig,
-);
+export default withNextIntl(nextConfig);
