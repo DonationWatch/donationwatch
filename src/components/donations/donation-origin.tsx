@@ -185,9 +185,11 @@ const OtherCountryPart = ({
               until: years.at(-1)!,
               countryCount: sums.length,
               highestCountry: t(
-                `countries.${largesOtherDonationSum[1].donations[0][
-                  DonationField.Address
-                ][AddressField.Country]!}`,
+                `countries.${
+                  largesOtherDonationSum[1].donations[0][DonationField.Address][
+                    AddressField.Country
+                  ]!
+                }`,
               ),
               highestSum: formatCountryCurrency(
                 browserBasedLocale,
