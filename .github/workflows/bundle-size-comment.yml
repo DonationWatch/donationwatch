@@ -1,0 +1,173 @@
+name: Comment Build Output Size
+
+on:
+  workflow_run:
+    workflows: ["Node.js CI"]
+    types:
+      - completed
+
+permissions:
+  pull-requests: write
+  actions: read
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    if: github.event.workflow_run.conclusion == 'success'
+
+    steps:
+      - name: Restore main baseline cache
+        uses: actions/cache/restore@v4
+        with:
+          path: main-baseline
+          key: main-bundle-size-
+          restore-keys: |
+            main-bundle-size-
+
+      - name: Download PR build metrics artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build-metrics
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: ./pr-metrics
+
+      - name: Process metrics and update PR comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            // Helper to format bytes cleanly (KB or MB)
+            function formatSize(bytes) {
+              if (bytes === null || bytes === undefined) return 'N/A';
+              if (bytes >= 1024 * 1024) {
+                return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+              }
+              return `${(bytes / 1024).toFixed(2)} KB`;
+            }
+
+            function formatDiff(prBytes, baseBytes) {
+              if (baseBytes === null || baseBytes === undefined || baseBytes === 0) {
+                return 'N/A (No main baseline yet)';
+              }
+              const diffBytes = prBytes - baseBytes;
+              if (diffBytes === 0) return '➖ No change (0 B)';
+              
+              const diffKb = (diffBytes / 1024).toFixed(2);
+              const percent = ((diffBytes / baseBytes) * 100).toFixed(2);
+              
+              if (diffBytes > 0) {
+                return `🔺 +${diffKb} KB (+${percent}%)`;
+              } else {
+                return `🟢 ${diffKb} KB (${percent}%)`;
+              }
+            }
+
+            // 1. Read PR/current build metrics
+            const prMetricsPath = path.join(process.env.GITHUB_WORKSPACE, 'pr-metrics', 'metrics.json');
+            if (!fs.existsSync(prMetricsPath)) {
+              console.log('No build metrics artifact found.');
+              return;
+            }
+            const currentMetrics = JSON.parse(fs.readFileSync(prMetricsPath, 'utf8'));
+
+            // 2. If this run was on main, save baseline for future PR comparisons
+            if (currentMetrics.is_main) {
+              fs.mkdirSync(path.join(process.env.GITHUB_WORKSPACE, 'main-baseline'), { recursive: true });
+              fs.writeFileSync(
+                path.join(process.env.GITHUB_WORKSPACE, 'main-baseline', 'baseline.json'),
+                JSON.stringify(currentMetrics)
+              );
+              console.log('Updated main baseline metrics.');
+              return;
+            }
+
+            // 3. For PR runs: read main baseline if exists
+            const baselinePath = path.join(process.env.GITHUB_WORKSPACE, 'main-baseline', 'baseline.json');
+            let mainMetrics = null;
+            if (fs.existsSync(baselinePath)) {
+              mainMetrics = JSON.parse(fs.readFileSync(baselinePath, 'utf8'));
+            }
+
+            const prNumber = currentMetrics.pr_number;
+            if (!prNumber) {
+              console.log('No PR number associated with this run.');
+              return;
+            }
+
+            const prBreakdown = currentMetrics.breakdown || {};
+            const mainBreakdown = mainMetrics ? (mainMetrics.breakdown || {}) : {};
+
+            const rows = [
+              {
+                name: '**Server Worker** (`worker.js` / `server-functions`)',
+                pr: prBreakdown.server_worker,
+                main: mainBreakdown.server_worker
+              },
+              {
+                name: '**Static Assets** (`assets/`)',
+                pr: prBreakdown.static_assets,
+                main: mainBreakdown.static_assets
+              },
+              {
+                name: '**Cache & Pre-rendered** (`cache/`)',
+                pr: prBreakdown.cache,
+                main: mainBreakdown.cache
+              },
+              {
+                name: '**Total OpenNext Output** (`.open-next`)',
+                pr: prBreakdown.total_opennext || currentMetrics.size_bytes,
+                main: mainBreakdown.total_opennext || (mainMetrics ? mainMetrics.size_bytes : null)
+              }
+            ];
+
+            const botHeader = '### 📦 OpenNext / Cloudflare Build Output Size Report';
+            const tableRows = rows.map(r => {
+              return `| ${r.name} | \`${formatSize(r.main)}\` | \`${formatSize(r.pr)}\` | **${formatDiff(r.pr, r.main)}** |`;
+            });
+
+            const body = [
+              botHeader,
+              '',
+              '| Component | Main Branch | Current PR | Difference |',
+              '| :--- | :--- | :--- | :--- |',
+              ...tableRows,
+              '',
+              `*Automated OpenNext build size check triggered by commit \`${currentMetrics.sha.substring(0, 7)}\`.*`,
+            ].join('\n');
+
+            // 4. Find existing comment and update or create new
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+            });
+
+            const existingComment = comments.find(c => c.body && c.body.includes(botHeader));
+
+            if (existingComment) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existingComment.id,
+                body: body,
+              });
+              console.log(`Updated comment on PR #${prNumber}`);
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                body: body,
+              });
+              console.log(`Created comment on PR #${prNumber}`);
+            }
+
+      - name: Save main baseline cache
+        uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: main-baseline
+          key: main-bundle-size-${{ github.event.workflow_run.id }}

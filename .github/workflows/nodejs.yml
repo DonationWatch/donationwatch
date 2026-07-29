@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
@@ -38,5 +38,71 @@ jobs:
         run: |
           pnpm run data:fake
           pnpm run data:postprocess
+          pnpm next typegen
+          pnpm run cf:typegen
       - name: Run (fake data) unit tests
         run: pnpm run test:unit:fake
+      - name: Build OpenNext app
+        run: pnpm run cf:build
+
+      - name: Measure build size
+        env:
+          IS_MAIN: ${{ github.ref == 'refs/heads/main' }}
+          PR_NUM: ${{ github.event.pull_request.number }}
+          GITHUB_SHA: ${{ github.sha }}
+        run: |
+          node -e '
+          const fs = require("fs");
+          const path = require("path");
+
+          function getDirSize(dirPath) {
+            if (!fs.existsSync(dirPath)) return 0;
+            let total = 0;
+            const files = fs.readdirSync(dirPath, { withFileTypes: true });
+            for (const file of files) {
+              const fullPath = path.join(dirPath, file.name);
+              if (file.isDirectory()) {
+                total += getDirSize(fullPath);
+              } else if (file.isFile()) {
+                total += fs.statSync(fullPath).size;
+              }
+            }
+            return total;
+          }
+
+          function getFileSize(filePath) {
+            if (!fs.existsSync(filePath)) return 0;
+            return fs.statSync(filePath).size;
+          }
+
+          const openNextDir = path.join(process.cwd(), ".open-next");
+          const workerJs = getFileSize(path.join(openNextDir, "worker.js"));
+          const serverFunctions = getDirSize(path.join(openNextDir, "server-functions"));
+          const assets = getDirSize(path.join(openNextDir, "assets"));
+          const cache = getDirSize(path.join(openNextDir, "cache"));
+          const totalOpenNext = getDirSize(openNextDir);
+
+          const metrics = {
+            size_bytes: totalOpenNext,
+            breakdown: {
+              server_worker: workerJs + serverFunctions,
+              static_assets: assets,
+              cache: cache,
+              total_opennext: totalOpenNext
+            },
+            is_main: process.env.IS_MAIN === "true",
+            pr_number: process.env.PR_NUM ? parseInt(process.env.PR_NUM, 10) : null,
+            sha: process.env.GITHUB_SHA
+          };
+
+          fs.mkdirSync("build-metrics", { recursive: true });
+          fs.writeFileSync("build-metrics/metrics.json", JSON.stringify(metrics, null, 2));
+          console.log("Measured OpenNext build size:", metrics);
+          '
+
+      - name: Upload build metrics artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-metrics
+          path: build-metrics/metrics.json
+          retention-days: 7
