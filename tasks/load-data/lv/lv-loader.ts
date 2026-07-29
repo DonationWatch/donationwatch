@@ -1,5 +1,4 @@
 import assert from "assert";
-import * as cheerio from "cheerio";
 import fs from "fs/promises";
 import path from "path";
 
@@ -11,13 +10,36 @@ import { DonationType, AddressField, DonationField } from "@/utils/types";
 import type { ExtractedYearData, PartyConfig } from "../data-loader";
 
 import { DataLoader } from "../data-loader";
-import { spawnBrowser, timeout } from "../util";
 import { donorMeta } from "./donor-meta";
+
+export interface KnabPayment {
+  public_id: string;
+  party_public_id: string;
+  party: string;
+  typeId: number;
+  type: string;
+  amountDisplay: string;
+  currency: string;
+  firstName: string;
+  lastName: string;
+  person: string;
+  personCode: string;
+  date: string;
+}
+
+export interface KnabApiResponse {
+  payments: KnabPayment[];
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+  };
+}
 
 const knabTypeMapping: Record<
   string,
   {
-    // the type id that their api needs for this type
     knabTypeId: string;
     donationType: DonationType;
   }
@@ -422,7 +444,7 @@ export class LvLoader extends DataLoader {
   donorMeta = donorMeta;
 
   cacheFile(yearTypeId: `${string}-${string}`) {
-    return path.join(this.cacheDir, `donations-${yearTypeId}.html`);
+    return path.join(this.cacheDir, `donations-${yearTypeId}.json`);
   }
 
   async loadYearDataToCache(year: string): Promise<void> {
@@ -430,29 +452,32 @@ export class LvLoader extends DataLoader {
     const dateTo = `31.12.${year}`;
 
     for (const [typeName, mapping] of Object.entries(knabTypeMapping)) {
-      const url = `https://info.knab.gov.lv/lv/db/ziedojumi/?party_id-hidden=&party_id=&type_id=${mapping.knabTypeId}&donator=&date_from=${dateFrom}&date_to=${dateTo}&amount_from=&amount_to=&search=to+look+for&order=&dir=&all_pages=1&recordsPerPage=all`;
+      this.log(`Loading "${typeName}" donation page for year ${year}`);
 
-      this.log(`Loading "${typeName}" donation page for year ${year}: ${url}`);
+      const donations: KnabPayment[] = [];
+      let page = 1;
+      let totalPages = 1;
 
-      const { html } = await spawnBrowser(async (page) => {
-        const response = await page.goto(url);
-        try {
-          await page.waitForSelector(".pageSizeDiv");
-          // wait a second because they have some js animation that takes a while to finish
-          await timeout(1000);
-        } catch {
-          throw new Error(`Unable to load ${url}: ${response?.status()}`);
+      while (page <= totalPages) {
+        const url = `https://info.knab.gov.lv/api/payments?type_id=${mapping.knabTypeId}&date_from=${dateFrom}&date_to=${dateTo}&order=date&dir=desc&page=${page}&limit=500`;
+
+        const res = await fetch(url);
+        if (!res.ok) {
+          throw new Error(`Unable to load ${url}: ${res.status}`);
         }
 
-        const html = await page.evaluate(
-          () => document.documentElement.outerHTML,
-        );
-        return { html };
-      });
+        const data = (await res.json()) as KnabApiResponse;
+        if (data.payments && Array.isArray(data.payments)) {
+          donations.push(...data.payments);
+        }
+
+        totalPages = data.pagination?.totalPages ?? 1;
+        page++;
+      }
 
       await fs.writeFile(
         this.cacheFile(`${year}-${mapping.knabTypeId}`),
-        html,
+        JSON.stringify(donations, null, 2),
         {
           encoding: "utf8",
         },
@@ -464,30 +489,26 @@ export class LvLoader extends DataLoader {
     const donations: ExtractedYearData[] = [];
 
     for (const [typeName, mapping] of Object.entries(knabTypeMapping)) {
-      const html = await this.cachedYearData(`${year}-${mapping.knabTypeId}`);
+      const json = await this.cachedYearData(`${year}-${mapping.knabTypeId}`);
+      if (!json) continue;
 
       this.log(`Extracting ${typeName} donation data for year ${year}`);
 
-      const $ = cheerio.load(html);
+      const payments = JSON.parse(json) as KnabPayment[];
 
-      $("#donations tbody tr").each((idx, tr) => {
-        const $tr = $(tr);
+      payments.forEach((payment, idx) => {
+        const id = payment.public_id;
+        const receiver = payment.party;
+        const amount = payment.amountDisplay;
+        const donor =
+          payment.person?.trim() ||
+          `${payment.firstName ?? ""} ${payment.lastName ?? ""}`.trim();
+        const date = payment.date;
 
-        const id = $($tr.find(".party a")).attr("href")?.split("id=")[1];
-        const receiver = $($tr.find(".party")).text().trim();
-        const amount = $($tr.find(".amount")).text().trim();
-        const type = $($tr.find(".type")).text().trim();
-        const donor = $($tr.find(".person"))
-          .contents()
-          .filter((idx) => idx === 0)
-          .text()
-          .trim();
-        const date = $($tr.find(".date")).text().trim();
-
-        assert(id, "Donation id not found");
+        assert(id, "Donation public_id not found");
         assert(
-          knabTypeMapping[type],
-          `Donation type can be mapped from KNAB type: ${type}`,
+          knabTypeMapping[payment.type] || knabTypeMapping[typeName],
+          `Donation type can be mapped from KNAB type: ${payment.type}`,
         );
 
         const donation: ExtractedYearData = {
@@ -497,7 +518,7 @@ export class LvLoader extends DataLoader {
           [DonationField.DonorName]: donor,
           [DonationField.Amount]: this.parseAmount(amount),
           [DonationField.Receiver]: receiver as ReceiverId,
-          [DonationField.DonationType]: knabTypeMapping[type].donationType,
+          [DonationField.DonationType]: mapping.donationType,
           [DonationField.Address]: {
             [AddressField.Country]: "LV",
           } as ExtractedDonationAddress,
@@ -516,14 +537,14 @@ export class LvLoader extends DataLoader {
   }
 
   private parseAmount(amount: string): number {
-    return parseFloat(amount.replace("EUR", ""));
+    return parseFloat(amount.replace(",", "."));
   }
 
   protected override normalizeReceiver(receiver: string): string {
     receiver = super
       .normalizeReceiver(receiver)
       // remove (likvidēta 18.01.2021)
-      .replace(/\s*\(likvidēta\s*\d{2}\.\d{2}\.\d{4}\)\s*/g, "")
+      .replace(/\s*\(likvidēta\s*\d{2}\.\d{2}\.\d{4}\.?\)\s*/g, "")
       // remove Politiskā partija prefix
       .replace(/^Politiskā partija\s+/, "")
       // remove leading and trailing " if exists

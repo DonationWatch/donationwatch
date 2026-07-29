@@ -8,7 +8,7 @@ const externalUrls: Partial<Record<Country, (id: string) => string>> = {
   [Country.unitedkingdom]: (id: string) =>
     `https://search.electoralcommission.org.uk/English/Donations/${id}`,
   [Country.latvia]: (id: string) =>
-    `https://info.knab.gov.lv/lv/db/ziedojumi?id=${id}`,
+    `https://info.knab.gov.lv/donations/show?public_id=${id}`,
 };
 
 export const ExternalDonationLink = ({
