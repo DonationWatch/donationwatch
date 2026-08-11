@@ -598,27 +598,25 @@ export class FrLoader extends DataLoader {
           columns: false,
         })
           .slice(dataStartOffset)
-          .map(
-            (row: string[]): ReportRow => ({
-              partyId: `${row[partyIdIdx]}`,
-              amount: `${row[amountIdx]}`,
-              currency: row[unitIdx] === euroUnit ? "EUR" : `${row[unitIdx]}`,
-              partyName: row[1],
-            }),
-          );
+          .map((row: string[]): ReportRow => ({
+            partyId: `${row[partyIdIdx]}`,
+            amount: `${row[amountIdx]}`,
+            currency: row[unitIdx] === euroUnit ? "EUR" : `${row[unitIdx]}`,
+            partyName: row[1],
+          }));
         break;
       }
       case "xlsx": {
         const [donationsSheet] = parseXlsx(this.cacheFile(year, "xlsx"), {});
 
-        rows = donationsSheet.data.slice(dataStartOffset).map(
-          (row): ReportRow => ({
+        rows = donationsSheet.data
+          .slice(dataStartOffset)
+          .map((row): ReportRow => ({
             partyId: `${row[partyIdIdx]}`,
             amount: `${row[amountIdx]}`,
             currency: row[unitIdx] === euroUnit ? "EUR" : `${row[unitIdx]}`,
             partyName: row[1],
-          }),
-        );
+          }));
         break;
       }
     }

@@ -405,9 +405,10 @@ const prebuildDonorMeta = async (
       processedMeta[donor].relations.push(
         ...entries
           .filter((entry) => entry[0] !== donor)
-          .map(
-            (entry): DonorMetaRelation => [...entry, donorPartySums[entry[0]]],
-          )
+          .map((entry): DonorMetaRelation => [
+            ...entry,
+            donorPartySums[entry[0]],
+          ])
           .toSorted(
             ([, , sumsA], [, , sumsB]) =>
               sumPartySums(sumsB) - sumPartySums(sumsA),
