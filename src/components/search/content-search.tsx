@@ -189,14 +189,12 @@ const GlobalSearch = ({ onClose }: { onClose: () => void }) => {
     groups.push({
       id: "donors",
       title: tSearch("donors"),
-      items: visibleDonors.map(
-        ([name, search]): DonorItem => ({
-          type: "donor",
-          id: name,
-          name,
-          search,
-        }),
-      ),
+      items: visibleDonors.map(([name, search]): DonorItem => ({
+        type: "donor",
+        id: name,
+        name,
+        search,
+      })),
     });
   }
 

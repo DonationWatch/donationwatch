@@ -1,18 +1,5 @@
 "use client";
-import {
-  CalendarDays,
-  ChartBarStacked,
-  ChevronRight,
-  FileSpreadsheet,
-  Globe,
-  Info,
-  Scale,
-  Server,
-  Sparkles,
-  Vote,
-} from "lucide-react";
 import { useLocale } from "next-intl";
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -20,6 +7,7 @@ import type { CountryConfig } from "@/types/country-config";
 import type { Country } from "@/utils/countries";
 
 import { Github } from "@/components/icons/Github";
+import { createLucideSpriteIcon } from "@/components/icons/lucide-sprite-icon";
 import { PartyDot } from "@/components/parties/party-dot";
 import {
   useOptionalCountryConfig,
@@ -58,6 +46,17 @@ import { countryFlags } from "@/utils/country-flags";
 import { Features, hasFeature } from "@/utils/features";
 
 import { CountrySwitch } from "./country-switch";
+
+const CalendarDays = createLucideSpriteIcon("calendar-days");
+const ChartBarStacked = createLucideSpriteIcon("chart-bar-stacked");
+const ChevronRight = createLucideSpriteIcon("chevron-right");
+const FileSpreadsheet = createLucideSpriteIcon("file-spreadsheet");
+const Globe = createLucideSpriteIcon("globe");
+const Info = createLucideSpriteIcon("info");
+const Scale = createLucideSpriteIcon("scale");
+const Server = createLucideSpriteIcon("server");
+const Sparkles = createLucideSpriteIcon("sparkles");
+const Vote = createLucideSpriteIcon("vote");
 
 function CountryConfigSidebarContent({
   countryConfig,
@@ -270,9 +269,9 @@ export function AppSidebar() {
                         <Link prefetch={false} href={`/${locale}/${countryId}`}>
                           <div className="grow truncate">{name}</div>
                           <div className="flex w-8 shrink-0 justify-center">
-                            <Image
-                              height={16}
-                              className="max-w-full rounded-xs"
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              className="h-4 max-w-full rounded-xs"
                               src={countryFlags[countryId]}
                               alt=""
                             />

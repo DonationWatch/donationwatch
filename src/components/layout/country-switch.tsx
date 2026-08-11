@@ -1,14 +1,13 @@
 "use client";
 import type { PropsWithChildren } from "react";
 
-import { ChevronDown, Globe } from "lucide-react";
 import { useLocale } from "next-intl";
-import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
 import type { Country } from "@/utils/countries";
 
+import { createLucideSpriteIcon } from "@/components/icons/lucide-sprite-icon";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -28,6 +27,9 @@ import { COUNTRIES, COUNTRY_CONFIG, getCountryName } from "@/utils/countries";
 import { countryFlags } from "@/utils/country-flags";
 
 import { PageLogo } from "./page-logo";
+
+const ChevronDown = createLucideSpriteIcon("chevron-down");
+const Globe = createLucideSpriteIcon("globe");
 
 export const RootLink = ({
   className,
@@ -149,9 +151,9 @@ export const CountrySwitch = () => {
                         className="flex basis-1/4 justify-center"
                         aria-hidden={true}
                       >
-                        <Image
-                          height={16}
-                          className="rounded-xs"
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          className="h-4 rounded-xs"
                           src={countryFlags[country]}
                           alt=""
                         />
