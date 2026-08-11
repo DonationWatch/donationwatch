@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 
 import { Server } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -211,10 +210,10 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
                       className="group flex gap-2 rounded border border-gray-200 px-2 py-1 transition-colors hover:border-gray-300 hover:bg-gray-50 xl:p-2 dark:border-gray-700 dark:hover:border-gray-600 dark:hover:bg-gray-800/50"
                     >
                       <div className="flex w-8 shrink-0 items-center justify-center 2xl:w-16">
-                        <Image
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
                           aria-hidden="true"
-                          height={18}
-                          className="max-h-full rounded-xs"
+                          className="h-4.5 max-h-full rounded-xs"
                           src={countryFlags[countryId]}
                           alt=""
                         />

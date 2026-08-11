@@ -1,10 +1,13 @@
+import type { SVGProps } from "react";
+
 export const PageLogo = ({
   className,
   size = 20,
+  ...props
 }: {
   size?: number;
   className?: string;
-}) => {
+} & SVGProps<SVGSVGElement>) => {
   return (
     <svg
       className={className}
@@ -18,9 +21,10 @@ export const PageLogo = ({
       strokeLinejoin="round"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 42 42"
+      {...props}
     >
       <defs>
-        <clipPath clipPathUnits="userSpaceOnUse" id="a">
+        <clipPath clipPathUnits="userSpaceOnUse" id="logo-clip-a">
           <path
             className="powerclip"
             d="M1 16.5h31.4V33H.9Zm9.5-5v13.4h12.3V11.4c0-1-.8-1.7-1.7-1.7h-8.9c-1 0-1.7.7-1.7 1.7z"
@@ -38,7 +42,7 @@ export const PageLogo = ({
       <path
         transform="matrix(1.82 0 0 1.82 -9.3 -10.6)"
         d="M6.8 27.2V25c0-1.6 1.1-2.7 2.7-2.7h14.3c1.6 0 2.7 1.1 2.7 2.7v2.2"
-        clipPath="url(#a)"
+        clipPath="url(#logo-clip-a)"
         strokeWidth="1.6"
       />
     </svg>
