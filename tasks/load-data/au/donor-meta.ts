@@ -200,6 +200,12 @@ export const donorMeta: DonorMetaDefinition = {
     "Cannon-Brookes, Michael": {
       wiki: 34523717,
     },
+    "Linfox Australia Pty Ltd": {
+      wiki: 4007428,
+    },
+    "Holmes a Court, Simon": {
+      wiki: 70066069,
+    },
   },
   relations: [
     [
@@ -304,6 +310,12 @@ export const donorMeta: DonorMetaDefinition = {
     [
       ["Wall AM, Ian", RelationKind.family],
       ["Wall OAM, Pamela", RelationKind.family],
+    ],
+
+    // Lindsay Fox family enterprise
+    [
+      ["Fox Group Holdings Pty Ltd", RelationKind.company],
+      ["Linfox Australia Pty Ltd", RelationKind.company],
     ],
   ],
 };
