@@ -244,6 +244,9 @@ export const donorMeta: DonorMetaDefinition = {
     "Ben Peter Delo": {
       wiki: 58740076,
     },
+    "Andreas Utermann": {
+      wiki: 58374112,
+    },
   },
   relations: [
     // Flamingo Land

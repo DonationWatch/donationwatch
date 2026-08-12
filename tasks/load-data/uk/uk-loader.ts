@@ -746,6 +746,12 @@ export class UkLoader extends DataLoader {
       return "Lord John Sainsbury";
     }
 
+    if (lower === "andreas uttermann") {
+      // There's a donation in 2010 from "Andreas Uttermann" which is actually from "Andreas Utermann".
+      // This is a typo currently in the upstream data (https://search.electoralcommission.org.uk/English/Donations/C0024817)
+      return "Andreas Utermann";
+    }
+
     if (
       lower.includes("david sainsbury") ||
       lower.includes("david j sainsbury")
