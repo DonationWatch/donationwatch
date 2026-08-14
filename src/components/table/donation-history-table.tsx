@@ -1,14 +1,20 @@
 "use client";
 import {
+  type ColumnDef,
+  columnFilteringFeature,
+  columnSizingFeature,
+  columnVisibilityFeature,
   createColumnHelper,
+  createFilteredRowModel,
+  createSortedRowModel,
   type FilterFn,
   flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getSortedRowModel,
-  type Row,
+  globalFilteringFeature,
+  metaHelper,
+  rowSortingFeature,
   type SortingState,
-  useReactTable,
+  tableFeatures,
+  useTable,
 } from "@tanstack/react-table";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import {
@@ -47,7 +53,26 @@ import { formatCountryCurrency, formatTwoDigitDate } from "@/utils/formatter";
 import { getLongName } from "@/utils/party";
 import { DonationField, DonationType } from "@/utils/types";
 
-const columnHelper = createColumnHelper<HistoryEntry>();
+interface CustomColumnMeta {
+  className?: string;
+  fill?: boolean;
+}
+
+const tableFeaturesConfig = tableFeatures({
+  rowSortingFeature,
+  columnFilteringFeature,
+  globalFilteringFeature,
+  columnSizingFeature,
+  columnVisibilityFeature,
+  sortedRowModel: createSortedRowModel(),
+  filteredRowModel: createFilteredRowModel(),
+  columnMeta: metaHelper<CustomColumnMeta>(),
+});
+
+const columnHelper = createColumnHelper<
+  typeof tableFeaturesConfig,
+  HistoryEntry
+>();
 
 export const DonationHistoryTable = ({
   years,
@@ -85,7 +110,9 @@ export const DonationHistoryTable = ({
     return map;
   }, [country.id]);
 
-  const globalFilterFn = useCallback<FilterFn<HistoryEntry>>(
+  const globalFilterFn = useCallback<
+    FilterFn<typeof tableFeaturesConfig, HistoryEntry>
+  >(
     (row, _columnId, filterValue: string) => {
       const q = filterValue.trim().toLowerCase();
       if (!q) return true;
@@ -109,9 +136,11 @@ export const DonationHistoryTable = ({
   );
   const isMobile = useMobile();
 
-  const columns = useMemo(() => {
+  const columns = useMemo<
+    ColumnDef<typeof tableFeaturesConfig, HistoryEntry, unknown>[]
+  >(() => {
     if (isMobile)
-      return [
+      return columnHelper.columns([
         columnHelper.display({
           id: "content",
           meta: {
@@ -183,94 +212,96 @@ export const DonationHistoryTable = ({
             );
           },
         }),
-      ];
+      ]);
 
-    return [
-      columnHelper.accessor("date", {
-        header: t("common.date"),
-        size: 150,
-        meta: {
-          className: "font-mono",
-        },
-        cell: (cell) => {
-          const date = cell.getValue();
+    return columnHelper.columns(
+      [
+        columnHelper.accessor("date", {
+          header: t("common.date"),
+          size: 150,
+          meta: {
+            className: "font-mono",
+          },
+          cell: (cell) => {
+            const date = cell.getValue();
 
-          if (date === donationYear({ [DonationField.Date]: date }))
-            return date;
+            if (date === donationYear({ [DonationField.Date]: date }))
+              return date;
 
-          return formatTwoDigitDate(browserBasedLocale, new Date(date));
-        },
-      }),
-      columnHelper.accessor("party", {
-        header: t("common.party"),
-        size: 150,
-        cell: (cell) => (
-          <PartyLink
-            className="overflow-x-hidden"
-            party={cell.getValue()}
-            locale={locale}
-          >
-            <PartyDot
+            return formatTwoDigitDate(browserBasedLocale, new Date(date));
+          },
+        }),
+        columnHelper.accessor("party", {
+          header: t("common.party"),
+          size: 150,
+          cell: (cell) => (
+            <PartyLink
               className="overflow-x-hidden"
-              nameClassName="truncate"
               party={cell.getValue()}
-            />
-          </PartyLink>
-        ),
-      }),
-      hasFeature(country, Features.DonationType)
-        ? columnHelper.accessor("donationType", {
-            header: t("common.donation_type"),
-            size: 150,
-            cell: (cell) => {
-              const donationType = cell.getValue() ?? DonationType.Money;
-
-              return (
-                <DonationTypeLabel
-                  donationType={donationType}
-                  label={t(`donation_type.${donationType}`)}
-                />
-              );
-            },
-          })
-        : undefined,
-      columnHelper.accessor("donor", {
-        header: t("common.donor"),
-        meta: {
-          fill: true,
-        },
-        cell: (cell) =>
-          readonlyDonor ? (
-            <DonorName donor={cell.row.original.donor} />
-          ) : (
-            <DonorLink donor={cell.row.original.donor} />
+              locale={locale}
+            >
+              <PartyDot
+                className="overflow-x-hidden"
+                nameClassName="truncate"
+                party={cell.getValue()}
+              />
+            </PartyLink>
           ),
-      }),
-      columnHelper.accessor("amount", {
-        header: t("common.amount"),
-        size: 150,
-        meta: {
-          className: "justify-end tabular-nums",
-        },
-        cell: (cell) =>
-          formatCountryCurrency(browserBasedLocale, cell.getValue(), country),
-      }),
-      hasFeature(country, Features.ExternalDonationIds)
-        ? columnHelper.accessor("id", {
-            header: "",
-            size: 50,
-            cell: (cell) => (
-              <ExternalDonationLink
-                countryConfig={country}
-                id={cell.row.original.id}
-                title={tCommon("view_source")}
-              >
-                <ExternalLink className={"m-1"} size={16} />
-              </ExternalDonationLink>
+        }),
+        hasFeature(country, Features.DonationType)
+          ? columnHelper.accessor("donationType", {
+              header: t("common.donation_type"),
+              size: 150,
+              cell: (cell) => {
+                const donationType = cell.getValue() ?? DonationType.Money;
+
+                return (
+                  <DonationTypeLabel
+                    donationType={donationType}
+                    label={t(`donation_type.${donationType}`)}
+                  />
+                );
+              },
+            })
+          : undefined,
+        columnHelper.accessor("donor", {
+          header: t("common.donor"),
+          meta: {
+            fill: true,
+          },
+          cell: (cell) =>
+            readonlyDonor ? (
+              <DonorName donor={cell.row.original.donor} />
+            ) : (
+              <DonorLink donor={cell.row.original.donor} />
             ),
-          })
-        : null,
-    ].filter(isNotNullandNotUndefined);
+        }),
+        columnHelper.accessor("amount", {
+          header: t("common.amount"),
+          size: 150,
+          meta: {
+            className: "justify-end tabular-nums",
+          },
+          cell: (cell) =>
+            formatCountryCurrency(browserBasedLocale, cell.getValue(), country),
+        }),
+        hasFeature(country, Features.ExternalDonationIds)
+          ? columnHelper.accessor("id", {
+              header: "",
+              size: 50,
+              cell: (cell) => (
+                <ExternalDonationLink
+                  countryConfig={country}
+                  id={cell.row.original.id}
+                  title={tCommon("view_source")}
+                >
+                  <ExternalLink className={"m-1"} size={16} />
+                </ExternalDonationLink>
+              ),
+            })
+          : null,
+      ].filter(isNotNullandNotUndefined),
+    );
   }, [locale, isMobile, country, readonlyDonor, t, tCommon]);
 
   const history = useMemo(
@@ -280,12 +311,10 @@ export const DonationHistoryTable = ({
       ),
     [donations, country, years, partiesIdSet, partiesIds.length],
   );
-  const table = useReactTable<HistoryEntry>({
+  const table = useTable({
+    features: tableFeaturesConfig,
     columns,
     data: history,
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
     globalFilterFn,
     state: {
       sorting,
@@ -400,7 +429,8 @@ export const DonationHistoryTable = ({
           )}
           <tbody className="relative grid" ref={rowVirtualizer.containerRef}>
             {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-              const row = rows[virtualRow.index] as Row<HistoryEntry>;
+              const row = rows[virtualRow.index];
+              if (!row) return null;
               return (
                 <tr
                   data-index={virtualRow.index} //needed for dynamic row height measurement
