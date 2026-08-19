@@ -318,7 +318,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
     currency: "EUR",
     source: {
       name: "APPF",
-      url: "https://www.appf.europa.eu/appf/en/donations-and-contributions#website-body",
+      url: "https://www.appf.europa.eu/en/donations-and-contributions",
     },
     code: "EU",
     wikiCountry: "en",
