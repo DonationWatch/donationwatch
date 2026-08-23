@@ -117,7 +117,7 @@ export const ImagePartyHeader = ({
             {party[PartyField.Short]}
           </div>
           {getLongName(party) !== party[PartyField.Short] ? (
-            <div tw="text-base text-slate-600 text-lg font-semibold leading-none">
+            <div tw="text-base text-zinc-600 text-lg font-semibold leading-none">
               {getLongName(party)}
             </div>
           ) : null}

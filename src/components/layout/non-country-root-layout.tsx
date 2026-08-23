@@ -19,9 +19,9 @@ export const NonCountryRootLayout = ({
       <SidebarInset className="min-w-0 flex-1">
         <div className="flex min-h-screen flex-col lg:px-16">
           <StickyHeader />
-          <main className="relative flex grow flex-col dark:text-white">
+          <div className="relative flex grow flex-col dark:text-white">
             <div className="flex grow flex-col">{children}</div>
-          </main>
+          </div>
           <PageFooter locale={locale} />
         </div>
       </SidebarInset>

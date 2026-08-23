@@ -14,7 +14,7 @@ export const TabList = ({ children }: PropsWithChildren) => {
   return (
     <div
       role="tablist"
-      className="items-center sm:flex sm:space-x-1 lg:space-x-4"
+      className="items-center font-semibold sm:flex sm:space-x-1 lg:space-x-4"
     >
       {children}
     </div>

@@ -222,7 +222,7 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
                         <div className="group-hover:text-primary-600 dark:group-hover:text-primary-400 truncate text-sm font-medium xl:text-base">
                           {countryName}
                         </div>
-                        <div className="text-xs text-slate-500 xl:text-sm dark:text-slate-300">
+                        <div className="text-xs text-zinc-500 xl:text-sm dark:text-zinc-300">
                           <FormattedCompactCurrency
                             value={sumPerCountry[countryId] ?? 0}
                             currency={config.currency}

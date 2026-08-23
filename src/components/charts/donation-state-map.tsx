@@ -170,7 +170,7 @@ export const DonationStateMap = ({
               .map(([party, sum]) => {
                 return `<div>
                   <div class="flex items-center font-semibold">
-                    <div class="mr-2 inline-block h-2 w-2 shrink-0 rounded-full border border-solid border-transparent dark:border-slate-600" style="background-color: ${partiesMap[party][PartyField.Color]}"></div>
+                    <div class="mr-2 inline-block h-2 w-2 shrink-0 rounded-full border border-solid border-transparent dark:border-zinc-600" style="background-color: ${partiesMap[party][PartyField.Color]}"></div>
                     <div>${partiesMap[party][PartyField.Short]}</div>
                   </div> 
                   ${formatCountryCurrency(browserBasedLocale, sum, country)}
@@ -178,7 +178,7 @@ export const DonationStateMap = ({
               });
 
             if (donations.length) {
-              tooltipContent += `<div class="border-t my-2 border-slate-400"></div><div class="flex flex-col space-y-2">${donations.join(
+              tooltipContent += `<div class="border-t my-2 border-zinc-400"></div><div class="flex flex-col space-y-2">${donations.join(
                 "",
               )}</div>`;
             }

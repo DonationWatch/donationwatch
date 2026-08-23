@@ -96,7 +96,7 @@ export const StickyFooter = () => {
           <div className="flex items-end">{/* left side */}</div>
           <div>
             {isFilterVisible && (
-              <div className="pointer-events-auto flex items-center gap-1 rounded-full border border-slate-200 bg-white/60 p-1 shadow backdrop-blur-sm transition-all lg:flex-col dark:border-slate-50/6 dark:bg-slate-900/60">
+              <div className="pointer-events-auto flex items-center gap-1 rounded-full border border-zinc-200 bg-white/60 p-1 shadow backdrop-blur-sm transition-all lg:flex-col dark:border-zinc-50/6 dark:bg-zinc-900/60">
                 <div className="flex items-center">
                   <FilterTriggerButton
                     activeFilterCount={activeFilterCount}

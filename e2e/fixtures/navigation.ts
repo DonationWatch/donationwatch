@@ -14,7 +14,11 @@ class Sidebar extends LocatorObject {
   );
 
   public async expectOpen(open = true) {
-    await expect(this.locator).toBeVisible({ visible: open });
+    if (open) {
+      await expect(this.locator).toBeInViewport();
+    } else {
+      await expect(this.locator).not.toBeInViewport();
+    }
   }
 }
 
@@ -23,7 +27,7 @@ export class Navigation extends PageObject {
     this.translations("sidebar.toggle"),
   );
   public readonly sidebar = new Sidebar(
-    this.page.locator('[data-slot="sidebar"]'),
+    this.page.locator('[data-sidebar="sidebar"]'),
     this.props,
   );
 }

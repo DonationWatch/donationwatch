@@ -64,7 +64,7 @@ const FunFact = ({
         <h3 className="text-sm">{formatMediumDate(locale, new Date(date))}</h3>
         <p className="whitespace-pre-wrap">{text[locale]}</p>
         {children ? (
-          <pre className="rounded-sm border border-slate-300 p-4 font-mono text-sm whitespace-pre-wrap lg:p-6 dark:border-slate-700">
+          <pre className="rounded-sm border border-zinc-300 p-4 font-mono text-sm whitespace-pre-wrap lg:p-6 dark:border-zinc-700">
             {children}
           </pre>
         ) : null}

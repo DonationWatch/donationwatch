@@ -37,7 +37,7 @@ export const BigDonorPill = ({
   return (
     <li className="basis-full overflow-hidden p-1 sm:basis-1/2 lg:basis-1/4">
       <Link
-        className="flex rounded-md bg-white p-2 shadow-sm transition-all hover:bg-gray-50 hover:shadow-md hover:saturate-100 dark:bg-gray-900 dark:hover:bg-gray-950"
+        className="flex rounded-md bg-white p-2 shadow-sm transition-all hover:bg-zinc-50 hover:shadow-md hover:saturate-100 dark:bg-zinc-900 dark:hover:bg-zinc-950"
         prefetch={false}
         href={`/${locale}/${country.id}/donor/${donor.id}`}
       >

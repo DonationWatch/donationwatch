@@ -2,6 +2,8 @@
 
 import type { JSX } from "react";
 
+import { cn } from "@/lib/utils";
+
 export const NavigationTab = ({
   label,
   isActive,
@@ -13,15 +15,15 @@ export const NavigationTab = ({
   isActive: boolean;
   onClick?: () => void;
 }) => {
-  const activeClass =
-    "text-primary-700 shadow-md bg-white dark:bg-primary-900 dark:text-primary-200";
+  const activeClass = "text-zinc-900 dark:text-white";
+
   return (
     <button
       role="tab"
-      className={
-        "hover:text-primary-700 dark:hover:bg-primary-800 flex w-full cursor-pointer items-center space-x-2 rounded-lg px-4 py-2 transition-all hover:bg-white hover:shadow-md sm:w-auto dark:hover:text-white " +
-        (isActive ? activeClass : "")
-      }
+      className={cn(
+        "hover:text-primary-700 flex w-full cursor-pointer items-center gap-2 p-2 text-zinc-500 transition-all hover:text-zinc-900 sm:w-auto dark:text-zinc-400 dark:hover:text-white",
+        isActive ? activeClass : undefined,
+      )}
       onClick={onClick}
     >
       {icon}

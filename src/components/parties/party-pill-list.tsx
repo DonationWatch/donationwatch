@@ -28,7 +28,7 @@ const PartyLinkPill = ({
     <li className="basis-full overflow-hidden p-1 sm:basis-1/2 lg:basis-1/4">
       <Link
         href={`/${locale}/${country.id}/party/${party[PartyField.Id]}/donors`}
-        className="flex rounded-md bg-white p-2 shadow-sm transition-all hover:bg-gray-50 hover:shadow-md hover:saturate-100 dark:bg-gray-900 dark:hover:bg-gray-950"
+        className="flex rounded-md bg-white p-2 shadow-sm transition-all hover:bg-zinc-50 hover:shadow-md hover:saturate-100 dark:bg-zinc-900 dark:hover:bg-zinc-950"
       >
         <div
           className="w-2 rounded-full border saturate-80"

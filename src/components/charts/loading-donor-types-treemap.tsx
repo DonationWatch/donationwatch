@@ -172,7 +172,7 @@ export const LoadedDonorTypeTreemap = ({
           formatter: (params) => {
             if (params.treeAncestors.length !== 3) return "";
 
-            const partyPart = `<div class="flex items-center font-semibold"><div class="mr-2 inline-block h-2 w-2 shrink-0 rounded-full border border-solid border-transparent dark:border-slate-600" style="background-color: ${party[PartyField.Color]}"></div>
+            const partyPart = `<div class="flex items-center font-semibold"><div class="mr-2 inline-block h-2 w-2 shrink-0 rounded-full border border-solid border-transparent dark:border-zinc-600" style="background-color: ${party[PartyField.Color]}"></div>
         <div>${party[PartyField.Short]}</div>
       </div></div>`;
 

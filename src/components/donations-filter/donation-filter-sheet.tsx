@@ -34,7 +34,6 @@ import { Button } from "../ui/button";
 
 const DonationFilterSheetBase = () => {
   const countryConfig = useOptionalCountryConfig();
-  const tActions = useClientTranslations("actions");
   const tFilter = useClientTranslations("filter");
   const tDonationType = useClientTranslations("donation_type");
   const tDonorType = useClientTranslations("donor_type");
@@ -90,13 +89,10 @@ const DonationFilterSheetBase = () => {
     <Sheet modal={"trap-focus"} open={isOpen} onOpenChange={setIsOpen}>
       <SheetContent
         className={
-          "top-4 right-4 bottom-4 left-4 h-auto w-auto max-w-full rounded-2xl border-0 border-slate-200 bg-white/80 shadow backdrop-blur-sm sm:left-auto sm:w-3/4 dark:border-slate-50/6 dark:bg-slate-900/80"
+          "top-4 right-4 bottom-4 left-4 h-auto w-auto max-w-full rounded-2xl border-0 border-zinc-200 bg-white/80 shadow backdrop-blur-sm sm:left-auto sm:w-3/4 dark:border-zinc-50/6 dark:bg-zinc-900/80"
         }
         hideOverlay={true}
         side="right"
-        translations={{
-          close: tActions("close"),
-        }}
       >
         <SheetHeader>
           <SheetTitle>{tFilter("title")}</SheetTitle>
@@ -202,7 +198,7 @@ const DonationFilterSheetBase = () => {
               label: (
                 <div className="flex grow items-center gap-2.5">
                   <span
-                    className="size-3.5 shrink-0 rounded-full border border-slate-950/20"
+                    className="size-3.5 shrink-0 rounded-full border border-zinc-950/20"
                     style={{ backgroundColor: party[PartyField.Color] }}
                   />
                   <span className="text-sm">{party[PartyField.Short]}</span>

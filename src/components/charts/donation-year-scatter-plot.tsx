@@ -179,7 +179,7 @@ export const DonationYearScatterPlot = ({
           number,
           ReceiverId,
         ];
-        const partyPart = `<div class="flex items-center font-semibold"><div class="mr-2 inline-block h-2 w-2 shrink-0 rounded-full border border-solid border-transparent dark:border-slate-600" style="background-color: ${partiesMap[partyId][PartyField.Color]}"></div>
+        const partyPart = `<div class="flex items-center font-semibold"><div class="mr-2 inline-block h-2 w-2 shrink-0 rounded-full border border-solid border-transparent dark:border-zinc-600" style="background-color: ${partiesMap[partyId][PartyField.Color]}"></div>
         <div>${partiesMap[partyId][PartyField.Short]}</div>
       </div></div>`;
 

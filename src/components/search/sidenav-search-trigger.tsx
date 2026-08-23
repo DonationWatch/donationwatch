@@ -13,7 +13,7 @@ export const SidenavSearchTrigger = () => {
       <button
         title={t("filter_description")}
         onClick={() => open()}
-        className="flex w-full cursor-pointer items-center gap-2 rounded-full border border-neutral-200 p-2 text-sm leading-none hover:bg-white dark:border-slate-800 dark:hover:bg-slate-800"
+        className="flex w-full cursor-pointer items-center gap-2 rounded-full border border-neutral-200 p-2 text-sm leading-none hover:bg-white dark:border-zinc-800 dark:hover:bg-zinc-800"
       >
         <Search size={16} />
         <span>{t("filter")}</span>

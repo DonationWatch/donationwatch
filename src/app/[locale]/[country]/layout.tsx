@@ -89,14 +89,14 @@ export default async function CountryRootLayout(
       <SidebarInset className="min-w-0 flex-1">
         <div className="flex min-h-screen flex-col lg:px-16">
           <StickyHeader />
-          <main className="relative flex grow flex-col dark:text-white">
+          <div className="relative flex grow flex-col dark:text-white">
             <div className="flex grow flex-col">{children}</div>
             <CountryFooter
               country={country}
               locale={locale}
               source={countryConfig.source}
             />
-          </main>
+          </div>
           <DonationFilterSheet />
           <PageFooter locale={locale} />
           <StickyFooter />

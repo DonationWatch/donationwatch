@@ -26,7 +26,7 @@ export const ImageMetaCard = ({
         {value}
       </div>
       <div
-        tw={`flex text-base ${variants[variant].title} font-semibold text-slate-600`}
+        tw={`flex text-base ${variants[variant].title} font-semibold text-zinc-600`}
       >
         {title}
       </div>

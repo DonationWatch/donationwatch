@@ -98,7 +98,7 @@ const DonorYearOverviewContent = ({
       <div className="relative w-full md:max-w-sm">
         <Search
           size={16}
-          className="pointer-events-none absolute top-1/2 left-2.5 -translate-y-1/2 text-slate-400"
+          className="pointer-events-none absolute top-1/2 left-2.5 -translate-y-1/2 text-zinc-400"
         />
         <input
           type="search"
@@ -107,12 +107,12 @@ const DonorYearOverviewContent = ({
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder={tSearch("filter")}
           aria-label={tSearch("filter")}
-          className="w-full rounded-md border border-slate-200 bg-white py-1.5 pr-3 pl-8 text-sm outline-none placeholder:text-slate-500 focus:border-slate-400 dark:border-slate-700 dark:bg-slate-900 dark:placeholder:text-slate-400 dark:focus:border-slate-500"
+          className="w-full rounded-md border border-zinc-200 bg-white py-1.5 pr-3 pl-8 text-sm outline-none placeholder:text-zinc-500 focus:border-zinc-400 dark:border-zinc-700 dark:bg-zinc-900 dark:placeholder:text-zinc-400 dark:focus:border-zinc-500"
         />
       </div>
 
       {filteredDonors.length === 0 ? (
-        <div className="py-8 text-center text-sm text-slate-500 dark:text-slate-400">
+        <div className="py-8 text-center text-sm text-zinc-500 dark:text-zinc-400">
           {tSearch("empty")}
         </div>
       ) : (

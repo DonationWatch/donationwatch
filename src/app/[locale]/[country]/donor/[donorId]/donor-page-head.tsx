@@ -225,7 +225,7 @@ const DonorPageHeadContent = ({
       <PageHeader>
         <section aria-labelledby="hero-label">
           <h1 className="mb-4">
-            <div className="mb-2 leading-none text-slate-500 dark:text-slate-300">
+            <div className="mb-2 leading-none text-zinc-500 dark:text-zinc-300">
               {t("donor.title")}
             </div>
             <div

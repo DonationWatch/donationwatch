@@ -394,10 +394,10 @@ const SelectableList = ({
                 aria-selected={isSelected}
                 type="button"
                 className={cn(
-                  "inline-block max-w-64 truncate rounded-full px-4 py-2 align-middle hover:bg-gray-200 dark:hover:bg-gray-800",
+                  "inline-block max-w-64 truncate rounded-full px-4 py-2 align-middle hover:bg-gray-200 dark:hover:bg-zinc-800",
                   isSelected
-                    ? "bg-gray-200 dark:bg-gray-800"
-                    : "bg-gray-50 dark:bg-gray-900",
+                    ? "bg-gray-200 dark:bg-zinc-800"
+                    : "bg-gray-50 dark:bg-zinc-900",
                 )}
                 key={`${item.type}-${item.id}`}
                 onClick={() => onSelect(item)}
@@ -420,7 +420,7 @@ const SelectableList = ({
   return (
     <>
       <div className="p-4">
-        <div className="flex items-center rounded-sm border px-3 text-neutral-800 dark:border-slate-800 dark:text-white">
+        <div className="flex items-center rounded-sm border px-3 text-neutral-800 dark:border-zinc-800 dark:text-white">
           <Search className="mr-2 h-4 w-4 shrink-0" />
           <input
             role={"searchbox"}

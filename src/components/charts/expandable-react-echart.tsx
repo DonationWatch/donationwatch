@@ -220,7 +220,7 @@ export const ExpandableReactEchart = ({
     );
   } else {
     return (
-      <section className="flex h-full w-full flex-col items-start justify-center rounded bg-white dark:bg-gray-900">
+      <section className="flex h-full w-full flex-col items-start justify-center rounded bg-white dark:bg-zinc-900">
         {Chart}
       </section>
     );

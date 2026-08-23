@@ -32,7 +32,7 @@ export const DonationHistoryItem = ({
   return (
     <li
       aria-label={`${party}: ${fmtAmount} ${donor}`}
-      className="flex justify-between space-x-2 rounded-sm p-2 odd:bg-white dark:odd:bg-slate-900"
+      className="flex justify-between space-x-2 rounded-sm p-2 odd:bg-white dark:odd:bg-zinc-900"
     >
       <div className="grow space-y-1 overflow-hidden">
         <div className="flex justify-between overflow-hidden text-gray-700 dark:text-gray-400">

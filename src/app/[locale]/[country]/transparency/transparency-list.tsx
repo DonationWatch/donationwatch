@@ -179,7 +179,7 @@ const NormalizedReceiversList = ({
           return (
             <li
               key={name}
-              className="border-b border-slate-200 py-2 last:border-b-0 dark:border-slate-950"
+              className="border-b border-zinc-200 py-2 last:border-b-0 dark:border-zinc-950"
             >
               <div className="font-semibold">{name}</div>
               <p className="text-sm">
@@ -207,7 +207,7 @@ const AggregatedDonorsList = ({ data }: { data: UseNormalizedData }) => {
         return (
           <li
             key={name}
-            className="border-b border-slate-200 py-2 last:border-b-0 dark:border-slate-950"
+            className="border-b border-zinc-200 py-2 last:border-b-0 dark:border-zinc-950"
           >
             <div className="font-semibold">{name}</div>
             <p>

@@ -114,7 +114,7 @@ export const DonationStateSankey = ({
         if (params.dataType === "edge") {
           const from = (params.data as Edge).source.substring(1);
           const party = (params.data as Edge).target.substring(1) as ReceiverId;
-          const partyPart = `<div class="flex items-center font-semibold"><div class="mr-2 inline-block h-2 w-2 shrink-0 rounded-full border border-solid border-transparent dark:border-slate-600" style="background-color: ${partiesMap[party][PartyField.Color]}"></div>
+          const partyPart = `<div class="flex items-center font-semibold"><div class="mr-2 inline-block h-2 w-2 shrink-0 rounded-full border border-solid border-transparent dark:border-zinc-600" style="background-color: ${partiesMap[party][PartyField.Color]}"></div>
         <div>${partiesMap[party][PartyField.Short]}</div>
       </div></div>`;
 

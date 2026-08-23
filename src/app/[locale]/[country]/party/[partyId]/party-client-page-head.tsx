@@ -92,7 +92,7 @@ export const PartyClientPageHead = ({
   return (
     <>
       <div className="mb-4">
-        <h2 className="mb-2 text-slate-500 dark:text-slate-300">
+        <h2 className="mb-2 text-zinc-500 dark:text-zinc-300">
           {t("years.title")}
         </h2>
         <h3 className="text-3xl font-semibold sm:text-4xl" id="hero-label">

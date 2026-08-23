@@ -23,7 +23,7 @@ export const ImageFooter = ({
   const t = getTranslations();
 
   return (
-    <div tw="shrink-0 flex flex-col text-sm text-slate-600 justify-end px-4 pb-2 font-semibold">
+    <div tw="shrink-0 flex flex-col text-sm text-zinc-600 justify-end px-4 pb-2 font-semibold">
       <div tw="flex justify-start">
         {[
           t("footer.build_since", {

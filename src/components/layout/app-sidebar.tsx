@@ -1,7 +1,8 @@
 "use client";
 import { useLocale } from "next-intl";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 import type { CountryConfig } from "@/types/country-config";
 import type { Country } from "@/utils/countries";
@@ -21,8 +22,6 @@ import {
 } from "@/components/ui/collapsible";
 import {
   Sidebar,
-  SidebarActiveMenuButton,
-  SidebarActiveMenuSubButton,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
@@ -32,6 +31,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarMenuSub,
+  SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
@@ -58,6 +58,86 @@ const Server = createLucideSpriteIcon("server");
 const Sparkles = createLucideSpriteIcon("sparkles");
 const Vote = createLucideSpriteIcon("vote");
 
+export function SidebarActiveMenuButton({
+  children,
+  activeHref,
+  activeClass,
+  href,
+  render,
+  asChild,
+  ...props
+}: {
+  href: string;
+  activeHref?: string;
+  activeClass?: string;
+  asChild?: boolean;
+} & React.ComponentProps<typeof SidebarMenuButton>) {
+  const pathname = usePathname();
+  const isActive = activeHref
+    ? pathname.startsWith(activeHref)
+    : pathname.startsWith(href);
+
+  let effectiveRender = render;
+  let effectiveChildren = children;
+
+  if (asChild && React.isValidElement(children)) {
+    effectiveRender = children;
+    effectiveChildren = (
+      children as React.ReactElement<{ children?: React.ReactNode }>
+    ).props.children;
+  } else if (!effectiveRender && href) {
+    effectiveRender = <Link prefetch={false} href={href} />;
+  }
+
+  return (
+    <SidebarMenuButton isActive={isActive} render={effectiveRender} {...props}>
+      {effectiveChildren}
+    </SidebarMenuButton>
+  );
+}
+
+export function SidebarActiveMenuSubButton({
+  children,
+  activeHref,
+  activeClass,
+  href,
+  render,
+  asChild,
+  ...props
+}: {
+  href: string;
+  activeHref?: string;
+  activeClass?: string;
+  asChild?: boolean;
+} & React.ComponentProps<typeof SidebarMenuSubButton>) {
+  const pathname = usePathname();
+  const isActive = activeHref
+    ? pathname.startsWith(activeHref)
+    : pathname.startsWith(href);
+
+  let effectiveRender = render;
+  let effectiveChildren = children;
+
+  if (asChild && React.isValidElement(children)) {
+    effectiveRender = children;
+    effectiveChildren = (
+      children as React.ReactElement<{ children?: React.ReactNode }>
+    ).props.children;
+  } else if (!effectiveRender && href) {
+    effectiveRender = <Link prefetch={false} href={href} />;
+  }
+
+  return (
+    <SidebarMenuSubButton
+      isActive={isActive}
+      render={effectiveRender}
+      {...props}
+    >
+      {effectiveChildren}
+    </SidebarMenuSubButton>
+  );
+}
+
 function CountryConfigSidebarContent({
   countryConfig,
 }: {
@@ -75,7 +155,7 @@ function CountryConfigSidebarContent({
       <SidebarGroup>
         <SidenavSearchTrigger />
         <SidebarGroupLabel>{tSidebar("donations")}</SidebarGroupLabel>
-        <SidebarGroupContent>
+        <SidebarGroupContent className="text-sm">
           <SidebarMenu>
             <Collapsible
               defaultOpen={true}
@@ -174,15 +254,9 @@ function CountryConfigSidebarContent({
             <SidebarActiveMenuButton
               activeHref={`/${locale}/${countryConfig.id}/tools/data`}
               href={`/${locale}/${countryConfig.id}/tools/data`}
-              asChild
             >
-              <Link
-                prefetch={false}
-                href={`/${locale}/${countryConfig.id}/tools/data`}
-              >
-                <FileSpreadsheet />
-                <span>{t("navigation.export")}</span>
-              </Link>
+              <FileSpreadsheet />
+              <span>{t("navigation.export")}</span>
             </SidebarActiveMenuButton>
           </SidebarMenuItem>
           {hasFeature(countryConfig, Features.Date) ? (
@@ -190,15 +264,9 @@ function CountryConfigSidebarContent({
               <SidebarActiveMenuButton
                 activeHref={`/${locale}/${countryConfig.id}/tools/bar-chart-race`}
                 href={`/${locale}/${countryConfig.id}/tools/bar-chart-race`}
-                asChild
               >
-                <Link
-                  prefetch={false}
-                  href={`/${locale}/${countryConfig.id}/tools/bar-chart-race`}
-                >
-                  <ChartBarStacked />
-                  <span>{t("navigation.bar_chart_race")}</span>
-                </Link>
+                <ChartBarStacked />
+                <span>{t("navigation.bar_chart_race")}</span>
               </SidebarActiveMenuButton>
             </SidebarMenuItem>
           ) : null}
@@ -206,15 +274,9 @@ function CountryConfigSidebarContent({
             <SidebarActiveMenuButton
               activeHref={`/${locale}/${countryConfig.id}/tools/compare`}
               href={`/${locale}/${countryConfig.id}/tools/compare`}
-              asChild
             >
-              <Link
-                prefetch={false}
-                href={`/${locale}/${countryConfig.id}/tools/compare`}
-              >
-                <Scale />
-                <span>{t("navigation.compare_parties")}</span>
-              </Link>
+              <Scale />
+              <span>{t("navigation.compare_parties")}</span>
             </SidebarActiveMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
@@ -228,7 +290,6 @@ export function AppSidebar() {
   const t = useTranslations();
   const tCountries = useTranslations("countries");
   const tSidebar = useTranslations("sidebar");
-  const tActions = useTranslations("actions");
   const locale = useLocale();
 
   useEffect(() => {
@@ -236,37 +297,32 @@ export function AppSidebar() {
   }, []);
 
   return (
-    <Sidebar
-      translations={{
-        close: tActions("close"),
-      }}
-    >
-      <SidebarHeader className="border-sidebar-border h-15 flex-row items-center border-b px-4">
-        <CountrySwitch />
-      </SidebarHeader>
-      <SidebarContent>
-        {countryConfig ? (
-          <CountryConfigSidebarContent countryConfig={countryConfig} />
-        ) : (
-          <SidebarGroup>
-            <SidebarGroupLabel>{tSidebar("all_countries")}</SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                {Object.entries(COUNTRY_CONFIG)
-                  .map(([countryId, country]) => ({
-                    countryId: countryId as Country,
-                    name: getCountryName(country, tCountries),
-                  }))
-                  .toSorted((a, b) => a.name.localeCompare(b.name, locale))
-                  .map(({ countryId, name }) => (
-                    <SidebarMenuItem key={countryId}>
-                      <SidebarActiveMenuButton
-                        asChild
-                        activeHref={`/${locale}/${countryId}`}
-                        href={`/${locale}/${countryId}`}
-                        className="flex items-center gap-2"
-                      >
-                        <Link prefetch={false} href={`/${locale}/${countryId}`}>
+    <aside>
+      <Sidebar className="border-r-sidebar-border">
+        <SidebarHeader className="border-sidebar-border h-15 flex-row items-center border-b px-4">
+          <CountrySwitch />
+        </SidebarHeader>
+        <SidebarContent>
+          {countryConfig ? (
+            <CountryConfigSidebarContent countryConfig={countryConfig} />
+          ) : (
+            <SidebarGroup>
+              <SidebarGroupLabel>{tSidebar("all_countries")}</SidebarGroupLabel>
+              <SidebarGroupContent>
+                <SidebarMenu>
+                  {Object.entries(COUNTRY_CONFIG)
+                    .map(([countryId, country]) => ({
+                      countryId: countryId as Country,
+                      name: getCountryName(country, tCountries),
+                    }))
+                    .toSorted((a, b) => a.name.localeCompare(b.name, locale))
+                    .map(({ countryId, name }) => (
+                      <SidebarMenuItem key={countryId}>
+                        <SidebarActiveMenuButton
+                          activeHref={`/${locale}/${countryId}`}
+                          href={`/${locale}/${countryId}`}
+                          className="flex items-center gap-2"
+                        >
                           <div className="grow truncate">{name}</div>
                           <div className="flex w-8 shrink-0 justify-center">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -276,59 +332,59 @@ export function AppSidebar() {
                               alt=""
                             />
                           </div>
-                        </Link>
-                      </SidebarActiveMenuButton>
-                    </SidebarMenuItem>
-                  ))}
-              </SidebarMenu>
+                        </SidebarActiveMenuButton>
+                      </SidebarMenuItem>
+                    ))}
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+          )}
+          <NavSecondary
+            label={tSidebar("more")}
+            className="mt-auto"
+            items={[
+              {
+                href: `/${locale}/other-countries`,
+                label: t("navigation.other_countries"),
+                icon: Globe,
+              },
+              {
+                href: `/${locale}/fun`,
+                label: t("navigation.fun"),
+                icon: Sparkles,
+              },
+              {
+                href: `/${locale}/about`,
+                label: t("navigation.about"),
+                icon: Info,
+              },
+              {
+                href: `/${locale}/enterprise`,
+                label: t("navigation.enterprise"),
+                icon: Server,
+              },
+              {
+                href: GITHUB_URL,
+                label: "GitHub",
+                target: "_blank",
+                icon: Github,
+              },
+            ]}
+          />
+          <SidebarGroup className="mt-2 pt-0 lg:hidden">
+            <SidebarGroupContent className="px-2">
+              <Link
+                href={`/${locale}/enterprise`}
+                prefetch={false}
+                className="block rounded-none border border-zinc-300 bg-white px-3 py-1.5 text-center font-mono text-[10px] font-bold tracking-widest text-zinc-900 uppercase transition-colors hover:bg-black hover:text-white md:text-xs dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-100 dark:hover:bg-white dark:hover:text-black"
+              >
+                Enterprise API
+              </Link>
             </SidebarGroupContent>
           </SidebarGroup>
-        )}
-        <NavSecondary
-          label={tSidebar("more")}
-          className="mt-auto"
-          items={[
-            {
-              href: `/${locale}/other-countries`,
-              label: t("navigation.other_countries"),
-              icon: Globe,
-            },
-            {
-              href: `/${locale}/fun`,
-              label: t("navigation.fun"),
-              icon: Sparkles,
-            },
-            {
-              href: `/${locale}/about`,
-              label: t("navigation.about"),
-              icon: Info,
-            },
-            {
-              href: `/${locale}/enterprise`,
-              label: t("navigation.enterprise"),
-              icon: Server,
-            },
-            {
-              href: GITHUB_URL,
-              label: "GitHub",
-              target: "_blank",
-              icon: Github,
-            },
-          ]}
-        />
-        <SidebarGroup className="mt-2 pt-0 lg:hidden">
-          <SidebarGroupContent className="px-2">
-            <Link
-              href={`/${locale}/enterprise`}
-              prefetch={false}
-              className="block rounded-none border border-zinc-300 bg-white px-3 py-1.5 text-center font-mono text-[10px] font-bold tracking-widest text-zinc-900 uppercase transition-colors hover:bg-black hover:text-white md:text-xs dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-100 dark:hover:bg-white dark:hover:text-black"
-            >
-              Enterprise API
-            </Link>
-          </SidebarGroupContent>
-        </SidebarGroup>
-      </SidebarContent>
-    </Sidebar>
+        </SidebarContent>
+      </Sidebar>
+    </aside>
   );
 }
 
@@ -351,11 +407,13 @@ export function NavSecondary({
       <SidebarMenu>
         {items.map(({ href, label, target, icon: Icon }) => (
           <SidebarMenuItem key={href}>
-            <SidebarActiveMenuButton activeHref={href} href={href} asChild>
-              <Link target={target} prefetch={false} href={href}>
-                {Icon && <Icon />}
-                <span>{label}</span>
-              </Link>
+            <SidebarActiveMenuButton
+              activeHref={href}
+              href={href}
+              render={<Link target={target} prefetch={false} href={href} />}
+            >
+              {Icon && <Icon />}
+              <span>{label}</span>
             </SidebarActiveMenuButton>
           </SidebarMenuItem>
         ))}

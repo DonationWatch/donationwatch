@@ -130,7 +130,7 @@ export const ImagePageHeader = ({
   const tCountries = getTranslations("countries");
 
   return (
-    <header tw="border-b border-slate-200 h-[64px] leading-none shrink-0">
+    <header tw="border-b border-zinc-200 h-[64px] leading-none shrink-0">
       <div tw="flex w-full justify-between items-center px-6">
         <div tw="flex items-center shrink-0">
           <div tw="flex text-indigo-700">
@@ -140,7 +140,7 @@ export const ImagePageHeader = ({
             <div tw="text-3xl font-semibold leading-none">
               {getCountryName(country, tCountries)}
             </div>
-            <div tw="text-slate-600 font-semibold">DonationWatch</div>
+            <div tw="text-zinc-600 font-semibold">DonationWatch</div>
           </div>
         </div>
         {children}

@@ -22,7 +22,7 @@ const YearsFooterLink = ({
     <Link
       prefetch={false}
       title={t("goto_year", { year })}
-      className="hover:text-primary-800 dark:hover:text-primary-400 flex items-center space-x-2 rounded-sm border border-transparent px-5 py-2 font-semibold uppercase hover:border-slate-300 dark:hover:border-slate-700"
+      className="hover:text-primary-800 dark:hover:text-primary-400 flex items-center space-x-2 rounded-sm border border-transparent px-5 py-2 font-semibold uppercase hover:border-zinc-300 dark:hover:border-zinc-700"
       href={`/${locale}/${country.id}/${year}`}
     >
       {!next && <ArrowLeft size={16} />}

@@ -345,7 +345,7 @@ export const DonationHistoryTable = ({
       <div className="relative md:max-w-sm">
         <Search
           size={16}
-          className="pointer-events-none absolute top-1/2 left-2.5 -translate-y-1/2 text-slate-400"
+          className="pointer-events-none absolute top-1/2 left-2.5 -translate-y-1/2 text-zinc-400"
         />
         <input
           type="search"
@@ -354,7 +354,7 @@ export const DonationHistoryTable = ({
           onChange={(e) => setGlobalFilter(e.target.value)}
           placeholder={tSearch("filter")}
           aria-label={tSearch("filter")}
-          className="w-full rounded-md border border-slate-200 bg-white py-1.5 pr-3 pl-8 text-sm outline-none placeholder:text-slate-500 focus:border-slate-400 dark:border-slate-700 dark:bg-slate-900 dark:placeholder:text-slate-400 dark:focus:border-slate-500"
+          className="w-full rounded-md border border-zinc-200 bg-white py-1.5 pr-3 pl-8 text-sm outline-none placeholder:text-zinc-500 focus:border-zinc-400 dark:border-zinc-700 dark:bg-zinc-900 dark:placeholder:text-zinc-400 dark:focus:border-zinc-500"
         />
       </div>
       <div
@@ -367,7 +367,7 @@ export const DonationHistoryTable = ({
       >
         <table className="grid">
           {isMobile ? null : (
-            <thead className="sticky top-0 z-1 grid border-b border-slate-200 bg-white dark:border-slate-950 dark:bg-slate-900">
+            <thead className="sticky top-0 z-1 grid border-b border-zinc-200 bg-white dark:border-zinc-950 dark:bg-zinc-900">
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id} className="flex w-full">
                   {headerGroup.headers.map((header) => (
@@ -438,7 +438,10 @@ export const DonationHistoryTable = ({
                     rowVirtualizer.measureElement(node);
                   }} //measure dynamic row height
                   key={row.id}
-                  className="absolute top-0 left-0 flex w-full border-b border-slate-200 even:bg-white dark:border-slate-950 dark:even:bg-slate-900"
+                  className={cn(
+                    "absolute top-0 left-0 flex w-full border-b border-zinc-200 dark:border-zinc-950",
+                    virtualRow.index % 2 !== 0 && "bg-white dark:bg-zinc-900",
+                  )}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <td

@@ -31,13 +31,13 @@ export const StickyHeader = () => {
       <header className="pointer-events-none absolute top-0 right-0 left-0 flex shrink-0 border-b border-transparent dark:text-white">
         <div className="flex grow justify-between px-2 pt-4 lg:px-4 lg:pt-4">
           <div>
-            <div className="pointer-events-auto flex items-center gap-1 rounded-full border-slate-200 bg-white/60 p-1 shadow backdrop-blur-sm lg:flex-col dark:border-slate-50/6 dark:bg-slate-900/60">
+            <div className="pointer-events-auto flex items-center gap-1 rounded-full border-zinc-200 bg-white/60 p-1 shadow backdrop-blur-sm lg:flex-col dark:border-zinc-50/6 dark:bg-zinc-900/60">
               <SidebarTriggerButtons />
             </div>
           </div>
 
           <div className="pointer-events-auto flex items-center gap-2">
-            <div className="flex items-center gap-1 rounded-full border-slate-200 bg-white/60 p-1 shadow backdrop-blur-sm lg:flex-col dark:border-slate-50/6 dark:bg-slate-900/60">
+            <div className="flex items-center gap-1 rounded-full border-zinc-200 bg-white/60 p-1 shadow backdrop-blur-sm lg:flex-col dark:border-zinc-50/6 dark:bg-zinc-900/60">
               <EnterpriseApiButton />
               <LangSwitch />
               <DynamicContentSearch />

@@ -14,7 +14,7 @@ export const MetaCardTitle = ({
       id={id}
       className={`${
         variant === "small" ? "text-sm" : "text-base"
-      } mb-1 leading-none text-slate-500 dark:text-slate-300`}
+      } mb-1 leading-none text-zinc-500 dark:text-zinc-300`}
     >
       {title}
     </div>

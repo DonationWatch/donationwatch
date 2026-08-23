@@ -47,9 +47,9 @@
   --color-sidebar-foreground: oklch(0.145 0 0);
   --color-sidebar-primary: oklch(0.205 0 0);
   --color-sidebar-primary-foreground: oklch(0.985 0 0);
-  --color-sidebar-accent: var(--color-neutral-100);
+  --color-sidebar-accent: var(--color-zinc-100);
   --color-sidebar-accent-foreground: oklch(0.205 0 0);
-  --color-sidebar-border: var(--color-slate-200);
+  --color-sidebar-border: oklch(0.92 0 0);
   --color-sidebar-ring: oklch(0.708 0 0);
 }
 
@@ -117,7 +117,7 @@
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.967 0.001 286.375);
   --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.92 0.004 286.32);
+  --sidebar-border: oklch(0.92 0 0);
   --sidebar-ring: oklch(0.705 0.015 286.067);
 }
 
@@ -138,7 +138,7 @@ html {
 }
 
 .card {
-  @apply block rounded-sm bg-white p-4 shadow-sm transition dark:bg-gray-900;
+  @apply block rounded-sm bg-white p-4 shadow-sm transition dark:bg-zinc-900;
 }
 
 .card--warn {
@@ -146,7 +146,7 @@ html {
 }
 
 .card--action {
-  @apply cursor-pointer hover:bg-gray-50 hover:shadow-md dark:hover:bg-gray-950;
+  @apply cursor-pointer hover:bg-gray-50 hover:shadow-md dark:hover:bg-zinc-950;
 }
 
 /* Instantly hide the expanded sidebar skeleton if document is marked as collapsed */
@@ -156,17 +156,17 @@ html.sidebar-collapsed aside[data-state="expanded"] {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #070a13;
+    --background: oklab(0.14 0 0);
     --foreground: oklch(0.985 0 0);
     --card: oklch(0.205 0 0);
     --card-foreground: oklch(0.985 0 0);
-    --popover: var(--color-slate-900);
+    --popover: var(--color-zinc-900);
     --popover-foreground: oklch(0.985 0 0);
     --primary: oklch(0.922 0 0);
     --primary-foreground: oklch(0.205 0 0);
     --secondary: oklch(0.269 0 0);
     --secondary-foreground: oklch(0.985 0 0);
-    --muted: var(--color-slate-900);
+    --muted: var(--color-zinc-900);
     --muted-foreground: oklch(0.708 0 0);
     --accent: oklch(0.371 0 0);
     --accent-foreground: oklch(0.985 0 0);
@@ -179,17 +179,13 @@ html.sidebar-collapsed aside[data-state="expanded"] {
     --chart-3: oklch(0.442 0.017 285.786);
     --chart-4: oklch(0.37 0.013 285.805);
     --chart-5: oklch(0.269 0 0);
-    --sidebar: var(--color-slate-900);
+    --sidebar: var(--color-zinc-900);
     --sidebar-foreground: oklch(0.985 0 0);
     --sidebar-primary: oklch(0.488 0.243 264.376);
     --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: var(--color-slate-800);
+    --sidebar-accent: var(--color-zinc-800);
     --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: color-mix(
-      in oklab,
-      var(--color-slate-50) 6%,
-      transparent
-    );
+    --sidebar-border: oklab(1 0 0 / 0.1);
     --sidebar-ring: oklch(0.552 0.016 285.938);
   }
 }

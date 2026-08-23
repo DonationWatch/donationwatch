@@ -18,7 +18,7 @@ export const PartyDot = ({
   return (
     <span className={cn("flex items-center font-medium", className)}>
       <span
-        className={`mr-2 inline-block h-2 w-2 shrink-0 rounded-full border border-solid border-transparent dark:border-slate-600`}
+        className={`mr-2 inline-block h-2 w-2 shrink-0 rounded-full border border-solid border-transparent dark:border-zinc-600`}
         style={{ backgroundColor: partiesMap[party][PartyField.Color] }}
       ></span>
       <span className={cn(nameClassName)}>
