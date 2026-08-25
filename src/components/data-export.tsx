@@ -9,8 +9,8 @@ import type { ConstLocale } from "@/utils/locales";
 import type { StrictNamespacedTranslator } from "@/utils/translator";
 import type { Donation } from "@/utils/types";
 
-import Loading from "@/app/[locale]/[country]/loading";
 import { CitationGenerator } from "@/components/citation/citation-generator";
+import Loading from "@/components/loading/loading";
 import {
   usePartiesMap,
   useRequiredCountryConfig,

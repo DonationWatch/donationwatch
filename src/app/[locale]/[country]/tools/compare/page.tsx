@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 
 import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
 import { Article } from "@/components/layout/article";
+import Loading from "@/components/loading/loading";
 import { PartyComparison } from "@/components/parties/party-comparison";
 import { COUNTRIES } from "@/utils/countries";
 import { getMessagesForLocale } from "@/utils/i18n-loader";
@@ -73,7 +75,9 @@ export default async function Page(
     <ScopedClientIntlProvider messages={pageMessages}>
       <Article title={tCompareParties("title")}>
         <p className="mb-8 max-w-prose">{tCompareParties("description")}</p>
-        <PartyComparison />
+        <Suspense fallback={<Loading />}>
+          <PartyComparison />
+        </Suspense>
       </Article>
     </ScopedClientIntlProvider>
   );

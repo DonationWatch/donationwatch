@@ -141,12 +141,14 @@ export default async function DonorPageLayout(
 
   if (!isValidLocale(params.locale)) return notFound();
   if (!isValidCountry(params.country)) return notFound();
+  const countryConfig = await getCountryConfig(params.country);
+  if (!hasFeature(countryConfig, Features.Donors)) {
+    return notFound();
+  }
   setRequestLocale(params.locale);
 
-  const { country, donorId } = params;
-
   const [donorMeta, messages] = await Promise.all([
-    getDonorMeta(country, donorId),
+    getDonorMeta(params.country, params.donorId),
     getMessagesForLocale(params.locale),
   ]);
 
@@ -170,11 +172,11 @@ export default async function DonorPageLayout(
   return (
     <ScopedClientIntlProvider messages={pageMessages}>
       <DonorPageHead
-        donorId={donorId}
-        country={country}
+        donorId={params.donorId}
+        country={params.country}
         donorMeta={donorMeta}
       />
-      <DonorClientPage donorId={donorId} />
+      <DonorClientPage donorId={params.donorId} />
     </ScopedClientIntlProvider>
   );
 }

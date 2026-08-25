@@ -1,12 +1,12 @@
 "use client";
 import { Suspense } from "react";
 
+import Loading from "@/components/loading/loading";
 import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useDonationsByYears } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { isNotNullandNotUndefined } from "@/utils/array";
 
-import Loading from "../../loading";
 import { RacingBarsContent } from "./racing-bars-content";
 
 export const RacingBars = () => {
