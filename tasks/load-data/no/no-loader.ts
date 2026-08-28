@@ -150,6 +150,31 @@ export class NoLoader extends DataLoader {
       color: "#F75415",
       wiki: 68721338,
     },
+    "Partiet DNI": {
+      name: "Det norske Industriparti",
+      short: "Partiet DNI",
+      code: "DNI",
+      color: "#812468",
+    },
+    Ensomhetspartiet: {
+      name: "Ensomhetspartiet",
+      short: "Ensomhetspartiet",
+      code: "ENSOMHETSPARTIET",
+      color: "#511a46",
+    },
+    Generasjonspartiet: {
+      name: "Generasjonspartiet",
+      short: "Generasjonspartiet",
+      code: "GENERASJONSPARTIET",
+      color: "#000000",
+    },
+    "Fred og rettferdighet (FOR)": {
+      name: "Fred og rettferdighet (FOR)",
+      short: "Fred og rettferdighet",
+      code: "FOR",
+      color: "#d14444",
+      wiki: 80022084,
+    },
   };
 
   constructor() {
@@ -272,6 +297,7 @@ export class NoLoader extends DataLoader {
       lower.includes("senterpartiet") ||
       lower.includes("senterparti") ||
       lower.includes("senterungdom") ||
+      lower === "lillestrøm sp" ||
       lower === "nordre follo sp"
     ) {
       return "Senterpartiet";
@@ -303,6 +329,12 @@ export class NoLoader extends DataLoader {
     }
     if (words.includes("NKP")) {
       return "Norges Kommunistiske Parti";
+    }
+    if (lower.includes("velferd og innovasjonspartiet")) {
+      return "Velferd og Innovasjonspartiet";
+    }
+    if (normalized === "FOR Rogaland - partiet for Fred og Rettferdighet") {
+      return "Fred og rettferdighet (FOR)";
     }
 
     return normalized;
