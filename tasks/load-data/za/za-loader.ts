@@ -22,6 +22,7 @@ const yearAlias: Record<string, string> = {
   "2023": "6",
   "2024": "7",
   "2025": "8",
+  "2026": "9",
 };
 
 function parseDate(dateStr: string): string | null {
