@@ -32,7 +32,7 @@ _Note: This is purely a voluntary tip to keep the servers running. There are no 
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) >= 22
+- [Node.js](https://nodejs.org/) >= 26
 - [pnpm](https://pnpm.io/) (package manager)
 - [libreoffice](https://www.libreoffice.org/) (for converting odt to csv in some data loaders)
 - [oxipng](https://github.com/oxipng/oxipng) (for optimizing PNG images)
