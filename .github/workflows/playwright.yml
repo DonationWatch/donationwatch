@@ -21,7 +21,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 26
 
       - name: Install pnpm & dependencies
         run: npm install -g pnpm && pnpm install --frozen-lockfile
@@ -55,7 +55,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 26
 
       - name: Install pnpm & dependencies
         run: npm install -g pnpm && pnpm install --frozen-lockfile

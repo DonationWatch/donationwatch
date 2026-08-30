@@ -1,4 +1,4 @@
-import { LocatorObject } from "e2e/util/locator";
+import { LocatorObject } from "../../util/locator";
 
 export class Collapsible extends LocatorObject {
   private readonly button = this.locator;

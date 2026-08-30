@@ -10,7 +10,7 @@
     "binding": "ASSETS"
   },
   "vars": {
-    "NODE_VERSION": "22"
+    "NODE_VERSION": "26"
   },
   "secrets": {
     "required": ["TURNSTILE_SECRET_KEY"]
