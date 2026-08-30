@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [22.x]
+        node-version: [26.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -42,8 +42,8 @@ jobs:
           pnpm run cf:typegen
       - name: Run (fake data) unit tests
         run: pnpm run test:unit:fake
-      - name: Build OpenNext app
-        run: pnpm run cf:build
+      - name: Build Next.js app
+        run: pnpm run build
 
       - name: Measure build size
         env:
@@ -70,25 +70,19 @@ jobs:
             return total;
           }
 
-          function getFileSize(filePath) {
-            if (!fs.existsSync(filePath)) return 0;
-            return fs.statSync(filePath).size;
-          }
-
-          const openNextDir = path.join(process.cwd(), ".open-next");
-          const workerJs = getFileSize(path.join(openNextDir, "worker.js"));
-          const serverFunctions = getDirSize(path.join(openNextDir, "server-functions"));
-          const assets = getDirSize(path.join(openNextDir, "assets"));
-          const cache = getDirSize(path.join(openNextDir, "cache"));
-          const totalOpenNext = getDirSize(openNextDir);
+          const nextDir = path.join(process.cwd(), ".next");
+          const serverCode = getDirSize(path.join(nextDir, "server"));
+          const staticAssets = getDirSize(path.join(nextDir, "static"));
+          const cache = getDirSize(path.join(nextDir, "cache"));
+          const totalNext = getDirSize(nextDir);
 
           const metrics = {
-            size_bytes: totalOpenNext,
+            size_bytes: totalNext,
             breakdown: {
-              server_worker: workerJs + serverFunctions,
-              static_assets: assets,
+              server_code: serverCode,
+              static_assets: staticAssets,
               cache: cache,
-              total_opennext: totalOpenNext
+              total_next: totalNext
             },
             is_main: process.env.IS_MAIN === "true",
             pr_number: process.env.PR_NUM ? parseInt(process.env.PR_NUM, 10) : null,
@@ -97,7 +91,7 @@ jobs:
 
           fs.mkdirSync("build-metrics", { recursive: true });
           fs.writeFileSync("build-metrics/metrics.json", JSON.stringify(metrics, null, 2));
-          console.log("Measured OpenNext build size:", metrics);
+          console.log("Measured Next.js build size:", metrics);
           '
 
       - name: Upload build metrics artifact
