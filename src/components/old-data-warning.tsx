@@ -3,6 +3,7 @@
 import { Snail } from "lucide-react";
 
 import { useRequiredCountryConfig } from "@/components/providers/country-provider";
+import { Card } from "@/components/ui/card";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { OLD_DATA_MONTHS_THRESHOLD } from "@/utils/config";
@@ -51,9 +52,10 @@ export const OldDataWarning = () => {
       : formatDate(locale, lastDate);
 
   return (
-    <div
+    <Card
+      variant="warn"
       role="alert"
-      className="card card--warn inline-flex flex-col justify-between gap-6 rounded-lg !py-2 text-sm lg:flex-row lg:items-center"
+      className="inline-flex flex-col justify-between gap-6 rounded-lg !py-2 text-sm lg:flex-row lg:items-center"
     >
       <div className="flex items-center gap-3">
         <Snail size={18} />
@@ -65,6 +67,6 @@ export const OldDataWarning = () => {
           })}
         </div>
       </div>
-    </div>
+    </Card>
   );
 };

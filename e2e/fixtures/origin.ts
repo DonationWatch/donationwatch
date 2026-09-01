@@ -5,7 +5,7 @@ import { YearsHeader } from "./components/years-header";
 
 export class OriginPage extends PageObject {
   public readonly yearsHeader = new YearsHeader(
-    this.page.locator(".card", {
+    this.page.locator('header, [data-slot="card"]', {
       has: this.page.getByRole("heading", {
         name: this.translations("years.title"),
         exact: true,

@@ -24,11 +24,14 @@ export const SidebarTriggerButtons = () => {
       <SidebarTrigger
         title={t("toggle")}
         aria-label={t("toggle")}
-        className={"size-10"}
-        size={"icon-xl"}
+        className="size-10 rounded-full hover:bg-neutral-600/10 dark:text-zinc-200 dark:hover:bg-white/10"
+        size="icon-xl"
       />
       <RootLink
-        className={"size-10 rounded-full p-1 " + (showLogo ? "" : "lg:hidden")}
+        className={
+          "flex size-10 items-center justify-center rounded-full p-1 hover:bg-neutral-600/10 dark:text-zinc-200 dark:hover:bg-white/10 " +
+          (showLogo ? "" : "lg:hidden")
+        }
       >
         <PageLogo size={24} />
       </RootLink>

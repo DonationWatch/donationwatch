@@ -31,7 +31,8 @@
     "error": "Fout bij het laden van gegevens"
   },
   "sidebar": {
-    "toggle": "Zijbalk schakelen",
+    "sidebar": "Zijbalk",
+    "toggle": "Zijbalk in-/uitschakelen",
     "donations": "Donaties",
     "all_countries": "Alle landen",
     "tools": "Hulpmiddelen",

@@ -111,7 +111,7 @@
   --chart-4: oklch(0.37 0.013 285.805);
   --chart-5: oklch(0.269 0 0);
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
+  --sidebar: #f6f9fc;
   --sidebar-foreground: oklch(0.141 0.005 285.823);
   --sidebar-primary: oklch(0.205 0 0);
   --sidebar-primary-foreground: oklch(0.985 0 0);
@@ -123,7 +123,7 @@
 
 body,
 html {
-  background-color: var(--color-background);
+  background-color: var(--color-sidebar);
   /* Ensure scrollbars don't jump the content around */
   scrollbar-gutter: stable;
 
@@ -137,28 +137,17 @@ html {
   }
 }
 
-.card {
-  @apply block rounded-sm bg-white p-4 shadow-sm transition dark:bg-zinc-900;
-}
-
-.card--warn {
-  @apply bg-amber-500/10 dark:bg-amber-500/15;
-}
-
-.card--action {
-  @apply cursor-pointer hover:bg-gray-50 hover:shadow-md dark:hover:bg-zinc-950;
-}
-
 /* Instantly hide the expanded sidebar skeleton if document is marked as collapsed */
-html.sidebar-collapsed aside[data-state="expanded"] {
+html.sidebar-collapsed aside[data-state="expanded"],
+html.sidebar-collapsed [data-slot="sidebar"][data-state="expanded"] {
   display: none !important;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: oklab(0.14 0 0);
+    --background: oklch(0.205 0 0);
     --foreground: oklch(0.985 0 0);
-    --card: oklch(0.205 0 0);
+    --card: oklch(0.269 0 0);
     --card-foreground: oklch(0.985 0 0);
     --popover: var(--color-zinc-900);
     --popover-foreground: oklch(0.985 0 0);
@@ -179,13 +168,13 @@ html.sidebar-collapsed aside[data-state="expanded"] {
     --chart-3: oklch(0.442 0.017 285.786);
     --chart-4: oklch(0.37 0.013 285.805);
     --chart-5: oklch(0.269 0 0);
-    --sidebar: var(--color-zinc-900);
+    --sidebar: oklab(0.18 0 0);
     --sidebar-foreground: oklch(0.985 0 0);
     --sidebar-primary: oklch(0.488 0.243 264.376);
     --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: var(--color-zinc-800);
+    --sidebar-accent: var(--color-zinc-900);
     --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklab(1 0 0 / 0.1);
+    --sidebar-border: oklab(1 0 0 / 0.08);
     --sidebar-ring: oklch(0.552 0.016 285.938);
   }
 }

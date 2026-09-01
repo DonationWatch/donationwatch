@@ -89,7 +89,7 @@ const DonationFilterSheetBase = () => {
     <Sheet modal={"trap-focus"} open={isOpen} onOpenChange={setIsOpen}>
       <SheetContent
         className={
-          "top-4 right-4 bottom-4 left-4 h-auto w-auto max-w-full rounded-2xl border-0 border-zinc-200 bg-white/80 shadow backdrop-blur-sm sm:left-auto sm:w-3/4 dark:border-zinc-50/6 dark:bg-zinc-900/80"
+          "top-4 right-4 bottom-4 left-4 h-auto w-auto max-w-full rounded-2xl border border-zinc-200 bg-white/80 shadow backdrop-blur-md sm:left-auto sm:w-3/4 dark:border-zinc-700/60 dark:bg-zinc-800/90"
         }
         hideOverlay={true}
         side="right"

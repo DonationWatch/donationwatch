@@ -31,6 +31,7 @@
     "error": "Kļūda datu ielādē"
   },
   "sidebar": {
+    "sidebar": "Sānjosla",
     "toggle": "Pārslēgt sānjoslu",
     "donations": "Ziedojumi",
     "all_countries": "Visas valstis",

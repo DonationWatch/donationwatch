@@ -31,6 +31,7 @@
     "error": "Erreur lors du chargement des données"
   },
   "sidebar": {
+    "sidebar": "Barre latérale",
     "toggle": "Afficher/Masquer la barre latérale",
     "donations": "Dons",
     "all_countries": "Tous les pays",

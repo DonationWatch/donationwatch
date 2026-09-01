@@ -35,7 +35,7 @@ const FilterTriggerButton = ({
         "relative flex h-10 cursor-pointer items-center justify-center transition-all",
         isActive
           ? "bg-primary-700 hover:bg-primary-500 gap-2 rounded-full px-4 text-white"
-          : "w-10 rounded-full text-neutral-600 hover:bg-neutral-600/10 dark:text-neutral-300",
+          : "w-10 rounded-full text-neutral-600 hover:bg-neutral-600/10 dark:text-zinc-200 dark:hover:bg-white/10",
       )}
       onClick={(event) => {
         onClick?.(event);
@@ -96,7 +96,7 @@ export const StickyFooter = () => {
           <div className="flex items-end">{/* left side */}</div>
           <div>
             {isFilterVisible && (
-              <div className="pointer-events-auto flex items-center gap-1 rounded-full border border-zinc-200 bg-white/60 p-1 shadow backdrop-blur-sm transition-all lg:flex-col dark:border-zinc-50/6 dark:bg-zinc-900/60">
+              <div className="pointer-events-auto flex items-center gap-1 rounded-full border border-zinc-200 bg-white/80 p-1 shadow-sm backdrop-blur-md transition-all lg:flex-col dark:border-zinc-700/60 dark:bg-zinc-800/80 dark:shadow-md">
                 <div className="flex items-center">
                   <FilterTriggerButton
                     activeFilterCount={activeFilterCount}

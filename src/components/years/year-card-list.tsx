@@ -8,6 +8,7 @@ import type { CountryConfig } from "@/types/country-config";
 import type { ConstLocale } from "@/utils/locales";
 
 import { StackedPartyDonations } from "@/components/charts/stacked-party-line";
+import { Card } from "@/components/ui/card";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { formatCompactCountryCurrency } from "@/utils/formatter";
 
@@ -37,19 +38,23 @@ const YearCard = ({
 }) => {
   return (
     <li key={year}>
-      <Link
-        prefetch={false}
-        href={`/${locale}/${country.id}/${year}/overview`}
-        className="card card--action hover:text-primary-600 dark:hover:text-primary-400"
+      <Card
+        variant="action"
+        render={
+          <Link
+            prefetch={false}
+            href={`/${locale}/${country.id}/${year}/overview`}
+          />
+        }
       >
-        <div className="mt-1 flex w-full justify-between">
+        <div className="mb-2 flex w-full justify-between leading-none">
           <span className="font-semibold">{year}</span>
           {sum}
         </div>
         <div className="mt-1 h-1">
           <StackedPartyDonations data={stackedConfig} />
         </div>
-      </Link>
+      </Card>
     </li>
   );
 };

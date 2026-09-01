@@ -31,6 +31,7 @@
     "error": "Feil ved lasting av data"
   },
   "sidebar": {
+    "sidebar": "Sidemeny",
     "toggle": "Vis/skjul sidepanel",
     "donations": "Donasjoner",
     "all_countries": "Alle land",

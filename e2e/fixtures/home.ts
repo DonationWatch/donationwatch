@@ -3,20 +3,12 @@ import { YearsHeader } from "./components/years-header";
 
 export class HomePage extends PageObject {
   public readonly currentLegislativePeriod = new YearsHeader(
-    this.page.locator(".card", {
-      has: this.page.getByRole("heading", {
-        name: this.translations("home.last_period"),
-        exact: true,
-      }),
-    }),
+    this.page.locator('section[aria-labelledby="last-period-title"]'),
     this.props,
   );
-  public readonly mostRecentDonations = this.page.locator(".card", {
-    has: this.page.getByRole("heading", {
-      name: this.translations("home.most_recent"),
-      exact: true,
-    }),
-  });
+  public readonly mostRecentDonations = this.page.locator(
+    'section[aria-labelledby="home-most-recent-donations"]',
+  );
   public readonly partiesList = this.page.locator("section", {
     has: this.page.getByRole("heading", {
       name: this.translations("home.parties.title"),

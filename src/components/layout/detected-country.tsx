@@ -4,6 +4,7 @@ import { useLocale } from "next-intl";
 
 import type { CountryCode } from "@/utils/countries";
 
+import { Card } from "@/components/ui/card";
 import { useDetectedCountry } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { countryCodesToCountry } from "@/utils/countries";
@@ -22,15 +23,20 @@ export const DetectedCountryContent = ({
     : "#";
 
   return (
-    <a
-      data-testid="detected-country"
-      aria-hidden={!detectedCountryCode}
-      rel="nofollow"
-      href={destinationLink}
-      title={t("detect_country.action", {
-        country: detectedCountry,
-      })}
-      className="card card--action inline-flex flex-col justify-between gap-6 rounded-lg !py-2 text-sm lg:flex-row lg:items-center"
+    <Card
+      variant="action"
+      className="inline-flex flex-col justify-between gap-6 rounded-lg !py-2 text-sm lg:flex-row lg:items-center"
+      render={
+        <a
+          data-testid="detected-country"
+          aria-hidden={!detectedCountryCode}
+          rel="nofollow"
+          href={destinationLink}
+          title={t("detect_country.action", {
+            country: detectedCountry,
+          })}
+        />
+      }
     >
       <div className="flex items-center gap-3">
         <ArrowUpRight size={18} />
@@ -42,7 +48,7 @@ export const DetectedCountryContent = ({
           })}
         </div>
       </div>
-    </a>
+    </Card>
   );
 };
 
