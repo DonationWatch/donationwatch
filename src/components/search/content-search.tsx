@@ -78,7 +78,7 @@ const HeaderSearch = () => {
   return (
     <>
       <button
-        className="flex size-10 cursor-pointer items-center justify-center rounded-full p-1 hover:bg-neutral-600/10"
+        className="flex size-10 cursor-pointer items-center justify-center rounded-full p-1 hover:bg-neutral-600/10 dark:text-zinc-200 dark:hover:bg-white/10"
         onClick={() => open()}
         aria-label={t("filter_description")}
         title={t("filter")}

@@ -9,6 +9,7 @@ import type { ConstLocale } from "@/utils/locales";
 
 import { StackedPartyDonations } from "@/components/charts/stacked-party-line";
 import { DonorName } from "@/components/donors/donor-name";
+import { Card } from "@/components/ui/card";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { formatCountryCurrency } from "@/utils/formatter";
 
@@ -36,10 +37,15 @@ export const BigDonorPill = ({
 }) => {
   return (
     <li className="basis-full overflow-hidden p-1 sm:basis-1/2 lg:basis-1/4">
-      <Link
-        className="flex rounded-md bg-white p-2 shadow-sm transition-all hover:bg-zinc-50 hover:shadow-md hover:saturate-100 dark:bg-zinc-900 dark:hover:bg-zinc-950"
-        prefetch={false}
-        href={`/${locale}/${country.id}/donor/${donor.id}`}
+      <Card
+        variant="action"
+        className="flex rounded-md p-2 hover:saturate-100"
+        render={
+          <Link
+            prefetch={false}
+            href={`/${locale}/${country.id}/donor/${donor.id}`}
+          />
+        }
       >
         <div className="w-2 shrink-0 overflow-hidden rounded-full">
           <StackedPartyDonations
@@ -53,7 +59,7 @@ export const BigDonorPill = ({
           </div>
           <div className="tabular-nums">{sum}</div>
         </div>
-      </Link>
+      </Card>
     </li>
   );
 };

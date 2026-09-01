@@ -31,6 +31,7 @@
     "error": "Fehler beim Laden der Daten"
   },
   "sidebar": {
+    "sidebar": "Seitenleiste",
     "toggle": "Seitenleiste umschalten",
     "donations": "Spenden",
     "all_countries": "Alle Länder",

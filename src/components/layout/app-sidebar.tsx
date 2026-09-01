@@ -297,94 +297,97 @@ export function AppSidebar() {
   }, []);
 
   return (
-    <aside>
-      <Sidebar className="border-r-sidebar-border">
-        <SidebarHeader className="border-sidebar-border h-15 flex-row items-center border-b px-4">
-          <CountrySwitch />
-        </SidebarHeader>
-        <SidebarContent>
-          {countryConfig ? (
-            <CountryConfigSidebarContent countryConfig={countryConfig} />
-          ) : (
-            <SidebarGroup>
-              <SidebarGroupLabel>{tSidebar("all_countries")}</SidebarGroupLabel>
-              <SidebarGroupContent>
-                <SidebarMenu>
-                  {Object.entries(COUNTRY_CONFIG)
-                    .map(([countryId, country]) => ({
-                      countryId: countryId as Country,
-                      name: getCountryName(country, tCountries),
-                    }))
-                    .toSorted((a, b) => a.name.localeCompare(b.name, locale))
-                    .map(({ countryId, name }) => (
-                      <SidebarMenuItem key={countryId}>
-                        <SidebarActiveMenuButton
-                          activeHref={`/${locale}/${countryId}`}
-                          href={`/${locale}/${countryId}`}
-                          className="flex items-center gap-2"
-                        >
-                          <div className="grow truncate">{name}</div>
-                          <div className="flex w-8 shrink-0 justify-center">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                              className="h-4 max-w-full rounded-xs"
-                              src={countryFlags[countryId]}
-                              alt=""
-                            />
-                          </div>
-                        </SidebarActiveMenuButton>
-                      </SidebarMenuItem>
-                    ))}
-                </SidebarMenu>
-              </SidebarGroupContent>
-            </SidebarGroup>
-          )}
-          <NavSecondary
-            label={tSidebar("more")}
-            className="mt-auto"
-            items={[
-              {
-                href: `/${locale}/other-countries`,
-                label: t("navigation.other_countries"),
-                icon: Globe,
-              },
-              {
-                href: `/${locale}/fun`,
-                label: t("navigation.fun"),
-                icon: Sparkles,
-              },
-              {
-                href: `/${locale}/about`,
-                label: t("navigation.about"),
-                icon: Info,
-              },
-              {
-                href: `/${locale}/enterprise`,
-                label: t("navigation.enterprise"),
-                icon: Server,
-              },
-              {
-                href: GITHUB_URL,
-                label: "GitHub",
-                target: "_blank",
-                icon: Github,
-              },
-            ]}
-          />
-          <SidebarGroup className="mt-2 pt-0 lg:hidden">
-            <SidebarGroupContent className="px-2">
-              <Link
-                href={`/${locale}/enterprise`}
-                prefetch={false}
-                className="block rounded-none border border-zinc-300 bg-white px-3 py-1.5 text-center font-mono text-[10px] font-bold tracking-widest text-zinc-900 uppercase transition-colors hover:bg-black hover:text-white md:text-xs dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-100 dark:hover:bg-white dark:hover:text-black"
-              >
-                Enterprise API
-              </Link>
+    <Sidebar
+      variant="inset"
+      className="border-r-0"
+      role="complementary"
+      aria-label={tSidebar("sidebar")}
+    >
+      <SidebarHeader className="border-sidebar-border h-15 flex-row items-center border-b px-4">
+        <CountrySwitch />
+      </SidebarHeader>
+      <SidebarContent>
+        {countryConfig ? (
+          <CountryConfigSidebarContent countryConfig={countryConfig} />
+        ) : (
+          <SidebarGroup>
+            <SidebarGroupLabel>{tSidebar("all_countries")}</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {Object.entries(COUNTRY_CONFIG)
+                  .map(([countryId, country]) => ({
+                    countryId: countryId as Country,
+                    name: getCountryName(country, tCountries),
+                  }))
+                  .toSorted((a, b) => a.name.localeCompare(b.name, locale))
+                  .map(({ countryId, name }) => (
+                    <SidebarMenuItem key={countryId}>
+                      <SidebarActiveMenuButton
+                        activeHref={`/${locale}/${countryId}`}
+                        href={`/${locale}/${countryId}`}
+                        className="flex items-center gap-2"
+                      >
+                        <div className="grow truncate">{name}</div>
+                        <div className="flex w-8 shrink-0 justify-center">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            className="h-4 max-w-full rounded-xs"
+                            src={countryFlags[countryId]}
+                            alt=""
+                          />
+                        </div>
+                      </SidebarActiveMenuButton>
+                    </SidebarMenuItem>
+                  ))}
+              </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
-        </SidebarContent>
-      </Sidebar>
-    </aside>
+        )}
+        <NavSecondary
+          label={tSidebar("more")}
+          className="mt-auto"
+          items={[
+            {
+              href: `/${locale}/other-countries`,
+              label: t("navigation.other_countries"),
+              icon: Globe,
+            },
+            {
+              href: `/${locale}/fun`,
+              label: t("navigation.fun"),
+              icon: Sparkles,
+            },
+            {
+              href: `/${locale}/about`,
+              label: t("navigation.about"),
+              icon: Info,
+            },
+            {
+              href: `/${locale}/enterprise`,
+              label: t("navigation.enterprise"),
+              icon: Server,
+            },
+            {
+              href: GITHUB_URL,
+              label: "GitHub",
+              target: "_blank",
+              icon: Github,
+            },
+          ]}
+        />
+        <SidebarGroup className="mt-2 pt-0 lg:hidden">
+          <SidebarGroupContent className="px-2">
+            <Link
+              href={`/${locale}/enterprise`}
+              prefetch={false}
+              className="block rounded-none border border-zinc-300 bg-white px-3 py-1.5 text-center font-mono text-[10px] font-bold tracking-widest text-zinc-900 uppercase transition-colors hover:bg-black hover:text-white md:text-xs dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-100 dark:hover:bg-white dark:hover:text-black"
+            >
+              Enterprise API
+            </Link>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+    </Sidebar>
   );
 }
 

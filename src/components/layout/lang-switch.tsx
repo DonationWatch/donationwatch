@@ -40,7 +40,7 @@ export const LangSwitch = () => {
           <button
             aria-label={t("header.language_selection")}
             title={t("header.language_selection")}
-            className="group flex size-10 cursor-pointer items-center justify-center rounded-full p-1 hover:bg-neutral-600/10"
+            className="group flex size-10 cursor-pointer items-center justify-center rounded-full p-1 hover:bg-neutral-600/10 dark:text-zinc-200 dark:hover:bg-white/10"
           >
             <Languages size={18} />
           </button>

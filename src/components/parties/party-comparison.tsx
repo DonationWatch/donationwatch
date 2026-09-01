@@ -22,6 +22,7 @@ import {
   useRequiredCountryConfig,
 } from "@/components/providers/country-provider";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { YearRangeSelector } from "@/components/years/year-range-selector";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
@@ -722,7 +723,7 @@ export const PartyComparison = () => {
                     if (!hasAnyDonor) return null;
 
                     return (
-                      <div key={rank} className="card min-w-0">
+                      <Card key={rank} className="min-w-0">
                         <h4 className="border-b border-gray-100 pb-2 text-sm font-medium text-gray-500 dark:border-gray-700 dark:text-gray-400">
                           #{rank + 1}
                         </h4>
@@ -747,11 +748,11 @@ export const PartyComparison = () => {
                                   </div>
                                   {donor ? (
                                     <>
-                                      <div className="truncate font-medium">
+                                      <div className="truncate text-sm font-medium">
                                         <DonorLink donor={donor.name} />
                                       </div>
-                                      <div className="text-muted-foreground text-xs font-medium tabular-nums">
-                                        {formatCountryCurrency(
+                                      <div className="text-muted-foreground text-xs tabular-nums">
+                                        {formatCompactCountryCurrency(
                                           browserBasedLocale,
                                           donor.sum,
                                           countryConfig,
@@ -759,8 +760,8 @@ export const PartyComparison = () => {
                                       </div>
                                     </>
                                   ) : (
-                                    <div className="text-muted-foreground">
-                                      {NO_DATA_TEXT}
+                                    <div className="text-muted-foreground text-sm italic">
+                                      -
                                     </div>
                                   )}
                                 </div>
@@ -768,7 +769,7 @@ export const PartyComparison = () => {
                             );
                           })}
                         </div>
-                      </div>
+                      </Card>
                     );
                   })}
                 </div>
@@ -888,7 +889,7 @@ export const PartyComparison = () => {
                       {/* Mobile View */}
                       <div className="grid gap-4 md:hidden">
                         {sortedTypes.map((dt) => (
-                          <div key={dt} className="card min-w-0">
+                          <Card key={dt} className="min-w-0">
                             <h4 className="border-b border-gray-100 pb-2 text-sm font-medium text-gray-500 dark:border-gray-700 dark:text-gray-400">
                               {t(`donor_type.${dt}`)}
                             </h4>
@@ -937,7 +938,7 @@ export const PartyComparison = () => {
                                 );
                               })}
                             </div>
-                          </div>
+                          </Card>
                         ))}
                       </div>
                     </>
@@ -1063,7 +1064,7 @@ export const PartyComparison = () => {
                   {/* Mobile View */}
                   <div className="grid gap-4 md:hidden">
                     {overlappingDonors.slice(0, OVERLAP_MAX).map((donor) => (
-                      <div key={donor.name} className="card min-w-0">
+                      <Card key={donor.name} className="min-w-0">
                         <div className="border-b border-gray-100 pb-3 dark:border-gray-700">
                           <h4 className="truncate text-base font-semibold">
                             <DonorLink donor={donor.name} />
@@ -1136,7 +1137,7 @@ export const PartyComparison = () => {
                             );
                           })}
                         </div>
-                      </div>
+                      </Card>
                     ))}
                   </div>
                 </div>
@@ -1235,7 +1236,7 @@ const ComparisonTable = ({
     {/* Mobile View (Stacked Cards) */}
     <div className="grid gap-4 md:hidden">
       {rows.map((row) => (
-        <div key={row.label} className="card min-w-0">
+        <Card key={row.label} className="min-w-0">
           <h4 className="border-b border-gray-100 pb-2 text-sm font-medium text-gray-500 dark:border-gray-700 dark:text-gray-400">
             {row.label}
           </h4>
@@ -1268,7 +1269,7 @@ const ComparisonTable = ({
               );
             })}
           </div>
-        </div>
+        </Card>
       ))}
     </div>
   </div>

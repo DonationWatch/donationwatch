@@ -25,6 +25,7 @@ import { NonCountryRootLayout } from "@/components/layout/non-country-root-layou
 import { MetaCard } from "@/components/meta-card";
 import { Translation } from "@/components/translation";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { getPartiesSync } from "@/config/parties";
 import { PartyStatField } from "@/types/party-stats";
 import { GITHUB_URL, THUMBNAIL_PREFIX } from "@/utils/config";
@@ -203,11 +204,17 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
                   const countryName = getCountryName(config, tCountries);
 
                   return (
-                    <Link
-                      prefetch={false}
+                    <Card
+                      variant="action"
+                      padding="none"
                       key={countryId}
-                      href={`/${locale}/${countryId}`}
-                      className="group flex gap-2 rounded border border-gray-200 px-2 py-1 transition-colors hover:border-gray-300 hover:bg-gray-50 xl:p-2 dark:border-gray-700 dark:hover:border-gray-600 dark:hover:bg-gray-800/50"
+                      className="flex gap-2 rounded px-2 py-1 xl:p-2"
+                      render={
+                        <Link
+                          prefetch={false}
+                          href={`/${locale}/${countryId}`}
+                        />
+                      }
                     >
                       <div className="flex w-8 shrink-0 items-center justify-center 2xl:w-16">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -219,7 +226,7 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
                         />
                       </div>
                       <div className="grow overflow-hidden">
-                        <div className="group-hover:text-primary-600 dark:group-hover:text-primary-400 truncate text-sm font-medium xl:text-base">
+                        <div className="truncate text-sm font-medium xl:text-base">
                           {countryName}
                         </div>
                         <div className="text-xs text-zinc-500 xl:text-sm dark:text-zinc-300">
@@ -229,7 +236,7 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
                           />
                         </div>
                       </div>
-                    </Link>
+                    </Card>
                   );
                 })}
             </nav>

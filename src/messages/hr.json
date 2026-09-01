@@ -31,6 +31,7 @@
     "error": "Pogreška pri učitavanju podataka"
   },
   "sidebar": {
+    "sidebar": "Bočna traka",
     "toggle": "Ukljuci/isključi bočnu traku",
     "donations": "Donacije",
     "all_countries": "Sve zemlje",

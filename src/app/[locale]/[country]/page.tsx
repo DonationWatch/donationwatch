@@ -21,6 +21,7 @@ import { DetectedCountry } from "@/components/layout/detected-country";
 import { OldDataWarning } from "@/components/old-data-warning";
 import { PartiesHero } from "@/components/parties/parties-hero";
 import { Translation } from "@/components/translation";
+import { Card, cardVariants } from "@/components/ui/card";
 import { YearsCards } from "@/components/years/years-cards";
 import { UnfilteredYearsHeader } from "@/components/years/years-header";
 import { PartyStatField } from "@/types/party-stats";
@@ -157,7 +158,7 @@ export default async function YearsPage(
             {currentYear ? (
               <section aria-labelledby="last-period-title">
                 <UnfilteredYearsHeader
-                  className="card card--action"
+                  className={cardVariants({ variant: "action" })}
                   title={tHome("last_period")}
                   idPrefix={"last-period-"}
                   locale={locale}
@@ -176,12 +177,17 @@ export default async function YearsPage(
               </section>
             ) : null}
             {currentYear !== previousYear && previousYear ? (
-              <Link
-                aria-label={tHome("previous_period")}
-                title={tHome("previous_period")}
-                scroll={true}
-                href={`/${locale}/${countryConfig.id}/${previousYear}/overview`}
-                className="card card--action hover:text-primary-600 dark:hover:text-primary-400 mt-2"
+              <Card
+                variant="action"
+                className="mt-2"
+                render={
+                  <Link
+                    aria-label={tHome("previous_period")}
+                    title={tHome("previous_period")}
+                    scroll={true}
+                    href={`/${locale}/${countryConfig.id}/${previousYear}/overview`}
+                  />
+                }
               >
                 <div className="flex items-center justify-between">
                   <span className="font-semibold">{previousYear}</span>
@@ -194,7 +200,7 @@ export default async function YearsPage(
                     />
                   }
                 </div>
-              </Link>
+              </Card>
             ) : null}
           </div>
         </div>
@@ -265,12 +271,12 @@ export default async function YearsPage(
               aria-labelledby="home-most-recent-donations"
               className="flex items-center justify-center lg:basis-1/2"
             >
-              <div className="card w-full">
+              <Card className="w-full">
                 <h3 className="mb-2 px-2" id="home-most-recent-donations">
                   {tHome("most_recent")}
                 </h3>
                 <HistoryComponent country={countryConfig} />
-              </div>
+              </Card>
             </section>
           ) : null}
         </div>
@@ -369,7 +375,7 @@ export default async function YearsPage(
             {countryConfig.legislativeYears.map((years, idx) => {
               return (
                 <UnfilteredYearsHeader
-                  className="card card--action"
+                  className={cardVariants({ variant: "action" })}
                   key={idx}
                   country={countryConfig}
                   idPrefix="list-"

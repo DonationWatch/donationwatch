@@ -24,6 +24,7 @@ import type {
   ReactEChartsProps,
 } from "./echart";
 
+import { Card } from "../ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { DynamicEchart } from "./dynamic-echart";
 
@@ -102,7 +103,7 @@ export const ExpandableReactEchart = ({
   const Chart = (
     <>
       {hasHeader ? (
-        <header className="flex w-full shrink-0 px-4 pt-4 pb-2">
+        <header className="flex w-full shrink-0 p-4 pt-4 pb-2">
           {title || subtitle ? (
             <div className="grow space-y-2">
               {title ? (
@@ -220,9 +221,14 @@ export const ExpandableReactEchart = ({
     );
   } else {
     return (
-      <section className="flex h-full w-full flex-col items-start justify-center rounded bg-white dark:bg-zinc-900">
-        {Chart}
-      </section>
+      <Card
+        padding="none"
+        render={
+          <section className="flex h-full w-full flex-col items-start justify-center" />
+        }
+      >
+        <div className="h-full w-full p-0.5">{Chart}</div>
+      </Card>
     );
   }
 };

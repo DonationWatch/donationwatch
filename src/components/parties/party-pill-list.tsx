@@ -6,6 +6,7 @@ import Link from "next/link";
 import type { CountryConfig } from "@/types/country-config";
 import type { ConstLocale } from "@/utils/locales";
 
+import { Card } from "@/components/ui/card";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { PartyField, type Party } from "@/types/party";
 import { formatCountryCurrency } from "@/utils/formatter";
@@ -26,9 +27,14 @@ const PartyLinkPill = ({
   const color = party[PartyField.Color];
   return (
     <li className="basis-full overflow-hidden p-1 sm:basis-1/2 lg:basis-1/4">
-      <Link
-        href={`/${locale}/${country.id}/party/${party[PartyField.Id]}/donors`}
-        className="flex rounded-md bg-white p-2 shadow-sm transition-all hover:bg-zinc-50 hover:shadow-md hover:saturate-100 dark:bg-zinc-900 dark:hover:bg-zinc-950"
+      <Card
+        variant="action"
+        className="flex rounded-md p-2 hover:saturate-100"
+        render={
+          <Link
+            href={`/${locale}/${country.id}/party/${party[PartyField.Id]}/donors`}
+          />
+        }
       >
         <div
           className="w-2 rounded-full border saturate-80"
@@ -36,12 +42,12 @@ const PartyLinkPill = ({
             borderColor: color,
             background: `linear-gradient(135deg, color-mix(in srgb, ${color} 90%, white), color-mix(in srgb, ${color} 90%, black))`,
           }}
-        ></div>
+        />
         <div className="overflow-hidden pl-2 text-sm">
           <div className="truncate font-bold">{party[PartyField.Short]}</div>
           <div className="tabular-nums">{sum}</div>
         </div>
-      </Link>
+      </Card>
     </li>
   );
 };
