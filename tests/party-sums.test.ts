@@ -373,13 +373,13 @@ describe("EU", () => {
 
     hasExpectedDonations(data, [
       // parties
-      ["ALDE", 98_273.03],
+      ["ALDE", 110_273.03],
       ["ECR", 47_000],
       ["ESN", 16_000],
       // foundations
       ["WMCES", 83566.7],
       ["ND", 69_000],
-      ["ELF", 85000],
+      ["ELF", 103_000],
     ]);
   });
 
@@ -393,7 +393,7 @@ describe("EU", () => {
       // foundations
       ["WMCES", 50110.87],
       ["ND", 36_000],
-      ["ELF", 53_000],
+      ["ELF", 71_000],
     ]);
   });
 });

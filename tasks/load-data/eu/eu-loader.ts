@@ -16,6 +16,11 @@ import { exists, trimRow } from "../util";
 import { donorMeta } from "./donor-meta";
 import { fromPdfDonations } from "./from-pdf-donations";
 
+const FETCH_HEADERS = {
+  "user-agent":
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3",
+};
+
 const mapCountry = (year: string, country: string | undefined): Countries => {
   if (country === "EL") return "GR";
   if (year === "2021") {
@@ -717,39 +722,39 @@ export class EuLoader extends DataLoader {
   yearFiles: Record<string, { parties?: string; foundations?: string }> = {
     "2021": {
       parties:
-        "https://www.appf.europa.eu/cmsdata/297619/PARTIES%20Contributions%20and%20donations%20related%20to%20financial%20year%202021_Redacted.xlsx",
+        "https://www.appf.europa.eu/telastatic/cmsdata/297619/PARTIES%20Contributions%20and%20donations%20related%20to%20financial%20year%202021_Redacted.xlsx",
       foundations:
-        "https://www.appf.europa.eu/cmsdata/297617/FOUNDATIONS%20Contributions%20and%20donations%20related%20to%20financial%20year%202021_Redacted.xlsx",
+        "https://www.appf.europa.eu/telastatic/cmsdata/297617/FOUNDATIONS%20Contributions%20and%20donations%20related%20to%20financial%20year%202021_Redacted.xlsx",
     },
     "2022": {
       parties:
-        "https://www.appf.europa.eu/cmsdata/297603/European%20Political%20Parties%20Contributions%20and%20Donations%202022_Redacted.xlsx",
+        "https://www.appf.europa.eu/telastatic/cmsdata/297603/European%20Political%20Parties%20Contributions%20and%20Donations%202022_Redacted.xlsx",
       foundations:
-        "https://www.appf.europa.eu/cmsdata/297602/European%20Political%20Foundations%20Contributions%20and%20Donations%202022_Redacted.xlsx",
+        "https://www.appf.europa.eu/telastatic/cmsdata/297602/European%20Political%20Foundations%20Contributions%20and%20Donations%202022_Redacted.xlsx",
     },
     "2023": {
       parties:
-        "https://www.appf.europa.eu/cmsdata/302877/2023%20PARTIES%20Contributions%20and%20Donations_redacted.xlsx",
+        "https://www.appf.europa.eu/telastatic/cmsdata/302877/2023%20PARTIES%20Contributions%20and%20Donations_redacted.xlsx",
       foundations:
-        "https://www.appf.europa.eu/cmsdata/302879/2023%20FOUNDATIONS%20Contributions%20and%20Donations_redacted.xlsx",
+        "https://www.appf.europa.eu/telastatic/cmsdata/302879/2023%20FOUNDATIONS%20Contributions%20and%20Donations_redacted.xlsx",
     },
     "2024": {
       parties:
-        "https://www.appf.europa.eu/cmsdata/301299/2024%20PARTIES%20Contributions%20and%20Donations.xlsx",
+        "https://www.appf.europa.eu/telastatic/cmsdata/301299/2024%20PARTIES%20Contributions%20and%20Donations.xlsx",
       foundations:
-        "https://www.appf.europa.eu/cmsdata/300387/2024%20FOUNDATIONS%20Contributions%20and%20Donations.xlsx",
+        "https://www.appf.europa.eu/telastatic/cmsdata/300387/2024%20FOUNDATIONS%20Contributions%20and%20Donations.xlsx",
     },
     "2025": {
       parties:
-        "https://www.appf.europa.eu/cmsdata/303917/2025%20PARTIES%20Donations%20table%20as%20of%202026-03-09.xlsx",
+        "https://www.appf.europa.eu/telastatic/cmsdata/307111/2025%20PARTIES%20Donations%20table%20as%20of%202026-05-28.xlsx",
       foundations:
-        "https://www.appf.europa.eu/cmsdata/303598/2025%20FOUNDATIONS%20Donations%20table%20as%20of%202026-03-02.xlsx",
+        "https://www.appf.europa.eu/telastatic/cmsdata/307109/2025%20FOUNDATIONS%20Donations%20table%20as%20of%202026-05-28.xlsx",
     },
     "2026": {
       parties:
-        "https://www.appf.europa.eu/cmsdata/309511/2026%20PARTIES%20Donations%20table%20as%20of%202026-08-03.xlsx",
+        "https://www.appf.europa.eu/telastatic/cmsdata/309511/2026%20PARTIES%20Donations%20table%20as%20of%202026-08-03.xlsx",
       foundations:
-        "https://www.appf.europa.eu/cmsdata/308896/2026%20FOUNDATIONS%20Donations%20table%20as%20of%202026-07-08.xlsx",
+        "https://www.appf.europa.eu/telastatic/cmsdata/309957/2026%20FOUNDATIONS%20Donations%20table%20as%20of%202026-08-31.xlsx",
     },
   };
 
@@ -847,10 +852,12 @@ export class EuLoader extends DataLoader {
 
     if (url.parties) {
       this.log(`loading ${year} parties`);
-      const res = await fetch(url.parties);
+      const res = await fetch(url.parties, {
+        headers: FETCH_HEADERS,
+      });
 
       if (!res.ok) {
-        throw `Unable to load ${url.parties}: ${res.status}`;
+        throw `Unable to load ${url.parties}: ${res.status}, ${await res.text()}`;
       }
 
       await fs.writeFile(
@@ -861,10 +868,12 @@ export class EuLoader extends DataLoader {
 
     if (url.foundations) {
       this.log(`loading ${year} foundations`);
-      const resFoundations = await fetch(url.foundations);
+      const resFoundations = await fetch(url.foundations, {
+        headers: FETCH_HEADERS,
+      });
 
       if (!resFoundations.ok) {
-        throw `Unable to load ${url.foundations}: ${resFoundations.status}`;
+        throw `Unable to load ${url.foundations}: ${resFoundations.status}, ${await resFoundations.text()}`;
       }
 
       await fs.writeFile(
