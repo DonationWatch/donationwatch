@@ -1,13 +1,8 @@
 import { exec } from "child_process";
 import debug from "debug";
 import { createTranslator } from "next-intl";
-import {
-  ModuleKind,
-  ModuleResolutionKind,
-  ScriptTarget,
-  transpileModule,
-} from "typescript";
 import { promisify } from "util";
+import { transformWithOxc } from "vite";
 
 import type { CountryConfig } from "@/types/country-config";
 import type { BrowserBasedLocale, ConstLocale } from "@/utils/locales";
@@ -168,26 +163,13 @@ const getDonationsFromLastGitRevision = async (
   );
 
   // Transpile TypeScript to JavaScript
-  const result = transpileModule(tsContent, {
-    compilerOptions: {
-      module: ModuleKind.CommonJS,
-      target: ScriptTarget.ES2020,
-      moduleResolution: ModuleResolutionKind.Node16,
-      esModuleInterop: true,
-      allowSyntheticDefaultImports: true,
-    },
-  });
+  const { code: jsCode } = await transformWithOxc(tsContent, "donations.ts");
 
-  // Execute the JavaScript code
-  const moduleCode = result.outputText;
-  const moduleExports: { default: Donation[] } = { default: [] };
-  const moduleObject = { exports: moduleExports };
+  // Execute the JavaScript code to get the default export
+  const fnBody = jsCode.replace(/export\s+default\s+/, "return ");
+  const moduleFunction = new Function(fnBody);
 
-  // Create a function that executes the module code
-  const moduleFunction = new Function("module", "exports", moduleCode);
-  moduleFunction(moduleObject, moduleExports);
-
-  return moduleObject.exports.default;
+  return moduleFunction() as Donation[];
 };
 
 type FlatPartySum = Record<
