@@ -402,14 +402,6 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       ],
     },
     states: [],
-    donorFilters: [
-      ".*electoral commission.*",
-      ".*house of commons.*",
-      "house of lords",
-      "parliamentary office.*",
-      ".*parliament",
-      ".*assembly",
-    ],
   },
   [Country.australia]: {
     id: Country.australia,
