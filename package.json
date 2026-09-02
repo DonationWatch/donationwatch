@@ -41,6 +41,7 @@
     "fmt:check": "oxfmt --check",
     "icons:generate": "tsx tasks/icons/generate-icons-sprite.ts",
     "generate-social-media": "tsx tasks/social-media/generate-social-media-posts.ts",
+    "generate-social-media:uk": "tsx tasks/social-media/generate-uk-social-media-posts.ts",
     "index-now": "tsx tasks/index-now/index-now.ts",
     "lint": "oxlint",
     "og-images": "vitest run ./tasks/social-images/generate-images.test.tsx",
