@@ -573,6 +573,20 @@ export class UkLoader extends DataLoader {
       color: "#012169",
       wiki: 80323199,
     },
+    "Great Yarmouth First": {
+      name: "Great Yarmouth First",
+      short: "Great Yarmouth First",
+      code: "GYF",
+      color: "#01183e",
+      wiki: 81773588,
+    },
+    "Restore Britain": {
+      name: "Restore Britain",
+      short: "Restore Britain",
+      code: "RESTOREBRITAIN",
+      color: "#051E40",
+      wiki: 80322064,
+    },
   };
 
   donorMeta = donorMeta;
