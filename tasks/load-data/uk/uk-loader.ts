@@ -926,6 +926,10 @@ export class UkLoader extends DataLoader {
       return "Cor Unum";
     }
 
+    if (lower === "ben delo") {
+      return "Ben Peter Delo";
+    }
+
     if (lower.startsWith("national union of mineworkers")) {
       return "National Union of Mineworkers (NUM)";
     }
