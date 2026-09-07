@@ -38,7 +38,7 @@ test.describe("404 Not Found Handling", () => {
     await expect(page.getByRole("heading")).toHaveText("Page not found");
   });
 
-  test("returns HTTP 404 for donor route on country without donor feature", async ({
+  test("returns HTTP 404 for non-existent donor in country without named donors", async ({
     page,
     baseURL,
   }) => {

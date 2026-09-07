@@ -141,16 +141,17 @@ export default async function DonorPageLayout(
 
   if (!isValidLocale(params.locale)) return notFound();
   if (!isValidCountry(params.country)) return notFound();
-  const countryConfig = await getCountryConfig(params.country);
-  if (!hasFeature(countryConfig, Features.Donors)) {
-    return notFound();
-  }
   setRequestLocale(params.locale);
 
-  const [donorMeta, messages] = await Promise.all([
+  const [donations, donorMeta, messages] = await Promise.all([
+    getDonationsByDonorId(params.country, params.donorId),
     getDonorMeta(params.country, params.donorId),
     getMessagesForLocale(params.locale),
   ]);
+
+  if (!donations?.length) {
+    return notFound();
+  }
 
   const pageMessages = pick(messages, [
     "donor",

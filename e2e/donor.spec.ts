@@ -83,4 +83,19 @@ test.describe("Donor page", () => {
 
     await donorPage.donationTypeSankey.expectHasFeature();
   });
+
+  test("loads aggregate donor page for countries without named donors feature", async ({
+    baseURL,
+    page,
+    donorPage,
+  }) => {
+    const response = await page.goto(
+      `${baseURL}/france/donor/${hash(DONOR_WITH_WIKIPEDIA_ARTICLE)}`,
+    );
+
+    expect(response?.status()).toBe(200);
+    await expect
+      .poll(() => donorPage.changesTable.rows.count())
+      .toBeGreaterThan(0);
+  });
 });
