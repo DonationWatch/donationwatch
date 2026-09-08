@@ -71,4 +71,15 @@ export class Meta extends PageObject {
     await this.expectHasProperty("og:description", new RegExp(name));
     await this.expectHasProperty("og:image", new RegExp(image));
   }
+
+  public async expectIndexed() {
+    await expect(this.getByName("robots")).toHaveCount(0);
+  }
+
+  public async expectNoIndex() {
+    await expect(this.getByName("robots")).toHaveAttribute(
+      "content",
+      /noindex/,
+    );
+  }
 }

@@ -35,8 +35,9 @@ test.describe("Donor page", () => {
     await test.step("has correct meta", async () => {
       await meta.expectConfigured(
         DONOR_WITH_WIKIPEDIA_ARTICLE,
-        `/${locale}/germany/cover.png`,
+        `/${locale}/germany/donors/${hash(DONOR_WITH_WIKIPEDIA_ARTICLE)}.png`,
       );
+      await meta.expectIndexed();
     });
 
     await test.step("donation table loads", async () => {
@@ -55,9 +56,12 @@ test.describe("Donor page", () => {
     donorPage,
     baseURL,
     accessibility,
+    meta,
     locale,
   }) => {
     await page.goto(`${baseURL}/germany/donor/${hash(DONOR_WITH_UBOs)}`);
+
+    await meta.expectNoIndex();
 
     await expect(donorPage.uboText).toHaveText(
       // Branded as BrowserBasedLocale to satisfy formatter types in tests.

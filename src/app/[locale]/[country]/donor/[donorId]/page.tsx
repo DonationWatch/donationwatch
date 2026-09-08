@@ -50,6 +50,7 @@ export async function generateMetadata(
     countryConfig,
     donations,
     biggestDonors,
+    donorMeta,
     tCommon,
   ] = await Promise.all([
     getTranslations({ locale: params.locale, namespace: "countries" }),
@@ -57,6 +58,7 @@ export async function generateMetadata(
     getCountryConfig(country),
     getDonationsByDonorId(country, donorId),
     getBiggestDonors(country),
+    getDonorMeta(country, donorId),
     getTranslations({ locale: params.locale, namespace: "common" }),
   ]);
 
@@ -92,6 +94,7 @@ export async function generateMetadata(
   });
 
   const isBiggestDonor = biggestDonors.some((donor) => donor.id === donorId);
+  const hasWiki = Boolean(donorMeta.wiki);
   const imageUrl = `${THUMBNAIL_PREFIX}/${locale}/${country}/donors/${donorId}.png`;
 
   const metadata: Metadata = {
@@ -104,11 +107,11 @@ export async function generateMetadata(
   };
 
   if (
-    isBiggestDonor &&
+    (isBiggestDonor || hasWiki) &&
     // only add images if the country has no donors
     hasFeature(countryConfig, Features.Donors)
   ) {
-    // add rich metadata for biggest donors as these have pregenerated images
+    // add rich metadata for biggest donors and donors with wiki as these have pregenerated images
     metadata.openGraph = baseOpenGraph({
       locale,
       images: [{ url: imageUrl, width: 800, height: 418 }],
@@ -117,8 +120,10 @@ export async function generateMetadata(
       card: "summary_large_image",
       images: [imageUrl],
     });
-  } else {
-    // donors that aren't part of the biggest donors aren't indexed individually
+  }
+
+  if (!isBiggestDonor && !hasWiki) {
+    // donors that aren't part of the biggest donors and don't have a wiki page aren't indexed individually
     metadata.robots = {
       index: false,
     };

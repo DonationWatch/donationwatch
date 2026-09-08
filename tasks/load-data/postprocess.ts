@@ -205,6 +205,61 @@ const buildBiggestDonors = (country: CountryConfig, donations: Donation[]) => {
     }));
 };
 
+const buildWikiDonors = (
+  country: CountryConfig,
+  donations: Donation[],
+  donorMeta?: DonorMetaDefinition,
+) => {
+  if (!donorMeta?.donors) return [];
+
+  const result: Record<
+    string,
+    { name: string; sum: number; partyYearSums: PartyYearsSums }
+  > = {};
+
+  const wikiDonorNames = new Set(
+    Object.entries(donorMeta.donors)
+      .filter(([, meta]) => meta.wiki)
+      .map(([name]) => name),
+  );
+
+  donations.forEach((donation) => {
+    const donorName = donation[DonationField.DonorName];
+    if (!wikiDonorNames.has(donorName)) return;
+
+    const year = donationYear(donation);
+    const donorId = hash(donorName);
+    result[donorId] ??= {
+      sum: 0,
+      name: donorName,
+      partyYearSums: {},
+    };
+    result[donorId].sum += donation[DonationField.Amount];
+
+    result[donorId].partyYearSums ??= {};
+    result[donorId].partyYearSums[year] ??= {};
+    result[donorId].partyYearSums[year][donation[DonationField.Receiver]] ??= {
+      [PartyStatField.Sum]: 0,
+      [PartyStatField.Count]: 0,
+      [PartyStatField.LastDonation]: donation[DonationField.Date],
+    };
+
+    result[donorId].partyYearSums[year][donation[DonationField.Receiver]][
+      PartyStatField.Sum
+    ] += donation[DonationField.Amount];
+    result[donorId].partyYearSums[year][donation[DonationField.Receiver]][
+      PartyStatField.Count
+    ]++;
+  });
+
+  return Object.entries(result).map(([id, { name, sum, partyYearSums }]) => ({
+    id,
+    name,
+    sum,
+    partyYearSums,
+  }));
+};
+
 const buildBiggestDonations = (
   country: CountryConfig,
   donations: Donation[],
@@ -328,6 +383,7 @@ const prebuiltDonorIds = async (
 const prebuildDonorMeta = async (
   country: CountryConfig,
   donations: Donation[],
+  donorMeta: DonorMetaDefinition,
 ) => {
   const donorMetaDir = path.join(
     __dirname,
@@ -338,13 +394,6 @@ const prebuildDonorMeta = async (
 
   await fs.mkdir(donorMetaDir, { recursive: true });
 
-  const donorMetaPath = path.join(
-    __dirname,
-    `../data/${country.code.toLowerCase()}/donor-meta.ts`,
-  );
-  const { default: donorMeta }: { default: DonorMetaDefinition } = await import(
-    donorMetaPath
-  );
   const processedMeta: Record<string, DonorMeta> = {};
 
   const relationDonors = new Set<string>();
@@ -510,6 +559,13 @@ const postprocess = async (
   countryConfig: CountryConfig,
   donations: Donation[],
 ) => {
+  const donorMetaPath = path.join(
+    __dirname,
+    `../data/${countryConfig.code.toLowerCase()}/donor-meta.ts`,
+  );
+  const { default: donorMeta }: { default: DonorMetaDefinition } = await import(
+    donorMetaPath
+  );
   const parties = await getPartiesForCountry(countryConfig.id);
   const dataDir = path.join(__dirname, "../../src/data", countryConfig.id);
 
@@ -548,6 +604,16 @@ const postprocess = async (
       ),
     ),
     fs.writeFile(
+      path.join(dataDir, "wiki-donors.ts"),
+      jsonAsTsModuleWithType(
+        JSON.stringify(buildWikiDonors(countryConfig, donations, donorMeta)),
+        {
+          name: "BigDonor[]",
+          import: "import {BigDonor} from '../../utils/loader/biggest-donors';",
+        },
+      ),
+    ),
+    fs.writeFile(
       path.join(dataDir, "biggest-donations.ts"),
       jsonAsTsModuleWithType(
         JSON.stringify(buildBiggestDonations(countryConfig, donations)),
@@ -572,7 +638,7 @@ const postprocess = async (
     prebuiltDonorIds(countryConfig, donations),
     prebuildWikipediaJsons(countryConfig),
     prebuildStaticNormalizationJsons(countryConfig),
-    prebuildDonorMeta(countryConfig, donations),
+    prebuildDonorMeta(countryConfig, donations, donorMeta),
   ]);
 };
 

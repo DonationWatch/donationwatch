@@ -13,7 +13,7 @@ import type { CountryConfig } from "@/types/country-config";
 import type { BigDonor } from "@/utils/loader/biggest-donors";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 import type { ImageLocale } from "@/utils/locales";
-import type { Donation } from "@/utils/types";
+import type { Donation, DonorMetaDefinition } from "@/utils/types";
 
 import { PartyField } from "@/types/party";
 import { makeBrand } from "@/utils/brand";
@@ -24,10 +24,12 @@ import { getBiggestDonors } from "@/utils/loader/biggest-donors";
 import { getParties } from "@/utils/loader/parties";
 import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
 import { CONST_LOCALES } from "@/utils/locales";
+import { DonationField } from "@/utils/types";
 
 import type { CreateTranslator } from "./utils";
 
 import { getDonations } from "../data/load-donations";
+import { hash } from "../load-data/util";
 import { CountryPageImage } from "./images/country-page-image";
 import { CountryYearsPageImage } from "./images/country-years-page-image";
 import { DonorImage } from "./images/donor-image";
@@ -96,6 +98,45 @@ const renderComponent = async (component: JSX.Element) => {
   const svg = await satori(component, satoriOptions);
 
   return toImage(svg);
+};
+
+const getDonorsForImages = async (
+  countryConfig: CountryConfig,
+  donations: Donation[],
+  biggestDonors: BigDonor[],
+): Promise<BigDonor[]> => {
+  const donorsToRender: BigDonor[] = [...biggestDonors];
+  const existingDonorIds = new Set(biggestDonors.map((d) => d.id));
+
+  const donorMetaModule = await import(
+    `../data/${countryConfig.code.toLowerCase()}/donor-meta.ts`
+  ).catch(() => ({ default: { donors: {} } }));
+  const donorMeta: DonorMetaDefinition = donorMetaModule.default ?? {
+    donors: {},
+  };
+
+  if (!donorMeta.donors) return donorsToRender;
+
+  for (const [donorName, meta] of Object.entries(donorMeta.donors)) {
+    if (!meta.wiki) continue;
+    const id = hash(donorName);
+    if (existingDonorIds.has(id)) continue;
+
+    const donorDonations = donations.filter(
+      (d) => d[DonationField.DonorName] === donorName,
+    );
+    if (!donorDonations.length) continue;
+
+    existingDonorIds.add(id);
+    donorsToRender.push({
+      id,
+      name: donorName,
+      sum: donorDonations.reduce((acc, d) => acc + d[DonationField.Amount], 0),
+      partyYearSums: {},
+    });
+  }
+
+  return donorsToRender;
 };
 
 describe.each(
@@ -198,11 +239,17 @@ describe.each(
         await fs.writeFile(path.join(COUNTRY_OUT_DIR, `cover.png`), png);
       });
 
-      it(`renders biggest donors images`, async () => {
+      it(`renders biggest and wiki donors images`, async () => {
         // if there are no donors, skip rendering donor images
         if (!hasFeature(countryConfig, Features.Donors)) return;
 
-        for (const donor of biggestDonors) {
+        const donors = await getDonorsForImages(
+          countryConfig,
+          donations,
+          biggestDonors,
+        );
+
+        for (const donor of donors) {
           const png = await renderComponent(
             await DonorImage(
               locale,

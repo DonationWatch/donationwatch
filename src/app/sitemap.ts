@@ -15,6 +15,7 @@ import { Features, hasFeature } from "@/utils/features";
 import { getBiggestDonors } from "@/utils/loader/biggest-donors";
 import { getBuild } from "@/utils/loader/build";
 import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
+import { getWikiDonors } from "@/utils/loader/wiki-donors";
 import { CONST_LOCALES } from "@/utils/locales";
 import { lastPartyStatsDonation } from "@/utils/party";
 
@@ -57,13 +58,23 @@ export default async function sitemap(props: {
           getPartyYearsSums(country),
           getBuild(country),
           getBiggestDonors(country),
+          getWikiDonors(country),
         ]),
       ),
     )
   ).reduce(
-    (configs, [country, config, partyYearsSums, build, biggestDonors]) => ({
+    (
+      configs,
+      [country, config, partyYearsSums, build, biggestDonors, wikiDonors],
+    ) => ({
       ...configs,
-      [country]: { config, partyYearsSums, build: build.t, biggestDonors },
+      [country]: {
+        config,
+        partyYearsSums,
+        build: build.t,
+        biggestDonors,
+        wikiDonors,
+      },
     }),
     {} as Record<
       Country,
@@ -72,6 +83,7 @@ export default async function sitemap(props: {
         partyYearsSums: PartyYearsSums;
         build: number;
         biggestDonors: BigDonor[];
+        wikiDonors: BigDonor[];
       }
     >,
   );
@@ -81,7 +93,7 @@ export default async function sitemap(props: {
       .flatMap((locale) => {
         return countriesArray
           .flatMap((country) => {
-            const { config, partyYearsSums, build, biggestDonors } =
+            const { config, partyYearsSums, build, biggestDonors, wikiDonors } =
               countryConfigs[country];
             const lastModified = new Date(
               Math.max(manualMinLastModified, build),
@@ -191,19 +203,29 @@ export default async function sitemap(props: {
                     lastModified: lastDonation ?? lastModified,
                   }));
               }),
-              biggestDonors
-                .filter(() => hasFeature(config, Features.Donors))
-                .map((donor) => {
+              (() => {
+                if (!hasFeature(config, Features.Donors)) return [];
+
+                const seenDonorIds = new Set<string>();
+                const sitemapDonors = [];
+
+                for (const donor of [...biggestDonors, ...wikiDonors]) {
+                  if (seenDonorIds.has(donor.id)) continue;
+                  seenDonorIds.add(donor.id);
+
                   const lastDonation = lastPartyStatsDonation(
                     config,
                     donor.partyYearSums,
                   );
 
-                  return {
+                  sitemapDonors.push({
                     url: `${BASE_URL}/${locale}/${country}/donor/${donor.id}`,
                     lastModified: lastDonation ?? lastModified,
-                  };
-                }),
+                  });
+                }
+
+                return sitemapDonors;
+              })(),
             ];
           })
           .concat([
