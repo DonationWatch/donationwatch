@@ -485,6 +485,10 @@ export class DeLoader extends DataLoader {
       return "Christian Oldendorff";
     }
 
+    if (donor.startsWith("Jutta") && donor.endsWith("Steiner")) {
+      return "Jutta Steiner";
+    }
+
     if (donor.startsWith("Andreas Bremke NEO 211")) {
       return "Andreas Bremke";
     }

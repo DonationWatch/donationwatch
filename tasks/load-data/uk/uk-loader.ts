@@ -954,6 +954,10 @@ export class UkLoader extends DataLoader {
       return "Union of Shop, Distributive and Allied Workers (USDAW)";
     }
 
+    if (lower.startsWith("christopher") && lower.endsWith("rokos")) {
+      return "Christopher Rokos";
+    }
+
     if (
       (lower.includes("peter andrew cruddas") && lower.includes("rt hon")) ||
       lower.includes("peter a cruddas")

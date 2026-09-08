@@ -206,6 +206,9 @@ export const donorMeta: DonorMetaDefinition = {
     "Holmes a Court, Simon": {
       wiki: 70066069,
     },
+    "Woolworths Group Ltd": {
+      wiki: 514888,
+    },
   },
   relations: [
     [

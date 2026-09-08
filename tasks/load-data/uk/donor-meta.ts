@@ -247,6 +247,9 @@ export const donorMeta: DonorMetaDefinition = {
     "Andreas Utermann": {
       wiki: 58374112,
     },
+    "Christopher Rokos": {
+      wiki: 44367493,
+    },
   },
   relations: [
     // Flamingo Land
