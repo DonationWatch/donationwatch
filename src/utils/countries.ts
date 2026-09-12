@@ -365,7 +365,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
   [Country.unitedkingdom]: {
     id: Country.unitedkingdom,
     minYear: "2010",
-    preliminaryDataSince: "2025",
+    preliminaryDataSince: "2026",
     legislativeYears: [
       ["2011", "2012", "2013", "2014", "2015"],
       ["2016", "2017"],
