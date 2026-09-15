@@ -45,7 +45,7 @@ export const DonorOverviewItem = ({
         </DonorLink>
       }
     >
-      <div className="truncate font-semibold">
+      <div className="min-w-0 truncate font-semibold">
         <DonorName donor={name} />
       </div>
     </CurrencyRankingItem>

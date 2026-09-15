@@ -150,6 +150,16 @@
       "title": "Istražite političke donacije po zemlji",
       "subtitle": "Odaberite zemlju kako biste pristupili detaljnim zapisima o donacijama, podacima o financiranju stranaka i informacijama o donatorima."
     },
+    "biggest_donations": {
+      "title": "Najveće političke donacije i donatori",
+      "text": "Istražite najveće pojedinačne političke priloge i donatore s najvećim ukupnim iznosima zabilježene u nacionalnim registrima koje prati DonationWatch, pri čemu su svi iznosi preračunati u EUR. Javno financiranje i državne subvencije isključeni su kako bi se naglasak stavio na privatne i korporativne priloge.",
+      "single_donations_title": "Najveće pojedinačne donacije",
+      "single_donations_footer": "Poredano prema pojedinačnoj transakciji",
+      "top_donors_title": "Donatori s najvećim ukupnim iznosima",
+      "top_donors_footer": "Agregirano kroz sve zapise",
+      "converted_to_eur": "Preračunato u EUR",
+      "rates_as_of": "Tečajevi valuta (na dan {date}):"
+    },
     "why": {
       "title": "Zašto je transparentnost političkih donacija važna",
       "p0": "Demokracija ovisi o informiranim građanima. Time što podatke o političkim donacijama činimo dostupnima i lakima za istraživanje, pomažemo ljudima razumjeti financijske odnose koji oblikuju njihov politički krajolik. Transparentnost u političkom financiranju gradi povjerenje, jača odgovornost i osnažuje birače da donose informirane odluke."

@@ -150,6 +150,16 @@
       "title": "Izpēti politiskos ziedojumus pēc valsts",
       "subtitle": "Izvēlieties valsti, lai piekļūtu detalizētiem ziedojumu ierakstiem, partiju finansēšanas datiem un informācijai par ziedotājiem."
     },
+    "biggest_donations": {
+      "title": "Lielākie politiskie ziedojumi un ziedotāji",
+      "text": "Izpētiet lielākos atsevišķos politiskos ieguldījumus un lielākos kopējos ziedotājus, kas reģistrēti DonationWatch uzraudzītajos valstu reģistros; visas summas ir pārrēķinātas EUR. Valsts finansējums un valsts subsīdijas ir izslēgtas, lai pievērstos privātpersonu un uzņēmumu ieguldījumiem.",
+      "single_donations_title": "Lielākie atsevišķie ziedojumi",
+      "single_donations_footer": "Sarindots pēc atsevišķa darījuma",
+      "top_donors_title": "Lielākie kopējie ziedotāji",
+      "top_donors_footer": "Apkopots no visiem ierakstiem",
+      "converted_to_eur": "Pārrēķināts EUR",
+      "rates_as_of": "Valūtu kursi (uz {date}):"
+    },
     "why": {
       "title": "Kāpēc politisko ziedojumu caurredzamība ir svarīga",
       "p0": "Demokrātija balstās uz informētiem pilsoņiem. Padarot politisko ziedojumu datus pieejamus un viegli izpētāmus, mēs palīdzam cilvēkiem izprast finanšu attiecības, kas veido viņu politisko vidi. Caurredzamība politiskajā finansēšanā vairo uzticēšanos, stiprina atbildību un dod vēlētājiem iespēju pieņemt informētus lēmumus."

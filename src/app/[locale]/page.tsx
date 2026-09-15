@@ -12,6 +12,7 @@ import {
   FormattedCompactCurrency,
   FormattedNumber,
 } from "@/components/browser-based-formatter";
+import { GlobalBiggestDonations } from "@/components/donations/global-biggest-donations";
 import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
 import {
   Article,
@@ -34,6 +35,10 @@ import { countryFlags } from "@/utils/country-flags";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { getMessagesForLocale } from "@/utils/i18n-loader";
 import { pick } from "@/utils/i18n-pick";
+import {
+  getGlobalBiggestDonations,
+  getGlobalBiggestDonors,
+} from "@/utils/loader/global-biggest-donations";
 import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
 import { LOCALES } from "@/utils/locales";
 import { baseOpenGraph, baseTwitter, generateAlternates } from "@/utils/meta";
@@ -92,15 +97,20 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
   ]);
   const countriesArray = [...COUNTRIES];
 
-  const countryDatas = await Promise.all(
-    countriesArray.map((country) =>
-      Promise.all([
-        country,
-        getCountryConfig(country),
-        getPartyYearsSums(country),
-      ]),
-    ),
-  );
+  const [globalBiggestDonations, globalBiggestDonors, countryDatas] =
+    await Promise.all([
+      getGlobalBiggestDonations(),
+      getGlobalBiggestDonors(),
+      Promise.all(
+        countriesArray.map((country) =>
+          Promise.all([
+            country,
+            getCountryConfig(country),
+            getPartyYearsSums(country),
+          ]),
+        ),
+      ),
+    ]);
 
   const sumPerCountry: Partial<Record<Country, number>> = {};
   const currencyTotals: Partial<Record<Currency, number>> = {};
@@ -122,7 +132,7 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
     });
   });
 
-  const pageMessages = pick(messages, ["root"]);
+  const pageMessages = pick(messages, ["root", "countries", "common"]);
 
   return (
     <ScopedClientIntlProvider messages={pageMessages}>
@@ -247,6 +257,12 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
               {tRoot("why.p0")}
             </p>
           </ArticleSection>
+
+          <GlobalBiggestDonations
+            donations={globalBiggestDonations}
+            donors={globalBiggestDonors}
+            locale={locale}
+          />
 
           <div className="grid gap-8 lg:grid-cols-2">
             <ArticleSection

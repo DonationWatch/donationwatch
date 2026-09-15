@@ -150,6 +150,16 @@
       "title": "Utforsk politiske donasjoner etter land",
       "subtitle": "Velg et land for å få tilgang til detaljerte donasjonsoppføringer, data om partifinansiering og informasjon om givere."
     },
+    "biggest_donations": {
+      "title": "Største politiske donasjoner og givere",
+      "text": "Utforsk de største enkeltstående politiske bidragene og giverne med høyest samlet beløp som er registrert i de nasjonale registrene DonationWatch følger, med alle beløp omregnet til EUR. Offentlig finansiering og statlige tilskudd er utelatt for å fokusere på private bidrag og bedriftsbidrag.",
+      "single_donations_title": "Største enkeltstående donasjoner",
+      "single_donations_footer": "Rangert etter enkelttransaksjon",
+      "top_donors_title": "Største samlede givere",
+      "top_donors_footer": "Aggregert på tvers av alle oppføringer",
+      "converted_to_eur": "Omregnet til EUR",
+      "rates_as_of": "Valutakurser (per {date}):"
+    },
     "why": {
       "title": "Hvorfor åpenhet om politiske donasjoner er viktig",
       "p0": "Demokrati er avhengig av informerte borgere. Ved å gjøre data om politiske donasjoner tilgjengelige og enkle å utforske, hjelper vi folk å forstå de økonomiske relasjonene som former deres politiske landskap. Åpenhet i politisk finansiering bygger tillit, styrker ansvarlighet og gjør velgere i stand til å ta informerte beslutninger."

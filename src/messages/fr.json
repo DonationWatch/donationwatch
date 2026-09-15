@@ -140,6 +140,16 @@
       "title": "Explorer les dons politiques par pays",
       "subtitle": "Sélectionnez un pays pour accéder aux registres détaillés des dons, aux données de financement des partis et aux informations sur les donateurs."
     },
+    "biggest_donations": {
+      "title": "Les plus grands dons politiques et donateurs",
+      "text": "Découvrez les plus importantes contributions politiques individuelles et les donateurs aux montants cumulés les plus élevés recensés dans les registres nationaux suivis par DonationWatch, tous les montants étant convertis en EUR. Les financements publics et les subventions de l’État sont exclus afin de mettre l’accent sur les contributions privées et d’entreprises.",
+      "single_donations_title": "Les plus grands dons individuels",
+      "single_donations_footer": "Classés par transaction individuelle",
+      "top_donors_title": "Les plus grands donateurs cumulés",
+      "top_donors_footer": "Agrégés sur l’ensemble des enregistrements",
+      "converted_to_eur": "Converti en EUR",
+      "rates_as_of": "Taux de change (au {date}) :"
+    },
     "why": {
       "title": "Pourquoi la transparence des dons politiques est cruciale",
       "p0": "La démocratie dépend de citoyens informés. En rendant les données sur les dons politiques accessibles et faciles à explorer, nous aidons à comprendre les relations financières qui façonnent le paysage politique. La transparence renforce la confiance, la responsabilité et permet aux électeurs de prendre des décisions éclairées."
