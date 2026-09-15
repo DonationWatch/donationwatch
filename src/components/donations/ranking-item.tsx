@@ -4,29 +4,12 @@ import { ChevronRight } from "lucide-react";
 
 import type { CountryConfig } from "@/types/country-config";
 
+import { RankBadge } from "@/components/donations/rank-badge";
 import { PercentageHint } from "@/components/percentage-hint";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { formatCountryCurrency } from "@/utils/formatter";
 
-const colorClasses: Record<number, string> = {
-  1: "from-yellow-100 to-yellow-200 text-yellow-900",
-  2: "from-gray-100 to-gray-200 text-gray-900",
-  3: "from-amber-100 to-amber-200 text-amber-900",
-};
-
-export const RankBadge = ({ rank }: { rank: number }) => {
-  return (
-    <div
-      aria-hidden={true}
-      className={
-        "mr-2 rounded-md bg-linear-to-r px-2 py-1 leading-none tabular-nums " +
-        colorClasses[rank]
-      }
-    >
-      #{rank}
-    </div>
-  );
-};
+export { RankBadge };
 
 export const CurrencyRankingItem = ({
   id = "n",
@@ -131,7 +114,7 @@ export const RankingItem = ({
           </div>
           <div
             className={
-              "flex grow items-center overflow-x-hidden " +
+              "flex min-w-0 grow items-center overflow-x-hidden " +
               (showRank ? "py-1" : "py-1.25")
             }
           >

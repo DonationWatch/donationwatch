@@ -150,6 +150,16 @@
       "title": "Verken politieke donaties per land",
       "subtitle": "Selecteer een land om toegang te krijgen tot gedetailleerde donatieregistraties, gegevens over partijfinanciering en donorinformatie."
     },
+    "biggest_donations": {
+      "title": "Grootste politieke donaties en donoren",
+      "text": "Bekijk de grootste afzonderlijke politieke bijdragen en de grootste cumulatieve donoren die zijn geregistreerd in de nationale registers die DonationWatch volgt, waarbij alle bedragen zijn omgerekend naar EUR. Publieke financiering en staatssteun zijn uitgesloten om de nadruk te leggen op particuliere en bedrijfsbijdragen.",
+      "single_donations_title": "Grootste afzonderlijke donaties",
+      "single_donations_footer": "Gerangschikt op afzonderlijke transactie",
+      "top_donors_title": "Grootste cumulatieve donoren",
+      "top_donors_footer": "Geaggregeerd over alle records",
+      "converted_to_eur": "Omgerekend naar EUR",
+      "rates_as_of": "Wisselkoersen (per {date}):"
+    },
     "why": {
       "title": "Waarom transparantie over politieke donaties belangrijk is",
       "p0": "Democratie is afhankelijk van geïnformeerde burgers. Door gegevens over politieke donaties toegankelijk en eenvoudig te verkennen te maken, helpen we mensen de financiële relaties te begrijpen die hun politieke landschap vormen. Transparantie in politieke financiering bouwt vertrouwen op, versterkt de verantwoordingsplicht en stelt kiezers in staat om weloverwogen beslissingen te nemen."

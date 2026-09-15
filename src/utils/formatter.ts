@@ -11,14 +11,14 @@ import type {
 import { createIntlCache } from "./intl-cache";
 
 const currencyFormatter = createIntlCache(
-  (locale: BrowserBasedLocale, currency: "EUR" | "CHF") =>
+  (locale: BrowserBasedLocale, currency: Currency) =>
     new Intl.NumberFormat(locale, {
       style: "currency",
       currency,
     }),
 );
 const currencyCompactFormatter = createIntlCache(
-  (locale: BrowserBasedLocale | ImageLocale, currency: "EUR" | "CHF") =>
+  (locale: BrowserBasedLocale | ImageLocale, currency: Currency) =>
     new Intl.NumberFormat(locale, {
       style: "currency",
       notation: "compact",

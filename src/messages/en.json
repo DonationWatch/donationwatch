@@ -140,6 +140,16 @@
       "title": "Explore political donations by country",
       "subtitle": "Select a country to access detailed donation records, party financing data, and donor information."
     },
+    "biggest_donations": {
+      "title": "Largest political donations and donors",
+      "text": "Explore the largest single political contributions and top cumulative donors recorded across the national registers tracked by DonationWatch, with all amounts normalized to EUR. Public funding and state subsidies are excluded to focus on private and corporate contributions.",
+      "single_donations_title": "Largest single donations",
+      "single_donations_footer": "Ranked by single transaction",
+      "top_donors_title": "Largest cumulative donors",
+      "top_donors_footer": "Aggregated across all records",
+      "converted_to_eur": "Converted to EUR",
+      "rates_as_of": "Exchange rates (as of {date}):"
+    },
     "why": {
       "title": "Why political donation transparency matters",
       "p0": "Democracy depends on informed citizens. By making political donation data accessible and easy to explore, we help people understand the financial relationships that shape their political landscape. Transparency in political financing builds trust, strengthens accountability, and empowers voters to make informed decisions."

@@ -150,6 +150,16 @@
       "title": "Prozkoumejte politické dary podle zemí",
       "subtitle": "Vyberte zemi a získejte přístup k podrobným záznamům o darech, údajům o financování stran a informacím o dárcích."
     },
+    "biggest_donations": {
+      "title": "Největší politické dary a dárci",
+      "text": "Prozkoumejte největší jednotlivé politické příspěvky a největší kumulativní dárce zaznamenané v národních registrech sledovaných platformou DonationWatch; všechny částky jsou přepočteny na EUR. Veřejné financování a státní dotace jsou vyloučeny, aby se pozornost soustředila na soukromé a firemní příspěvky.",
+      "single_donations_title": "Největší jednotlivé dary",
+      "single_donations_footer": "Seřazeno podle jednotlivé transakce",
+      "top_donors_title": "Největší kumulativní dárci",
+      "top_donors_footer": "Agregováno napříč všemi záznamy",
+      "converted_to_eur": "Přepočteno na EUR",
+      "rates_as_of": "Směnné kurzy (k datu {date}):"
+    },
     "why": {
       "title": "Proč je transparentnost politických darů důležitá",
       "p0": "Demokracie závisí na informovaných občanech. Tím, že zpřístupňujeme data o politických darech a umožňujeme je snadno prozkoumávat, pomáháme lidem porozumět finančním vztahům, které utvářejí jejich politické prostředí. Transparentnost ve financování politiky buduje důvěru, posiluje odpovědnost a umožňuje voličům činit informovaná rozhodnutí."

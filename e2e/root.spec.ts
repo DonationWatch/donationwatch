@@ -18,6 +18,14 @@ test.describe("Root page", () => {
     await test.step("has countries links", async () => {
       await expect(rootPage.countryLinks).toHaveCount(COUNTRIES.size);
     });
+
+    await test.step("has single donations section", async () => {
+      await expect(rootPage.singleDonations).toBeVisible();
+    });
+
+    await test.step("has top donors section", async () => {
+      await expect(rootPage.topDonors).toBeVisible();
+    });
   });
 });
 

@@ -150,6 +150,16 @@
       "title": "Politische Spenden nach Land erkunden",
       "subtitle": "Wähle ein Land aus, um auf detaillierte Spendeneinträge, Daten zur Parteienfinanzierung und Informationen zu Spendern zuzugreifen."
     },
+    "biggest_donations": {
+      "title": "Größte politische Spenden und Spender",
+      "text": "Entdecken Sie die größten einzelnen politischen Zuwendungen und die größten kumulierten Spender, die in den von DonationWatch erfassten nationalen Registern verzeichnet sind. Alle Beträge werden in EUR umgerechnet. Öffentliche Finanzierung und staatliche Zuschüsse sind ausgeschlossen, um den Fokus auf private und Unternehmensspenden zu legen.",
+      "single_donations_title": "Größte Einzelspenden",
+      "single_donations_footer": "Nach Einzeltransaktion sortiert",
+      "top_donors_title": "Größte kumulierte Spender",
+      "top_donors_footer": "Über alle Datensätze aggregiert",
+      "converted_to_eur": "In EUR umgerechnet",
+      "rates_as_of": "Wechselkurse (Stand: {date}):"
+    },
     "why": {
       "title": "Warum Transparenz bei politischen Spenden wichtig ist",
       "p0": "Demokratie lebt von informierten Bürgerinnen und Bürgern. Indem wir Daten zu politischen Spenden zugänglich und leicht erkundbar machen, helfen wir Menschen, die finanziellen Beziehungen zu verstehen, die ihre politische Landschaft prägen. Transparenz in der politischen Finanzierung schafft Vertrauen, stärkt die Rechenschaftspflicht und befähigt Wählerinnen und Wähler, informierte Entscheidungen zu treffen."

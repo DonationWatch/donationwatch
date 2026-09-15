@@ -150,6 +150,16 @@
       "title": "Uuri poliitilisi annetusi riigiti",
       "subtitle": "Vali riik, et pääseda ligi üksikasjalikele annetuskirjetele, parteide rahastamise andmetele ja annetajate teabele."
     },
+    "biggest_donations": {
+      "title": "Suurimad poliitilised annetused ja annetajad",
+      "text": "Uurige suurimaid üksikuid poliitilisi panuseid ja suurimaid kogupanusega annetajaid, mis on registreeritud DonationWatchi jälgitavates riiklikes registrites; kõik summad on teisendatud eurodesse. Avalik rahastamine ja riiklikud toetused on välja jäetud, et keskenduda era- ja ettevõtete panustele.",
+      "single_donations_title": "Suurimad üksikannetused",
+      "single_donations_footer": "Järjestatud üksiktehingu järgi",
+      "top_donors_title": "Suurimad kogupanusega annetajad",
+      "top_donors_footer": "Koondatud kõigi kirjete põhjal",
+      "converted_to_eur": "Teisendatud eurodesse",
+      "rates_as_of": "Vahetuskursid (seisuga {date}):"
+    },
     "why": {
       "title": "Miks poliitiliste annetuste läbipaistvus on oluline",
       "p0": "Demokraatia sõltub teadlikest kodanikest. Muutes poliitiliste annetuste andmed kättesaadavaks ja hõlpsasti uuritavaks, aitame inimestel mõista rahalisi seoseid, mis kujundavad nende poliitilist maastikku. Läbipaistvus poliitilises rahastamises suurendab usaldust, tugevdab vastutust ning annab valijatele võimaluse teha teadlikke otsuseid."

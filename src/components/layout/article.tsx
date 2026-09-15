@@ -50,34 +50,60 @@ export const Article = ({
 export const ArticleSectionWrapper = ({
   id,
   children,
+  className = "",
 }: PropsWithChildren<{
   id: string;
+  className?: string;
 }>) => {
   return (
-    <section className="space-y-4 lg:mt-4" aria-labelledby={id}>
+    <section
+      className={cn("space-y-4 lg:mt-4", className)}
+      aria-labelledby={id}
+    >
       {children}
     </section>
   );
 };
 
-export const ArticleSectionOneColumns = ({ children }: PropsWithChildren) => {
+export const ArticleSectionOneColumns = ({
+  children,
+  className = "",
+}: PropsWithChildren<{ className?: string }>) => {
   return (
-    <div className="relative mb-8 grid gap-8 lg:grid-cols-1 xl:gap-12">
+    <div
+      className={cn(
+        "relative mb-8 grid gap-8 lg:grid-cols-1 xl:gap-12",
+        className,
+      )}
+    >
       {children}
     </div>
   );
 };
-export const ArticleSectionTwoColumns = ({ children }: PropsWithChildren) => {
+export const ArticleSectionTwoColumns = ({
+  children,
+  className = "",
+}: PropsWithChildren<{ className?: string }>) => {
   return (
-    <div className="relative mb-8 grid gap-8 lg:grid-cols-2 xl:gap-12">
+    <div
+      className={cn(
+        "relative mb-8 grid gap-8 lg:grid-cols-2 xl:gap-12",
+        className,
+      )}
+    >
       {children}
     </div>
   );
 };
 
-export const ArticleSectionColumn = ({ children }: PropsWithChildren) => {
+export const ArticleSectionColumn = ({
+  children,
+  className,
+}: PropsWithChildren<{ className?: string }>) => {
   return (
-    <div className="mx-auto w-full space-y-2 lg:w-10/12 lg:w-full">
+    <div
+      className={cn("mx-auto w-full space-y-2 lg:w-10/12 lg:w-full", className)}
+    >
       {children}
     </div>
   );

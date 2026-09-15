@@ -7,6 +7,10 @@ import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { PartyStats } from "@/types/party-stats";
 import type { CountryCode, Currency } from "@/utils/countries";
+import type {
+  GlobalBiggestDonation,
+  GlobalBiggestDonor,
+} from "@/utils/loader/global-biggest-donations";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 import type {
   Donation,
@@ -19,11 +23,17 @@ import { PartyField } from "@/types/party";
 import { PartyStatField } from "@/types/party-stats";
 import { firstItem, lastItem } from "@/utils/array";
 import {
+  ANONYMIZED_DONOR_KEYWORD,
   BIGGEST_DONATIONS_COUNT,
   DONOR_ID_HASH_LEN,
+  DONOR_TO_PARTY_BY_YEAR,
+  GLOBAL_BIGGEST_DONATIONS_COUNT,
+  GLOBAL_BIGGEST_DONORS_COUNT,
   MOST_RECENT_HISTORY_SIZE,
+  REDACTED_DONOR_KEYWORD,
 } from "@/utils/config";
 import { Country, COUNTRIES } from "@/utils/countries";
+import { convertToEur } from "@/utils/currency";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { getHistory } from "@/utils/data/get-history";
 import { donationYear } from "@/utils/date";
@@ -31,7 +41,7 @@ import { getWikiArticles } from "@/utils/loader/wiki";
 import { sumPartySums } from "@/utils/math";
 import { getLongName } from "@/utils/party";
 import { donationDateSorter } from "@/utils/sort";
-import { DonationField } from "@/utils/types";
+import { DonationField, DonationType, DonorType } from "@/utils/types";
 
 import { getDonations } from "../data/load-donations";
 import { jsonAsTsModule, jsonAsTsModuleWithType } from "../utils";
@@ -268,6 +278,121 @@ const buildBiggestDonations = (
     .toSorted((a, b) => b[DonationField.Amount] - a[DonationField.Amount])
     .slice(0, BIGGEST_DONATIONS_COUNT);
 };
+
+class GlobalBiggestDataBuilder {
+  private donorSums = new Map<
+    string,
+    {
+      donor: string;
+      donorId: string;
+      country: Country;
+      currency: Currency;
+      sum: number;
+      donationCount: number;
+    }
+  >();
+  private donorMaxDonations = new Map<string, GlobalBiggestDonation>();
+
+  public processCountryDonations(
+    countryConfig: CountryConfig,
+    donations: Donation[],
+  ) {
+    for (const donation of donations) {
+      const donorName = donation[DonationField.DonorName];
+      if (
+        !donorName ||
+        donorName.startsWith(DONOR_TO_PARTY_BY_YEAR) ||
+        donorName.startsWith(REDACTED_DONOR_KEYWORD) ||
+        donorName.startsWith(ANONYMIZED_DONOR_KEYWORD)
+      ) {
+        continue;
+      }
+      if (
+        donation[DonationField.DonationType] === DonationType.PublicFunds ||
+        donation[DonationField.DonorType] === DonorType.PublicFund
+      ) {
+        continue;
+      }
+
+      const amount = donation[DonationField.Amount];
+      const amountInEur = convertToEur(amount, countryConfig.currency);
+      const donorId = hash(donorName);
+      const donorKey = `${countryConfig.id}:${donorId}`;
+
+      const currentMax = this.donorMaxDonations.get(donorKey);
+      if (!currentMax || amountInEur > currentMax.amountInEur) {
+        this.donorMaxDonations.set(donorKey, {
+          id: donation[DonationField.Id],
+          donor: donorName,
+          donorId,
+          country: countryConfig.id,
+          party: donation[DonationField.Receiver],
+          amount,
+          currency: countryConfig.currency,
+          amountInEur,
+          date: donation[DonationField.Date],
+          ...(donation[DonationField.DonorType] !== undefined
+            ? { donorType: donation[DonationField.DonorType] }
+            : {}),
+        });
+      }
+
+      const existing = this.donorSums.get(donorKey) || {
+        donor: donorName,
+        donorId,
+        country: countryConfig.id,
+        currency: countryConfig.currency,
+        sum: 0,
+        donationCount: 0,
+      };
+
+      existing.sum += amount;
+      existing.donationCount += 1;
+      this.donorSums.set(donorKey, existing);
+    }
+  }
+
+  public async writeFiles() {
+    const topDonations = Array.from(this.donorMaxDonations.values())
+      .sort((a, b) => b.amountInEur - a.amountInEur)
+      .slice(0, GLOBAL_BIGGEST_DONATIONS_COUNT);
+
+    const topDonors: GlobalBiggestDonor[] = Array.from(this.donorSums.values())
+      .map((item) => ({
+        donor: item.donor,
+        donorId: item.donorId,
+        country: item.country,
+        currency: item.currency,
+        sum: item.sum,
+        sumInEur: convertToEur(item.sum, item.currency),
+        donationCount: item.donationCount,
+      }))
+      .sort((a, b) => b.sumInEur - a.sumInEur)
+      .slice(0, GLOBAL_BIGGEST_DONORS_COUNT);
+
+    const globalDataDir = path.join(__dirname, "../../src/data/global");
+    await fs.mkdir(globalDataDir, { recursive: true });
+
+    await Promise.all([
+      fs.writeFile(
+        path.join(globalDataDir, "biggest-donations.ts"),
+        jsonAsTsModuleWithType(JSON.stringify(topDonations), {
+          name: "GlobalBiggestDonation[]",
+          import:
+            "import type {GlobalBiggestDonation} from '../../utils/loader/global-biggest-donations';",
+        }),
+      ),
+      fs.writeFile(
+        path.join(globalDataDir, "biggest-donors.ts"),
+        jsonAsTsModuleWithType(JSON.stringify(topDonors), {
+          name: "GlobalBiggestDonor[]",
+          import:
+            "import type {GlobalBiggestDonor} from '../../utils/loader/global-biggest-donations';",
+        }),
+      ),
+    ]);
+  }
+}
 
 const prebuildWikipediaJsons = async (country: CountryConfig) => {
   const publicDataDir = path.join(__dirname, "../../public/data", country.id);
@@ -685,6 +810,8 @@ const codeCountry: Record<CountryCode, Country> = {
   ZA: Country.southafrica,
 };
 const main = async () => {
+  const globalBuilder = new GlobalBiggestDataBuilder();
+
   await Promise.all(
     countries.map(async (countryCode) => {
       const country = codeCountry[countryCode];
@@ -693,10 +820,12 @@ const main = async () => {
         getDonations(country),
       ]);
 
-      return postprocess(countryConfig, countryDonations);
+      globalBuilder.processCountryDonations(countryConfig, countryDonations);
+      await postprocess(countryConfig, countryDonations);
     }),
   );
 
+  await globalBuilder.writeFiles();
   await buildDataIndex([...COUNTRIES]);
   await postprocessGeojson();
 };

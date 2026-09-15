@@ -66,3 +66,7 @@ export const CACHED_PARTIES_COUNT = 8;
 
 // How many top donors are visible on the country home page
 export const TOP_DONORS_TO_SHOW = 8;
+
+// How many top donations are visible on the root page
+export const GLOBAL_BIGGEST_DONATIONS_COUNT = 10;
+export const GLOBAL_BIGGEST_DONORS_COUNT = 10;
