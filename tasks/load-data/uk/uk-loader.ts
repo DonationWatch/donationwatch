@@ -760,9 +760,13 @@ export class UkLoader extends DataLoader {
       return "Lord John Sainsbury";
     }
 
-    if (lower === "andreas uttermann") {
+    if (
       // There's a donation in 2010 from "Andreas Uttermann" which is actually from "Andreas Utermann".
       // This is a typo currently in the upstream data (https://search.electoralcommission.org.uk/English/Donations/C0024817)
+      lower === "andreas uttermann" ||
+      // Also in Q2 2026 they changed his name to Andreas EF Utermann which we want to normalize to the other donations of him (https://search.electoralcommission.org.uk/English/Donations/C0839193)
+      (lower.startsWith("andreas") && lower.endsWith("utermann"))
+    ) {
       return "Andreas Utermann";
     }
 
