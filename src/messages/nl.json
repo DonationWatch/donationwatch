@@ -354,6 +354,19 @@
       "p1": "Grotere vakken duiden op hogere bedragen, en de namen in elk vak tonen de grootste bijdragers binnen hun donortype. Deze weergave bevat {count} verschillende donortypes voor {party}.",
       "p2": "Hieronder staat een lijst met sectoren gerangschikt naar hun totale bijdragen, van hoog naar laag:"
     },
+    "donation_types": {
+      "title": "Donatietypen",
+      "treemap": {
+        "title": "Donatietypen voor {party}",
+        "description": "Totaal gepubliceerde bijdragen aan {party} in {country} per donatietype."
+      },
+      "p0": "Politieke bijdragen aan {party} zijn gecategoriseerd op donatietype om inzicht te geven in hoe de partij wordt gefinancierd.",
+      "all_single": "Alle geregistreerde bijdragen aan {party} werden ontvangen als {type}, goed voor in totaal {amount} ({percentage}) verspreid over {count} registraties.",
+      "largest_share": "Het grootste deel van de financiering werd ontvangen als {type}, wat neerkomt op {amount} ({percentage} van alle bijdragen).",
+      "remaining_share": "De overige bijdragen werden ontvangen als {types}.",
+      "summary_item": "{amount} ({percentage}) als {type}",
+      "treemap_guide": "De interactieve treemap toont de relatieve omvang van elk donatiekanaal, waarbij de vakken de grootste individuele donateurs binnen die categorie weergeven. Hieronder staat de volledige ranglijst op basis van het totale bedrag:"
+    },
     "qa": {
       "sum": {
         "q": "Hoeveel heeft {party} aan donaties ontvangen?",

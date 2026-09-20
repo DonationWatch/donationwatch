@@ -354,6 +354,19 @@
       "p1": "Větší boxy označují vyšší částky a jména zobrazená uvnitř představují největší dárce v daném typu. Tento pohled zahrnuje {count} různých typů dárců pro {party}.",
       "p2": "Níže je seznam sektorů seřazených podle celkových příspěvků od nejvyšších po nejnižší:"
     },
+    "donation_types": {
+      "title": "Typy darů",
+      "treemap": {
+        "title": "Typy darů pro {party}",
+        "description": "Celkové zveřejněné příspěvky {party} v {country} podle typu daru."
+      },
+      "p0": "Politické příspěvky straně {party} jsou rozděleny podle typu daru, aby poskytly transparentnost ohledně financování strany.",
+      "all_single": "Všechny evidované příspěvky straně {party} byly přijaty jako {type}, v celkové výši {amount} ({percentage}) v rámci {count} záznamů.",
+      "largest_share": "Největší podíl na financování byl přijat jako {type}, což představuje {amount} ({percentage} všech příspěvků).",
+      "remaining_share": "Zbývající příspěvky byly přijaty jako {types}.",
+      "summary_item": "{amount} ({percentage}) jako {type}",
+      "treemap_guide": "Interaktivní stromová mapa znázorňuje relativní velikost jednotlivých kategorií darů, přičemž vnořené obdélníky představují největší dárce v dané kategorii. Níže je kompletní pořadí podle celkové částky:"
+    },
     "qa": {
       "sum": {
         "q": "Kolik obdržela {party} na darech?",

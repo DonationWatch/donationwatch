@@ -1,4 +1,4 @@
-import type { DonorType } from "./types";
+import type { DonationType, DonorType } from "./types";
 
 const chartColors = [
   "#5070dd",
@@ -18,3 +18,6 @@ export const chartColorFor = (idx: number) =>
 
 export const donorTypeColor = (donorType: DonorType) =>
   chartColorFor(donorType);
+
+export const donationTypeColor = (donationType: DonationType) =>
+  chartColorFor(donationType);

@@ -354,6 +354,19 @@
       "p1": "Größere Kästchen zeigen höhere Summen an, und die in jedem Kästchen angezeigten Namen sind die größten Beitragszahler innerhalb ihres Spendentypus. Diese Ansicht umfasst {count} verschiedene Spendentypen für {party}.",
       "p2": "Unten steht eine Liste, in der die Sektoren nach ihren Gesamtspenden von hoch nach niedrig sortiert sind:"
     },
+    "donation_types": {
+      "title": "Spendenarten",
+      "treemap": {
+        "title": "Spendenarten für {party}",
+        "description": "Gesamte veröffentlichte Beiträge an {party} in {country} nach Spendenart."
+      },
+      "p0": "Politische Spenden an {party} werden nach Spendenart kategorisiert, um Transparenz darüber zu schaffen, wie die Partei finanziert wird.",
+      "all_single": "Alle erfassten Spenden an {party} wurden als {type} verbucht, mit insgesamt {amount} ({percentage}) über {count} dokumentierte Spenden hinweg.",
+      "largest_share": "Der größte Teil der Finanzierung entfiel auf {type}, was {amount} ({percentage} aller Spenden) ausmacht.",
+      "remaining_share": "Die restlichen Zuwendungen wurden verbucht als {types}.",
+      "summary_item": "{amount} ({percentage}) als {type}",
+      "treemap_guide": "Die interaktive Baumkarte visualisiert die relative Größe jeder Spendenart, wobei die inneren Rechtecke die größten Einzelspender in dieser Kategorie darstellen. Unten ist die vollständige Rangliste nach Gesamtbetrag:"
+    },
     "qa": {
       "sum": {
         "q": "Wie viel hat {party} an Spenden erhalten?",

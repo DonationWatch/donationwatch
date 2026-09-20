@@ -354,6 +354,19 @@
       "p1": "Lielāki kvadrāti norāda uz lielākām summām, un katrā kvadrātā redzamie vārdi ir lielākie ziedotāji savā kategorijā. Šajā skatā iekļauti {count} dažādi ziedotāju veidi partijai {party}.",
       "p2": "Zemāk ir saraksts ar nozarēm, kas sarindotas pēc kopējā ziedojumu apjoma, no lielākā līdz mazākajam:"
     },
+    "donation_types": {
+      "title": "Ziedojumu veidi",
+      "treemap": {
+        "title": "Ziedojumu veidi partijai {party}",
+        "description": "Kopējie publicētie ziedojumi partijai {party} valstī {country} pēc ziedojumu veida."
+      },
+      "p0": "Politiskie ziedojumi partijai {party} tiek kategorizēti pēc ziedojuma veida, lai nodrošinātu caurskatāmību par partijas finansējumu.",
+      "all_single": "Visi reģistrētie ziedojumi partijai {party} tika saņemti kā {type}, kopā veidojot {amount} ({percentage}) {count} ierakstos.",
+      "largest_share": "Lielākā finansējuma daļa tika saņemta kā {type}, veidojot {amount} ({percentage} no visiem ziedojumiem).",
+      "remaining_share": "Atlikušie ziedojumi tika saņemti kā {types}.",
+      "summary_item": "{amount} ({percentage}) kā {type}",
+      "treemap_guide": "Interaktīvā koka karte parāda katra ziedojumu veida relatīvo apjomu, kur iekšējie taisnstūri attēlo lielākos individuālos ziedotājus šajā kategorijā. Zemāk ir pilns saraksts pēc kopējās summas:"
+    },
     "qa": {
       "sum": {
         "q": "Cik {party} ir saņēmusi ziedojumos?",

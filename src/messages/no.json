@@ -354,6 +354,19 @@
       "p1": "Større bokser indikerer høyere summer, og navnene som vises i hver boks er de største bidragsyterne innen givertypen. Denne visningen inkluderer {count} ulike givertyper for {party}.",
       "p2": "Nedenfor er en liste som rangerer givertyper etter totalbidrag, sortert fra høyest til lavest:"
     },
+    "donation_types": {
+      "title": "Donasjonstyper",
+      "treemap": {
+        "title": "{party}: donasjonstyper",
+        "description": "Totale publiserte bidrag til {party} i {country} etter donasjonstype."
+      },
+      "p0": "Politiske bidrag til {party} er kategorisert etter donasjonstype for å gi åpenhet om hvordan partiet er finansiert.",
+      "all_single": "Alle registrerte bidrag til {party} ble mottatt som {type}, på til sammen {amount} ({percentage}) fordelt på {count} registreringer.",
+      "largest_share": "Den største andelen av finansieringen ble mottatt som {type}, og utgjorde {amount} ({percentage} av alle bidrag).",
+      "remaining_share": "De resterende bidragene ble mottatt som {types}.",
+      "summary_item": "{amount} ({percentage}) som {type}",
+      "treemap_guide": "Det interaktive trekartet viser den relative størrelsen på hver donasjonstype, der indre rektangler representerer de største individuelle bidragsyterne. Nedenfor er den fullstendige rangeringen etter totalbeløp:"
+    },
     "qa": {
       "sum": {
         "q": "Hvor mye har {party} mottatt i donasjoner?",
