@@ -113,6 +113,12 @@ test.describe("Party page", () => {
     await expect(partyPage.donorTypeSection.typeList).toBeVisible();
   });
 
+  test("donation type section", async ({ page, baseURL, partyPage }) => {
+    await page.goto(`${baseURL}/unitedkingdom/party/TORIES/donors`);
+    await partyPage.donationTypeSection.treemap.expectHasFeature();
+    await expect(partyPage.donationTypeSection.typeList).toBeVisible();
+  });
+
   test.describe("changes page", () => {
     test.beforeEach(async ({ page, baseURL, historyPage, partyPage }) => {
       await page.goto(`${baseURL}/germany/party/${CHECK_PARTY}/changes`);

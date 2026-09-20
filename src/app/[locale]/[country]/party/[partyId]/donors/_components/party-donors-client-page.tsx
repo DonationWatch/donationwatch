@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 import type { Party } from "@/types/party";
 
+import { LoadingPartyDonationTypeTreemap } from "@/components/charts/loading-donation-types-treemap";
 import { LoadingDonationPartyTreemap } from "@/components/charts/loading-donation-years-treemap";
 import { LoadingPartyDonorTypeTreemap } from "@/components/charts/loading-donor-types-treemap";
 import { DonorOverviewList } from "@/components/donors/donor-overview-list";
@@ -17,6 +18,7 @@ import {
 } from "@/components/layout/article";
 import Loading from "@/components/loading/loading";
 import { LoadingPartyDonorTypeText } from "@/components/parties/part-donor-type-text";
+import { LoadingPartyDonationTypeText } from "@/components/parties/party-donation-type-text";
 import { PartyDonorPageText } from "@/components/parties/party-donor-page-text";
 import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useDonationsByParty } from "@/hooks/use-api";
@@ -36,6 +38,9 @@ interface PartyDonorsClientPageProps {
   donorTypesTitle: string;
   donorTypesTreemapTitle: string;
   donorTypesTreemapSubtitle: string;
+  donationTypesTitle: string;
+  donationTypesTreemapTitle: string;
+  donationTypesTreemapSubtitle: string;
   listTitle: string;
   listP0: string;
 }
@@ -47,6 +52,9 @@ export const PartyDonorsClientPage = ({
   donorTypesTitle,
   donorTypesTreemapTitle,
   donorTypesTreemapSubtitle,
+  donationTypesTitle,
+  donationTypesTreemapTitle,
+  donationTypesTreemapSubtitle,
   listTitle,
   listP0,
 }: PartyDonorsClientPageProps) => {
@@ -125,6 +133,31 @@ export const PartyDonorsClientPage = ({
                 party={party}
                 title={donorTypesTreemapTitle}
                 subtitle={donorTypesTreemapSubtitle}
+                donations={filteredDonations}
+              />
+            </ArticleSectionColumn>
+          </ArticleSectionTwoColumns>
+        </ArticleSectionWrapper>
+      ) : null}
+
+      {hasFeature(country, Features.DonationType) ? (
+        <ArticleSectionWrapper id={"sec-party-donation-types"}>
+          <ArticleSectionTwoColumns>
+            <ArticleSectionColumn>
+              <ArticleSectionTitle
+                id={"sec-party-donation-types"}
+                title={donationTypesTitle}
+              />
+              <LoadingPartyDonationTypeText
+                party={party}
+                donations={filteredDonations}
+              />
+            </ArticleSectionColumn>
+            <ArticleSectionColumn>
+              <LoadingPartyDonationTypeTreemap
+                party={party}
+                title={donationTypesTreemapTitle}
+                subtitle={donationTypesTreemapSubtitle}
                 donations={filteredDonations}
               />
             </ArticleSectionColumn>

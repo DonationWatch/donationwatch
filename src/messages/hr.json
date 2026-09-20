@@ -354,6 +354,19 @@
       "p1": "Veći okviri označavaju veće iznose, a imena prikazana unutar svakog okvira predstavljaju najveće donatore unutar njihove kategorije. Ovaj prikaz uključuje {count} različitih vrsta donatora za {party}.",
       "p2": "U nastavku je popis sektora rangiranih prema ukupnim donacijama, od najvećih prema najmanjima:"
     },
+    "donation_types": {
+      "title": "Vrste donacija",
+      "treemap": {
+        "title": "Vrste donacija za {party}",
+        "description": "Ukupno objavljeni doprinosi za {party} u {country} po vrsti donacije."
+      },
+      "p0": "Politički doprinosi stranci {party} kategorizirani su prema vrsti donacije kako bi se osigurala transparentnost financiranja stranke.",
+      "all_single": "Svi zabilježeni doprinosi stranci {party} primljeni su kao {type}, u ukupnom iznosu od {amount} ({percentage}) kroz {count} zabilježenih uplata.",
+      "largest_share": "Najveći udio financiranja primljen je kao {type}, što čini {amount} ({percentage} svih doprinosa).",
+      "remaining_share": "Preostali doprinosi primljeni su kao {types}.",
+      "summary_item": "{amount} ({percentage}) kao {type}",
+      "treemap_guide": "Interaktivna karta stabla prikazuje relativnu veličinu svakog kanala donacija, gdje ugniježđeni pravokutnici predstavljaju najveće pojedinačne donatore unutar te kategorije. U nastavku je potpuni poredak prema ukupnom iznosu:"
+    },
     "qa": {
       "sum": {
         "q": "Koliko je {party} primila u donacijama?",

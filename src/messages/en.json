@@ -344,6 +344,19 @@
       "p1": "Larger boxes indicate higher sums, and the names shown within each box are the largest contributors inside their donor type. This view includes {count} distinct donor types for {party}.",
       "p2": "Below is a list ranking sectors by their total contributions, sorted from highest to lowest:"
     },
+    "donation_types": {
+      "title": "Donation types",
+      "treemap": {
+        "title": "{party} donation types",
+        "description": "Total published contributions to {party} in {country} by donation type."
+      },
+      "p0": "Political contributions to {party} are categorized by donation type to provide transparency into how the party is funded.",
+      "all_single": "All recorded contributions to {party} were received as {type}, totaling {amount} ({percentage}) across {count} documented records.",
+      "largest_share": "The largest share of funding was received as {type}, accounting for {amount} ({percentage} of all contributions).",
+      "remaining_share": "The remaining contributions were received as {types}.",
+      "summary_item": "{amount} ({percentage}) as {type}",
+      "treemap_guide": "The interactive treemap highlights the relative size of each donation channel, where nested rectangles represent the top individual donors within that category. Below is the complete ranking by total amount:"
+    },
     "qa": {
       "sum": {
         "q": "How much has {party} received in donations?",

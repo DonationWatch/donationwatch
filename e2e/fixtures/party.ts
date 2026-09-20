@@ -21,4 +21,10 @@ export class PartyPage extends PageObject {
     }),
     this.props,
   );
+  public readonly donationTypeSection = new DonorTypeSection(
+    this.page.getByRole("region", {
+      name: this.translations("party.donation_types.title"),
+    }),
+    this.props,
+  );
 }

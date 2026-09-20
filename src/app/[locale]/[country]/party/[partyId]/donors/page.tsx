@@ -118,6 +118,17 @@ export default async function DonorPage(
           party: party[PartyField.Short],
           country: getCountryName(countryConfig, tCountries),
         })}
+        donationTypesTitle={t("party.donation_types.title")}
+        donationTypesTreemapTitle={t("party.donation_types.treemap.title", {
+          party: party[PartyField.Short],
+        })}
+        donationTypesTreemapSubtitle={t(
+          "party.donation_types.treemap.description",
+          {
+            party: party[PartyField.Short],
+            country: getCountryName(countryConfig, tCountries),
+          },
+        )}
         listTitle={t("party.donor_list.title", {
           party: party[PartyField.Short],
         })}

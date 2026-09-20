@@ -354,6 +354,19 @@
       "p1": "Suuremad ruudud näitavad suuremaid summasid ja igas ruudus olevad nimed tähistavad suurimaid annetajaid vastavas kategoorias. See vaade sisaldab {count} erinevat annetajatüüpi erakonna {party} jaoks.",
       "p2": "Allpool on loetelu sektoritest, mis on järjestatud kogupanuste järgi, kõrgeimast madalaimani:"
     },
+    "donation_types": {
+      "title": "Annetuste tüübid",
+      "treemap": {
+        "title": "Annetuste tüübid erakonnale {party}",
+        "description": "Kokku avaldatud annetused erakonnale {party} riigis {country} annetuse tüübi järgi."
+      },
+      "p0": "Poliitilised annetused erakonnale {party} on jaotatud annetuse tüübi järgi, et tagada läbipaistvus erakonna rahastamises.",
+      "all_single": "Kõik registreeritud annetused erakonnale {party} laekusid kui {type}, kogusummas {amount} ({percentage}) {count} kirje kohta.",
+      "largest_share": "Suurim osa rahastamisest saadi kui {type}, moodustades {amount} ({percentage} kõigist annetustest).",
+      "remaining_share": "Ülejäänud annetused laekusid kui {types}.",
+      "summary_item": "{amount} ({percentage}) kui {type}",
+      "treemap_guide": "Interaktiivne puukaart näitab iga annetustüübi suhtelist osakaalu, kus sisemised ruudud tähistavad selle kategooria suurimaid annetajaid. Allpool on täielik pingerida kogusumma järgi:"
+    },
     "qa": {
       "sum": {
         "q": "Kui palju on {party} annetusi saanud?",

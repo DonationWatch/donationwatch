@@ -344,6 +344,19 @@
       "p1": "Les plus grands blocs indiquent les sommes les plus élevées. Cette vue inclut {count} types de donateurs distincts pour {party}.",
       "p2": "Ci-dessous, le classement des secteurs par contribution totale :"
     },
+    "donation_types": {
+      "title": "Types de dons",
+      "treemap": {
+        "title": "Types de dons pour {party}",
+        "description": "Total des contributions publiées pour {party} en {country} par type de don."
+      },
+      "p0": "Les contributions politiques à {party} sont catégorisées par type de don afin d'offrir une transparence sur le financement du parti.",
+      "all_single": "Toutes les contributions enregistrées pour {party} ont été reçues sous forme de {type}, pour un total de {amount} ({percentage}) réparties sur {count} enregistrements.",
+      "largest_share": "La plus grande part du financement a été reçue sous forme de {type}, représentant {amount} ({percentage} de toutes les contributions).",
+      "remaining_share": "Les contributions restantes ont été reçues sous forme de {types}.",
+      "summary_item": "{amount} ({percentage}) sous forme de {type}",
+      "treemap_guide": "Le treemap interactif met en évidence la taille relative de chaque catégorie de don, les rectangles imbriqués représentant les principaux donateurs individuels dans chaque catégorie. Vous trouverez ci-dessous le classement complet par montant total :"
+    },
     "qa": {
       "sum": {
         "q": "Combien {party} a-t-il reçu de dons ?",
