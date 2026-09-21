@@ -115,6 +115,49 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
         <FunFact
           locale={locale}
           t={tFun}
+          date={"2026-09-21"}
+          status={{
+            owner: "The Electoral Commission",
+            type: "reported",
+          }}
+          title={{
+            en: "UK Donations: Registration Number Typos",
+            de: "UK-Spenden: Tippfehler bei Firmennummern",
+            et: "Ühendkuningriigi annetused: Registrinumbrite näpuvead",
+            nl: "VK-donaties: Typefouten in registratienummers",
+            cs: "Dary ve Velké Británii: Překlepy v registračních číslech",
+            lv: "Apvienotās Karalistes ziedojumi: Reģistrācijas numuru kļūdas",
+            hr: "Donacije u UK-u: Tipfeleri u registracijskim brojevima",
+            no: "Storbritannia-donasjoner: Tastefeil i registreringsnumre",
+            uk: "Пожертви у Великій Британії: Помилки в реєстраційних номерах",
+            fr: "Dons au Royaume-Uni : Fautes de frappe dans les numéros d'enregistrement",
+          }}
+          text={{
+            en: "While linking corporate donations in the UK Electoral Commission data to Companies House, a few company registration numbers returned a 404. Looking closer, most of these were simple typos like transposed digits or incorrect leading zeros.",
+            de: "Beim Verknüpfen von Unternehmensspenden aus den Daten der britischen Wahlkommission mit dem Companies House führten einige Firmennummern ins Leere. Bei genauerem Hinsehen handelte es sich meist um einfache Tippfehler wie Zahlendreher oder falsche Nullen.",
+            et: "Ühendkuningriigi valimiskomisjoni ettevõtete annetuste sidumisel Companies House'i registriga viisid mõned registrinumbrid 404 veani. Lähemal vaatlusel olid põhjuseks lihtsad näpuvead, nagu vahetusse läinud numbrid või valed nullid.",
+            nl: "Bij het koppelen van bedrijfsdonaties uit de Britse verkiezingsdata aan Companies House leverden enkele registratienummers een 404 op. Bij nadere inspectie bleken dit meestal simpele typefoutjes te zijn, zoals verwisselde cijfers of verkeerde voorloopnullen.",
+            cs: "Při propojování firemních darů z dat britské volební komise s Companies House skončilo několik registračních čísel chybou 404. Při bližším pohledu šlo většinou o prosté překlepy jako prohozené číslice nebo nesprávné počáteční nuly.",
+            lv: "Savienojot uzņēmumu ziedojumus no Apvienotās Karalistes datiem ar Companies House, daži reģistrācijas numuri atgrieza 404 kļūdu. Pārbaudot tuvāk, lielākoties tās bija vienkāršas pārrakstīšanās kļūdas, piemēram, samainīti cipari vai nepareizas sākuma nulles.",
+            hr: "Prilikom povezivanja donacija tvrtki iz britanskih podataka s Companies Houseom, nekoliko registracijskih brojeva vraćalo je grešku 404. Detaljnijim pregledom pokazalo se da je uglavnom riječ o jednostavnim tipfelerima poput zamijenjenih znamenki ili pogrešnih početnih nula.",
+            no: "Ved kobling av selskapsdonasjoner fra britiske valgdata til Companies House ga enkelte registreringsnumre en 404-feil. Ved nærmere undersøkelse viste det seg å være enkle tastefeil som ombyttede sifre eller feil antall innledende nuller.",
+            uk: "Під час зіставлення корпоративних пожертв із даних британської виборчої комісії з Companies House кілька реєстраційних номерів видавали помилку 404. Як з'ясувалося, здебільшого це були прості одруківки: переставлені місцями цифри або неправильні початкові нулі.",
+            fr: "En reliant les dons d'entreprises des données électorales britanniques à Companies House, quelques numéros d'immatriculation renvoyaient une erreur 404. En y regardant de plus près, il s'agissait surtout de simples fautes de frappe comme des chiffres inversés ou de mauvais zéros au début.",
+          }}
+        >
+          {`Reported:  00129450  ->  Liskeard Liberal Club Company Ltd
+Actual:    00129430  ->  LISKEARD LIBERAL CLUB COMPANY LIMITED
+
+Reported:  00012011  ->  Romiley Liberal Club & Hall Co Ltd
+Actual:    00120011  ->  ROMILEY LIBERAL CLUB AND HALL COMPANY LIMITED
+
+Reported:  03299742  ->  Midland Computer Services
+Actual:    03277942  ->  MIDLAND COMPUTER SERVICES LIMITED`}
+        </FunFact>
+
+        <FunFact
+          locale={locale}
+          t={tFun}
           date={"2026-04-21"}
           status={{
             owner: "The National Cyber Security Centre (NCSC)",
