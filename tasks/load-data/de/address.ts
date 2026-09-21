@@ -83,6 +83,9 @@ export const extractAddress = (
   if (text.endsWith("Italien")) {
     return { [AddressField.Country]: "IT" };
   }
+  if (text.endsWith("Zypern")) {
+    return { [AddressField.Country]: "CY" };
+  }
 
   if (lines.length > 0) {
     const cityLine = lines.at(-1)!;

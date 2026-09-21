@@ -514,6 +514,10 @@ export class DeLoader extends DataLoader {
       return "MMI Leisure & Capital Management GmbH";
     }
 
+    if (donor.startsWith("Nicholas Galea")) {
+      return "Nicholas Galea";
+    }
+
     if (
       containsWords(donor, "Hans Helmuth Schmidt") &&
       address[AddressField.Zip] === "52353"
