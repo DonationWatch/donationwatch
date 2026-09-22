@@ -53,6 +53,12 @@ function generateJSON(
         currency: country.currency,
         donor_type:
           donorType !== undefined ? t(`donor_type.${donorType}`) : undefined,
+        donor_registration_number: hasFeature(
+          country,
+          Features.DonorRegistrationNumber,
+        )
+          ? d[DonationField.DonorRegistrationNumber]
+          : undefined,
         country: d[DonationField.Address]?.[AddressField.Country],
         state: d[DonationField.Address]?.[AddressField.State],
       };
@@ -71,6 +77,9 @@ function generateCSV(
 
   if (hasFeature(country, Features.DonorType)) {
     headers.push("Donor Type");
+  }
+  if (hasFeature(country, Features.DonorRegistrationNumber)) {
+    headers.push("Registration Number");
   }
   if (hasFeature(country, Features.Origin)) {
     headers.push("Country", "State");
@@ -93,6 +102,12 @@ function generateCSV(
     if (hasFeature(country, Features.DonorType)) {
       const donorType = donation[DonationField.DonorType];
       row.push(donorType !== undefined ? t(`donor_type.${donorType}`) : "");
+    }
+
+    if (hasFeature(country, Features.DonorRegistrationNumber)) {
+      row.push(
+        escapeCSVField(donation[DonationField.DonorRegistrationNumber] ?? ""),
+      );
     }
 
     if (hasFeature(country, Features.Origin)) {

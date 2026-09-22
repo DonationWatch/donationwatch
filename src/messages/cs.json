@@ -487,6 +487,7 @@
     "subtitle": "Celkové příspěvky a příjemci",
     "active_period": "Aktivní období",
     "type": "Typ dárce",
+    "registration_number": "IČO",
     "summary": "{donor} daroval celkem {sum} v {count} jednotlivých darech. Průměrná velikost daru je {avg}. Dary byly rozděleny mezi {parties} různých stran.",
     "oldest": "První dar po roce {minYear} byl učiněn dne {date} v částce {amount} straně {party}.",
     "newest": "Nejnovější dar byl učiněn dne {date}, kdy {amount} bylo darováno straně {party}.",

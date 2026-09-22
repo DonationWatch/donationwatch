@@ -487,6 +487,7 @@
     "subtitle": "Kopējie ieguldījumi un saņēmēji",
     "active_period": "Aktīvais periods",
     "type": "Ziedojuma veids",
+    "registration_number": "Reģistrācijas numurs",
     "summary": "{donor} ir kopumā ziedojis {sum} {count} atsevišķos ziedojumos. Vidējais ziedojuma lielums ir {avg}. Ziedojumi tika sadalīti starp {parties} dažādām partijām.",
     "oldest": "Pirmais ziedojums pēc {minYear} tika veikts {date}, ziedojot {amount} partijai {party}.",
     "newest": "Jaunākais ziedojums tika veikts {date}, kad {amount} tika ziedoti partijai {party}.",

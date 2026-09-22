@@ -1,10 +1,11 @@
 "use client";
-import { HatGlasses, Info, Lock } from "lucide-react";
+import { ExternalLink, HatGlasses, Info, Lock } from "lucide-react";
 
 import type { Countries, Country } from "@/utils/countries";
 import type { Donation, DonorMeta, ReceiverId } from "@/utils/types";
 
 import { AbsoluteMultipleColorsGradient } from "@/components/absolute-multiple-colors-gradient";
+import { ExternalRegistryLink } from "@/components/donations/external-registry-link";
 import { RelatedDonorChip } from "@/components/donors/related-donor-chip";
 import { PageHeader } from "@/components/layout/page-header";
 import Loading from "@/components/loading/loading";
@@ -27,6 +28,7 @@ import { useFilterEngine } from "@/hooks/use-filter-engine";
 import { PartyField } from "@/types/party";
 import { donationYear } from "@/utils/date";
 import { getDonorName, isRedactedDonor } from "@/utils/donor";
+import { Features, hasFeature } from "@/utils/features";
 import {
   formatAnd,
   formatCountryCurrency,
@@ -158,6 +160,14 @@ const DonorPageHeadContent = ({
   const rawDonorName = donations.at(0)?.[DonationField.DonorName] ?? "";
   const donorName = getDonorName(rawDonorName, tCommon);
   const donorType = donations.at(0)?.[DonationField.DonorType];
+  const registrationNumber = hasFeature(
+    countryConfig,
+    Features.DonorRegistrationNumber,
+  )
+    ? donations.find(
+        (donation) => donation[DonationField.DonorRegistrationNumber],
+      )?.[DonationField.DonorRegistrationNumber]
+    : undefined;
 
   let sum: number = 0;
   const sums: Record<string, number> = {};
@@ -288,6 +298,25 @@ const DonorPageHeadContent = ({
                 <MetaCard
                   title={t("donor.type")}
                   value={t(`donor_type.${donorType}`)}
+                />
+              ) : null}
+              {registrationNumber ? (
+                <MetaCard
+                  title={t("donor.registration_number")}
+                  value={
+                    <ExternalRegistryLink
+                      countryConfig={countryConfig}
+                      registrationNumber={registrationNumber}
+                      className="group inline-flex items-center gap-1.5 tabular-nums hover:underline"
+                      title={tCommon("view_source")}
+                    >
+                      <span>{registrationNumber}</span>
+                      <ExternalLink
+                        className="inline shrink-0 text-zinc-400 group-hover:text-zinc-600 dark:text-zinc-500 dark:group-hover:text-zinc-300"
+                        size={16}
+                      />
+                    </ExternalRegistryLink>
+                  }
                 />
               ) : null}
             </div>

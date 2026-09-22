@@ -57,7 +57,7 @@ interface PartyConfig {
 
 ## `COUNTRY_CONFIG` fields worth knowing
 
-- `features` — bitmask of `Features` (`src/utils/features.ts`): `Date` (day-level dates vs. year-only), `Origin` (address has country/state), `DonorType`, `ExternalDonationIds`, `Donors` (has real donor names, as opposed to aggregate-only sources), `DonationType`.
+- `features` — bitmask of `Features` (`src/utils/features.ts`): `Date` (day-level dates vs. year-only), `Origin` (address has country/state), `DonorType`, `ExternalDonationIds`, `Donors` (has real donor names, as opposed to aggregate-only sources), `DonationType`, `DonorRegistrationNumber`.
 - `knownPartyRequirements: { count, sum }` — a party only _needs_ an entry in `parties` once it crosses this count OR this sum (use `-1` on one side to check only the other). Without it, every single-donation micro-party demands an entry. See `cz`/`lv`/`hr`/`ge`/`ca`/`fr`/`ua` for real thresholds.
 - `donorFilters` / `receiverFilters` — arrays of regex strings (case-insensitive) matched against the _normalized_ donor/receiver name to drop known noise (government bodies acting as pass-through, deregistered fringe committees). See `at`, `uk`, `au` for large examples — `au`'s receiver filter list in particular is a good template for handling independents/individual-politician "parties".
 - `projection` — Lambert Conformal Conic params, only needed if the country gets a choropleth map.

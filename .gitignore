@@ -54,6 +54,7 @@ next-env.d.ts
 .open-next
 .wrangler
 *.zip
+*.csv
 
 # app specific data which we don't want to ship
 /public/*.txt
