@@ -431,6 +431,7 @@
     "subtitle": "Total contributions and recipients",
     "active_period": "Active period",
     "type": "Donor type",
+    "registration_number": "Company number",
     "summary": "{donor} has made a total of {sum} in the form of {count} individual donations. The average donation size is {avg}. The donations were distributed to {parties} different parties.",
     "oldest": "The first donation after {minYear} was made on {date} with an amount of {amount} to the {party}.",
     "newest": "The most recent donation was made on {date}, with {amount} going to the {party}.",

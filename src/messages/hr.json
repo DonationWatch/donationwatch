@@ -441,6 +441,7 @@
     "subtitle": "Ukupni doprinosi i primatelji",
     "active_period": "Aktivno razdoblje",
     "type": "Vrsta donatora",
+    "registration_number": "Registarski broj",
     "summary": "{donor} je dao ukupno {sum} u obliku {count} pojedinačnih donacija. Prosječna veličina donacije je {avg}. Donacije su raspoređene na {parties} različitih stranaka.",
     "oldest": "Prva donacija nakon {minYear} dana je {date} u iznosu od {amount} stranci {party}.",
     "newest": "Najnovija donacija dana je {date}, s {amount} upućenih stranci {party}.",

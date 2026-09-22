@@ -18,7 +18,15 @@ import type { ExtractedYearData, PartyConfig } from "../data-loader";
 
 import { DataLoader } from "../data-loader";
 import { containsWords, RANDOM_COLOR_MARKER } from "../util";
+import {
+  crnOverrides,
+  normalizeUkCompanyNumber,
+  prepareCompaniesHouseCache,
+  verifyExtractedCompanyNumbers,
+} from "./companies-house";
 import { donorMeta } from "./donor-meta";
+
+export { crnOverrides, normalizeUkCompanyNumber };
 
 const toGBPFloat = (valueString: string) => {
   const ukFormat = valueString.substring(1).replaceAll(/,/g, "");
@@ -678,6 +686,15 @@ export class UkLoader extends DataLoader {
       "Building Society": DonorType.BuildingSociety,
     };
 
+    const normalizedCrn =
+      typeof CompanyRegistrationNumber === "string"
+        ? normalizeUkCompanyNumber(CompanyRegistrationNumber)
+        : undefined;
+
+    const donorRegistrationNumber = normalizedCrn
+      ? (crnOverrides[normalizedCrn] ?? normalizedCrn)
+      : undefined;
+
     return {
       [DonationField.Id]: ecRef,
       [DonationField.Date]: this.normalizeIsoDate(isoDate),
@@ -689,7 +706,15 @@ export class UkLoader extends DataLoader {
       [DonationField.Address]: { [AddressField.Country]: "UK" },
       [DonationField.DonationType]:
         ecDonationTypeToDonationType[donationType] ?? DonationType.Money,
+      ...(donorRegistrationNumber
+        ? { [DonationField.DonorRegistrationNumber]: donorRegistrationNumber }
+        : {}),
     };
+  }
+
+  public override async prepareCache(): Promise<void> {
+    await super.prepareCache();
+    await prepareCompaniesHouseCache(this.cacheDir, this.log);
   }
 
   async extractYearData(year: string): Promise<ExtractedYearData[]> {
@@ -700,22 +725,24 @@ export class UkLoader extends DataLoader {
       columns: false,
     });
 
-    return (
-      rows
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        .map((row: any[], idx: number) => {
-          const extracted = this.extractor(row, idx);
+    const extractedData = rows
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .map((row: any[], idx: number) => {
+        const extracted = this.extractor(row, idx);
 
-          if (!extracted) return;
+        if (!extracted) return;
 
-          return {
-            idx: `r${idx}`,
-            ...extracted,
-          };
-        })
-        // remove empty rows
-        .filter(Boolean)
-    );
+        return {
+          idx: `r${idx}`,
+          ...extracted,
+        };
+      })
+      // remove empty rows
+      .filter(Boolean) as ExtractedYearData[];
+
+    await verifyExtractedCompanyNumbers(extractedData, this.cacheDir, this.log);
+
+    return extractedData;
   }
 
   cacheFile(year: string) {

@@ -487,6 +487,7 @@
     "subtitle": "Panused ja saajad kokku",
     "active_period": "Aktiivne periood",
     "type": "Annetajatüüp",
+    "registration_number": "Registrikood",
     "summary": "{donor} on teinud kokku {sum} {count} eraldi annetusena. Keskmine annetuse suurus on {avg}. Annetused on jagatud {parties} eri erakonna vahel.",
     "oldest": "Esimene annetus pärast {minYear} tehti {date} summas {amount} erakonnale {party}.",
     "newest": "Viimane annetus tehti {date}, kui {amount} läks erakonnale {party}.",

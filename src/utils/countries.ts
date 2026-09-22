@@ -378,7 +378,8 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       Features.Donors |
       Features.DonorType |
       Features.ExternalDonationIds |
-      Features.DonationType,
+      Features.DonationType |
+      Features.DonorRegistrationNumber,
     minPublicDonationAmount: 1000,
     knownPartyRequirements: {
       sum: 10_000,

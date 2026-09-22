@@ -62,6 +62,8 @@ export const enum DonationField {
   // Ultimate Beneficial Owners
   // see https://en.wikipedia.org/wiki/Beneficial_ownership
   UBOs,
+  // Official registration / entity number (e.g. UK Companies House CRN, Norwegian OrgNr, French SIREN)
+  DonorRegistrationNumber,
 }
 
 export interface Donation {
@@ -77,6 +79,7 @@ export interface Donation {
   [DonationField.UBOs]?: string[];
   // being unset = DonationTypes.Money
   [DonationField.DonationType]?: DonationType;
+  [DonationField.DonorRegistrationNumber]?: string;
 }
 
 export type IsoDate = `${number}-${number}-${number}`;

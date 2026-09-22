@@ -441,6 +441,7 @@
     "subtitle": "Totale bidrag og mottakere",
     "active_period": "Aktiv periode",
     "type": "Givertype",
+    "registration_number": "Organisasjonsnummer",
     "summary": "{donor} har gitt totalt {sum} fordelt på {count} enkeltbidrag. Gjennomsnittlig donasjon er {avg}. Donasjonene ble fordelt på {parties} ulike partier.",
     "oldest": "Den første donasjonen etter {minYear} ble gjort den {date} med beløpet {amount} til {party}.",
     "newest": "Den nyeste donasjonen ble gjort den {date}, med {amount} til {party}.",

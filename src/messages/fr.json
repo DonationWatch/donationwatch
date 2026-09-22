@@ -431,6 +431,7 @@
     "subtitle": "Total des contributions et bénéficiaires",
     "active_period": "Période d'activité",
     "type": "Type de donateur",
+    "registration_number": "Numéro d'immatriculation",
     "summary": "{donor} a effectué un total de {sum} via {count} dons individuels. Le don moyen est de {avg}. Les dons ont été répartis entre {parties} partis.",
     "oldest": "Le premier don après {minYear} a été fait le {date} pour un montant de {amount} au bénéfice du {party}.",
     "newest": "Le don le plus récent date du {date}, avec {amount} versés au {party}.",

@@ -487,6 +487,7 @@
     "subtitle": "Totale bijdragen en ontvangers",
     "active_period": "Actieve periode",
     "type": "Donortype",
+    "registration_number": "KvK-nummer",
     "summary": "{donor} heeft in totaal {sum} gedoneerd in {count} afzonderlijke donaties. De gemiddelde donatie bedraagt {avg}. De donaties zijn verdeeld over {parties} verschillende partijen.",
     "oldest": "De eerste donatie na {minYear} werd gedaan op {date} met een bedrag van {amount} aan de {party}.",
     "newest": "De meest recente donatie werd gedaan op {date}, waarbij {amount} naar de {party} ging.",
