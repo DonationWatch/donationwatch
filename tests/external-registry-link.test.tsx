@@ -45,7 +45,7 @@ describe("ExternalRegistryLink", () => {
       "https://find-and-update.company-information.service.gov.uk/company/02366682",
     );
     expect(link.getAttribute("target")).toBe("_blank");
-    expect(link.getAttribute("rel")).toBe("noopener noreferrer");
+    expect(link.getAttribute("rel")).toBe("nofollow noopener noreferrer");
     expect(link.textContent).toBe("02366682");
   });
 

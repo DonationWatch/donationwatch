@@ -27,7 +27,12 @@ export const ExternalDonationLink = ({
   if (!externalUrl) return null;
 
   return (
-    <a {...props} href={externalUrl} rel="noopener noreferrer" target="_blank">
+    <a
+      {...props}
+      href={externalUrl}
+      rel="nofollow noopener noreferrer"
+      target="_blank"
+    >
       {children}
     </a>
   );
