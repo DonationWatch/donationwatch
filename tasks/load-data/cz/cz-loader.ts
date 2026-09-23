@@ -14,9 +14,59 @@ import { donorMeta } from "./donor-meta";
 
 interface CompanyDonation {
   company: string;
+  companyId?: number | string;
   date: string;
   money: number;
 }
+
+export const normalizeCzechIco = (
+  raw: number | string | undefined,
+): string | undefined => {
+  if (raw === undefined || raw === null) return undefined;
+  const cleaned = String(raw).replace(/\D/g, "");
+  if (cleaned.length === 0) return undefined;
+  return cleaned.padStart(8, "0");
+};
+
+export const isValidCzechIco = (ico: string | undefined): boolean => {
+  if (!ico || !/^\d{8}$/.test(ico)) return false;
+  const digits = ico.split("").map(Number);
+  const weights = [8, 7, 6, 5, 4, 3, 2];
+  const sum = digits
+    .slice(0, 7)
+    .reduce((acc, digit, idx) => acc + digit * weights[idx], 0);
+  const remainder = sum % 11;
+  let expectedCheckDigit: number;
+  if (remainder === 0) {
+    expectedCheckDigit = 1;
+  } else if (remainder === 1) {
+    expectedCheckDigit = 0;
+  } else {
+    expectedCheckDigit = 11 - remainder;
+  }
+  return digits[7] === expectedCheckDigit;
+};
+
+// Known typos in UDHPSH open data mapped to correct Czech IČO numbers in ARES
+export const icoOverrides: Record<string, string> = {
+  // Jan Kulhánek s.r.o.: reported 66473383, actual is 06647383
+  "66473383": "06647383",
+  // Magnety nálepky s.r.o.: reported 00565686, actual is 05656869
+  "00565686": "05656869",
+  // Změna pro Kolín z.s.: reported 02287438, actual is 22874381
+  "02287438": "22874381",
+  // Kellner Písek s.r.o.: reported 02604538, actual is 26049538
+  "02604538": "26049538",
+  // Cravt koupelny s.r.o.: reported 26009228, actual is 26090228
+  "26009228": "26090228",
+  // START INSURANCE GROUP s.r.o.: reported 07586074, actual is 07286074
+  "07586074": "07286074",
+  // ELPOS, s.r.o.: reported 14614355, actual is 14614855
+  "14614355": "14614855",
+  // ALOX s.r.o.: reported 25427959, actual is 25427989
+  "25427959": "25427989",
+};
+
 interface PersonDonation {
   lastName: string;
   firstName: string;
@@ -581,6 +631,7 @@ export class CzLoader extends DataLoader {
     const defs = JSON.parse(await this.cachedYearData(year)) as PartyDef[];
 
     const donations: ExtractedYearData[] = [];
+    const invalidIcos = new Map<string, string[]>();
 
     defs.forEach((def, didx) => {
       def.donations.forEach((donation, idx) => {
@@ -602,6 +653,22 @@ export class CzLoader extends DataLoader {
 
         if (isCompanyDonation(donation)) {
           extractedData[DonationField.DonorName] = donation.company;
+          extractedData[DonationField.DonorType] = DonorType.Company;
+          const rawIco = normalizeCzechIco(donation.companyId);
+          const ico = rawIco ? (icoOverrides[rawIco] ?? rawIco) : undefined;
+          if (ico) {
+            if (isValidCzechIco(ico)) {
+              extractedData[DonationField.DonorRegistrationNumber] = ico;
+            } else {
+              if (!invalidIcos.has(ico)) {
+                invalidIcos.set(ico, []);
+              }
+              const list = invalidIcos.get(ico)!;
+              if (!list.includes(donation.company)) {
+                list.push(donation.company);
+              }
+            }
+          }
         } else if (isPersonDonation(donation)) {
           extractedData[DonationField.DonorName] =
             `${donation.firstName} ${donation.lastName}`;
@@ -611,6 +678,15 @@ export class CzLoader extends DataLoader {
         donations.push(extractedData);
       });
     });
+
+    if (invalidIcos.size > 0) {
+      const invalidList = Array.from(invalidIcos.entries())
+        .map(([ico, donors]) => `${ico} (${donors.join(", ")})`)
+        .join(", ");
+      this.log(
+        `Found ${invalidIcos.size} invalid IČOs (failed modulo-11 checksum): ${invalidList}`,
+      );
+    }
 
     return donations;
   }

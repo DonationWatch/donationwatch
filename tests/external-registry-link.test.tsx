@@ -18,11 +18,24 @@ describe("Features.DonorRegistrationNumber", () => {
       ),
     ).toBe(true);
   });
+
+  test("is enabled on Czech Republic country config", () => {
+    expect(
+      hasFeature(
+        COUNTRY_CONFIG[Country.czechrepublic],
+        Features.DonorRegistrationNumber,
+      ),
+    ).toBe(true);
+  });
 });
 
 describe("ExternalRegistryLink", () => {
   const ukConfig = {
     id: Country.unitedkingdom,
+  } as CountryConfig;
+
+  const czConfig = {
+    id: Country.czechrepublic,
   } as CountryConfig;
 
   const deConfig = {
@@ -47,6 +60,26 @@ describe("ExternalRegistryLink", () => {
     expect(link.getAttribute("target")).toBe("_blank");
     expect(link.getAttribute("rel")).toBe("nofollow noopener noreferrer");
     expect(link.textContent).toBe("02366682");
+  });
+
+  test("renders link for Czech Republic IČO", () => {
+    render(
+      <ExternalRegistryLink
+        countryConfig={czConfig}
+        registrationNumber="60197501"
+      >
+        <span>60197501</span>
+      </ExternalRegistryLink>,
+    );
+
+    const link = screen.getByRole("link");
+    expect(link).toBeDefined();
+    expect(link.getAttribute("href")).toBe(
+      "https://ares.gov.cz/ekonomicke-subjekty/ros/60197501",
+    );
+    expect(link.getAttribute("target")).toBe("_blank");
+    expect(link.getAttribute("rel")).toBe("nofollow noopener noreferrer");
+    expect(link.textContent).toBe("60197501");
   });
 
   test("renders plain span fallback for unsupported country", () => {

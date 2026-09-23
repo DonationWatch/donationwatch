@@ -252,7 +252,11 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       ["2022", "2023", "2024", "2025"],
       ["2026", "2027", "2028", "2029"],
     ],
-    features: Features.Date | Features.Donors | Features.DonorType,
+    features:
+      Features.Date |
+      Features.Donors |
+      Features.DonorType |
+      Features.DonorRegistrationNumber,
     minPublicDonationAmount: 25, // approx 1 eur
     currency: "CZK",
     source: {
