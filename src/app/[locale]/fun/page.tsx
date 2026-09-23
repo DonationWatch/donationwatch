@@ -115,6 +115,55 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
         <FunFact
           locale={locale}
           t={tFun}
+          date={"2026-09-23"}
+          status={{
+            owner: "ÚDHPSH",
+            type: "reported",
+          }}
+          title={{
+            en: "Czech Republic: Company ID (IČO) Typos",
+            de: "Tschechien: Tippfehler bei Firmen-Identifikationsnummern (IČO)",
+            et: "Tšehhi: Ettevõtete registrikoodide (IČO) näpuvead",
+            nl: "Tsjechië: Typefouten in bedrijfsnummers (IČO)",
+            cs: "Česká republika: Překlepy v IČO firemních dárců",
+            lv: "Čehija: Uzņēmumu reģistrācijas numuru (IČO) kļūdas",
+            hr: "Češka: Tipfeleri u matičnim brojevima tvrtki (IČO)",
+            no: "Tsjekkia: Tastefeil i organisasjonsnumre (IČO)",
+            uk: "Чехія: Помилки в ідентифікаційних кодах компаній (IČO)",
+            fr: "République tchèque : Fautes de frappe dans les numéros d'entreprise (IČO)",
+          }}
+          text={{
+            en: "While integrating links to the Czech company register (ARES) for corporate donors in the ÚDHPSH dataset, several company IDs failed the official modulo-11 checksum. Comparing company names against ARES revealed typical typos like mistyped digits, missing digits, or transposed characters.",
+            de: "Bei der Verknüpfung von Unternehmensspenden aus dem ÚDHPSH-Datensatz mit dem tschechischen Firmenregister (ARES) bestanden mehrere Firmennummern (IČO) die offizielle Modulo-11-Prüfsumme nicht. Ein Abgleich der Firmennamen mit ARES zeigte typische Tippfehler wie Zahlendreher, vertauschte oder fehlende Ziffern.",
+            et: "ÚDHPSH andmestiku ettevõtete annetuste sidumisel Tšehhi äriregistriga (ARES) ei läbinud mitmed ettevõtete registrikoodid (IČO) ametlikku modulo-11 kontrollsummat. Nimede võrdlemisel ARES-iga tulid ilmsiks tüüpilised näpuvead nagu valed või puuduvad numbrid ja numbrite vahetusse minek.",
+            nl: "Bij het koppelen van bedrijfsdonaties uit de ÚDHPSH-dataset aan het Tsjechische handelsregister (ARES) voldeden verschillende bedrijfsnummers (IČO) niet aan de officiële modulo-11-controlesom. Een vergelijking met ARES bracht typische typefouten aan het licht, zoals verwisselde of ontbrekende cijfers.",
+            cs: "Při propojování firemních dárců z dat ÚDHPSH s registrem ARES neprošlo několik identifikačních čísel (IČO) oficiálním kontrolním součtem modulo 11. Porovnání názvů společností v ARES odhalilo klasické překlepy jako prohozené číslice, chybějící číslice nebo překlepy v jednotlivých číslicích.",
+            lv: "Savienojot uzņēmumu ziedojumus no ÚDHPSH datu kopas ar Čehijas uzņēmumu reģistru (ARES), vairāki uzņēmumu reģistrācijas numuri (IČO) neizturēja oficiālo 11. moduļa kontrolsummas pārbaudi. Salīdzinot uzņēmumu nosaukumus ar ARES, atklājās tipiskas pārrakstīšanās kļūdas, piemēram, nepareizi, trūkstoši vai samainīti cipari.",
+            hr: "Prilikom povezivanja donacija tvrtki iz skupa podataka ÚDHPSH-a s češkim registrom tvrtki (ARES), nekoliko identifikacijskih brojeva (IČO) nije prošlo službenu provjeru kontrolnog zbroja modulo-11. Usporedba naziva tvrtki u ARES-u otkrila je tipične tipfelere poput zamijenjenih, pogrešnih ili nedostajućih znamenki.",
+            no: "Ved kobling av selskapsdonasjoner fra ÚDHPSH-datasettet til det tsjekkiske foretaksregisteret (ARES) besto flere organisasjonsnumre (IČO) ikke den offisielle modulo-11-kontrollsummen. En sammenligning av selskapsnavn mot ARES avdekket klassiske tastefeil som ombyttede, gale eller manglende sifre.",
+            uk: "Під час зіставлення корпоративних пожертв із набору даних ÚDHPSH із чеським реєстром компаній (ARES) кілька кодів компаній (IČO) не пройшли офіційну перевірку контрольної суми за модулем 11. Зіставлення назв компаній з ARES виявило типові одруківки: переставлені, пропущені або помилково введені цифри.",
+            fr: "Lors de l'intégration des liens vers le registre tchèque des entreprises (ARES) pour les dons de sociétés dans le jeu de données de l'ÚDHPSH, plusieurs numéros d'immatriculation (IČO) ont échoué à la somme de contrôle modulo-11. La comparaison des noms avec ARES a révélé des fautes de frappe classiques comme des chiffres inversés, manquants ou erronés.",
+          }}
+        >
+          {`Reported:  26009228  ->  Cravt koupelny s.r.o.
+Actual:    26090228  ->  CRAVT Koupelny spol. s r.o.
+
+Reported:  66473383  ->  Jan Kulhánek s.r.o.
+Actual:    06647383  ->  Jan Kulhánek s.r.o.
+
+Reported:  07586074  ->  START INSURANCE GROUP s.r.o.
+Actual:    07286074  ->  START INSURANCE GROUP s.r.o.
+
+Reported:  14614355  ->  ELPOS, s.r.o.
+Actual:    14614855  ->  ELPOS, s.r.o.
+
+Reported:  25427959  ->  Alox spo.s r.o.
+Actual:    25427989  ->  ALOX spol. s r.o.`}
+        </FunFact>
+
+        <FunFact
+          locale={locale}
+          t={tFun}
           date={"2026-09-21"}
           status={{
             owner: "The Electoral Commission",

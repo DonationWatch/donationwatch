@@ -9,6 +9,8 @@ const externalRegistryUrls: Partial<
 > = {
   [Country.unitedkingdom]: (registrationNumber: string) =>
     `https://find-and-update.company-information.service.gov.uk/company/${registrationNumber}`,
+  [Country.czechrepublic]: (registrationNumber: string) =>
+    `https://ares.gov.cz/ekonomicke-subjekty/ros/${registrationNumber}`,
 };
 
 export const ExternalRegistryLink = ({
