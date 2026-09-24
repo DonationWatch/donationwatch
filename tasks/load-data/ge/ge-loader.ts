@@ -551,6 +551,12 @@ export class GeLoader extends DataLoader {
       code: "SOIDARITYFORPEACE",
       color: "#eb6b3f",
     },
+    "ფედერალისტური პარტია": {
+      name: "ფედერალისტური პარტია",
+      short: "Federalist Party",
+      code: "FEDERALIST",
+      color: "#FF008C",
+    },
   };
 
   donorMeta = donorMeta;
