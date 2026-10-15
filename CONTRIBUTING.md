@@ -87,6 +87,7 @@ You should add entries to the `donorMeta` object, which adheres to the `DonorMet
 
 ```typescript
 import type { DonorMetaDefinition } from "../../../src/utils/types";
+
 import { RelationKind } from "../../../src/utils/types";
 
 export const donorMeta: DonorMetaDefinition = {
