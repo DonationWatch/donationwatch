@@ -108,14 +108,13 @@ export default async function Page(
                     {countryConfig.source.name}
                   </a>
                 ),
-                transparency: (
+                methodology: (
                   <Link
-                    href={`/${locale}/${countryConfig.id}/transparency`}
+                    href={`/${locale}/${countryConfig.id}/methodology`}
                     prefetch={false}
-                    rel="nofollow"
                     className="hover:text-primary-800 dark:hover:text-primary-400 underline"
                   >
-                    {tNavigation("transparency")}
+                    {tNavigation("methodology")}
                   </Link>
                 ),
               }}

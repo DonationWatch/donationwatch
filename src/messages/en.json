@@ -19,6 +19,7 @@
     "imprint": "Imprint",
     "privacy": "Privacy policy",
     "transparency": "Transparency",
+    "methodology": "Methodology",
     "sources": "Sources",
     "export": "Data export",
     "bar_chart_race": "Bar chart race",
@@ -181,15 +182,15 @@
         "germany": "The data used here comes from the German Bundestag and includes all party donations over €50,000 documented there since 2010 and over €35,000 since March 5, 2024.",
         "switzerland": "The data used here comes from the Swiss Federal Finance Control and includes all political donations documented there since 2023.",
         "netherlands": "The information presented here is sourced from the Government of the Netherlands and includes all political donations recorded since 2022 that exceed €1,000, as reported in the annual “Overzicht van giften aan politieke partijen en hun neveninstellingen”.\n\nFor the current year, only donations exceeding €10,000 are included, based on the “Overzicht substantiële giften aan politieke partijen” dataset.\n\nPlease note: Some donations lack specific date information and therefore are not included in time-series or other date-based visualizations.\n\nDonations reported for SP and GL may appear relatively high because both parties require their MPs and administrators to contribute a substantial portion of their salaries to the party.",
-        "europeanunion": "The data presented here is sourced from the Authority for European Political Parties and European Political Foundations, encompassing all documented party and foundation donations since 2018. Due to the importance of European political foundations, we track and display their donations similarly to those of European political parties.\n\nAs the official data does not include data, no time series or similar visual representations are available.\n\nNote that in the run-up to the 2024 European elections (from December 6, 2023 to June 10, 2024), special reporting requirements for donations applied, with weekly reports and timely publication by the authority.\nSince June 10, 2024, only donations over 12,000 euros must be reported immediately. Other donations will only be available after the annual financial statements have been submitted.",
+        "europeanunion": "The data presented here is sourced from the Authority for European Political Parties and European Political Foundations, encompassing all documented party and foundation donations since 2018. Due to the importance of European political foundations, we track and display their donations similarly to those of European political parties.\n\nAs the official data does not include exact transaction dates, no time series or similar date-based visual representations are available.\n\nNote that in the run-up to the 2024 European elections (from December 6, 2023 to June 10, 2024), special reporting requirements for donations applied, with weekly reports and timely publication by the authority.\nSince June 10, 2024, only donations over 12,000 euros must be reported immediately. Other donations will only be available after the annual financial statements have been submitted.",
         "estonia": "The data used here comes from the Estonian Party Funding Monitoring Committee and includes all political donations documented there since 2014 that exceed 1 euro.\n\nPolitical parties in Estonia are required to report their income, including donations received, on a quarterly basis.\nThe data on the committee's website is updated accordingly on a quarterly basis.",
         "czechrepublic": "The data used here comes from the Office for the Control of the Administration of Political Parties and Political Movements and includes all political donations documented there since 2018 that exceed CZK 25.\n\nThis scope also encompasses all contributions to parties or political movements that have either received more than 100 individual donations or surpassed 1 million CZK in total donation amounts, regardless of individual contribution sizes. The data is updated annually.\nDonor type detection is based on identifying a donor as an Individual if both firstName and lastName fields are present.",
         "latvia": "The data used here is sourced from the Corruption Prevention and Combating Office (KNAB) and includes all political contributions documented since 2015 that exceed €1. This dataset encompasses monetary donations, in-kind gifts and services, as well as party joining and membership fees.",
-        "australia": "The data used here comes from the Australian Electoral Commission (AEC) and specifically from the \"Donations Made Details\" dataset that the AEC publishes. It includes all political donations documented there since 2014, exceeding €1.\n\nIt's worth noting that the AEC dataset may contain some typographical errors, which could result in certain donations being unaccounted for or not properly assigned to a specific party due to data entry inconsistencies. Additionally, the AEC's annual disclosures are released on February 1 each year, but the data does not provide a complete picture of all contributions due to the disclosure threshold of $15,000.\n\nDonor types are classified by matching donor names. All common trade unions are manually mapped to the Trade Union donor type. Companies are detected by checking for specific corporate identifiers in the donor name: 'Pty' (Proprietary), 'Ltd' at the end of the name, 'Corporation', or 'Corp'.",
+        "australia": "The data used here comes from the Australian Electoral Commission (AEC) and specifically from the \"Donations Made Details\" dataset that the AEC publishes. It includes all political donations documented there since 2014, exceeding AUD 1.\n\nIt's worth noting that the AEC dataset may contain some typographical errors, which could result in certain donations being unaccounted for or not properly assigned to a specific party due to data entry inconsistencies. Additionally, the AEC's annual disclosures are released on February 1 each year, but the data does not provide a complete picture of all contributions due to the disclosure threshold of $15,000.\n\nDonor types are classified by matching donor names. All common trade unions are manually mapped to the Trade Union donor type. Companies are detected by checking for specific corporate identifiers in the donor name: 'Pty' (Proprietary), 'Ltd' at the end of the name, 'Corporation', or 'Corp'.",
         "unitedkingdom": "The data used here comes from the Electoral Commission and includes all political donations that have been documented there since 2010 and exceed £1,000.\n\nThe underlying Electoral Commission register retroactively maps all historical transactions to each party's current official registered name. As a result, historical donations made to parties before an official rebranding or name change (such as donations made to The Brexit Party before 2021) are displayed under the party's current registered entity name (Reform UK).\n\nThe donation data is updated quarterly.",
         "serbia": "The data used here does not come from the government, but from the non-profit organization “Center for Investigative Journalism of Serbia” (“Centar za istraživačko novinarstvo Srbije” - CINS), which has kindly aggregated the donation data of the Serbian Anti-Corruption Agency.\n\nThis data includes all political donations documented there since 2015.\n\nAs the dataset does not provide specific date information for individual donations, it is unfortunately not possible to display timelines or other time-based visualizations.",
         "croatia": "The data used here comes from the State Electoral Commission of the Republic of Croatia (DIP) and includes all political donations with a monetary value exceeding €1, documented since 2019.\nThe dataset uses only the last donation document published for each reporting year (as reported by izbori) to avoid duplicates from earlier versions of the same year’s report.\nAll donations are displayed in Euro, while the underlying dataset uses Kuna until 2024. Donations originally made in Kuna are converted to Euro using approximate exchange rates for each half-year period from 2019 to 2024: H1 (0.1340, 0.1335, 0.1332, 0.1329, 0.1326) and H2 (0.1341, 0.1338, 0.1334, 0.1327, 0.1328).",
-        "canada": "The data used here comes from Elections Canada and is based on the \"contributions as submitted\" dataset. It includes all political donations with a monetary value exceeding €500, documented since 2015. All entries that are part of the \"Statement of Contributions Received\" report from the \"Annual\" electoral event to \"Registered parties\" are included.",
+        "canada": "The data used here comes from Elections Canada and is based on the \"contributions as submitted\" dataset. It includes all political donations with a monetary value exceeding CAD 500, documented since 2015. All entries that are part of the \"Statement of Contributions Received\" report from the \"Annual\" electoral event to \"Registered parties\" are included.",
         "georgia": "The information presented here is sourced from the Anti-Corruption Bureau (ანტიკორუფციული ბიურო﻿) of Georgia and includes all political donations recorded since 2011 that exceed 1 GEL. The dataset comprises only contributions classified as type #10 (Monetary donations) or type #16 (Monetary donations made by legal entities).",
         "norway": "The data used here comes from the official party funding publications by Statistics Norway (SSB) and Partifinansiering.no. Totals shown are aggregated from multiple reported receiver entities (such as central, regional, local, and youth units) into a single total per party, with the underlying receiver mapping kept available for transparency.\n\nThe Norway dataset is refreshed on an annual update cycle, reflecting the cadence of the underlying disclosures.",
         "ukraine": "The data used here is sourced from the National Agency on Corruption Prevention (NAZK) via the PolitData portal. It includes all records identified as \"monetary contributions\" in the official reports.\n\nNote on Data Scope: This total reflects direct financial transfers only. It does not include state funding provided to parliamentary parties or in-kind (non-monetary) contributions such as goods and services.\n\nDue to the full-scale Russian invasion, mandatory political party reporting was suspended from early 2022 until late 2023 for security and logistical reasons. Following the adoption of Law 3337-IX, parties are now backfilling their reports. Data for 2022–2025 is still being updated as the NAZK processes these submissions.",
@@ -661,7 +662,9 @@
     },
     "user_rights": {
       "title": "Your User Rights",
-      "p": "According to the GDPR, you have the right to receive free information at any time about the origin, recipient, and purpose of your stored personal data. You also have the right to request correction, blocking, or deletion of this data. However, as we process only minimal and anonymized data, we generally cannot personally identify you based on our logs. You also have the right to file a complaint with the competent data protection authority. If you have any questions about data protection, feel free to contact us at any time."
+      "p": "According to the GDPR, you have the right to receive free information at any time about the origin, recipient, and purpose of your stored personal data. You also have the right to request correction, blocking, or deletion of this data. However, as we process only minimal and anonymized data, we generally cannot personally identify you based on our logs. You also have the right to file a complaint with the competent data protection authority. If you have any questions about data protection, feel free to contact us at any time.",
+      "erasure": "Right to Erasure (Article 17 GDPR): Under Article 17 of the GDPR, data subjects have the right to obtain the erasure of personal data concerning them where statutory grounds apply. If you believe your personal details published in transparency registers should be erased under Article 17, you can submit an erasure request directly to us.",
+      "discretionary": "Discretionary Anonymisation: Distinct from statutory Article 17 erasure claims, DonationWatch reviews discretionary anonymisation requests on a case-by-case basis. When actioned, donor identities are anonymized while preserving aggregate sums and recipient party totals to maintain electoral transparency."
     }
   },
   "fun": {
@@ -687,12 +690,12 @@
       "p1": "Below is a list of donors whose contributions were filtered out according to our criteria and filtering rules."
     },
     "filtered_receivers": {
-      "p0": "To ensure we only present meaningful recipient data, we also filter out certain receivers or parties that are deemed irrelevant or non-operational for donor-tracking purposes. Since our datasets do not always label these receivers explicitly, we apply a set of regexp-based rules to automatically exclude them.",
-      "p1": "You can review the full list of applied regexp filter rules below."
+      "p0": "To ensure we only present meaningful recipient data, we also filter out certain receivers or parties that are deemed irrelevant or non-operational for donor-tracking purposes. Since our datasets do not always label these receivers explicitly, we apply a set of regexp-based rules to automatically exclude them. You can review the full list of applied regexp filter rules below.",
+      "p1": "Below is a list of receivers whose records were filtered out according to our criteria and filtering rules."
     },
     "receivers": {
       "title": "Aggregated Receivers",
-      "p0": "In {country}, donations may be reported to different organizational units within a party. For consistency, we consolidates related receiver entities into one party-level total. The list below documents which receiver entities are aggregated into each party."
+      "p0": "In {country}, donations may be reported to different organizational units within a party. For consistency, we consolidate related receiver entities into one party-level total. The list below documents which receiver entities are aggregated into each party."
     }
   },
   "related": {
@@ -732,7 +735,7 @@
   "export": {
     "title": "Data export",
     "p0": "Get the complete dataset of political donations for {country} used on this site. The export includes normalized donor names, amounts, dates, and recipient parties.",
-    "p1": "Important: This is not the raw data from the {source}. This dataset contains only donations that have been normalized and filtered by our team. Please review our {transparency} section for methodology.",
+    "p1": "Important: This is not the raw data from the {source}. This dataset contains only donations that have been normalized and filtered by our team. Please review our {methodology} section.",
     "license": "License: {license}"
   },
   "bar_chart_race": {
@@ -887,6 +890,101 @@
       "title": "No donations found",
       "p0": "There are no donations matching your current filter configuration. Try adjusting your filters or resetting them.",
       "reset": "Reset Filters"
+    }
+  },
+  "methodology": {
+    "title": "Methodology",
+    "intro": "DonationWatch processes, normalizes, and contextualizes official disclosure datasets published by national electoral authorities and oversight bodies. This page documents our data sources, ingestion rules, normalization criteria, and disclosure limitations for {country}.",
+    "sections": {
+      "profile": "Dataset Profile",
+      "source": "Data Source & Scope",
+      "coverage": "Coverage & Thresholds",
+      "cadence": "Update Cadence",
+      "processing": "Processing & Normalization",
+      "anonymisation": "Anonymisation & Redactions",
+      "licence": "Licence & Provenance",
+      "version": "Data Version & Timestamps",
+      "disclaimer": "Disclaimer"
+    },
+    "profile": {
+      "source": "Official source",
+      "coverage": "Coverage period",
+      "coverage_preliminary": "{range} (preliminary since {preliminarySince})",
+      "latest_transaction": "Latest recorded transaction",
+      "last_processed": "Dataset last processed",
+      "cadence": "Update cadence",
+      "cadence_value": "{cadence, select, annual {Annual} quarterly {Quarterly} other {Periodic}}",
+      "volume": "Compiled dataset volume",
+      "volume_value": "{count} records ({sum}) across {parties} parties",
+      "donation_threshold": "Per-donation threshold",
+      "donation_threshold_all": "All published contributions (no minimum filter)",
+      "party_threshold": "Party inclusion threshold",
+      "party_threshold_value": "{type, select, count {≥ {count} donations} sum {≥ {sum} cumulative} other {≥ {count} donations or ≥ {sum} cumulative}}",
+      "party_threshold_all": "All reported parties included",
+      "granularity": "Data granularity",
+      "granularity_individual": "Individual transaction & donor records",
+      "granularity_aggregate": "Annual party-level aggregates (no individual donor identities)",
+      "temporal_resolution": "Temporal resolution",
+      "resolution_date": "Exact transaction date (YYYY-MM-DD)",
+      "resolution_year": "Reporting year only (YYYY)",
+      "origin_coverage": "Geographic origin",
+      "origin_yes": "Sub-national state/region & country of origin",
+      "origin_no": "Country-level only",
+      "donation_types": "Included contribution types",
+      "donor_types": "Classified donor categories",
+      "external_ids": "External registry identifiers",
+      "external_ids_both": "Source transaction IDs & corporate registration numbers",
+      "external_ids_transaction": "Per-transaction source register IDs",
+      "external_ids_company": "Corporate / entity registration numbers",
+      "external_ids_none": "None published in source register",
+      "access": "Data access & pipeline",
+      "export_link": "Download bulk dataset (CSV / JSON)",
+      "pipeline_link": "Inspect country loader source code (GitHub)"
+    },
+    "source": {
+      "default": "Data for {country} is sourced directly from {source}.",
+      "link": "Visit official source register"
+    },
+    "coverage": {
+      "default": "The dataset covers published political contributions starting from {minYear}.",
+      "preliminary": "Records since {preliminarySince} are preliminary and subject to ongoing filings or retrospective updates by the source authority."
+    },
+    "threshold": {
+      "default": "DonationWatch applies a minimum inclusion threshold of {amount} per transaction for this dataset.",
+      "note": "This threshold is configured by us to avoid an excessive volume of small donations, and may be higher than the minimum amount exported by the upstream registry. Contributions with an absolute value below this amount are filtered out.",
+      "all": "This dataset includes all published contributions without a minimum amount filter.",
+      "party": "Party-level inclusion threshold: To focus on active political entities, only parties with {type, select, count {at least {count} documented donations} sum {at least {sum} in cumulative donations} other {at least {count} documented donations or {sum} in cumulative donations}} are included in the compiled dataset.",
+      "party_all": "Party-level inclusion: All political parties with valid reported contributions above the transaction threshold are included.",
+      "net_positive": "Refunds and net-zero filtering: Some registers record returned or refunded contributions as negative entries. Donors or recipient parties whose cumulative net contribution sum across the dataset is zero or negative are excluded."
+    },
+    "cadence": {
+      "default": "Datasets are periodically synchronized with the published upstream register.",
+      "annual": "The source dataset is updated on an annual release cycle.",
+      "quarterly": "The source dataset is updated on a quarterly reporting cycle."
+    },
+    "processing": {
+      "summary": "Raw disclosures undergo deterministic, rule-based normalization during ingestion to standardize entity names, consolidate organizational branches, and exclude non-qualifying entries:",
+      "step_cleaning": "Base string cleaning: All entity names undergo Unicode NFKC normalization, trimming of surrounding quotation marks and trailing commas, and collapsing of duplicate whitespace.",
+      "step_clustering": "Donor key clustering & country rules: A canonical lookup key (stripping all non-alphanumeric characters and case-folding to uppercase) groups casing, spacing, and punctuation variants under a single canonical donor name. Where configured for a country's loader, additional rules standardize local legal entity suffixes, strip personal titles, or map known aliases—with every merged variant listed in the Aggregated Donors section below.",
+      "step_receivers": "Receiver mapping & consolidation: Reported recipient names are mapped to canonical political party entities. Where registers report contributions to regional, local, or youth party units separately, they are consolidated into a single party total (listed in Aggregated Receivers below when applicable).",
+      "donor_identity": "Important limitation on donor identity (homonyms vs. unmerged variants): Official party funding registers rarely publish unique personal identifiers (such as national identity numbers, tax IDs, or birth dates) for individual donors. Contribution totals on donor profile pages are aggregated strictly by normalized donor name. As a result, a single donor profile may combine contributions from multiple distinct individuals who share the exact same name (over-aggregation), while variations containing middle names or unmapped abbreviations may remain separate profiles (under-aggregation)."
+    },
+    "anonymisation": {
+      "summary": "We distinguish between redactions made upstream by the publishing authority and discretionary anonymisations actioned upon request.",
+      "upstream": "Redacted upstream: {count} donor records were withheld by the authority prior to publication.",
+      "by_request": "Anonymised by request: {count} donor names have been removed upon request, while preserving transaction sums and party totals."
+    },
+    "licence": {
+      "output": "Our compiled, normalized dataset and visualizations are released under the {licence} licence.",
+      "export_prompt": "For researchers, journalists, and data scientists, the complete normalized dataset for {country} can be downloaded via our {exportLink}, and the exact ingestion and normalization rules can be audited in our {pipelineLink}."
+    },
+    "version": {
+      "last_updated": "Dataset last processed: {date}.",
+      "latest_donation": "Latest recorded transaction in dataset: {date}.",
+      "explanation": "The processing timestamp indicates when our pipeline last synchronized and compiled data from the official register, whereas the latest transaction date reflects the most recent contribution date present in the published records."
+    },
+    "disclaimer": {
+      "text": "Compiled, not official: DonationWatch is an independent civic project and is not affiliated with any electoral authority, government body, or political party. Because records undergo normalization, entity deduplication, and filtering, this compiled dataset should not be cited as an official government registry."
     }
   }
 }

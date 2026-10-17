@@ -27,6 +27,9 @@ export interface UnloadedCountryConfig {
   // Is used to e.g. skip scraping for years that are not available for a country
   readonly minYear: string;
 
+  // Documented update cadence from source register (e.g. annual, quarterly)
+  readonly updateCadence?: "annual" | "quarterly";
+
   // markers in timeseries charts
   readonly markers: {
     label: string;

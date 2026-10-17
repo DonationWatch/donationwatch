@@ -19,6 +19,7 @@
     "imprint": "Impressum",
     "privacy": "Datenschutzerklärung",
     "transparency": "Transparenz",
+    "methodology": "Methodik",
     "sources": "Quellen",
     "export": "Datenexport",
     "bar_chart_race": "Balkendiagramm-Rennen",
@@ -191,15 +192,15 @@
         "germany": "Die hier verwendeten Daten stammen vom Deutschen Bundestag und umfassen sämtliche dort seit 2010 dokumentierten Parteispenden über 50.000 € und seit dem 5. März 2024 über 35.000 €.",
         "switzerland": "Die hier verwendeten Daten stammen von der Eidgenössischen Finanzkontrolle und umfassen sämtliche dort seit 2023 dokumentierten Parteispenden.",
         "netherlands": "Die hier dargestellten Informationen stammen von der Regierung der Niederlande und umfassen alle seit 2022 registrierten politischen Spenden, die 1.000 € übersteigen, wie im jährlichen Bericht „Overzicht van giften aan politieke partijen en hun neveninstellingen“ angegeben.\n\nFür das laufende Jahr sind nur Spenden über 10.000 € enthalten, basierend auf dem Datensatz „Overzicht substantiële giften aan politieke partijen“.\n\nBitte beachten Sie: Einige Spenden enthalten keine genauen Datumsangaben und sind daher nicht in Zeitreihen oder anderen datumsbasierten Visualisierungen enthalten.\n\nDie für SP und GL gemeldeten Spenden können relativ hoch erscheinen, da beide Parteien von ihren Abgeordneten und Funktionären verlangen, einen erheblichen Teil ihres Gehalts an die Partei abzuführen.",
-        "europeanunion": "Die hier präsentierten Daten stammen von der Behörde für europäische politische Parteien und europäische politische Stiftungen und umfassen alle dokumentierten Partei- und Stiftungsspenden seit 2018. Aufgrund der Bedeutung der europäischen politischen Stiftungen werden deren Spenden ähnlich wie die der europäischen politischen Parteien erfasst und dargestellt.\n\nDa die offiziellen Daten keine Daten enthalten, sind keine Zeitreihen oder ähnliche visuelle Darstellungen verfügbar.\n\nZu beachten ist, dass im Vorfeld der Europawahl 2024 (vom 6. Dezember 2023 bis 10. Juni 2024) besondere Meldepflichten für Spenden galten, mit wöchentlichen Meldungen und zeitnaher Veröffentlichung durch die Behörde.\nAb dem 10. Juni 2024 müssen nur noch Spenden über 12.000 Euro sofort gemeldet werden. Andere Spenden werden erst nach Vorlage des Jahresabschlusses zur Verfügung stehen.",
+        "europeanunion": "Die hier präsentierten Daten stammen von der Behörde für europäische politische Parteien und europäische politische Stiftungen und umfassen alle dokumentierten Partei- und Stiftungsspenden seit 2018. Aufgrund der Bedeutung der europäischen politischen Stiftungen werden deren Spenden ähnlich wie die der europäischen politischen Parteien erfasst und dargestellt.\n\nDa die offiziellen Daten keine genauen Transaktionsdaten enthalten, sind keine Zeitreihen oder ähnliche datumsbasierte Darstellungen verfügbar.\n\nZu beachten ist, dass im Vorfeld der Europawahl 2024 (vom 6. Dezember 2023 bis 10. Juni 2024) besondere Meldepflichten für Spenden galten, mit wöchentlichen Meldungen und zeitnaher Veröffentlichung durch die Behörde.\nAb dem 10. Juni 2024 müssen nur noch Spenden über 12.000 Euro sofort gemeldet werden. Andere Spenden werden erst nach Vorlage des Jahresabschlusses zur Verfügung stehen.",
         "estonia": "Die hier verwendeten Daten stammen vom estnischen Ausschuss für die Überwachung der Parteienfinanzierung und umfassen alle dort seit 2014 dokumentierten politischen Spenden, die 1 Euro übersteigen.\n\nPolitische Parteien in Estland sind verpflichtet, ihre Einnahmen, einschließlich erhaltener Spenden, vierteljährlich zu melden.\nDie Daten auf der Website des Ausschusses werden dementsprechend quartalsweise aktualisiert.",
         "czechrepublic": "Die hier verwendeten Daten stammen vom Amt für die Kontrolle der Verwaltung politischer Parteien und politischer Bewegungen und umfassen alle dort seit 2018 dokumentierten politischen Spenden, die 25 CZK übersteigen.\n\nDieser Umfang schließt auch alle Beiträge an Parteien oder politische Bewegungen ein, die entweder mehr als 100 einzelne Spenden erhalten haben oder insgesamt mehr als 1 Million CZK an Spendenbeträgen überschritten haben, unabhängig von der Größe der einzelnen Beiträge. Die Daten werden jährlich aktualisiert.\nDie Erkennung des Spendertyps basiert darauf, einen Spender als Einzelperson zu identifizieren, wenn sowohl die Felder firstName als auch lastName vorhanden sind.",
         "latvia": "Die hier verwendeten Daten stammen vom Büro zur Korruptionsverhütung und -bekämpfung (KNAB) und umfassen alle politischen Beiträge, die seit 2015 dokumentiert wurden und €1 übersteigen. Dieser Datensatz umfasst Geldspenden, Sachspenden und Dienstleistungen sowie Parteiein- und Mitgliedsbeiträge.",
-        "australia": "Die hier verwendeten Daten stammen von der Australian Electoral Commission (AEC), insbesondere aus dem von der AEC veröffentlichten Datensatz „Donations Made Details“. Er umfasst alle dort dokumentierten politischen Spenden seit 2014, die €1 übersteigen.\n\nHinweis: Der AEC-Datensatz kann einige Tippfehler enthalten, was dazu führen kann, dass bestimmte Spenden nicht erfasst werden oder aufgrund von Inkonsistenzen bei der Dateneingabe nicht korrekt einer bestimmten Partei zugeordnet werden. Außerdem werden die jährlichen Offenlegungen der AEC jeweils am 1. Februar veröffentlicht, aber die Daten liefern kein vollständiges Bild aller Zuwendungen, da die Offenlegungsschwelle bei $15.000 liegt.\n\nSpenderarten werden durch Abgleich von Spendernamen klassifiziert. Alle gängigen Gewerkschaften werden manuell dem Spender-Typ „Gewerkschaft“ zugeordnet. Unternehmen werden erkannt, indem im Spendernamen nach bestimmten Unternehmenskennzeichen gesucht wird: „Pty“ (Proprietary), „Ltd“ am Ende des Namens, „Corporation“ oder „Corp“.",
+        "australia": "Die hier verwendeten Daten stammen von der Australian Electoral Commission (AEC), insbesondere aus dem von der AEC veröffentlichten Datensatz „Donations Made Details“. Er umfasst alle dort dokumentierten politischen Spenden seit 2014, die 1 AUD übersteigen.\n\nHinweis: Der AEC-Datensatz kann einige Tippfehler enthalten, was dazu führen kann, dass bestimmte Spenden nicht erfasst werden oder aufgrund von Inkonsistenzen bei der Dateneingabe nicht korrekt einer bestimmten Partei zugeordnet werden. Außerdem werden die jährlichen Offenlegungen der AEC jeweils am 1. Februar veröffentlicht, aber die Daten liefern kein vollständiges Bild aller Zuwendungen, da die Offenlegungsschwelle bei $15.000 liegt.\n\nSpenderarten werden durch Abgleich von Spendernamen klassifiziert. Alle gängigen Gewerkschaften werden manuell dem Spender-Typ „Gewerkschaft“ zugeordnet. Unternehmen werden erkannt, indem im Spendernamen nach bestimmten Unternehmenskennzeichen gesucht wird: „Pty“ (Proprietary), „Ltd“ am Ende des Namens, „Corporation“ oder „Corp“.",
         "unitedkingdom": "Die hier verwendeten Daten stammen von der Electoral Commission und umfassen alle dort seit 2010 dokumentierten politischen Spenden von mehr als 1.000 £.\n\nDas zugrunde liegende Register der Electoral Commission ordnet alle historischen Transaktionen rückwirkend dem aktuell offiziell eingetragenen Namen jeder Partei zu. Daher werden historische Spenden an Parteien, die vor einer offiziellen Umbenennung oder Namensänderung erfolgten (etwa Spenden an die Brexit Party vor 2021), unter dem derzeit eingetragenen Namen der Partei (Reform UK) angezeigt.\n\nDie Spendendaten werden vierteljährlich aktualisiert.",
         "serbia": "Die hier verwendeten Daten stammen nicht von der Regierung, sondern von der gemeinnützigen Organisation \"Center for Investigative Journalism of Serbia\" (\"Centar za istraživačko novinarstvo Srbije\" - CINS), die dankenswerterweise die Spendendaten der Serbian Anti-Corruption Agency aggregiert hat.\n\nDiese Daten umfassen alle dort dokumentierten politischen Spenden seit 2015.\n\nDa der Datensatz keine spezifischen Datumsinformationen für die einzelnen Spenden bereitstellt, können leider keine Zeitleisten oder andere zeitbasierte Visualisierungen dargestellt werden.",
         "croatia": "Die hier verwendeten Daten stammen von der Staatlichen Wahlkommission der Republik Kroatien (DIP) und umfassen alle politischen Spenden mit einem Geldwert von mehr als 1 €, die seit 2019 dokumentiert sind.\nDer Datensatz verwendet pro Berichtsjahr ausschließlich das zuletzt veröffentlichte Spenden-Dokument (wie von izbori angegeben), um Duplikate aus früheren Versionen desselben Jahresberichts zu vermeiden.\nAlle Spenden werden in Euro angezeigt, während der zugrunde liegende Datensatz bis 2024 Kuna verwendet. Spenden, die ursprünglich in Kuna getätigt wurden, werden anhand ungefährer Wechselkurse für jedes Halbjahr von 2019 bis 2024 in Euro umgerechnet: H1 (0.1340, 0.1335, 0.1332, 0.1329, 0.1326) und H2 (0.1341, 0.1338, 0.1334, 0.1327, 0.1328).",
-        "canada": "Die hier verwendeten Daten stammen von Elections Canada und basieren auf dem Datensatz „contributions as submitted“. Er umfasst alle politischen Spenden mit einem Geldwert von über 500 €, die seit 2015 dokumentiert wurden. Alle Einträge, die Teil des Berichts „Statement of Contributions Received“ aus der Wahlveranstaltung „Annual“ an „Registered parties“ sind, sind enthalten.",
+        "canada": "Die hier verwendeten Daten stammen von Elections Canada und basieren auf dem Datensatz „contributions as submitted“. Er umfasst alle politischen Spenden mit einem Geldwert von über 500 CAD, die seit 2015 dokumentiert wurden. Alle Einträge, die Teil des Berichts „Statement of Contributions Received“ aus der Wahlveranstaltung „Annual“ an „Registered parties“ sind, sind enthalten.",
         "georgia": "Die hier präsentierten Informationen stammen vom Antikorruptionsbüro (ანტიკორუფციული ბიურო﻿) Georgiens und umfassen alle seit 2011 registrierten politischen Spenden, die 1 GEL übersteigen. Der Datensatz umfasst nur Beiträge, die als Typ #10 (Geldspenden) oder Typ #16 (Geldspenden juristischer Personen) klassifiziert sind.",
         "norway": "Die hier verwendeten Daten stammen aus den offiziellen Veröffentlichungen zur Parteienfinanzierung von Statistics Norway (SSB) und Partifinansiering.no. Die ausgewiesenen Summen werden aus mehreren gemeldeten Empfängereinheiten (z. B. zentralen, regionalen, lokalen und Jugendorganisationen) zu einem einzigen Gesamtwert pro Partei aggregiert, wobei die zugrunde liegende Zuordnung der Empfänger zur Transparenz weiterhin verfügbar bleibt.\n\nDer Norwegen-Datensatz wird in einem jährlichen Aktualisierungszyklus erneuert und spiegelt damit den Rhythmus der zugrunde liegenden Offenlegungen wider.",
         "ukraine": "Die hier verwendeten Daten stammen von der Nationalen Agentur für Korruptionsprävention (NAZK) über das PolitData-Portal. Sie umfassen alle Datensätze, die in den offiziellen Berichten als „finanzielle Zuwendungen“ gekennzeichnet sind.\n\nHinweis zum Datenumfang: Diese Gesamtsumme bezieht sich ausschließlich auf direkte Geldtransfers. Sie enthält keine staatlichen Zuschüsse an Parlamentsparteien oder Sachleistungen (nicht-monetäre Beiträge) wie Waren und Dienstleistungen.\n\nAufgrund der umfassenden russischen Invasion wurde die verpflichtende Berichterstattung politischer Parteien von Anfang 2022 bis Ende 2023 aus Sicherheits- und Logistikgründen ausgesetzt. Nach der Verabschiedung des Gesetzes Nr. 3337-IX holen die Parteien ihre Berichte nun nach. Die Daten für die Jahre 2022–2025 werden weiterhin aktualisiert, während die NAZK diese Meldungen bearbeitet.",
@@ -671,7 +672,9 @@
     },
     "user_rights": {
       "title": "Deine Nutzerrechte",
-      "p": "Gemäß der DSGVO hast du das Recht, jederzeit unentgeltlich Auskunft über Herkunft, Empfänger und Zweck deiner gespeicherten personenbezogenen Daten zu erhalten. Du hast außerdem ein Recht, die Berichtigung, Sperrung oder Löschung dieser Daten zu verlangen. Da wir jedoch nur minimale und anonymisierte Daten verarbeiten, können wir dich anhand unserer Logs in der Regel nicht persönlich identifizieren. Des Weiteren steht dir ein Beschwerderecht bei der zuständigen Datenschutzaufsichtsbehörde zu. Bei Fragen zum Datenschutz kannst du dich jederzeit an uns wenden."
+      "p": "Gemäß der DSGVO hast du das Recht, jederzeit unentgeltlich Auskunft über Herkunft, Empfänger und Zweck deiner gespeicherten personenbezogenen Daten zu erhalten. Du hast außerdem ein Recht, die Berichtigung, Sperrung oder Löschung dieser Daten zu verlangen. Da wir jedoch nur minimale und anonymisierte Daten verarbeiten, können wir dich anhand unserer Logs in der Regel nicht persönlich identifizieren. Des Weiteren steht dir ein Beschwerderecht bei der zuständigen Datenschutzaufsichtsbehörde zu. Bei Fragen zum Datenschutz kannst du dich jederzeit an uns wenden.",
+      "erasure": "Recht auf Löschung (Art. 17 DSGVO): Gemäß Art. 17 DSGVO haben betroffene Personen das Recht, die Löschung sie betreffender personenbezogener Daten zu verlangen, sofern die gesetzlichen Voraussetzungen vorliegen. Wenn Sie der Ansicht sind, dass Ihre personenbezogenen Daten gemäß Art. 17 gelöscht werden sollten, können Sie einen entsprechenden Antrag direkt an uns richten.",
+      "discretionary": "Ermessensweise Anonymisierung: Unabhängig von gesetzlichen Löschungsansprüchen nach Art. 17 prüft DonationWatch freiwillige Anonymisierungsanträge im Einzelfall. Bei Bewilligung werden Spendernamen anonymisiert, während die Transaktionsbeträge und Parteisummen zur Wahrung der Transparenz vollständig erhalten bleiben."
     }
   },
   "fun": {
@@ -697,8 +700,8 @@
       "p1": "Unten finden Sie eine Liste der Spender, deren Beiträge gemäß unseren Kriterien und Filterregeln herausgefiltert wurden."
     },
     "filtered_receivers": {
-      "p0": "Um sicherzustellen, dass wir nur aussagekräftige Empfängerdaten darstellen, filtern wir auch bestimmte Empfänger oder Parteien heraus, die für die Spendernachverfolgung als irrelevant oder nicht operativ gelten. Da unsere Datensätze diese Empfänger nicht immer ausdrücklich kennzeichnen, wenden wir eine Reihe von RegExp-basierten Regeln an, um sie automatisch auszuschließen.",
-      "p1": "Unten können Sie die vollständige Liste der angewandten RegExp-Filterregeln einsehen."
+      "p0": "Um sicherzustellen, dass wir nur aussagekräftige Empfängerdaten darstellen, filtern wir auch bestimmte Empfänger oder Parteien heraus, die für die Spendernachverfolgung als irrelevant oder nicht operativ gelten. Da unsere Datensätze diese Empfänger nicht immer ausdrücklich kennzeichnen, wenden wir eine Reihe von RegExp-basierten Regeln an, um sie automatisch auszuschließen. Unten können Sie die vollständige Liste der angewandten RegExp-Filterregeln einsehen.",
+      "p1": "Unten finden Sie eine Liste der Empfänger, deren Einträge gemäß unseren Kriterien und Filterregeln herausgefiltert wurden."
     },
     "receivers": {
       "title": "Aggregierte Empfänger",
@@ -748,7 +751,7 @@
   "export": {
     "title": "Datenexport",
     "p0": "Erhalten Sie den vollständigen Datensatz politischer Spenden für {country}, der auf dieser Website verwendet wird. Der Export enthält normalisierte Spendernamen, Beträge, Daten und Empfängerparteien.",
-    "p1": "Wichtig: Dies sind nicht die Rohdaten aus {source}. Dieser Datensatz enthält nur Spenden, die von unserem Team normalisiert und gefiltert wurden. Bitte lesen Sie unseren Abschnitt {transparency} zur Methodik.",
+    "p1": "Wichtig: Dies sind nicht die Rohdaten aus {source}. Dieser Datensatz enthält nur Spenden, die von unserem Team normalisiert und gefiltert wurden. Bitte lesen Sie unsere {methodology}.",
     "license": "Lizenz: {license}"
   },
   "bar_chart_race": {
@@ -903,6 +906,101 @@
       "title": "Keine Spenden gefunden",
       "p0": "Es wurden keine Spenden gefunden, die Ihrer aktuellen Filterkonfiguration entsprechen. Versuchen Sie, Ihre Filter anzupassen oder zurückzusetzen.",
       "reset": "Filter zurücksetzen"
+    }
+  },
+  "methodology": {
+    "title": "Methodik",
+    "intro": "DonationWatch verarbeitet, normalisiert und kontextualisiert offizielle Veröffentlichungsdatensätze von nationalen Wahlbehörden und Aufsichtsstellen. Diese Seite dokumentiert unsere Datenquellen, Verarbeitungsregeln, Normalisierungskriterien und Einschränkungen für {country}.",
+    "sections": {
+      "profile": "Datensatzprofil",
+      "source": "Datenquelle & Umfang",
+      "coverage": "Abdeckung & Schwellenwerte",
+      "cadence": "Aktualisierungsintervall",
+      "processing": "Verarbeitung & Normalisierung",
+      "anonymisation": "Anonymisierung & Schwärzungen",
+      "licence": "Lizenz & Herkunft",
+      "version": "Datenversion & Zeitstempel",
+      "disclaimer": "Haftungsausschluss"
+    },
+    "profile": {
+      "source": "Offizielle Quelle",
+      "coverage": "Abdeckungszeitraum",
+      "coverage_preliminary": "{range} (vorläufig seit {preliminarySince})",
+      "latest_transaction": "Jüngste erfasste Transaktion",
+      "last_processed": "Datensatz zuletzt verarbeitet",
+      "cadence": "Aktualisierungsintervall",
+      "cadence_value": "{cadence, select, annual {Jährlich} quarterly {Vierteljährlich} other {Regelmäßig}}",
+      "volume": "Umfang des aufbereiteten Datensatzes",
+      "volume_value": "{count} Einträge ({sum}) über {parties} Parteien",
+      "donation_threshold": "Schwellenwert pro Spende",
+      "donation_threshold_all": "Alle veröffentlichten Zuwendungen (kein Mindestfilter)",
+      "party_threshold": "Schwellenwert für Parteienaufnahme",
+      "party_threshold_value": "{type, select, count {≥ {count} Spenden} sum {≥ {sum} kumulativ} other {≥ {count} Spenden oder ≥ {sum} kumulativ}}",
+      "party_threshold_all": "Alle gemeldeten Parteien enthalten",
+      "granularity": "Datengranularität",
+      "granularity_individual": "Einzeltransaktionen & Spenderdatensätze",
+      "granularity_aggregate": "Jährliche Partei-Gesamtwerte (keine einzelnen Spenderidentitäten)",
+      "temporal_resolution": "Zeitliche Auflösung",
+      "resolution_date": "Exaktes Transaktionsdatum (JJJJ-MM-TT)",
+      "resolution_year": "Nur Berichtsjahr (JJJJ)",
+      "origin_coverage": "Geografische Herkunft",
+      "origin_yes": "Bundesland/Region & Herkunftsland",
+      "origin_no": "Nur auf Länderebene",
+      "donation_types": "Enthaltene Zuwendungsarten",
+      "donor_types": "Klassifizierte Spenderkategorien",
+      "external_ids": "Externe Registerkennungen",
+      "external_ids_both": "Quell-Transaktions-IDs & Handelsregisternummern",
+      "external_ids_transaction": "Transaktions-IDs des Quellregisters",
+      "external_ids_company": "Handelsregister- / Unternehmensnummern",
+      "external_ids_none": "Keine im Quellregister veröffentlicht",
+      "access": "Datenzugang & Pipeline",
+      "export_link": "Gesamtdatensatz herunterladen (CSV / JSON)",
+      "pipeline_link": "Quellcode des Länder-Loaders einsehen (GitHub)"
+    },
+    "source": {
+      "default": "Die Daten für {country} stammen direkt von {source}.",
+      "link": "Offizielles Register aufrufen"
+    },
+    "coverage": {
+      "default": "Der Datensatz umfasst veröffentlichte politische Zuwendungen ab dem Jahr {minYear}.",
+      "preliminary": "Datensätze seit {preliminarySince} sind vorläufig und unterliegen laufenden Nachmeldungen oder rückwirkenden Korrekturen der Aufsichtsbehörde."
+    },
+    "threshold": {
+      "default": "DonationWatch wendet für diesen Datensatz einen Mindestbetrag von {amount} pro Transaktion an.",
+      "note": "Dieser Schwellenwert wird von uns festgelegt, um eine übermäßige Menge an Kleinstspenden zu vermeiden, und kann höher sein als der von der zuständigen Stelle exportierte Mindestbetrag. Spenden mit einem Absolutwert unter diesem Betrag werden herausgefiltert.",
+      "all": "Dieser Datensatz enthält alle veröffentlichten Spenden ohne Mindestbetragsfilter.",
+      "party": "Aufnahmeschwelle für Parteien: Um den Fokus auf aktive politische Einheiten zu richten, werden nur Parteien mit {type, select, count {mindestens {count} dokumentierten Spenden} sum {mindestens {sum} an kumulierten Spenden} other {mindestens {count} dokumentierten Spenden oder {sum} an kumulierten Spenden}} in den aufbereiteten Datensatz aufgenommen.",
+      "party_all": "Parteienaufnahme: Alle politischen Parteien mit gültigen gemeldeten Zuwendungen oberhalb des Transaktionsschwellenwerts sind enthalten.",
+      "net_positive": "Rückerstattungen und Netto-Null-Filterung: Einige Register erfassen zurückgegebene oder erstattete Zuwendungen als negative Buchungen. Spender oder Empfängerparteien, deren kumulierte Nettospendensumme über den gesamten Datensatz null oder negativ ist, werden ausgeschlossen."
+    },
+    "cadence": {
+      "default": "Die Datensätze werden regelmäßig mit dem veröffentlichten Quellregister synchronisiert.",
+      "annual": "Der Quelldatensatz wird in einem jährlichen Veröffentlichungszyklus aktualisiert.",
+      "quarterly": "Der Quelldatensatz wird in einem vierteljährlichen Berichtszyklus aktualisiert."
+    },
+    "processing": {
+      "summary": "Die Rohdaten durchlaufen beim Einlesen eine deterministische, regelbasierte Normalisierung, um Namen zu vereinheitlichen, Untergliederungen zusammenzuführen und nicht qualifizierte Einträge auszuschließen:",
+      "step_cleaning": "Basis-Textbereinigung: Alle Namen durchlaufen eine Unicode-NFKC-Normalisierung, das Entfernen umschließender Anführungszeichen und nachgestellter Kommas sowie das Zusammenfassen doppelter Leerzeichen.",
+      "step_clustering": "Spenderschlüssel-Clustering & Länderregeln: Ein kanonischer Suchschlüssel (der alle nicht-alphanumerischen Zeichen entfernt und Großbuchstaben verwendet) gruppiert Schreibweisen-, Leerzeichen- und Zeichensetzungsvarianten unter einem einheitlichen Spendernamen. Sofern für das jeweilige Land konfiguriert, vereinheitlichen zusätzliche Regeln Rechtsformzusätze, entfernen akademische Grade oder Anreden und ordnen bekannte Aliase zu – alle zusammengeführten Varianten sind unten im Abschnitt „Aggregierte Spender“ aufgeführt.",
+      "step_receivers": "Empfängerzuordnung & Konsolidierung: Gemeldete Empfängernamen werden kanonischen Parteien zugeordnet. Wenn Register Zuwendungen an regionale, lokale oder Jugendorganisationen getrennt ausweisen, werden diese zu einem Gesamtwert pro Partei zusammengefasst (sofern zutreffend unten unter „Aggregierte Empfänger“ dokumentiert).",
+      "donor_identity": "Wichtige Einschränkung zur Spenderidentität (Namensgleichheit vs. nicht zusammengeführte Varianten): Offizielle Parteispendenregister veröffentlichen für Einzelpersonen selten eindeutige Identifikatoren (wie Personalausweisnummern, Steuer-IDs oder Geburtsdaten). Spendensummen auf Spenderprofilseiten werden ausschließlich anhand des normalisierten Spendernamens aggregiert. Daher kann ein einzelnes Spenderprofil Spenden mehrerer verschiedener Personen mit exakt demselben Namen zusammenfassen (Überaggregation), während Varianten mit Zweitnamen oder nicht zugeordneten Abkürzungen als separate Profile bestehen bleiben können (Unteraggregation)."
+    },
+    "anonymisation": {
+      "summary": "Wir unterscheiden zwischen Schwärzungen durch die herausgebende Behörde und diskretionären Anonymisierungen auf Anfrage.",
+      "upstream": "Behördlich geschwärzt: {count} Spendeneinträge wurden von der Aufsichtsbehörde vor der Veröffentlichung unkenntlich gemacht.",
+      "by_request": "Auf Anfrage anonymisiert: {count} Spendernamen wurden auf Antrag entfernt, wobei Transaktionssummen und Parteigesamtwerte vollständig erhalten bleiben."
+    },
+    "licence": {
+      "output": "Unser aufbereiteter, normalisierter Datensatz und die Visualisierungen stehen unter der {licence}-Lizenz.",
+      "export_prompt": "Für Forschende, Journalistinnen und Journalisten sowie Data Scientists kann der vollständige normalisierte Datensatz für {country} über unseren {exportLink} heruntergeladen werden; die genauen Einlese- und Normalisierungsregeln können in unserem {pipelineLink} überprüft werden."
+    },
+    "version": {
+      "last_updated": "Datensatz zuletzt verarbeitet: {date}.",
+      "latest_donation": "Jüngste erfasste Transaktion im Datensatz: {date}.",
+      "explanation": "Der Verarbeitungszeitstempel gibt an, wann unsere Pipeline die Daten zuletzt mit dem offiziellen Register synchronisiert und kompiliert hat, während das Datum der jüngsten Transaktion den aktuellsten Spendeneintrag in den veröffentlichten Daten widerspiegelt."
+    },
+    "disclaimer": {
+      "text": "Aufbereitet, nicht offiziell: DonationWatch ist ein unabhängiges zivilgesellschaftliches Projekt und steht in keiner Verbindung zu Wahlbehörden, staatlichen Stellen oder politischen Parteien. Da die Datensätze normalisiert, bereinigt und gefiltert werden, stellt diese Zusammenstellung kein amtliches Register dar."
     }
   }
 }

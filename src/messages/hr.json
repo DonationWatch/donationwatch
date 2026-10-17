@@ -19,6 +19,7 @@
     "imprint": "Impresum",
     "privacy": "Politika privatnosti",
     "transparency": "Transparentnost",
+    "methodology": "Metodologija",
     "sources": "Izvori",
     "export": "Izvoz podataka",
     "bar_chart_race": "Utrka stupčastih grafikona",
@@ -191,15 +192,15 @@
         "germany": "Podaci koji se ovdje koriste dolaze iz njemačkog Bundestaga i uključuju sve donacije strankama preko 50.000 eura dokumentirane tamo od 2010. godine i preko 35.000 eura od 5. ožujka 2024.",
         "switzerland": "Podaci koji se ovdje koriste dolaze iz švicarske Savezne financijske kontrole i uključuju sve političke donacije dokumentirane tamo od 2023. godine.",
         "netherlands": "Informacije prikazane ovdje preuzete su od Vlade Nizozemske i uključuju sve političke donacije zabilježene od 2022. godine koje premašuju 1.000 €, kako je navedeno u godišnjem izvješću „Overzicht van giften aan politieke partijen en hun neveninstellingen“.\n\nZa tekuću godinu uključene su samo donacije koje prelaze 10.000 €, na temelju skupa podataka „Overzicht substantiële giften aan politieke partijen“.\n\nNapomena: Neke donacije nemaju precizan datum i stoga nisu uključene u vremenske serije ili druge vizualizacije temeljene na datumu.\n\nDonacije prijavljene za SP i GL mogu izgledati relativno visoke jer obje stranke zahtijevaju od svojih zastupnika i dužnosnika da značajan dio svojih plaća uplate stranci.",
-        "europeanunion": "Podaci predstavljeni ovdje potječu od Tijela za europske političke stranke i europske političke zaklade, obuhvaćajući sve dokumentirane donacije strankama i zakladama od 2018. godine. Zbog važnosti europskih političkih zaklada, pratimo i prikazujemo njihove donacije slično kao i donacije europskim političkim strankama.\n\nBudući da službeni podaci ne uključuju datume, nisu dostupne vremenske serije ili slični vizualni prikazi.\n\nImajte na umu da su u razdoblju prije europskih izbora 2024. (od 6. prosinca 2023. do 10. lipnja 2024.) vrijedili posebni zahtjevi za izvještavanje o donacijama, s tjednim izvješćima i pravovremenom objavom od strane tijela.\nOd 10. lipnja 2024. samo se donacije preko 12.000 eura moraju odmah prijaviti. Ostale donacije bit će dostupne tek nakon predaje godišnjih financijskih izvještaja.",
+        "europeanunion": "Podaci predstavljeni ovdje potječu od Tijela za europske političke stranke i europske političke zaklade, obuhvaćajući sve dokumentirane donacije strankama i zakladama od 2018. godine. Zbog važnosti europskih političkih zaklada, pratimo i prikazujemo njihove donacije slično kao i donacije europskim političkim strankama.\n\nBudući da službeni podaci ne uključuju točne datume transakcija, nisu dostupne vremenske serije ili slični vizualni prikazi temeljeni na datumima.\n\nImajte na umu da su u razdoblju prije europskih izbora 2024. (od 6. prosinca 2023. do 10. lipnja 2024.) vrijedili posebni zahtjevi za izvještavanje o donacijama, s tjednim izvješćima i pravovremenom objavom od strane tijela.\nOd 10. lipnja 2024. samo se donacije preko 12.000 eura moraju odmah prijaviti. Ostale donacije bit će dostupne tek nakon predaje godišnjih financijskih izvještaja.",
         "estonia": "Podaci koji se ovdje koriste dolaze iz estonskog Odbora za nadzor financiranja stranaka i uključuju sve političke donacije dokumentirane tamo od 2014. godine koje prelaze 1 euro.\n\nPolitičke stranke u Estoniji dužne su izvještavati o svojim prihodima, uključujući primljene donacije, na tromjesečnoj osnovi.\nPodaci na web stranici odbora ažuriraju se sukladno tome tromjesečno.",
         "czechrepublic": "Podaci korišteni ovdje potječu iz Ureda za nadzor nad upravljanjem političkih stranaka i političkih pokreta i uključuju sve političke donacije koje su tamo dokumentirane od 2018. godine i koje prelaze 25 CZK.\n\nOvaj opseg također obuhvaća sve doprinose strankama ili političkim pokretima koji su ili primili više od 100 pojedinačnih donacija ili premašili ukupni iznos donacija od 1 milijun CZK, bez obzira na veličinu pojedinačnih doprinosa. Podaci se ažuriraju jednom godišnje.\nOtkrivanje vrste donatora temelji se na identifikaciji donatora kao pojedinca ako su prisutna polja firstName i lastName.",
         "latvia": "Ovdje korišteni podaci potječu od Ureda za sprječavanje i suzbijanje korupcije (KNAB) i uključuju sve političke doprinose dokumentirane od 2015. godine koji prelaze €1. Ovaj skup podataka obuhvaća novčane donacije, nenovčane darove i usluge, te pristupnine i članarine stranke.",
-        "australia": "Ovdje korišteni podaci dolaze od Australian Electoral Commission (AEC), i to konkretno iz skupa podataka \"Donations Made Details\" koji AEC objavljuje. Uključuje sve političke donacije ondje evidentirane od 2014., veće od €1.\n\nVrijedi napomenuti da skup podataka AEC-a može sadržavati neke tipografske pogreške, što može dovesti do toga da određene donacije ne budu obuhvaćene ili da zbog nedosljednosti pri unosu podataka ne budu ispravno dodijeljene određenoj stranci. Uz to, godišnje objave AEC-a izlaze 1. veljače svake godine, ali podaci ne pružaju potpunu sliku svih doprinosa zbog praga za objavu od $15,000.\n\nVrste donatora klasificiraju se usporedbom naziva donatora. Svi uobičajeni sindikati ručno se mapiraju na vrstu donatora 'Sindikat'. Tvrtke se otkrivaju provjerom prisutnosti određenih korporativnih oznaka u nazivu donatora: 'Pty' (Proprietary), 'Ltd' na kraju naziva, 'Corporation' ili 'Corp'.",
+        "australia": "Ovdje korišteni podaci dolaze od Australian Electoral Commission (AEC), i to konkretno iz skupa podataka \"Donations Made Details\" koji AEC objavljuje. Uključuje sve političke donacije ondje evidentirane od 2014., veće od 1 AUD.\n\nVrijedi napomenuti da skup podataka AEC-a može sadržavati neke tipografske pogreške, što može dovesti do toga da određene donacije ne budu obuhvaćene ili da zbog nedosljednosti pri unosu podataka ne budu ispravno dodijeljene određenoj stranci. Uz to, godišnje objave AEC-a izlaze 1. veljače svake godine, ali podaci ne pružaju potpunu sliku svih doprinosa zbog praga za objavu od $15,000.\n\nVrste donatora klasificiraju se usporedbom naziva donatora. Svi uobičajeni sindikati ručno se mapiraju na vrstu donatora 'Sindikat'. Tvrtke se otkrivaju provjerom prisutnosti određenih korporativnih oznaka u nazivu donatora: 'Pty' (Proprietary), 'Ltd' na kraju naziva, 'Corporation' ili 'Corp'.",
         "unitedkingdom": "Ovdje korišteni podaci dolaze od Electoral Commissiona i uključuju sve političke donacije koje su ondje dokumentirane od 2010. godine i veće su od 1.000 £.\n\nTemeljni registar Electoral Commissiona retroaktivno povezuje sve povijesne transakcije s trenutačnim službeno registriranim nazivom svake stranke. Zbog toga se povijesne donacije strankama prije službenog rebrendiranja ili promjene naziva (kao što su donacije stranci The Brexit Party prije 2021.) prikazuju pod trenutačnim registriranim nazivom stranke (Reform UK).\n\nPodaci o donacijama ažuriraju se tromjesečno.",
         "serbia": "Podaci koji se ovdje koriste ne dolaze od vlade, već od neprofitne organizacije \"Centar za istraživačko novinarstvo Srbije\" (CINS), koja je ljubazno agregirala podatke o donacijama Agencije za borbu protiv korupcije Srbije.\n\nOvi podaci uključuju sve političke donacije dokumentirane tamo od 2015. godine.\n\nBudući da skup podataka ne pruža specifične informacije o datumu za pojedinačne donacije, nažalost nije moguće prikazati vremenske crte ili druge vizualizacije temeljene na vremenu.",
         "croatia": "Podaci koji se ovdje koriste potječu od Državnog izbornog povjerenstva Republike Hrvatske (DIP) i obuhvaćaju sve političke donacije novčane vrijednosti veće od 1 €, dokumentirane od 2019. godine.\nSkup podataka koristi samo posljednji objavljeni dokument o donacijama za svaku izvještajnu godinu (kako navodi izbori) kako bi se izbjegli duplikati iz ranijih verzija izvješća za istu godinu.\nSve donacije prikazane su u eurima, dok temeljni skup podataka koristi kune do 2024. godine. Donacije izvorno u kunama pretvaraju se u eure koristeći približne tečajeve za svako polugodište od 2019. do 2024.: H1 (0.1340, 0.1335, 0.1332, 0.1329, 0.1326) i H2 (0.1341, 0.1338, 0.1334, 0.1327, 0.1328).",
-        "canada": "Podaci korišteni ovdje dolaze od Elections Canada i temelje se na skupu podataka „contributions as submitted“. Uključuju sve političke donacije novčane vrijednosti veće od 500 €, dokumentirane od 2015. godine. Uključeni su svi unosi koji su dio izvješća „Statement of Contributions Received“ iz izbornog događaja „Annual“ za „Registered parties“.",
+        "canada": "Podaci korišteni ovdje dolaze od Elections Canada i temelje se na skupu podataka „contributions as submitted“. Uključuju sve političke donacije novčane vrijednosti veće od 500 CAD, dokumentirane od 2015. godine. Uključeni su svi unosi koji su dio izvješća „Statement of Contributions Received“ iz izbornog događaja „Annual“ za „Registered parties“.",
         "georgia": "Informacije prikazane ovdje preuzete su iz Ureda za borbu protiv korupcije (ანტიკორუფციული ბიურო﻿) Gruzije i uključuju sve političke donacije zabilježene od 2011. godine koje prelaze 1 GEL. Skup podataka uključuje samo doprinose klasificirane kao tip #10 (Novčane donacije) ili tip #16 (Novčane donacije pravnih osoba).",
         "norway": "Ovdje korišteni podaci potječu iz službenih publikacija o financiranju stranaka koje objavljuju Statistics Norway (SSB) i Partifinansiering.no. Prikazani ukupni iznosi agregirani su iz više prijavljenih primateljskih entiteta (kao što su središnje, regionalne, lokalne i omladinske jedinice) u jedan ukupni iznos po stranci, pri čemu je temeljno mapiranje primatelja i dalje dostupno radi transparentnosti.\n\nNorveški skup podataka osvježava se u godišnjem ciklusu ažuriranja, odražavajući dinamiku temeljnih objava.",
         "ukraine": "Podaci korišteni ovdje potječu od Nacionalne agencije za prevenciju korupcije (NAZK) putem portala PolitData. Obuhvaćaju sve zapise koji su u službenim izvješćima označeni kao „novčani doprinosi“.\n\nNapomena o opsegu podataka: Ovaj ukupni iznos odnosi se samo na izravne financijske transfere. Ne uključuje državna sredstva osigurana parlamentarnim strankama niti nenovčane (prirodne) doprinose poput robe i usluga.\n\nZbog sveobuhvatne ruske invazije obvezno izvještavanje političkih stranaka bilo je obustavljeno od početka 2022. do kraja 2023. iz sigurnosnih i logističkih razloga. Nakon usvajanja Zakona 3337-IX, stranke sada retroaktivno podnose svoja izvješća. Podaci za razdoblje 2022.–2025. i dalje se ažuriraju dok NAZK obrađuje te prijave.",
@@ -671,7 +672,9 @@
     },
     "user_rights": {
       "title": "Tvoja prava korisnika",
-      "p": "Prema GDPR-u imaš pravo u bilo kojem trenutku besplatno dobiti informacije o porijeklu, primatelju i svrsi tvojih pohranjenih osobnih podataka. Također imaš pravo zatražiti ispravak, blokiranje ili brisanje ovih podataka. Budući da obrađujemo samo minimalne i anonimizirane podatke, obično te ne možemo osobno identificirati. Imaš i pravo podnijeti pritužbu nadležnom tijelu za zaštitu podataka. Za sva pitanja u vezi privatnosti slobodno nam se obrati."
+      "p": "Prema GDPR-u imaš pravo u bilo kojem trenutku besplatno dobiti informacije o porijeklu, primatelju i svrsi tvojih pohranjenih osobnih podataka. Također imaš pravo zatražiti ispravak, blokiranje ili brisanje ovih podataka. Budući da obrađujemo samo minimalne i anonimizirane podatke, obično te ne možemo osobno identificirati. Imaš i pravo podnijeti pritužbu nadležnom tijelu za zaštitu podataka. Za sva pitanja u vezi privatnosti slobodno nam se obrati.",
+      "erasure": "Pravo na brisanje (članak 17. GDPR-a): Prema članku 17. GDPR-a, ispitanici imaju pravo zatražiti brisanje osobnih podataka ako za to postoje zakonski uvjeti. Zahtjev za brisanje možete uputiti izravno nama.",
+      "discretionary": "Diskrecijska anonimizacija: Odvojeno od zakonskih zahtjeva za brisanje, DonationWatch razmatra dobrovoljne zahtjeve za anonimizaciju od slučaja do slučaja. Imena donatora se anonimiziraju uz zadržavanje iznosa i ukupnih vrijednosti stranaka."
     }
   },
   "fun": {
@@ -697,8 +700,8 @@
       "p1": "U nastavku je popis donatora čiji su doprinosi filtrirani prema našim kriterijima i pravilima filtriranja."
     },
     "filtered_receivers": {
-      "p0": "Kako bismo osigurali da prikazujemo samo smislenе podatke o primateljima, filtriramo i određene primatelje ili stranke koje se smatraju nerelevantnima ili neoperativnima za potrebe praćenja donatora. Budući da naši skupovi podataka ne označavaju uvijek te primatelje izričito, primjenjujemo skup pravila temeljenih na regexp-u kako bismo ih automatski isključili.",
-      "p1": "U nastavku možete pregledati potpuni popis primijenjenih regexp pravila filtriranja."
+      "p0": "Kako bismo osigurali da prikazujemo samo smislenе podatke o primateljima, filtriramo i određene primatelje ili stranke koje se smatraju nerelevantnima ili neoperativnima za potrebe praćenja donatora. Budući da naši skupovi podataka ne označavaju uvijek te primatelje izričito, primjenjujemo skup pravila temeljenih na regexp-u kako bismo ih automatski isključili. U nastavku možete pregledati potpuni popis primijenjenih regexp pravila filtriranja.",
+      "p1": "U nastavku je popis primatelja čiji su zapisi filtrirani prema našim kriterijima i pravilima filtriranja."
     },
     "receivers": {
       "title": "Agregirani primatelji",
@@ -748,7 +751,7 @@
   "export": {
     "title": "Izvoz podataka",
     "p0": "Preuzmite cjeloviti skup podataka o političkim donacijama za {country} koji se koristi na ovoj stranici. Izvoz uključuje normalizirana imena donatora, iznose, datume i stranke primateljice.",
-    "p1": "Važno: Ovo nisu sirovi podaci iz {source}. Ovaj skup podataka sadrži samo donacije koje je naš tim normalizirao i filtrirao. Molimo pogledajte naš odjeljak {transparency} za metodologiju.",
+    "p1": "Važno: Ovo nisu sirovi podaci iz {source}. Ovaj skup podataka sadrži samo donacije koje je naš tim normalizirao i filtrirao. Molimo pogledajte našu {methodology}.",
     "license": "Licenca: {license}"
   },
   "bar_chart_race": {
@@ -903,6 +906,101 @@
       "title": "Nema pronađenih donacija",
       "p0": "Nema donacija koje odgovaraju vašoj trenutačnoj konfiguraciji filtara. Pokušajte prilagoditi filtre ili ih resetirati.",
       "reset": "Resetiraj filtre"
+    }
+  },
+  "methodology": {
+    "title": "Metodologija",
+    "intro": "DonationWatch obrađuje, normalizira i stavlja u kontekst službene skupove podataka koje objavljuju nacionalna izborna povjerenstva i nadzorna tijela. Ova stranica dokumentira naše izvore, pravila obrade i ograničenja za zemlju {country}.",
+    "sections": {
+      "profile": "Profil skupa podataka",
+      "source": "Izvor podataka i opseg",
+      "coverage": "Pokrivenost i pragovi",
+      "cadence": "Učestalost ažuriranja",
+      "processing": "Obrada i normalizacija",
+      "anonymisation": "Anonimizacija i redigiranje",
+      "licence": "Licenca i podrijetlo",
+      "version": "Verzija podataka i vremenske oznake",
+      "disclaimer": "Izjava o odricanju odgovornosti"
+    },
+    "profile": {
+      "source": "Službeni izvor",
+      "coverage": "Razdoblje pokrivenosti",
+      "coverage_preliminary": "{range} (preliminarno od {preliminarySince})",
+      "latest_transaction": "Posljednja zabilježena transakcija",
+      "last_processed": "Skup podataka zadnji put obrađen",
+      "cadence": "Učestalost ažuriranja",
+      "cadence_value": "{cadence, select, annual {Godišnje} quarterly {Tromjesečno} other {Povremeno}}",
+      "volume": "Opseg kompiliranog skupa podataka",
+      "volume_value": "{count} zapisa ({sum}) kroz {parties} stranaka",
+      "donation_threshold": "Prag po donaciji",
+      "donation_threshold_all": "Svi objavljeni doprinosi (bez minimalnog filtra)",
+      "party_threshold": "Prag za uključenje stranke",
+      "party_threshold_value": "{type, select, count {≥ {count} donacija} sum {≥ {sum} kumulativno} other {≥ {count} donacija ili ≥ {sum} kumulativno}}",
+      "party_threshold_all": "Uključene sve prijavljene stranke",
+      "granularity": "Granularnost podataka",
+      "granularity_individual": "Pojedinačne transakcije i zapisi o donatorima",
+      "granularity_aggregate": "Godišnji agregati na razini stranaka (bez identiteta pojedinačnih donatora)",
+      "temporal_resolution": "Vremenska rezolucija",
+      "resolution_date": "Točan datum transakcije (GGGG-MM-DD)",
+      "resolution_year": "Samo izvještajna godina (GGGG)",
+      "origin_coverage": "Geografsko podrijetlo",
+      "origin_yes": "Županija/regija i država podrijetla",
+      "origin_no": "Samo na razini države",
+      "donation_types": "Uključene vrste doprinosa",
+      "donor_types": "Klasificirane kategorije donatora",
+      "external_ids": "Vanjski identifikatori registra",
+      "external_ids_both": "ID-ovi izvornih transakcija i matični brojevi tvrtki (OIB)",
+      "external_ids_transaction": "ID-ovi transakcija u izvornom registru",
+      "external_ids_company": "Registracijski / matični brojevi tvrtki",
+      "external_ids_none": "Nisu objavljeni u izvornom registru",
+      "access": "Pristup podacima i cjevovod (pipeline)",
+      "export_link": "Preuzmi cjeloviti skup podataka (CSV / JSON)",
+      "pipeline_link": "Pregledaj izvorni kod učitavača za državu (GitHub)"
+    },
+    "source": {
+      "default": "Podaci za {country} preuzeti su izravno iz {source}.",
+      "link": "Posjetite službeni registar"
+    },
+    "coverage": {
+      "default": "Skup podataka obuhvaća objavljene političke donacije od {minYear}.",
+      "preliminary": "Podaci od {preliminarySince} su preliminarni i podložni naknadnim dopunama nadležnog tijela."
+    },
+    "threshold": {
+      "default": "DonationWatch primjenjuje minimalni prag uključenja od {amount} po transakciji za ovaj skup podataka.",
+      "note": "Ovaj smo prag sami postavili kako bismo izbjegli preveliku količinu sitnih donacija, te može biti viši od minimalnog iznosa koji službeni registar objavljuje. Doprinosi čija je apsolutna vrijednost manja od ovog iznosa se filtriraju.",
+      "all": "Ovaj skup podataka uključuje sve objavljene donacije bez filtera minimalnog iznosa.",
+      "party": "Prag uključenja na razini stranke: Kako bismo se usredotočili na aktivne političke subjekte, u kompilirani skup podataka uključene su samo stranke s {type, select, count {najmanje {count} dokumentiranih donacija} sum {najmanje {sum} kumulativnih donacija} other {najmanje {count} dokumentiranih donacija ili {sum} kumulativnih donacija}}.",
+      "party_all": "Uključenje na razini stranke: Uključene su sve političke stranke s valjanim prijavljenim doprinosima iznad praga transakcije.",
+      "net_positive": "Povrati i filtriranje neto nule: Neki registri bilježe vraćene ili refundirane doprinose kao negativne stavke. Donatori ili stranke primateljice čiji je kumulativni neto zbroj doprinosa u cijelom skupu podataka nula ili negativan isključuju se."
+    },
+    "cadence": {
+      "default": "Skupovi podataka se povremeno sinkroniziraju sa službeno objavljenim registrom.",
+      "annual": "Izvorni skup podataka ažurira se na godišnjoj razini.",
+      "quarterly": "Izvorni skup podataka ažurira se na tromjesečnoj razini."
+    },
+    "processing": {
+      "summary": "Sirove objave prolaze determinističku normalizaciju temeljenu na pravilima tijekom učitavanja kako bi se standardizirali nazivi subjekata, objedinili organizacijski ogranci i isključili neodgovarajući unosi:",
+      "step_cleaning": "Osnovno čišćenje teksta: Svi nazivi subjekata prolaze Unicode NFKC normalizaciju, uklanjanje okolnih navodnika i završnih zareza te sažimanje višestrukih razmaka.",
+      "step_clustering": "Grupiranje po ključu donatora i pravila za državu: Kanonski ključ pretraživanja (koji uklanja sve ne-alfanumeričke znakove i pretvara slova u velika) grupira varijante u veličini slova, razmacima i interpunkciji pod jedno kanonsko ime donatora. Gdje je to konfigurirano za pojedinu državu, dodatna pravila standardiziraju lokalne pravne oblike, uklanjaju osobne titule ili povezuju poznate pseudonime — pri čemu je svaka spojena varijanta navedena u odjeljku Agregirani donatori u nastavku.",
+      "step_receivers": "Mapiranje i konsolidacija primatelja: Prijavljeni nazivi primatelja mapiraju se na kanonske političke stranke. Kada registri odvojeno prikazuju doprinose regionalnim, lokalnim ili omladinskim jedinicama stranke, oni se konsolidiraju u jedan ukupni iznos stranke (navedeno u odjeljku Agregirani primatelji u nastavku kada je primjenjivo).",
+      "donor_identity": "Važno ograničenje vezano uz identitet donatora (imenjaci naspram nespojenih varijanti): Službeni registri financiranja političkih stranaka rijetko objavljuju jedinstvene osobne identifikatore (poput OIB-a, poreznih brojeva ili datuma rođenja) za pojedinačne donatore. Ukupni iznosi na stranicama profila donatora agregiraju se isključivo prema normaliziranom imenu donatora. Zbog toga jedan profil donatora može objediniti doprinose više različitih osoba koje dijele potpuno isto ime (prekomjerna agregacija), dok varijante koje sadrže srednja imena ili nemapirane kratice mogu ostati zasebni profili (nedovoljna agregacija)."
+    },
+    "anonymisation": {
+      "summary": "Razlikujemo redakcije koje je unaprijed provelo nadležno tijelo od diskrecijske anonimizacije na zahtjev.",
+      "upstream": "Redigirano od nadležnog tijela: {count} zapisa donatora prikriveno je od strane tijela prije objave.",
+      "by_request": "Anonimizirano na zahtjev: {count} imena donatora uklonjeno je na zahtjev, uz očuvanje iznosa transakcija i ukupnih iznosa stranaka."
+    },
+    "licence": {
+      "output": "Naš kompilirani, normalizirani skup podataka i vizualizacije objavljeni su pod licencom {licence}.",
+      "export_prompt": "Za istraživače, novinare i podatkovne znanstvenike, cjeloviti normalizirani skup podataka za zemlju {country} može se preuzeti putem naše stranice {exportLink}, a točna pravila učitavanja i normalizacije mogu se provjeriti u našem {pipelineLink}."
+    },
+    "version": {
+      "last_updated": "Skup podataka zadnji put obrađen: {date}.",
+      "latest_donation": "Posljednja zabilježena transakcija u skupu podataka: {date}.",
+      "explanation": "Vremenska oznaka obrade pokazuje kada je naš sustav zadnji put sinkronizirao i kompilirao podatke iz službenog registra, dok datum posljednje transakcije odražava najnoviji datum doprinosa prisutan u objavljenim zapisima."
+    },
+    "disclaimer": {
+      "text": "Kompilirano, nije službeno: DonationWatch je neovisan građanski projekt i nije povezan s izbornim tijelima niti političkim strankama. Zbog normalizacije i filtriranja, ove podatke ne treba citirati kao službeni državni registar."
     }
   }
 }

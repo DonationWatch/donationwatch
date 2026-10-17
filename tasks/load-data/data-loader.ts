@@ -4,11 +4,12 @@ import fs, { constants } from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
 
-import type {
-  CountryConfig,
-  UnloadedCountryConfig,
-} from "@/types/country-config";
+import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
+import type {
+  AnonymizedDonorEntry,
+  TransparencyData,
+} from "@/types/transparency";
 import type { Country, CountryCode } from "@/utils/countries";
 import type {
   Donation,
@@ -71,14 +72,7 @@ interface ProcessedDonationData {
   donations: Donation[];
   parties: Party[];
   countryConfig: CountryConfig;
-  transparencyData: {
-    donorFilters?: UnloadedCountryConfig["donorFilters"];
-    receiverFilters?: UnloadedCountryConfig["receiverFilters"];
-    filteredDonors: string[];
-    filteredReceivers: string[];
-    normalizedDonors: [string, string[]][];
-    normalizedReceivers: [string, string[]][];
-  };
+  transparencyData: TransparencyData;
   donorMeta: DonorMetaDefinition;
 }
 
@@ -125,6 +119,10 @@ export abstract class DataLoader {
   abstract extractYearData(year: string): Promise<ExtractedYearData[]>;
 
   protected anonymizedDonors: string[] = [];
+  protected anonymizedDonorRecords: Array<{
+    name: string;
+    actionedOn?: string;
+  }> = [];
 
   protected readonly log: debug.Debugger;
   protected readonly cacheDir: string;
@@ -627,6 +625,10 @@ export abstract class DataLoader {
             [...variants].toSorted(),
           ])
           .toSorted(([a], [b]) => a.localeCompare(b)),
+        anonymisation: {
+          anonymisedByRequestCount: this.anonymizedDonorRecords.length,
+          redactedUpstreamCount: this.redactedDonorCount,
+        },
       },
       donorMeta: this.donorMeta,
     };
@@ -706,10 +708,17 @@ export abstract class DataLoader {
         this.anonymizedDonorsPath,
         "utf-8",
       );
-      this.anonymizedDonors = JSON.parse(anonymizedDonorsContent);
+      const parsed: AnonymizedDonorEntry[] = JSON.parse(
+        anonymizedDonorsContent,
+      );
+      this.anonymizedDonorRecords = parsed.map((entry) =>
+        typeof entry === "string" ? { name: entry } : entry,
+      );
+      this.anonymizedDonors = this.anonymizedDonorRecords.map((r) => r.name);
     } catch (error) {
       this.log("Proceeding without anonymization", error);
       this.anonymizedDonors = [];
+      this.anonymizedDonorRecords = [];
     }
   }
 

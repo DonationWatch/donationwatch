@@ -19,6 +19,7 @@
     "imprint": "Impressum",
     "privacy": "Personvernerklæring",
     "transparency": "Åpenhet",
+    "methodology": "Metodologi",
     "sources": "Kilder",
     "export": "Dataeksport",
     "bar_chart_race": "Søylediagram-kappløp",
@@ -195,11 +196,11 @@
         "estonia": "Dataene som brukes her kommer fra Estlands komité for overvåking av partifinansiering og inkluderer alle politiske donasjoner dokumentert der siden 2014 som overstiger 1 euro.\n\nPolitiske partier i Estland er pålagt å rapportere inntekter, inkludert mottatte donasjoner, kvartalsvis.\nDataene på komiteens nettside oppdateres tilsvarende kvartalsvis.",
         "czechrepublic": "Dataene som brukes her kommer fra kontoret for kontroll av administrasjonen av politiske partier og politiske bevegelser, og inkluderer alle politiske donasjoner dokumentert der siden 2018 som overstiger 25 CZK.\n\nDette omfanget inkluderer også alle bidrag til partier eller politiske bevegelser som enten har mottatt mer enn 100 enkeltbidrag eller har passert 1 million CZK i totale donasjonsbeløp, uavhengig av størrelsen på enkeltbidragene. Dataene oppdateres årlig.\nKlassifisering av givertype er basert på at en giver identifiseres som en privatperson hvis både firstName- og lastName-feltene er til stede.",
         "latvia": "Dataene som brukes her er hentet fra Kontoret for korrupsjonsforebygging og -bekjempelse (KNAB) og inkluderer alle politiske bidrag dokumentert siden 2015 som overstiger €1. Dette datasettet omfatter pengedonasjoner, tingsgaver og tjenester, samt partiinnmeldings- og medlemskontingenter.",
-        "australia": "Dataene som brukes her kommer fra Australian Electoral Commission (AEC), og spesielt fra datasettet \"Donations Made Details\" som AEC publiserer. Det inkluderer alle politiske donasjoner som er dokumentert der siden 2014, over €1.\n\nDet er verdt å merke seg at AEC-datasettet kan inneholde enkelte skrivefeil, noe som kan føre til at visse donasjoner ikke blir fanget opp eller ikke blir riktig knyttet til et bestemt parti på grunn av inkonsistens i dataregistreringen. I tillegg publiseres AECs årlige offentliggjøringer 1. februar hvert år, men dataene gir ikke et fullstendig bilde av alle bidrag på grunn av terskelen for offentliggjøring på $15,000.\n\nDonortyper klassifiseres ved å matche donornavn. Alle vanlige fagforeninger mappes manuelt til donortypen 'Fagforening'. Selskaper oppdages ved å sjekke etter spesifikke selskapsidentifikatorer i donornavnet: 'Pty' (Proprietary), 'Ltd' på slutten av navnet, 'Corporation' eller 'Corp'.",
+        "australia": "Dataene som brukes her kommer fra Australian Electoral Commission (AEC), og spesielt fra datasettet \"Donations Made Details\" som AEC publiserer. Det inkluderer alle politiske donasjoner som er dokumentert der siden 2014, over 1 AUD.\n\nDet er verdt å merke seg at AEC-datasettet kan inneholde enkelte skrivefeil, noe som kan føre til at visse donasjoner ikke blir fanget opp eller ikke blir riktig knyttet til et bestemt parti på grunn av inkonsistens i dataregistreringen. I tillegg publiseres AECs årlige offentliggjøringer 1. februar hvert år, men dataene gir ikke et fullstendig bilde av alle bidrag på grunn av terskelen for offentliggjøring på $15,000.\n\nDonortyper klassifiseres ved å matche donornavn. Alle vanlige fagforeninger mappes manuelt til donortypen 'Fagforening'. Selskaper oppdages ved å sjekke etter spesifikke selskapsidentifikatorer i donornavnet: 'Pty' (Proprietary), 'Ltd' på slutten av navnet, 'Corporation' eller 'Corp'.",
         "unitedkingdom": "Dataene som brukes her, kommer fra Electoral Commission og inkluderer alle politiske donasjoner som er dokumentert der siden 2010 og overstiger £1 000.\n\nDet underliggende registeret til Electoral Commission knytter alle historiske transaksjoner retroaktivt til hver partis nåværende offisielt registrerte navn. Historiske donasjoner til partier før en offisiell omprofilering eller navneendring (for eksempel donasjoner til The Brexit Party før 2021) vises derfor under partiets nåværende registrerte navn (Reform UK).\n\nDonasjonsdataene oppdateres kvartalsvis.",
         "serbia": "Dataene som brukes her kommer ikke fra myndighetene, men fra den ideelle organisasjonen «Center for Investigative Journalism of Serbia» («Centar za istraživačko novinarstvo Srbije» – CINS), som har aggregert donasjonsdata fra Serbias antikorrupsjonsbyrå.\n\nDisse dataene inkluderer alle politiske donasjoner dokumentert der siden 2015.\n\nSiden datasettet ikke gir spesifikk datoinformasjon for enkeltbidrag, er det dessverre ikke mulig å vise tidslinjer eller andre tidsbaserte visualiseringer.",
         "croatia": "Dataene som brukes her kommer fra Den statlige valgkommisjonen i Republikken Kroatia (DIP) og inkluderer alle politiske donasjoner med en pengeverdi som overstiger 1 €, dokumentert siden 2019.\nDatasettet bruker kun det sist publiserte donasjonsdokumentet for hvert rapporteringsår (slik det er oppgitt av izbori) for å unngå duplikater fra tidligere versjoner av rapporten for samme år.\nAlle donasjoner vises i euro, mens det underliggende datasettet bruker kuna fram til 2024. Donasjoner som opprinnelig er gitt i kuna, konverteres til euro ved hjelp av omtrentlige valutakurser for hvert halvår fra 2019 til 2024: H1 (0.1340, 0.1335, 0.1332, 0.1329, 0.1326) og H2 (0.1341, 0.1338, 0.1334, 0.1327, 0.1328).",
-        "canada": "Dataene som brukes her kommer fra Elections Canada og er basert på datasettet \"contributions as submitted\". Det inkluderer alle politiske donasjoner med pengeverdi over €500, dokumentert siden 2015. Alle oppføringer som inngår i rapporten \"Statement of Contributions Received\" fra valgtypen \"Annual\" til \"Registered parties\" er inkludert.",
+        "canada": "Dataene som brukes her kommer fra Elections Canada og er basert på datasettet \"contributions as submitted\". Det inkluderer alle politiske donasjoner med pengeverdi over 500 CAD, dokumentert siden 2015. Alle oppføringer som inngår i rapporten \"Statement of Contributions Received\" fra valgtypen \"Annual\" til \"Registered parties\" er inkludert.",
         "georgia": "Informasjonen som presenteres her er hentet fra Georgias antikorrupsjonsbyrå (ანტიკორუფციული ბიურო﻿) og inkluderer alle politiske donasjoner registrert siden 2011 som overstiger 1 GEL. Datasettet omfatter kun bidrag klassifisert som type #10 (monetære donasjoner) eller type #16 (monetære donasjoner fra juridiske personer).",
         "norway": "Dataene som brukes her kommer fra de offisielle publikasjonene om partifinansiering fra Statistisk sentralbyrå (SSB) og Partifinansiering.no. Totalene som vises er aggregert fra flere rapporterte mottakerenheter (for eksempel sentrale, regionale, lokale og ungdomsenheter) til én samlet totalsum per parti, mens den underliggende mappingen av mottakere holdes tilgjengelig for åpenhet.\n\nNorgesdatasettet oppdateres årlig, i tråd med publiseringstakten for de underliggende opplysningene.",
         "ukraine": "Dataene som brukes her, er hentet fra Nasjonalt byrå for korrupsjonsforebygging (NAZK) via PolitData-portalen. De inkluderer alle poster identifisert som «økonomiske bidrag» i de offisielle rapportene.\n\nMerknad om datagrunnlag: Dette tallet viser kun direkte pengetransaksjoner. Det inkluderer ikke statlig finansiering til parlamentariske partier eller ikke-monetære bidrag, som varer og tjenester.\n\nPå grunn av den fullskala russiske invasjonen ble den obligatoriske rapporteringen for politiske partier suspendert fra tidlig 2022 til slutten av 2023 av sikkerhets- og logistikkårsaker. Etter vedtakelsen av lov 3337-IX leverer partiene nå inn sine rapporter i ettertid. Data for 2022–2025 oppdateres fortsatt mens NAZK behandler disse innsendelsene.",
@@ -671,7 +672,9 @@
     },
     "user_rights": {
       "title": "Dine rettigheter",
-      "p": "I henhold til GDPR har du rett til når som helst gratis å be om informasjon om opprinnelse, mottakere og formål med lagrede personopplysninger. Du har også rett til å be om retting, blokkering eller sletting av slike data. Ettersom vi kun behandler minimale og anonymiserte data, kan vi vanligvis ikke identifisere deg personlig. Du har også rett til å klage til relevant datatilsynsmyndighet. Kontakt oss gjerne ved spørsmål om personvern."
+      "p": "I henhold til GDPR har du rett til når som helst gratis å be om informasjon om opprinnelse, mottakere og formål med lagrede personopplysninger. Du har også rett til å be om retting, blokkering eller sletting av slike data. Ettersom vi kun behandler minimale og anonymiserte data, kan vi vanligvis ikke identifisere deg personlig. Du har også rett til å klage til relevant datatilsynsmyndighet. Kontakt oss gjerne ved spørsmål om personvern.",
+      "erasure": "Rett til sletting (artikkel 17 GDPR): I henhold til artikkel 17 i GDPR har registrerte rett til å få slettet personopplysninger når lovfestede vilkår er oppfylt. Du kan sende en sletteforespørsel direkte til oss.",
+      "discretionary": "Skjønnsmessig anonymisering: Uavhengig av lovbestemte krav om sletting, vurderer DonationWatch anonymiseringsforespørsler individuelt. Navn anonymiseres mens beløp og partitotaler opprettholdes for å sikre åpenhet."
     }
   },
   "fun": {
@@ -697,8 +700,8 @@
       "p1": "Nedenfor finner du en liste over givere der bidragene ble filtrert bort i tråd med våre kriterier og filtreringsregler."
     },
     "filtered_receivers": {
-      "p0": "For å sikre at vi bare presenterer meningsfulle mottakerdata, filtrerer vi også bort enkelte mottakere eller partier som anses som irrelevante eller ikke-operative for formål knyttet til sporing av givere. Siden datasettene våre ikke alltid merker disse mottakerne eksplisitt, bruker vi et sett med regexp-baserte regler for automatisk å ekskludere dem.",
-      "p1": "Nedenfor kan du se hele listen over anvendte regexp-filtreringsregler."
+      "p0": "For å sikre at vi bare presenterer meningsfulle mottakerdata, filtrerer vi også bort enkelte mottakere eller partier som anses som irrelevante eller ikke-operative for formål knyttet til sporing av givere. Siden datasettene våre ikke alltid merker disse mottakerne eksplisitt, bruker vi et sett med regexp-baserte regler for automatisk å ekskludere dem. Nedenfor kan du se hele listen over anvendte regexp-filtreringsregler.",
+      "p1": "Nedenfor finner du en liste over mottakere der oppføringene ble filtrert bort i tråd med våre kriterier og filtreringsregler."
     },
     "receivers": {
       "title": "Aggregerte mottakere",
@@ -748,7 +751,7 @@
   "export": {
     "title": "Dataeksport",
     "p0": "Få hele datasettet med politiske donasjoner for {country} som brukes på dette nettstedet. Eksporten inkluderer normaliserte donornavn, beløp, datoer og mottakerpartier.",
-    "p1": "Viktig: Dette er ikke rådataene fra {source}. Dette datasettet inneholder kun donasjoner som er normalisert og filtrert av teamet vårt. Se delen {transparency} for metodebeskrivelse.",
+    "p1": "Viktig: Dette er ikke rådataene fra {source}. Dette datasettet inneholder kun donasjoner som er normalisert og filtrert av teamet vårt. Se vår {methodology}.",
     "license": "Lisens: {license}"
   },
   "bar_chart_race": {
@@ -903,6 +906,101 @@
       "title": "Ingen donasjoner funnet",
       "p0": "Det finnes ingen donasjoner som samsvarer med din nåværende filterkonfigurasjon. Prøv å justere filtrene eller tilbakestille dem.",
       "reset": "Tilbakestill filtre"
+    }
+  },
+  "methodology": {
+    "title": "Metodologi",
+    "intro": "DonationWatch behandler, normaliserer og kontekstualiserer offisielle offentliggjøringsdata fra nasjonale valgmyndigheter og tilsynsorganer. Denne siden dokumenterer våre datakilder, behandlingsregler og begrensninger for {country}.",
+    "sections": {
+      "profile": "Datasettprofil",
+      "source": "Datakilde og omfang",
+      "coverage": "Dekning og terskelverdier",
+      "cadence": "Oppdateringsfrekvens",
+      "processing": "Behandling og normalisering",
+      "anonymisation": "Anonymisering og sladding",
+      "licence": "Lisens og opprinnelse",
+      "version": "Dataversjon og tidsstempler",
+      "disclaimer": "Ansvarsfraskrivelse"
+    },
+    "profile": {
+      "source": "Offisiell kilde",
+      "coverage": "Dekningsperiode",
+      "coverage_preliminary": "{range} (foreløpig siden {preliminarySince})",
+      "latest_transaction": "Siste registrerte transaksjon",
+      "last_processed": "Datasett sist behandlet",
+      "cadence": "Oppdateringsfrekvens",
+      "cadence_value": "{cadence, select, annual {Årlig} quarterly {Kvartalsvis} other {Periodisk}}",
+      "volume": "Sammenstilt datasettvolum",
+      "volume_value": "{count} oppføringer ({sum}) på tvers av {parties} partier",
+      "donation_threshold": "Terskel per donasjon",
+      "donation_threshold_all": "Alle publiserte bidrag (ingen minimumsfilter)",
+      "party_threshold": "Terskel for partiinkludering",
+      "party_threshold_value": "{type, select, count {≥ {count} donasjoner} sum {≥ {sum} kumulativt} other {≥ {count} donasjoner eller ≥ {sum} kumulativt}}",
+      "party_threshold_all": "Alle rapporterte partier inkludert",
+      "granularity": "Datagranularitet",
+      "granularity_individual": "Enkelttransaksjoner og giveroppføringer",
+      "granularity_aggregate": "Årlige partitotaler (ingen individuelle giveridentiteter)",
+      "temporal_resolution": "Tidsoppløsning",
+      "resolution_date": "Nøyaktig transaksjonsdato (ÅÅÅÅ-MM-DD)",
+      "resolution_year": "Kun rapporteringsår (ÅÅÅÅ)",
+      "origin_coverage": "Geografisk opprinnelse",
+      "origin_yes": "Fylke/region og opprinnelsesland",
+      "origin_no": "Kun på landsnivå",
+      "donation_types": "Inkluderte bidragstyper",
+      "donor_types": "Klassifiserte giverkategorier",
+      "external_ids": "Eksterne register-ID-er",
+      "external_ids_both": "Kildetransaksjons-ID-er og organisasjonsnumre",
+      "external_ids_transaction": "Transaksjons-ID-er fra kilderegisteret",
+      "external_ids_company": "Organisasjons- / foretaksnumre",
+      "external_ids_none": "Ingen publisert i kilderegisteret",
+      "access": "Datatilgang og pipeline",
+      "export_link": "Last ned hele datasettet (CSV / JSON)",
+      "pipeline_link": "Se kildekoden til landets innlaster (GitHub)"
+    },
+    "source": {
+      "default": "Data for {country} er hentet direkte fra {source}.",
+      "link": "Besøk offisielt kilderegister"
+    },
+    "coverage": {
+      "default": "Datasettet dekker publiserte politiske bidrag fra og med {minYear}.",
+      "preliminary": "Oppføringer fra {preliminarySince} er foreløpige og kan bli oppdatert av myndighetene."
+    },
+    "threshold": {
+      "default": "DonationWatch bruker en minimumsgrense på {amount} per transaksjon for dette datasettet.",
+      "note": "Denne terskelen er konfigurert av oss for å unngå en overveldende mengde smådonasjoner, og kan være høyere enn minstebeløpet som eksporteres av kilderegisteret. Bidrag med en absoluttverdi under dette beløpet filtreres bort.",
+      "all": "Dette datasettet inkluderer alle publiserte bidrag uten et minimumsbeløpsfilter.",
+      "party": "Inkluderingsterskel på partinivå: For å fokusere på aktive politiske enheter inkluderes kun partier med {type, select, count {minst {count} dokumenterte donasjoner} sum {minst {sum} i kumulative donasjoner} other {minst {count} dokumenterte donasjoner eller {sum} i kumulative donasjoner}} i det sammenstilte datasettet.",
+      "party_all": "Partiinkludering: Alle politiske partier med gyldige rapporterte bidrag over transaksjonsterskelen er inkludert.",
+      "net_positive": "Tilbakebetalinger og netto-null-filtrering: Enkelte registre fører returnerte eller refunderte bidrag som negative oppføringer. Givere eller mottakerpartier med en kumulativ netto bidragssum på null eller mindre i datasettet ekskluderes."
+    },
+    "cadence": {
+      "default": "Datasett synkroniseres jevnlig med det publiserte kilderegisteret.",
+      "annual": "Kildedatasettet oppdateres i en årlig syklus.",
+      "quarterly": "Kildedatasettet oppdateres i en kvartalsvis syklus."
+    },
+    "processing": {
+      "summary": "Rådata gjennomgår deterministisk, regelbasert normalisering ved innlesing for å standardisere enhetsnavn, konsolidere underavdelinger og ekskludere ugyldige oppføringer:",
+      "step_cleaning": "Grunnleggende tekstvask: Alle enhetsnavn gjennomgår Unicode NFKC-normalisering, fjerning av omsluttende anførselstegn og avsluttende komma, samt sammenslåing av doble mellomrom.",
+      "step_clustering": "Givernøkkel-gruppering og landsregler: En kanonisk oppslagsnøkkel (som fjerner alle ikke-alfanumeriske tegn og gjør om til store bokstaver) grupperer varianter i store/små bokstaver, mellomrom og tegnsetting under ett kanonisk givernavn. Der det er konfigurert for et lands innlaster, standardiserer tilleggsregler lokale selskapsformer, fjerner personlige titler eller kobler kjente aliaser — der hver sammenslått variant er oppført under Aggregerte givere nedenfor.",
+      "step_receivers": "Mottakerkobling og konsolidering: Rapporterte mottakernavn kobles til kanoniske politiske partier. Der registre rapporterer bidrag til regionale, lokale eller ungdomsorganisasjoner separat, samles disse til én partitotal (oppført under Aggregerte mottakere nedenfor når det er aktuelt).",
+      "donor_identity": "Viktig begrensning knyttet til giveridentitet (navnebrødre vs. ikke-sammenslåtte varianter): Offisielle partifinansieringsregistre publiserer sjelden unike personidentifikatorer (som fødselsnumre, skatte-ID-er eller fødselsdatoer) for individuelle givere. Donasjonstotaler på giverprofiler aggregeres strengt etter normalisert givernavn. Dermed kan én giverprofil samle bidrag fra flere ulike personer som deler nøyaktig samme navn (overaggregering), mens varianter med mellomnavn eller ukoblede forkortelser kan bli stående som separate profiler (underaggregering)."
+    },
+    "anonymisation": {
+      "summary": "Vi skiller mellom sladding utført av publiserende myndighet og skjønnsmessig anonymisering utført etter forespørsel.",
+      "upstream": "Sladdet av kilde: {count} oppføringer ble sladdet av myndighetene før publisering.",
+      "by_request": "Anonymisert etter forespørsel: {count} navn har blitt fjernet etter forespørsel, mens beløp og partitotaler opprettholdes."
+    },
+    "licence": {
+      "output": "Vårt sammenstilte, normaliserte datasett og visualiseringer er utgitt under {licence}-lisensen.",
+      "export_prompt": "For forskere, journalister og dataforskere kan hele det normaliserte datasettet for {country} lastes ned via vår side {exportLink}, og de nøyaktige innlesings- og normaliseringsreglene kan etterprøves i vår {pipelineLink}."
+    },
+    "version": {
+      "last_updated": "Datasett sist behandlet: {date}.",
+      "latest_donation": "Siste registrerte transaksjon i datasettet: {date}.",
+      "explanation": "Behandlingstidsstempelet viser når vår pipeline sist synkroniserte og sammenstilte data fra det offisielle registeret, mens datoen for siste transaksjon gjenspeiler den nyeste bidragsdatoen i de publiserte oppføringene."
+    },
+    "disclaimer": {
+      "text": "Sammenstilt, ikke offisielt: DonationWatch er et uavhengig samfunnsprosjekt og er ikke tilknyttet valgmyndigheter eller politiske partier. På grunn av normalisering og filtrering skal dette datasettet ikke siteres som et offisielt register."
     }
   }
 }

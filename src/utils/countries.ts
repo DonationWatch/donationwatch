@@ -149,6 +149,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
     features: Features.Origin | Features.Date | Features.Donors,
     minPublicDonationAmount: 540,
     currency: "EUR",
+    updateCadence: "quarterly",
     source: {
       name: "Rechnungshof Österreich",
       url: "https://www.rechnungshof.gv.at/Parteispenden",
@@ -231,6 +232,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
     features: Features.Date | Features.Donors,
     minPublicDonationAmount: 1,
     currency: "EUR",
+    updateCadence: "quarterly",
     source: {
       name: "ERJK",
       url: "https://www.erjk.ee/en",
@@ -259,6 +261,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       Features.DonorRegistrationNumber,
     minPublicDonationAmount: 25, // approx 1 eur
     currency: "CZK",
+    updateCadence: "annual",
     source: {
       name: "ÚDHPSH",
       url: "https://www.udhpsh.cz/vyrocni-financni-zpravy-stran-a-hnuti",
@@ -390,6 +393,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       count: -1,
     },
     currency: "GBP",
+    updateCadence: "quarterly",
     wikiCountry: "en",
     source: {
       name: "Electoral Commission",
@@ -422,6 +426,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
     features: Features.Date | Features.Donors | Features.DonorType,
     minPublicDonationAmount: 1,
     currency: "AUD",
+    updateCadence: "annual",
     source: {
       name: "AEC",
       url: "https://transparency.aec.gov.au/Download",
@@ -691,6 +696,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
     features: Features.Donors,
     minPublicDonationAmount: 500,
     currency: "NOK",
+    updateCadence: "annual",
     source: {
       name: "Partifinansiering.no",
       url: "https://www.partifinansiering.no/en/annual-donations/",

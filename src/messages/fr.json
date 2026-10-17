@@ -19,6 +19,7 @@
     "imprint": "Mentions légales",
     "privacy": "Politique de confidentialité",
     "transparency": "Transparence",
+    "methodology": "Méthodologie",
     "sources": "Sources",
     "export": "Exportation de données",
     "bar_chart_race": "Course de graphiques",
@@ -189,7 +190,7 @@
         "unitedkingdom": "Les données utilisées ici proviennent de l’Electoral Commission et comprennent tous les dons politiques qui y sont documentés depuis 2010 et qui dépassent 1 000 £.\n\nLe registre sous-jacent de l’Electoral Commission associe rétroactivement toutes les transactions historiques au nom officiel actuellement enregistré de chaque parti. Par conséquent, les dons historiques effectués à des partis avant un changement officiel de marque ou de nom (comme les dons faits à The Brexit Party avant 2021) sont affichés sous le nom actuellement enregistré du parti (Reform UK).\n\nLes données sur les dons sont mises à jour trimestriellement.",
         "serbia": "Les données proviennent de l'organisation non lucrative « Center for Investigative Journalism of Serbia » (CINS), qui a agrégé les données de l'Agence de lutte contre la corruption de Serbie depuis 2015.",
         "croatia": "Les données proviennent de la Commission électorale d'État (DIP) depuis 2019. Les montants en Kuna avant 2024 ont été convertis en Euro selon des taux de change semestriels approximatifs.",
-        "canada": "Les données proviennent d'Élections Canada (ensemble de données « contributions telles que soumises ») et incluent les dons supérieurs à 500 € documentés depuis 2015.",
+        "canada": "Les données proviennent d'Élections Canada (ensemble de données « contributions telles que soumises ») et incluent les dons supérieurs à 500 CAD documentés depuis 2015.",
         "georgia": "Les informations proviennent du Bureau de lutte contre la corruption de Géorgie et incluent les dons supérieurs à 1 GEL depuis 2011 (types #10 et #16).",
         "norway": "Les données proviennent de Statistiques Norvège (SSB) et Partifinansiering.no. Les montants sont agrégés par parti (unités nationales, régionales et locales combinées).",
         "ukraine": "Les données proviennent de l'Agence nationale pour la prévention de la corruption (NAZK) via le portail PolitData. Note : En raison de l'invasion russe, les rapports ont été suspendus entre début 2022 et fin 2023 ; les données sont en cours de mise à jour.",
@@ -661,7 +662,9 @@
     },
     "user_rights": {
       "title": "Vos droits",
-      "p": "Conformément au RGPD, vous avez un droit d'accès, de rectification et de suppression de vos données. Comme nous traitons des données minimales et anonymisées, nous ne pouvons généralement pas vous identifier personnellement via nos journaux. Vous pouvez introduire une réclamation auprès d'une autorité de contrôle."
+      "p": "Conformément au RGPD, vous avez un droit d'accès, de rectification et de suppression de vos données. Comme nous traitons des données minimales et anonymisées, nous ne pouvons généralement pas vous identifier personnellement via nos journaux. Vous pouvez introduire une réclamation auprès d'une autorité de contrôle.",
+      "erasure": "Droit à l'effacement (Article 17 du RGPD) : En vertu de l'article 17 du RGPD, les personnes concernées ont le droit d'obtenir l'effacement de données personnelles les concernant lorsque les motifs légaux s'appliquent. Vous pouvez nous adresser directement une demande d'effacement.",
+      "discretionary": "Anonymisation discrétionnaire : Distincte des demandes légales d'effacement, DonationWatch examine les demandes d'anonymisation au cas par cas. Les noms des donateurs sont alors anonymisés tout en préservant les montants et totaux des partis."
     }
   },
   "fun": {
@@ -687,8 +690,8 @@
       "p1": "Liste des donateurs exclus selon nos critères de filtrage :"
     },
     "filtered_receivers": {
-      "p0": "Nous excluons certains bénéficiaires jugés non pertinents pour le suivi des dons politiques (ex: entités purement administratives).",
-      "p1": "Vous trouverez ci-dessous la liste des règles de filtrage appliquées."
+      "p0": "Nous excluons certains bénéficiaires jugés non pertinents pour le suivi des dons politiques (ex : entités purement administratives) à l'aide de règles basées sur des expressions régulières (regexp). Vous trouverez ci-dessous la liste des règles de filtrage appliquées.",
+      "p1": "Liste des bénéficiaires dont les enregistrements ont été exclus selon nos critères et règles de filtrage :"
     },
     "receivers": {
       "title": "Bénéficiaires agrégés",
@@ -732,7 +735,7 @@
   "export": {
     "title": "Exportation de données",
     "p0": "Obtenez le jeu de données complet des dons politiques pour {country}. L'export inclut les noms normalisés, montants, dates et partis bénéficiaires.",
-    "p1": "Important : Il ne s'agit pas des données brutes de {source}, mais des données normalisées et filtrées par notre équipe. Voir la section {transparency}.",
+    "p1": "Important : Il ne s'agit pas des données brutes de {source}, mais des données normalisées et filtrées par notre équipe. Voir la {methodology}.",
     "license": "Licence : {license}"
   },
   "bar_chart_race": {
@@ -887,6 +890,101 @@
       "title": "Aucun don trouvé",
       "p0": "Aucun don ne correspond à votre configuration actuelle de filtres. Essayez d’ajuster ou de réinitialiser vos filtres.",
       "reset": "Réinitialiser les filtres"
+    }
+  },
+  "methodology": {
+    "title": "Méthodologie",
+    "intro": "DonationWatch traite, normalise et contextualise les jeux de données officiels publiés par les autorités électorales et de contrôle nationales. Cette page documente nos sources, règles d'ingestion et limites pour {country}.",
+    "sections": {
+      "profile": "Profil du jeu de données",
+      "source": "Source des données & Portée",
+      "coverage": "Couverture & Seuils",
+      "cadence": "Fréquence de mise à jour",
+      "processing": "Traitement & Normalisation",
+      "anonymisation": "Anonymisation & Masquage",
+      "licence": "Licence & Provenance",
+      "version": "Version des données & Horodatages",
+      "disclaimer": "Avertissement"
+    },
+    "profile": {
+      "source": "Source officielle",
+      "coverage": "Période couverte",
+      "coverage_preliminary": "{range} (provisoire depuis {preliminarySince})",
+      "latest_transaction": "Dernière transaction enregistrée",
+      "last_processed": "Dernier traitement du jeu de données",
+      "cadence": "Fréquence de mise à jour",
+      "cadence_value": "{cadence, select, annual {Annuelle} quarterly {Trimestrielle} other {Périodique}}",
+      "volume": "Volume du jeu de données compilé",
+      "volume_value": "{count} entrées ({sum}) pour {parties} partis",
+      "donation_threshold": "Seuil par don",
+      "donation_threshold_all": "Toutes les contributions publiées (sans filtre minimum)",
+      "party_threshold": "Seuil d'inclusion des partis",
+      "party_threshold_value": "{type, select, count {≥ {count} dons} sum {≥ {sum} cumulés} other {≥ {count} dons ou ≥ {sum} cumulés}}",
+      "party_threshold_all": "Tous les partis déclarés sont inclus",
+      "granularity": "Granularité des données",
+      "granularity_individual": "Transactions individuelles & dossiers de donateurs",
+      "granularity_aggregate": "Agrégats annuels par parti (sans identité individuelle des donateurs)",
+      "temporal_resolution": "Résolution temporelle",
+      "resolution_date": "Date exacte de transaction (AAAA-MM-JJ)",
+      "resolution_year": "Année de déclaration uniquement (AAAA)",
+      "origin_coverage": "Origine géographique",
+      "origin_yes": "État/région infranationale & pays d'origine",
+      "origin_no": "Niveau national uniquement",
+      "donation_types": "Types de contributions inclus",
+      "donor_types": "Catégories de donateurs classifiées",
+      "external_ids": "Identifiants de registres externes",
+      "external_ids_both": "Identifiants de transaction sources & numéros d'immatriculation d'entreprise",
+      "external_ids_transaction": "Identifiants de transaction du registre source",
+      "external_ids_company": "Numéros d'immatriculation des entreprises / entités",
+      "external_ids_none": "Aucun publié dans le registre source",
+      "access": "Accès aux données & pipeline",
+      "export_link": "Télécharger le jeu de données complet (CSV / JSON)",
+      "pipeline_link": "Inspecter le code source du chargeur pays (GitHub)"
+    },
+    "source": {
+      "default": "Les données pour {country} proviennent directement de {source}.",
+      "link": "Consulter le registre officiel"
+    },
+    "coverage": {
+      "default": "Le jeu de données couvre les dons politiques publiés depuis {minYear}.",
+      "preliminary": "Les enregistrements depuis {preliminarySince} sont provisoires et sujets à des mises à jour rétroactives de l'autorité."
+    },
+    "threshold": {
+      "default": "DonationWatch applique un seuil d'inclusion minimum de {amount} par transaction pour ce jeu de données.",
+      "note": "Ce seuil est configuré par nos soins afin d'éviter un volume excessif de petits dons, et peut être supérieur au montant minimal exporté par le registre d'origine. Les contributions dont la valeur absolue est inférieure à ce montant sont filtrées.",
+      "all": "Ce jeu de données inclut toutes les contributions publiées sans filtre de montant minimum.",
+      "party": "Seuil d'inclusion des partis : Afin de cibler les entités politiques actives, seuls les partis comptant {type, select, count {au moins {count} dons documentés} sum {au moins {sum} de dons cumulés} other {au moins {count} dons documentés ou {sum} de dons cumulés}} sont inclus dans le jeu de données compilé.",
+      "party_all": "Inclusion des partis : Tous les partis politiques ayant des contributions déclarées valides supérieures au seuil de transaction sont inclus.",
+      "net_positive": "Remboursements et filtrage à somme nulle : Certains registres inscrivent les dons retournés ou remboursés sous forme d'entrées négatives. Les donateurs ou partis bénéficiaires dont le total net cumulé sur l'ensemble du jeu de données est nul ou négatif sont exclus."
+    },
+    "cadence": {
+      "default": "Les jeux de données sont périodiquement synchronisés avec le registre en amont.",
+      "annual": "Le jeu de données source est mis à jour sur un cycle annuel.",
+      "quarterly": "Le jeu de données source est mis à jour sur un cycle trimestriel."
+    },
+    "processing": {
+      "summary": "Les déclarations brutes subissent une normalisation déterministe basée sur des règles lors de l'ingestion afin de standardiser les noms d'entités, consolider les sections locales et exclure les entrées non éligibles :",
+      "step_cleaning": "Nettoyage de base des chaînes : Tous les noms d'entités subissent une normalisation Unicode NFKC, la suppression des guillemets englobants et des virgules finales, ainsi que la réduction des espaces multiples.",
+      "step_clustering": "Regroupement par clé de donateur & règles nationales : Une clé de recherche canonique (supprimant tous les caractères non alphanumériques et convertie en majuscules) regroupe les variantes de casse, d'espacement et de ponctuation sous un nom de donateur canonique unique. Lorsque configurées pour le pays, des règles supplémentaires standardisent les formes juridiques locales, retirent les titres de civilité ou associent les alias connus — chaque variante fusionnée étant listée dans la section Donateurs agrégés ci-dessous.",
+      "step_receivers": "Association & consolidation des bénéficiaires : Les noms des bénéficiaires déclarés sont associés aux partis politiques canoniques. Lorsque les registres déclarent séparément les contributions aux unités régionales, locales ou de jeunesse, celles-ci sont consolidées en un total unique par parti (listé dans Bénéficiaires agrégés ci-dessous le cas échéant).",
+      "donor_identity": "Limitation importante concernant l'identité des donateurs (homonymes vs variantes non fusionnées) : Les registres officiels de financement politique publient rarement des identifiants personnels uniques (tels que les numéros d'identité nationale, identifiants fiscaux ou dates de naissance) pour les donateurs individuels. Les totaux sur les pages de profil des donateurs sont agrégés strictement par nom de donateur normalisé. Par conséquent, un même profil peut regrouper les contributions de plusieurs personnes distinctes portant exactement le même nom (sur-agrégation), tandis que des variantes comportant un deuxième prénom ou des abréviations non répertoriées peuvent rester sur des profils distincts (sous-agrégation)."
+    },
+    "anonymisation": {
+      "summary": "Nous distinguons les suppressions effectuées en amont par l'autorité de publication des anonymisations discrétionnaires effectuées sur demande.",
+      "upstream": "Masqué en amont : {count} enregistrements ont été masqués par l'autorité avant publication.",
+      "by_request": "Anonymisé sur demande : {count} noms de donateurs ont été retirés sur demande, tout en conservant les montants et totaux par parti."
+    },
+    "licence": {
+      "output": "Nos données compilées et nos visualisations sont publiées sous licence {licence}.",
+      "export_prompt": "Pour les chercheurs, journalistes et data scientists, le jeu de données complet et normalisé pour {country} peut être téléchargé via notre page {exportLink}, et les règles exactes d'ingestion et de normalisation peuvent être vérifiées dans notre {pipelineLink}."
+    },
+    "version": {
+      "last_updated": "Dernier traitement du jeu de données : {date}.",
+      "latest_donation": "Dernière transaction enregistrée dans le jeu de données : {date}.",
+      "explanation": "L'horodatage de traitement indique la date à laquelle notre pipeline a synchronisé et compilé les données du registre officiel pour la dernière fois, tandis que la date de dernière transaction reflète la contribution la plus récente présente dans les enregistrements publiés."
+    },
+    "disclaimer": {
+      "text": "Compilé, non officiel : DonationWatch est un projet citoyen indépendant, non affilié aux autorités électorales ni aux partis politiques. En raison des normalisations et filtrages, ce jeu de données ne doit pas être cité comme registre officiel."
     }
   }
 }

@@ -131,6 +131,10 @@ export default async function sitemap(props: {
                 lastModified,
               },
               {
+                url: `${BASE_URL}/${locale}/${country}/methodology`,
+                lastModified,
+              },
+              {
                 url: `${BASE_URL}/${locale}/${country}/tools/bar-chart-race`,
                 lastModified,
               },

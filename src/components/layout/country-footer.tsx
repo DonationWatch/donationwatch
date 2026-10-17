@@ -54,11 +54,10 @@ export const CountryFooter = ({
           </a>
           <Link
             className="hover:text-primary-800 dark:hover:text-primary-400 p-2 text-sm"
-            href={`/${locale}/${country}/transparency`}
+            href={`/${locale}/${country}/methodology`}
             prefetch={false}
-            rel="nofollow"
           >
-            {t("navigation.transparency")}
+            {t("navigation.methodology")}
           </Link>
         </div>
       </div>
