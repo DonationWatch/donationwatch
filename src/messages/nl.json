@@ -19,6 +19,7 @@
     "imprint": "Colofon",
     "privacy": "Privacybeleid",
     "transparency": "Transparantie",
+    "methodology": "Methodologie",
     "sources": "Bronnen",
     "export": "Gegevensexport",
     "bar_chart_race": "Staafdiagramrace",
@@ -191,15 +192,15 @@
         "germany": "De hier gebruikte gegevens zijn afkomstig van de Duitse Bondsdag en omvatten alle partijgiften van meer dan 50.000 euro die daar sinds 2010 zijn gedocumenteerd en van meer dan 35.000 euro sinds 5 maart 2024.",
         "switzerland": "De hier gebruikte gegevens zijn afkomstig van de Zwitserse Federale Rekenkamer en omvatten alle partijgiften die daar sinds 2023 zijn gedocumenteerd.",
         "netherlands": "De hier gepresenteerde informatie is afkomstig van de Nederlandse overheid en omvat alle politieke donaties die sinds 2022 zijn geregistreerd en meer bedragen dan €1.000, zoals gerapporteerd in het jaarlijkse „Overzicht van giften aan politieke partijen en hun neveninstellingen“.\n\nVoor het huidige jaar zijn alleen donaties opgenomen die meer bedragen dan €10.000, op basis van de dataset „Overzicht substantiële giften aan politieke partijen“.\n\nLet op: sommige donaties bevatten geen specifieke datuminformatie en zijn daarom niet opgenomen in tijdreeksen of andere datumgebaseerde visualisaties.\n\nDe donaties die voor SP en GL zijn gerapporteerd, kunnen relatief hoog lijken omdat beide partijen van hun Kamerleden en bestuurders eisen dat zij een aanzienlijk deel van hun salaris aan de partij afstaan.",
-        "europeanunion": "De hier gepresenteerde gegevens zijn afkomstig van de Autoriteit Europese Politieke Partijen en Europese Politieke Stichtingen en omvatten alle gedocumenteerde donaties van partijen en stichtingen sinds 2018. Vanwege het belang van Europese politieke stichtingen, volgen en tonen we hun donaties op dezelfde manier als die van Europese politieke partijen.\n\nOmdat de officiële gegevens geen gegevens bevatten, zijn er geen tijdreeksen of soortgelijke visuele weergaven beschikbaar.\n\nMerk op dat in de aanloop naar de Europese verkiezingen van 2024 (van 6 december 2023 tot 10 juni 2024) speciale rapportagevereisten voor donaties golden, met wekelijkse rapporten en tijdige publicatie door de autoriteit.\nSinds 10 juni 2024 moeten alleen donaties van meer dan 12.000 euro onmiddellijk worden gemeld. Andere donaties zijn pas beschikbaar nadat de jaarrekening is ingediend.",
+        "europeanunion": "De hier gepresenteerde gegevens zijn afkomstig van de Autoriteit Europese Politieke Partijen en Europese Politieke Stichtingen en omvatten alle gedocumenteerde donaties van partijen en stichtingen sinds 2018. Vanwege het belang van Europese politieke stichtingen, volgen en tonen we hun donaties op dezelfde manier als die van Europese politieke partijen.\n\nOmdat de officiële gegevens geen exacte transactiedata bevatten, zijn er geen tijdreeksen of soortgelijke op datums gebaseerde visuele weergaven beschikbaar.\n\nMerk op dat in de aanloop naar de Europese verkiezingen van 2024 (van 6 december 2023 tot 10 juni 2024) speciale rapportagevereisten voor donaties golden, met wekelijkse rapporten en tijdige publicatie door de autoriteit.\nSinds 10 juni 2024 moeten alleen donaties van meer dan 12.000 euro onmiddellijk worden gemeld. Andere donaties zijn pas beschikbaar nadat de jaarrekening is ingediend.",
         "estonia": "De hier gebruikte gegevens zijn afkomstig van het Estse comité voor toezicht op de financiering van politieke partijen en omvatten alle politieke donaties die daar sinds 2014 zijn gedocumenteerd en die meer dan 1 euro bedragen.\n\nPolitieke partijen in Estland zijn verplicht om elk kwartaal verslag te doen van hun inkomsten, inclusief ontvangen donaties.\nDe gegevens op de website van de commissie worden elk kwartaal dienovereenkomstig bijgewerkt.",
         "czechrepublic": "De hier gebruikte gegevens zijn afkomstig van het Bureau voor de Controle op het Beheer van Politieke Partijen en Politieke Bewegingen en omvatten alle politieke donaties die daar sinds 2018 zijn gedocumenteerd en meer dan 25 CZK bedragen.\n\nDeze reikwijdte omvat ook alle bijdragen aan partijen of politieke bewegingen die ofwel meer dan 100 afzonderlijke donaties hebben ontvangen, of waarvan het totale donatiebedrag meer dan 1 miljoen CZK bedraagt, ongeacht de omvang van individuele bijdragen. De gegevens worden jaarlijks bijgewerkt.\nHet detecteren van het donortype is gebaseerd op het identificeren van een donor als een individu wanneer zowel de velden firstName als lastName aanwezig zijn.",
         "latvia": "De hier gebruikte gegevens zijn afkomstig van het Bureau voor Corruptiepreventie en -bestrijding (KNAB) en omvatten alle politieke bijdragen die sinds 2015 zijn gedocumenteerd en meer dan €1 bedragen. Deze dataset omvat geldelijke donaties, giften in natura en diensten, evenals partijtoetredings- en lidmaatschapskosten.",
-        "australia": "De hier gebruikte gegevens zijn afkomstig van de Australian Electoral Commission (AEC), en specifiek uit de dataset \"Donations Made Details\" die de AEC publiceert. Deze bevat alle politieke donaties die daar sinds 2014 zijn vastgelegd en die meer dan €1 bedragen.\n\nHet is het vermelden waard dat de AEC-dataset enkele typefouten kan bevatten, waardoor bepaalde donaties mogelijk niet worden meegenomen of door inconsistenties bij de gegevensinvoer niet correct aan een specifieke partij worden toegewezen. Daarnaast worden de jaarlijkse openbaarmakingen van de AEC elk jaar op 1 februari gepubliceerd, maar de data geven geen volledig beeld van alle bijdragen vanwege de openbaarmakingsdrempel van $15.000.\n\nDonortypen worden geclassificeerd door donornamen te matchen. Alle gangbare vakbonden worden handmatig toegewezen aan het donortype 'Vakbond'. Bedrijven worden gedetecteerd door in de donornaam te controleren op specifieke bedrijfsidentificatoren: 'Pty' (Proprietary), 'Ltd' aan het einde van de naam, 'Corporation' of 'Corp'.",
+        "australia": "De hier gebruikte gegevens zijn afkomstig van de Australian Electoral Commission (AEC), en specifiek uit de dataset \"Donations Made Details\" die de AEC publiceert. Deze bevat alle politieke donaties die daar sinds 2014 zijn vastgelegd en die meer dan AUD 1 bedragen.\n\nHet is het vermelden waard dat de AEC-dataset enkele typefouten kan bevatten, waardoor bepaalde donaties mogelijk niet worden meegenomen of door inconsistenties bij de gegevensinvoer niet correct aan een specifieke partij worden toegewezen. Daarnaast worden de jaarlijkse openbaarmakingen van de AEC elk jaar op 1 februari gepubliceerd, maar de data geven geen volledig beeld van alle bijdragen vanwege de openbaarmakingsdrempel van $15.000.\n\nDonortypen worden geclassificeerd door donornamen te matchen. Alle gangbare vakbonden worden handmatig toegewezen aan het donortype 'Vakbond'. Bedrijven worden gedetecteerd door in de donornaam te controleren op specifieke bedrijfsidentificatoren: 'Pty' (Proprietary), 'Ltd' aan het einde van de naam, 'Corporation' of 'Corp'.",
         "unitedkingdom": "De hier gebruikte gegevens zijn afkomstig van de Electoral Commission en omvatten alle politieke donaties die daar sinds 2010 zijn gedocumenteerd en meer dan £1.000 bedragen.\n\nHet onderliggende register van de Electoral Commission koppelt alle historische transacties met terugwerkende kracht aan de huidige officieel geregistreerde naam van elke partij. Daardoor worden historische donaties aan partijen van vóór een officiële rebranding of naamswijziging (zoals donaties aan The Brexit Party vóór 2021) weergegeven onder de huidige geregistreerde naam van de partij (Reform UK).\n\nDe donatiegegevens worden elk kwartaal bijgewerkt.",
         "serbia": "De hier gebruikte gegevens zijn niet afkomstig van de overheid, maar van de non-profitorganisatie “Center for Investigative Journalism of Serbia” (“Centar za istraživačko novinarstvo Srbije” - CINS), die zo vriendelijk is geweest om de donatiegegevens van het Servische anticorruptiebureau samen te voegen.\n\nDeze gegevens omvatten alle politieke donaties die daar sinds 2015 zijn gedocumenteerd.\n\nAangezien de dataset geen specifieke datuminformatie geeft voor de afzonderlijke donaties, is het helaas niet mogelijk om tijdlijnen of andere op tijd gebaseerde visualisaties weer te geven.",
         "croatia": "De hier gebruikte gegevens zijn afkomstig van de Staatsverkiezingscommissie van de Republiek Kroatië (DIP) en omvatten alle politieke donaties met een geldwaarde van meer dan €1, gedocumenteerd sinds 2019.\nDe dataset gebruikt voor elk rapportagejaar alleen het laatst gepubliceerde donatiedocument (zoals gerapporteerd door izbori) om duplicaten uit eerdere versies van het rapport van hetzelfde jaar te vermijden.\nAlle donaties worden weergegeven in euro, terwijl de onderliggende dataset tot en met 2024 kuna gebruikt. Donaties die oorspronkelijk in kuna zijn gedaan, worden omgerekend naar euro met behulp van benaderde wisselkoersen voor elk halfjaar van 2019 tot 2024: H1 (0.1340, 0.1335, 0.1332, 0.1329, 0.1326) en H2 (0.1341, 0.1338, 0.1334, 0.1327, 0.1328).",
-        "canada": "De hier gebruikte gegevens zijn afkomstig van Elections Canada en zijn gebaseerd op de dataset “contributions as submitted”. Het omvat alle politieke donaties met een geldwaarde van meer dan €500, gedocumenteerd sinds 2015. Alle vermeldingen die deel uitmaken van het rapport “Statement of Contributions Received” van het verkiezingsevenement “Annual” aan “Registered parties” zijn inbegrepen.",
+        "canada": "De hier gebruikte gegevens zijn afkomstig van Elections Canada en zijn gebaseerd op de dataset “contributions as submitted”. Het omvat alle politieke donaties met een geldwaarde van meer dan CAD 500, gedocumenteerd sinds 2015. Alle vermeldingen die deel uitmaken van het rapport “Statement of Contributions Received” van het verkiezingsevenement “Annual” aan “Registered parties” zijn inbegrepen.",
         "georgia": "De hier gepresenteerde informatie is afkomstig van het Bureau voor Anti-Corruptie (ანტიკორუფციული ბიურო﻿) van Georgië en bevat alle politieke donaties die sinds 2011 zijn geregistreerd en meer dan 1 GEL bedragen. De dataset omvat alleen bijdragen die zijn geclassificeerd als type #10 (Geldelijke donaties) of type #16 (Geldelijke donaties van rechtspersonen).",
         "norway": "De hier gebruikte gegevens zijn afkomstig uit de officiële publicaties over partijfinanciering van Statistics Norway (SSB) en Partifinansiering.no. De getoonde totalen zijn geaggregeerd uit meerdere gerapporteerde ontvangende entiteiten (zoals centrale, regionale, lokale en jongerenafdelingen) tot één totaal per partij, waarbij de onderliggende toewijzing van ontvangers beschikbaar blijft voor transparantie.\n\nDe Noorwegen-dataset wordt jaarlijks bijgewerkt en weerspiegelt daarmee het ritme van de onderliggende openbaarmakingen.",
         "ukraine": "De hier gebruikte gegevens zijn afkomstig van het Nationaal Agentschap voor Corruptiepreventie (NAZK) via het PolitData-portaal. Ze omvatten alle gegevens die in de officiële rapporten zijn aangemerkt als ‘monetaire bijdragen’.\n\nOpmerking over de gegevensomvang: Dit totaal weerspiegelt alleen rechtstreekse financiële overdrachten. Het omvat geen staatsfinanciering voor parlementaire partijen of niet-geldelijke (in natura) bijdragen zoals goederen en diensten.\n\nVanwege de grootschalige Russische invasie werd de verplichte rapportage door politieke partijen van begin 2022 tot eind 2023 om veiligheids- en logistieke redenen opgeschort. Na de goedkeuring van Wet 3337-IX vullen de partijen hun rapporten nu achteraf aan. De gegevens voor 2022–2025 worden nog bijgewerkt terwijl de NAZK deze inzendingen verwerkt.",
@@ -671,7 +672,9 @@
     },
     "user_rights": {
       "title": "Je gebruikersrechten",
-      "p": "Volgens de AVG heb je het recht om op elk moment gratis informatie te ontvangen over de herkomst, ontvanger en het doel van je opgeslagen persoonsgegevens. Je hebt ook het recht op correctie, blokkering of verwijdering van deze gegevens. Omdat wij alleen minimale en geanonimiseerde gegevens verwerken, kunnen we je meestal niet persoonlijk identificeren aan de hand van onze logs. Je hebt ook het recht om een klacht in te dienen bij de bevoegde autoriteit voor gegevensbescherming. Neem bij vragen over privacy gerust contact met ons op."
+      "p": "Volgens de AVG heb je het recht om op elk moment gratis informatie te ontvangen over de herkomst, ontvanger en het doel van je opgeslagen persoonsgegevens. Je hebt ook het recht op correctie, blokkering of verwijdering van deze gegevens. Omdat wij alleen minimale en geanonimiseerde gegevens verwerken, kunnen we je meestal niet persoonlijk identificeren aan de hand van onze logs. Je hebt ook het recht om een klacht in te dienen bij de bevoegde autoriteit voor gegevensbescherming. Neem bij vragen over privacy gerust contact met ons op.",
+      "erasure": "Recht op gegevenswissing (Artikel 17 AVG): Op grond van artikel 17 van de AVG hebben betrokkenen het recht op wissing van persoonsgegevens wanneer de wettelijke gronden van toepassing zijn. U kunt een verzoek tot gegevenswissing rechtstreeks bij ons indienen.",
+      "discretionary": "Discretionaire anonimisering: Los van wettelijke verzoeken tot gegevenswissing beoordeelt DonationWatch verzoeken tot anonimisering per geval. Donateursnamen worden geanonimiseerd met behoud van bedragen en partijtotalen."
     }
   },
   "fun": {
@@ -697,8 +700,8 @@
       "p1": "Hieronder staat een lijst met donateurs waarvan de bijdragen volgens onze criteria en filterregels zijn uitgefilterd."
     },
     "filtered_receivers": {
-      "p0": "Om ervoor te zorgen dat we alleen zinvolle ontvangersgegevens presenteren, filteren we ook bepaalde ontvangers of partijen weg die voor het volgen van donateurs als irrelevant of niet-operationeel worden beschouwd. Omdat onze datasets deze ontvangers niet altijd expliciet labelen, passen we een set regels op basis van regexp toe om ze automatisch uit te sluiten.",
-      "p1": "Hieronder kunt u de volledige lijst met toegepaste regexp-filterregels bekijken."
+      "p0": "Om ervoor te zorgen dat we alleen zinvolle ontvangersgegevens presenteren, filteren we ook bepaalde ontvangers of partijen weg die voor het volgen van donateurs als irrelevant of niet-operationeel worden beschouwd. Omdat onze datasets deze ontvangers niet altijd expliciet labelen, passen we een set regels op basis van regexp toe om ze automatisch uit te sluiten. Hieronder kunt u de volledige lijst met toegepaste regexp-filterregels bekijken.",
+      "p1": "Hieronder staat een lijst met ontvangers waarvan de vermeldingen volgens onze criteria en filterregels zijn uitgefilterd."
     },
     "receivers": {
       "title": "Geaggregeerde ontvangers",
@@ -748,7 +751,7 @@
   "export": {
     "title": "Gegevensexport",
     "p0": "Download de volledige dataset met politieke donaties voor {country} die op deze site wordt gebruikt. De export bevat genormaliseerde donornamen, bedragen, datums en ontvangende partijen.",
-    "p1": "Belangrijk: Dit zijn niet de ruwe gegevens van {source}. Deze dataset bevat alleen donaties die door ons team zijn genormaliseerd en gefilterd. Bekijk onze sectie {transparency} voor de methodiek.",
+    "p1": "Belangrijk: Dit zijn niet de ruwe gegevens van {source}. Deze dataset bevat alleen donaties die door ons team zijn genormaliseerd en gefilterd. Bekijk onze {methodology}.",
     "license": "Licentie: {license}"
   },
   "bar_chart_race": {
@@ -903,6 +906,101 @@
       "title": "Geen donaties gevonden",
       "p0": "Er zijn geen donaties die overeenkomen met je huidige filterinstellingen. Probeer je filters aan te passen of te resetten.",
       "reset": "Filters resetten"
+    }
+  },
+  "methodology": {
+    "title": "Methodologie",
+    "intro": "DonationWatch verwerkt, normaliseert en contextualiseert officiële datasets gepubliceerd door nationale kiesraden en toezichthouders. Deze pagina documenteert onze gegevensbronnen, verwerkingsregels en beperkingen voor {country}.",
+    "sections": {
+      "profile": "Datasetprofiel",
+      "source": "Gegevensbron & Reikwijdte",
+      "coverage": "Dekking & Drempelwaarden",
+      "cadence": "Updatefrequentie",
+      "processing": "Verwerking & Normalisatie",
+      "anonymisation": "Anonimisering & Weglakkingen",
+      "licence": "Licentie & Herkomst",
+      "version": "Gegevensversie & Tijdstempels",
+      "disclaimer": "Disclaimer"
+    },
+    "profile": {
+      "source": "Officiële bron",
+      "coverage": "Dekkingsperiode",
+      "coverage_preliminary": "{range} (voorlopig sinds {preliminarySince})",
+      "latest_transaction": "Laatst geregistreerde transactie",
+      "last_processed": "Dataset laatst verwerkt",
+      "cadence": "Updatefrequentie",
+      "cadence_value": "{cadence, select, annual {Jaarlijks} quarterly {Per kwartaal} other {Periodiek}}",
+      "volume": "Omvang samengestelde dataset",
+      "volume_value": "{count} records ({sum}) over {parties} partijen",
+      "donation_threshold": "Drempelwaarde per donatie",
+      "donation_threshold_all": "Alle gepubliceerde bijdragen (geen minimumfilter)",
+      "party_threshold": "Drempelwaarde voor partijopname",
+      "party_threshold_value": "{type, select, count {≥ {count} donaties} sum {≥ {sum} cumulatief} other {≥ {count} donaties of ≥ {sum} cumulatief}}",
+      "party_threshold_all": "Alle gerapporteerde partijen opgenomen",
+      "granularity": "Gegevensgranulariteit",
+      "granularity_individual": "Individuele transacties & donateursgegevens",
+      "granularity_aggregate": "Jaarlijkse totalen op partijniveau (geen individuele donateursidentiteiten)",
+      "temporal_resolution": "Tijdsresolutie",
+      "resolution_date": "Exacte transactiedatum (JJJJ-MM-DD)",
+      "resolution_year": "Alleen rapportagejaar (JJJJ)",
+      "origin_coverage": "Geografische herkomst",
+      "origin_yes": "Provincie/regio & land van herkomst",
+      "origin_no": "Alleen op landniveau",
+      "donation_types": "Opgenomen soorten bijdragen",
+      "donor_types": "Geclassificeerde donateurscategorieën",
+      "external_ids": "Externe register-ID's",
+      "external_ids_both": "Brontransactie-ID's & handelsregisternummers",
+      "external_ids_transaction": "Transactie-ID's van het bronregister",
+      "external_ids_company": "Handelsregister- / ondernemingsnummers",
+      "external_ids_none": "Geen gepubliceerd in bronregister",
+      "access": "Gegevenstoegang & pipeline",
+      "export_link": "Volledige dataset downloaden (CSV / JSON)",
+      "pipeline_link": "Broncode van de landen-loader bekijken (GitHub)"
+    },
+    "source": {
+      "default": "Gegevens voor {country} zijn rechtstreeks afkomstig van {source}.",
+      "link": "Bekijk het officiële register"
+    },
+    "coverage": {
+      "default": "De dataset omvat gepubliceerde politieke donaties vanaf {minYear}.",
+      "preliminary": "Gegevens sinds {preliminarySince} zijn voorlopig en onderhevig aan lopende indieningen of correcties door de toezichthouder."
+    },
+    "threshold": {
+      "default": "DonationWatch hanteert een minimale drempelwaarde van {amount} per transactie voor deze dataset.",
+      "note": "Deze drempel is door ons geconfigureerd om een overmatige hoeveelheid kleine donaties te voorkomen, en kan hoger zijn dan het minimumbedrag dat door het officiële register wordt geëxporteerd. Bijdragen met een absolute waarde onder dit bedrag worden uitgefilterd.",
+      "all": "Deze dataset bevat alle gepubliceerde bijdragen zonder minimumbedragfilter.",
+      "party": "Opnamedrempel op partijniveau: Om de focus op actieve politieke entiteiten te leggen, worden alleen partijen met {type, select, count {ten minste {count} gedocumenteerde donaties} sum {ten minste {sum} aan cumulatieve donaties} other {ten minste {count} gedocumenteerde donaties of {sum} aan cumulatieve donaties}} opgenomen in de samengestelde dataset.",
+      "party_all": "Opname op partijniveau: Alle politieke partijen met geldige gerapporteerde bijdragen boven de transactiedrempel zijn opgenomen.",
+      "net_positive": "Terugbetalingen en netto-nul-filtering: Sommige registers vermelden teruggestorte of terugbetaalde bijdragen als negatieve posten. Donateurs of ontvangende partijen waarvan de cumulatieve netto-bijdragesom over de dataset nul of negatief is, worden uitgesloten."
+    },
+    "cadence": {
+      "default": "Datasets worden periodiek gesynchroniseerd met het gepubliceerde register.",
+      "annual": "De brongegevensset wordt jaarlijks bijgewerkt.",
+      "quarterly": "De brongegevensset wordt per kwartaal bijgewerkt."
+    },
+    "processing": {
+      "summary": "Ruwe openbaarmakingen ondergaan tijdens het inlezen een deterministische, op regels gebaseerde normalisatie om entiteitsnamen te standaardiseren, regionale afdelingen samen te voegen en niet-kwalificerende vermeldingen uit te sluiten:",
+      "step_cleaning": "Basis-tekstopschoning: Alle entiteitsnamen ondergaan Unicode NFKC-normalisatie, verwijdering van omsluitende aanhalingstekens en afsluitende komma's, en het samenvoegen van dubbele spaties.",
+      "step_clustering": "Clustering op donateursleutel & landenregels: Een canonieke zoeksleutel (waarbij alle niet-alfanumerieke tekens worden verwijderd en hoofdletters worden gebruikt) groepeert varianten in hoofdlettergebruik, spaties en interpunctie onder één canonieke donateursnaam. Waar geconfigureerd voor de loader van een land, standaardiseren aanvullende regels lokale rechtsvormen, verwijderen ze persoonlijke titels of koppelen ze bekende aliassen — waarbij elke samengevoegde variant hieronder wordt vermeld onder Geaggregeerde donateurs.",
+      "step_receivers": "Toewijzing & consolidatie van ontvangers: Gerapporteerde namen van ontvangers worden gekoppeld aan canonieke politieke partijen. Wanneer registers bijdragen aan regionale, lokale of jongerenafdelingen afzonderlijk rapporteren, worden deze samengevoegd tot één partijtotaal (hieronder vermeld onder Geaggregeerde ontvangers indien van toepassing).",
+      "donor_identity": "Belangrijke beperking omtrent donateursidentiteit (naamgenoten vs. niet-samengevoegde varianten): Officiële registers voor partijfinanciering publiceren zelden unieke persoonlijke identificatienummers (zoals burgerservicenummers, fiscale nummers of geboortedata) voor individuele donateurs. Totalen op donorprofielpagina's worden strikt geaggregeerd op basis van de genormaliseerde donateursnaam. Hierdoor kan één donorprofiel bijdragen combineren van meerdere afzonderlijke personen met exact dezelfde naam (over-aggregatie), terwijl varianten met tweede namen of niet-gekoppelde afkortingen als afzonderlijke profielen kunnen blijven bestaan (onder-aggregatie)."
+    },
+    "anonymisation": {
+      "summary": "We maken onderscheid tussen weglakkingen door de publicerende autoriteit en discretionaire anonimisering op verzoek.",
+      "upstream": "Weggelakt door autoriteit: {count} donateursrecords werden voorafgaand aan publicatie door de autoriteit weggelakt.",
+      "by_request": "Geanonimiseerd op verzoek: {count} donateursnamen zijn op verzoek verwijderd, waarbij transactiebedragen en partijtotalen behouden blijven."
+    },
+    "licence": {
+      "output": "Onze samengestelde, genormaliseerde dataset en visualisaties worden vrijgegeven onder de {licence}-licentie.",
+      "export_prompt": "Voor onderzoekers, journalisten en data scientists kan de volledige genormaliseerde dataset voor {country} worden gedownload via onze pagina {exportLink}, en kunnen de exacte inlees- en normalisatieregels worden gecontroleerd in onze {pipelineLink}."
+    },
+    "version": {
+      "last_updated": "Dataset laatst verwerkt: {date}.",
+      "latest_donation": "Laatst geregistreerde transactie in dataset: {date}.",
+      "explanation": "De verwerkingstijdstempel geeft aan wanneer onze pipeline voor het laatst gegevens uit het officiële register heeft gesynchroniseerd en samengesteld, terwijl de laatste transactiedatum de meest recente bijdragendatum in de gepubliceerde records weergeeft."
+    },
+    "disclaimer": {
+      "text": "Samengesteld, niet officieel: DonationWatch is een onafhankelijk maatschappelijk initiatief en is niet gelieerd aan kiesraden of politieke partijen. Vanwege normalisatie en filtering dient deze dataset niet te worden geciteerd als officieel overheidsregister."
     }
   }
 }

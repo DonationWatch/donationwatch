@@ -19,6 +19,7 @@
     "imprint": "Impresum",
     "privacy": "Zásady ochrany osobních údajů",
     "transparency": "Transparentnost",
+    "methodology": "Metodika",
     "sources": "Zdroje",
     "export": "Export dat",
     "bar_chart_race": "Závod sloupcových grafů",
@@ -191,15 +192,15 @@
         "germany": "Data zde použitá pocházejí od Německého spolkového sněmu a zahrnují všechny stranické dary zaznamenané od roku 2010 nad 50 000 € a od 5. března 2024 nad 35 000 €.",
         "switzerland": "Data zde použitá pocházejí od Švýcarského federálního kontrolního úřadu a zahrnují všechny stranické dary zaznamenané od roku 2023.",
         "netherlands": "Zde uvedené informace pocházejí od vlády Nizozemska a zahrnují všechny politické dary zaznamenané od roku 2022, které přesahují 1 000 €, jak je uvedeno ve výroční zprávě „Overzicht van giften aan politieke partijen en hun neveninstellingen“.\n\nPro aktuální rok jsou zahrnuty pouze dary přesahující 10 000 €, na základě datové sady „Overzicht substantiële giften aan politieke partijen“.\n\nUpozornění: Některé dary neobsahují konkrétní údaje o datu a proto nejsou zahrnuty do časových řad nebo jiných vizualizací založených na datech.\n\nDary vykázané pro SP a GL se mohou zdát relativně vysoké, protože obě strany požadují, aby jejich poslanci a administrátoři přispívali významnou část svého platu straně.",
-        "europeanunion": "Zde uvedené údaje pocházejí od Úřadu pro evropské politické strany a evropské politické nadace a zahrnují všechny zdokumentované dary stran a nadací od roku 2018. Vzhledem k významu evropských politických nadací sledujeme a zobrazujeme jejich dary podobně jako dary evropských politických stran.\n\nVzhledem k tomu, že oficiální údaje neobsahují data, nejsou k dispozici žádné časové řady ani podobné vizuální znázornění.\n\nUpozorňujeme, že v období před volbami do Evropského parlamentu v roce 2024 (od 6. prosince 2023 do 10. června 2024) platily zvláštní požadavky na vykazování darů, kdy úřad podával zprávy každý týden a včas je zveřejňoval.\nOd 10. června 2024 je třeba neprodleně hlásit pouze dary nad 12 000 eur. Ostatní dary budou k dispozici až po předložení roční účetní závěrky.",
+        "europeanunion": "Zde uvedené údaje pocházejí od Úřadu pro evropské politické strany a evropské politické nadace a zahrnují všechny zdokumentované dary stran a nadací od roku 2018. Vzhledem k významu evropských politických nadací sledujeme a zobrazujeme jejich dary podobně jako dary evropských politických stran.\n\nVzhledem k tomu, že oficiální údaje neobsahují přesná data transakcí, nejsou k dispozici žádné časové řady ani podobná vizuální znázornění založená na datech.\n\nUpozorňujeme, že v období před volbami do Evropského parlamentu v roce 2024 (od 6. prosince 2023 do 10. června 2024) platily zvláštní požadavky na vykazování darů, kdy úřad podával zprávy každý týden a včas je zveřejňoval.\nOd 10. června 2024 je třeba neprodleně hlásit pouze dary nad 12 000 eur. Ostatní dary budou k dispozici až po předložení roční účetní závěrky.",
         "estonia": "Zde použité údaje pocházejí z estonského Výboru pro monitorování financování politických stran a zahrnují všechny politické dary zdokumentované od roku 2014, které přesahují 1 euro.\n\nPolitické strany v Estonsku jsou povinny čtvrtletně vykazovat své příjmy včetně přijatých darů.\nÚdaje na internetových stránkách výboru jsou odpovídajícím způsobem čtvrtletně aktualizovány.",
         "czechrepublic": "Použitá data pocházejí z Úřadu pro dohled nad hospodařením politických stran a politických hnutí a zahrnují všechny politické dary, které jsou tam od roku 2018 zdokumentovány a přesahují 25 Kč.\n\nTento rozsah také zahrnuje všechny příspěvky stranám nebo politickým hnutím, které buď obdržely více než 100 individuálních darů, nebo překročily celkovou částku darů ve výši 1 milionu Kč, bez ohledu na velikost jednotlivých příspěvků. Data jsou aktualizována jednou ročně.\nUrčení typu dárce je založeno na identifikaci dárce jako fyzické osoby, pokud jsou vyplněna pole firstName i lastName.",
         "latvia": "Zde použitá data pocházejí z Úřadu pro prevenci a boj proti korupci (KNAB) a zahrnují všechny politické příspěvky zdokumentované od roku 2015, které překračují 1 €. Tento soubor dat zahrnuje peněžní dary, věcné dary a služby a také stranické vstupní a členské příspěvky.",
-        "australia": "Zde použité údaje pocházejí z Australian Electoral Commission (AEC), konkrétně ze souboru „Donations Made Details“, který AEC zveřejňuje. Zahrnuje všechny politické dary v něm evidované od roku 2014, přesahující €1.\n\nJe dobré upozornit, že dataset AEC může obsahovat některé překlepy, což může vést k tomu, že některé dary nebudou zahrnuty nebo nebudou správně přiřazeny ke konkrétní straně kvůli nekonzistencím při zadávání dat. Roční zveřejnění AEC jsou navíc vydávána každý rok 1. února, ale data neposkytují úplný obraz všech příspěvků kvůli prahu pro zveřejnění ve výši $15,000.\n\nTypy dárců se klasifikují porovnáním názvů dárců. Všechny běžné odborové svazy jsou ručně mapovány na typ dárce „Odbory“. Společnosti se rozpoznávají kontrolou konkrétních firemních identifikátorů v názvu dárce: „Pty“ (Proprietary), „Ltd“ na konci názvu, „Corporation“ nebo „Corp“.",
+        "australia": "Zde použité údaje pocházejí z Australian Electoral Commission (AEC), konkrétně ze souboru „Donations Made Details“, který AEC zveřejňuje. Zahrnuje všechny politické dary v něm evidované od roku 2014, přesahující 1 AUD.\n\nJe dobré upozornit, že dataset AEC může obsahovat některé překlepy, což může vést k tomu, že některé dary nebudou zahrnuty nebo nebudou správně přiřazeny ke konkrétní straně kvůli nekonzistencím při zadávání dat. Roční zveřejnění AEC jsou navíc vydávána každý rok 1. února, ale data neposkytují úplný obraz všech příspěvků kvůli prahu pro zveřejnění ve výši $15,000.\n\nTypy dárců se klasifikují porovnáním názvů dárců. Všechny běžné odborové svazy jsou ručně mapovány na typ dárce „Odbory“. Společnosti se rozpoznávají kontrolou konkrétních firemních identifikátorů v názvu dárce: „Pty“ (Proprietary), „Ltd“ na konci názvu, „Corporation“ nebo „Corp“.",
         "unitedkingdom": "Zde použitá data pocházejí od Electoral Commission a zahrnují všechny politické dary, které tam byly zdokumentovány od roku 2010 a přesahují 1 000 £.\n\nZákladní registr Electoral Commission zpětně přiřazuje všechny historické transakce k aktuálnímu oficiálně registrovanému názvu každé strany. Historické dary stranám před jejich oficiálním přejmenováním nebo změnou názvu (například dary pro The Brexit Party před rokem 2021) jsou proto zobrazeny pod aktuálním registrovaným názvem strany (Reform UK).\n\nÚdaje o darech jsou aktualizovány čtvrtletně.",
         "serbia": "Údaje zde použité nepocházejí od vlády, ale od neziskové organizace „Centrum pro investigativní žurnalistiku Srbska“ („Centar za istraživačko novinarstvo Srbije“ - CINS), která laskavě shromáždila údaje o darech Srbské protikorupční agentury.\n\nTyto údaje zahrnují všechny politické dary zdokumentované tamtéž od roku 2015.\n\nVzhledem k tomu, že soubor dat neposkytuje konkrétní informace o datu jednotlivých darů, není bohužel možné zobrazit časové osy ani jiné časové vizualizace.",
         "croatia": "Zde použitá data pocházejí ze Státní volební komise Chorvatské republiky (DIP) a zahrnují všechny politické dary s peněžní hodnotou přesahující 1 €, které jsou dokumentovány od roku 2019.\nDatová sada používá pro každý vykazovaný rok pouze poslední zveřejněný dokument o darech (podle údajů izbori), aby se předešlo duplicitám z dřívějších verzí zprávy za tentýž rok.\nVšechny dary jsou zobrazeny v eurech, zatímco podkladová datová sada používá do roku 2024 kuny. Dary původně poskytnuté v kunách se převádějí na eura pomocí přibližných směnných kurzů pro každé pololetí období 2019–2024: H1 (0.1340, 0.1335, 0.1332, 0.1329, 0.1326) a H2 (0.1341, 0.1338, 0.1334, 0.1327, 0.1328).",
-        "canada": "Zde použité údaje pocházejí od Elections Canada a jsou založeny na datovém souboru „contributions as submitted“. Zahrnují všechny politické dary s peněžní hodnotou přesahující 500 €, které byly zaznamenány od roku 2015. Zahrnuty jsou všechny položky, které jsou součástí zprávy „Statement of Contributions Received“ z volební události „Annual“ pro „Registered parties“.",
+        "canada": "Zde použité údaje pocházejí od Elections Canada a jsou založeny na datovém souboru „contributions as submitted“. Zahrnují všechny politické dary s peněžní hodnotou přesahující 500 CAD, které byly zaznamenány od roku 2015. Zahrnuty jsou všechny položky, které jsou součástí zprávy „Statement of Contributions Received“ z volební události „Annual“ pro „Registered parties“.",
         "georgia": "Zde uvedené informace pocházejí z Úřadu pro boj s korupcí (ანტიკორუფციული ბიურო﻿) Gruzie a zahrnují všechny politické dary zaznamenané od roku 2011, které přesahují 1 GEL. Datový soubor obsahuje pouze příspěvky klasifikované jako typ #10 (Finanční dary) nebo typ #16 (Finanční dary od právnických osob).",
         "norway": "Zde použitá data pocházejí z oficiálních publikací o financování politických stran od Statistics Norway (SSB) a Partifinansiering.no. Uvedené součty jsou agregovány z více nahlášených přijímajících subjektů (například centrálních, regionálních, místních a mládežnických jednotek) do jediného celku za každou stranu, přičemž podkladové mapování příjemců zůstává k dispozici pro transparentnost.\n\nDatová sada pro Norsko je aktualizována v ročním cyklu a odráží tak tempo zveřejňování těchto podkladových údajů.",
         "ukraine": "Zde použité údaje pocházejí z Národní agentury pro prevenci korupce (NAZK) prostřednictvím portálu PolitData. Obsahují všechny záznamy označené v oficiálních zprávách jako „peněžní příspěvky“.\n\nPoznámka k rozsahu dat: Tento součet odráží pouze přímé finanční převody. Nezahrnuje státní financování poskytované parlamentním stranám ani nepeněžní (věcné) příspěvky, jako jsou zboží a služby.\n\nKvůli rozsáhlé ruské invazi bylo povinné vykazování politických stran od začátku roku 2022 do konce roku 2023 z bezpečnostních a logistických důvodů pozastaveno. Po přijetí zákona č. 3337-IX nyní strany zpětně doplňují své zprávy. Údaje za roky 2022–2025 se stále aktualizují, jak NAZK zpracovává tyto podklady.",
@@ -671,7 +672,9 @@
     },
     "user_rights": {
       "title": "Tvoje uživatelská práva",
-      "p": "V souladu s GDPR máš právo kdykoliv bezplatně získat informace o původu, příjemci a účelu uložených osobních údajů. Máš také právo požadovat opravu, blokování nebo vymazání těchto údajů. Jelikož však zpracováváme pouze minimální a anonymizované údaje, obvykle tě nemůžeme osobně identifikovat na základě našich logů. Dále máš právo podat stížnost u příslušného dozorového úřadu pro ochranu osobních údajů. V případě otázek ohledně ochrany soukromí se na nás můžeš kdykoli obrátit."
+      "p": "V souladu s GDPR máš právo kdykoliv bezplatně získat informace o původu, příjemci a účelu uložených osobních údajů. Máš také právo požadovat opravu, blokování nebo vymazání těchto údajů. Jelikož však zpracováváme pouze minimální a anonymizované údaje, obvykle tě nemůžeme osobně identifikovat na základě našich logů. Dále máš právo podat stížnost u příslušného dozorového úřadu pro ochranu osobních údajů. V případě otázek ohledně ochrany soukromí se na nás můžeš kdykoli obrátit.",
+      "erasure": "Právo na výmaz (článek 17 GDPR): Podle článku 17 GDPR mají subjekty údajů právo na výmaz svých osobních údajů, pokud jsou splněny zákonné důvody. Žádost o výmaz můžete podat přímo nám.",
+      "discretionary": "Diskreční anonymizace: Nezávisle na zákonném právu na výmaz posuzuje DonationWatch žádosti o anonymizaci individuálně. V případě schválení je jméno dárce anonymizováno při zachování částek a součtů stran."
     }
   },
   "fun": {
@@ -697,8 +700,8 @@
       "p1": "Níže je uveden seznam dárců, jejichž příspěvky byly podle našich kritérií a filtračních pravidel odfiltrovány."
     },
     "filtered_receivers": {
-      "p0": "Abychom zajistili, že budeme zobrazovat pouze smysluplná data o příjemcích, filtrujeme také některé příjemce nebo strany, které jsou pro účely sledování dárců považovány za nerelevantní nebo neaktivní. Protože naše datové sady tyto příjemce ne vždy výslovně označují, používáme sadu pravidel založených na regexp k jejich automatickému vyloučení.",
-      "p1": "Níže si můžete prohlédnout úplný seznam použitých filtračních pravidel regexp."
+      "p0": "Abychom zajistili, že budeme zobrazovat pouze smysluplná data o příjemcích, filtrujeme také některé příjemce nebo strany, které jsou pro účely sledování dárců považovány za nerelevantní nebo neaktivní. Protože naše datové sady tyto příjemce ne vždy výslovně označují, používáme sadu pravidel založených na regexp k jejich automatickému vyloučení. Níže si můžete prohlédnout úplný seznam použitých filtračních pravidel regexp.",
+      "p1": "Níže je uveden seznam příjemců, jejichž záznamy byly podle našich kritérií a filtračních pravidel odfiltrovány."
     },
     "receivers": {
       "title": "Agregovaní příjemci",
@@ -748,7 +751,7 @@
   "export": {
     "title": "Export dat",
     "p0": "Získejte kompletní datovou sadu politických darů pro {country} používanou na tomto webu. Export zahrnuje normalizovaná jména dárců, částky, data a příjemce (strany).",
-    "p1": "Důležité: Nejde o surová data ze zdroje {source}. Tato datová sada obsahuje pouze dary, které náš tým normalizoval a vyfiltroval. Pro metodiku si prosím přečtěte naši část {transparency}.",
+    "p1": "Důležité: Nejde o surová data ze zdroje {source}. Tato datová sada obsahuje pouze dary, které náš tým normalizoval a vyfiltroval. Přečtěte si prosím naši {methodology}.",
     "license": "Licence: {license}"
   },
   "bar_chart_race": {
@@ -903,6 +906,101 @@
       "title": "Nebyly nalezeny žádné dary",
       "p0": "Nebyly nalezeny žádné dary odpovídající vašemu aktuálnímu nastavení filtrů. Zkuste filtry upravit nebo je resetovat.",
       "reset": "Obnovit filtry"
+    }
+  },
+  "methodology": {
+    "title": "Metodika",
+    "intro": "DonationWatch zpracovává, normalizuje a zasazuje do kontextu oficiální datové sady zveřejňované volebními a dozorovými orgány. Tato stránka dokumentuje naše zdroje dat, pravidla zpracování, normalizační kritéria a omezení pro zemi {country}.",
+    "sections": {
+      "profile": "Profil datové sady",
+      "source": "Zdroj dat a rozsah",
+      "coverage": "Pokrytí a prahové hodnoty",
+      "cadence": "Frekvence aktualizací",
+      "processing": "Zpracování a normalizace",
+      "anonymisation": "Anonymizace a redakce",
+      "licence": "Licence a původ",
+      "version": "Verze dat a časová razítka",
+      "disclaimer": "Upozornění"
+    },
+    "profile": {
+      "source": "Oficiální zdroj",
+      "coverage": "Období pokrytí",
+      "coverage_preliminary": "{range} (předběžná data od {preliminarySince})",
+      "latest_transaction": "Poslední zaznamenaná transakce",
+      "last_processed": "Datová sada naposledy zpracována",
+      "cadence": "Frekvence aktualizací",
+      "cadence_value": "{cadence, select, annual {Roční} quarterly {Čtvrtletní} other {Pravidelná}}",
+      "volume": "Objem kompilované datové sady",
+      "volume_value": "{count} záznamů ({sum}) napříč {parties} stranami",
+      "donation_threshold": "Prahová hodnota na dar",
+      "donation_threshold_all": "Všechny zveřejněné příspěvky (bez minimálního filtru)",
+      "party_threshold": "Prahová hodnota pro zahrnutí strany",
+      "party_threshold_value": "{type, select, count {≥ {count} darů} sum {≥ {sum} kumulativně} other {≥ {count} darů nebo ≥ {sum} kumulativně}}",
+      "party_threshold_all": "Zahrnuty všechny vykazované strany",
+      "granularity": "Granularita dat",
+      "granularity_individual": "Jednotlivé transakce a záznamy o dárcích",
+      "granularity_aggregate": "Roční souhrny na úrovni stran (bez identit jednotlivých dárců)",
+      "temporal_resolution": "Časové rozlišení",
+      "resolution_date": "Přesné datum transakce (RRRR-MM-DD)",
+      "resolution_year": "Pouze vykazovaný rok (RRRR)",
+      "origin_coverage": "Geografický původ",
+      "origin_yes": "Kraj/region a země původu",
+      "origin_no": "Pouze na úrovni státu",
+      "donation_types": "Zahrnuté typy příspěvků",
+      "donor_types": "Klasifikované kategorie dárců",
+      "external_ids": "Externí identifikátory v registru",
+      "external_ids_both": "ID zdrojových transakcí a identifikační čísla firem (IČO)",
+      "external_ids_transaction": "ID transakcí ve zdrojovém registru",
+      "external_ids_company": "Registrační / identifikační čísla firem",
+      "external_ids_none": "Ve zdrojovém registru nejsou zveřejněny",
+      "access": "Přístup k datům a pipeline",
+      "export_link": "Stáhnout kompletní datovou sadu (CSV / JSON)",
+      "pipeline_link": "Zobrazit zdrojový kód loaderu pro danou zemi (GitHub)"
+    },
+    "source": {
+      "default": "Data pro zemi {country} pocházejí přímo z {source}.",
+      "link": "Navštívit oficiální registr"
+    },
+    "coverage": {
+      "default": "Datová sada pokrývá zveřejněné politické dary od roku {minYear}.",
+      "preliminary": "Záznamy od roku {preliminarySince} jsou předběžné a podléhají průběžným aktualizacím dozorového orgánu."
+    },
+    "threshold": {
+      "default": "DonationWatch uplatňuje pro tuto datovou sadu minimální prahovou hodnotu {amount} na transakci.",
+      "note": "Tento limit jsme nastavili, abychom se vyhnuli nadměrnému množství drobných darů, a může být vyšší než minimální částka exportovaná zdrojovým registrem. Příspěvky s absolutní hodnotou pod touto částkou jsou odfiltrovány.",
+      "all": "Tento datový soubor obsahuje všechny zveřejněné dary bez filtru minimální částky.",
+      "party": "Prahová hodnota pro zahrnutí strany: Abychom se zaměřili na aktivní politické subjekty, jsou do kompilované datové sady zahrnuty pouze strany s {type, select, count {alespoň {count} zdokumentovanými dary} sum {alespoň {sum} v kumulativních darech} other {alespoň {count} zdokumentovanými dary nebo {sum} v kumulativních darech}}.",
+      "party_all": "Zahrnutí stran: Zahrnuty jsou všechny politické strany s platnými vykázanými příspěvky nad prahem transakce.",
+      "net_positive": "Vrácené dary a filtrování nulového součtu: Některé registry evidují vrácené či refundované příspěvky jako záporné položky. Dárci nebo přijímající strany, jejichž kumulativní čistý součet příspěvků v celé datové sadě je nulový nebo záporný, jsou vyloučeni."
+    },
+    "cadence": {
+      "default": "Datové sady jsou pravidelně synchronizovány se zveřejněným zdrojovým registrem.",
+      "annual": "Zdrojová datová sada je aktualizována v ročním cyklu.",
+      "quarterly": "Zdrojová datová sada je aktualizována ve čtvrtletním cyklu."
+    },
+    "processing": {
+      "summary": "Surová data procházejí při načítání deterministickou, pravidly řízenou normalizací s cílem sjednotit názvy subjektů, sloučit organizační pobočky a vyloučit nevyhovující záznamy:",
+      "step_cleaning": "Základní čištění řetězců: Všechny názvy subjektů procházejí normalizací Unicode NFKC, oříznutím okolních uvozovek a koncových čárek a sloučením vícenásobných mezer.",
+      "step_clustering": "Seskupování podle klíče dárce a pravidla pro danou zemi: Kanonický vyhledávací klíč (odstraňující všechny nealfanumerické znaky a převádějící text na velká písmena) seskupuje varianty ve velikosti písmen, mezerách a interpunkci pod jeden kanonický název dárce. Pokud jsou pro loader dané země nastavena další pravidla, standardizují místní právní formy, odstraňují osobní tituly nebo mapují známé aliasy — přičemž každá sloučená varianta je uvedena níže v části Agregovaní dárci.",
+      "step_receivers": "Mapování a konsolidace příjemců: Vykázané názvy příjemců jsou mapovány na kanonické politické strany. Pokud registry vykazují příspěvky krajským, místním nebo mládežnickým organizacím odděleně, jsou konsolidovány do jednoho celkového součtu za stranu (v relevantních případech uvedeno níže v části Agregovaní příjemci).",
+      "donor_identity": "Důležité omezení ohledně identity dárců (shoda jmen vs. nesloučené varianty): Oficiální registry financování politických stran zřídka zveřejňují jednoznačné osobní identifikátory (jako jsou rodná čísla, daňová čísla nebo data narození) jednotlivých dárců. Částky na profilových stránkách dárců jsou seskupovány výhradně podle normalizovaného jména dárce. V důsledku toho může jeden profil dárce sdružovat příspěvky více různých osob se stejným jménem (nadměrná agregace), zatímco varianty obsahující druhá jména nebo nenamapované zkratky mohou zůstat jako samostatné profily (nedostatečná agregace)."
+    },
+    "anonymisation": {
+      "summary": "Rozlišujeme mezi redakcemi provedenými přímo zveřejňujícím orgánem a diskreční anonymizací na základě žádosti.",
+      "upstream": "Redigováno úřadem: {count} dárcovských záznamů bylo úřadem před zveřejněním skryto.",
+      "by_request": "Anonymizováno na žádost: {count} jmen dárců bylo odstraněno na žádost, přičemž částky transakcí a stranické součty zůstaly zachovány."
+    },
+    "licence": {
+      "output": "Naše kompilovaná, normalizovaná datová sada a vizualizace jsou publikovány pod licencí {licence}.",
+      "export_prompt": "Pro výzkumníky, novináře a datové vědce je kompletní normalizovaná datová sada pro zemi {country} ke stažení přes naši stránku {exportLink} a přesná pravidla načítání a normalizace lze zkontrolovat v našem {pipelineLink}."
+    },
+    "version": {
+      "last_updated": "Datová sada naposledy zpracována: {date}.",
+      "latest_donation": "Poslední zaznamenaná transakce v datové sadě: {date}.",
+      "explanation": "Časové razítko zpracování udává, kdy naše pipeline naposledy synchronizovala a zkompilovala data z oficiálního registru, zatímco datum poslední transakce odráží nejnovější datum příspěvku přítomné ve zveřejněných záznamech."
+    },
+    "disclaimer": {
+      "text": "Kompilovaná, nikoliv oficiální data: DonationWatch je nezávislý občanský projekt a není spojen s žádným volebním orgánem ani politickou stranou. Vzhledem k normalizaci a filtrování by tato datová sada neměla být citována jako oficiální státní registr."
     }
   }
 }

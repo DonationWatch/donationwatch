@@ -12,6 +12,7 @@ import type {
   UnloadedCountryConfig,
 } from "@/types/country-config";
 import type { Party } from "@/types/party";
+import type { TransparencyAnonymisation } from "@/types/transparency";
 import type { CountryCode } from "@/utils/countries";
 import type { Donation } from "@/utils/types";
 
@@ -73,6 +74,7 @@ export interface UseNormalizedData {
   filteredReceivers: string[];
   normalizedDonors: [string, string[]][];
   normalizedReceivers: [string, string[]][];
+  anonymisation?: TransparencyAnonymisation;
 }
 
 export const useNormalized = (country: CountryConfig) => {

@@ -6,6 +6,7 @@ import { fileURLToPath } from "url";
 import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
 import type { PartyStats } from "@/types/party-stats";
+import type { TransparencyData } from "@/types/transparency";
 import type { CountryCode, Currency } from "@/utils/countries";
 import type {
   GlobalBiggestDonation,
@@ -469,10 +470,7 @@ const prebuildStaticNormalizationJsons = async (country: CountryConfig) => {
   const {
     default: normalized,
   }: {
-    default: {
-      filteredDonors: string[];
-      normalizedDonors: Record<string, string[]>;
-    };
+    default: TransparencyData;
   } = await import(transparencyPath);
 
   await fs.writeFile(

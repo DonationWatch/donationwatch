@@ -75,6 +75,14 @@ const nextConfig = {
         destination: "/sitemap_index.xml",
         permanent: true,
       },
+
+      // added on 2026-10-17
+      // redirect old transparency page to methodology
+      {
+        source: "/:locale/:country/transparency",
+        destination: "/:locale/:country/methodology",
+        permanent: true,
+      },
     ];
   },
 };

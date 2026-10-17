@@ -19,6 +19,7 @@
     "imprint": "Impressum",
     "privacy": "Privaatsuspoliitika",
     "transparency": "Läbipaistvus",
+    "methodology": "Metoodika",
     "sources": "Allikad",
     "export": "Andmete eksport",
     "bar_chart_race": "Tulpdiagrammi võistlus",
@@ -191,15 +192,15 @@
         "germany": "Siin kasutatud andmed pärinevad Saksamaa Bundestagist ja hõlmavad kõiki alates 2010. aastast dokumenteeritud üle 50 000 euro ja alates 5. märtsist 2024. aastast üle 35 000 euro suuruseid annetusi erakondadele.",
         "switzerland": "Siin kasutatud andmed pärinevad Šveitsi riigikontrollist ja hõlmavad kõiki seal alates 2023. aastast dokumenteeritud erakondade annetusi.",
         "netherlands": "Siin esitatud teave on pärit Hollandi valitsuselt ja sisaldab kõiki alates aastast 2022 registreeritud poliitilisi annetusi, mis ületavad 1 000 €, nagu on märgitud iga-aastases aruandes „Overzicht van giften aan politieke partijen en hun neveninstellingen“.\n\nKäesoleva aasta jaoks on kaasatud ainult annetused, mis ületavad 10 000 €, tuginedes andmekogule „Overzicht substantiële giften aan politieke partijen“.\n\nPange tähele: mõnel annetusel puudub konkreetne kuupäevainfo ning seetõttu ei ole need lisatud ajareadesse ega teistesse kuupäeval põhinevatesse visualiseeringutesse.\n\nSP ja GL jaoks registreeritud annetused võivad tunduda suhteliselt suured, kuna mõlemad parteid nõuavad, et nende parlamendiliikmed ja haldurid annetaksid erakonnale märkimisväärse osa oma palgast.",
-        "europeanunion": "Die hier präsentierten Daten stammen von der Behörde für europäische politische Parteien und europäische politische Stiftungen und umfassen alle dokumentierten Partei- und Stiftungsspenden seit 2018. Aufgrund der Bedeutung der europäischen politischen Stiftungen werden deren Spenden ähnlich wie die der europäischen politischen Parteien erfasst und dargestellt.\n\nDa die offiziellen Daten keine Daten enthalten, sind keine Zeitreihen oder ähnliche visuelle Darstellungen verfügbar.\n\nZu beachten ist, dass im Vorfeld der Europawahl 2024 (vom 6. Dezember 2023 bis 10. Juni 2024) besondere Meldepflichten für Spenden galten, mit wöchentlichen Meldungen und zeitnaher Veröffentlichung durch die Behörde.\nAb dem 10. Juni 2024 müssen nur noch Spenden über 12.000 Euro sofort gemeldet werden. Andere Spenden werden erst nach Vorlage des Jahresabschlusses zur Verfügung stehen.",
+        "europeanunion": "Siin esitatud andmed pärinevad Euroopa Poliitiliste Parteide ja Euroopa Poliitiliste Sihtasutuste Ametilt ning hõlmavad kõiki dokumenteeritud parteide ja sihtasutuste annetusi alates 2018. aastast. Euroopa poliitiliste sihtasutuste olulisuse tõttu jälgime ja kuvame nende annetusi sarnaselt Euroopa poliitiliste parteide omadega.\n\nKuna ametlikud andmed ei sisalda täpseid tehingukuupäevi, ei ole ajaread ega sarnased kuupäevapõhised visualiseeringud saadaval.\n\nPange tähele, et 2024. aasta Euroopa Parlamendi valimiste eel (6. detsembrist 2023 kuni 10. juunini 2024) kehtisid annetustele eriaruandlusnõuded koos iganädalaste aruannete ja ameti kiire avalikustamisega.\nAlates 10. juunist 2024 tuleb viivitamatult teavitada ainult üle 12 000 euro suurustest annetustest. Muud annetused muutuvad kättesaadavaks alles pärast majandusaasta aruannete esitamist.",
         "estonia": "Siin kasutatud andmed pärinevad Eesti erakondade rahastamise seirekomisjonilt ja hõlmavad kõiki seal alates 2014. aastast dokumenteeritud poliitilisi annetusi, mis ületavad 1 euro.\n\nEesti erakonnad on kohustatud oma tuludest, sealhulgas saadud annetustest, aru andma kord kvartalis.\nKomitee veebilehel olevaid andmeid ajakohastatakse vastavalt kord kvartalis.",
         "czechrepublic": "Siin kasutatud andmed pärinevad Poliitiliste Parteilide ja Poliitiliste Liikumiste Haldamise Kontrolli Ametist ning hõlmavad kõiki seal alates 2018. aastast dokumenteeritud poliitilisi annetusi, mis ületavad 25 CZK.\n\nSee ulatus hõlmab ka kõiki annetusi erakondadele või poliitilistele liikumistele, mis on kas saanud üle 100 üksikud annetuse või mille kogusumma on ületanud 1 miljonit CZK, olenemata üksikannete suurusest. Andmeid ajakohastatakse kord aastas.\nAnnetajatüübi tuvastamine põhineb annetaja määramisel üksikisikuks, kui nii firstName kui ka lastName väljad on olemas.",
         "latvia": "Siin kasutatud andmed pärinevad Korruptsiooni Ennetamise ja Tõkestamise Büroolt (KNAB) ning hõlmavad kõiki alates 2015. aastast dokumenteeritud poliitilisi annetusi, mis ületavad €1. See andmestik sisaldab rahalisi annetusi, mitterahalisi kingitusi ja teenuseid ning parteiühinemis- ja liikmemakse.",
-        "australia": "Siin kasutatud andmed pärinevad Australian Electoral Commissionist (AEC) ning täpsemalt AEC-i avaldatud andmestikust \"Donations Made Details\". See hõlmab kõiki seal dokumenteeritud poliitilisi annetusi alates 2014. aastast, mis ületavad €1.\n\nTasub märkida, et AEC-i andmestik võib sisaldada mõningaid trükivigu, mille tõttu võivad teatud annetused jääda arvestusest välja või ei pruugi need andmesisestuse ebajärjekindluse tõttu olla korrektselt konkreetsele parteile omistatud. Lisaks avaldatakse AEC-i iga-aastased avalikustamised igal aastal 1. veebruaril, kuid andmed ei anna täielikku ülevaadet kõigist panustest, kuna avalikustamislävi on $15,000.\n\nAnnetajate tüübid klassifitseeritakse annetajate nimede sobitamise teel. Kõik levinud ametiühingud kaardistatakse käsitsi annetajatüübi 'Ametiühing' alla. Ettevõtted tuvastatakse, kontrollides annetaja nimes konkreetseid ettevõtte tunnuseid: 'Pty' (Proprietary), 'Ltd' nime lõpus, 'Corporation' või 'Corp'.",
+        "australia": "Siin kasutatud andmed pärinevad Australian Electoral Commissionist (AEC) ning täpsemalt AEC-i avaldatud andmestikust \"Donations Made Details\". See hõlmab kõiki seal dokumenteeritud poliitilisi annetusi alates 2014. aastast, mis ületavad 1 AUD.\n\nTasub märkida, et AEC-i andmestik võib sisaldada mõningaid trükivigu, mille tõttu võivad teatud annetused jääda arvestusest välja või ei pruugi need andmesisestuse ebajärjekindluse tõttu olla korrektselt konkreetsele parteile omistatud. Lisaks avaldatakse AEC-i iga-aastased avalikustamised igal aastal 1. veebruaril, kuid andmed ei anna täielikku ülevaadet kõigist panustest, kuna avalikustamislävi on $15,000.\n\nAnnetajate tüübid klassifitseeritakse annetajate nimede sobitamise teel. Kõik levinud ametiühingud kaardistatakse käsitsi annetajatüübi 'Ametiühing' alla. Ettevõtted tuvastatakse, kontrollides annetaja nimes konkreetseid ettevõtte tunnuseid: 'Pty' (Proprietary), 'Ltd' nime lõpus, 'Corporation' või 'Corp'.",
         "unitedkingdom": "Siin kasutatud andmed pärinevad Electoral Commissionilt ning hõlmavad kõiki seal alates 2010. aastast dokumenteeritud poliitilisi annetusi, mis ületavad 1 000 £.\n\nElectoral Commissioni aluseks olev register seob kõik ajaloolised tehingud tagasiulatuvalt iga partei praeguse ametlikult registreeritud nimega. Seetõttu kuvatakse parteidele enne ametlikku ümberbrändimist või nimemuutust tehtud ajaloolised annetused (näiteks enne 2021. aastat The Brexit Partyle tehtud annetused) partei praeguse registreeritud nime all (Reform UK).\n\nAnnetusandmeid uuendatakse kord kvartalis.",
         "serbia": "Siin kasutatud andmed ei pärine valitsuselt, vaid mittetulundusühingult „Serbia Uuriva Ajakirjanduse Keskus“ („Centar za istraživačko novinarstvo Srbije“ - CINS), mis on lahkesti koondanud Serbia Korruptsioonivastase Ameti annetuste andmed.\n\nNeed andmed hõlmavad kõiki seal dokumenteeritud poliitilisi annetusi alates 2015. aastast.\n\nKuna andmekogum ei sisalda konkreetset kuupäeva teavet üksikute annetuste kohta, ei ole kahjuks võimalik kuvada ajagraafikuid ega muid ajapõhiseid visualiseeringuid.",
         "croatia": "Siin kasutatud andmed pärinevad Horvaatia Vabariigi Riiklikult Valimiskomisjonilt (DIP) ning hõlmavad kõiki poliitilisi annetusi rahalise väärtusega üle 1 €, mis on dokumenteeritud alates 2019. aastast.\nAndmestik kasutab iga aruandeaasta kohta ainult viimati avaldatud annetusdokumenti (nagu on teatanud izbori), et vältida sama aasta aruande varasemate versioonide duplikaate.\nKõik annetused kuvatakse eurodes, samas kui aluseks olev andmestik kasutab kuni 2024. aastani kunasid. Algselt kunades tehtud annetused teisendatakse eurodeks, kasutades ligikaudseid vahetuskursse iga poolaasta kohta ajavahemikus 2019–2024: H1 (0.1340, 0.1335, 0.1332, 0.1329, 0.1326) ja H2 (0.1341, 0.1338, 0.1334, 0.1327, 0.1328).",
-        "canada": "Siin kasutatud andmed pärinevad Elections Canada’lt ja põhinevad andmekogul „contributions as submitted“. See hõlmab kõiki poliitilisi annetusi, mille rahaline väärtus ületab 500 €, dokumenteeritud alates 2015. aastast. Kaasatud on kõik kirjed, mis kuuluvad aruandesse „Statement of Contributions Received“ valimisürituselt „Annual“ registreeritud erakondadele.",
+        "canada": "Siin kasutatud andmed pärinevad Elections Canada’lt ja põhinevad andmekogul „contributions as submitted“. See hõlmab kõiki poliitilisi annetusi, mille rahaline väärtus ületab 500 CAD, dokumenteeritud alates 2015. aastast. Kaasatud on kõik kirjed, mis kuuluvad aruandesse „Statement of Contributions Received“ valimisürituselt „Annual“ registreeritud erakondadele.",
         "georgia": "Siin esitatud teave pärineb Gruusia korruptsioonivastasest büroost (ანტიკორუფციული ბიურო﻿) ja hõlmab kõiki alates 2011. aastast registreeritud poliitilisi annetusi, mis ületavad 1 GEL. Andmekogum hõlmab ainult annetusi, mis on klassifitseeritud kui tüüp #10 (Rahaannetused) või tüüp #16 (Rahaannetused juriidilistelt isikutelt).",
         "norway": "Siin kasutatud andmed pärinevad Statistics Norway (SSB) ja Partifinansiering.no ametlikest erakondade rahastamise publikatsioonidest. Kuva­tud kogusummad on koondatud mitme raporteeritud saajaüksuse (näiteks kesk-, piirkondlike, kohalike ja noorteüksuste) põhjal üheks kogusummaks erakonna kohta, kusjuures aluseks olev saajate vastendus on läbipaistvuse tagamiseks jätkuvalt kättesaadav.\n\nNorra andmestikku uuendatakse kord aastas, kajastades alusandmete avalikustamise rütmi.",
         "ukraine": "Siin kasutatud andmed on pärit riiklikust korruptsiooni ennetamise agentuurist (NAZK) PolitData portaali kaudu. Need sisaldavad kõiki ametlikes aruannetes märgitud kirjeid, mis on tähistatud kui „rahalised annetused“.\n\nMärkus andmete ulatuse kohta: See summa kajastab ainult otseseid rahalisi ülekandeid. See ei hõlma riiklikku rahastust parlamendierakondadele ega mitterahalisi (looduslikke) panuseid, nagu kaubad ja teenused.\n\nVene täiemahulise sissetungi tõttu peatati poliitiliste parteide kohustuslik aruandlus 2022. aasta algusest kuni 2023. aasta lõpuni julgeoleku- ja logistilistel põhjustel. Pärast seaduse nr 3337-IX vastuvõtmist täidavad parteid nüüd oma aruandeid tagantjärele. Aastate 2022–2025 andmeid ajakohastatakse endiselt, kuna NAZK töötleb neid esitusi.",
@@ -671,7 +672,9 @@
     },
     "user_rights": {
       "title": "Sinu kasutajaõigused",
-      "p": "Vastavalt GDPR-ile on sul õigus igal ajal tasuta saada teavet oma isikuandmete päritolu, saajate ja eesmärgi kohta. Samuti on sul õigus taotleda parandamist, blokeerimist või kustutamist. Kuna me töötleme vaid minimaalseid ja anonüümseid andmeid, ei saa me sind üldjuhul isiklikult tuvastada. Sul on ka õigus esitada kaebus andmekaitseasutusele. Küsimuste korral võta meiega ühendust."
+      "p": "Vastavalt GDPR-ile on sul õigus igal ajal tasuta saada teavet oma isikuandmete päritolu, saajate ja eesmärgi kohta. Samuti on sul õigus taotleda parandamist, blokeerimist või kustutamist. Kuna me töötleme vaid minimaalseid ja anonüümseid andmeid, ei saa me sind üldjuhul isiklikult tuvastada. Sul on ka õigus esitada kaebus andmekaitseasutusele. Küsimuste korral võta meiega ühendust.",
+      "erasure": "Õigus andmete kustutamisele (GDPR artikkel 17): Vastavalt GDPR artiklile 17 on andmesubjektil õigus nõuda oma isikuandmete kustutamist seaduses sätestatud alustel. Kustutamistaotluse saab esitada otse meile.",
+      "discretionary": "Kaalutlusõiguse alusel anonümiseerimine: Lisaks seadusjärgsetele nõuetele vaatab DonationWatch anonümiseerimistaotlusi läbi juhtumipõhiselt. Heakskiitmisel annetaja nimi anonümiseeritakse, säilitades summad ja erakondade kogumahud."
     }
   },
   "fun": {
@@ -697,8 +700,8 @@
       "p1": "Allpool on loetelu annetajatest, kelle panused filtreeriti välja vastavalt meie kriteeriumidele ja filtrireeglitele."
     },
     "filtered_receivers": {
-      "p0": "Selleks, et esitada ainult sisukaid saajate andmeid, filtreerime välja ka teatud saajad või erakonnad, mida peetakse annetajate jälgimise seisukohalt ebaoluliseks või mitteaktiivseks. Kuna meie andmestikud ei märgista neid saajaid alati otsesõnu, rakendame regulaaravaldistel (regexp) põhinevaid reegleid, et need automaatselt välja jätta.",
-      "p1": "Allpool saate vaadata kõiki rakendatud regexp-filtrireegleid."
+      "p0": "Selleks, et esitada ainult sisukaid saajate andmeid, filtreerime välja ka teatud saajad või erakonnad, mida peetakse annetajate jälgimise seisukohalt ebaoluliseks või mitteaktiivseks. Kuna meie andmestikud ei märgista neid saajaid alati otsesõnu, rakendame regulaaravaldistel (regexp) põhinevaid reegleid, et need automaatselt välja jätta. Allpool saate vaadata kõiki rakendatud regexp-filtrireegleid.",
+      "p1": "Allpool on loetelu saajatest, kelle kirjed filtreeriti välja vastavalt meie kriteeriumidele ja filtrireeglitele."
     },
     "receivers": {
       "title": "Koondatud saajad",
@@ -748,7 +751,7 @@
   "export": {
     "title": "Andmete eksport",
     "p0": "Hankige sellel saidil kasutatav täielik poliitiliste annetuste andmestik riigi {country} kohta. Eksport sisaldab normaliseeritud annetajate nimesid, summasid, kuupäevi ja saajaparteisid.",
-    "p1": "Oluline: Need ei ole {source} toorandmed. See andmestik sisaldab ainult annetusi, mille meie meeskond on normaliseerinud ja filtreerinud. Metoodika kohta vaadake palun meie jaotist {transparency}.",
+    "p1": "Oluline: Need ei ole {source} toorandmed. See andmestik sisaldab ainult annetusi, mille meie meeskond on normaliseerinud ja filtreerinud. Vaadake palun meie {methodology}.",
     "license": "Litsents: {license}"
   },
   "bar_chart_race": {
@@ -903,6 +906,101 @@
       "title": "Annetusi ei leitud",
       "p0": "Teie praegusele filtrikonfiguratsioonile vastavaid annetusi ei leitud. Proovige filtreid kohandada või lähtestada.",
       "reset": "Lähtesta filtrid"
+    }
+  },
+  "methodology": {
+    "title": "Metoodika",
+    "intro": "DonationWatch töötleb, normaliseerib ja kontekstualiseerib riiklike valimisasutuste avaldatud ametlikke andmekogusid. See leht dokumenteerib meie andmeallikaid, töötlemisreegleid ja piiranguid riigi {country} kohta.",
+    "sections": {
+      "profile": "Andmestiku profiil",
+      "source": "Andmeallikas ja ulatus",
+      "coverage": "Kaetus ja künnised",
+      "cadence": "Uuendamissagedus",
+      "processing": "Töötlemine ja normaliseerimine",
+      "anonymisation": "Anonümiseerimine ja varjamised",
+      "licence": "Litsents ja päritolu",
+      "version": "Andmete versioon ja ajatemplid",
+      "disclaimer": "Lahtiütlus"
+    },
+    "profile": {
+      "source": "Ametlik allikas",
+      "coverage": "Kaetud periood",
+      "coverage_preliminary": "{range} (esialgsed andmed alates {preliminarySince})",
+      "latest_transaction": "Viimane registreeritud tehing",
+      "last_processed": "Andmestik viimati töödeldud",
+      "cadence": "Uuendamissagedus",
+      "cadence_value": "{cadence, select, annual {Kord aastas} quarterly {Kord kvartalis} other {Regulaarne}}",
+      "volume": "Koostatud andmestiku maht",
+      "volume_value": "{count} kirjet ({sum}) {parties} erakonna lõikes",
+      "donation_threshold": "Annetuse alampiir",
+      "donation_threshold_all": "Kõik avaldatud annetused (ilma miinimumfiltrita)",
+      "party_threshold": "Erakonna kaasamise künnis",
+      "party_threshold_value": "{type, select, count {≥ {count} annetust} sum {≥ {sum} kumulatiivselt} other {≥ {count} annetust või ≥ {sum} kumulatiivselt}}",
+      "party_threshold_all": "Kõik aruandluses esitatud erakonnad on kaasatud",
+      "granularity": "Andmete detailsus",
+      "granularity_individual": "Üksiktehingute ja annetajate kirjed",
+      "granularity_aggregate": "Erakondade aastased koondsummad (ilma üksikannetajate nimedeta)",
+      "temporal_resolution": "Ajaline täpsus",
+      "resolution_date": "Täpne tehingukuupäev (AAAA-KK-PP)",
+      "resolution_year": "Ainult aruandeaasta (AAAA)",
+      "origin_coverage": "Geograafiline päritolu",
+      "origin_yes": "Maakond/piirkond ja päritoluriik",
+      "origin_no": "Ainult riigi tasand",
+      "donation_types": "Kaasatud annetuste liigid",
+      "donor_types": "Klassifitseeritud annetajate kategooriad",
+      "external_ids": "Välised registritunnused",
+      "external_ids_both": "Allikatehingute ID-d ja äriregistri koodid",
+      "external_ids_transaction": "Allikaregistri tehingu ID-d",
+      "external_ids_company": "Ettevõtete / juriidiliste isikute registrikoodid",
+      "external_ids_none": "Allikaregistris ei avaldata",
+      "access": "Andmetele ligipääs ja töövoog",
+      "export_link": "Laadi alla kogu andmestik (CSV / JSON)",
+      "pipeline_link": "Tutvu riigi andmelaadija lähtekoodiga (GitHub)"
+    },
+    "source": {
+      "default": "Riigi {country} andmed pärinevad otse allikast {source}.",
+      "link": "Vaata ametlikku registrit"
+    },
+    "coverage": {
+      "default": "Andmestik hõlmab avaldatud poliitilisi annetusi alates aastast {minYear}.",
+      "preliminary": "Andmed alates aastast {preliminarySince} on esialgsed ja võivad täieneda."
+    },
+    "threshold": {
+      "default": "DonationWatch rakendab selle andmestiku puhul iga tehingu kohta minimaalset kaasamisläve {amount}.",
+      "note": "See lävi on meie määratud, et vältida liigset väikeannetuste hulka, ning see võib olla kõrgem kui allikaregistri avalikustatud miinimumsumma. Annetused, mille absoluutväärtus jääb sellest summast allapoole, filtreeritakse välja.",
+      "all": "See andmestik sisaldab kõiki avaldatud annetusi ilma miinimumsumma filtrita.",
+      "party": "Erakonna kaasamise künnis: Aktiivsetele poliitilistele üksustele keskendumiseks kaasatakse koostatud andmestikku ainult erakonnad, millel on {type, select, count {vähemalt {count} dokumenteeritud annetust} sum {vähemalt {sum} kumulatiivseid annetusi} other {vähemalt {count} dokumenteeritud annetust või {sum} kumulatiivseid annetusi}}.",
+      "party_all": "Erakondade kaasamine: Kaasatud on kõik erakonnad, millel on tehingukünnist ületavaid kehtivaid annetusi.",
+      "net_positive": "Tagasimaksed ja nullsumma filtreerimine: Mõned registrid kajastavad tagastatud annetusi negatiivsete kirjetena. Annetajad või erakonnad, kelle kumulatiivne netoannetuste summa kogu andmestikus on null või negatiivne, jäetakse välja."
+    },
+    "cadence": {
+      "default": "Andmekogusid sünkroonitakse regulaarselt ametliku registriga.",
+      "annual": "Lähteandmeid uuendatakse kord aastas.",
+      "quarterly": "Lähteandmeid uuendatakse kord kvartalis."
+    },
+    "processing": {
+      "summary": "Algandmed läbivad sissevõtmisel deterministliku reeglipõhise normaliseerimise, et ühtlustada üksuste nimesid, koondada piirkondlikud harud ja välistada mittekvalifitseeruvad kirjed:",
+      "step_cleaning": "Teksti baaspuhastus: Kõikidele nimedele tehakse Unicode NFKC normaliseerimine, eemaldatakse ümbritsevad jutumärgid ja lõpukomad ning koondatakse korduvad tühikud.",
+      "step_clustering": "Annetaja võtme klasterdamine ja riigipõhised reeglid: Kanooniline otsinguvõti (mis eemaldab kõik mittetähe- ja mittenumbrimärgid ning teisendab teksti suurtähtedeks) rühmitab tõstu-, tühiku- ja kirjavahemärgivariandid ühe kanoonilise annetaja nime alla. Kui riigi andmelaadijas on seadistatud lisareeglid, ühtlustavad need kohalikke õiguslikke vorme, eemaldavad tiitlid või seovad tuntud aliased — kõik ühendatud variandid on toodud allpool jaotises Koondatud annetajad.",
+      "step_receivers": "Saajate vastendamine ja koondamine: Aruannetes esitatud saajate nimed seotakse kanooniliste erakondadega. Kui registrid esitavad annetusi piirkondlikele, kohalikele või noorteorganisatsioonidele eraldi, koondatakse need üheks erakonna kogusummaks (toodud allpool jaotises Koondatud saajad, kui see on asjakohane).",
+      "donor_identity": "Oluline piirang annetaja identiteedi osas (nimekaimud vs. ühendamata variandid): Ametlikud erakondade rahastamise registrid avaldavad harva üksikisikute kordumatuid identifikaatoreid (nagu isikukoodid, maksukohustuslase numbrid või sünniajad). Annetajate profiililehtedel olevad koondsummad rühmitatakse rangelt normaliseeritud annetaja nime alusel. Seetõttu võib üks annetajaprofiil koondada mitme täpselt sama nime kandva erineva isiku annetused (ülekoondamine), samas kui keskmisi nimesid või kaardistamata lühendeid sisaldavad variandid võivad jääda eraldi profiilideks (alakoondamine)."
+    },
+    "anonymisation": {
+      "summary": "Eristame ametiasutuse tehtud varjamisi ja taotluse alusel tehtud diskreetsust tagavat anonümiseerimist.",
+      "upstream": "Ametlikult varjatud: {count} annetaja kirjet varjati ametiasutuse poolt enne avaldamist.",
+      "by_request": "Taotluse alusel anonümiseeritud: {count} annetaja nime eemaldati taotluse alusel, säilitades summad ja erakondade kogusummad."
+    },
+    "licence": {
+      "output": "Meie koostatud ja normaliseeritud andmestik ning visualiseeringud on avaldatud litsentsi {licence} all.",
+      "export_prompt": "Teadlastele, ajakirjanikele ja andmeteadlastele on riigi {country} täielik normaliseeritud andmestik allalaaditav lehelt {exportLink} ning täpsete sissevõtu- ja normaliseerimisreeglitega saab tutvuda meie lehel {pipelineLink}."
+    },
+    "version": {
+      "last_updated": "Andmestik viimati töödeldud: {date}.",
+      "latest_donation": "Viimane registreeritud tehing andmestikus: {date}.",
+      "explanation": "Töötlemise ajatempel näitab, millal meie andmetorustik viimati ametliku registri andmed sünkroonis ja koostas, samas kui viimase tehingu kuupäev kajastab avaldatud kirjetes esinevat uusimat annetuse kuupäeva."
+    },
+    "disclaimer": {
+      "text": "Koostatud, mitte ametlik: DonationWatch on sõltumatu kodanikualgatus ega ole seotud valimisasutuste ega parteidega. Normaliseerimise tõttu ei tohiks seda andmestikku tsiteerida ametliku riikliku registrina."
     }
   }
 }

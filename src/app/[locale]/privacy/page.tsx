@@ -115,7 +115,9 @@ export default async function Page(props: PageProps<"/[locale]/privacy">) {
         </ArticleSection>
 
         <ArticleSection title={tPrivacy("user_rights.title")}>
-          <p>{tPrivacy("user_rights.p")}</p>
+          <p className="mb-4">{tPrivacy("user_rights.p")}</p>
+          <p className="mb-4">{tPrivacy("user_rights.erasure")}</p>
+          <p>{tPrivacy("user_rights.discretionary")}</p>
         </ArticleSection>
       </Article>
     </NonCountryRootLayout>
