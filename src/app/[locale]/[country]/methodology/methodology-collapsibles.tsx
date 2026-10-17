@@ -325,6 +325,8 @@ function VirtualizedAggregatedEntityList({
     estimateSize: () => 56,
     overscan: 10,
     getItemKey: (index) => items[index][0],
+    directDomUpdates: true,
+    directDomUpdatesMode: "transform",
   });
 
   return (
@@ -332,9 +334,7 @@ function VirtualizedAggregatedEntityList({
       <ul
         data-testid={testId}
         className="relative w-full"
-        style={{
-          height: `${rowVirtualizer.getTotalSize()}px`,
-        }}
+        ref={rowVirtualizer.containerRef}
       >
         {rowVirtualizer.getVirtualItems().map((virtualItem) => {
           const [name, normalizedVariants] = items[virtualItem.index];
@@ -345,9 +345,6 @@ function VirtualizedAggregatedEntityList({
               ref={rowVirtualizer.measureElement}
               data-index={virtualItem.index}
               className="absolute top-0 left-0 w-full border-b border-zinc-200 py-2 last:border-b-0 dark:border-zinc-800"
-              style={{
-                transform: `translateY(${virtualItem.start}px)`,
-              }}
             >
               <div className="font-semibold">{name}</div>
               <NormalizedVariantsList variants={normalizedVariants} />
