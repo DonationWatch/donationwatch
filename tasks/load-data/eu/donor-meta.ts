@@ -4,7 +4,7 @@ export const donorMeta: DonorMetaDefinition = {
   donors: {
     GLOBSEC: { wiki: 50582379 },
     "Vlaams Belang": {
-      wiki: 103160,
+      wiki: 1171278,
     },
     "Rassemblement National": {
       wiki: 67119,

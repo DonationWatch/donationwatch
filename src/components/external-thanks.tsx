@@ -51,6 +51,12 @@ const externalThanks: Partial<
       url: "https://www.pantheonsorbonne.fr/page-perso/francisco.roa-bastos%40",
     },
   ],
+  [Country.europeanunion]: [
+    {
+      name: "European Democracy Consulting",
+      url: "https://eudemocracy.eu/",
+    },
+  ],
 };
 
 export const ExternalThanks = async ({

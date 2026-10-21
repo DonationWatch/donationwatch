@@ -310,11 +310,10 @@ export class EuLoader extends DataLoader {
     },
 
     "Patriots for Europe": {
-      name: "Patriots for Europe",
+      name: "Patriots for Europe Foundation",
       color: "#253082",
       code: "PFE",
-      short: "Patriots for Europe",
-      wiki: 77266055,
+      short: "Patriots for Europe Foundation",
     },
   };
 
@@ -752,7 +751,7 @@ export class EuLoader extends DataLoader {
     },
     "2026": {
       parties:
-        "https://www.appf.europa.eu/telastatic/cmsdata/310079/2026%20PARTIES%20Donations%20table%20as%20of%202026-09-02.xlsx",
+        "https://www.appf.europa.eu/telastatic/cmsdata/311350/2026_PARTIES_Donations-table_2026-10-19.xlsx",
       foundations:
         "https://www.appf.europa.eu/telastatic/cmsdata/311132/2026_FOUNDATIONS_Donations_table_2026-10-09.xlsx",
     },

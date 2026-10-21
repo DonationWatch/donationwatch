@@ -390,7 +390,7 @@ describe("EU", () => {
 
     hasExpectedDonations(data, [
       // parties
-      ["ALDE", 107_000],
+      ["ALDE", 125_000],
       ["ECR", 33_000],
       // foundations
       ["WMCES", 50_110.87],
