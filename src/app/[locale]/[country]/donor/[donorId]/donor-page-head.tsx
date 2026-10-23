@@ -160,14 +160,18 @@ const DonorPageHeadContent = ({
   const rawDonorName = donations.at(0)?.[DonationField.DonorName] ?? "";
   const donorName = getDonorName(rawDonorName, tCommon);
   const donorType = donations.at(0)?.[DonationField.DonorType];
-  const registrationNumber = hasFeature(
+  const registrationDonation = hasFeature(
     countryConfig,
     Features.DonorRegistrationNumber,
   )
     ? donations.find(
         (donation) => donation[DonationField.DonorRegistrationNumber],
-      )?.[DonationField.DonorRegistrationNumber]
+      )
     : undefined;
+  const registrationNumber =
+    registrationDonation?.[DonationField.DonorRegistrationNumber];
+  const registrationDonorCountry =
+    registrationDonation?.[DonationField.Address]?.[AddressField.Country];
 
   let sum: number = 0;
   const sums: Record<string, number> = {};
@@ -300,12 +304,12 @@ const DonorPageHeadContent = ({
                   value={t(`donor_type.${donorType}`)}
                 />
               ) : null}
-              {registrationNumber ? (
+              {registrationNumber && registrationDonorCountry ? (
                 <MetaCard
                   title={t("donor.registration_number")}
                   value={
                     <ExternalRegistryLink
-                      countryConfig={countryConfig}
+                      country={registrationDonorCountry}
                       registrationNumber={registrationNumber}
                       className="group inline-flex items-center gap-1.5 tabular-nums hover:underline"
                       title={tCommon("view_source")}

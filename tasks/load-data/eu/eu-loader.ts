@@ -15,6 +15,7 @@ import { DataLoader } from "../data-loader";
 import { exists, trimRow } from "../util";
 import { donorMeta } from "./donor-meta";
 import { fromPdfDonations } from "./from-pdf-donations";
+import { inspectEuDonorRegistrationNumber } from "./registration-numbers";
 
 const FETCH_HEADERS = {
   "user-agent":
@@ -637,48 +638,93 @@ export class EuLoader extends DataLoader {
           })
         : [{ name: "", data: [] }];
 
-      return [
+      const unsupportedCountryNumbers = new Map<Countries, Set<string>>();
+      const invalidRegistrationNumbers = new Map<string, Set<string>>();
+
+      const enrichDonation = (d: ExtractedYearData): ExtractedYearData => {
+        const country = d[DonationField.Address][AddressField.Country];
+        const donorName =
+          // the 2022 docs were redacted and removed some donor names
+          stringOrUndefined(d[DonationField.DonorName]) ??
+          this.redactDonor(country);
+        const extractionResult = inspectEuDonorRegistrationNumber(
+          donorName,
+          country,
+        );
+
+        let donorRegistrationNumber: string | undefined;
+        if (extractionResult.status === "extracted") {
+          donorRegistrationNumber = extractionResult.registrationNumber;
+        } else if (extractionResult.status === "unsupported_country") {
+          if (!unsupportedCountryNumbers.has(country)) {
+            unsupportedCountryNumbers.set(country, new Set());
+          }
+          unsupportedCountryNumbers
+            .get(country)!
+            .add(
+              `${extractionResult.rawNumber} - ${extractionResult.cleanDonorName}`,
+            );
+        } else if (extractionResult.status === "invalid") {
+          const key = `${country}: ${extractionResult.rawNumber}`;
+          if (!invalidRegistrationNumbers.has(key)) {
+            invalidRegistrationNumbers.set(key, new Set());
+          }
+          invalidRegistrationNumbers
+            .get(key)!
+            .add(extractionResult.cleanDonorName);
+        }
+
+        return {
+          ...d,
+          [DonationField.DonorName]: donorName,
+          [DonationField.Address]: {
+            [AddressField.Country]: country,
+            [AddressField.State]: country,
+          },
+          ...(donorRegistrationNumber
+            ? {
+                [DonationField.DonorRegistrationNumber]:
+                  donorRegistrationNumber,
+              }
+            : {}),
+        };
+      };
+
+      const extracted = [
         ...this.yearExtractors[year]
           .call(this, year, partySheets)
           .filter((d) => d[DonationField.Amount] > 0)
-          .map((d) => {
-            return {
-              ...d,
-              [DonationField.DonorName]:
-                // the 2022 docs were redacted and removed some donor names
-                stringOrUndefined(d[DonationField.DonorName]) ??
-                this.redactDonor(
-                  d[DonationField.Address][AddressField.Country],
-                ),
-              [DonationField.Address]: {
-                [AddressField.Country]:
-                  d[DonationField.Address][AddressField.Country],
-                [AddressField.State]:
-                  d[DonationField.Address][AddressField.Country],
-              },
-            };
-          }),
+          .map(enrichDonation),
         ...this.yearExtractors[year]
           .call(this, year, foundationSheets)
           .filter((d) => d[DonationField.Amount] > 0)
-          .map((d) => {
-            return {
-              ...d,
-              [DonationField.DonorName]:
-                // the 2022 docs were redacted and removed some donor names
-                stringOrUndefined(d[DonationField.DonorName]) ??
-                this.redactDonor(
-                  d[DonationField.Address][AddressField.Country],
-                ),
-              [DonationField.Address]: {
-                [AddressField.Country]:
-                  d[DonationField.Address][AddressField.Country],
-                [AddressField.State]:
-                  d[DonationField.Address][AddressField.Country],
-              },
-            };
-          }),
+          .map(enrichDonation),
       ];
+
+      if (unsupportedCountryNumbers.size > 0) {
+        const unsupportedSummary = Array.from(
+          unsupportedCountryNumbers.entries(),
+        )
+          .map(
+            ([country, entries]) =>
+              `${country} (${entries.size}: ${Array.from(entries).join(", ")})`,
+          )
+          .join("; ");
+        this.log(
+          `[${year}] Found registration numbers for ${unsupportedCountryNumbers.size} unmapped countries: ${unsupportedSummary}`,
+        );
+      }
+
+      if (invalidRegistrationNumbers.size > 0) {
+        const invalidSummary = Array.from(invalidRegistrationNumbers.entries())
+          .map(([key, donors]) => `${key} (${Array.from(donors).join(", ")})`)
+          .join(", ");
+        this.log(
+          `[${year}] Found ${invalidRegistrationNumbers.size} invalid registration numbers (failed validation): ${invalidSummary}`,
+        );
+      }
+
+      return extracted;
     }
 
     // Fallbacks that are to annoying to parse. I've manually extracted them into the corresponding module

@@ -19,33 +19,9 @@ interface CompanyDonation {
   money: number;
 }
 
-export const normalizeCzechIco = (
-  raw: number | string | undefined,
-): string | undefined => {
-  if (raw === undefined || raw === null) return undefined;
-  const cleaned = String(raw).replace(/\D/g, "");
-  if (cleaned.length === 0) return undefined;
-  return cleaned.padStart(8, "0");
-};
+import { isValidCzechIco, normalizeCzechIco } from "../registration-numbers";
 
-export const isValidCzechIco = (ico: string | undefined): boolean => {
-  if (!ico || !/^\d{8}$/.test(ico)) return false;
-  const digits = ico.split("").map(Number);
-  const weights = [8, 7, 6, 5, 4, 3, 2];
-  const sum = digits
-    .slice(0, 7)
-    .reduce((acc, digit, idx) => acc + digit * weights[idx], 0);
-  const remainder = sum % 11;
-  let expectedCheckDigit: number;
-  if (remainder === 0) {
-    expectedCheckDigit = 1;
-  } else if (remainder === 1) {
-    expectedCheckDigit = 0;
-  } else {
-    expectedCheckDigit = 11 - remainder;
-  }
-  return digits[7] === expectedCheckDigit;
-};
+export { isValidCzechIco, normalizeCzechIco };
 
 // Known typos in UDHPSH open data mapped to correct Czech IČO numbers in ARES
 export const icoOverrides: Record<string, string> = {
