@@ -27,22 +27,7 @@ export const getCompaniesHouseDumpUrls = (): string[] => {
   return urls;
 };
 
-export const normalizeUkCompanyNumber = (raw: string): string | undefined => {
-  const cleaned = raw.toUpperCase().replace(/[^A-Z0-9]/g, "");
-  if (cleaned.length === 0) return undefined;
-
-  const match = cleaned.match(/^([A-Z]*)(\d+)$/);
-  if (!match) return cleaned;
-
-  const [, prefix, digits] = match;
-  const targetDigitsLength = 8 - prefix.length;
-
-  if (targetDigitsLength > 0 && digits.length < targetDigitsLength) {
-    return `${prefix}${digits.padStart(targetDigitsLength, "0")}`;
-  }
-
-  return cleaned;
-};
+export { normalizeUkCompanyNumber } from "../registration-numbers";
 
 // Known typos in Electoral Commission data mapped to correct Companies House CRNs
 export const crnOverrides: Record<string, string> = {
