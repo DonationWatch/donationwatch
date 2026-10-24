@@ -154,12 +154,13 @@ export class EeLoader extends DataLoader {
       short: "Elurikkuse",
       wiki: 59563397,
     },
-    "Vabaerakond Aru Pähe": {
-      name: "Vabaerakond Aru Pähe",
+    // It's a bit weird they retrospectively changed the name of the party in the upstream data. Keep the old code to avoid 404s.
+    "Eesti Rahvusliberaalid - Vabaerakond": {
+      name: "Eesti Rahvusliberaalid - Vabaerakond",
       code: "TULE",
-      short: "TULE",
-      color: "#0085ce",
-      wiki: 65551587,
+      short: "Eesti Rahvusliberaalid - Vabaerakond",
+      color: "#0183e2",
+      wiki: 77018673,
     },
     "Eesti Rahvuslased ja Konservatiivid": {
       name: "Eesti Rahvuslased ja Konservatiivid",
@@ -208,10 +209,6 @@ export class EeLoader extends DataLoader {
   }
 
   protected override normalizeReceiver(party: string): string {
-    if (party === "Eesti Tulevikuerakond") {
-      return "Vabaerakond Aru Pähe";
-    }
-
     if (party.startsWith("Eesti Vasakliit")) {
       return "Eesti Vasakliit";
     }
