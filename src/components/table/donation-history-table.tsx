@@ -21,6 +21,7 @@ import {
   ArrowDownNarrowWide,
   ArrowUpNarrowWide,
   ExternalLink,
+  HandCoins,
   Search,
 } from "lucide-react";
 import { useLocale } from "next-intl";
@@ -117,6 +118,8 @@ export const DonationHistoryTable = ({
       const q = filterValue.trim().toLowerCase();
       if (!q) return true;
       const donor = row.original.donor?.toLowerCase() ?? "";
+      const originalReceiver =
+        row.original.originalReceiver?.toLowerCase() ?? "";
       const partyId = String(row.original.party);
       const partyName = (
         partyNameMap.get(partyId)?.name ?? partyId
@@ -125,7 +128,10 @@ export const DonationHistoryTable = ({
         partyNameMap.get(partyId)?.short ?? partyId
       ).toLowerCase();
       return (
-        donor.includes(q) || partyName.includes(q) || partyShort.includes(q)
+        donor.includes(q) ||
+        originalReceiver.includes(q) ||
+        partyName.includes(q) ||
+        partyShort.includes(q)
       );
     },
     [partyNameMap],
@@ -135,6 +141,19 @@ export const DonationHistoryTable = ({
     null,
   );
   const isMobile = useMobile();
+
+  const history = useMemo(
+    () =>
+      getHistory(country, donations, years).filter((entry) =>
+        partiesIds.length ? partiesIdSet.has(entry.party) : true,
+      ),
+    [donations, country, years, partiesIdSet, partiesIds.length],
+  );
+
+  const hasOriginalReceiver = useMemo(
+    () => history.some((entry) => Boolean(entry.originalReceiver)),
+    [history],
+  );
 
   const columns = useMemo<
     ColumnDef<typeof tableFeaturesConfig, HistoryEntry, unknown>[]
@@ -151,9 +170,9 @@ export const DonationHistoryTable = ({
 
             return (
               <div className="grow">
-                <div className="flex justify-between text-gray-700 dark:text-gray-400">
+                <div className="flex items-start justify-between gap-2 text-gray-700 dark:text-gray-400">
                   {
-                    <div className="font-mono">
+                    <div className="shrink-0 font-mono">
                       {historyEntry.date !==
                       donationYear({ [DonationField.Date]: historyEntry.date })
                         ? formatTwoDigitDate(
@@ -163,9 +182,27 @@ export const DonationHistoryTable = ({
                         : historyEntry.date}
                     </div>
                   }
-                  <PartyLink party={historyEntry.party} locale={locale}>
-                    <PartyDot className="text-sm" party={historyEntry.party} />
-                  </PartyLink>
+                  <div className="flex min-w-0 flex-col items-end overflow-hidden">
+                    <PartyLink party={historyEntry.party} locale={locale}>
+                      <PartyDot
+                        className="text-sm"
+                        party={historyEntry.party}
+                      />
+                    </PartyLink>
+                    {historyEntry.originalReceiver ? (
+                      <span
+                        className="inline-flex max-w-full items-center gap-1 text-xs text-zinc-500 dark:text-zinc-400"
+                        title={tCommon("donated_to", {
+                          recipient: historyEntry.originalReceiver,
+                        })}
+                      >
+                        <HandCoins className="size-3 shrink-0" />
+                        <span className="truncate">
+                          {historyEntry.originalReceiver}
+                        </span>
+                      </span>
+                    ) : null}
+                  </div>
                 </div>
                 <div className="space-y-1">
                   <div className="space-x-1 font-semibold">
@@ -233,19 +270,34 @@ export const DonationHistoryTable = ({
         }),
         columnHelper.accessor("party", {
           header: t("common.party"),
-          size: 150,
+          size: hasOriginalReceiver ? 260 : 150,
           cell: (cell) => (
-            <PartyLink
-              className="overflow-x-hidden"
-              party={cell.getValue()}
-              locale={locale}
-            >
-              <PartyDot
+            <div className="flex min-w-0 flex-col overflow-hidden">
+              <PartyLink
                 className="overflow-x-hidden"
-                nameClassName="truncate"
                 party={cell.getValue()}
-              />
-            </PartyLink>
+                locale={locale}
+              >
+                <PartyDot
+                  className="overflow-x-hidden"
+                  nameClassName="truncate"
+                  party={cell.getValue()}
+                />
+              </PartyLink>
+              {cell.row.original.originalReceiver ? (
+                <span
+                  className="inline-flex items-center gap-1 pl-4 text-xs text-zinc-500 dark:text-zinc-400"
+                  title={tCommon("donated_to", {
+                    recipient: cell.row.original.originalReceiver,
+                  })}
+                >
+                  <HandCoins className="size-3 shrink-0" />
+                  <span className="truncate">
+                    {cell.row.original.originalReceiver}
+                  </span>
+                </span>
+              ) : null}
+            </div>
           ),
         }),
         hasFeature(country, Features.DonationType)
@@ -302,15 +354,15 @@ export const DonationHistoryTable = ({
           : null,
       ].filter(isNotNullandNotUndefined),
     );
-  }, [locale, isMobile, country, readonlyDonor, t, tCommon]);
-
-  const history = useMemo(
-    () =>
-      getHistory(country, donations, years).filter((entry) =>
-        partiesIds.length ? partiesIdSet.has(entry.party) : true,
-      ),
-    [donations, country, years, partiesIdSet, partiesIds.length],
-  );
+  }, [
+    locale,
+    isMobile,
+    country,
+    readonlyDonor,
+    hasOriginalReceiver,
+    t,
+    tCommon,
+  ]);
   const table = useTable({
     features: tableFeaturesConfig,
     columns,

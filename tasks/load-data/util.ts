@@ -76,6 +76,9 @@ export const donationsToDonationsDocumentWithoutDonorIds = (
   const document = donationsToDonationsDocument(donations);
   return {
     donors: document.donors.map(([donorName, ubos]) => [donorName, ubos]),
+    ...(document.originalReceivers
+      ? { originalReceivers: document.originalReceivers }
+      : undefined),
     donations: document.donations,
   };
 };
@@ -91,16 +94,24 @@ const donationsToDonationsDocument = (
 ): DonationsDocument => {
   const donorIds: Record<string, string> = {};
   const donorUBOs: Record<string, Set<string>> = {};
+  const originalReceiverToIndex = new Map<string, number>();
+  const originalReceivers: string[] = [];
 
   donations.forEach((donation) => {
     const donorName = donation[DonationField.DonorName];
     const ubos = donation[DonationField.UBOs];
+    const originalReceiver = donation[DonationField.OriginalReceiver];
 
     donorIds[donorName] = hash(donorName);
 
     if (ubos?.length) {
       donorUBOs[donorName] ??= new Set([]);
       ubos.forEach((ubo) => donorUBOs[donorName].add(ubo));
+    }
+
+    if (originalReceiver && !originalReceiverToIndex.has(originalReceiver)) {
+      originalReceiverToIndex.set(originalReceiver, originalReceivers.length);
+      originalReceivers.push(originalReceiver);
     }
   });
 
@@ -110,6 +121,7 @@ const donationsToDonationsDocument = (
       donorUBOs[donorName] ? [...donorUBOs[donorName]] : null,
       donorId,
     ]),
+    ...(originalReceivers.length ? { originalReceivers } : undefined),
     donations: [],
   };
   const donorNames = Object.keys(donorIds);
@@ -121,16 +133,24 @@ const donationsToDonationsDocument = (
   donations.forEach((donation) => {
     const donorName = donation[DonationField.DonorName];
     const donorIndex = donorNameToIndex[donorName];
+    const originalReceiver = donation[DonationField.OriginalReceiver];
+    const originalReceiverIndex = originalReceiver
+      ? originalReceiverToIndex.get(originalReceiver)
+      : undefined;
 
     const {
       [DonationField.DonorName]: _1,
       [DonationField.UBOs]: _2,
+      [DonationField.OriginalReceiver]: _3,
       ...donationWithStrippedFields
     } = donation;
 
     document.donations.push({
       ...donationWithStrippedFields,
       [DonationField.DonorIndex]: donorIndex,
+      ...(originalReceiverIndex !== undefined
+        ? { [DonationField.OriginalReceiverIndex]: originalReceiverIndex }
+        : undefined),
     });
   });
 

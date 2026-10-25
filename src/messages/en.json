@@ -68,7 +68,7 @@
     },
     "donor": {
       "overview": "Donations by {donor} in {country}",
-      "description": "{donor} has donated a total of {sum} across {count} donations over {minAmount} since {minYear}. These contributions were distributed to {parties} different parties. Explore detailed insights into donation patterns and recipient parties for this donor in {country}."
+      "description": "See where {donor}’s political donations went. {sum} donated across {count} contributions to {parties} parties in {country} since {minYear}."
     }
   },
   "chart": {
@@ -93,7 +93,8 @@
     "summary": "Summary",
     "download_format": "Download {format}",
     "view_source": "View source",
-    "donation_type": "Donation type"
+    "donation_type": "Donation type",
+    "donated_to": "Donated to {recipient}"
   },
   "sort": {
     "asc": "Sort ascending",
@@ -196,7 +197,8 @@
         "ukraine": "The data used here is sourced from the National Agency on Corruption Prevention (NAZK) via the PolitData portal. It includes all records identified as \"monetary contributions\" in the official reports.\n\nNote on Data Scope: This total reflects direct financial transfers only. It does not include state funding provided to parliamentary parties or in-kind (non-monetary) contributions such as goods and services.\n\nDue to the full-scale Russian invasion, mandatory political party reporting was suspended from early 2022 until late 2023 for security and logistical reasons. Following the adoption of Law 3337-IX, parties are now backfilling their reports. Data for 2022–2025 is still being updated as the NAZK processes these submissions.",
         "france": "The data used here comes from the Commission Nationale des Comptes de Campagne et des Financements Politiques (CNCCFP) and includes all political donations (reported in Euro) documented in the \"Dons_de_personne_physique\" field.\n\nUnlike other regions, French data is published as an annual aggregate per party, and the identity of individual donors is protected by privacy laws.",
         "sweden": "The data used here is sourced from Kammarkollegiet, the official Swedish government registry for party financing. To provide an accurate picture of pure private and grassroots support (reported in SEK), this aggregate includes direct contributions documented under Category 4 (\"Insamling av kontanter\") and Category 5 (\"Bidrag\"). Internal party transfers, state subsidies, and lottery revenues have been specifically excluded to prevent double-counting and to accurately isolate external donations. All data is grouped by political party affiliation (\"Partitillhörighet\").",
-        "southafrica": "The data used here comes from the Electoral Commission of South Africa (IEC) and includes all published political party funding declarations (Section 9(1)) since 2021, including valid late submissions. Indirect contributions to the Multi-Party Democracy Fund and duplicate donor-side disclosures (Section 9(2)) are excluded.\n\nNote on thresholds: Political parties were required to report donations exceeding ZAR 100,000 per donor per year until 1 April 2024, when the legal disclosure threshold was increased to ZAR 200,000."
+        "southafrica": "The data used here comes from the Electoral Commission of South Africa (IEC) and includes all published political party funding declarations (Section 9(1)) since 2021, including valid late submissions. Indirect contributions to the Multi-Party Democracy Fund and duplicate donor-side disclosures (Section 9(2)) are excluded.\n\nNote on thresholds: Political parties were required to report donations exceeding ZAR 100,000 per donor per year until 1 April 2024, when the legal disclosure threshold was increased to ZAR 200,000.",
+        "unitedstates": "The data presented here is sourced from the Federal Election Commission (FEC) bulk disclosures and covers political contributions documented since 2016.\n\nUnlike parliamentary systems where donations flow directly into central party headquarters, US federal campaign finance is decentralized across candidate campaigns, party organizations, and independent expenditure committees. To provide an accurate picture of the financial coalitions behind each movement, DonationWatch consolidates major funding vehicles into unified party totals (\"Democrats\", \"Republicans\", and \"Bipartisan & Nonpartisan Super PACs\"). This includes:\n• Official party committees: National, congressional campaign, and state party committees (e.g., DNC, RNC, DSCC, NRSC, DCCC, NRCC)\n• Authorized federal candidate campaign committees\n• Politically aligned Super PACs, Hybrid PACs, and Joint Fundraising Committees (e.g., Senate Majority PAC, Future Forward, MAGA Inc., Senate Leadership Fund, Harris Victory Fund, Trump 47 Committee)\n• Nonpartisan and industry-focused Super PACs that back candidates across both major parties (e.g., Fairshake, United Democracy Project)\n\nWhy some PACs are not mapped to a party:\nOfficial party and candidate committees report a declared party affiliation in FEC records and are mapped automatically. Super PACs and Hybrid PACs operate as independent entities without formal party declarations; DonationWatch continuously audits and maps all prominent committees reaching $5 million or more in cumulative receipts. Smaller single-issue groups, corporate PACs, and committees below this threshold without clear alignment remain unmapped to prevent speculative attribution, and their receipts are excluded from party totals.\n\nData normalization & scope:\n• Minimum Amount: Only contributions of $10,000 or greater are tracked. Because federal law caps direct donations to candidates ($3,300 per election) and traditional PAC accounts ($5,000 per year), this threshold isolates high-dollar receipts to party committees, Joint Fundraising Committees (JFCs), Super PACs, and unlimited Hybrid PAC accounts.\n• 501(c)(4) Non-Profits (\"Dark Money\"): Contributions from 501(c)(4) social welfare organizations (e.g., Future Forward USA Action, One Nation) to Super PACs are recorded as organizational receipts (ORG), as these entities do not disclose their underlying donors to the FEC.\n• Deduplication: JFC contributions are recorded at initial receipt, while internal distributions and attribution memos are discarded. Conduit pass-throughs (WinRed, ActBlue) and transfers between tracked committees are excluded so funds are counted only once.\n• Exclusions: Refunds are deducted from donor totals. Candidate self-funding (loans and personal contributions) and operating revenue (interest, dividends, asset sales) are excluded."
       },
       "source_link": "Data source"
     },
@@ -397,6 +399,15 @@
         "summary": "Explore the interactive line chart to track the donation history of {party} over time. The x-axis represents the dates, while the y-axis shows the amount of money donated. {party} is represented by a distinct line that grows with each donation.",
         "per_year": "The total amount of donations received by {party} varies by year. Below is a historical overview of the annual funding totals declared by the party. This list tracks the sum of all reportable contributions and financial support for each specific year:"
       }
+    },
+    "committees": {
+      "title": "Contributing Committees & PACs",
+      "treemap": {
+        "title": "Committees Powering {party}",
+        "subtitle": "Breakdown of contributions by recipient committee"
+      },
+      "p0": "Capital for {party} is dispersed across {count, plural, one {# registered committee} other {# registered committees}}, including party committees, joint victory funds, and independent Super PACs. In total, {amount} was received through these committees.",
+      "top_intro": "Below are the largest contributing committees:"
     }
   },
   "origin": {
@@ -469,6 +480,21 @@
       "graph": {
         "subtitle": "How {donor} contributions flow to each party by type"
       }
+    },
+    "via": {
+      "title": "Intermediary Conduits & Routed Giving Distribution",
+      "overview": "Public campaign transparency filings disclose that {viaSum} of {donor}'s total political contributions ({pct} of all {donorSum} tracked) was routed through intermediary committees.",
+      "direct_donations": "Direct donations accounted for {amount}.",
+      "downstream_title": "Downstream Political Alignment",
+      "downstream_overview": "Examining the ultimate beneficiaries of channeled contributions, the entirety of routed funds was distributed across {count, plural, one {# political movement} other {# political movements}}.",
+      "downstream_primary": "The primary recipient was {party}, accounting for {amount} ({pct}) of all routed funds.",
+      "downstream_followed_by": "Followed by {list}.",
+      "downstream_item": "{party} at {amount} ({pct})",
+      "table_intro": "The table below lists the intermediary committees, conduits, and joint fundraising committees through which these donations were channeled{years}:",
+      "table_intro_years": " between {earliestYear} and {latestYear}",
+      "intermediate_entity": "Intermediate Entity",
+      "transactions": "Transactions",
+      "checks": "{count, plural, one {# check} other {# checks}}"
     }
   },
   "countries": {
@@ -561,7 +587,8 @@
     "NO": "Norway",
     "UA": "Ukraine",
     "SE": "Sweden",
-    "ZA": "South Africa"
+    "ZA": "South Africa",
+    "US": "the United States"
   },
   "state": {
     "germany": {
@@ -607,6 +634,65 @@
       "NT": "Northwest Territories",
       "YT": "Yukon",
       "NU": "Nunavut"
+    },
+    "unitedstates": {
+      "AL": "Alabama",
+      "AK": "Alaska",
+      "AZ": "Arizona",
+      "AR": "Arkansas",
+      "CA": "California",
+      "CO": "Colorado",
+      "CT": "Connecticut",
+      "DE": "Delaware",
+      "FL": "Florida",
+      "GA": "Georgia",
+      "HI": "Hawaii",
+      "ID": "Idaho",
+      "IL": "Illinois",
+      "IN": "Indiana",
+      "IA": "Iowa",
+      "KS": "Kansas",
+      "KY": "Kentucky",
+      "LA": "Louisiana",
+      "ME": "Maine",
+      "MD": "Maryland",
+      "MA": "Massachusetts",
+      "MI": "Michigan",
+      "MN": "Minnesota",
+      "MS": "Mississippi",
+      "MO": "Missouri",
+      "MT": "Montana",
+      "NE": "Nebraska",
+      "NV": "Nevada",
+      "NH": "New Hampshire",
+      "NJ": "New Jersey",
+      "NM": "New Mexico",
+      "NY": "New York",
+      "NC": "North Carolina",
+      "ND": "North Dakota",
+      "OH": "Ohio",
+      "OK": "Oklahoma",
+      "OR": "Oregon",
+      "PA": "Pennsylvania",
+      "RI": "Rhode Island",
+      "SC": "South Carolina",
+      "SD": "South Dakota",
+      "TN": "Tennessee",
+      "TX": "Texas",
+      "UT": "Utah",
+      "VT": "Vermont",
+      "VA": "Virginia",
+      "WA": "Washington",
+      "WV": "West Virginia",
+      "WI": "Wisconsin",
+      "WY": "Wyoming",
+      "DC": "District of Columbia",
+      "AS": "American Samoa",
+      "GU": "Guam",
+      "MP": "Northern Mariana Islands",
+      "PR": "Puerto Rico",
+      "UM": "United States Minor Outlying Islands",
+      "VI": "U.S. Virgin Islands"
     }
   },
   "about": {

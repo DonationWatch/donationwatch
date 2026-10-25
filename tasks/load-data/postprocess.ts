@@ -450,7 +450,13 @@ const postprocessGeojson = async () => {
 
   await fs.mkdir(publicDataDir, { recursive: true });
 
-  for (const file of ["europe.ts", "austria.ts", "germany.ts", "canada.ts"]) {
+  for (const file of [
+    "europe.ts",
+    "austria.ts",
+    "germany.ts",
+    "canada.ts",
+    "unitedstates.ts",
+  ]) {
     const content = await import(`./geojson/${file}`).then(
       (module) => module.default,
     );
@@ -785,6 +791,7 @@ const countries: CountryCode[] = [
   "FR",
   "SE",
   "ZA",
+  "US",
 ];
 const codeCountry: Record<CountryCode, Country> = {
   DE: Country.germany,
@@ -806,6 +813,7 @@ const codeCountry: Record<CountryCode, Country> = {
   FR: Country.france,
   SE: Country.sweden,
   ZA: Country.southafrica,
+  US: Country.unitedstates,
 };
 const main = async () => {
   const globalBuilder = new GlobalBiggestDataBuilder();

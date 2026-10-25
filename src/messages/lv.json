@@ -68,7 +68,7 @@
     },
     "donor": {
       "overview": "{donor} ziedojumi {country}",
-      "description": "{donor} kopumā ir ziedojis {sum} {count} ziedojumos, kas pārsniedz {minAmount} kopš {minYear}. Šie ziedojumi tika sadalīti {parties} dažādām partijām. Izpētiet detalizētu informāciju par šī ziedotāja ziedošanas paradumiem un saņēmējpartijām valstī {country}."
+      "description": "Uzziniet, kur nonāca {donor} politiskie ziedojumi. {sum} ziedots {count} iemaksās {parties} partijām {country} kopš {minYear}."
     }
   },
   "chart": {
@@ -93,7 +93,8 @@
     "summary": "Kopsavilkums",
     "download_format": "Lejupielādēt {format}",
     "view_source": "Skatīt avotu",
-    "donation_type": "Ziedojuma veids"
+    "donation_type": "Ziedojuma veids",
+    "donated_to": "Ziedots saņēmējam {recipient}"
   },
   "sort": {
     "asc": "Kārtot augošā secībā",
@@ -206,7 +207,8 @@
         "ukraine": "Šeit izmantotie dati ir iegūti no Nacionālās korupcijas novēršanas aģentūras (NAZK) caur PolitData portālu. Tie ietver visus ierakstus, kas oficiālajos ziņojumos identificēti kā “naudas ziedojumi”.\n\nPiezīme par datu tvērumu: Šī kopsumma atspoguļo tikai tiešus finanšu pārskaitījumus. Tā neietver valsts finansējumu parlamenta partijām vai ziedojumus natūrā (ne-naudas formā), piemēram, preces un pakalpojumus.\n\nPlaša mēroga Krievijas iebrukuma dēļ obligātā politisko partiju atskaišu sniegšana no 2022. gada sākuma līdz 2023. gada beigām tika apturēta drošības un loģistikas apsvērumu dēļ. Pēc Likuma Nr. 3337-IX pieņemšanas partijas tagad iesniedz atskaites atpakaļejoši. Dati par 2022.–2025. gadu joprojām tiek atjaunināti, kamēr NAZK apstrādā šos iesniegumus.",
         "france": "De hier gebruikte gegevens zijn afkomstig van de Commission Nationale des Comptes de Campagne et des Financements Politiques (CNCCFP) en omvatten alle politieke donaties (gerapporteerd in euro) die zijn vermeld in het veld \"Dons_de_personne_physique\".\n\nIn tegenstelling tot andere regio's worden de Franse gegevens als jaarlijkse totalen per partij gepubliceerd en is de identiteit van individuele donoren beschermd door privacywetten.",
         "sweden": "Šeit izmantotie dati ir iegūti no Kammarkollegiet, Zviedrijas oficiālā valdības partiju finansēšanas reģistra. Lai sniegtu precīzu priekšstatu par tīri privātu un sabiedrības bāzes atbalstu (norādīts SEK), šajā apkopojumā ir iekļauti tiešie ieguldījumi, kas dokumentēti 4. kategorijā (\"Insamling av kontanter\") un 5. kategorijā (\"Bidrag\"). Iekšējie partiju pārskaitījumi, valsts subsīdijas un loteriju ieņēmumi ir īpaši izslēgti, lai novērstu dubultu uzskaiti un precīzi nodalītu ārējos ziedojumus. Visi dati ir sagrupēti pēc politiskās partijas piederības (\"Partitillhörighet\").",
-        "southafrica": "The data used here comes from the Electoral Commission of South Africa (IEC) and includes all published political party funding declarations (Section 9(1)) since 2021, including valid late submissions. Indirect contributions to the Multi-Party Democracy Fund and duplicate donor-side disclosures (Section 9(2)) are excluded.\\n\\nNote on thresholds: Political parties were required to report donations exceeding ZAR 100,000 per donor per year until 1 April 2024, when the legal disclosure threshold was increased to ZAR 200,000."
+        "southafrica": "Šeit izmantotie dati ir iegūti no Dienvidāfrikas Vēlēšanu komisijas (IEC) un ietver visus publicētos politisko partiju finansēšanas deklarējumus (9.(1) pants) kopš 2021. gada, tostarp derīgus novēlotos iesniegumus. Netiešie ieguldījumi Daudzpartiju demokrātijas fondā (Multi-Party Democracy Fund) un dublēti ziedotāju puses uzskaites ieraksti (9.(2) pants) ir izslēgti.\n\nPiezīme par robežvērtībām: Politiskās partijas bija paredzētas ziņot par ziedojumiem, kas pārsniedz 100 000 ZAR par ziedotāju gadā, līdz 2024. gada 1. aprīlī likumīgais atklāšanas robežvērtība tika palielināta līdz 200 000 ZAR.",
+        "unitedstates": "Šeit sniegtie dati ir iegūti no ASV Federālās vēlēšanu komisijas (FEC) masveida publikācijām un aptver politiskos ziedojumus, kas dokumentēti kopš 2016. gada.\n\nAtšķirībā no parlamentārām sistēmām, kurās ziedojumi plūst tieši partiju centrālajos birojos, ASV federālo vēlēšanu kampaņu finansēšana ir decentralizēta starp kandidātu kampaņām, partiju organizācijām un neatkarīgo izdevumu komitejām. Lai sniegtu uzticamu priekšstatu par finansiālajām koalīcijām aiz katras kustības, DonationWatch apvieno galvenos finansēšanas rīkus vienotās partiju kopsummās („Demokrāti”, „Republikāņi” un „Divpartijiskie un nepartijiskie Super PAC”). Tas ietver:\n• Oficiālās partiju komitejas: nacionālās, Kongresa kampaņu un štatu partiju komitejas (piem., DNC, RNC, DSCC, NRSC, DCCC, NRCC)\n• Autorizētās federālo kandidātu kampaņu komitejas\n• Politiski orientētos Super PAC, hibrīdu PAC un kopīgās finansēšanas komitejas (piem., Senate Majority PAC, Future Forward, MAGA Inc., Senate Leadership Fund, Harris Victory Fund, Trump 47 Committee)\n• Nepartijiskos un nozares vērstos Super PAC, kas atbalsta abu lielo partiju kandidātus (piem., Fairshake, United Democracy Project)\n\nKāpēc daži PAC nav piesaistīti nevienai partijai:\nOficiālās partiju un kandidātu komitejas reģistrē oficiālu partijas piederību FEC reģistros un tiek piesaistītas automātiski. Super PAC un hibrīdie PAC darbojas kā neatkarīgas vienības bez formālas partijas deklarācijas; DonationWatch nepārtraukti auditē un piesaista visas nozīmīgās komitejas ar kumulatīvajiem ieņēmumiem 5 miljoni USD vai vairāk. Mazākas vienas tēmas grupas, korporatīvie PAC un komitejas zem šī sliekšņa bez skaidras piederības paliek nepiesaistītas, lai novērstu spekulatīvu piederības noteikšanu, un netiek iekļautas partiju kopsummās.\n\nDatu normalizācija un tvērums:\n• Minimālā summa: Tiek reģistrēti tikai ziedojumi 10 000 USD vai lielākā apmērā. Tā kā federālie likumi ierobežo tiešos ziedojumus kandidātiem (3 300 USD par vēlēšanām) un tradicionālajiem PAC kontiem (5 000 USD gadā), šis slieksnis nodrošina lielo ziedojumu atlasi partiju komitejām, kopīgajiem līdzekļu vākšanas fondiem (JFC), Super PAC un neierobežotajiem Hybrid PAC kontiem.\n• 501(c)(4) bezpeļņas organizācijas („Dark Money”): 501(c)(4) sociālās labklājības organizāciju (piem., Future Forward USA Action, One Nation) ziedojumi Super PAC tiek reģistrēti kā organizāciju ieņēmumi (ORG), jo šīs vienības neatklāj savus patiesos ziedotājus FEC.\n• Dubultās uzskaites novēršana: JFC ziedojumi tiek reģistrēti sākotnējās saņemšanas brīdī, bet iekšējie sadalījumi un piešķīrumu piezīmes tiek noraidīti. Starpnieku maksājumi (WinRed, ActBlue) un pārskaitījumi starp reģistrētajām komitejām tiek izslēgti, lai līdzekļi tiktu uzskaitīti tikai vienu reizi.\n• Izņēmumi: Atmaksātie ziedojumi tiek atskaitīti no kopējām summām. Kandidātu pašfinansējums (aizdevumi un personīgie ieguldījumi), kā arī darbības ieņēmumi (procenti, dividendes, aktīvu pārdošana) tiek izslēgti."
       },
       "source_link": "Datu avots"
     },
@@ -407,6 +409,15 @@
         "summary": "Izpēti interaktīvo līniju diagrammu, lai laika gaitā sekotu {party} ziedojumu vēsturei. X ass attēlo datumus, bet Y ass rāda ziedoto naudas summu. {party} ir attēlota ar atsevišķu līniju, kas ar katru ziedojumu pieaug.",
         "per_year": "Kopējā {party} saņemto ziedojumu summa atšķiras pa gadiem. Zemāk ir vēsturisks pārskats par partijas deklarētajiem gada finansējuma kopsummām. Šajā sarakstā ir apkopota visu ziņojamo iemaksu un finansiālā atbalsta summa katram konkrētajam gadam:"
       }
+    },
+    "committees": {
+      "title": "Iesaistītās komitejas un PAC",
+      "treemap": {
+        "title": "Komitejas, kas finansē {party}",
+        "subtitle": "Ziedojumu sadalījums pēc saņēmēja komitejas"
+      },
+      "p0": "Partijas {party} finansējums ir sadalīts starp {count, plural, zero {# reģistrētām komitejām} one {# reģistrētu komiteju} other {# reģistrētām komitejām}}, tostarp partiju komitejām, kopīgiem vēlēšanu fondiem un neatkarīgiem Super PAC. Kopumā ar šo komiteju starpniecību tika saņemti {amount}.",
+      "top_intro": "Zemāk uzskaitītas komitejas ar lielāko ieguldījumu:"
     }
   },
   "origin": {
@@ -481,6 +492,65 @@
       "NT": "Ziemeļrietumu teritorijas",
       "YT": "Jukona",
       "NU": "Nunavuta"
+    },
+    "unitedstates": {
+      "AL": "Alabama",
+      "AK": "Aļaska",
+      "AZ": "Arizona",
+      "AR": "Ārkanzasa",
+      "CA": "Kalifornija",
+      "CO": "Kolorādo",
+      "CT": "Konektikuta",
+      "DE": "Delavēra",
+      "FL": "Florida",
+      "GA": "Džordžija",
+      "HI": "Havajas",
+      "ID": "Aidaho",
+      "IL": "Ilinoisa",
+      "IN": "Indiāna",
+      "IA": "Aiova",
+      "KS": "Kanzasa",
+      "KY": "Kentuki",
+      "LA": "Luiziāna",
+      "ME": "Mena",
+      "MD": "Merilenda",
+      "MA": "Masačūsetsa",
+      "MI": "Mičigana",
+      "MN": "Minesota",
+      "MS": "Misisipi",
+      "MO": "Misūri",
+      "MT": "Montāna",
+      "NE": "Nebraska",
+      "NV": "Nevada",
+      "NH": "Ņūhempšīra",
+      "NJ": "Ņūdžersija",
+      "NM": "Ņūmeksika",
+      "NY": "Ņujorka",
+      "NC": "Ziemeļkarolīna",
+      "ND": "Ziemeļdakota",
+      "OH": "Ohaio",
+      "OK": "Oklahoma",
+      "OR": "Oregona",
+      "PA": "Pensilvānija",
+      "RI": "Rodailenda",
+      "SC": "Dienvidkarolīna",
+      "SD": "Dienviddakota",
+      "TN": "Tenesī",
+      "TX": "Teksasa",
+      "UT": "Jūta",
+      "VT": "Vermonta",
+      "VA": "Virdžīnija",
+      "WA": "Vašingtona",
+      "WV": "Rietumvirdžīnija",
+      "WI": "Viskonsina",
+      "WY": "Vaiominga",
+      "DC": "Kolumbijas apgabals",
+      "AS": "ASV Samoa",
+      "GU": "Guama",
+      "MP": "Ziemeļu Marianas salas",
+      "PR": "Puertoriko",
+      "UM": "ASV Mazās Aizjūras salas",
+      "VI": "ASV Virdžīnu salas"
     }
   },
   "donor": {
@@ -525,6 +595,21 @@
       "graph": {
         "subtitle": "Kā {donor} iemaksas pēc veida tiek sadalītas starp partijām"
       }
+    },
+    "via": {
+      "title": "Starpnieki un novirzīto ziedojumu sadalījums",
+      "overview": "Publiskie kampaņu pārskati liecina, ka {viaSum} no {donor} kopējiem politiskajiem ziedojumiem ({pct} no visiem reģistrētajiem {donorSum}) tika novirzīti caur starpnieku komitejām.",
+      "direct_donations": "Tiešie ziedojumi veidoja {amount}.",
+      "downstream_title": "Galīgo saņēmēju politiskā piederība",
+      "downstream_overview": "Aplūkojot novirzīto ziedojumu galīgos saņēmējus, visi līdzekļi tika sadalīti starp {count, plural, one {# politisko kustību} other {# politiskajām kustībām}}.",
+      "downstream_primary": "Galvenais saņēmējs bija {party}, kas saņēma {amount} ({pct}) no visiem novirzītajiem līdzekļiem.",
+      "downstream_followed_by": "Seko {list}.",
+      "downstream_item": "{party} ar {amount} ({pct})",
+      "table_intro": "Zemāk esošajā tabulā uzskaitītas starpnieku un kopīgās līdzekļu vākšanas komitejas, caur kurām šie ziedojumi tika novirzīti{years}:",
+      "table_intro_years": " laikā no {earliestYear}. līdz {latestYear}. gadam",
+      "intermediate_entity": "Starpnieka organizācija",
+      "transactions": "Darījumi",
+      "checks": "{count, plural, one {# maksājums} other {# maksājumi}}"
     }
   },
   "countries": {
@@ -617,7 +702,8 @@
     "NO": "Norvēģija",
     "UA": "Ukraina",
     "SE": "Rootsi",
-    "ZA": "South Africa"
+    "ZA": "South Africa",
+    "US": "Amerikas Savienotās Valstis"
   },
   "about": {
     "title": "Par mums",

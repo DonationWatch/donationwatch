@@ -142,6 +142,8 @@ Each country has its own loader (e.g., `de/de-loader.ts`, `uk/uk-loader.ts`) tha
 - Normalizes the data into the common `Donation` format
 - Caches raw data locally for faster subsequent runs
 
+> For United States (FEC) specific details on Super PAC / JFC discovery and party affiliations, see [`tasks/load-data/us/README.md`](tasks/load-data/us/README.md).
+
 > Adding support for a brand-new country? See [CONTRIBUTING.md § Adding a New Country](CONTRIBUTING.md#adding-a-new-country) for the full step-by-step guide.
 
 > [!IMPORTANT]

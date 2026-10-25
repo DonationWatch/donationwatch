@@ -68,7 +68,7 @@
     },
     "donor": {
       "overview": "Donacije od {donor} u {country}",
-      "description": "{donor} je ukupno donirao {sum} kroz {count} donacija iznad {minAmount} od {minYear}. Ovi doprinosi su raspodijeljeni na {parties} različitih stranaka. Istražite detaljne uvide u obrasce donacija i primatelje donacija ovog donatora u zemlji {country}."
+      "description": "Pogledajte kamo su otišle političke donacije od {donor}. {sum} donirano u {count} doprinosa za {parties} stranaka u {country} od {minYear}."
     }
   },
   "chart": {
@@ -93,7 +93,8 @@
     "summary": "Sažetak",
     "download_format": "Preuzmi {format}",
     "view_source": "Prikaži izvor",
-    "donation_type": "Vrsta donacije"
+    "donation_type": "Vrsta donacije",
+    "donated_to": "Donirano za {recipient}"
   },
   "sort": {
     "asc": "Sortiraj uzlazno",
@@ -206,7 +207,8 @@
         "ukraine": "Podaci korišteni ovdje potječu od Nacionalne agencije za prevenciju korupcije (NAZK) putem portala PolitData. Obuhvaćaju sve zapise koji su u službenim izvješćima označeni kao „novčani doprinosi“.\n\nNapomena o opsegu podataka: Ovaj ukupni iznos odnosi se samo na izravne financijske transfere. Ne uključuje državna sredstva osigurana parlamentarnim strankama niti nenovčane (prirodne) doprinose poput robe i usluga.\n\nZbog sveobuhvatne ruske invazije obvezno izvještavanje političkih stranaka bilo je obustavljeno od početka 2022. do kraja 2023. iz sigurnosnih i logističkih razloga. Nakon usvajanja Zakona 3337-IX, stranke sada retroaktivno podnose svoja izvješća. Podaci za razdoblje 2022.–2025. i dalje se ažuriraju dok NAZK obrađuje te prijave.",
         "france": "Podaci korišteni ovdje potječu iz Commission Nationale des Comptes de Campagne et des Financements Politiques (CNCCFP) i uključuju sve političke donacije (izražene u eurima) zabilježene u polju \"Dons_de_personne_physique\".\n\nZa razliku od drugih regija, francuski se podaci objavljuju kao godišnji zbroj po stranci, a identitet pojedinih donatora zaštićen je zakonima o privatnosti.",
         "sweden": "Ovdje korišteni podaci potječu iz Kammarkollegieta, službenog švedskog državnog registra financiranja političkih stranaka. Kako bi se pružila točna slika isključivo privatne i građanske podrške (prikazane u SEK), ovaj zbir uključuje izravne doprinose evidentirane u kategoriji 4 (\"Insamling av kontanter\") i kategoriji 5 (\"Bidrag\"). Unutarstranački prijenosi, državne subvencije i prihodi od lutrije izričito su isključeni kako bi se spriječilo dvostruko brojanje i precizno izdvojile vanjske donacije. Svi podaci grupirani su prema političkoj stranačkoj pripadnosti (\"Partitillhörighet\").",
-        "southafrica": "The data used here comes from the Electoral Commission of South Africa (IEC) and includes all published political party funding declarations (Section 9(1)) since 2021, including valid late submissions. Indirect contributions to the Multi-Party Democracy Fund and duplicate donor-side disclosures (Section 9(2)) are excluded.\\n\\nNote on thresholds: Political parties were required to report donations exceeding ZAR 100,000 per donor per year until 1 April 2024, when the legal disclosure threshold was increased to ZAR 200,000."
+        "southafrica": "Podaci korišteni ovdje potječu iz Izborne komisije Južnoafričke Republike (IEC) i obuhvaćaju sve objavljene izjave o financiranju političkih stranaka (odjeljak 9(1)) od 2021. godine, uključujući valjane kasnije predaje. Neizravni doprinosi Višestranačkom demokratskom fondu (Multi-Party Democracy Fund) i dvostruke prijave sa strane donatora (odjeljak 9(2)) su isključeni.\n\nNapomena o pragovima: Političke stranke bile su dužne prijavljivati donacije koje premašuju 100 000 ZAR po donatoru godišnje, do 1. travnja 2024., kada je zakonski prag objavljivanja povišen na 200 000 ZAR.",
+        "unitedstates": "Prikazani podaci potječu iz masovnih objava Savezne izborne komisije (FEC) i obuhvaćaju političke donacije dokumentirane od 2016. godine.\n\nZa razliku od parlamentarnih sustava u kojima donacije izravno teku u središnjice stranaka, financiranje saveznih izbornih kampanja u SAD-u decentralizirano je na odbore kandidata, stranačke organizacije i odbore za neovisne izdatke. Kako bi se pružila točna slika financijskih koalicija koje stoje iza svakog pokreta, DonationWatch objedinjuje glavna sredstva financiranja u jedinstvene ukupne iznose stranaka („Demokrati“, „Republikanci“ i „Bipartizanski i nestranački Super PAC-ovi“). To uključuje:\n• Službene stranačke odbore: nacionalne, kongresne i savezne državne odbore (npr. DNC, RNC, DSCC, NRSC, DCCC, NRCC)\n• Ovlaštene izborne odbore saveznih kandidata\n• Politički usmjerene Super PAC-ove, hibridne PAC-ove i zajedničke odbore za prikupljanje sredstava (npr. Senate Majority PAC, Future Forward, MAGA Inc., Senate Leadership Fund, Harris Victory Fund, Trump 47 Committee)\n• Nestranačke i sektorske Super PAC-ove koji podržavaju kandidate obiju glavnih stranaka (npr. Fairshake, United Democracy Project)\n\nZašto neki PAC-ovi nisu pridruženi strankama:\nSlužbeni stranački odbori i odbori kandidata prijavljuju službenu stranačku pripadnost u evidenciji FEC-a i automatski se pridružuju. Super PAC-ovi i hibridni PAC-ovi djeluju kao neovisni subjekti bez formalnog izjašnjavanja o pripadnosti stranci; DonationWatch kontinuirano revidira i mapira sve istaknute odbore s kumulativnim prihodom od 5 milijuna USD ili više. Manje skupine usmjerene na jedno pitanje, korporativni PAC-ovi i odbori ispod tog praga bez jasne pripadnosti ostaju nemapirani kako bi se izbjeglo nagađanje, te se ne ubrajaju u stranačke zbrojeve.\n\nNormalizacija podataka i obuhvat:\n• Minimalni iznos: Prate se samo doprinosi od 10.000 USD ili veći. Budući da savezni zakon ograničava izravne donacije kandidatima (3.300 USD po izborima) i tradicionalnim računima PAC-ova (5.000 USD godišnje), ovaj prag izdvaja velike iznose uplaćene stranačkim odborima, zajedničkim odborima za prikupljanje sredstava (JFC), Super PAC-ovima i neograničenim računima Hybrid PAC-ova.\n• Neprofitne organizacije 501(c)(4) („Dark Money“): Doprinosi organizacija za društvenu dobrobit 501(c)(4) (npr. Future Forward USA Action, One Nation) Super PAC-ovima bilježe se kao uplate organizacija (ORG), budući da ti subjekti ne otkrivaju svoje stvarne donatore FEC-u.\n• Uklanjanje duplikata: Doprinosi JFC-ovima bilježe se prilikom početnog primitka, dok se interna raspodjela i memorandumi o raspodjeli odbacuju. Prolazne uplate (WinRed, ActBlue) i prijenosi između praćenih odbora isključeni su kako bi se sredstva računala samo jednom.\n• Isključenja: Povrati se oduzimaju od ukupnih iznosa donatora. Vlastita sredstva kandidata (zajmovi i osobni doprinosi) te operativni prihodi (kamate, dividende, prodaja imovine) isključeni su."
       },
       "source_link": "Izvor podataka"
     },
@@ -407,6 +409,15 @@
         "summary": "Istražite interaktivni linijski graf kako biste pratili povijest donacija za {party} kroz vrijeme. X-os predstavlja datume, dok Y-os prikazuje iznos doniranog novca. {party} je prikazana zasebnom linijom koja raste sa svakom donacijom.",
         "per_year": "Ukupan iznos donacija koje je {party} primila razlikuje se po godinama. U nastavku je povijesni pregled godišnjih ukupnih iznosa financiranja koje je stranka prijavila. Ovaj popis prati zbroj svih prijavljivih doprinosa i financijske potpore za svaku pojedinu godinu:"
       }
+    },
+    "committees": {
+      "title": "Uključeni odbori i PAC-ovi",
+      "treemap": {
+        "title": "Odbori koji financiraju {party}",
+        "subtitle": "Raspodjela donacija prema odboru primatelju"
+      },
+      "p0": "Kapital za {party} raspoređen je na {count, plural, one {# registrirani odbor} few {# registrirana odbora} other {# registriranih odbora}}, uključujući stranačke odbore, zajedničke fondove za pobjedu i neovisne Super PAC-ove. Ukupno je preko ovih odbora primljeno {amount}.",
+      "top_intro": "Ispod su navedeni odbori s najvećim iznosom donacija:"
     }
   },
   "origin": {
@@ -479,6 +490,21 @@
       "graph": {
         "subtitle": "Kako se doprinosi od {donor} prema vrsti raspoređuju na svaku stranku"
       }
+    },
+    "via": {
+      "title": "Posrednici i distribucija usmjerenih donacija",
+      "overview": "Javna izvješća o financiranju kampanja otkrivaju da je {viaSum} od ukupnih političkih donacija donatora {donor} ({pct} od svih praćenih {donorSum}) usmjereno preko posredničkih odbora.",
+      "direct_donations": "Izravne donacije iznosile su {amount}.",
+      "downstream_title": "Politička usmjerenost krajnjih primatelja",
+      "downstream_overview": "Promatrajući krajnje primatelje usmjerenih donacija, cjelokupni iznos raspoređen je na {count, plural, one {# politički pokret} few {# politička pokreta} other {# političkih pokreta}}.",
+      "downstream_primary": "Glavni primatelj bio je {party}, na kojeg otpada {amount} ({pct}) svih usmjerenih sredstava.",
+      "downstream_followed_by": "Slijede {list}.",
+      "downstream_item": "{party} s {amount} ({pct})",
+      "table_intro": "Tablica u nastavku prikazuje posredničke i zajedničke odbore za prikupljanje sredstava preko kojih su ove donacije usmjerene{years}:",
+      "table_intro_years": " između {earliestYear}. i {latestYear}.",
+      "intermediate_entity": "Posrednička organizacija",
+      "transactions": "Transakcije",
+      "checks": "{count, plural, one {# uplata} few {# uplate} other {# uplata}}"
     }
   },
   "countries": {
@@ -571,7 +597,8 @@
     "NO": "Norveška",
     "UA": "Ukrajina",
     "SE": "Švedska",
-    "ZA": "South Africa"
+    "ZA": "South Africa",
+    "US": "Sjedinjene Američke Države"
   },
   "state": {
     "germany": {
@@ -617,6 +644,65 @@
       "NT": "Sjeverozapadni teritoriji",
       "YT": "Yukon",
       "NU": "Nunavut"
+    },
+    "unitedstates": {
+      "AL": "Alabama",
+      "AK": "Aljaska",
+      "AZ": "Arizona",
+      "AR": "Arkansas",
+      "CA": "Kalifornija",
+      "CO": "Colorado",
+      "CT": "Connecticut",
+      "DE": "Delaware",
+      "FL": "Florida",
+      "GA": "Georgia",
+      "HI": "Havaji",
+      "ID": "Idaho",
+      "IL": "Illinois",
+      "IN": "Indiana",
+      "IA": "Iowa",
+      "KS": "Kansas",
+      "KY": "Kentucky",
+      "LA": "Louisiana",
+      "ME": "Maine",
+      "MD": "Maryland",
+      "MA": "Massachusetts",
+      "MI": "Michigan",
+      "MN": "Minnesota",
+      "MS": "Mississippi",
+      "MO": "Missouri",
+      "MT": "Montana",
+      "NE": "Nebraska",
+      "NV": "Nevada",
+      "NH": "New Hampshire",
+      "NJ": "New Jersey",
+      "NM": "Novi Meksiko",
+      "NY": "New York",
+      "NC": "Sjeverna Karolina",
+      "ND": "Sjeverna Dakota",
+      "OH": "Ohio",
+      "OK": "Oklahoma",
+      "OR": "Oregon",
+      "PA": "Pennsylvania",
+      "RI": "Rhode Island",
+      "SC": "Južna Karolina",
+      "SD": "Južna Dakota",
+      "TN": "Tennessee",
+      "TX": "Teksas",
+      "UT": "Utah",
+      "VT": "Vermont",
+      "VA": "Virginia",
+      "WA": "Washington",
+      "WV": "Zapadna Virginia",
+      "WI": "Wisconsin",
+      "WY": "Wyoming",
+      "DC": "District of Columbia",
+      "AS": "Američka Samoa",
+      "GU": "Guam",
+      "MP": "Sjevernomarijanski otoci",
+      "PR": "Portoriko",
+      "UM": "Mali udaljeni otoci SAD-a",
+      "VI": "Američki Djevičanski otoci"
     }
   },
   "about": {

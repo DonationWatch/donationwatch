@@ -20,4 +20,5 @@ export const countryFlags: Record<Country, string> = {
   [Country.france]: "/flags/fr.svg",
   [Country.sweden]: "/flags/sweden.svg",
   [Country.southafrica]: "/flags/za.svg",
+  [Country.unitedstates]: "/flags/us.svg",
 };

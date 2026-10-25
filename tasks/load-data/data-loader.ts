@@ -68,7 +68,7 @@ export type ExtractedYearData = Omit<
 /**
  * Bag of data that's going to be written to the filesystem.
  */
-interface ProcessedDonationData {
+export interface ProcessedDonationData {
   donations: Donation[];
   parties: Party[];
   countryConfig: CountryConfig;

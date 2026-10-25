@@ -17,9 +17,15 @@ import BuildSweden from "../../data/sweden/build";
 import BuildSwitzerland from "../../data/switzerland/build";
 import BuildUkraine from "../../data/ukraine/build";
 import BuildUnitedKingdom from "../../data/unitedkingdom/build";
+import BuildUnitedStates from "../../data/unitedstates/build";
 import { Country } from "../countries";
 
-const countryDonation: Record<Country, { t: number }> = {
+export interface BuildMeta {
+  // Timestamp of last build that changed donation data or metadata
+  t: number;
+}
+
+const countryDonation: Record<Country, BuildMeta> = {
   [Country.germany]: BuildGermany,
   [Country.austria]: BuildAustria,
   [Country.switzerland]: BuildSwitzerland,
@@ -39,8 +45,9 @@ const countryDonation: Record<Country, { t: number }> = {
   [Country.france]: BuildFrance,
   [Country.sweden]: BuildSweden,
   [Country.southafrica]: BuildSouthAfrica,
+  [Country.unitedstates]: BuildUnitedStates,
 };
 
-export const getBuild = (country: Country): { t: number } => {
+export const getBuild = (country: Country): BuildMeta => {
   return countryDonation[country];
 };

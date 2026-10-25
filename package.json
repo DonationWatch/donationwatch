@@ -35,6 +35,7 @@
     "data:rebuild:cached": "FETCH_FROM_REMOTE=false tsx tasks/load-data/index.ts",
     "data:ai-documentation": "tsx tasks/ai-documentation/index.ts",
     "data:wikipedia": "tsx tasks/wikipedia/populate-wikipedia-articles.ts",
+    "us:discover-pacs": "tsx tasks/load-data/us/discover-unmapped-pacs.ts",
     "dev:debug": "NODE_OPTIONS='--inspect' next dev --turbo",
     "dev:turbo": "next dev --turbo",
     "fmt": "oxfmt",

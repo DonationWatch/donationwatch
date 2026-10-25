@@ -64,6 +64,9 @@ export const enum DonationField {
   UBOs,
   // Official registration / entity number (e.g. UK Companies House CRN, Norwegian OrgNr, French SIREN)
   DonorRegistrationNumber,
+  // Initial recipient committee, PAC, or sub-organization when consolidated under a party
+  OriginalReceiver,
+  OriginalReceiverIndex,
 }
 
 export interface Donation {
@@ -80,6 +83,7 @@ export interface Donation {
   // being unset = DonationTypes.Money
   [DonationField.DonationType]?: DonationType;
   [DonationField.DonorRegistrationNumber]?: string;
+  [DonationField.OriginalReceiver]?: string;
 }
 
 export type IsoDate = `${number}-${number}-${number}`;

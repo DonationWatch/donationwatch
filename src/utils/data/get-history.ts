@@ -10,6 +10,7 @@ export interface HistoryEntry {
   party: ReceiverId;
   id: string;
   donationType?: DonationType;
+  originalReceiver?: string;
 }
 
 export const getHistory = (
@@ -32,6 +33,9 @@ export const getHistory = (
       date: donation[DonationField.Date],
       party: donation[DonationField.Receiver],
       donationType: donation[DonationField.DonationType],
+      ...(donation[DonationField.OriginalReceiver]
+        ? { originalReceiver: donation[DonationField.OriginalReceiver] }
+        : undefined),
     });
   });
 

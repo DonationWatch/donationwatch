@@ -68,7 +68,7 @@
     },
     "donor": {
       "overview": "{donor} annetused {country}s",
-      "description": "{donor} on annetanud kokku {sum} {count} annetuses, millest igaüks ületas {minAmount} alates {minYear}. Need annetused jagati {parties} erineva partei vahel. Uurige üksikasjalikke andmeid selle annetaja annetuste mustrite ja saajaparteide kohta riigis {country}."
+      "description": "Vaadake, kuhu läksid {donor} poliitilised annetused. {sum} annetatud {count} sissemaksega {parties} erakonnale {country} alates {minYear}."
     }
   },
   "chart": {
@@ -93,7 +93,8 @@
     "summary": "Kokkuvõte",
     "download_format": "Laadi alla {format}",
     "view_source": "Kuva allikas",
-    "donation_type": "Annetuse liik"
+    "donation_type": "Annetuse liik",
+    "donated_to": "Annetatud saajale {recipient}"
   },
   "sort": {
     "asc": "Sorteerimine ülespoole",
@@ -206,7 +207,8 @@
         "ukraine": "Siin kasutatud andmed on pärit riiklikust korruptsiooni ennetamise agentuurist (NAZK) PolitData portaali kaudu. Need sisaldavad kõiki ametlikes aruannetes märgitud kirjeid, mis on tähistatud kui „rahalised annetused“.\n\nMärkus andmete ulatuse kohta: See summa kajastab ainult otseseid rahalisi ülekandeid. See ei hõlma riiklikku rahastust parlamendierakondadele ega mitterahalisi (looduslikke) panuseid, nagu kaubad ja teenused.\n\nVene täiemahulise sissetungi tõttu peatati poliitiliste parteide kohustuslik aruandlus 2022. aasta algusest kuni 2023. aasta lõpuni julgeoleku- ja logistilistel põhjustel. Pärast seaduse nr 3337-IX vastuvõtmist täidavad parteid nüüd oma aruandeid tagantjärele. Aastate 2022–2025 andmeid ajakohastatakse endiselt, kuna NAZK töötleb neid esitusi.",
         "france": "Siin kasutatud andmed pärinevad Commission Nationale des Comptes de Campagne et des Financements Politiques (CNCCFP) andmebaasist ning hõlmavad kõiki poliitilisi annetusi (eurodes), mis on dokumenteeritud väljal \"Dons_de_personne_physique\".\n\nErinevalt teistest piirkondadest avaldatakse Prantsuse andmed iga erakonna aastase koondsummana ning üksikute annetajate isikusamasus on privaatsusseadustega kaitstud.",
         "sweden": "Siin kasutatud andmed pärinevad Kammarkollegietist, Rootsi ametlikust erakondade rahastamise riiklikust registrist. Et anda täpne ülevaade puhtalt era- ja rohujuuretasandi toetusest (esitatud SEK-is), hõlmab see koondandmestik otseseid panuseid, mis on dokumenteeritud kategooria 4 (\"Insamling av kontanter\") ja kategooria 5 (\"Bidrag\") all. Erakondade sisesed ülekanded, riiklikud toetused ja loteriitulud on topeltarvestuse vältimiseks ning väliste annetuste täpseks eristamiseks teadlikult välja jäetud. Kõik andmed on rühmitatud poliitilise parteilise kuuluvuse järgi (\"Partitillhörighet\").",
-        "southafrica": "The data used here comes from the Electoral Commission of South Africa (IEC) and includes all published political party funding declarations (Section 9(1)) since 2021, including valid late submissions. Indirect contributions to the Multi-Party Democracy Fund and duplicate donor-side disclosures (Section 9(2)) are excluded.\\n\\nNote on thresholds: Political parties were required to report donations exceeding ZAR 100,000 per donor per year until 1 April 2024, when the legal disclosure threshold was increased to ZAR 200,000."
+        "southafrica": "Siin kasutatavad andmed pärinevad Lõuna-Aafrika Vabariigi valimiskomisjonilt (IEC) ja hõlmavad kõiki avaldatud erakondade rahastamise deklaratsioone (paragrahv 9(1)) alates 2021. aastast, sealhulgas kehtivaid hilinenud esitusi. Mitmeparteilise demokraatia fondi (Multi-Party Democracy Fund) kaudsed annetused ja annetajapoolsed topeltdeklaratsioonid (paragrahv 9(2)) on välja jäetud.\n\nMärkus künniste kohta: Erakonnad olid kohustatud teatama annetustest, mis ületavad 100 000 ZAR annetaja kohta aastas, kuni 1. aprillil 2024 tõsteti seaduslik avalikustamise künnis 200 000 ZAR-le.",
+        "unitedstates": "Siin esitatud andmed pärinevad Ameerika Ühendriikide Föderaalse Valimiskomisjoni (FEC) masstilistest avaldustest ja hõlmavad alates 2016. aastast dokumenteeritud poliitilisi annetusi.\n\nErinevalt parlamentaarsetest süsteemidest, kus annetused laekuvad otse erakondade keskkontoritesse, on USA föderaalne kampaaniarahastus detsentraliseeritud kandidaatide kampaaniate, erakondade organisatsioonide ja sõltumatute kulutuskomiteede vahel. Selleks et anda usaldusväärne ülevaade iga liikumise taga seisvatest finantskoalitsioonidest, koondab DonationWatch peamised rahastuskanalid ühtseteks erakondade kogusummadeks („Demokraadid“, „Vabariiklased“ ja „Bipartiilised ja mitteerakondlikud Super PAC-id“). See hõlmab:\n• Ametlikud erakonnakomiteed: riiklikud, kongressi ja osariikide komiteed (nt DNC, RNC, DSCC, NRSC, DCCC, NRCC)\n• Volitatud föderaalsete kandidaatide valimiskampaania komiteed\n• Poliitiliselt joondunud Super PAC-id, hübriid-PAC-id ja ühised rahastuskomiteed (nt Senate Majority PAC, Future Forward, MAGA Inc., Senate Leadership Fund, Harris Victory Fund, Trump 47 Committee)\n• Mitteerakondlikud ja tööstusharu Super PAC-id, kes toetavad mõlema suure erakonna kandidaate (nt Fairshake, United Democracy Project)\n\nMiks mõned PAC-id pole erakonnaga seotud:\nAmetlikud erakondade ja kandidaatide komiteed deklareerivad FEC-i registrites ametliku parteilise kuuluvuse ning need seotakse automaatselt. Super PAC-id ja hübriid-PAC-id tegutsevad sõltumatute üksustena ilma ametliku parteilise kuuluvuseta; DonationWatch auditeerib ja kaardistab pidevalt kõiki juhtivaid komiteesid, mille kumulatiivsed tulud ulatuvad vähemalt 5 miljoni dollarini. Sellest künnisest väiksemad üksikteemalised rühmad, ettevõtete PAC-id ja selge joonduseta komiteed jäetakse spekulatiivsete seoste vältimiseks sidumata ning neid ei arvestata erakondade koondsummade hulka.\n\nAndmete normaliseerimine ja ulatus:\n• Minimaalne summa: Jälgitakse ainult annetusi alates 10 000 dollarist. Kuna föderaalseadusega on otsesed annetused kandidaatidele piiratud (3 300 dollarit valimiste kohta) ja traditsioonilistele PAC-idele (5 000 dollarit aastas), eraldab see künnis suured maksed parteikomiteedele, ühistele rahakogumiskomiteedele (JFC), Super PAC-idele ja piiramatutele Hybrid PAC-ide kontodele.\n• 501(c)(4) mittetulundusühingud (\"Dark Money\"): 501(c)(4) sotsiaalhoolekande organisatsioonide (nt Future Forward USA Action, One Nation) annetused Super PAC-idele registreeritakse organisatsioonide laekumistena (ORG), kuna need üksused ei avalikusta oma tegelikke rahastajaid FEC-ile.\n• Duplikaatide eemaldamine: JFC annetused salvestatakse esmasel laekumisel, samas kui sisemised jaotused ja eraldamismärkmed jäetakse kõrvale. Vahenduskanaleid (WinRed, ActBlue) ja ülekandeid jälgitavate komiteede vahel ei arvestata, et vahendeid loetaks ainult üks kord.\n• Välistused: Tagasimaksed arvatakse annetaja kogusummadest maha. Kandidaatide omavahendid (laenud ja isiklikud panused) ning tegevustulud (intressid, dividendid, varade müük) jäetakse välja."
       },
       "source_link": "Andmeallikas"
     },
@@ -407,6 +409,15 @@
         "summary": "Uuri interaktiivset joondiagrammi, et jälgida {party} annetuste ajalugu ajas. X-telg kujutab kuupäevi, Y-telg näitab annetatud rahasummat. {party} on esitatud eraldi joonega, mis kasvab iga annetusega.",
         "per_year": "{party} poolt saadud annetuste kogusumma varieerub aasta lõikes. Allpool on ajalooline ülevaade partei deklareeritud iga-aastastest rahastuse kogusummadest. See loetelu jälgib kõigi aruandluskohustuslike panuste ja rahalise toetuse summat iga konkreetse aasta kohta:"
       }
+    },
+    "committees": {
+      "title": "Toetavad komiteed ja PAC-id",
+      "treemap": {
+        "title": "Erakonda {party} rahastavad komiteed",
+        "subtitle": "Annetuste jaotus saajakomitee järgi"
+      },
+      "p0": "Erakonna {party} annetused jagunevad {count, plural, one {# registreeritud komitee} other {# registreeritud komitee}} vahel, sealhulgas parteikomiteed, ühised kampaaniafondid ja sõltumatud Super PAC-id. Kokku saadi nende komiteede kaudu {amount}.",
+      "top_intro": "Allpool on toodud suurima panuse andnud komiteed:"
     }
   },
   "origin": {
@@ -481,6 +492,65 @@
       "NT": "Loodealad",
       "YT": "Yukon",
       "NU": "Nunavut"
+    },
+    "unitedstates": {
+      "AL": "Alabama",
+      "AK": "Alaska",
+      "AZ": "Arizona",
+      "AR": "Arkansas",
+      "CA": "California",
+      "CO": "Colorado",
+      "CT": "Connecticut",
+      "DE": "Delaware",
+      "FL": "Florida",
+      "GA": "Georgia",
+      "HI": "Hawaii",
+      "ID": "Idaho",
+      "IL": "Illinois",
+      "IN": "Indiana",
+      "IA": "Iowa",
+      "KS": "Kansas",
+      "KY": "Kentucky",
+      "LA": "Louisiana",
+      "ME": "Maine",
+      "MD": "Maryland",
+      "MA": "Massachusetts",
+      "MI": "Michigan",
+      "MN": "Minnesota",
+      "MS": "Mississippi",
+      "MO": "Missouri",
+      "MT": "Montana",
+      "NE": "Nebraska",
+      "NV": "Nevada",
+      "NH": "New Hampshire",
+      "NJ": "New Jersey",
+      "NM": "New Mexico",
+      "NY": "New York",
+      "NC": "Põhja-Carolina",
+      "ND": "Põhja-Dakota",
+      "OH": "Ohio",
+      "OK": "Oklahoma",
+      "OR": "Oregon",
+      "PA": "Pennsylvania",
+      "RI": "Rhode Island",
+      "SC": "Lõuna-Carolina",
+      "SD": "Lõuna-Dakota",
+      "TN": "Tennessee",
+      "TX": "Texas",
+      "UT": "Utah",
+      "VT": "Vermont",
+      "VA": "Virginia",
+      "WA": "Washington",
+      "WV": "Lääne-Virginia",
+      "WI": "Wisconsin",
+      "WY": "Wyoming",
+      "DC": "Columbia ringkond",
+      "AS": "Ameerika Samoa",
+      "GU": "Guam",
+      "MP": "Põhja-Mariaanid",
+      "PR": "Puerto Rico",
+      "UM": "Ameerika Ühendriikide väikesed saared",
+      "VI": "Ameerika Neitsisaared"
     }
   },
   "donor": {
@@ -525,6 +595,21 @@
       "graph": {
         "subtitle": "Kuidas {donor} sissemaksed liigi järgi iga erakonna vahel jagunevad"
       }
+    },
+    "via": {
+      "title": "Vahendajad ja suunatud annetuste jaotus",
+      "overview": "Avalikest kampaaniate aruannetest nähtub, et {viaSum} annetaja {donor} poliitilistest annetustest ({pct} kõigist jälgitud {donorSum}) suunati vahenduskomiteede kaudu.",
+      "direct_donations": "Otsesed annetused moodustasid {amount}.",
+      "downstream_title": "Lõplike saajate poliitiline suunitlus",
+      "downstream_overview": "Vaadates suunatud annetuste lõplikke saajaid, jagunes kogu summa {count, plural, one {# poliitilise liikumise} other {# poliitilise liikumise}} vahel.",
+      "downstream_primary": "Peamine saaja oli {party}, kellele läks {amount} ({pct}) kõigist suunatud vahenditest.",
+      "downstream_followed_by": "Järgnevad {list}.",
+      "downstream_item": "{party}: {amount} ({pct})",
+      "table_intro": "Allolev tabel loetleb vahendus- ja ühiskomiteed, mille kaudu need annetused suunati{years}:",
+      "table_intro_years": " aastatel {earliestYear}–{latestYear}",
+      "intermediate_entity": "Vahendaja",
+      "transactions": "Tehingud",
+      "checks": "{count, plural, one {# makse} other {# makset}}"
     }
   },
   "countries": {
@@ -617,7 +702,8 @@
     "NO": "Norra",
     "UA": "Ukraina",
     "SE": "Rootsi",
-    "ZA": "South Africa"
+    "ZA": "South Africa",
+    "US": "Ameerika Ühendriigid"
   },
   "about": {
     "title": "Meie kohta",
