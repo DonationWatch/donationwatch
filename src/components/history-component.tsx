@@ -12,13 +12,14 @@ export const HistoryComponent = async ({
 
   return (
     <ul className="@container">
-      {history.map(({ donor, amount, date, party, id }) => (
+      {history.map(({ donor, amount, date, party, id, originalReceiver }) => (
         <DonationHistoryItem
           key={id}
           amount={amount}
           party={party}
           donor={donor}
           date={date}
+          originalReceiver={originalReceiver}
         />
       ))}
     </ul>

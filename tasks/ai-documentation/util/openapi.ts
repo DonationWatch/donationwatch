@@ -269,6 +269,8 @@ export const buildOpenapiDocument = (): OpenAPIV3_1.Document => {
               DonationField.UBOs,
               "UBOs (See https://en.wikipedia.org/wiki/Beneficial_ownership )",
             ],
+            [DonationField.OriginalReceiver, "OriginalReceiver"],
+            [DonationField.OriginalReceiverIndex, "OriginalReceiverIndex"],
           ]),
         },
 
@@ -292,6 +294,12 @@ export const buildOpenapiDocument = (): OpenAPIV3_1.Document => {
                   },
                 ],
               },
+            },
+            originalReceivers: {
+              type: "array",
+              description:
+                "Optional lookup table of initial recipient committees/PACs/sub-organizations.",
+              items: { type: "string" },
             },
             donations: {
               type: "array",
@@ -352,6 +360,11 @@ export const buildOpenapiDocument = (): OpenAPIV3_1.Document => {
               type: "integer",
               description:
                 "DonorIndex: Index of the donor in the DonationsDocument donors array",
+            },
+            [DonationField.OriginalReceiverIndex]: {
+              type: "integer",
+              description:
+                "OriginalReceiverIndex: Optional index of the initial recipient committee/PAC in the DonationsDocument originalReceivers array",
             },
             [DonationField.DonorType]: {
               $ref: "#/components/schemas/DonorType",

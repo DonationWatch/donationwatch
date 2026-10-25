@@ -68,7 +68,7 @@
     },
     "donor": {
       "overview": "Donasjoner fra {donor} i {country}",
-      "description": "{donor} har donert totalt {sum} fordelt på {count} donasjoner over {minAmount} siden {minYear}. Bidragene ble fordelt på {parties} ulike partier. Utforsk detaljerte innsikter i donasjonsmønstre og mottakerpartier for denne giveren i {country}."
+      "description": "Se hvor {donor}s politiske donasjoner gikk. {sum} donert i {count} bidrag til {parties} partier i {country} siden {minYear}."
     }
   },
   "chart": {
@@ -93,7 +93,8 @@
     "summary": "Sammendrag",
     "download_format": "Last ned {format}",
     "view_source": "Vis kilde",
-    "donation_type": "Donasjonstype"
+    "donation_type": "Donasjonstype",
+    "donated_to": "Donert til {recipient}"
   },
   "sort": {
     "asc": "Sorter stigende",
@@ -206,7 +207,8 @@
         "ukraine": "Dataene som brukes her, er hentet fra Nasjonalt byrå for korrupsjonsforebygging (NAZK) via PolitData-portalen. De inkluderer alle poster identifisert som «økonomiske bidrag» i de offisielle rapportene.\n\nMerknad om datagrunnlag: Dette tallet viser kun direkte pengetransaksjoner. Det inkluderer ikke statlig finansiering til parlamentariske partier eller ikke-monetære bidrag, som varer og tjenester.\n\nPå grunn av den fullskala russiske invasjonen ble den obligatoriske rapporteringen for politiske partier suspendert fra tidlig 2022 til slutten av 2023 av sikkerhets- og logistikkårsaker. Etter vedtakelsen av lov 3337-IX leverer partiene nå inn sine rapporter i ettertid. Data for 2022–2025 oppdateres fortsatt mens NAZK behandler disse innsendelsene.",
         "france": "Dataene som brukes her kommer fra Commission Nationale des Comptes de Campagne et des Financements Politiques (CNCCFP) og inkluderer alle politiske donasjoner (rapportert i euro) som er dokumentert i feltet \"Dons_de_personne_physique\".\n\nI motsetning til andre regioner publiseres de franske dataene som en årlig samlet oversikt per parti, og identiteten til individuelle givere er beskyttet av personvernlovgivningen.",
         "sweden": "Dataene som brukes her, kommer fra Kammarkollegiet, det offisielle svenske statlige registeret for partifinansiering. For å gi et nøyaktig bilde av ren privat og grasrotbasert støtte (rapportert i SEK), inkluderer denne sammenstillingen direkte bidrag dokumentert under kategori 4 (\"Insamling av kontanter\") og kategori 5 (\"Bidrag\"). Interne partioverføringer, statlige subsidier og lotteriinntekter er uttrykkelig utelatt for å forhindre dobbeltelling og for å isolere eksterne donasjoner på en presis måte. Alle data er gruppert etter politisk partitilhørighet (\"Partitillhörighet\").",
-        "southafrica": "The data used here comes from the Electoral Commission of South Africa (IEC) and includes all published political party funding declarations (Section 9(1)) since 2021, including valid late submissions. Indirect contributions to the Multi-Party Democracy Fund and duplicate donor-side disclosures (Section 9(2)) are excluded.\\n\\nNote on thresholds: Political parties were required to report donations exceeding ZAR 100,000 per donor per year until 1 April 2024, when the legal disclosure threshold was increased to ZAR 200,000."
+        "southafrica": "Dataene som brukes her, kommer fra Sør-Afrikas valgkommisjon (IEC) og omfatter alle offentliggjorte erklæringer om finansiering av politiske partier (seksjon 9(1)) siden 2021, inkludert gyldige sene innleveringer. Indirekte bidrag til flerpartidemokratifondet (Multi-Party Democracy Fund) og dupliserte rapporter fra giverens side (seksjon 9(2)) er ekskludert.\n\nMerknad om terskler: Politiske partier var pålagt å rapportere donasjoner over 100 000 ZAR per giver per år, til 1. april 2024, da den juridiske offentliggjøringsterskelen ble hevet til 200 000 ZAR.",
+        "unitedstates": "Dataene som presenteres her, er hentet fra Federal Election Commissions (FEC) masseavsløringer og dekker politiske bidrag dokumentert siden 2016.\n\nI motsetning til parlamentariske systemer, der donasjoner går direkte til sentrale partikontorer, er finansieringen av føderale valgkamper i USA desentralisert mellom kandidatkampanjer, partiorganisasjoner og uavhengige organisasjoner for valgpåvirkning (Super PAC-er). For å gi et presist bilde av de finansielle koalisjonene bak hver bevegelse, konsoliderer DonationWatch de viktigste finansieringskanalene til enhetlige partitotaler («Demokratene», «Republikanerne» og «Tverrpolitiske og partipolitisk nøytrale Super PAC-er»). Dette omfatter:\n• Offisielle partikomiteer: Nasjonale, kongress- og delstatspartikomiteer (f.eks. DNC, RNC, DSCC, NRSC, DCCC, NRCC)\n• Godkjente valgkampanjekomiteer for føderale kandidater\n• Politisk orienterte Super PAC-er, hybrid-PAC-er og felles innsamlingskomiteer (f.eks. Senate Majority PAC, Future Forward, MAGA Inc., Senate Leadership Fund, Harris Victory Fund, Trump 47 Committee)\n• Partipolitisk nøytrale og næringsrettede Super PAC-er som støtter kandidater fra begge de store partiene (f.eks. Fairshake, United Democracy Project)\n\nHvorfor enkelte PAC-er ikke er tilknyttet et parti:\nOffisielle partikomiteer og kandidaters valgkampkomiteer oppgir en offisiell partitilhørighet i FEC-registrene og kobles automatisk. Super PAC-er og hybrid-PAC-er opererer som uavhengige enheter uten formelle partierklæringer; DonationWatch reviderer og kartlegger fortløpende alle fremtredende komiteer med samlede inntekter på 5 millioner dollar eller mer. Mindre enkeltsak-grupper, næringslivs-PAC-er og komiteer under denne terskelen uten tydelig tilhørighet forblir ukoblet for å forhindre spekulative antagelser, og utelates fra partitallene.\n\nDatanormalisering og omfang:\n• Minimumsbeløp: Kun bidrag på 10 000 USD eller mer spores. Fordi føderal lov begrenser direkte donasjoner til kandidater (3 300 USD per valg) og tradisjonelle PAC-kontoer (5 000 USD per år), isolerer denne terskelen store innbetalinger til partikomiteer, felles innsamlingskomiteer (JFC), Super PAC-er og ubegrensede Hybrid PAC-kontoer.\n• 501(c)(4)-organisasjoner («Dark Money»): Bidrag fra 501(c)(4)-organisasjoner (f.eks. Future Forward USA Action, One Nation) til Super PAC-er føres som organisasjonsinnbetalinger (ORG), ettersom disse enhetene ikke oppgir sine bakenforliggende givere til FEC.\n• Deduplisering: JFC-bidrag registreres ved opprinnelig mottak, mens interne fordelinger og tildelingsnotater forkastes. Videreformidlinger (WinRed, ActBlue) og overføringer mellom sporede komiteer er utelukket, slik at midler bare telles én gang.\n• Eksklusjoner: Refusjoner trekkes fra givernes totaler. Kandidaters egenfinansiering (lån og personlige bidrag) samt driftsinntekter (renter, utbytter, salg av eiendeler) er ekskludert."
       },
       "source_link": "Datakilde"
     },
@@ -407,6 +409,15 @@
         "summary": "Utforsk det interaktive linjediagrammet for å følge donasjonshistorikken til {party} over tid. X-aksen viser datoene, mens Y-aksen viser beløpet som er donert. {party} vises som en egen linje som øker for hver donasjon.",
         "per_year": "Det totale beløpet i donasjoner mottatt av {party} varierer fra år til år. Nedenfor finner du en historisk oversikt over de årlige finansieringstotalene som partiet har oppgitt. Denne listen følger summen av alle rapporteringspliktige bidrag og økonomisk støtte for hvert enkelt år:"
       }
+    },
+    "committees": {
+      "title": "Bidragsytende komiteer og PAC-er",
+      "treemap": {
+        "title": "Komiteer som støtter {party}",
+        "subtitle": "Fordeling av bidrag etter mottakerkomité"
+      },
+      "p0": "Kapitalen til {party} er fordelt over {count, plural, one {# registrert komité} other {# registrerte komiteer}}, inkludert partikomiteer, felles valgkampfond og uavhengige Super PAC-er. Totalt ble {amount} mottatt via disse komiteene.",
+      "top_intro": "Nedenfor er de største bidragsytende komiteene:"
     }
   },
   "origin": {
@@ -479,6 +490,21 @@
       "graph": {
         "subtitle": "Hvordan bidragene fra {donor} fordeles på hvert parti etter type"
       }
+    },
+    "via": {
+      "title": "Mellommenn og fordeling av videreformidlede donasjoner",
+      "overview": "Offentlige innsynsrapporter viser at {viaSum} av de totale politiske bidragene fra {donor} ({pct} av alle {donorSum} som spores) ble videreformidlet via mellomledd.",
+      "direct_donations": "Direkte donasjoner utgjorde {amount}.",
+      "downstream_title": "Mottakernes politiske tilhørighet",
+      "downstream_overview": "Når man ser på de endelige mottakerne av de videreformidlede bidragene, ble samtlige midler fordelt på {count, plural, one {# politisk bevegelse} other {# politiske bevegelser}}.",
+      "downstream_primary": "Hovedmottakeren var {party}, som mottok {amount} ({pct}) av alle videreformidlede midler.",
+      "downstream_followed_by": "Etterfulgt av {list}.",
+      "downstream_item": "{party} med {amount} ({pct})",
+      "table_intro": "Tabellen nedenfor viser mellomledd og felles innsamlingskomiteer som disse donasjonene ble formidlet gjennom{years}:",
+      "table_intro_years": " mellom {earliestYear} og {latestYear}",
+      "intermediate_entity": "Mellomenhet",
+      "transactions": "Transaksjoner",
+      "checks": "{count, plural, one {# innbetaling} other {# innbetalinger}}"
     }
   },
   "countries": {
@@ -571,7 +597,8 @@
     "NO": "Norge",
     "UA": "Ukraina",
     "SE": "Sverige",
-    "ZA": "South Africa"
+    "ZA": "South Africa",
+    "US": "USA"
   },
   "state": {
     "germany": {
@@ -617,6 +644,65 @@
       "NT": "Nordvestterritoriene",
       "YT": "Yukon",
       "NU": "Nunavut"
+    },
+    "unitedstates": {
+      "AL": "Alabama",
+      "AK": "Alaska",
+      "AZ": "Arizona",
+      "AR": "Arkansas",
+      "CA": "California",
+      "CO": "Colorado",
+      "CT": "Connecticut",
+      "DE": "Delaware",
+      "FL": "Florida",
+      "GA": "Georgia",
+      "HI": "Hawaii",
+      "ID": "Idaho",
+      "IL": "Illinois",
+      "IN": "Indiana",
+      "IA": "Iowa",
+      "KS": "Kansas",
+      "KY": "Kentucky",
+      "LA": "Louisiana",
+      "ME": "Maine",
+      "MD": "Maryland",
+      "MA": "Massachusetts",
+      "MI": "Michigan",
+      "MN": "Minnesota",
+      "MS": "Mississippi",
+      "MO": "Missouri",
+      "MT": "Montana",
+      "NE": "Nebraska",
+      "NV": "Nevada",
+      "NH": "New Hampshire",
+      "NJ": "New Jersey",
+      "NM": "New Mexico",
+      "NY": "New York",
+      "NC": "Nord-Carolina",
+      "ND": "Nord-Dakota",
+      "OH": "Ohio",
+      "OK": "Oklahoma",
+      "OR": "Oregon",
+      "PA": "Pennsylvania",
+      "RI": "Rhode Island",
+      "SC": "Sør-Carolina",
+      "SD": "Sør-Dakota",
+      "TN": "Tennessee",
+      "TX": "Texas",
+      "UT": "Utah",
+      "VT": "Vermont",
+      "VA": "Virginia",
+      "WA": "Washington",
+      "WV": "Vest-Virginia",
+      "WI": "Wisconsin",
+      "WY": "Wyoming",
+      "DC": "District of Columbia",
+      "AS": "Amerikansk Samoa",
+      "GU": "Guam",
+      "MP": "Nord-Marianene",
+      "PR": "Puerto Rico",
+      "UM": "USAs ytre småøyer",
+      "VI": "De amerikanske Jomfruøyene"
     }
   },
   "about": {

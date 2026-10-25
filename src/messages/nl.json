@@ -68,7 +68,7 @@
     },
     "donor": {
       "overview": "Donaties van {donor} in {country}",
-      "description": "{donor} heeft in totaal {sum} gedoneerd via {count} donaties van meer dan {minAmount} sinds {minYear}. Deze bijdragen werden verdeeld over {parties} verschillende partijen. Ontdek gedetailleerde inzichten in donatiepatronen en ontvangerspartijen voor deze donateur in {country}."
+      "description": "Bekijk waar de politieke donaties van {donor} naartoe gingen. {sum} gedoneerd in {count} bijdragen aan {parties} partijen in {country} sinds {minYear}."
     }
   },
   "chart": {
@@ -93,7 +93,8 @@
     "summary": "Samenvatting",
     "download_format": "{format} downloaden",
     "view_source": "Bron bekijken",
-    "donation_type": "Donatietype"
+    "donation_type": "Donatietype",
+    "donated_to": "Gedoneerd aan {recipient}"
   },
   "sort": {
     "asc": "Sorteer oplopend",
@@ -206,7 +207,8 @@
         "ukraine": "De hier gebruikte gegevens zijn afkomstig van het Nationaal Agentschap voor Corruptiepreventie (NAZK) via het PolitData-portaal. Ze omvatten alle gegevens die in de officiële rapporten zijn aangemerkt als ‘monetaire bijdragen’.\n\nOpmerking over de gegevensomvang: Dit totaal weerspiegelt alleen rechtstreekse financiële overdrachten. Het omvat geen staatsfinanciering voor parlementaire partijen of niet-geldelijke (in natura) bijdragen zoals goederen en diensten.\n\nVanwege de grootschalige Russische invasie werd de verplichte rapportage door politieke partijen van begin 2022 tot eind 2023 om veiligheids- en logistieke redenen opgeschort. Na de goedkeuring van Wet 3337-IX vullen de partijen hun rapporten nu achteraf aan. De gegevens voor 2022–2025 worden nog bijgewerkt terwijl de NAZK deze inzendingen verwerkt.",
         "france": "De hier gebruikte gegevens zijn afkomstig van de Commission Nationale des Comptes de Campagne et des Financements Politiques (CNCCFP) en omvatten alle politieke donaties (gerapporteerd in euro) die zijn vermeld in het veld \"Dons_de_personne_physique\".\n\nIn tegenstelling tot andere regio's worden de Franse gegevens als jaarlijkse totalen per partij gepubliceerd en is de identiteit van individuele donoren beschermd door privacywetten.",
         "sweden": "De hier gebruikte gegevens zijn afkomstig van Kammarkollegiet, het officiële Zweedse overheidsregister voor partijfinanciering. Om een nauwkeurig beeld te geven van louter particuliere en grassroots-steun (gerapporteerd in SEK), omvat deze aggregatie directe bijdragen die zijn vastgelegd onder categorie 4 (\"Insamling av kontanter\") en categorie 5 (\"Bidrag\"). Interne partijoverdrachten, staatssubsidies en loterij-inkomsten zijn specifiek uitgesloten om dubbeltellingen te voorkomen en externe donaties nauwkeurig te isoleren. Alle gegevens zijn gegroepeerd op politieke partijaffiliatie (\"Partitillhörighet\").",
-        "southafrica": "The data used here comes from the Electoral Commission of South Africa (IEC) and includes all published political party funding declarations (Section 9(1)) since 2021, including valid late submissions. Indirect contributions to the Multi-Party Democracy Fund and duplicate donor-side disclosures (Section 9(2)) are excluded.\\n\\nNote on thresholds: Political parties were required to report donations exceeding ZAR 100,000 per donor per year until 1 April 2024, when the legal disclosure threshold was increased to ZAR 200,000."
+        "southafrica": "De hier gebruikte gegevens zijn afkomstig van de Kiescommissie van Zuid-Afrika (IEC) en omvatten alle gepubliceerde aangiften van politieke partijfinanciering (artikel 9(1)) sinds 2021, inclusief geldige late inzendingen. Indirecte bijdragen aan het Multi-Party Democracy Fund en dubbele aangiften aan de zijde van donoren (artikel 9(2)) zijn uitgesloten.\n\nOpmerking over drempels: Politieke partijen waren verplicht om donaties boven 100.000 ZAR per donor per jaar te rapporteren, tot 1 april 2024, toen de wettelijke openbaarmakingsdrempel werd verhoogd naar 200.000 ZAR.",
+        "unitedstates": "De hier gepresenteerde gegevens zijn afkomstig uit de bulkpublicaties van de Federal Election Commission (FEC) en beslaan politieke bijdragen die zijn gedocumenteerd sinds 2016.\n\nAnders dan in parlementaire systemen, waar donaties rechtstreeks naar centrale partijhoofdkwartieren vloeien, is de federale verkiezingsfinanciering in de VS gedecentraliseerd over campagnes van kandidaten, partijorganisaties en comités voor onafhankelijke uitgaven. Om een getrouw beeld te geven van de financiële coalities achter elke beweging, consolideert DonationWatch de belangrijkste financieringsvehikels in verenigde partijtotalen („Democraten”, „Republikeinen” en „Bipartizane en niet-partijgebonden Super PACs”). Dit omvat:\n• Officiële partijcomités: Landelijke, congres- en staatspartijcomités (bv. DNC, RNC, DSCC, NRSC, DCCC, NRCC)\n• Geautoriseerde campagnecomités van federale kandidaten\n• Politiek georiënteerde Super PACs, Hybrid PACs en Joint Fundraising Committees (bv. Senate Majority PAC, Future Forward, MAGA Inc., Senate Leadership Fund, Harris Victory Fund, Trump 47 Committee)\n• Niet-partijgebonden en op de industrie gerichte Super PACs die kandidaten van beide grote partijen steunen (bv. Fairshake, United Democracy Project)\n\nWaarom sommige PAC's niet aan een partij zijn gekoppeld:\nOfficiële partijcomités en kandidaatcomités geven een officiële partijaffiliatie op bij de FEC en worden automatisch gekoppeld. Super PAC's en Hybrid PAC's opereren als onafhankelijke entiteiten zonder formele partijverklaring; DonationWatch controleert en koppelt doorlopend alle toonaangevende comités met een gecumuleerd bedrag van $ 5 miljoen of meer aan ontvangsten. Kleinere themagroepen, bedrijfs-PAC's en comités onder deze drempel zonder duidelijke affiliatie blijven ongekoppeld om speculatieve toewijzingen te voorkomen, en vloeien niet naar partijtotalen.\n\nGegevensnormalisatie en omvang:\n• Minimumbedrag: Alleen bijdragen van $ 10.000 of meer worden bijgehouden. Omdat federale wetgeving directe donaties aan kandidaten ($ 3.300 per verkiezing) en traditionele PAC-rekeningen ($ 5.000 per jaar) maximeert, isoleert deze drempel grote ontvangsten aan partijcomités, Joint Fundraising Committees (JFC's), Super PAC's en onbeperkte Hybrid PAC-rekeningen.\n• 501(c)(4)-non-profits (\"Dark Money\"): Bijdragen van 501(c)(4)-belangenorganisaties (bijv. Future Forward USA Action, One Nation) aan Super PAC's worden geregistreerd als organisatie-ontvangsten (ORG), aangezien deze entiteiten hun achterliggende donateurs niet aan de FEC openbaar maken.\n• Ontdubbeling: JFC-bijdragen worden geregistreerd bij de eerste ontvangst, terwijl interne doorstortingen en toewijzingsmemo's worden genegeerd. Tussenpersonen (WinRed, ActBlue) en overdrachten tussen gevolgde comités worden uitgesloten, zodat fondsen slechts eenmaal worden geteld.\n• Uitsluitingen: Terugbetalingen worden in mindering gebracht op donortotalen. Eigen financiering door kandidaten (leningen en persoonlijke bijdragen) en operationele inkomsten (rente, dividenden, verkoop van activa) worden uitgesloten."
       },
       "source_link": "Gegevensbron"
     },
@@ -407,6 +409,15 @@
         "summary": "Verken de interactieve lijngrafiek om de donatiegeschiedenis van {party} door de tijd heen te volgen. De x-as toont de datums, terwijl de y-as het gedoneerde geldbedrag weergeeft. {party} wordt weergegeven door een eigen lijn die met elke donatie verder oploopt.",
         "per_year": "Het totale bedrag aan donaties dat {party} ontvangt, verschilt per jaar. Hieronder vind je een historisch overzicht van de jaarlijkse financieringstotalen die door de partij zijn opgegeven. Deze lijst volgt de som van alle meldingsplichtige bijdragen en financiële steun voor elk specifiek jaar:"
       }
+    },
+    "committees": {
+      "title": "Bijdragende comités & PAC's",
+      "treemap": {
+        "title": "Comités achter {party}",
+        "subtitle": "Verdeling van bijdragen naar ontvangend comité"
+      },
+      "p0": "Het kapitaal voor {party} is verdeeld over {count, plural, one {# geregistreerd comité} other {# geregistreerde comités}}, waaronder partijcomités, gezamenlijke campagnefondsen en onafhankelijke Super PAC's. In totaal werd {amount} via deze comités ontvangen.",
+      "top_intro": "Hieronder volgen de grootste bijdragende comités:"
     }
   },
   "origin": {
@@ -481,6 +492,65 @@
       "NT": "Northwest Territories",
       "YT": "Yukon",
       "NU": "Nunavut"
+    },
+    "unitedstates": {
+      "AL": "Alabama",
+      "AK": "Alaska",
+      "AZ": "Arizona",
+      "AR": "Arkansas",
+      "CA": "Californië",
+      "CO": "Colorado",
+      "CT": "Connecticut",
+      "DE": "Delaware",
+      "FL": "Florida",
+      "GA": "Georgia",
+      "HI": "Hawaï",
+      "ID": "Idaho",
+      "IL": "Illinois",
+      "IN": "Indiana",
+      "IA": "Iowa",
+      "KS": "Kansas",
+      "KY": "Kentucky",
+      "LA": "Louisiana",
+      "ME": "Maine",
+      "MD": "Maryland",
+      "MA": "Massachusetts",
+      "MI": "Michigan",
+      "MN": "Minnesota",
+      "MS": "Mississippi",
+      "MO": "Missouri",
+      "MT": "Montana",
+      "NE": "Nebraska",
+      "NV": "Nevada",
+      "NH": "New Hampshire",
+      "NJ": "New Jersey",
+      "NM": "New Mexico",
+      "NY": "New York",
+      "NC": "Noord-Carolina",
+      "ND": "Noord-Dakota",
+      "OH": "Ohio",
+      "OK": "Oklahoma",
+      "OR": "Oregon",
+      "PA": "Pennsylvania",
+      "RI": "Rhode Island",
+      "SC": "Zuid-Carolina",
+      "SD": "Zuid-Dakota",
+      "TN": "Tennessee",
+      "TX": "Texas",
+      "UT": "Utah",
+      "VT": "Vermont",
+      "VA": "Virginia",
+      "WA": "Washington",
+      "WV": "West-Virginia",
+      "WI": "Wisconsin",
+      "WY": "Wyoming",
+      "DC": "District of Columbia",
+      "AS": "Amerikaans-Samoa",
+      "GU": "Guam",
+      "MP": "Noordelijke Marianen",
+      "PR": "Puerto Rico",
+      "UM": "Kleine afgelegen eilanden van de Verenigde Staten",
+      "VI": "Amerikaanse Maagdeneilanden"
     }
   },
   "donor": {
@@ -525,6 +595,21 @@
       "graph": {
         "subtitle": "Hoe de bijdragen van {donor} per type naar elke partij stromen"
       }
+    },
+    "via": {
+      "title": "Tussenpersonen & distributie van doorgesluisde donaties",
+      "overview": "Uit openbare transparantieverslagen blijkt dat {viaSum} van de totale politieke bijdragen van {donor} ({pct} van alle gevolgde {donorSum}) via tussencomités is doorgesluisd.",
+      "direct_donations": "Directe donaties waren goed voor {amount}.",
+      "downstream_title": "Politieke richting van begunstigden",
+      "downstream_overview": "Kijkend naar de uiteindelijke begunstigden van de doorgesluisde bijdragen, werd het totale bedrag verdeeld over {count, plural, one {# politieke beweging} other {# politieke bewegingen}}.",
+      "downstream_primary": "De belangrijkste begunstigde was {party}, goed voor {amount} ({pct}) van alle doorgesluisde fondsen.",
+      "downstream_followed_by": "Gevolgd door {list}.",
+      "downstream_item": "{party} met {amount} ({pct})",
+      "table_intro": "De onderstaande tabel toont de tussencomités en gezamenlijke fondsenwervingscomités waarlangs deze donaties zijn doorgesluisd{years}:",
+      "table_intro_years": " tussen {earliestYear} en {latestYear}",
+      "intermediate_entity": "Tussenpersoon",
+      "transactions": "Transacties",
+      "checks": "{count, plural, one {# donatie} other {# donaties}}"
     }
   },
   "countries": {
@@ -617,7 +702,8 @@
     "NO": "Noorwegen",
     "UA": "Oekraïne",
     "SE": "Zweden",
-    "ZA": "South Africa"
+    "ZA": "South Africa",
+    "US": "de Verenigde Staten"
   },
   "about": {
     "title": "Over ons",

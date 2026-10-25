@@ -22,6 +22,7 @@ import sweden from "@/data/sweden/parties";
 import switzerland from "@/data/switzerland/parties";
 import ukraine from "@/data/ukraine/parties";
 import unitedkingdom from "@/data/unitedkingdom/parties";
+import unitedstates from "@/data/unitedstates/parties";
 import { PartyField } from "@/types/party";
 
 export const PARTIES: Record<Country, Party[]> = {
@@ -44,6 +45,7 @@ export const PARTIES: Record<Country, Party[]> = {
   switzerland,
   ukraine,
   unitedkingdom,
+  unitedstates,
 };
 
 export const PARTY_MAP: Record<

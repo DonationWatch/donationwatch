@@ -21,6 +21,7 @@ import { DonorClientPageContent } from "./_components/donor-client-page-content"
 import { DonorDonationTable } from "./_components/donor-donation-table";
 import { DonorDonationTimeline } from "./_components/donor-donation-timeline";
 import { DonorDonationTypes } from "./_components/donor-donation-types";
+import { DonorOriginalReceivers } from "./_components/donor-original-receivers";
 
 export const DonorClientPage = ({ donorId }: { donorId: string }) => {
   const countryConfig = useRequiredCountryConfig();
@@ -113,6 +114,7 @@ export const DonorClientPage = ({ donorId }: { donorId: string }) => {
         <>
           <DonorClientPageContent donations={filteredDonations} />
           <DonorDonationTimeline donations={filteredDonations} />
+          <DonorOriginalReceivers donations={filteredDonations} />
           {hasFeature(countryConfig, Features.DonationType) ? (
             <DonorDonationTypes donations={filteredDonations} />
           ) : null}

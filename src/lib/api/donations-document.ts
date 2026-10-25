@@ -2,17 +2,23 @@ import type { Donation } from "@/utils/types";
 
 import { DonationField } from "@/utils/types";
 
-type DocumentDonation = Omit<Donation, DonationField.DonorName> & {
+type DocumentDonation = Omit<
+  Donation,
+  DonationField.DonorName | DonationField.OriginalReceiver
+> & {
   [DonationField.DonorIndex]: number;
+  [DonationField.OriginalReceiverIndex]?: number;
 };
 
 export interface DonationsDocument {
   donors: [donorName: string, ubos: string[] | null, donorId: string][];
+  originalReceivers?: string[];
   donations: DocumentDonation[];
 }
 
 export interface DonationsDocumentWithoutDonorIds {
   donors: [donorName: string, ubos: string[] | null][];
+  originalReceivers?: string[];
   donations: DocumentDonation[];
 }
 
@@ -21,13 +27,24 @@ export const donationDocumentDonationToDonation = (
   doc: DonationsDocument | DonationsDocumentWithoutDonorIds,
   donation: DocumentDonation,
 ): Donation => {
-  const donorIndex = donation[DonationField.DonorIndex];
+  const {
+    [DonationField.DonorIndex]: donorIndex,
+    [DonationField.OriginalReceiverIndex]: originalReceiverIndex,
+    ...rest
+  } = donation;
   const [donorName, ubos] = doc.donors[donorIndex];
+  const originalReceiver =
+    originalReceiverIndex !== undefined && doc.originalReceivers
+      ? doc.originalReceivers[originalReceiverIndex]
+      : undefined;
 
   return {
-    ...donation,
+    ...rest,
     [DonationField.DonorName]: donorName,
     ...(ubos ? { [DonationField.UBOs]: ubos } : undefined),
+    ...(originalReceiver
+      ? { [DonationField.OriginalReceiver]: originalReceiver }
+      : undefined),
   };
 };
 

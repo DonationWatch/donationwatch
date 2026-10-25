@@ -68,7 +68,7 @@
     },
     "donor": {
       "overview": "Dary od {donor} v {country}",
-      "description": "{donor} daroval celkem {sum} v rámci {count} darů nad {minAmount} od roku {minYear}. Tyto příspěvky byly rozděleny mezi {parties} různé strany. Prozkoumejte podrobné informace o vzorcích darování a příjemcích tohoto dárce v zemi {country}."
+      "description": "Zjistěte, kam směřovaly politické dary {donor}. {sum} darováno v {count} příspěvcích pro {parties} strany v {country} od roku {minYear}."
     }
   },
   "chart": {
@@ -93,7 +93,8 @@
     "summary": "Souhrn",
     "download_format": "Stáhnout {format}",
     "view_source": "Zobrazit zdroj",
-    "donation_type": "Typ daru"
+    "donation_type": "Typ daru",
+    "donated_to": "Darováno pro {recipient}"
   },
   "sort": {
     "asc": "Řadit vzestupně",
@@ -206,7 +207,8 @@
         "ukraine": "Zde použité údaje pocházejí z Národní agentury pro prevenci korupce (NAZK) prostřednictvím portálu PolitData. Obsahují všechny záznamy označené v oficiálních zprávách jako „peněžní příspěvky“.\n\nPoznámka k rozsahu dat: Tento součet odráží pouze přímé finanční převody. Nezahrnuje státní financování poskytované parlamentním stranám ani nepeněžní (věcné) příspěvky, jako jsou zboží a služby.\n\nKvůli rozsáhlé ruské invazi bylo povinné vykazování politických stran od začátku roku 2022 do konce roku 2023 z bezpečnostních a logistických důvodů pozastaveno. Po přijetí zákona č. 3337-IX nyní strany zpětně doplňují své zprávy. Údaje za roky 2022–2025 se stále aktualizují, jak NAZK zpracovává tyto podklady.",
         "france": "Data použitá zde pocházejí z Commission Nationale des Comptes de Campagne et des Financements Politiques (CNCCFP) a zahrnují všechny politické dary (vykázané v eurech) uvedené v poli „Dons_de_personne_physique“.\n\nNa rozdíl od jiných regionů jsou francouzská data zveřejňována jako roční souhrn za jednotlivé strany a totožnost jednotlivých dárců je chráněna zákony o ochraně soukromí.",
         "sweden": "Zde použitá data pocházejí z Kammarkollegiet, oficiálního švédského vládního registru financování politických stran. Aby tento souhrn poskytl přesný obraz čistě soukromé a občanské podpory (vykazované v SEK), zahrnuje přímé příspěvky zaznamenané v kategorii 4 (\"Insamling av kontanter\") a kategorii 5 (\"Bidrag\"). Vnitrostranické převody, státní dotace a příjmy z loterií byly výslovně vyloučeny, aby se zabránilo dvojímu započítání a aby bylo možné přesně oddělit externí dary. Všechna data jsou seskupena podle politické stranické příslušnosti (\"Partitillhörighet\").",
-        "southafrica": "The data used here comes from the Electoral Commission of South Africa (IEC) and includes all published political party funding declarations (Section 9(1)) since 2021, including valid late submissions. Indirect contributions to the Multi-Party Democracy Fund and duplicate donor-side disclosures (Section 9(2)) are excluded.\\n\\nNote on thresholds: Political parties were required to report donations exceeding ZAR 100,000 per donor per year until 1 April 2024, when the legal disclosure threshold was increased to ZAR 200,000."
+        "southafrica": "Zde použité údaje pocházejí od Volební komise Jihoafrické republiky (IEC) a zahrnují všechna zveřejněná prohlášení o financování politických stran (oddíl 9(1)) od roku 2021, včetně platných pozdních podání. Nepřímé příspěvky do Fondu vícestranické demokracie (Multi-Party Democracy Fund) a duplicitní zprávy ze strany dárců (oddíl 9(2)) jsou vyloučeny.\n\nPoznámka k prahovým hodnotám: Politické strany byly povinny hlásit dary převyšující 100 000 ZAR na dárce a rok, dokud nebyla 1. dubna 2024 zákonná prahová hodnota pro zveřejnění zvýšena na 200 000 ZAR.",
+        "unitedstates": "Zde uvedená data pocházejí z hromadných zveřejnění Federální volební komise (FEC) a zahrnují politické příspěvky zdokumentované od roku 2016.\n\nNa rozdíl od parlamentních systémů, kde dary proudí přímo do ústředí stran, je federální financování kampaní v USA decentralizované mezi volební výbory kandidátů, stranické organizace a výbory pro nezávislé výdaje. Aby poskytla věrný obraz finančních koalic stojících za jednotlivými proudy, konsoliduje DonationWatch hlavní nástroje financování do sjednocených celkových součtů stran („Demokraté“, „Republikáni“ a „Bipartizanské a nadstranické Super PAC“). Patří sem:\n• Oficiální stranické výbory: celostátní, kongresové a státní stranické výbory (např. DNC, RNC, DSCC, NRSC, DCCC, NRCC)\n• Autorizované volební výbory federálních kandidátů\n• Politicky orientované Super PAC, Hybrid PAC a společné výbory pro fundraising (Joint Fundraising Committees) (např. Senate Majority PAC, Future Forward, MAGA Inc., Senate Leadership Fund, Harris Victory Fund, Trump 47 Committee)\n• Nadstranické a průmyslově zaměřené Super PAC podporující kandidáty obou hlavních stran (např. Fairshake, United Democracy Project)\n\nProč některé PAC nejsou přiřazeny ke stranám:\nOficiální stranické výbory a výbory kandidátů uvádějí oficiální stranickou příslušnost v záznamech FEC a jsou přiřazovány automaticky. Super PAC a Hybrid PAC fungují jako nezávislé subjekty bez formálního prohlášení o stranické příslušnosti; DonationWatch průběžně prověřuje a mapuje všechny významné výbory s kumulativními příjmy 5 milionů USD a více. Menší jednooborové skupiny, korporátní PAC a výbory pod touto hranicí bez jasné vazby zůstávají nepřiřazené, aby se předešlo spekulativním přiřazením, a nezapočítávají se do stranických součtů.\n\nNormalizace dat a rozsah:\n• Minimální částka: Sledují se pouze příspěvky ve výši 10 000 USD a vyšší. Vzhledem k tomu, že federální zákon omezuje přímé dary kandidátům (3 300 USD na volby) a tradičním účtům PAC (5 000 USD ročně), tato hranice izoluje vysoké částky plynoucí stranickým výborům, společným výborům pro získávání finančních prostředků (JFC), Super PAC a neomezeným účtům Hybrid PAC.\n• Neziskové organizace 501(c)(4) („Dark Money“): Příspěvky od organizací sociálního zabezpečení 501(c)(4) (např. Future Forward USA Action, One Nation) pro Super PAC jsou zaznamenány jako příjmy od organizací (ORG), protože tyto subjekty nezveřejňují své skutečné dárce FEC.\n• Deduplikace: Příspěvky JFC jsou zaznamenány při počátečním přijetí, zatímco interní přerozdělení a alokační memoranda jsou vyřazena. Průchozí transakce (WinRed, ActBlue) a převody mezi sledovanými výbory jsou vyloučeny, aby se finance započítávaly pouze jednou.\n• Vyloučení: Vrácené částky se odečítají od celkových součtů dárců. Vlastní financování kandidáty (půjčky a osobní příspěvky) a provozní příjmy (úroky, dividendy, prodej aktiv) jsou vyloučeny."
       },
       "source_link": "Zdroj dat"
     },
@@ -407,6 +409,15 @@
         "summary": "Prozkoumejte interaktivní spojnicový graf a sledujte historii darů pro {party} v čase. Osa x představuje data, zatímco osa y ukazuje darovanou částku. {party} je znázorněna samostatnou čárou, která se s každým darem zvyšuje.",
         "per_year": "Celková výše darů přijatých stranou {party} se liší podle roku. Níže je historický přehled ročních součtů financování uvedených stranou. Tento seznam sleduje součet všech ohlašovatelných příspěvků a finanční podpory pro každý konkrétní rok:"
       }
+    },
+    "committees": {
+      "title": "Přispívající výbory & PAC",
+      "treemap": {
+        "title": "Výbory financující {party}",
+        "subtitle": "Rozdělení darů podle přijímajícího výboru"
+      },
+      "p0": "Kapitál pro {party} je rozdělen mezi {count, plural, one {# registrovaný výbor} few {# registrované výbory} other {# registrovaných výborů}}, včetně stranických výborů, společných volebních fondů a nezávislých Super PAC. Celkem bylo přes tyto výbory přijato {amount}.",
+      "top_intro": "Níže jsou uvedeny výbory s nejvyššími příspěvky:"
     }
   },
   "origin": {
@@ -481,6 +492,65 @@
       "NT": "Severozápadní teritoria",
       "YT": "Yukon",
       "NU": "Nunavut"
+    },
+    "unitedstates": {
+      "AL": "Alabama",
+      "AK": "Aljaška",
+      "AZ": "Arizona",
+      "AR": "Arkansas",
+      "CA": "Kalifornie",
+      "CO": "Colorado",
+      "CT": "Connecticut",
+      "DE": "Delaware",
+      "FL": "Florida",
+      "GA": "Georgie",
+      "HI": "Havaj",
+      "ID": "Idaho",
+      "IL": "Illinois",
+      "IN": "Indiana",
+      "IA": "Iowa",
+      "KS": "Kansas",
+      "KY": "Kentucky",
+      "LA": "Louisiana",
+      "ME": "Maine",
+      "MD": "Maryland",
+      "MA": "Massachusetts",
+      "MI": "Michigan",
+      "MN": "Minnesota",
+      "MS": "Mississippi",
+      "MO": "Missouri",
+      "MT": "Montana",
+      "NE": "Nebraska",
+      "NV": "Nevada",
+      "NH": "New Hampshire",
+      "NJ": "New Jersey",
+      "NM": "Nové Mexiko",
+      "NY": "New York",
+      "NC": "Severní Karolína",
+      "ND": "Severní Dakota",
+      "OH": "Ohio",
+      "OK": "Oklahoma",
+      "OR": "Oregon",
+      "PA": "Pensylvánie",
+      "RI": "Rhode Island",
+      "SC": "Jižní Karolína",
+      "SD": "Jižní Dakota",
+      "TN": "Tennessee",
+      "TX": "Texas",
+      "UT": "Utah",
+      "VT": "Vermont",
+      "VA": "Virginie",
+      "WA": "Washington",
+      "WV": "Západní Virginie",
+      "WI": "Wisconsin",
+      "WY": "Wyoming",
+      "DC": "District of Columbia",
+      "AS": "Americká Samoa",
+      "GU": "Guam",
+      "MP": "Severní Mariany",
+      "PR": "Portoriko",
+      "UM": "Menší odlehlé ostrovy USA",
+      "VI": "Americké Panenské ostrovy"
     }
   },
   "donor": {
@@ -525,6 +595,21 @@
       "graph": {
         "subtitle": "Jak příspěvky od {donor} proudí k jednotlivým stranám podle typu"
       }
+    },
+    "via": {
+      "title": "Zprostředkovatelé & distribuce směrovaných darů",
+      "overview": "Veřejné zprávy o financování kampaní ukazují, že {viaSum} z celkových politických darů dárce {donor} ({pct} ze všech sledovaných {donorSum}) bylo směrováno přes zprostředkující výbory.",
+      "direct_donations": "Přímé dary činily {amount}.",
+      "downstream_title": "Politická orientace příjemců",
+      "downstream_overview": "Při zkoumání konečných příjemců směrovaných darů byly veškeré prostředky rozděleny mezi {count, plural, one {# politické hnutí} few {# politická hnutí} other {# politických hnutí}}.",
+      "downstream_primary": "Hlavním příjemcem byla strana {party}, která získala {amount} ({pct}) všech směrovaných prostředků.",
+      "downstream_followed_by": "Následují {list}.",
+      "downstream_item": "{party} s {amount} ({pct})",
+      "table_intro": "Níže uvedená tabulka uvádí zprostředkující a společné fundraisingové výbory, přes které byly tyto dary směrovány{years}:",
+      "table_intro_years": " mezi lety {earliestYear} a {latestYear}",
+      "intermediate_entity": "Zprostředkovatel",
+      "transactions": "Transakce",
+      "checks": "{count, plural, one {# platba} few {# platby} other {# plateb}}"
     }
   },
   "countries": {
@@ -617,7 +702,8 @@
     "NO": "Norsko",
     "UA": "Ukrajina",
     "SE": "Švédsko",
-    "ZA": "South Africa"
+    "ZA": "South Africa",
+    "US": "Spojené státy"
   },
   "about": {
     "title": "O nás",

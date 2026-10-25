@@ -31,6 +31,9 @@ import { useScrollToHash } from "@/hooks/use-scroll-to-hash";
 import { PartyField } from "@/types/party";
 import { Features, hasFeature } from "@/utils/features";
 
+import { usePartyViaSummary } from "./original-receivers/use-party-via-summary";
+import { PartyOriginalReceivers } from "./party-original-receivers";
+
 interface PartyDonorsClientPageProps {
   party: Party;
   treemapTitle: string;
@@ -67,6 +70,8 @@ export const PartyDonorsClientPage = ({
 
   const { isFiltered, filteredDonations, setDonations, controls } =
     useFilterEngine();
+
+  const viaSummary = usePartyViaSummary(party, filteredDonations);
 
   useEffect(() => {
     if (isSuccess && !error) {
@@ -163,6 +168,11 @@ export const PartyDonorsClientPage = ({
             </ArticleSectionColumn>
           </ArticleSectionTwoColumns>
         </ArticleSectionWrapper>
+      ) : null}
+
+      {/* Contributing Committees Section */}
+      {viaSummary.hasViaData ? (
+        <PartyOriginalReceivers summary={viaSummary} />
       ) : null}
 
       <ArticleSectionWrapper id={"sec-donor-list"}>

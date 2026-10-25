@@ -21,6 +21,8 @@ const mapLoader: Partial<Record<Country, () => Promise<unknown>>> = {
     import("../../../public/geojson/europe").then((mod) => mod.default),
   [Country.canada]: () =>
     import("../../../public/geojson/canada").then((mod) => mod.default),
+  [Country.unitedstates]: () =>
+    import("../../../public/geojson/unitedstates").then((mod) => mod.default),
 };
 
 export const GeoJsonLoader = ({ children }: PropsWithChildren) => {

@@ -68,7 +68,7 @@
     },
     "donor": {
       "overview": "Spenden von {donor} in {country}",
-      "description": "{donor} hat insgesamt {sum} in {count} Spenden über jeweils mindestens {minAmount} seit {minYear} gespendet. Diese Beiträge wurden auf {parties} verschiedene Parteien verteilt. Entdecken Sie detaillierte Einblicke in die Spendengewohnheiten und Empfängerparteien dieses Spenders in {country}."
+      "description": "Erfahren Sie, wohin die politischen Spenden von {donor} geflossen sind. {sum} gespendet in {count} Beiträgen an {parties} Parteien in {country} seit {minYear}."
     }
   },
   "chart": {
@@ -93,7 +93,8 @@
     "summary": "Zusammenfassung",
     "download_format": "{format} herunterladen",
     "view_source": "Quelle anzeigen",
-    "donation_type": "Spendenart"
+    "donation_type": "Spendenart",
+    "donated_to": "Gespendet an {recipient}"
   },
   "sort": {
     "asc": "Sortiere aufsteigend",
@@ -206,7 +207,8 @@
         "ukraine": "Die hier verwendeten Daten stammen von der Nationalen Agentur für Korruptionsprävention (NAZK) über das PolitData-Portal. Sie umfassen alle Datensätze, die in den offiziellen Berichten als „finanzielle Zuwendungen“ gekennzeichnet sind.\n\nHinweis zum Datenumfang: Diese Gesamtsumme bezieht sich ausschließlich auf direkte Geldtransfers. Sie enthält keine staatlichen Zuschüsse an Parlamentsparteien oder Sachleistungen (nicht-monetäre Beiträge) wie Waren und Dienstleistungen.\n\nAufgrund der umfassenden russischen Invasion wurde die verpflichtende Berichterstattung politischer Parteien von Anfang 2022 bis Ende 2023 aus Sicherheits- und Logistikgründen ausgesetzt. Nach der Verabschiedung des Gesetzes Nr. 3337-IX holen die Parteien ihre Berichte nun nach. Die Daten für die Jahre 2022–2025 werden weiterhin aktualisiert, während die NAZK diese Meldungen bearbeitet.",
         "france": "Die hier verwendeten Daten stammen von der Commission Nationale des Comptes de Campagne et des Financements Politiques (CNCCFP) und umfassen alle politischen Spenden (in Euro angegeben), die im Feld \"Dons_de_personne_physique\" dokumentiert sind.\n\nIm Gegensatz zu anderen Regionen werden die französischen Daten als jährliche Gesamtsumme pro Partei veröffentlicht, und die Identität einzelner Spender ist durch Datenschutzgesetze geschützt.",
         "sweden": "Die hier verwendeten Daten stammen vom Kammarkollegiet, dem offiziellen schwedischen Regierungsregister für Parteienfinanzierung. Um ein genaues Bild rein privater und basisnaher Unterstützung zu vermitteln (angegeben in SEK), umfasst diese Aggregation direkte Beiträge, die unter Kategorie 4 (\"Insamling av kontanter\") und Kategorie 5 (\"Bidrag\") dokumentiert sind. Innerparteiliche Transfers, staatliche Zuschüsse und Lotterieeinnahmen wurden ausdrücklich ausgeschlossen, um Doppelzählungen zu vermeiden und externe Spenden präzise zu isolieren. Alle Daten sind nach politischer Parteizugehörigkeit (\"Partitillhörighet\") gruppiert.",
-        "southafrica": "Die hier verwendeten Daten stammen von der Electoral Commission of South Africa (IEC) und umfassen alle seit 2021 veröffentlichten Parteienfinanzierungserklärungen (Abschnitt 9(1)), einschließlich gültiger Nachmeldungen. Indirekte Beiträge zum Multi-Party Democracy Fund und doppelte Offenlegungen von Spenderseite (Abschnitt 9(2)) sind ausgenommen.\\n\\nHinweis zu den Schwellenwerten: Politische Parteien mussten Spenden von über 100.000 ZAR pro Spender und Jahr melden, bis die gesetzliche Offenlegungsgrenze zum 1. April 2024 auf 200.000 ZAR angehoben wurde."
+        "southafrica": "Die hier verwendeten Daten stammen von der Electoral Commission of South Africa (IEC) und umfassen alle seit 2021 veröffentlichten Parteienfinanzierungserklärungen (Abschnitt 9(1)), einschließlich gültiger Nachmeldungen. Indirekte Beiträge zum Multi-Party Democracy Fund und doppelte Offenlegungen von Spenderseite (Abschnitt 9(2)) sind ausgenommen.\\n\\nHinweis zu den Schwellenwerten: Politische Parteien mussten Spenden von über 100.000 ZAR pro Spender und Jahr melden, bis die gesetzliche Offenlegungsgrenze zum 1. April 2024 auf 200.000 ZAR angehoben wurde.",
+        "unitedstates": "Die hier dargestellten Daten stammen aus den Massenveröffentlichungen der Federal Election Commission (FEC) und umfassen politische Zuwendungen, die seit 2016 dokumentiert wurden.\n\nAnders als in parlamentarischen Systemen, in denen Spenden direkt an zentrale Parteizentralen fließen, ist die Wahlkampffinanzierung auf Bundesebene in den USA über Kandidatenkampagnen, Parteiorganisationen und unabhängige Ausgabenausschüsse dezentralisiert. Um ein verlässliches Bild der finanziellen Koalitionen hinter jeder Strömung zu vermitteln, konsolidiert DonationWatch die wichtigsten Finanzierungsvehikel zu vereinheitlichten Parteigesamtbeträgen („Demokraten“, „Republikaner“ und „Bipartisan & Nonpartisan Super PACs“). Dazu gehören:\n• Offizielle Parteiausschüsse: Nationale, bundesstaatliche und Kongress-Wahlkampfausschüsse (z. B. DNC, RNC, DSCC, NRSC, DCCC, NRCC)\n• Autorisierte Wahlkampfausschüsse von Bundeskandidaten\n• Politisch ausgerichtete Super PACs, Hybrid PACs und Joint Fundraising Committees (z. B. Senate Majority PAC, Future Forward, MAGA Inc., Senate Leadership Fund, Harris Victory Fund, Trump 47 Committee)\n• Überparteiliche und branchenspezifische Super PACs, die Kandidaten beider großer Parteien unterstützen (z. B. Fairshake, United Democracy Project)\n\nWarum manche PACs keiner Partei zugeordnet sind:\nOffizielle Parteigremien und Kandidatenausschüsse deklarieren eine offizielle Parteizugehörigkeit bei der FEC und werden automatisch zugeordnet. Super PACs und Hybrid PACs operieren als unabhängige Einheiten ohne formelle Parteierklärung; DonationWatch prüft und erfasst fortlaufend alle bedeutenden Ausschüsse, die kumulierte Einnahmen von 5 Millionen USD oder mehr erreichen. Kleinere Einzelthema-Gruppen, Unternehmens-PACs und Gremien unterhalb dieser Schwelle ohne klare Ausrichtung bleiben unzugeordnet, um spekulative Zuordnungen zu vermeiden, und fließen nicht in die Parteisummen ein.\n\nDatennormalisierung & Umfang:\n• Mindestbetrag: Es werden nur Zuwendungen ab 10.000 USD erfasst. Da das Bundesrecht Direktspenden an Kandidaten (3.300 USD pro Wahl) und traditionelle PAC-Konten (5.000 USD pro Jahr) begrenzt, isoliert dieser Schwellenwert Großspenden an Parteikomitees, Joint Fundraising Committees (JFCs), Super-PACs und unbegrenzte Hybrid-PAC-Konten.\n• 501(c)(4)-Organisationen („Dark Money“): Spenden von gemeinnützigen 501(c)(4)-Organisationen (z. B. Future Forward USA Action, One Nation) an Super-PACs werden als Organisationseinnahmen (ORG) erfasst, da diese Gruppen ihre eigentlichen Geldgeber der FEC nicht offenlegen müssen.\n• Deduplizierung: JFC-Spenden werden beim ursprünglichen Eingang verbucht, während interne Weiterleitungen und Zuordnungs-Memos verworfen werden. Durchleitungsbuchungen (WinRed, ActBlue) und Übertragungen zwischen erfassten Komitees werden ausgeschlossen, damit Gelder nur einmal gezählt werden.\n• Ausschlüsse: Rückerstattungen werden von den Spendersummen abgezogen. Eigenmittel von Kandidaten (Darlehen und persönliche Einlagen) sowie Betriebseinnahmen (Zinsen, Dividenden, Wertpapierverkäufe) werden ausgeschlossen."
       },
       "source_link": "Datenquelle"
     },
@@ -407,6 +409,15 @@
         "summary": "Erkunde das interaktive Liniendiagramm, um die Spendenhistorie von {party} im Zeitverlauf nachzuverfolgen. Die x-Achse stellt die Daten dar, während die y-Achse den gespendeten Geldbetrag zeigt. {party} wird durch eine eigene Linie dargestellt, die mit jeder Spende weiter ansteigt.",
         "per_year": "Der Gesamtbetrag der von {party} erhaltenen Spenden variiert je nach Jahr. Unten findest du eine historische Übersicht der jährlichen Finanzierungssummen, die von der Partei angegeben wurden. Diese Liste erfasst die Summe aller meldepflichtigen Zuwendungen und finanziellen Unterstützungen für jedes einzelne Jahr:"
       }
+    },
+    "committees": {
+      "title": "Beteiligte Komitees & PACs",
+      "treemap": {
+        "title": "Finanzierende Komitees für {party}",
+        "subtitle": "Aufschlüsselung der Spenden nach Empfängerkomitee"
+      },
+      "p0": "Das Spendenkapital für {party} verteilt sich auf {count, plural, one {# registriertes Komitee} other {# registrierte Komitees}}, darunter Parteiorganisationen, gemeinsame Wahlkampffonds und unabhängige Super-PACs. Insgesamt gingen {amount} über diese Komitees ein.",
+      "top_intro": "Nachfolgend sind die Komitees mit dem größten Spendenaufkommen aufgeführt:"
     }
   },
   "origin": {
@@ -481,6 +492,65 @@
       "NT": "Nordwest-Territorien",
       "YT": "Yukon",
       "NU": "Nunavut"
+    },
+    "unitedstates": {
+      "AL": "Alabama",
+      "AK": "Alaska",
+      "AZ": "Arizona",
+      "AR": "Arkansas",
+      "CA": "Kalifornien",
+      "CO": "Colorado",
+      "CT": "Connecticut",
+      "DE": "Delaware",
+      "FL": "Florida",
+      "GA": "Georgia",
+      "HI": "Hawaii",
+      "ID": "Idaho",
+      "IL": "Illinois",
+      "IN": "Indiana",
+      "IA": "Iowa",
+      "KS": "Kansas",
+      "KY": "Kentucky",
+      "LA": "Louisiana",
+      "ME": "Maine",
+      "MD": "Maryland",
+      "MA": "Massachusetts",
+      "MI": "Michigan",
+      "MN": "Minnesota",
+      "MS": "Mississippi",
+      "MO": "Missouri",
+      "MT": "Montana",
+      "NE": "Nebraska",
+      "NV": "Nevada",
+      "NH": "New Hampshire",
+      "NJ": "New Jersey",
+      "NM": "New Mexico",
+      "NY": "New York",
+      "NC": "North Carolina",
+      "ND": "North Dakota",
+      "OH": "Ohio",
+      "OK": "Oklahoma",
+      "OR": "Oregon",
+      "PA": "Pennsylvania",
+      "RI": "Rhode Island",
+      "SC": "South Carolina",
+      "SD": "South Dakota",
+      "TN": "Tennessee",
+      "TX": "Texas",
+      "UT": "Utah",
+      "VT": "Vermont",
+      "VA": "Virginia",
+      "WA": "Washington",
+      "WV": "West Virginia",
+      "WI": "Wisconsin",
+      "WY": "Wyoming",
+      "DC": "District of Columbia",
+      "AS": "Amerikanisch-Samoa",
+      "GU": "Guam",
+      "MP": "Nördliche Marianen",
+      "PR": "Puerto Rico",
+      "UM": "Kleinere Inselbesitzungen der Vereinigten Staaten",
+      "VI": "Amerikanische Jungferninseln"
     }
   },
   "donor": {
@@ -525,6 +595,21 @@
       "graph": {
         "subtitle": "Wie die Beiträge von {donor} nach Art auf die einzelnen Parteien verteilt werden"
       }
+    },
+    "via": {
+      "title": "Zwischenempfänger & Weitergeleitete Spendenverteilung",
+      "overview": "Öffentliche Transparenzberichte zeigen, dass {viaSum} der gesamten politischen Spenden von {donor} ({pct} aller erfassten {donorSum}) über Zwischenempfänger weitergeleitet wurden.",
+      "direct_donations": "Direktspenden beliefen sich auf {amount}.",
+      "downstream_title": "Politische Ausrichtung der Empfänger",
+      "downstream_overview": "Betrachtet man die Endbegünstigten der weitergeleiteten Spenden, so verteilten sich die Mittel auf {count, plural, one {# politische Bewegung} other {# politische Bewegungen}}.",
+      "downstream_primary": "Hauptempfänger war {party} mit {amount} ({pct}) aller weitergeleiteten Mittel.",
+      "downstream_followed_by": "Gefolgt von {list}.",
+      "downstream_item": "{party} mit {amount} ({pct})",
+      "table_intro": "Die nachstehende Tabelle zeigt die Zwischenausschüsse, Förderer und gemeinsamen Spendenkomitees, über die diese Spenden weitergeleitet wurden{years}:",
+      "table_intro_years": " zwischen {earliestYear} und {latestYear}",
+      "intermediate_entity": "Zwischenempfänger",
+      "transactions": "Transaktionen",
+      "checks": "{count, plural, one {# Spende} other {# Spenden}}"
     }
   },
   "countries": {
@@ -617,7 +702,8 @@
     "NO": "Norwegen",
     "UA": "Ukraine",
     "SE": "Schweden",
-    "ZA": "South Africa"
+    "ZA": "South Africa",
+    "US": "den Vereinigten Staaten"
   },
   "about": {
     "title": "Über uns",

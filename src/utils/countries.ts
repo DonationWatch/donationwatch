@@ -25,6 +25,7 @@ export const enum Country {
   france = "france",
   sweden = "sweden",
   southafrica = "southafrica",
+  unitedstates = "unitedstates",
 }
 
 export type CountryCode =
@@ -46,7 +47,8 @@ export type CountryCode =
   | "UA"
   | "FR"
   | "SE"
-  | "ZA";
+  | "ZA"
+  | "US";
 
 export type Currency =
   | "EUR"
@@ -60,7 +62,8 @@ export type Currency =
   | "NOK"
   | "UAH"
   | "SEK"
-  | "ZAR";
+  | "ZAR"
+  | "USD";
 
 export const COUNTRIES = new Set<Country>([
   Country.germany,
@@ -82,6 +85,7 @@ export const COUNTRIES = new Set<Country>([
   Country.france,
   Country.sweden,
   Country.southafrica,
+  Country.unitedstates,
 ]);
 
 // This is the static config of each country.
@@ -821,6 +825,100 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       dates: ["2024-05-29", "2019-05-08"],
     },
     states: [],
+  },
+  [Country.unitedstates]: {
+    id: Country.unitedstates,
+    minYear: "2016",
+    preliminaryDataSince: "2026",
+    features:
+      Features.Date | Features.Origin | Features.Donors | Features.DonorType,
+    minPublicDonationAmount: 10_000,
+    currency: "USD",
+    legislativeYears: [
+      ["2013", "2014", "2015", "2016"],
+      ["2017", "2018", "2019", "2020"],
+      ["2021", "2022", "2023", "2024"],
+      ["2025", "2026", "2027", "2028"],
+    ],
+    code: "US",
+    wikiCountry: "en",
+    source: {
+      name: "Federal Election Commission (FEC)",
+      url: "https://www.fec.gov/",
+    },
+    markers: {
+      label: "Presidential election",
+      dates: ["2016-11-08", "2020-11-03", "2024-11-05", "2028-11-07"],
+    },
+    projection: {
+      phi1: 30, // Southern standard parallel (cuts across Gulf coast / north of Hawaii)
+      phi2: 60, // Northern standard parallel (cuts through southern Alaska)
+      phi0: 45, // Latitude of origin (vertical center)
+      lambda0: -120, // Central meridian (shifted west from -96 to balance Alaska & Hawaii)
+    },
+    // https://en.wikipedia.org/wiki/ISO_3166-2:US#Current_codes
+    states: [
+      // states
+      "AL",
+      "AK",
+      "AZ",
+      "AR",
+      "CA",
+      "CO",
+      "CT",
+      "DE",
+      "FL",
+      "GA",
+      "HI",
+      "ID",
+      "IL",
+      "IN",
+      "IA",
+      "KS",
+      "KY",
+      "LA",
+      "ME",
+      "MD",
+      "MA",
+      "MI",
+      "MN",
+      "MS",
+      "MO",
+      "MT",
+      "NE",
+      "NV",
+      "NH",
+      "NJ",
+      "NM",
+      "NY",
+      "NC",
+      "ND",
+      "OH",
+      "OK",
+      "OR",
+      "PA",
+      "RI",
+      "SC",
+      "SD",
+      "TN",
+      "TX",
+      "UT",
+      "VT",
+      "VA",
+      "WA",
+      "WV",
+      "WI",
+      "WY",
+      // district
+      "DC",
+      // outlying area
+      "AS",
+      "GU",
+      "MP",
+      "PR",
+      "UM",
+      "VI",
+    ],
   },
 };
 

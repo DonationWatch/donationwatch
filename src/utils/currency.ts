@@ -16,6 +16,7 @@ export const CURRENCY_TO_EUR_RATES: Record<Currency, number> = {
   UAH: 0.019376, // EUR/UAH ~51.61
   SEK: 0.088645, // EUR/SEK 11.2810
   ZAR: 0.053278, // EUR/ZAR 18.7695
+  USD: 0.89238, // EUR/USD 1.1206
 };
 
 export const CURRENCY_RATES_DATE = "2026-09-15";

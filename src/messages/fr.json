@@ -68,7 +68,7 @@
     },
     "donor": {
       "overview": "Dons de {donor} en {country}",
-      "description": "{donor} a effectué un total de {sum} via {count} dons supérieurs à {minAmount} depuis {minYear}. Ces contributions ont été réparties entre {parties} partis différents. Explorez l'analyse détaillée des schémas de donation et des partis bénéficiaires pour ce donateur en {country}."
+      "description": "Découvrez où sont allés les dons politiques de {donor}. {sum} donnés en {count} contributions à {parties} partis en {country} depuis {minYear}."
     }
   },
   "chart": {
@@ -93,7 +93,8 @@
     "summary": "Résumé",
     "download_format": "Télécharger au format {format}",
     "view_source": "Voir la source",
-    "donation_type": "Type de don"
+    "donation_type": "Type de don",
+    "donated_to": "Donné à {recipient}"
   },
   "sort": {
     "asc": "Tri croissant",
@@ -196,7 +197,8 @@
         "ukraine": "Les données proviennent de l'Agence nationale pour la prévention de la corruption (NAZK) via le portail PolitData. Note : En raison de l'invasion russe, les rapports ont été suspendus entre début 2022 et fin 2023 ; les données sont en cours de mise à jour.",
         "france": "Les données proviennent de la Commission Nationale des Comptes de Campagne et des Financements Politiques (CNCCFP) et incluent les dons des personnes physiques. En France, les données sont publiées sous forme d'agrégat annuel par parti et l'identité des donateurs est protégée par la loi.",
         "sweden": "Les données utilisées ici proviennent du Kammarkollegiet, le registre officiel du gouvernement suédois pour le financement des partis politiques. Afin de fournir une image précise du soutien purement privé et citoyen (déclaré en SEK), cet agrégat inclut les contributions directes documentées dans la catégorie 4 (\"Insamling av kontanter\") et la catégorie 5 (\"Bidrag\"). Les transferts internes entre partis, les subventions publiques et les revenus de loterie ont été expressément exclus afin d’éviter les doubles comptages et d’isoler avec précision les dons externes. Toutes les données sont regroupées par affiliation politique (\"Partitillhörighet\").",
-        "southafrica": "The data used here comes from the Electoral Commission of South Africa (IEC) and includes all published political party funding declarations (Section 9(1)) since 2021, including valid late submissions. Indirect contributions to the Multi-Party Democracy Fund and duplicate donor-side disclosures (Section 9(2)) are excluded.\\n\\nNote on thresholds: Political parties were required to report donations exceeding ZAR 100,000 per donor per year until 1 April 2024, when the legal disclosure threshold was increased to ZAR 200,000."
+        "southafrica": "Les données utilisées ici proviennent de la Commission électorale sud-africaine (IEC) et comprennent toutes les déclarations publiées de financement des partis politiques (article 9(1)) depuis 2021, y compris les soumissions tardives valides. Les contributions indirectes au Fonds pour la démocratie multipartite (Multi-Party Democracy Fund) et les déclarations en double côté donateurs (article 9(2)) sont exclues.\n\nNote sur les seuils : les partis politiques étaient tenus de déclarer les donations dépassant 100 000 ZAR par donateur et par an, jusqu'au 1er avril 2024, date à laquelle le seuil légal de divulgation a été porté à 200 000 ZAR.",
+        "unitedstates": "Les données présentées ici proviennent des divulgations en masse de la Federal Election Commission (FEC) et couvrent les contributions politiques documentées depuis 2016.\n\nContrairement aux systèmes parlementaires où les dons affluent directement vers les sièges centraux des partis, le financement électoral fédéral américain est décentralisé entre campagnes de candidats, organisations de partis et comités de dépenses indépendantes. Afin de donner une image fidèle des coalitions financières derrière chaque mouvement, DonationWatch consolide les principaux véhicules de financement en totaux de parti unifiés (« Démocrates », « Républicains » et « Super PACs bipartisans et non partisans »). Cela inclut :\n• Les comités de parti officiels : comités nationaux, de campagne pour le Congrès et de partis d'État (p. ex. DNC, RNC, DSCC, NRSC, DCCC, NRCC)\n• Les comités de campagne autorisés des candidats fédéraux\n• Les Super PACs, PACs hybrides et comités de collecte conjoints politiquement alignés (p. ex. Senate Majority PAC, Future Forward, MAGA Inc., Senate Leadership Fund, Harris Victory Fund, Trump 47 Committee)\n• Les Super PACs non partisans et axés sur l'industrie soutenant des candidats des deux grands partis (p. ex. Fairshake, United Democracy Project)\n\nPourquoi certains PAC ne sont pas associés à un parti :\nLes comités officiels de parti et de campagne des candidats déclarent une affiliation politique officielle auprès de la FEC et sont associés automatiquement. Les Super PAC et les PAC hybrides opèrent en tant qu'entités indépendantes sans déclarations formelles de parti ; DonationWatch audite et associe continuellement tous les comités atteignant 5 millions de dollars ou plus de recettes cumulées. Les groupes à cause unique plus modestes, les comités d'entreprise et les organisations sous ce seuil sans affiliation claire restent non associés pour éviter toute attribution spéculative, et leurs recettes sont exclues des totaux partisans.\n\nNormalisation des données et périmètre :\n• Montant minimum : Seules les contributions d'au moins 10 000 USD sont prises en compte. La loi fédérale plafonnant les dons directs aux candidats (3 300 USD par élection) et aux comptes de PAC traditionnels (5 000 USD par an), ce seuil permet d'isoler les dons majeurs versés aux comités de parti, aux comités conjoints (JFC), aux Super PAC et aux comptes illimités des Hybrid PAC.\n• Organisations 501(c)(4) (« Dark Money ») : Les contributions des organisations caritatives et sociales 501(c)(4) (ex. Future Forward USA Action, One Nation) aux Super PAC sont enregistrées en tant que recettes d'organisations (ORG), ces entités ne divulguant pas leurs donateurs sous-jacents à la FEC.\n• Déduplication : Les dons aux JFC sont enregistrés dès leur réception initiale, tandis que les redistributions internes et mémos d'attribution sont ignorés. Les transferts via des intermédiaires (WinRed, ActBlue) et les virements entre comités suivis sont exclus pour éviter tout double comptage.\n• Exclusions : Les remboursements sont déduits des totaux des donateurs. L'autofinancement des candidats (prêts et apports personnels) ainsi que les revenus d'exploitation (intérêts, dividendes, ventes d'actifs) sont exclus."
       },
       "source_link": "Source des données"
     },
@@ -397,6 +399,15 @@
         "summary": "Explorez le graphique linéaire interactif pour suivre l'historique des dons reçus par {party} au fil du temps. L'axe des abscisses (x) représente les dates, tandis que l'axe des ordonnées (y) indique les montants versés. {party} est représenté par une ligne distincte qui progresse à chaque nouveau don.",
         "per_year": "Le montant total des dons reçus par {party} varie selon les années. Vous trouverez ci-dessous un aperçu historique des totaux de financement annuels déclarés par le parti. Cette liste retrace la somme de toutes les contributions et aides financières déclarées pour chaque année spécifique :"
       }
+    },
+    "committees": {
+      "title": "Comités et PAC contributeurs",
+      "treemap": {
+        "title": "Comités finançant {party}",
+        "subtitle": "Répartition des contributions par comité destinataire"
+      },
+      "p0": "Les fonds destinés à {party} sont répartis entre {count, plural, one {# comité enregistré} other {# comités enregistrés}}, incluant les comités de parti, les fonds conjoints de campagne et les Super PAC indépendants. Au total, {amount} ont été perçus par le biais de ces comités.",
+      "top_intro": "Voici les comités ayant apporté les plus importantes contributions :"
     }
   },
   "origin": {
@@ -469,6 +480,21 @@
       "graph": {
         "subtitle": "Comment les contributions de {donor} sont réparties entre chaque parti par type"
       }
+    },
+    "via": {
+      "title": "Intermédiaires & distribution des dons acheminés",
+      "overview": "Les déclarations publiques de transparence indiquent que {viaSum} du total des contributions politiques de {donor} ({pct} de l'ensemble des {donorSum} suivis) ont été acheminés par des comités intermédiaires.",
+      "direct_donations": "Les dons directs se sont élevés à {amount}.",
+      "downstream_title": "Orientation politique des bénéficiaires",
+      "downstream_overview": "En examinant les bénéficiaires finaux des contributions acheminées, la totalité des fonds a été distribuée entre {count, plural, one {# mouvement politique} other {# mouvements politiques}}.",
+      "downstream_primary": "Le principal bénéficiaire était {party}, représentant {amount} ({pct}) de tous les fonds acheminés.",
+      "downstream_followed_by": "Suivi de {list}.",
+      "downstream_item": "{party} avec {amount} ({pct})",
+      "table_intro": "Le tableau ci-dessous répertorie les comités intermédiaires, relais et comités conjoints par lesquels ces dons ont été acheminés{years} :",
+      "table_intro_years": " entre {earliestYear} et {latestYear}",
+      "intermediate_entity": "Entité intermédiaire",
+      "transactions": "Transactions",
+      "checks": "{count, plural, one {# versement} other {# versements}}"
     }
   },
   "countries": {
@@ -561,7 +587,8 @@
     "NO": "la Norvège",
     "UA": "l'Ukraine",
     "SE": "la Suède",
-    "ZA": "South Africa"
+    "ZA": "South Africa",
+    "US": "les États-Unis"
   },
   "state": {
     "germany": {
@@ -607,6 +634,65 @@
       "NT": "Territoires du Nord-Ouest",
       "YT": "Yukon",
       "NU": "Nunavut"
+    },
+    "unitedstates": {
+      "AL": "Alabama",
+      "AK": "Alaska",
+      "AZ": "Arizona",
+      "AR": "Arkansas",
+      "CA": "Californie",
+      "CO": "Colorado",
+      "CT": "Connecticut",
+      "DE": "Delaware",
+      "FL": "Floride",
+      "GA": "Géorgie",
+      "HI": "Hawaï",
+      "ID": "Idaho",
+      "IL": "Illinois",
+      "IN": "Indiana",
+      "IA": "Iowa",
+      "KS": "Kansas",
+      "KY": "Kentucky",
+      "LA": "Louisiane",
+      "ME": "Maine",
+      "MD": "Maryland",
+      "MA": "Massachusetts",
+      "MI": "Michigan",
+      "MN": "Minnesota",
+      "MS": "Mississippi",
+      "MO": "Missouri",
+      "MT": "Montana",
+      "NE": "Nebraska",
+      "NV": "Nevada",
+      "NH": "New Hampshire",
+      "NJ": "New Jersey",
+      "NM": "Nouveau-Mexique",
+      "NY": "New York",
+      "NC": "Caroline du Nord",
+      "ND": "Dakota du Nord",
+      "OH": "Ohio",
+      "OK": "Oklahoma",
+      "OR": "Oregon",
+      "PA": "Pennsylvanie",
+      "RI": "Rhode Island",
+      "SC": "Caroline du Sud",
+      "SD": "Dakota du Sud",
+      "TN": "Tennessee",
+      "TX": "Texas",
+      "UT": "Utah",
+      "VT": "Vermont",
+      "VA": "Virginie",
+      "WA": "Washington",
+      "WV": "Virginie-Occidentale",
+      "WI": "Wisconsin",
+      "WY": "Wyoming",
+      "DC": "District de Columbia",
+      "AS": "Samoa américaines",
+      "GU": "Guam",
+      "MP": "Îles Mariannes du Nord",
+      "PR": "Porto Rico",
+      "UM": "Îles mineures éloignées des États-Unis",
+      "VI": "Îles Vierges des États-Unis"
     }
   },
   "about": {

@@ -96,7 +96,7 @@ export const ExpandableReactEchart = ({
 
   const hasPreliminaryData =
     country.preliminaryDataSince !== undefined &&
-    years.some((year) => year >= country.preliminaryDataSince!);
+    Boolean(years?.some((year) => year >= country.preliminaryDataSince!));
 
   const hasHeader = Boolean(title || subtitle || tools.length);
 
