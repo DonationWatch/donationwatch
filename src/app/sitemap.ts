@@ -105,6 +105,8 @@ export default async function sitemap(props: {
 
             const filterConditionalSubPages =
               (section: "year" | "party") => (subPage: string) => {
+                if (subPage.startsWith("donors"))
+                  return hasFeature(config, Features.Donors);
                 if (subPage.startsWith("origin"))
                   return hasFeature(config, Features.Origin);
                 if (section === "year" && subPage.startsWith("timeline"))
@@ -153,12 +155,6 @@ export default async function sitemap(props: {
                 );
 
                 return partySubPages
-                  .filter((subpage) =>
-                    // If there are no donors, don't index the donors page
-                    !hasFeature(config, Features.Donors)
-                      ? subpage !== "donors"
-                      : true,
-                  )
                   .filter(filterConditionalSubPages("party"))
                   .map((subPage) => ({
                     url: `${partiesBaseUrl}/${subPage}`,
@@ -176,12 +172,6 @@ export default async function sitemap(props: {
                 );
 
                 return yearSubPages
-                  .filter((subpage) =>
-                    // If there are no donors, don't index the donors page
-                    !hasFeature(config, Features.Donors)
-                      ? subpage !== "donors"
-                      : true,
-                  )
                   .filter(filterConditionalSubPages("year"))
                   .map((subPage) => ({
                     url: `${yearsBaseUrl}/${subPage}`,
