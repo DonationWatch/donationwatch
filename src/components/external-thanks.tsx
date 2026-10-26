@@ -53,8 +53,8 @@ const externalThanks: Partial<
   ],
   [Country.europeanunion]: [
     {
-      name: "European Democracy Consulting",
-      url: "https://eudemocracy.eu/",
+      name: "European Democracy Consulting Stiftung",
+      url: "https://edcstiftung.eu/",
     },
   ],
 };
