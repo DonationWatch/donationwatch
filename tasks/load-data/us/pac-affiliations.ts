@@ -172,6 +172,25 @@ export const PAC_AFFILIATIONS: Record<string, PacAffiliationConfig> = {
     party: "DEM",
     expectedNames: ["PROTECT PROGRESS"],
   },
+  C00764233: {
+    party: "DEM",
+    expectedNames: ["DEFEND THE VOTE"],
+  },
+  C00812495: {
+    party: "DEM",
+    expectedNames: [
+      "STATE + LOCAL ELECTION ALLIANCE",
+      "STATE DEMOCRACY DEFENDERS PAC",
+    ],
+  },
+  C00757419: {
+    party: "DEM",
+    expectedNames: ["SD PAC", "SAVE DEMOCRACY PAC"],
+  },
+  C00540443: {
+    party: "DEM",
+    expectedNames: ["GIFFORDS PAC", "AMERICANS FOR RESPONSIBLE SOLUTIONS-PAC"],
+  },
 
   // Democratic Joint Fundraising Committees (Type J)
   C00744946: {
@@ -225,6 +244,14 @@ export const PAC_AFFILIATIONS: Record<string, PacAffiliationConfig> = {
   C00836353: {
     party: "DEM",
     expectedNames: ["NEWSOM FOR CALIFORNIA GOVERNOR 2022"],
+  },
+  C00750919: {
+    party: "DEM",
+    expectedNames: ["OSSOFF VICTORY FUND"],
+  },
+  C00958066: {
+    party: "DEM",
+    expectedNames: ["ABDUL FOR MICHIGAN VICTORY FUND"],
   },
 
   // Republican Aligned Super PACs
@@ -503,6 +530,10 @@ export const PAC_AFFILIATIONS: Record<string, PacAffiliationConfig> = {
   C00833749: {
     party: "REP",
     expectedNames: ["AMERICAN EXCEPTIONALISM PAC"],
+  },
+  C00552851: {
+    party: "REP",
+    expectedNames: ["FREEDOM CAUCUS FUND", "HOUSE FREEDOM FUND"],
   },
 
   // Republican Joint Fundraising Committees (Type J)
