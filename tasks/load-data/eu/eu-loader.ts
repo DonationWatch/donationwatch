@@ -94,6 +94,10 @@ const normalizeParty = (party: string): string => {
     return "Coppieters Foundation";
   }
 
+  if (normalized === "Patriots for Europe Foundation") {
+    return "Patriots for Europe";
+  }
+
   if (normalized === "New Direction") {
     return "New Direction - The Foundation for European Reform";
   }
@@ -799,7 +803,7 @@ export class EuLoader extends DataLoader {
       parties:
         "https://www.appf.europa.eu/telastatic/cmsdata/311350/2026_PARTIES_Donations-table_2026-10-19.xlsx",
       foundations:
-        "https://www.appf.europa.eu/telastatic/cmsdata/311132/2026_FOUNDATIONS_Donations_table_2026-10-09.xlsx",
+        "https://www.appf.europa.eu/telastatic/cmsdata/311733/2026_FOUNDATIONS_Donations_table_2026-10-26.xlsx",
     },
   };
 
