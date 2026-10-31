@@ -37,18 +37,13 @@ const Wrapper = ({
   country: CountryConfig;
   className?: string;
 }>) => {
-  const t = useTranslations();
-  const ariaLabel = `${t("years.title")} ${formatYearsRange(years)}`;
   const yearsParam = serializeYears(years);
 
   return readonly ? (
-    <div aria-label={ariaLabel} className={cn(className, "block")}>
-      {children}
-    </div>
+    <div className={cn(className, "block")}>{children}</div>
   ) : (
     <Link
       prefetch={false}
-      aria-label={ariaLabel}
       href={`/${locale}/${country.id}/${yearsParam}/overview`}
       className={cn(className, "block")}
     >
