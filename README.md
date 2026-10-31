@@ -45,8 +45,9 @@ This repository does not include cached data assets from governmental or third-p
 # Install dependencies
 pnpm install
 
-# Generate fake data for development
+# Generate fake data for development and postprocess it
 pnpm data:fake
+pnpm data:postprocess
 
 # Run the development server (with Turbopack)
 pnpm dev:turbo
@@ -63,8 +64,11 @@ The app will be available at `http://localhost:3000`.
 # Build for production
 pnpm build
 
-# Run E2E tests
+# Run E2E tests (run 'pnpm exec playwright install chromium' first if not installed)
 pnpm test:e2e
+
+# Run E2E tests in interactive UI mode
+pnpm test:e2e:ui
 
 # Run unit tests
 pnpm test:unit
@@ -72,8 +76,15 @@ pnpm test:unit
 # Run unit tests with fake data (required if no real data is present)
 pnpm test:unit:fake
 
+# Run translation integrity tests
+pnpm test:i18n
+
 # Lint the codebase
 pnpm lint
+
+# Check code formatting / format code
+pnpm fmt:check
+pnpm fmt
 ```
 
 ## Project Structure
