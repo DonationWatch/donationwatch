@@ -182,7 +182,6 @@ export default async function YearsPage(
                 className="mt-2"
                 render={
                   <Link
-                    aria-label={tHome("previous_period")}
                     title={tHome("previous_period")}
                     scroll={true}
                     href={`/${locale}/${countryConfig.id}/${previousYear}/overview`}
