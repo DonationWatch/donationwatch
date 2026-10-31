@@ -18,7 +18,7 @@ The main application is a standard [Next.js](https://nextjs.org/) project locate
 
 1.  **Setup**: Follow the [README](./README.md) to install dependencies.
 2.  **Run**: Use `pnpm dev:turbo` to start the development server.
-3.  **Data**: The app relies on JSON files in `src/data/`. Running `pnpm data:fake` gives you sample data to work with immediately.
+3.  **Data**: The app relies on JSON files in `src/data/`. Running `pnpm data:fake && pnpm data:postprocess` gives you sample data to work with immediately.
 
 ## Adding a New Country
 
