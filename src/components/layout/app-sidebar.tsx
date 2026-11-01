@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 import type { CountryConfig } from "@/types/country-config";
-import type { Country } from "@/utils/countries";
 
 import { Github } from "@/components/icons/Github";
 import { createLucideSpriteIcon } from "@/components/icons/lucide-sprite-icon";
@@ -41,7 +40,7 @@ import {
   SIDENAV_PARTIES_VISIBLE,
   SIDENAV_YEARS_VISIBLE,
 } from "@/utils/config";
-import { COUNTRY_CONFIG, getCountryName } from "@/utils/countries";
+import { COUNTRIES, COUNTRY_CODES, getCountryName } from "@/utils/countries";
 import { countryFlags } from "@/utils/country-flags";
 import { Features, hasFeature } from "@/utils/features";
 
@@ -314,10 +313,13 @@ export function AppSidebar() {
             <SidebarGroupLabel>{tSidebar("all_countries")}</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-                {Object.entries(COUNTRY_CONFIG)
-                  .map(([countryId, country]) => ({
-                    countryId: countryId as Country,
-                    name: getCountryName(country, tCountries),
+                {[...COUNTRIES]
+                  .map((countryId) => ({
+                    countryId,
+                    name: getCountryName(
+                      { code: COUNTRY_CODES[countryId] },
+                      tCountries,
+                    ),
                   }))
                   .toSorted((a, b) => a.name.localeCompare(b.name, locale))
                   .map(({ countryId, name }) => (

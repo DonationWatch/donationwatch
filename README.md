@@ -113,9 +113,10 @@ The application is built around two primary data types defined in `src/utils/typ
 - `Donation` - Represents a single donation
 - `Party` - Represents a political party
 
-There's also `src/utils/countries.ts` containing the static configuration for all supported countries.
+There's also `src/utils/countries.ts` and `src/utils/country-config.ts` containing the country configurations and metadata for all supported countries:
 
-- `CountryConfig` - Provides per-country configuration that drives the entire application.
+- `CountryConfig` - (in `src/utils/country-config.ts`) Provides per-country configuration (registry URLs, regexes, data sources) that drives the data pipeline and server loaders.
+- `Country` / `COUNTRY_CODES` - (in `src/utils/countries.ts`) Provides lightweight enums and mappings safe for client bundle consumption.
 
 ## Data Pipeline
 

@@ -12,17 +12,12 @@ import { Country } from "@/utils/countries";
 
 echarts.use([VisualMapComponent, MapChart]);
 
-const mapLoader: Partial<Record<Country, () => Promise<unknown>>> = {
-  [Country.germany]: () =>
-    import("../../../public/geojson/germany").then((mod) => mod.default),
-  [Country.austria]: () =>
-    import("../../../public/geojson/austria").then((mod) => mod.default),
-  [Country.europeanunion]: () =>
-    import("../../../public/geojson/europe").then((mod) => mod.default),
-  [Country.canada]: () =>
-    import("../../../public/geojson/canada").then((mod) => mod.default),
-  [Country.unitedstates]: () =>
-    import("../../../public/geojson/unitedstates").then((mod) => mod.default),
+const GEOJSON_FILES: Partial<Record<Country, string>> = {
+  [Country.germany]: "/geojson/germany.json",
+  [Country.austria]: "/geojson/austria.json",
+  [Country.europeanunion]: "/geojson/europe.json",
+  [Country.canada]: "/geojson/canada.json",
+  [Country.unitedstates]: "/geojson/unitedstates.json",
 };
 
 export const GeoJsonLoader = ({ children }: PropsWithChildren) => {
@@ -34,8 +29,15 @@ export const GeoJsonLoader = ({ children }: PropsWithChildren) => {
       try {
         const map = echarts.getMap(country.code);
         if (!map) {
-          const data = await mapLoader[country.id]!();
-          echarts.registerMap(country.code, data as GeoJSONSourceInput);
+          const jsonPath = GEOJSON_FILES[country.id];
+          if (jsonPath) {
+            const res = await fetch(jsonPath);
+            if (!res.ok) {
+              throw new Error(`Failed to load geojson: ${res.statusText}`);
+            }
+            const data = (await res.json()) as GeoJSONSourceInput;
+            echarts.registerMap(country.code, data);
+          }
         }
         setMapLoaded(true);
       } catch (error) {

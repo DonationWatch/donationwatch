@@ -52,6 +52,10 @@
     <path d="M12 3v18"></path><path d="m19 8 3 8a5 5 0 0 1-6 0zV7"></path><path d="M3 7h1a17 17 0 0 0 8-2 17 17 0 0 0 8 2h1"></path><path d="m5 8 3 8a5 5 0 0 1-6 0zV7"></path><path d="M7 21h10"></path>
   </symbol>
 
+  <symbol id="lucide-search" viewBox="0 0 24 24">
+    <path d="m21 21-4.34-4.34"></path><circle cx="11" cy="11" r="8"></circle>
+  </symbol>
+
   <symbol id="lucide-server" viewBox="0 0 24 24">
     <rect width="20" height="8" x="2" y="2" rx="2" ry="2"></rect><rect width="20" height="8" x="2" y="14" rx="2" ry="2"></rect><line x1="6" x2="6.01" y1="6" y2="6"></line><line x1="6" x2="6.01" y1="18" y2="18"></line>
   </symbol>

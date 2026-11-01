@@ -13,7 +13,8 @@ import { ArticleSection } from "@/components/layout/article";
 import { Card } from "@/components/ui/card";
 import { getPartySync } from "@/config/parties";
 import { PartyField } from "@/types/party";
-import { COUNTRY_CONFIG, getCountryName } from "@/utils/countries";
+import { getCountryName } from "@/utils/countries";
+import { COUNTRY_CONFIG } from "@/utils/country-config";
 import { countryFlags } from "@/utils/country-flags";
 import { CURRENCY_RATES_DATE, getCurrencyRatesSummary } from "@/utils/currency";
 

@@ -2,6 +2,7 @@
 import type { LucideIcon } from "lucide-react";
 
 import { Expand, X, ZoomOut } from "lucide-react";
+import dynamic from "next/dynamic";
 import { type JSX, useCallback, useRef, useState } from "react";
 
 import { PageLogo } from "@/components/layout/page-logo";
@@ -25,8 +26,13 @@ import type {
 } from "./echart";
 
 import { Card } from "../ui/card";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { DynamicEchart } from "./dynamic-echart";
+
+const ExpandedChartDialog = dynamic(
+  () =>
+    import("./expanded-chart-dialog").then((mod) => mod.ExpandedChartDialog),
+  { ssr: false },
+);
 
 export const ExpandableReactEchart = ({
   years,
@@ -207,17 +213,13 @@ export const ExpandableReactEchart = ({
 
   if (isExpanded) {
     return (
-      <Dialog open={isExpanded} onOpenChange={(open) => setIsExpanded(open)}>
-        <DialogContent
-          className="h-full max-h-[90vh] w-full p-0 lg:max-w-[90vw]"
-          showCloseButton={false}
-        >
-          <DialogHeader className="sr-only">
-            <DialogTitle>{title}</DialogTitle>
-          </DialogHeader>
-          <div className="flex grow flex-col">{Chart}</div>
-        </DialogContent>
-      </Dialog>
+      <ExpandedChartDialog
+        isExpanded={isExpanded}
+        setIsExpanded={setIsExpanded}
+        title={title}
+      >
+        {Chart}
+      </ExpandedChartDialog>
     );
   } else {
     return (

@@ -7,7 +7,7 @@ import type {
   ExtractedDonationAddress,
 } from "@/utils/types";
 
-import { COUNTRY_CONFIG } from "@/utils/countries";
+import { COUNTRY_CONFIG } from "@/utils/country-config";
 import { fillYears } from "@/utils/date";
 import { Features, hasFeature } from "@/utils/features";
 import {

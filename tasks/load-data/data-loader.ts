@@ -24,7 +24,7 @@ import {
   ANONYMIZED_DONOR_KEYWORD,
   REDACTED_DONOR_KEYWORD,
 } from "@/utils/config";
-import { COUNTRY_CONFIG } from "@/utils/countries";
+import { COUNTRY_CONFIG } from "@/utils/country-config";
 import { donationYear, fillYears } from "@/utils/date";
 import { Features, hasFeature } from "@/utils/features";
 import { donationDateSorter } from "@/utils/sort";

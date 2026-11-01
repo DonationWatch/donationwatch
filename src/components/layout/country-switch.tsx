@@ -18,7 +18,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
-import { COUNTRIES, COUNTRY_CONFIG, getCountryName } from "@/utils/countries";
+import { COUNTRIES, COUNTRY_CODES, getCountryName } from "@/utils/countries";
 import { countryFlags } from "@/utils/country-flags";
 
 import { PageLogo } from "./page-logo";
@@ -88,7 +88,7 @@ export const CountrySwitch = () => {
               <div className="truncate text-xs">DonationWatch</div>
               <div className="truncate font-semibold">
                 {activeCountry
-                  ? t(`countries.${COUNTRY_CONFIG[activeCountry].code}`)
+                  ? t(`countries.${COUNTRY_CODES[activeCountry]}`)
                   : tSidebar("all_countries")}
               </div>
             </div>
@@ -106,14 +106,14 @@ export const CountrySwitch = () => {
               </DropdownMenuLabel>
               {[...COUNTRIES]
                 .toSorted((a, b) => {
-                  const translationA = t(`countries.${COUNTRY_CONFIG[a].code}`);
-                  const translationB = t(`countries.${COUNTRY_CONFIG[b].code}`);
+                  const translationA = t(`countries.${COUNTRY_CODES[a]}`);
+                  const translationB = t(`countries.${COUNTRY_CODES[b]}`);
 
                   return translationA.localeCompare(translationB);
                 })
                 .map((country) => {
                   const countryName = getCountryName(
-                    { code: COUNTRY_CONFIG[country].code },
+                    { code: COUNTRY_CODES[country] },
                     tCountries,
                   );
                   return (

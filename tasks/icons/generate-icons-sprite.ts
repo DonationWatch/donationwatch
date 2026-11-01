@@ -14,6 +14,7 @@ const LUCIDE_ICONS_TO_EXTRACT = [
   "Globe",
   "Info",
   "Scale",
+  "Search",
   "Server",
   "Sparkles",
   "Vote",

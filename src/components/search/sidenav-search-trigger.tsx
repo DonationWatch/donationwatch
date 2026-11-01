@@ -1,8 +1,10 @@
 "use client";
-import { Search } from "lucide-react";
-
+import { createLucideSpriteIcon } from "@/components/icons/lucide-sprite-icon";
+import { prefetchSearchDialog } from "@/components/search/dynamic-content-search";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { useSearchDialog } from "@/hooks/use-search-dialog";
+
+const Search = createLucideSpriteIcon("search");
 
 export const SidenavSearchTrigger = () => {
   const { open } = useSearchDialog();
@@ -13,6 +15,8 @@ export const SidenavSearchTrigger = () => {
       <button
         title={t("filter_description")}
         onClick={() => open()}
+        onMouseEnter={prefetchSearchDialog}
+        onFocus={prefetchSearchDialog}
         className="flex w-full cursor-pointer items-center gap-2 rounded-full border border-neutral-200 p-2 text-sm leading-none hover:bg-white dark:border-zinc-800 dark:hover:bg-zinc-800"
       >
         <Search size={16} />

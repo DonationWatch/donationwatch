@@ -8,6 +8,7 @@ import { DataExport } from "@/components/data-export";
 import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
 import { Article } from "@/components/layout/article";
 import { Translation } from "@/components/translation";
+import { Toaster } from "@/components/ui/sonner";
 import { DATA_LICENSE } from "@/utils/config";
 import { COUNTRIES, getCountryName } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
@@ -141,6 +142,7 @@ export default async function Page(
             }
           </p>
           <DataExport locale={locale} />
+          <Toaster position={"top-center"} />
         </div>
       </Article>
     </ScopedClientIntlProvider>

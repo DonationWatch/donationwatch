@@ -3,10 +3,9 @@ import type { ReactNode } from "react";
 
 import { Frown, Search, X } from "lucide-react";
 import { useLocale } from "next-intl";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
-import type { Country } from "@/utils/countries";
 import type { ReceiverId } from "@/utils/types";
 
 import { PartyDot } from "@/components/parties/party-dot";
@@ -22,7 +21,6 @@ import {
 } from "@/components/ui/dialog";
 import { useDonorNames } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
-import { useSearchDialog } from "@/hooks/use-search-dialog";
 import { cn } from "@/lib/utils";
 import { PartyField } from "@/types/party";
 import { Features, hasFeature } from "@/utils/features";
@@ -32,11 +30,7 @@ import { serializeYears } from "@/utils/serializers";
 
 const MAX_DONOR_LEN = 15;
 
-export const CountryHeaderSearch = () => {
-  return <HeaderSearch />;
-};
-
-const SearchDialog = ({
+export const SearchDialog = ({
   onClose,
   isOpen,
 }: {
@@ -65,28 +59,6 @@ const SearchDialog = ({
         </div>
       </DialogContent>
     </Dialog>
-  );
-};
-
-const HeaderSearch = () => {
-  const t = useTranslations("search");
-  const { country: activeCountry } = useParams<{ country: Country }>();
-  const { isOpen, open, close } = useSearchDialog();
-
-  if (!activeCountry) return null;
-
-  return (
-    <>
-      <button
-        className="flex size-10 cursor-pointer items-center justify-center rounded-full p-1 hover:bg-neutral-600/10 dark:text-zinc-200 dark:hover:bg-white/10"
-        onClick={() => open()}
-        aria-label={t("filter_description")}
-        title={t("filter")}
-      >
-        <Search size={18} />
-      </button>
-      <SearchDialog isOpen={isOpen} onClose={() => close()} />
-    </>
   );
 };
 
