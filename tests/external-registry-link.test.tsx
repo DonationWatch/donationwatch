@@ -2,7 +2,8 @@ import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, test } from "vitest";
 
 import { ExternalRegistryLink } from "@/components/donations/external-registry-link";
-import { COUNTRY_CONFIG, Country } from "@/utils/countries";
+import { Country } from "@/utils/countries";
+import { COUNTRY_CONFIG } from "@/utils/country-config";
 import { Features, hasFeature } from "@/utils/features";
 
 afterEach(cleanup);

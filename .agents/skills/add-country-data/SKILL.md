@@ -22,13 +22,13 @@ Completion criterion: you have a real flag file path and the facts above confirm
 
 ### 2. Register the country
 
-In [`src/utils/countries.ts`](../../../src/utils/countries.ts):
+1. In [`src/utils/countries.ts`](../../../src/utils/countries.ts):
+   - Add the lowercase full name to the `Country` const enum and the `COUNTRIES` set.
+   - Add the 2-letter code to `CountryCode`, the currency to `Currency` if it's new, and the mapping to `COUNTRY_CODES`.
+2. In [`src/utils/country-config.ts`](../../../src/utils/country-config.ts):
+   - Add a `COUNTRY_CONFIG[Country.x]` entry (`id`, `minYear`, `legislativeYears`, `features`, `minPublicDonationAmount`, `currency`, `source`, `code`, `wikiCountry`, `markers`, `states`; `donorFilters`/`receiverFilters`/`knownPartyRequirements`/`projection` as needed — see the reference doc).
 
-- Add the lowercase full name to the `Country` const enum and the `COUNTRIES` set.
-- Add the 2-letter code to `CountryCode`, and the currency to `Currency` if it's new.
-- Add a `COUNTRY_CONFIG[Country.x]` entry (`id`, `minYear`, `legislativeYears`, `features`, `minPublicDonationAmount`, `currency`, `source`, `code`, `wikiCountry`, `markers`, `states`; `donorFilters`/`receiverFilters`/`knownPartyRequirements`/`projection` as needed — see the reference doc).
-
-Completion criterion: `pnpm run lint` reports no errors touching `countries.ts`, and every field above holds a real value, not a placeholder.
+Completion criterion: `pnpm run lint` reports no errors touching `countries.ts` or `country-config.ts`, and every field above holds a real value, not a placeholder.
 
 ### 3. Wire the flag
 

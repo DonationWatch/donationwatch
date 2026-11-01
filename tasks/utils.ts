@@ -2,11 +2,8 @@ import { checkbox } from "@inquirer/prompts";
 import assert from "assert";
 import fs from "fs/promises";
 
-import {
-  COUNTRIES,
-  COUNTRY_CONFIG,
-  countryCodesToCountry,
-} from "@/utils/countries";
+import { COUNTRIES, countryCodesToCountry } from "@/utils/countries";
+import { COUNTRY_CONFIG } from "@/utils/country-config";
 
 // Non-interactive override for scripting/agents: skips the checkbox prompt entirely.
 // Example: COUNTRIES=ZA,SE pnpm run data:rebuild:cached

@@ -45,7 +45,7 @@ import { donationDateSorter } from "@/utils/sort";
 import { DonationField, DonationType, DonorType } from "@/utils/types";
 
 import { getDonations } from "../data/load-donations";
-import { jsonAsTsModule, jsonAsTsModuleWithType } from "../utils";
+import { jsonAsTsModuleWithType } from "../utils";
 import {
   donationsToDonationsDocumentWithDonorIds,
   donationsToDonationsDocumentWithoutDonorIds,
@@ -450,19 +450,19 @@ const postprocessGeojson = async () => {
 
   await fs.mkdir(publicDataDir, { recursive: true });
 
-  for (const file of [
-    "europe.ts",
-    "austria.ts",
-    "germany.ts",
-    "canada.ts",
-    "unitedstates.ts",
+  for (const name of [
+    "europe",
+    "austria",
+    "germany",
+    "canada",
+    "unitedstates",
   ]) {
-    const content = await import(`./geojson/${file}`).then(
+    const content = await import(`./geojson/${name}.ts`).then(
       (module) => module.default,
     );
     await fs.writeFile(
-      path.join(publicDataDir, file),
-      jsonAsTsModule(JSON.stringify(content)),
+      path.join(publicDataDir, `${name}.json`),
+      JSON.stringify(content),
     );
   }
 };

@@ -1,6 +1,6 @@
 # Loader Reference
 
-Disclosed reference for [`add-country-data`](../SKILL.md). Consult this from step 2 onward — registering `COUNTRY_CONFIG` and writing the loader both draw on it.
+Disclosed reference for [`add-country-data`](../SKILL.md). Consult this from step 2 onward — registering `COUNTRY_CONFIG` (in `src/utils/country-config.ts`) and writing the loader both draw on it.
 
 ## File map
 
@@ -55,7 +55,7 @@ interface PartyConfig {
 
 `tests/countries.test.ts` enforces uniqueness of `code`, `color`, `short`, and the long name within a country — a copy-pasted color or code from another party is a real failure mode when there are 50+ minor parties (see `ge-loader.ts`, which resorts to placeholder colors like `#ff0027` for parties with no known brand color — that pattern is a last resort, not a first choice).
 
-## `COUNTRY_CONFIG` fields worth knowing
+## `COUNTRY_CONFIG` fields worth knowing (`src/utils/country-config.ts`)
 
 - `features` — bitmask of `Features` (`src/utils/features.ts`): `Date` (day-level dates vs. year-only), `Origin` (address has country/state), `DonorType`, `ExternalDonationIds`, `Donors` (has real donor names, as opposed to aggregate-only sources), `DonationType`, `DonorRegistrationNumber`.
 - `knownPartyRequirements: { count, sum }` — a party only _needs_ an entry in `parties` once it crosses this count OR this sum (use `-1` on one side to check only the other). Without it, every single-donation micro-party demands an entry. See `cz`/`lv`/`hr`/`ge`/`ca`/`fr`/`ua` for real thresholds.
