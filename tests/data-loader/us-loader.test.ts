@@ -513,6 +513,20 @@ describe("US donor alias map and party configuration", () => {
       "STAND TOGETHER CHAMBER OF COMMERCE",
     );
   });
+
+  test("normalizes AIPAC to AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE via alias map", () => {
+    const aliasMap = buildUsDonorAliasMap([
+      { [DonationField.DonorName]: "AIPAC" },
+      { [DonationField.DonorName]: "AIPAC PAC" },
+    ] as unknown as ExtractedYearData[]);
+
+    expect(aliasMap.get("AIPAC")).toBe(
+      "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE",
+    );
+    expect(aliasMap.get("AIPAC PAC")).toBe(
+      "AMERICAN ISRAEL PUBLIC AFFAIRS COMMITTEE",
+    );
+  });
 });
 
 describe("US PAC affiliations validation and safeguards", () => {
