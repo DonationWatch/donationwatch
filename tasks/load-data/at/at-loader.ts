@@ -465,7 +465,7 @@ export class AtLoader extends DataLoader {
           };
         })
         // remove empty rows
-        .filter(Boolean)
+        .filter(Boolean) as ExtractedYearData[]
     );
   }
 

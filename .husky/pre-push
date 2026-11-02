@@ -1,2 +1,3 @@
-pnpm run fmt
+pnpm run fmt:check
 pnpm run lint
+pnpm run typecheck

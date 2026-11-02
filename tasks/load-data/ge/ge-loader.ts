@@ -613,6 +613,7 @@ export class GeLoader extends DataLoader {
         `Loading year ${year} data from ${url.toString()} (start: ${start})`,
       );
 
+      process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "0";
       const res = await fetch(url.toString(), {
         headers: {
           Accept: "application/json, text/javascript, */*; q=0.01",
