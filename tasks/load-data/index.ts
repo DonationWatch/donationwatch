@@ -1,6 +1,6 @@
 import debug from "debug";
 
-import { COUNTRY_CONFIG } from "@/utils/countries";
+import { COUNTRY_CONFIG } from "@/utils/country-config";
 import { fillYears } from "@/utils/date";
 
 import { promptCountries, promptYears } from "../utils";
