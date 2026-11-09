@@ -174,11 +174,9 @@ export const LoadedDonorReceiverHistogram = ({
   return (
     <ExpandableReactEchart
       height={400}
-      maxHeightScreen={true}
       title={title}
       subtitle={subtitle}
       years={years}
-      allowExpand={true}
       feature="bar"
       option={option}
     />

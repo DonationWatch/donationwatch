@@ -108,8 +108,8 @@ function AppUIProvider({
   }, [sidebarOpen]);
 
   return (
-    <BrowserBasedLocaleContext.Provider value={browserBasedLocale}>
-      <SearchDialogContext.Provider value={searchDialogValue}>
+    <BrowserBasedLocaleContext value={browserBasedLocale}>
+      <SearchDialogContext value={searchDialogValue}>
         <SidebarProvider
           open={sidebarOpen}
           onOpenChange={setSidebarOpen}
@@ -117,7 +117,7 @@ function AppUIProvider({
         >
           {children}
         </SidebarProvider>
-      </SearchDialogContext.Provider>
-    </BrowserBasedLocaleContext.Provider>
+      </SearchDialogContext>
+    </BrowserBasedLocaleContext>
   );
 }

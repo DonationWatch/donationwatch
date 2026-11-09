@@ -1,6 +1,6 @@
 "use client";
 
-import type { PropsWithChildren } from "react";
+import type { PropsWithChildren, Ref } from "react";
 
 import { createParser, useQueryStates, parseAsInteger, throttle } from "nuqs";
 import {
@@ -9,7 +9,6 @@ import {
   useEffect,
   useMemo,
   useState,
-  forwardRef,
   useImperativeHandle,
   Suspense,
   useRef,
@@ -115,23 +114,34 @@ export interface FilterControls {
   resetFilters: () => void;
 }
 
-export interface FilterContextValue {
+export interface FilterEngineState {
   filteredDonations: Donation[];
   filteredYears: string[];
+  filteredParties: string[];
   activeFilters: FilterState;
   bounds: FilterBounds;
   stats: FilteredStats;
-  controls: FilterControls;
   isFiltered: boolean;
   isOpen: boolean;
-  setIsOpen: (open: boolean) => void;
   yearStats: Record<number, number> | null;
+}
+
+export interface FilterEngineActions extends FilterControls {
+  setIsOpen: (open: boolean) => void;
   setYearStats: (stats: Record<number, number> | null) => void;
   setAvailableRange: (range: [number, number] | null) => void;
-  accentColor: string;
   setDonations: (donations: Donation[]) => void;
-  filteredParties: string[];
+}
+
+export interface FilterEngineMeta {
+  accentColor: string;
   hasFilterSections: boolean;
+}
+
+export interface FilterContextValue {
+  state: FilterEngineState;
+  actions: FilterEngineActions;
+  meta: FilterEngineMeta;
 }
 
 export const FilterContext = createContext<FilterContextValue | null>(null);
@@ -156,44 +166,46 @@ export interface NuqsParams {
   donorTypes: DonorType[] | null;
 }
 
-const FilterNuqsSync = memo(
-  forwardRef<NuqsSyncHandle, { onParamsChange: (params: NuqsParams) => void }>(
-    ({ onParamsChange }, ref) => {
-      const [params, setParams] = useQueryStates(
-        {
-          from: yearParser,
-          to: yearParser,
-          parties: partiesParser,
-          types: typesParser,
-          donorTypes: donorTypesParser,
-        },
-        {
-          shallow: true,
-          limitUrlUpdates: throttle(100),
-        },
-      );
-
-      useImperativeHandle(
-        ref,
-        () => ({
-          setParams,
-        }),
-        [setParams],
-      );
-
-      const lastParamsRef = useRef<NuqsParams | null>(null);
-
-      useEffect(() => {
-        if (!areNuqsParamsEqual(lastParamsRef.current, params)) {
-          lastParamsRef.current = params;
-          onParamsChange(params);
-        }
-      }, [params, onParamsChange]);
-
-      return null;
+const FilterNuqsSync = memo(function FilterNuqsSync({
+  onParamsChange,
+  ref,
+}: {
+  onParamsChange: (params: NuqsParams) => void;
+  ref?: Ref<NuqsSyncHandle>;
+}) {
+  const [params, setParams] = useQueryStates(
+    {
+      from: yearParser,
+      to: yearParser,
+      parties: partiesParser,
+      types: typesParser,
+      donorTypes: donorTypesParser,
     },
-  ),
-);
+    {
+      shallow: true,
+      limitUrlUpdates: throttle(100),
+    },
+  );
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      setParams,
+    }),
+    [setParams],
+  );
+
+  const lastParamsRef = useRef<NuqsParams | null>(null);
+
+  useEffect(() => {
+    if (!areNuqsParamsEqual(lastParamsRef.current, params)) {
+      lastParamsRef.current = params;
+      onParamsChange(params);
+    }
+  }, [params, onParamsChange]);
+
+  return null;
+});
 
 const areNuqsParamsEqual = (a: NuqsParams | null, b: NuqsParams): boolean => {
   return (
@@ -671,12 +683,18 @@ export const FilterProvider = ({
 
   const value = useMemo<FilterContextValue>(
     () => ({
-      filteredDonations,
-      filteredYears,
-      activeFilters,
-      bounds,
-      stats,
-      controls: {
+      state: {
+        filteredDonations,
+        filteredYears,
+        filteredParties,
+        activeFilters,
+        bounds,
+        stats,
+        isFiltered,
+        isOpen,
+        yearStats,
+      },
+      actions: {
         setYearRange,
         toggleParty,
         toggleDonationType,
@@ -685,24 +703,26 @@ export const FilterProvider = ({
         toggleDonorType,
         setSelectedDonorTypes,
         resetFilters,
+        setIsOpen,
+        setYearStats,
+        setAvailableRange,
+        setDonations,
       },
-      isFiltered,
-      isOpen,
-      setIsOpen,
-      yearStats,
-      setYearStats,
-      setAvailableRange,
-      accentColor,
-      setDonations,
-      filteredParties,
-      hasFilterSections,
+      meta: {
+        accentColor,
+        hasFilterSections,
+      },
     }),
     [
       filteredDonations,
       filteredYears,
+      filteredParties,
       activeFilters,
       bounds,
       stats,
+      isFiltered,
+      isOpen,
+      yearStats,
       setYearRange,
       toggleParty,
       toggleDonationType,
@@ -711,25 +731,21 @@ export const FilterProvider = ({
       toggleDonorType,
       setSelectedDonorTypes,
       resetFilters,
-      isFiltered,
-      isOpen,
       setIsOpen,
-      yearStats,
       setYearStats,
       setAvailableRange,
-      accentColor,
       setDonations,
-      filteredParties,
+      accentColor,
       hasFilterSections,
     ],
   );
 
   return (
-    <FilterContext.Provider value={value}>
+    <FilterContext value={value}>
       {children}
       <Suspense fallback={null}>
         <FilterNuqsSync ref={nuqsRef} onParamsChange={onParamsChange} />
       </Suspense>
-    </FilterContext.Provider>
+    </FilterContext>
   );
 };

@@ -14,7 +14,9 @@ const DonationFilterSheetContent = dynamic(
 );
 
 export const DonationFilterSheet = () => {
-  const { isOpen } = useFilterEngine();
+  const {
+    state: { isOpen },
+  } = useFilterEngine();
   const hasEverOpened = useHasEverOpened(isOpen);
 
   if (!hasEverOpened) {

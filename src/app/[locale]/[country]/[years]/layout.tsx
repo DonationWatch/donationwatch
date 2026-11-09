@@ -11,7 +11,7 @@ import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
 import { PageHeader } from "@/components/layout/page-header";
 import { LastModifiedSchema } from "@/components/schema";
 import { NavigationTabs } from "@/components/tabs";
-import { FilteredYearsHeader } from "@/components/years/filtered-years-header";
+import { FilteredYearsHeroHeader } from "@/components/years/filtered-years-header";
 import { YearsFilterSync } from "@/components/years/years-filter-sync";
 import { YearsFooterNav } from "@/components/years/years-footer-nav";
 import { isNotNullandNotUndefined } from "@/utils/array";
@@ -214,15 +214,9 @@ export default async function YearsLayout(
       />
 
       <PageHeader>
-        <FilteredYearsHeader
-          titleBeforeYears={true}
+        <FilteredYearsHeroHeader
           title={t("years.title")}
-          idPrefix="hero-"
-          locale={locale}
           years={years}
-          showTop3={false}
-          showExtendedMeta={true}
-          readonly={true}
           partySums={partySums}
         />
       </PageHeader>

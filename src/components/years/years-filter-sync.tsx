@@ -6,7 +6,9 @@ import { useFilterEngine } from "@/hooks/use-filter-engine";
 import { deserializeYears } from "@/utils/serializers";
 
 export const YearsFilterSync = ({ yearsParam }: { yearsParam: string }) => {
-  const { setAvailableRange } = useFilterEngine();
+  const {
+    actions: { setAvailableRange },
+  } = useFilterEngine();
 
   useEffect(() => {
     const years = deserializeYears(yearsParam);

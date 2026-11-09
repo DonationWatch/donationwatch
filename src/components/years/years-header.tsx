@@ -20,18 +20,24 @@ import { getPartiesByYears } from "@/utils/data/get-parties-by-years";
 import { getPartiesSum } from "@/utils/data/get-parties-sum";
 import { Features, hasFeature } from "@/utils/features";
 import { formatYearsRange } from "@/utils/formatter";
-import { numbersAvg } from "@/utils/math";
 import { serializeYears } from "@/utils/serializers";
 
-const Wrapper = ({
+const HighscoreHeaderFrame = ({
+  className,
+  children,
+}: PropsWithChildren<{
+  className?: string;
+}>) => {
+  return <div className={cn(className, "block")}>{children}</div>;
+};
+
+const HighscoreHeaderLinkFrame = ({
   className,
   children,
   country,
-  readonly,
   locale,
   years,
 }: PropsWithChildren<{
-  readonly: boolean;
   locale: ConstLocale;
   years: string[];
   country: CountryConfig;
@@ -39,9 +45,7 @@ const Wrapper = ({
 }>) => {
   const yearsParam = serializeYears(years);
 
-  return readonly ? (
-    <div className={cn(className, "block")}>{children}</div>
-  ) : (
+  return (
     <Link
       prefetch={false}
       href={`/${locale}/${country.id}/${yearsParam}/overview`}
@@ -52,126 +56,149 @@ const Wrapper = ({
   );
 };
 
-export const HighscoreHeader = ({
-  className,
-  years,
-  locale,
-  count,
-  sum,
-  sums,
-  avg,
-  showTop3,
-  idPrefix = "",
-  showExtendedMeta = false,
-  readonly = true,
-  country,
+const HighscoreHeaderTitle = ({
   title,
-  children,
-  titleBeforeYears = false,
-}: PropsWithChildren<{
-  className?: string;
-  country: CountryConfig;
-  count: number;
-  sum: number;
-  sums: [ReceiverId, { count: number; sum: number }][];
-  avg: number;
-  idPrefix: string;
-  locale: ConstLocale;
-  years: string[];
-  showTop3: boolean;
-  readonly?: boolean;
-  showExtendedMeta?: boolean;
+  idPrefix = "",
+  years,
+}: {
   title?: string;
-  titleBeforeYears?: boolean;
-}>) => {
-  const t = useTranslations();
-
+  idPrefix?: string;
+  years: string[];
+}) => {
   return (
-    <Wrapper
-      className={className}
-      years={years}
-      readonly={readonly}
-      locale={locale}
-      country={country}
-    >
-      {title && !titleBeforeYears ? (
+    <>
+      {title ? (
         <h2 className="mb-2" id={`${idPrefix}title`}>
           {title}
         </h2>
       ) : null}
-      <h3 className="mb-4 text-3xl sm:text-4xl">
-        {titleBeforeYears ? title : null} {formatYearsRange(years)}
-      </h3>
-      <div className="mb-4">
-        <div className="flex-row space-y-2 sm:flex sm:space-y-0 sm:space-x-10">
-          {hasFeature(country, Features.Donors) ? (
-            <MetaCard
-              title={t("donation_count")}
-              value={<FormattedNumber value={count} />}
-            />
-          ) : null}
-          <MetaCard
-            title={t("sum")}
-            value={<FormattedCountryCurrency value={sum} />}
-          />
-          {hasFeature(country, Features.Donors) &&
-            showExtendedMeta &&
-            count > 1 && (
-              <MetaCard
-                title={t("average")}
-                value={<FormattedCountryCurrency value={avg} />}
-              />
-            )}
-        </div>
-      </div>
-      {children}
-      {showTop3 && (
-        <div className="@container mt-4 space-y-2">
-          {sums.slice(0, 3).map(([party, data], idx) => (
-            <ReadonlyTopYearDonationsItem
-              rank={idx + 1}
-              key={party}
-              partyId={party}
-              amount={data.sum}
-              sum={sum}
-            />
-          ))}
-        </div>
-      )}
-    </Wrapper>
+      <h3 className="mb-4 text-3xl sm:text-4xl"> {formatYearsRange(years)}</h3>
+    </>
   );
+};
+
+const HighscoreHeaderInlineTitle = ({
+  title,
+  years,
+}: {
+  title?: string;
+  years: string[];
+}) => {
+  return (
+    <h3 className="mb-4 text-3xl sm:text-4xl">
+      {title} {formatYearsRange(years)}
+    </h3>
+  );
+};
+
+const HighscoreHeaderAverageMeta = ({
+  country,
+  count,
+  avg,
+}: {
+  country: CountryConfig;
+  count: number;
+  avg: number;
+}) => {
+  const t = useTranslations();
+
+  if (!hasFeature(country, Features.Donors) || count <= 1) {
+    return null;
+  }
+
+  return (
+    <MetaCard
+      title={t("average")}
+      value={<FormattedCountryCurrency value={avg} />}
+    />
+  );
+};
+
+const HighscoreHeaderMeta = ({
+  country,
+  count,
+  sum,
+  children,
+}: PropsWithChildren<{
+  country: CountryConfig;
+  count: number;
+  sum: number;
+}>) => {
+  const t = useTranslations();
+
+  return (
+    <div className="mb-4">
+      <div className="flex-row space-y-2 sm:flex sm:space-y-0 sm:space-x-10">
+        {hasFeature(country, Features.Donors) ? (
+          <MetaCard
+            title={t("donation_count")}
+            value={<FormattedNumber value={count} />}
+          />
+        ) : null}
+        <MetaCard
+          title={t("sum")}
+          value={<FormattedCountryCurrency value={sum} />}
+        />
+        {children}
+      </div>
+    </div>
+  );
+};
+
+const HighscoreHeaderTopParties = ({
+  sums,
+  sum,
+}: {
+  sums: [ReceiverId, { count: number; sum: number }][];
+  sum: number;
+}) => {
+  return (
+    <div className="@container mt-4 space-y-2">
+      {sums.slice(0, 3).map(([party, data], idx) => (
+        <ReadonlyTopYearDonationsItem
+          rank={idx + 1}
+          key={party}
+          partyId={party}
+          amount={data.sum}
+          sum={sum}
+        />
+      ))}
+    </div>
+  );
+};
+
+export const HighscoreHeader = {
+  Frame: HighscoreHeaderFrame,
+  LinkFrame: HighscoreHeaderLinkFrame,
+  Title: HighscoreHeaderTitle,
+  InlineTitle: HighscoreHeaderInlineTitle,
+  Meta: HighscoreHeaderMeta,
+  AverageMeta: HighscoreHeaderAverageMeta,
+  TopParties: HighscoreHeaderTopParties,
 };
 
 export const UnfilteredYearsHeader = ({
   locale,
   years,
   idPrefix = "",
-  showTop3 = true,
-  showExtendedMeta = false,
-  readonly = false,
   country,
   title,
   partySums,
   children,
   className,
-  titleBeforeYears = false,
   parties,
 }: PropsWithChildren<{
   idPrefix?: string;
   locale: ConstLocale;
   years: string[];
-  showTop3?: boolean;
-  showExtendedMeta?: boolean;
-  readonly?: boolean;
   country: CountryConfig;
   title?: string;
   partySums: PartyYearsSums;
   className?: string;
-  titleBeforeYears?: boolean;
   parties: Party[];
 }>) => {
   const yearParties = getPartiesByYears(years, parties);
-  const { count, sum, sums, sumNumbers } = getPartiesSum(
+  const { count, sum, sums } = getPartiesSum(
     country,
     partySums,
     yearParties,
@@ -179,23 +206,16 @@ export const UnfilteredYearsHeader = ({
   );
 
   return (
-    <HighscoreHeader
+    <HighscoreHeader.LinkFrame
       className={className}
       country={country}
-      count={count}
-      sum={sum}
-      sums={sums}
-      avg={numbersAvg(sumNumbers, count)}
-      idPrefix={idPrefix}
       locale={locale}
       years={years}
-      showTop3={showTop3}
-      showExtendedMeta={showExtendedMeta}
-      readonly={readonly}
-      title={title}
-      titleBeforeYears={titleBeforeYears}
     >
+      <HighscoreHeader.Title idPrefix={idPrefix} title={title} years={years} />
+      <HighscoreHeader.Meta country={country} count={count} sum={sum} />
       {children}
-    </HighscoreHeader>
+      <HighscoreHeader.TopParties sums={sums} sum={sum} />
+    </HighscoreHeader.LinkFrame>
   );
 };

@@ -1,4 +1,6 @@
 "use client";
+import type { ReactNode } from "react";
+
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useLocale } from "next-intl";
 import { useEffect, useMemo, useRef } from "react";
@@ -18,33 +20,52 @@ import { getDonationDonorName } from "@/utils/donor";
 import { DonationField } from "@/utils/types";
 
 export const LoadedTopDonationsItemDetail = ({
-  showDonationParty = false,
   partyId,
   donations,
 }: {
-  showDonationParty?: boolean;
   partyId: ReceiverId;
   donations: Donation[];
 }) => {
   return (
     <TopDonationsItemDetail
       donations={donations.filter((d) => d[DonationField.Receiver] === partyId)}
-      showDonationParty={showDonationParty}
+    />
+  );
+};
+
+export const TopDonationsItemDetailWithParty = ({
+  donations,
+}: {
+  donations: Donation[];
+}) => {
+  const locale = useLocale();
+
+  return (
+    <TopDonationsItemDetail
+      donations={donations}
+      renderItemExtra={(donation) => (
+        <PartyLink
+          className="mx-2 shrink-0"
+          party={donation[DonationField.Receiver]}
+          locale={locale}
+        >
+          <PartyDot party={donation[DonationField.Receiver]} />
+        </PartyLink>
+      )}
     />
   );
 };
 
 export const TopDonationsItemDetail = ({
-  showDonationParty = false,
   donations,
+  renderItemExtra,
 }: {
-  showDonationParty?: boolean;
   donations: Donation[];
+  renderItemExtra?: (donation: Donation) => ReactNode;
 }) => {
   const country = useRequiredCountryConfig();
   const t = useTranslations();
   const tCommon = useTranslations("common");
-  const locale = useLocale();
   const browserBasedLocale = useBrowserBasedLocale();
   const parentRef = useRef<HTMLDivElement>(null);
   const isSm = useBreakpoint("sm");
@@ -102,15 +123,7 @@ export const TopDonationsItemDetail = ({
                     donor={donation[DonationField.DonorName]}
                   />
                 </div>
-                {showDonationParty && (
-                  <PartyLink
-                    className="mx-2 shrink-0"
-                    party={donation[DonationField.Receiver]}
-                    locale={locale}
-                  >
-                    <PartyDot party={donation[DonationField.Receiver]} />
-                  </PartyLink>
-                )}
+                {renderItemExtra?.(donation)}
               </RankingItemLine>
             </li>
           );

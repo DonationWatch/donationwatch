@@ -228,12 +228,12 @@ export const DonorDonationTypesSankey = ({
   return (
     <ExpandableReactEchart
       height={Math.max(500, receiverIds.length * 60 + totalPartyTypes * 40)}
+      heightMode="fixed"
       feature="sankey"
       option={option}
       title={tDonor("donation_type.title")}
       subtitle={tDonor("donation_type.graph.subtitle", { donor: donorName })}
       years={[]}
-      allowExpand={true}
     />
   );
 };

@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import type { Party } from "@/types/party";
 import type { Donation } from "@/utils/types";
 
-import { RankingItem } from "@/components/donations/ranking-item";
+import { UnrankedRankingItem } from "@/components/donations/ranking-item";
 import { DonorLink } from "@/components/donors/donor-link";
 import {
   usePartiesMap,
@@ -185,7 +185,6 @@ const DonorHistogramTextList = ({
     }[];
   }[];
 }) => {
-  const country = useRequiredCountryConfig();
   const t = useTranslations();
   const [expandedBuckets, setExpandedBuckets] = useState<string[]>([]);
   const onToggleExpanded = (state: string) => {
@@ -201,11 +200,9 @@ const DonorHistogramTextList = ({
       {countDonorSums.map(({ receiversCount, donorSums }, idx) => {
         return (
           <li key={receiversCount}>
-            <RankingItem
-              showRank={false}
+            <UnrankedRankingItem
               id={receiversCount}
               rank={idx + 1}
-              country={country}
               expanded={expandedBuckets.includes(receiversCount)}
               onToggleExpanded={() => onToggleExpanded(receiversCount)}
               detail={<HistogramItemDetail sums={donorSums} />}
@@ -214,7 +211,7 @@ const DonorHistogramTextList = ({
                 donors: donorSums.length,
                 parties: receiversCount,
               })}
-            </RankingItem>
+            </UnrankedRankingItem>
           </li>
         );
       })}

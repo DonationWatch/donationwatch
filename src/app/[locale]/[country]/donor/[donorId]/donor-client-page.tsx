@@ -27,12 +27,8 @@ export const DonorClientPage = ({ donorId }: { donorId: string }) => {
   const countryConfig = useRequiredCountryConfig();
   const t = useTranslations("data");
   const {
-    isFiltered,
-    setYearStats,
-    setAvailableRange,
-    filteredDonations,
-    setDonations,
-    controls,
+    state: { isFiltered, filteredDonations },
+    actions: { setYearStats, setAvailableRange, setDonations, ...controls },
   } = useFilterEngine();
   const { data, isLoading, error, isSuccess } = useDonationsByDonorId(
     countryConfig,

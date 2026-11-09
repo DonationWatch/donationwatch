@@ -156,12 +156,12 @@ export const ClientDonationStackedYears = ({
     <div className="flex items-center justify-center">
       <ExpandableReactEchart
         height={chartHeight}
+        heightMode="fixed"
         title={tStackedYears("title")}
         subtitle={subtitle}
         years={years}
         feature="bar"
         option={option}
-        allowExpand={true}
         onZrClick={(params, chart) => {
           if (!chart) return;
 

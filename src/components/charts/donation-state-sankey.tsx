@@ -19,7 +19,7 @@ import { formatCountryCurrency } from "@/utils/formatter";
 import { sourceId, targetId } from "@/utils/graph";
 import { AddressField, DonationField } from "@/utils/types";
 
-import { ExpandableReactEchart } from "./expandable-react-echart";
+import { StaticReactEchart } from "./expandable-react-echart";
 
 interface Edge {
   source: string;
@@ -160,9 +160,9 @@ export const DonationStateSankey = ({
   };
 
   return (
-    <ExpandableReactEchart
+    <StaticReactEchart
       height={650}
-      maxHeightScreen={true}
+      heightMode="screen"
       feature="sankey"
       option={option}
       title={chartTitle}

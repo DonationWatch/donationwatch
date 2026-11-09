@@ -16,32 +16,11 @@ import { getPartiesByYears } from "@/utils/data/get-parties-by-years";
 import { getPartiesSum } from "@/utils/data/get-parties-sum";
 import { numbersAvg } from "@/utils/math";
 
-export const FilteredYearsHeader = ({
-  locale,
-  years,
-  idPrefix = "",
-  showTop3 = true,
-  showExtendedMeta = false,
-  readonly = false,
-  title,
-  partySums,
-  children,
-  className,
-  titleBeforeYears = false,
-}: PropsWithChildren<{
-  idPrefix?: string;
-  locale: ConstLocale;
-  years: string[];
-  showTop3?: boolean;
-  showExtendedMeta?: boolean;
-  readonly?: boolean;
-  title?: string;
-  partySums: PartyYearsSums;
-  className?: string;
-  titleBeforeYears?: boolean;
-}>) => {
+function useFilteredYearsStats(years: string[], partySums: PartyYearsSums) {
   const country = useRequiredCountryConfig();
-  const filterEngine = useFilterEngine();
+  const {
+    state: { isFiltered, stats },
+  } = useFilterEngine();
   const allParties = useParties();
   const parties = getPartiesByYears(years, allParties);
   const {
@@ -56,10 +35,10 @@ export const FilteredYearsHeader = ({
   let sums = staticSums;
   let avg = numbersAvg(sumNumbers, staticCount);
 
-  if (filterEngine.isFiltered) {
-    count = filterEngine.stats.donationCount;
-    sum = filterEngine.stats.totalAmount;
-    sums = Object.entries(filterEngine.stats.amountPerParty)
+  if (isFiltered) {
+    count = stats.donationCount;
+    sum = stats.totalAmount;
+    sums = Object.entries(stats.amountPerParty)
       .map(
         ([partyId, amount]) =>
           [partyId, { count: 0, sum: amount }] as [
@@ -71,24 +50,67 @@ export const FilteredYearsHeader = ({
     avg = count > 0 ? sum / count : 0;
   }
 
+  return { country, count, sum, sums, avg };
+}
+
+export const FilteredYearsCard = ({
+  locale,
+  years,
+  idPrefix = "",
+  title,
+  partySums,
+  children,
+  className,
+}: PropsWithChildren<{
+  idPrefix?: string;
+  locale: ConstLocale;
+  years: string[];
+  title?: string;
+  partySums: PartyYearsSums;
+  className?: string;
+}>) => {
+  const { country, count, sum, sums } = useFilteredYearsStats(years, partySums);
+
   return (
-    <HighscoreHeader
+    <HighscoreHeader.LinkFrame
       className={className}
       country={country}
-      count={count}
-      sum={sum}
-      sums={sums}
-      avg={avg}
-      idPrefix={idPrefix}
       locale={locale}
       years={years}
-      showTop3={showTop3}
-      showExtendedMeta={showExtendedMeta}
-      readonly={readonly}
-      title={title}
-      titleBeforeYears={titleBeforeYears}
     >
+      <HighscoreHeader.Title idPrefix={idPrefix} title={title} years={years} />
+      <HighscoreHeader.Meta country={country} count={count} sum={sum} />
       {children}
-    </HighscoreHeader>
+      <HighscoreHeader.TopParties sums={sums} sum={sum} />
+    </HighscoreHeader.LinkFrame>
+  );
+};
+
+export const FilteredYearsHeroHeader = ({
+  years,
+  title,
+  partySums,
+  children,
+  className,
+}: PropsWithChildren<{
+  years: string[];
+  title?: string;
+  partySums: PartyYearsSums;
+  className?: string;
+}>) => {
+  const { country, count, sum, avg } = useFilteredYearsStats(years, partySums);
+
+  return (
+    <HighscoreHeader.Frame className={className}>
+      <HighscoreHeader.InlineTitle title={title} years={years} />
+      <HighscoreHeader.Meta country={country} count={count} sum={sum}>
+        <HighscoreHeader.AverageMeta
+          country={country}
+          count={count}
+          avg={avg}
+        />
+      </HighscoreHeader.Meta>
+      {children}
+    </HighscoreHeader.Frame>
   );
 };

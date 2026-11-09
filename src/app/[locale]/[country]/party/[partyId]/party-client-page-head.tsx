@@ -27,12 +27,8 @@ export const PartyClientPageHead = ({
   const locale = useBrowserBasedLocale();
   const t = useTranslations();
   const {
-    isFiltered,
-    filteredYears,
-    setYearStats,
-    setAvailableRange,
-    filteredDonations,
-    stats,
+    state: { isFiltered, filteredYears, filteredDonations, stats },
+    actions: { setYearStats, setAvailableRange },
   } = useFilterEngine();
 
   useEffect(() => {
