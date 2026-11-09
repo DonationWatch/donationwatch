@@ -173,7 +173,7 @@ export abstract class DataLoader {
   }
 
   private redactedDonorCount = 0;
-  protected redactDonor(suffix = ""): string {
+  protected redactDonor(suffix: string = this.countryCode): string {
     return `${REDACTED_DONOR_KEYWORD}${suffix}${++this.redactedDonorCount}`;
   }
 
@@ -347,23 +347,6 @@ export abstract class DataLoader {
     const normalizedReceivers: Record<string, Set<string>> = {};
 
     {
-      // remove donors where the sum donated is negative/zero
-      // This is required because some countries report seem to do refunds as negative donations
-      const preDonorSums = extractedDonations.reduce<Record<string, number>>(
-        (acc, donation) => {
-          acc[donation[DonationField.DonorName]] ??= 0;
-          acc[donation[DonationField.DonorName]] +=
-            donation[DonationField.Amount];
-          return acc;
-        },
-        {},
-      );
-      extractedDonations = extractedDonations.filter(
-        (d) => preDonorSums[d[DonationField.DonorName]] > 0,
-      );
-    }
-
-    {
       // normalize receiver names
       extractedDonations.forEach((extracted) => {
         const preNormalized = this.preNormalizeReceiver(
@@ -378,6 +361,63 @@ export abstract class DataLoader {
 
         extracted[DonationField.Receiver] = normalized as ReceiverId;
       });
+    }
+
+    {
+      // Cancel out matched +X / -X anonymous (blank donor name) refund pairs per receiver
+      const positiveBlankByReceiverAndAmount = new Map<
+        string,
+        ExtractedYearData[]
+      >();
+      const cancelledBlankDonations = new Set<ExtractedYearData>();
+
+      for (const donation of extractedDonations) {
+        if (donation[DonationField.DonorName]?.trim()) continue;
+        const amount = donation[DonationField.Amount];
+        if (amount > 0) {
+          const key = `${donation[DonationField.Receiver]}|${amount}`;
+          const list = positiveBlankByReceiverAndAmount.get(key) ?? [];
+          list.push(donation);
+          positiveBlankByReceiverAndAmount.set(key, list);
+        }
+      }
+
+      for (const donation of extractedDonations) {
+        if (donation[DonationField.DonorName]?.trim()) continue;
+        const amount = donation[DonationField.Amount];
+        if (amount < 0) {
+          const key = `${donation[DonationField.Receiver]}|${-amount}`;
+          const list = positiveBlankByReceiverAndAmount.get(key);
+          const matchedPositive = list?.shift();
+          if (matchedPositive) {
+            cancelledBlankDonations.add(matchedPositive);
+            cancelledBlankDonations.add(donation);
+          }
+        }
+      }
+
+      if (cancelledBlankDonations.size > 0) {
+        extractedDonations = extractedDonations.filter(
+          (d) => !cancelledBlankDonations.has(d),
+        );
+      }
+    }
+
+    {
+      // remove donors where the sum donated is negative/zero
+      // This is required because some countries report seem to do refunds as negative donations
+      const preDonorSums = extractedDonations.reduce<Record<string, number>>(
+        (acc, donation) => {
+          acc[donation[DonationField.DonorName]] ??= 0;
+          acc[donation[DonationField.DonorName]] +=
+            donation[DonationField.Amount];
+          return acc;
+        },
+        {},
+      );
+      extractedDonations = extractedDonations.filter(
+        (d) => preDonorSums[d[DonationField.DonorName]] > 0,
+      );
     }
 
     {
@@ -423,12 +463,16 @@ export abstract class DataLoader {
         extractedDonation[DonationField.DonorName] = this.preNormalizeDonor(
           extractedDonation[DonationField.DonorName],
         );
-        const donorName = this.preNormalizeDonor(
+        const normalizedDonorName = this.preNormalizeDonor(
           this.normalizeDonor(
             extractedDonation[DonationField.DonorName],
             extractedDonation[DonationField.Address],
           ),
         );
+        const donorName = normalizedDonorName || this.redactDonor();
+        if (!normalizedDonorName) {
+          extractedDonation[DonationField.DonorName] = donorName;
+        }
 
         // filter if ignored donor
         if (!applyDonorReceiverFilters(donorName, donorFiltersRegex)) {

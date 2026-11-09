@@ -1,11 +1,11 @@
-import { render } from "@testing-library/react";
+import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, test } from "vitest";
 
 import { FormatAnd } from "@/components/formatter";
 
 describe("FormatAnd", () => {
   test("renders react nodes", () => {
-    const { container } = render(
+    const html = renderToStaticMarkup(
       <FormatAnd
         locale={"de"}
         items={[
@@ -16,7 +16,7 @@ describe("FormatAnd", () => {
       />,
     );
 
-    expect(container.innerHTML).toBe(
+    expect(html).toBe(
       "<strong>hello</strong>, <span>MyUser</span> und <em>world</em>",
     );
   });

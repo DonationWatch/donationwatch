@@ -1,12 +1,10 @@
-import { cleanup, render, screen } from "@testing-library/react";
-import { afterEach, describe, expect, test } from "vitest";
+import { renderToStaticMarkup } from "react-dom/server";
+import { describe, expect, test } from "vitest";
 
 import { ExternalRegistryLink } from "@/components/donations/external-registry-link";
 import { Country } from "@/utils/countries";
 import { COUNTRY_CONFIG } from "@/utils/country-config";
 import { Features, hasFeature } from "@/utils/features";
-
-afterEach(cleanup);
 
 describe("Features.DonorRegistrationNumber", () => {
   test("is enabled on UK country config", () => {
@@ -85,7 +83,7 @@ describe("ExternalRegistryLink", () => {
       "https://tietopalvelu.ytj.fi/yritys/1897609-5",
     ],
   ])("renders link for %s (%s)", (country, registrationNumber, expectedUrl) => {
-    render(
+    const html = renderToStaticMarkup(
       <ExternalRegistryLink
         country={country}
         registrationNumber={registrationNumber}
@@ -94,22 +92,18 @@ describe("ExternalRegistryLink", () => {
       </ExternalRegistryLink>,
     );
 
-    const link = screen.getByRole("link");
-    expect(link).toBeDefined();
-    expect(link.getAttribute("href")).toBe(expectedUrl);
-    expect(link.getAttribute("target")).toBe("_blank");
-    expect(link.getAttribute("rel")).toBe("nofollow noopener noreferrer");
-    expect(link.textContent).toBe(registrationNumber);
+    expect(html).toBe(
+      `<a href="${expectedUrl}" rel="nofollow noopener noreferrer" target="_blank"><span>${registrationNumber}</span></a>`,
+    );
   });
 
   test("renders plain span fallback for unsupported country", () => {
-    const { container } = render(
+    const html = renderToStaticMarkup(
       <ExternalRegistryLink country="DE" registrationNumber="HRB12345">
         <span>HRB12345</span>
       </ExternalRegistryLink>,
     );
 
-    expect(screen.queryByRole("link")).toBeNull();
-    expect(container.textContent).toBe("HRB12345");
+    expect(html).toBe("<span>HRB12345</span>");
   });
 });
