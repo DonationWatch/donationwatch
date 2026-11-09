@@ -68,8 +68,10 @@ export const PartyDonorsClientPage = ({
     party,
   );
 
-  const { isFiltered, filteredDonations, setDonations, controls } =
-    useFilterEngine();
+  const {
+    state: { isFiltered, filteredDonations },
+    actions: { setDonations, ...controls },
+  } = useFilterEngine();
 
   const viaSummary = usePartyViaSummary(party, filteredDonations);
 

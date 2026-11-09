@@ -3,7 +3,7 @@
 import type { Donation } from "@/utils/types";
 
 import { CurrencyRankingItem } from "@/components/donations/ranking-item";
-import { TopDonationsItemDetail } from "@/components/loading/loading-top-year-donations-item-detail";
+import { TopDonationsItemDetailWithParty } from "@/components/loading/loading-top-year-donations-item-detail";
 import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { AddressField, DonationField } from "@/utils/types";
@@ -22,7 +22,6 @@ export const OriginDonationsItem = ({
   rank: number;
   sum: number;
   donations: Donation[];
-  readonly?: boolean;
   expanded: boolean;
   onToggleExpanded: (expanded: boolean) => void;
 }) => {
@@ -42,12 +41,7 @@ export const OriginDonationsItem = ({
         country={country}
         expanded={expanded}
         onToggleExpanded={onToggleExpanded}
-        detail={
-          <TopDonationsItemDetail
-            showDonationParty={true}
-            donations={donations}
-          />
-        }
+        detail={<TopDonationsItemDetailWithParty donations={donations} />}
       >
         {address[AddressField.State] &&
         address[AddressField.State] !== address[AddressField.Country]

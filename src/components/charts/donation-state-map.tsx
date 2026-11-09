@@ -199,9 +199,7 @@ export const DonationStateMap = ({
   return (
     <ExpandableReactEchart
       height={450}
-      maxHeightScreen={true}
       feature="map"
-      allowExpand={true}
       option={option}
       title={chartTitle}
       subtitle={subtitle}

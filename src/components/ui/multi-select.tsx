@@ -5,8 +5,8 @@ import {
   type ComponentPropsWithoutRef,
   type ReactNode,
   createContext,
+  use,
   useCallback,
-  useContext,
   useEffect,
   useRef,
   useState,
@@ -351,7 +351,7 @@ export function MultiSelectSeparator(
 }
 
 function useMultiSelectContext() {
-  const context = useContext(MultiSelectContext);
+  const context = use(MultiSelectContext);
   if (context == null) {
     throw new Error(
       "useMultiSelectContext must be used within a MultiSelectContext",

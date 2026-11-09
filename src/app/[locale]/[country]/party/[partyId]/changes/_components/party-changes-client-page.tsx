@@ -40,8 +40,10 @@ export const PartyChangesClientPage = ({
     party,
   );
 
-  const { isFiltered, filteredDonations, setDonations, controls } =
-    useFilterEngine();
+  const {
+    state: { isFiltered, filteredDonations },
+    actions: { setDonations, ...controls },
+  } = useFilterEngine();
 
   const isSyncing = hasPendingFilterDonationSync({
     dataDonations: isSuccess ? data : undefined,

@@ -1,10 +1,10 @@
 import "client-only";
-import { useContext } from "react";
+import { use } from "react";
 
 import { BrowserBasedLocaleContext } from "@/app/providers";
 
 export const useBrowserBasedLocale = () => {
-  const ctx = useContext(BrowserBasedLocaleContext);
+  const ctx = use(BrowserBasedLocaleContext);
 
   if (!ctx)
     throw new Error(

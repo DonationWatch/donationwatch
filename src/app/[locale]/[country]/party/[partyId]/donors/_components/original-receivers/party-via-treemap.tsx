@@ -133,9 +133,7 @@ export const PartyViaTreemap = ({
       title={title}
       subtitle={subtitle}
       height={height}
-      maxHeightScreen={true}
       years={country.years}
-      allowExpand={true}
       feature="treemap"
     />
   );

@@ -36,8 +36,11 @@ export const DonationFilterSheetContent = () => {
   const tDonationType = useClientTranslations("donation_type");
   const tDonorType = useClientTranslations("donor_type");
 
-  const { activeFilters, bounds, controls, isFiltered, isOpen, setIsOpen } =
-    useFilterEngine();
+  const {
+    state: { activeFilters, bounds, isFiltered, isOpen },
+    actions: controls,
+  } = useFilterEngine();
+  const { setIsOpen } = controls;
 
   // Accordion toggle states
   const [isYearsOpen, setIsYearsOpen] = useState(true);

@@ -1,11 +1,11 @@
-import { useContext } from "react";
+import { use } from "react";
 
 import type { Donation } from "@/utils/types";
 
 import { FilterContext } from "@/components/filter/filter-context";
 
 export const useFilterEngine = () => {
-  const context = useContext(FilterContext);
+  const context = use(FilterContext);
   if (!context) {
     throw new Error("useFilterEngine must be used within a FilterProvider");
   }

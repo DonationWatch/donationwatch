@@ -375,8 +375,6 @@ const DonationTimeseriesChart = ({
   return (
     <ExpandableReactEchart
       height={550}
-      maxHeightScreen={true}
-      allowExpand={true}
       feature="line"
       option={option}
       title={chartTitle}
@@ -691,8 +689,6 @@ export const DonationStackedTimeseriesChart = ({
   return (
     <ExpandableReactEchart
       height={550}
-      maxHeightScreen={true}
-      allowExpand={true}
       feature="line"
       option={option}
       title={chartTitle}

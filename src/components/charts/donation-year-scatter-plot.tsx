@@ -25,7 +25,7 @@ import { formatCountryCurrency } from "@/utils/formatter";
 import { DonationField } from "@/utils/types";
 
 import { Translation } from "../translation";
-import { ExpandableReactEchart } from "./expandable-react-echart";
+import { StaticReactEchart } from "./expandable-react-echart";
 
 export const DonationYearScatterPlot = ({
   title: chartTitle,
@@ -225,7 +225,7 @@ ${partyPart}
         </p>
       ) : null}
       <div className="flex items-center justify-center">
-        <ExpandableReactEchart
+        <StaticReactEchart
           height={chartHeight}
           feature="scatter"
           option={option}

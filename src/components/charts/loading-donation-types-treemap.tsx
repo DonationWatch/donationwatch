@@ -280,11 +280,9 @@ export const LoadedDonationTypeTreemap = ({
   return (
     <ExpandableReactEchart
       height={600}
-      maxHeightScreen={true}
       title={title}
       subtitle={subtitle}
       years={years}
-      allowExpand={true}
       feature="treemap"
       option={option}
       onClick={(params) => {

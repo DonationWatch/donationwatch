@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 
-import { createContext, useContext } from "react";
+import { createContext, use } from "react";
 
 import type { CountryConfig } from "@/types/country-config";
 import type { Party } from "@/types/party";
@@ -31,14 +31,14 @@ export const CountryProvider = ({
   children,
 }: CountryProviderProps) => {
   return (
-    <CountryContext.Provider value={{ countryConfig, parties }}>
+    <CountryContext value={{ countryConfig, parties }}>
       {children}
-    </CountryContext.Provider>
+    </CountryContext>
   );
 };
 
 export const useRequiredCountryConfig = (): CountryConfig => {
-  const ctx = useContext(CountryContext);
+  const ctx = use(CountryContext);
   if (!ctx) {
     throw new Error("useCountryConfig must be used within a CountryProvider");
   }
@@ -46,12 +46,12 @@ export const useRequiredCountryConfig = (): CountryConfig => {
 };
 
 export const useOptionalCountryConfig = (): CountryConfig | null => {
-  const ctx = useContext(CountryContext);
+  const ctx = use(CountryContext);
   return ctx?.countryConfig ?? null;
 };
 
 export const useParties = (): Party[] => {
-  const ctx = useContext(CountryContext);
+  const ctx = use(CountryContext);
   if (!ctx) {
     throw new Error("useParties must be used within a CountryProvider");
   }

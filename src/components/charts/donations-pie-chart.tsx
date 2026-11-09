@@ -155,8 +155,6 @@ export const DonationsPieChart = ({
   return (
     <ExpandableReactEchart
       height={650}
-      maxHeightScreen={true}
-      allowExpand={true}
       title={t("overview.pie.title")}
       subtitle={t("overview.pie.subtitle", {
         country: getCountryName(country, tCountries),

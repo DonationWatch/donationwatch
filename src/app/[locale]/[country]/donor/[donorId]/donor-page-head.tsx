@@ -151,7 +151,9 @@ const DonorPageHeadContent = ({
   const t = useTranslations();
   const tCommon = useTranslations("common");
   const browserBasedLocale = useBrowserBasedLocale();
-  const { filteredDonations } = useFilterEngine();
+  const {
+    state: { filteredDonations },
+  } = useFilterEngine();
   const partiesMap = usePartiesMap();
 
   const wikiPageId = donorMeta.wiki;

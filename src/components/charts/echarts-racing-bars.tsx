@@ -8,7 +8,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { Currency } from "@/utils/countries";
 import type { Donation, ReceiverId } from "@/utils/types";
 
-import { ExpandableReactEchart } from "@/components/charts/expandable-react-echart";
+import { BareReactEchart } from "@/components/charts/expandable-react-echart";
 import {
   usePartiesMap,
   useRequiredCountryConfig,
@@ -725,11 +725,8 @@ export const EChartsRacingBars = ({
           }}
         >
           {/* Chart - Always renders at defined resolution */}
-          <ExpandableReactEchart
+          <BareReactEchart
             height={CHART_HEIGHT}
-            maxHeightScreen={false}
-            allowExpand={false}
-            footer={false}
             years={years}
             feature="bar"
             option={chartOption}

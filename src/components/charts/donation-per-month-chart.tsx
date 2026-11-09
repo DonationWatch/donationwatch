@@ -319,8 +319,6 @@ const DonationBarChart = ({
   return (
     <ExpandableReactEchart
       height={350}
-      maxHeightScreen={true}
-      allowExpand={true}
       feature="bar"
       option={option}
       title={chartTitle}

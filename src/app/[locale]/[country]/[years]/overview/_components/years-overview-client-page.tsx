@@ -74,12 +74,8 @@ export const YearsOverviewClientPage = ({
   const parties = useParties();
 
   const {
-    isFiltered,
-    filteredYears,
-    filteredDonations,
-    setDonations,
-    activeFilters,
-    controls,
+    state: { isFiltered, filteredYears, filteredDonations, activeFilters },
+    actions: { setDonations, ...controls },
   } = useFilterEngine();
 
   const activeYears = useMemo(() => {

@@ -39,11 +39,8 @@ export const YearsChangesClientPage = ({
   const isSuccess = results.every((r) => r.isSuccess);
 
   const {
-    isFiltered,
-    filteredYears,
-    filteredDonations,
-    setDonations,
-    controls,
+    state: { isFiltered, filteredYears, filteredDonations },
+    actions: { setDonations, ...controls },
   } = useFilterEngine();
 
   const rawDonations = useMemo(() => {

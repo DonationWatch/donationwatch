@@ -46,11 +46,8 @@ export const PartyTimelineClientPage = ({
   const tData = useTranslations("data");
 
   const {
-    isFiltered,
-    filteredYears,
-    filteredDonations,
-    setDonations,
-    controls,
+    state: { isFiltered, filteredYears, filteredDonations },
+    actions: { setDonations, ...controls },
   } = useFilterEngine();
 
   const activeYears = useMemo(() => {

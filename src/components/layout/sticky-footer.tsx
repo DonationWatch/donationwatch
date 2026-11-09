@@ -5,7 +5,7 @@ import type { ComponentProps } from "react";
 import { Funnel } from "lucide-react";
 import { usePathname } from "next/navigation";
 import * as React from "react";
-import { useContext } from "react";
+import { use } from "react";
 
 import type { FilterContextValue } from "@/components/filter/filter-context";
 
@@ -23,7 +23,7 @@ const FilterTriggerButton = ({
   activeFilterCount: number;
 }) => {
   const tFilter = useClientTranslations("filter");
-  const isActive = yearFilter?.isFiltered;
+  const isActive = yearFilter?.state.isFiltered;
   const label = tFilter("title");
 
   return (
@@ -56,17 +56,17 @@ const FilterTriggerButton = ({
 
 export const StickyFooter = () => {
   const pathname = usePathname() ?? "";
-  const yearFilter = useContext(FilterContext);
+  const yearFilter = use(FilterContext);
 
   const segments = pathname.split("/").filter(Boolean);
   const isCountryRoot = segments.length <= 2;
 
   const isFilterVisible =
-    !isCountryRoot && !!yearFilter && yearFilter.hasFilterSections;
+    !isCountryRoot && !!yearFilter && yearFilter.meta.hasFilterSections;
 
   let activeFilterCount = 0;
-  if (yearFilter?.isFiltered) {
-    const { activeFilters, bounds } = yearFilter;
+  if (yearFilter?.state.isFiltered) {
+    const { activeFilters, bounds } = yearFilter.state;
     if (
       activeFilters.fromYear !== bounds.minYear ||
       activeFilters.toYear !== bounds.maxYear
@@ -101,7 +101,7 @@ export const StickyFooter = () => {
                   <FilterTriggerButton
                     activeFilterCount={activeFilterCount}
                     yearFilter={yearFilter}
-                    onClick={() => yearFilter?.setIsOpen(true)}
+                    onClick={() => yearFilter?.actions.setIsOpen(true)}
                   />
                 </div>
               </div>
