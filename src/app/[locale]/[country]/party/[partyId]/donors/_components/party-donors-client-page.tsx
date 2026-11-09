@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 
 import type { Party } from "@/types/party";
+import type { PartyDonorStats } from "@/utils/data/get-party-donor-stats";
 
 import { LoadingPartyDonationTypeTreemap } from "@/components/charts/loading-donation-types-treemap";
 import { LoadingDonationPartyTreemap } from "@/components/charts/loading-donation-years-treemap";
@@ -36,6 +37,7 @@ import { PartyOriginalReceivers } from "./party-original-receivers";
 
 interface PartyDonorsClientPageProps {
   party: Party;
+  ssrStats?: PartyDonorStats | null;
   treemapTitle: string;
   treemapSubtitle: string;
   donorTypesTitle: string;
@@ -50,6 +52,7 @@ interface PartyDonorsClientPageProps {
 
 export const PartyDonorsClientPage = ({
   party,
+  ssrStats,
   treemapTitle,
   treemapSubtitle,
   donorTypesTitle,
@@ -89,15 +92,21 @@ export const PartyDonorsClientPage = ({
 
   useScrollToHash(isSuccess);
 
-  if (isLoading || isSyncing) {
+  const isPendingClientDonations = isLoading || isSyncing;
+
+  if (!ssrStats && isPendingClientDonations) {
     return <Loading heightClass="h-[80vh]" />;
   }
 
-  if (error || !data) {
+  if (!isPendingClientDonations && (error || !data)) {
     return <div>{tData("error")}</div>;
   }
 
-  if (isFiltered && filteredDonations.length === 0) {
+  if (
+    !isPendingClientDonations &&
+    isFiltered &&
+    filteredDonations.length === 0
+  ) {
     return <FilterEmptyState onReset={controls.resetFilters} />;
   }
 
@@ -106,17 +115,25 @@ export const PartyDonorsClientPage = ({
       <ArticleSectionWrapper id={"sec-party-donors"}>
         <ArticleSectionTwoColumns>
           <ArticleSectionColumn>
-            <PartyDonorPageText party={party} donations={filteredDonations} />
+            <PartyDonorPageText
+              party={party}
+              donations={filteredDonations}
+              ssrStats={ssrStats}
+            />
           </ArticleSectionColumn>
           <ArticleSectionColumn>
             <div>
-              <LoadingDonationPartyTreemap
-                party={party}
-                tooSmallAreaColor={party[PartyField.Color]}
-                title={treemapTitle}
-                subtitle={treemapSubtitle}
-                donations={filteredDonations}
-              />
+              {isPendingClientDonations ? (
+                <Loading />
+              ) : (
+                <LoadingDonationPartyTreemap
+                  party={party}
+                  tooSmallAreaColor={party[PartyField.Color]}
+                  title={treemapTitle}
+                  subtitle={treemapSubtitle}
+                  donations={filteredDonations}
+                />
+              )}
             </div>
           </ArticleSectionColumn>
         </ArticleSectionTwoColumns>
@@ -133,15 +150,20 @@ export const PartyDonorsClientPage = ({
               <LoadingPartyDonorTypeText
                 party={party}
                 donations={filteredDonations}
+                ssrDonorTypes={ssrStats?.donorTypes}
               />
             </ArticleSectionColumn>
             <ArticleSectionColumn>
-              <LoadingPartyDonorTypeTreemap
-                party={party}
-                title={donorTypesTreemapTitle}
-                subtitle={donorTypesTreemapSubtitle}
-                donations={filteredDonations}
-              />
+              {isPendingClientDonations ? (
+                <Loading />
+              ) : (
+                <LoadingPartyDonorTypeTreemap
+                  party={party}
+                  title={donorTypesTreemapTitle}
+                  subtitle={donorTypesTreemapSubtitle}
+                  donations={filteredDonations}
+                />
+              )}
             </ArticleSectionColumn>
           </ArticleSectionTwoColumns>
         </ArticleSectionWrapper>
@@ -158,15 +180,20 @@ export const PartyDonorsClientPage = ({
               <LoadingPartyDonationTypeText
                 party={party}
                 donations={filteredDonations}
+                ssrDonationTypes={ssrStats?.donationTypes}
               />
             </ArticleSectionColumn>
             <ArticleSectionColumn>
-              <LoadingPartyDonationTypeTreemap
-                party={party}
-                title={donationTypesTreemapTitle}
-                subtitle={donationTypesTreemapSubtitle}
-                donations={filteredDonations}
-              />
+              {isPendingClientDonations ? (
+                <Loading />
+              ) : (
+                <LoadingPartyDonationTypeTreemap
+                  party={party}
+                  title={donationTypesTreemapTitle}
+                  subtitle={donationTypesTreemapSubtitle}
+                  donations={filteredDonations}
+                />
+              )}
             </ArticleSectionColumn>
           </ArticleSectionTwoColumns>
         </ArticleSectionWrapper>
@@ -182,11 +209,15 @@ export const PartyDonorsClientPage = ({
           <ArticleSectionColumn>
             <ArticleSectionTitle id={"sec-donor-list"} title={listTitle} />
             <p className="mb-6">{listP0}</p>
-            <DonorOverviewList
-              countryConfig={country}
-              party={party}
-              donations={filteredDonations}
-            />
+            {isPendingClientDonations ? (
+              <Loading />
+            ) : (
+              <DonorOverviewList
+                countryConfig={country}
+                party={party}
+                donations={filteredDonations}
+              />
+            )}
           </ArticleSectionColumn>
         </ArticleSectionOneColumns>
       </ArticleSectionWrapper>

@@ -7,9 +7,10 @@ import { notFound } from "next/navigation";
 import { DataExport } from "@/components/data-export";
 import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
 import { Article } from "@/components/layout/article";
+import { DatasetSchema } from "@/components/schema";
 import { Translation } from "@/components/translation";
 import { Toaster } from "@/components/ui/sonner";
-import { DATA_LICENSE } from "@/utils/config";
+import { BASE_URL, DATA_LICENSE } from "@/utils/config";
 import { COUNTRIES, getCountryName } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { getMessagesForLocale } from "@/utils/i18n-loader";
@@ -38,13 +39,25 @@ export async function generateMetadata(
 
   const { country } = params;
 
-  const tExport = await getTranslations({
-    locale: params.locale,
-    namespace: "export",
-  });
+  const [tExport, tCountries, countryConfig] = await Promise.all([
+    getTranslations({
+      locale: params.locale,
+      namespace: "export",
+    }),
+    getTranslations({
+      locale: params.locale,
+      namespace: "countries",
+    }),
+    getCountryConfig(country),
+  ]);
+  const localizedCountryName = getCountryName(countryConfig, tCountries);
 
   return {
-    title: `${tExport("title")} | DonationWatch`,
+    title: `${tExport("title")} - ${localizedCountryName}`,
+    description: tExport("p0", {
+      country: localizedCountryName,
+      license: DATA_LICENSE,
+    }),
     alternates: generateAlternates(`${country}/tools/data`),
   };
 }
@@ -70,9 +83,27 @@ export default async function Page(
     ]);
 
   const pageMessages = pick(messages, ["export", "citation", "donor_type"]);
+  const localizedCountryName = getCountryName(countryConfig, tCountries);
+  const firstYear = countryConfig.years.at(0);
+  const lastYear = countryConfig.years.at(-1);
 
   return (
     <ScopedClientIntlProvider messages={pageMessages}>
+      <DatasetSchema
+        name={`${tExport("title")} - ${localizedCountryName}`}
+        description={tExport("p0", {
+          country: localizedCountryName,
+          license: DATA_LICENSE,
+        })}
+        url={`${BASE_URL}/${locale}/${country}/tools/data`}
+        temporalCoverage={
+          firstYear && lastYear && firstYear !== lastYear
+            ? `${firstYear}/${lastYear}`
+            : (firstYear ?? "")
+        }
+        spatialCoverage={localizedCountryName}
+        sourceUrl={countryConfig.source.url}
+      />
       <Article title={tExport("title")}>
         <div className="space-y-6">
           <p>

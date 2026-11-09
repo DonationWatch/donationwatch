@@ -3,8 +3,13 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
+import type { ReceiverId } from "@/utils/types";
+
 import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
-import { THUMBNAIL_PREFIX } from "@/utils/config";
+import { DonorSchema } from "@/components/schema";
+import { getParty } from "@/config/parties";
+import { PartyField } from "@/types/party";
+import { BASE_URL, THUMBNAIL_PREFIX } from "@/utils/config";
 import { getCountryName } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import {
@@ -71,15 +76,29 @@ export async function generateMetadata(
 
   let count = 0;
   let sum = 0;
-  const parties = new Set<string>();
+  const partySums: Record<string, number> = {};
 
   for (const donation of donations) {
     count++;
     sum += donation[DonationField.Amount];
-    parties.add(donation[DonationField.Receiver]);
+    const receiver = donation[DonationField.Receiver];
+    partySums[receiver] =
+      (partySums[receiver] ?? 0) + donation[DonationField.Amount];
   }
 
-  const description = tPageTitle("donor.description", {
+  const sortedPartyEntries = (
+    Object.entries(partySums) as [ReceiverId, number][]
+  ).toSorted(([, a], [, b]) => b - a);
+  const topRecipientsText = sortedPartyEntries
+    .slice(0, 3)
+    .map(([partyId, partySum]) => {
+      const party = getParty(countryConfig.id, partyId);
+      const shortName = party ? party[PartyField.Short] : partyId;
+      return `${shortName} (${formatCompactCountryCurrency(locale, partySum, countryConfig)})`;
+    })
+    .join(", ");
+
+  const baseDescription = tPageTitle("donor.description", {
     country: getCountryName(countryConfig, tCountries),
     donor: donorName,
     count,
@@ -90,8 +109,12 @@ export async function generateMetadata(
       countryConfig.minPublicDonationAmount,
       countryConfig,
     ),
-    parties: parties.size,
+    parties: sortedPartyEntries.length,
   });
+
+  const description = topRecipientsText
+    ? `${baseDescription} ${tCommon("donated_to", { recipient: topRecipientsText })}.`
+    : baseDescription;
 
   const isBiggestDonor = biggestDonors.some((donor) => donor.id === donorId);
   const hasWiki = Boolean(donorMeta.wiki);
@@ -148,15 +171,24 @@ export default async function DonorPageLayout(
   if (!isValidCountry(params.country)) return notFound();
   setRequestLocale(params.locale);
 
-  const [donations, donorMeta, messages] = await Promise.all([
+  const [donations, donorMeta, messages, tCommon] = await Promise.all([
     getDonationsByDonorId(params.country, params.donorId),
     getDonorMeta(params.country, params.donorId),
     getMessagesForLocale(params.locale),
+    getTranslations({ locale: params.locale, namespace: "common" }),
   ]);
 
   if (!donations?.length) {
     return notFound();
   }
+
+  const donorType = donations[0][DonationField.DonorType];
+  const donorName = getDonationDonorName(donations[0], tCommon);
+  const isPerson = donorType === DonorType.Individual;
+  const canonicalUrl = `${BASE_URL}/${params.locale}/${params.country}/donor/${params.donorId}`;
+  const sameAs = donorMeta.wiki
+    ? [`https://en.wikipedia.org/wiki/Special:Redirect/page/${donorMeta.wiki}`]
+    : undefined;
 
   const pageMessages = pick(messages, [
     "donor",
@@ -177,12 +209,21 @@ export default async function DonorPageLayout(
 
   return (
     <ScopedClientIntlProvider messages={pageMessages}>
+      {donorType !== DonorType.AnonymizedDonor && (
+        <DonorSchema
+          name={donorName}
+          url={canonicalUrl}
+          isPerson={isPerson}
+          sameAs={sameAs}
+        />
+      )}
       <DonorPageHead
         donorId={params.donorId}
         country={params.country}
         donorMeta={donorMeta}
+        initialDonations={donations}
       />
-      <DonorClientPage donorId={params.donorId} />
+      <DonorClientPage donorId={params.donorId} initialDonations={donations} />
     </ScopedClientIntlProvider>
   );
 }

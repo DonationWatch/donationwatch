@@ -17,6 +17,7 @@ export const generateAlternates = (
     alternates.languages[locale] =
       `${BASE_URL}/${locale}${path ? `/${path}` : ""}`;
   });
+  alternates.languages["x-default"] = `${BASE_URL}/en${path ? `/${path}` : ""}`;
 
   return alternates;
 };

@@ -55,19 +55,19 @@
       "description": "En {year}, {parties} partis en {country} ont reçu un total de {sum} provenant de {count} dons supérieurs à {minAmount}. Explorez la répartition détaillée par parti, donateur et les tendances du financement politique.",
       "overview": "Aperçu des dons aux partis politiques en {country} pour {year}",
       "changes": "Changements récents dans les dons aux partis en {country} pour {year}",
-      "donors": "Principaux donateurs des partis politiques en {country} pour {year}",
+      "donors": "Liste des donateurs de partis politiques et principaux contributeurs en {country} ({year})",
       "timeline": "Chronologie des dons aux partis politiques en {country} pour {year}",
       "origin": "Aperçu géographique des dons aux partis en {country} pour {year}"
     },
     "party": {
-      "donors": "Principaux donateurs de {party} ({country})",
+      "donors": "{party} : Liste des donateurs et détail du financement ({country})",
       "changes": "Changements récents dans les dons pour {party} ({country})",
-      "timeline": "Chronologie des dons du parti {party} ({country})",
-      "origin": "Aperçu géographique des dons du parti {party} ({country})",
+      "timeline": "Chronologie des dons pour {party} ({country})",
+      "origin": "Aperçu géographique des dons pour {party} ({country})",
       "description": "Depuis {year}, {party} a reçu {count} dons supérieurs à {minimumAmount}, pour un total de {sum}. Explorez les données sur les donateurs et les tendances en {country}."
     },
     "donor": {
-      "overview": "Dons de {donor} en {country}",
+      "overview": "{donor} – Dons politiques et historique de financement ({country})",
       "description": "Découvrez où sont allés les dons politiques de {donor}. {sum} donnés en {count} contributions à {parties} partis en {country} depuis {minYear}."
     }
   },
@@ -366,7 +366,7 @@
         "a": "{party} a reçu un total de {sum} provenant de {count} dons documentés."
       },
       "top_donors": {
-        "q": "Qui sont les principaux donateurs de {party} ?",
+        "q": "Qui finance {party} et qui sont ses principaux donateurs ?",
         "a": "Les principaux donateurs de {party} sont : {donors}."
       },
       "largest_singular": {

@@ -110,6 +110,7 @@ export class HrLoader extends DataLoader {
     "ZAGREB JE NAŠ!": {
       name: "Zagreb je NAŠ!",
       short: "Zagreb je NAŠ!",
+      abbr: "Zagreb je NAŠ!",
       code: "ZJN",
       wiki: 64105718,
       color: "#0062ac",
@@ -123,6 +124,7 @@ export class HrLoader extends DataLoader {
     "HRVATSKA NARODNA STRANKA - LIBERALNI DEMOKRATI - HNS": {
       name: "Hrvatska narodna stranka – liberalni demokrati",
       short: "HNS",
+      abbr: "HNS",
       code: "HNS",
       color: "#ff931e",
       wiki: 408725,
@@ -130,6 +132,7 @@ export class HrLoader extends DataLoader {
     "AUTOHTONA - HRVATSKA STRANKA PRAVA - A - HSP": {
       name: "Autohtona – Hrvatska stranka prava",
       short: "A-HSP",
+      abbr: "A-HSP",
       code: "AHSP",
       color: "#202f5b",
       wiki: 13930230,
@@ -137,6 +140,7 @@ export class HrLoader extends DataLoader {
     "HRVATSKA DEMOKRATSKA ZAJEDNICA - HDZ": {
       name: "Hrvatska demokratska zajednica",
       short: "HDZ",
+      abbr: "HDZ",
       code: "HDZ",
       color: "#295ba5",
       wiki: 399870,
@@ -169,6 +173,7 @@ export class HrLoader extends DataLoader {
     "MOŽEMO! - POLITIČKA PLATFORMA": {
       name: "Možemo!",
       short: "Možemo!",
+      abbr: "Možemo!",
       code: "MOZEMO",
       color: "#c3d746",
       wiki: 64182427,
@@ -176,6 +181,7 @@ export class HrLoader extends DataLoader {
     "SOCIJALDEMOKRATSKA PARTIJA HRVATSKE - SDP": {
       name: "Socijaldemokratska partija Hrvatske",
       short: "SDP",
+      abbr: "SDP",
       code: "SDP",
       color: "#ed1c24",
       wiki: 404594,
@@ -190,6 +196,7 @@ export class HrLoader extends DataLoader {
     MOST: {
       name: "MOST",
       short: "MOST",
+      abbr: "Most",
       code: "MOST",
       color: "#1E5797",
       wiki: 46426336,
@@ -216,6 +223,7 @@ export class HrLoader extends DataLoader {
     "HRVATSKA SELJAČKA STRANKA - HSS": {
       name: "Hrvatska seljačka stranka",
       short: "HSS",
+      abbr: "HSS",
       code: "HSS",
       color: "#0aaf4c",
       wiki: 408715,
@@ -281,6 +289,7 @@ export class HrLoader extends DataLoader {
     "HRVATSKA STRANKA UMIROVLJENIKA - HSU": {
       name: "Hrvatska stranka umirovljenika",
       short: "HSU",
+      abbr: "HSU",
       code: "HSU",
       color: "#2e3193",
       wiki: 408712,
@@ -451,6 +460,7 @@ export class HrLoader extends DataLoader {
     "HRVATSKA SOCIJALNO - LIBERALNA STRANKA - HSLS": {
       name: "Hrvatska socijalno-liberalna stranka",
       short: "HSLS",
+      abbr: "HSLS",
       code: "HSLS",
       color: "#0053a0",
       wiki: 408722,
@@ -458,6 +468,7 @@ export class HrLoader extends DataLoader {
     "ISTARSKI DEMOKRATSKI SABOR - IDS": {
       name: "Istarski demokratski sabor",
       short: "IDS",
+      abbr: "IDS",
       code: "IDS",
       color: "#00a950",
       wiki: 408711,
@@ -496,6 +507,7 @@ export class HrLoader extends DataLoader {
     "DOMOVINSKI POKRET": {
       name: "Domovinski pokret",
       short: "DP",
+      abbr: "DP",
       code: "DP",
       color: "#005baa",
       wiki: 63244670,
@@ -710,6 +722,7 @@ export class HrLoader extends DataLoader {
     "SAMOSTALNA DEMOKRATSKA SRPSKA STRANKA - SDSS": {
       name: "Samostalna demokratska srpska stranka",
       short: "SDSS",
+      abbr: "SDSS",
       code: "SDSS",
       color: "#d8182e",
       wiki: 385158,

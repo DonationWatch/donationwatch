@@ -9,6 +9,7 @@ import type { Donation, ReceiverId } from "@/utils/types";
 
 import { RankingItemLine } from "@/components/donations/ranking-item-line";
 import { DonorLink } from "@/components/donors/donor-link";
+import Loading from "@/components/loading/loading";
 import { PartyDot } from "@/components/parties/party-dot";
 import { PartyLink } from "@/components/parties/party-link";
 import { useRequiredCountryConfig } from "@/components/providers/country-provider";
@@ -26,6 +27,10 @@ export const LoadedTopDonationsItemDetail = ({
   partyId: ReceiverId;
   donations: Donation[];
 }) => {
+  if (donations.length === 0) {
+    return <Loading />;
+  }
+
   return (
     <TopDonationsItemDetail
       donations={donations.filter((d) => d[DonationField.Receiver] === partyId)}

@@ -55,19 +55,19 @@
       "description": "U {year}. godini {parties} stranaka u {country} primilo je ukupno {sum} iz {count} donacija iznad {minAmount}. Istražite detaljne prikaze po stranci, donatoru i trendovima u političkom financiranju.",
       "overview": "Pregled donacija političkim strankama u {country} za {year}",
       "changes": "Nedavne promjene u donacijama političkim strankama u {country} za {year}",
-      "donors": "Najveći donatori političkim strankama u {country} za {year}",
+      "donors": "Popis donatora političkih stranaka i najveći donatori u {country} ({year})",
       "timeline": "Vremenska crta donacija političkim strankama u {country} za {year}",
       "origin": "Geografski pregled donacija strankama u {country} za {year}"
     },
     "party": {
-      "donors": "Najveći donatori {party} {country}",
-      "changes": "Nedavne promjene u donacijama {party} {country}",
-      "timeline": "Vremenska crta donacija stranke {party} {country}",
-      "origin": "Geografski pregled donacija stranke {party} {country}",
+      "donors": "{party}: Popis donatora i pregled financiranja ({country})",
+      "changes": "Nedavne promjene u donacijama za {party} ({country})",
+      "timeline": "Vremenska crta donacija za {party} ({country})",
+      "origin": "Geografski pregled donacija za {party} ({country})",
       "description": "Od {year}. zabilježeno je {count} donacija za {party} većih od {minimumAmount}, u ukupnom iznosu od {sum}. Istražite podatke o donatorima i trendove u {country}."
     },
     "donor": {
-      "overview": "Donacije od {donor} u {country}",
+      "overview": "{donor} – Političke donacije i povijest financiranja ({country})",
       "description": "Pogledajte kamo su otišle političke donacije od {donor}. {sum} donirano u {count} doprinosa za {parties} stranaka u {country} od {minYear}."
     }
   },
@@ -376,7 +376,7 @@
         "a": "{party} je primila ukupno {sum} u donacijama iz {count} dokumentiranih donacija."
       },
       "top_donors": {
-        "q": "Tko su najveći donatori {party}?",
+        "q": "Tko financira {party} i tko su najveći donatori?",
         "a": "Najveći donatori {party} su: {donors}."
       },
       "largest_singular": {

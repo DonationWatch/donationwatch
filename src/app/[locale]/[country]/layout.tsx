@@ -12,8 +12,13 @@ import { StickyHeader } from "@/components/layout/sticky-header";
 import { CountryLayoutProviders } from "@/components/providers/country-layout-providers";
 import { SidebarInset } from "@/components/ui/sidebar";
 import { THUMBNAIL_PREFIX } from "@/utils/config";
-import { COUNTRIES, getCountryName } from "@/utils/countries";
+import {
+  COUNTRIES,
+  getCountryName,
+  getReferencingCountryName,
+} from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
+import { formatYearsRange } from "@/utils/formatter";
 import { getMessagesForLocale } from "@/utils/i18n-loader";
 import { pick } from "@/utils/i18n-pick";
 import { getParties } from "@/utils/loader/parties";
@@ -34,21 +39,33 @@ export async function generateMetadata(
   if (!isValidCountry(country)) return notFoundMetadata;
   setRequestLocale(locale);
 
-  const [t, tCountries, countryConfig] = await Promise.all([
-    getTranslations({ locale }),
-    getTranslations({ locale, namespace: "countries" }),
-    getCountryConfig(country),
-  ]);
+  const [t, tHome, tCountries, tRefCountries, countryConfig] =
+    await Promise.all([
+      getTranslations({ locale }),
+      getTranslations({ locale, namespace: "home" }),
+      getTranslations({ locale, namespace: "countries" }),
+      getTranslations({ locale, namespace: "ref_countries" }),
+      getCountryConfig(country),
+    ]);
 
+  const countryName = getCountryName(countryConfig, tCountries);
   const title = {
     template: `%s | DonationWatch`,
-    default: `${t("title", { country: getCountryName(countryConfig, tCountries) })} | DonationWatch`,
+    default: `${t("title", { country: countryName })} | DonationWatch`,
   };
+
+  const description = `${tHome("hero.subtitle", {
+    country: getReferencingCountryName(countryConfig, tRefCountries),
+  })} — ${t("years.subtitle", {
+    country: countryName,
+    years: formatYearsRange(countryConfig.years),
+  })} ${t("description")}`;
 
   const imageUrl = `${THUMBNAIL_PREFIX}/${locale}/${country}/cover.png`;
 
   return {
     title,
+    description,
     openGraph: baseOpenGraph({
       locale,
       images: [{ url: imageUrl, width: 800, height: 418 }],

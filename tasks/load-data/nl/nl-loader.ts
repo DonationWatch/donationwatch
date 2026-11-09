@@ -61,6 +61,7 @@ export class NlLoader extends DataLoader {
   parties: Record<string, PartyConfig> = {
     CDA: {
       short: "CDA",
+      abbr: "CDA",
       name: "Christen-Democratisch Appèl",
       code: "CDA",
       color: "#28b445",
@@ -68,6 +69,7 @@ export class NlLoader extends DataLoader {
     },
     FvD: {
       short: "FvD",
+      abbr: "FVD",
       name: "Forum voor Democratie",
       code: "FVD",
       color: "#b02520",
@@ -75,6 +77,7 @@ export class NlLoader extends DataLoader {
     },
     VVD: {
       short: "VVD",
+      abbr: "VVD",
       name: "Volkspartij voor Vrijheid en Democratie",
       code: "VVD",
       color: "#0a2cca",
@@ -82,6 +85,7 @@ export class NlLoader extends DataLoader {
     },
     Volt: {
       short: "Volt",
+      abbr: "Volt",
       name: "Volt Nederland",
       code: "VOLT",
       color: "#502379",
@@ -89,6 +93,7 @@ export class NlLoader extends DataLoader {
     },
     SP: {
       short: "SP",
+      abbr: "SP",
       name: "Socialistische Partij",
       code: "SP",
       color: "#EC1B23",
@@ -96,6 +101,7 @@ export class NlLoader extends DataLoader {
     },
     CU: {
       short: "CU",
+      abbr: "CU",
       name: "ChristenUnie",
       code: "CU",
       color: "#00a7eb",
@@ -103,6 +109,7 @@ export class NlLoader extends DataLoader {
     },
     D66: {
       short: "D66",
+      abbr: "D66",
       name: "Democraten 66",
       code: "D66",
       color: "#00AE41",
@@ -110,6 +117,7 @@ export class NlLoader extends DataLoader {
     },
     PvdD: {
       short: "PvdD",
+      abbr: "PvdD",
       name: "Partij voor de Dieren",
       code: "PVDD",
       color: "#00743c",
@@ -117,6 +125,7 @@ export class NlLoader extends DataLoader {
     },
     GL: {
       short: "GL",
+      abbr: "GL",
       name: "GroenLinks",
       code: "GL",
       color: "#dd2132",
@@ -124,6 +133,7 @@ export class NlLoader extends DataLoader {
     },
     BBB: {
       short: "BBB",
+      abbr: "BBB",
       name: "BoerBurgerBeweging",
       code: "BBB",
       color: "#95c11f",
@@ -131,6 +141,7 @@ export class NlLoader extends DataLoader {
     },
     PVV: {
       short: "PVV",
+      abbr: "PVV",
       name: "Partij voor de Vrijheid",
       code: "PVV",
       color: "#1b3357",
@@ -138,6 +149,7 @@ export class NlLoader extends DataLoader {
     },
     BVNL: {
       short: "BVNL",
+      abbr: "BVNL",
       name: "Belang van Nederland",
       code: "BVNL",
       color: "#212B51",
@@ -145,6 +157,7 @@ export class NlLoader extends DataLoader {
     },
     PvdA: {
       short: "PvdA",
+      abbr: "PvdA",
       name: "Partij van de Arbeid",
       code: "PVDA",
       color: "#e40006",
@@ -152,6 +165,7 @@ export class NlLoader extends DataLoader {
     },
     SGP: {
       short: "SGP",
+      abbr: "SGP",
       name: "Staatkundig Gereformeerde Partij",
       code: "SGP",
       color: "#e95e10",
@@ -159,6 +173,7 @@ export class NlLoader extends DataLoader {
     },
     JA21: {
       short: "JA21",
+      abbr: "JA21",
       name: "JA21",
       code: "JA21",
       color: "#242B57",

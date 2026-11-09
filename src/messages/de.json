@@ -55,19 +55,19 @@
       "description": "Im Jahr {year} erhielten {parties} Parteien in {country} insgesamt {sum} aus {count} Spenden über {minAmount}. Entdecken Sie detaillierte Aufschlüsselungen nach Partei, Spender und Trends in der Parteienfinanzierung.",
       "overview": "Übersicht über politische Parteispenden in {country} für {year}",
       "changes": "Aktuelle Änderungen bei politischen Parteispenden in {country} für {year}",
-      "donors": "Top-Spender an politische Parteien in {country} für {year}",
+      "donors": "Parteispenden-Liste & Top-Spender in {country} ({year})",
       "timeline": "Zeitstrahl der politischen Parteispenden in {country} für {year}",
       "origin": "Geografische Übersicht der Parteispenden in {country} für {year}"
     },
     "party": {
-      "donors": "Top-Spender der {party} {country}",
-      "changes": "Aktuelle Änderungen der {party}-Spenden {country}",
-      "timeline": "Zeitstrahl der {party}-Parteispenden {country}",
-      "origin": "Geografische Übersicht der {party}-Parteispenden {country}",
+      "donors": "{party}: Spenderliste & Finanzierungsübersicht ({country})",
+      "changes": "Aktuelle Änderungen der {party}-Spenden ({country})",
+      "timeline": "Zeitstrahl der {party}-Spenden ({country})",
+      "origin": "Geografische Übersicht der {party}-Spenden ({country})",
       "description": "Seit {year} hat {party} {count} Spenden über {minimumAmount} erhalten, insgesamt {sum}. Entdecken Sie Spenderdaten und Trends in {country}."
     },
     "donor": {
-      "overview": "Spenden von {donor} in {country}",
+      "overview": "{donor} – Parteispenden & Finanzierung ({country})",
       "description": "Erfahren Sie, wohin die politischen Spenden von {donor} geflossen sind. {sum} gespendet in {count} Beiträgen an {parties} Parteien in {country} seit {minYear}."
     }
   },
@@ -376,7 +376,7 @@
         "a": "{party} hat insgesamt {sum} an Spenden aus {count} dokumentierten Spenden erhalten."
       },
       "top_donors": {
-        "q": "Wer sind die größten Spender von {party}?",
+        "q": "Wer finanziert die {party} und wer sind die Top-Spender?",
         "a": "Die größten Spender von {party} sind: {donors}."
       },
       "largest_singular": {

@@ -12,6 +12,7 @@ import type {
   GlobalBiggestDonation,
   GlobalBiggestDonor,
 } from "@/utils/loader/global-biggest-donations";
+import type { CountryPartyDonorStats } from "@/utils/loader/party-donor-stats";
 import type { PartyYearsSums } from "@/utils/loader/party-years-sums";
 import type {
   Donation,
@@ -37,6 +38,7 @@ import { Country, COUNTRIES } from "@/utils/countries";
 import { convertToEur } from "@/utils/currency";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { getHistory } from "@/utils/data/get-history";
+import { computePartyDonorStats } from "@/utils/data/get-party-donor-stats";
 import { donationYear } from "@/utils/date";
 import { getWikiArticles } from "@/utils/loader/wiki";
 import { sumPartySums } from "@/utils/math";
@@ -168,6 +170,33 @@ const buildPartySums = (
     });
     result[year] = partyStatsForYear;
   });
+
+  return result;
+};
+
+const buildPartyDonorStats = (
+  parties: Party[],
+  donations: Donation[],
+): CountryPartyDonorStats => {
+  const perParty: Record<string, Donation[]> = {};
+  for (const party of parties) {
+    perParty[party[PartyField.Id]] = [];
+  }
+  for (const donation of donations) {
+    const receiver = donation[DonationField.Receiver];
+    if (perParty[receiver]) {
+      perParty[receiver].push(donation);
+    }
+  }
+
+  const result: CountryPartyDonorStats = {};
+  for (const party of parties) {
+    const partyId = party[PartyField.Id];
+    const stats = computePartyDonorStats(partyId, perParty[partyId] ?? []);
+    if (stats) {
+      result[partyId] = stats;
+    }
+  }
 
   return result;
 };
@@ -719,6 +748,17 @@ const postprocess = async (
           name: "PartyYearsSums",
           import:
             "import {PartyYearsSums} from '../../utils/loader/party-years-sums';",
+        },
+      ),
+    ),
+    fs.writeFile(
+      path.join(dataDir, "party-donor-stats.ts"),
+      jsonAsTsModuleWithType(
+        JSON.stringify(buildPartyDonorStats(parties, donations)),
+        {
+          name: "CountryPartyDonorStats",
+          import:
+            "import type {CountryPartyDonorStats} from '../../utils/loader/party-donor-stats';",
         },
       ),
     ),

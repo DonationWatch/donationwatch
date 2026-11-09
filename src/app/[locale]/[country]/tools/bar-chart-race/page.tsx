@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 
 import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
 import { Article } from "@/components/layout/article";
+import { getCountryName } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { Features, hasFeature } from "@/utils/features";
 import { getMessagesForLocale } from "@/utils/i18n-loader";
@@ -33,15 +34,23 @@ export async function generateMetadata(
 
   const { country } = params;
 
-  const t = await getTranslations({
-    locale: params.locale,
-    namespace: "bar_chart_race",
-  });
+  const [t, tCountries, countryConfig] = await Promise.all([
+    getTranslations({
+      locale: params.locale,
+      namespace: "bar_chart_race",
+    }),
+    getTranslations({
+      locale: params.locale,
+      namespace: "countries",
+    }),
+    getCountryConfig(country),
+  ]);
+  const localizedCountryName = getCountryName(countryConfig, tCountries);
 
   return {
-    title: `${t("title")} | DonationWatch`,
+    title: `${t("title")} - ${localizedCountryName}`,
     description: t("description"),
-    alternates: generateAlternates(`${country}/tools/data`),
+    alternates: generateAlternates(`${country}/tools/bar-chart-race`),
   };
 }
 

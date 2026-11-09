@@ -313,6 +313,7 @@ export async function generateMetadata(
 
   return {
     title: `${tOtherCountries("title")} | DonationWatch`,
+    description: componentTranslations[params.locale].p0,
     alternates: generateAlternates("other-countries"),
   };
 }

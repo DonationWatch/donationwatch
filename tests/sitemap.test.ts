@@ -26,4 +26,22 @@ describe("sitemap", () => {
     );
     expect(germanyDonorUrls.length).toBeGreaterThan(0);
   });
+
+  it("contains no duplicate URLs and excludes bar-chart-race for countries without Features.Date", async () => {
+    const urls = await sitemap({ id: Promise.resolve("en") });
+    const locs = urls.map((entry) => entry.url);
+
+    expect(new Set(locs).size).toBe(locs.length);
+    expect(locs).toContain("https://donation.watch/en/about");
+    expect(locs).toContain("https://donation.watch/en/other-countries");
+    expect(locs).toContain(
+      "https://donation.watch/en/germany/tools/bar-chart-race",
+    );
+    expect(locs).not.toContain(
+      "https://donation.watch/en/france/tools/bar-chart-race",
+    );
+    expect(locs).not.toContain(
+      "https://donation.watch/en/europeanunion/tools/bar-chart-race",
+    );
+  });
 });

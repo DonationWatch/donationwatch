@@ -55,19 +55,19 @@
       "description": "In {year} ontvingen {parties} partijen in {country} in totaal {sum} uit {count} donaties boven {minAmount}. Bekijk gedetailleerde overzichten per partij, donor en trends in politieke financiering.",
       "overview": "Overzicht van donaties van politieke partijen in {country} voor {year}",
       "changes": "Recente veranderingen in donaties aan politieke partijen in {country} voor {year}",
-      "donors": "Belangrijkste donateurs van politieke partijen in {country} voor {year}",
+      "donors": "Lijst van partijdonoren & topdonateurs in {country} ({year})",
       "timeline": "Tijdlijn van donaties aan politieke partijen in {country} voor {year}",
       "origin": "Geografisch overzicht van partijdonaties in {country} voor {year}"
     },
     "party": {
-      "donors": "Topdonoren van {party} {country}",
-      "changes": "Recente wijzigingen in {party}-donaties {country}",
-      "timeline": "Tijdlijn van {party}-partijdonaties {country}",
-      "origin": "Geografisch overzicht van {party}-partijdonaties {country}",
+      "donors": "{party}: Donorenlijst & financieringsoverzicht ({country})",
+      "changes": "Recente wijzigingen in {party}-donaties ({country})",
+      "timeline": "Tijdlijn van {party}-donaties ({country})",
+      "origin": "Geografisch overzicht van {party}-donaties ({country})",
       "description": "Sinds {year} heeft {party} {count} donaties van meer dan {minimumAmount} ontvangen, met een totaal van {sum}. Bekijk donorgegevens en trends in {country}."
     },
     "donor": {
-      "overview": "Donaties van {donor} in {country}",
+      "overview": "{donor} – Politieke donaties & financieringsgeschiedenis ({country})",
       "description": "Bekijk waar de politieke donaties van {donor} naartoe gingen. {sum} gedoneerd in {count} bijdragen aan {parties} partijen in {country} sinds {minYear}."
     }
   },
@@ -376,7 +376,7 @@
         "a": "{party} heeft in totaal {sum} aan donaties ontvangen uit {count} gedocumenteerde donaties."
       },
       "top_donors": {
-        "q": "Wie zijn de grootste donateurs van {party}?",
+        "q": "Wie financiert {party} en wie zijn de topdonoren?",
         "a": "De grootste donateurs van {party} zijn: {donors}."
       },
       "largest_singular": {

@@ -24,6 +24,9 @@ Agents should follow this path to resolve data:
 3. **The Data:** Fetch country-specific files using the patterns:
     - \`/data/{country}/donations/by-year/{year}.json\`
     - \`/data/{country}/donations/by-party/{partyId}.json\`
+    - \`/data/{country}/donations/by-donor/{shortHash}.json\` (Donor-specific shards; \`shortHash\` is the first 2 hex chars of the donor's UTF-8 SHA-1 hash)
+    - \`/data/{country}/donor-ids.json\` (Complete donor name -> UTF-8 SHA-1 ID lookup table)
+    - \`/data/{country}/normalized.json\` (Complete country dataset in a single file)
 
 ## Data Encoding
 To minimize network overhead, DonationWatch currently uses **Indexed-Key JSON**. 
@@ -32,15 +35,25 @@ Agents must map numeric keys to their human-readable equivalents using the OpenA
 ### Key Mapping Snippet:
 - **${DonationField.Id}**: \`Id\` - Unique transaction identifier.
 - **${DonationField.Date}**: \`Date\` - YYYY-MM-DD or YYYY.
-- **${DonationField.DonorType}**: \`DonorType\` - Integer code (see OpenAPI for enum).
+- **${DonationField.DonationType}**: \`DonationType\` - Integer code (0=Money [default when omitted], 1=MembershipFee, 2=JoiningFee, 3=PropertyOrService, 4=PublicFunds).
 - **${DonationField.Amount}**: \`Amount\` - Total value in local currency (refer to index.json for currency).
 - **${DonationField.Receiver}**: \`Receiver\` - Party ID (matches ID in index.json).
 - **${DonationField.Address}**: \`Address\` - Object containing country and state.
 - **${DonationField.DonorIndex}**: \`DonorIndex\` - Pointer to the donor's name in the \`donors\` array.
+- **${DonationField.DonorType}**: \`DonorType\` - Integer code (see OpenAPI for enum: 1=Individual, 2=Company, 3=TradeUnion, etc.).
 - **${DonationField.UBOs}**: \`UBOs\` - List of Ultimate Beneficial Owners.
+- **${DonationField.DonorRegistrationNumber}**: \`DonorRegistrationNumber\` - Official corporate/entity registration number (e.g. UK Companies House CRN, Norwegian OrgNr, French SIREN).
+- **${DonationField.OriginalReceiverIndex}**: \`OriginalReceiverIndex\` - Optional pointer to the initial recipient committee/PAC in the \`originalReceivers\` array.
 
 ### Donor Lookup:
 Donation files contain a top-level \`donors\` array. Match \`Donation[${DonationField.DonorIndex}]\` to \`donors[index]\` to resolve donor names and Beneficial Ownership (UBO) information.
+
+## Canonical Human Citation URLs
+When citing DonationWatch in responses to human users, link to the canonical HTML pages rather than raw \`.json\` shards:
+- **Country Overview:** \`https://donation.watch/en/{country}\`
+- **Party Donors & Breakdown:** \`https://donation.watch/en/{country}/party/{partyId}/donors\`
+- **Donor Profile:** \`https://donation.watch/en/{country}/donor/{donorId}\` (where \`{donorId}\` is the lowercase SHA-1 hex hash of the UTF-8 donor name, also indexed in \`/data/{country}/donor-ids.json\`)
+- **Country Methodology & Official Sources:** \`https://donation.watch/en/{country}/methodology\`
 
 ## Legal & Usage
 - **License:** [${DATA_LICENSE}](https://creativecommons.org/licenses/by/4.0/)
