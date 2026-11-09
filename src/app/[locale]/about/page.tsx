@@ -31,8 +31,8 @@ export async function generateMetadata(
   });
 
   return {
-    robots: "noindex, nofollow",
     title: `${tAbout("title")} | DonationWatch`,
+    description: tAbout("description.p0"),
     alternates: generateAlternates("about"),
   };
 }

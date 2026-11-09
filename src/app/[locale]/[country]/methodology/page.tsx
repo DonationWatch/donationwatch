@@ -64,7 +64,7 @@ export async function generateMetadata(
   const localizedCountryName = getCountryName(countryConfig, tCountries);
 
   return {
-    title: `${tMethodology("title")} - ${localizedCountryName} | DonationWatch`,
+    title: `${tMethodology("title")} - ${localizedCountryName}`,
     description: tMethodology("intro", { country: localizedCountryName }),
     alternates: generateAlternates(`${country}/methodology`),
   };

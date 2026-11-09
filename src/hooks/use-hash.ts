@@ -1,34 +1,21 @@
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 
-import { clientSha1 } from "@/utils/hash";
+import { sha1Sync } from "@/utils/hash";
 
 export const useHash = (inputString: string) => {
-  const [hash, setHash] = useState<string | null>(null);
-  const [isHashing, setIsHashing] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
-
-  performance.mark("useHash.start");
-
-  useEffect(() => {
-    if (!inputString) return;
-
-    const computeHash = async () => {
-      setIsHashing(true);
-      try {
-        const hashed = await clientSha1(inputString);
-        setHash(hashed);
-
-        performance.mark("useHash.end");
-        performance.measure("useHash", "useHash.start", "useHash.end");
-      } catch (err) {
-        setError(err instanceof Error ? err : new Error("Hashing failed"));
-      } finally {
-        setIsHashing(false);
-      }
-    };
-
-    computeHash();
+  return useMemo(() => {
+    if (!inputString) {
+      return { hash: null, isHashing: false, error: null };
+    }
+    try {
+      const hash = sha1Sync(inputString);
+      return { hash, isHashing: false, error: null };
+    } catch (err) {
+      return {
+        hash: null,
+        isHashing: false,
+        error: err instanceof Error ? err : new Error("Hashing failed"),
+      };
+    }
   }, [inputString]);
-
-  return { hash, isHashing, error };
 };

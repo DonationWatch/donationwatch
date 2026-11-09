@@ -24,7 +24,7 @@ export const DonorLink = ({
   const locale = useLocale();
   const { hash, isHashing, error } = useHash(donor);
 
-  if (isHashing || error)
+  if (isHashing || error || !hash)
     return <span className={cn("font-semibold", className)}>{donor}</span>;
 
   return (

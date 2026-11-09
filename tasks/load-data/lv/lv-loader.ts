@@ -67,6 +67,7 @@ export class LvLoader extends DataLoader {
       name: "Latvijas Sociālistiskā partija",
       code: "LSP",
       short: "LSP",
+      abbr: "LSP",
       wiki: 356652,
     },
     "LATGALES PARTIJA": {
@@ -75,6 +76,7 @@ export class LvLoader extends DataLoader {
       name: "Latgales partija",
       code: "LP",
       short: "LP",
+      abbr: "LP",
     },
     "Reformu partija (Zatlera Reformu partija) (likvidēta 03.04.2020.)": {
       wiki: 32446328,
@@ -82,6 +84,7 @@ export class LvLoader extends DataLoader {
       name: "Reformu partija",
       code: "ZRP",
       short: "ZRP",
+      abbr: "ZRP",
     },
     'Partija "VIENOTĪBA"': {
       wiki: 26861276,
@@ -103,6 +106,7 @@ export class LvLoader extends DataLoader {
       name: "Latvijas Zemnieku savienība",
       code: "LZS",
       short: "LZS",
+      abbr: "LZS",
     },
     "Latvijas Krievu savienība": {
       wiki: 710653,
@@ -110,6 +114,7 @@ export class LvLoader extends DataLoader {
       name: "Latvijas Krievu savienība",
       code: "LKS",
       short: "LKS",
+      abbr: "LKS",
     },
     '"Saskaņa" sociāldemokrātiskā partija': {
       wiki: 27083175,
@@ -117,6 +122,7 @@ export class LvLoader extends DataLoader {
       name: "Saskaņa, sociāldemokrātiskā partija",
       code: "S",
       short: "Saskaņa",
+      abbr: "Saskaņa",
     },
     "Zaļo un Zemnieku savienība": {
       wiki: 737046,
@@ -124,6 +130,7 @@ export class LvLoader extends DataLoader {
       name: "Zaļo un Zemnieku savienība",
       code: "ZZS",
       short: "ZZS",
+      abbr: "ZZS",
     },
     'Politisko partiju apvienība "Saskaņas Centrs"': {
       wiki: 4591044,
@@ -194,6 +201,7 @@ export class LvLoader extends DataLoader {
       name: 'Nacionālā apvienība "Visu Latvijai!"-"Tēvzemei un Brīvībai/LNNK',
       code: "NA",
       short: "Nacionālā apvienība",
+      abbr: "NA",
     },
     "APVIENOTAIS SARAKSTS - Latvijas Zaļā partija, Latvijas Reģionu Apvienība, Liepājas partija":
       {
@@ -201,6 +209,7 @@ export class LvLoader extends DataLoader {
         color: "#ffa800",
         name: "Apvienotais saraksts — Latvijas Zaļā partija, Latvijas Reģionu Apvienība, Liepājas partija",
         short: "Apvienotais saraksts",
+        abbr: "AS",
         code: "AS",
       },
     "No sirds Latvijai": {
@@ -215,6 +224,7 @@ export class LvLoader extends DataLoader {
       name: "Latvijas Pirmā partija/Latvijas Ceļš",
       code: "LPPLC",
       short: "LPP/LC",
+      abbr: "LPP/LC",
     },
     "JKP Jaunā konservatīvā partija": {
       wiki: 57276839,
@@ -222,6 +232,7 @@ export class LvLoader extends DataLoader {
       name: "Jaunā konservatīvā partija",
       code: "JKP",
       short: "JKP",
+      abbr: "JKP",
     },
     "Nacionālā Savienība TAISNĪGUMS": {
       wiki: 803638,
@@ -250,6 +261,7 @@ export class LvLoader extends DataLoader {
       name: "Progresīvie",
       code: "PRO",
       short: "PRO",
+      abbr: "PRO",
     },
     "APVIENĪBA IEDZĪVOTĀJI": {
       color: "#03989E",
@@ -311,6 +323,7 @@ export class LvLoader extends DataLoader {
       name: "Latvija pirmajā vietā",
       code: "LPV",
       short: "LPV",
+      abbr: "LPV",
     },
     "Mēs mainām noteikumus": {
       color: "#210106",
@@ -338,6 +351,7 @@ export class LvLoader extends DataLoader {
       name: "Jaunā Vienotība",
       code: "JV",
       short: "JV",
+      abbr: "JV",
     },
     "APVIENĪBA JAUNLATVIEŠI": {
       wiki: 73925276,
@@ -435,6 +449,7 @@ export class LvLoader extends DataLoader {
     "Gobzema saraksts": {
       name: "Gobzema saraksts",
       short: "Gobzema saraksts",
+      abbr: "KuK",
       code: "GOBZEMASARAKSTS",
       color: "#0e1b3a",
       wiki: 66677152,

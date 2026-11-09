@@ -55,19 +55,19 @@
       "description": "In {year}, {parties} parties in {country} received a total of {sum} from {count} donations over {minAmount}. Explore detailed breakdowns by party, donor, and trends in political funding.",
       "overview": "Overview of political party donations in {country} for {year}",
       "changes": "Recent changes in political party donations in {country} for {year}",
-      "donors": "Top donors to political parties in {country} for {year}",
+      "donors": "Political Party Donors List & Top Contributors in {country} ({year})",
       "timeline": "Timeline of political party donations in {country} for {year}",
       "origin": "Geographical overview of party donations in {country} for {year}"
     },
     "party": {
-      "donors": "Top donors of {party} {country}",
-      "changes": "Recent changes in {party} donations {country}",
-      "timeline": "Timeline of {party} party donations {country}",
-      "origin": "Geographical overview of {party} party donations {country}",
+      "donors": "{party} Donors List & Funding Breakdown ({country})",
+      "changes": "Recent changes in {party} donations ({country})",
+      "timeline": "Timeline of {party} donations ({country})",
+      "origin": "Geographical overview of {party} donations ({country})",
       "description": "Since {year}, {party} has received {count} donations over {minimumAmount}, totaling {sum}. Explore donor data and trends in {country}."
     },
     "donor": {
-      "overview": "Donations by {donor} in {country}",
+      "overview": "{donor} – Political Donations & Funding History ({country})",
       "description": "See where {donor}’s political donations went. {sum} donated across {count} contributions to {parties} parties in {country} since {minYear}."
     }
   },
@@ -366,7 +366,7 @@
         "a": "{party} has received {sum} in total donations from {count} documented donations."
       },
       "top_donors": {
-        "q": "Who are the top donors to {party}?",
+        "q": "Who funds {party} and who are its top donors?",
         "a": "The top donors to {party} are: {donors}."
       },
       "largest_singular": {

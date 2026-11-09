@@ -8,6 +8,7 @@ export const enum PartyField {
   Color,
   Years,
   Wiki,
+  Abbr,
 }
 
 export interface Party {
@@ -20,4 +21,6 @@ export interface Party {
   [PartyField.Color]: string;
   [PartyField.Years]: [from: string, to: string];
   [PartyField.Wiki]?: number;
+  // Optional abbreviation / acronym (e.g. "BOSA", "RN", "GOP")
+  [PartyField.Abbr]?: string;
 }

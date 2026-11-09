@@ -63,6 +63,7 @@ export class EeLoader extends DataLoader {
       name: "Sotsiaaldemokraatlik Erakond",
       code: "SDE",
       short: "SDE",
+      abbr: "SDE",
       wiki: 793508,
     },
     "Eesti Reformierakond": {
@@ -70,6 +71,7 @@ export class EeLoader extends DataLoader {
       name: "Eesti Reformierakond",
       code: "RE",
       short: "RE",
+      abbr: "REF",
       wiki: 424689,
     },
     "Eesti Konservatiivne Rahvaerakond": {
@@ -77,6 +79,7 @@ export class EeLoader extends DataLoader {
       name: "Eesti Konservatiivne Rahvaerakond",
       code: "EKRE",
       short: "EKRE",
+      abbr: "EKRE",
       wiki: 38453075,
     },
     "ISAMAA Erakond": {
@@ -84,6 +87,7 @@ export class EeLoader extends DataLoader {
       name: "Isamaa Erakond",
       code: "ISAMAA",
       short: "ISAMAA",
+      abbr: "Isamaa",
       wiki: 5421394,
     },
     "Eesti Keskerakond": {
@@ -91,6 +95,7 @@ export class EeLoader extends DataLoader {
       name: "Eesti Keskerakond",
       code: "EK",
       short: "EK",
+      abbr: "Kesk",
       wiki: 379555,
     },
     "Erakond Eesti 200": {
@@ -98,19 +103,22 @@ export class EeLoader extends DataLoader {
       name: "Eesti 200",
       code: "E200",
       short: "E200",
+      abbr: "E200",
     },
     "Erakond Eestimaa Rohelised": {
       color: "#004438",
-      name: "Eestimaa Rohelised",
+      name: "Erakond Eestimaa Rohelised",
       code: "EER",
-      short: "EER",
+      short: "Erakond Eestimaa Rohelised",
+      abbr: "EER",
       wiki: 7413932,
     },
     "Erakond Parempoolsed": {
       color: "#FF6100",
-      name: "Parempoolsed",
+      name: "Erakond Parempoolsed",
       code: "EPP",
       short: "Parempoolsed",
+      abbr: "Parempoolsed",
       wiki: 71550707,
     },
     "EESTIMAA ÜHENDATUD VASAKPARTEI": {
@@ -118,6 +126,7 @@ export class EeLoader extends DataLoader {
       name: "Eestimaa Ühendatud Vasakpartei",
       code: "EUEVP",
       short: "EÜVP",
+      abbr: "EÜVP",
       wiki: 18700145,
     },
     "Eesti Iseseisvuspartei": {
@@ -125,6 +134,7 @@ export class EeLoader extends DataLoader {
       name: "Eesti Iseseisvuspartei",
       code: "EIP",
       short: "EIP",
+      abbr: "EIP",
       wiki: 1857725,
     },
     "Eesti Vabaerakond": {
@@ -132,6 +142,7 @@ export class EeLoader extends DataLoader {
       name: "Eesti Vabaerakond",
       code: "VABAERAKOND",
       short: "Vabaerakond",
+      abbr: "Vabaerakond",
       wiki: 45492661,
     },
     "Rahva Ühtsuse Erakond": {
@@ -139,6 +150,7 @@ export class EeLoader extends DataLoader {
       name: "Rahva Ühtsuse Erakond",
       code: "RUE",
       short: "RÜE",
+      abbr: "RÜE",
       wiki: 74636180,
     },
     "Erakond Rahva Tahe": {
@@ -166,6 +178,7 @@ export class EeLoader extends DataLoader {
       name: "Eesti Rahvuslased ja Konservatiivid",
       code: "ERK",
       short: "ERK",
+      abbr: "ERK",
       color: "#c9a218",
       wiki: 77163029,
     },
@@ -173,6 +186,7 @@ export class EeLoader extends DataLoader {
       name: "Eesti Vasakliit",
       code: "VL",
       short: "Vasakliit",
+      abbr: "Vasakliit",
       wiki: 18700145,
       color: "#fe0000",
     },

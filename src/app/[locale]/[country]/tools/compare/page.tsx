@@ -8,7 +8,8 @@ import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
 import { Article } from "@/components/layout/article";
 import Loading from "@/components/loading/loading";
 import { PartyComparison } from "@/components/parties/party-comparison";
-import { COUNTRIES } from "@/utils/countries";
+import { COUNTRIES, getCountryName } from "@/utils/countries";
+import { getCountryConfig } from "@/utils/data/get-country-config";
 import { getMessagesForLocale } from "@/utils/i18n-loader";
 import { pick } from "@/utils/i18n-pick";
 import { LOCALES } from "@/utils/locales";
@@ -35,13 +36,22 @@ export async function generateMetadata(
 
   const { country } = params;
 
-  const tCompareParties = await getTranslations({
-    locale: params.locale,
-    namespace: "compare_parties_page",
-  });
+  const [tCompareParties, tCountries, countryConfig] = await Promise.all([
+    getTranslations({
+      locale: params.locale,
+      namespace: "compare_parties_page",
+    }),
+    getTranslations({
+      locale: params.locale,
+      namespace: "countries",
+    }),
+    getCountryConfig(country),
+  ]);
+  const localizedCountryName = getCountryName(countryConfig, tCountries);
 
   return {
-    title: `${tCompareParties("title")} | DonationWatch`,
+    title: `${tCompareParties("title")} - ${localizedCountryName}`,
+    description: tCompareParties("description"),
     alternates: generateAlternates(`${country}/tools/compare`),
   };
 }

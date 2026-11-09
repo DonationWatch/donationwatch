@@ -9,10 +9,14 @@ import { PartyField } from "@/types/party";
 import { PartyStatField } from "@/types/party-stats";
 import { getCountryName } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
+import { getDonorName } from "@/utils/donor";
+import { Features, hasFeature } from "@/utils/features";
 import { formatCompactCountryCurrency } from "@/utils/formatter";
+import { getPartyDonorStats } from "@/utils/loader/party-donor-stats";
 import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
 import { generateAlternates } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
+import { getPartyFullAndShortName } from "@/utils/party";
 import {
   isValidCountry,
   isValidLocale,
@@ -33,16 +37,28 @@ export async function generateMetadata(
 
   const { locale, country, partyId } = params;
 
-  const [tCountries, tPageTitle, countryConfig, partySums] = await Promise.all([
+  const [
+    t,
+    tCommon,
+    tCountries,
+    tPageTitle,
+    countryConfig,
+    partySums,
+    partyDonorStats,
+  ] = await Promise.all([
+    getTranslations({ locale }),
+    getTranslations({ locale, namespace: "common" }),
     getTranslations({ locale, namespace: "countries" }),
     getTranslations({ locale, namespace: "page_title" }),
     getCountryConfig(country),
     getPartyYearsSums(country),
+    getPartyDonorStats(country),
   ]);
 
   if (!isValidParty(partyId, countryConfig)) return notFoundMetadata;
 
   const party = getParty(countryConfig.id, partyId);
+  const partyDisplayName = getPartyFullAndShortName(party);
 
   let sum = 0;
   let count = 0;
@@ -56,9 +72,9 @@ export async function generateMetadata(
     }
   }
 
-  const description = tPageTitle("party.description", {
+  const baseDescription = tPageTitle("party.description", {
     year: countryConfig.minYear,
-    party: party[PartyField.Short],
+    party: partyDisplayName,
     count,
     minimumAmount: formatCompactCountryCurrency(
       locale,
@@ -69,9 +85,27 @@ export async function generateMetadata(
     country: getCountryName(countryConfig, tCountries),
   });
 
+  const topDonors = hasFeature(countryConfig, Features.Donors)
+    ? (partyDonorStats[partyId]?.topDonors.slice(0, 3) ?? [])
+    : [];
+  const topDonorsSentence =
+    topDonors.length > 0
+      ? ` ${t("party.qa.top_donors.a", {
+          party: party[PartyField.Short],
+          donors: topDonors
+            .map(
+              (d) =>
+                `${getDonorName(d.name, tCommon)} (${formatCompactCountryCurrency(locale, d.sum, countryConfig)})`,
+            )
+            .join(", "),
+        })}`
+      : "";
+
+  const description = `${baseDescription}${topDonorsSentence}`;
+
   return {
     title: tPageTitle("party.donors", {
-      party: party[PartyField.Short],
+      party: partyDisplayName,
       country: getCountryName(countryConfig, tCountries),
     }),
     description,
@@ -90,10 +124,11 @@ export default async function DonorPage(
 
   const { country, partyId } = params;
 
-  const [t, tCountries, countryConfig] = await Promise.all([
+  const [t, tCountries, countryConfig, partyDonorStats] = await Promise.all([
     getTranslations({ locale: params.locale }),
     getTranslations({ locale: params.locale, namespace: "countries" }),
     getCountryConfig(country),
+    getPartyDonorStats(country),
   ]);
 
   if (!isValidParty(partyId, countryConfig)) return notFound();
@@ -103,6 +138,7 @@ export default async function DonorPage(
     <Article fullWidth={true}>
       <PartyDonorsClientPage
         party={party}
+        ssrStats={partyDonorStats[partyId] ?? null}
         treemapTitle={t("party.donors.title", {
           party: party[PartyField.Short],
         })}

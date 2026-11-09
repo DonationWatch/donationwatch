@@ -109,11 +109,13 @@ export const useDonorNames = (country: CountryConfig) => {
 export const useDonationsByDonorId = (
   country: CountryConfig,
   donorId: string,
+  initialData?: Donation[],
 ) => {
   const build = getBuild(country.id).t;
 
   return useQuery<Donation[]>({
     queryKey: [country.id, "donations", "by-donor", donorId],
+    initialData,
     queryFn: () =>
       jsonFetcher<DonationsDocument>(
         `/data/${country.id}/donations/by-donor/${donorId.substring(0, DONOR_ID_HASH_LEN)}.json?${QUERY_PARAM_BUILD_TS}=${build}`,

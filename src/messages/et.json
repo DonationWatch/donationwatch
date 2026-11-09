@@ -55,19 +55,19 @@
       "description": "Aastal {year} said {parties} parteid riigis {country} kokku {sum} {count} annetusest, mis ületasid {minAmount}. Uurige üksikasjalikke jaotusi parteide, annetajate ja poliitilise rahastamise trendide lõikes.",
       "overview": "Ülevaade poliitiliste parteide annetustest {country} aastal {year}",
       "changes": "Viimased muudatused poliitiliste parteide annetustes {country} aastal {year}",
-      "donors": "Suurimad annetajad poliitilistele parteidele {country} aastal {year}",
+      "donors": "Erakondade annetajate nimekiri ja suurimad toetajad riigis {country} ({year})",
       "timeline": "Ajaline joon poliitiliste parteide annetustest {country} aastal {year}",
       "origin": "Geograafiline ülevaade parteiannetustest {country} aastal {year}"
     },
     "party": {
-      "donors": "{party} suurimad annetajad {country}",
-      "changes": "{party} annetuste viimased muudatused {country}",
-      "timeline": "{party} parteiannetuste ajajoon {country}",
-      "origin": "{party} parteiannetuste geograafiline ülevaade {country}",
+      "donors": "{party}: Annetajate nimekiri ja rahastamise ülevaade ({country})",
+      "changes": "{party} annetuste viimased muudatused ({country})",
+      "timeline": "{party} annetuste ajajoon ({country})",
+      "origin": "{party} annetuste geograafiline ülevaade ({country})",
       "description": "Alates {year}. aastast on {party} saanud {count} annetust üle {minimumAmount}, kokku {sum}. Uurige annetajate andmeid ja trende {country}."
     },
     "donor": {
-      "overview": "{donor} annetused {country}s",
+      "overview": "{donor} – Poliitilised annetused ja rahastamise ajalugu ({country})",
       "description": "Vaadake, kuhu läksid {donor} poliitilised annetused. {sum} annetatud {count} sissemaksega {parties} erakonnale {country} alates {minYear}."
     }
   },
@@ -376,7 +376,7 @@
         "a": "{party} on saanud kokku {sum} annetustes {count} dokumenteeritud annetusest."
       },
       "top_donors": {
-        "q": "Kes on {party} suurimad annetajad?",
+        "q": "Kes rahastab erakonda {party} ja kes on selle suurimad toetajad?",
         "a": "{party} suurimad annetajad on: {donors}."
       },
       "largest_singular": {

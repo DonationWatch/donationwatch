@@ -91,9 +91,17 @@ export const PartyClientPageHead = ({
         <h2 className="mb-2 text-zinc-500 dark:text-zinc-300">
           {t("years.title")}
         </h2>
-        <h3 className="text-3xl font-semibold sm:text-4xl" id="hero-label">
-          {party[PartyField.Short]}
-        </h3>
+        <div className="flex flex-wrap items-center gap-3">
+          <h3 className="text-3xl font-semibold sm:text-4xl" id="hero-label">
+            {party[PartyField.Short]}
+          </h3>
+          {party[PartyField.Abbr] &&
+          party[PartyField.Abbr] !== party[PartyField.Short] ? (
+            <span className="inline-block rounded-md bg-zinc-100 px-2.5 py-0.5 align-middle text-base font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+              {party[PartyField.Abbr]}
+            </span>
+          ) : null}
+        </div>
         {party[PartyField.Short] !== getLongName(party) ? (
           <h4 className="mt-1 text-lg">{getLongName(party)}</h4>
         ) : null}

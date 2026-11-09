@@ -55,19 +55,19 @@
       "description": "{year}. gadā {parties} partijas {country} saņēma kopā {sum} no {count} ziedojumiem virs {minAmount}. Izpētiet detalizētu sadalījumu pa partijām, ziedotājiem un politiskās finansēšanas tendencēm.",
       "overview": "Politisko partiju ziedojumu pārskats {country} gadā {year}",
       "changes": "Jaunākās izmaiņas politisko partiju ziedojumos {country} gadā {year}",
-      "donors": "Galvenie ziedotāji politiskajām partijām {country} gadā {year}",
+      "donors": "Politisko partiju ziedotāju saraksts un lielākie ziedotāji {country} ({year})",
       "timeline": "Politisko partiju ziedojumu laika grafiks {country} gadā {year}",
       "origin": "Ģeogrāfiskais politisko partiju ziedojumu pārskats {country} gadā {year}"
     },
     "party": {
-      "donors": "{party} galvenie ziedotāji {country}",
-      "changes": "Jaunākās izmaiņas {party} ziedojumos {country}",
-      "timeline": "{party} partijas ziedojumu laika grafiks {country}",
-      "origin": "{party} partijas ziedojumu ģeogrāfiskais pārskats {country}",
+      "donors": "{party}: Ziedotāju saraksts un finansējuma pārskats ({country})",
+      "changes": "Jaunākās izmaiņas {party} ziedojumos ({country})",
+      "timeline": "{party} ziedojumu laika grafiks ({country})",
+      "origin": "{party} ziedojumu ģeogrāfiskais pārskats ({country})",
       "description": "Kopš {year}. gada {party} ir saņēmusi {count} ziedojumus virs {minimumAmount}, kuru kopējā summa ir {sum}. Izpētiet ziedotāju datus un tendences {country}."
     },
     "donor": {
-      "overview": "{donor} ziedojumi {country}",
+      "overview": "{donor} – Politiskie ziedojumi un finansējuma vēsture ({country})",
       "description": "Uzziniet, kur nonāca {donor} politiskie ziedojumi. {sum} ziedots {count} iemaksās {parties} partijām {country} kopš {minYear}."
     }
   },
@@ -376,7 +376,7 @@
         "a": "{party} ir saņēmusi kopumā {sum} ziedojumos no {count} dokumentētiem ziedojumiem."
       },
       "top_donors": {
-        "q": "Kas ir lielākie {party} ziedotāji?",
+        "q": "Kas finansē {party} un kas ir tās lielākie ziedotāji?",
         "a": "Lielākie {party} ziedotāji ir: {donors}."
       },
       "largest_singular": {

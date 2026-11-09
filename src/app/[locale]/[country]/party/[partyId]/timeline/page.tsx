@@ -11,6 +11,7 @@ import { getCountryConfig } from "@/utils/data/get-country-config";
 import { formatYearsRange } from "@/utils/formatter";
 import { generateAlternates } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
+import { getPartyFullAndShortName } from "@/utils/party";
 import { isValidCountry, isValidLocale, isValidParty } from "@/utils/validate";
 
 import { PartyTimelineClientPage } from "./_components/party-timeline-client-page";
@@ -35,14 +36,15 @@ export async function generateMetadata(
 
   if (!isValidParty(partyId, countryConfig)) return notFoundMetadata;
   const party = getParty(countryConfig.id, partyId);
+  const partyDisplayName = getPartyFullAndShortName(party);
 
   return {
     title: tPageTitle("party.timeline", {
-      party: party[PartyField.Short],
+      party: partyDisplayName,
       country: getCountryName(countryConfig, tCountries),
     }),
     description: t("party.timeline.detail.summary", {
-      party: party[PartyField.Short],
+      party: partyDisplayName,
     }),
     alternates: generateAlternates(`${country}/party/${partyId}/timeline`),
   };

@@ -10,6 +10,7 @@ import { getCountryName } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { generateAlternates } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
+import { getPartyFullAndShortName } from "@/utils/party";
 import { isValidCountry, isValidLocale, isValidParty } from "@/utils/validate";
 
 import { PartyChangesClientPage } from "./_components/party-changes-client-page";
@@ -34,14 +35,15 @@ export async function generateMetadata(
 
   if (!isValidParty(partyId, countryConfig)) return notFoundMetadata;
   const party = getParty(countryConfig.id, partyId);
+  const partyDisplayName = getPartyFullAndShortName(party);
 
   return {
     title: tPageTitle("party.changes", {
-      party: party[PartyField.Short],
+      party: partyDisplayName,
       country: getCountryName(countryConfig, tCountries),
     }),
     description: t("party.changes.detail.summary", {
-      party: party[PartyField.Short],
+      party: partyDisplayName,
     }),
     alternates: generateAlternates(`${country}/party/${partyId}/changes`),
   };

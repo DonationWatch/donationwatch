@@ -25,7 +25,10 @@ import { pick } from "@/utils/i18n-pick";
 import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
 import { baseOpenGraph, baseTwitter } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
-import { lastPartyStatsDonation } from "@/utils/party";
+import {
+  getPartyFullAndShortName,
+  lastPartyStatsDonation,
+} from "@/utils/party";
 import { generateCountryTitlePart } from "@/utils/title";
 import { isValidCountry, isValidLocale, isValidParty } from "@/utils/validate";
 
@@ -78,7 +81,7 @@ export async function generateMetadata(
 
   const title = {
     template: `%s | DonationWatch`,
-    default: `${party[PartyField.Short]} | ${countryPart} | DonationWatch`,
+    default: `${getPartyFullAndShortName(party)} | ${countryPart} | DonationWatch`,
   };
 
   const imageUrl = `${THUMBNAIL_PREFIX}/${locale}/${country}/parties/${party[PartyField.Id]}.png`;

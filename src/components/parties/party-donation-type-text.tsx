@@ -20,9 +20,13 @@ import { DonationField, DonationType } from "@/utils/types";
 export const LoadingPartyDonationTypeText = ({
   party,
   donations,
+  ssrDonationTypes,
 }: {
   party: Party;
   donations: Donation[];
+  ssrDonationTypes?: Partial<
+    Record<DonationType, { sum: number; count: number }>
+  >;
 }) => {
   const country = useRequiredCountryConfig();
   const browserBasedLocale = useBrowserBasedLocale();
@@ -34,18 +38,26 @@ export const LoadingPartyDonationTypeText = ({
   > = {};
   let totalSum = 0;
 
-  donations.forEach((donation) => {
-    if (donation[DonationField.Receiver] !== party[PartyField.Id]) return;
+  if (donations.length > 0) {
+    donations.forEach((donation) => {
+      if (donation[DonationField.Receiver] !== party[PartyField.Id]) return;
 
-    const donationType =
-      donation[DonationField.DonationType] ?? DonationType.Money;
+      const donationType =
+        donation[DonationField.DonationType] ?? DonationType.Money;
 
-    sumByType[donationType] ??= { sum: 0, count: 0 };
-    sumByType[donationType]!.sum += donation[DonationField.Amount];
-    sumByType[donationType]!.count++;
+      sumByType[donationType] ??= { sum: 0, count: 0 };
+      sumByType[donationType]!.sum += donation[DonationField.Amount];
+      sumByType[donationType]!.count++;
 
-    totalSum += donation[DonationField.Amount];
-  });
+      totalSum += donation[DonationField.Amount];
+    });
+  } else if (ssrDonationTypes) {
+    for (const [type, stats] of Object.entries(ssrDonationTypes)) {
+      if (!stats) continue;
+      sumByType[Number(type) as DonationType] = stats;
+      totalSum += stats.sum;
+    }
+  }
 
   const sortedEntries = Object.entries(sumByType).toSorted(
     ([, a], [, b]) => b.sum - a.sum,

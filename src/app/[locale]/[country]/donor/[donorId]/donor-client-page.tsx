@@ -2,6 +2,8 @@
 import { notFound } from "next/navigation";
 import { useEffect } from "react";
 
+import type { Donation } from "@/utils/types";
+
 import { FilterEmptyState } from "@/components/filter/filter-empty-state";
 import { Article } from "@/components/layout/article";
 import Loading from "@/components/loading/loading";
@@ -23,7 +25,13 @@ import { DonorDonationTimeline } from "./_components/donor-donation-timeline";
 import { DonorDonationTypes } from "./_components/donor-donation-types";
 import { DonorOriginalReceivers } from "./_components/donor-original-receivers";
 
-export const DonorClientPage = ({ donorId }: { donorId: string }) => {
+export const DonorClientPage = ({
+  donorId,
+  initialDonations,
+}: {
+  donorId: string;
+  initialDonations?: Donation[];
+}) => {
   const countryConfig = useRequiredCountryConfig();
   const t = useTranslations("data");
   const {
@@ -33,6 +41,7 @@ export const DonorClientPage = ({ donorId }: { donorId: string }) => {
   const { data, isLoading, error, isSuccess } = useDonationsByDonorId(
     countryConfig,
     donorId,
+    initialDonations,
   );
 
   useScrollToHash(isSuccess);
@@ -75,7 +84,13 @@ export const DonorClientPage = ({ donorId }: { donorId: string }) => {
     isFiltered,
   });
 
-  if (!filteredDonations || filteredDonations.length === 0) {
+  const activeDonations = isFiltered
+    ? filteredDonations
+    : filteredDonations.length > 0
+      ? filteredDonations
+      : (data ?? []);
+
+  if (!activeDonations || activeDonations.length === 0) {
     if (isFiltered) {
       return (
         <Article fullWidth={true}>
@@ -108,13 +123,13 @@ export const DonorClientPage = ({ donorId }: { donorId: string }) => {
         )
       ) : (
         <>
-          <DonorClientPageContent donations={filteredDonations} />
-          <DonorDonationTimeline donations={filteredDonations} />
-          <DonorOriginalReceivers donations={filteredDonations} />
+          <DonorClientPageContent donations={activeDonations} />
+          <DonorDonationTimeline donations={activeDonations} />
+          <DonorOriginalReceivers donations={activeDonations} />
           {hasFeature(countryConfig, Features.DonationType) ? (
-            <DonorDonationTypes donations={filteredDonations} />
+            <DonorDonationTypes donations={activeDonations} />
           ) : null}
-          <DonorDonationTable donations={filteredDonations} />
+          <DonorDonationTable donations={activeDonations} />
         </>
       )}
     </Article>

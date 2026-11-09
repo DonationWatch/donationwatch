@@ -11,6 +11,19 @@ import { getBuild } from "@/utils/loader/build";
 export const getLongName = (party: Party): string =>
   party[PartyField.Name] ?? party[PartyField.Short];
 
+export const getPartyFullAndShortName = (party: Party): string => {
+  const name = party[PartyField.Name] ?? party[PartyField.Short];
+  const abbr =
+    party[PartyField.Abbr] ??
+    (party[PartyField.Name] ? party[PartyField.Short] : undefined);
+
+  if (abbr && abbr !== name) {
+    return `${name} (${abbr})`;
+  }
+
+  return name;
+};
+
 export const yearPartiesHaveYearOnlyDonations = (
   partySums: PartyYearsSums,
   years: string[],

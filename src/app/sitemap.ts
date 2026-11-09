@@ -91,8 +91,24 @@ export default async function sitemap(props: {
   return [
     ...[locale]
       .flatMap((locale) => {
-        return countriesArray
-          .flatMap((country) => {
+        return [
+          {
+            url: `${BASE_URL}/${locale}`,
+            lastModified,
+          },
+          {
+            url: `${BASE_URL}/${locale}/about`,
+            lastModified,
+          },
+          {
+            url: `${BASE_URL}/${locale}/other-countries`,
+            lastModified,
+          },
+          {
+            url: `${BASE_URL}/${locale}/enterprise`,
+            lastModified,
+          },
+          ...countriesArray.flatMap((country) => {
             const { config, partyYearsSums, build, biggestDonors, wikiDonors } =
               countryConfigs[country];
             const lastModified = new Date(
@@ -117,14 +133,6 @@ export default async function sitemap(props: {
 
             return [
               {
-                url: `${BASE_URL}/${locale}`,
-                lastModified,
-              },
-              {
-                url: `${BASE_URL}/${locale}/enterprise`,
-                lastModified,
-              },
-              {
                 url: `${BASE_URL}/${locale}/${country}`,
                 lastModified,
               },
@@ -136,10 +144,14 @@ export default async function sitemap(props: {
                 url: `${BASE_URL}/${locale}/${country}/methodology`,
                 lastModified,
               },
-              {
-                url: `${BASE_URL}/${locale}/${country}/tools/bar-chart-race`,
-                lastModified,
-              },
+              ...(hasFeature(config, Features.Date)
+                ? [
+                    {
+                      url: `${BASE_URL}/${locale}/${country}/tools/bar-chart-race`,
+                      lastModified,
+                    },
+                  ]
+                : []),
               {
                 url: `${BASE_URL}/${locale}/${country}/tools/compare`,
                 lastModified,
@@ -221,13 +233,12 @@ export default async function sitemap(props: {
                 return sitemapDonors;
               })(),
             ];
-          })
-          .concat([
-            {
-              url: `${BASE_URL}/${locale}/fun`,
-              lastModified,
-            },
-          ]);
+          }),
+          {
+            url: `${BASE_URL}/${locale}/fun`,
+            lastModified,
+          },
+        ];
       })
       .flat(),
   ];

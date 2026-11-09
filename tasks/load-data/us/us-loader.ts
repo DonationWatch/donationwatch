@@ -333,6 +333,7 @@ export class UsLoader extends DataLoader {
     DEM: {
       code: "DEM",
       short: "Democrats",
+      abbr: "Dem",
       name: "Democratic Party & Aligned PACs",
       color: "#0044C9",
       wiki: 5043544,
@@ -340,6 +341,7 @@ export class UsLoader extends DataLoader {
     REP: {
       code: "GOP",
       short: "Republicans",
+      abbr: "GOP",
       name: "Republican Party & Aligned PACs",
       color: "#DE0100",
       wiki: 32070,
@@ -347,6 +349,7 @@ export class UsLoader extends DataLoader {
     LIB: {
       code: "LP",
       short: "Libertarians",
+      abbr: "LP",
       name: "Libertarian Party",
       color: "#FFD100",
       wiki: 32044,
@@ -354,6 +357,7 @@ export class UsLoader extends DataLoader {
     GRE: {
       code: "GPUS",
       short: "Greens",
+      abbr: "GPUS",
       name: "Green Party of the United States",
       color: "#17AA5C",
       wiki: 30696,

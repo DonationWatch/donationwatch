@@ -3,7 +3,12 @@ import type { OpenAPIV3_1 } from "openapi-types";
 import { PartyField } from "@/types/party";
 import { CONTACT_MAIL, DATA_LICENSE, PROD_URL } from "@/utils/config";
 import { COUNTRIES, Country } from "@/utils/countries";
-import { AddressField, DonationField, DonorType } from "@/utils/types";
+import {
+  AddressField,
+  DonationField,
+  DonationType,
+  DonorType,
+} from "@/utils/types";
 
 const schemaConstEnum = <T>(members: [T, string][]) =>
   members.map(([value, description]) => ({ const: value, description }));
@@ -134,6 +139,110 @@ export const buildOpenapiDocument = (): OpenAPIV3_1.Document => {
           },
         },
       },
+      "/data/{country}/donations/by-donor/{shortHash}.json": {
+        get: {
+          summary: "Donor Shard Donation Records",
+          description:
+            "Returns a donations document for all donors in a country whose lowercase UTF-8 SHA-1 hash starts with the 2-character hex prefix `shortHash`.",
+          parameters: [
+            {
+              name: "country",
+              in: "path",
+              required: true,
+              schema: {
+                $ref: "#/components/schemas/Country",
+                example: Country.germany,
+              },
+            },
+            {
+              name: "shortHash",
+              in: "path",
+              required: true,
+              schema: {
+                type: "string",
+                minLength: 2,
+                maxLength: 2,
+                example: "a1",
+              },
+            },
+          ],
+          responses: {
+            "200": {
+              description:
+                "A donations document containing all donations and a donor lookup table for the matching 2-hex-char SHA-1 shard.",
+              content: {
+                "application/json": {
+                  schema: {
+                    $ref: "#/components/schemas/DonationsDocumentWithoutDonorIds",
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+      "/data/{country}/donor-ids.json": {
+        get: {
+          summary: "Donor ID Lookup Table",
+          description:
+            "Returns a mapping of donor names to their lowercase UTF-8 SHA-1 hex IDs for a given country.",
+          parameters: [
+            {
+              name: "country",
+              in: "path",
+              required: true,
+              schema: {
+                $ref: "#/components/schemas/Country",
+                example: Country.germany,
+              },
+            },
+          ],
+          responses: {
+            "200": {
+              description: "Map of donor name to SHA-1 hex ID.",
+              content: {
+                "application/json": {
+                  schema: {
+                    type: "object",
+                    additionalProperties: { type: "string" },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+      "/data/{country}/normalized.json": {
+        get: {
+          summary: "Complete Country Donations Dataset",
+          description:
+            "Returns the complete donations document and donor lookup table for a country in a single file.",
+          parameters: [
+            {
+              name: "country",
+              in: "path",
+              required: true,
+              schema: {
+                $ref: "#/components/schemas/Country",
+                example: Country.germany,
+              },
+            },
+          ],
+          responses: {
+            "200": {
+              description:
+                "Complete country donations document and donor lookup table.",
+              content: {
+                "application/json": {
+                  schema: {
+                    $ref: "#/components/schemas/DonationsDocumentWithoutDonorIds",
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
     },
     components: {
       schemas: {
@@ -230,6 +339,11 @@ export const buildOpenapiDocument = (): OpenAPIV3_1.Document => {
               description:
                 "Wiki: The corresponding wikipedia page id. More info: https://www.mediawiki.org/wiki/Help:Page_ID",
             },
+            [PartyField.Abbr]: {
+              type: "string",
+              description:
+                "Abbr: Optional recognized party abbreviation or acronym",
+            },
           },
         },
 
@@ -255,11 +369,32 @@ export const buildOpenapiDocument = (): OpenAPIV3_1.Document => {
           ]),
         },
 
+        DonationType: {
+          type: "integer",
+          oneOf: schemaConstEnum([
+            [
+              DonationType.Money,
+              "Money (Private monetary donations; default when omitted)",
+            ],
+            [DonationType.MembershipFee, "MembershipFee (Regular member dues)"],
+            [DonationType.JoiningFee, "JoiningFee (One-time entry fees)"],
+            [
+              DonationType.PropertyOrService,
+              "PropertyOrService (In-kind / Non-cash donations)",
+            ],
+            [
+              DonationType.PublicFunds,
+              "PublicFunds (State subsidies, e.g. Short Money)",
+            ],
+          ]),
+        },
+
         DonationField: {
           type: "integer",
           oneOf: schemaConstEnum([
             [DonationField.Id, "Id"],
             [DonationField.Date, "Date"],
+            [DonationField.DonationType, "DonationType"],
             [DonationField.DonorType, "DonorType"],
             [DonationField.Amount, "Amount"],
             [DonationField.Receiver, "Receiver"],
@@ -269,6 +404,7 @@ export const buildOpenapiDocument = (): OpenAPIV3_1.Document => {
               DonationField.UBOs,
               "UBOs (See https://en.wikipedia.org/wiki/Beneficial_ownership )",
             ],
+            [DonationField.DonorRegistrationNumber, "DonorRegistrationNumber"],
             [DonationField.OriginalReceiver, "OriginalReceiver"],
             [DonationField.OriginalReceiverIndex, "OriginalReceiverIndex"],
           ]),
@@ -344,6 +480,11 @@ export const buildOpenapiDocument = (): OpenAPIV3_1.Document => {
               description: "Date: ISO-8601 date string or Year",
               example: "2020-01-01",
             },
+            [DonationField.DonationType]: {
+              $ref: "#/components/schemas/DonationType",
+              description:
+                "DonationType: See DonationType enum (0=Money [default when omitted], 1=MembershipFee, 2=JoiningFee, 3=PropertyOrService, 4=PublicFunds)",
+            },
             [DonationField.Amount]: {
               type: "number",
               description: "Amount: Total value in the countries currency",
@@ -376,6 +517,11 @@ export const buildOpenapiDocument = (): OpenAPIV3_1.Document => {
               items: {
                 type: "string",
               },
+            },
+            [DonationField.DonorRegistrationNumber]: {
+              type: "string",
+              description:
+                "DonorRegistrationNumber: Official corporate/entity registration number (e.g. UK Companies House CRN, Norwegian OrgNr, French SIREN)",
             },
           },
           required: [

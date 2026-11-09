@@ -55,19 +55,19 @@
       "description": "V roce {year} obdrželo {parties} stran v {country} celkem {sum} z {count} darů nad {minAmount}. Prozkoumejte podrobné rozdělení podle strany, dárce a trendů ve financování politiky.",
       "overview": "Přehled politických stranových darů v {country} pro rok {year}",
       "changes": "Nedávné změny v politických stranových darech v {country} pro rok {year}",
-      "donors": "Největší dárci politickým stranám v {country} pro rok {year}",
+      "donors": "Seznam dárců politických stran a největší dárci v {country} ({year})",
       "timeline": "Časová osa politických stranových darů v {country} pro rok {year}",
       "origin": "Geografický přehled darů stran v {country} pro rok {year}"
     },
     "party": {
-      "donors": "Největší dárci strany {party} {country}",
-      "changes": "Nedávné změny v darech strany {party} {country}",
-      "timeline": "Časová osa darů strany {party} {country}",
-      "origin": "Geografický přehled darů strany {party} {country}",
+      "donors": "{party}: Seznam dárců a přehled financování ({country})",
+      "changes": "Nedávné změny v darech pro {party} ({country})",
+      "timeline": "Časová osa darů pro {party} ({country})",
+      "origin": "Geografický přehled darů pro {party} ({country})",
       "description": "Od roku {year} obdržela {party} {count} darů nad {minimumAmount} v celkové výši {sum}. Prozkoumejte data o dárcích a trendy v {country}."
     },
     "donor": {
-      "overview": "Dary od {donor} v {country}",
+      "overview": "{donor} – Politické dary a historie financování ({country})",
       "description": "Zjistěte, kam směřovaly politické dary {donor}. {sum} darováno v {count} příspěvcích pro {parties} strany v {country} od roku {minYear}."
     }
   },
@@ -376,7 +376,7 @@
         "a": "{party} obdržela celkem {sum} na darech z {count} zdokumentovaných darů."
       },
       "top_donors": {
-        "q": "Kdo jsou největší dárci {party}?",
+        "q": "Kdo financuje stranu {party} a kdo jsou její největší dárci?",
         "a": "Největší dárci {party} jsou: {donors}."
       },
       "largest_singular": {

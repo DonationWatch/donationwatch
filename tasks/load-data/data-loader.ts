@@ -53,6 +53,7 @@ export interface PartyConfig {
   code: string;
   short: string;
   name: string;
+  abbr?: string;
   wiki?: number;
 }
 
@@ -620,6 +621,7 @@ export abstract class DataLoader {
             ...(config.name !== config.short
               ? { [PartyField.Name]: config.name }
               : undefined),
+            ...(config.abbr ? { [PartyField.Abbr]: config.abbr } : undefined),
           };
         }),
     };

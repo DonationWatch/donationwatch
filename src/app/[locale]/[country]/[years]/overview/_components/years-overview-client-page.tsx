@@ -177,10 +177,9 @@ export const YearsOverviewClientPage = ({
     return sums.toSorted((a, b) => b[1].sum - a[1].sum).slice(0, 5);
   }, [sums]);
 
-  if (isLoading) return <Loading />;
   if (error) return <div>{tData("error")}</div>;
 
-  if (isFiltered && filteredDonations.length === 0) {
+  if (!isLoading && isFiltered && filteredDonations.length === 0) {
     return <FilterEmptyState onReset={controls.resetFilters} />;
   }
 
@@ -288,13 +287,17 @@ export const YearsOverviewClientPage = ({
                 title={scatterTitle}
               />
               <p className="mb-6">{scatterSummary}</p>
-              <DonationYearScatterPlot
-                years={activeYears}
-                parties={activeParties}
-                title={scatterTitle}
-                subtitle={scatterSubtitle}
-                donations={filteredDonations}
-              />
+              {isLoading ? (
+                <Loading />
+              ) : (
+                <DonationYearScatterPlot
+                  years={activeYears}
+                  parties={activeParties}
+                  title={scatterTitle}
+                  subtitle={scatterSubtitle}
+                  donations={filteredDonations}
+                />
+              )}
             </ArticleSectionColumn>
           </ArticleSectionOneColumns>
         </ArticleSectionWrapper>

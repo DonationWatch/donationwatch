@@ -46,6 +46,7 @@ export class ZaLoader extends DataLoader {
     ACTIONSA: {
       name: "ActionSA",
       short: "ActionSA",
+      abbr: "ActionSA",
       code: "ACTIONSA",
       color: "#05B615",
       wiki: 66098255,
@@ -53,6 +54,7 @@ export class ZaLoader extends DataLoader {
     "AFRICAN NATIONAL CONGRESS": {
       name: "African National Congress",
       short: "African National Congress",
+      abbr: "ANC",
       code: "ANC",
       color: "#00A650",
       wiki: 2503,
@@ -60,6 +62,7 @@ export class ZaLoader extends DataLoader {
     "DEMOCRATIC ALLIANCE": {
       name: "Democratic Alliance",
       short: "Democratic Alliance",
+      abbr: "DA",
       code: "DA",
       color: "#001993",
       wiki: 403102,
@@ -67,6 +70,7 @@ export class ZaLoader extends DataLoader {
     "ECONOMIC FREEDOM FIGHTERS": {
       name: "Economic Freedom Fighters",
       short: "Economic Freedom Fighters",
+      abbr: "EFF",
       code: "EFF",
       color: "#FF0000",
       wiki: 40005536,
@@ -74,6 +78,7 @@ export class ZaLoader extends DataLoader {
     "INKATHA FREEDOM PARTY": {
       name: "Inkatha Freedom Party",
       short: "Inkatha Freedom Party",
+      abbr: "IFP",
       code: "IFP",
       color: "#D7191D",
       wiki: 383326,
@@ -81,6 +86,7 @@ export class ZaLoader extends DataLoader {
     "PATRIOTIC ALLIANCE": {
       name: "Patriotic Alliance",
       short: "Patriotic Alliance",
+      abbr: "PA",
       code: "PA",
       color: "#198B0A",
       wiki: 41238240,
@@ -88,6 +94,7 @@ export class ZaLoader extends DataLoader {
     "VRYHEIDSFRONT PLUS": {
       name: "Vryheidsfront Plus",
       short: "Vryheidsfront Plus",
+      abbr: "VF+",
       code: "VF",
       color: "#ED6C08",
       wiki: 449582,
@@ -95,6 +102,7 @@ export class ZaLoader extends DataLoader {
     "BUILD ONE SOUTH AFRICA": {
       name: "Build One South Africa",
       short: "Build One South Africa",
+      abbr: "BOSA",
       code: "BOSA",
       color: "#fdb316",
       wiki: 71844566,
@@ -102,6 +110,7 @@ export class ZaLoader extends DataLoader {
     "RISE MZANSI": {
       name: "RISE Mzansi",
       short: "RISE Mzansi",
+      abbr: "RISE",
       code: "RISE",
       color: "#000000",
       wiki: 74715656,
@@ -109,6 +118,7 @@ export class ZaLoader extends DataLoader {
     "UMKHONTO WESIZWE": {
       name: "uMkhonto weSizwe",
       short: "uMkhonto weSizwe",
+      abbr: "MK",
       code: "MK",
       color: "#53a546",
       wiki: 185537,
@@ -116,6 +126,7 @@ export class ZaLoader extends DataLoader {
     GOOD: {
       name: "GOOD",
       short: "GOOD",
+      abbr: "GOOD",
       code: "GOOD",
       color: "#ec690d",
       wiki: 59231193,
@@ -123,6 +134,7 @@ export class ZaLoader extends DataLoader {
     "AFRICAN CHRISTIAN DEMOCRATIC PARTY": {
       name: "African Christian Democratic Party",
       short: "African Christian Democratic Party",
+      abbr: "ACDP",
       code: "ACDP",
       color: "#009CDE",
       wiki: 435602,
@@ -130,6 +142,7 @@ export class ZaLoader extends DataLoader {
     "AFRICAN TRANSFORMATION MOVEMENT": {
       name: "African Transformation Movement",
       short: "African Transformation Movement",
+      abbr: "ATM",
       code: "ATM",
       color: "#dbbe3c",
       wiki: 59624037,
@@ -137,6 +150,7 @@ export class ZaLoader extends DataLoader {
     "UNITED DEMOCRATIC MOVEMENT": {
       name: "United Democratic Movement",
       short: "United Democratic Movement",
+      abbr: "UDM",
       code: "UDM",
       color: "#ffb300",
       wiki: 449587,
@@ -144,12 +158,14 @@ export class ZaLoader extends DataLoader {
     "ABANTU INTEGRITY MOVEMENT": {
       name: "Abantu Integrity Movement",
       short: "Abantu Integrity Movement",
+      abbr: "AIM",
       code: "AIM",
       color: "#f93306",
     },
     "CHANGE STARTS NOW": {
       name: "Change Starts Now",
       short: "Change Starts Now",
+      abbr: "CSN",
       code: "CSN",
       color: "#060606",
       wiki: 75552129,
@@ -157,6 +173,7 @@ export class ZaLoader extends DataLoader {
     "SOUTH AFRICAN RAINBOW ALLIANCE": {
       name: "South African Rainbow Alliance",
       short: "South African Rainbow Alliance",
+      abbr: "SARA",
       code: "SARA",
       color: "#2f4737",
       wiki: 76142915,
@@ -164,6 +181,7 @@ export class ZaLoader extends DataLoader {
     "REFERENDUM PARTY": {
       name: "Referendum Party",
       short: "Referendum Party",
+      abbr: "RP",
       code: "RP",
       color: "#09083a",
       wiki: 75284884,
@@ -171,6 +189,7 @@ export class ZaLoader extends DataLoader {
     "ALLIANCE OF CITIZENS FOR CHANGE": {
       name: "Alliance of Citizens for Change",
       short: "Alliance of Citizens for Change",
+      abbr: "ACC",
       code: "ACC",
       color: "#8300E9",
       wiki: 74724036,
@@ -178,18 +197,21 @@ export class ZaLoader extends DataLoader {
     "SHOSHOLOZA PROGRESSIVE PARTY": {
       name: "Shosholoza Progressive Party",
       short: "Shosholoza Progressive Party",
+      abbr: "SPP",
       code: "SPP",
       color: "#010101",
     },
     "ABLE LEADERSHIP": {
       name: "Able Leadership",
       short: "Able Leadership",
+      abbr: "AL",
       code: "AL",
       color: "#145d03",
     },
     "INDEPENDENT SOUTH AFRICAN NATIONAL CIVIC ORGANISATION": {
       name: "Independent South African National Civic Organisation",
       short: "Independent South African National Civic Organisation",
+      abbr: "ISANCO",
       code: "ISANCO",
       color: "#dc9028",
       wiki: 72315059,

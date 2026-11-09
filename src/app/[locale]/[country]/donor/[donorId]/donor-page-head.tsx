@@ -40,16 +40,19 @@ import { AddressField, DonationField, DonorType } from "@/utils/types";
 export const DonorPageHead = ({
   donorId,
   donorMeta,
+  initialDonations,
 }: {
   donorId: string;
   country: Country;
   donorMeta: DonorMeta;
+  initialDonations?: Donation[];
 }) => {
   const countryConfig = useRequiredCountryConfig();
   const t = useTranslations("data");
   const { data, isLoading, error } = useDonationsByDonorId(
     countryConfig,
     donorId,
+    initialDonations,
   );
 
   if (isLoading) {
@@ -152,12 +155,13 @@ const DonorPageHeadContent = ({
   const tCommon = useTranslations("common");
   const browserBasedLocale = useBrowserBasedLocale();
   const {
-    state: { filteredDonations },
+    state: { isFiltered, filteredDonations },
   } = useFilterEngine();
   const partiesMap = usePartiesMap();
 
   const wikiPageId = donorMeta.wiki;
-  const activeDonations = filteredDonations;
+  const activeDonations =
+    isFiltered || filteredDonations.length > 0 ? filteredDonations : donations;
 
   const rawDonorName = donations.at(0)?.[DonationField.DonorName] ?? "";
   const donorName = getDonorName(rawDonorName, tCommon);

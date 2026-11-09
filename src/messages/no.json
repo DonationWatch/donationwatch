@@ -55,19 +55,19 @@
       "description": "I {year} mottok {parties} partier i {country} totalt {sum} fra {count} donasjoner over {minAmount}. Utforsk detaljerte oppdelinger per parti og giver, samt trender i politisk finansiering.",
       "overview": "Oversikt over politiske partidonasjoner i {country} for {year}",
       "changes": "Siste endringer i politiske partidonasjoner i {country} for {year}",
-      "donors": "Toppgivere til politiske partier i {country} for {year}",
+      "donors": "Partidonorliste og største bidragsytere i {country} ({year})",
       "timeline": "Tidslinje for politiske partidonasjoner i {country} for {year}",
       "origin": "Geografisk oversikt over partidonasjoner i {country} for {year}"
     },
     "party": {
-      "donors": "Toppgivere til {party} i {country}",
-      "changes": "Siste endringer i donasjoner til {party} i {country}",
-      "timeline": "Tidslinje for donasjoner til {party} i {country}",
-      "origin": "Geografisk oversikt over donasjoner til {party} i {country}",
+      "donors": "{party}: Giverliste og finansieringsoversikt ({country})",
+      "changes": "Siste endringer i donasjoner til {party} ({country})",
+      "timeline": "Tidslinje for donasjoner til {party} ({country})",
+      "origin": "Geografisk oversikt over donasjoner til {party} ({country})",
       "description": "Siden {year} har {party} mottatt {count} donasjoner over {minimumAmount}, med en totalsum på {sum}. Utforsk giverdata og trender i {country}."
     },
     "donor": {
-      "overview": "Donasjoner fra {donor} i {country}",
+      "overview": "{donor} – Politiske donasjoner og finansieringshistorikk ({country})",
       "description": "Se hvor {donor}s politiske donasjoner gikk. {sum} donert i {count} bidrag til {parties} partier i {country} siden {minYear}."
     }
   },
@@ -376,7 +376,7 @@
         "a": "{party} har mottatt totalt {sum} fra {count} dokumenterte donasjoner."
       },
       "top_donors": {
-        "q": "Hvem er de største giverne til {party}?",
+        "q": "Hvem finansierer {party} og hvem er de største giverne?",
         "a": "De største giverne til {party} er: {donors}."
       },
       "largest_singular": {

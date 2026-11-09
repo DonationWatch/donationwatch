@@ -6,12 +6,16 @@ import type { Country } from "../countries";
 import type { HistoryEntry } from "../data/get-history";
 import type { Donation } from "../types";
 import type { BigDonor } from "./biggest-donors";
+import type { CountryPartyDonorStats } from "./party-donor-stats";
 import type { PartyYearsSums } from "./party-years-sums";
 
 type DefaultExport<T> = { default: T };
 
 interface CountryLoaders {
   partySums: (country: Country) => Promise<DefaultExport<PartyYearsSums>>;
+  partyDonorStats: (
+    country: Country,
+  ) => Promise<DefaultExport<CountryPartyDonorStats>>;
   mostRecent: (country: Country) => Promise<DefaultExport<HistoryEntry[]>>;
   biggestDonors: (country: Country) => Promise<DefaultExport<BigDonor[]>>;
   wikiDonors: (country: Country) => Promise<DefaultExport<BigDonor[]>>;
@@ -23,6 +27,8 @@ interface CountryLoaders {
 // Note: anything that's imported here will be bundled in the server bundle
 const loaders: CountryLoaders = {
   partySums: (country: Country) => import(`../../data/${country}/party-sums`),
+  partyDonorStats: (country: Country) =>
+    import(`../../data/${country}/party-donor-stats`),
   mostRecent: (country: Country) => import(`../../data/${country}/most-recent`),
   biggestDonors: (country: Country) =>
     import(`../../data/${country}/biggest-donors`),
