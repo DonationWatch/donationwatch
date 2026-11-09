@@ -1,5 +1,5 @@
-import { render } from "@testing-library/react";
 import React from "react";
+import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, test, vi, beforeEach, afterEach } from "vitest";
 
 import type { CountryConfig } from "@/types/country-config";
@@ -109,13 +109,13 @@ describe("OldDataWarning Rendering", () => {
   } as any;
 
   test("renders warning banner if dataset is older than threshold", () => {
-    const { container } = render(
+    const html = renderToStaticMarkup(
       <CountryProvider countryConfig={mockCountryConfig}>
         <OldDataWarning />
       </CountryProvider>,
     );
 
-    expect(container.innerHTML).toContain(
+    expect(html).toContain(
       "The most recent donation recorded for Australia in this dataset was on June 30, 2025 (published by AEC)",
     );
   });
@@ -126,12 +126,12 @@ describe("OldDataWarning Rendering", () => {
       lastDonationDate: "2026-06-30", // 16 days ago relative to fake time
     };
 
-    const { container } = render(
+    const html = renderToStaticMarkup(
       <CountryProvider countryConfig={recentConfig}>
         <OldDataWarning />
       </CountryProvider>,
     );
 
-    expect(container.firstChild).toBeNull();
+    expect(html).toBe("");
   });
 });

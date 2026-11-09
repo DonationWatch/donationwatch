@@ -5,7 +5,10 @@ import type { CountryCode } from "@/utils/countries";
 import type { DonorMetaDefinition, ReceiverId } from "@/utils/types";
 
 import { PartyField } from "@/types/party";
-import { ANONYMIZED_DONOR_KEYWORD } from "@/utils/config";
+import {
+  ANONYMIZED_DONOR_KEYWORD,
+  REDACTED_DONOR_KEYWORD,
+} from "@/utils/config";
 import { Country } from "@/utils/countries";
 import { AddressField, DonationField, DonorType } from "@/utils/types";
 
@@ -243,6 +246,48 @@ describe("data loader", () => {
     const ids = result.donations.map((d) => d[DonationField.Id]);
     const uniqueIds = new Set(ids);
     expect(uniqueIds.size).toBe(ids.length);
+  });
+
+  test("cancels matched +X / -X blank-donor refund pairs per receiver and redacts remaining positive blank donors", () => {
+    const donations: ExtractedYearData[] = [
+      // Matched +50,000 / -50,000 blank-donor pair for Party Alpha -> should cancel out
+      createDonation({
+        idx: "1",
+        [DonationField.DonorName]: "",
+        [DonationField.Amount]: 50_000,
+        [DonationField.Date]: "2024-06-10",
+        [DonationField.Receiver]: "Party Alpha" as ReceiverId,
+      }),
+      createDonation({
+        idx: "2",
+        [DonationField.DonorName]: "",
+        [DonationField.Amount]: -50_000,
+        [DonationField.Date]: "2024-06-15",
+        [DonationField.Receiver]: "Party Alpha" as ReceiverId,
+      }),
+      // Unreturned +60,000 blank-donor entry for Party Alpha -> should be redacted and kept
+      createDonation({
+        idx: "3",
+        [DonationField.DonorName]: "",
+        [DonationField.Amount]: 60_000,
+        [DonationField.Date]: "2024-06-20",
+        [DonationField.Receiver]: "Party Alpha" as ReceiverId,
+      }),
+    ];
+
+    const result = loader.processYearData(donations);
+
+    expect(result.donations).toHaveLength(1);
+    expect(result.donations[0][DonationField.Amount]).toBe(60_000);
+    expect(
+      result.donations[0][DonationField.DonorName].startsWith(
+        REDACTED_DONOR_KEYWORD,
+      ),
+    ).toBe(true);
+    expect(result.parties[0][PartyField.Sum]).toBe(60_000);
+    expect(result.transparencyData.anonymisation?.redactedUpstreamCount).toBe(
+      1,
+    );
   });
 
   describe("anonymized-donors.json file loading", () => {

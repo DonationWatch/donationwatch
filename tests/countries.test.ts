@@ -11,26 +11,26 @@ import { getDonations } from "../tasks/data/load-donations";
 
 describe("Party countries are translated", () => {
   COUNTRIES.forEach((country) => {
-    test(`for ${country}`, async () => {
+    test.concurrent(`for ${country}`, async () => {
       const countries = new Set<string>();
       const donations = await getDonations(country);
-      donations.forEach((donation) => {
+      for (const donation of donations) {
         countries.add(donation[DonationField.Address][AddressField.Country]);
-      });
+      }
 
-      countries.forEach((country) => {
+      for (const c of countries) {
         expect(
-          (en.countries as Record<string, string>)[country],
-          `Has translation for country ${country} (${country.length})`,
+          (en.countries as Record<string, string>)[c],
+          `Has translation for country ${c} (${c.length})`,
         ).toBeTruthy();
-      });
+      }
     });
   });
 });
 
 describe("Party config fields are unique", () => {
   COUNTRIES.forEach((country) => {
-    test(`for ${country}`, async () => {
+    test.concurrent(`for ${country}`, async () => {
       const ids = new Set<string>();
       const colors = new Set<string>();
       const shortNames = new Set<string>();

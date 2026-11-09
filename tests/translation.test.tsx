@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, test } from "vitest";
 
 import { Translation } from "@/components/translation";
@@ -18,7 +18,7 @@ describe("Translation Component", () => {
       return "";
     };
 
-    const { container } = render(
+    const html = renderToStaticMarkup(
       <Translation
         // oxlint-disable-next-line typescript/no-explicit-any
         t={mockT as any}
@@ -32,7 +32,7 @@ describe("Translation Component", () => {
     );
 
     // It should successfully replace "__VAR__sum__" with the <em>$100</em> React node
-    expect(container.innerHTML).toBe(
+    expect(html).toBe(
       "Under both: we found 5 matching items totaling <em>$100</em>.",
     );
   });
