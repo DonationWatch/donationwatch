@@ -2,12 +2,15 @@
 
 import { useMemo, useEffect } from "react";
 
+import type { DonorInterestMap } from "@/types/interests";
+
 import { DonationYearsTreemap } from "@/components/charts/loading-donation-years-treemap";
 import { DonorReceiverHistogram } from "@/components/charts/loading-donor-receiver-histogram";
 import { DonorYearOverview } from "@/components/donors/donor-year-overview";
 import { YearsDonorHistogramText } from "@/components/donors/years-donor-histogram-text";
 import { YearsDonorPageText } from "@/components/donors/years-donor-page-text";
 import { FilterEmptyState } from "@/components/filter/filter-empty-state";
+import { YearsInterestsSection } from "@/components/interests/party-interests-section";
 import {
   ArticleSectionColumn,
   ArticleSectionOneColumns,
@@ -29,9 +32,11 @@ import {
 import { useScrollToHash } from "@/hooks/use-scroll-to-hash";
 import { isNotNullandNotUndefined } from "@/utils/array";
 import { getPartiesByYears } from "@/utils/data/get-parties-by-years";
+import { Features, hasFeature } from "@/utils/features";
 
 interface YearsDonorsClientPageProps {
   years: string[];
+  donorInterests?: DonorInterestMap;
   treemapTitle: string;
   treemapSubtitle: string;
   histogramTitle: string;
@@ -47,6 +52,7 @@ interface YearsDonorsClientPageProps {
 
 export const YearsDonorsClientPage = ({
   years,
+  donorInterests,
   treemapTitle,
   treemapSubtitle,
   histogramTitle,
@@ -166,6 +172,15 @@ export const YearsDonorsClientPage = ({
           </ArticleSectionColumn>
         </ArticleSectionTwoColumns>
       </ArticleSectionWrapper>
+      {hasFeature(country, Features.DonorInterests) && donorInterests && (
+        <ArticleSectionWrapper id={"sec-party-interests"}>
+          <YearsInterestsSection
+            years={activeYears}
+            donations={filteredDonations}
+            donorInterests={donorInterests}
+          />
+        </ArticleSectionWrapper>
+      )}
       <ArticleSectionWrapper id={"sec-donor-list"}>
         <ArticleSectionOneColumns>
           <ArticleSectionColumn>

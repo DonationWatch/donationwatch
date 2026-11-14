@@ -418,6 +418,74 @@
       },
       "p0": "Kapital za {party} raspoređen je na {count, plural, one {# registrirani odbor} few {# registrirana odbora} other {# registriranih odbora}}, uključujući stranačke odbore, zajedničke fondove za pobjedu i neovisne Super PAC-ove. Ukupno je preko ovih odbora primljeno {amount}.",
       "top_intro": "Ispod su navedeni odbori s najvećim iznosom donacija:"
+    },
+    "interests": {
+      "title": "Industrije i interesne skupine",
+      "intro": "Mnogi politički donatori u državi {country} djeluju u više od jedne industrije. Ovaj pregled grupira donacije stranci {party} prema području politike i industriji, razlikujući pojedinačne tvrtke od višesektorskih skupina.",
+      "intro_years": "Mnogi politički donatori u državi {country} djeluju u više od jedne industrije. Ovaj pregled grupira donacije u razdoblju {years} prema području politike i industriji, razlikujući pojedinačne tvrtke od višesektorskih skupina.",
+      "explainer": {
+        "summary": "Kako čitati ovaj prikaz: Izravne tvrtke naspram višesektorskih skupina",
+        "direct_label": "Izravne tvrtke:",
+        "direct_text": "Tvrtke čija je glavna djelatnost u tom sektoru (na primjer rudarska tvrtka, banka ili priređivač igara na sreću). U grafikonu su prikazane punom ispunom i izoliraju se kada je uključena opcija „Samo izravne tvrtke“.",
+        "multisector_label": "Višesektorske skupine i krovna udruženja:",
+        "multisector_text": "Industrijska udruženja ili konglomerati koji istovremeno zastupaju više sektora (na primjer hotelijerska udruženja aktivna u ugostiteljstvu, automat-klubovima i alkoholu). U grafikonu su označeni prugastim uzorkom i uključeni su uz izravne tvrtke kada opcija „Samo izravne tvrtke“ nije uključena.",
+        "domains_label": "Šira područja naspram specifičnih industrija:",
+        "domains_text": "Kada je uključena opcija „Grupiraj po području“, 24 specifične industrije okupljene su u 6 širih područja politike. Kliknite bilo koji redak područja ispod za prikaz njegovih industrija ili kliknite područje u grafikonu za uvećanje."
+      },
+      "switches": {
+        "direct_only": "Samo izravne tvrtke",
+        "group_by_domain": "Grupiraj po području"
+      },
+      "summary": {
+        "exposure": "Od ukupno {total} donacija za {party}, {tracked} ({percent}) dolazi od donatora povezanih s barem jednom praćenom industrijom ili interesnom skupinom.",
+        "core": "Od ukupno {total} donacija za {party}, {tracked} ({percent}) dolazi od izravnih tvrtki čija je glavna djelatnost u praćenoj industriji.",
+        "exposure_years": "Od ukupno {total} donacija u razdoblju {years}, {tracked} ({percent}) dolazi od donatora povezanih s barem jednom praćenom industrijom ili interesnom skupinom.",
+        "core_years": "Od ukupno {total} donacija u razdoblju {years}, {tracked} ({percent}) dolazi od izravnih tvrtki čija je glavna djelatnost u praćenoj industriji.",
+        "top_exposure_one": "Najveća povezana industrija je {item}.",
+        "top_exposure_many": "Najveće povezane industrije su {items}.",
+        "top_core_one": "Među samim izravnim tvrtkama najveća industrija je {item}.",
+        "top_core_many": "Među samim izravnim tvrtkama najveće industrije su {items}."
+      },
+      "show_top": "Prikaži prvih 10 sektora",
+      "show_all": "Prikaži svih {count} aktivnih sektora",
+      "note": {
+        "prefix": "Napomena: Oznake industrija obogaćeni su sloj na službenim izvješćima.",
+        "exposure": "Višesektorski donatori pojavljuju se u svakom sektoru koji zastupaju, pa se iznosi po sektorima preklapaju i ne smiju se zbrajati; ukupni iznosi po području broje svakog donatora jednom.",
+        "core": "Tvrtke s glavnim poslovanjem u više sektora mogu se pojaviti u više od jednog sektora; ukupni iznosi po području broje svakog donatora jednom.",
+        "share": "Postoci prikazuju udio svake skupine u svim donacijama za {party}.",
+        "share_years": "Postoci prikazuju udio svake skupine u svim donacijama u razdoblju {years}.",
+        "methodology_link": "Pogledaj sve kategorije u metodologiji"
+      },
+      "chart": {
+        "title": "{party}: Industrije i interesne skupine",
+        "title_years": "{country} ({years}): Industrije i interesne skupine",
+        "subtitle_grouped_exposure": "Donacije grupirane prema području politike, industriji i donatoru u usporedbi s nekategoriziranim donacijama",
+        "subtitle_grouped_core": "Izravne tvrtke prema području politike i industriji u usporedbi sa svim ostalim donacijama",
+        "subtitle_flat_exposure": "Donacije grupirane prema industriji i donatoru u usporedbi s nekategoriziranim donacijama",
+        "subtitle_flat_core": "Izravne tvrtke prema industriji u usporedbi sa svim ostalim donacijama",
+        "footer_note": "Kategorizacija uz pomoć AI-ja",
+        "legend_solid_label": "Puna ispuna:",
+        "legend_solid_text": "Izravna tvrtka",
+        "legend_striped_label": "Prugasti uzorak:",
+        "legend_striped_text": "Višesektorska skupina / krovno tijelo",
+        "uncategorized": "Ostali / nekategorizirani donatori",
+        "uncategorized_donor": "Ostali / nekategorizirani donator",
+        "uncategorized_hint": "Još nije povezano ni s jednom praćenom industrijom ili interesnom skupinom.",
+        "uncategorized_desc": "Donacije pojedinaca, lokalnih poduzeća i skupina koje nisu povezane s praćenom industrijom.",
+        "tooltip_direct_business": "Izravna tvrtka",
+        "tooltip_multisector": "Višesektorska skupina / krovno tijelo",
+        "tooltip_share_of": "Udio u kategoriji {category}:",
+        "tooltip_share_uncategorized": "Udio u nekategoriziranim:",
+        "tooltip_share_party": "Udio u donacijama stranke:",
+        "tooltip_share_total": "Udio u ukupnim donacijama:",
+        "tooltip_share_total_pct": "{amount} ({percent}% ukupnih donacija)",
+        "tooltip_donations": "Donacija:",
+        "tooltip_donors": "Donatora:",
+        "tooltip_direct_businesses": "Izravne tvrtke:",
+        "tooltip_multisector_bodies": "Višesektorske skupine / udruženja:",
+        "tooltip_solid_hint": "Puna ispuna: Glavna djelatnost je u ovom sektoru.",
+        "tooltip_striped_hint": "Prugasti uzorak: Višesektorska skupina ili krovno tijelo aktivno u više područja."
+      }
     }
   },
   "origin": {
@@ -779,7 +847,8 @@
     "section": {
       "filtered_donors": "Filtrirani donatori",
       "filtered_receivers": "Filtrirani primatelji",
-      "aggregated": "Agregirani donatori"
+      "aggregated": "Agregirani donatori",
+      "categorized": "Donatori po industrijama i interesnim skupinama"
     },
     "filtered_donors": {
       "p0": "Kako bismo točno prikazali stvarne izvore političkih donacija, filtriramo određene transakcije koje su zapravo državna davanja, a ne stvarne donacije. Budući da ih naši izvorni skupovi podataka ne označavaju izričito, oslanjamo se na skup pravila filtriranja temeljenih na regularnim izrazima (regexp) kako bismo takve zapise automatski prepoznali i uklonili. U nastavku možete pregledati potpuni popis primijenjenih regexp pravila filtriranja.",
@@ -792,6 +861,11 @@
     "receivers": {
       "title": "Agregirani primatelji",
       "p0": "U zemlji {country} donacije se mogu prijavljivati različitim organizacijskim jedinicama unutar stranke. Radi dosljednosti objedinjujemo povezane entitete primatelja u jedan ukupni iznos na razini stranke. Popis u nastavku dokumentira koji su entiteti primatelja agregirani u svaku stranku."
+    },
+    "categorized": {
+      "title": "Donatori po industrijama i interesnim skupinama",
+      "p0": "Kako bismo olakšali uvid u to koje industrije financiraju političke stranke, glavne donatore razvrstavamo u 24 industrijske i interesne kategorije (poput rudarstva, bankarstva, igara na sreću ili sindikata). Također navodimo je li donator izravna tvrtka (glavna djelatnost u tom sektoru) ili krovna udruga odnosno konglomerat aktivan u više područja. Ove kategorije donatora dodijeljene su uz pomoć AI-ja — ako primijetite pogrešku, slobodno nas kontaktirajte ili otvorite GitHub issue.",
+      "p1": "U nastavku je popis kategoriziranih donatora i industrija povezanih s njima."
     }
   },
   "related": {
@@ -1087,6 +1161,137 @@
     },
     "disclaimer": {
       "text": "Kompilirano, nije službeno: DonationWatch je neovisan građanski projekt i nije povezan s izbornim tijelima niti političkim strankama. Zbog normalizacije i filtriranja, ove podatke ne treba citirati kao službeni državni registar."
+    },
+    "policy_domains": {
+      "title": "Područja politike i kategorije industrija",
+      "intro": "Donatori u državi {country} raspoređeni su u 24 specifične kategorije industrija okupljene pod 6 širih područja politike:",
+      "disclaimer": "Ove kategorije predstavljaju najbolju moguću nadogradnju uz pomoć AI-ja, izrađenu na temelju javnih opisa tvrtki, industrijskih registara i članstva u udruženjima, a ne službene klasifikacije tijela za objavu podataka. Izravne tvrtke odvojene su od višesektorskih krovnih tijela, a nekategorizirani donatori ostaju prikazani zasebno. Ako uočite pogrešno razvrstanog donatora ili poveznicu koja nedostaje, <github>otvorite issue na GitHubu</github> ili pišite na <emailLink>{email}</emailLink>."
+    }
+  },
+  "interests": {
+    "domains": {
+      "energy-resources": {
+        "label": "Energija i resursi",
+        "description": "Fosilna goriva, rudarstvo, obnovljivi izvori, poljoprivreda i šumarstvo"
+      },
+      "built-environment": {
+        "label": "Izgrađeni okoliš",
+        "description": "Razvoj nekretnina, građevinarstvo, infrastruktura i promet"
+      },
+      "finance-advisory": {
+        "label": "Financije i savjetovanje",
+        "description": "Bankarstvo, mirovinski fondovi, osiguranje, savjetovanje, pravo i fintech"
+      },
+      "regulated-consumer": {
+        "label": "Regulirana potrošnja",
+        "description": "Igre na sreću, alkohol, duhan, supermarketi i ugostiteljstvo"
+      },
+      "health-tech-industry": {
+        "label": "Zdravstvo, tehnologija i industrija",
+        "description": "Farmacija, privatno zdravstvo, tehnologija, mediji, obrana i proizvodnja"
+      },
+      "labor-advocacy": {
+        "label": "Rad i zagovaranje",
+        "description": "Sindikati, politički fondovi za prikupljanje sredstava i tematske kampanje"
+      }
+    },
+    "tags": {
+      "fossil-fuels": {
+        "label": "Fosilna goriva i termoelektrane",
+        "description": "Vađenje ugljena, nafte i plina te proizvodnja toplinske energije"
+      },
+      "mining-metals": {
+        "label": "Rudarstvo i metali",
+        "description": "Vađenje željezne rude, zlata, litija i kritičnih minerala"
+      },
+      "renewables-cleantech": {
+        "label": "Obnovljivi izvori i čiste tehnologije",
+        "description": "Solarna i vjetroenergija, baterijska pohrana i zeleni vodik"
+      },
+      "agriculture-forestry": {
+        "label": "Poljoprivreda i šumarstvo",
+        "description": "Agrobiznis, stočarstvo, drvna industrija i vodna prava"
+      },
+      "property-development": {
+        "label": "Nekretnine i razvoj projekata",
+        "description": "Komercijalni i stambeni razvoj nekretnina te fondovi REIT"
+      },
+      "construction-infrastructure": {
+        "label": "Građevinarstvo i infrastruktura",
+        "description": "Niskogradnja, izvođači cestovnih i željezničkih radova te građevinski materijali"
+      },
+      "aviation-transport": {
+        "label": "Zrakoplovstvo, brodarstvo i logistika",
+        "description": "Zrakoplovne tvrtke, zračne luke, luke, pomorski i teretni prijevoz"
+      },
+      "banking-lending": {
+        "label": "Bankarstvo i kreditiranje",
+        "description": "Komercijalne banke, kreditne unije i nebankovni zajmodavci"
+      },
+      "wealth-super-insurance": {
+        "label": "Upravljanje imovinom, mirovine i osiguranje",
+        "description": "Mirovinski fondovi, private equity, upravitelji imovinom i osiguravatelji"
+      },
+      "consulting-accounting-legal": {
+        "label": "Savjetovanje, računovodstvo i pravo",
+        "description": "Revizorske i savjetodavne tvrtke Velike četvorke, korporativna odvjetnička društva i PR/lobiranje"
+      },
+      "crypto-fintech": {
+        "label": "Kripto i fintech",
+        "description": "Mjenjačnice digitalne imovine, blockchain i alternativna plaćanja"
+      },
+      "gambling-wagering": {
+        "label": "Igre na sreću i klađenje",
+        "description": "Kasina, internetsko klađenje, lutrije i automat-klubovi"
+      },
+      "alcohol-beverages": {
+        "label": "Alkohol i pića",
+        "description": "Pivovare, destilerije, vinarije i maloprodaja alkoholnih pića"
+      },
+      "tobacco-nicotine": {
+        "label": "Duhan i nikotin",
+        "description": "Proizvođači duhana, veletrgovci i proizvodi za e-cigarete"
+      },
+      "food-supermarkets": {
+        "label": "Supermarketi i prehrambena maloprodaja",
+        "description": "Veliki trgovački lanci, brza hrana i proizvođači pakirane hrane"
+      },
+      "hospitality-tourism": {
+        "label": "Ugostiteljstvo, klubovi i turizam",
+        "description": "Hoteli, licencirani klubovi, restorani i turistički operateri"
+      },
+      "pharma-biotech": {
+        "label": "Farmacija i biotehnologija",
+        "description": "Proizvođači lijekova, cjepiva i medicinska istraživanja"
+      },
+      "private-healthcare": {
+        "label": "Privatno zdravstvo i skrb za starije",
+        "description": "Privatne bolnice, patologija i pružatelji skrbi za starije osobe"
+      },
+      "tech-telecom-platforms": {
+        "label": "Tehnologija, telekomunikacije i platforme",
+        "description": "Softver, računalstvo u oblaku, društvene platforme i telekomunikacijski operateri"
+      },
+      "media-broadcasting": {
+        "label": "Mediji i emitiranje",
+        "description": "Komercijalna televizija, radio, izdavaštvo i informativne mreže"
+      },
+      "defense-aerospace": {
+        "label": "Obrana i zrakoplovno-svemirska industrija",
+        "description": "Dobavljači obrambene opreme, vojna tehnologija i sigurnosni sustavi"
+      },
+      "manufacturing-automotive": {
+        "label": "Proizvodnja i automobilska industrija",
+        "description": "Industrijska proizvodnja, papir i ambalaža te distribucija vozila"
+      },
+      "trade-unions": {
+        "label": "Sindikati",
+        "description": "Sindikati zaposlenika u javnom i privatnom sektoru"
+      },
+      "ideological-issue-advocacy": {
+        "label": "Ideološko i tematsko zagovaranje",
+        "description": "Politički fondovi za prikupljanje sredstava, think tankovi i tematske kampanje"
+      }
     }
   }
 }

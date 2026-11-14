@@ -418,6 +418,74 @@
       },
       "p0": "Kapitalen til {party} er fordelt over {count, plural, one {# registrert komité} other {# registrerte komiteer}}, inkludert partikomiteer, felles valgkampfond og uavhengige Super PAC-er. Totalt ble {amount} mottatt via disse komiteene.",
       "top_intro": "Nedenfor er de største bidragsytende komiteene:"
+    },
+    "interests": {
+      "title": "Bransjer og interessegrupper",
+      "intro": "Mange politiske givere i {country} opererer i mer enn én bransje. Denne oversikten grupperer gaver til {party} etter politikkområde og bransje, og skiller mellom enkeltselskaper og flersektorgrupper.",
+      "intro_years": "Mange politiske givere i {country} opererer i mer enn én bransje. Denne oversikten grupperer gaver i {years} etter politikkområde og bransje, og skiller mellom enkeltselskaper og flersektorgrupper.",
+      "explainer": {
+        "summary": "Slik leser du dette: Direkte selskaper vs. flersektorgrupper",
+        "direct_label": "Direkte selskaper:",
+        "direct_text": "Selskaper som har sin hovedvirksomhet i den aktuelle sektoren (for eksempel et gruveselskap, en bank eller en pengespilloperatør). Vises som helfylte felt i diagrammet og isoleres når «Kun direkte selskaper» er slått på.",
+        "multisector_label": "Flersektorgrupper og paraplyorganisasjoner:",
+        "multisector_text": "Bransjeforeninger eller konglomerater som representerer flere sektorer samtidig (for eksempel hotellforeninger som er aktive innen servering, spilleautomater og alkohol). Vises med stripete mønster i diagrammet og inkluderes sammen med direkte selskaper når «Kun direkte selskaper» er slått av.",
+        "domains_label": "Brede områder vs. spesifikke bransjer:",
+        "domains_text": "Når «Grupper etter område» er på, samles de 24 spesifikke bransjene under 6 brede politikkområder. Klikk på en områderad nedenfor for å utvide bransjene, eller klikk på et område i diagrammet for å zoome inn."
+      },
+      "switches": {
+        "direct_only": "Kun direkte selskaper",
+        "group_by_domain": "Grupper etter område"
+      },
+      "summary": {
+        "exposure": "Av totalt {total} i gaver til {party} kommer {tracked} ({percent}) fra givere som er knyttet til minst én sporet bransje eller interessegruppe.",
+        "core": "Av totalt {total} i gaver til {party} kommer {tracked} ({percent}) fra direkte selskaper med hovedvirksomhet i en sporet bransje.",
+        "exposure_years": "Av totalt {total} i gaver i {years} kommer {tracked} ({percent}) fra givere som er knyttet til minst én sporet bransje eller interessegruppe.",
+        "core_years": "Av totalt {total} i gaver i {years} kommer {tracked} ({percent}) fra direkte selskaper med hovedvirksomhet i en sporet bransje.",
+        "top_exposure_one": "Den største tilknyttede bransjen er {item}.",
+        "top_exposure_many": "De største tilknyttede bransjene er {items}.",
+        "top_core_one": "Blant direkte selskaper alene er den største bransjen {item}.",
+        "top_core_many": "Blant direkte selskaper alene er de største bransjene {items}."
+      },
+      "show_top": "Vis topp 10 sektorer",
+      "show_all": "Vis alle {count} aktive sektorer",
+      "note": {
+        "prefix": "Merk: Bransjetagger er et beriket lag oppå offisielle innrapporteringer.",
+        "exposure": "Flersektorgivere vises under hver sektor de representerer, så sektorbeløpene overlapper og bør ikke summeres; områdesummer teller hver giver én gang.",
+        "core": "Selskaper med hovedvirksomhet i flere sektorer kan vises i mer enn én sektor; områdesummer teller hver giver én gang.",
+        "share": "Prosentene viser hver gruppes andel av alle gaver til {party}.",
+        "share_years": "Prosentene viser hver gruppes andel av alle gaver i {years}.",
+        "methodology_link": "Se alle kategorier i metodikken"
+      },
+      "chart": {
+        "title": "{party}: Bransjer og interessegrupper",
+        "title_years": "{country} ({years}): Bransjer og interessegrupper",
+        "subtitle_grouped_exposure": "Gaver gruppert etter politikkområde, bransje og giver, sammenlignet med ukategoriserte gaver",
+        "subtitle_grouped_core": "Direkte selskaper etter politikkområde og bransje, sammenlignet med alle andre gaver",
+        "subtitle_flat_exposure": "Gaver gruppert etter bransje og giver, sammenlignet med ukategoriserte gaver",
+        "subtitle_flat_core": "Direkte selskaper etter bransje, sammenlignet med alle andre gaver",
+        "footer_note": "KI-assistert kategorisering",
+        "legend_solid_label": "Helfylt:",
+        "legend_solid_text": "Direkte selskap",
+        "legend_striped_label": "Stripete mønster:",
+        "legend_striped_text": "Flersektorgruppe / paraplyorganisasjon",
+        "uncategorized": "Andre / ukategoriserte givere",
+        "uncategorized_donor": "Annen / ukategorisert giver",
+        "uncategorized_hint": "Ennå ikke knyttet til noen sporet bransje eller interessegruppe.",
+        "uncategorized_desc": "Gaver fra privatpersoner, lokale bedrifter og grupper som ikke er knyttet til en sporet bransje.",
+        "tooltip_direct_business": "Direkte selskap",
+        "tooltip_multisector": "Flersektorgruppe / paraplyorganisasjon",
+        "tooltip_share_of": "Andel av {category}:",
+        "tooltip_share_uncategorized": "Andel av ukategoriserte:",
+        "tooltip_share_party": "Andel av partiets gaver:",
+        "tooltip_share_total": "Andel av totale gaver:",
+        "tooltip_share_total_pct": "{amount} ({percent}% av totale gaver)",
+        "tooltip_donations": "Gaver:",
+        "tooltip_donors": "Givere:",
+        "tooltip_direct_businesses": "Direkte selskaper:",
+        "tooltip_multisector_bodies": "Flersektorgrupper / foreninger:",
+        "tooltip_solid_hint": "Helfylt: Hovedvirksomheten er i denne sektoren.",
+        "tooltip_striped_hint": "Stripete mønster: Flersektorgruppe eller paraplyorganisasjon aktiv på flere områder."
+      }
     }
   },
   "origin": {
@@ -779,7 +847,8 @@
     "section": {
       "filtered_donors": "Filtrerte givere",
       "filtered_receivers": "Filtrerte mottakere",
-      "aggregated": "Aggregerte givere"
+      "aggregated": "Aggregerte givere",
+      "categorized": "Givere etter bransje og interessegruppe"
     },
     "filtered_donors": {
       "p0": "For å gi et mest mulig presist bilde av de reelle kildene til politiske donasjoner, filtrerer vi bort enkelte transaksjoner som i praksis er offentlige bidrag snarere enn reelle donasjoner. Fordi kildedatasett ikke merker disse eksplisitt, bruker vi et sett med filtreringsregler basert på regulære uttrykk (regexp) for automatisk å identifisere og fjerne slike oppføringer. Nedenfor kan du se hele listen over anvendte regexp-filtreringsregler.",
@@ -792,6 +861,11 @@
     "receivers": {
       "title": "Aggregerte mottakere",
       "p0": "I {country} kan donasjoner rapporteres til ulike organisatoriske enheter innenfor et parti. For konsistens konsoliderer vi relaterte mottakerenheter til én totalsum på partinivå. Listen nedenfor dokumenterer hvilke mottakerenheter som er aggregert inn i hvert parti."
+    },
+    "categorized": {
+      "title": "Givere etter bransje og interessegruppe",
+      "p0": "For å gjøre det enklere å se hvilke bransjer som finansierer politiske partier, grupperer vi store givere i 24 bransje- og interessekategorier (som gruvedrift, bank, pengespill eller fagforeninger). Vi oppgir også om giveren er et direkte selskap (hovedvirksomhet i den sektoren) eller en paraplyorganisasjon (bransjeforening eller konsern aktivt på flere områder). Disse kategoriene er tildelt ved hjelp av KI — hvis du oppdager feil, er du velkommen til å kontakte oss eller opprette et GitHub-issue.",
+      "p1": "Nedenfor er listen over kategoriserte givere og bransjene knyttet til hver av dem."
     }
   },
   "related": {
@@ -1087,6 +1161,137 @@
     },
     "disclaimer": {
       "text": "Sammenstilt, ikke offisielt: DonationWatch er et uavhengig samfunnsprosjekt og er ikke tilknyttet valgmyndigheter eller politiske partier. På grunn av normalisering og filtrering skal dette datasettet ikke siteres som et offisielt register."
+    },
+    "policy_domains": {
+      "title": "Politikkområder og bransjekategorier",
+      "intro": "Givere i {country} er kartlagt til 24 spesifikke bransjekategorier gruppert under 6 brede politikkområder:",
+      "disclaimer": "Disse kategoriene er et best mulig KI-assistert tilleggslag basert på offentlige selskapsbeskrivelser, bransjeregistre og foreningsmedlemskap, og ikke en offisiell klassifisering fra innrapporteringsmyndighetene. Direkte selskaper skilles fra flersektorielle paraplyorganisasjoner, og ukategoriserte givere vises fortsatt separat. Hvis du oppdager en feilklassifisert giver eller en manglende kobling, ber vi deg <github>opprette en sak på GitHub</github> eller skrive til <emailLink>{email}</emailLink>."
+    }
+  },
+  "interests": {
+    "domains": {
+      "energy-resources": {
+        "label": "Energi og ressurser",
+        "description": "Fossilt brensel, gruvedrift, fornybar energi, landbruk og skogbruk"
+      },
+      "built-environment": {
+        "label": "Bygget miljø",
+        "description": "Eiendomsutvikling, bygg og anlegg, infrastruktur og transport"
+      },
+      "finance-advisory": {
+        "label": "Finans og rådgivning",
+        "description": "Bank, pensjon, forsikring, rådgivning, juss og fintech"
+      },
+      "regulated-consumer": {
+        "label": "Regulert forbruk",
+        "description": "Pengespill, alkohol, tobakk, dagligvare og servering"
+      },
+      "health-tech-industry": {
+        "label": "Helse, teknologi og industri",
+        "description": "Legemidler, privat helse, teknologi, medier, forsvar og produksjon"
+      },
+      "labor-advocacy": {
+        "label": "Arbeidsliv og interessepolitikk",
+        "description": "Fagforeninger, politiske innsamlingsfond og saksbasert påvirkning"
+      }
+    },
+    "tags": {
+      "fossil-fuels": {
+        "label": "Fossilt brensel og termisk kraft",
+        "description": "Utvinning av kull, olje og gass og termisk kraftproduksjon"
+      },
+      "mining-metals": {
+        "label": "Gruvedrift og metaller",
+        "description": "Utvinning av jernmalm, gull, litium og kritiske mineraler"
+      },
+      "renewables-cleantech": {
+        "label": "Fornybar energi og ren teknologi",
+        "description": "Sol- og vindkraft, batterilagring og grønn hydrogenteknologi"
+      },
+      "agriculture-forestry": {
+        "label": "Landbruk og skogbruk",
+        "description": "Landbruksnæring, husdyrhold, tømmer og vannrettigheter"
+      },
+      "property-development": {
+        "label": "Eiendom og eiendomsutvikling",
+        "description": "Kommersiell og boligrettet eiendomsutvikling og eiendomsfond (REIT)"
+      },
+      "construction-infrastructure": {
+        "label": "Bygg og infrastruktur",
+        "description": "Anleggsteknikk, vei- og jernbaneentreprenører og byggematerialer"
+      },
+      "aviation-transport": {
+        "label": "Luftfart, sjøfart og logistikk",
+        "description": "Flyselskaper, flyplasser, havner, maritim og godslogistikk"
+      },
+      "banking-lending": {
+        "label": "Bank og utlån",
+        "description": "Forretningsbanker, kredittforeninger og ikke-bankbaserte långivere"
+      },
+      "wealth-super-insurance": {
+        "label": "Formue, pensjon og forsikring",
+        "description": "Pensjonsfond, aktiv eierkapital, kapitalforvaltere og forsikringsselskaper"
+      },
+      "consulting-accounting-legal": {
+        "label": "Rådgivning, regnskap og juss",
+        "description": "De fire store revisjons- og rådgivningsselskapene, forretningsadvokater og PR/lobby"
+      },
+      "crypto-fintech": {
+        "label": "Krypto og fintech",
+        "description": "Børser for digitale eiendeler, blokkjede og alternative betalingstjenester"
+      },
+      "gambling-wagering": {
+        "label": "Pengespill og tipping",
+        "description": "Kasinoer, nettspill, lotterier og spillautomatlokaler"
+      },
+      "alcohol-beverages": {
+        "label": "Alkohol og drikkevarer",
+        "description": "Bryggerier, destillerier, vingårder og detaljhandel med alkohol"
+      },
+      "tobacco-nicotine": {
+        "label": "Tobakk og nikotin",
+        "description": "Tobakksprodusenter, grossister og e-sigaretter"
+      },
+      "food-supermarkets": {
+        "label": "Dagligvare og matvarehandel",
+        "description": "Store dagligvarekjeder, hurtigmat og produsenter av ferdigmat"
+      },
+      "hospitality-tourism": {
+        "label": "Servering, klubber og reiseliv",
+        "description": "Hoteller, lisensierte klubber, restauranter og reiselivsaktører"
+      },
+      "pharma-biotech": {
+        "label": "Legemidler og bioteknologi",
+        "description": "Legemiddelprodusenter, vaksiner og medisinsk forskning"
+      },
+      "private-healthcare": {
+        "label": "Privat helse og eldreomsorg",
+        "description": "Private sykehus, patologi og tilbydere av eldreomsorg"
+      },
+      "tech-telecom-platforms": {
+        "label": "Teknologi, telekom og plattformer",
+        "description": "Programvare, skytjenester, sosiale plattformer og teleoperatører"
+      },
+      "media-broadcasting": {
+        "label": "Medier og kringkasting",
+        "description": "Kommersiell TV, radio, forlag og nyhetsnettverk"
+      },
+      "defense-aerospace": {
+        "label": "Forsvar og luft- og romfart",
+        "description": "Forsvarsleverandører, militært materiell og sikkerhetssystemer"
+      },
+      "manufacturing-automotive": {
+        "label": "Industri og bilbransje",
+        "description": "Industriell produksjon, papir og emballasje og kjøretøydistribusjon"
+      },
+      "trade-unions": {
+        "label": "Fagforeninger",
+        "description": "Arbeidstakerorganisasjoner i offentlig og privat sektor"
+      },
+      "ideological-issue-advocacy": {
+        "label": "Ideologisk og saksbasert påvirkning",
+        "description": "Politiske innsamlingsfond, tankesmier og sakskampanjer"
+      }
     }
   }
 }

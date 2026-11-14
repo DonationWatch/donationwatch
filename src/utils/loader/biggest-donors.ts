@@ -1,3 +1,4 @@
+import "server-only";
 import type { Country } from "../countries";
 import type { PartyYearsSums } from "./party-years-sums";
 

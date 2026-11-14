@@ -10,7 +10,8 @@ import type {
   DonationsDocument,
   DonationsDocumentWithoutDonorIds,
 } from "@/lib/api/donations-document";
-import type { Donation } from "@/utils/types";
+import type { DonorInterestAttribution } from "@/types/interests";
+import type { Donation, DonorMetaItem } from "@/utils/types";
 
 import { DonationField } from "@/utils/types";
 
@@ -232,4 +233,25 @@ export const trimRow = <T>(row: T[]) => {
   if (firstFilled === -1) return [];
 
   return reversed.slice(firstFilled).toReversed();
+};
+
+/**
+ * Merges curated policy interest attributions into a manual donor metadata map
+ * without overwriting interests already specified on individual manual entries.
+ */
+export const mergeDonorInterests = (
+  manualDonors: Record<string, DonorMetaItem>,
+  interestsByName: Record<string, DonorInterestAttribution[]>,
+): Record<string, DonorMetaItem> => {
+  const donors: Record<string, DonorMetaItem> = {};
+  for (const [name, meta] of Object.entries(manualDonors)) {
+    donors[name] = { ...meta };
+  }
+  for (const [name, interests] of Object.entries(interestsByName)) {
+    donors[name] = {
+      ...donors[name],
+      interests: donors[name]?.interests ?? interests,
+    };
+  }
+  return donors;
 };

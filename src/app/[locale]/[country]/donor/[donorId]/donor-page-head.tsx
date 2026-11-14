@@ -1,6 +1,17 @@
 "use client";
-import { ExternalLink, HatGlasses, Info, Lock } from "lucide-react";
+import {
+  Briefcase,
+  Building2,
+  ExternalLink,
+  Hash,
+  HatGlasses,
+  Info,
+  Lock,
+  MapPin,
+} from "lucide-react";
 
+import type { CountryConfig } from "@/types/country-config";
+import type { DonorInterestAttribution } from "@/types/interests";
 import type { Countries, Country } from "@/utils/countries";
 import type { Donation, DonorMeta, ReceiverId } from "@/utils/types";
 
@@ -25,6 +36,11 @@ import { useDonationsByDonorId } from "@/hooks/use-api";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { useFilterEngine } from "@/hooks/use-filter-engine";
+import {
+  AttributionRole,
+  POLICY_INTEREST_TAG_METADATA,
+  POLICY_MACRO_DOMAIN_SLUGS,
+} from "@/types/interests";
 import { PartyField } from "@/types/party";
 import { donationYear } from "@/utils/date";
 import { getDonorName, isRedactedDonor } from "@/utils/donor";
@@ -143,6 +159,321 @@ const UBOsTooltip = () => {
   );
 };
 
+interface DonorPageHeadSummaryProps {
+  countryConfig: CountryConfig;
+  addresses: { country: Countries; state?: string }[];
+  donationCount: number;
+  sum: number;
+  avg: number;
+  firstYear: string;
+  lastYear: string;
+  donorType?: DonorType;
+  registrationNumber?: string;
+  registrationDonorCountry?: Countries;
+  donorMeta: DonorMeta;
+  ubos: string[];
+}
+
+const useInterestLabels = () => {
+  const tInterests = useTranslations("interests");
+  const tPartyInterests = useTranslations("party.interests");
+
+  return (attr: DonorInterestAttribution) => {
+    const meta = POLICY_INTEREST_TAG_METADATA[attr.tag];
+    const domainSlug = POLICY_MACRO_DOMAIN_SLUGS[meta.macroDomain];
+    const isCore =
+      attr.role === AttributionRole.core || String(attr.role) === "core";
+    return {
+      isCore,
+      label: tInterests(
+        `tags.${meta.slug}.label` as Parameters<typeof tInterests>[0],
+      ),
+      description: tInterests(
+        `tags.${meta.slug}.description` as Parameters<typeof tInterests>[0],
+      ),
+      domainLabel: tInterests(
+        `domains.${domainSlug}.label` as Parameters<typeof tInterests>[0],
+      ),
+      roleLabel: tPartyInterests(
+        isCore ? "chart.tooltip_direct_business" : "chart.tooltip_multisector",
+      ),
+    };
+  };
+};
+
+const sortByRole = (interests: DonorInterestAttribution[]) =>
+  [...interests].sort((a, b) => {
+    const aCore =
+      a.role === AttributionRole.core || String(a.role) === "core" ? 0 : 1;
+    const bCore =
+      b.role === AttributionRole.core || String(b.role) === "core" ? 0 : 1;
+    return aCore - bCore;
+  });
+
+const useLocationText = (
+  countryConfig: CountryConfig,
+  addresses: { country: Countries; state?: string }[],
+) => {
+  const t = useTranslations();
+  return addresses
+    .map((a) => {
+      const c = t(`countries.${a.country}`);
+      if (a.state && a.state !== a.country) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        return `${t.raw(`state.${countryConfig.id}.${a.state}`)}, ${c}`;
+      }
+      return c;
+    })
+    .join(" · ");
+};
+
+const RegistryLink = ({
+  country,
+  registrationNumber,
+  title,
+}: {
+  country: Countries;
+  registrationNumber: string;
+  title: string;
+}) => (
+  <ExternalRegistryLink
+    country={country}
+    registrationNumber={registrationNumber}
+    className="group inline-flex items-center gap-1 tabular-nums hover:underline"
+    title={title}
+  >
+    <span>{registrationNumber}</span>
+    <ExternalLink
+      className="inline shrink-0 text-zinc-400 group-hover:text-zinc-600 dark:text-zinc-500 dark:group-hover:text-zinc-300"
+      size={13}
+    />
+  </ExternalRegistryLink>
+);
+
+const IconValueStrip = ({
+  countryConfig,
+  addresses,
+  donorType,
+  registrationNumber,
+  registrationDonorCountry,
+  donorMeta,
+}: Pick<
+  DonorPageHeadSummaryProps,
+  | "countryConfig"
+  | "addresses"
+  | "donorType"
+  | "registrationNumber"
+  | "registrationDonorCountry"
+  | "donorMeta"
+>) => {
+  const t = useTranslations();
+  const tCommon = useTranslations("common");
+  const locationText = useLocationText(countryConfig, addresses);
+  const getLabels = useInterestLabels();
+  const showDonorType = donorType && donorType !== DonorType.AnonymizedDonor;
+  const sortedInterests = donorMeta.interests
+    ? sortByRole(donorMeta.interests)
+    : [];
+
+  if (
+    !showDonorType &&
+    !locationText &&
+    !(registrationNumber && registrationDonorCountry) &&
+    sortedInterests.length === 0
+  ) {
+    return null;
+  }
+
+  return (
+    <dl className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-sm">
+      {showDonorType && (
+        <div className="inline-flex items-center gap-1.5">
+          <dt className="inline-flex items-center" title={t("donor.type")}>
+            <Building2
+              className="size-4 shrink-0 text-zinc-500 dark:text-zinc-300"
+              aria-hidden="true"
+            />
+            <span className="sr-only">{t("donor.type")}</span>
+          </dt>
+          <dd>{t(`donor_type.${donorType}`)}</dd>
+        </div>
+      )}
+      {locationText && (
+        <div className="inline-flex items-center gap-1.5">
+          <dt className="inline-flex items-center" title={tCommon("country")}>
+            <MapPin
+              className="size-4 shrink-0 text-zinc-500 dark:text-zinc-300"
+              aria-hidden="true"
+            />
+            <span className="sr-only">{tCommon("country")}</span>
+          </dt>
+          <dd>{locationText}</dd>
+        </div>
+      )}
+      {registrationNumber && registrationDonorCountry && (
+        <div className="inline-flex items-center gap-1.5">
+          <dt
+            className="inline-flex items-center"
+            title={t("donor.registration_number")}
+          >
+            <Hash
+              className="size-4 shrink-0 text-zinc-500 dark:text-zinc-300"
+              aria-hidden="true"
+            />
+            <span className="sr-only">{t("donor.registration_number")}</span>
+          </dt>
+          <dd>
+            <RegistryLink
+              country={registrationDonorCountry}
+              registrationNumber={registrationNumber}
+              title={tCommon("view_source")}
+            />
+          </dd>
+        </div>
+      )}
+      {sortedInterests.length > 0 && (
+        <div className="inline-flex flex-wrap items-center gap-1.5">
+          <dt
+            className="inline-flex items-center"
+            title={t("party.interests.title")}
+          >
+            <Briefcase
+              className="size-4 shrink-0 text-zinc-500 dark:text-zinc-300"
+              aria-hidden="true"
+            />
+            <span className="sr-only">{t("party.interests.title")}</span>
+          </dt>
+          <dd className="inline-flex flex-wrap items-center gap-x-1.5 gap-y-0.5">
+            {sortedInterests.map((attr, idx) => {
+              const info = getLabels(attr);
+              return (
+                <span
+                  key={attr.tag}
+                  className="inline-flex items-center gap-1.5"
+                >
+                  {idx > 0 && (
+                    <>
+                      <span className="sr-only">, </span>
+                      <span
+                        className="text-zinc-500 dark:text-zinc-300"
+                        aria-hidden="true"
+                      >
+                        /
+                      </span>
+                    </>
+                  )}
+                  <Tooltip>
+                    <TooltipTrigger
+                      render={
+                        <span
+                          tabIndex={0}
+                          className={
+                            info.isCore
+                              ? "cursor-default font-medium"
+                              : "cursor-default"
+                          }
+                        />
+                      }
+                    >
+                      {info.label}
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <div className="max-w-64 space-y-0.5 p-0.5 text-xs">
+                        <div className="font-semibold">
+                          {info.domainLabel} · {info.roleLabel}
+                        </div>
+                        <div className="opacity-85">{info.description}</div>
+                      </div>
+                    </TooltipContent>
+                  </Tooltip>
+                </span>
+              );
+            })}
+          </dd>
+        </div>
+      )}
+    </dl>
+  );
+};
+
+const DonorPageHeadSummary = (props: DonorPageHeadSummaryProps) => {
+  const t = useTranslations();
+  const locale = useBrowserBasedLocale();
+
+  return (
+    <div className="mb-3 space-y-3">
+      <div className="flex flex-wrap gap-x-10 gap-y-2">
+        <MetaCard
+          title={t("donation_count")}
+          value={formatNumber(locale, props.donationCount)}
+        />
+        <MetaCard
+          title={t("sum")}
+          value={formatCountryCurrency(locale, props.sum, props.countryConfig)}
+        />
+        {props.donationCount > 1 && (
+          <MetaCard
+            title={t("average")}
+            value={formatCountryCurrency(
+              locale,
+              props.avg,
+              props.countryConfig,
+            )}
+          />
+        )}
+        <MetaCard
+          title={t("donor.active_period")}
+          value={formatYearsRange([props.firstYear, props.lastYear])}
+        />
+      </div>
+
+      <IconValueStrip
+        countryConfig={props.countryConfig}
+        addresses={props.addresses}
+        donorType={props.donorType}
+        registrationNumber={props.registrationNumber}
+        registrationDonorCountry={props.registrationDonorCountry}
+        donorMeta={props.donorMeta}
+      />
+
+      {(props.donorMeta.relations?.length || props.ubos.length > 0) && (
+        <div className="flex flex-wrap items-start gap-x-8 gap-y-2">
+          {props.donorMeta.relations && (
+            <div>
+              <MetaCardTitle title={t("related.donors")} />
+              <div className="mt-1.5 flex flex-wrap gap-1.5">
+                {props.donorMeta.relations.map(([name, kind, sums]) => (
+                  <RelatedDonorChip
+                    key={name}
+                    name={name}
+                    kind={kind}
+                    sums={sums}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+          {props.ubos.length > 0 && (
+            <section aria-labelledby="ubo-heading">
+              <MetaCardTitle
+                id="ubo-heading"
+                title={
+                  <>
+                    {t("donor.ubo")}
+                    <UBOsTooltip />
+                  </>
+                }
+              />
+              <p className="mt-1 text-sm">{formatAnd(locale, props.ubos)}</p>
+            </section>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
+
 const DonorPageHeadContent = ({
   donations,
   donorMeta,
@@ -153,7 +484,6 @@ const DonorPageHeadContent = ({
   const countryConfig = useRequiredCountryConfig();
   const t = useTranslations();
   const tCommon = useTranslations("common");
-  const browserBasedLocale = useBrowserBasedLocale();
   const {
     state: { isFiltered, filteredDonations },
   } = useFilterEngine();
@@ -258,110 +588,21 @@ const DonorPageHeadContent = ({
             </div>
           </h1>
 
-          <div className="mb-3 flex flex-col space-y-3">
-            {addresses.map((address, idx) => (
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2" key={idx}>
-                <MetaCard
-                  title={tCommon("country")}
-                  value={t(`countries.${address.country}`)}
-                />
-                {address.state && address.state !== address.country && (
-                  <MetaCard
-                    title={tCommon("state")}
-                    value={t.raw(
-                      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                      // @ts-ignore
-                      `state.${countryConfig.id}.${address.state}`,
-                    )}
-                  />
-                )}
-              </div>
-            ))}
-            <div className="flex-row space-y-2 sm:flex sm:space-y-0 sm:space-x-10">
-              <MetaCard
-                title={t("donation_count")}
-                value={formatNumber(browserBasedLocale, activeDonations.length)}
-              />
-              <MetaCard
-                title={t("sum")}
-                value={formatCountryCurrency(
-                  browserBasedLocale,
-                  sum,
-                  countryConfig,
-                )}
-              />
-              {activeDonations.length > 1 ? (
-                <MetaCard
-                  title={t("average")}
-                  value={formatCountryCurrency(
-                    browserBasedLocale,
-                    avg,
-                    countryConfig,
-                  )}
-                />
-              ) : null}
-              <MetaCard
-                title={t("donor.active_period")}
-                value={formatYearsRange([firstYear, lastYear])}
-              />
-              {donorType && donorType !== DonorType.AnonymizedDonor ? (
-                <MetaCard
-                  title={t("donor.type")}
-                  value={t(`donor_type.${donorType}`)}
-                />
-              ) : null}
-              {registrationNumber && registrationDonorCountry ? (
-                <MetaCard
-                  title={t("donor.registration_number")}
-                  value={
-                    <ExternalRegistryLink
-                      country={registrationDonorCountry}
-                      registrationNumber={registrationNumber}
-                      className="group inline-flex items-center gap-1.5 tabular-nums hover:underline"
-                      title={tCommon("view_source")}
-                    >
-                      <span>{registrationNumber}</span>
-                      <ExternalLink
-                        className="inline shrink-0 text-zinc-400 group-hover:text-zinc-600 dark:text-zinc-500 dark:group-hover:text-zinc-300"
-                        size={16}
-                      />
-                    </ExternalRegistryLink>
-                  }
-                />
-              ) : null}
-            </div>
-            {donorMeta.relations ? (
-              <div>
-                <MetaCardTitle title={t("related.donors")} />
-                <div className="mt-2 flex flex-wrap gap-2">
-                  {donorMeta.relations.map(([name, kind, sums]) => (
-                    <RelatedDonorChip
-                      key={name}
-                      name={name}
-                      kind={kind}
-                      sums={sums}
-                    />
-                  ))}
-                </div>
-              </div>
-            ) : null}
-            {ubos.size > 0 ? (
-              <section aria-labelledby="ubo-heading">
-                <MetaCardTitle
-                  id="ubo-heading"
-                  title={
-                    <>
-                      {t("donor.ubo")}
-                      <UBOsTooltip />
-                    </>
-                  }
-                />
-                <p className="mt-2">
-                  {formatAnd(browserBasedLocale, [...ubos])}
-                </p>
-              </section>
-            ) : null}
-          </div>
+          <DonorPageHeadSummary
+            countryConfig={countryConfig}
+            addresses={addresses}
+            donationCount={activeDonations.length}
+            sum={sum}
+            avg={avg}
+            firstYear={firstYear}
+            lastYear={lastYear}
+            donorType={donorType}
+            registrationNumber={registrationNumber}
+            registrationDonorCountry={registrationDonorCountry}
+            donorMeta={donorMeta}
+            ubos={[...ubos]}
+          />
+
           <div className="mb-3">
             {wikiPageId && (
               <section aria-label={tCommon("summary")} className="pt-4 sm:px-4">

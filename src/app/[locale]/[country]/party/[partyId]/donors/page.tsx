@@ -12,6 +12,7 @@ import { getCountryConfig } from "@/utils/data/get-country-config";
 import { getDonorName } from "@/utils/donor";
 import { Features, hasFeature } from "@/utils/features";
 import { formatCompactCountryCurrency } from "@/utils/formatter";
+import { getCountryDonorInterests } from "@/utils/interests/categorized-donors";
 import { getPartyDonorStats } from "@/utils/loader/party-donor-stats";
 import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
 import { generateAlternates } from "@/utils/meta";
@@ -133,12 +134,16 @@ export default async function DonorPage(
 
   if (!isValidParty(partyId, countryConfig)) return notFound();
   const party = getParty(countryConfig.id, partyId);
+  const donorInterests = hasFeature(countryConfig, Features.DonorInterests)
+    ? await getCountryDonorInterests(countryConfig.id)
+    : undefined;
 
   return (
     <Article fullWidth={true}>
       <PartyDonorsClientPage
         party={party}
         ssrStats={partyDonorStats[partyId] ?? null}
+        donorInterests={donorInterests}
         treemapTitle={t("party.donors.title", {
           party: party[PartyField.Short],
         })}

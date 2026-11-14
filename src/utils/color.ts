@@ -1,3 +1,8 @@
+import {
+  interestColorFor,
+  policyInterestColor,
+} from "@/utils/interests/interest-colors";
+
 import type { DonationType, DonorType } from "./types";
 
 const chartColors = [
@@ -21,3 +26,5 @@ export const donorTypeColor = (donorType: DonorType) =>
 
 export const donationTypeColor = (donationType: DonationType) =>
   chartColorFor(donationType);
+
+export { interestColorFor, policyInterestColor };

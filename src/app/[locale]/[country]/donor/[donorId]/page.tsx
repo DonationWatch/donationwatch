@@ -205,6 +205,8 @@ export default async function DonorPageLayout(
     "changes",
     "state",
     "related",
+    "interests",
+    "party",
   ]);
 
   return (

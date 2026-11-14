@@ -418,6 +418,74 @@
       },
       "p0": "Kapitál pro {party} je rozdělen mezi {count, plural, one {# registrovaný výbor} few {# registrované výbory} other {# registrovaných výborů}}, včetně stranických výborů, společných volebních fondů a nezávislých Super PAC. Celkem bylo přes tyto výbory přijato {amount}.",
       "top_intro": "Níže jsou uvedeny výbory s nejvyššími příspěvky:"
+    },
+    "interests": {
+      "title": "Odvětví a zájmové skupiny",
+      "intro": "Řada politických dárců v zemi {country} působí ve více než jednom odvětví. Tento přehled seskupuje dary pro {party} podle politické oblasti a odvětví a rozlišuje mezi jednotlivými společnostmi a víceodvětvovými skupinami.",
+      "intro_years": "Řada politických dárců v zemi {country} působí ve více než jednom odvětví. Tento přehled seskupuje dary v období {years} podle politické oblasti a odvětví a rozlišuje mezi jednotlivými společnostmi a víceodvětvovými skupinami.",
+      "explainer": {
+        "summary": "Jak toto číst: Přímé společnosti vs. víceodvětvové skupiny",
+        "direct_label": "Přímé společnosti:",
+        "direct_text": "Společnosti, jejichž hlavní činnost spadá do daného odvětví (například těžařská společnost, banka nebo provozovatel hazardních her). V grafu jsou zobrazeny plnou výplní a izolovány při zapnutí volby „Pouze přímé společnosti“.",
+        "multisector_label": "Víceodvětvové skupiny a zastřešující svazy:",
+        "multisector_text": "Odvětvová sdružení nebo konglomeráty zastupující více sektorů současně (například hotelové asociace působící v pohostinství, hazardních hrách a prodeji alkoholu). V grafu jsou označeny šrafováním a při vypnutí volby „Pouze přímé společnosti“ jsou zahrnuty vedle přímých společností.",
+        "domains_label": "Širší oblasti vs. konkrétní odvětví:",
+        "domains_text": "Při zapnuté volbě „Seskupit podle oblasti“ je 24 konkrétních odvětví seskupeno pod 6 širších politických oblastí. Kliknutím na řádek oblasti níže zobrazíte její odvětví, nebo kliknutím na oblast v grafu přiblížíte zobrazení."
+      },
+      "switches": {
+        "direct_only": "Pouze přímé společnosti",
+        "group_by_domain": "Seskupit podle oblasti"
+      },
+      "summary": {
+        "exposure": "Z celkového objemu {total} na darech pro {party} pochází {tracked} ({percent}) od dárců napojených alespoň na jedno sledované odvětví nebo zájmovou skupinu.",
+        "core": "Z celkového objemu {total} na darech pro {party} pochází {tracked} ({percent}) od přímých společností, jejichž hlavní činnost spadá do sledovaného odvětví.",
+        "exposure_years": "Z celkového objemu {total} na darech v období {years} pochází {tracked} ({percent}) od dárců napojených alespoň na jedno sledované odvětví nebo zájmovou skupinu.",
+        "core_years": "Z celkového objemu {total} na darech v období {years} pochází {tracked} ({percent}) od přímých společností, jejichž hlavní činnost spadá do sledovaného odvětví.",
+        "top_exposure_one": "Největším zastoupeným odvětvím je {item}.",
+        "top_exposure_many": "Největšími zastoupenými odvětvími jsou {items}.",
+        "top_core_one": "Mezi samotnými přímými společnostmi je největším odvětvím {item}.",
+        "top_core_many": "Mezi samotnými přímými společnostmi jsou největšími odvětvími {items}."
+      },
+      "show_top": "Zobrazit top 10 odvětví",
+      "show_all": "Zobrazit všech {count} aktivních odvětví",
+      "note": {
+        "prefix": "Poznámka: Odvětvové štítky jsou doplňkovou vrstvou nad oficiálními výkazy.",
+        "exposure": "Víceodvětvoví dárci se zobrazují v každém odvětví, které zastupují, takže se částky odvětví překrývají a neměly by se sčítat; součty oblastí započítávají každého dárce pouze jednou.",
+        "core": "Společnosti s hlavní činností ve více odvětvích se mohou objevit ve více než jednom odvětví; součty oblastí započítávají každého dárce pouze jednou.",
+        "share": "Procenta udávají podíl každé skupiny na všech darech pro {party}.",
+        "share_years": "Procenta udávají podíl každé skupiny na všech darech v období {years}.",
+        "methodology_link": "Zobrazit všechny kategorie v metodice"
+      },
+      "chart": {
+        "title": "{party}: Odvětví a zájmové skupiny",
+        "title_years": "{country} ({years}): Odvětví a zájmové skupiny",
+        "subtitle_grouped_exposure": "Dary seskupené podle politické oblasti, odvětví a dárce ve srovnání s nezařazenými dary",
+        "subtitle_grouped_core": "Přímé společnosti podle politické oblasti a odvětví ve srovnání se všemi ostatními dary",
+        "subtitle_flat_exposure": "Dary seskupené podle odvětví a dárce ve srovnání s nezařazenými dary",
+        "subtitle_flat_core": "Přímé společnosti podle odvětví ve srovnání se všemi ostatními dary",
+        "footer_note": "Kategorizace s asistencí AI",
+        "legend_solid_label": "Plná výplň:",
+        "legend_solid_text": "Přímá společnost",
+        "legend_striped_label": "Šrafování:",
+        "legend_striped_text": "Víceodvětvová skupina / svaz",
+        "uncategorized": "Ostatní / Nezařazení dárci",
+        "uncategorized_donor": "Ostatní / Nezařazený dárce",
+        "uncategorized_hint": "Zatím není napojeno na žádné sledované odvětví ani zájmovou skupinu.",
+        "uncategorized_desc": "Dary od jednotlivců, místních podniků a skupin nenapojených na sledované odvětví.",
+        "tooltip_direct_business": "Přímá společnost",
+        "tooltip_multisector": "Víceodvětvová skupina / svaz",
+        "tooltip_share_of": "Podíl na {category}:",
+        "tooltip_share_uncategorized": "Podíl na nezařazených:",
+        "tooltip_share_party": "Podíl na darech strany:",
+        "tooltip_share_total": "Podíl na celkových darech:",
+        "tooltip_share_total_pct": "{amount} ({percent}% z celkových darů)",
+        "tooltip_donations": "Počet darů:",
+        "tooltip_donors": "Počet dárců:",
+        "tooltip_direct_businesses": "Přímé společnosti:",
+        "tooltip_multisector_bodies": "Víceodvětvové skupiny / svazy:",
+        "tooltip_solid_hint": "Plná výplň: Hlavní činnost spadá do tohoto odvětví.",
+        "tooltip_striped_hint": "Šrafování: Víceodvětvová skupina nebo svaz působící ve více oblastech."
+      }
     }
   },
   "origin": {
@@ -779,7 +847,8 @@
     "section": {
       "filtered_donors": "Filtrovaní dárci",
       "filtered_receivers": "Filtrovaní příjemci",
-      "aggregated": "Agregovaní dárci"
+      "aggregated": "Agregovaní dárci",
+      "categorized": "Dárci podle odvětví a zájmových skupin"
     },
     "filtered_donors": {
       "p0": "Abychom přesně zachytili skutečné zdroje politických darů, odfiltrujeme některé transakce, které jsou ve skutečnosti státními příspěvky, nikoli skutečnými dary. Protože je naše zdrojové datové sady výslovně neoznačují, opíráme se o sadu filtračních pravidel založených na regulárních výrazech (regexp), která takové záznamy automaticky identifikují a odstraní. Níže si můžete prohlédnout úplný seznam použitých filtračních pravidel regexp.",
@@ -792,6 +861,11 @@
     "receivers": {
       "title": "Agregovaní příjemci",
       "p0": "V zemi {country} mohou být dary vykazovány různým organizačním jednotkám v rámci strany. Kvůli konzistenci slučujeme související subjekty příjemců do jednoho celkového součtu na úrovni strany. Níže uvedený seznam dokládá, které subjekty příjemců jsou u jednotlivých stran agregovány."
+    },
+    "categorized": {
+      "title": "Dárci podle odvětví a zájmových skupin",
+      "p0": "Aby bylo snazší vidět, která odvětví financují politické strany, rozdělujeme hlavní dárce do 24 odvětvových a zájmových kategorií (například těžba, bankovnictví, hazard nebo odbory). Uvádíme také, zda jde o přímou firmu (její hlavní činnost spadá do daného odvětví), nebo o zastřešující organizaci (oborové sdružení či konglomerát působící ve více oblastech). Tyto kategorie dárců jsou přiřazovány s pomocí AI — pokud narazíte na chybu nebo chybějící záznam, neváhejte nás kontaktovat nebo založit issue na GitHubu.",
+      "p1": "Níže je seznam kategorizovaných dárců a odvětví s nimi spojených."
     }
   },
   "related": {
@@ -1087,6 +1161,137 @@
     },
     "disclaimer": {
       "text": "Kompilovaná, nikoliv oficiální data: DonationWatch je nezávislý občanský projekt a není spojen s žádným volebním orgánem ani politickou stranou. Vzhledem k normalizaci a filtrování by tato datová sada neměla být citována jako oficiální státní registr."
+    },
+    "policy_domains": {
+      "title": "Politické oblasti a odvětvové kategorie",
+      "intro": "Dárci v zemi {country} jsou přiřazeni do 24 konkrétních odvětvových kategorií seskupených pod 6 širších politických oblastí:",
+      "disclaimer": "Tyto kategorie představují doplňkovou vrstvu sestavenou podle nejlepšího vědomí s asistencí AI na základě veřejných popisů společností, oborových registrů a členství ve svazech, nikoli oficiální klasifikaci úřadů. Přímé společnosti jsou odlišeny od víceodvětvových zastřešujících svazů a nezařazení dárci zůstávají uvedeni odděleně. Pokud narazíte na chybně zařazeného dárce nebo chybějící vazbu, otevřete prosím <github>issue na GitHubu</github> nebo napište na <emailLink>{email}</emailLink>."
+    }
+  },
+  "interests": {
+    "domains": {
+      "energy-resources": {
+        "label": "Energetika a zdroje",
+        "description": "Fosilní paliva, těžba, obnovitelné zdroje, zemědělství a lesnictví"
+      },
+      "built-environment": {
+        "label": "Výstavba a infrastruktura",
+        "description": "Development nemovitostí, stavebnictví, infrastruktura a doprava"
+      },
+      "finance-advisory": {
+        "label": "Finance a poradenství",
+        "description": "Bankovnictví, penzijní fondy, pojišťovnictví, poradenství, právo a fintech"
+      },
+      "regulated-consumer": {
+        "label": "Regulovaná spotřeba",
+        "description": "Hazardní hry, alkohol, tabák, supermarkety a pohostinství"
+      },
+      "health-tech-industry": {
+        "label": "Zdravotnictví, technologie a průmysl",
+        "description": "Farmacie, soukromá zdravotní péče, technologie, média, obrana a výroba"
+      },
+      "labor-advocacy": {
+        "label": "Práce a zájmová advokacie",
+        "description": "Odbory, politické fundraisingové fondy a tematické kampaně"
+      }
+    },
+    "tags": {
+      "fossil-fuels": {
+        "label": "Fosilní paliva a tepelná energetika",
+        "description": "Těžba uhlí, ropy a plynu a výroba tepelné energie"
+      },
+      "mining-metals": {
+        "label": "Těžba a kovy",
+        "description": "Těžba železné rudy, zlata, lithia a kritických nerostů"
+      },
+      "renewables-cleantech": {
+        "label": "Obnovitelné zdroje a čisté technologie",
+        "description": "Solární a větrná energie, bateriová úložiště a zelený vodík"
+      },
+      "agriculture-forestry": {
+        "label": "Zemědělství a lesnictví",
+        "description": "Agropodnikání, pastevectví, chov hospodářských zvířat, dřevo a vodní práva"
+      },
+      "property-development": {
+        "label": "Nemovitosti a development",
+        "description": "Komerční a rezidenční development nemovitostí a realitní fondy REIT"
+      },
+      "construction-infrastructure": {
+        "label": "Stavebnictví a infrastruktura",
+        "description": "Inženýrské stavby, dodavatelé silnic a železnic a stavební materiály"
+      },
+      "aviation-transport": {
+        "label": "Letectví, lodní doprava a logistika",
+        "description": "Letecké společnosti, letiště, přístavy, námořní a nákladní logistika"
+      },
+      "banking-lending": {
+        "label": "Bankovnictví a úvěry",
+        "description": "Komerční banky, družstevní záložny a nebankovní poskytovatelé úvěrů"
+      },
+      "wealth-super-insurance": {
+        "label": "Správa majetku, penze a pojištění",
+        "description": "Penzijní fondy, private equity, správci aktiv a pojišťovny"
+      },
+      "consulting-accounting-legal": {
+        "label": "Poradenství, účetnictví a právo",
+        "description": "Auditorské a poradenské firmy Velké čtyřky, korporátní advokátní kanceláře a PR/lobbing"
+      },
+      "crypto-fintech": {
+        "label": "Krypto a fintech",
+        "description": "Burzy digitálních aktiv, blockchain a alternativní platební systémy"
+      },
+      "gambling-wagering": {
+        "label": "Hazardní hry a sázení",
+        "description": "Kasina, online sázení, loterie a provozovny hracích automatů"
+      },
+      "alcohol-beverages": {
+        "label": "Alkohol a nápoje",
+        "description": "Pivovary, lihovary, vinařství a maloobchodní prodejny alkoholu"
+      },
+      "tobacco-nicotine": {
+        "label": "Tabák a nikotin",
+        "description": "Výrobci tabáku, velkoobchodníci a elektronické cigarety"
+      },
+      "food-supermarkets": {
+        "label": "Supermarkety a potravinářství",
+        "description": "Velké obchodní řetězce s potravinami, rychlé občerstvení a výrobci balených potravin"
+      },
+      "hospitality-tourism": {
+        "label": "Pohostinství, kluby a cestovní ruch",
+        "description": "Hotely, licencované kluby, restaurace a provozovatelé cestovního ruchu"
+      },
+      "pharma-biotech": {
+        "label": "Farmacie a biotechnologie",
+        "description": "Výrobci léčiv, vakcín a lékařský výzkum"
+      },
+      "private-healthcare": {
+        "label": "Soukromé zdravotnictví a péče o seniory",
+        "description": "Soukromé nemocnice, patologie a poskytovatelé péče o seniory"
+      },
+      "tech-telecom-platforms": {
+        "label": "Technologie, telekomunikace a platformy",
+        "description": "Software, cloud, sociální platformy a telekomunikační operátoři"
+      },
+      "media-broadcasting": {
+        "label": "Média a vysílání",
+        "description": "Komerční televize, rozhlas, vydavatelství a zpravodajské sítě"
+      },
+      "defense-aerospace": {
+        "label": "Obrana a letectví",
+        "description": "Dodavatelé obranného průmyslu, vojenská technika a bezpečnostní systémy"
+      },
+      "manufacturing-automotive": {
+        "label": "Výroba a automobilový průmysl",
+        "description": "Průmyslová výroba, papír a obaly a distribuce vozidel"
+      },
+      "trade-unions": {
+        "label": "Odborové organizace",
+        "description": "Zaměstnanecké odbory ve veřejném i soukromém sektoru"
+      },
+      "ideological-issue-advocacy": {
+        "label": "Ideologická a tematická advokacie",
+        "description": "Politické fundraisingové fondy, think tanky a tematické kampaně"
+      }
     }
   }
 }

@@ -9,6 +9,8 @@ import {
 import { useRef, useState } from "react";
 
 import type { UseNormalizedData } from "@/hooks/use-api";
+import type { DonorInterestAttribution } from "@/types/interests";
+import type { CategorizedDonorItem } from "@/utils/interests/categorized-donors";
 
 import { FormatAnd } from "@/components/formatter";
 import { ArticleSection } from "@/components/layout/article";
@@ -22,18 +24,26 @@ import {
 } from "@/components/ui/collapsible";
 import { useNormalized } from "@/hooks/use-api";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import {
+  AttributionRole,
+  POLICY_INTEREST_TAG_METADATA,
+} from "@/types/interests";
+import { GITHUB_URL } from "@/utils/config";
 
 export interface MethodologyCollapsiblesTexts {
   filteredReceivers: { title: string; p0: string; p1: string };
   filteredDonors: { title: string; p0: string; p1: string };
   normalizedReceivers: { title: string; p0: string };
   aggregatedDonors: { title: string; p0: string; p1: string };
+  categorizedDonors?: { title: string; p0: string; p1: string };
 }
 
 export function MethodologyCollapsibles({
   texts,
+  categorizedDonors,
 }: {
   texts: MethodologyCollapsiblesTexts;
+  categorizedDonors?: CategorizedDonorItem[];
 }) {
   const countryConfig = useRequiredCountryConfig();
   const tData = useTranslations("data");
@@ -63,6 +73,11 @@ export function MethodologyCollapsibles({
   );
   const hasNormalizedDonors = Boolean(
     data.normalizedDonors && data.normalizedDonors.length > 0,
+  );
+  const hasCategorizedDonors = Boolean(
+    categorizedDonors &&
+    categorizedDonors.length > 0 &&
+    texts.categorizedDonors,
   );
 
   return (
@@ -225,6 +240,53 @@ export function MethodologyCollapsibles({
           </CollapsibleContent>
         </Collapsible>
       )}
+
+      {hasCategorizedDonors && categorizedDonors && texts.categorizedDonors && (
+        <Collapsible
+          open={Boolean(openSections.categorizedDonors)}
+          onOpenChange={() => toggle("categorizedDonors")}
+          className="rounded-lg border border-neutral-200 p-4 dark:border-neutral-800"
+        >
+          <CollapsibleTrigger
+            render={
+              <Button
+                variant="ghost"
+                data-testid="categorized-donors-trigger"
+                className="flex w-full items-center justify-between text-left text-base font-semibold"
+              >
+                <span>
+                  {texts.categorizedDonors.title} ({categorizedDonors.length})
+                </span>
+                <ChevronDownIcon
+                  className={`size-4 transition-transform duration-200 ${
+                    openSections.categorizedDonors ? "rotate-180" : ""
+                  }`}
+                />
+              </Button>
+            }
+          />
+          <CollapsibleContent className="px-2">
+            <div className="mt-4 space-y-3">
+              <p>
+                {texts.categorizedDonors.p0}{" "}
+                <a
+                  href={`${GITHUB_URL}/issues`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline"
+                >
+                  GitHub Issues
+                </a>
+              </p>
+              <p>{texts.categorizedDonors.p1}</p>
+              <VirtualizedCategorizedEntityList
+                items={categorizedDonors}
+                testId="categorized-donors-list"
+              />
+            </div>
+          </CollapsibleContent>
+        </Collapsible>
+      )}
     </div>
   );
 }
@@ -348,6 +410,86 @@ function VirtualizedAggregatedEntityList({
             >
               <div className="font-semibold">{name}</div>
               <NormalizedVariantsList variants={normalizedVariants} />
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}
+
+function CategorizedInterestsList({
+  attributions,
+}: {
+  attributions: DonorInterestAttribution[];
+}) {
+  const tInterests = useTranslations("interests");
+  const tPartyInterests = useTranslations("party.interests");
+
+  return (
+    <ul>
+      {attributions.map((attr) => {
+        const meta = POLICY_INTEREST_TAG_METADATA[attr.tag];
+        const isCore =
+          attr.role === AttributionRole.core || String(attr.role) === "core";
+        const roleLabel = tPartyInterests(
+          isCore
+            ? "chart.tooltip_direct_business"
+            : "chart.tooltip_multisector",
+        );
+        const tagLabel = meta
+          ? tInterests(
+              `tags.${meta.slug}.label` as Parameters<typeof tInterests>[0],
+            )
+          : String(attr.tag);
+        return (
+          <li key={attr.tag} className="leading-snug">
+            {roleLabel}: {tagLabel}
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+function VirtualizedCategorizedEntityList({
+  items,
+  testId,
+}: {
+  items: [string, DonorInterestAttribution[]][];
+  testId: string;
+}) {
+  const parentRef = useRef<HTMLDivElement>(null);
+
+  const rowVirtualizer = useVirtualizer({
+    count: items.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 52,
+    overscan: 10,
+    getItemKey: (index) => items[index][0],
+    directDomUpdates: true,
+    directDomUpdatesMode: "transform",
+  });
+
+  return (
+    <div ref={parentRef} className="max-h-96 overflow-y-auto">
+      <ul
+        data-testid={testId}
+        className="relative w-full"
+        ref={rowVirtualizer.containerRef}
+      >
+        {rowVirtualizer.getVirtualItems().map((virtualItem) => {
+          const [name, attributions] = items[virtualItem.index];
+
+          return (
+            <li
+              key={virtualItem.key}
+              ref={rowVirtualizer.measureElement}
+              data-index={virtualItem.index}
+              className="absolute top-0 left-0 w-full border-b border-zinc-200 py-1.5 last:border-b-0 dark:border-zinc-800"
+            >
+              <div className="font-semibold">{name}</div>
+              <CategorizedInterestsList attributions={attributions} />
             </li>
           );
         })}

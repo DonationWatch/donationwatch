@@ -11,7 +11,7 @@ export const NavigationTab = ({
   icon,
 }: {
   label: string;
-  icon: JSX.Element;
+  icon?: JSX.Element;
   isActive: boolean;
   onClick?: () => void;
 }) => {

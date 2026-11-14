@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 
+import type { DonorInterestMap } from "@/types/interests";
 import type { Party } from "@/types/party";
 import type { PartyDonorStats } from "@/utils/data/get-party-donor-stats";
 
@@ -10,6 +11,7 @@ import { LoadingDonationPartyTreemap } from "@/components/charts/loading-donatio
 import { LoadingPartyDonorTypeTreemap } from "@/components/charts/loading-donor-types-treemap";
 import { DonorOverviewList } from "@/components/donors/donor-overview-list";
 import { FilterEmptyState } from "@/components/filter/filter-empty-state";
+import { PartyInterestsSection } from "@/components/interests/party-interests-section";
 import {
   ArticleSectionColumn,
   ArticleSectionOneColumns,
@@ -38,6 +40,7 @@ import { PartyOriginalReceivers } from "./party-original-receivers";
 interface PartyDonorsClientPageProps {
   party: Party;
   ssrStats?: PartyDonorStats | null;
+  donorInterests?: DonorInterestMap;
   treemapTitle: string;
   treemapSubtitle: string;
   donorTypesTitle: string;
@@ -53,6 +56,7 @@ interface PartyDonorsClientPageProps {
 export const PartyDonorsClientPage = ({
   party,
   ssrStats,
+  donorInterests,
   treemapTitle,
   treemapSubtitle,
   donorTypesTitle,
@@ -202,6 +206,18 @@ export const PartyDonorsClientPage = ({
       {/* Contributing Committees Section */}
       {viaSummary.hasViaData ? (
         <PartyOriginalReceivers summary={viaSummary} />
+      ) : null}
+
+      {/* Policy Interest & Lobby Groups Breakdown */}
+      {hasFeature(country, Features.DonorInterests) && donorInterests ? (
+        <ArticleSectionWrapper id={"sec-party-interests"}>
+          <PartyInterestsSection
+            party={party}
+            donations={filteredDonations}
+            donorInterests={donorInterests}
+            isPendingClientDonations={isPendingClientDonations}
+          />
+        </ArticleSectionWrapper>
       ) : null}
 
       <ArticleSectionWrapper id={"sec-donor-list"}>

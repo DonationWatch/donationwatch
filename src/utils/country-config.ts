@@ -18,7 +18,11 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       ["2022", "2023", "2024", "2025"],
       ["2026", "2027", "2028", "2029"],
     ],
-    features: Features.Origin | Features.Date | Features.Donors,
+    features:
+      Features.Origin |
+      Features.Date |
+      Features.Donors |
+      Features.DonorInterests,
     minPublicDonationAmount: 35_000,
     currency: "EUR",
     source: {
@@ -307,7 +311,8 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       Features.DonorType |
       Features.ExternalDonationIds |
       Features.DonationType |
-      Features.DonorRegistrationNumber,
+      Features.DonorRegistrationNumber |
+      Features.DonorInterests,
     minPublicDonationAmount: 1000,
     knownPartyRequirements: {
       sum: 10_000,
@@ -344,7 +349,11 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
       ["2023", "2024", "2025"],
       ["2026", "2027", "2028"],
     ],
-    features: Features.Date | Features.Donors | Features.DonorType,
+    features:
+      Features.Date |
+      Features.Donors |
+      Features.DonorType |
+      Features.DonorInterests,
     minPublicDonationAmount: 1,
     currency: "AUD",
     updateCadence: "annual",

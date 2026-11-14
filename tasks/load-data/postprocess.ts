@@ -4,6 +4,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 import type { CountryConfig } from "@/types/country-config";
+import type { DonorInterestAttribution } from "@/types/interests";
 import type { Party } from "@/types/party";
 import type { PartyStats } from "@/types/party-stats";
 import type { TransparencyData } from "@/types/transparency";
@@ -635,6 +636,9 @@ const prebuildDonorMeta = async (
     if (meta.wiki) {
       processedMeta[donor].wiki = meta.wiki;
     }
+    if (meta.interests) {
+      processedMeta[donor].interests = meta.interests;
+    }
   });
 
   for (const [donor, meta] of Object.entries(processedMeta)) {
@@ -713,6 +717,18 @@ const prebuildStaticDonationJsons = async (
   ]);
 };
 
+const buildDonorInterests = (
+  donorMeta: DonorMetaDefinition,
+): Record<string, DonorInterestAttribution[]> => {
+  const result: Record<string, DonorInterestAttribution[]> = {};
+  for (const [donor, meta] of Object.entries(donorMeta.donors)) {
+    if (meta.interests && meta.interests.length > 0) {
+      result[donor] = meta.interests;
+    }
+  }
+  return result;
+};
+
 const postprocess = async (
   countryConfig: CountryConfig,
   donations: Donation[],
@@ -724,6 +740,22 @@ const postprocess = async (
   const { default: donorMeta }: { default: DonorMetaDefinition } = await import(
     donorMetaPath
   );
+  const sourceDonorMetaPath = path.join(
+    __dirname,
+    `./${countryConfig.code.toLowerCase()}/donor-meta.ts`,
+  );
+  let sourceDonorMeta = donorMeta;
+  try {
+    const mod: { donorMeta?: DonorMetaDefinition } = await import(
+      sourceDonorMetaPath
+    );
+    if (mod.donorMeta) {
+      sourceDonorMeta = mod.donorMeta;
+    }
+  } catch {
+    // Fall back to prebuilt donorMeta if load-data/<cc>/donor-meta.ts is absent
+  }
+  const donorInterests = buildDonorInterests(sourceDonorMeta);
   const parties = await getPartiesForCountry(countryConfig.id);
   const dataDir = path.join(__dirname, "../../src/data", countryConfig.id);
 
@@ -792,6 +824,17 @@ const postprocess = async (
         },
       ),
     ),
+    ...(Object.keys(donorInterests).length > 0
+      ? [
+          fs.writeFile(
+            path.join(dataDir, "donor-interests.ts"),
+            jsonAsTsModuleWithType(JSON.stringify(donorInterests), {
+              name: "DonorInterestMap",
+              import: "import {DonorInterestMap} from '../../types/interests';",
+            }),
+          ),
+        ]
+      : []),
   ]);
 
   const publicDataDir = path.join(

@@ -418,6 +418,74 @@
       },
       "p0": "Partijas {party} finansējums ir sadalīts starp {count, plural, zero {# reģistrētām komitejām} one {# reģistrētu komiteju} other {# reģistrētām komitejām}}, tostarp partiju komitejām, kopīgiem vēlēšanu fondiem un neatkarīgiem Super PAC. Kopumā ar šo komiteju starpniecību tika saņemti {amount}.",
       "top_intro": "Zemāk uzskaitītas komitejas ar lielāko ieguldījumu:"
+    },
+    "interests": {
+      "title": "Nozares un interešu grupas",
+      "intro": "Daudzi politiskie ziedotāji valstī {country} darbojas vairāk nekā vienā nozarē. Šajā pārskatā ziedojumi partijai {party} ir sagrupēti pēc politikas jomas un nozares, nošķirot atsevišķus uzņēmumus no daudznozaru grupām.",
+      "intro_years": "Daudzi politiskie ziedotāji valstī {country} darbojas vairāk nekā vienā nozarē. Šajā pārskatā ziedojumi laikposmā {years} ir sagrupēti pēc politikas jomas un nozares, nošķirot atsevišķus uzņēmumus no daudznozaru grupām.",
+      "explainer": {
+        "summary": "Kā to lasīt: Tiešie uzņēmumi salīdzinājumā ar daudznozaru grupām",
+        "direct_label": "Tiešie uzņēmumi:",
+        "direct_text": "Uzņēmumi, kuru pamatdarbība ir attiecīgajā nozarē (piemēram, kalnrūpniecības uzņēmums, banka vai azartspēļu operators). Diagrammā tie attēloti ar vienlaidus krāsojumu un tiek nodalīti, kad ir ieslēgta opcija „Tikai tiešie uzņēmumi“.",
+        "multisector_label": "Daudznozaru grupas un jumta organizācijas:",
+        "multisector_text": "Nozaru asociācijas vai konglomerāti, kas vienlaikus pārstāv vairākas nozares (piemēram, viesnīcu asociācijas, kas darbojas viesmīlības, spēļu automātu un alkohola jomā). Diagrammā tās apzīmētas ar svītrojumu un tiek iekļautas līdzās tiešajiem uzņēmumiem, kad opcija „Tikai tiešie uzņēmumi“ ir izslēgta.",
+        "domains_label": "Plašas jomas salīdzinājumā ar konkrētām nozarēm:",
+        "domains_text": "Kad ir ieslēgta opcija „Grupēt pēc jomas“, 24 konkrētās nozares tiek apvienotas 6 plašās politikas jomās. Noklikšķiniet uz jebkuras jomas rindas zemāk, lai izvērstu tās nozares, vai noklikšķiniet uz jomas diagrammā, lai tuvinātu."
+      },
+      "switches": {
+        "direct_only": "Tikai tiešie uzņēmumi",
+        "group_by_domain": "Grupēt pēc jomas"
+      },
+      "summary": {
+        "exposure": "No kopumā {total} ziedojumiem partijai {party} summu {tracked} ({percent}) veido ziedotāji, kas saistīti ar vismaz vienu uzraudzīto nozari vai interešu grupu.",
+        "core": "No kopumā {total} ziedojumiem partijai {party} summu {tracked} ({percent}) veido tiešie uzņēmumi, kuru pamatdarbība ir uzraudzītajā nozarē.",
+        "exposure_years": "No kopumā {total} ziedojumiem laikposmā {years} summu {tracked} ({percent}) veido ziedotāji, kas saistīti ar vismaz vienu uzraudzīto nozari vai interešu grupu.",
+        "core_years": "No kopumā {total} ziedojumiem laikposmā {years} summu {tracked} ({percent}) veido tiešie uzņēmumi, kuru pamatdarbība ir uzraudzītajā nozarē.",
+        "top_exposure_one": "Lielākā saistītā nozare ir {item}.",
+        "top_exposure_many": "Lielākās saistītās nozares ir {items}.",
+        "top_core_one": "Tikai tiešo uzņēmumu vidū lielākā nozare ir {item}.",
+        "top_core_many": "Tikai tiešo uzņēmumu vidū lielākās nozares ir {items}."
+      },
+      "show_top": "Rādīt top 10 nozares",
+      "show_all": "Rādīt visas {count} aktīvās nozares",
+      "note": {
+        "prefix": "Piezīme: Nozaru birkas ir papildu slānis virs oficiālajiem pārskatiem.",
+        "exposure": "Daudznozaru ziedotāji parādās katrā pārstāvētajā nozarē, tāpēc nozaru summas pārklājas un tās nevajadzētu saskaitīt; jomu kopsummās katrs ziedotājs tiek skaitīts vienu reizi.",
+        "core": "Uzņēmumi ar pamatdarbību vairākās nozarēs var parādīties vairāk nekā vienā nozarē; jomu kopsummās katrs ziedotājs tiek skaitīts vienu reizi.",
+        "share": "Procenti parāda katras grupas daļu no visiem ziedojumiem partijai {party}.",
+        "share_years": "Procenti parāda katras grupas daļu no visiem ziedojumiem laikposmā {years}.",
+        "methodology_link": "Skatīt visas kategorijas metodoloģijā"
+      },
+      "chart": {
+        "title": "{party}: Nozares un interešu grupas",
+        "title_years": "{country} ({years}): Nozares un interešu grupas",
+        "subtitle_grouped_exposure": "Ziedojumi, kas grupēti pēc politikas jomas, nozares un ziedotāja, salīdzinājumā ar nekategorizētiem ziedojumiem",
+        "subtitle_grouped_core": "Tiešie uzņēmumi pēc politikas jomas un nozares salīdzinājumā ar visiem pārējiem ziedojumiem",
+        "subtitle_flat_exposure": "Ziedojumi, kas grupēti pēc nozares un ziedotāja, salīdzinājumā ar nekategorizētiem ziedojumiem",
+        "subtitle_flat_core": "Tiešie uzņēmumi pēc nozares salīdzinājumā ar visiem pārējiem ziedojumiem",
+        "footer_note": "Ar mākslīgā intelekta palīdzību veikta kategorizācija",
+        "legend_solid_label": "Vienlaidus krāsojums:",
+        "legend_solid_text": "Tiešais uzņēmums",
+        "legend_striped_label": "Svītrots raksts:",
+        "legend_striped_text": "Daudznozaru grupa / jumta organizācija",
+        "uncategorized": "Citi / nekategorizēti ziedotāji",
+        "uncategorized_donor": "Cits / nekategorizēts ziedotājs",
+        "uncategorized_hint": "Vēl nav saistīts ne ar vienu uzraudzīto nozari vai interešu grupu.",
+        "uncategorized_desc": "Ziedojumi no privātpersonām, vietējiem uzņēmumiem un grupām, kas nav saistītas ar uzraudzīto nozari.",
+        "tooltip_direct_business": "Tiešais uzņēmums",
+        "tooltip_multisector": "Daudznozaru grupa / jumta organizācija",
+        "tooltip_share_of": "Daļa no {category}:",
+        "tooltip_share_uncategorized": "Daļa no nekategorizētajiem:",
+        "tooltip_share_party": "Daļa no partijas ziedojumiem:",
+        "tooltip_share_total": "Daļa no kopējiem ziedojumiem:",
+        "tooltip_share_total_pct": "{amount} ({percent}% no kopējiem ziedojumiem)",
+        "tooltip_donations": "Ziedojumi:",
+        "tooltip_donors": "Ziedotāji:",
+        "tooltip_direct_businesses": "Tiešie uzņēmumi:",
+        "tooltip_multisector_bodies": "Daudznozaru grupas / asociācijas:",
+        "tooltip_solid_hint": "Vienlaidus krāsojums: Pamatdarbība ir šajā nozarē.",
+        "tooltip_striped_hint": "Svītrots raksts: Daudznozaru grupa vai jumta organizācija, kas darbojas vairākās jomās."
+      }
     }
   },
   "origin": {
@@ -779,7 +847,8 @@
     "section": {
       "filtered_donors": "Filtrētie ziedotāji",
       "filtered_receivers": "Filtrētie saņēmēji",
-      "aggregated": "Apkopotie ziedotāji"
+      "aggregated": "Apkopotie ziedotāji",
+      "categorized": "Ziedotāji pēc nozarēm un interešu grupām"
     },
     "filtered_donors": {
       "p0": "Lai precīzi atspoguļotu patiesos politisko ziedojumu avotus, mēs atfiltrējam noteiktus darījumus, kas patiesībā ir valsts iemaksas, nevis īsti ziedojumi. Tā kā mūsu avota datu kopās tie nav skaidri marķēti, mēs izmantojam regulāro izteiksmju (regexp) filtrēšanas noteikumu kopumu, lai šādus ierakstus automātiski identificētu un noņemtu. Zemāk varat pārskatīt pilnu piemēroto regexp filtrēšanas noteikumu sarakstu.",
@@ -792,6 +861,11 @@
     "receivers": {
       "title": "Apkopotie saņēmēji",
       "p0": "Valstī {country} ziedojumi var tikt ziņoti dažādām partijas organizatoriskajām vienībām. Konsekvences nolūkos mēs apvienojam saistītas saņēmēju vienības vienā kopējā summā partijas līmenī. Zemāk redzamajā sarakstā ir norādīts, kuras saņēmēju vienības tiek apkopotas katrai partijai."
+    },
+    "categorized": {
+      "title": "Ziedotāji pēc nozarēm un interešu grupām",
+      "p0": "Lai būtu vieglāk redzēt, kuras nozares finansē politiskās partijas, lielākos ziedotājus iedalām 24 nozaru un interešu kategorijās (piemēram, ieguves rūpniecība, bankas, azartspēles vai arodbiedrības). Norādām arī, vai ziedotājs ir tiešs uzņēmums (galvenā darbība šajā nozarē) vai jumta organizācija / konglomerāts, kas darbojas vairākās jomās. Šīs ziedotāju kategorijas ir noteiktas ar MI palīdzību — ja pamanāt kļūdas, droši sazinieties ar mums vai izveidojiet GitHub issue.",
+      "p1": "Zemāk ir kategorizēto ziedotāju saraksts un ar tiem saistītās nozares."
     }
   },
   "related": {
@@ -1087,6 +1161,137 @@
     },
     "disclaimer": {
       "text": "Apkopoti, nevis oficiāli dati: DonationWatch ir neatkarīgs pilsonisks projekts un nav saistīts ar vēlēšanu iestādēm vai partijām. Datu normalizācijas un atlases dēļ šo datu kopu nevajadzētu citēt kā oficiālu valsts reģistru."
+    },
+    "policy_domains": {
+      "title": "Politikas jomas un nozaru kategorijas",
+      "intro": "Ziedotāji valstī {country} ir iedalīti 24 konkrētās nozaru kategorijās, kas apvienotas 6 plašās politikas jomās:",
+      "disclaimer": "Šīs kategorijas ir pēc labākās sirdsapziņas un ar mākslīgā intelekta palīdzību veidots papildu slānis, kas balstīts uz publiskiem uzņēmumu aprakstiem, nozaru reģistriem un dalību asociācijās, nevis oficiāla pārskatu klasifikācija. Tiešie uzņēmumi ir nošķirti no daudznozaru jumta organizācijām, un nekategorizētie ziedotāji tiek uzrādīti atsevišķi. Ja pamanāt nepareizi klasificētu ziedotāju vai trūkstošu saikni, lūdzu, <github>atveriet pieteikumu vietnē GitHub</github> vai rakstiet uz <emailLink>{email}</emailLink>."
+    }
+  },
+  "interests": {
+    "domains": {
+      "energy-resources": {
+        "label": "Enerģētika un resursi",
+        "description": "Fosilais kurināmais, kalnrūpniecība, atjaunīgā enerģija, lauksaimniecība un mežsaimniecība"
+      },
+      "built-environment": {
+        "label": "Būvētā vide",
+        "description": "Nekustamā īpašuma attīstība, būvniecība, infrastruktūra un transports"
+      },
+      "finance-advisory": {
+        "label": "Finanses un konsultācijas",
+        "description": "Banku pakalpojumi, pensiju fondi, apdrošināšana, konsultācijas, tiesību pakalpojumi un fintech"
+      },
+      "regulated-consumer": {
+        "label": "Regulētais patēriņš",
+        "description": "Azartspēles, alkohols, tabaka, lielveikali un viesmīlība"
+      },
+      "health-tech-industry": {
+        "label": "Veselība, tehnoloģijas un rūpniecība",
+        "description": "Farmācija, privātā veselības aprūpe, tehnoloģijas, mediji, aizsardzība un ražošana"
+      },
+      "labor-advocacy": {
+        "label": "Darbs un interešu aizstāvība",
+        "description": "Arodbiedrības, politiskās ziedojumu vākšanas organizācijas un tematiskās kampaņas"
+      }
+    },
+    "tags": {
+      "fossil-fuels": {
+        "label": "Fosilais kurināmais un siltumenerģija",
+        "description": "Ogļu, naftas un gāzes ieguve un siltumenerģijas ražošana"
+      },
+      "mining-metals": {
+        "label": "Kalnrūpniecība un metāli",
+        "description": "Dzelzsrūdas, zelta, litija un kritisko minerālu ieguve"
+      },
+      "renewables-cleantech": {
+        "label": "Atjaunīgā enerģija un tīrās tehnoloģijas",
+        "description": "Saules un vēja enerģija, akumulatoru krātuves un zaļais ūdeņradis"
+      },
+      "agriculture-forestry": {
+        "label": "Lauksaimniecība un mežsaimniecība",
+        "description": "Agrobizness, lopkopība, kokmateriāli un ūdens tiesības"
+      },
+      "property-development": {
+        "label": "Nekustamais īpašums un attīstība",
+        "description": "Komerciālā un dzīvojamā nekustamā īpašuma attīstība un REIT fondi"
+      },
+      "construction-infrastructure": {
+        "label": "Būvniecība un infrastruktūra",
+        "description": "Inženierbūves, ceļu un dzelzceļu būvuzņēmēji un būvmateriāli"
+      },
+      "aviation-transport": {
+        "label": "Aviācija, kuģniecība un loģistika",
+        "description": "Aviokompānijas, lidostas, ostas, jūrniecība un kravu loģistika"
+      },
+      "banking-lending": {
+        "label": "Banku pakalpojumi un kreditēšana",
+        "description": "Komercbankas, krājaizdevu sabiedrības un nebanku aizdevēji"
+      },
+      "wealth-super-insurance": {
+        "label": "Aktīvu pārvaldība, pensijas un apdrošināšana",
+        "description": "Pensiju fondi, privātais kapitāls, aktīvu pārvaldītāji un apdrošinātāji"
+      },
+      "consulting-accounting-legal": {
+        "label": "Konsultācijas, grāmatvedība un tiesības",
+        "description": "Lielā četrinieka revīzijas un konsultāciju uzņēmumi, korporatīvie advokātu biroji un PR/lobēšana"
+      },
+      "crypto-fintech": {
+        "label": "Kripto un fintech",
+        "description": "Digitālo aktīvu biržas, blokķēde un alternatīvie maksājumi"
+      },
+      "gambling-wagering": {
+        "label": "Azartspēles un derības",
+        "description": "Kazino, tiešsaistes derības, loterijas un spēļu automātu zāles"
+      },
+      "alcohol-beverages": {
+        "label": "Alkohols un dzērieni",
+        "description": "Alus darītavas, spirta rūpnīcas, vīna darītavas un alkohola mazumtirdzniecība"
+      },
+      "tobacco-nicotine": {
+        "label": "Tabaka un nikotīns",
+        "description": "Tabakas ražotāji, vairumtirgotāji un elektroniskās cigaretes"
+      },
+      "food-supermarkets": {
+        "label": "Lielveikali un pārtikas tirdzniecība",
+        "description": "Lielie pārtikas veikalu tīkli, ātrā ēdināšana un fasētas pārtikas ražotāji"
+      },
+      "hospitality-tourism": {
+        "label": "Viesmīlība, klubi un tūrisms",
+        "description": "Viesnīcas, licencēti klubi, restorāni un tūrisma operatori"
+      },
+      "pharma-biotech": {
+        "label": "Farmācija un biotehnoloģija",
+        "description": "Zāļu ražotāji, vakcīnas un medicīnas pētniecība"
+      },
+      "private-healthcare": {
+        "label": "Privātā veselības aprūpe un senioru aprūpe",
+        "description": "Privātās slimnīcas, patoloģija un senioru aprūpes sniedzēji"
+      },
+      "tech-telecom-platforms": {
+        "label": "Tehnoloģijas, telekomunikācijas un platformas",
+        "description": "Programmatūra, mākoņpakalpojumi, sociālās platformas un sakaru operatori"
+      },
+      "media-broadcasting": {
+        "label": "Mediji un apraide",
+        "description": "Komerc televīzija, radio, izdevējdarbība un ziņu tīkli"
+      },
+      "defense-aerospace": {
+        "label": "Aizsardzība un aviācijas un kosmosa rūpniecība",
+        "description": "Aizsardzības nozares piegādātāji, militārā tehnika un drošības sistēmas"
+      },
+      "manufacturing-automotive": {
+        "label": "Ražošana un autobūve",
+        "description": "Rūpnieciskā ražošana, papīrs un iepakojums un transportlīdzekļu izplatīšana"
+      },
+      "trade-unions": {
+        "label": "Arodbiedrības",
+        "description": "Publiskā un privātā sektora darbinieku arodbiedrības"
+      },
+      "ideological-issue-advocacy": {
+        "label": "Ideoloģiskā un tematiskā aizstāvība",
+        "description": "Politiskie ziedojumu vākšanas fondi, domnīcas un tematiskās kampaņas"
+      }
     }
   }
 }

@@ -32,7 +32,7 @@ export const PartyViaTreemap = ({
 }: PartyViaTreemapProps) => {
   const country = useRequiredCountryConfig();
   const browserBasedLocale = useBrowserBasedLocale();
-  const { isDark, isMobile, backgroundColor } = useChart();
+  const { isDark, isMobile, backgroundColor, treemapBorderColor } = useChart();
 
   const option = useMemo((): EChartsOption => {
     const partyColor = party[PartyField.Color] || "#3b82f6";
@@ -45,7 +45,7 @@ export const PartyViaTreemap = ({
         pct: item.pctOfParty,
         itemStyle: {
           color: partyColor,
-          borderColor: isDark ? "#111827" : "#f3f4f6",
+          borderColor: treemapBorderColor,
           borderWidth: 2,
           gapWidth: 2,
         },
@@ -108,7 +108,7 @@ export const PartyViaTreemap = ({
             show: false,
           },
           itemStyle: {
-            borderColor: isDark ? "#111827" : "#f3f4f6",
+            borderColor: treemapBorderColor,
             borderWidth: 2,
             gapWidth: 2,
           },
@@ -125,6 +125,7 @@ export const PartyViaTreemap = ({
     items,
     party,
     title,
+    treemapBorderColor,
   ]);
 
   return (
