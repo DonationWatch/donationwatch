@@ -10,13 +10,15 @@ import type {
   ReceiverId,
 } from "@/utils/types";
 
+import { AttributionRole, PolicyInterestTag } from "@/types/interests";
 import { Country } from "@/utils/countries";
 import { AddressField, DonationField, DonorType } from "@/utils/types";
 
 import type { ExtractedYearData, PartyConfig } from "../data-loader";
 
 import { DataLoader } from "../data-loader";
-import { Deferred, containsWords } from "../util";
+import { containsWords, Deferred } from "../util";
+import { AUSTRALIAN_DONOR_INTERESTS_BY_NAME } from "./donor-interests";
 import { donorMeta } from "./donor-meta";
 
 // convert day/month/year to local ISO date string
@@ -62,7 +64,24 @@ const companyDonors = new Set<string>([
   "TG Public Affairs",
 ]);
 
+const nonCompanyInterestNamePattern =
+  /\b(association|council|society|institute|foundation|trust|fund|federation|chamber|alliance|coalition|network|clubs?|union)\b/i;
+
+const individualInterestDonors = new Set(["Sarina Russo", "Malcolm Turnbull"]);
+
 const classifyDonorType = (donor: string): DonorType | undefined => {
+  const interestAttributions = AUSTRALIAN_DONOR_INTERESTS_BY_NAME[donor];
+
+  if (
+    interestAttributions?.some(
+      (attr) =>
+        attr.tag === PolicyInterestTag.TradeUnions &&
+        attr.role === AttributionRole.core,
+    )
+  ) {
+    return DonorType.TradeUnion;
+  }
+
   if (
     companyDonors.has(donor) ||
     // Classify companies based on Australian corporate naming patterns
@@ -70,6 +89,21 @@ const classifyDonorType = (donor: string): DonorType | undefined => {
     /\bltd\.?$/i.test(donor) ||
     /\bcorporation\b/i.test(donor) ||
     /\bcorp\.?\b/i.test(donor)
+  ) {
+    return DonorType.Company;
+  }
+
+  // Classify remaining commercial-sector donors from donor-interests as companies,
+  // excluding individuals ("Surname, First" or known people) and non-company entities.
+  if (
+    !donor.includes(",") &&
+    !individualInterestDonors.has(donor) &&
+    interestAttributions?.some(
+      (attr) =>
+        attr.tag !== PolicyInterestTag.TradeUnions &&
+        attr.tag !== PolicyInterestTag.IdeologicalIssueAdvocacy,
+    ) &&
+    !nonCompanyInterestNamePattern.test(donor)
   ) {
     return DonorType.Company;
   }
@@ -104,7 +138,6 @@ const classifyDonorType = (donor: string): DonorType | undefined => {
       "Queensland Council of Unions (QCU)",
       "Health and Community Services Union (HSU)",
       "Fire Brigade Employees Union (FBEU)",
-      "Queensland Hotels Association, Union of Employers (QHA)",
     ].includes(donor)
   ) {
     return DonorType.TradeUnion;
@@ -842,6 +875,17 @@ export class AuLoader extends DataLoader {
 
     if (lowerDonor.includes("clubsnsw")) {
       return "ClubsNSW";
+    }
+
+    if (lowerDonor.includes("tabcorp")) {
+      return "TABCORP HOLDINGS Ltd";
+    }
+
+    if (
+      lowerDonor.includes("endeavour group") ||
+      lowerDonor.includes("endeavour operating")
+    ) {
+      return "Endeavour Group";
     }
 
     if (lowerDonor.includes("500 club")) {

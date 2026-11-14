@@ -262,7 +262,7 @@ const ChartCardCanvas = ({
   );
 };
 
-const ChartCardFooter = () => {
+const ChartCardFooter = ({ extraNote }: { extraNote?: string }) => {
   const {
     meta: { years },
   } = useChartCardContext();
@@ -318,6 +318,7 @@ const ChartCardFooter = () => {
               })
             : undefined,
           isFiltered ? tChart("filtered") : undefined,
+          extraNote,
         ]
           .filter(isNotNullandNotUndefined)
           .join(", ")}

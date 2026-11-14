@@ -408,6 +408,74 @@
       },
       "p0": "Capital for {party} is dispersed across {count, plural, one {# registered committee} other {# registered committees}}, including party committees, joint victory funds, and independent Super PACs. In total, {amount} was received through these committees.",
       "top_intro": "Below are the largest contributing committees:"
+    },
+    "interests": {
+      "title": "Industries & Lobby Groups",
+      "intro": "Many political donors in {country} operate in more than one industry. This breakdown groups donations to {party} by policy domain and industry, distinguishing between individual companies and multi-sector groups.",
+      "explainer": {
+        "summary": "How to read this: Direct businesses vs. multi-sector groups",
+        "direct_label": "Direct Businesses:",
+        "direct_text": "Companies whose primary activity is in that sector (for example, a mining company, a bank, or a gambling operator). Shown as solid blocks in the chart, and isolated when \"Direct businesses only\" is enabled.",
+        "multisector_label": "Multi-Sector Groups & Peak Bodies:",
+        "multisector_text": "Industry associations or conglomerates that represent multiple sectors at once (for example, hotel associations active in hospitality, poker machines, and alcohol). Shown with a striped pattern in the chart, and included alongside direct businesses when \"Direct businesses only\" is off.",
+        "domains_label": "Broad Domains vs. Specific Industries:",
+        "domains_text": "With \"Group by domain\" on, the 24 specific industries are clustered under 6 broad policy domains. Click any domain row below to expand its industries, or click a domain in the chart to zoom in."
+      },
+      "switches": {
+        "direct_only": "Direct businesses only",
+        "group_by_domain": "Group by domain"
+      },
+      "summary": {
+        "exposure": "Out of {total} in donations to {party}, {tracked} ({percent}) comes from donors linked to at least one tracked industry or interest group.",
+        "core": "Out of {total} in donations to {party}, {tracked} ({percent}) comes from direct businesses whose primary activity is in a tracked industry.",
+        "top_exposure_one": "The largest linked industry is {item}.",
+        "top_exposure_many": "The largest linked industries are {items}.",
+        "top_core_one": "Among direct businesses only, the largest industry is {item}.",
+        "top_core_many": "Among direct businesses only, the largest industries are {items}.",
+        "exposure_years": "Out of {total} in donations in {years}, {tracked} ({percent}) comes from donors linked to at least one tracked industry or interest group.",
+        "core_years": "Out of {total} in donations in {years}, {tracked} ({percent}) comes from direct businesses whose primary activity is in a tracked industry."
+      },
+      "show_top": "Show top 10 sectors",
+      "show_all": "Show all {count} active sectors",
+      "note": {
+        "prefix": "Note: Industry tags are an enriched overlay on official disclosures.",
+        "exposure": "Multi-sector donors appear under each sector they represent, so sector amounts overlap and should not be summed; domain totals count each donor once.",
+        "core": "Companies with primary operations in multiple sectors can appear in more than one sector; domain totals count each donor once.",
+        "share": "Percentages show each group's share of all donations to {party}.",
+        "methodology_link": "View all categories in the methodology",
+        "share_years": "Percentages show each group's share of all donations in {years}."
+      },
+      "chart": {
+        "title": "{party}: Industries & Lobby Groups",
+        "subtitle_grouped_exposure": "Donations grouped by policy domain, industry, and donor, compared with uncategorized donations",
+        "subtitle_grouped_core": "Direct businesses by policy domain and industry, compared with all other donations",
+        "subtitle_flat_exposure": "Donations grouped by industry and donor, compared with uncategorized donations",
+        "subtitle_flat_core": "Direct businesses by industry, compared with all other donations",
+        "footer_note": "AI-assisted categorization",
+        "legend_solid_label": "Solid fill:",
+        "legend_solid_text": "Direct business",
+        "legend_striped_label": "Striped pattern:",
+        "legend_striped_text": "Multi-sector / peak body",
+        "uncategorized": "Other / Uncategorized Donors",
+        "uncategorized_donor": "Other / Uncategorized Donor",
+        "uncategorized_hint": "Not yet linked to any tracked industry or interest group.",
+        "uncategorized_desc": "Donations from individuals, local businesses, and groups not linked to a tracked industry.",
+        "tooltip_direct_business": "Direct business",
+        "tooltip_multisector": "Multi-sector / peak body",
+        "tooltip_share_of": "Share of {category}:",
+        "tooltip_share_uncategorized": "Share of Uncategorized:",
+        "tooltip_share_party": "Share of party's donations:",
+        "tooltip_share_total_pct": "{amount} ({percent}% of total party donations)",
+        "tooltip_donations": "Donations:",
+        "tooltip_donors": "Donors:",
+        "tooltip_direct_businesses": "Direct businesses:",
+        "tooltip_multisector_bodies": "Multi-sector / peak bodies:",
+        "tooltip_solid_hint": "Solid fill: Main business is in this sector.",
+        "tooltip_striped_hint": "Striped pattern: Multi-sector group or peak body active in several areas.",
+        "title_years": "{country} ({years}): Industries & Lobby Groups",
+        "tooltip_share_total": "Share of total donations:"
+      },
+      "intro_years": "Many political donors in {country} operate in more than one industry. This breakdown groups donations in {years} by policy domain and industry, distinguishing between individual companies and multi-sector groups."
     }
   },
   "origin": {
@@ -769,7 +837,13 @@
     "section": {
       "filtered_donors": "Filtered donors",
       "filtered_receivers": "Filtered receivers",
-      "aggregated": "Aggregated Donors"
+      "aggregated": "Aggregated Donors",
+      "categorized": "Donors by Industry & Interest Group"
+    },
+    "categorized": {
+      "title": "Donors by Industry & Interest Group",
+      "p0": "To make it easier to see which industries fund political parties, we group major donors into 24 industry and interest categories (such as Mining, Banking, Gambling, or Trade Unions). We also note whether a donor is a Direct business (its main work is in that sector) or a Peak Body (an industry association or conglomerate active across several areas). These donor categories are assigned with AI assistance. If you spot any mistakes or missing entries, feel free to contact us or open a GitHub issue.",
+      "p1": "Below is the list of categorized donors and the industries linked to each one."
     },
     "filtered_donors": {
       "p0": "To accurately represent the true sources of political donations, we filter out certain transactions that are actually governmental contributions rather than genuine donations. Because our source datasets do not explicitly label these, we rely on a set of regular expression (regexp) filtering rules to automatically identify and remove such entries. You can review the full list of applied regexp filter rules below.",
@@ -1071,6 +1145,137 @@
     },
     "disclaimer": {
       "text": "Compiled, not official: DonationWatch is an independent civic project and is not affiliated with any electoral authority, government body, or political party. Because records undergo normalization, entity deduplication, and filtering, this compiled dataset should not be cited as an official government registry."
+    },
+    "policy_domains": {
+      "title": "Policy Domains & Industry Categories",
+      "intro": "Donors in {country} are mapped to 24 specific industry categories grouped under 6 broad policy domains:",
+      "disclaimer": "These categories are a best-effort, AI-assisted overlay derived from public company descriptions, industry registries, and association memberships, rather than official disclosure classifications. Direct businesses are distinguished from multi-sector peak bodies, and uncategorized donors remain grouped separately. If you spot a misclassified donor or missing link, please <github>open an issue on GitHub</github> or write to <emailLink>{email}</emailLink>."
+    }
+  },
+  "interests": {
+    "domains": {
+      "energy-resources": {
+        "label": "Energy & Resources",
+        "description": "Fossil fuels, mining, renewables, agriculture, and forestry"
+      },
+      "built-environment": {
+        "label": "Built Environment",
+        "description": "Property development, construction, infrastructure, and transport"
+      },
+      "finance-advisory": {
+        "label": "Finance & Advisory",
+        "description": "Banking, superannuation, insurance, consulting, legal, and fintech"
+      },
+      "regulated-consumer": {
+        "label": "Regulated Consumer",
+        "description": "Gambling, alcohol, tobacco, supermarkets, and hospitality"
+      },
+      "health-tech-industry": {
+        "label": "Health, Tech & Industry",
+        "description": "Pharma, private healthcare, tech, media, defense, and manufacturing"
+      },
+      "labor-advocacy": {
+        "label": "Labor & Advocacy",
+        "description": "Trade unions, political fundraising trusts, and issue advocacy"
+      }
+    },
+    "tags": {
+      "fossil-fuels": {
+        "label": "Fossil Fuels & Thermal Power",
+        "description": "Coal, oil, gas extraction, and thermal power generation"
+      },
+      "mining-metals": {
+        "label": "Mining & Metals",
+        "description": "Iron ore, gold, lithium, and critical minerals extraction"
+      },
+      "renewables-cleantech": {
+        "label": "Renewables & Clean Tech",
+        "description": "Solar, wind, battery storage, and green hydrogen technology"
+      },
+      "agriculture-forestry": {
+        "label": "Agriculture & Forestry",
+        "description": "Agribusiness, pastoral, livestock, timber, and water rights"
+      },
+      "property-development": {
+        "label": "Property & Real Estate",
+        "description": "Commercial and residential property development and REITs"
+      },
+      "construction-infrastructure": {
+        "label": "Construction & Infrastructure",
+        "description": "Civil engineering, road/rail contractors, and building materials"
+      },
+      "aviation-transport": {
+        "label": "Aviation, Shipping & Logistics",
+        "description": "Airlines, airports, ports, maritime, and freight logistics"
+      },
+      "banking-lending": {
+        "label": "Banking & Lending",
+        "description": "Commercial banks, credit unions, and non-bank lenders"
+      },
+      "wealth-super-insurance": {
+        "label": "Wealth, Super & Insurance",
+        "description": "Superannuation funds, private equity, asset managers, and insurers"
+      },
+      "consulting-accounting-legal": {
+        "label": "Consulting, Accounting & Law",
+        "description": "Big 4 audit/advisory firms, corporate law firms, and PR/lobbying"
+      },
+      "crypto-fintech": {
+        "label": "Crypto & Fintech",
+        "description": "Digital asset exchanges, blockchain, and alternative payments"
+      },
+      "gambling-wagering": {
+        "label": "Gambling & Wagering",
+        "description": "Casinos, online betting, lotteries, and gaming machine venues"
+      },
+      "alcohol-beverages": {
+        "label": "Alcohol & Beverages",
+        "description": "Breweries, distilleries, wineries, and liquor retail groups"
+      },
+      "tobacco-nicotine": {
+        "label": "Tobacco & Nicotine",
+        "description": "Tobacco manufacturers, wholesalers, and vaping products"
+      },
+      "food-supermarkets": {
+        "label": "Supermarkets & Food Retail",
+        "description": "Major grocery chains, fast food, and packaged food manufacturers"
+      },
+      "hospitality-tourism": {
+        "label": "Hospitality, Clubs & Tourism",
+        "description": "Hotels, licensed clubs, restaurants, and tourism operators"
+      },
+      "pharma-biotech": {
+        "label": "Pharma & Biotech",
+        "description": "Pharmaceutical manufacturers, vaccines, and medical research"
+      },
+      "private-healthcare": {
+        "label": "Private Healthcare & Aged Care",
+        "description": "Private hospitals, pathology, and aged care providers"
+      },
+      "tech-telecom-platforms": {
+        "label": "Tech, Telecom & Platforms",
+        "description": "Software, cloud, social platforms, and telecommunications carriers"
+      },
+      "media-broadcasting": {
+        "label": "Media & Broadcasting",
+        "description": "Commercial television, radio, publishing, and news networks"
+      },
+      "defense-aerospace": {
+        "label": "Defense & Aerospace",
+        "description": "Defense contractors, military hardware, and security systems"
+      },
+      "manufacturing-automotive": {
+        "label": "Manufacturing & Automotive",
+        "description": "Industrial manufacturing, paper/packaging, and vehicle distribution"
+      },
+      "trade-unions": {
+        "label": "Trade Unions",
+        "description": "Public and private sector employee trade unions"
+      },
+      "ideological-issue-advocacy": {
+        "label": "Ideological & Issue Advocacy",
+        "description": "Political fundraising trusts, think tanks, and issue campaigns"
+      }
     }
   }
 }

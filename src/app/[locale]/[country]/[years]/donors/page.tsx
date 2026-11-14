@@ -8,6 +8,7 @@ import { getCountryName } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { Features, hasFeature } from "@/utils/features";
 import { formatYearsRange } from "@/utils/formatter";
+import { getCountryDonorInterests } from "@/utils/interests/categorized-donors";
 import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
 import { generateAlternates } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
@@ -82,10 +83,15 @@ export default async function YearPage(
     );
   }
 
+  const donorInterests = hasFeature(countryConfig, Features.DonorInterests)
+    ? await getCountryDonorInterests(countryConfig.id)
+    : undefined;
+
   return (
     <Article fullWidth={true}>
       <YearsDonorsClientPage
         years={years}
+        donorInterests={donorInterests}
         sectionTitle={t("donors.detail.title")}
         summary={t("donors.detail.summary")}
         summary2={t("donors.detail.summary2")}

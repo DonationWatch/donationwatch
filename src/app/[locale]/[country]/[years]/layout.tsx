@@ -202,6 +202,8 @@ export default async function YearsLayout(
     "data",
     "donation_type",
     "per_month",
+    "party",
+    "interests",
   ]);
 
   return (

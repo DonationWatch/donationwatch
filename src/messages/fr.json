@@ -408,6 +408,74 @@
       },
       "p0": "Les fonds destinés à {party} sont répartis entre {count, plural, one {# comité enregistré} other {# comités enregistrés}}, incluant les comités de parti, les fonds conjoints de campagne et les Super PAC indépendants. Au total, {amount} ont été perçus par le biais de ces comités.",
       "top_intro": "Voici les comités ayant apporté les plus importantes contributions :"
+    },
+    "interests": {
+      "title": "Secteurs & groupes d'intérêt",
+      "intro": "De nombreux donateurs politiques en {country} opèrent dans plusieurs secteurs. Cette répartition classe les dons à {party} par domaine politique et secteur, en distinguant les entreprises individuelles des groupes multisectoriels.",
+      "explainer": {
+        "summary": "Comment lire ces données : entreprises directes vs groupes multisectoriels",
+        "direct_label": "Entreprises directes :",
+        "direct_text": "Entreprises dont l'activité principale relève de ce secteur (par exemple une société minière, une banque ou un opérateur de jeux). Affichées en aplats dans le graphique et isolées lorsque « Entreprises directes uniquement » est activé.",
+        "multisector_label": "Groupes multisectoriels & fédérations :",
+        "multisector_text": "Associations professionnelles ou conglomérats actifs dans plusieurs secteurs à la fois (par exemple des fédérations hôtelières présentes dans l'hôtellerie, les jeux et l'alcool). Affichés avec des rayures dans le graphique et inclus lorsque « Entreprises directes uniquement » est désactivé.",
+        "domains_label": "Grands domaines vs secteurs spécifiques :",
+        "domains_text": "Avec « Grouper par domaine » activé, les 24 secteurs sont regroupés sous 6 grands domaines politiques. Cliquez sur un domaine ci-dessous pour afficher ses secteurs, ou sur un domaine du graphique pour zoomer."
+      },
+      "switches": {
+        "direct_only": "Entreprises directes uniquement",
+        "group_by_domain": "Grouper par domaine"
+      },
+      "summary": {
+        "exposure": "Sur {total} de dons à {party}, {tracked} ({percent}) proviennent de donateurs liés à au moins un secteur ou groupe d'intérêt suivi.",
+        "core": "Sur {total} de dons à {party}, {tracked} ({percent}) proviennent d'entreprises directes dont l'activité principale relève d'un secteur suivi.",
+        "top_exposure_one": "Le principal secteur lié est {item}.",
+        "top_exposure_many": "Les principaux secteurs liés sont {items}.",
+        "top_core_one": "Parmi les entreprises directes uniquement, le principal secteur est {item}.",
+        "top_core_many": "Parmi les entreprises directes uniquement, les principaux secteurs sont {items}.",
+        "exposure_years": "Sur {total} de dons sur {years}, {tracked} ({percent}) proviennent de donateurs liés à au moins un secteur ou groupe d'intérêt suivi.",
+        "core_years": "Sur {total} de dons sur {years}, {tracked} ({percent}) proviennent d'entreprises directes dont l'activité principale relève d'un secteur suivi."
+      },
+      "show_top": "Afficher les 10 premiers secteurs",
+      "show_all": "Afficher les {count} secteurs actifs",
+      "note": {
+        "prefix": "Note : Les catégories sectorielles constituent une couche enrichie sur les déclarations officielles.",
+        "exposure": "Les donateurs multisectoriels apparaissent dans chaque secteur représenté ; leurs montants se chevauchent et ne doivent pas être additionnés. Les totaux par domaine comptent chaque donateur une seule fois.",
+        "core": "Les entreprises ayant une activité principale dans plusieurs secteurs peuvent apparaître dans plusieurs secteurs ; les totaux par domaine comptent chaque donateur une seule fois.",
+        "share": "Les pourcentages indiquent la part de l'ensemble des dons à {party}.",
+        "methodology_link": "Voir toutes les catégories dans la méthodologie",
+        "share_years": "Les pourcentages indiquent la part de l'ensemble des dons sur {years}."
+      },
+      "chart": {
+        "title": "{party} : Secteurs & groupes d'intérêt",
+        "subtitle_grouped_exposure": "Dons regroupés par domaine politique, secteur et donateur, comparés aux dons non catégorisés",
+        "subtitle_grouped_core": "Entreprises directes par domaine politique et secteur, comparées aux autres dons",
+        "subtitle_flat_exposure": "Dons regroupés par secteur et donateur, comparés aux dons non catégorisés",
+        "subtitle_flat_core": "Entreprises directes par secteur, comparées aux autres dons",
+        "footer_note": "Catégorisation assistée par IA",
+        "legend_solid_label": "Aplat :",
+        "legend_solid_text": "Entreprise directe",
+        "legend_striped_label": "Rayures :",
+        "legend_striped_text": "Multisectoriel / fédération",
+        "uncategorized": "Autres / Donateurs non catégorisés",
+        "uncategorized_donor": "Autre / Donateur non catégorisé",
+        "uncategorized_hint": "Pas encore lié à un secteur ou groupe d'intérêt suivi.",
+        "uncategorized_desc": "Dons de particuliers, d'entreprises locales et de groupes non liés à un secteur suivi.",
+        "tooltip_direct_business": "Entreprise directe",
+        "tooltip_multisector": "Multisectoriel / fédération",
+        "tooltip_share_of": "Part de {category} :",
+        "tooltip_share_uncategorized": "Part des non catégorisés :",
+        "tooltip_share_party": "Part des dons au parti :",
+        "tooltip_share_total_pct": "{amount} ({percent}% du total des dons au parti)",
+        "tooltip_donations": "Dons :",
+        "tooltip_donors": "Donateurs :",
+        "tooltip_direct_businesses": "Entreprises directes :",
+        "tooltip_multisector_bodies": "Multisectoriel / fédérations :",
+        "tooltip_solid_hint": "Aplat : L'activité principale relève de ce secteur.",
+        "tooltip_striped_hint": "Rayures : Groupe multisectoriel ou fédération actif dans plusieurs domaines.",
+        "title_years": "{country} ({years}) : Secteurs & groupes d'intérêt",
+        "tooltip_share_total": "Part des dons totaux :"
+      },
+      "intro_years": "De nombreux donateurs politiques en {country} opèrent dans plusieurs secteurs. Cette répartition classe les dons sur {years} par domaine politique et secteur, en distinguant les entreprises individuelles des groupes multisectoriels."
     }
   },
   "origin": {
@@ -769,7 +837,8 @@
     "section": {
       "filtered_donors": "Donateurs filtrés",
       "filtered_receivers": "Bénéficiaires filtrés",
-      "aggregated": "Donateurs agrégés"
+      "aggregated": "Donateurs agrégés",
+      "categorized": "Donateurs par secteur et groupe d’intérêt"
     },
     "filtered_donors": {
       "p0": "Pour représenter les véritables sources de financement, nous filtrons les transactions qui sont en réalité des contributions gouvernementales plutôt que des dons privés. Nous utilisons des expressions régulières (regexp) pour identifier et exclure ces entrées.",
@@ -782,6 +851,11 @@
     "receivers": {
       "title": "Bénéficiaires agrégés",
       "p0": "En {country}, les dons peuvent être déclarés à différentes unités locales d'un parti. Pour plus de clarté, nous regroupons ces entités sous le nom du parti national."
+    },
+    "categorized": {
+      "title": "Donateurs par secteur et groupe d’intérêt",
+      "p0": "Pour voir plus facilement quels secteurs financent les partis politiques, nous regroupons les principaux donateurs en 24 catégories sectorielles et d’intérêt (comme les mines, la banque, les jeux d’argent ou les syndicats). Nous précisons également si le donateur est une entreprise directe (son activité principale relève de ce secteur) ou une fédération / un groupe multisectoriel. Ces catégories sont attribuées avec l’aide de l’IA — si vous constatez une erreur, n’hésitez pas à nous contacter ou à ouvrir une issue sur GitHub.",
+      "p1": "Voici la liste des donateurs catégorisés et des secteurs qui leur sont associés."
     }
   },
   "related": {
@@ -1071,6 +1145,137 @@
     },
     "disclaimer": {
       "text": "Compilé, non officiel : DonationWatch est un projet citoyen indépendant, non affilié aux autorités électorales ni aux partis politiques. En raison des normalisations et filtrages, ce jeu de données ne doit pas être cité comme registre officiel."
+    },
+    "policy_domains": {
+      "title": "Domaines politiques & catégories sectorielles",
+      "intro": "Les donateurs en {country} sont classés selon 24 catégories sectorielles regroupées sous 6 grands domaines politiques :",
+      "disclaimer": "Ces catégories constituent une couche d'enrichissement assistée par IA, établie au mieux à partir de descriptions publiques d'entreprises, de registres sectoriels et d'adhésions à des associations, et non une classification officielle des déclarations. Les entreprises directes sont distinguées des fédérations multisectorielles, et les donateurs non catégorisés restent regroupés séparément. Si vous repérez une erreur de classification ou un lien manquant, veuillez <github>ouvrir un ticket sur GitHub</github> ou écrire à <emailLink>{email}</emailLink>."
+    }
+  },
+  "interests": {
+    "domains": {
+      "energy-resources": {
+        "label": "Énergie & Ressources",
+        "description": "Énergies fossiles, mines, renouvelables, agriculture et sylviculture"
+      },
+      "built-environment": {
+        "label": "Cadre bâti & Infrastructures",
+        "description": "Promotion immobilière, construction, infrastructures et transport"
+      },
+      "finance-advisory": {
+        "label": "Finance & Conseil",
+        "description": "Banque, retraite, assurance, conseil, droit et fintech"
+      },
+      "regulated-consumer": {
+        "label": "Consommation réglementée",
+        "description": "Jeux d'argent, alcool, tabac, grande distribution et hôtellerie"
+      },
+      "health-tech-industry": {
+        "label": "Santé, Tech & Industrie",
+        "description": "Pharma, santé privée, tech, médias, défense et industrie"
+      },
+      "labor-advocacy": {
+        "label": "Travail & Plaidoyer",
+        "description": "Syndicats, fonds de financement politique et campagnes thématiques"
+      }
+    },
+    "tags": {
+      "fossil-fuels": {
+        "label": "Énergies fossiles & thermique",
+        "description": "Extraction de charbon, pétrole, gaz et production thermique"
+      },
+      "mining-metals": {
+        "label": "Mines & Métaux",
+        "description": "Extraction de minerai de fer, or, lithium et minéraux critiques"
+      },
+      "renewables-cleantech": {
+        "label": "Renouvelables & Clean Tech",
+        "description": "Solaire, éolien, stockage par batterie et hydrogène vert"
+      },
+      "agriculture-forestry": {
+        "label": "Agriculture & Sylviculture",
+        "description": "Agro-industrie, élevage, bois et droits sur l'eau"
+      },
+      "property-development": {
+        "label": "Immobilier & Promotion",
+        "description": "Promotion immobilière commerciale et résidentielle et foncières"
+      },
+      "construction-infrastructure": {
+        "label": "Construction & Infrastructures",
+        "description": "Génie civil, infrastructures routières/ferroviaires et matériaux"
+      },
+      "aviation-transport": {
+        "label": "Aviation, Maritime & Logistique",
+        "description": "Compagnies aériennes, aéroports, ports, transport maritime et fret"
+      },
+      "banking-lending": {
+        "label": "Banque & Crédit",
+        "description": "Banques commerciales, coopératives de crédit et prêteurs non bancaires"
+      },
+      "wealth-super-insurance": {
+        "label": "Gestion d'actifs, Retraite & Assurance",
+        "description": "Fonds de pension, capital-investissement, gestionnaires d'actifs et assureurs"
+      },
+      "consulting-accounting-legal": {
+        "label": "Conseil, Audit & Droit",
+        "description": "Cabinets d'audit/conseil, cabinets d'avocats d'affaires et relations publiques"
+      },
+      "crypto-fintech": {
+        "label": "Crypto & Fintech",
+        "description": "Plateformes d'actifs numériques, blockchain et paiements alternatifs"
+      },
+      "gambling-wagering": {
+        "label": "Jeux d'argent & Paris",
+        "description": "Casinos, paris en ligne, loteries et salles de jeux"
+      },
+      "alcohol-beverages": {
+        "label": "Alcool & Boissons",
+        "description": "Brasseries, distilleries, domaines viticoles et distribution d'alcool"
+      },
+      "tobacco-nicotine": {
+        "label": "Tabac & Nicotine",
+        "description": "Fabricants de tabac, grossistes et produits de vapotage"
+      },
+      "food-supermarkets": {
+        "label": "Supermarchés & Alimentation",
+        "description": "Grandes enseignes alimentaires, restauration rapide et agroalimentaire"
+      },
+      "hospitality-tourism": {
+        "label": "Hôtellerie, Clubs & Tourisme",
+        "description": "Hôtels, clubs agréés, restaurants et opérateurs touristiques"
+      },
+      "pharma-biotech": {
+        "label": "Pharma & Biotech",
+        "description": "Fabricants pharmaceutiques, vaccins et recherche médicale"
+      },
+      "private-healthcare": {
+        "label": "Santé privée & Soins",
+        "description": "Hôpitaux privés, laboratoires et maisons de retraite"
+      },
+      "tech-telecom-platforms": {
+        "label": "Tech, Télécoms & Plateformes",
+        "description": "Logiciels, cloud, plateformes sociales et opérateurs télécoms"
+      },
+      "media-broadcasting": {
+        "label": "Médias & Audiovisuel",
+        "description": "Télévision commerciale, radio, édition et réseaux d'information"
+      },
+      "defense-aerospace": {
+        "label": "Défense & Aérospatiale",
+        "description": "Industriels de la défense, équipements militaires et systèmes de sécurité"
+      },
+      "manufacturing-automotive": {
+        "label": "Industrie & Automobile",
+        "description": "Industrie manufacturière, papier/emballage et distribution automobile"
+      },
+      "trade-unions": {
+        "label": "Syndicats",
+        "description": "Syndicats de salariés des secteurs public et privé"
+      },
+      "ideological-issue-advocacy": {
+        "label": "Plaidoyer idéologique & thématique",
+        "description": "Fonds politiques, think tanks et campagnes d'opinion"
+      }
     }
   }
 }

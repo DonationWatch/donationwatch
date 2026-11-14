@@ -88,10 +88,17 @@ export interface Donation {
 
 export type IsoDate = `${number}-${number}-${number}`;
 
+import type { DonorInterestAttribution } from "@/types/interests";
+
 // Type for defining that's later post processed into the DonorMeta
 // This won't reach the next app
+export interface DonorMetaItem {
+  wiki?: number;
+  interests?: DonorInterestAttribution[];
+}
+
 export interface DonorMetaDefinition {
-  donors: Record<string, { wiki?: number }>;
+  donors: Record<string, DonorMetaItem>;
   relations?: [donor: string, kind: RelationKind][][];
 }
 
@@ -104,6 +111,7 @@ export type DonorMetaRelation = [
 export interface DonorMeta {
   wiki?: number;
   relations?: DonorMetaRelation[];
+  interests?: DonorInterestAttribution[];
 }
 
 export const enum RelationKind {

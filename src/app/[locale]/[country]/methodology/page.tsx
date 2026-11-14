@@ -16,8 +16,15 @@ import { FormatAnd } from "@/components/formatter";
 import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
 import { Article, ArticleSection } from "@/components/layout/article";
 import { Translation } from "@/components/translation";
+import {
+  ALL_POLICY_INTEREST_TAGS,
+  ALL_POLICY_MACRO_DOMAINS,
+  POLICY_INTEREST_TAG_METADATA,
+  POLICY_MACRO_DOMAIN_COLORS,
+  POLICY_MACRO_DOMAIN_SLUGS,
+} from "@/types/interests";
 import { PartyStatField } from "@/types/party-stats";
-import { DATA_LICENSE, GITHUB_URL } from "@/utils/config";
+import { CONTACT_MAIL, DATA_LICENSE, GITHUB_URL } from "@/utils/config";
 import { COUNTRIES, getCountryName } from "@/utils/countries";
 import { COUNTRY_CONFIG } from "@/utils/country-config";
 import { getCountryConfig } from "@/utils/data/get-country-config";
@@ -25,6 +32,7 @@ import { Features, hasFeature } from "@/utils/features";
 import { formatDate, formatYearsRange } from "@/utils/formatter";
 import { getMessagesForLocale } from "@/utils/i18n-loader";
 import { pick } from "@/utils/i18n-pick";
+import { getCountryCategorizedDonors } from "@/utils/interests/categorized-donors";
 import { getBuild } from "@/utils/loader/build";
 import { getParties } from "@/utils/loader/parties";
 import { getPartyYearsSums } from "@/utils/loader/party-years-sums";
@@ -88,6 +96,7 @@ export default async function Page(
     tCountries,
     tDonationType,
     tDonorType,
+    tInterests,
     countryConfig,
     parties,
     partySums,
@@ -99,6 +108,7 @@ export default async function Page(
     getTranslations({ locale, namespace: "countries" }),
     getTranslations({ locale, namespace: "donation_type" }),
     getTranslations({ locale, namespace: "donor_type" }),
+    getTranslations({ locale, namespace: "interests" }),
     getCountryConfig(country),
     getParties(country),
     getPartyYearsSums(country),
@@ -131,6 +141,8 @@ export default async function Page(
       ? formatDate(locale, new Date(countryConfig.lastDonationDate))
       : countryConfig.lastDonationDate
     : null;
+
+  const categorizedDonors = await getCountryCategorizedDonors(countryConfig.id);
 
   const hasIndividualDonors = hasFeature(countryConfig, Features.Donors);
   const hasExactDates = hasFeature(countryConfig, Features.Date);
@@ -191,6 +203,8 @@ export default async function Page(
     "countries",
     "data",
     "methodology",
+    "interests",
+    "party",
   ]);
 
   return (
@@ -557,10 +571,120 @@ export default async function Page(
                   p0: tTransparency("p0"),
                   p1: tTransparency("p1"),
                 },
+                categorizedDonors: {
+                  title: tTransparency.has("section.categorized")
+                    ? tTransparency("section.categorized")
+                    : "Categorized Donors & Lobby Interests",
+                  p0: tTransparency.has("categorized.p0")
+                    ? tTransparency("categorized.p0")
+                    : "To measure industry influence and lobbying exposure, donors are mapped to a standardized 24-tag international policy interest taxonomy grouped into 6 Macro-Domains. Attribution distinguishes between Direct Industry operators (primary commercial revenue or sole lobbying mandate in the sector) and Peak Bodies & Umbrella Groups (multi-sector industry associations, conglomerates, or diversified groups).",
+                  p1: tTransparency.has("categorized.p1")
+                    ? tTransparency("categorized.p1")
+                    : "Below is the registry of categorized donors along with their assigned policy interest tags and attribution roles.",
+                },
               }}
+              categorizedDonors={categorizedDonors}
             />
           </div>
         </ArticleSection>
+
+        {categorizedDonors.length > 0 && (
+          <ArticleSection
+            id="sec-policy-domains"
+            title={tMethodology("policy_domains.title")}
+          >
+            <div className="space-y-3">
+              <p>
+                {tMethodology("policy_domains.intro", {
+                  country: countryName,
+                })}
+              </p>
+              <p>
+                {tMethodology.rich("policy_domains.disclaimer", {
+                  email: CONTACT_MAIL,
+                  github: (chunks) => (
+                    <a
+                      href={`${GITHUB_URL}/issues/new`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline"
+                    >
+                      {chunks}
+                    </a>
+                  ),
+                  emailLink: (chunks) => (
+                    <a href={`mailto:${CONTACT_MAIL}`} className="underline">
+                      {chunks}
+                    </a>
+                  ),
+                })}
+              </p>
+              <div className="grid gap-3 md:grid-cols-2">
+                {ALL_POLICY_MACRO_DOMAINS.map((domain) => {
+                  const domainSlug = POLICY_MACRO_DOMAIN_SLUGS[domain];
+                  const tags = ALL_POLICY_INTEREST_TAGS.filter(
+                    (tag) =>
+                      POLICY_INTEREST_TAG_METADATA[tag].macroDomain === domain,
+                  );
+
+                  return (
+                    <div
+                      key={domain}
+                      className="rounded-lg border border-neutral-200 p-3 dark:border-neutral-800"
+                    >
+                      <div className="flex items-center gap-2 font-semibold">
+                        <span
+                          className="size-2.5 shrink-0 rounded-full"
+                          style={{
+                            backgroundColor: POLICY_MACRO_DOMAIN_COLORS[domain],
+                          }}
+                          aria-hidden="true"
+                        />
+                        <span>
+                          {tInterests(
+                            `domains.${domainSlug}.label` as Parameters<
+                              typeof tInterests
+                            >[0],
+                          )}
+                        </span>
+                      </div>
+                      <ul className="mt-2 space-y-1 text-sm">
+                        {tags.map((tag) => {
+                          const meta = POLICY_INTEREST_TAG_METADATA[tag];
+                          return (
+                            <li key={tag} className="flex items-start gap-2">
+                              <span
+                                className="mt-1.5 size-2 shrink-0 rounded-full"
+                                style={{ backgroundColor: meta.color }}
+                                aria-hidden="true"
+                              />
+                              <div>
+                                <div className="font-medium">
+                                  {tInterests(
+                                    `tags.${meta.slug}.label` as Parameters<
+                                      typeof tInterests
+                                    >[0],
+                                  )}
+                                </div>
+                                <div>
+                                  {tInterests(
+                                    `tags.${meta.slug}.description` as Parameters<
+                                      typeof tInterests
+                                    >[0],
+                                  )}
+                                </div>
+                              </div>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </ArticleSection>
+        )}
 
         {/* Section 5: Anonymisation & Redactions (omitted if none) */}
         <MethodologyAnonymisationSection />

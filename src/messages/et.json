@@ -418,6 +418,74 @@
       },
       "p0": "Erakonna {party} annetused jagunevad {count, plural, one {# registreeritud komitee} other {# registreeritud komitee}} vahel, sealhulgas parteikomiteed, ühised kampaaniafondid ja sõltumatud Super PAC-id. Kokku saadi nende komiteede kaudu {amount}.",
       "top_intro": "Allpool on toodud suurima panuse andnud komiteed:"
+    },
+    "interests": {
+      "title": "Tegevusalad ja huvirühmad",
+      "intro": "Paljud poliitilised annetajad riigis {country} tegutsevad rohkem kui ühes majandusharus. See ülevaade rühmitab erakonnale {party} tehtud annetused poliitikavaldkonna ja tegevusala järgi ning eristab üksikettevõtteid mitut sektorit esindavatest rühmadest.",
+      "intro_years": "Paljud poliitilised annetajad riigis {country} tegutsevad rohkem kui ühes majandusharus. See ülevaade rühmitab perioodil {years} tehtud annetused poliitikavaldkonna ja tegevusala järgi ning eristab üksikettevõtteid mitut sektorit esindavatest rühmadest.",
+      "explainer": {
+        "summary": "Kuidas seda lugeda: Otsesed ettevõtted vs. mitme sektori rühmad",
+        "direct_label": "Otsesed ettevõtted:",
+        "direct_text": "Ettevõtted, mille põhitegevus on selles sektoris (näiteks kaevandusettevõte, pank või hasartmängukorraldaja). Joonisel kuvatakse need ühtlase täitega ja eraldatakse valiku „Ainult otsesed ettevõtted“ sisselülitamisel.",
+        "multisector_label": "Mitme sektori rühmad ja katusorganisatsioonid:",
+        "multisector_text": "Tegevusalaliidud või konglomeraadid, mis esindavad mitut sektorit korraga (näiteks hotelliliidud, mis tegutsevad majutuse, mänguautomaatide ja alkoholi valdkonnas). Joonisel on need tähistatud triibulise mustriga ning kui valik „Ainult otsesed ettevõtted“ on välja lülitatud, kuvatakse neid koos otseste ettevõtetega.",
+        "domains_label": "Laiad valdkonnad vs. konkreetsed tegevusalad:",
+        "domains_text": "Kui valik „Rühmita valdkonna järgi“ on sisse lülitatud, koondatakse 24 konkreetset tegevusala 6 laiemasse poliitikavaldkonda. Tegevusalade nägemiseks klõpsake alloleval valdkonna real või suumimiseks klõpsake valdkonnal joonisel."
+      },
+      "switches": {
+        "direct_only": "Ainult otsesed ettevõtted",
+        "group_by_domain": "Rühmita valdkonna järgi"
+      },
+      "summary": {
+        "exposure": "Erakonnale {party} tehtud annetustest kogusummas {total} pärineb {tracked} ({percent}) annetajatelt, kes on seotud vähemalt ühe jälgitava tegevusala või huvirühmaga.",
+        "core": "Erakonnale {party} tehtud annetustest kogusummas {total} pärineb {tracked} ({percent}) otsestelt ettevõtetelt, mille põhitegevus kuulub jälgitavasse tegevusalasse.",
+        "exposure_years": "Perioodil {years} tehtud annetustest kogusummas {total} pärineb {tracked} ({percent}) annetajatelt, kes on seotud vähemalt ühe jälgitava tegevusala või huvirühmaga.",
+        "core_years": "Perioodil {years} tehtud annetustest kogusummas {total} pärineb {tracked} ({percent}) otsestelt ettevõtetelt, mille põhitegevus kuulub jälgitavasse tegevusalasse.",
+        "top_exposure_one": "Suurim seotud tegevusala on {item}.",
+        "top_exposure_many": "Suurimad seotud tegevusalad on {items}.",
+        "top_core_one": "Ainult otseste ettevõtete seas on suurim tegevusala {item}.",
+        "top_core_many": "Ainult otseste ettevõtete seas on suurimad tegevusalad {items}."
+      },
+      "show_top": "Kuva 10 suurimat sektorit",
+      "show_all": "Kuva kõik {count} aktiivset sektorit",
+      "note": {
+        "prefix": "Märkus: Tegevusalamärgendid on ametlikele aruannetele lisatud täiendav kiht.",
+        "exposure": "Mitme sektori annetajad ilmuvad iga esindatava sektori all, mistõttu sektorite summad kattuvad ja neid ei tohiks kokku liita; valdkonna kogusummades arvestatakse iga annetajat ühe korra.",
+        "core": "Mitmes sektoris põhitegevust omavad ettevõtted võivad ilmuda rohkem kui ühes sektoris; valdkonna kogusummades arvestatakse iga annetajat ühe korra.",
+        "share": "Protsendid näitavad iga rühma osakaalu kõigist erakonnale {party} tehtud annetustest.",
+        "share_years": "Protsendid näitavad iga rühma osakaalu kõigist perioodil {years} tehtud annetustest.",
+        "methodology_link": "Vaata kõiki kategooriaid metoodikas"
+      },
+      "chart": {
+        "title": "{party}: Tegevusalad ja huvirühmad",
+        "title_years": "{country} ({years}): Tegevusalad ja huvirühmad",
+        "subtitle_grouped_exposure": "Annetused rühmitatuna poliitikavaldkonna, tegevusala ja annetaja järgi võrreldes kategoriseerimata annetustega",
+        "subtitle_grouped_core": "Otsesed ettevõtted poliitikavaldkonna ja tegevusala järgi võrreldes kõigi teiste annetustega",
+        "subtitle_flat_exposure": "Annetused rühmitatuna tegevusala ja annetaja järgi võrreldes kategoriseerimata annetustega",
+        "subtitle_flat_core": "Otsesed ettevõtted tegevusala järgi võrreldes kõigi teiste annetustega",
+        "footer_note": "Tehisintellekti abil kategoriseeritud",
+        "legend_solid_label": "Ühtlane täide:",
+        "legend_solid_text": "Otsene ettevõte",
+        "legend_striped_label": "Triibuline muster:",
+        "legend_striped_text": "Mitme sektori rühm / katusorganisatsioon",
+        "uncategorized": "Muud / kategoriseerimata annetajad",
+        "uncategorized_donor": "Muu / kategoriseerimata annetaja",
+        "uncategorized_hint": "Ei ole veel seotud ühegi jälgitava tegevusala ega huvirühmaga.",
+        "uncategorized_desc": "Annetused eraisikutelt, kohalikelt ettevõtetelt ja rühmadelt, mis ei ole seotud jälgitava tegevusalaga.",
+        "tooltip_direct_business": "Otsene ettevõte",
+        "tooltip_multisector": "Mitme sektori rühm / katusorganisatsioon",
+        "tooltip_share_of": "Osakaal kategooriast {category}:",
+        "tooltip_share_uncategorized": "Osakaal kategoriseerimata annetustest:",
+        "tooltip_share_party": "Osakaal erakonna annetustest:",
+        "tooltip_share_total": "Osakaal koguannetustest:",
+        "tooltip_share_total_pct": "{amount} ({percent}% koguannetustest)",
+        "tooltip_donations": "Annetusi:",
+        "tooltip_donors": "Annetajaid:",
+        "tooltip_direct_businesses": "Otsesed ettevõtted:",
+        "tooltip_multisector_bodies": "Mitme sektori rühmad / liidud:",
+        "tooltip_solid_hint": "Ühtlane täide: Põhitegevus on selles sektoris.",
+        "tooltip_striped_hint": "Triibuline muster: Mitme sektori rühm või katusorganisatsioon, mis tegutseb mitmes valdkonnas."
+      }
     }
   },
   "origin": {
@@ -779,7 +847,8 @@
     "section": {
       "filtered_donors": "Filtreeritud annetajad",
       "filtered_receivers": "Filtreeritud saajad",
-      "aggregated": "Koondatud annetajad"
+      "aggregated": "Koondatud annetajad",
+      "categorized": "Annetajad valdkondade ja huvigruppide järgi"
     },
     "filtered_donors": {
       "p0": "Poliitiliste annetuste tegelike allikate täpseks esitamiseks filtreerime välja teatud tehingud, mis on tegelikult riiklikud toetused, mitte ehtsad annetused. Kuna meie lähteandmestikud neid tehinguid otsesõnu ei märgista, tugineme regulaaravaldiste (regexp) filtrireeglite kogumile, et sellised kirjed automaatselt tuvastada ja eemaldada. Allpool saate vaadata kõiki rakendatud regexp-filtrireegleid.",
@@ -792,6 +861,11 @@
     "receivers": {
       "title": "Koondatud saajad",
       "p0": "Riigis {country} võidakse annetused esitada eri erakonna organisatsioonilistele üksustele. Ühtsuse tagamiseks koondame seotud saajaüksused üheks erakonna tasandi kogusummaks. Allolev loetelu kirjeldab, millised saajaüksused on iga erakonna puhul koondatud."
+    },
+    "categorized": {
+      "title": "Annetajad valdkondade ja huvigruppide järgi",
+      "p0": "Et oleks lihtsam näha, millised majandusharud erakondi rahastavad, jaotame suuremad annetajad 24 valdkonna- ja huvikategooriasse (näiteks kaevandus, pangandus, hasartmängud või ametiühingud). Samuti märgime, kas annetaja on otsene ettevõte (peamine tegevusala selles sektoris) või katusorganisatsioon (mitmes valdkonnas tegutsev erialaliit või kontsern). Need annetajate kategooriad on määratud tehisintellekti abil — kui märkate vigu, võtke meiega julgelt ühendust või looge GitHubis issue.",
+      "p1": "Allpool on nimekiri kategoriseeritud annetajatest ja nendega seotud valdkondadest."
     }
   },
   "related": {
@@ -1087,6 +1161,137 @@
     },
     "disclaimer": {
       "text": "Koostatud, mitte ametlik: DonationWatch on sõltumatu kodanikualgatus ega ole seotud valimisasutuste ega parteidega. Normaliseerimise tõttu ei tohiks seda andmestikku tsiteerida ametliku riikliku registrina."
+    },
+    "policy_domains": {
+      "title": "Poliitikavaldkonnad ja tegevusalade kategooriad",
+      "intro": "Annetajad riigis {country} on jaotatud 24 konkreetsesse tegevusala kategooriasse, mis on koondatud 6 laiemasse poliitikavaldkonda:",
+      "disclaimer": "Need kategooriad on parima teadmise järgi ja tehisintellekti abil loodud lisakiht, mis põhineb avalikel ettevõtete kirjeldustel, tegevusalaregistritel ja liitude liikmesustel, mitte ametlikel aruandlusklassifikatsioonidel. Otseseid ettevõtteid eristatakse mitme sektori katusorganisatsioonidest ning kategoriseerimata annetajad kuvatakse eraldi. Kui märkate valesti liigitatud annetajat või puuduvat seost, avage palun <github>GitHubis issue</github> või kirjutage aadressil <emailLink>{email}</emailLink>."
+    }
+  },
+  "interests": {
+    "domains": {
+      "energy-resources": {
+        "label": "Energeetika ja ressursid",
+        "description": "Fossiilkütused, kaevandamine, taastuvenergia, põllumajandus ja metsandus"
+      },
+      "built-environment": {
+        "label": "Ehitatud keskkond",
+        "description": "Kinnisvaraarendus, ehitus, taristu ja transport"
+      },
+      "finance-advisory": {
+        "label": "Rahandus ja nõustamine",
+        "description": "Pangandus, pensionifondid, kindlustus, nõustamine, õigusabi ja finantstehnoloogia"
+      },
+      "regulated-consumer": {
+        "label": "Reguleeritud tarbijakaubad",
+        "description": "Hasartmängud, alkohol, tubakas, supermarketid ja külalislahkus"
+      },
+      "health-tech-industry": {
+        "label": "Tervis, tehnoloogia ja tööstus",
+        "description": "Farmaatsia, eratervishoid, tehnoloogia, meedia, kaitsetööstus ja tootmine"
+      },
+      "labor-advocacy": {
+        "label": "Töö ja huvikaitse",
+        "description": "Ametiühingud, poliitilised rahastusfondid ja teemapõhine huvikaitse"
+      }
+    },
+    "tags": {
+      "fossil-fuels": {
+        "label": "Fossiilkütused ja soojusenergia",
+        "description": "Söe, nafta ja gaasi ammutamine ning soojusenergia tootmine"
+      },
+      "mining-metals": {
+        "label": "Kaevandamine ja metallid",
+        "description": "Rauamaagi, kulla, liitiumi ja kriitiliste maavarade kaevandamine"
+      },
+      "renewables-cleantech": {
+        "label": "Taastuvenergia ja puhtad tehnoloogiad",
+        "description": "Päikese- ja tuuleenergia, akusalvestus ja roheline vesinik"
+      },
+      "agriculture-forestry": {
+        "label": "Põllumajandus ja metsandus",
+        "description": "Põllumajandusäri, karjakasvatus, puit ja veeõigused"
+      },
+      "property-development": {
+        "label": "Kinnisvara ja arendus",
+        "description": "Äri- ja elamukinnisvara arendus ning kinnisvarafondid (REIT)"
+      },
+      "construction-infrastructure": {
+        "label": "Ehitus ja taristu",
+        "description": "Tsiviilehitus, maantee- ja raudtee-ehitajad ning ehitusmaterjalid"
+      },
+      "aviation-transport": {
+        "label": "Lennundus, laevandus ja logistika",
+        "description": "Lennufirmad, lennujaamad, sadamad, merendus ja kaubaveologistika"
+      },
+      "banking-lending": {
+        "label": "Pangandus ja laenud",
+        "description": "Kommertspangad, hoiu-laenuühistud ja pangavälised laenuandjad"
+      },
+      "wealth-super-insurance": {
+        "label": "Varahaldus, pensionid ja kindlustus",
+        "description": "Pensionifondid, erakapital, varahaldurid ja kindlustusandjad"
+      },
+      "consulting-accounting-legal": {
+        "label": "Nõustamine, raamatupidamine ja õigus",
+        "description": "Suure neliku audiitor- ja nõustamisfirmad, äriõigusbürood ning PR/lobitöö"
+      },
+      "crypto-fintech": {
+        "label": "Krüpto ja finantstehnoloogia",
+        "description": "Digivarade börsid, plokiahel ja alternatiivsed makselahendused"
+      },
+      "gambling-wagering": {
+        "label": "Hasartmängud ja kihlveod",
+        "description": "Kasiinod, veebikihlveod, loteriid ja mänguautomaadisaalid"
+      },
+      "alcohol-beverages": {
+        "label": "Alkohol ja joogid",
+        "description": "Õlletehased, piiritusetehased, veinitootjad ja alkoholijaemüük"
+      },
+      "tobacco-nicotine": {
+        "label": "Tubakas ja nikotiin",
+        "description": "Tubakatootjad, hulgimüüjad ja e-sigaretid"
+      },
+      "food-supermarkets": {
+        "label": "Supermarketid ja toidukaubandus",
+        "description": "Suured toidupoodide ketid, kiirtoit ja pakendatud toidu tootjad"
+      },
+      "hospitality-tourism": {
+        "label": "Majutus, klubid ja turism",
+        "description": "Hotellid, litsentseeritud klubid, restoranid ja turismiettevõtted"
+      },
+      "pharma-biotech": {
+        "label": "Farmaatsia ja biotehnoloogia",
+        "description": "Ravimitootjad, vaktsiinid ja meditsiiniuuringud"
+      },
+      "private-healthcare": {
+        "label": "Eratervishoid ja eakate hooldus",
+        "description": "Erahaiglad, patoloogia ja eakate hoolekandeasutused"
+      },
+      "tech-telecom-platforms": {
+        "label": "Tehnoloogia, telekom ja platvormid",
+        "description": "Tarkvara, pilveteenused, sotsiaalmeediaplatvormid ja sideoperaatorid"
+      },
+      "media-broadcasting": {
+        "label": "Meedia ja ringhääling",
+        "description": "Kommertstelevisioon, raadio, kirjastamine ja uudistevõrgud"
+      },
+      "defense-aerospace": {
+        "label": "Kaitse- ja lennundustööstus",
+        "description": "Kaitsetööstuse tarnijad, sõjatehnika ja turvasüsteemid"
+      },
+      "manufacturing-automotive": {
+        "label": "Tootmine ja autotööstus",
+        "description": "Tööstustootmine, paber ja pakendid ning sõidukite turustamine"
+      },
+      "trade-unions": {
+        "label": "Ametiühingud",
+        "description": "Avaliku ja erasektori töötajate ametiühingud"
+      },
+      "ideological-issue-advocacy": {
+        "label": "Ideoloogiline ja teemapõhine huvikaitse",
+        "description": "Poliitilised rahastusfondid, mõttekojad ja teemakampaaniad"
+      }
     }
   }
 }

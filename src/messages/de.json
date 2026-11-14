@@ -418,6 +418,74 @@
       },
       "p0": "Das Spendenkapital für {party} verteilt sich auf {count, plural, one {# registriertes Komitee} other {# registrierte Komitees}}, darunter Parteiorganisationen, gemeinsame Wahlkampffonds und unabhängige Super-PACs. Insgesamt gingen {amount} über diese Komitees ein.",
       "top_intro": "Nachfolgend sind die Komitees mit dem größten Spendenaufkommen aufgeführt:"
+    },
+    "interests": {
+      "title": "Branchen & Lobbygruppen",
+      "intro": "Viele politische Spender in {country} sind in mehr als einer Branche aktiv. Diese Aufschlüsselung ordnet Spenden an {party} nach Politikfeldern und Branchen und unterscheidet zwischen einzelnen Unternehmen und branchenübergreifenden Verbänden.",
+      "explainer": {
+        "summary": "Lesehilfe: Einzelne Unternehmen vs. branchenübergreifende Verbände",
+        "direct_label": "Einzelne Unternehmen:",
+        "direct_text": "Unternehmen, deren Hauptgeschäft in diesem Sektor liegt (z. B. ein Bergbauunternehmen, eine Bank oder ein Glücksspielanbieter). Im Diagramm als ausgefüllte Flächen dargestellt und über \"Nur direkte Unternehmen\" isolierbar.",
+        "multisector_label": "Verbände & Mischkonzerne:",
+        "multisector_text": "Branchenverbände oder Konzerne, die mehrere Sektoren gleichzeitig vertreten (z. B. Hotelverbände in Gastronomie, Glücksspiel und Alkohol). Im Diagramm schraffiert dargestellt und sichtbar, wenn \"Nur direkte Unternehmen\" deaktiviert ist.",
+        "domains_label": "Politikfelder vs. einzelne Branchen:",
+        "domains_text": "Mit \"Nach Bereich gruppieren\" werden die 24 Branchen unter 6 übergeordneten Politikfeldern gebündelt. Klicken Sie in der Liste auf einen Bereich, um die Branchen aufzuklappen, oder im Diagramm, um hineinzuzoomen."
+      },
+      "switches": {
+        "direct_only": "Nur direkte Unternehmen",
+        "group_by_domain": "Nach Bereich gruppieren"
+      },
+      "summary": {
+        "exposure": "Von {total} an Spenden an {party} stammen {tracked} ({percent}) von Spendern, die mindestens einer erfassten Branche oder Interessengruppe zugeordnet sind.",
+        "core": "Von {total} an Spenden an {party} stammen {tracked} ({percent}) von direkten Unternehmen mit Hauptgeschäft in einer erfassten Branche.",
+        "top_exposure_one": "Die größte verknüpfte Branche ist {item}.",
+        "top_exposure_many": "Die größten verknüpften Branchen sind {items}.",
+        "top_core_one": "Bei direkten Unternehmen ist die größte Branche {item}.",
+        "top_core_many": "Bei direkten Unternehmen sind die größten Branchen {items}.",
+        "exposure_years": "Von {total} an Spenden in {years} stammen {tracked} ({percent}) von Spendern, die mindestens einer erfassten Branche oder Interessengruppe zugeordnet sind.",
+        "core_years": "Von {total} an Spenden in {years} stammen {tracked} ({percent}) von direkten Unternehmen mit Hauptgeschäft in einer erfassten Branche."
+      },
+      "show_top": "Top 10 Branchen anzeigen",
+      "show_all": "Alle {count} aktiven Branchen anzeigen",
+      "note": {
+        "prefix": "Hinweis: Branchen-Tags sind eine angereicherte Zusatzebene auf Basis offizieller Offenlegungen.",
+        "exposure": "Branchenübergreifende Spender erscheinen in jedem von ihnen vertretenen Sektor; daher überschneiden sich Sektorbeträge und sollten nicht addiert werden. Bereichssummen zählen jeden Spender einmal.",
+        "core": "Unternehmen mit Hauptaktivitäten in mehreren Sektoren können in mehreren Sektoren erscheinen; Bereichssummen zählen jeden Spender einmal.",
+        "share": "Prozentwerte zeigen den Anteil an allen Spenden an {party}.",
+        "methodology_link": "Alle Kategorien in der Methodik ansehen",
+        "share_years": "Prozentwerte zeigen den Anteil an allen Spenden in {years}."
+      },
+      "chart": {
+        "title": "{party}: Branchen & Lobbygruppen",
+        "subtitle_grouped_exposure": "Spenden nach Politikfeld, Branche und Spender im Vergleich zu nicht kategorisierten Spenden",
+        "subtitle_grouped_core": "Direkte Unternehmen nach Politikfeld und Branche im Vergleich zu allen anderen Spenden",
+        "subtitle_flat_exposure": "Spenden nach Branche und Spender im Vergleich zu nicht kategorisierten Spenden",
+        "subtitle_flat_core": "Direkte Unternehmen nach Branche im Vergleich zu allen anderen Spenden",
+        "footer_note": "KI-gestützte Kategorisierung",
+        "legend_solid_label": "Ausgefüllt:",
+        "legend_solid_text": "Direktes Unternehmen",
+        "legend_striped_label": "Schraffiert:",
+        "legend_striped_text": "Verband / branchenübergreifend",
+        "uncategorized": "Sonstige / nicht kategorisierte Spender",
+        "uncategorized_donor": "Sonstiger / nicht kategorisierter Spender",
+        "uncategorized_hint": "Noch keiner erfassten Branche oder Interessengruppe zugeordnet.",
+        "uncategorized_desc": "Spenden von Privatpersonen, lokalen Betrieben und Gruppen ohne Zuordnung zu einer erfassten Branche.",
+        "tooltip_direct_business": "Direktes Unternehmen",
+        "tooltip_multisector": "Verband / branchenübergreifend",
+        "tooltip_share_of": "Anteil an {category}:",
+        "tooltip_share_uncategorized": "Anteil an Nicht kategorisiert:",
+        "tooltip_share_party": "Anteil an Parteispenden:",
+        "tooltip_share_total_pct": "{amount} ({percent}% der gesamten Parteispenden)",
+        "tooltip_donations": "Spenden:",
+        "tooltip_donors": "Spender:",
+        "tooltip_direct_businesses": "Direkte Unternehmen:",
+        "tooltip_multisector_bodies": "Verbände / branchenübergreifend:",
+        "tooltip_solid_hint": "Ausgefüllt: Hauptgeschäft liegt in diesem Sektor.",
+        "tooltip_striped_hint": "Schraffiert: Branchenübergreifende Gruppe oder Verband in mehreren Bereichen.",
+        "title_years": "{country} ({years}): Branchen & Lobbygruppen",
+        "tooltip_share_total": "Anteil an Gesamtspenden:"
+      },
+      "intro_years": "Viele politische Spender in {country} sind in mehr als einer Branche aktiv. Diese Aufschlüsselung ordnet Spenden in {years} nach Politikfeldern und Branchen und unterscheidet zwischen einzelnen Unternehmen und branchenübergreifenden Verbänden."
     }
   },
   "origin": {
@@ -779,7 +847,8 @@
     "section": {
       "filtered_donors": "Gefilterte Spender",
       "filtered_receivers": "Gefilterte Empfänger",
-      "aggregated": "Aggregierte Spender"
+      "aggregated": "Aggregierte Spender",
+      "categorized": "Spender nach Branchen & Interessengruppen"
     },
     "filtered_donors": {
       "p0": "Um die tatsächlichen Quellen politischer Spenden korrekt abzubilden, filtern wir bestimmte Transaktionen heraus, bei denen es sich in Wirklichkeit um staatliche Zuwendungen und nicht um echte Spenden handelt. Da unsere Quelldatensätze diese nicht ausdrücklich kennzeichnen, stützen wir uns auf eine Reihe von Filterregeln auf Basis regulärer Ausdrücke (RegExp), um solche Einträge automatisch zu identifizieren und zu entfernen. Unten können Sie die vollständige Liste der angewandten RegExp-Filterregeln einsehen.",
@@ -792,6 +861,11 @@
     "receivers": {
       "title": "Aggregierte Empfänger",
       "p0": "In {country} können Spenden an verschiedene organisatorische Einheiten innerhalb einer Partei gemeldet werden. Für Konsistenz konsolidieren wir zusammengehörige Empfängerentitäten zu einer Gesamtsumme auf Parteiebene. Die folgende Liste dokumentiert, welche Empfängerentitäten in jeder Partei aggregiert werden."
+    },
+    "categorized": {
+      "title": "Spender nach Branchen & Interessengruppen",
+      "p0": "Um leichter sichtbar zu machen, welche Branchen politische Parteien finanzieren, ordnen wir große Spender 24 Branchen- und Interessenkategorien zu (z. B. Bergbau, Banken, Glücksspiel oder Gewerkschaften). Außerdem geben wir an, ob ein Spender ein direktes Unternehmen (Hauptgeschäft in dieser Branche) oder ein Dachverband bzw. Mischkonzern ist (aktiv in mehreren Bereichen). Diese Kategorisierungen werden mit Unterstützung von KI erstellt — falls Ihnen Fehler auffallen, kontaktieren Sie uns gerne oder erstellen Sie ein GitHub-Issue.",
+      "p1": "Unten finden Sie die Liste der kategorisierten Spender und der ihnen zugeordneten Branchen."
     }
   },
   "related": {
@@ -1087,6 +1161,137 @@
     },
     "disclaimer": {
       "text": "Aufbereitet, nicht offiziell: DonationWatch ist ein unabhängiges zivilgesellschaftliches Projekt und steht in keiner Verbindung zu Wahlbehörden, staatlichen Stellen oder politischen Parteien. Da die Datensätze normalisiert, bereinigt und gefiltert werden, stellt diese Zusammenstellung kein amtliches Register dar."
+    },
+    "policy_domains": {
+      "title": "Politikfelder & Branchenkategorien",
+      "intro": "Spender in {country} werden 24 spezifischen Branchenkategorien zugeordnet, die in 6 übergeordneten Politikfeldern gebündelt sind:",
+      "disclaimer": "Diese Kategorien sind eine nach bestem Wissen erstellte, KI-gestützte Einordnung auf Basis öffentlicher Unternehmensbeschreibungen, Branchenregister und Verbandsmitgliedschaften und keine amtliche Klassifizierung der Offenlegungsstellen. Direkte Unternehmen werden von branchenübergreifenden Spitzenverbänden unterschieden, und nicht zugeordnete Spender bleiben gesondert ausgewiesen. Wenn Sie eine fehlerhafte Zuordnung oder einen fehlenden Zusammenhang entdecken, erstellen Sie bitte ein <github>Issue auf GitHub</github> oder schreiben Sie an <emailLink>{email}</emailLink>."
+    }
+  },
+  "interests": {
+    "domains": {
+      "energy-resources": {
+        "label": "Energie & Ressourcen",
+        "description": "Fossile Brennstoffe, Bergbau, Erneuerbare, Landwirtschaft und Forstwirtschaft"
+      },
+      "built-environment": {
+        "label": "Bau & Infrastruktur",
+        "description": "Immobilienentwicklung, Bauwesen, Infrastruktur und Verkehr"
+      },
+      "finance-advisory": {
+        "label": "Finanzen & Beratung",
+        "description": "Banken, Altersvorsorge, Versicherungen, Beratung, Recht und Fintech"
+      },
+      "regulated-consumer": {
+        "label": "Regulierte Konsumgüter",
+        "description": "Glücksspiel, Alkohol, Tabak, Supermärkte und Gastgewerbe"
+      },
+      "health-tech-industry": {
+        "label": "Gesundheit, Tech & Industrie",
+        "description": "Pharma, private Gesundheit, Tech, Medien, Verteidigung und Fertigung"
+      },
+      "labor-advocacy": {
+        "label": "Arbeit & Interessenvertretung",
+        "description": "Gewerkschaften, politische Finanzierungsfonds und Themenkampagnen"
+      }
+    },
+    "tags": {
+      "fossil-fuels": {
+        "label": "Fossile Brennstoffe & Wärmekraft",
+        "description": "Kohle-, Öl- und Gasförderung sowie thermische Stromerzeugung"
+      },
+      "mining-metals": {
+        "label": "Bergbau & Metalle",
+        "description": "Eisenerz-, Gold-, Lithium- und kritische Rohstoffförderung"
+      },
+      "renewables-cleantech": {
+        "label": "Erneuerbare & Clean Tech",
+        "description": "Solar-, Wind-, Batteriespeicher- und grüne Wasserstofftechnologie"
+      },
+      "agriculture-forestry": {
+        "label": "Land- & Forstwirtschaft",
+        "description": "Agrarwirtschaft, Viehzucht, Holz- und Wasserrechte"
+      },
+      "property-development": {
+        "label": "Immobilien & Projektentwicklung",
+        "description": "Gewerbe- und Wohnimmobilienentwicklung sowie REITs"
+      },
+      "construction-infrastructure": {
+        "label": "Bauwesen & Infrastruktur",
+        "description": "Tiefbau, Straßen-/Schienenbau und Baustoffe"
+      },
+      "aviation-transport": {
+        "label": "Luftfahrt, Schifffahrt & Logistik",
+        "description": "Fluggesellschaften, Flughäfen, Häfen, Seefahrt und Frachtlogistik"
+      },
+      "banking-lending": {
+        "label": "Banken & Kreditwesen",
+        "description": "Geschäftsbanken, Kreditgenossenschaften und Nichtbanken-Kreditgeber"
+      },
+      "wealth-super-insurance": {
+        "label": "Vermögen, Vorsorge & Versicherungen",
+        "description": "Pensionsfonds, Private Equity, Vermögensverwalter und Versicherer"
+      },
+      "consulting-accounting-legal": {
+        "label": "Beratung, Wirtschaftsprüfung & Recht",
+        "description": "Große Prüfungs-/Beratungshäuser, Wirtschaftskanzleien und PR/Lobbying"
+      },
+      "crypto-fintech": {
+        "label": "Krypto & Fintech",
+        "description": "Kryptobörsen, Blockchain und alternative Zahlungsdienste"
+      },
+      "gambling-wagering": {
+        "label": "Glücksspiel & Wetten",
+        "description": "Casinos, Online-Wetten, Lotterien und Spielautomatenbetriebe"
+      },
+      "alcohol-beverages": {
+        "label": "Alkohol & Getränke",
+        "description": "Brauereien, Brennereien, Weingüter und Getränkehandel"
+      },
+      "tobacco-nicotine": {
+        "label": "Tabak & Nikotin",
+        "description": "Tabakhersteller, Großhändler und E-Zigaretten"
+      },
+      "food-supermarkets": {
+        "label": "Supermärkte & Lebensmittelhandel",
+        "description": "Große Lebensmitteleinzelhändler, Systemgastronomie und Lebensmittelhersteller"
+      },
+      "hospitality-tourism": {
+        "label": "Gastgewerbe, Clubs & Tourismus",
+        "description": "Hotels, lizenzierte Clubs, Restaurants und Tourismusanbieter"
+      },
+      "pharma-biotech": {
+        "label": "Pharma & Biotech",
+        "description": "Pharmahersteller, Impfstoffe und medizinische Forschung"
+      },
+      "private-healthcare": {
+        "label": "Private Gesundheit & Pflege",
+        "description": "Privatkliniken, Labore und Pflegeanbieter"
+      },
+      "tech-telecom-platforms": {
+        "label": "Tech, Telekom & Plattformen",
+        "description": "Software, Cloud, soziale Plattformen und Telekommunikationsanbieter"
+      },
+      "media-broadcasting": {
+        "label": "Medien & Rundfunk",
+        "description": "Privates Fernsehen, Radio, Verlage und Nachrichtennetzwerke"
+      },
+      "defense-aerospace": {
+        "label": "Verteidigung & Luft- und Raumfahrt",
+        "description": "Rüstungsunternehmen, Militärtechnik und Sicherheitssysteme"
+      },
+      "manufacturing-automotive": {
+        "label": "Industrie & Automobil",
+        "description": "Industrielle Fertigung, Papier/Verpackung und Fahrzeughandel"
+      },
+      "trade-unions": {
+        "label": "Gewerkschaften",
+        "description": "Gewerkschaften des öffentlichen und privaten Sektors"
+      },
+      "ideological-issue-advocacy": {
+        "label": "Ideologie & Themenkampagnen",
+        "description": "Politische Spendenfonds, Thinktanks und Themenkampagnen"
+      }
     }
   }
 }

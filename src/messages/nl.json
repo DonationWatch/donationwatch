@@ -418,6 +418,74 @@
       },
       "p0": "Het kapitaal voor {party} is verdeeld over {count, plural, one {# geregistreerd comité} other {# geregistreerde comités}}, waaronder partijcomités, gezamenlijke campagnefondsen en onafhankelijke Super PAC's. In totaal werd {amount} via deze comités ontvangen.",
       "top_intro": "Hieronder volgen de grootste bijdragende comités:"
+    },
+    "interests": {
+      "title": "Sectoren en belangengroepen",
+      "intro": "Veel politieke donateurs in {country} zijn actief in meer dan één sector. Dit overzicht groepeert donaties aan {party} per beleidsdomein en sector, waarbij onderscheid wordt gemaakt tussen afzonderlijke bedrijven en multisectorgroepen.",
+      "intro_years": "Veel politieke donateurs in {country} zijn actief in meer dan één sector. Dit overzicht groepeert donaties in {years} per beleidsdomein en sector, waarbij onderscheid wordt gemaakt tussen afzonderlijke bedrijven en multisectorgroepen.",
+      "explainer": {
+        "summary": "Leeswijzer: Directe bedrijven vs. multisectorgroepen",
+        "direct_label": "Directe bedrijven:",
+        "direct_text": "Bedrijven waarvan de hoofdactiviteit in die sector ligt (bijvoorbeeld een mijnbouwbedrijf, een bank of een kansspelaanbieder). Ze worden met een effen vulling in de grafiek weergegeven en geïsoleerd wanneer \"Alleen directe bedrijven\" is ingeschakeld.",
+        "multisector_label": "Multisectorgroepen en koepelorganisaties:",
+        "multisector_text": "Brancheorganisaties of conglomeraten die meerdere sectoren tegelijk vertegenwoordigen (bijvoorbeeld hotelorganisaties die actief zijn in horeca, speelautomaten en alcohol). Ze worden met een gestreept patroon weergegeven en naast directe bedrijven getoond wanneer \"Alleen directe bedrijven\" is uitgeschakeld.",
+        "domains_label": "Brede domeinen vs. specifieke sectoren:",
+        "domains_text": "Met \"Groepeer op domein\" ingeschakeld worden de 24 specifieke sectoren gebundeld onder 6 brede beleidsdomeinen. Klik hieronder op een domeinrij om de sectoren uit te klappen, of klik op een domein in de grafiek om in te zoomen."
+      },
+      "switches": {
+        "direct_only": "Alleen directe bedrijven",
+        "group_by_domain": "Groepeer op domein"
+      },
+      "summary": {
+        "exposure": "Van de in totaal {total} aan donaties aan {party} is {tracked} ({percent}) afkomstig van donateurs die verbonden zijn aan ten minste één gevolgde sector of belangengroep.",
+        "core": "Van de in totaal {total} aan donaties aan {party} is {tracked} ({percent}) afkomstig van directe bedrijven waarvan de hoofdactiviteit in een gevolgde sector ligt.",
+        "exposure_years": "Van de in totaal {total} aan donaties in {years} is {tracked} ({percent}) afkomstig van donateurs die verbonden zijn aan ten minste één gevolgde sector of belangengroep.",
+        "core_years": "Van de in totaal {total} aan donaties in {years} is {tracked} ({percent}) afkomstig van directe bedrijven waarvan de hoofdactiviteit in een gevolgde sector ligt.",
+        "top_exposure_one": "De grootste verbonden sector is {item}.",
+        "top_exposure_many": "De grootste verbonden sectoren zijn {items}.",
+        "top_core_one": "Onder alleen directe bedrijven is de grootste sector {item}.",
+        "top_core_many": "Onder alleen directe bedrijven zijn de grootste sectoren {items}."
+      },
+      "show_top": "Toon top 10 sectoren",
+      "show_all": "Toon alle {count} actieve sectoren",
+      "note": {
+        "prefix": "Opmerking: Sectorlabels zijn een verrijkte laag boven op officiële meldingen.",
+        "exposure": "Multisectordonateurs verschijnen onder elke sector die zij vertegenwoordigen, waardoor sectorbedragen overlappen en niet mogen worden opgeteld; domeintotalen tellen elke donateur één keer mee.",
+        "core": "Bedrijven met hoofdactiviteiten in meerdere sectoren kunnen in meer dan één sector voorkomen; domeintotalen tellen elke donateur één keer mee.",
+        "share": "Percentages tonen het aandeel van elke groep in alle donaties aan {party}.",
+        "share_years": "Percentages tonen het aandeel van elke groep in alle donaties in {years}.",
+        "methodology_link": "Bekijk alle categorieën in de methodologie"
+      },
+      "chart": {
+        "title": "{party}: Sectoren en belangengroepen",
+        "title_years": "{country} ({years}): Sectoren en belangengroepen",
+        "subtitle_grouped_exposure": "Donaties gegroepeerd per beleidsdomein, sector en donateur, vergeleken met niet-gecategoriseerde donaties",
+        "subtitle_grouped_core": "Directe bedrijven per beleidsdomein en sector, vergeleken met alle andere donaties",
+        "subtitle_flat_exposure": "Donaties gegroepeerd per sector en donateur, vergeleken met niet-gecategoriseerde donaties",
+        "subtitle_flat_core": "Directe bedrijven per sector, vergeleken met alle andere donaties",
+        "footer_note": "AI-ondersteunde categorisatie",
+        "legend_solid_label": "Effen vulling:",
+        "legend_solid_text": "Direct bedrijf",
+        "legend_striped_label": "Gestreept patroon:",
+        "legend_striped_text": "Multisectorgroep / koepelorganisatie",
+        "uncategorized": "Overige / niet-gecategoriseerde donateurs",
+        "uncategorized_donor": "Overige / niet-gecategoriseerde donateur",
+        "uncategorized_hint": "Nog niet gekoppeld aan een gevolgde sector of belangengroep.",
+        "uncategorized_desc": "Donaties van particulieren, lokale bedrijven en groepen die niet aan een gevolgde sector zijn gekoppeld.",
+        "tooltip_direct_business": "Direct bedrijf",
+        "tooltip_multisector": "Multisectorgroep / koepelorganisatie",
+        "tooltip_share_of": "Aandeel in {category}:",
+        "tooltip_share_uncategorized": "Aandeel in niet-gecategoriseerd:",
+        "tooltip_share_party": "Aandeel in donaties aan partij:",
+        "tooltip_share_total": "Aandeel in totale donaties:",
+        "tooltip_share_total_pct": "{amount} ({percent}% van totale donaties)",
+        "tooltip_donations": "Donaties:",
+        "tooltip_donors": "Donateurs:",
+        "tooltip_direct_businesses": "Directe bedrijven:",
+        "tooltip_multisector_bodies": "Multisectorgroepen / koepels:",
+        "tooltip_solid_hint": "Effen vulling: Hoofdactiviteit ligt in deze sector.",
+        "tooltip_striped_hint": "Gestreept patroon: Multisectorgroep of koepelorganisatie actief op meerdere terreinen."
+      }
     }
   },
   "origin": {
@@ -779,7 +847,8 @@
     "section": {
       "filtered_donors": "Gefilterde donateurs",
       "filtered_receivers": "Gefilterde ontvangers",
-      "aggregated": "Geaggregeerde donateurs"
+      "aggregated": "Geaggregeerde donateurs",
+      "categorized": "Donateurs per sector en belangengroep"
     },
     "filtered_donors": {
       "p0": "Om de werkelijke bronnen van politieke donaties nauwkeurig weer te geven, filteren we bepaalde transacties weg die in feite overheidsbijdragen zijn in plaats van echte donaties. Omdat onze brondatasets deze niet expliciet labelen, gebruiken we een set filterregels op basis van reguliere expressies (regexp) om dergelijke vermeldingen automatisch te identificeren en te verwijderen. Hieronder kunt u de volledige lijst met toegepaste regexp-filterregels bekijken.",
@@ -792,6 +861,11 @@
     "receivers": {
       "title": "Geaggregeerde ontvangers",
       "p0": "In {country} kunnen donaties worden gerapporteerd aan verschillende organisatorische onderdelen binnen een partij. Voor consistentie voegen we verwante ontvanger-entiteiten samen tot één totaal op partijniveau. De onderstaande lijst laat zien welke ontvanger-entiteiten per partij worden geaggregeerd."
+    },
+    "categorized": {
+      "title": "Donateurs per sector en belangengroep",
+      "p0": "Om duidelijker te maken welke sectoren politieke partijen financieren, delen we grote donateurs in 24 sector- en belangencategorieën in (zoals mijnbouw, bankwezen, kansspelen of vakbonden). We vermelden ook of een donateur een direct bedrijf is (hoofdactiviteit in die sector) of een koepelorganisatie (een branchevereniging of conglomeraat actief in meerdere sectoren). Deze categorieën zijn met behulp van AI toegewezen — als u fouten ziet, neem dan gerust contact met ons op of open een GitHub-issue.",
+      "p1": "Hieronder staat de lijst van gecategoriseerde donateurs en de bijbehorende sectoren."
     }
   },
   "related": {
@@ -1087,6 +1161,137 @@
     },
     "disclaimer": {
       "text": "Samengesteld, niet officieel: DonationWatch is een onafhankelijk maatschappelijk initiatief en is niet gelieerd aan kiesraden of politieke partijen. Vanwege normalisatie en filtering dient deze dataset niet te worden geciteerd als officieel overheidsregister."
+    },
+    "policy_domains": {
+      "title": "Beleidsdomeinen en sectorcategorieën",
+      "intro": "Donateurs in {country} zijn ingedeeld in 24 specifieke sectorcategorieën onder 6 brede beleidsdomeinen:",
+      "disclaimer": "Deze categorieën vormen een naar beste weten en met AI-ondersteuning opgestelde extra laag op basis van openbare bedrijfsbeschrijvingen, brancheregisters en verenigingslidmaatschappen, en geen officiële classificatie van de toezichthouder. Directe bedrijven worden onderscheiden van multisectorkoepels en niet-gecategoriseerde donateurs blijven afzonderlijk gegroepeerd. Als u een onjuist geclassificeerde donateur of ontbrekende koppeling ziet, <github>open dan een issue op GitHub</github> of mail naar <emailLink>{email}</emailLink>."
+    }
+  },
+  "interests": {
+    "domains": {
+      "energy-resources": {
+        "label": "Energie en grondstoffen",
+        "description": "Fossiele brandstoffen, mijnbouw, hernieuwbare energie, landbouw en bosbouw"
+      },
+      "built-environment": {
+        "label": "Gebouwde omgeving",
+        "description": "Vastgoedontwikkeling, bouw, infrastructuur en transport"
+      },
+      "finance-advisory": {
+        "label": "Financiën en advies",
+        "description": "Bankieren, pensioenen, verzekeringen, consultancy, juridisch advies en fintech"
+      },
+      "regulated-consumer": {
+        "label": "Gereguleerde consumentensector",
+        "description": "Kansspelen, alcohol, tabak, supermarkten en horeca"
+      },
+      "health-tech-industry": {
+        "label": "Gezondheid, technologie en industrie",
+        "description": "Farma, particuliere zorg, technologie, media, defensie en maakindustrie"
+      },
+      "labor-advocacy": {
+        "label": "Arbeid en belangenbehartiging",
+        "description": "Vakbonden, politieke fondsenwerving en thematische belangenbehartiging"
+      }
+    },
+    "tags": {
+      "fossil-fuels": {
+        "label": "Fossiele brandstoffen en thermische energie",
+        "description": "Winning van steenkool, olie en gas en thermische elektriciteitsopwekking"
+      },
+      "mining-metals": {
+        "label": "Mijnbouw en metalen",
+        "description": "Winning van ijzererts, goud, lithium en kritieke mineralen"
+      },
+      "renewables-cleantech": {
+        "label": "Hernieuwbare energie en schone technologie",
+        "description": "Zonne-energie, windenergie, batterijopslag en groene waterstof"
+      },
+      "agriculture-forestry": {
+        "label": "Landbouw en bosbouw",
+        "description": "Agribusiness, veeteelt, houtbouw en waterrechten"
+      },
+      "property-development": {
+        "label": "Vastgoed en projectontwikkeling",
+        "description": "Commerciële en residentiële vastgoedontwikkeling en REIT's"
+      },
+      "construction-infrastructure": {
+        "label": "Bouw en infrastructuur",
+        "description": "Civiele techniek, wegen- en spoorbouwers en bouwmaterialen"
+      },
+      "aviation-transport": {
+        "label": "Luchtvaart, scheepvaart en logistiek",
+        "description": "Luchtvaartmaatschappijen, luchthavens, havens, maritieme en vrachtlogistiek"
+      },
+      "banking-lending": {
+        "label": "Bankieren en kredietverlening",
+        "description": "Commerciële banken, kredietunies en niet-bancaire kredietverstrekkers"
+      },
+      "wealth-super-insurance": {
+        "label": "Vermogen, pensioenen en verzekeringen",
+        "description": "Pensioenfondsen, private equity, vermogensbeheerders en verzekeraars"
+      },
+      "consulting-accounting-legal": {
+        "label": "Advies, accountancy en recht",
+        "description": "Big 4 accountants- en advieskantoren, zakelijke advocatenkantoren en PR/lobby"
+      },
+      "crypto-fintech": {
+        "label": "Crypto en fintech",
+        "description": "Beurzen voor digitale activa, blockchain en alternatieve betalingen"
+      },
+      "gambling-wagering": {
+        "label": "Kansspelen en weddenschappen",
+        "description": "Casino's, online weddenschappen, loterijen en speelautomatenhallen"
+      },
+      "alcohol-beverages": {
+        "label": "Alcohol en dranken",
+        "description": "Brouwerijen, distilleerderijen, wijnhuizen en slijterijketens"
+      },
+      "tobacco-nicotine": {
+        "label": "Tabak en nicotine",
+        "description": "Tabaksfabrikanten, groothandels en e-sigaretten"
+      },
+      "food-supermarkets": {
+        "label": "Supermarkten en levensmiddelen",
+        "description": "Grote supermarktketens, fastfood en fabrikanten van verpakte voeding"
+      },
+      "hospitality-tourism": {
+        "label": "Horeca, clubs en toerisme",
+        "description": "Hotels, gelicentieerde clubs, restaurants en toeristische aanbieders"
+      },
+      "pharma-biotech": {
+        "label": "Farma en biotech",
+        "description": "Geneesmiddelenfabrikanten, vaccins en medisch onderzoek"
+      },
+      "private-healthcare": {
+        "label": "Particuliere zorg en ouderenzorg",
+        "description": "Particuliere ziekenhuizen, pathologie en aanbieders van ouderenzorg"
+      },
+      "tech-telecom-platforms": {
+        "label": "Technologie, telecom en platformen",
+        "description": "Software, cloud, sociale platformen en telecomproviders"
+      },
+      "media-broadcasting": {
+        "label": "Media en omroep",
+        "description": "Commerciële televisie, radio, uitgeverijen en nieuwsnetwerken"
+      },
+      "defense-aerospace": {
+        "label": "Defensie en lucht- en ruimtevaart",
+        "description": "Defensieleveranciers, militair materieel en beveiligingssystemen"
+      },
+      "manufacturing-automotive": {
+        "label": "Maakindustrie en automotive",
+        "description": "Industriële productie, papier en verpakkingen en voertuigdistributie"
+      },
+      "trade-unions": {
+        "label": "Vakbonden",
+        "description": "Werknemersvakbonden in de publieke en private sector"
+      },
+      "ideological-issue-advocacy": {
+        "label": "Ideologische en thematische belangenbehartiging",
+        "description": "Politieke fondsen, denktanks en themacampagnes"
+      }
     }
   }
 }

@@ -64,7 +64,7 @@ export const LoadedDonationTypeTreemap = ({
   parties = parties.length ? parties : Array.from(partiesSet);
 
   const router = useRouter();
-  const { backgroundColor, isDark, isMobile } = useChart();
+  const { backgroundColor, isMobile, treemapBorderColor } = useChart();
 
   if (!donations.length) return null;
 
@@ -182,7 +182,7 @@ export const LoadedDonationTypeTreemap = ({
         borderRadius: 2,
         borderWidth: 3,
         gapWidth: 2,
-        borderColor: isDark ? "#111827" : "#f3f4f6",
+        borderColor: treemapBorderColor,
       },
       children,
     });

@@ -1,3 +1,4 @@
+import "server-only";
 import type { Party } from "@/types/party";
 
 import type { Country } from "../countries";
