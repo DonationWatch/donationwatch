@@ -224,11 +224,8 @@ export const UK_DONOR_INTERESTS_BY_NAME: Record<
     { tag: PolicyInterestTag.AviationTransport, role: AttributionRole.partial },
   ],
   "Peter Andrew Cruddas": [
-    { tag: PolicyInterestTag.CryptoFintech, role: AttributionRole.core },
-    {
-      tag: PolicyInterestTag.WealthSuperInsurance,
-      role: AttributionRole.partial,
-    },
+    { tag: PolicyInterestTag.WealthSuperInsurance, role: AttributionRole.core },
+    { tag: PolicyInterestTag.CryptoFintech, role: AttributionRole.partial },
   ],
 
   // ==========================================
@@ -480,6 +477,476 @@ export const UK_DONOR_INTERESTS_BY_NAME: Record<
     },
   ],
   "Colin Weir": [
+    {
+      tag: PolicyInterestTag.IdeologicalIssueAdvocacy,
+      role: AttributionRole.core,
+    },
+  ],
+
+  // ==========================================
+  // Expanded Coverage (Energy, Built Env, Finance, Consumer, Health/Tech/Industry, Labor/Advocacy)
+  // ==========================================
+
+  // Energy & Resources
+  "Ayman Asfari": [
+    { tag: PolicyInterestTag.FossilFuels, role: AttributionRole.core },
+  ],
+  "Alexander Temerko": [
+    { tag: PolicyInterestTag.FossilFuels, role: AttributionRole.core },
+    {
+      tag: PolicyInterestTag.RenewablesCleantech,
+      role: AttributionRole.partial,
+    },
+  ],
+
+  // Built Environment
+  "CC Property Company Ltd": [
+    { tag: PolicyInterestTag.PropertyDevelopment, role: AttributionRole.core },
+  ],
+  "Broadland Properties Ltd": [
+    { tag: PolicyInterestTag.PropertyDevelopment, role: AttributionRole.core },
+  ],
+  "Thakeham Homes Ltd": [
+    { tag: PolicyInterestTag.PropertyDevelopment, role: AttributionRole.core },
+    {
+      tag: PolicyInterestTag.ConstructionInfrastructure,
+      role: AttributionRole.partial,
+    },
+  ],
+  "I M Properties Plc": [
+    { tag: PolicyInterestTag.PropertyDevelopment, role: AttributionRole.core },
+  ],
+  "Canary Wharf Group PLC": [
+    { tag: PolicyInterestTag.PropertyDevelopment, role: AttributionRole.core },
+  ],
+  "Leopold Noe": [
+    { tag: PolicyInterestTag.PropertyDevelopment, role: AttributionRole.core },
+  ],
+  "Andrew Rosenfeld": [
+    { tag: PolicyInterestTag.PropertyDevelopment, role: AttributionRole.core },
+  ],
+  "Sir David Garrard": [
+    { tag: PolicyInterestTag.PropertyDevelopment, role: AttributionRole.core },
+  ],
+  "Edwin D Healey": [
+    { tag: PolicyInterestTag.PropertyDevelopment, role: AttributionRole.core },
+  ],
+  "Michael I Freeman": [
+    { tag: PolicyInterestTag.PropertyDevelopment, role: AttributionRole.core },
+  ],
+  "David J Rowland": [
+    { tag: PolicyInterestTag.PropertyDevelopment, role: AttributionRole.core },
+    {
+      tag: PolicyInterestTag.WealthSuperInsurance,
+      role: AttributionRole.partial,
+    },
+  ],
+  "Lord David E D Brownlow": [
+    { tag: PolicyInterestTag.PropertyDevelopment, role: AttributionRole.core },
+    {
+      tag: PolicyInterestTag.WealthSuperInsurance,
+      role: AttributionRole.partial,
+    },
+  ],
+  "James Adam Reuben": [
+    { tag: PolicyInterestTag.PropertyDevelopment, role: AttributionRole.core },
+    {
+      tag: PolicyInterestTag.WealthSuperInsurance,
+      role: AttributionRole.partial,
+    },
+  ],
+  "Matthew A Oakeshott": [
+    { tag: PolicyInterestTag.PropertyDevelopment, role: AttributionRole.core },
+    {
+      tag: PolicyInterestTag.WealthSuperInsurance,
+      role: AttributionRole.partial,
+    },
+  ],
+  "Roger G Orf": [
+    { tag: PolicyInterestTag.PropertyDevelopment, role: AttributionRole.core },
+    {
+      tag: PolicyInterestTag.WealthSuperInsurance,
+      role: AttributionRole.partial,
+    },
+  ],
+  "Javad Marandi": [
+    { tag: PolicyInterestTag.PropertyDevelopment, role: AttributionRole.core },
+    {
+      tag: PolicyInterestTag.FoodSupermarkets,
+      role: AttributionRole.partial,
+    },
+  ],
+  "William Haughey": [
+    {
+      tag: PolicyInterestTag.ConstructionInfrastructure,
+      role: AttributionRole.core,
+    },
+  ],
+  "Unatrac Ltd": [
+    {
+      tag: PolicyInterestTag.ConstructionInfrastructure,
+      role: AttributionRole.core,
+    },
+    {
+      tag: PolicyInterestTag.ManufacturingAutomotive,
+      role: AttributionRole.partial,
+    },
+  ],
+  "Lord Michael D Glendonbrook": [
+    { tag: PolicyInterestTag.AviationTransport, role: AttributionRole.core },
+  ],
+  "Michael Bishop": [
+    { tag: PolicyInterestTag.AviationTransport, role: AttributionRole.core },
+  ],
+
+  // Finance & Advisory
+  "Bloomberg Tradebook Europe Ltd": [
+    { tag: PolicyInterestTag.BankingLending, role: AttributionRole.core },
+    {
+      tag: PolicyInterestTag.MediaBroadcasting,
+      role: AttributionRole.partial,
+    },
+    {
+      tag: PolicyInterestTag.TechTelecomPlatforms,
+      role: AttributionRole.partial,
+    },
+  ],
+  "Alexander A Fraser": [
+    { tag: PolicyInterestTag.BankingLending, role: AttributionRole.core },
+    {
+      tag: PolicyInterestTag.WealthSuperInsurance,
+      role: AttributionRole.partial,
+    },
+  ],
+  "Howard Paul Shore": [
+    { tag: PolicyInterestTag.BankingLending, role: AttributionRole.core },
+    {
+      tag: PolicyInterestTag.WealthSuperInsurance,
+      role: AttributionRole.partial,
+    },
+  ],
+  "Britannia Financial Group Ltd": [
+    { tag: PolicyInterestTag.BankingLending, role: AttributionRole.core },
+    {
+      tag: PolicyInterestTag.WealthSuperInsurance,
+      role: AttributionRole.partial,
+    },
+  ],
+  "William H Salomon": [
+    { tag: PolicyInterestTag.BankingLending, role: AttributionRole.core },
+    {
+      tag: PolicyInterestTag.WealthSuperInsurance,
+      role: AttributionRole.partial,
+    },
+  ],
+  "David L Mayhew": [
+    { tag: PolicyInterestTag.BankingLending, role: AttributionRole.core },
+  ],
+  "Roger Nagioff": [
+    { tag: PolicyInterestTag.BankingLending, role: AttributionRole.core },
+    {
+      tag: PolicyInterestTag.WealthSuperInsurance,
+      role: AttributionRole.partial,
+    },
+  ],
+  "Peter Cruddas": [
+    { tag: PolicyInterestTag.WealthSuperInsurance, role: AttributionRole.core },
+    { tag: PolicyInterestTag.CryptoFintech, role: AttributionRole.partial },
+  ],
+  "Dr Peter Andrew Cruddas": [
+    { tag: PolicyInterestTag.WealthSuperInsurance, role: AttributionRole.core },
+    { tag: PolicyInterestTag.CryptoFintech, role: AttributionRole.partial },
+  ],
+  "Peter K Hargreaves": [
+    { tag: PolicyInterestTag.WealthSuperInsurance, role: AttributionRole.core },
+  ],
+  "Investors in Private Capital Ltd": [
+    { tag: PolicyInterestTag.WealthSuperInsurance, role: AttributionRole.core },
+  ],
+  "Lubov Chernukhin": [
+    { tag: PolicyInterestTag.WealthSuperInsurance, role: AttributionRole.core },
+  ],
+  "Jonathan Wood": [
+    { tag: PolicyInterestTag.WealthSuperInsurance, role: AttributionRole.core },
+  ],
+  "David Tilles": [
+    { tag: PolicyInterestTag.WealthSuperInsurance, role: AttributionRole.core },
+  ],
+  "Paul A Beecroft": [
+    { tag: PolicyInterestTag.WealthSuperInsurance, role: AttributionRole.core },
+  ],
+  "Stuart Roden": [
+    { tag: PolicyInterestTag.WealthSuperInsurance, role: AttributionRole.core },
+  ],
+  "Stanley Fink": [
+    { tag: PolicyInterestTag.WealthSuperInsurance, role: AttributionRole.core },
+  ],
+  "Mark Coombs": [
+    { tag: PolicyInterestTag.WealthSuperInsurance, role: AttributionRole.core },
+  ],
+  "John A S Nash": [
+    { tag: PolicyInterestTag.WealthSuperInsurance, role: AttributionRole.core },
+  ],
+  "Paul M Ruddock": [
+    { tag: PolicyInterestTag.WealthSuperInsurance, role: AttributionRole.core },
+  ],
+  "Lord Michael Anthony Ashcroft": [
+    { tag: PolicyInterestTag.WealthSuperInsurance, role: AttributionRole.core },
+    {
+      tag: PolicyInterestTag.IdeologicalIssueAdvocacy,
+      role: AttributionRole.partial,
+    },
+  ],
+  "Stuart Wheeler": [
+    { tag: PolicyInterestTag.WealthSuperInsurance, role: AttributionRole.core },
+    {
+      tag: PolicyInterestTag.IdeologicalIssueAdvocacy,
+      role: AttributionRole.partial,
+    },
+  ],
+  "ADAM MANAGEMENT HOLDINGS LTD": [
+    { tag: PolicyInterestTag.WealthSuperInsurance, role: AttributionRole.core },
+    { tag: PolicyInterestTag.CryptoFintech, role: AttributionRole.partial },
+    {
+      tag: PolicyInterestTag.PropertyDevelopment,
+      role: AttributionRole.partial,
+    },
+  ],
+  "Sudhir Choudhrie": [
+    { tag: PolicyInterestTag.WealthSuperInsurance, role: AttributionRole.core },
+    { tag: PolicyInterestTag.PrivateHealthCare, role: AttributionRole.partial },
+  ],
+  "Henry Keswick": [
+    { tag: PolicyInterestTag.WealthSuperInsurance, role: AttributionRole.core },
+    {
+      tag: PolicyInterestTag.PropertyDevelopment,
+      role: AttributionRole.partial,
+    },
+    { tag: PolicyInterestTag.FoodSupermarkets, role: AttributionRole.partial },
+  ],
+  "KPMG LLP": [
+    {
+      tag: PolicyInterestTag.ConsultingAccountingLegal,
+      role: AttributionRole.core,
+    },
+  ],
+
+  // Regulated Consumer
+  "Derek J Webb": [
+    { tag: PolicyInterestTag.GamblingWagering, role: AttributionRole.core },
+  ],
+  "Midcounties Co-operative Ltd": [
+    { tag: PolicyInterestTag.FoodSupermarkets, role: AttributionRole.core },
+  ],
+  "Bestway Wholesale Ltd": [
+    { tag: PolicyInterestTag.FoodSupermarkets, role: AttributionRole.core },
+  ],
+  "Bestway Cash & Carry Ltd": [
+    { tag: PolicyInterestTag.FoodSupermarkets, role: AttributionRole.core },
+  ],
+  "Michael Lewis": [
+    { tag: PolicyInterestTag.FoodSupermarkets, role: AttributionRole.core },
+    {
+      tag: PolicyInterestTag.PropertyDevelopment,
+      role: AttributionRole.partial,
+    },
+  ],
+  "Richard Caring": [
+    { tag: PolicyInterestTag.HospitalityTourism, role: AttributionRole.core },
+  ],
+  "Trailfinders Ltd": [
+    { tag: PolicyInterestTag.HospitalityTourism, role: AttributionRole.core },
+  ],
+  "Dinesh Dhamija": [
+    { tag: PolicyInterestTag.HospitalityTourism, role: AttributionRole.core },
+    {
+      tag: PolicyInterestTag.TechTelecomPlatforms,
+      role: AttributionRole.partial,
+    },
+  ],
+
+  // Health, Tech & Industry
+  "David John Grainger": [
+    { tag: PolicyInterestTag.PharmaBiotech, role: AttributionRole.core },
+    {
+      tag: PolicyInterestTag.WealthSuperInsurance,
+      role: AttributionRole.partial,
+    },
+  ],
+  "Professor Christopher Barry Wood": [
+    { tag: PolicyInterestTag.PrivateHealthCare, role: AttributionRole.core },
+    {
+      tag: PolicyInterestTag.TechTelecomPlatforms,
+      role: AttributionRole.partial,
+    },
+  ],
+  "Professor Christopher Wood": [
+    { tag: PolicyInterestTag.PrivateHealthCare, role: AttributionRole.core },
+    {
+      tag: PolicyInterestTag.TechTelecomPlatforms,
+      role: AttributionRole.partial,
+    },
+  ],
+  "Justinian J Ash": [
+    { tag: PolicyInterestTag.PrivateHealthCare, role: AttributionRole.core },
+  ],
+  "Bassim Haidar": [
+    { tag: PolicyInterestTag.TechTelecomPlatforms, role: AttributionRole.core },
+    { tag: PolicyInterestTag.CryptoFintech, role: AttributionRole.partial },
+  ],
+  "Rocktel Services Ltd": [
+    { tag: PolicyInterestTag.TechTelecomPlatforms, role: AttributionRole.core },
+  ],
+  "John Gore": [
+    { tag: PolicyInterestTag.MediaBroadcasting, role: AttributionRole.core },
+    {
+      tag: PolicyInterestTag.HospitalityTourism,
+      role: AttributionRole.partial,
+    },
+  ],
+  "International Motors Ltd": [
+    {
+      tag: PolicyInterestTag.ManufacturingAutomotive,
+      role: AttributionRole.core,
+    },
+    {
+      tag: PolicyInterestTag.PropertyDevelopment,
+      role: AttributionRole.partial,
+    },
+  ],
+  "IM Group Ltd": [
+    {
+      tag: PolicyInterestTag.ManufacturingAutomotive,
+      role: AttributionRole.core,
+    },
+    {
+      tag: PolicyInterestTag.PropertyDevelopment,
+      role: AttributionRole.partial,
+    },
+  ],
+  "JCB Sales Ltd": [
+    {
+      tag: PolicyInterestTag.ManufacturingAutomotive,
+      role: AttributionRole.core,
+    },
+    {
+      tag: PolicyInterestTag.ConstructionInfrastructure,
+      role: AttributionRole.partial,
+    },
+  ],
+  "Peak Scientific Holdings Ltd": [
+    {
+      tag: PolicyInterestTag.ManufacturingAutomotive,
+      role: AttributionRole.core,
+    },
+  ],
+  "Christopher J Rea": [
+    {
+      tag: PolicyInterestTag.ManufacturingAutomotive,
+      role: AttributionRole.core,
+    },
+  ],
+  "Balmoral Group Holdings Ltd": [
+    {
+      tag: PolicyInterestTag.ManufacturingAutomotive,
+      role: AttributionRole.core,
+    },
+    { tag: PolicyInterestTag.FossilFuels, role: AttributionRole.partial },
+  ],
+  "Allamhouse Ltd": [
+    {
+      tag: PolicyInterestTag.ManufacturingAutomotive,
+      role: AttributionRole.core,
+    },
+    {
+      tag: PolicyInterestTag.WealthSuperInsurance,
+      role: AttributionRole.partial,
+    },
+  ],
+  "Lord David Alliance": [
+    {
+      tag: PolicyInterestTag.ManufacturingAutomotive,
+      role: AttributionRole.core,
+    },
+  ],
+
+  // Labor & Advocacy
+  "Musicians' Union (MU)": [
+    { tag: PolicyInterestTag.TradeUnions, role: AttributionRole.core },
+  ],
+  "Leave Means Leave Ltd": [
+    {
+      tag: PolicyInterestTag.IdeologicalIssueAdvocacy,
+      role: AttributionRole.core,
+    },
+  ],
+  "Britain Means Business Ltd": [
+    {
+      tag: PolicyInterestTag.IdeologicalIssueAdvocacy,
+      role: AttributionRole.core,
+    },
+  ],
+  "Association of Conservative Clubs": [
+    {
+      tag: PolicyInterestTag.IdeologicalIssueAdvocacy,
+      role: AttributionRole.core,
+    },
+  ],
+  "Methuen Liberal Trust Fund": [
+    {
+      tag: PolicyInterestTag.IdeologicalIssueAdvocacy,
+      role: AttributionRole.core,
+    },
+  ],
+  "United & Cecil Club": [
+    {
+      tag: PolicyInterestTag.IdeologicalIssueAdvocacy,
+      role: AttributionRole.core,
+    },
+  ],
+  "Co-operative Party": [
+    {
+      tag: PolicyInterestTag.IdeologicalIssueAdvocacy,
+      role: AttributionRole.core,
+    },
+  ],
+  "HEREFORD AND COUNTY LIBERAL CLUB COMPANY Ltd": [
+    {
+      tag: PolicyInterestTag.IdeologicalIssueAdvocacy,
+      role: AttributionRole.core,
+    },
+  ],
+  "Manchester Labour Group": [
+    {
+      tag: PolicyInterestTag.IdeologicalIssueAdvocacy,
+      role: AttributionRole.core,
+    },
+  ],
+  "Barnes and Richmond Labour Club and Institute": [
+    {
+      tag: PolicyInterestTag.IdeologicalIssueAdvocacy,
+      role: AttributionRole.core,
+    },
+  ],
+  "Carlton Club Political Committee": [
+    {
+      tag: PolicyInterestTag.IdeologicalIssueAdvocacy,
+      role: AttributionRole.core,
+    },
+  ],
+  "MOU Operations Ltd": [
+    {
+      tag: PolicyInterestTag.IdeologicalIssueAdvocacy,
+      role: AttributionRole.core,
+    },
+  ],
+  "Francesca Perrin": [
+    {
+      tag: PolicyInterestTag.IdeologicalIssueAdvocacy,
+      role: AttributionRole.core,
+    },
+  ],
+  "Fiona Mactaggart": [
     {
       tag: PolicyInterestTag.IdeologicalIssueAdvocacy,
       role: AttributionRole.core,

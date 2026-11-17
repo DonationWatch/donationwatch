@@ -928,6 +928,25 @@ export class UkLoader extends DataLoader {
       return "Zac FR Goldsmith";
     }
 
+    if (
+      containsWords(lower, "peter cruddas") ||
+      containsWords(lower, "peter andrew cruddas")
+    ) {
+      return "Peter Andrew Cruddas";
+    }
+
+    if (
+      lower === "professor christopher wood" ||
+      lower === "professor christopher barry wood" ||
+      lower === "christopher barry wood"
+    ) {
+      return "Professor Christopher Barry Wood";
+    }
+
+    if (lower === "christopher j rea" || lower === "christopher john rea") {
+      return "Christopher John Rea";
+    }
+
     if (containsWords(lower, "annabel goldsmith")) {
       return "Annabel Goldsmith";
     }
