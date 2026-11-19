@@ -65,6 +65,10 @@ export async function generateMetadata(
     }),
     description,
     alternates: generateAlternates(`${country}/${years}/changes`),
+    robots: {
+      index: false,
+      follow: true,
+    },
   };
 }
 

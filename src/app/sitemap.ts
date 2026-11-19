@@ -19,21 +19,28 @@ import { getWikiDonors } from "@/utils/loader/wiki-donors";
 import { CONST_LOCALES } from "@/utils/locales";
 import { lastPartyStatsDonation } from "@/utils/party";
 
-const yearSubPages = [
-  "overview",
-  "changes",
-  "donors",
-  "timeline",
-  "origin/overview",
-];
+const yearSubPages = ["overview", "donors", "origin/overview"];
 
 // Use this to force a minimum last modified date e.g. for important changes that are not reflected in the data
 const manualMinLastModified: number = new Date(
-  "2024-10-26T07:00:00.000Z",
+  "2026-11-19T00:00:00.000Z",
 ).getTime();
 const lastModified = new Date();
 
-const partySubPages = ["donors", "changes", "timeline", "origin/overview"];
+const clampLastModified = (
+  date: string | Date | undefined,
+  fallback: Date,
+): Date => {
+  const timestamp = date ? new Date(date).getTime() : fallback.getTime();
+  return new Date(
+    Math.max(
+      manualMinLastModified,
+      Number.isNaN(timestamp) ? fallback.getTime() : timestamp,
+    ),
+  );
+};
+
+const partySubPages = ["donors", "origin/overview"];
 
 export const dynamic = "force-static";
 
@@ -116,17 +123,14 @@ export default async function sitemap(props: {
             (year) => Object.keys(partyYearsSums[year]).length > 0,
           );
 
-          const filterConditionalSubPages =
-            (section: "year" | "party") => (subPage: string) => {
-              if (subPage.startsWith("donors"))
-                return hasFeature(config, Features.Donors);
-              if (subPage.startsWith("origin"))
-                return hasFeature(config, Features.Origin);
-              if (section === "year" && subPage.startsWith("timeline"))
-                return hasFeature(config, Features.Date);
+          const filterConditionalSubPages = (subPage: string) => {
+            if (subPage.startsWith("donors"))
+              return hasFeature(config, Features.Donors);
+            if (subPage.startsWith("origin"))
+              return hasFeature(config, Features.Origin);
 
-              return true;
-            };
+            return true;
+          };
 
           return [
             {
@@ -164,10 +168,10 @@ export default async function sitemap(props: {
               );
 
               return partySubPages
-                .filter(filterConditionalSubPages("party"))
+                .filter(filterConditionalSubPages)
                 .map((subPage) => ({
                   url: `${partiesBaseUrl}/${subPage}`,
-                  lastModified: lastDonation ?? lastModified,
+                  lastModified: clampLastModified(lastDonation, lastModified),
                 }));
             }),
             filledYears.flatMap((year) => {
@@ -181,10 +185,10 @@ export default async function sitemap(props: {
               );
 
               return yearSubPages
-                .filter(filterConditionalSubPages("year"))
+                .filter(filterConditionalSubPages)
                 .map((subPage) => ({
                   url: `${yearsBaseUrl}/${subPage}`,
-                  lastModified: lastDonation ?? lastModified,
+                  lastModified: clampLastModified(lastDonation, lastModified),
                 }));
             }),
             (config.legislativeYears ?? []).flatMap((years) => {
@@ -200,10 +204,10 @@ export default async function sitemap(props: {
               );
 
               return yearSubPages
-                .filter(filterConditionalSubPages("year"))
+                .filter(filterConditionalSubPages)
                 .map((subPage) => ({
                   url: `${yearsBaseUrl}/${subPage}`,
-                  lastModified: lastDonation ?? lastModified,
+                  lastModified: clampLastModified(lastDonation, lastModified),
                 }));
             }),
             (() => {
@@ -223,7 +227,7 @@ export default async function sitemap(props: {
 
                 sitemapDonors.push({
                   url: `${BASE_URL}/${locale}/${country}/donor/${donor.id}`,
-                  lastModified: lastDonation ?? lastModified,
+                  lastModified: clampLastModified(lastDonation, lastModified),
                 });
               }
 

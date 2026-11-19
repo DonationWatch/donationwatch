@@ -140,6 +140,7 @@ test.describe("Party page", () => {
           CHECK_PARTY,
           `/${locale}/germany/parties/${CHECK_PARTY}.png`,
         );
+        await meta.expectNoIndex();
       });
 
       await test.step("can search for donors", async () => {
@@ -199,6 +200,7 @@ test.describe("Party page", () => {
           CHECK_PARTY,
           `/${locale}/germany/parties/${CHECK_PARTY}.png`,
         );
+        await meta.expectNoIndex();
       });
     });
 

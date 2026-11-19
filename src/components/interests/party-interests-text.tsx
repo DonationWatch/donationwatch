@@ -270,92 +270,93 @@ export const PartyInterestsText = () => {
             );
 
             return (
-              <CurrencyRankingItem
-                key={domainStat.domain}
-                id={`domain-${domainStat.domain}`}
-                rank={idx + 1}
-                amount={domainAmount}
-                sum={totalPartyDonations}
-                country={country}
-                expanded={expandedDomains.includes(domainStat.domain)}
-                onToggleExpanded={(expanded) =>
-                  toggleDomain(domainStat.domain, expanded)
-                }
-                detail={
-                  childTags.length > 0 ? (
-                    <ul className="space-y-1">
-                      {childTags.map((tagStat) => {
-                        const tagAmount =
-                          viewMode === "exposure"
-                            ? tagStat.totalExposureAmount
-                            : tagStat.coreAmount;
-                        const tagShare =
-                          viewMode === "exposure"
-                            ? tagStat.shareOfTotalPartyDonations
-                            : tagStat.coreShareOfTotalPartyDonations;
-                        const tagLabel = tInterests(
-                          `tags.${tagStat.slug}.label` as Parameters<
-                            typeof tInterests
-                          >[0],
-                        );
-                        const tagDesc = tInterests(
-                          `tags.${tagStat.slug}.description` as Parameters<
-                            typeof tInterests
-                          >[0],
-                        );
+              <li key={domainStat.domain}>
+                <CurrencyRankingItem
+                  id={`domain-${domainStat.domain}`}
+                  rank={idx + 1}
+                  amount={domainAmount}
+                  sum={totalPartyDonations}
+                  country={country}
+                  expanded={expandedDomains.includes(domainStat.domain)}
+                  onToggleExpanded={(expanded) =>
+                    toggleDomain(domainStat.domain, expanded)
+                  }
+                  detail={
+                    childTags.length > 0 ? (
+                      <ul className="space-y-1">
+                        {childTags.map((tagStat) => {
+                          const tagAmount =
+                            viewMode === "exposure"
+                              ? tagStat.totalExposureAmount
+                              : tagStat.coreAmount;
+                          const tagShare =
+                            viewMode === "exposure"
+                              ? tagStat.shareOfTotalPartyDonations
+                              : tagStat.coreShareOfTotalPartyDonations;
+                          const tagLabel = tInterests(
+                            `tags.${tagStat.slug}.label` as Parameters<
+                              typeof tInterests
+                            >[0],
+                          );
+                          const tagDesc = tInterests(
+                            `tags.${tagStat.slug}.description` as Parameters<
+                              typeof tInterests
+                            >[0],
+                          );
 
-                        return (
-                          <li
-                            key={tagStat.tag}
-                            title={`${tagLabel}: ${tagDesc}`}
-                            className="flex w-full items-center justify-between px-1.5 py-1"
-                          >
-                            <div className="flex items-center overflow-x-hidden">
-                              <span
-                                className="mr-2 size-2 shrink-0 rounded-full"
-                                style={{
-                                  backgroundColor: interestColorFor(
-                                    tagStat.tag,
-                                  ),
-                                }}
-                                aria-hidden="true"
-                              />
-                              <span className="truncate">{tagLabel}</span>
-                            </div>
-                            <div className="ml-2 flex tabular-nums">
-                              <span className="lg:mr-1">
-                                {formatCountryCurrency(
-                                  locale,
-                                  tagAmount,
-                                  country,
-                                )}
-                              </span>
-                              <PercentageHint
-                                browserBasedLocale={locale}
-                                percentage={tagShare}
-                              />
-                            </div>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  ) : null
-                }
-              >
-                <div
-                  title={`${domainLabel}: ${domainDesc}`}
-                  className="flex items-center overflow-x-hidden"
+                          return (
+                            <li
+                              key={tagStat.tag}
+                              title={`${tagLabel}: ${tagDesc}`}
+                              className="flex w-full items-center justify-between px-1.5 py-1"
+                            >
+                              <div className="flex items-center overflow-x-hidden">
+                                <span
+                                  className="mr-2 size-2 shrink-0 rounded-full"
+                                  style={{
+                                    backgroundColor: interestColorFor(
+                                      tagStat.tag,
+                                    ),
+                                  }}
+                                  aria-hidden="true"
+                                />
+                                <span className="truncate">{tagLabel}</span>
+                              </div>
+                              <div className="ml-2 flex tabular-nums">
+                                <span className="lg:mr-1">
+                                  {formatCountryCurrency(
+                                    locale,
+                                    tagAmount,
+                                    country,
+                                  )}
+                                </span>
+                                <PercentageHint
+                                  browserBasedLocale={locale}
+                                  percentage={tagShare}
+                                />
+                              </div>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    ) : null
+                  }
                 >
-                  <span
-                    className="mr-2 size-2.5 shrink-0 rounded-full"
-                    style={{
-                      backgroundColor: macroDomainColorFor(domainStat.domain),
-                    }}
-                    aria-hidden="true"
-                  />
-                  <span className="truncate">{domainLabel}</span>
-                </div>
-              </CurrencyRankingItem>
+                  <div
+                    title={`${domainLabel}: ${domainDesc}`}
+                    className="flex items-center overflow-x-hidden"
+                  >
+                    <span
+                      className="mr-2 size-2.5 shrink-0 rounded-full"
+                      style={{
+                        backgroundColor: macroDomainColorFor(domainStat.domain),
+                      }}
+                      aria-hidden="true"
+                    />
+                    <span className="truncate">{domainLabel}</span>
+                  </div>
+                </CurrencyRankingItem>
+              </li>
             );
           })}
         </ul>

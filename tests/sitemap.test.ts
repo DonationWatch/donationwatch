@@ -44,4 +44,20 @@ describe("sitemap", () => {
       "https://donation.watch/en/europeanunion/tools/bar-chart-race",
     );
   });
+
+  it("excludes /changes and /timeline sub-pages and clamps lastModified to manualMinLastModified", async () => {
+    const urls = await sitemap({ id: Promise.resolve("en") });
+    const locs = urls.map((entry) => entry.url);
+
+    expect(locs.filter((url) => url.endsWith("/changes"))).toHaveLength(0);
+    expect(locs.filter((url) => url.endsWith("/timeline"))).toHaveLength(0);
+
+    const minTimestamp = new Date("2026-11-19T00:00:00.000Z").getTime();
+    for (const entry of urls) {
+      expect(entry.lastModified).toBeInstanceOf(Date);
+      expect((entry.lastModified as Date).getTime()).toBeGreaterThanOrEqual(
+        minTimestamp,
+      );
+    }
+  });
 });
