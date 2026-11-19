@@ -68,6 +68,10 @@ export async function generateMetadata(
     }),
     description,
     alternates: generateAlternates(`${country}/${params.years}/timeline`),
+    robots: {
+      index: false,
+      follow: true,
+    },
   };
 }
 export default async function TimelinePage(

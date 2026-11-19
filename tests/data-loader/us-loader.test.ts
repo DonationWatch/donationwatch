@@ -86,7 +86,7 @@ describe("US loader row extractor and filters", () => {
   };
 
   const makeRow = (overrides: Partial<Record<number, string>> = {}) => {
-    const cols = new Array(21).fill("");
+    const cols = Array.from<string>({ length: 21 }).fill("");
     cols[0] = "C00003418"; // CMTE_ID (DNC)
     cols[5] = "15"; // TRANSACTION_TP (contribution)
     cols[6] = "IND"; // ENTITY_TP (individual)
@@ -99,7 +99,7 @@ describe("US loader row extractor and filters", () => {
     cols[18] = ""; // MEMO_CD
 
     for (const [idx, val] of Object.entries(overrides)) {
-      cols[Number(idx)] = val;
+      if (val !== undefined) cols[Number(idx)] = val;
     }
     return cols;
   };

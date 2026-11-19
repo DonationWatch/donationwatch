@@ -35,7 +35,7 @@ export default async function OverviewPage(
   if (!isValidCountry(country)) return notFound();
   setRequestLocale(params.locale);
 
-  const [countryConfig] = await Promise.all([getCountryConfig(country)]);
+  const countryConfig = await getCountryConfig(country);
 
   if (!isValidParty(partyId, countryConfig)) return notFound();
   const party = getParty(countryConfig.id, partyId);

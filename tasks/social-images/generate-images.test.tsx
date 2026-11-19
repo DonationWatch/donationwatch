@@ -210,10 +210,10 @@ describe.each(
 
         [countryConfig, donations, yearSums, biggestDonors] = await Promise.all(
           [
-            await getCountryConfig(country),
-            await getDonations(country),
-            await getPartyYearsSums(country),
-            await getBiggestDonors(country),
+            getCountryConfig(country),
+            getDonations(country),
+            getPartyYearsSums(country),
+            getBiggestDonors(country),
           ],
         );
       });

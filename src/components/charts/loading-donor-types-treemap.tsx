@@ -314,7 +314,7 @@ export const LoadedDonorTypeTreemap = ({
 
         if (params.treeAncestors.length === 4) {
           // is donor level
-          clientSha1(dataId).then((donorId) => {
+          void clientSha1(dataId).then((donorId) => {
             router.push(`/${locale}/${country.id}/donor/${donorId}`);
           });
         }

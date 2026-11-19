@@ -2,6 +2,7 @@ import { select } from "@inquirer/prompts";
 
 const INDEXNOW_KEY = "b505b06a6ef745df9fb702d2c8ab9fee";
 const SITEMAP_URL = "https://donation.watch/sitemap.xml";
+const MAX_URLS_PER_REQUEST = 10_000;
 
 const promptIndexAfter = async (): Promise<string> =>
   await select({
@@ -118,34 +119,64 @@ const main = async () => {
     allUrls = sitemap.urls;
   }
 
-  const urlList = allUrls
-    .filter(
-      (sitemapEntry) => (sitemapEntry.lastmod ?? "") > MODIFIED_AFTER_FILTER,
-    )
-    .map((sitemapEntry) => sitemapEntry.loc);
+  const urlList = Array.from(
+    new Set(
+      allUrls
+        .filter(
+          (sitemapEntry) =>
+            (sitemapEntry.lastmod ?? "") > MODIFIED_AFTER_FILTER,
+        )
+        .map((sitemapEntry) => sitemapEntry.loc),
+    ),
+  );
 
-  console.log(`Submitting ${urlList.length} URLs to IndexNow...`);
+  if (urlList.length === 0) {
+    console.log("No URLs to submit to IndexNow.");
+    return;
+  }
 
-  const indexNowResponse = await fetch("https://api.indexnow.org/IndexNow", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    body: JSON.stringify({
-      host: new URL(SITEMAP_URL).origin,
-      key: INDEXNOW_KEY,
-      keyLocation: new URL(SITEMAP_URL).origin + `/${INDEXNOW_KEY}.txt`,
-      urlList,
-    }),
-  });
-  console.log(`sent to indexnow (status=${indexNowResponse.status})`);
-  if (!indexNowResponse.ok) {
-    console.error(JSON.stringify(await indexNowResponse.json(), null, 2));
-    throw new Error(
-      `IndexNow request failed with status ${indexNowResponse.status}`,
+  const totalBatches = Math.ceil(urlList.length / MAX_URLS_PER_REQUEST);
+  const origin = new URL(SITEMAP_URL).origin;
+  const keyLocation = `${origin}/${INDEXNOW_KEY}.txt`;
+
+  console.log(
+    `Submitting ${urlList.length} URLs to IndexNow in ${totalBatches} batch(es)...`,
+  );
+
+  for (let i = 0; i < urlList.length; i += MAX_URLS_PER_REQUEST) {
+    const batch = urlList.slice(i, i + MAX_URLS_PER_REQUEST);
+    const batchNumber = Math.floor(i / MAX_URLS_PER_REQUEST) + 1;
+
+    console.log(
+      `Submitting batch ${batchNumber}/${totalBatches} (${batch.length} URLs)...`,
     );
+
+    const indexNowResponse = await fetch("https://api.indexnow.org/IndexNow", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        host: origin,
+        key: INDEXNOW_KEY,
+        keyLocation,
+        urlList: batch,
+      }),
+    });
+
+    console.log(
+      `Batch ${batchNumber}/${totalBatches} sent to IndexNow (status=${indexNowResponse.status})`,
+    );
+
+    if (!indexNowResponse.ok) {
+      const errorBody = await indexNowResponse.text();
+      console.error(errorBody);
+      throw new Error(
+        `IndexNow request failed on batch ${batchNumber}/${totalBatches} with status ${indexNowResponse.status}`,
+      );
+    }
   }
 };
 
-main();
+void main();

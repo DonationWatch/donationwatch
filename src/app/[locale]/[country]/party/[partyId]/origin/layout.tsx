@@ -57,7 +57,7 @@ export default async function OriginLayout(
 
   const { children } = props;
 
-  const [countryConfig] = await Promise.all([getCountryConfig(country)]);
+  const countryConfig = await getCountryConfig(country);
 
   if (!hasFeature(countryConfig, Features.Origin)) {
     return notFound();

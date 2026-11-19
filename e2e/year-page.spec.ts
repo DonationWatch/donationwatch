@@ -111,6 +111,7 @@ test.describe("Year page", () => {
                 `${CHECK_YEAR}`,
                 `/${locale}/${country}/years/${CHECK_YEAR}.png`,
               );
+              await meta.expectNoIndex();
             });
 
             await test.step("can search for donors", async () => {
@@ -263,6 +264,7 @@ test.describe("Year page", () => {
                 `${CHECK_YEAR}`,
                 `/${locale}/${country}/years/${CHECK_YEAR}.png`,
               );
+              await meta.expectNoIndex();
             });
 
             await timelinePage.timelineChart.expectHasFeature();

@@ -94,7 +94,6 @@ const DonationBarChart = ({
     if (donation[DonationField.Date] === donationYear(donation)) {
       if (resolution === "month") {
         throw new Error("Donation date is only year but resolution is month");
-        return;
       }
     }
     if (!yearsSet.has(donationYear(donation))) return;
@@ -266,8 +265,9 @@ const DonationBarChart = ({
 
           const party = partiesMap[param.seriesName as ReceiverId];
 
+          const marker = typeof param.marker === "string" ? param.marker : "";
           lines.push(
-            `${param.marker} ${party[PartyField.Short]}: ${formatCountryCurrency(browserBasedLocale, sum, country)}`,
+            `${marker} ${party[PartyField.Short]}: ${formatCountryCurrency(browserBasedLocale, sum, country)}`,
           );
         }
 

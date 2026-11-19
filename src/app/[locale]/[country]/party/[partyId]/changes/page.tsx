@@ -46,6 +46,10 @@ export async function generateMetadata(
       party: partyDisplayName,
     }),
     alternates: generateAlternates(`${country}/party/${partyId}/changes`),
+    robots: {
+      index: false,
+      follow: true,
+    },
   };
 }
 

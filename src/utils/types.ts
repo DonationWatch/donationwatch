@@ -75,7 +75,7 @@ export interface Donation {
   // name of the donor
   [DonationField.DonorName]: string;
   // either year or year-month-day
-  [DonationField.Date]: `${string}` | `${string}-${string}-${string}`;
+  [DonationField.Date]: string;
   [DonationField.Address]: DonationAddress;
   [DonationField.Receiver]: ReceiverId;
   [DonationField.DonorType]?: DonorType;

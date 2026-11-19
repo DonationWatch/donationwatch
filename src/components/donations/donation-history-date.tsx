@@ -1,11 +1,13 @@
 "use client";
+import { useState } from "react";
+
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { dateDiffInDays, donationYear } from "@/utils/date";
 import { formatDate, formatRelativeDate } from "@/utils/formatter";
 import { DonationField } from "@/utils/types";
 
 export const DonationHistoryDate = ({ date }: { date: string }) => {
-  const now = Date.now();
+  const [now] = useState(() => Date.now());
   const browserBasedLocale = useBrowserBasedLocale();
 
   if (date === donationYear({ [DonationField.Date]: date }))

@@ -4,8 +4,8 @@ export class Collapsible extends LocatorObject {
   private readonly button = this.locator;
   private readonly content = this.button.locator("..").locator("> div");
 
-  public toggle() {
-    this.button.click();
+  public async toggle() {
+    await this.button.click();
   }
 
   public async deselectAll() {
