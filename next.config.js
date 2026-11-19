@@ -6,7 +6,7 @@ const withNextIntl = createNextIntlPlugin();
 const env = process.env.NODE_ENV;
 const isProd = env === "production";
 
-initOpenNextCloudflareForDev();
+void initOpenNextCloudflareForDev();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

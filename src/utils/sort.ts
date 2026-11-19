@@ -3,12 +3,12 @@ import { DonationField } from "./types";
 export const donationDateSorter = (
   a: {
     idx: string;
-    [DonationField.Date]: `${string}` | `${string}-${string}-${string}`;
+    [DonationField.Date]: string;
     [DonationField.Id]?: string;
   },
   b: {
     idx: string;
-    [DonationField.Date]: `${string}` | `${string}-${string}-${string}`;
+    [DonationField.Date]: string;
     [DonationField.Id]?: string;
   },
 ) => {

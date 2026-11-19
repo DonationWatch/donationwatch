@@ -59,7 +59,7 @@ export const CountryPageImage = async (
   const Chart = (
     <div tw="flex flex-col" style={{ width: `${CHART_WIDTH}px` }}>
       <div tw="grow flex flex-col relative">
-        {new Array(X_AXIS_TICKS + 2).fill(0).map((_, i) => (
+        {Array.from({ length: X_AXIS_TICKS + 2 }, (_, i) => (
           <div
             tw="flex absolute top-0 bottom-0 bg-gray-400"
             key={i}
@@ -103,7 +103,7 @@ export const CountryPageImage = async (
       <div tw="flex shrink-0">
         {/* x axis*/}
         <div tw="flex w-full justify-between text-neutral-600">
-          {new Array(X_AXIS_TICKS + 1).fill(0).map((_, i) => (
+          {Array.from({ length: X_AXIS_TICKS + 1 }, (_, i) => (
             <div
               key={i}
               tw="absolute flex"

@@ -6,7 +6,6 @@ import type { ReactNode } from "react";
 import { useQueries } from "@tanstack/react-query";
 import { Trophy } from "lucide-react";
 import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
-import { useMemo } from "react";
 
 import type { DonationsDocumentWithoutDonorIds } from "@/lib/api/donations-document";
 import type { NonEmptyArray } from "@/utils/array";
@@ -346,7 +345,7 @@ export const PartyComparison = () => {
   const hasError = results.some((r) => r.error);
 
   const toggleParty = (partyId: ReceiverId) => {
-    setPartiesParam((prev) => {
+    void setPartiesParam((prev) => {
       const next = new Set(prev);
       if (next.has(partyId)) {
         next.delete(partyId);
@@ -359,14 +358,13 @@ export const PartyComparison = () => {
   };
 
   // Filter donations by selected year range
-  const filterDonationsByYear = useMemo(() => {
-    if (isAllYears) return (donations: Donation[]) => donations;
-    return (donations: Donation[]) =>
-      donations.filter((d) => {
-        const year = donationYear(d);
-        return year >= fromYear && year <= toYear;
-      });
-  }, [fromYear, toYear, isAllYears]);
+  const filterDonationsByYear = (donations: Donation[]) => {
+    if (isAllYears) return donations;
+    return donations.filter((d) => {
+      const year = donationYear(d);
+      return year >= fromYear && year <= toYear;
+    });
+  };
 
   // Compute stats for loaded parties
   const allStats: PartyStats[] = [];

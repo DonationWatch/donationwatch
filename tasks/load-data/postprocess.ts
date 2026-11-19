@@ -696,19 +696,19 @@ const prebuildStaticDonationJsons = async (
   }
 
   await Promise.all([
-    Object.entries(perYear).map(([year, donations]) =>
+    ...Object.entries(perYear).map(([year, donations]) =>
       fs.writeFile(
         path.join(byYearDataDir, `${year}.json`),
         JSON.stringify(donationsToDonationsDocumentWithoutDonorIds(donations)),
       ),
     ),
-    Object.entries(perParty).map(([party, donations]) =>
+    ...Object.entries(perParty).map(([party, donations]) =>
       fs.writeFile(
         path.join(byPartyDataDir, `${party}.json`),
         JSON.stringify(donationsToDonationsDocumentWithoutDonorIds(donations)),
       ),
     ),
-    Object.entries(perDonorHash).map(([hash, donations]) =>
+    ...Object.entries(perDonorHash).map(([hash, donations]) =>
       fs.writeFile(
         path.join(byDonorHashDataDir, `${hash}.json`),
         JSON.stringify(donationsToDonationsDocumentWithDonorIds(donations)),
@@ -919,4 +919,4 @@ const main = async () => {
   await postprocessGeojson();
 };
 
-main();
+void main();

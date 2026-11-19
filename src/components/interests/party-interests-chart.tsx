@@ -801,6 +801,7 @@ export const PartyInterestsChart = () => {
       ? t("chart.subtitle_flat_exposure")
       : t("chart.subtitle_flat_core");
 
+  const countryYears = country.years;
   const years = useMemo(() => {
     const yearsSet = new Set<string>();
     for (const d of donations) {
@@ -808,8 +809,8 @@ export const PartyInterestsChart = () => {
     }
     return yearsSet.size > 0
       ? Array.from(yearsSet)
-      : (propYears ?? country.years);
-  }, [donations, propYears, country.years]);
+      : (propYears ?? countryYears);
+  }, [donations, propYears, countryYears]);
 
   return (
     <ChartCard.Provider years={years} title={title}>
@@ -836,7 +837,7 @@ export const PartyInterestsChart = () => {
               return;
             }
 
-            clientSha1(data.donorName).then((donorId) => {
+            void clientSha1(data.donorName).then((donorId) => {
               router.push(`/${routeLocale}/${country.id}/donor/${donorId}`);
             });
           }}

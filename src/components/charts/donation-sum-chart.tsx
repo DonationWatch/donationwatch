@@ -1,6 +1,8 @@
 "use client";
 import type { EChartsOption, LineSeriesOption } from "echarts";
 
+import { useState } from "react";
+
 import type { Party } from "@/types/party";
 import type { Donation, ReceiverId } from "@/utils/types";
 
@@ -111,6 +113,7 @@ const DonationTimeseriesChart = ({
   const { backgroundColor, isMobile, isDark } = useChart();
   const tYears = useClientTranslations("years");
   const partiesMap = usePartiesMap();
+  const [now] = useState(() => Date.now());
 
   if (!donations.length) return null;
 
@@ -119,7 +122,6 @@ const DonationTimeseriesChart = ({
     : years.at(0)!;
   const rightmostYear = years.at(-1)!;
 
-  const now = Date.now();
   const isOngoing = parseInt(rightmostYear, 10) >= new Date(now).getFullYear();
 
   const partyLines: LineSeriesOption[] = parties.map((party, idx) => ({
@@ -305,7 +307,8 @@ const DonationTimeseriesChart = ({
           const delta = sum - previousPartyValue;
 
           const party = partiesMap[param.seriesName as ReceiverId];
-          line += `${param.marker} ${party[PartyField.Short]}: ${formatCountryCurrency(browserBasedLocale, sum, country)}`;
+          const marker = typeof param.marker === "string" ? param.marker : "";
+          line += `${marker} ${party[PartyField.Short]}: ${formatCountryCurrency(browserBasedLocale, sum, country)}`;
 
           // only add delta if there is a change
           if (delta > 0) {
@@ -411,7 +414,7 @@ export const DonationStackedTimeseriesChart = ({
     : years.at(0)!;
   const rightmostYear = years.at(-1)!;
 
-  const now = Date.now();
+  const [now] = useState(() => Date.now());
   const isOngoing = parseInt(rightmostYear, 10) >= new Date(now).getFullYear();
   // [date, Record<ReceiverId, number>]
   const partySumsPerDate: Record<string, Record<string, number>> = {};
@@ -630,7 +633,8 @@ export const DonationStackedTimeseriesChart = ({
           const delta = sum - previousPartyValue;
 
           const party = partiesMap[param.seriesName as ReceiverId];
-          line += `${param.marker} <span class="font-medium">${party[PartyField.Short]}</span>: ${formatCountryCurrency(browserBasedLocale, sum, country)}`;
+          const marker = typeof param.marker === "string" ? param.marker : "";
+          line += `${marker} <span class="font-medium">${party[PartyField.Short]}</span>: ${formatCountryCurrency(browserBasedLocale, sum, country)}`;
 
           // only add delta if there is a change
           if (delta > 0) {

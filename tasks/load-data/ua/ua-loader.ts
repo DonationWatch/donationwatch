@@ -444,18 +444,16 @@ export class UaLoader extends DataLoader {
       .flatMap((doc, pidx) => {
         const partyName = this.normalizeReceiver(doc.party.name);
 
-        {
-          this.parties[partyName] = {
-            ...{
+        const existingParty = this.parties[partyName];
+        this.parties[partyName] = existingParty
+          ? { ...existingParty, code: doc.party.id }
+          : {
               name: partyName,
               short: partyName,
               color: RANDOM_COLOR_MARKER,
-            },
-            ...this.parties[partyName],
-            // patch our party code with the upstream id
-            ...{ code: doc.party.id },
-          };
-        }
+              // patch our party code with the upstream id
+              code: doc.party.id,
+            };
 
         return doc.reports
           .map((report, idx) => {

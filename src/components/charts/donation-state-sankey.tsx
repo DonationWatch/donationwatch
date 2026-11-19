@@ -123,7 +123,10 @@ export const DonationStateSankey = ({
           return `<div><div>${params.name}</div><div class="font-semibold">${formattedCurrency}</div></div>`;
         }
 
-        return `${params.value}`;
+        return typeof params.value === "string" ||
+          typeof params.value === "number"
+          ? `${params.value}`
+          : "";
       },
     },
     series: {

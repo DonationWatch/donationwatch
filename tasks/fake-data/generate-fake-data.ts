@@ -208,14 +208,14 @@ const generateFakeWikipediaArticles = async (
   const wikipediaArticles: Record<number, string> = {};
   const originalDataLoader = loaders[countryConfig.id];
 
-  const wikiIds = new Set<number>([
-    ...[
+  const wikiIds = new Set<number>(
+    [
       ...Object.values(donorMeta.donors),
       ...Object.values(originalDataLoader.parties),
     ]
       .filter((d): d is { wiki: number } => typeof d.wiki === "number")
       .map((d) => d.wiki!),
-  ]);
+  );
 
   wikiIds.forEach((id) => {
     wikipediaArticles[id] = fakeText;
@@ -241,4 +241,4 @@ const main = async () => {
   }
 };
 
-main();
+void main();

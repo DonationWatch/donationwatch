@@ -88,158 +88,154 @@ export default async function sitemap(props: {
     >,
   );
 
-  return [
-    ...[locale]
-      .flatMap((locale) => {
-        return [
-          {
-            url: `${BASE_URL}/${locale}`,
-            lastModified,
-          },
-          {
-            url: `${BASE_URL}/${locale}/about`,
-            lastModified,
-          },
-          {
-            url: `${BASE_URL}/${locale}/other-countries`,
-            lastModified,
-          },
-          {
-            url: `${BASE_URL}/${locale}/enterprise`,
-            lastModified,
-          },
-          ...countriesArray.flatMap((country) => {
-            const { config, partyYearsSums, build, biggestDonors, wikiDonors } =
-              countryConfigs[country];
-            const lastModified = new Date(
-              Math.max(manualMinLastModified, build),
-            );
+  return [locale]
+    .flatMap((locale) => {
+      return [
+        {
+          url: `${BASE_URL}/${locale}`,
+          lastModified,
+        },
+        {
+          url: `${BASE_URL}/${locale}/about`,
+          lastModified,
+        },
+        {
+          url: `${BASE_URL}/${locale}/other-countries`,
+          lastModified,
+        },
+        {
+          url: `${BASE_URL}/${locale}/enterprise`,
+          lastModified,
+        },
+        ...countriesArray.flatMap((country) => {
+          const { config, partyYearsSums, build, biggestDonors, wikiDonors } =
+            countryConfigs[country];
+          const lastModified = new Date(Math.max(manualMinLastModified, build));
 
-            const filledYears = config.years.filter(
-              (year) => Object.keys(partyYearsSums[year]).length > 0,
-            );
+          const filledYears = config.years.filter(
+            (year) => Object.keys(partyYearsSums[year]).length > 0,
+          );
 
-            const filterConditionalSubPages =
-              (section: "year" | "party") => (subPage: string) => {
-                if (subPage.startsWith("donors"))
-                  return hasFeature(config, Features.Donors);
-                if (subPage.startsWith("origin"))
-                  return hasFeature(config, Features.Origin);
-                if (section === "year" && subPage.startsWith("timeline"))
-                  return hasFeature(config, Features.Date);
+          const filterConditionalSubPages =
+            (section: "year" | "party") => (subPage: string) => {
+              if (subPage.startsWith("donors"))
+                return hasFeature(config, Features.Donors);
+              if (subPage.startsWith("origin"))
+                return hasFeature(config, Features.Origin);
+              if (section === "year" && subPage.startsWith("timeline"))
+                return hasFeature(config, Features.Date);
 
-                return true;
-              };
+              return true;
+            };
 
-            return [
-              {
-                url: `${BASE_URL}/${locale}/${country}`,
-                lastModified,
-              },
-              {
-                url: `${BASE_URL}/${locale}/${country}/tools/data`,
-                lastModified,
-              },
-              {
-                url: `${BASE_URL}/${locale}/${country}/methodology`,
-                lastModified,
-              },
-              ...(hasFeature(config, Features.Date)
-                ? [
-                    {
-                      url: `${BASE_URL}/${locale}/${country}/tools/bar-chart-race`,
-                      lastModified,
-                    },
-                  ]
-                : []),
-              {
-                url: `${BASE_URL}/${locale}/${country}/tools/compare`,
-                lastModified,
-              },
-              getPartiesSync(country).flatMap((party) => {
-                const partiesBaseUrl = `${BASE_URL}/${locale}/${country}/party/${party[PartyField.Id]}`;
+          return [
+            {
+              url: `${BASE_URL}/${locale}/${country}`,
+              lastModified,
+            },
+            {
+              url: `${BASE_URL}/${locale}/${country}/tools/data`,
+              lastModified,
+            },
+            {
+              url: `${BASE_URL}/${locale}/${country}/methodology`,
+              lastModified,
+            },
+            ...(hasFeature(config, Features.Date)
+              ? [
+                  {
+                    url: `${BASE_URL}/${locale}/${country}/tools/bar-chart-race`,
+                    lastModified,
+                  },
+                ]
+              : []),
+            {
+              url: `${BASE_URL}/${locale}/${country}/tools/compare`,
+              lastModified,
+            },
+            getPartiesSync(country).flatMap((party) => {
+              const partiesBaseUrl = `${BASE_URL}/${locale}/${country}/party/${party[PartyField.Id]}`;
+              const lastDonation = lastPartyStatsDonation(
+                config,
+                partyYearsSums,
+                {
+                  partyId: party[PartyField.Id],
+                },
+              );
+
+              return partySubPages
+                .filter(filterConditionalSubPages("party"))
+                .map((subPage) => ({
+                  url: `${partiesBaseUrl}/${subPage}`,
+                  lastModified: lastDonation ?? lastModified,
+                }));
+            }),
+            filledYears.flatMap((year) => {
+              const yearsBaseUrl = `${BASE_URL}/${locale}/${country}/${year}`;
+              const lastDonation = lastPartyStatsDonation(
+                config,
+                partyYearsSums,
+                {
+                  year,
+                },
+              );
+
+              return yearSubPages
+                .filter(filterConditionalSubPages("year"))
+                .map((subPage) => ({
+                  url: `${yearsBaseUrl}/${subPage}`,
+                  lastModified: lastDonation ?? lastModified,
+                }));
+            }),
+            (config.legislativeYears ?? []).flatMap((years) => {
+              const yearsBaseUrl = `${BASE_URL}/${locale}/${country}/${years.at(
+                0,
+              )}-${years.at(-1)}`;
+              const lastDonation = lastPartyStatsDonation(
+                config,
+                partyYearsSums,
+                {
+                  year: years.at(-1),
+                },
+              );
+
+              return yearSubPages
+                .filter(filterConditionalSubPages("year"))
+                .map((subPage) => ({
+                  url: `${yearsBaseUrl}/${subPage}`,
+                  lastModified: lastDonation ?? lastModified,
+                }));
+            }),
+            (() => {
+              if (!hasFeature(config, Features.Donors)) return [];
+
+              const seenDonorIds = new Set<string>();
+              const sitemapDonors = [];
+
+              for (const donor of [...biggestDonors, ...wikiDonors]) {
+                if (seenDonorIds.has(donor.id)) continue;
+                seenDonorIds.add(donor.id);
+
                 const lastDonation = lastPartyStatsDonation(
                   config,
-                  partyYearsSums,
-                  {
-                    partyId: party[PartyField.Id],
-                  },
+                  donor.partyYearSums,
                 );
 
-                return partySubPages
-                  .filter(filterConditionalSubPages("party"))
-                  .map((subPage) => ({
-                    url: `${partiesBaseUrl}/${subPage}`,
-                    lastModified: lastDonation ?? lastModified,
-                  }));
-              }),
-              filledYears.flatMap((year) => {
-                const yearsBaseUrl = `${BASE_URL}/${locale}/${country}/${year}`;
-                const lastDonation = lastPartyStatsDonation(
-                  config,
-                  partyYearsSums,
-                  {
-                    year,
-                  },
-                );
+                sitemapDonors.push({
+                  url: `${BASE_URL}/${locale}/${country}/donor/${donor.id}`,
+                  lastModified: lastDonation ?? lastModified,
+                });
+              }
 
-                return yearSubPages
-                  .filter(filterConditionalSubPages("year"))
-                  .map((subPage) => ({
-                    url: `${yearsBaseUrl}/${subPage}`,
-                    lastModified: lastDonation ?? lastModified,
-                  }));
-              }),
-              (config.legislativeYears ?? []).flatMap((years) => {
-                const yearsBaseUrl = `${BASE_URL}/${locale}/${country}/${years.at(
-                  0,
-                )}-${years.at(-1)}`;
-                const lastDonation = lastPartyStatsDonation(
-                  config,
-                  partyYearsSums,
-                  {
-                    year: years.at(-1),
-                  },
-                );
-
-                return yearSubPages
-                  .filter(filterConditionalSubPages("year"))
-                  .map((subPage) => ({
-                    url: `${yearsBaseUrl}/${subPage}`,
-                    lastModified: lastDonation ?? lastModified,
-                  }));
-              }),
-              (() => {
-                if (!hasFeature(config, Features.Donors)) return [];
-
-                const seenDonorIds = new Set<string>();
-                const sitemapDonors = [];
-
-                for (const donor of [...biggestDonors, ...wikiDonors]) {
-                  if (seenDonorIds.has(donor.id)) continue;
-                  seenDonorIds.add(donor.id);
-
-                  const lastDonation = lastPartyStatsDonation(
-                    config,
-                    donor.partyYearSums,
-                  );
-
-                  sitemapDonors.push({
-                    url: `${BASE_URL}/${locale}/${country}/donor/${donor.id}`,
-                    lastModified: lastDonation ?? lastModified,
-                  });
-                }
-
-                return sitemapDonors;
-              })(),
-            ];
-          }),
-          {
-            url: `${BASE_URL}/${locale}/fun`,
-            lastModified,
-          },
-        ];
-      })
-      .flat(),
-  ];
+              return sitemapDonors;
+            })(),
+          ];
+        }),
+        {
+          url: `${BASE_URL}/${locale}/fun`,
+          lastModified,
+        },
+      ];
+    })
+    .flat();
 }

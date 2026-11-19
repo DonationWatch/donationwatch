@@ -215,7 +215,9 @@ const GlobalSearch = ({ onClose }: { onClose: () => void }) => {
               break;
             }
             case "donor": {
-              clientSha1(item.name).then((donorId) => selectDonor(donorId));
+              void clientSha1(item.name).then((donorId) =>
+                selectDonor(donorId),
+              );
               break;
             }
           }

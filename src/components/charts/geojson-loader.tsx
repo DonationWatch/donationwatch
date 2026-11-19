@@ -45,7 +45,7 @@ export const GeoJsonLoader = ({ children }: PropsWithChildren) => {
       }
     };
 
-    fetchData();
+    void fetchData();
   }, [country]);
 
   return mapLoaded ? children : null;

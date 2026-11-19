@@ -169,6 +169,7 @@ const getDonationsFromLastGitRevision = async (
 
   // Execute the JavaScript code to get the default export
   const fnBody = jsCode.replace(/export\s+default\s+/, "return ");
+  // oxlint-disable-next-line typescript/no-implied-eval
   const moduleFunction = new Function(fnBody);
 
   return moduleFunction() as Donation[];
@@ -288,4 +289,4 @@ const main = async () => {
   }
 };
 
-main();
+void main();

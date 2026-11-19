@@ -273,7 +273,7 @@ export const LoadedDonationYearsTreemap = ({
 
         if (params.treeAncestors.length === 2) {
           // is donor level
-          clientSha1(dataId).then((donorId) => {
+          void clientSha1(dataId).then((donorId) => {
             router.push(`/${locale}/${country.id}/donor/${donorId}`);
           });
         }

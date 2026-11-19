@@ -60,13 +60,11 @@ const featureImports: Record<
     ]);
   },
   pie: () => {
-    return Promise.all([
-      import("echarts/lib/chart/pie/install").then((mod) => mod.install),
-    ]);
+    return import("echarts/lib/chart/pie/install").then((mod) => [mod.install]);
   },
   treemap: () => {
-    return Promise.all([
-      import("echarts/lib/chart/treemap/install").then((mod) => mod.install),
+    return import("echarts/lib/chart/treemap/install").then((mod) => [
+      mod.install,
     ]);
   },
   map: () => {
@@ -201,7 +199,7 @@ export const ReactECharts = ({
   );
 
   useEffect(() => {
-    featureImports[feature]().then((installFns) => {
+    void featureImports[feature]().then((installFns) => {
       // @ts-expect-error - incorrect upstream types
       echarts.use(installFns);
 
