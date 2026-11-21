@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import type { ReceiverId } from "@/utils/types";
 
 import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
+import { PageWithToc } from "@/components/layout/article";
 import { DonorSchema } from "@/components/schema";
 import { getParty } from "@/config/parties";
 import { PartyField } from "@/types/party";
@@ -219,13 +220,18 @@ export default async function DonorPageLayout(
           sameAs={sameAs}
         />
       )}
-      <DonorPageHead
-        donorId={params.donorId}
-        country={params.country}
-        donorMeta={donorMeta}
-        initialDonations={donations}
-      />
-      <DonorClientPage donorId={params.donorId} initialDonations={donations} />
+      <PageWithToc tocTitle={donorName}>
+        <DonorPageHead
+          donorId={params.donorId}
+          country={params.country}
+          donorMeta={donorMeta}
+          initialDonations={donations}
+        />
+        <DonorClientPage
+          donorId={params.donorId}
+          initialDonations={donations}
+        />
+      </PageWithToc>
     </ScopedClientIntlProvider>
   );
 }

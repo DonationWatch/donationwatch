@@ -1,5 +1,7 @@
 "use client";
 
+import type { ReactNode } from "react";
+
 import { ChevronRight } from "lucide-react";
 import { useLocale } from "next-intl";
 import Link from "next/link";
@@ -32,7 +34,7 @@ import { getPartyFullAndShortName } from "@/utils/party";
 
 import { useInterestsContext } from "./interests-context";
 
-export const PartyInterestsText = () => {
+export const PartyInterestsText = ({ chart }: { chart?: ReactNode }) => {
   const {
     state: {
       totalPartyDonations,
@@ -139,7 +141,7 @@ export const PartyInterestsText = () => {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="min-w-0 space-y-4">
       {/* SEO-friendly narrative introduction */}
       <p>
         {partyDisplayName
@@ -180,6 +182,7 @@ export const PartyInterestsText = () => {
         <div className="flex items-center gap-2">
           <Switch
             id="direct-businesses-only"
+            aria-labelledby="direct-businesses-only-label"
             checked={viewMode === "core"}
             onCheckedChange={(checked) => {
               setShowAllFlat(false);
@@ -188,6 +191,7 @@ export const PartyInterestsText = () => {
             className="cursor-pointer"
           />
           <label
+            id="direct-businesses-only-label"
             htmlFor="direct-businesses-only"
             className="cursor-pointer text-sm font-medium select-none"
           >
@@ -198,11 +202,13 @@ export const PartyInterestsText = () => {
         <div className="flex items-center gap-2">
           <Switch
             id="group-by-domain"
+            aria-labelledby="group-by-domain-label"
             checked={isGrouped}
             onCheckedChange={onGroupedChange}
             className="cursor-pointer"
           />
           <label
+            id="group-by-domain-label"
             htmlFor="group-by-domain"
             className="cursor-pointer text-sm font-medium select-none"
           >
@@ -248,6 +254,8 @@ export const PartyInterestsText = () => {
             )}
         {topIndustriesSentence ? ` ${topIndustriesSentence}` : ""}
       </p>
+
+      {chart ? <div>{chart}</div> : null}
 
       {isGrouped ? (
         /* Expandable 2-level list using CurrencyRankingItem */
@@ -308,9 +316,9 @@ export const PartyInterestsText = () => {
                             <li
                               key={tagStat.tag}
                               title={`${tagLabel}: ${tagDesc}`}
-                              className="flex w-full items-center justify-between px-1.5 py-1"
+                              className="flex w-full min-w-0 items-center justify-between px-1.5 py-1"
                             >
-                              <div className="flex items-center overflow-x-hidden">
+                              <div className="flex min-w-0 items-center overflow-x-hidden">
                                 <span
                                   className="mr-2 size-2 shrink-0 rounded-full"
                                   style={{
@@ -322,7 +330,7 @@ export const PartyInterestsText = () => {
                                 />
                                 <span className="truncate">{tagLabel}</span>
                               </div>
-                              <div className="ml-2 flex tabular-nums">
+                              <div className="ml-2 flex shrink-0 tabular-nums">
                                 <span className="lg:mr-1">
                                   {formatCountryCurrency(
                                     locale,
@@ -344,7 +352,7 @@ export const PartyInterestsText = () => {
                 >
                   <div
                     title={`${domainLabel}: ${domainDesc}`}
-                    className="flex items-center overflow-x-hidden"
+                    className="flex min-w-0 items-center overflow-x-hidden"
                   >
                     <span
                       className="mr-2 size-2.5 shrink-0 rounded-full"

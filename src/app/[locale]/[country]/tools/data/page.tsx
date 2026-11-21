@@ -6,7 +6,12 @@ import { notFound } from "next/navigation";
 
 import { DataExport } from "@/components/data-export";
 import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
-import { Article } from "@/components/layout/article";
+import {
+  Article,
+  ArticleHeader,
+  ArticleLead,
+  ArticleTitle,
+} from "@/components/layout/article";
 import { DatasetSchema } from "@/components/schema";
 import { Translation } from "@/components/translation";
 import { Toaster } from "@/components/ui/sonner";
@@ -104,56 +109,57 @@ export default async function Page(
         spatialCoverage={localizedCountryName}
         sourceUrl={countryConfig.source.url}
       />
-      <Article title={tExport("title")}>
-        <div className="space-y-6">
-          <p>
-            <Translation
-              t={tExport}
-              translationId={"p0"}
-              variables={{
-                country: getCountryName(countryConfig, tCountries),
-                license: (
-                  <a
-                    href="https://creativecommons.org/licenses/by/4.0/deed.en"
-                    target="_blank"
-                    rel={"noopener noreferrer"}
-                    className="hover:text-primary-800 dark:hover:text-primary-400 underline"
-                  >
-                    {DATA_LICENSE}
-                  </a>
-                ),
-              }}
-            />
-          </p>
-          <p>
-            <Translation
-              t={tExport}
-              translationId={"p1"}
-              variables={{
-                source: (
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={countryConfig.source.url}
-                    className="hover:text-primary-800 dark:hover:text-primary-400 underline"
-                  >
-                    {countryConfig.source.name}
-                  </a>
-                ),
-                methodology: (
-                  <Link
-                    href={`/${locale}/${countryConfig.id}/methodology`}
-                    prefetch={false}
-                    className="hover:text-primary-800 dark:hover:text-primary-400 underline"
-                  >
-                    {tNavigation("methodology")}
-                  </Link>
-                ),
-              }}
-            />
-          </p>
-          <p>
-            {
+      <Article>
+        <ArticleHeader>
+          <ArticleTitle>{tExport("title")}</ArticleTitle>
+          <ArticleLead>
+            <p>
+              <Translation
+                t={tExport}
+                translationId={"p0"}
+                variables={{
+                  country: getCountryName(countryConfig, tCountries),
+                  license: (
+                    <a
+                      href="https://creativecommons.org/licenses/by/4.0/deed.en"
+                      target="_blank"
+                      rel={"noopener noreferrer"}
+                      className="text-primary-700 dark:text-primary-400 underline hover:no-underline"
+                    >
+                      {DATA_LICENSE}
+                    </a>
+                  ),
+                }}
+              />
+            </p>
+            <p>
+              <Translation
+                t={tExport}
+                translationId={"p1"}
+                variables={{
+                  source: (
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={countryConfig.source.url}
+                      className="text-primary-700 dark:text-primary-400 underline hover:no-underline"
+                    >
+                      {countryConfig.source.name}
+                    </a>
+                  ),
+                  methodology: (
+                    <Link
+                      href={`/${locale}/${countryConfig.id}/methodology`}
+                      prefetch={false}
+                      className="text-primary-700 dark:text-primary-400 underline hover:no-underline"
+                    >
+                      {tNavigation("methodology")}
+                    </Link>
+                  ),
+                }}
+              />
+            </p>
+            <p>
               <Translation
                 t={tExport}
                 translationId={"license"}
@@ -163,18 +169,18 @@ export default async function Page(
                       href="https://creativecommons.org/licenses/by/4.0/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:text-primary-800 dark:hover:text-primary-400 underline"
+                      className="text-primary-700 dark:text-primary-400 underline hover:no-underline"
                     >
                       {DATA_LICENSE}
                     </a>
                   ),
                 }}
               />
-            }
-          </p>
-          <DataExport locale={locale} />
-          <Toaster position={"top-center"} />
-        </div>
+            </p>
+          </ArticleLead>
+        </ArticleHeader>
+        <DataExport locale={locale} />
+        <Toaster position={"top-center"} />
       </Article>
     </ScopedClientIntlProvider>
   );

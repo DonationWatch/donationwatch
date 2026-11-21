@@ -25,7 +25,8 @@
     "bar_chart_race": "Utrka stupčastih grafikona",
     "compare_parties": "Usporedi stranke",
     "support_us": "☕ Podrži troškove poslužitelja",
-    "enterprise": "API za poduzeća"
+    "enterprise": "API za poduzeća",
+    "on_this_page": "Na ovoj stranici"
   },
   "data": {
     "loading": "Sadržaj se učitava...",
@@ -1001,7 +1002,7 @@
     "p0": "Pratite političke donacije preko granica. Čisti, potpuno obogaćeni API-ji za financiranje izgrađeni na normaliziranim transakcijskim zapisima iz globalnih izbornih povjerenstava.",
     "draft_schema": "* Napomena: Nacrt sheme v1. Struktura odgovora podložna je promjenama na temelju povratnih informacija iz bete.",
     "engine_specs": {
-      "title": "// SPECIFIKACIJE I PREDNOSTI SUSTAVA",
+      "title": "Specifikacije i prednosti sustava",
       "s0": {
         "title": "1. Standardizirani transakcijski zapisi",
         "description": "Prestanite se boriti s neurednim CSV datotekama i promjenjivim državnim formatima. Pristupite uredno mapiranim zapisima donacija normaliziranima kroz više međunarodnih registara."

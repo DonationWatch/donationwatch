@@ -1,5 +1,7 @@
 "use client";
 
+import type { ReactNode } from "react";
+
 import type { Party } from "@/types/party";
 import type { Donation } from "@/utils/types";
 
@@ -14,9 +16,11 @@ import { DonationField } from "@/utils/types";
 export const PartyTimelineText = ({
   party,
   donations,
+  chart,
 }: {
   party: Party;
   donations: Donation[];
+  chart?: ReactNode;
 }) => {
   const country = useRequiredCountryConfig();
   const t = useTranslations();
@@ -41,6 +45,7 @@ export const PartyTimelineText = ({
           party: party[PartyField.Short],
         })}
       </p>
+      {chart ? <div className="mb-6">{chart}</div> : null}
       <ul className="mx-2 py-2 text-sm *:py-1">
         {Object.entries(perYearSums).map(([year, yearSum]) => {
           return (

@@ -74,7 +74,7 @@ export default async function ChangesPage(
   const party = getParty(countryConfig.id, partyId);
 
   return (
-    <Article fullWidth={true}>
+    <Article>
       <PartyChangesClientPage
         party={party}
         title={t("party.changes.detail.title", {

@@ -25,7 +25,8 @@
     "bar_chart_race": "Balkendiagramm-Rennen",
     "compare_parties": "Parteien vergleichen",
     "support_us": "☕ Serverkosten unterstützen",
-    "enterprise": "Unternehmens-API"
+    "enterprise": "Unternehmens-API",
+    "on_this_page": "Auf dieser Seite"
   },
   "data": {
     "loading": "Inhalt wird geladen...",
@@ -1001,7 +1002,7 @@
     "p0": "Verfolgen Sie politische Spenden grenzüberschreitend. Saubere, vollständig angereicherte Funding-APIs, aufgebaut auf normalisierten Transaktionsdatensätzen aus globalen Wahlkommissionen.",
     "draft_schema": "* Hinweis: Entwurf des v1-Schemas. Die Struktur der Antwort kann sich auf Basis des Beta-Feedbacks ändern.",
     "engine_specs": {
-      "title": "// TECHNISCHE SPEZIFIKATIONEN & STÄRKEN",
+      "title": "Technische Spezifikationen & Stärken",
       "s0": {
         "title": "1. Standardisierte Transaktionsdatensätze",
         "description": "Hören Sie auf, mit unübersichtlichen CSV-Dateien und wechselnden Regierungsformaten zu kämpfen. Greifen Sie auf sauber zugeordnete Spendeneinträge zu, die über mehrere internationale Register hinweg normalisiert wurden."

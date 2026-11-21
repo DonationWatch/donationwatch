@@ -5,7 +5,13 @@ import { notFound } from "next/navigation";
 
 import type { Countries } from "@/utils/countries";
 
-import { Article, ArticleSection } from "@/components/layout/article";
+import {
+  Article,
+  ArticleHeader,
+  ArticleLead,
+  ArticleSection,
+  ArticleTitle,
+} from "@/components/layout/article";
 import { NonCountryRootLayout } from "@/components/layout/non-country-root-layout";
 import { CONTACT_MAIL } from "@/utils/config";
 import { LOCALES } from "@/utils/locales";
@@ -336,11 +342,17 @@ export default async function Page(
 
   return (
     <NonCountryRootLayout locale={locale}>
-      <Article title={tOtherCountries("title")} subtitle={pageTranslations.p0}>
+      <Article>
+        <ArticleHeader>
+          <ArticleTitle>{tOtherCountries("title")}</ArticleTitle>
+          <ArticleLead>
+            <p>{pageTranslations.p0}</p>
+          </ArticleLead>
+        </ArticleHeader>
         <ArticleSection title={pageTranslations.h1}>
-          {pageTranslations.p1}
+          <p>{pageTranslations.p1}</p>
 
-          <div className="prose dark:prose-invert w-full max-w-full pt-6">
+          <div className="prose dark:prose-invert w-full max-w-full pt-2">
             <table>
               <thead>
                 <tr>
@@ -373,7 +385,7 @@ export default async function Page(
 
           <a
             href={`mailto:${CONTACT_MAIL}`}
-            className="text-primary-700 dark:text-primary-400 hover:underline"
+            className="text-primary-700 dark:text-primary-400 inline-block underline hover:no-underline"
           >
             {CONTACT_MAIL}
           </a>

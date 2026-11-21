@@ -25,7 +25,8 @@
     "bar_chart_race": "Závod sloupcových grafů",
     "compare_parties": "Porovnat strany",
     "support_us": "☕ Podpořte provoz serveru",
-    "enterprise": "Podnikové API"
+    "enterprise": "Podnikové API",
+    "on_this_page": "Na této stránce"
   },
   "data": {
     "loading": "Načítání obsahu...",
@@ -1001,7 +1002,7 @@
     "p0": "Sledujte politické dary napříč hranicemi. Čistá, plně obohacená funding API postavená na normalizovaných transakčních záznamech z globálních volebních komisí.",
     "draft_schema": "* Poznámka: Návrh schématu v1. Struktura odpovědi se může změnit na základě zpětné vazby z bety.",
     "engine_specs": {
-      "title": "// SPECIFIKACE ENGINE A SILNÉ STRÁNKY",
+      "title": "Specifikace engine a silné stránky",
       "s0": {
         "title": "1. Standardizované transakční záznamy",
         "description": "Přestaňte bojovat s nepřehlednými CSV a měnícími se vládními formáty. Získejte přístup k čistě mapovaným záznamům o darech normalizovaným napříč více mezinárodními registry."

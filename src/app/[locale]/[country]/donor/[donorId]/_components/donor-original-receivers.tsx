@@ -153,8 +153,13 @@ export const DonorOriginalReceivers = ({
             ) : null}
           </p>
 
-          <p className="mb-6 leading-relaxed">
-            {tDonor("via.table_intro", {
+          {/* TanStack-powered Conduit Table */}
+          <DonorViaTable
+            viaList={viaList}
+            countryConfig={countryConfig}
+            locale={locale}
+            browserBasedLocale={browserBasedLocale}
+            description={tDonor("via.table_intro", {
               years: earliestYear
                 ? tDonor("via.table_intro_years", {
                     earliestYear,
@@ -162,14 +167,6 @@ export const DonorOriginalReceivers = ({
                   })
                 : "",
             })}
-          </p>
-
-          {/* TanStack-powered Conduit Table */}
-          <DonorViaTable
-            viaList={viaList}
-            countryConfig={countryConfig}
-            locale={locale}
-            browserBasedLocale={browserBasedLocale}
           />
         </ArticleSectionColumn>
       </ArticleSectionOneColumns>

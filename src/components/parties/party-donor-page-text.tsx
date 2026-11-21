@@ -28,10 +28,12 @@ export const PartyDonorPageText = ({
   party,
   donations: data,
   ssrStats,
+  chart,
 }: {
   party: Party;
   donations: Donation[];
   ssrStats?: PartyDonorStats | null;
+  chart?: ReactNode;
 }) => {
   const country = useRequiredCountryConfig();
   const t = useTranslations();
@@ -187,6 +189,7 @@ export const PartyDonorPageText = ({
           source: country.source.name,
         })}
       </p>
+      {chart ? <div className="mb-6">{chart}</div> : null}
       <section aria-label={t("faq")}>
         <dl className="space-y-2">
           {faqData.map((item, index) => (

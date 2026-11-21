@@ -25,7 +25,8 @@
     "bar_chart_race": "Staafdiagramrace",
     "compare_parties": "Vergelijk partijen",
     "support_us": "☕ Ondersteun serverkosten",
-    "enterprise": "API voor ondernemingen"
+    "enterprise": "API voor ondernemingen",
+    "on_this_page": "Op deze pagina"
   },
   "data": {
     "loading": "Inhoud wordt geladen...",
@@ -1001,7 +1002,7 @@
     "p0": "Volg politieke donaties over de grens heen. Schone, volledig verrijkte funding-API's gebouwd op genormaliseerde transactierecords van wereldwijde kiescommissies.",
     "draft_schema": "* Opmerking: Concept v1-schema. De antwoordstructuur kan veranderen op basis van feedback uit de bèta.",
     "engine_specs": {
-      "title": "// ENGINE-SPECIFICATIES & STERKE PUNTEN",
+      "title": "Engine-specificaties & sterke punten",
       "s0": {
         "title": "1. Gestandaardiseerde transactierecords",
         "description": "Stop met worstelen met rommelige CSV's en veranderende overheidsformaten. Krijg toegang tot netjes gemapte donatieregels die zijn genormaliseerd over meerdere internationale registers."

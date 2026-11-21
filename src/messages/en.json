@@ -25,7 +25,8 @@
     "bar_chart_race": "Bar chart race",
     "compare_parties": "Compare parties",
     "support_us": "☕ Support Server Costs",
-    "enterprise": "Enterprise API"
+    "enterprise": "Enterprise API",
+    "on_this_page": "On this page"
   },
   "data": {
     "loading": "Content is loading...",
@@ -985,7 +986,7 @@
     "p0": "Track political donations across borders. Clean, fully-hydrated funding APIs built on normalized transaction records from global electoral commissions.",
     "draft_schema": "* Note: Draft v1 schema. Response structure is subject to change based on beta feedback.",
     "engine_specs": {
-      "title": "// ENGINE SPECIFICATIONS & STRENGTHS",
+      "title": "Engine Specifications & Strengths",
       "s0": {
         "title": "1. Standardized Transaction Records",
         "description": "Stop fighting with messy CSVs and changing government formats. Access cleanly mapped donation entries normalized across multiple international registries."

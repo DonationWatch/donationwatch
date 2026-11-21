@@ -59,16 +59,26 @@ export const PartyChangesClientPage = ({
 
   useScrollToHash(isSuccess);
 
+  const showTable =
+    !(isLoading || isSyncing) &&
+    !error &&
+    Boolean(data) &&
+    !(isFiltered && filteredDonations.length === 0);
+
   return (
     <ArticleSectionWrapper id={"sec-party-changes"}>
       <ArticleSectionOneColumns>
         <ArticleSectionColumn>
-          <ArticleSectionTitle
-            as={"h1"}
-            id={"sec-party-changes"}
-            title={title}
-          />
-          <p className="mb-6">{summary}</p>
+          {!showTable ? (
+            <>
+              <ArticleSectionTitle
+                as={"h1"}
+                id={"sec-party-changes"}
+                title={title}
+              />
+              <p className="mb-6">{summary}</p>
+            </>
+          ) : null}
           {isLoading || isSyncing ? (
             <Loading heightClass="h-[80vh]" />
           ) : error || !data ? (
@@ -76,7 +86,14 @@ export const PartyChangesClientPage = ({
           ) : isFiltered && filteredDonations.length === 0 ? (
             <FilterEmptyState onReset={controls.resetFilters} />
           ) : (
-            <PartyDonationHistory party={party} donations={filteredDonations} />
+            <PartyDonationHistory
+              party={party}
+              donations={filteredDonations}
+              title={title}
+              description={summary}
+              titleId={"sec-party-changes"}
+              titleAs={"h1"}
+            />
           )}
         </ArticleSectionColumn>
       </ArticleSectionOneColumns>

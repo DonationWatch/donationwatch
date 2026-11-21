@@ -3,8 +3,8 @@
 import { RankBadge } from "@/components/donations/ranking-item";
 import {
   ArticleSectionColumn,
+  ArticleSectionOneColumns,
   ArticleSectionTitle,
-  ArticleSectionTwoColumns,
   ArticleSectionWrapper,
 } from "@/components/layout/article";
 import { PercentageHint } from "@/components/percentage-hint";
@@ -43,8 +43,7 @@ export const PartyOriginalReceivers = ({
 
   return (
     <ArticleSectionWrapper id="sec-party-via-committees">
-      <ArticleSectionTwoColumns>
-        {/* Left Column: Narrative & Top 5 Ranked */}
+      <ArticleSectionOneColumns>
         <ArticleSectionColumn>
           <ArticleSectionTitle
             id="sec-party-via-committees"
@@ -60,6 +59,16 @@ export const PartyOriginalReceivers = ({
           </p>
 
           <p>{tCommittees("top_intro")}</p>
+
+          <div className="my-4">
+            <PartyViaTreemap
+              party={party}
+              items={items}
+              title={tCommittees("treemap.title", { party: partyName })}
+              subtitle={tCommittees("treemap.subtitle")}
+              height={600}
+            />
+          </div>
 
           <ul className="mx-2 py-2 *:py-1">
             {topVehicles.map((v, idx) => (
@@ -88,20 +97,7 @@ export const PartyOriginalReceivers = ({
             ))}
           </ul>
         </ArticleSectionColumn>
-
-        {/* Right Column: Treemap Visualization */}
-        <ArticleSectionColumn>
-          <div>
-            <PartyViaTreemap
-              party={party}
-              items={items}
-              title={tCommittees("treemap.title", { party: partyName })}
-              subtitle={tCommittees("treemap.subtitle")}
-              height={600}
-            />
-          </div>
-        </ArticleSectionColumn>
-      </ArticleSectionTwoColumns>
+      </ArticleSectionOneColumns>
     </ArticleSectionWrapper>
   );
 };

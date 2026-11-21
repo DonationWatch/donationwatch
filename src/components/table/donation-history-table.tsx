@@ -41,6 +41,7 @@ import {
   useParties,
   useRequiredCountryConfig,
 } from "@/components/providers/country-provider";
+import { TableCard } from "@/components/table/expandable-table-card";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { useMobile } from "@/hooks/use-media-query";
@@ -80,11 +81,19 @@ export const DonationHistoryTable = ({
   partiesIds,
   donations,
   readonlyDonor = false,
+  title,
+  description,
+  titleId,
+  titleAs,
 }: {
   years?: string[];
   partiesIds: string[];
   donations: Donation[];
   readonlyDonor?: boolean;
+  title?: string;
+  description?: string;
+  titleId?: string;
+  titleAs?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 }) => {
   const country = useRequiredCountryConfig();
   const t = useTranslations();
@@ -393,132 +402,149 @@ export const DonationHistoryTable = ({
   });
 
   return (
-    <div className="flex flex-col gap-2">
-      <div className="relative md:max-w-sm">
-        <Search
-          size={16}
-          className="pointer-events-none absolute top-1/2 left-2.5 -translate-y-1/2 text-zinc-400"
-        />
-        <input
-          type="search"
-          name="donations-search"
-          value={globalFilter}
-          onChange={(e) => setGlobalFilter(e.target.value)}
-          placeholder={tSearch("filter")}
-          aria-label={tSearch("filter")}
-          className="w-full rounded-md border border-zinc-200 bg-white py-1.5 pr-3 pl-8 text-sm outline-none placeholder:text-zinc-500 focus:border-zinc-400 dark:border-zinc-700 dark:bg-zinc-900 dark:placeholder:text-zinc-400 dark:focus:border-zinc-500"
-        />
-      </div>
-      <div
-        className="h-[80vh] min-h-[600px]"
-        style={{
-          overflow: "auto", //our scrollable table container
-          position: "relative", //needed for sticky header
-        }}
-        ref={setTableContainer}
-      >
-        <table className="grid">
-          {isMobile ? null : (
-            <thead className="sticky top-0 z-1 grid border-b border-zinc-200 bg-white dark:border-zinc-950 dark:bg-zinc-900">
-              {table.getHeaderGroups().map((headerGroup) => (
-                <tr key={headerGroup.id} className="flex w-full">
-                  {headerGroup.headers.map((header) => (
-                    <th
-                      className={cn(
-                        header.column.columnDef.meta?.fill ? "grow" : undefined,
-                      )}
-                      key={header.id}
-                      style={{
-                        width: header.getSize(),
-                      }}
-                    >
-                      {header.isPlaceholder ? null : (
-                        <div
-                          tabIndex={0}
-                          role="button"
-                          className={cn(
-                            header.column.columnDef.meta?.className,
-                            "flex items-center space-x-1 px-2 py-1",
-                            header.column.getCanSort()
-                              ? "cursor-pointer select-none"
-                              : "",
-                          )}
-                          onClick={header.column.getToggleSortingHandler()}
-                          onKeyDown={(ev) => {
-                            if (ev.key !== "Enter") return;
-
-                            // on enter trigger the click action
-                            ev.stopPropagation();
-                            header.column.getToggleSortingHandler()?.(ev);
-                          }}
-                          title={
-                            header.column.getCanSort()
-                              ? header.column.getNextSortingOrder() === "asc"
-                                ? tSort("asc")
-                                : header.column.getNextSortingOrder() === "desc"
-                                  ? tSort("desc")
-                                  : tSort("clear")
-                              : undefined
-                          }
-                        >
-                          <span>
-                            {flexRender(
-                              header.column.columnDef.header,
-                              header.getContext(),
+    <TableCard.Provider title={title ?? t("changes.title")}>
+      <TableCard.Frame>
+        <TableCard.Header
+          title={title ?? t("changes.title")}
+          description={description}
+          titleId={titleId}
+          titleAs={titleAs}
+        >
+          <TableCard.ExpandTool />
+        </TableCard.Header>
+        <TableCard.Toolbar>
+          <div className="relative md:max-w-sm">
+            <Search
+              size={16}
+              className="pointer-events-none absolute top-1/2 left-2.5 -translate-y-1/2 text-zinc-400"
+            />
+            <input
+              type="search"
+              name="donations-search"
+              value={globalFilter}
+              onChange={(e) => setGlobalFilter(e.target.value)}
+              placeholder={tSearch("filter")}
+              aria-label={tSearch("filter")}
+              className="w-full rounded-md border border-zinc-200 bg-white py-1.5 pr-3 pl-8 text-sm outline-none placeholder:text-zinc-500 focus:border-zinc-400 dark:border-zinc-700 dark:bg-zinc-900 dark:placeholder:text-zinc-400 dark:focus:border-zinc-500"
+            />
+          </div>
+        </TableCard.Toolbar>
+        <TableCard.ScrollArea
+          collapsedClassName="h-[80vh] min-h-[600px]"
+          expandedClassName="min-h-0 flex-1"
+          style={{
+            overflow: "auto", //our scrollable table container
+            position: "relative", //needed for sticky header
+          }}
+          ref={setTableContainer}
+        >
+          <table className="grid">
+            {isMobile ? null : (
+              <thead className="sticky top-0 z-1 grid border-b border-zinc-200 bg-white dark:border-zinc-950 dark:bg-zinc-900">
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <tr key={headerGroup.id} className="flex w-full">
+                    {headerGroup.headers.map((header) => (
+                      <th
+                        className={cn(
+                          "group/th",
+                          header.column.columnDef.meta?.fill
+                            ? "grow"
+                            : undefined,
+                        )}
+                        key={header.id}
+                        style={{
+                          width: header.getSize(),
+                        }}
+                      >
+                        {header.isPlaceholder ? null : (
+                          <div
+                            tabIndex={0}
+                            role="button"
+                            className={cn(
+                              header.column.columnDef.meta?.className,
+                              "flex items-center space-x-1 px-2 py-1 group-first/th:pl-4 group-last/th:pr-4",
+                              header.column.getCanSort()
+                                ? "cursor-pointer select-none"
+                                : "",
                             )}
-                          </span>
-                          {{
-                            asc: <ArrowDownNarrowWide size={16} />,
-                            desc: <ArrowUpNarrowWide size={16} />,
-                          }[header.column.getIsSorted() as string] ?? null}
-                        </div>
-                      )}
-                    </th>
-                  ))}
-                </tr>
-              ))}
-            </thead>
-          )}
-          <tbody className="relative grid" ref={rowVirtualizer.containerRef}>
-            {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-              const row = rows[virtualRow.index];
-              if (!row) return null;
-              return (
-                <tr
-                  data-index={virtualRow.index} //needed for dynamic row height measurement
-                  ref={(node) => {
-                    rowVirtualizer.measureElement(node);
-                  }} //measure dynamic row height
-                  key={row.id}
-                  className={cn(
-                    "absolute top-0 left-0 flex w-full border-b border-zinc-200 dark:border-zinc-950",
-                    virtualRow.index % 2 !== 0 && "bg-white dark:bg-zinc-900",
-                  )}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <td
-                      key={cell.id}
-                      className={cn(
-                        "flex items-center px-2 py-1",
-                        cell.column.columnDef.meta?.className,
-                        cell.column.columnDef.meta?.fill ? "grow" : undefined,
-                      )}
-                      style={{
-                        width: cell.column.getSize(),
-                      }}
-                    >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext(),
-                      )}
-                    </td>
-                  ))}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-    </div>
+                            onClick={header.column.getToggleSortingHandler()}
+                            onKeyDown={(ev) => {
+                              if (ev.key !== "Enter") return;
+
+                              // on enter trigger the click action
+                              ev.stopPropagation();
+                              header.column.getToggleSortingHandler()?.(ev);
+                            }}
+                            title={
+                              header.column.getCanSort()
+                                ? header.column.getNextSortingOrder() === "asc"
+                                  ? tSort("asc")
+                                  : header.column.getNextSortingOrder() ===
+                                      "desc"
+                                    ? tSort("desc")
+                                    : tSort("clear")
+                                : undefined
+                            }
+                          >
+                            <span>
+                              {flexRender(
+                                header.column.columnDef.header,
+                                header.getContext(),
+                              )}
+                            </span>
+                            {{
+                              asc: <ArrowDownNarrowWide size={16} />,
+                              desc: <ArrowUpNarrowWide size={16} />,
+                            }[header.column.getIsSorted() as string] ?? null}
+                          </div>
+                        )}
+                      </th>
+                    ))}
+                  </tr>
+                ))}
+              </thead>
+            )}
+            <tbody className="relative grid" ref={rowVirtualizer.containerRef}>
+              {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+                const row = rows[virtualRow.index];
+                if (!row) return null;
+                return (
+                  <tr
+                    data-index={virtualRow.index} //needed for dynamic row height measurement
+                    ref={(node) => {
+                      rowVirtualizer.measureElement(node);
+                    }} //measure dynamic row height
+                    key={row.id}
+                    className={cn(
+                      "absolute top-0 left-0 flex w-full border-b border-zinc-200 dark:border-zinc-950",
+                      virtualRow.index % 2 !== 0 && "bg-white dark:bg-zinc-900",
+                    )}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <td
+                        key={cell.id}
+                        className={cn(
+                          "flex items-center px-2 py-1 first:pl-4 last:pr-4",
+                          cell.column.columnDef.meta?.className,
+                          cell.column.columnDef.meta?.fill ? "grow" : undefined,
+                        )}
+                        style={{
+                          width: cell.column.getSize(),
+                        }}
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </td>
+                    ))}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </TableCard.ScrollArea>
+      </TableCard.Frame>
+    </TableCard.Provider>
   );
 };

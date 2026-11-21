@@ -8,7 +8,13 @@ import type { ConstLocale } from "@/utils/locales";
 import type { StrictNamespacedTranslator } from "@/utils/translator";
 
 import { ErrorAlert, InfoAlert, SuccessAlert } from "@/components/alert";
-import { Article, ArticleSection } from "@/components/layout/article";
+import {
+  ArticleHeader,
+  ArticleLead,
+  ArticleSection,
+  ArticleTitle,
+  ArticleWithToc,
+} from "@/components/layout/article";
 import { NonCountryRootLayout } from "@/components/layout/non-country-root-layout";
 import { formatMediumDate } from "@/utils/formatter";
 import { LOCALES } from "@/utils/locales";
@@ -61,7 +67,9 @@ const FunFact = ({
   return (
     <ArticleSection title={title[locale]}>
       <div className="space-y-4">
-        <h3 className="text-sm">{formatMediumDate(locale, new Date(date))}</h3>
+        <time dateTime={date} className="block text-sm">
+          {formatMediumDate(locale, new Date(date))}
+        </time>
         <p className="whitespace-pre-wrap">{text[locale]}</p>
         {children ? (
           <pre className="rounded-sm border border-zinc-300 p-4 font-mono text-sm whitespace-pre-wrap lg:p-6 dark:border-zinc-700">
@@ -102,16 +110,14 @@ export default async function Page(props: PageProps<"/[locale]/fun">) {
 
   return (
     <NonCountryRootLayout locale={locale}>
-      <Article
-        className={"max-w-4xl"}
-        title={tFun("title")}
-        subtitle={
-          <>
+      <ArticleWithToc tocTitle={tFun("title")}>
+        <ArticleHeader>
+          <ArticleTitle>{tFun("title")}</ArticleTitle>
+          <ArticleLead>
             <p>{tFun("p0")}</p>
             <p>{tFun("p1")}</p>
-          </>
-        }
-      >
+          </ArticleLead>
+        </ArticleHeader>
         <FunFact
           locale={locale}
           t={tFun}
@@ -722,7 +728,7 @@ Actual:    03277942  ->  MIDLAND COMPUTER SERVICES LIMITED`}
           Zu ver<span className="font-black text-red-800">�</span>
           ffentlichen;;;;;;
         </FunFact>
-      </Article>
+      </ArticleWithToc>
     </NonCountryRootLayout>
   );
 }

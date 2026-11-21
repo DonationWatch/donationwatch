@@ -7,8 +7,8 @@ import type { Donation, ReceiverId } from "@/utils/types";
 import { FormatAnd } from "@/components/formatter";
 import {
   ArticleSectionColumn,
+  ArticleSectionOneColumns,
   ArticleSectionTitle,
-  ArticleSectionTwoColumns,
   ArticleSectionWrapper,
 } from "@/components/layout/article";
 import { TextPartyLink } from "@/components/parties/text-party-link";
@@ -69,7 +69,7 @@ export const DonorDonationTypes = ({
 
   return (
     <ArticleSectionWrapper id={"sec-donor-donation-types"}>
-      <ArticleSectionTwoColumns>
+      <ArticleSectionOneColumns>
         <ArticleSectionColumn>
           <ArticleSectionTitle
             id={"sec-donor-donation-types"}
@@ -157,14 +157,14 @@ export const DonorDonationTypes = ({
                 );
               })}
           </ul>
+          <div className="mt-4">
+            <DonorDonationTypesSankey
+              donations={donations}
+              donorName={donorName}
+            />
+          </div>
         </ArticleSectionColumn>
-        <ArticleSectionColumn>
-          <DonorDonationTypesSankey
-            donations={donations}
-            donorName={donorName}
-          />
-        </ArticleSectionColumn>
-      </ArticleSectionTwoColumns>
+      </ArticleSectionOneColumns>
     </ArticleSectionWrapper>
   );
 };

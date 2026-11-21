@@ -9,7 +9,10 @@ import type { ConstLocale } from "@/utils/locales";
 
 import { ConvertedCurrency } from "@/components/donations/converted-currency";
 import { RankBadge } from "@/components/donations/rank-badge";
-import { ArticleSection } from "@/components/layout/article";
+import {
+  ArticleSection,
+  ArticleSectionTwoColumns,
+} from "@/components/layout/article";
 import { Card } from "@/components/ui/card";
 import { getPartySync } from "@/config/parties";
 import { PartyField } from "@/types/party";
@@ -43,11 +46,9 @@ export const GlobalBiggestDonations = async ({
       title={tRoot("biggest_donations.title")}
       id="sec-global-biggest-donations"
     >
-      <p className="text-gray-700 dark:text-gray-300">
-        {tRoot("biggest_donations.text")}
-      </p>
+      <p>{tRoot("biggest_donations.text")}</p>
 
-      <div className="grid gap-8 lg:grid-cols-2">
+      <ArticleSectionTwoColumns className="mb-0 min-w-0">
         {/* Card 1: Largest single donations */}
         <Card
           id="sec-global-single-donations"
@@ -216,7 +217,7 @@ export const GlobalBiggestDonations = async ({
             </span>
           </div>
         </Card>
-      </div>
+      </ArticleSectionTwoColumns>
     </ArticleSection>
   );
 };

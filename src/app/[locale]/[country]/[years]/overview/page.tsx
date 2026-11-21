@@ -7,7 +7,12 @@ import type { Country } from "@/utils/countries";
 import type { ConstLocale } from "@/utils/locales";
 
 import { DynamicStackedPartyDonations } from "@/components/charts/dynamic-stacked-party-line";
-import { Article } from "@/components/layout/article";
+import {
+  Article,
+  ArticleHeader,
+  ArticleLead,
+  ArticleTitle,
+} from "@/components/layout/article";
 import { cardVariants } from "@/components/ui/card";
 import { FilteredYearsCard } from "@/components/years/filtered-years-header";
 import { getPartiesSync } from "@/config/parties";
@@ -119,11 +124,10 @@ export default async function OverviewPage(props: {
 
     return (
       <div className="grow">
-        <Article
-          skipTitleOffset={true}
-          title={t("years.no_data.title")}
-          subtitle={
-            <>
+        <Article>
+          <ArticleHeader className="mt-0">
+            <ArticleTitle>{t("years.no_data.title")}</ArticleTitle>
+            <ArticleLead>
               <p>
                 {t("years.no_data.summary", {
                   year: formatYearsRange(years),
@@ -135,25 +139,25 @@ export default async function OverviewPage(props: {
                     })
                   : null}
               </p>
-              {lastYearWithData ? (
-                <FilteredYearsCard
-                  className={cn(cardVariants({ variant: "action" }), "mt-8")}
-                  idPrefix="list-"
-                  locale={locale}
+            </ArticleLead>
+          </ArticleHeader>
+          {lastYearWithData ? (
+            <FilteredYearsCard
+              className={cn(cardVariants({ variant: "action" }), "mt-8")}
+              idPrefix="list-"
+              locale={locale}
+              years={[lastYearWithData[0]]}
+              partySums={partyYearSums}
+            >
+              <div className="h-2.5">
+                <DynamicStackedPartyDonations
                   years={[lastYearWithData[0]]}
-                  partySums={partyYearSums}
-                >
-                  <div className="h-2.5">
-                    <DynamicStackedPartyDonations
-                      years={[lastYearWithData[0]]}
-                      partyYearsSums={partyYearSums}
-                    />
-                  </div>
-                </FilteredYearsCard>
-              ) : null}
-            </>
-          }
-        />
+                  partyYearsSums={partyYearSums}
+                />
+              </div>
+            </FilteredYearsCard>
+          ) : null}
+        </Article>
       </div>
     );
   }
@@ -161,7 +165,7 @@ export default async function OverviewPage(props: {
   const parties = getPartiesByYears(years, getPartiesSync(countryConfig.id));
 
   return (
-    <Article fullWidth={true}>
+    <Article>
       <YearsOverviewClientPage
         country={params.country}
         years={years}

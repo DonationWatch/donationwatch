@@ -5,8 +5,8 @@ import type { Donation, ReceiverId } from "@/utils/types";
 import { DonationStackedTimeseriesChart } from "@/components/charts/donation-sum-chart";
 import {
   ArticleSectionColumn,
+  ArticleSectionOneColumns,
   ArticleSectionTitle,
-  ArticleSectionTwoColumns,
   ArticleSectionWrapper,
 } from "@/components/layout/article";
 import {
@@ -65,7 +65,7 @@ export const DonorDonationTimeline = ({
 
   return (
     <ArticleSectionWrapper id={"sec-donor-timeseries"}>
-      <ArticleSectionTwoColumns>
+      <ArticleSectionOneColumns>
         <ArticleSectionColumn>
           <ArticleSectionTitle
             id={"sec-donor-timeseries"}
@@ -79,6 +79,20 @@ export const DonorDonationTimeline = ({
             })}
           </p>
           <p className="mb-6">{tDonor("timeline.years")}</p>
+          <div className="mb-6">
+            <DonationStackedTimeseriesChart
+              donations={donations}
+              donationsHaveYearsOnly={donationsHaveYearsOnly}
+              title={tDonor("timeline.title")}
+              subtitle={tDonor("timeline.chart_subtitle", {
+                country: getCountryName(countryConfig, tCountries),
+                donor: donorName,
+                minYear: firstYear,
+              })}
+              years={fillYears(firstYear, lastYear)}
+              parties={[...parties].map((id) => partiesMap[id])}
+            />
+          </div>
           <ul className="mx-2 py-2 text-sm *:py-1">
             {Object.entries(sumPerYear).map(([year, yearSum]) => (
               <li key={year} className="">
@@ -106,23 +120,7 @@ export const DonorDonationTimeline = ({
           </ul>
           <p className="mb-6">{tDonor("timeline.p1")}</p>
         </ArticleSectionColumn>
-        <ArticleSectionColumn>
-          <div>
-            <DonationStackedTimeseriesChart
-              donations={donations}
-              donationsHaveYearsOnly={donationsHaveYearsOnly}
-              title={tDonor("timeline.title")}
-              subtitle={tDonor("timeline.chart_subtitle", {
-                country: getCountryName(countryConfig, tCountries),
-                donor: donorName,
-                minYear: firstYear,
-              })}
-              years={fillYears(firstYear, lastYear)}
-              parties={[...parties].map((id) => partiesMap[id])}
-            />
-          </div>
-        </ArticleSectionColumn>
-      </ArticleSectionTwoColumns>
+      </ArticleSectionOneColumns>
     </ArticleSectionWrapper>
   );
 };

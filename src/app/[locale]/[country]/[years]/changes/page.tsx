@@ -96,7 +96,7 @@ export default async function ChangesPage(
   }
 
   return (
-    <Article fullWidth={true}>
+    <Article>
       <YearsChangesClientPage
         years={years}
         title={t("changes.detail.title")}

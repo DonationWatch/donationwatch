@@ -1,6 +1,7 @@
 import type { PropsWithChildren, ReactNode } from "react";
 
 import { ChevronDownIcon, SquareMinus } from "lucide-react";
+import { useId } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -124,6 +125,7 @@ export const FilterChecklistSection = <T,>({
   isOpen,
   onToggleOpen,
 }: FilterChecklistSectionProps<T>) => {
+  const idPrefix = useId();
   if (items.length <= 1) return null;
 
   return (
@@ -140,9 +142,10 @@ export const FilterChecklistSection = <T,>({
     >
       <div className="max-h-72 overflow-x-hidden overflow-y-auto pr-2">
         <div className="flex flex-col gap-2">
-          {items.map((item) => {
+          {items.map((item, idx) => {
             const { key, label } = renderItem(item);
             const isChecked = activeItems.has(item);
+            const labelId = `${idPrefix}-${idx}`;
 
             return (
               <label
@@ -150,11 +153,14 @@ export const FilterChecklistSection = <T,>({
                 key={key}
               >
                 <Checkbox
+                  aria-labelledby={labelId}
                   className="shrink-0 after:inset-0"
                   checked={isChecked}
                   onCheckedChange={() => onToggleItem(item)}
                 />
-                {label}
+                <span id={labelId} className="contents">
+                  {label}
+                </span>
               </label>
             );
           })}

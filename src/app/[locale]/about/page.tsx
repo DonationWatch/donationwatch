@@ -3,7 +3,11 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
-import { Article } from "@/components/layout/article";
+import {
+  Article,
+  ArticleHeader,
+  ArticleTitle,
+} from "@/components/layout/article";
 import { NonCountryRootLayout } from "@/components/layout/non-country-root-layout";
 import { CONTACT_MAIL } from "@/utils/config";
 import { LOCALES } from "@/utils/locales";
@@ -49,27 +53,27 @@ export default async function Page(props: PageProps<"/[locale]/about">) {
 
   return (
     <NonCountryRootLayout locale={locale}>
-      <Article
-        title={tAbout("title")}
-        subtitle={
-          <>
-            <p>{tAbout("description.p0")}</p>
-            <p>{tAbout("description.p1")}</p>
-            <p>{tAbout("description.p2")}</p>
-            <p>
-              {tAbout("description.p3")} {tAbout("description.mail")}:{" "}
-              <a
-                href={`mailto:${CONTACT_MAIL}`}
-                className="text-primary-700 dark:text-primary-400 inline-block hover:underline"
-              >
-                {CONTACT_MAIL}
-              </a>
-              .
-            </p>
-            <p>{tAbout("source")}</p>
-          </>
-        }
-      />
+      <Article>
+        <ArticleHeader>
+          <ArticleTitle>{tAbout("title")}</ArticleTitle>
+        </ArticleHeader>
+        <div className="space-y-4">
+          <p>{tAbout("description.p0")}</p>
+          <p>{tAbout("description.p1")}</p>
+          <p>{tAbout("description.p2")}</p>
+          <p>
+            {tAbout("description.p3")} {tAbout("description.mail")}:{" "}
+            <a
+              href={`mailto:${CONTACT_MAIL}`}
+              className="text-primary-700 dark:text-primary-400 inline-block underline hover:no-underline"
+            >
+              {CONTACT_MAIL}
+            </a>
+            .
+          </p>
+          <p>{tAbout("source")}</p>
+        </div>
+      </Article>
     </NonCountryRootLayout>
   );
 }

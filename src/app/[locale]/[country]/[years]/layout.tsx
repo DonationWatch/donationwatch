@@ -8,6 +8,7 @@ import type { TabItem } from "@/components/tabs";
 
 import { DynamicAbsoluteMultiplePartySumsGradient } from "@/components/charts/dynamic-stacked-party-line";
 import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
+import { PageWithToc } from "@/components/layout/article";
 import { PageHeader } from "@/components/layout/page-header";
 import { LastModifiedSchema } from "@/components/schema";
 import { NavigationTabs } from "@/components/tabs";
@@ -215,27 +216,29 @@ export default async function YearsLayout(
         years={years}
       />
 
-      <PageHeader>
-        <FilteredYearsHeroHeader
-          title={t("years.title")}
-          years={years}
-          partySums={partySums}
-        />
-      </PageHeader>
+      <PageWithToc tocTitle={formatYearsRange(years)}>
+        <PageHeader>
+          <FilteredYearsHeroHeader
+            title={t("years.title")}
+            years={years}
+            partySums={partySums}
+          />
+        </PageHeader>
 
-      {hasYearSums(partySums, years) ? (
-        <div className="container mx-auto px-4">
-          <div className="space-y-4 pt-4">
-            <NavigationTabs items={tabItems} />
+        {hasYearSums(partySums, years) ? (
+          <div className="container mx-auto px-4">
+            <div className="space-y-4 pt-4">
+              <NavigationTabs items={tabItems} />
+            </div>
           </div>
+        ) : null}
+
+        {children}
+
+        <div className="container mx-auto px-4">
+          <YearsFooterNav years={years} locale={locale} />
         </div>
-      ) : null}
-
-      {children}
-
-      <div className="container mx-auto px-4">
-        <YearsFooterNav years={years} locale={locale} />
-      </div>
+      </PageWithToc>
     </ScopedClientIntlProvider>
   );
 }

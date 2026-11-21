@@ -3,7 +3,11 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
-import { Article } from "@/components/layout/article";
+import {
+  Article,
+  ArticleHeader,
+  ArticleTitle,
+} from "@/components/layout/article";
 import { NonCountryRootLayout } from "@/components/layout/non-country-root-layout";
 import { CONTACT_MAIL, IMPRINT } from "@/utils/config";
 import { LOCALES } from "@/utils/locales";
@@ -49,14 +53,19 @@ export default async function Page(props: PageProps<"/[locale]/imprint">) {
 
   return (
     <NonCountryRootLayout locale={locale}>
-      <Article title={tImprint("title")}>
-        <div className="whitespace-pre">{IMPRINT}</div>
-        <a
-          href={`mailto:${CONTACT_MAIL}`}
-          className="text-primary-700 dark:text-primary-400 hover:underline"
-        >
-          {CONTACT_MAIL}
-        </a>
+      <Article>
+        <ArticleHeader>
+          <ArticleTitle>{tImprint("title")}</ArticleTitle>
+        </ArticleHeader>
+        <div className="space-y-4">
+          <p className="whitespace-pre">{IMPRINT}</p>
+          <a
+            href={`mailto:${CONTACT_MAIL}`}
+            className="text-primary-700 dark:text-primary-400 inline-block underline hover:no-underline"
+          >
+            {CONTACT_MAIL}
+          </a>
+        </div>
       </Article>
     </NonCountryRootLayout>
   );

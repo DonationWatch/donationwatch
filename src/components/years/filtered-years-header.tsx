@@ -14,6 +14,7 @@ import { HighscoreHeader } from "@/components/years/years-header";
 import { useFilterEngine } from "@/hooks/use-filter-engine";
 import { getPartiesByYears } from "@/utils/data/get-parties-by-years";
 import { getPartiesSum } from "@/utils/data/get-parties-sum";
+import { formatYearsRange } from "@/utils/formatter";
 import { numbersAvg } from "@/utils/math";
 
 function useFilteredYearsStats(years: string[], partySums: PartyYearsSums) {
@@ -101,16 +102,22 @@ export const FilteredYearsHeroHeader = ({
   const { country, count, sum, avg } = useFilteredYearsStats(years, partySums);
 
   return (
-    <HighscoreHeader.Frame className={className}>
-      <HighscoreHeader.InlineTitle title={title} years={years} />
-      <HighscoreHeader.Meta country={country} count={count} sum={sum}>
-        <HighscoreHeader.AverageMeta
-          country={country}
-          count={count}
-          avg={avg}
-        />
-      </HighscoreHeader.Meta>
-      {children}
-    </HighscoreHeader.Frame>
+    <div
+      data-toc-header=""
+      data-toc-header-label={title}
+      data-toc-header-title={formatYearsRange(years)}
+    >
+      <HighscoreHeader.Frame className={className}>
+        <HighscoreHeader.InlineTitle title={title} years={years} />
+        <HighscoreHeader.Meta country={country} count={count} sum={sum}>
+          <HighscoreHeader.AverageMeta
+            country={country}
+            count={count}
+            avg={avg}
+          />
+        </HighscoreHeader.Meta>
+        {children}
+      </HighscoreHeader.Frame>
+    </div>
   );
 };

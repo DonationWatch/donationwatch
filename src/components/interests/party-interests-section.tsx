@@ -6,8 +6,8 @@ import type { Donation } from "@/utils/types";
 
 import {
   ArticleSectionColumn,
+  ArticleSectionOneColumns,
   ArticleSectionTitle,
-  ArticleSectionTwoColumns,
 } from "@/components/layout/article";
 import Loading from "@/components/loading/loading";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
@@ -24,15 +24,12 @@ const InterestsSectionLayout = ({ chart }: InterestsSectionLayoutProps) => {
   const t = useTranslations("party.interests");
 
   return (
-    <ArticleSectionTwoColumns className="items-start">
+    <ArticleSectionOneColumns>
       <ArticleSectionColumn>
         <ArticleSectionTitle id={"sec-party-interests"} title={t("title")} />
-        <PartyInterestsText />
+        <PartyInterestsText chart={chart} />
       </ArticleSectionColumn>
-      <ArticleSectionColumn className="self-start">
-        {chart}
-      </ArticleSectionColumn>
-    </ArticleSectionTwoColumns>
+    </ArticleSectionOneColumns>
   );
 };
 

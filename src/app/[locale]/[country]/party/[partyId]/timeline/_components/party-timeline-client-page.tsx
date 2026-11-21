@@ -11,7 +11,6 @@ import {
   ArticleSectionColumn,
   ArticleSectionOneColumns,
   ArticleSectionTitle,
-  ArticleSectionTwoColumns,
   ArticleSectionWrapper,
 } from "@/components/layout/article";
 import Loading from "@/components/loading/loading";
@@ -103,28 +102,33 @@ export const PartyTimelineClientPage = ({
         </ArticleSectionWrapper>
       ) : null}
       <ArticleSectionWrapper id={"sec-per-year"}>
-        <ArticleSectionTwoColumns>
+        <ArticleSectionOneColumns>
           <ArticleSectionColumn>
-            {hasFeature(country, Features.Date) ? null : (
+            {hasFeature(country, Features.Date) ? (
+              <ArticleSectionTitle id={"sec-per-year"} title={perYearTitle} />
+            ) : (
               <ArticleSectionTitle
                 as={"h1"}
                 id={"sec-timeline"}
                 title={timelineTitle}
               />
             )}
-            <PartyTimelineText party={party} donations={filteredDonations} />
-          </ArticleSectionColumn>
-          <ArticleSectionColumn>
-            <DonationPerMonthChart
+            <PartyTimelineText
+              party={party}
               donations={filteredDonations}
-              title={perYearTitle}
-              resolution={"year"}
-              subtitle={perYearSubtitle}
-              years={activeYears}
-              parties={[party]}
+              chart={
+                <DonationPerMonthChart
+                  donations={filteredDonations}
+                  title={perYearTitle}
+                  resolution={"year"}
+                  subtitle={perYearSubtitle}
+                  years={activeYears}
+                  parties={[party]}
+                />
+              }
             />
           </ArticleSectionColumn>
-        </ArticleSectionTwoColumns>
+        </ArticleSectionOneColumns>
       </ArticleSectionWrapper>
     </>
   );
