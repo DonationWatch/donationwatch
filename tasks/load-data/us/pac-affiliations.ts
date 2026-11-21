@@ -191,6 +191,56 @@ export const PAC_AFFILIATIONS: Record<string, PacAffiliationConfig> = {
     party: "DEM",
     expectedNames: ["GIFFORDS PAC", "AMERICANS FOR RESPONSIBLE SOLUTIONS-PAC"],
   },
+  C00961276: {
+    party: "DEM",
+    expectedNames: ["LOWER COSTS NOW"],
+  },
+  C90017955: {
+    party: "DEM",
+    expectedNames: [
+      "SERVICE EMPLOYEES INTERNATIONAL UNION POLITICAL EDUCATION AND ACTION FUND",
+      "SEIU PEA",
+    ],
+  },
+  C00953299: {
+    party: "DEM",
+    expectedNames: ["PEOPLE OVER POLITICS ACTION FUND"],
+  },
+  C00956292: {
+    party: "DEM",
+    expectedNames: ["NEBRASKA VALUES PAC"],
+  },
+  C00939801: {
+    party: "DEM",
+    expectedNames: [
+      "WORKING AMERICANS BUILDING A STRONGER AMERICA - SPONSORED BY THE WESTERN STATES CARPENTERS",
+      "WORKING AMERICANS BUILDING A STRONGER AMERICA",
+    ],
+  },
+  C00960997: {
+    party: "DEM",
+    expectedNames: ["READY FOR THE FIGHT"],
+  },
+  C00490375: {
+    party: "DEM",
+    expectedNames: ["NATIONAL NURSES UNITED FOR PATIENT PROTECTION"],
+  },
+  C00899427: {
+    party: "DEM",
+    expectedNames: ["SERVANT-LEADER FUND, INC."],
+  },
+  C00751503: {
+    party: "DEM",
+    expectedNames: ["NEW LEADERSHIP PAC"],
+  },
+  C00739771: {
+    party: "DEM",
+    expectedNames: ["UNITE TO WIN"],
+  },
+  C00959593: {
+    party: "DEM",
+    expectedNames: ["49TH STATE PAC"],
+  },
 
   // Democratic Joint Fundraising Committees (Type J)
   C00744946: {
@@ -535,6 +585,66 @@ export const PAC_AFFILIATIONS: Record<string, PacAffiliationConfig> = {
     party: "REP",
     expectedNames: ["FREEDOM CAUCUS FUND", "HOUSE FREEDOM FUND"],
   },
+  C00904482: {
+    party: "REP",
+    expectedNames: ["FIGHT ON IOWA"],
+  },
+  C00960435: {
+    party: "REP",
+    expectedNames: ["NO GOING BACK PAC INC."],
+  },
+  C00960211: {
+    party: "REP",
+    expectedNames: ["TEXAS PAC"],
+  },
+  C00960443: {
+    party: "REP",
+    expectedNames: ["SAFETY & AFFORDABILITY PAC INC."],
+  },
+  C00634261: {
+    party: "REP",
+    expectedNames: ["DEFEND US PAC"],
+  },
+  C00953588: {
+    party: "REP",
+    expectedNames: ["CIVIC RENEWAL FUND INC."],
+  },
+  C00961656: {
+    party: "REP",
+    expectedNames: ["CHOOSE FREEDOM PAC"],
+  },
+  C00961342: {
+    party: "REP",
+    expectedNames: ["THE MAINE STANDARD"],
+  },
+  C00950600: {
+    party: "REP",
+    expectedNames: ["PALMETTO ACTION"],
+  },
+  C00961227: {
+    party: "REP",
+    expectedNames: ["CORNHUSKER MAJORITY"],
+  },
+  C00733352: {
+    party: "REP",
+    expectedNames: ["AMERICANS 4 SECURITY PAC"],
+  },
+  C00950006: {
+    party: "REP",
+    expectedNames: ["75 PAC"],
+  },
+  C00540203: {
+    party: "REP",
+    expectedNames: ["DEFENDING MAIN STREET SUPERPAC INC."],
+  },
+  C00922294: {
+    party: "REP",
+    expectedNames: ["STRONGER MAINE"],
+  },
+  C00912865: {
+    party: "REP",
+    expectedNames: ["OHIO FLYER PAC"],
+  },
 
   // Republican Joint Fundraising Committees (Type J)
   C00858373: { party: "REP", expectedNames: ["GROW THE MAJORITY"] },
@@ -645,6 +755,14 @@ export const PAC_AFFILIATIONS: Record<string, PacAffiliationConfig> = {
     party: "REP",
     expectedNames: ["BUCKEYE LEADERSHIP FUND, INC."],
   },
+  C00952218: {
+    party: "REP",
+    expectedNames: ["PAXTON VICTORY"],
+  },
+  C00937797: {
+    party: "REP",
+    expectedNames: ["HUSTED VICTORY"],
+  },
 
   // Bipartisan, Nonpartisan & Independent Super PACs
   C00835959: { party: "NON", expectedNames: ["FAIRSHAKE"] },
@@ -682,6 +800,22 @@ export const PAC_AFFILIATIONS: Record<string, PacAffiliationConfig> = {
   C00888172: {
     party: "NON",
     expectedNames: ["MAHA ALLIANCE"],
+  },
+  C00884924: {
+    party: "NON",
+    expectedNames: ["INDEPENDENT PAC"],
+  },
+  C00824342: {
+    party: "NON",
+    expectedNames: ["WAY BACK PAC"],
+  },
+  C00943910: {
+    party: "NON",
+    expectedNames: ["MONTANA FREEDOM PAC"],
+  },
+  C00624817: {
+    party: "NON",
+    expectedNames: ["EARN INTERNATIONAL UNION OF OPERATING ENGINEERS"],
   },
 };
 
