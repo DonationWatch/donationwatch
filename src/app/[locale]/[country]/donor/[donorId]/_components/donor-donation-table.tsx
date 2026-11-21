@@ -5,7 +5,6 @@ import type { Donation } from "@/utils/types";
 import {
   ArticleSectionColumn,
   ArticleSectionOneColumns,
-  ArticleSectionTitle,
   ArticleSectionWrapper,
 } from "@/components/layout/article";
 import { useRequiredCountryConfig } from "@/components/providers/country-provider";
@@ -36,22 +35,16 @@ export const DonorDonationTable = ({
     <ArticleSectionWrapper id={"sec-donor-donations-table"}>
       <ArticleSectionOneColumns>
         <ArticleSectionColumn>
-          <ArticleSectionTitle
-            id={"sec-donor-donations-table"}
-            title={t("changes.title")}
-          />
-
-          <p className="mb-6">
-            {t("donor.table", {
-              donor: donorName,
-            })}
-          </p>
-
           <DonationHistoryTable
             readonlyDonor={true}
             donations={donations}
             years={countryConfig.years}
             partiesIds={[]}
+            title={t("changes.title")}
+            description={t("donor.table", {
+              donor: donorName,
+            })}
+            titleId={"sec-donor-donations-table"}
           />
         </ArticleSectionColumn>
       </ArticleSectionOneColumns>

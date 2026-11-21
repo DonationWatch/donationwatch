@@ -3,7 +3,13 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
-import { Article, ArticleSection } from "@/components/layout/article";
+import {
+  ArticleHeader,
+  ArticleLead,
+  ArticleSection,
+  ArticleTitle,
+  ArticleWithToc,
+} from "@/components/layout/article";
 import { NonCountryRootLayout } from "@/components/layout/non-country-root-layout";
 import { CONTACT_MAIL, IMPRINT } from "@/utils/config";
 import { LOCALES } from "@/utils/locales";
@@ -52,24 +58,22 @@ export default async function Page(props: PageProps<"/[locale]/privacy">) {
 
   return (
     <NonCountryRootLayout locale={locale}>
-      <Article
-        title={tPrivacy("title")}
-        subtitle={
-          <div className="text-sm text-gray-500">
+      <ArticleWithToc tocTitle={tPrivacy("title")}>
+        <ArticleHeader>
+          <ArticleTitle>{tPrivacy("title")}</ArticleTitle>
+          <ArticleLead className="space-y-1 text-sm">
             <p>{tPrivacy("last_updated", { date: LAST_UPDATE })}</p>
-            <p className="mt-1">
-              {tPrivacy("effective_date", { date: EFFECTIVE_DATE })}
-            </p>
-          </div>
-        }
-      >
+            <p>{tPrivacy("effective_date", { date: EFFECTIVE_DATE })}</p>
+          </ArticleLead>
+        </ArticleHeader>
+
         {/* Controller Section */}
         <ArticleSection title={tPrivacy("controller.title")}>
-          <p className="mb-4">{tPrivacy("controller.p")}</p>
+          <p>{tPrivacy("controller.p")}</p>
           <p className="whitespace-pre">{IMPRINT}</p>
           <a
             href={`mailto:${CONTACT_MAIL}`}
-            className="text-primary-700 dark:text-primary-400 inline-block hover:underline"
+            className="text-primary-700 dark:text-primary-400 inline-block underline hover:no-underline"
           >
             {CONTACT_MAIL}
           </a>
@@ -77,7 +81,7 @@ export default async function Page(props: PageProps<"/[locale]/privacy">) {
 
         {/* Data Collection Section */}
         <ArticleSection title={tPrivacy("data.title")}>
-          <p className="mb-4">{tPrivacy("data.p")}</p>
+          <p>{tPrivacy("data.p")}</p>
           <ul className="list-disc space-y-2 pl-6">
             <li>{tPrivacy("data.li0")}</li>
             <li>{tPrivacy("data.li1")}</li>
@@ -87,26 +91,26 @@ export default async function Page(props: PageProps<"/[locale]/privacy">) {
 
         <ArticleSection title={tPrivacy("logs.title")}>
           <p>{tPrivacy("logs.p")}</p>
-          <ul className="mt-2 list-disc space-y-1 pl-6">
+          <ul className="list-disc space-y-2 pl-6">
             <li>{tPrivacy("logs.li0")}</li>
             <li>{tPrivacy("logs.li1")}</li>
             <li>{tPrivacy("logs.li2")}</li>
           </ul>
-          <p className="mt-2">{tPrivacy("logs.retention")}</p>
+          <p>{tPrivacy("logs.retention")}</p>
         </ArticleSection>
 
         {/* Cloudflare Section */}
         <ArticleSection title={tPrivacy("cf.title")}>
-          <p className="mb-4">{tPrivacy("cf.p")}</p>
-          <p className="mb-4">{tPrivacy("cf.p2")}</p>
-          <p className="mb-4">{tPrivacy("cf.p3")}</p>
+          <p>{tPrivacy("cf.p")}</p>
+          <p>{tPrivacy("cf.p2")}</p>
+          <p>{tPrivacy("cf.p3")}</p>
           <ol className="list-decimal space-y-2 pl-6">
             <li>{tPrivacy("cf.workers.summary")}</li>
             <li>{tPrivacy("cf.analytics.summary")}</li>
           </ol>
           <a
             href="https://www.cloudflare.com/privacypolicy/"
-            className="text-primary-700 dark:text-primary-400 mt-4 inline-block hover:underline"
+            className="text-primary-700 dark:text-primary-400 inline-block underline hover:no-underline"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -115,11 +119,11 @@ export default async function Page(props: PageProps<"/[locale]/privacy">) {
         </ArticleSection>
 
         <ArticleSection title={tPrivacy("user_rights.title")}>
-          <p className="mb-4">{tPrivacy("user_rights.p")}</p>
-          <p className="mb-4">{tPrivacy("user_rights.erasure")}</p>
+          <p>{tPrivacy("user_rights.p")}</p>
+          <p>{tPrivacy("user_rights.erasure")}</p>
           <p>{tPrivacy("user_rights.discretionary")}</p>
         </ArticleSection>
-      </Article>
+      </ArticleWithToc>
     </NonCountryRootLayout>
   );
 }

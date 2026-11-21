@@ -1,4 +1,6 @@
 "use client";
+import type { ReactNode } from "react";
+
 import type { Party } from "@/types/party";
 import type { Donation } from "@/utils/types";
 
@@ -15,10 +17,12 @@ export const LoadingPartyDonorTypeText = ({
   party,
   donations,
   ssrDonorTypes,
+  chart,
 }: {
   party: Party;
   donations: Donation[];
   ssrDonorTypes?: Partial<Record<DonorType, { sum: number; count: number }>>;
+  chart?: ReactNode;
 }) => {
   const country = useRequiredCountryConfig();
   const t = useTranslations();
@@ -63,6 +67,7 @@ export const LoadingPartyDonorTypeText = ({
         })}
       </p>
       <p>{t("party.donor_types.p2")}</p>
+      {chart ? <div className="my-4">{chart}</div> : null}
       <ul className="mx-2 py-2 *:py-1">
         {sortedEntries.map(([type, stats], idx) => {
           const donorType = type as unknown as DonorType;

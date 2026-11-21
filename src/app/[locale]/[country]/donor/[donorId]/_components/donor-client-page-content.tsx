@@ -8,8 +8,8 @@ import { LoadedDonationYearsTreemap } from "@/components/charts/loading-donation
 import { RankBadge } from "@/components/donations/ranking-item";
 import {
   ArticleSectionColumn,
+  ArticleSectionOneColumns,
   ArticleSectionTitle,
-  ArticleSectionTwoColumns,
   ArticleSectionWrapper,
 } from "@/components/layout/article";
 import { TextPartyLink } from "@/components/parties/text-party-link";
@@ -138,7 +138,7 @@ export const DonorClientPageContent = ({
 
   return (
     <ArticleSectionWrapper id={"sec-donor-overview"}>
-      <ArticleSectionTwoColumns>
+      <ArticleSectionOneColumns>
         <ArticleSectionColumn>
           <ArticleSectionTitle
             id={"sec-donor-overview"}
@@ -165,6 +165,19 @@ export const DonorClientPageContent = ({
             })}
           </p>
           <p className="mb-6">{tDonor("biggest_amounts")}</p>
+          <div className="mb-6">
+            <LoadedDonationYearsTreemap
+              title={tDonor("tree_map", {
+                name: donorName,
+              })}
+              subtitle={tDonor("tree_map_subtitle", {
+                donor: donorName,
+                country: getCountryName(countryConfig, tCountries),
+              })}
+              donations={donations}
+              parties={parties}
+            />
+          </div>
           <ul className="mx-2 py-2 *:py-1">
             {allPartyDonations
               .toSorted((a, b) => b.sum - a.sum)
@@ -315,22 +328,7 @@ export const DonorClientPageContent = ({
             ) : null}
           </p>
         </ArticleSectionColumn>
-        <ArticleSectionColumn>
-          <div>
-            <LoadedDonationYearsTreemap
-              title={tDonor("tree_map", {
-                name: donorName,
-              })}
-              subtitle={tDonor("tree_map_subtitle", {
-                donor: donorName,
-                country: getCountryName(countryConfig, tCountries),
-              })}
-              donations={donations}
-              parties={parties}
-            />
-          </div>
-        </ArticleSectionColumn>
-      </ArticleSectionTwoColumns>
+      </ArticleSectionOneColumns>
     </ArticleSectionWrapper>
   );
 };

@@ -78,7 +78,7 @@ export default async function TimelinePage(
   }
 
   return (
-    <Article fullWidth={true}>
+    <Article>
       <PartyTimelineClientPage
         party={party}
         timelineTitle={t("party.timeline.detail.title", {

@@ -88,7 +88,7 @@ export default async function YearPage(
     : undefined;
 
   return (
-    <Article fullWidth={true}>
+    <Article>
       <YearsDonorsClientPage
         years={years}
         donorInterests={donorInterests}

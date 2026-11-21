@@ -4,7 +4,12 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
-import { Article } from "@/components/layout/article";
+import {
+  ArticleHeader,
+  ArticleLead,
+  ArticleTitle,
+  WideArticle,
+} from "@/components/layout/article";
 import { getCountryName } from "@/utils/countries";
 import { getCountryConfig } from "@/utils/data/get-country-config";
 import { Features, hasFeature } from "@/utils/features";
@@ -79,13 +84,16 @@ export default async function Page(
 
   return (
     <ScopedClientIntlProvider messages={pageMessages}>
-      <Article title={tBarChartRace("title")}>
-        <>
-          <p className="mb-8 max-w-prose">{tBarChartRace("description")}</p>
-          <p className="mb-8 max-w-prose text-sm">{tBarChartRace("note")}</p>
-          <RacingBars />
-        </>
-      </Article>
+      <WideArticle>
+        <ArticleHeader>
+          <ArticleTitle>{tBarChartRace("title")}</ArticleTitle>
+          <ArticleLead>
+            <p>{tBarChartRace("description")}</p>
+            <p className="text-sm">{tBarChartRace("note")}</p>
+          </ArticleLead>
+        </ArticleHeader>
+        <RacingBars />
+      </WideArticle>
     </ScopedClientIntlProvider>
   );
 }

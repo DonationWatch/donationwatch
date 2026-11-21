@@ -139,7 +139,7 @@ export default async function DonorPage(
     : undefined;
 
   return (
-    <Article fullWidth={true}>
+    <Article>
       <PartyDonorsClientPage
         party={party}
         ssrStats={partyDonorStats[partyId] ?? null}

@@ -25,7 +25,8 @@
     "bar_chart_race": "Tulpdiagrammi võistlus",
     "compare_parties": "Võrdle erakondi",
     "support_us": "☕ Toeta serveri kulusid",
-    "enterprise": "Ettevõtte API"
+    "enterprise": "Ettevõtte API",
+    "on_this_page": "Sellel lehel"
   },
   "data": {
     "loading": "Sisu laadimine...",
@@ -1001,7 +1002,7 @@
     "p0": "Jälgige poliitilisi annetusi üle riigipiiride. Puhtad, täielikult rikastatud rahastuse API-d, mis põhinevad normaliseeritud tehingukirjetel ülemaailmsetest valimiskomisjonidest.",
     "draft_schema": "* Märkus: v1 skeemi mustand. Vastuse struktuur võib beetatagasiside põhjal muutuda.",
     "engine_specs": {
-      "title": "// MOOTORI SPETSIFIKATSIOONID JA TUGEVUSED",
+      "title": "Mootori spetsifikatsioonid ja tugevused",
       "s0": {
         "title": "1. Standardiseeritud tehingukirjed",
         "description": "Lõpetage võitlus segaste CSV-failide ja muutuvate riiklike vormingutega. Saage ligipääs puhtalt kaardistatud annetuskannetele, mis on normaliseeritud mitme rahvusvahelise registri lõikes."

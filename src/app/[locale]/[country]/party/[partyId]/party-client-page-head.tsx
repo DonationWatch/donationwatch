@@ -83,11 +83,19 @@ export const PartyClientPageHead = ({
     filteredYears,
   ]);
 
-  const showExtendedMeta = true;
-
+  const longName = getLongName(party);
   return (
     <>
-      <div className="mb-4">
+      <div
+        className="mb-4"
+        data-toc-header=""
+        data-toc-header-label={t("years.title")}
+        data-toc-header-title={party[PartyField.Short]}
+        data-toc-header-color={party[PartyField.Color]}
+        data-toc-header-subtitle={
+          party[PartyField.Short] !== longName ? longName : undefined
+        }
+      >
         <h2 className="mb-2 text-zinc-500 dark:text-zinc-300">
           {t("years.title")}
         </h2>
@@ -118,18 +126,16 @@ export const PartyClientPageHead = ({
             title={t("sum")}
             value={formatCountryCurrency(locale, donationSum, countryConfig)}
           />
-          {hasFeature(countryConfig, Features.Donors) &&
-            showExtendedMeta &&
-            donationCount > 1 && (
-              <MetaCard
-                title={t("average")}
-                value={formatCountryCurrency(
-                  locale,
-                  donationSum / donationCount,
-                  countryConfig,
-                )}
-              />
-            )}
+          {hasFeature(countryConfig, Features.Donors) && donationCount > 1 && (
+            <MetaCard
+              title={t("average")}
+              value={formatCountryCurrency(
+                locale,
+                donationSum / donationCount,
+                countryConfig,
+              )}
+            />
+          )}
         </div>
       </div>
     </>

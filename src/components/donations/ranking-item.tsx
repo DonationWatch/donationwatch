@@ -61,7 +61,7 @@ const RankingItemRoot = ({
       }}
     >
       <section
-        className="grow overflow-x-hidden"
+        className="min-w-0 grow overflow-x-hidden"
         data-testid="ranking-item"
         aria-labelledby={`rank-head-${id}-${rank}`}
       >
@@ -96,7 +96,7 @@ const RankingItemTrigger = ({ children }: PropsWithChildren) => {
   return (
     <div
       id={`rank-head-${id}-${rank}`}
-      className="flex grow cursor-pointer items-center justify-between overflow-x-hidden"
+      className="flex min-w-0 grow cursor-pointer items-center justify-between overflow-x-hidden"
       role="button"
       tabIndex={0}
       aria-expanded={expanded}

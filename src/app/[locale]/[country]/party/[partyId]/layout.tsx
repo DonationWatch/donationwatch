@@ -9,6 +9,7 @@ import type { Country } from "@/utils/countries";
 
 import { AbsoluteMultipleColorsGradient } from "@/components/absolute-multiple-colors-gradient";
 import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
+import { PageWithToc } from "@/components/layout/article";
 import { PageHeader } from "@/components/layout/page-header";
 import { LastModifiedSchema } from "@/components/schema";
 import { NavigationTabs } from "@/components/tabs";
@@ -199,27 +200,29 @@ export default async function PartyLayout(
           },
         ]}
       />
-      <PageHeader>
-        <section aria-labelledby="hero-label">
-          <PartyClientPageHead
-            party={party}
-            partyYearsSums={singlePartyYearsSums}
-          />
-          <div className="mb-3">
-            {wikiPageId && (
-              <section aria-label={tCommon("summary")} className="pt-4 sm:px-4">
-                <WikiQuote pageId={wikiPageId} />
-              </section>
-            )}
+      <PageWithToc tocTitle={party[PartyField.Short]}>
+        <PageHeader>
+          <section aria-labelledby="hero-label">
+            <PartyClientPageHead
+              party={party}
+              partyYearsSums={singlePartyYearsSums}
+            />
+            <div className="mb-3">
+              {wikiPageId && (
+                <section aria-label={tCommon("summary")} className="pt-4">
+                  <WikiQuote pageId={wikiPageId} />
+                </section>
+              )}
+            </div>
+          </section>
+        </PageHeader>
+        <div className="container mx-auto px-4">
+          <div className="space-y-4 pt-4">
+            <NavigationTabs items={tabItems} />
           </div>
-        </section>
-      </PageHeader>
-      <div className="container mx-auto px-4">
-        <div className="space-y-4 pt-4">
-          <NavigationTabs items={tabItems} />
         </div>
-      </div>
-      {children}
+        {children}
+      </PageWithToc>
     </ScopedClientIntlProvider>
   );
 }

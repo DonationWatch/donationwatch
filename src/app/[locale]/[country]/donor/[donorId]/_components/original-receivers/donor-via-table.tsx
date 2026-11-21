@@ -22,6 +22,7 @@ import type { CountryConfig } from "@/types/country-config";
 import type { BrowserBasedLocale, ConstLocale } from "@/utils/locales";
 
 import { TextPartyLink } from "@/components/parties/text-party-link";
+import { TableCard } from "@/components/table/expandable-table-card";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 import { useMobile } from "@/hooks/use-media-query";
 import { cn } from "@/lib/utils";
@@ -52,6 +53,7 @@ interface DonorViaTableProps {
   countryConfig: CountryConfig;
   locale: ConstLocale;
   browserBasedLocale: BrowserBasedLocale;
+  description?: string;
 }
 
 export const DonorViaTable = ({
@@ -59,6 +61,7 @@ export const DonorViaTable = ({
   countryConfig,
   locale,
   browserBasedLocale,
+  description,
 }: DonorViaTableProps) => {
   const tDonor = useTranslations("donor");
   const tCommon = useTranslations("common");
@@ -203,109 +206,131 @@ export const DonorViaTable = ({
   });
 
   return (
-    <div className="relative mb-6 max-h-[500px] overflow-auto">
-      <table className="w-full text-left">
-        {isMobile ? null : (
-          <thead className="sticky top-0 z-1 border-b border-zinc-200 bg-white dark:border-zinc-950 dark:bg-zinc-900">
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  const isRightAligned =
-                    header.column.columnDef.meta?.className?.includes(
-                      "justify-end",
-                    ) ?? false;
+    <TableCard.Provider title={tDonor("via.title")}>
+      <TableCard.Frame className="mb-6">
+        <TableCard.Header title={tDonor("via.title")} description={description}>
+          <TableCard.ExpandTool />
+        </TableCard.Header>
+        <TableCard.ScrollArea
+          className="relative overflow-auto"
+          collapsedClassName="max-h-[500px]"
+          expandedClassName="min-h-0 flex-1"
+        >
+          <table className="w-full text-left">
+            {isMobile ? null : (
+              <thead className="sticky top-0 z-1 border-b border-zinc-200 bg-white dark:border-zinc-950 dark:bg-zinc-900">
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <tr key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => {
+                      const isRightAligned =
+                        header.column.columnDef.meta?.className?.includes(
+                          "justify-end",
+                        ) ?? false;
 
-                  return (
-                    <th
-                      key={header.id}
-                      className={cn(
-                        "px-2 py-1",
-                        isRightAligned ? "text-right" : "text-left",
-                      )}
-                    >
-                      {header.isPlaceholder ? null : (
-                        <div
-                          tabIndex={header.column.getCanSort() ? 0 : undefined}
-                          role={
-                            header.column.getCanSort() ? "button" : undefined
-                          }
+                      return (
+                        <th
+                          key={header.id}
                           className={cn(
-                            "flex items-center space-x-1 select-none",
-                            isRightAligned ? "justify-end" : "justify-start",
-                            header.column.getCanSort()
-                              ? "hover:text-primary cursor-pointer transition-colors"
-                              : "",
+                            "px-2 py-1 first:pl-4 last:pr-4",
+                            isRightAligned ? "text-right" : "text-left",
                           )}
-                          onClick={header.column.getToggleSortingHandler()}
-                          onKeyDown={(e) => {
-                            if (e.key === "Enter" || e.key === " ") {
-                              e.preventDefault();
-                              header.column.getToggleSortingHandler()?.(e);
-                            }
-                          }}
-                          title={
-                            header.column.getCanSort()
-                              ? header.column.getNextSortingOrder() === "asc"
-                                ? tSort("asc")
-                                : header.column.getNextSortingOrder() === "desc"
-                                  ? tSort("desc")
-                                  : tSort("clear")
-                              : undefined
-                          }
                         >
-                          <span>
-                            {flexRender(
-                              header.column.columnDef.header,
-                              header.getContext(),
-                            )}
-                          </span>
-                          {{
-                            asc: (
-                              <ArrowDownNarrowWide
-                                size={16}
-                                className="shrink-0"
-                              />
-                            ),
-                            desc: (
-                              <ArrowUpNarrowWide
-                                size={16}
-                                className="shrink-0"
-                              />
-                            ),
-                          }[header.column.getIsSorted() as string] ?? null}
-                        </div>
-                      )}
-                    </th>
-                  );
-                })}
-              </tr>
-            ))}
-          </thead>
-        )}
-        <tbody>
-          {table.getRowModel().rows.map((row, index) => (
-            <tr
-              key={row.id}
-              className={cn(
-                "border-b border-zinc-200 dark:border-zinc-950",
-                index % 2 !== 0 && "bg-white dark:bg-zinc-900",
-              )}
-            >
-              {row.getVisibleCells().map((cell) => (
-                <td
-                  key={cell.id}
+                          {header.isPlaceholder ? null : (
+                            <div
+                              tabIndex={
+                                header.column.getCanSort() ? 0 : undefined
+                              }
+                              role={
+                                header.column.getCanSort()
+                                  ? "button"
+                                  : undefined
+                              }
+                              className={cn(
+                                "flex items-center space-x-1 select-none",
+                                isRightAligned
+                                  ? "justify-end"
+                                  : "justify-start",
+                                header.column.getCanSort()
+                                  ? "hover:text-primary cursor-pointer transition-colors"
+                                  : "",
+                              )}
+                              onClick={header.column.getToggleSortingHandler()}
+                              onKeyDown={(e) => {
+                                if (e.key === "Enter" || e.key === " ") {
+                                  e.preventDefault();
+                                  header.column.getToggleSortingHandler()?.(e);
+                                }
+                              }}
+                              title={
+                                header.column.getCanSort()
+                                  ? header.column.getNextSortingOrder() ===
+                                    "asc"
+                                    ? tSort("asc")
+                                    : header.column.getNextSortingOrder() ===
+                                        "desc"
+                                      ? tSort("desc")
+                                      : tSort("clear")
+                                  : undefined
+                              }
+                            >
+                              <span>
+                                {flexRender(
+                                  header.column.columnDef.header,
+                                  header.getContext(),
+                                )}
+                              </span>
+                              {{
+                                asc: (
+                                  <ArrowDownNarrowWide
+                                    size={16}
+                                    className="shrink-0"
+                                  />
+                                ),
+                                desc: (
+                                  <ArrowUpNarrowWide
+                                    size={16}
+                                    className="shrink-0"
+                                  />
+                                ),
+                              }[header.column.getIsSorted() as string] ?? null}
+                            </div>
+                          )}
+                        </th>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </thead>
+            )}
+            <tbody>
+              {table.getRowModel().rows.map((row, index) => (
+                <tr
+                  key={row.id}
                   className={cn(
-                    "px-2 py-1",
-                    cell.column.columnDef.meta?.className,
+                    "border-b border-zinc-200 dark:border-zinc-950",
+                    index % 2 !== 0 && "bg-white dark:bg-zinc-900",
                   )}
                 >
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
+                  {row.getVisibleCells().map((cell) => (
+                    <td
+                      key={cell.id}
+                      className={cn(
+                        "px-2 py-1 first:pl-4 last:pr-4",
+                        cell.column.columnDef.meta?.className,
+                      )}
+                    >
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext(),
+                      )}
+                    </td>
+                  ))}
+                </tr>
               ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+            </tbody>
+          </table>
+        </TableCard.ScrollArea>
+      </TableCard.Frame>
+    </TableCard.Provider>
   );
 };

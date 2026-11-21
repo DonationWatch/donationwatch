@@ -15,11 +15,10 @@ import {
 import { GlobalBiggestDonations } from "@/components/donations/global-biggest-donations";
 import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
 import {
-  Article,
   ArticleSection,
-  ArticleSectionColumn,
-  ArticleSectionOneColumns,
+  ArticleSectionTwoColumns,
   ArticleSectionWrapper,
+  WideArticle,
 } from "@/components/layout/article";
 import { DetectedCountry } from "@/components/layout/detected-country";
 import { NonCountryRootLayout } from "@/components/layout/non-country-root-layout";
@@ -147,7 +146,10 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
           className="relative flex min-h-64 flex-row items-center justify-center p-4 pt-14 sm:py-10 sm:pt-20"
         >
           <div className="z-1 container mx-auto lg:text-center">
-            <h1 className="mb-2 text-4xl font-bold sm:text-5xl" id="hero-title">
+            <h1
+              className="mb-2 text-4xl font-semibold tracking-tight sm:text-5xl"
+              id="hero-title"
+            >
               DonationWatch
             </h1>
             <p className="mb-4 text-xl sm:text-2xl">{tRoot("title")}</p>
@@ -162,44 +164,38 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
           </div>
         </header>
 
-        <Article fullWidth skipTitleOffset>
+        <WideArticle>
           <ArticleSectionWrapper id="stats">
-            <ArticleSectionOneColumns>
-              <ArticleSectionColumn>
-                <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-                  <div className="text-center">
-                    <MetaCard
-                      title={tRoot("stats.countries")}
-                      value={<FormattedNumber value={trackedCountries} />}
-                    />
-                  </div>
-                  <div className="text-center">
-                    <MetaCard
-                      title={tRoot("stats.parties")}
-                      value={<FormattedNumber value={trackedParties} />}
-                    />
-                  </div>
-                  <div className="text-center">
-                    <MetaCard
-                      title={tRoot("stats.donations")}
-                      value={<FormattedNumber value={trackedDonations} />}
-                    />
-                  </div>
-                  <div className="text-center">
-                    <MetaCard
-                      title={tRoot("stats.currencies")}
-                      value={Object.keys(currencyTotals).length}
-                    />
-                  </div>
-                </div>
-              </ArticleSectionColumn>
-            </ArticleSectionOneColumns>
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+              <div className="text-center">
+                <MetaCard
+                  title={tRoot("stats.countries")}
+                  value={<FormattedNumber value={trackedCountries} />}
+                />
+              </div>
+              <div className="text-center">
+                <MetaCard
+                  title={tRoot("stats.parties")}
+                  value={<FormattedNumber value={trackedParties} />}
+                />
+              </div>
+              <div className="text-center">
+                <MetaCard
+                  title={tRoot("stats.donations")}
+                  value={<FormattedNumber value={trackedDonations} />}
+                />
+              </div>
+              <div className="text-center">
+                <MetaCard
+                  title={tRoot("stats.currencies")}
+                  value={Object.keys(currencyTotals).length}
+                />
+              </div>
+            </div>
           </ArticleSectionWrapper>
 
           <ArticleSection title={tRoot("countries.title")} id="countries">
-            <p className="mb-6 text-gray-600 dark:text-gray-400">
-              {tRoot("countries.subtitle")}
-            </p>
+            <p>{tRoot("countries.subtitle")}</p>
             <nav
               aria-label={t("header.country_selection")}
               className="grid grid-cols-2 gap-2 lg:grid-cols-3 xl:gap-4 2xl:grid-cols-5"
@@ -254,9 +250,7 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
           </ArticleSection>
 
           <ArticleSection title={tRoot("why.title")} id="why-transparency">
-            <p className="text-gray-700 dark:text-gray-300">
-              {tRoot("why.p0")}
-            </p>
+            <p>{tRoot("why.p0")}</p>
           </ArticleSection>
 
           <GlobalBiggestDonations
@@ -265,14 +259,12 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
             locale={locale}
           />
 
-          <div className="grid gap-8 lg:grid-cols-2">
+          <ArticleSectionTwoColumns className="mb-0">
             <ArticleSection
               title={tRoot("enterprise.title")}
               id="enterprise-api-beta"
             >
-              <p className="mb-6 text-gray-700 dark:text-gray-300">
-                {tRoot("enterprise.p0")}
-              </p>
+              <p>{tRoot("enterprise.p0")}</p>
               <div>
                 <Button
                   variant={"outline"}
@@ -287,7 +279,7 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
               </div>
             </ArticleSection>
             <ArticleSection title={tRoot("open_source.title")} id="open-source">
-              <p className="text-gray-700 dark:text-gray-300">
+              <p>
                 <Translation
                   t={tRoot}
                   translationId={"open_source.p0"}
@@ -297,7 +289,7 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
                         href={GITHUB_URL}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-primary-600 hover:text-primary-800 dark:text-primary-400 dark:hover:text-primary-300 underline"
+                        className="text-primary-700 dark:text-primary-400 underline hover:no-underline"
                       >
                         GitHub
                       </a>
@@ -306,8 +298,8 @@ export default async function RootPage(props: PageProps<"/[locale]">) {
                 />
               </p>
             </ArticleSection>
-          </div>
-        </Article>
+          </ArticleSectionTwoColumns>
+        </WideArticle>
       </NonCountryRootLayout>
     </ScopedClientIntlProvider>
   );

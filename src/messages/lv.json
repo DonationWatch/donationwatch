@@ -25,7 +25,8 @@
     "bar_chart_race": "Joslu diagrammas sacensības",
     "compare_parties": "Salīdzināt partijas",
     "support_us": "☕ Atbalstiet servera izmaksas",
-    "enterprise": "Uzņēmuma API"
+    "enterprise": "Uzņēmuma API",
+    "on_this_page": "Šajā lapā"
   },
   "data": {
     "loading": "Saturs tiek ielādēts...",
@@ -1001,7 +1002,7 @@
     "p0": "Izsekojiet politiskajiem ziedojumiem pāri robežām. Tīras, pilnībā bagātinātas finansējuma API, kas balstītas uz normalizētiem darījumu ierakstiem no pasaules vēlēšanu komisijām.",
     "draft_schema": "* Piezīme: v1 shēmas melnraksts. Atbildes struktūra var mainīties, pamatojoties uz beta atsauksmēm.",
     "engine_specs": {
-      "title": "// DZINĒJA SPECIFIKĀCIJAS UN PRIEKŠROCĪBAS",
+      "title": "Dzinēja specifikācijas un priekšrocības",
       "s0": {
         "title": "1. Standartizēti darījumu ieraksti",
         "description": "Pārtrauciet cīnīties ar nekārtīgiem CSV failiem un mainīgiem valdības formātiem. Piekļūstiet tīri kartētiem ziedojumu ierakstiem, kas normalizēti vairākos starptautiskos reģistros."

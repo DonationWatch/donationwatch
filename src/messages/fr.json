@@ -25,7 +25,8 @@
     "bar_chart_race": "Course de graphiques",
     "compare_parties": "Comparer les partis",
     "support_us": "☕ Soutenir les coûts du serveur",
-    "enterprise": "API d’entreprise"
+    "enterprise": "API d’entreprise",
+    "on_this_page": "Sur cette page"
   },
   "data": {
     "loading": "Chargement du contenu...",
@@ -985,7 +986,7 @@
     "p0": "Suivez les dons politiques au-delà des frontières. Des API de financement propres et entièrement enrichies, construites sur des enregistrements de transactions normalisés provenant de commissions électorales du monde entier.",
     "draft_schema": "* Remarque : version préliminaire du schéma v1. La structure de la réponse est susceptible de changer en fonction des retours de la bêta.",
     "engine_specs": {
-      "title": "// SPÉCIFICATIONS ET POINTS FORTS DU MOTEUR",
+      "title": "Spécifications et points forts du moteur",
       "s0": {
         "title": "1. Enregistrements de transactions standardisés",
         "description": "Ne perdez plus de temps avec des CSV désordonnés et des formats gouvernementaux changeants. Accédez à des entrées de dons proprement mappées et normalisées à travers plusieurs registres internationaux."

@@ -122,7 +122,7 @@ export default async function TimelinePage(
         };
 
   return (
-    <Article fullWidth={true}>
+    <Article>
       <YearsTimelineClientPage
         years={years}
         parties={parties}

@@ -17,6 +17,11 @@ import { DonorsHero } from "@/components/donors/donors-hero";
 import { ExternalThanks } from "@/components/external-thanks";
 import { HistoryComponent } from "@/components/history-component";
 import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
+import {
+  ArticleSection,
+  ArticleSectionTwoColumns,
+  WideArticle,
+} from "@/components/layout/article";
 import { DetectedCountry } from "@/components/layout/detected-country";
 import { OldDataWarning } from "@/components/old-data-warning";
 import { PartiesHero } from "@/components/parties/parties-hero";
@@ -133,7 +138,7 @@ export default async function YearsPage(
         <div className="z-1 container mx-auto grid items-center max-lg:gap-10 lg:grid-cols-2 lg:gap-2">
           <div className="flex flex-col">
             <h1 className="mb-6 lg:mt-20">
-              <div className="mb-2 flex items-center text-3xl font-bold">
+              <div className="mb-2 flex items-center text-3xl font-semibold tracking-tight">
                 DonationWatch
               </div>
               <div className="text-lg sm:text-xl" id="hero-label">
@@ -205,196 +210,162 @@ export default async function YearsPage(
         </div>
       </section>
 
-      <section
-        className="content-visibility-auto contain-intrinsic-size-[auto_1100px_auto_512px] container mx-auto p-4 py-12 sm:py-24"
-        aria-labelledby="home-what-title"
-      >
-        <div className="items-center space-y-4 lg:flex lg:space-x-4">
-          <div className="lg:basis-1/2">
-            <h2 className="mb-4 text-2xl" id="home-what-title">
-              {tHome("what.title")}
-            </h2>
-            <p className="mb-4 whitespace-pre-wrap">{tHome("what.summary")}</p>
-            <p className="mb-4 whitespace-pre-wrap">
-              {tHome(`what.source.${country}`)}
-              <br />
-              {countryConfig.knownPartyRequirements ? (
-                <>
-                  <br />
-                  <Translation
-                    t={tHome}
-                    translationId="what.threshold"
-                    variables={{
-                      type:
-                        countryConfig.knownPartyRequirements.count === -1
-                          ? "sum"
-                          : countryConfig.knownPartyRequirements.sum === -1
-                            ? "count"
-                            : "both",
-                      count: countryConfig.knownPartyRequirements.count,
-                      sum: (
-                        <FormattedCompactCountryCurrency
-                          value={Math.max(
-                            0,
-                            countryConfig.knownPartyRequirements.sum,
-                          )}
-                        />
-                      ),
-                    }}
-                  />
-                  <br />
-                </>
-              ) : null}
-              {!hasFeature(countryConfig, Features.Donors) ? (
-                <>
-                  <br />
-                  {tHome("what.no_donors", {
-                    country: getCountryName(countryConfig, tCountries),
-                  })}
-                  <br />
-                </>
-              ) : null}
-              <br />
-              <a
-                className="hover:text-primary-800 dark:hover:text-primary-400 underline"
-                target="_blank"
-                href={countryConfig.source.url}
-                rel="noreferrer"
-              >
-                {tHome("what.source_link")}
-              </a>
-            </p>
-          </div>
-          {hasFeature(countryConfig, Features.Date) ? (
-            <section
-              aria-labelledby="home-most-recent-donations"
-              className="flex items-center justify-center lg:basis-1/2"
-            >
-              <Card className="w-full">
-                <h3 className="mb-2 px-2" id="home-most-recent-donations">
-                  {tHome("most_recent")}
-                </h3>
-                <HistoryComponent country={countryConfig} />
-              </Card>
-            </section>
-          ) : null}
-        </div>
-      </section>
-
-      <section
-        className="content-visibility-auto @container container mx-auto p-4 pb-12 sm:pb-24"
-        aria-labelledby="year-donations-list"
-      >
-        <div className="text-primary-700 dark:text-primary-400 mb-2 text-lg">
-          {tHome("years.subtitle")}
-        </div>
-        <h2 className="mb-6 text-2xl" id="year-donations-list">
-          {tHome("years.title")}
-        </h2>
-
-        <div className="grid gap-8 @4xl:grid-cols-2">
-          <DonationStackedYears partyYearsSums={partySums} />
-          <div>
-            <p className="mb-8 lg:text-lg">{tHome("years.summary")}</p>
-
-            <YearsCards
-              country={countryConfig}
-              locale={locale}
-              partyYearsSums={partySums}
-            />
-          </div>
-        </div>
-      </section>
-
-      <section
-        className="content-visibility-auto contain-intrinsic-size-[auto_1100px_auto_512px] container mx-auto p-4 pb-12 sm:pb-24"
-        aria-labelledby="home-parties-list"
-      >
-        <div className="text-primary-700 dark:text-primary-400 mb-2 text-lg">
-          {tHome("parties.subtitle")}
-        </div>
-        <h2 className="mb-6 text-2xl" id="home-parties-list">
-          {tHome("parties.title")}
-        </h2>
-        <p className="mb-8 lg:w-10/12 lg:text-lg">{tHome("parties.summary")}</p>
-
-        <PartiesHero country={countryConfig} locale={locale} />
-      </section>
-
-      {hasFeature(countryConfig, Features.Donors) ? (
-        <section
-          className="content-visibility-auto contain-intrinsic-size-[auto_1100px_auto_508px] container mx-auto p-4 pb-12 sm:pb-24"
-          aria-labelledby="home-donor-list"
-        >
-          <div className="text-primary-700 dark:text-primary-400 mb-2 text-lg">
-            {tHome("donors.subtitle")}
-          </div>
-          <h2 className="mb-6 text-2xl" id="home-donor-list">
-            {tHome("donors.title")}
-          </h2>
-          <p className="mb-8 lg:w-10/12 lg:text-lg">
-            {tHome("donors.summary", {
-              minYear: countryConfig.minYear,
-            })}
-          </p>
-
-          <DonorsHero
-            country={countryConfig}
-            biggestDonors={biggestDonors
-              .slice(0, TOP_DONORS_TO_SHOW)
-              .map((donor) => ({
-                id: donor.id,
-                name: donor.name,
-                sum: donor.sum,
-                stackedConfig: partyYearsSumsToStackedConfig(
-                  countryConfig.years,
-                  donor.partyYearSums,
-                ),
-              }))}
-          />
-
-          <BiggestDonationsHero biggestDonations={biggestDonations} />
-        </section>
-      ) : null}
-
-      {countryConfig.legislativeYears?.length ? (
-        <section
-          className="content-visibility-auto contain-intrinsic-size-[auto_1100px_auto_924px] @container container mx-auto p-4 pb-12 sm:pb-24"
-          aria-labelledby="home-history-list"
-        >
-          <div className="text-primary-700 dark:text-primary-400 mb-2 text-lg">
-            {tHome("list.subtitle")}
-          </div>
-          <h2 className="mb-6 text-2xl" id="home-history-list">
-            {tHome("list.title")}
-          </h2>
-          <p className="mb-8 lg:w-10/12 lg:text-lg">{tHome("list.summary")}</p>
-
-          <div className="grid gap-4 @3xl:grid-cols-2">
-            {countryConfig.legislativeYears.map((years, idx) => {
-              return (
-                <UnfilteredYearsHeader
-                  className={cardVariants({ variant: "action" })}
-                  key={idx}
-                  country={countryConfig}
-                  idPrefix="list-"
-                  locale={locale}
-                  years={years}
-                  partySums={partySums}
-                  parties={parties}
-                >
-                  <div className="h-2.5">
-                    <DynamicStackedPartyDonations
-                      years={years}
-                      partyYearsSums={partySums}
+      <WideArticle>
+        <ArticleSection title={tHome("what.title")} id="home-what-title">
+          <ArticleSectionTwoColumns className="mb-0 items-center">
+            <div className="min-w-0 space-y-4">
+              <p className="whitespace-pre-wrap">{tHome("what.summary")}</p>
+              <p className="whitespace-pre-wrap">
+                {tHome(`what.source.${country}`)}
+                <br />
+                {countryConfig.knownPartyRequirements ? (
+                  <>
+                    <br />
+                    <Translation
+                      t={tHome}
+                      translationId="what.threshold"
+                      variables={{
+                        type:
+                          countryConfig.knownPartyRequirements.count === -1
+                            ? "sum"
+                            : countryConfig.knownPartyRequirements.sum === -1
+                              ? "count"
+                              : "both",
+                        count: countryConfig.knownPartyRequirements.count,
+                        sum: (
+                          <FormattedCompactCountryCurrency
+                            value={Math.max(
+                              0,
+                              countryConfig.knownPartyRequirements.sum,
+                            )}
+                          />
+                        ),
+                      }}
                     />
-                  </div>
-                </UnfilteredYearsHeader>
-              );
-            })}
+                    <br />
+                  </>
+                ) : null}
+                {!hasFeature(countryConfig, Features.Donors) ? (
+                  <>
+                    <br />
+                    {tHome("what.no_donors", {
+                      country: getCountryName(countryConfig, tCountries),
+                    })}
+                    <br />
+                  </>
+                ) : null}
+                <br />
+                <a
+                  className="text-primary-700 dark:text-primary-400 underline hover:no-underline"
+                  target="_blank"
+                  href={countryConfig.source.url}
+                  rel="noreferrer"
+                >
+                  {tHome("what.source_link")}
+                </a>
+              </p>
+            </div>
+            {hasFeature(countryConfig, Features.Date) ? (
+              <section
+                aria-labelledby="home-most-recent-donations"
+                className="flex min-w-0 items-center justify-center"
+              >
+                <Card className="w-full">
+                  <h3
+                    className="mb-2 px-2 text-base font-semibold"
+                    id="home-most-recent-donations"
+                  >
+                    {tHome("most_recent")}
+                  </h3>
+                  <HistoryComponent country={countryConfig} />
+                </Card>
+              </section>
+            ) : null}
+          </ArticleSectionTwoColumns>
+        </ArticleSection>
+
+        <ArticleSection title={tHome("years.title")} id="year-donations-list">
+          <div className="content-visibility-auto @container">
+            <div className="grid gap-8 @4xl:grid-cols-2">
+              <DonationStackedYears partyYearsSums={partySums} />
+              <div className="space-y-4">
+                <p>{tHome("years.summary")}</p>
+
+                <YearsCards
+                  country={countryConfig}
+                  locale={locale}
+                  partyYearsSums={partySums}
+                />
+              </div>
+            </div>
           </div>
-        </section>
-      ) : null}
+        </ArticleSection>
+
+        <ArticleSection title={tHome("parties.title")} id="home-parties-list">
+          <p>{tHome("parties.summary")}</p>
+
+          <PartiesHero country={countryConfig} locale={locale} />
+        </ArticleSection>
+
+        {hasFeature(countryConfig, Features.Donors) ? (
+          <ArticleSection title={tHome("donors.title")} id="home-donor-list">
+            <p>
+              {tHome("donors.summary", {
+                minYear: countryConfig.minYear,
+              })}
+            </p>
+
+            <DonorsHero
+              country={countryConfig}
+              biggestDonors={biggestDonors
+                .slice(0, TOP_DONORS_TO_SHOW)
+                .map((donor) => ({
+                  id: donor.id,
+                  name: donor.name,
+                  sum: donor.sum,
+                  stackedConfig: partyYearsSumsToStackedConfig(
+                    countryConfig.years,
+                    donor.partyYearSums,
+                  ),
+                }))}
+            />
+
+            <BiggestDonationsHero biggestDonations={biggestDonations} />
+          </ArticleSection>
+        ) : null}
+
+        {countryConfig.legislativeYears?.length ? (
+          <ArticleSection title={tHome("list.title")} id="home-history-list">
+            <p>{tHome("list.summary")}</p>
+
+            <div className="@container">
+              <div className="grid gap-4 @3xl:grid-cols-2">
+                {countryConfig.legislativeYears.map((years, idx) => {
+                  return (
+                    <UnfilteredYearsHeader
+                      className={cardVariants({ variant: "action" })}
+                      key={idx}
+                      country={countryConfig}
+                      idPrefix="list-"
+                      locale={locale}
+                      years={years}
+                      partySums={partySums}
+                      parties={parties}
+                    >
+                      <div className="h-2.5">
+                        <DynamicStackedPartyDonations
+                          years={years}
+                          partyYearsSums={partySums}
+                        />
+                      </div>
+                    </UnfilteredYearsHeader>
+                  );
+                })}
+              </div>
+            </div>
+          </ArticleSection>
+        ) : null}
+      </WideArticle>
 
       <ExternalThanks country={countryConfig} locale={locale} />
     </ScopedClientIntlProvider>

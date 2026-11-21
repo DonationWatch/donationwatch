@@ -10,7 +10,6 @@ import {
   ArticleSectionColumn,
   ArticleSectionOneColumns,
   ArticleSectionTitle,
-  ArticleSectionTwoColumns,
   ArticleSectionWrapper,
 } from "@/components/layout/article";
 import { useRequiredCountryConfig } from "@/components/providers/country-provider";
@@ -69,7 +68,7 @@ const CurrentCountryPart = ({
 
   return (
     <ArticleSectionWrapper id={"sec-current-country"}>
-      <ArticleSectionTwoColumns>
+      <ArticleSectionOneColumns>
         <ArticleSectionColumn>
           <ArticleSectionTitle
             as={"h2"}
@@ -102,6 +101,15 @@ const CurrentCountryPart = ({
             })}
           </p>
 
+          <div className="mb-6">
+            <DonationOriginVisual
+              donations={donations}
+              years={years}
+              parties={parties}
+              subtitle={subtitle}
+            />
+          </div>
+
           <ul className="mb-6 space-y-1">
             {sums.map(([bucket, data], idx) => (
               <OriginDonationsItem
@@ -117,17 +125,7 @@ const CurrentCountryPart = ({
             ))}
           </ul>
         </ArticleSectionColumn>
-        <ArticleSectionColumn>
-          <div>
-            <DonationOriginVisual
-              donations={donations}
-              years={years}
-              parties={parties}
-              subtitle={subtitle}
-            />
-          </div>
-        </ArticleSectionColumn>
-      </ArticleSectionTwoColumns>
+      </ArticleSectionOneColumns>
     </ArticleSectionWrapper>
   );
 };
@@ -338,7 +336,7 @@ const DonationOrigin = ({
   );
 
   return (
-    <Article fullWidth={true}>
+    <Article>
       <ArticleSectionWrapper id={"sec-origin"}>
         <ArticleSectionOneColumns>
           <ArticleSectionColumn>

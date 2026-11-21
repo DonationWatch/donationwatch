@@ -17,7 +17,6 @@ import {
   ArticleSectionColumn,
   ArticleSectionOneColumns,
   ArticleSectionTitle,
-  ArticleSectionTwoColumns,
   ArticleSectionWrapper,
 } from "@/components/layout/article";
 import Loading from "@/components/loading/loading";
@@ -186,7 +185,7 @@ export const YearsOverviewClientPage = ({
   return (
     <>
       <ArticleSectionWrapper id={"sec-years-overview"}>
-        <ArticleSectionTwoColumns>
+        <ArticleSectionOneColumns>
           <ArticleSectionColumn>
             <ArticleSectionTitle
               as={"h1"}
@@ -258,6 +257,13 @@ export const YearsOverviewClientPage = ({
                 />
               </p>
             )}
+            <div className="mb-6">
+              <DonationsPieChart
+                years={activeYears}
+                partyYearsSums={partyYearSums}
+                sums={sums}
+              />
+            </div>
             <LoadedTopPartyDonations
               locale={locale}
               donations={filteredDonations}
@@ -265,16 +271,7 @@ export const YearsOverviewClientPage = ({
               sum={sum}
             />
           </ArticleSectionColumn>
-          <ArticleSectionColumn>
-            <div>
-              <DonationsPieChart
-                years={activeYears}
-                partyYearsSums={partyYearSums}
-                sums={sums}
-              />
-            </div>
-          </ArticleSectionColumn>
-        </ArticleSectionTwoColumns>
+        </ArticleSectionOneColumns>
       </ArticleSectionWrapper>
 
       {count > 0 ? (

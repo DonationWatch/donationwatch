@@ -5,7 +5,12 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
 import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
-import { Article } from "@/components/layout/article";
+import {
+  ArticleHeader,
+  ArticleLead,
+  ArticleTitle,
+  WideArticle,
+} from "@/components/layout/article";
 import Loading from "@/components/loading/loading";
 import { PartyComparison } from "@/components/parties/party-comparison";
 import { COUNTRIES, getCountryName } from "@/utils/countries";
@@ -83,12 +88,17 @@ export default async function Page(
 
   return (
     <ScopedClientIntlProvider messages={pageMessages}>
-      <Article title={tCompareParties("title")}>
-        <p className="mb-8 max-w-prose">{tCompareParties("description")}</p>
+      <WideArticle>
+        <ArticleHeader>
+          <ArticleTitle>{tCompareParties("title")}</ArticleTitle>
+          <ArticleLead>
+            <p>{tCompareParties("description")}</p>
+          </ArticleLead>
+        </ArticleHeader>
         <Suspense fallback={<Loading />}>
           <PartyComparison />
         </Suspense>
-      </Article>
+      </WideArticle>
     </ScopedClientIntlProvider>
   );
 }

@@ -145,7 +145,7 @@ export const YearsDonorsClientPage = ({
         </ArticleSectionTwoColumns>
       </ArticleSectionWrapper>
       <ArticleSectionWrapper id={"sec-histogram"}>
-        <ArticleSectionTwoColumns>
+        <ArticleSectionOneColumns>
           <ArticleSectionColumn>
             <ArticleSectionTitle
               as={"h2"}
@@ -153,14 +153,7 @@ export const YearsDonorsClientPage = ({
               title={histogramSectionTitle}
             />
             <p className="mb-6">{histogramP0}</p>
-            <YearsDonorHistogramText
-              years={activeYears}
-              parties={activeParties}
-              donations={filteredDonations}
-            />
-          </ArticleSectionColumn>
-          <ArticleSectionColumn>
-            <div>
+            <div className="mb-6">
               <DonorReceiverHistogram
                 years={activeYears}
                 parties={activeParties}
@@ -169,8 +162,13 @@ export const YearsDonorsClientPage = ({
                 donations={filteredDonations}
               />
             </div>
+            <YearsDonorHistogramText
+              years={activeYears}
+              parties={activeParties}
+              donations={filteredDonations}
+            />
           </ArticleSectionColumn>
-        </ArticleSectionTwoColumns>
+        </ArticleSectionOneColumns>
       </ArticleSectionWrapper>
       {hasFeature(country, Features.DonorInterests) && donorInterests && (
         <ArticleSectionWrapper id={"sec-party-interests"}>

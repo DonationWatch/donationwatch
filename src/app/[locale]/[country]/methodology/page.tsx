@@ -14,7 +14,13 @@ import {
 } from "@/components/browser-based-formatter";
 import { FormatAnd } from "@/components/formatter";
 import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
-import { Article, ArticleSection } from "@/components/layout/article";
+import {
+  ArticleHeader,
+  ArticleLead,
+  ArticleSection,
+  ArticleTitle,
+  ArticleWithToc,
+} from "@/components/layout/article";
 import { Translation } from "@/components/translation";
 import {
   ALL_POLICY_INTEREST_TAGS,
@@ -209,10 +215,20 @@ export default async function Page(
 
   return (
     <ScopedClientIntlProvider messages={pageMessages}>
-      <Article
-        title={tMethodology("title")}
-        subtitle={<p>{tMethodology("intro", { country: countryName })}</p>}
+      <ArticleWithToc
+        tocHeader={{
+          label: countryName,
+          title: tMethodology("title"),
+          subtitle: countryConfig.source.name,
+          stats: yearsRange,
+        }}
       >
+        <ArticleHeader>
+          <ArticleTitle>{tMethodology("title")}</ArticleTitle>
+          <ArticleLead>
+            <p>{tMethodology("intro", { country: countryName })}</p>
+          </ArticleLead>
+        </ArticleHeader>
         {/* Dataset Profile Summary Card */}
         <ArticleSection title={tMethodology("sections.profile")}>
           <dl className="grid gap-x-8 gap-y-4 rounded-lg border border-neutral-200 bg-neutral-50/60 p-5 text-sm sm:grid-cols-2 dark:border-neutral-800 dark:bg-neutral-900/40">
@@ -751,7 +767,7 @@ export default async function Page(
         <ArticleSection title={tMethodology("sections.disclaimer")}>
           <p>{tMethodology("disclaimer.text")}</p>
         </ArticleSection>
-      </Article>
+      </ArticleWithToc>
     </ScopedClientIntlProvider>
   );
 }

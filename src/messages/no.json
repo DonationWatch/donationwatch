@@ -25,7 +25,8 @@
     "bar_chart_race": "Søylediagram-kappløp",
     "compare_parties": "Sammenlign partier",
     "support_us": "☕ Støtt serverkostnader",
-    "enterprise": "Bedrifts-API"
+    "enterprise": "Bedrifts-API",
+    "on_this_page": "På denne siden"
   },
   "data": {
     "loading": "Innhold lastes...",
@@ -1001,7 +1002,7 @@
     "p0": "Spor politiske donasjoner på tvers av landegrenser. Ryddige, fullt berikede finansierings-API-er bygget på normaliserte transaksjonsregistre fra globale valgkommisjoner.",
     "draft_schema": "* Merk: Utkast til v1-skjema. Responsstrukturen kan bli endret basert på tilbakemeldinger fra betaen.",
     "engine_specs": {
-      "title": "// MOTORSPESIFIKASJONER OG STYRKER",
+      "title": "Motorspesifikasjoner og styrker",
       "s0": {
         "title": "1. Standardiserte transaksjonsregistre",
         "description": "Slipp å kjempe med rotete CSV-filer og skiftende offentlige formater. Få tilgang til rent mappede donasjonsoppføringer normalisert på tvers av flere internasjonale registre."

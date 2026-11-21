@@ -8,6 +8,7 @@ import {
   createContext,
   use,
   useCallback,
+  useEffect,
   useRef,
   useState,
 } from "react";
@@ -123,28 +124,69 @@ const ChartCardFrame = ({ children }: PropsWithChildren) => {
     actions: { setIsExpanded },
     meta: { title },
   } = useChartCardContext();
+  const frameRef = useRef<HTMLElement>(null);
+  const [placeholderHeight, setPlaceholderHeight] = useState<number | null>(
+    null,
+  );
 
-  if (isExpanded) {
-    return (
-      <ExpandedChartDialog
-        isExpanded={isExpanded}
-        setIsExpanded={setIsExpanded}
-        title={title}
-      >
-        {children}
-      </ExpandedChartDialog>
-    );
-  }
+  useEffect(() => {
+    if (isExpanded) return;
+    const el = frameRef.current;
+    if (!el) return;
+
+    const updateHeight = () => {
+      const nextHeight = el.offsetHeight;
+      if (nextHeight > 0) {
+        setPlaceholderHeight((prev) =>
+          prev === nextHeight ? prev : nextHeight,
+        );
+      }
+    };
+
+    updateHeight();
+    const observer = new ResizeObserver(updateHeight);
+    observer.observe(el);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [isExpanded]);
 
   return (
-    <Card
-      padding="none"
-      render={
-        <section className="flex h-full w-full flex-col items-start justify-center" />
-      }
-    >
-      <div className="h-full w-full p-0.5">{children}</div>
-    </Card>
+    <>
+      <Card
+        padding="none"
+        style={
+          isExpanded && placeholderHeight
+            ? { height: `${placeholderHeight}px` }
+            : undefined
+        }
+        render={
+          <section
+            ref={frameRef}
+            className="flex h-full w-full flex-col items-start justify-center in-data-[toc-root]:xl:-mx-6 in-data-[toc-root]:xl:w-[calc(100%+3rem)] in-data-[toc-root]:2xl:-mx-12 in-data-[toc-root]:2xl:w-[calc(100%+6rem)]"
+          />
+        }
+      >
+        {isExpanded ? (
+          <div
+            aria-hidden="true"
+            className="h-full w-full animate-pulse rounded-xs bg-zinc-100/60 dark:bg-zinc-800/40"
+          />
+        ) : (
+          <div className="h-full w-full p-0.5">{children}</div>
+        )}
+      </Card>
+      {isExpanded ? (
+        <ExpandedChartDialog
+          isExpanded={isExpanded}
+          setIsExpanded={setIsExpanded}
+          title={title}
+        >
+          {children}
+        </ExpandedChartDialog>
+      ) : null}
+    </>
   );
 };
 

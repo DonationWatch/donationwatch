@@ -7,6 +7,9 @@ import React, { useState, useRef } from "react";
 import * as v from "valibot";
 
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { useClientTranslations } from "@/hooks/use-client-translations";
 import { TURNSTILE_PUBLIC_KEY } from "@/utils/config";
 
@@ -98,29 +101,26 @@ export const EnterpriseContactForm = ({
   });
 
   return submitted ? (
-    <div className="w-full rounded-none border border-zinc-900 bg-zinc-50 p-6 transition-all duration-200 md:p-8 dark:border-zinc-100 dark:bg-zinc-900/40">
+    <div className="w-full rounded-lg border border-emerald-500/40 bg-emerald-500/5 p-6 transition-all duration-200">
       <div className="flex items-start gap-4">
-        <div className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-none border border-emerald-500 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
-          <Check className="h-4 w-4" />
+        <div className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-400">
+          <Check className="size-4" />
         </div>
-        <div className="w-full space-y-4 text-sm">
-          <div>
-            <h3 className="font-mono text-sm font-bold tracking-widest text-zinc-900 uppercase dark:text-zinc-100">
-              {successTitle}
-            </h3>
-          </div>
-          <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-            {successMessageTemplate}
-          </p>
-          <div className="border-t border-zinc-200 pt-2 dark:border-zinc-800">
+        <div className="w-full space-y-3 text-sm">
+          <h3 className="text-base font-semibold tracking-tight">
+            {successTitle}
+          </h3>
+          <p className="leading-relaxed">{successMessageTemplate}</p>
+          <div className="border-t border-zinc-200 pt-3 dark:border-zinc-800">
             <button
+              type="button"
               onClick={() => {
                 setSubmitted(false);
                 setErrorMessage(null);
                 form.reset();
                 turnstileRef.current?.reset();
               }}
-              className="cursor-pointer font-mono text-sm text-zinc-500 underline decoration-dotted hover:text-zinc-900 dark:hover:text-zinc-100"
+              className="text-primary-700 dark:text-primary-400 cursor-pointer text-sm underline hover:no-underline"
             >
               {submitAnotherButton}
             </button>
@@ -130,9 +130,7 @@ export const EnterpriseContactForm = ({
     </div>
   ) : (
     <div className="space-y-6">
-      <h3 className="font-mono text-sm font-bold tracking-widest text-zinc-900 uppercase dark:text-zinc-100">
-        {formTitle}
-      </h3>
+      <h3 className="text-lg font-semibold tracking-tight">{formTitle}</h3>
 
       <form
         onSubmit={(e) => {
@@ -140,12 +138,12 @@ export const EnterpriseContactForm = ({
           e.stopPropagation();
           void form.handleSubmit();
         }}
-        className="space-y-5"
+        className="space-y-4"
       >
         {/* Error message banner */}
         {errorMessage && (
-          <div className="border border-red-500 bg-red-500/10 p-3 font-mono text-xs text-red-500 dark:text-red-400">
-            &gt; ERROR: {errorMessage}
+          <div className="rounded-md border border-red-500/50 bg-red-500/10 p-3 text-sm text-red-700 dark:text-red-400">
+            {errorMessage}
           </div>
         )}
 
@@ -163,23 +161,20 @@ export const EnterpriseContactForm = ({
         >
           {(field) => (
             <div className="space-y-1.5">
-              <label
-                htmlFor={field.name}
-                className="block font-mono text-sm font-bold tracking-widest text-zinc-500 uppercase dark:text-zinc-400"
-              >
+              <label htmlFor={field.name} className="block text-sm font-medium">
                 {labelFullName}
               </label>
-              <input
+              <Input
                 type="text"
                 id={field.name}
                 name={field.name}
                 value={field.state.value}
                 onBlur={field.handleBlur}
                 onChange={(e) => field.handleChange(e.target.value)}
-                className="w-full rounded-none border border-zinc-300 bg-transparent px-3 py-2.5 text-sm text-zinc-900 transition-colors focus:border-black focus:ring-1 focus:ring-black focus:outline-none dark:border-zinc-800 dark:text-zinc-100 dark:focus:border-white dark:focus:ring-white"
+                className="h-9 px-3 text-sm md:text-sm"
               />
               {field.state.meta.isTouched && field.state.meta.errors.length ? (
-                <p className="mt-1 font-mono text-xs text-red-500 dark:text-red-400">
+                <p className="text-xs text-red-600 dark:text-red-400">
                   {field.state.meta.errors.join(", ")}
                 </p>
               ) : null}
@@ -201,23 +196,20 @@ export const EnterpriseContactForm = ({
         >
           {(field) => (
             <div className="space-y-1.5">
-              <label
-                htmlFor={field.name}
-                className="block font-mono text-sm font-bold tracking-widest text-zinc-500 uppercase dark:text-zinc-400"
-              >
+              <label htmlFor={field.name} className="block text-sm font-medium">
                 {labelWorkEmail}
               </label>
-              <input
+              <Input
                 type="email"
                 id={field.name}
                 name={field.name}
                 value={field.state.value}
                 onBlur={field.handleBlur}
                 onChange={(e) => field.handleChange(e.target.value)}
-                className="w-full rounded-none border border-zinc-300 bg-transparent px-3 py-2.5 text-sm text-zinc-900 transition-colors focus:border-black focus:ring-1 focus:ring-black focus:outline-none dark:border-zinc-800 dark:text-zinc-100 dark:focus:border-white dark:focus:ring-white"
+                className="h-9 px-3 text-sm md:text-sm"
               />
               {field.state.meta.isTouched && field.state.meta.errors.length ? (
-                <p className="mt-1 font-mono text-xs text-red-500 dark:text-red-400">
+                <p className="text-xs text-red-600 dark:text-red-400">
                   {field.state.meta.errors.join(", ")}
                 </p>
               ) : null}
@@ -242,23 +234,20 @@ export const EnterpriseContactForm = ({
         >
           {(field) => (
             <div className="space-y-1.5">
-              <label
-                htmlFor={field.name}
-                className="block font-mono text-sm font-bold tracking-widest text-zinc-500 uppercase dark:text-zinc-400"
-              >
+              <label htmlFor={field.name} className="block text-sm font-medium">
                 {labelOrganization}
               </label>
-              <input
+              <Input
                 type="text"
                 id={field.name}
                 name={field.name}
                 value={field.state.value}
                 onBlur={field.handleBlur}
                 onChange={(e) => field.handleChange(e.target.value)}
-                className="w-full rounded-none border border-zinc-300 bg-transparent px-3 py-2.5 text-sm text-zinc-900 transition-colors focus:border-black focus:ring-1 focus:ring-black focus:outline-none dark:border-zinc-800 dark:text-zinc-100 dark:focus:border-white dark:focus:ring-white"
+                className="h-9 px-3 text-sm md:text-sm"
               />
               {field.state.meta.isTouched && field.state.meta.errors.length ? (
-                <p className="mt-1 font-mono text-xs text-red-500 dark:text-red-400">
+                <p className="text-xs text-red-600 dark:text-red-400">
                   {field.state.meta.errors.join(", ")}
                 </p>
               ) : null}
@@ -270,20 +259,17 @@ export const EnterpriseContactForm = ({
         <form.Field name="queryRequest">
           {(field) => (
             <div className="space-y-1.5">
-              <label
-                htmlFor={field.name}
-                className="block font-mono text-sm font-bold tracking-widest text-zinc-500 uppercase dark:text-zinc-400"
-              >
-                {labelQueryRequest}{" "}
+              <label htmlFor={field.name} className="block text-sm font-medium">
+                {labelQueryRequest}
               </label>
-              <textarea
+              <Textarea
                 id={field.name}
                 name={field.name}
                 rows={3}
                 value={field.state.value}
                 onBlur={field.handleBlur}
                 onChange={(e) => field.handleChange(e.target.value)}
-                className="w-full resize-none rounded-none border border-zinc-300 bg-transparent px-3 py-2.5 font-mono text-sm text-zinc-900 transition-colors focus:border-black focus:ring-1 focus:ring-black focus:outline-none dark:border-zinc-800 dark:text-zinc-100 dark:focus:border-white dark:focus:ring-white"
+                className="resize-none font-mono text-sm"
               />
             </div>
           )}
@@ -306,21 +292,17 @@ export const EnterpriseContactForm = ({
         >
           {(field) => (
             <div className="space-y-1.5">
-              <div className="block font-mono text-sm font-bold tracking-widest text-zinc-500 uppercase dark:text-zinc-400">
-                {turnstileLabel}
-              </div>
-              <div className="pt-2">
-                <div className="border border-dashed border-zinc-300 bg-zinc-50 py-4 text-center font-mono text-sm text-zinc-500 select-none dark:border-zinc-800 dark:bg-zinc-900/40">
-                  <Turnstile
-                    ref={turnstileRef}
-                    siteKey={TURNSTILE_PUBLIC_KEY}
-                    onSuccess={(token) => field.handleChange(token)}
-                    onExpire={() => field.handleChange("")}
-                  />
-                </div>
+              <div className="block text-sm font-medium">{turnstileLabel}</div>
+              <div className="rounded-md border border-dashed border-zinc-300 bg-zinc-50 py-3 text-center select-none dark:border-zinc-800 dark:bg-zinc-900/40">
+                <Turnstile
+                  ref={turnstileRef}
+                  siteKey={TURNSTILE_PUBLIC_KEY}
+                  onSuccess={(token) => field.handleChange(token)}
+                  onExpire={() => field.handleChange("")}
+                />
               </div>
               {field.state.meta.isTouched && field.state.meta.errors.length ? (
-                <p className="mt-1 text-center font-mono text-xs text-red-500 dark:text-red-400">
+                <p className="text-center text-xs text-red-600 dark:text-red-400">
                   {field.state.meta.errors.join(", ")}
                 </p>
               ) : null}
@@ -343,26 +325,27 @@ export const EnterpriseContactForm = ({
           {(field) => (
             <div className="space-y-1.5">
               <div className="flex items-start gap-2.5 pt-1">
-                <div className="mt-0.5 flex h-4 items-center">
-                  <input
-                    id={field.name}
-                    name={field.name}
-                    type="checkbox"
-                    checked={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={(e) => field.handleChange(e.target.checked)}
-                    className="h-4 w-4 cursor-pointer rounded-none border-zinc-300 bg-transparent text-black accent-black focus:ring-0 focus:ring-offset-0 focus:outline-none dark:border-zinc-800 dark:text-white dark:accent-white"
-                  />
-                </div>
+                <Checkbox
+                  id={field.name}
+                  name={field.name}
+                  aria-labelledby={`${field.name}-label`}
+                  checked={field.state.value}
+                  onBlur={field.handleBlur}
+                  onCheckedChange={(checked) =>
+                    field.handleChange(checked === true)
+                  }
+                  className="mt-0.5 cursor-pointer"
+                />
                 <label
+                  id={`${field.name}-label`}
                   htmlFor={field.name}
-                  className="cursor-pointer text-sm leading-snug text-zinc-500 select-none dark:text-zinc-400"
+                  className="cursor-pointer text-sm leading-snug select-none"
                 >
                   {consentText}
                 </label>
               </div>
               {field.state.meta.isTouched && field.state.meta.errors.length ? (
-                <p className="mt-1 font-mono text-xs text-red-500 dark:text-red-400">
+                <p className="text-xs text-red-600 dark:text-red-400">
                   {field.state.meta.errors.join(", ")}
                 </p>
               ) : null}
@@ -380,13 +363,13 @@ export const EnterpriseContactForm = ({
           >
             {loading ? (
               <>
-                <Loader2 className="h-4 w-4 animate-spin text-zinc-500" />
+                <Loader2 className="size-4 animate-spin" />
                 {buttonProcessing}
               </>
             ) : (
               <>
                 {buttonSubmit}
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
               </>
             )}
           </Button>

@@ -573,7 +573,17 @@ const DonorPageHeadContent = ({
         }))}
       />
       <PageHeader>
-        <section aria-labelledby="hero-label">
+        <section
+          aria-labelledby="hero-label"
+          data-toc-header=""
+          data-toc-header-label={
+            donorType && donorType !== DonorType.AnonymizedDonor
+              ? t(`donor_type.${donorType}`)
+              : t("donor.title")
+          }
+          data-toc-header-title={donorName}
+          data-toc-header-subtitle={formatYearsRange([firstYear, lastYear])}
+        >
           <h1 className="mb-4">
             <div className="mb-2 leading-none text-zinc-500 dark:text-zinc-300">
               {t("donor.title")}
@@ -605,7 +615,7 @@ const DonorPageHeadContent = ({
 
           <div className="mb-3">
             {wikiPageId && (
-              <section aria-label={tCommon("summary")} className="pt-4 sm:px-4">
+              <section aria-label={tCommon("summary")} className="pt-4">
                 <WikiQuote pageId={wikiPageId} />
               </section>
             )}

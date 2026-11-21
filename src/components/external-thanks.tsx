@@ -73,8 +73,8 @@ export const ExternalThanks = async ({
   const t = await getTranslations({ locale });
 
   return (
-    <div className="container mx-auto space-y-4 px-4 text-sm text-gray-600 dark:text-gray-400">
-      <div className="border-t border-t-gray-200 dark:border-t-gray-800"></div>
+    <div className="container mx-auto space-y-4 px-4 text-sm">
+      <div className="border-t border-zinc-200 dark:border-zinc-800"></div>
       <div className="px-2">
         <Translation
           t={t}
@@ -89,7 +89,7 @@ export const ExternalThanks = async ({
                     href={thank.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-primary-800 dark:hover:text-primary-400"
+                    className="text-primary-700 dark:text-primary-400 underline hover:no-underline"
                   >
                     {thank.name}
                   </a>
@@ -99,7 +99,7 @@ export const ExternalThanks = async ({
           }}
         />
       </div>
-      <div className="border-t border-t-gray-200 dark:border-t-gray-800"></div>
+      <div className="border-t border-zinc-200 dark:border-zinc-800"></div>
     </div>
   );
 };

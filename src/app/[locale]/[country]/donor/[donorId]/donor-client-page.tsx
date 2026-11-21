@@ -93,14 +93,14 @@ export const DonorClientPage = ({
   if (!activeDonations || activeDonations.length === 0) {
     if (isFiltered) {
       return (
-        <Article fullWidth={true}>
+        <Article>
           <FilterEmptyState onReset={controls.resetFilters} />
         </Article>
       );
     }
     if (isSyncing) {
       return (
-        <Article fullWidth={true}>
+        <Article>
           <div className="flex h-screen items-center justify-center">
             <Loading />
           </div>
@@ -110,7 +110,7 @@ export const DonorClientPage = ({
   }
 
   return (
-    <Article fullWidth={true}>
+    <Article>
       {isLoading ? (
         <div className="flex h-screen items-center justify-center">
           <Loading />

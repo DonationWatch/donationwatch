@@ -67,10 +67,23 @@ export const YearsChangesClientPage = ({
 
   useScrollToHash(isSuccess);
 
+  const showTable =
+    !(isLoading || isSyncing) &&
+    !error &&
+    !(isFiltered && filteredDonations.length === 0);
+
   return (
     <ArticleSectionWrapper id={"sec-years-changes"}>
-      <ArticleSectionTitle as={"h1"} id={"sec-years-changes"} title={title} />
-      <p className="mb-6">{summary}</p>
+      {!showTable ? (
+        <>
+          <ArticleSectionTitle
+            as={"h1"}
+            id={"sec-years-changes"}
+            title={title}
+          />
+          <p className="mb-6">{summary}</p>
+        </>
+      ) : null}
       {isLoading || isSyncing ? (
         <Loading heightClass="h-[80vh]" />
       ) : error ? (
@@ -81,6 +94,10 @@ export const YearsChangesClientPage = ({
         <YearDonationHistory
           years={activeYears}
           donations={filteredDonations}
+          title={title}
+          description={summary}
+          titleId={"sec-years-changes"}
+          titleAs={"h1"}
         />
       )}
     </ArticleSectionWrapper>
