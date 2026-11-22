@@ -1,0 +1,190 @@
+import type { Metadata } from "next";
+
+import { BASE_URL, DATA_LICENSE } from "@donationwatch/core/utils/config";
+import { COUNTRIES, getCountryName } from "@donationwatch/core/utils/countries";
+import { LOCALES } from "@donationwatch/core/utils/locales";
+import {
+  isValidCountry,
+  isValidLocale,
+} from "@donationwatch/core/utils/validate";
+import { getCountryConfig } from "@donationwatch/data/queries/get-country-config";
+import { Toaster } from "@donationwatch/ui/components/sonner";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+
+import { DataExport } from "@/components/data-export";
+import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
+import {
+  Article,
+  ArticleHeader,
+  ArticleLead,
+  ArticleTitle,
+} from "@/components/layout/article";
+import { DatasetSchema } from "@/components/schema";
+import { Translation } from "@/components/translation";
+import { getMessagesForLocale } from "@/utils/i18n-loader";
+import { pick } from "@/utils/i18n-pick";
+import { generateAlternates } from "@/utils/meta";
+import { notFoundMetadata } from "@/utils/not-found-metadata";
+
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  return [...COUNTRIES].flatMap((country) =>
+    LOCALES.map((locale) => ({ locale, country })),
+  );
+}
+
+export async function generateMetadata(
+  props: PageProps<"/[locale]/[country]/tools/data">,
+): Promise<Metadata> {
+  const params = await props.params;
+
+  if (!isValidLocale(params.locale)) return notFoundMetadata;
+  if (!isValidCountry(params.country)) return notFoundMetadata;
+  setRequestLocale(params.locale);
+
+  const { country } = params;
+
+  const [tExport, tCountries, countryConfig] = await Promise.all([
+    getTranslations({
+      locale: params.locale,
+      namespace: "export",
+    }),
+    getTranslations({
+      locale: params.locale,
+      namespace: "countries",
+    }),
+    getCountryConfig(country),
+  ]);
+  const localizedCountryName = getCountryName(countryConfig, tCountries);
+
+  return {
+    title: `${tExport("title")} - ${localizedCountryName}`,
+    description: tExport("p0", {
+      country: localizedCountryName,
+      license: DATA_LICENSE,
+    }),
+    alternates: generateAlternates(`${country}/tools/data`),
+  };
+}
+
+export default async function Page(
+  props: PageProps<"/[locale]/[country]/tools/data">,
+) {
+  const params = await props.params;
+
+  if (!isValidLocale(params.locale)) return notFound();
+  if (!isValidCountry(params.country)) return notFound();
+  setRequestLocale(params.locale);
+
+  const { locale, country } = params;
+
+  const [tExport, tCountries, tNavigation, countryConfig, messages] =
+    await Promise.all([
+      getTranslations({ locale, namespace: "export" }),
+      getTranslations({ locale, namespace: "countries" }),
+      getTranslations({ locale, namespace: "navigation" }),
+      getCountryConfig(country),
+      getMessagesForLocale(params.locale),
+    ]);
+
+  const pageMessages = pick(messages, ["export", "citation", "donor_type"]);
+  const localizedCountryName = getCountryName(countryConfig, tCountries);
+  const firstYear = countryConfig.years.at(0);
+  const lastYear = countryConfig.years.at(-1);
+
+  return (
+    <ScopedClientIntlProvider messages={pageMessages}>
+      <DatasetSchema
+        name={`${tExport("title")} - ${localizedCountryName}`}
+        description={tExport("p0", {
+          country: localizedCountryName,
+          license: DATA_LICENSE,
+        })}
+        url={`${BASE_URL}/${locale}/${country}/tools/data`}
+        temporalCoverage={
+          firstYear && lastYear && firstYear !== lastYear
+            ? `${firstYear}/${lastYear}`
+            : (firstYear ?? "")
+        }
+        spatialCoverage={localizedCountryName}
+        sourceUrl={countryConfig.source.url}
+      />
+      <Article>
+        <ArticleHeader>
+          <ArticleTitle>{tExport("title")}</ArticleTitle>
+          <ArticleLead>
+            <p>
+              <Translation
+                t={tExport}
+                translationId={"p0"}
+                variables={{
+                  country: getCountryName(countryConfig, tCountries),
+                  license: (
+                    <a
+                      href="https://creativecommons.org/licenses/by/4.0/deed.en"
+                      target="_blank"
+                      rel={"noopener noreferrer"}
+                      className="text-primary-700 dark:text-primary-400 underline hover:no-underline"
+                    >
+                      {DATA_LICENSE}
+                    </a>
+                  ),
+                }}
+              />
+            </p>
+            <p>
+              <Translation
+                t={tExport}
+                translationId={"p1"}
+                variables={{
+                  source: (
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={countryConfig.source.url}
+                      className="text-primary-700 dark:text-primary-400 underline hover:no-underline"
+                    >
+                      {countryConfig.source.name}
+                    </a>
+                  ),
+                  methodology: (
+                    <Link
+                      href={`/${locale}/${countryConfig.id}/methodology`}
+                      prefetch={false}
+                      className="text-primary-700 dark:text-primary-400 underline hover:no-underline"
+                    >
+                      {tNavigation("methodology")}
+                    </Link>
+                  ),
+                }}
+              />
+            </p>
+            <p>
+              <Translation
+                t={tExport}
+                translationId={"license"}
+                variables={{
+                  license: (
+                    <a
+                      href="https://creativecommons.org/licenses/by/4.0/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary-700 dark:text-primary-400 underline hover:no-underline"
+                    >
+                      {DATA_LICENSE}
+                    </a>
+                  ),
+                }}
+              />
+            </p>
+          </ArticleLead>
+        </ArticleHeader>
+        <DataExport locale={locale} />
+        <Toaster position={"top-center"} />
+      </Article>
+    </ScopedClientIntlProvider>
+  );
+}

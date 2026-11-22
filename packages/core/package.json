@@ -1,0 +1,21 @@
+{
+  "name": "@donationwatch/core",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./types/*": "./src/types/*.ts",
+    "./utils/*": "./src/utils/*.ts",
+    "./lib/*": "./src/lib/*.ts"
+  },
+  "scripts": {
+    "test:unit": "vitest run ./tests/",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "echarts": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "plugins": [{ "name": "next" }],
+    "types": ["@cloudflare/workers-types", "node"]
+  },
+  "include": [
+    "next-env.d.ts",
+    "types/global.d.ts",
+    "types/echarts.d.ts",
+    "types/cloudflare-env.d.ts",
+    "cloudflare-env.d.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "tests/**/*.ts",
+    "tests/**/*.tsx",
+    "e2e/**/*.ts",
+    "playwright.config.ts",
+    "vitest.config.ts",
+    ".next/types/**/*.ts"
+  ]
+}

@@ -1,0 +1,636 @@
+import type {
+  ExtractedDonationAddress,
+  ReceiverId,
+} from "@donationwatch/core/utils/types";
+
+import { isNotNullandNotUndefined } from "@donationwatch/core/utils/array";
+import { Country } from "@donationwatch/core/utils/countries";
+import { AddressField, DonationField } from "@donationwatch/core/utils/types";
+import * as cheerio from "cheerio";
+import fs from "fs/promises";
+import path from "path";
+
+import type { ExtractedYearData, PartyConfig } from "../data-loader";
+
+import { DataLoader } from "../data-loader";
+import { containsWords, spawnBrowser, timeout, trimRow } from "../util";
+import { extractAddress } from "./address";
+import { donorMeta } from "./donor-meta";
+
+const normalizedReceivers: Record<string, string> = {
+  BÜNDNIS: "BÜNDNIS 90 / DIE GRÜNEN",
+  "BÜNDNIS 90/DIE GRÜNEN": "BÜNDNIS 90 / DIE GRÜNEN",
+  "BÜNDNIS 90/ DIE GRÜNEN": "BÜNDNIS 90 / DIE GRÜNEN",
+  "VOLT DEUTSCH-LAND": "VOLT DEUTSCHLAND",
+  VOLT: "VOLT DEUTSCHLAND",
+  "DIE GERECHTIG": "TEAM TODENHÖFER",
+  DIEBASIS: "BASIS",
+  "PARTEI BÜNDNIS SAHRA WAGENKNECHT": "BÜNDNIS SAHRA WAGENKNECHT",
+  BSW: "BÜNDNIS SAHRA WAGENKNECHT",
+  "BÜNDNIS SAHRA WAGENKNECHT -­ VERNUNFT UND GERECHTIGKEIT":
+    "BÜNDNIS SAHRA WAGENKNECHT",
+  "DIE GERECHTIGKEITSPARTEI - TEAM TODENHÖFER": "TEAM TODENHÖFER",
+  "DIE GERECHTIGKEITS": "TEAM TODENHÖFER",
+  "DIE GERECHTIG­KEITSPARTEI - TEAM TODEN­HÖFER": "TEAM TODENHÖFER",
+  "DIE GERECHTIGKEITS­PARTEI - TEAM TODENHÖFER": "TEAM TODENHÖFER",
+};
+
+const stripEuroDot = (str: string): string => str.replace(/\./g, "");
+const toEurFloat = (str: string): number => {
+  str = str.replace("ca.", "").replace("ca", "").trim();
+
+  const hasPost = str.indexOf(",") !== -1;
+  const pre = hasPost
+    ? parseInt(str.substring(0, str.indexOf(",")), 10)
+    : parseInt(str, 10);
+  const post = parseFloat("0." + str.substring(str.indexOf(",") + 1));
+  let sum = 0;
+
+  if (!isNaN(pre)) {
+    sum = pre;
+  }
+  if (hasPost && !isNaN(post)) {
+    sum += post;
+  }
+  return sum;
+};
+
+export const extractDate = (year: string, dateHtml: string[]): string => {
+  if (!dateHtml || dateHtml.length === 0) return "";
+
+  let s = dateHtml.join(" ");
+
+  // remove spaces and hidden characters (like soft hyphens)
+  // eslint-disable-next-line no-misleading-character-class
+  s = s.replace(/[\s\u00AD\u200B\u200C\u200D\uFEFF]/g, "");
+
+  // ignore any comments in parentheses
+  s = s.split("(")[0];
+
+  // split by slashes or hyphens (joined dates like 10./13.08.2010 or 06.-08.08.2013)
+  const parts = s.split(/[/-]/);
+  const lastPart = parts[parts.length - 1];
+
+  const match = lastPart.match(/(\d{1,2})\.(\d{1,2})\.(?:\s*(\d{4}))?/);
+  if (!match) return "";
+
+  const d = match[1].padStart(2, "0");
+  const m = match[2].padStart(2, "0");
+  const y = match[3] || year;
+  return `${y}-${m}-${d}`;
+};
+
+export class DeLoader extends DataLoader {
+  constructor() {
+    super("DE", Country.germany);
+  }
+
+  parties: Record<string, PartyConfig> = {
+    AFD: {
+      color: "#34a3d2",
+      code: "AFD",
+      short: "AfD",
+      abbr: "AfD",
+      name: "Alternative für Deutschland",
+      wiki: 7669143,
+    },
+    "BÜNDNIS 90 / DIE GRÜNEN": {
+      color: "#4ba345",
+      code: "GRUENE",
+      short: "Die Grünen",
+      abbr: "Grüne",
+      name: "Bündnis 90/Die Grünen",
+      wiki: 697216,
+    },
+    "BÜNDNIS SAHRA WAGENKNECHT": {
+      color: "#bf1d46",
+      code: "BSW",
+      short: "BSW",
+      abbr: "BSW",
+      name: "Bündnis Soziale Gerechtigkeit und Wirtschaftliche Vernunft",
+      wiki: 12853745,
+    },
+    CDU: {
+      color: "#373737",
+      code: "CDU",
+      short: "CDU",
+      abbr: "CDU",
+      name: "Christlich Demokratische Union Deutschlands",
+      wiki: 3956889,
+    },
+    CSU: {
+      color: "#0076b6",
+      code: "CSU",
+      short: "CSU",
+      abbr: "CSU",
+      name: "Christlich-Soziale Union in Bayern",
+      wiki: 16746,
+    },
+    "DIE LINKE": {
+      color: "#96276e",
+      code: "LINKE",
+      short: "Die Linke",
+      abbr: "Linke",
+      name: "Die Linke",
+      wiki: 5386785,
+    },
+    "DIE PARTEI": {
+      color: "#B92837",
+      code: "PARTEI",
+      short: "Die PARTEI",
+      abbr: "Die PARTEI",
+      name: "Die PARTEI",
+      wiki: 317517,
+    },
+    BASIS: {
+      color: "#8bcbbd",
+      code: "BASIS",
+      short: "Die BASIS",
+      abbr: "dieBasis",
+      name: "Basisdemokratische Partei Deutschland",
+      wiki: 11645713,
+    },
+    DKP: {
+      color: "#ff0000",
+      code: "DKP",
+      short: "DKP",
+      abbr: "DKP",
+      name: "Deutsche Kommunistische Partei",
+      wiki: 12821,
+    },
+    DVU: {
+      color: "#aa4422",
+      code: "DVU",
+      short: "DVU",
+      abbr: "DVU",
+      name: "Deutsche Volksunion",
+      wiki: 114978,
+    },
+    FDP: {
+      color: "#f6bb00",
+      code: "FDP",
+      short: "FDP",
+      abbr: "FDP",
+      name: "Freie Demokratische Partei",
+      wiki: 1624,
+    },
+    "FREIE WÄHLER": {
+      color: "#00519e",
+      code: "FREIEWAEHLER",
+      short: "FREIE WÄHLER",
+      abbr: "FW",
+      name: "FREIE WÄHLER",
+      wiki: 6634230,
+    },
+    MLPD: {
+      color: "#D0011B",
+      code: "MLPD",
+      short: "MLPD",
+      abbr: "MLPD",
+      name: "Marxistisch-Leninistische Partei Deutschlands",
+      wiki: 134557,
+    },
+    NPD: {
+      color: "#e00622",
+      code: "NPD",
+      short: "NPD",
+      abbr: "NPD",
+      name: "Nationaldemokratische Partei Deutschlands",
+      wiki: 36663,
+    },
+    SPD: {
+      color: "#db4240",
+      code: "SPD",
+      short: "SPD",
+      abbr: "SPD",
+      name: "Sozialdemokratische Partei Deutschlands",
+      wiki: 855440,
+    },
+    SSW: {
+      color: "#003c91",
+      code: "SSW",
+      short: "SSW",
+      abbr: "SSW",
+      name: "Südschleswigscher Wählerverband",
+      wiki: 21019,
+    },
+    "TEAM TODENHÖFER": {
+      color: "#bb1f2a",
+      code: "TODENHOEFER",
+      short: "Die Gerechtigkeitspartei",
+      abbr: "Team Todenhöfer",
+      name: "Die Gerechtigkeitspartei – Team Todenhöfer",
+      wiki: 11528335,
+    },
+    "VOLT DEUTSCHLAND": {
+      color: "#502379",
+      code: "VOLT",
+      short: "Volt",
+      abbr: "Volt",
+      name: "Volt Deutschland",
+      wiki: 11713753,
+    },
+    WERTEUNION: {
+      color: "#013B5B",
+      code: "WU",
+      short: "WerteUnion",
+      abbr: "WU",
+      name: "WerteUnion",
+      wiki: 9837249,
+    },
+  };
+
+  donorMeta = donorMeta;
+
+  protected normalizeReceiver(receiver: string): string {
+    let normalized = super
+      .normalizeReceiver(receiver)
+      .toUpperCase()
+      .replace(/\./g, "")
+      .replace(/-$/g, "")
+      .trim();
+
+    if (normalizedReceivers[normalized]) {
+      normalized = normalizedReceivers[normalized];
+    }
+
+    return normalized;
+  }
+
+  cacheFile(year: string) {
+    return path.join(this.cacheDir, `donations-${year}.html`);
+  }
+
+  override partyId(party: string): string {
+    if (party === "BASIS") return "DIEBASIS";
+
+    return super.partyId(party);
+  }
+
+  async loadYearDataToCache(year: string): Promise<void> {
+    const url = `https://www.bundestag.de/parlament/praesidium/parteienfinanzierung/fundstellen50000/${year}`;
+
+    this.log(`Loading donation page for year ${year}: ${url}`);
+
+    const { html } = await spawnBrowser(async (page) => {
+      const response = await page.goto(url);
+      try {
+        await page.waitForSelector(
+          ".bt-artikel__title:not(.bt-error__heading)",
+        );
+        // wait a second because they have some js animation that takes a while to finish
+        await timeout(1000);
+      } catch {
+        throw new Error(`Unable to load ${url}: ${response?.status()}`);
+      }
+
+      const html = await page.evaluate(
+        () => document.documentElement.outerHTML,
+      );
+
+      return { html };
+    });
+
+    await fs.writeFile(this.cacheFile(year), html, {
+      encoding: "utf8",
+    });
+  }
+
+  private extractDonor(lines: string[]): string {
+    let donor = lines[0];
+
+    if (
+      lines
+        .map((w) => w.trim())
+        .join(" ")
+        .includes("Philip Harting Familienstiftung")
+    ) {
+      return "Philip Harting Familienstiftung";
+    }
+
+    if (lines.length >= 3) {
+      donor = lines.slice(0, lines.length - 2).join(" ");
+    }
+
+    return donor;
+  }
+
+  protected override normalizeDonor(
+    donor: string,
+    address: ExtractedDonationAddress,
+  ): string {
+    donor = super.normalizeDonor(donor, address);
+
+    if (donor.includes("Carl Rudolf Thies Knauf")) {
+      return "Carl Rudolf Thies Knauf";
+    }
+
+    if (donor.includes("Winfried") && donor.includes("Stöcker")) {
+      donor = "Prof. Dr. Winfried Alexander Stöcker";
+    }
+
+    if (donor.includes("BSW - Vernunft und Gerechtigkeit e.V.")) {
+      donor = "BSW - Für Vernunft und Gerechtigkeit e.V.";
+    }
+
+    if (donor.includes("Thadaeus") && donor.includes("Otto")) {
+      donor = "Thadaeus Friedemann Otto";
+    }
+
+    if (donor.includes("Deutsche Vermögensberatung")) {
+      donor = "Deutsche Vermögensberatung AG";
+    }
+
+    if (donor.includes("The Hill House")) {
+      return "Philipp Freise";
+    }
+
+    if (donor.includes("Gossler & Co")) {
+      donor = "Berenberg Bank";
+    }
+
+    if (donor.toLowerCase().includes("trumpf")) {
+      donor = "TRUMPF SE + Co. KG";
+    }
+
+    if (donor.includes("Sydslesvigudvalget")) {
+      donor = "Sydslesvigudvalget/ Kulturministeriet, Kulturstyrelsen";
+    }
+
+    if (donor.includes("Schwarz-Schütte")) {
+      donor = "Patrick Anton Walther Schwarz-Schütte";
+    }
+
+    if (donor.toUpperCase().includes("SÜDWESTMETALL")) {
+      donor =
+        "Südwestmetall – Verband der Metall- und Elektroindustrie Baden-Württemberg e. V.";
+    }
+
+    if (donor.startsWith("Dr. Karl Gerhold")) {
+      return "Dr. Karl Gerhold";
+    }
+
+    if (
+      donor.includes("Verband der Bayerischen") ||
+      // published by Bundestag on 2025-12-29
+      donor.includes("Verband der Bayrischen Metall")
+    ) {
+      donor =
+        "vbm - Verband der Bayerischen Metall- und Elektro-Industrie e.V.";
+    }
+
+    if (donor.includes("Martin Herrenknecht")) {
+      donor = "Martin Herrenknecht";
+    }
+
+    if (donor.startsWith("Coroplast Fritz Müller")) {
+      donor = "Coroplast Fritz Müller";
+    }
+    if (donor.startsWith("Gerhard Dingler")) {
+      donor = "Gerhard Dingler";
+    }
+
+    // remove herr/frau
+    donor = donor.replaceAll(/^herr/gi, "").replaceAll(/^frau/gi, "");
+
+    if (donor.includes("Susanne Klatten")) {
+      donor = "Susanne Klatten";
+    }
+    if (donor.includes("Stefan Quandt")) {
+      donor = "Stefan Quandt";
+    }
+    if (donor.includes("Gabriele Quandt")) {
+      donor = "Gabriele Quandt";
+    }
+    if (donor.includes("Johanna Quandt")) {
+      donor = "Johanna Quandt";
+    }
+    if (donor.includes("Alexander Kahl") || donor.includes("Christoph Kahl")) {
+      donor = "Christoph Alexander Kahl";
+    }
+    if (donor.includes("Harald Christ")) {
+      donor = "Harald Christ";
+    }
+    if (donor.includes("Carsten Maschmeyer")) {
+      donor = "Carsten Maschmeyer";
+    }
+    if (donor.startsWith("Harald Link")) {
+      donor = "Harald Link";
+    }
+    if (donor.startsWith("Daniela Porsche")) {
+      donor = "Daniela Porsche";
+    }
+    if (donor.includes("Torsten Toeller")) {
+      donor = "Torsten Toeller";
+    }
+    if (donor.includes("Stephan Schambach")) {
+      donor = "Stephan Schambach";
+    }
+    if (
+      donor.toUpperCase().includes("METALL NRW") ||
+      donor.includes("Metall- und Elektro-Industrie Nordrhein") ||
+      donor.includes("Metall- und Elektroindustrie Nordrhein")
+    ) {
+      donor =
+        "METALL NRW - Verband der Metall- und Elektro-Industrie Nordrhein-Westfalen e.V.";
+    }
+    if (donor.includes("Joachim Langmann")) {
+      donor = "Prof. Dr. Hans-Joachim Langmann";
+    }
+    if (donor.includes("Verband der Chemischen Industrie")) {
+      donor = "VCI - Verband der Chemischen Industrie e.V.";
+    }
+    if (donor.includes("Kofler") && donor.includes("Georg")) {
+      donor = "Dr. Georg Jakob Kofler";
+    }
+    if (donor.includes("Georg Näder")) {
+      donor = "Prof. Hans Georg Näder";
+    }
+    if (donor.startsWith("Klaus-Michael Kühne")) {
+      donor = "Klaus-Michael Kühne";
+    }
+    if (donor.startsWith("Wilfried Pabst")) {
+      donor = "Wilfried Pabst";
+    }
+    if (donor.includes("General Logistics Systems Germany GmbH")) {
+      donor = "GLS Germany GmbH + Co OHG";
+    }
+
+    if (donor.includes("Elmar Reiss")) {
+      donor = "Elmar Reiss";
+    }
+
+    if (donor.includes("Johannes Schuetze") && donor.includes("Import AG")) {
+      donor = "Johannes Schuetze Energy Import AG";
+    }
+
+    if (
+      donor.includes("Gesamtmetall") ||
+      donor.includes("Gesamtverband der Arbeitgeberverbände der Metall")
+    ) {
+      donor = "Gesamtmetall";
+    }
+
+    if (
+      donor.includes("R & W") ||
+      donor.includes("R + W") ||
+      donor.includes("R&W") ||
+      donor.includes("R+W")
+    ) {
+      // find R&W / R & W
+      donor = "R&W Industriebeteiligungen GmbH";
+    }
+
+    if (donor.includes("Johannes Peter Huth")) {
+      return "Johannes Peter Huth";
+    }
+
+    if (donor.startsWith("Jan-Dirk Lüders")) {
+      return "Jan-Dirk Lüders";
+    }
+
+    // TODO: this is leaking the address into the name, fix it by improving the address extraction
+    if (donor.startsWith("Bernd Erich Beetz")) {
+      return "Bernd Erich Beetz";
+    }
+
+    if (donor.startsWith("Dr. Karl Gerhold c/o GETEC")) {
+      return "Dr. Karl Gerhold c/o GETEC";
+    }
+
+    if (donor.startsWith("Christoph Meyer c/o FDP")) {
+      return "Christoph Meyer";
+    }
+
+    if (donor.startsWith("Christian Oldendorff Via Valpetrosa 10")) {
+      return "Christian Oldendorff";
+    }
+
+    if (donor.startsWith("Jutta") && donor.endsWith("Steiner")) {
+      return "Jutta Steiner";
+    }
+
+    if (donor.startsWith("Andreas Bremke NEO 211")) {
+      return "Andreas Bremke";
+    }
+
+    if (donor.includes("Marquardt GmbH")) {
+      return "Firma Marquardt GmbH";
+    }
+
+    if (donor.includes("Theiss") && donor.includes("Naturwaren")) {
+      donor = "Dr. Theiss Naturwaren GmbH";
+    }
+
+    // according to https://www.oedp-hessen.de/aktuelles/pressemitteilungen/nachrichtendetails/news/von-wegen-unabhaengig-afd-immer-tiefer-im-rechtsra it's a typo in the upstream data, normalize it
+    if (donor === "Harmut Issmer" || donor.includes("Hartmut Issmer")) {
+      donor = "Hartmut Issmer";
+    }
+
+    if (donor.endsWith("Aktiengesellschaft")) {
+      return donor.replace(/ Aktiengesellschaft$/, " AG");
+    }
+
+    if (donor.includes("MMI Leisure & Capital Management GmbH")) {
+      return "MMI Leisure & Capital Management GmbH";
+    }
+
+    if (donor.startsWith("Nicholas Galea")) {
+      return "Nicholas Galea";
+    }
+
+    if (
+      containsWords(donor, "Hans Helmuth Schmidt") &&
+      address[AddressField.Zip] === "52353"
+    ) {
+      return "Hans-Helmuth Walter Schmidt";
+    }
+
+    // replace e. V. with e.V.
+    donor = donor.replace(/e\.\s+V\./g, "e.V.");
+
+    return donor;
+  }
+
+  public parseHtmlToRawDonations(
+    html: string,
+  ): { tr: number; columns: string[][] }[] {
+    const $ = cheerio.load(html);
+    const rawDonationData: { tr: number; columns: string[][] }[] = [];
+
+    $(".bt-standard-content tbody tr").each((trI, tr) => {
+      const rawDonation: string[][] = [];
+      $(tr)
+        .find("td")
+        .each((tdI, td) => {
+          const tdContent: string[] = [];
+          let justSawBr = true;
+          const p = $(td).find("p");
+          p.find("a").remove();
+          p.contents().each((cI, content) => {
+            if (content.type === "tag" && content.name === "br") {
+              justSawBr = true;
+            } else {
+              const text = $(content).text();
+              if (justSawBr || tdContent.length === 0) {
+                tdContent.push(text);
+                justSawBr = false;
+              } else {
+                tdContent[tdContent.length - 1] += text;
+              }
+            }
+          });
+          rawDonation.push(tdContent);
+        });
+      rawDonationData.push({ tr: trI, columns: rawDonation });
+    });
+
+    return rawDonationData;
+  }
+
+  public transformRawDonation(
+    data: { tr: number; columns: string[][] },
+    year: string,
+  ): ExtractedYearData | undefined {
+    const trId = data.tr;
+    const donation = data.columns;
+
+    const donorCell = trimRow(donation[2]);
+    const donor = this.extractDonor(donorCell);
+    const receiver = donation[0][0];
+    const parsedDate = donation[3] ? extractDate(year, donation[3]) : "";
+
+    if (
+      donation[2]
+        .join(" ")
+        .includes(
+          "Meinungsäußerung im Sinne von § 27 Absatz 1a Satz 5 Parteiengesetz",
+        )
+    ) {
+      // This is a redacted donation as decided by the bundestag
+      return;
+    }
+
+    return {
+      idx: `r${trId}`,
+      [DonationField.Receiver]: receiver as ReceiverId,
+      [DonationField.Amount]: toEurFloat(stripEuroDot(donation[1][0])),
+      [DonationField.DonorName]: donor,
+      [DonationField.Address]: extractAddress(donorCell)!,
+      [DonationField.Date]: this.normalizeIsoDate(parsedDate),
+    };
+  }
+
+  public async extractYearData(year: string): Promise<ExtractedYearData[]> {
+    const html = await this.cachedYearData(year);
+
+    this.log(`Extracting donation data for year ${year}`);
+
+    const rawDonationData = this.parseHtmlToRawDonations(html);
+
+    return rawDonationData
+      .filter((data) => data.columns.length > 1)
+      .flatMap((data) => this.transformRawDonation(data, year))
+      .filter(isNotNullandNotUndefined);
+  }
+}

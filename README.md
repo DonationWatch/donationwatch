@@ -10,7 +10,7 @@ A Next.js application for tracking and visualizing political party donations acr
 ## License
 
 - **Code**: Licensed under the [GNU Affero General Public License v3.0](./LICENSE) (AGPL-3.0)
-- **Generated Data** (contents of `src/data/`): Licensed under the [Creative Commons Attribution 4.0 International License](./LICENSE-DATA) (CC BY 4.0)
+- **Generated Data** (contents of `packages/data/src/countries/`): Licensed under the [Creative Commons Attribution 4.0 International License](./LICENSE-DATA) (CC BY 4.0)
 
 ## Contributing
 
@@ -89,34 +89,34 @@ pnpm fmt
 
 ## Project Structure
 
-### Next.js Application
-
-The Next.js app code is located in `src/`:
+The repository is organized as a pnpm + Turborepo monorepo:
 
 ```
-src/
-├── app/          # Next.js App Router pages and layouts
-├── components/   # React components
-├── data/         # Pre-generated JSON data files
-├── hooks/        # Custom React hooks
-├── messages/     # Internationalization messages
-├── middleware.ts # Request middleware
-└── utils/        # Utility functions and types
+apps/
+└── web/                      # Next.js web application (@donationwatch/web)
+    ├── src/                  # App Router pages, layouts, domain components, i18n messages
+    ├── public/               # Static assets and postprocessed JSON data
+    └── e2e/                  # Playwright end-to-end tests
+packages/
+├── core/                     # Pure domain types, config, and utilities (@donationwatch/core)
+├── ui/                       # Shared UI primitives and styling utilities (@donationwatch/ui)
+├── data/                     # Generated country datasets, loaders, and queries (@donationwatch/data)
+└── data-pipeline/            # CLI data loaders, postprocessor, social images, and icons (@donationwatch/data-pipeline)
 ```
 
 ## Architecture
 
 ### Core Data Types
 
-The application is built around two primary data types defined in `src/utils/types.ts`:
+The application is built around two primary data types defined in `packages/core/src/utils/types.ts` (`@donationwatch/core/utils/types`):
 
 - `Donation` - Represents a single donation
 - `Party` - Represents a political party
 
-There's also `src/utils/countries.ts` and `src/utils/country-config.ts` containing the country configurations and metadata for all supported countries:
+There's also `packages/core/src/utils/countries.ts` and `packages/core/src/utils/country-config.ts` containing the country configurations and metadata for all supported countries:
 
-- `CountryConfig` - (in `src/utils/country-config.ts`) Provides per-country configuration (registry URLs, regexes, data sources) that drives the data pipeline and server loaders.
-- `Country` / `COUNTRY_CODES` - (in `src/utils/countries.ts`) Provides lightweight enums and mappings safe for client bundle consumption.
+- `CountryConfig` - (in `packages/core/src/utils/country-config.ts`) Provides per-country configuration (registry URLs, regexes, data sources) that drives the data pipeline and server loaders.
+- `Country` / `COUNTRY_CODES` - (in `packages/core/src/utils/countries.ts`) Provides lightweight enums and mappings safe for client bundle consumption.
 
 ## Data Pipeline
 
@@ -128,7 +128,7 @@ There's also `src/utils/countries.ts` and `src/utils/country-config.ts` containi
 > However, the raw data is sourced from public government records.
 > While https://donation.watch honors removal requests on our hosted platform, we cannot remove data from the official government sources, nor can we enforce this anonymization if you run this scraper independently.
 
-### Data Loading (`tasks/load-data/`)
+### Data Loading (`packages/data-pipeline/src/load-data/`)
 
 The data pipeline consists of two main steps:
 
@@ -154,7 +154,7 @@ Each country has its own loader (e.g., `de/de-loader.ts`, `uk/uk-loader.ts`) tha
 - Normalizes the data into the common `Donation` format
 - Caches raw data locally for faster subsequent runs
 
-> For United States (FEC) specific details on Super PAC / JFC discovery and party affiliations, see [`tasks/load-data/us/README.md`](tasks/load-data/us/README.md).
+> For United States (FEC) specific details on Super PAC / JFC discovery and party affiliations, see [`packages/data-pipeline/src/load-data/us/README.md`](packages/data-pipeline/src/load-data/us/README.md).
 
 > Adding support for a brand-new country? See [CONTRIBUTING.md § Adding a New Country](CONTRIBUTING.md#adding-a-new-country) for the full step-by-step guide.
 
@@ -175,7 +175,7 @@ The `postprocess.ts` script transforms the raw donation data into optimized JSON
 - Pre-builds Wikipedia data
 - Processes GeoJSON for map visualizations
 
-The generated files are written to `src/data/` and are directly imported by the Next.js app.
+The generated files are written to `packages/data/src/countries/` and `apps/web/public/data/` and are imported by the Next.js app via `@donationwatch/data`.
 
 ## Deployment
 

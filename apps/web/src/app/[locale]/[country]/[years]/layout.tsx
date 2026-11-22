@@ -1,0 +1,255 @@
+import type { Metadata } from "next";
+
+import { isNotNullandNotUndefined } from "@donationwatch/core/utils/array";
+import {
+  CACHED_LAST_LEGISLATIVE_YEARS,
+  CACHED_LAST_YEARS,
+  THUMBNAIL_PREFIX,
+} from "@donationwatch/core/utils/config";
+import { getCountryName } from "@donationwatch/core/utils/countries";
+import { Features, hasFeature } from "@donationwatch/core/utils/features";
+import { formatYearsRange } from "@donationwatch/core/utils/formatter";
+import {
+  canShowYearsTimeline,
+  hasYearSums,
+  lastPartyStatsDonation,
+} from "@donationwatch/core/utils/party";
+import {
+  deserializeYears,
+  hasKnownYearRange,
+  serializeYears,
+} from "@donationwatch/core/utils/serializers";
+import {
+  isValidCountry,
+  isValidLocale,
+} from "@donationwatch/core/utils/validate";
+import { getBuild } from "@donationwatch/data/loader/build";
+import { getPartyYearsSums } from "@donationwatch/data/loader/party-years-sums";
+import { getCountryConfig } from "@donationwatch/data/queries/get-country-config";
+import { ChartLine, Earth, History, List, UserRound } from "lucide-react";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { notFound, redirect } from "next/navigation";
+
+import type { TabItem } from "@/components/tabs";
+
+import { DynamicAbsoluteMultiplePartySumsGradient } from "@/components/charts/dynamic-stacked-party-line";
+import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
+import { PageWithToc } from "@/components/layout/article";
+import { PageHeader } from "@/components/layout/page-header";
+import { LastModifiedSchema } from "@/components/schema";
+import { NavigationTabs } from "@/components/tabs";
+import { FilteredYearsHeroHeader } from "@/components/years/filtered-years-header";
+import { YearsFilterSync } from "@/components/years/years-filter-sync";
+import { YearsFooterNav } from "@/components/years/years-footer-nav";
+import { getMessagesForLocale } from "@/utils/i18n-loader";
+import { pick } from "@/utils/i18n-pick";
+import { baseOpenGraph, baseTwitter } from "@/utils/meta";
+import { notFoundMetadata } from "@/utils/not-found-metadata";
+
+import type { ParamsOf } from "../../../../../.next/types/routes";
+
+export const dynamicParams = true;
+// Is needed because with the hybird static/dynamic generation.
+// Without it next reports STALE and will always try to re-generate the page which causes unneeded CPU load.
+export const revalidate = false;
+
+const sortYearsDesc = (a: string, b: string) =>
+  parseInt(b, 10) - parseInt(a, 10);
+
+export async function generateStaticParams({
+  params,
+}: {
+  params: ParamsOf<"/[locale]/[country]/[years]">;
+}) {
+  if (!isValidCountry(params.country)) return [];
+
+  const countryConfig = await getCountryConfig(params.country);
+
+  return [
+    // singular years
+    ...countryConfig.years.toSorted(sortYearsDesc).slice(0, CACHED_LAST_YEARS),
+
+    // legislative year ranges
+    ...(countryConfig.legislativeYears ?? [])
+      .map((years) => serializeYears(years))
+      .toSorted(sortYearsDesc)
+      .slice(0, CACHED_LAST_LEGISLATIVE_YEARS),
+  ].map((year) => ({
+    years: year,
+  }));
+}
+
+export async function generateMetadata(
+  props: LayoutProps<"/[locale]/[country]/[years]">,
+): Promise<Metadata> {
+  const params = await props.params;
+
+  if (!isValidLocale(params.locale)) return notFoundMetadata;
+  if (!isValidCountry(params.country)) return notFoundMetadata;
+  setRequestLocale(params.locale);
+
+  const years = deserializeYears(params.years);
+
+  const [t, tCountries, countryConfig] = await Promise.all([
+    getTranslations({ locale: params.locale }),
+    getTranslations({ locale: params.locale, namespace: "countries" }),
+    getCountryConfig(params.country),
+  ]);
+
+  const yearsParam = serializeYears(years);
+  const imageUrl = `${THUMBNAIL_PREFIX}/${params.locale}/${params.country}/years/${yearsParam}.png`;
+
+  if (!years.length) {
+    return notFoundMetadata;
+  }
+
+  const title = {
+    template: `%s | DonationWatch`,
+    default: `${t("title", { country: getCountryName(countryConfig, tCountries) })} ${formatYearsRange(
+      years,
+    )}`,
+  };
+
+  return {
+    title,
+    openGraph: baseOpenGraph({
+      locale: params.locale,
+      images: [{ url: imageUrl, width: 800, height: 418 }],
+    }),
+    twitter: baseTwitter({
+      card: "summary_large_image",
+      images: [imageUrl],
+    }),
+  };
+}
+
+export default async function YearsLayout(
+  props: LayoutProps<"/[locale]/[country]/[years]">,
+) {
+  const params = await props.params;
+
+  // Normalize same-year ranges: e.g. /2023-2023/... -> /2023/...
+  const sameYearMatch = params.years.match(/^(\d{4})-(\d{4})$/);
+  if (sameYearMatch && sameYearMatch[1] === sameYearMatch[2]) {
+    redirect(`/${params.locale}/${params.country}/${sameYearMatch[1]}`);
+  }
+
+  if (!isValidLocale(params.locale)) return notFound();
+  if (!isValidCountry(params.country)) return notFound();
+  setRequestLocale(params.locale);
+
+  const { children } = props;
+  const { locale, country } = params;
+  const years = deserializeYears(params.years);
+
+  const [t, countryConfig, partySums, messages] = await Promise.all([
+    getTranslations({ locale }),
+    getCountryConfig(country),
+    getPartyYearsSums(country),
+    getMessagesForLocale(locale),
+  ]);
+
+  if (!years.length || !hasKnownYearRange(years, countryConfig)) {
+    return notFound();
+  }
+
+  const yearsLink = serializeYears(years);
+
+  const tabItems: TabItem[] = [
+    {
+      icon: List,
+      href: `/${locale}/${country}/${yearsLink}/overview`,
+      label: t("overview.title"),
+    },
+    {
+      icon: History,
+      href: `/${locale}/${country}/${yearsLink}/changes`,
+      label: t("changes.title"),
+    },
+    hasFeature(countryConfig, Features.Donors)
+      ? {
+          icon: UserRound,
+          href: `/${locale}/${country}/${yearsLink}/donors`,
+          activeHref: `/${locale}/${country}/${yearsLink}/donors`,
+          label: t("donors.title"),
+        }
+      : undefined,
+    canShowYearsTimeline(countryConfig, partySums, years)
+      ? {
+          icon: ChartLine,
+          href: `/${locale}/${country}/${yearsLink}/timeline`,
+          label: t("timeline.title"),
+        }
+      : undefined,
+    hasFeature(countryConfig, Features.Origin)
+      ? {
+          icon: Earth,
+          href: `/${locale}/${country}/${yearsLink}/origin/overview`,
+          activeHref: `/${locale}/${country}/${yearsLink}/origin`,
+          label: t("origin.title"),
+        }
+      : undefined,
+  ].filter(isNotNullandNotUndefined);
+
+  const lastDonation = lastPartyStatsDonation(
+    getBuild(countryConfig.id).t,
+    partySums,
+    {
+      year: years.at(-1)!,
+    },
+  );
+
+  const pageMessages = pick(messages, [
+    "overview",
+    "changes",
+    "donors",
+    "timeline",
+    "origin",
+    "stacked_years",
+    "years",
+    "chart",
+    "state",
+    "countries",
+    "ref_countries",
+    "data",
+    "donation_type",
+    "per_month",
+    "party",
+    "interests",
+  ]);
+
+  return (
+    <ScopedClientIntlProvider messages={pageMessages}>
+      <YearsFilterSync yearsParam={params.years} />
+      {lastDonation ? <LastModifiedSchema dateModified={lastDonation} /> : null}
+      <DynamicAbsoluteMultiplePartySumsGradient
+        partyYearsSums={partySums}
+        years={years}
+      />
+
+      <PageWithToc tocTitle={formatYearsRange(years)}>
+        <PageHeader>
+          <FilteredYearsHeroHeader
+            title={t("years.title")}
+            years={years}
+            partySums={partySums}
+          />
+        </PageHeader>
+
+        {hasYearSums(partySums, years) ? (
+          <div className="container mx-auto px-4">
+            <div className="space-y-4 pt-4">
+              <NavigationTabs items={tabItems} />
+            </div>
+          </div>
+        ) : null}
+
+        {children}
+
+        <div className="container mx-auto px-4">
+          <YearsFooterNav years={years} locale={locale} />
+        </div>
+      </PageWithToc>
+    </ScopedClientIntlProvider>
+  );
+}

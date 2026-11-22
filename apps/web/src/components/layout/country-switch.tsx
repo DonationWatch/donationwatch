@@ -1,0 +1,180 @@
+"use client";
+import type { Country } from "@donationwatch/core/utils/countries";
+import type { PropsWithChildren } from "react";
+
+import {
+  COUNTRIES,
+  COUNTRY_CODES,
+  getCountryName,
+} from "@donationwatch/core/utils/countries";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@donationwatch/ui/components/dropdown-menu";
+import { PageLogo } from "@donationwatch/ui/components/page-logo";
+import { useLocale } from "next-intl";
+import Link from "next/link";
+import { useParams } from "next/navigation";
+
+import { createLucideSpriteIcon } from "@/components/icons/lucide-sprite-icon";
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { countryFlags } from "@/utils/country-flags";
+
+const ChevronDown = createLucideSpriteIcon("chevron-down");
+const Globe = createLucideSpriteIcon("globe");
+
+export const RootLink = ({
+  className,
+  children,
+}: PropsWithChildren<{
+  className?: string;
+}>) => {
+  const t = useTranslations();
+  const locale = useLocale();
+  let { country: activeCountry } = useParams<{
+    country: Country | undefined;
+  }>();
+
+  if (activeCountry && !COUNTRIES.has(activeCountry)) {
+    activeCountry = undefined;
+  }
+
+  const rootHref = activeCountry ? `/${locale}/${activeCountry}` : `/${locale}`;
+
+  return (
+    <Link
+      prefetch={false}
+      title={t("header.home")}
+      href={rootHref}
+      className={
+        "bg-primary-700 hover:bg-primary-500 flex size-8 shrink-0 items-center justify-center font-semibold text-white " +
+        (className ?? "")
+      }
+    >
+      {children}
+    </Link>
+  );
+};
+
+export const CountrySwitch = () => {
+  const locale = useLocale();
+  const t = useTranslations();
+  const tCountries = useTranslations("countries");
+  const tSidebar = useTranslations("sidebar");
+  let { country: activeCountry } = useParams<{
+    country: Country | undefined;
+  }>();
+
+  if (activeCountry && !COUNTRIES.has(activeCountry)) {
+    activeCountry = undefined;
+  }
+
+  return (
+    <div className="flex w-full items-center gap-2">
+      <RootLink className="rounded">
+        <PageLogo size={24} />
+      </RootLink>
+      <div className="relative grow overflow-hidden text-left">
+        <DropdownMenu modal={false}>
+          <DropdownMenuTrigger
+            render={
+              <button className="group flex w-full cursor-pointer items-center text-left" />
+            }
+          >
+            <div className="grow overflow-hidden leading-none">
+              <div className="truncate text-xs">DonationWatch</div>
+              <div className="truncate font-semibold">
+                {activeCountry
+                  ? t(`countries.${COUNTRY_CODES[activeCountry]}`)
+                  : tSidebar("all_countries")}
+              </div>
+            </div>
+            <ChevronDown
+              className={
+                "shrink-0 rotate-0 transition-transform group-data-[open]:rotate-180"
+              }
+              size={18}
+            />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-56" align="start">
+            <DropdownMenuGroup>
+              <DropdownMenuLabel>
+                {t("header.country_selection")}
+              </DropdownMenuLabel>
+              {[...COUNTRIES]
+                .toSorted((a, b) => {
+                  const translationA = t(`countries.${COUNTRY_CODES[a]}`);
+                  const translationB = t(`countries.${COUNTRY_CODES[b]}`);
+
+                  return translationA.localeCompare(translationB);
+                })
+                .map((country) => {
+                  const countryName = getCountryName(
+                    { code: COUNTRY_CODES[country] },
+                    tCountries,
+                  );
+                  return (
+                    <DropdownMenuItem
+                      key={country}
+                      render={
+                        <a
+                          aria-label={countryName}
+                          title={countryName}
+                          href={`/${locale}/${country}`}
+                          className={`group flex w-full cursor-pointer items-center justify-between rounded py-4 pl-4 text-gray-900 hover:bg-black/10 sm:py-2 dark:hover:bg-white/10 ${
+                            activeCountry === country
+                              ? "text-primary-700 dark:text-primary-400 font-bold"
+                              : "dark:text-gray-100"
+                          } data-active:bg-black/10 dark:data-active:bg-white/10`}
+                        />
+                      }
+                    >
+                      <span>{countryName}</span>
+                      <span
+                        className="flex basis-1/4 justify-center"
+                        aria-hidden={true}
+                      >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          className="h-4 rounded-xs"
+                          src={countryFlags[country]}
+                          alt=""
+                        />
+                      </span>
+                    </DropdownMenuItem>
+                  );
+                })}
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
+              <DropdownMenuItem
+                render={
+                  <a
+                    aria-label={tSidebar("all_countries")}
+                    title={tSidebar("all_countries")}
+                    href={`/${locale}/`}
+                    className={`group flex w-full cursor-pointer items-center justify-between rounded py-4 pl-4 text-gray-900 hover:bg-black/10 sm:py-2 dark:hover:bg-white/10 ${
+                      !activeCountry
+                        ? "text-primary-700 dark:text-primary-400 font-bold"
+                        : "dark:text-gray-100"
+                    } data-active:bg-black/10 dark:data-active:bg-white/10`}
+                  />
+                }
+              >
+                <span>{tSidebar("all_countries")}</span>
+                <span className="flex basis-1/4 justify-center">
+                  <Globe />
+                </span>
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+    </div>
+  );
+};

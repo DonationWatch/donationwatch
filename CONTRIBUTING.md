@@ -14,11 +14,11 @@ TL;DR: You still own your code. You're just giving us permission to use it, incl
 
 ## implementing Fixes & Features in the App
 
-The main application is a standard [Next.js](https://nextjs.org/) project located in the `src/` directory.
+The main application is a [Next.js](https://nextjs.org/) app located in `apps/web/`.
 
 1.  **Setup**: Follow the [README](./README.md) to install dependencies.
 2.  **Run**: Use `pnpm dev:turbo` to start the development server.
-3.  **Data**: The app relies on JSON files in `src/data/`. Running `pnpm data:fake && pnpm data:postprocess` gives you sample data to work with immediately.
+3.  **Data**: The app relies on generated modules in `packages/data/src/countries/` and JSON files in `apps/web/public/data/`. Running `pnpm data:fake && pnpm data:postprocess` gives you sample data to work with immediately.
 
 ## Adding a New Country
 
@@ -28,11 +28,11 @@ If you're working with an AI coding agent that supports the Agent Skills format 
 
 ## Working on Data Loaders
 
-Each country has its own data loader located in `tasks/load-data/<country_code>/`. These loaders are responsible for scraping or fetching raw data from official sources and normalizing it.
+Each country has its own data loader located in `packages/data-pipeline/src/load-data/<country_code>/`. These loaders are responsible for scraping or fetching raw data from official sources and normalizing it.
 
 ### File Structure
 
-- `tasks/load-data/<country>/<country>-loader.ts`: Main loader logic.
+- `packages/data-pipeline/src/load-data/<country>/<country>-loader.ts`: Main loader logic.
   - **Extends**: `DataLoader` class.
   - must implement the abstract members
 
@@ -42,7 +42,7 @@ Each country has its own data loader located in `tasks/load-data/<country_code>/
 
 If you spot incorrect data (e.g., a donor name is garbled or a date is wrong):
 
-1.  Locate the country's loader file (e.g., `tasks/load-data/de/de-loader.ts`).
+1.  Locate the country's loader file (e.g., `packages/data-pipeline/src/load-data/de/de-loader.ts`).
 2.  Inspect the `transformRawDonation` or `normalizeDonor` methods.
 3.  Add specific rules to handle the edge case.
 
@@ -79,16 +79,16 @@ To test data loader changes, you need to run the ingestion pipeline:
 
 We maintain a metadata file for each country to link donors to Wikipedia and define relationships between donors (e.g., family members, subsidiaries).
 
-- **Location**: `tasks/load-data/<country>/donor-meta.ts`
+- **Location**: `packages/data-pipeline/src/load-data/<country>/donor-meta.ts`
 
 ### Adding/Updating Metadata
 
 You should add entries to the `donorMeta` object, which adheres to the `DonorMetaDefinition` interface.
 
 ```typescript
-import type { DonorMetaDefinition } from "../../../src/utils/types";
+import type { DonorMetaDefinition } from "@donationwatch/core/utils/types";
 
-import { RelationKind } from "../../../src/utils/types";
+import { RelationKind } from "@donationwatch/core/utils/types";
 
 export const donorMeta: DonorMetaDefinition = {
   donors: {

@@ -1,23 +1,23 @@
 # Loader Reference
 
-Disclosed reference for [`add-country-data`](../SKILL.md). Consult this from step 2 onward — registering `COUNTRY_CONFIG` (in `src/utils/country-config.ts`) and writing the loader both draw on it.
+Disclosed reference for [`add-country-data`](../SKILL.md). Consult this from step 2 onward — registering `COUNTRY_CONFIG` (in `packages/core/src/utils/country-config.ts`) and writing the loader both draw on it.
 
 ## File map
 
-| Path                                                                                              | Written by                  | Contents                                                         |
-| ------------------------------------------------------------------------------------------------- | --------------------------- | ---------------------------------------------------------------- |
-| `tasks/load-data/<code>/<code>-loader.ts`                                                         | you                         | the `DataLoader` subclass                                        |
-| `tasks/load-data/<code>/donor-meta.ts`                                                            | you                         | `DonorMetaDefinition` — usually `{ donors: {} }`                 |
-| `tasks/load-data/<code>/.donations-cache/`                                                        | loader, at runtime          | raw fetched files, one per year                                  |
-| `tasks/load-data/<code>/anonymized-donors.json`                                                   | you, optional               | array of donor names to redact — loaded automatically if present |
-| `tasks/data/<code>/donations.ts`, `donor-meta.ts`, `transparency.ts`                              | `DataLoader.run()`          | generated, don't hand-edit                                       |
-| `src/data/<country>/country-config.ts`, `parties.ts`, `build.ts`                                  | `DataLoader.run()`          | generated, don't hand-edit                                       |
-| `src/data/<country>/party-sums.ts`, `biggest-donors.ts`, `biggest-donations.ts`, `most-recent.ts` | `pnpm run data:postprocess` | generated, don't hand-edit                                       |
-| `src/data/<country>/wikipedia-articles.ts`, `public/data/<country>/wikipedia/by-pageId/*.json`    | `pnpm run data:wikipedia`   | generated, don't hand-edit                                       |
+| Path                                                                                                                       | Written by                  | Contents                                                         |
+| -------------------------------------------------------------------------------------------------------------------------- | --------------------------- | ---------------------------------------------------------------- |
+| `packages/data-pipeline/src/load-data/<code>/<code>-loader.ts`                                                             | you                         | the `DataLoader` subclass                                        |
+| `packages/data-pipeline/src/load-data/<code>/donor-meta.ts`                                                                | you                         | `DonorMetaDefinition` — usually `{ donors: {} }`                 |
+| `packages/data-pipeline/src/load-data/<code>/.donations-cache/`                                                            | loader, at runtime          | raw fetched files, one per year                                  |
+| `packages/data-pipeline/src/load-data/<code>/anonymized-donors.json`                                                       | you, optional               | array of donor names to redact — loaded automatically if present |
+| `packages/data-pipeline/src/data/<code>/donations.ts`, `donor-meta.ts`, `transparency.ts`                                  | `DataLoader.run()`          | generated, don't hand-edit                                       |
+| `packages/data/src/countries/<country>/country-config.ts`, `parties.ts`, `build.ts`                                        | `DataLoader.run()`          | generated, don't hand-edit                                       |
+| `packages/data/src/countries/<country>/party-sums.ts`, `biggest-donors.ts`, `biggest-donations.ts`, `most-recent.ts`       | `pnpm run data:postprocess` | generated, don't hand-edit                                       |
+| `packages/data/src/countries/<country>/wikipedia-articles.ts`, `apps/web/public/data/<country>/wikipedia/by-pageId/*.json` | `pnpm run data:wikipedia`   | generated, don't hand-edit                                       |
 
 ## `DataLoader` contract
 
-Abstract members you implement (`tasks/load-data/data-loader.ts`):
+Abstract members you implement (`packages/data-pipeline/src/load-data/data-loader.ts`):
 
 - `parties: Record<string, PartyConfig>` — keyed by whatever string identifies the party in _your_ extracted data (source name, numeric id, etc.) — this key does not need to match the final `code`.
 - `donorMeta: DonorMetaDefinition`.
@@ -55,9 +55,9 @@ interface PartyConfig {
 
 `tests/countries.test.ts` enforces uniqueness of `code`, `color`, `short`, and the long name within a country — a copy-pasted color or code from another party is a real failure mode when there are 50+ minor parties (see `ge-loader.ts`, which resorts to placeholder colors like `#ff0027` for parties with no known brand color — that pattern is a last resort, not a first choice).
 
-## `COUNTRY_CONFIG` fields worth knowing (`src/utils/country-config.ts`)
+## `COUNTRY_CONFIG` fields worth knowing (`packages/core/src/utils/country-config.ts`)
 
-- `features` — bitmask of `Features` (`src/utils/features.ts`): `Date` (day-level dates vs. year-only), `Origin` (address has country/state), `DonorType`, `ExternalDonationIds`, `Donors` (has real donor names, as opposed to aggregate-only sources), `DonationType`, `DonorRegistrationNumber`.
+- `features` — bitmask of `Features` (`packages/core/src/utils/features.ts`): `Date` (day-level dates vs. year-only), `Origin` (address has country/state), `DonorType`, `ExternalDonationIds`, `Donors` (has real donor names, as opposed to aggregate-only sources), `DonationType`, `DonorRegistrationNumber`.
 - `knownPartyRequirements: { count, sum }` — a party only _needs_ an entry in `parties` once it crosses this count OR this sum (use `-1` on one side to check only the other). Without it, every single-donation micro-party demands an entry. See `cz`/`lv`/`hr`/`ge`/`ca`/`fr`/`ua` for real thresholds.
 - `donorFilters` / `receiverFilters` — arrays of regex strings (case-insensitive) matched against the _normalized_ donor/receiver name to drop known noise (government bodies acting as pass-through, deregistered fringe committees). See `at`, `uk`, `au` for large examples — `au`'s receiver filter list in particular is a good template for handling independents/individual-politician "parties".
 - `projection` — Lambert Conformal Conic params, only needed if the country gets a choropleth map.
@@ -65,7 +65,7 @@ interface PartyConfig {
 
 ## Quirks seen in production loaders
 
-- **Aggregate-only sources** (no individual donor names, only party totals per year): mark the donor with the `DONOR_TO_PARTY_BY_YEAR` sentinel from `@/utils/config` instead of inventing a fake name (see `se-loader.ts`).
+- **Aggregate-only sources** (no individual donor names, only party totals per year): mark the donor with the `DONOR_TO_PARTY_BY_YEAR` sentinel from `@donationwatch/core/utils/config` instead of inventing a fake name (see `se-loader.ts`).
 - **Source returns everything in one request**, not segmented by year: guard `loadYearDataToCache`/`extractYearData` with a `loadedOnce`/`extractedOnce` instance flag so repeated calls (once per selected year) don't refetch or reprocess (see `se-loader.ts`).
 - **Non-UTF8 / non-comma exports**: check the actual encoding and delimiter before parsing — `se-loader.ts` needs `utf16le` decoding and tab-delimited rows despite being a `.csv`.
 - **Positional destructuring for wide rows**: destructure XLSX/CSV rows into named local variables in one place (a `rowFields()` helper) rather than indexing by number scattered through the code — makes source-language column names self-documenting and safe to reuse for dedup comparisons (see `ch-loader.ts`).

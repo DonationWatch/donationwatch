@@ -1,0 +1,102 @@
+import type { Metadata } from "next";
+
+import { getCountryName } from "@donationwatch/core/utils/countries";
+import { Features, hasFeature } from "@donationwatch/core/utils/features";
+import { LOCALES } from "@donationwatch/core/utils/locales";
+import {
+  isValidCountry,
+  isValidLocale,
+} from "@donationwatch/core/utils/validate";
+import { getCountryConfig } from "@donationwatch/data/queries/get-country-config";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { notFound } from "next/navigation";
+
+import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
+import {
+  ArticleHeader,
+  ArticleLead,
+  ArticleTitle,
+  WideArticle,
+} from "@/components/layout/article";
+import { getMessagesForLocale } from "@/utils/i18n-loader";
+import { pick } from "@/utils/i18n-pick";
+import { generateAlternates } from "@/utils/meta";
+import { notFoundMetadata } from "@/utils/not-found-metadata";
+
+import { RacingBars } from "./racing-bars";
+
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  return LOCALES.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata(
+  props: PageProps<"/[locale]/[country]/tools/bar-chart-race">,
+): Promise<Metadata> {
+  const params = await props.params;
+
+  if (!isValidLocale(params.locale)) return notFoundMetadata;
+  if (!isValidCountry(params.country)) return notFoundMetadata;
+  setRequestLocale(params.locale);
+
+  const { country } = params;
+
+  const [t, tCountries, countryConfig] = await Promise.all([
+    getTranslations({
+      locale: params.locale,
+      namespace: "bar_chart_race",
+    }),
+    getTranslations({
+      locale: params.locale,
+      namespace: "countries",
+    }),
+    getCountryConfig(country),
+  ]);
+  const localizedCountryName = getCountryName(countryConfig, tCountries);
+
+  return {
+    title: `${t("title")} - ${localizedCountryName}`,
+    description: t("description"),
+    alternates: generateAlternates(`${country}/tools/bar-chart-race`),
+  };
+}
+
+export default async function Page(
+  props: PageProps<"/[locale]/[country]/tools/bar-chart-race">,
+) {
+  const params = await props.params;
+
+  if (!isValidLocale(params.locale)) return notFound();
+  if (!isValidCountry(params.country)) return notFound();
+  setRequestLocale(params.locale);
+
+  const { country } = params;
+
+  const [tBarChartRace, countryConfig, messages] = await Promise.all([
+    getTranslations({ locale: params.locale, namespace: "bar_chart_race" }),
+    getCountryConfig(country),
+    getMessagesForLocale(params.locale),
+  ]);
+
+  if (!hasFeature(countryConfig, Features.Date)) {
+    return notFound();
+  }
+
+  const pageMessages = pick(messages, ["bar_chart_race", "chart", "actions"]);
+
+  return (
+    <ScopedClientIntlProvider messages={pageMessages}>
+      <WideArticle>
+        <ArticleHeader>
+          <ArticleTitle>{tBarChartRace("title")}</ArticleTitle>
+          <ArticleLead>
+            <p>{tBarChartRace("description")}</p>
+            <p className="text-sm">{tBarChartRace("note")}</p>
+          </ArticleLead>
+        </ArticleHeader>
+        <RacingBars />
+      </WideArticle>
+    </ScopedClientIntlProvider>
+  );
+}

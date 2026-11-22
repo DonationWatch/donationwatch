@@ -1,7 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+node_modules
 /.pnp
 .pnp.*
 .yarn/*
@@ -14,11 +14,12 @@
 /coverage
 
 # next.js
-/.next/
-/out/
+**/.next/
+**/out/
 
 # production
 /build
+.turbo
 
 # misc
 .DS_Store
@@ -47,25 +48,25 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
+**/test-results/
+**/playwright-report/
+**/blob-report/
+**/playwright/.cache/
 .open-next
 .wrangler
 *.zip
 *.csv
 
 # app specific data which we don't want to ship
-/public/*.txt
-/public/data
-/public/thumbnails
-/public/.well-known
-/public/schema
-/public/sitemap-global.xml
-/public/geojson/**
-/tasks/load-data/**/.donations-cache/**
-/tasks/data/**/donations.ts
-/tasks/data/**/*.ts
-/src/data/**/*.ts
-/tasks/load-data/**/anonymized-donors.json
+/apps/web/public/*.txt
+/apps/web/public/data
+/apps/web/public/thumbnails
+/apps/web/public/.well-known
+/apps/web/public/schema
+/apps/web/public/sitemap-global.xml
+/apps/web/public/geojson/**
+/packages/data-pipeline/src/load-data/**/.donations-cache/**
+/packages/data-pipeline/src/data/**/donations.ts
+/packages/data-pipeline/src/data/**/*.ts
+/packages/data/src/countries/**/*.ts
+/packages/data-pipeline/src/load-data/**/anonymized-donors.json

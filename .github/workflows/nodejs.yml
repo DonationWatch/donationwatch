@@ -42,8 +42,10 @@ jobs:
         run: |
           pnpm run data:fake
           pnpm run data:postprocess
-          pnpm next typegen
+          pnpm --filter @donationwatch/web exec next typegen
           pnpm run cf:typegen
+      - name: Typecheck
+        run: pnpm run typecheck
       - name: Run (fake data) unit tests
         run: pnpm run test:unit:fake
       - name: Build Next.js app
@@ -74,7 +76,7 @@ jobs:
             return total;
           }
 
-          const nextDir = path.join(process.cwd(), ".next");
+          const nextDir = path.join(process.cwd(), "apps/web/.next");
           const serverCode = getDirSize(path.join(nextDir, "server"));
           const staticAssets = getDirSize(path.join(nextDir, "static"));
           const cache = getDirSize(path.join(nextDir, "cache"));

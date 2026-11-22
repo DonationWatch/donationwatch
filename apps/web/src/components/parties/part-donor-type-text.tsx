@@ -1,0 +1,103 @@
+"use client";
+import type { Party } from "@donationwatch/core/types/party";
+import type { Donation } from "@donationwatch/core/utils/types";
+import type { ReactNode } from "react";
+
+import { PartyField } from "@donationwatch/core/types/party";
+import { formatCountryCurrency } from "@donationwatch/core/utils/formatter";
+import { DonationField, DonorType } from "@donationwatch/core/utils/types";
+
+import { RankBadge } from "@/components/donations/ranking-item";
+import { PercentageHint } from "@/components/percentage-hint";
+import { useRequiredCountryConfig } from "@/components/providers/country-provider";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+
+export const LoadingPartyDonorTypeText = ({
+  party,
+  donations,
+  ssrDonorTypes,
+  chart,
+}: {
+  party: Party;
+  donations: Donation[];
+  ssrDonorTypes?: Partial<Record<DonorType, { sum: number; count: number }>>;
+  chart?: ReactNode;
+}) => {
+  const country = useRequiredCountryConfig();
+  const t = useTranslations();
+  const browserBasedLocale = useBrowserBasedLocale();
+
+  const sumByType: Partial<Record<DonorType, { sum: number; count: number }>> =
+    {};
+  let totalSum = 0;
+
+  if (donations.length > 0) {
+    donations.forEach((donation) => {
+      if (donation[DonationField.Receiver] !== party[PartyField.Id]) return;
+
+      const donorType = donation[DonationField.DonorType] ?? DonorType.Other;
+
+      sumByType[donorType] ??= { sum: 0, count: 0 };
+      sumByType[donorType].sum += donation[DonationField.Amount];
+      sumByType[donorType].count++;
+
+      totalSum += donation[DonationField.Amount];
+    });
+  } else if (ssrDonorTypes) {
+    for (const [type, stats] of Object.entries(ssrDonorTypes)) {
+      if (!stats) continue;
+      sumByType[type as unknown as DonorType] = stats;
+      totalSum += stats.sum;
+    }
+  }
+
+  const sortedEntries = Object.entries(sumByType).toSorted(
+    ([, a], [, b]) => b.sum - a.sum,
+  );
+
+  return (
+    <>
+      <p>
+        {t("party.donor_types.p0")}
+        <br />
+        {t("party.donor_types.p1", {
+          count: sortedEntries.length,
+          party: party[PartyField.Short],
+        })}
+      </p>
+      <p>{t("party.donor_types.p2")}</p>
+      {chart ? <div className="my-4">{chart}</div> : null}
+      <ul className="mx-2 py-2 *:py-1">
+        {sortedEntries.map(([type, stats], idx) => {
+          const donorType = type as unknown as DonorType;
+
+          return (
+            <li
+              key={donorType}
+              className="flex w-full items-center justify-between text-sm font-semibold"
+            >
+              <div className="flex items-center overflow-x-hidden">
+                <RankBadge rank={idx + 1} />
+                <span className="truncate">{t(`donor_type.${donorType}`)}</span>
+              </div>
+              <div className="ml-2 flex tabular-nums">
+                <span className="lg:mr-1">
+                  {formatCountryCurrency(
+                    browserBasedLocale,
+                    stats.sum,
+                    country,
+                  )}
+                </span>
+                <PercentageHint
+                  browserBasedLocale={browserBasedLocale}
+                  percentage={stats.sum / totalSum}
+                />
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </>
+  );
+};

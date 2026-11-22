@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-[DonationWatch](https://donation.watch/) is an open-source Next.js application that tracks and visualizes political party donations across multiple countries. There is no database—all data is ingested by country loaders (`tasks/load-data/`) and pre-generated into static JSON files under `src/data/`.
+[DonationWatch](https://donation.watch/) is an open-source Next.js monorepo (pnpm workspaces + Turborepo) that tracks and visualizes political party donations across multiple countries. There is no database: all data is ingested by country loaders (`packages/data-pipeline/src/load-data/`) and pre-generated into static TypeScript/JSON files under `packages/data/src/countries/` and `apps/web/public/data/`.
 
 ## Target Audience
 
@@ -27,18 +27,18 @@ When writing UI copy, documentation, methodology notes, or generated content:
 
 ## UI & Frontend Conventions
 
-- **shadcn & Base UI:** Install `src/components/ui/*` primitives via `pnpm dlx shadcn@latest add <component>` (or `npx shadcn@latest add <component>`) rather than hand-rolling them. This repo uses `@base-ui/react`, so active states use `data-pressed`, `aria-pressed`, or `data-checked` instead of `data-[state=on]`.
+- **shadcn & Base UI:** Install `packages/ui/src/components/*` (`@donationwatch/ui`) primitives via `pnpm dlx shadcn@latest add <component>` (or `npx shadcn@latest add <component>`) rather than hand-rolling them. This repo uses `@base-ui/react`, so active states use `data-pressed`, `aria-pressed`, or `data-checked` instead of `data-[state=on]`.
 - **Default Text Color & Formatting:** Keep default foreground text color for textual sections, list items, and descriptions; avoid `text-muted-foreground` or hover color changes on non-interactive text. Do not bold currency sums in prose paragraphs.
 - **Top-to-Bottom Control Placement:** Place static introductory copy above interactive controls, and place dynamic text or lists controlled by them below.
 
 ## Country-Specific Features & Data Loading
 
-- **Feature Flags (`Features`):** Gate country-specific features with `Features` in `src/utils/features.ts` and `hasFeature(country, Features.<Flag>)` instead of hardcoding `country.id === "..."`. Enable flags per country in `src/utils/country-config.ts`.
-- **Server-Loaded Country Datasets:** Load optional per-country datasets in Server Components (`page.tsx`) via dynamic `import()` gated by `hasFeature(...)`, then pass the data down as props. Do not statically import `src/data/<country>/*` inside `"use client"` components, so other countries' client bundles do not ship unused country data.
+- **Feature Flags (`Features`):** Gate country-specific features with `Features` in `packages/core/src/utils/features.ts` (`@donationwatch/core/utils/features`) and `hasFeature(country, Features.<Flag>)` instead of hardcoding `country.id === "..."`. Enable flags per country in `packages/core/src/utils/country-config.ts`.
+- **Server-Loaded Country Datasets:** Load optional per-country datasets in Server Components (`page.tsx`) via dynamic `import()` gated by `hasFeature(...)` (via `@donationwatch/data`), then pass the data down as props. Do not statically import `packages/data/src/countries/<country>/*` inside `"use client"` components, so other countries' client bundles do not ship unused country data.
 
 ## i18n & Routing
 
-- **Scoped Client Translations:** Client components using `useClientTranslations` only receive namespaces listed in `pick(messages, [...])` in the route's `layout.tsx` or `page.tsx`. Add new namespaces there and keep all `src/messages/*.json` files in sync.
+- **Scoped Client Translations:** Client components using `useClientTranslations` only receive namespaces listed in `pick(messages, [...])` in the route's `layout.tsx` or `page.tsx`. Add new namespaces there and keep all `apps/web/src/messages/*.json` files in sync.
 - **Route vs. Formatting Locale:** Use `useLocale()` from `next-intl` for URL paths (`/${routeLocale}/${country.id}/...`), and `useBrowserBasedLocale()` only for currency, number, and date formatting.
 
 ## Key References

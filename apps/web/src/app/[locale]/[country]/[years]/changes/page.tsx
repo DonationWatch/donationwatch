@@ -1,0 +1,107 @@
+import type { Metadata } from "next";
+
+import { getCountryName } from "@donationwatch/core/utils/countries";
+import {
+  formatCompactCountryCurrency,
+  formatYearsRange,
+} from "@donationwatch/core/utils/formatter";
+import { hasYearSums } from "@donationwatch/core/utils/party";
+import { deserializeYears } from "@donationwatch/core/utils/serializers";
+import {
+  isValidCountry,
+  isValidLocale,
+  isValidMetadataLocale,
+} from "@donationwatch/core/utils/validate";
+import { getPartyYearsSums } from "@donationwatch/data/loader/party-years-sums";
+import { getCountryConfig } from "@donationwatch/data/queries/get-country-config";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { notFound, redirect } from "next/navigation";
+
+import { Article } from "@/components/layout/article";
+import { generateAlternates } from "@/utils/meta";
+import { notFoundMetadata } from "@/utils/not-found-metadata";
+
+import { YearsChangesClientPage } from "./_components/years-changes-client-page";
+
+export async function generateMetadata(
+  props: PageProps<"/[locale]/[country]/[years]/changes">,
+): Promise<Metadata> {
+  const params = await props.params;
+
+  if (!isValidMetadataLocale(params.locale)) return notFoundMetadata;
+  if (!isValidCountry(params.country)) return notFoundMetadata;
+
+  setRequestLocale(params.locale);
+
+  const locale = params.locale;
+  const country = params.country;
+  const years = params.years;
+
+  const [t, tCountries, tPageTitle, countryConfig] = await Promise.all([
+    getTranslations({ locale }),
+    getTranslations({ locale, namespace: "countries" }),
+    getTranslations({ locale, namespace: "page_title" }),
+    getCountryConfig(country),
+  ]);
+
+  const countryName = getCountryName(countryConfig, tCountries);
+  const deserializedYears = deserializeYears(years);
+  const yearRange = formatYearsRange(deserializedYears);
+
+  const description = t("changes.description", {
+    country: countryName,
+    year: yearRange,
+    minAmount: formatCompactCountryCurrency(
+      locale,
+      countryConfig.minPublicDonationAmount,
+      countryConfig,
+    ),
+  });
+
+  return {
+    title: tPageTitle("years.changes", {
+      year: yearRange,
+      country: countryName,
+    }),
+    description,
+    alternates: generateAlternates(`${country}/${years}/changes`),
+    robots: {
+      index: false,
+      follow: true,
+    },
+  };
+}
+
+export default async function ChangesPage(
+  props: PageProps<"/[locale]/[country]/[years]/changes">,
+) {
+  const params = await props.params;
+
+  if (!isValidLocale(params.locale)) return notFound();
+  if (!isValidCountry(params.country)) return notFound();
+  setRequestLocale(params.locale);
+
+  const { locale, country } = params;
+  const years = deserializeYears(params.years);
+
+  const [t, partySums] = await Promise.all([
+    getTranslations({ locale }),
+    getPartyYearsSums(country),
+  ]);
+
+  if (!hasYearSums(partySums, years)) {
+    return redirect(
+      `/${params.locale}/${params.country}/${params.years}/overview`,
+    );
+  }
+
+  return (
+    <Article>
+      <YearsChangesClientPage
+        years={years}
+        title={t("changes.detail.title")}
+        summary={t("changes.detail.summary")}
+      />
+    </Article>
+  );
+}

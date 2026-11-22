@@ -16,7 +16,9 @@
     "correctness": "error"
   },
   "ignorePatterns": [
+    "**/node_modules/**",
     "**/data/**/*",
+    "**/countries/**/*",
     "**/geojson/**/*",
     "**/.donations-cache/**/*",
     "**/.next/**",
@@ -61,7 +63,120 @@
   },
   "overrides": [
     {
-      "files": ["e2e/**/*.spec.ts"],
+      "files": [
+        "apps/**/*",
+        "packages/core/**/*",
+        "packages/ui/**/*",
+        "packages/data/**/*"
+      ],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": [
+                  "@donationwatch/data-pipeline",
+                  "@donationwatch/data-pipeline/*",
+                  "**/data-pipeline/**"
+                ],
+                "message": "Do not import @donationwatch/data-pipeline into apps or shared packages."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["packages/core/**/*"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": [
+                  "@donationwatch/ui",
+                  "@donationwatch/ui/*",
+                  "@donationwatch/data",
+                  "@donationwatch/data/*",
+                  "@donationwatch/data-pipeline",
+                  "@donationwatch/data-pipeline/*",
+                  "@donationwatch/web",
+                  "@donationwatch/web/*",
+                  "**/data-pipeline/**",
+                  "react",
+                  "react-dom",
+                  "next",
+                  "next/*",
+                  "next-intl",
+                  "next-intl/*"
+                ],
+                "message": "@donationwatch/core must remain pure and framework-agnostic."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["packages/ui/**/*"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": [
+                  "@donationwatch/data",
+                  "@donationwatch/data/*",
+                  "@donationwatch/data-pipeline",
+                  "@donationwatch/data-pipeline/*",
+                  "@donationwatch/web",
+                  "@donationwatch/web/*",
+                  "**/data-pipeline/**",
+                  "next",
+                  "next/*",
+                  "next-intl",
+                  "next-intl/*"
+                ],
+                "message": "@donationwatch/ui must not depend on Next.js, next-intl, data, or data-pipeline."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["packages/data/**/*"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": [
+                  "@donationwatch/ui",
+                  "@donationwatch/ui/*",
+                  "@donationwatch/data-pipeline",
+                  "@donationwatch/data-pipeline/*",
+                  "@donationwatch/web",
+                  "@donationwatch/web/*",
+                  "**/data-pipeline/**",
+                  "react",
+                  "react-dom",
+                  "next",
+                  "next/*"
+                ],
+                "message": "@donationwatch/data may only depend on @donationwatch/core."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["apps/web/e2e/**/*.spec.ts"],
       "jsPlugins": ["eslint-plugin-playwright"],
       "env": {
         "shared-node-browser": true

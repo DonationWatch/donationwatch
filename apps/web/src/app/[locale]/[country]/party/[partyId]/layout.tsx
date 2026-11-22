@@ -1,0 +1,247 @@
+import type { Country } from "@donationwatch/core/utils/countries";
+import type { Metadata } from "next";
+
+import { PartyField } from "@donationwatch/core/types/party";
+import { isNotNullandNotUndefined } from "@donationwatch/core/utils/array";
+import {
+  CACHED_PARTIES_COUNT,
+  THUMBNAIL_PREFIX,
+} from "@donationwatch/core/utils/config";
+import { Features, hasFeature } from "@donationwatch/core/utils/features";
+import {
+  getPartyFullAndShortName,
+  lastPartyStatsDonation,
+} from "@donationwatch/core/utils/party";
+import {
+  findCorrectParty,
+  getPartiesSync,
+  getParty,
+} from "@donationwatch/data/config/parties";
+import { getBuild } from "@donationwatch/data/loader/build";
+import { getPartyYearsSums } from "@donationwatch/data/loader/party-years-sums";
+import { getCountryConfig } from "@donationwatch/data/queries/get-country-config";
+import { getSinglePartyYearsSums } from "@donationwatch/data/queries/get-parties-sum";
+import {
+  isValidCountry,
+  isValidLocale,
+  isValidParty,
+} from "@donationwatch/data/queries/validate";
+import { ChartLine, Earth, History, UserRound } from "lucide-react";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { notFound, redirect } from "next/navigation";
+
+import type { TabItem } from "@/components/tabs";
+
+import { AbsoluteMultipleColorsGradient } from "@/components/absolute-multiple-colors-gradient";
+import { ScopedClientIntlProvider } from "@/components/i18n/scoped-provider";
+import { PageWithToc } from "@/components/layout/article";
+import { PageHeader } from "@/components/layout/page-header";
+import { LastModifiedSchema } from "@/components/schema";
+import { NavigationTabs } from "@/components/tabs";
+import { WikiQuote } from "@/components/wiki-quote";
+import { getMessagesForLocale } from "@/utils/i18n-loader";
+import { pick } from "@/utils/i18n-pick";
+import { baseOpenGraph, baseTwitter } from "@/utils/meta";
+import { notFoundMetadata } from "@/utils/not-found-metadata";
+import { generateCountryTitlePart } from "@/utils/title";
+
+import type { ParamsOf } from "../../../../../../.next/types/routes";
+
+import { PartyClientPageHead } from "./party-client-page-head";
+
+export const dynamicParams = true;
+// Is needed because with the hybird static/dynamic generation.
+// Without it next reports STALE and will always try to re-generate the page which causes unneeded CPU load.
+export const revalidate = false;
+
+export async function generateStaticParams({
+  params,
+}: {
+  params: ParamsOf<"/[locale]/[country]/party/[partyId]">;
+}) {
+  if (!isValidLocale(params.locale)) return [];
+  const { country } = params;
+
+  const parties = getPartiesSync(country as Country);
+  return parties
+    .toSorted((a, b) => b[PartyField.Sum] - a[PartyField.Sum])
+    .slice(0, CACHED_PARTIES_COUNT)
+    .map((party) => ({
+      partyId: party[PartyField.Id],
+    }));
+}
+
+export async function generateMetadata(
+  props: LayoutProps<"/[locale]/[country]/party/[partyId]">,
+): Promise<Metadata> {
+  const { locale, country, partyId } = await props.params;
+
+  if (!isValidLocale(locale)) return notFoundMetadata;
+  if (!isValidCountry(country)) return notFoundMetadata;
+  setRequestLocale(locale);
+
+  const [tCountries, countryConfig] = await Promise.all([
+    getTranslations({ locale, namespace: "countries" }),
+    getCountryConfig(country),
+  ]);
+
+  if (!isValidParty(partyId, countryConfig)) return notFoundMetadata;
+
+  const party = getParty(countryConfig.id, partyId);
+
+  if (!party) {
+    return notFoundMetadata;
+  }
+
+  const countryPart = generateCountryTitlePart(countryConfig, tCountries);
+
+  const title = {
+    template: `%s | DonationWatch`,
+    default: `${getPartyFullAndShortName(party)} | ${countryPart}`,
+  };
+
+  const imageUrl = `${THUMBNAIL_PREFIX}/${locale}/${country}/parties/${party[PartyField.Id]}.png`;
+
+  return {
+    title,
+    openGraph: baseOpenGraph({
+      locale,
+      images: [{ url: imageUrl, width: 800, height: 418 }],
+    }),
+    twitter: baseTwitter({
+      card: "summary_large_image",
+      images: [imageUrl],
+    }),
+  };
+}
+
+export default async function PartyLayout(
+  props: LayoutProps<"/[locale]/[country]/party/[partyId]">,
+) {
+  const params = await props.params;
+
+  if (!isValidLocale(params.locale)) return notFound();
+  if (!isValidCountry(params.country)) return notFound();
+  setRequestLocale(params.locale);
+
+  const { locale, country, partyId } = params;
+
+  const { children } = props;
+
+  const [t, countryConfig, partyYearsSums, tCommon, messages] =
+    await Promise.all([
+      getTranslations({ locale }),
+      getCountryConfig(country),
+      getPartyYearsSums(country),
+      getTranslations({ locale, namespace: "common" }),
+      getMessagesForLocale(locale),
+    ]);
+
+  if (!isValidParty(partyId, countryConfig)) {
+    const correctParty = findCorrectParty(countryConfig.id, partyId);
+    if (correctParty) {
+      redirect(`/${locale}/${country}/party/${correctParty[PartyField.Id]}`);
+    }
+    return notFound();
+  }
+
+  const party = getParty(countryConfig.id, partyId);
+  const singlePartyYearsSums = getSinglePartyYearsSums(
+    partyYearsSums,
+    party[PartyField.Id],
+  );
+
+  const wikiPageId = party[PartyField.Wiki];
+  const tabItems: TabItem[] = [
+    {
+      icon: UserRound,
+      href: `/${locale}/${country}/party/${party[PartyField.Id]}/donors`,
+      label: t("donors.title"),
+    },
+    {
+      icon: History,
+      href: `/${locale}/${country}/party/${party[PartyField.Id]}/changes`,
+      label: t("changes.title"),
+    },
+    // We can show a timeline chart here as the party page chart falls back to year resolution if we have no dates
+    {
+      icon: ChartLine,
+      href: `/${locale}/${country}/party/${party[PartyField.Id]}/timeline`,
+      label: t("timeline.title"),
+    },
+    hasFeature(countryConfig, Features.Origin)
+      ? {
+          icon: Earth,
+          href: `/${locale}/${country}/party/${party[PartyField.Id]}/origin/overview`,
+          label: t("origin.title"),
+        }
+      : undefined,
+  ].filter(isNotNullandNotUndefined);
+
+  const lastDonation = lastPartyStatsDonation(
+    getBuild(countryConfig.id).t,
+    partyYearsSums,
+    {
+      partyId,
+    },
+  );
+
+  const pageMessages = pick(messages, [
+    "party",
+    "changes",
+    "donors",
+    "origin",
+    "timeline",
+    "per_year_party",
+    "per_month",
+    "per_year",
+    "chart",
+    "state",
+    "countries",
+    "ref_countries",
+    "data",
+    "donor_type",
+    "years",
+    "donation_type",
+    "old_data_warning",
+    "common",
+    "interests",
+  ]);
+
+  return (
+    <ScopedClientIntlProvider messages={pageMessages}>
+      {lastDonation ? <LastModifiedSchema dateModified={lastDonation} /> : null}
+      <AbsoluteMultipleColorsGradient
+        colors={[
+          {
+            color: party[PartyField.Color],
+            width: 100,
+          },
+        ]}
+      />
+      <PageWithToc tocTitle={party[PartyField.Short]}>
+        <PageHeader>
+          <section aria-labelledby="hero-label">
+            <PartyClientPageHead
+              party={party}
+              partyYearsSums={singlePartyYearsSums}
+            />
+            <div className="mb-3">
+              {wikiPageId && (
+                <section aria-label={tCommon("summary")} className="pt-4">
+                  <WikiQuote pageId={wikiPageId} />
+                </section>
+              )}
+            </div>
+          </section>
+        </PageHeader>
+        <div className="container mx-auto px-4">
+          <div className="space-y-4 pt-4">
+            <NavigationTabs items={tabItems} />
+          </div>
+        </div>
+        {children}
+      </PageWithToc>
+    </ScopedClientIntlProvider>
+  );
+}

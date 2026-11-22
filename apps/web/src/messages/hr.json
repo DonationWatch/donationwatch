@@ -1,0 +1,1301 @@
+{
+  "copyright": "Autorsko pravo",
+  "description": "DonationWatch pruža jasan uvid u donatore i stranke, olakšavajući razumijevanje političkog financiranja objašnjavajući složene podatke na jednostavan način",
+  "title": "Donacije stranaka {country}",
+  "sum": "Suma",
+  "donation_count": "Broj donacija",
+  "average": "Prosjek",
+  "donations_by_party": "Donacije po strankama",
+  "donations_per_year": "Donacije po godinama",
+  "party_donations": "Donacije stranaka",
+  "more": "Više",
+  "data_since": "Od {year}",
+  "view_party": "Pogledajte stranicu stranke {party}",
+  "faq": "Često postavljana pitanja",
+  "navigation": {
+    "fun": "Zanimljivosti",
+    "about": "O nama",
+    "other_countries": "Druge zemlje",
+    "imprint": "Impresum",
+    "privacy": "Politika privatnosti",
+    "transparency": "Transparentnost",
+    "methodology": "Metodologija",
+    "sources": "Izvori",
+    "export": "Izvoz podataka",
+    "bar_chart_race": "Utrka stupčastih grafikona",
+    "compare_parties": "Usporedi stranke",
+    "support_us": "☕ Podrži troškove poslužitelja",
+    "enterprise": "API za poduzeća",
+    "on_this_page": "Na ovoj stranici"
+  },
+  "data": {
+    "loading": "Sadržaj se učitava...",
+    "error": "Pogreška pri učitavanju podataka"
+  },
+  "sidebar": {
+    "sidebar": "Bočna traka",
+    "toggle": "Ukljuci/isključi bočnu traku",
+    "donations": "Donacije",
+    "all_countries": "Sve zemlje",
+    "tools": "Alati",
+    "show_all": "Prikaži sve ({num})",
+    "show_less": "Prikaži manje",
+    "more": "Više"
+  },
+  "search": {
+    "filter": "Pretraživanje...",
+    "filter_description": "Pretražite stranke, godine ili donatore",
+    "parties": "Stranke",
+    "years": "Godine",
+    "legislative_years": "Zakonodavne godine",
+    "empty": "Nema rezultata",
+    "donors": "Donatori"
+  },
+  "page_title": {
+    "years": {
+      "description": "U {year}. godini {parties} stranaka u {country} primilo je ukupno {sum} iz {count} donacija iznad {minAmount}. Istražite detaljne prikaze po stranci, donatoru i trendovima u političkom financiranju.",
+      "overview": "Političke donacije u {country} ({year}) – Godišnji pregled i financiranje",
+      "changes": "Nedavne promjene u donacijama političkim strankama u {country} za {year}",
+      "donors": "Popis donatora političkih stranaka i najveći donatori u {country} ({year})",
+      "timeline": "Vremenska crta donacija političkim strankama u {country} za {year}",
+      "origin": "Geografski pregled donacija strankama u {country} za {year}"
+    },
+    "party": {
+      "donors": "{party}: Popis donatora i pregled financiranja ({country})",
+      "changes": "Nedavne promjene u donacijama za {party} ({country})",
+      "timeline": "{party}: Vremenska crta financiranja i povijest donacija ({country})",
+      "origin": "Geografski pregled donacija za {party} ({country})",
+      "description": "Popis donatora i pregled financiranja za {party} u {country}. Saznajte koje tvrtke, organizacije i pojedinci doniraju: {count} donacija većih od {minimumAmount} u ukupnom iznosu od {sum} od {year}.",
+      "timeline_description": "Pratite prijavljene političke donacije i povijest financiranja za {party} u {country}: kumulativni iznosi, povijesni trendovi i godišnji pregledi.",
+      "changes_description": "Najnovije političke donacije i ažuriranja financiranja za {party} u {country}: kronološki pregled novoobjavljenih donacija, datuma i iznosa.",
+      "origin_description": "Geografsko podrijetlo političkih donacija za {party} u {country}: pregled po regijama, državama i stranim izvorima."
+    },
+    "donor": {
+      "overview": "{donor} – Političke donacije i povijest financiranja ({country})",
+      "description": "Pogledajte kamo su otišle političke donacije od {donor}. {sum} donirano u {count} doprinosa za {parties} stranaka u {country} od {minYear}."
+    }
+  },
+  "chart": {
+    "save_as_image": "Spremi kao sliku",
+    "toggle_fullscreen": "Prebaci na puni zaslon",
+    "reset_zoom": "Resetiraj zum",
+    "filtered": "filtrirani skup podataka"
+  },
+  "over_min_public_amount": "preko {amount}",
+  "over_threshold": "{type, select, count {samo stranke s ≥ {count} donacija} sum {samo stranke s ≥ {sum}} other {samo stranke s ≥ {count} donacija ili ≥ {sum}}}",
+  "prelim_data": "preliminarni podaci od {year}. godine",
+  "common": {
+    "date": "Datum",
+    "party": "Stranka",
+    "donor": "Donator",
+    "amount": "Iznos",
+    "anonymizedDonor": "Anonimizirani donator",
+    "redactedDonor": "Redigirani donator",
+    "donorToPartyByYear": "Donatori u {year}. godini",
+    "country": "Država",
+    "state": "Savezna država",
+    "summary": "Sažetak",
+    "download_format": "Preuzmi {format}",
+    "view_source": "Prikaži izvor",
+    "donation_type": "Vrsta donacije",
+    "donated_to": "Donirano za {recipient}"
+  },
+  "sort": {
+    "asc": "Sortiraj uzlazno",
+    "desc": "Sortiraj silazno",
+    "clear": "Poništi sortiranje"
+  },
+  "old_data_warning": {
+    "description": "Posljednja donacija: {date}.\nSljedeći zapisi čekaju službenu objavu."
+  },
+  "footer": {
+    "sources": "Izvori",
+    "build": "Stanje na dan {date}",
+    "build_since": "Od {date}, od {year}",
+    "published_by": "Kako je objavio {source}",
+    "charts_license": "Grafikoni licencirani pod {license} s navođenjem izvora"
+  },
+  "header": {
+    "home": "Početna stranica",
+    "language_selection": "Odabir jezika",
+    "country_selection": "Odabir države"
+  },
+  "actions": {
+    "close": "Zatvori",
+    "play": "Reproduciraj",
+    "pause": "Pauziraj",
+    "restart": "Ponovno pokreni"
+  },
+  "donor_dialog": {
+    "title": "Informacije o donatoru",
+    "summary": "Sažetak"
+  },
+  "donation_dialog": {
+    "title": "Detalji o donaciji",
+    "donor": "Donator",
+    "country": "Država",
+    "state": "Pokrajina",
+    "receiver": "Primatelj",
+    "donation_amount": "Iznos donacije",
+    "date": "Datum"
+  },
+  "root": {
+    "title": "Praćenje donacija političkim strankama otvorenog koda",
+    "subtitle": "Pratite i istražite političke donacije u više zemalja. Saznajte tko financira političke stranke i kako novac teče diljem svijeta.",
+    "enterprise": {
+      "title": "Enterprise API (Beta)",
+      "p0": "Trebate li programski pristup mapiranju entiteta između registara? Trenutno razvijamo visoko dostupni REST API s OpenAPI specifikacijama, posebno dizajniran za timove za usklađenost i analizu rizika u institucijama."
+    },
+    "stats": {
+      "countries": "Obuhvaćene zemlje",
+      "parties": "Političke stranke",
+      "donations": "Pojedinačne donacije",
+      "currencies": "Praćene valute"
+    },
+    "countries": {
+      "title": "Istražite političke donacije po zemlji",
+      "subtitle": "Odaberite zemlju kako biste pristupili detaljnim zapisima o donacijama, podacima o financiranju stranaka i informacijama o donatorima."
+    },
+    "biggest_donations": {
+      "title": "Najveće političke donacije i donatori",
+      "text": "Istražite najveće pojedinačne političke priloge i donatore s najvećim ukupnim iznosima zabilježene u nacionalnim registrima koje prati DonationWatch, pri čemu su svi iznosi preračunati u EUR. Javno financiranje i državne subvencije isključeni su kako bi se naglasak stavio na privatne i korporativne priloge.",
+      "single_donations_title": "Najveće pojedinačne donacije",
+      "single_donations_footer": "Poredano prema pojedinačnoj transakciji",
+      "top_donors_title": "Donatori s najvećim ukupnim iznosima",
+      "top_donors_footer": "Agregirano kroz sve zapise",
+      "converted_to_eur": "Preračunato u EUR",
+      "rates_as_of": "Tečajevi valuta (na dan {date}):"
+    },
+    "why": {
+      "title": "Zašto je transparentnost političkih donacija važna",
+      "p0": "Demokracija ovisi o informiranim građanima. Time što podatke o političkim donacijama činimo dostupnima i lakima za istraživanje, pomažemo ljudima razumjeti financijske odnose koji oblikuju njihov politički krajolik. Transparentnost u političkom financiranju gradi povjerenje, jača odgovornost i osnažuje birače da donose informirane odluke."
+    },
+    "open_source": {
+      "title": "Otvoreni kod",
+      "p0": "DonationWatch je otvorenog koda. Možeš pregledati kod, prijaviti probleme ili doprinijeti na {github}."
+    }
+  },
+  "biggest_donations": {
+    "text": "Od {minYear} godine najveća objavljena pojedinačna donacija u {country} dosegla je {amount} od {donor} za {party} u {year} godini. Slijede {others}.",
+    "list": "{amount} od {donor} za {receiver}"
+  },
+  "home": {
+    "most_recent": "Najnovije donacije",
+    "hero": {
+      "subtitle": "Praćenje donacija političkim strankama za {country}",
+      "subtitle_no_country": "Praćenje donacija političkim strankama"
+    },
+    "last_period": "Najnovija godina:",
+    "previous_period": "Donacije iz prethodne godine.",
+    "what": {
+      "title": "Što je ovo?",
+      "summary": "Donacije strankama važan su dio politike. One su važan pokazatelj političke podrške.\n\nMi pokušavamo ove podatke predstaviti jasno i razumljivo.",
+      "threshold": "Zbog velikog broja manjih političkih stranaka pratimo samo donacije za stranke koje prelaze određeni prag. Trenutni prag postavljen je na {type, select, count {{count} donacija} sum {ukupno {sum}} other {{count} donacija ili ukupno {sum}}} doprinosa toj stranci, bez obzira na veličinu pojedinačnih donacija.",
+      "no_donors": "Zbog nacionalnih propisa {country} ne objavljuje identitete pojedinačnih političkih donatora. Stoga prikazujemo revidirane ukupne iznose po stranci umjesto pojedinačnih transakcija. Značajke poput \"Najveći donatori\" ili \"Pretraga donatora\" onemogućene su za ovu regiju.",
+      "source": {
+        "austria": "Podaci koji se ovdje koriste dolaze iz austrijskog Revizorskog suda i uključuju sve donacije strankama koje su tamo dokumentirane od 2012. godine.\n\nMolimo imajte na umu: Prije 8. srpnja 2019., političke stranke morale su prijaviti pojedinačne donacije veće od 51.000 eura (do 2018. preko 50.000 eura) ACA-u. Od srpnja 2019. granica za prijavu je 2.500 eura.\n\nPodaci stranaka obično se ažuriraju tromjesečno.",
+        "germany": "Podaci koji se ovdje koriste dolaze iz njemačkog Bundestaga i uključuju sve donacije strankama preko 50.000 eura dokumentirane tamo od 2010. godine i preko 35.000 eura od 5. ožujka 2024.",
+        "switzerland": "Podaci koji se ovdje koriste dolaze iz švicarske Savezne financijske kontrole i uključuju sve političke donacije dokumentirane tamo od 2023. godine.",
+        "netherlands": "Informacije prikazane ovdje preuzete su od Vlade Nizozemske i uključuju sve političke donacije zabilježene od 2022. godine koje premašuju 1.000 €, kako je navedeno u godišnjem izvješću „Overzicht van giften aan politieke partijen en hun neveninstellingen“.\n\nZa tekuću godinu uključene su samo donacije koje prelaze 10.000 €, na temelju skupa podataka „Overzicht substantiële giften aan politieke partijen“.\n\nNapomena: Neke donacije nemaju precizan datum i stoga nisu uključene u vremenske serije ili druge vizualizacije temeljene na datumu.\n\nDonacije prijavljene za SP i GL mogu izgledati relativno visoke jer obje stranke zahtijevaju od svojih zastupnika i dužnosnika da značajan dio svojih plaća uplate stranci.",
+        "europeanunion": "Podaci predstavljeni ovdje potječu od Tijela za europske političke stranke i europske političke zaklade, obuhvaćajući sve dokumentirane donacije strankama i zakladama od 2018. godine. Zbog važnosti europskih političkih zaklada, pratimo i prikazujemo njihove donacije slično kao i donacije europskim političkim strankama.\n\nBudući da službeni podaci ne uključuju točne datume transakcija, nisu dostupne vremenske serije ili slični vizualni prikazi temeljeni na datumima.\n\nImajte na umu da su u razdoblju prije europskih izbora 2024. (od 6. prosinca 2023. do 10. lipnja 2024.) vrijedili posebni zahtjevi za izvještavanje o donacijama, s tjednim izvješćima i pravovremenom objavom od strane tijela.\nOd 10. lipnja 2024. samo se donacije preko 12.000 eura moraju odmah prijaviti. Ostale donacije bit će dostupne tek nakon predaje godišnjih financijskih izvještaja.\n\nTamo gdje ih APPF navede u zapisima pravnih donatora, registracijski brojevi tvrtki (poput belgijskog KBO-a, francuskog SIREN-a, češkog IČO-a, nizozemskog KVK-a itd.) izdvajaju se, provjeravaju kontrolnim zbrojem i izravno povezuju s odgovarajućim službenim nacionalnim registrom.",
+        "estonia": "Podaci koji se ovdje koriste dolaze iz estonskog Odbora za nadzor financiranja stranaka i uključuju sve političke donacije dokumentirane tamo od 2014. godine koje prelaze 1 euro.\n\nPolitičke stranke u Estoniji dužne su izvještavati o svojim prihodima, uključujući primljene donacije, na tromjesečnoj osnovi.\nPodaci na web stranici odbora ažuriraju se sukladno tome tromjesečno.",
+        "czechrepublic": "Podaci korišteni ovdje potječu iz Ureda za nadzor nad upravljanjem političkih stranaka i političkih pokreta i uključuju sve političke donacije koje su tamo dokumentirane od 2018. godine i koje prelaze 25 CZK.\n\nOvaj opseg također obuhvaća sve doprinose strankama ili političkim pokretima koji su ili primili više od 100 pojedinačnih donacija ili premašili ukupni iznos donacija od 1 milijun CZK, bez obzira na veličinu pojedinačnih doprinosa. Podaci se ažuriraju jednom godišnje.\nOtkrivanje vrste donatora temelji se na identifikaciji donatora kao pojedinca ako su prisutna polja firstName i lastName.",
+        "latvia": "Ovdje korišteni podaci potječu od Ureda za sprječavanje i suzbijanje korupcije (KNAB) i uključuju sve političke doprinose dokumentirane od 2015. godine koji prelaze €1. Ovaj skup podataka obuhvaća novčane donacije, nenovčane darove i usluge, te pristupnine i članarine stranke.",
+        "australia": "Ovdje korišteni podaci dolaze od Australian Electoral Commission (AEC), i to konkretno iz skupa podataka \"Donations Made Details\" koji AEC objavljuje. Uključuje sve političke donacije ondje evidentirane od 2014., veće od 1 AUD.\n\nVrijedi napomenuti da skup podataka AEC-a može sadržavati neke tipografske pogreške, što može dovesti do toga da određene donacije ne budu obuhvaćene ili da zbog nedosljednosti pri unosu podataka ne budu ispravno dodijeljene određenoj stranci. Uz to, godišnje objave AEC-a izlaze 1. veljače svake godine, ali podaci ne pružaju potpunu sliku svih doprinosa zbog praga za objavu od $15,000.\n\nVrste donatora klasificiraju se usporedbom naziva donatora. Svi uobičajeni sindikati ručno se mapiraju na vrstu donatora 'Sindikat'. Tvrtke se otkrivaju provjerom prisutnosti određenih korporativnih oznaka u nazivu donatora: 'Pty' (Proprietary), 'Ltd' na kraju naziva, 'Corporation' ili 'Corp'.",
+        "unitedkingdom": "Ovdje korišteni podaci dolaze od Electoral Commissiona i uključuju sve političke donacije koje su ondje dokumentirane od 2010. godine i veće su od 1.000 £.\n\nTemeljni registar Electoral Commissiona retroaktivno povezuje sve povijesne transakcije s trenutačnim službeno registriranim nazivom svake stranke. Zbog toga se povijesne donacije strankama prije službenog rebrendiranja ili promjene naziva (kao što su donacije stranci The Brexit Party prije 2021.) prikazuju pod trenutačnim registriranim nazivom stranke (Reform UK).\n\nPodaci o donacijama ažuriraju se tromjesečno.",
+        "serbia": "Podaci koji se ovdje koriste ne dolaze od vlade, već od neprofitne organizacije \"Centar za istraživačko novinarstvo Srbije\" (CINS), koja je ljubazno agregirala podatke o donacijama Agencije za borbu protiv korupcije Srbije.\n\nOvi podaci uključuju sve političke donacije dokumentirane tamo od 2015. godine.\n\nBudući da skup podataka ne pruža specifične informacije o datumu za pojedinačne donacije, nažalost nije moguće prikazati vremenske crte ili druge vizualizacije temeljene na vremenu.",
+        "croatia": "Podaci koji se ovdje koriste potječu od Državnog izbornog povjerenstva Republike Hrvatske (DIP) i obuhvaćaju sve političke donacije novčane vrijednosti veće od 1 €, dokumentirane od 2019. godine.\nSkup podataka koristi samo posljednji objavljeni dokument o donacijama za svaku izvještajnu godinu (kako navodi izbori) kako bi se izbjegli duplikati iz ranijih verzija izvješća za istu godinu.\nSve donacije prikazane su u eurima, dok temeljni skup podataka koristi kune do 2024. godine. Donacije izvorno u kunama pretvaraju se u eure koristeći približne tečajeve za svako polugodište od 2019. do 2024.: H1 (0.1340, 0.1335, 0.1332, 0.1329, 0.1326) i H2 (0.1341, 0.1338, 0.1334, 0.1327, 0.1328).",
+        "canada": "Podaci korišteni ovdje dolaze od Elections Canada i temelje se na skupu podataka „contributions as submitted“. Uključuju sve političke donacije novčane vrijednosti veće od 500 CAD, dokumentirane od 2015. godine. Uključeni su svi unosi koji su dio izvješća „Statement of Contributions Received“ iz izbornog događaja „Annual“ za „Registered parties“.",
+        "georgia": "Informacije prikazane ovdje preuzete su iz Ureda za borbu protiv korupcije (ანტიკორუფციული ბიურო﻿) Gruzije i uključuju sve političke donacije zabilježene od 2011. godine koje prelaze 1 GEL. Skup podataka uključuje samo doprinose klasificirane kao tip #10 (Novčane donacije) ili tip #16 (Novčane donacije pravnih osoba).",
+        "norway": "Ovdje korišteni podaci potječu iz službenih publikacija o financiranju stranaka koje objavljuju Statistics Norway (SSB) i Partifinansiering.no. Prikazani ukupni iznosi agregirani su iz više prijavljenih primateljskih entiteta (kao što su središnje, regionalne, lokalne i omladinske jedinice) u jedan ukupni iznos po stranci, pri čemu je temeljno mapiranje primatelja i dalje dostupno radi transparentnosti.\n\nNorveški skup podataka osvježava se u godišnjem ciklusu ažuriranja, odražavajući dinamiku temeljnih objava.",
+        "ukraine": "Podaci korišteni ovdje potječu od Nacionalne agencije za prevenciju korupcije (NAZK) putem portala PolitData. Obuhvaćaju sve zapise koji su u službenim izvješćima označeni kao „novčani doprinosi“.\n\nNapomena o opsegu podataka: Ovaj ukupni iznos odnosi se samo na izravne financijske transfere. Ne uključuje državna sredstva osigurana parlamentarnim strankama niti nenovčane (prirodne) doprinose poput robe i usluga.\n\nZbog sveobuhvatne ruske invazije obvezno izvještavanje političkih stranaka bilo je obustavljeno od početka 2022. do kraja 2023. iz sigurnosnih i logističkih razloga. Nakon usvajanja Zakona 3337-IX, stranke sada retroaktivno podnose svoja izvješća. Podaci za razdoblje 2022.–2025. i dalje se ažuriraju dok NAZK obrađuje te prijave.",
+        "france": "Podaci korišteni ovdje potječu iz Commission Nationale des Comptes de Campagne et des Financements Politiques (CNCCFP) i uključuju sve političke donacije (izražene u eurima) zabilježene u polju \"Dons_de_personne_physique\".\n\nZa razliku od drugih regija, francuski se podaci objavljuju kao godišnji zbroj po stranci, a identitet pojedinih donatora zaštićen je zakonima o privatnosti.",
+        "sweden": "Ovdje korišteni podaci potječu iz Kammarkollegieta, službenog švedskog državnog registra financiranja političkih stranaka. Kako bi se pružila točna slika isključivo privatne i građanske podrške (prikazane u SEK), ovaj zbir uključuje izravne doprinose evidentirane u kategoriji 4 (\"Insamling av kontanter\") i kategoriji 5 (\"Bidrag\"). Unutarstranački prijenosi, državne subvencije i prihodi od lutrije izričito su isključeni kako bi se spriječilo dvostruko brojanje i precizno izdvojile vanjske donacije. Svi podaci grupirani su prema političkoj stranačkoj pripadnosti (\"Partitillhörighet\").",
+        "southafrica": "Podaci korišteni ovdje potječu iz Izborne komisije Južnoafričke Republike (IEC) i obuhvaćaju sve objavljene izjave o financiranju političkih stranaka (odjeljak 9(1)) od 2021. godine, uključujući valjane kasnije predaje. Neizravni doprinosi Višestranačkom demokratskom fondu (Multi-Party Democracy Fund) i dvostruke prijave sa strane donatora (odjeljak 9(2)) su isključeni.\n\nNapomena o pragovima: Političke stranke bile su dužne prijavljivati donacije koje premašuju 100 000 ZAR po donatoru godišnje, do 1. travnja 2024., kada je zakonski prag objavljivanja povišen na 200 000 ZAR.",
+        "unitedstates": "Prikazani podaci potječu iz masovnih objava Savezne izborne komisije (FEC) i obuhvaćaju političke donacije dokumentirane od 2016. godine.\n\nZa razliku od parlamentarnih sustava u kojima donacije izravno teku u središnjice stranaka, financiranje saveznih izbornih kampanja u SAD-u decentralizirano je na odbore kandidata, stranačke organizacije i odbore za neovisne izdatke. Kako bi se pružila točna slika financijskih koalicija koje stoje iza svakog pokreta, DonationWatch objedinjuje glavna sredstva financiranja u jedinstvene ukupne iznose stranaka („Demokrati“, „Republikanci“ i „Bipartizanski i nestranački Super PAC-ovi“). To uključuje:\n• Službene stranačke odbore: nacionalne, kongresne i savezne državne odbore (npr. DNC, RNC, DSCC, NRSC, DCCC, NRCC)\n• Ovlaštene izborne odbore saveznih kandidata\n• Politički usmjerene Super PAC-ove, hibridne PAC-ove i zajedničke odbore za prikupljanje sredstava (npr. Senate Majority PAC, Future Forward, MAGA Inc., Senate Leadership Fund, Harris Victory Fund, Trump 47 Committee)\n• Nestranačke i sektorske Super PAC-ove koji podržavaju kandidate obiju glavnih stranaka (npr. Fairshake, United Democracy Project)\n\nZašto neki PAC-ovi nisu pridruženi strankama:\nSlužbeni stranački odbori i odbori kandidata prijavljuju službenu stranačku pripadnost u evidenciji FEC-a i automatski se pridružuju. Super PAC-ovi i hibridni PAC-ovi djeluju kao neovisni subjekti bez formalnog izjašnjavanja o pripadnosti stranci; DonationWatch kontinuirano revidira i mapira sve istaknute odbore s kumulativnim prihodom od 5 milijuna USD ili više. Manje skupine usmjerene na jedno pitanje, korporativni PAC-ovi i odbori ispod tog praga bez jasne pripadnosti ostaju nemapirani kako bi se izbjeglo nagađanje, te se ne ubrajaju u stranačke zbrojeve.\n\nNormalizacija podataka i obuhvat:\n• Minimalni iznos: Prate se samo doprinosi od 10.000 USD ili veći. Budući da savezni zakon ograničava izravne donacije kandidatima (3.300 USD po izborima) i tradicionalnim računima PAC-ova (5.000 USD godišnje), ovaj prag izdvaja velike iznose uplaćene stranačkim odborima, zajedničkim odborima za prikupljanje sredstava (JFC), Super PAC-ovima i neograničenim računima Hybrid PAC-ova.\n• Neprofitne organizacije 501(c)(4) („Dark Money“): Doprinosi organizacija za društvenu dobrobit 501(c)(4) (npr. Future Forward USA Action, One Nation) Super PAC-ovima bilježe se kao uplate organizacija (ORG), budući da ti subjekti ne otkrivaju svoje stvarne donatore FEC-u.\n• Uklanjanje duplikata: Doprinosi JFC-ovima bilježe se prilikom početnog primitka, dok se interna raspodjela i memorandumi o raspodjeli odbacuju. Prolazne uplate (WinRed, ActBlue) i prijenosi između praćenih odbora isključeni su kako bi se sredstva računala samo jednom.\n• Isključenja: Povrati se oduzimaju od ukupnih iznosa donatora. Vlastita sredstva kandidata (zajmovi i osobni doprinosi) te operativni prihodi (kamate, dividende, prodaja imovine) isključeni su."
+      },
+      "source_link": "Izvor podataka"
+    },
+    "list": {
+      "subtitle": "Zakonodavna razdoblja",
+      "title": "Prošla zakonodavna razdoblja",
+      "summary": "Naš Pregled zakonodavnih razdoblja objedinjuje sve donacije tijekom cijelog zakonodavnog mandata. Kliknite na karticu za navigaciju do odgovarajućeg zakonodavnog razdoblja."
+    },
+    "years": {
+      "title": "Godišnji pregled donacija strankama",
+      "subtitle": "Agregirane sume kroz godine",
+      "more": "Pogledajte sve preostale godine",
+      "summary": "Istražite naš godišnji pregled donacija strankama, koji sažima sve doprinose za svaku godinu. Kliknite na karticu za navigaciju do detaljnog godišnjeg pregleda."
+    },
+    "parties": {
+      "title": "Donacije strankama",
+      "subtitle": "Detalji o pojedinačnim strankama",
+      "more": "Pogledajte sve preostale stranke",
+      "summary": "Istražite naš pregled donacija strankama, koji objedinjuje sve doprinose za svaku stranku. Kliknite na karticu za pristup detaljima o donacijama."
+    },
+    "donors": {
+      "title": "Donacije donatora",
+      "subtitle": "Detalji o pojedinačnim donatorima",
+      "summary": "Otkrijte naš pregled donatora, koji prikazuje najznačajnije financijske doprinositelje od {minYear}. Kliknite na donatora za pregled detaljnih informacija o njihovim doprinosima."
+    }
+  },
+  "stacked_years": {
+    "title": "Iznos donacija po godini",
+    "subtitle": "Zbrojeni iznos objavljenih doprinosa u {country}, po godinama od {years}.",
+    "preliminary": "Isprekidani stupci označavaju preliminarne podatke koji podliježu daljnjim ažuriranjima objavljivanja."
+  },
+  "years": {
+    "title": "Donacije strankama",
+    "subtitle": "Kumulativni zbroj objavljenih donacija svakoj stranci u {country}, {years}.",
+    "goto_year": "Idi na godinu {year}",
+    "no_date_omitted": "Isključuje {count} donacija ({sum}) za koje je izvor naveo samo godinu.",
+    "no_data": {
+      "title": "Nema dostupnih podataka",
+      "summary": "Žao nam je, ali još nemamo podatke o donacijama za {year}. godinu.",
+      "last_year": "Alternativno, pogledajte podatke iz {year}. godine."
+    }
+  },
+  "overview": {
+    "title": "Pregled",
+    "detail": {
+      "title": "Vodeće političke stranke i njihove ukupne donacije",
+      "summary": "Ovaj popis prikazuje vodeće političke stranke i njihove kumulativne donacije unutar određenog intervala, poredane silazno prema zbroju donacija",
+      "summary2": "U godinama {years}, ukupno {partyCount} stranaka primilo je ukupno {donationSum} kroz {donationCount} donacija koje premašuju {minimumAmount}.",
+      "most_donations": "{party} je primila najviše donacija s ukupno {count} doprinosa, u iznosu od {sum}.",
+      "highest_sum": "Pet stranaka s najvećim ukupnim donacijama su {parties}."
+    },
+    "scatter": {
+      "title": "Raspodjela donacija",
+      "subtitle": "Individualne donacije svakoj stranci prema iznosu i učestalosti u {country} od {years}. Prikazano na logaritamskoj skali radi prikaza raspodjele kroz različite redove veličine.",
+      "summary": "Pregled raspodjele donacija strankama pruža sažetu analizu raspodjele donacija među različitim političkim strankama. Kroz vizualizaciju točkastog dijagrama, svaka točka predstavlja stranku, s x-osi koja označava iznose donacija, a veličina točke odražava učestalost donacija.",
+      "span": "Stranka {biggestSpanParty} zabilježila je najveću razliku u donacijama, s razlikom od {biggestSpanAmount} između najmanje i najveće donacije."
+    },
+    "pie": {
+      "title": "Raspodjela donacija strankama",
+      "subtitle": "Ukupno objavljene donacije svakoj stranci, {country}, {years}."
+    }
+  },
+  "changes": {
+    "title": "Promjene",
+    "description": "Pregledajte detaljnu tablicu donacija političkim strankama u {country} iz {year}, samo doprinosi iznad {minAmount}, sortirano po datumu transakcije, s podacima o donatoru i iznosu.",
+    "detail": {
+      "title": "Donacije strankama prema datumu transakcije",
+      "summary": "Ova stranica prikazuje popis donacija strankama sortiranih prema datumu transakcije, s najnovijim donacijama na vrhu. Pruža informacije o iznosu koji je primila svaka stranka i odgovarajućim donatorima."
+    }
+  },
+  "donors": {
+    "title": "Donatori",
+    "description": "Pogledajte potpuni popis donatora političkim strankama u {country} za {year}. Saznajte tko je dao najviše i koliko je svatko pridonio.",
+    "detail": {
+      "title": "Doprinosi donatora političkim strankama",
+      "subtitle": "Ukupni objavljeni doprinosi pojedinačnih donatora svakoj političkoj stranci u {country}, {years}.",
+      "summary": "Treemap vizualizira donacije strankama u jasno strukturiranom prikazu. Gornja razina prikazuje pojedinačne donatore, koji su predstavljeni pravokutnicima čija je veličina proporcionalna iznosu njihovih donacija.",
+      "summary2": "Ispod svakog donatora nalaze se daljnji pravokutnici koji predstavljaju odgovarajuće stranke primatelje. Ovaj hijerarhijski raspored pruža brz pregled raspodjele donacija i na prvi pogled pokazuje koliko je primatelja svaki donator podržao.",
+      "unique_donors": "Broj različitih donatora u {years} iznosi {count} donatora.",
+      "biggest_donor": "Najviša ukupna donacija od {amount} došla je od {donor}.",
+      "most_donations": "S {count} donacija (ukupni iznos: {sum}), {donor} je na vrhu liste najčešćih pojedinačnih donatora.",
+      "most_unique_parties": "{donor} je dao donacije ukupno {count} različitih stranaka (ukupni iznos: {sum}), pokazujući najveću raznolikost među primateljima donacija.",
+      "top_3": "U razdoblju {years} najvećih {amount} donatora su: {donors}."
+    },
+    "list": {
+      "title": "Najbolji pojedinačni donatori prema ukupnim doprinosima",
+      "p0": "Ovaj odjeljak prikazuje rangiran popis svih pojedinačnih donatora unutar odabranih godina, sortiran prema kumulativnom zbroju njihovih objavljenih donacija. Na taj način ističu se donatori koji su najviše doprinijeli."
+    },
+    "sankey": {
+      "title": "Sankey dijagram"
+    },
+    "histogram": {
+      "title": "Raspodjela donatora prema broju jedinstvenih primatelja",
+      "subtitle": "Broj jedinstvenih političkih stranaka koje su primile objavljene donacije od pojedinačnih donatora u zemlji {country}, {years}.",
+      "p0": "Ovaj grafikon pruža pregled načina na koji pojedinačni donatori raspoređuju svoje doprinose među političkim strankama, pokazujući imaju li tendenciju usmjeravati svoju podršku jednoj stranci ili je tijekom vremena raspodijeliti na više stranaka.",
+      "p1": "U {years}. godini najveći broj različitih stranaka koje je podupirao jedan donator bio je {max}. Samo je {donors} donator dao prilog za {max} stranaka. U prosjeku je svaki donator podupirao {mean} stranaka (medijan: {median}).",
+      "p2": "Od {totalDonors} donatora, {singlePartyDonors} je doniralo samo jednoj stranci, što čini {percentage} svih donatora.",
+      "tooltip": "{donors} donatora • {parties} jedinstvenih stranaka",
+      "item": "{donors} donatora doniralo je za {parties} stranaka"
+    }
+  },
+  "timeline": {
+    "title": "Vremenska crta",
+    "description": "Pogledajte vremensku crtu svih donacija političkim strankama u {country} za {years}, s mjesečnim ukupnim iznosima i trendovima kroz godine.",
+    "year_resolution_note": "Ovaj prikaz je standardiziran na godišnju razinu jer neki zapisi u ovom rasponu sadrže samo godinu donacije. Kako bi se omogućila potpuna i točna usporedba bez korištenja procijenjenih datuma, svi su podaci objedinjeni po godinama.",
+    "detail": {
+      "title": "Vremenska crta donacija političkim strankama",
+      "summary": "Pogledajte interaktivni linijski grafikon ispod kako biste pratili povijest donacija svake političke stranke tijekom vremena. X-os predstavlja datume, dok y-os prikazuje iznos doniranog novca. Svaka politička stranka predstavljena je posebnom linijom koja raste sa svakom donacijom."
+    },
+    "days": "U zemlji {country} su tijekom {years} zabilježene donacije na {n} različitih dana."
+  },
+  "per_year_party": {
+    "title": "Donacije za {party} po godini",
+    "subtitle": "Godišnji zbroj objavljenih donacija za {party} u {country}, {years}."
+  },
+  "per_month": {
+    "title": "Donacije po mjesecima",
+    "subtitle": "Mjesečni zbroj objavljenih donacija svakoj stranci u {country}, {years}.",
+    "description": "Ovaj složeni stupčasti grafikon prikazuje mjesečne podatke o donacijama za više političkih stranaka. X-os prikazuje mjesece, y-os predstavlja zbroj donacija, a svaki stupac je segmentiran bojom kako bi prikazao doprinose pojedinačnih stranaka, omogućujući laku usporedbu donacija strankama unutar i između mjeseci.",
+    "highest_sum": "{month} je imao najviše ukupne donacije, s kombiniranim brojem od {count} donacija u iznosu od {sum}.",
+    "most_months": "{party} je primila donacije u {count} mjeseci, što je najviše mjeseci s prilozima međusvim strankama.",
+    "month_most_donations": "Mjesec s najviše donacija bio je {month}, koji je primio ukupno {count} pojedinačnih donacija."
+  },
+  "per_year": {
+    "title": "Donacije po godini",
+    "subtitle": "Godišnji zbroj objavljenih donacija svakoj stranci u {country}, {years}.",
+    "description": "Ovaj složeni stupčasti grafikon prikazuje godišnje podatke o donacijama za više političkih stranaka. X-os pokazuje godine, Y-os predstavlja iznose donacija, a svaki je stupac podijeljen bojama koje prikazuju doprinose pojedinih stranaka, što omogućuje jednostavnu usporedbu donacija unutar i između godina."
+  },
+  "party": {
+    "donors": {
+      "title": "Donatori za {party}",
+      "subtitle": "Ukupni objavljeni doprinosi pojedinačnih donatora stranci {party} u {country}.",
+      "summary": "Ova stranica prikazuje sve službeno objavljene donacije iznad {minSum} za {party} od {minYear}, grupirane po donatorima kako bi se prikazali ukupni doprinosi kroz vrijeme. Sve brojke su temeljene na službenim objavama objavljenima od strane {source}, prikazane i kao treemap za vizualnu usporedbu i kao proširivi popis temeljnih transakcija."
+    },
+    "donor_list": {
+      "title": "Najveći donatori stranke {party} prema ukupnim doprinosima",
+      "p0": "Istražite subjekte i pojedince koji doprinose stranci {party}. Ovaj popis je poredан prema kumulativnom iznosu donacija i prikazuje kako ukupnu sumu, tako i relativni postotak ukupnog financiranja stranke. Svaki unos možete proširiti kako biste pregledali potpunu kronološku povijest pojedinačnih donacija iz tog specifičnog izvora."
+    },
+    "donor_types": {
+      "title": "Vrste donatora",
+      "treemap": {
+        "title": "Vrste donatora za {party}",
+        "description": "Ukupno objavljene donacije {party} u {country} po vrsti donatora."
+      },
+      "p0": "Ova karta stabla grupira prijavljene političke donacije po vrsti donatora (na primjer, pojedinci, tvrtke i javni fondovi) i veličinu svakog pravokutnika određuje prema ukupnom iznosu u odabranom razdoblju i opsegu.",
+      "p1": "Veći okviri označavaju veće iznose, a imena prikazana unutar svakog okvira predstavljaju najveće donatore unutar njihove kategorije. Ovaj prikaz uključuje {count} različitih vrsta donatora za {party}.",
+      "p2": "U nastavku je popis sektora rangiranih prema ukupnim donacijama, od najvećih prema najmanjima:"
+    },
+    "donation_types": {
+      "title": "Vrste donacija",
+      "treemap": {
+        "title": "Vrste donacija za {party}",
+        "description": "Ukupno objavljeni doprinosi za {party} u {country} po vrsti donacije."
+      },
+      "p0": "Politički doprinosi stranci {party} kategorizirani su prema vrsti donacije kako bi se osigurala transparentnost financiranja stranke.",
+      "all_single": "Svi zabilježeni doprinosi stranci {party} primljeni su kao {type}, u ukupnom iznosu od {amount} ({percentage}) kroz {count} zabilježenih uplata.",
+      "largest_share": "Najveći udio financiranja primljen je kao {type}, što čini {amount} ({percentage} svih doprinosa).",
+      "remaining_share": "Preostali doprinosi primljeni su kao {types}.",
+      "summary_item": "{amount} ({percentage}) kao {type}",
+      "treemap_guide": "Interaktivna karta stabla prikazuje relativnu veličinu svakog kanala donacija, gdje ugniježđeni pravokutnici predstavljaju najveće pojedinačne donatore unutar te kategorije. U nastavku je potpuni poredak prema ukupnom iznosu:"
+    },
+    "qa": {
+      "sum": {
+        "q": "Koliko je {party} primila u donacijama?",
+        "a": "{party} je primila ukupno {sum} u donacijama iz {count} dokumentiranih donacija."
+      },
+      "top_donors": {
+        "q": "Tko financira {party} i tko su najveći donatori?",
+        "a": "Najveći donatori {party} su: {donors}."
+      },
+      "largest_singular": {
+        "q": "Koja je bila najveća pojedinačna donacija za {party}?",
+        "a": "Najveća pojedinačna donacija bila je {amount} od {donor} na datum {date}."
+      },
+      "biggest_overall": {
+        "q": "Tko je najveći ukupni donator {party}?",
+        "a": "Najveći ukupni donator {party} je {donor} s ukupnim donacijama od {sum}."
+      },
+      "frequent_donor": {
+        "q": "Tko je napravio najviše donacija za {party}?",
+        "a": "{donor} je napravio najviše donacija za {party} s {count} odvojenih donacija ukupno {sum}."
+      }
+    },
+    "overview": {
+      "title": "Pregled donacija {party}"
+    },
+    "changes": {
+      "detail": {
+        "title": "Donacije {party} prema datumu transakcije",
+        "summary": "Ova stranica prikazuje popis donacija {party} sortiranih prema datumu transakcije, s najnovijim doprinosima navedenim na vrhu. Nudi detalje o iznosu koji je primila {party} i odgovarajućim donatorima."
+      }
+    },
+    "timeline": {
+      "chart_title": "Donacije {party}",
+      "subtitle": "Kumulativni zbroj objavljenih donacija stranci {party} u {country}.",
+      "detail": {
+        "title": "Vremenska crta donacija {party}",
+        "summary": "Interaktivna vremenska crta za praćenje donacija i prijavljenih doprinosa za {party} kroz vrijeme. Usporedite povijesne trendove, godišnje prihode i ukupan rast financiranja.",
+        "per_year": "Ukupan iznos donacija koje je {party} primila razlikuje se po godinama. U nastavku je povijesni pregled godišnjih ukupnih iznosa financiranja koje je stranka prijavila. Ovaj popis prati zbroj svih prijavljivih doprinosa i financijske potpore za svaku pojedinu godinu:"
+      }
+    },
+    "committees": {
+      "title": "Uključeni odbori i PAC-ovi",
+      "treemap": {
+        "title": "Odbori koji financiraju {party}",
+        "subtitle": "Raspodjela donacija prema odboru primatelju"
+      },
+      "p0": "Kapital za {party} raspoređen je na {count, plural, one {# registrirani odbor} few {# registrirana odbora} other {# registriranih odbora}}, uključujući stranačke odbore, zajedničke fondove za pobjedu i neovisne Super PAC-ove. Ukupno je preko ovih odbora primljeno {amount}.",
+      "top_intro": "Ispod su navedeni odbori s najvećim iznosom donacija:"
+    },
+    "interests": {
+      "title": "Industrije i interesne skupine",
+      "intro": "Mnogi politički donatori u državi {country} djeluju u više od jedne industrije. Ovaj pregled grupira donacije stranci {party} prema području politike i industriji, razlikujući pojedinačne tvrtke od višesektorskih skupina.",
+      "intro_years": "Mnogi politički donatori u državi {country} djeluju u više od jedne industrije. Ovaj pregled grupira donacije u razdoblju {years} prema području politike i industriji, razlikujući pojedinačne tvrtke od višesektorskih skupina.",
+      "explainer": {
+        "summary": "Kako čitati ovaj prikaz: Izravne tvrtke naspram višesektorskih skupina",
+        "direct_label": "Izravne tvrtke:",
+        "direct_text": "Tvrtke čija je glavna djelatnost u tom sektoru (na primjer rudarska tvrtka, banka ili priređivač igara na sreću). U grafikonu su prikazane punom ispunom i izoliraju se kada je uključena opcija „Samo izravne tvrtke“.",
+        "multisector_label": "Višesektorske skupine i krovna udruženja:",
+        "multisector_text": "Industrijska udruženja ili konglomerati koji istovremeno zastupaju više sektora (na primjer hotelijerska udruženja aktivna u ugostiteljstvu, automat-klubovima i alkoholu). U grafikonu su označeni prugastim uzorkom i uključeni su uz izravne tvrtke kada opcija „Samo izravne tvrtke“ nije uključena.",
+        "domains_label": "Šira područja naspram specifičnih industrija:",
+        "domains_text": "Kada je uključena opcija „Grupiraj po području“, 24 specifične industrije okupljene su u 6 širih područja politike. Kliknite bilo koji redak područja ispod za prikaz njegovih industrija ili kliknite područje u grafikonu za uvećanje."
+      },
+      "switches": {
+        "direct_only": "Samo izravne tvrtke",
+        "group_by_domain": "Grupiraj po području"
+      },
+      "summary": {
+        "exposure": "Od ukupno {total} donacija za {party}, {tracked} ({percent}) dolazi od donatora povezanih s barem jednom praćenom industrijom ili interesnom skupinom.",
+        "core": "Od ukupno {total} donacija za {party}, {tracked} ({percent}) dolazi od izravnih tvrtki čija je glavna djelatnost u praćenoj industriji.",
+        "exposure_years": "Od ukupno {total} donacija u razdoblju {years}, {tracked} ({percent}) dolazi od donatora povezanih s barem jednom praćenom industrijom ili interesnom skupinom.",
+        "core_years": "Od ukupno {total} donacija u razdoblju {years}, {tracked} ({percent}) dolazi od izravnih tvrtki čija je glavna djelatnost u praćenoj industriji.",
+        "top_exposure_one": "Najveća povezana industrija je {item}.",
+        "top_exposure_many": "Najveće povezane industrije su {items}.",
+        "top_core_one": "Među samim izravnim tvrtkama najveća industrija je {item}.",
+        "top_core_many": "Među samim izravnim tvrtkama najveće industrije su {items}."
+      },
+      "show_top": "Prikaži prvih 10 sektora",
+      "show_all": "Prikaži svih {count} aktivnih sektora",
+      "note": {
+        "prefix": "Napomena: Oznake industrija obogaćeni su sloj na službenim izvješćima.",
+        "exposure": "Višesektorski donatori pojavljuju se u svakom sektoru koji zastupaju, pa se iznosi po sektorima preklapaju i ne smiju se zbrajati; ukupni iznosi po području broje svakog donatora jednom.",
+        "core": "Tvrtke s glavnim poslovanjem u više sektora mogu se pojaviti u više od jednog sektora; ukupni iznosi po području broje svakog donatora jednom.",
+        "share": "Postoci prikazuju udio svake skupine u svim donacijama za {party}.",
+        "share_years": "Postoci prikazuju udio svake skupine u svim donacijama u razdoblju {years}.",
+        "methodology_link": "Pogledaj sve kategorije u metodologiji"
+      },
+      "chart": {
+        "title": "{party}: Industrije i interesne skupine",
+        "title_years": "{country} ({years}): Industrije i interesne skupine",
+        "subtitle_grouped_exposure": "Donacije grupirane prema području politike, industriji i donatoru u usporedbi s nekategoriziranim donacijama",
+        "subtitle_grouped_core": "Izravne tvrtke prema području politike i industriji u usporedbi sa svim ostalim donacijama",
+        "subtitle_flat_exposure": "Donacije grupirane prema industriji i donatoru u usporedbi s nekategoriziranim donacijama",
+        "subtitle_flat_core": "Izravne tvrtke prema industriji u usporedbi sa svim ostalim donacijama",
+        "footer_note": "Kategorizacija uz pomoć AI-ja",
+        "legend_solid_label": "Puna ispuna:",
+        "legend_solid_text": "Izravna tvrtka",
+        "legend_striped_label": "Prugasti uzorak:",
+        "legend_striped_text": "Višesektorska skupina / krovno tijelo",
+        "uncategorized": "Ostali / nekategorizirani donatori",
+        "uncategorized_donor": "Ostali / nekategorizirani donator",
+        "uncategorized_hint": "Još nije povezano ni s jednom praćenom industrijom ili interesnom skupinom.",
+        "uncategorized_desc": "Donacije pojedinaca, lokalnih poduzeća i skupina koje nisu povezane s praćenom industrijom.",
+        "tooltip_direct_business": "Izravna tvrtka",
+        "tooltip_multisector": "Višesektorska skupina / krovno tijelo",
+        "tooltip_share_of": "Udio u kategoriji {category}:",
+        "tooltip_share_uncategorized": "Udio u nekategoriziranim:",
+        "tooltip_share_party": "Udio u donacijama stranke:",
+        "tooltip_share_total": "Udio u ukupnim donacijama:",
+        "tooltip_share_total_pct": "{amount} ({percent}% ukupnih donacija)",
+        "tooltip_donations": "Donacija:",
+        "tooltip_donors": "Donatora:",
+        "tooltip_direct_businesses": "Izravne tvrtke:",
+        "tooltip_multisector_bodies": "Višesektorske skupine / udruženja:",
+        "tooltip_solid_hint": "Puna ispuna: Glavna djelatnost je u ovom sektoru.",
+        "tooltip_striped_hint": "Prugasti uzorak: Višesektorska skupina ili krovno tijelo aktivno u više područja."
+      }
+    }
+  },
+  "origin": {
+    "title": "Podrijetlo",
+    "description": "Pogledajte odakle dolaze donacije političkim strankama u {country} za {years}—prikaz po županijama i međunarodnim doprinosima.",
+    "detail": {
+      "title": "Pregled podrijetla donacija",
+      "description": "Pogledajte transparentno podrijetlo političkih donacija za {party} u {country}: raščlamba po državama i stranim izvorima.",
+      "summary": "Istražite jasan pregled geografskog podrijetla donacija. Otkrijte koje države ili zemlje izvan {country} doprinose podršci. Pratite transparentnost raspodjele donacija kako biste stekli uvid u geografski krajolik doprinosa.",
+      "country": {
+        "austria": "U Austriji se podrijetlo donacija bilježi tek od 2023. godine. Iz tog razloga, sve starije donacije ne mogu se dodijeliti pojedinim saveznim državama."
+      },
+      "sum": "Za godinu {years}, donacije političkim strankama u {country} ukupno su iznosile {sumCountry} iz domaćih izvora. Doprinosi iz inozemnih izvora iznosili su {sumOthers}."
+    },
+    "type": {
+      "map": "Karta"
+    },
+    "party": {
+      "subtitle": "Ukupno objavljene donacije za {party} prema državi podrijetla u {country}."
+    },
+    "country": {
+      "title": "Donacije iz {country}",
+      "subtitle": "Ukupno objavljene donacije prema državi podrijetla u {country}, {years}.",
+      "summary": "Između godina {from} i {until}, zabilježene su donacije iz {stateCount} različitih saveznih država. Država s najvišim iznosom donacija je {highestState} s {highestSum}. Većina donacija, točnije {largesDonationCountNum}, došla je iz {largesDonationCountState}."
+    },
+    "elsewhere": {
+      "title": "Donacije izvan {country}",
+      "summary": "Između godina {from} i {until}, zabilježene su donacije iz {countryCount} različitih zemalja. Zemlja s najvišim iznosom donacija je {highestCountry} s {highestSum}. Većina donacija, točnije {largesDonationCountNum}, došla je iz {largesDonationCountState}."
+    }
+  },
+  "donor": {
+    "title": "Donacije od donatora",
+    "subtitle": "Ukupni doprinosi i primatelji",
+    "active_period": "Aktivno razdoblje",
+    "type": "Vrsta donatora",
+    "registration_number": "Registarski broj",
+    "summary": "{donor} je dao ukupno {sum} u obliku {count} pojedinačnih donacija. Prosječna veličina donacije je {avg}. Donacije su raspoređene na {parties} različitih stranaka.",
+    "oldest": "Prva donacija nakon {minYear} dana je {date} u iznosu od {amount} stranci {party}.",
+    "newest": "Najnovija donacija dana je {date}, s {amount} upućenih stranci {party}.",
+    "most_donations": "Najčešće donacije dane su strankama {list}.",
+    "most_donations_item": "{party} ({count})",
+    "highest_most_donation": "Godinu {biggestYear} karakterizirao je najviši ukupni iznos donacija od {biggestSum}, dok je najviše pojedinačnih donacija ({mostCount}) dano u {mostYear}.",
+    "biggest": "Najveća pojedinačna donacija od {amount} otišla je stranci {party} dana {date}.",
+    "tree_map": "Donacije od {name}",
+    "tree_map_subtitle": "Ukupno objavljene donacije svakoj stranci u {country}.",
+    "biggest_amounts": "Donacije su uglavnom bile usmjerene prema odabranoj skupini stranaka. Dolje je prikaz primatelja prema iznosu i postotku ukupnog doniranog iznosa:",
+    "table": "Ovaj odjeljak pruža sveobuhvatan pregled svih pojedinačnih donacija koje je napravio {donor}. Možete sortirati tablicu po datumu, stranci ili iznosu kako biste lako istražili kako su donacije raspoređene tijekom vremena i između primatelja. Ovaj detaljan pregled omogućuje transparentno praćenje svakog doprinosa i nudi dublji uvid u obrasce davanja donatora.",
+    "timeline": {
+      "title": "Akumulacija donacija kroz vrijeme",
+      "p0": "Ovaj odjeljak prikazuje kako su se donacije od {donor} od {year} različitim političkim strankama mijenjale kroz vrijeme. Grafikon prikazuje ukupno donirani iznos, s istaknutim udjelom svake stranke, tako da je lako vidjeti kada i kamo je podrška usmjerena.",
+      "p1": "Pratite linije kako biste uočili obrasce, nagle poraste ili promjene u doniranju. Ovaj pregled nudi transparentan uvid u to kako su doprinosi jednog donatora raspoređeni kroz politički krajolik.",
+      "years": "Donacije su se mijenjale tijekom godina. Slijedi prikaz ukupnih iznosa donacija po godinama, kao i postotak koji svaka godina doprinosi ukupnim donacijama ovog donatora.",
+      "chart_subtitle": "Kumulativne donacije od {donor} političkim strankama u {country}, prikazane prema iznosu i datumu od {minYear}."
+    },
+    "anonymized": {
+      "title": "Zapis anonimiziran",
+      "description": "Osobni identitet povezan s ovom donacijom uklonjen je u skladu s važećim GDPR zahtjevom. Iznos donacije i dalje je uključen u ukupne izračune financiranja kako bi se održala financijska transparentnost."
+    },
+    "redacted": {
+      "title": "Zapis redigiran",
+      "description": "Identitet donatora redigirala je nadležna institucija prije objave ovih podataka. Iznos donacije i dalje je uključen u izračune ukupnog financiranja kako bi se očuvala financijska transparentnost."
+    },
+    "ubo": "Stvarni vlasnici (SV)",
+    "ubo_description": "Stvarni vlasnik (SV) je osoba koja zapravo vuče konce. To su pojedinci koji u konačnici posjeduju ili kontroliraju donatora, obično držeći 25% ili više njegovih dionica ili glasačkih prava. Ako nijedna pojedinačna osoba ne ispunjava ovaj prag, viši menadžment (poput direktora) može biti naveden kao \"pseudo-SV\" kako bi se osigurala odgovornost.",
+    "donation_type": {
+      "title": "Vrste donacija",
+      "subtitle": "Grafikon i sljedeći popis prikazuju koje je vrste donacija {donor} dao i koje su stranke primile koji iznos za svaku vrstu.",
+      "summary": "Od ukupnog iznosa {total}",
+      "summary_item": "{amount} je dano kao {type}",
+      "graph": {
+        "subtitle": "Kako se doprinosi od {donor} prema vrsti raspoređuju na svaku stranku"
+      }
+    },
+    "via": {
+      "title": "Posrednici i distribucija usmjerenih donacija",
+      "overview": "Javna izvješća o financiranju kampanja otkrivaju da je {viaSum} od ukupnih političkih donacija donatora {donor} ({pct} od svih praćenih {donorSum}) usmjereno preko posredničkih odbora.",
+      "direct_donations": "Izravne donacije iznosile su {amount}.",
+      "downstream_title": "Politička usmjerenost krajnjih primatelja",
+      "downstream_overview": "Promatrajući krajnje primatelje usmjerenih donacija, cjelokupni iznos raspoređen je na {count, plural, one {# politički pokret} few {# politička pokreta} other {# političkih pokreta}}.",
+      "downstream_primary": "Glavni primatelj bio je {party}, na kojeg otpada {amount} ({pct}) svih usmjerenih sredstava.",
+      "downstream_followed_by": "Slijede {list}.",
+      "downstream_item": "{party} s {amount} ({pct})",
+      "table_intro": "Tablica u nastavku prikazuje posredničke i zajedničke odbore za prikupljanje sredstava preko kojih su ove donacije usmjerene{years}:",
+      "table_intro_years": " između {earliestYear}. i {latestYear}.",
+      "intermediate_entity": "Posrednička organizacija",
+      "transactions": "Transakcije",
+      "checks": "{count, plural, one {# uplata} few {# uplate} other {# uplata}}"
+    }
+  },
+  "countries": {
+    "??": "Nije navedeno",
+    "DE": "Njemačka",
+    "DK": "Danska",
+    "CH": "Švicarska",
+    "TH": "Tajland",
+    "AT": "Austrija",
+    "UK": "Ujedinjeno Kraljevstvo",
+    "NL": "Nizozemska",
+    "EU": "Europska unija",
+    "LV": "Latvija",
+    "ES": "Španija",
+    "FI": "Finska",
+    "HR": "Hrvatska",
+    "BE": "Belgija",
+    "LU": "Luksemburg",
+    "SI": "Slovenija",
+    "EE": "Estonija",
+    "FR": "Francuska",
+    "IE": "Irska",
+    "IT": "Italija",
+    "PL": "Poljska",
+    "RO": "Rumunija",
+    "CY": "Kipar",
+    "MT": "Malta",
+    "PT": "Portugal",
+    "LT": "Litvanija",
+    "HU": "Mađarska",
+    "CZ": "Češka Republika",
+    "SG": "Singapur",
+    "MC": "Monako",
+    "SE": "Švedska",
+    "AD": "Andora",
+    "IM": "Otok Man",
+    "NO": "Norveška",
+    "LI": "Lihtenštajn",
+    "MK": "Makedonija",
+    "AL": "Albanija",
+    "MD": "Moldova",
+    "SM": "San Marino",
+    "FO": "Farski Otoci",
+    "BA": "Bosna i Hercegovina",
+    "ME": "Crna Gora",
+    "BG": "Bugarska",
+    "BY": "Bjelorusija",
+    "GR": "Grčka",
+    "IS": "Island",
+    "SK": "Slovačka",
+    "UA": "Ukrajina",
+    "GB": "Ujedinjeno Kraljevstvo",
+    "RS": "Srbija",
+    "AU": "Australija",
+    "ZA": "Južnoafrička Republika",
+    "US": "Sjedinjene Američke Države",
+    "CA": "Kanada",
+    "GE": "Gruzija",
+    "NZ": "Novi Zeland",
+    "VE": "Venezuela"
+  },
+  "ref_countries": {
+    "DE": "Njemačka",
+    "DK": "Danska",
+    "CH": "Švicarska",
+    "TH": "Tajland",
+    "AT": "Austrija",
+    "UK": "Ujedinjeno Kraljevstvo",
+    "NL": "Nizozemska",
+    "EU": "Europska unija",
+    "LV": "Latvija",
+    "ES": "Španija",
+    "FI": "Finska",
+    "HR": "Hrvatska",
+    "BE": "Belgija",
+    "LU": "Luksemburg",
+    "SI": "Slovenija",
+    "EE": "Estonija",
+    "FR": "Francuska",
+    "IE": "Irska",
+    "IT": "Italija",
+    "PL": "Poljska",
+    "RO": "Rumunija",
+    "CY": "Kipar",
+    "CZ": "Češka Republika",
+    "AU": "Australija",
+    "RS": "Srbija",
+    "CA": "Kanada",
+    "GE": "Gruzija",
+    "NO": "Norveška",
+    "UA": "Ukrajina",
+    "SE": "Švedska",
+    "ZA": "South Africa",
+    "US": "Sjedinjene Američke Države"
+  },
+  "state": {
+    "germany": {
+      "BW": "Baden-Württemberg",
+      "BY": "Bavarska",
+      "BE": "Berlin",
+      "BB": "Brandenburg",
+      "HB": "Bremen",
+      "HH": "Hamburg",
+      "HE": "Heska",
+      "MV": "Mecklenburg-Zapadna Pomeranija",
+      "NI": "Donja Saksonija",
+      "NW": "Sjeverna Rajna-Vestfalija",
+      "RP": "Rajna-Palatinat",
+      "SL": "Saar",
+      "SN": "Saska",
+      "ST": "Saska-Anhalt",
+      "SH": "Schleswig-Holštein",
+      "TH": "Tiringija"
+    },
+    "austria": {
+      "1": "Burgenland",
+      "2": "Koruška",
+      "3": "Donja Austrija",
+      "4": "Gornja Austrija",
+      "5": "Salzburg",
+      "6": "Štajerska",
+      "7": "Tirol",
+      "8": "Vorarlberg",
+      "9": "Beč"
+    },
+    "canada": {
+      "ON": "Ontario",
+      "QC": "Québec",
+      "NS": "Nova Škotska",
+      "NB": "Novi Brunswick",
+      "MB": "Manitoba",
+      "BC": "Britanska Kolumbija",
+      "PE": "Otok princa Edwarda",
+      "SK": "Saskatchewan",
+      "AB": "Alberta",
+      "NL": "Newfoundland i Labrador",
+      "NT": "Sjeverozapadni teritoriji",
+      "YT": "Yukon",
+      "NU": "Nunavut"
+    },
+    "unitedstates": {
+      "AL": "Alabama",
+      "AK": "Aljaska",
+      "AZ": "Arizona",
+      "AR": "Arkansas",
+      "CA": "Kalifornija",
+      "CO": "Colorado",
+      "CT": "Connecticut",
+      "DE": "Delaware",
+      "FL": "Florida",
+      "GA": "Georgia",
+      "HI": "Havaji",
+      "ID": "Idaho",
+      "IL": "Illinois",
+      "IN": "Indiana",
+      "IA": "Iowa",
+      "KS": "Kansas",
+      "KY": "Kentucky",
+      "LA": "Louisiana",
+      "ME": "Maine",
+      "MD": "Maryland",
+      "MA": "Massachusetts",
+      "MI": "Michigan",
+      "MN": "Minnesota",
+      "MS": "Mississippi",
+      "MO": "Missouri",
+      "MT": "Montana",
+      "NE": "Nebraska",
+      "NV": "Nevada",
+      "NH": "New Hampshire",
+      "NJ": "New Jersey",
+      "NM": "Novi Meksiko",
+      "NY": "New York",
+      "NC": "Sjeverna Karolina",
+      "ND": "Sjeverna Dakota",
+      "OH": "Ohio",
+      "OK": "Oklahoma",
+      "OR": "Oregon",
+      "PA": "Pennsylvania",
+      "RI": "Rhode Island",
+      "SC": "Južna Karolina",
+      "SD": "Južna Dakota",
+      "TN": "Tennessee",
+      "TX": "Teksas",
+      "UT": "Utah",
+      "VT": "Vermont",
+      "VA": "Virginia",
+      "WA": "Washington",
+      "WV": "Zapadna Virginia",
+      "WI": "Wisconsin",
+      "WY": "Wyoming",
+      "DC": "District of Columbia",
+      "AS": "Američka Samoa",
+      "GU": "Guam",
+      "MP": "Sjevernomarijanski otoci",
+      "PR": "Portoriko",
+      "UM": "Mali udaljeni otoci SAD-a",
+      "VI": "Američki Djevičanski otoci"
+    }
+  },
+  "about": {
+    "title": "O nama",
+    "description": {
+      "p0": "DonationWatch je nastao iz frustracije zbog nedostatka lako čitljivih podataka na službenoj stranici njemačkog Bundestaga.",
+      "p1": "Naš cilj je poboljšati ovu situaciju korištenjem javno dostupnih podataka i njihovim učinkovitijim predstavljanjem.",
+      "p2": "Primijetili smo da zemlje poput Austrije, Švicarske i Nizozemske objavljuju svoje političke donacije u raznim strukturiranim formatima. Kako bismo stvorili ujedinjeno sučelje koje pojednostavljuje pristup tim informacijama, uključili smo te zemlje u naš projekt. Više zemalja bit će dodano dok budemo pronalazili i obrađivali relevantne podatke.",
+      "p3": "Ako imate bilo kakve prijedloge ili povratne informacije, slobodno",
+      "mail": "kontaktirajte nas"
+    },
+    "source": "Sve vizualizirane informacije dolaze isključivo iz javno dostupnih vladinih izvora, ne uključujući prethodno neobjavljene podatke ili privatne evidencije. Transparentnost je naš temelj"
+  },
+  "imprint": {
+    "title": "Impressum"
+  },
+  "privacy": {
+    "title": "Politika privatnosti",
+    "last_updated": "Posljednje ažurirano: {date}",
+    "effective_date": "Stupa na snagu: {date}",
+    "controller": {
+      "title": "Voditelj obrade podataka",
+      "p": "Za obradu podataka na ovoj web stranici odgovoran je:"
+    },
+    "data": {
+      "title": "Opće prikupljanje podataka",
+      "p": "Vrlo ozbiljno shvaćamo zaštitu tvojih podataka. Ne prikupljamo osobne podatke posjetitelja u svrhe praćenja ili marketinga. To konkretno znači:",
+      "li0": "Nema registracijskih obrazaca ni korisničkih računa",
+      "li1": "Nema prijava na newsletter",
+      "li2": "Nema kolačića za praćenje"
+    },
+    "cf": {
+      "title": "Cloudflare usluge",
+      "link": "Prikaži Cloudflare politiku privatnosti",
+      "p": "Koristimo usluge tvrtke Cloudflare, Inc. (101 Townsend St, San Francisco, CA 94107, SAD) kako bismo osigurali da naša web stranica bude brza, sigurna i pouzdana.",
+      "p2": "Korištenjem Cloudflarea tvoja IP adresa se obrađuje kako bi te se povezalo s najbližim poslužiteljem. Podaci se mogu prenositi u SAD. Cloudflare je certificiran prema EU–US Data Privacy Framework (DPF), što osigurava usklađenost s europskim standardima zaštite podataka.",
+      "p3": "Naš legitimni interes (čl. 6., st. 1., toč. f GDPR-a) jest pružanje sigurne i učinkovite web stranice. Dodatne informacije možeš pronaći u Cloudflare politici privatnosti.",
+      "workers": {
+        "summary": "Cloudflare Workers: Platforma bez poslužitelja za brzo isporučivanje sadržaja naše stranice."
+      },
+      "analytics": {
+        "summary": "Cloudflare Web Analytics: Alat za analitiku koji poštuje privatnost, ne koristi kolačiće, ne prati korisnike i prikuplja samo agregirane metrike (npr. ukupni broj posjetitelja)."
+      }
+    },
+    "logs": {
+      "title": "Automatski zapisi poslužitelja",
+      "p": "Prilikom posjete našoj web stranici naš pružatelj hostinga automatski prikuplja i pohranjuje podatke u tzv. zapisima poslužitelja. Oni uključuju:",
+      "li0": "IP adrese (anonimizirane)",
+      "li1": "Datum i vrijeme zahtjeva",
+      "li2": "Vrstu preglednika i informacije o uređaju",
+      "li3": "Referentni URL (referrer)",
+      "retention": "Obrada ovih podataka temelji se na našem legitimnom interesu (čl. 6., st. 1., toč. f GDPR-a) za tehničku stabilnost, sigurnost i ispravan rad web stranice. Podaci se ne kombiniraju s drugim izvorima i automatski se brišu unutar 7 dana."
+    },
+    "user_rights": {
+      "title": "Tvoja prava korisnika",
+      "p": "Prema GDPR-u imaš pravo u bilo kojem trenutku besplatno dobiti informacije o porijeklu, primatelju i svrsi tvojih pohranjenih osobnih podataka. Također imaš pravo zatražiti ispravak, blokiranje ili brisanje ovih podataka. Budući da obrađujemo samo minimalne i anonimizirane podatke, obično te ne možemo osobno identificirati. Imaš i pravo podnijeti pritužbu nadležnom tijelu za zaštitu podataka. Za sva pitanja u vezi privatnosti slobodno nam se obrati.",
+      "erasure": "Pravo na brisanje (članak 17. GDPR-a): Prema članku 17. GDPR-a, ispitanici imaju pravo zatražiti brisanje osobnih podataka ako za to postoje zakonski uvjeti. Zahtjev za brisanje možete uputiti izravno nama.",
+      "discretionary": "Diskrecijska anonimizacija: Odvojeno od zakonskih zahtjeva za brisanje, DonationWatch razmatra dobrovoljne zahtjeve za anonimizaciju od slučaja do slučaja. Imena donatora se anonimiziraju uz zadržavanje iznosa i ukupnih vrijednosti stranaka."
+    }
+  },
+  "fun": {
+    "link": "Zanimljivosti",
+    "title": "Zanimljivosti o javnim podacima",
+    "p0": "Ova stranica prikazuje zanimljive nalaze iz našeg rada s javno dostupnim vladinim podacima. Ova zapažanja nisu kritike, već manje posebnosti koje se mogu pojaviti u bilo kojem velikom skupu podataka.",
+    "p1": "Iako prijavljujemo probleme kada je to prikladno, ne smatramo ih hitnim pitanjima koja vladine institucije trebaju rješavati. Prema našem iskustvu, ove organizacije su prijemčive i otvorene za povratne informacije.",
+    "reported_fixed": "Ovo je prijavljeno {owner} i oni su to ispravili.",
+    "reported_wontfix": "Ovo je prijavljeno {owner} i oni to ne mogu promijeniti.",
+    "reported": "Ovo je prijavljeno {owner}."
+  },
+  "transparency": {
+    "title": "Transparentnost",
+    "p0": "Nastojimo pružiti jasne i dosljedne informacije o donatorima političkih stranaka. Da bismo to postigli, automatski normaliziramo određena imena donatora kako bismo osigurali ujednačenost u našoj bazi podataka. Ovaj pristup nam omogućuje održavanje točnosti uz istovremeno uzimanje u obzir neslaganja u načinu na koji imena mogu biti zabilježena.",
+    "p1": "Radi transparentnosti sastavili smo popis normaliziranih imena zajedno s njihovim varijacijama koje smo pronašli u našim zapisima o donacijama. U nastavku ćete pronaći svako normalizirano ime uz njegove varijacije. Ovaj popis pomaže objasniti zašto moguće vidite imena donatora koja nisu u potpunosti ista kao u našim izvornim dokumentima.",
+    "section": {
+      "filtered_donors": "Filtrirani donatori",
+      "filtered_receivers": "Filtrirani primatelji",
+      "aggregated": "Agregirani donatori",
+      "categorized": "Donatori po industrijama i interesnim skupinama"
+    },
+    "filtered_donors": {
+      "p0": "Kako bismo točno prikazali stvarne izvore političkih donacija, filtriramo određene transakcije koje su zapravo državna davanja, a ne stvarne donacije. Budući da ih naši izvorni skupovi podataka ne označavaju izričito, oslanjamo se na skup pravila filtriranja temeljenih na regularnim izrazima (regexp) kako bismo takve zapise automatski prepoznali i uklonili. U nastavku možete pregledati potpuni popis primijenjenih regexp pravila filtriranja.",
+      "p1": "U nastavku je popis donatora čiji su doprinosi filtrirani prema našim kriterijima i pravilima filtriranja."
+    },
+    "filtered_receivers": {
+      "p0": "Kako bismo osigurali da prikazujemo samo smislenе podatke o primateljima, filtriramo i određene primatelje ili stranke koje se smatraju nerelevantnima ili neoperativnima za potrebe praćenja donatora. Budući da naši skupovi podataka ne označavaju uvijek te primatelje izričito, primjenjujemo skup pravila temeljenih na regexp-u kako bismo ih automatski isključili. U nastavku možete pregledati potpuni popis primijenjenih regexp pravila filtriranja.",
+      "p1": "U nastavku je popis primatelja čiji su zapisi filtrirani prema našim kriterijima i pravilima filtriranja."
+    },
+    "receivers": {
+      "title": "Agregirani primatelji",
+      "p0": "U zemlji {country} donacije se mogu prijavljivati različitim organizacijskim jedinicama unutar stranke. Radi dosljednosti objedinjujemo povezane entitete primatelja u jedan ukupni iznos na razini stranke. Popis u nastavku dokumentira koji su entiteti primatelja agregirani u svaku stranku."
+    },
+    "categorized": {
+      "title": "Donatori po industrijama i interesnim skupinama",
+      "p0": "Kako bismo olakšali uvid u to koje industrije financiraju političke stranke, glavne donatore razvrstavamo u 24 industrijske i interesne kategorije (poput rudarstva, bankarstva, igara na sreću ili sindikata). Također navodimo je li donator izravna tvrtka (glavna djelatnost u tom sektoru) ili krovna udruga odnosno konglomerat aktivan u više područja. Ove kategorije donatora dodijeljene su uz pomoć AI-ja — ako primijetite pogrešku, slobodno nas kontaktirajte ili otvorite GitHub issue.",
+      "p1": "U nastavku je popis kategoriziranih donatora i industrija povezanih s njima."
+    }
+  },
+  "related": {
+    "donors": "Slični donatori"
+  },
+  "similar_donors": {
+    "title": "Mreža sličnih donatora",
+    "description": "Istražite širu mrežu donacija povezanu s ovim donatorom.",
+    "summary": "U povezanoj mreži donacija nalazi se {count} jedinstvenih donatora.",
+    "list_title": "Pregled raspodjele po strankama"
+  },
+  "detect_country": {
+    "title": "Čini se da ste u državi {country}.",
+    "description": "Dodirnite za pregled političkih donacija u {country}.",
+    "action": "Pogledaj donacije za {country}"
+  },
+  "donor_type": {
+    "0": "Ostalo",
+    "1": "Pojedinac",
+    "2": "Tvrtka",
+    "3": "Sindikata",
+    "4": "Javni fond",
+    "5": "Neinkorporirana udruga",
+    "6": "Registrirana politička stranka",
+    "7": "Povjerenje",
+    "8": "Dobrotvorno društvo",
+    "9": "Partnersko društvo s ograničenom odgovornošću",
+    "10": "Stambena štedionica",
+    "11": "Neprofitna pravna osoba",
+    "12": "Anonimizirani donator"
+  },
+  "donation_type": {
+    "0": "novčana donacija",
+    "1": "članarina",
+    "2": "pristupnina",
+    "3": "donacija u naravi",
+    "4": "javno financiranje"
+  },
+  "other_countries": {
+    "title": "Druge zemlje"
+  },
+  "thanks": "Zahvaljujemo pojedincima i organizacijama poput {external} na pružanju vrijednih informacija o mehanizmima političkih donacija.",
+  "export": {
+    "title": "Izvoz podataka",
+    "p0": "Preuzmite cjeloviti skup podataka o političkim donacijama za {country} koji se koristi na ovoj stranici. Izvoz uključuje normalizirana imena donatora, iznose, datume i stranke primateljice.",
+    "p1": "Važno: Ovo nisu sirovi podaci iz {source}. Ovaj skup podataka sadrži samo donacije koje je naš tim normalizirao i filtrirao. Molimo pogledajte našu {methodology}.",
+    "license": "Licenca: {license}"
+  },
+  "bar_chart_race": {
+    "title": "Utrka stupčastog grafikona",
+    "description": "Vizualizirajte akumulaciju donacija kroz vrijeme. Odaberite raspon godina kako biste vidjeli kako se financiranje stranaka dinamično mijenja.",
+    "from": "Od",
+    "to": "Do",
+    "download_video": "Preuzmi video",
+    "rendering": "Renderiranje... {percentage}",
+    "no_data": "Nema dostupnih podataka za odabrani raspon.",
+    "note": "Napomena: Ova se animacija renderira na strani klijenta u vašem pregledniku i na nekim uređajima može biti zahtjevna za resurse. Preuzimanje videozapisa automatski će reproducirati cijelu animaciju.",
+    "individual_years": "Pojedinačne godine",
+    "animation_duration": "Trajanje animacije",
+    "duration_s": "{seconds}s",
+    "custom_range": "Napredno: Prilagođen raspon godina",
+    "group_by": {
+      "label": "Grupiraj prema",
+      "receiver": "Stranka",
+      "donor": "Donator"
+    },
+    "chart_title": "Raspodjela donacija strankama",
+    "chart_subtitle": "Ukupne objavljene donacije svakoj stranci, {country}, {years}."
+  },
+  "compare_parties_page": {
+    "title": "Usporedi stranke",
+    "description": "Ispod odaberite između dvije i četiri stranke kako biste usporedili njihovu statistiku donacija usporedno. Ograničenje od četiri stranke osigurava da usporedba ostane čitka na svim zaslonima."
+  },
+  "compare_parties": {
+    "parties": "Stranke",
+    "min_select": "Odaberite najmanje dvije stranke iznad kako biste vidjeli usporedbu.",
+    "comparing": "Uspoređivanje",
+    "years": "Godine",
+    "top_3_donors": "Top 3 donatora",
+    "n_donations": "{count} donacija",
+    "donor_type": "Tip donatora",
+    "donor": "Donator",
+    "overview": {
+      "title": "Pregled",
+      "description": "Opća statistika, uključujući ukupni iznos i broj donacija koje je svaka stranka primila u odabranom razdoblju."
+    },
+    "timeline": {
+      "title": "Vremenska crta",
+      "description": "Kronološki prikaz koji pokazuje kada su stranke primile svoju prvu i posljednju donaciju, kao i svoja financijski najaktivnija razdoblja."
+    },
+    "top_donations": {
+      "title": "Najveće donacije",
+      "description": "Ističe najveću pojedinačnu dolaznu transakciju i najveće pojedinačne donatore za svaku odabranu stranku."
+    },
+    "donor_types": {
+      "title": "Tipovi donatora",
+      "description": "Analiza financijske potpore razvrstane prema tipu subjekta, poput tvrtki, pojedinaca ili sindikata.",
+      "biggest_donor_type": "Najveći tip donatora"
+    },
+    "donors": {
+      "title": "Donatori",
+      "description": "Detaljniji uvid u jedinstvene osobe i organizacije koje podupiru svaku stranku, uključujući učestalost i preklapanje donacija."
+    },
+    "overlapping": {
+      "title": "Preklapajući donatori ({count})",
+      "description": "Donatori koji su donirali višestrukim odabranim strankama.",
+      "more": "... i još {count}"
+    },
+    "stats": {
+      "sum": "Ukupne donacije",
+      "count": "Broj donacija",
+      "avg": "Prosječna donacija",
+      "median": "Medijan donacije",
+      "first_year": "Prva godina donacije",
+      "last_year": "Zadnja godina donacije",
+      "active_year_sum": "Najaktivnija godina (prema iznosu)",
+      "active_year_count": "Godina s najviše donacija",
+      "unique_donors": "Jedinstveni donatori",
+      "top_donor": "Najveći donator",
+      "frequent_donor": "Najčešći donator",
+      "biggest_donation": "Najveća pojedinačna donacija"
+    }
+  },
+  "citation": {
+    "action": "Citiraj",
+    "success": "Citat u stilu {style} kopiran u međuspremnik.",
+    "data": "DonationWatch – podaci o političkim donacijama u {country}",
+    "apa": "DonationWatch. ({year}). {title} [Skup podataka]. Preuzeto {date}, s {url}"
+  },
+  "enterprise": {
+    "title": "Enterprise",
+    "heading": "Podaci o političkom financiranju na razini Enterprisea.",
+    "p0": "Pratite političke donacije preko granica. Čisti, potpuno obogaćeni API-ji za financiranje izgrađeni na normaliziranim transakcijskim zapisima iz globalnih izbornih povjerenstava.",
+    "draft_schema": "* Napomena: Nacrt sheme v1. Struktura odgovora podložna je promjenama na temelju povratnih informacija iz bete.",
+    "engine_specs": {
+      "title": "Specifikacije i prednosti sustava",
+      "s0": {
+        "title": "1. Standardizirani transakcijski zapisi",
+        "description": "Prestanite se boriti s neurednim CSV datotekama i promjenjivim državnim formatima. Pristupite uredno mapiranim zapisima donacija normaliziranima kroz više međunarodnih registara."
+      },
+      "s1": {
+        "title": "2. Obogaćeni REST API-ji i OpenAPI specifikacije",
+        "description": "Recite zbogom krhkim web scraperima. Pristupite pouzdanim JSON krajnjim točkama uz napredno filtriranje prema donatoru, stranci, datumu i iznosu."
+      },
+      "s2": {
+        "title": "3. SLA pouzdanost",
+        "description": "Izgrađeno za institucionalne radne procese. Namjenski API ključevi, ograničenja za velike količine zahtjeva i ciljana dostupnost od 99,9%."
+      }
+    },
+    "monitoring": {
+      "title": "Prate:",
+      "financial": "Financijske institucije",
+      "government": "Državna porezna tijela",
+      "universities": "Vrhunska sveučilišta",
+      "newsrooms": "Istraživačke redakcije"
+    },
+    "register": {
+      "title": "Registracija za privatnu betu",
+      "p0": "Temeljni podatkovni sustav trenutno se prebacuje u REST API visoke dostupnosti za komercijalnu upotrebu. Pošaljite svoje zahtjeve za upite u nastavku kako biste se pridružili listi čekanja i ostvarili prioritetni pristup izdanju v1."
+    },
+    "form": {
+      "successTitle": "Zahtjev za pristup je registriran",
+      "successMessageTemplate": "Hvala vam što ste poslali specifikacije svog upita. Pregledat ćemo podatkovne zahtjeve vaše organizacije i kontaktirati vas u vezi s prioritetnim pristupom komercijalnim endpointima v1.",
+      "submitAnotherButton": "< Pošalji još jedan zahtjev",
+      "formTitle": "Prijava za beta pristup",
+      "labelFullName": "Puno ime",
+      "labelWorkEmail": "Poslovni e-mail",
+      "labelOrganization": "Organizacija",
+      "labelQueryRequest": "Ciljni endpoint / Zahtjev za upit",
+      "consentText": "Slažem se s pravilima privatnosti i pristajem da me se kontaktira u vezi s Enterprise API-jem.",
+      "buttonProcessing": "Obrada zahtjeva...",
+      "buttonSubmit": "Pošalji zahtjev",
+      "errorFailedSubmit": "Slanje registracije za listu čekanja nije uspjelo.",
+      "errorUnexpected": "Došlo je do neočekivane pogreške. Pokušajte ponovno.",
+      "turnstileLabel": "Recite nam da ste čovjek"
+    }
+  },
+  "errors": {
+    "required": "Ovo polje je obavezno.",
+    "empty": "Ovo polje ne smije biti prazno.",
+    "email": "Unesite valjanu adresu e-pošte."
+  },
+  "filter": {
+    "title": "Filteri",
+    "description": "Precizirajte podatke o donacijama prema godinama, strankama i tipu.",
+    "select_all": "Odaberi sve",
+    "select_none": "Poništi odabir",
+    "reset": "Poništi",
+    "parties": "Stranke",
+    "donation_types": "Vrste donacija",
+    "donor_types": "Vrste donatora",
+    "years": {
+      "title": "Raspon godina",
+      "from": "Od",
+      "to": "Do"
+    },
+    "empty": {
+      "title": "Nema pronađenih donacija",
+      "p0": "Nema donacija koje odgovaraju vašoj trenutačnoj konfiguraciji filtara. Pokušajte prilagoditi filtre ili ih resetirati.",
+      "reset": "Resetiraj filtre"
+    }
+  },
+  "methodology": {
+    "title": "Metodologija",
+    "intro": "DonationWatch obrađuje, normalizira i stavlja u kontekst službene skupove podataka koje objavljuju nacionalna izborna povjerenstva i nadzorna tijela. Ova stranica dokumentira naše izvore, pravila obrade i ograničenja za zemlju {country}.",
+    "sections": {
+      "profile": "Profil skupa podataka",
+      "source": "Izvor podataka i opseg",
+      "coverage": "Pokrivenost i pragovi",
+      "cadence": "Učestalost ažuriranja",
+      "processing": "Obrada i normalizacija",
+      "anonymisation": "Anonimizacija i redigiranje",
+      "licence": "Licenca i podrijetlo",
+      "version": "Verzija podataka i vremenske oznake",
+      "disclaimer": "Izjava o odricanju odgovornosti"
+    },
+    "profile": {
+      "source": "Službeni izvor",
+      "coverage": "Razdoblje pokrivenosti",
+      "coverage_preliminary": "{range} (preliminarno od {preliminarySince})",
+      "latest_transaction": "Posljednja zabilježena transakcija",
+      "last_processed": "Skup podataka zadnji put obrađen",
+      "cadence": "Učestalost ažuriranja",
+      "cadence_value": "{cadence, select, annual {Godišnje} quarterly {Tromjesečno} other {Povremeno}}",
+      "volume": "Opseg kompiliranog skupa podataka",
+      "volume_value": "{count} zapisa ({sum}) kroz {parties} stranaka",
+      "donation_threshold": "Prag po donaciji",
+      "donation_threshold_all": "Svi objavljeni doprinosi (bez minimalnog filtra)",
+      "party_threshold": "Prag za uključenje stranke",
+      "party_threshold_value": "{type, select, count {≥ {count} donacija} sum {≥ {sum} kumulativno} other {≥ {count} donacija ili ≥ {sum} kumulativno}}",
+      "party_threshold_all": "Uključene sve prijavljene stranke",
+      "granularity": "Granularnost podataka",
+      "granularity_individual": "Pojedinačne transakcije i zapisi o donatorima",
+      "granularity_aggregate": "Godišnji agregati na razini stranaka (bez identiteta pojedinačnih donatora)",
+      "temporal_resolution": "Vremenska rezolucija",
+      "resolution_date": "Točan datum transakcije (GGGG-MM-DD)",
+      "resolution_year": "Samo izvještajna godina (GGGG)",
+      "origin_coverage": "Geografsko podrijetlo",
+      "origin_yes": "Županija/regija i država podrijetla",
+      "origin_no": "Samo na razini države",
+      "donation_types": "Uključene vrste doprinosa",
+      "donor_types": "Klasificirane kategorije donatora",
+      "external_ids": "Vanjski identifikatori registra",
+      "external_ids_both": "ID-ovi izvornih transakcija i matični brojevi tvrtki (OIB)",
+      "external_ids_transaction": "ID-ovi transakcija u izvornom registru",
+      "external_ids_company": "Registracijski / matični brojevi tvrtki",
+      "external_ids_none": "Nisu objavljeni u izvornom registru",
+      "access": "Pristup podacima i cjevovod (pipeline)",
+      "export_link": "Preuzmi cjeloviti skup podataka (CSV / JSON)",
+      "pipeline_link": "Pregledaj izvorni kod učitavača za državu (GitHub)"
+    },
+    "source": {
+      "default": "Podaci za {country} preuzeti su izravno iz {source}.",
+      "link": "Posjetite službeni registar"
+    },
+    "coverage": {
+      "default": "Skup podataka obuhvaća objavljene političke donacije od {minYear}.",
+      "preliminary": "Podaci od {preliminarySince} su preliminarni i podložni naknadnim dopunama nadležnog tijela."
+    },
+    "threshold": {
+      "default": "DonationWatch primjenjuje minimalni prag uključenja od {amount} po transakciji za ovaj skup podataka.",
+      "note": "Ovaj smo prag sami postavili kako bismo izbjegli preveliku količinu sitnih donacija, te može biti viši od minimalnog iznosa koji službeni registar objavljuje. Doprinosi čija je apsolutna vrijednost manja od ovog iznosa se filtriraju.",
+      "all": "Ovaj skup podataka uključuje sve objavljene donacije bez filtera minimalnog iznosa.",
+      "party": "Prag uključenja na razini stranke: Kako bismo se usredotočili na aktivne političke subjekte, u kompilirani skup podataka uključene su samo stranke s {type, select, count {najmanje {count} dokumentiranih donacija} sum {najmanje {sum} kumulativnih donacija} other {najmanje {count} dokumentiranih donacija ili {sum} kumulativnih donacija}}.",
+      "party_all": "Uključenje na razini stranke: Uključene su sve političke stranke s valjanim prijavljenim doprinosima iznad praga transakcije.",
+      "net_positive": "Povrati i filtriranje neto nule: Neki registri bilježe vraćene ili refundirane doprinose kao negativne stavke. Donatori ili stranke primateljice čiji je kumulativni neto zbroj doprinosa u cijelom skupu podataka nula ili negativan isključuju se."
+    },
+    "cadence": {
+      "default": "Skupovi podataka se povremeno sinkroniziraju sa službeno objavljenim registrom.",
+      "annual": "Izvorni skup podataka ažurira se na godišnjoj razini.",
+      "quarterly": "Izvorni skup podataka ažurira se na tromjesečnoj razini."
+    },
+    "processing": {
+      "summary": "Sirove objave prolaze determinističku normalizaciju temeljenu na pravilima tijekom učitavanja kako bi se standardizirali nazivi subjekata, objedinili organizacijski ogranci i isključili neodgovarajući unosi:",
+      "step_cleaning": "Osnovno čišćenje teksta: Svi nazivi subjekata prolaze Unicode NFKC normalizaciju, uklanjanje okolnih navodnika i završnih zareza te sažimanje višestrukih razmaka.",
+      "step_clustering": "Grupiranje po ključu donatora i pravila za državu: Kanonski ključ pretraživanja (koji uklanja sve ne-alfanumeričke znakove i pretvara slova u velika) grupira varijante u veličini slova, razmacima i interpunkciji pod jedno kanonsko ime donatora. Gdje je to konfigurirano za pojedinu državu, dodatna pravila standardiziraju lokalne pravne oblike, uklanjaju osobne titule ili povezuju poznate pseudonime — pri čemu je svaka spojena varijanta navedena u odjeljku Agregirani donatori u nastavku.",
+      "step_receivers": "Mapiranje i konsolidacija primatelja: Prijavljeni nazivi primatelja mapiraju se na kanonske političke stranke. Kada registri odvojeno prikazuju doprinose regionalnim, lokalnim ili omladinskim jedinicama stranke, oni se konsolidiraju u jedan ukupni iznos stranke (navedeno u odjeljku Agregirani primatelji u nastavku kada je primjenjivo).",
+      "donor_identity": "Važno ograničenje vezano uz identitet donatora (imenjaci naspram nespojenih varijanti): Službeni registri financiranja političkih stranaka rijetko objavljuju jedinstvene osobne identifikatore (poput OIB-a, poreznih brojeva ili datuma rođenja) za pojedinačne donatore. Ukupni iznosi na stranicama profila donatora agregiraju se isključivo prema normaliziranom imenu donatora. Zbog toga jedan profil donatora može objediniti doprinose više različitih osoba koje dijele potpuno isto ime (prekomjerna agregacija), dok varijante koje sadrže srednja imena ili nemapirane kratice mogu ostati zasebni profili (nedovoljna agregacija)."
+    },
+    "anonymisation": {
+      "summary": "Razlikujemo redakcije koje je unaprijed provelo nadležno tijelo od diskrecijske anonimizacije na zahtjev.",
+      "upstream": "Redigirano od nadležnog tijela: {count} zapisa donatora prikriveno je od strane tijela prije objave.",
+      "by_request": "Anonimizirano na zahtjev: {count} imena donatora uklonjeno je na zahtjev, uz očuvanje iznosa transakcija i ukupnih iznosa stranaka."
+    },
+    "licence": {
+      "output": "Naš kompilirani, normalizirani skup podataka i vizualizacije objavljeni su pod licencom {licence}.",
+      "export_prompt": "Za istraživače, novinare i podatkovne znanstvenike, cjeloviti normalizirani skup podataka za zemlju {country} može se preuzeti putem naše stranice {exportLink}, a točna pravila učitavanja i normalizacije mogu se provjeriti u našem {pipelineLink}."
+    },
+    "version": {
+      "last_updated": "Skup podataka zadnji put obrađen: {date}.",
+      "latest_donation": "Posljednja zabilježena transakcija u skupu podataka: {date}.",
+      "explanation": "Vremenska oznaka obrade pokazuje kada je naš sustav zadnji put sinkronizirao i kompilirao podatke iz službenog registra, dok datum posljednje transakcije odražava najnoviji datum doprinosa prisutan u objavljenim zapisima."
+    },
+    "disclaimer": {
+      "text": "Kompilirano, nije službeno: DonationWatch je neovisan građanski projekt i nije povezan s izbornim tijelima niti političkim strankama. Zbog normalizacije i filtriranja, ove podatke ne treba citirati kao službeni državni registar."
+    },
+    "policy_domains": {
+      "title": "Područja politike i kategorije industrija",
+      "intro": "Donatori u državi {country} raspoređeni su u 24 specifične kategorije industrija okupljene pod 6 širih područja politike:",
+      "disclaimer": "Ove kategorije predstavljaju najbolju moguću nadogradnju uz pomoć AI-ja, izrađenu na temelju javnih opisa tvrtki, industrijskih registara i članstva u udruženjima, a ne službene klasifikacije tijela za objavu podataka. Izravne tvrtke odvojene su od višesektorskih krovnih tijela, a nekategorizirani donatori ostaju prikazani zasebno. Ako uočite pogrešno razvrstanog donatora ili poveznicu koja nedostaje, <github>otvorite issue na GitHubu</github> ili pišite na <emailLink>{email}</emailLink>."
+    }
+  },
+  "interests": {
+    "domains": {
+      "energy-resources": {
+        "label": "Energija i resursi",
+        "description": "Fosilna goriva, rudarstvo, obnovljivi izvori, poljoprivreda i šumarstvo"
+      },
+      "built-environment": {
+        "label": "Izgrađeni okoliš",
+        "description": "Razvoj nekretnina, građevinarstvo, infrastruktura i promet"
+      },
+      "finance-advisory": {
+        "label": "Financije i savjetovanje",
+        "description": "Bankarstvo, mirovinski fondovi, osiguranje, savjetovanje, pravo i fintech"
+      },
+      "regulated-consumer": {
+        "label": "Regulirana potrošnja",
+        "description": "Igre na sreću, alkohol, duhan, supermarketi i ugostiteljstvo"
+      },
+      "health-tech-industry": {
+        "label": "Zdravstvo, tehnologija i industrija",
+        "description": "Farmacija, privatno zdravstvo, tehnologija, mediji, obrana i proizvodnja"
+      },
+      "labor-advocacy": {
+        "label": "Rad i zagovaranje",
+        "description": "Sindikati, politički fondovi za prikupljanje sredstava i tematske kampanje"
+      }
+    },
+    "tags": {
+      "fossil-fuels": {
+        "label": "Fosilna goriva i termoelektrane",
+        "description": "Vađenje ugljena, nafte i plina te proizvodnja toplinske energije"
+      },
+      "mining-metals": {
+        "label": "Rudarstvo i metali",
+        "description": "Vađenje željezne rude, zlata, litija i kritičnih minerala"
+      },
+      "renewables-cleantech": {
+        "label": "Obnovljivi izvori i čiste tehnologije",
+        "description": "Solarna i vjetroenergija, baterijska pohrana i zeleni vodik"
+      },
+      "agriculture-forestry": {
+        "label": "Poljoprivreda i šumarstvo",
+        "description": "Agrobiznis, stočarstvo, drvna industrija i vodna prava"
+      },
+      "property-development": {
+        "label": "Nekretnine i razvoj projekata",
+        "description": "Komercijalni i stambeni razvoj nekretnina te fondovi REIT"
+      },
+      "construction-infrastructure": {
+        "label": "Građevinarstvo i infrastruktura",
+        "description": "Niskogradnja, izvođači cestovnih i željezničkih radova te građevinski materijali"
+      },
+      "aviation-transport": {
+        "label": "Zrakoplovstvo, brodarstvo i logistika",
+        "description": "Zrakoplovne tvrtke, zračne luke, luke, pomorski i teretni prijevoz"
+      },
+      "banking-lending": {
+        "label": "Bankarstvo i kreditiranje",
+        "description": "Komercijalne banke, kreditne unije i nebankovni zajmodavci"
+      },
+      "wealth-super-insurance": {
+        "label": "Upravljanje imovinom, mirovine i osiguranje",
+        "description": "Mirovinski fondovi, private equity, upravitelji imovinom i osiguravatelji"
+      },
+      "consulting-accounting-legal": {
+        "label": "Savjetovanje, računovodstvo i pravo",
+        "description": "Revizorske i savjetodavne tvrtke Velike četvorke, korporativna odvjetnička društva i PR/lobiranje"
+      },
+      "crypto-fintech": {
+        "label": "Kripto i fintech",
+        "description": "Mjenjačnice digitalne imovine, blockchain i alternativna plaćanja"
+      },
+      "gambling-wagering": {
+        "label": "Igre na sreću i klađenje",
+        "description": "Kasina, internetsko klađenje, lutrije i automat-klubovi"
+      },
+      "alcohol-beverages": {
+        "label": "Alkohol i pića",
+        "description": "Pivovare, destilerije, vinarije i maloprodaja alkoholnih pića"
+      },
+      "tobacco-nicotine": {
+        "label": "Duhan i nikotin",
+        "description": "Proizvođači duhana, veletrgovci i proizvodi za e-cigarete"
+      },
+      "food-supermarkets": {
+        "label": "Supermarketi i prehrambena maloprodaja",
+        "description": "Veliki trgovački lanci, brza hrana i proizvođači pakirane hrane"
+      },
+      "hospitality-tourism": {
+        "label": "Ugostiteljstvo, klubovi i turizam",
+        "description": "Hoteli, licencirani klubovi, restorani i turistički operateri"
+      },
+      "pharma-biotech": {
+        "label": "Farmacija i biotehnologija",
+        "description": "Proizvođači lijekova, cjepiva i medicinska istraživanja"
+      },
+      "private-healthcare": {
+        "label": "Privatno zdravstvo i skrb za starije",
+        "description": "Privatne bolnice, patologija i pružatelji skrbi za starije osobe"
+      },
+      "tech-telecom-platforms": {
+        "label": "Tehnologija, telekomunikacije i platforme",
+        "description": "Softver, računalstvo u oblaku, društvene platforme i telekomunikacijski operateri"
+      },
+      "media-broadcasting": {
+        "label": "Mediji i emitiranje",
+        "description": "Komercijalna televizija, radio, izdavaštvo i informativne mreže"
+      },
+      "defense-aerospace": {
+        "label": "Obrana i zrakoplovno-svemirska industrija",
+        "description": "Dobavljači obrambene opreme, vojna tehnologija i sigurnosni sustavi"
+      },
+      "manufacturing-automotive": {
+        "label": "Proizvodnja i automobilska industrija",
+        "description": "Industrijska proizvodnja, papir i ambalaža te distribucija vozila"
+      },
+      "trade-unions": {
+        "label": "Sindikati",
+        "description": "Sindikati zaposlenika u javnom i privatnom sektoru"
+      },
+      "ideological-issue-advocacy": {
+        "label": "Ideološko i tematsko zagovaranje",
+        "description": "Politički fondovi za prikupljanje sredstava, think tankovi i tematske kampanje"
+      }
+    }
+  }
+}

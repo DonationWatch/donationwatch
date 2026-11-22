@@ -1,0 +1,553 @@
+"use client";
+import type { Party } from "@donationwatch/core/types/party";
+import type { Donation } from "@donationwatch/core/utils/types";
+import type { HistoryEntry } from "@donationwatch/data/queries/get-history";
+
+import { PartyField } from "@donationwatch/core/types/party";
+import { isNotNullandNotUndefined } from "@donationwatch/core/utils/array";
+import { donationYear } from "@donationwatch/core/utils/date";
+import { Features, hasFeature } from "@donationwatch/core/utils/features";
+import {
+  formatCountryCurrency,
+  formatTwoDigitDate,
+} from "@donationwatch/core/utils/formatter";
+import { getLongName } from "@donationwatch/core/utils/party";
+import { DonationField, DonationType } from "@donationwatch/core/utils/types";
+import { getHistory } from "@donationwatch/data/queries/get-history";
+import { cn } from "@donationwatch/ui/lib/utils";
+import {
+  type ColumnDef,
+  columnFilteringFeature,
+  columnSizingFeature,
+  columnVisibilityFeature,
+  createColumnHelper,
+  createFilteredRowModel,
+  createSortedRowModel,
+  type FilterFn,
+  flexRender,
+  globalFilteringFeature,
+  metaHelper,
+  rowSortingFeature,
+  type SortingState,
+  tableFeatures,
+  useTable,
+} from "@tanstack/react-table";
+import { useVirtualizer } from "@tanstack/react-virtual";
+import {
+  ArrowDownNarrowWide,
+  ArrowUpNarrowWide,
+  ExternalLink,
+  HandCoins,
+  Search,
+} from "lucide-react";
+import { useLocale } from "next-intl";
+import { useCallback, useMemo, useState } from "react";
+
+import { DonationTypeLabel } from "@/components/donations/donation-type";
+import { ExternalDonationLink } from "@/components/donations/external-donation-link";
+import { DonorLink } from "@/components/donors/donor-link";
+import { DonorName } from "@/components/donors/donor-name";
+import { PartyDot } from "@/components/parties/party-dot";
+import { PartyLink } from "@/components/parties/party-link";
+import {
+  useParties,
+  useRequiredCountryConfig,
+} from "@/components/providers/country-provider";
+import { TableCard } from "@/components/table/expandable-table-card";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
+import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
+import { useMobile } from "@/hooks/use-media-query";
+
+interface CustomColumnMeta {
+  className?: string;
+  fill?: boolean;
+}
+
+const tableFeaturesConfig = tableFeatures({
+  rowSortingFeature,
+  columnFilteringFeature,
+  globalFilteringFeature,
+  columnSizingFeature,
+  columnVisibilityFeature,
+  sortedRowModel: createSortedRowModel(),
+  filteredRowModel: createFilteredRowModel(),
+  columnMeta: metaHelper<CustomColumnMeta>(),
+});
+
+const columnHelper = createColumnHelper<
+  typeof tableFeaturesConfig,
+  HistoryEntry
+>();
+
+export const DonationHistoryTable = ({
+  years,
+  partiesIds,
+  donations,
+  readonlyDonor = false,
+  title,
+  description,
+  titleId,
+  titleAs,
+}: {
+  years?: string[];
+  partiesIds: string[];
+  donations: Donation[];
+  readonlyDonor?: boolean;
+  title?: string;
+  description?: string;
+  titleId?: string;
+  titleAs?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+}) => {
+  const country = useRequiredCountryConfig();
+  const t = useTranslations();
+  const tSort = useTranslations("sort");
+  const tCommon = useTranslations("common");
+  const tSearch = useTranslations("search");
+  const locale = useLocale();
+  const browserBasedLocale = useBrowserBasedLocale();
+  const parties = useParties();
+  const partiesIdSet = useMemo(() => new Set(partiesIds), [partiesIds]);
+  const [sorting, setSorting] = useState<SortingState>([
+    { id: "date", desc: true },
+  ]);
+  const [globalFilter, setGlobalFilter] = useState("");
+
+  const partyNameMap = useMemo(() => {
+    const map = new Map<string, { name: string; short: string }>();
+    parties.forEach((party: Party) => {
+      map.set(String(party[PartyField.Id]), {
+        name: getLongName(party),
+        short: party[PartyField.Short],
+      });
+    });
+    return map;
+  }, [country.id]);
+
+  const globalFilterFn = useCallback<
+    FilterFn<typeof tableFeaturesConfig, HistoryEntry>
+  >(
+    (row, _columnId, filterValue: string) => {
+      const q = filterValue.trim().toLowerCase();
+      if (!q) return true;
+      const donor = row.original.donor?.toLowerCase() ?? "";
+      const originalReceiver =
+        row.original.originalReceiver?.toLowerCase() ?? "";
+      const partyId = String(row.original.party);
+      const partyName = (
+        partyNameMap.get(partyId)?.name ?? partyId
+      ).toLowerCase();
+      const partyShort = (
+        partyNameMap.get(partyId)?.short ?? partyId
+      ).toLowerCase();
+      return (
+        donor.includes(q) ||
+        originalReceiver.includes(q) ||
+        partyName.includes(q) ||
+        partyShort.includes(q)
+      );
+    },
+    [partyNameMap],
+  );
+
+  const [tableContainer, setTableContainer] = useState<HTMLDivElement | null>(
+    null,
+  );
+  const isMobile = useMobile();
+
+  const history = useMemo(
+    () =>
+      getHistory(country, donations, years).filter((entry) =>
+        partiesIds.length ? partiesIdSet.has(entry.party) : true,
+      ),
+    [donations, country, years, partiesIdSet, partiesIds.length],
+  );
+
+  const hasOriginalReceiver = useMemo(
+    () => history.some((entry) => Boolean(entry.originalReceiver)),
+    [history],
+  );
+
+  const columns = useMemo<
+    ColumnDef<typeof tableFeaturesConfig, HistoryEntry, unknown>[]
+  >(() => {
+    if (isMobile)
+      return columnHelper.columns([
+        columnHelper.display({
+          id: "content",
+          meta: {
+            fill: true,
+          },
+          cell: (cell) => {
+            const historyEntry = cell.row.original;
+
+            return (
+              <div className="grow">
+                <div className="flex items-start justify-between gap-2 text-gray-700 dark:text-gray-400">
+                  {
+                    <div className="shrink-0 font-mono">
+                      {historyEntry.date !==
+                      donationYear({ [DonationField.Date]: historyEntry.date })
+                        ? formatTwoDigitDate(
+                            browserBasedLocale,
+                            new Date(historyEntry.date),
+                          )
+                        : historyEntry.date}
+                    </div>
+                  }
+                  <div className="flex min-w-0 flex-col items-end overflow-hidden">
+                    <PartyLink party={historyEntry.party} locale={locale}>
+                      <PartyDot
+                        className="text-sm"
+                        party={historyEntry.party}
+                      />
+                    </PartyLink>
+                    {historyEntry.originalReceiver ? (
+                      <span
+                        className="inline-flex max-w-full items-center gap-1 text-xs text-zinc-500 dark:text-zinc-400"
+                        title={tCommon("donated_to", {
+                          recipient: historyEntry.originalReceiver,
+                        })}
+                      >
+                        <HandCoins className="size-3 shrink-0" />
+                        <span className="truncate">
+                          {historyEntry.originalReceiver}
+                        </span>
+                      </span>
+                    ) : null}
+                  </div>
+                </div>
+                <div className="space-y-1">
+                  <div className="space-x-1 font-semibold">
+                    {readonlyDonor ? (
+                      <DonorName donor={historyEntry.donor} />
+                    ) : (
+                      <DonorLink donor={historyEntry.donor} />
+                    )}
+                  </div>
+                  {hasFeature(country, Features.DonationType) ? (
+                    <DonationTypeLabel
+                      donationType={
+                        historyEntry.donationType ?? DonationType.Money
+                      }
+                      label={t(
+                        `donation_type.${historyEntry.donationType ?? DonationType.Money}`,
+                      )}
+                    />
+                  ) : null}
+                  <div className="flex items-center justify-between">
+                    <div className="shrink-0 text-sm tabular-nums">
+                      {formatCountryCurrency(
+                        browserBasedLocale,
+                        historyEntry.amount,
+                        country,
+                      )}
+                    </div>
+                    <div className="shrink-0">
+                      <ExternalDonationLink
+                        countryConfig={country}
+                        id={cell.row.original.id}
+                        className={
+                          "text-s1 flex items-center gap-1 pr-1 text-sm"
+                        }
+                        title={tCommon("view_source")}
+                      >
+                        <span>{tCommon("view_source")}</span>
+                        <ExternalLink className={"inline"} size={16} />
+                      </ExternalDonationLink>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          },
+        }),
+      ]);
+
+    return columnHelper.columns(
+      [
+        columnHelper.accessor("date", {
+          header: t("common.date"),
+          size: 150,
+          meta: {
+            className: "font-mono",
+          },
+          cell: (cell) => {
+            const date = cell.getValue();
+
+            if (date === donationYear({ [DonationField.Date]: date }))
+              return date;
+
+            return formatTwoDigitDate(browserBasedLocale, new Date(date));
+          },
+        }),
+        columnHelper.accessor("party", {
+          header: t("common.party"),
+          size: hasOriginalReceiver ? 260 : 150,
+          cell: (cell) => (
+            <div className="flex min-w-0 flex-col overflow-hidden">
+              <PartyLink
+                className="overflow-x-hidden"
+                party={cell.getValue()}
+                locale={locale}
+              >
+                <PartyDot
+                  className="overflow-x-hidden"
+                  nameClassName="truncate"
+                  party={cell.getValue()}
+                />
+              </PartyLink>
+              {cell.row.original.originalReceiver ? (
+                <span
+                  className="inline-flex items-center gap-1 pl-4 text-xs text-zinc-500 dark:text-zinc-400"
+                  title={tCommon("donated_to", {
+                    recipient: cell.row.original.originalReceiver,
+                  })}
+                >
+                  <HandCoins className="size-3 shrink-0" />
+                  <span className="truncate">
+                    {cell.row.original.originalReceiver}
+                  </span>
+                </span>
+              ) : null}
+            </div>
+          ),
+        }),
+        hasFeature(country, Features.DonationType)
+          ? columnHelper.accessor("donationType", {
+              header: t("common.donation_type"),
+              size: 150,
+              cell: (cell) => {
+                const donationType = cell.getValue() ?? DonationType.Money;
+
+                return (
+                  <DonationTypeLabel
+                    donationType={donationType}
+                    label={t(`donation_type.${donationType}`)}
+                  />
+                );
+              },
+            })
+          : undefined,
+        columnHelper.accessor("donor", {
+          header: t("common.donor"),
+          meta: {
+            fill: true,
+          },
+          cell: (cell) =>
+            readonlyDonor ? (
+              <DonorName donor={cell.row.original.donor} />
+            ) : (
+              <DonorLink donor={cell.row.original.donor} />
+            ),
+        }),
+        columnHelper.accessor("amount", {
+          header: t("common.amount"),
+          size: 150,
+          meta: {
+            className: "justify-end tabular-nums",
+          },
+          cell: (cell) =>
+            formatCountryCurrency(browserBasedLocale, cell.getValue(), country),
+        }),
+        hasFeature(country, Features.ExternalDonationIds)
+          ? columnHelper.accessor("id", {
+              header: "",
+              size: 50,
+              cell: (cell) => (
+                <ExternalDonationLink
+                  countryConfig={country}
+                  id={cell.row.original.id}
+                  title={tCommon("view_source")}
+                >
+                  <ExternalLink className={"m-1"} size={16} />
+                </ExternalDonationLink>
+              ),
+            })
+          : null,
+      ].filter(isNotNullandNotUndefined),
+    );
+  }, [
+    locale,
+    isMobile,
+    country,
+    readonlyDonor,
+    hasOriginalReceiver,
+    t,
+    tCommon,
+  ]);
+  const table = useTable({
+    features: tableFeaturesConfig,
+    columns,
+    data: history,
+    globalFilterFn,
+    state: {
+      sorting,
+      globalFilter,
+    },
+    onSortingChange: setSorting,
+    onGlobalFilterChange: setGlobalFilter,
+  });
+  const { rows } = table.getRowModel();
+
+  const rowVirtualizer = useVirtualizer({
+    count: rows.length,
+    estimateSize: () => 33, //estimate row height for accurate scrollbar dragging
+    getScrollElement: () => tableContainer,
+    //measure dynamic row height, except in firefox because it measures table border height incorrectly
+    measureElement:
+      typeof window !== "undefined" &&
+      navigator.userAgent.indexOf("Firefox") === -1
+        ? (element) => element?.getBoundingClientRect().height
+        : undefined,
+    overscan: 5,
+    directDomUpdates: true,
+    directDomUpdatesMode: "transform",
+  });
+
+  return (
+    <TableCard.Provider title={title ?? t("changes.title")}>
+      <TableCard.Frame>
+        <TableCard.Header
+          title={title ?? t("changes.title")}
+          description={description}
+          titleId={titleId}
+          titleAs={titleAs}
+        >
+          <TableCard.ExpandTool />
+        </TableCard.Header>
+        <TableCard.Toolbar>
+          <div className="relative md:max-w-sm">
+            <Search
+              size={16}
+              className="pointer-events-none absolute top-1/2 left-2.5 -translate-y-1/2 text-zinc-400"
+            />
+            <input
+              type="search"
+              name="donations-search"
+              value={globalFilter}
+              onChange={(e) => setGlobalFilter(e.target.value)}
+              placeholder={tSearch("filter")}
+              aria-label={tSearch("filter")}
+              className="w-full rounded-md border border-zinc-200 bg-white py-1.5 pr-3 pl-8 text-sm outline-none placeholder:text-zinc-500 focus:border-zinc-400 dark:border-zinc-700 dark:bg-zinc-900 dark:placeholder:text-zinc-400 dark:focus:border-zinc-500"
+            />
+          </div>
+        </TableCard.Toolbar>
+        <TableCard.ScrollArea
+          collapsedClassName="h-[80vh] min-h-[600px]"
+          expandedClassName="min-h-0 flex-1"
+          style={{
+            overflow: "auto", //our scrollable table container
+            position: "relative", //needed for sticky header
+          }}
+          ref={setTableContainer}
+        >
+          <table className="grid">
+            {isMobile ? null : (
+              <thead className="sticky top-0 z-1 grid border-b border-zinc-200 bg-white dark:border-zinc-950 dark:bg-zinc-900">
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <tr key={headerGroup.id} className="flex w-full">
+                    {headerGroup.headers.map((header) => (
+                      <th
+                        className={cn(
+                          "group/th",
+                          header.column.columnDef.meta?.fill
+                            ? "grow"
+                            : undefined,
+                        )}
+                        key={header.id}
+                        style={{
+                          width: header.getSize(),
+                        }}
+                      >
+                        {header.isPlaceholder ? null : (
+                          <div
+                            tabIndex={0}
+                            role="button"
+                            className={cn(
+                              header.column.columnDef.meta?.className,
+                              "flex items-center space-x-1 px-2 py-1 group-first/th:pl-4 group-last/th:pr-4",
+                              header.column.getCanSort()
+                                ? "cursor-pointer select-none"
+                                : "",
+                            )}
+                            onClick={header.column.getToggleSortingHandler()}
+                            onKeyDown={(ev) => {
+                              if (ev.key !== "Enter") return;
+
+                              // on enter trigger the click action
+                              ev.stopPropagation();
+                              header.column.getToggleSortingHandler()?.(ev);
+                            }}
+                            title={
+                              header.column.getCanSort()
+                                ? header.column.getNextSortingOrder() === "asc"
+                                  ? tSort("asc")
+                                  : header.column.getNextSortingOrder() ===
+                                      "desc"
+                                    ? tSort("desc")
+                                    : tSort("clear")
+                                : undefined
+                            }
+                          >
+                            <span>
+                              {flexRender(
+                                header.column.columnDef.header,
+                                header.getContext(),
+                              )}
+                            </span>
+                            {{
+                              asc: <ArrowDownNarrowWide size={16} />,
+                              desc: <ArrowUpNarrowWide size={16} />,
+                            }[header.column.getIsSorted() as string] ?? null}
+                          </div>
+                        )}
+                      </th>
+                    ))}
+                  </tr>
+                ))}
+              </thead>
+            )}
+            <tbody className="relative grid" ref={rowVirtualizer.containerRef}>
+              {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+                const row = rows[virtualRow.index];
+                if (!row) return null;
+                return (
+                  <tr
+                    data-index={virtualRow.index} //needed for dynamic row height measurement
+                    ref={(node) => {
+                      rowVirtualizer.measureElement(node);
+                    }} //measure dynamic row height
+                    key={row.id}
+                    className={cn(
+                      "absolute top-0 left-0 flex w-full border-b border-zinc-200 dark:border-zinc-950",
+                      virtualRow.index % 2 !== 0 && "bg-white dark:bg-zinc-900",
+                    )}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <td
+                        key={cell.id}
+                        className={cn(
+                          "flex items-center px-2 py-1 first:pl-4 last:pr-4",
+                          cell.column.columnDef.meta?.className,
+                          cell.column.columnDef.meta?.fill ? "grow" : undefined,
+                        )}
+                        style={{
+                          width: cell.column.getSize(),
+                        }}
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </td>
+                    ))}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </TableCard.ScrollArea>
+      </TableCard.Frame>
+    </TableCard.Provider>
+  );
+};

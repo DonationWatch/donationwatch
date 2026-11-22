@@ -1,0 +1,702 @@
+"use client";
+import type { Party } from "@donationwatch/core/types/party";
+import type { Donation, ReceiverId } from "@donationwatch/core/utils/types";
+import type { EChartsOption, LineSeriesOption } from "echarts";
+
+import { PartyField } from "@donationwatch/core/types/party";
+import { donationYear } from "@donationwatch/core/utils/date";
+import { buildElectionTimelineMarkArea } from "@donationwatch/core/utils/election-marker";
+import {
+  formatCompactCountryCurrency,
+  formatCountryCurrency,
+  formatDate,
+  formatMonthYear,
+  formatTwoDigitDate,
+  formatYear,
+} from "@donationwatch/core/utils/formatter";
+import { DonationField } from "@donationwatch/core/utils/types";
+import { useState } from "react";
+
+import {
+  usePartiesMap,
+  useRequiredCountryConfig,
+} from "@/components/providers/country-provider";
+import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
+import { useChart } from "@/hooks/use-chart";
+import { useClientTranslations } from "@/hooks/use-client-translations";
+
+import { ExpandableReactEchart } from "./expandable-react-echart";
+
+const symbolConfiguration = (idx: number) => {
+  const symbols = ["circle", "rect", "triangle", "diamond", "pin", "arrow"];
+
+  return {
+    symbol: symbols[idx % symbols.length],
+    symbolRotate: 0,
+  };
+};
+
+type LineDatum = [number, number];
+
+export const DonationSumChart = ({
+  title: chartTitle,
+  subtitle,
+  years,
+  parties,
+  limitToFirstDateYear,
+  donations,
+}: {
+  years: string[];
+  parties: Party[];
+  title: string;
+  subtitle: string;
+  limitToFirstDateYear?: boolean;
+  donations: Donation[];
+}) => {
+  return (
+    <DonationTimeseriesChart
+      donations={donations}
+      years={years}
+      parties={parties}
+      title={chartTitle}
+      subtitle={subtitle}
+      limitToFirstDateYear={limitToFirstDateYear}
+    />
+  );
+};
+
+export const DonationPartyChart = ({
+  title: chartTitle,
+  subtitle,
+  years,
+  party,
+  limitToFirstDateYear,
+  donations,
+}: {
+  years: string[];
+  party: Party;
+  title: string;
+  subtitle: string;
+  limitToFirstDateYear?: boolean;
+  donations: Donation[];
+}) => {
+  return (
+    <DonationTimeseriesChart
+      donations={donations}
+      years={years}
+      parties={[party]}
+      title={chartTitle}
+      subtitle={subtitle}
+      limitToFirstDateYear={limitToFirstDateYear}
+    />
+  );
+};
+
+const DonationTimeseriesChart = ({
+  title: chartTitle,
+  subtitle,
+  years,
+  parties,
+  limitToFirstDateYear,
+  donations,
+}: {
+  donations: Donation[];
+  years: string[];
+  parties: Party[];
+  title: string;
+  subtitle: string;
+  limitToFirstDateYear?: boolean;
+}) => {
+  const country = useRequiredCountryConfig();
+  const browserBasedLocale = useBrowserBasedLocale();
+  const { backgroundColor, isMobile, isDark } = useChart();
+  const tYears = useClientTranslations("years");
+  const partiesMap = usePartiesMap();
+  const [now] = useState(() => Date.now());
+
+  if (!donations.length) return null;
+
+  const leftmostYear = limitToFirstDateYear
+    ? donations[0][DonationField.Date].substring(0, 4)
+    : years.at(0)!;
+  const rightmostYear = years.at(-1)!;
+
+  const isOngoing = parseInt(rightmostYear, 10) >= new Date(now).getFullYear();
+
+  const partyLines: LineSeriesOption[] = parties.map((party, idx) => ({
+    ...symbolConfiguration(idx),
+    yAxisIndex: 0,
+    name: party[PartyField.Id],
+    type: "line",
+    step: "end",
+    symbolSize: ([timestamp, value]) => {
+      if (value === 0) return 0;
+
+      if (
+        // padded data point needs no symbol
+        (isOngoing && timestamp === now) ||
+        // end of year data point needs no symbol
+        maxX === timestamp
+      ) {
+        return 0;
+      }
+
+      return 10;
+    },
+    color: party[PartyField.Color] ?? undefined,
+    data: [],
+  }));
+
+  const minX = new Date(leftmostYear).getTime();
+  const maxX = new Date(`${parseInt(rightmostYear, 10) + 1}`).getTime();
+
+  const yearsSet = new Set<string>(years);
+  const partiesSet = new Set<string>(parties.map((p) => p[PartyField.Id]));
+  const foundParties = new Set<string>([]);
+  const partySums: Record<string, number> = {};
+  let filteredYearDonationSum = 0;
+  let filteredYearDonationCount = 0;
+
+  donations.forEach((donation: Donation & { [DonationField.Date]: string }) => {
+    if (donation[DonationField.Date] === donationYear(donation)) {
+      console.warn(
+        "Donation date is only year but expected full date",
+        donation[DonationField.Date],
+      );
+      filteredYearDonationCount++;
+      filteredYearDonationSum += donation[DonationField.Amount];
+      return;
+    }
+    if (!yearsSet.has(donationYear(donation))) return;
+    if (!partiesSet.has(donation[DonationField.Receiver])) return;
+
+    foundParties.add(donation[DonationField.Receiver]);
+
+    const idx = parties.findIndex(
+      (p) => p[PartyField.Id] === donation[DonationField.Receiver],
+    );
+    const previousValue = partyLines[idx].data!.at(-1) as
+      | [Date, number, string]
+      | undefined;
+    const previousAmount = previousValue?.[1] ?? 0;
+    const previousDate = previousValue?.[2] ?? undefined;
+
+    if (previousDate === donation[DonationField.Date]) {
+      // update existing entry to avoid additional points
+      previousValue![1] += donation[DonationField.Amount];
+    } else {
+      partyLines[idx].data!.push([
+        new Date(donation[DonationField.Date]),
+        previousAmount + donation[DonationField.Amount],
+        donation[DonationField.Date],
+      ]);
+    }
+
+    partySums[donation[DonationField.Receiver]] ??= 0;
+    partySums[donation[DonationField.Receiver]] +=
+      donation[DonationField.Amount];
+  });
+
+  partyLines.forEach((_, idx) => {
+    partyLines[idx].data!.unshift([minX, 0]);
+
+    // pad ongoing data to today
+    if (isOngoing) {
+      const previousValue =
+        (partyLines[idx].data!.at(-1) as LineDatum | undefined)?.[1] ?? 0;
+      partyLines[idx].data!.push([now, previousValue]);
+      return;
+    }
+
+    // add entry for end of year
+    const previousValue =
+      (partyLines[idx].data!.at(-1) as LineDatum | undefined)?.[1] ?? 0;
+    partyLines[idx].data!.push([maxX, previousValue]);
+  });
+
+  const option: EChartsOption = {
+    grid: {
+      right: 20,
+      left: 20,
+      top: 80,
+      bottom: 60,
+      containLabel: true,
+    },
+    backgroundColor,
+    legend: {
+      show: true,
+      type: "scroll",
+      data: parties
+        .map((party) => party[PartyField.Id])
+        .toSorted((a, b) => partySums[b] - partySums[a]),
+      top: 20,
+      padding: [0, 20],
+      // left: "right",
+      // align: "left",
+      orient: "horizontal",
+      textStyle: {
+        width: 100,
+        overflow: "truncate",
+      },
+      formatter: (partyId) =>
+        partiesMap[partyId as ReceiverId][PartyField.Short],
+    },
+    dataZoom: [
+      {
+        type: "inside",
+        filterMode: "none",
+        // zoom to min 5 days
+        minValueSpan: 1000 * 60 * 60 * 24 * 5,
+      },
+      {
+        id: "dataZoomX",
+        type: "slider",
+        xAxisIndex: [0],
+        filterMode: "none",
+        labelFormatter: (value) =>
+          formatTwoDigitDate(browserBasedLocale, value),
+        bottom: 20,
+        // zoom to min 5 days
+        minValueSpan: 1000 * 60 * 60 * 24 * 5,
+      },
+    ],
+    tooltip: {
+      confine: true,
+      trigger: "axis",
+      axisPointer: {
+        type: "cross", // set axis pointer to 'cross' to show vertical and horizontal lines
+        label: {
+          backgroundColor: "#6a7985", // set background color of axis pointer label
+          formatter: (params) => {
+            if (params.axisDimension === "y") {
+              return formatCompactCountryCurrency(
+                browserBasedLocale,
+                params.value as number,
+                country,
+              );
+            } else if (params.axisDimension === "x") {
+              return formatMonthYear(
+                browserBasedLocale,
+                new Date(params.value),
+              );
+            }
+
+            return "";
+          },
+        },
+      },
+      formatter: (params) => {
+        if (!Array.isArray(params)) return "";
+
+        const lines: string[] = [];
+
+        for (let i = 0; i < params.length; i++) {
+          const param = params[i];
+          const [timestamp, sum] = param.value as [number, number];
+
+          // no tooltip for ongoing data
+          if (timestamp === now) continue;
+          // no tooltip for end of year data
+          if (timestamp === maxX) continue;
+
+          let line = "";
+          const partyLine = partyLines[param.seriesIndex as number];
+          const previousPartyValue =
+            (partyLine.data![param.dataIndex - 1] as LineDatum)?.[1] ?? 0;
+          const delta = sum - previousPartyValue;
+
+          const party = partiesMap[param.seriesName as ReceiverId];
+          const marker = typeof param.marker === "string" ? param.marker : "";
+          line += `${marker} ${party[PartyField.Short]}: ${formatCountryCurrency(browserBasedLocale, sum, country)}`;
+
+          // only add delta if there is a change
+          if (delta > 0) {
+            line += ` (+${formatCountryCurrency(browserBasedLocale, delta, country)})`;
+          }
+
+          lines.push(line);
+        }
+
+        if (!lines.length) return "";
+
+        return `<div style="font-size:14px;color:#666;font-weight:600;line-height:1;margin-bottom:5px">${formatDate(
+          browserBasedLocale,
+          (params[0].data as LineDatum)[0],
+        )}</div>${lines.join("<br/>")}`;
+      },
+    },
+    xAxis: {
+      type: "time",
+      min: new Date(`${parseInt(leftmostYear, 10) - 1}-12-31`),
+      max: new Date(`${parseInt(rightmostYear, 10) + 1}-01-01`),
+      // min interval is one month
+      minInterval: 1000 * 60 * 60 * 24,
+    },
+    yAxis: [
+      {
+        position: "left",
+        type: "value",
+        axisLabel: {
+          formatter: (value) =>
+            formatCompactCountryCurrency(browserBasedLocale, value, country),
+        },
+      },
+    ],
+    series: [
+      ...partyLines,
+      {
+        yAxisIndex: 0,
+        type: "line",
+        data: [],
+        markLine: buildElectionTimelineMarkArea(
+          country,
+          years,
+          isMobile,
+          isDark,
+        ),
+      },
+    ],
+  };
+
+  const filteredEntriesSubtitle =
+    filteredYearDonationCount > 0
+      ? tYears("no_date_omitted", {
+          sum: formatCompactCountryCurrency(
+            browserBasedLocale,
+            filteredYearDonationSum,
+            country,
+          ),
+          count: filteredYearDonationCount,
+        })
+      : undefined;
+
+  const fullSubtitle = filteredEntriesSubtitle
+    ? `${subtitle} ${filteredEntriesSubtitle}`
+    : subtitle;
+
+  return (
+    <ExpandableReactEchart
+      height={550}
+      feature="line"
+      option={option}
+      title={chartTitle}
+      subtitle={fullSubtitle}
+      years={years}
+    />
+  );
+};
+
+export const DonationStackedTimeseriesChart = ({
+  title: chartTitle,
+  subtitle,
+  years,
+  parties,
+  limitToFirstDateYear,
+  donations,
+  donationsHaveYearsOnly = false,
+}: {
+  donations: Donation[];
+  years: string[];
+  parties: Party[];
+  title: string;
+  subtitle: string;
+  limitToFirstDateYear?: boolean;
+  donationsHaveYearsOnly?: boolean;
+}) => {
+  const country = useRequiredCountryConfig();
+  const browserBasedLocale = useBrowserBasedLocale();
+  const { backgroundColor, isMobile, isDark } = useChart();
+  const partiesMap = usePartiesMap();
+
+  const leftmostYear = limitToFirstDateYear
+    ? donations[0][DonationField.Date].substring(0, 4)
+    : years.at(0)!;
+  const rightmostYear = years.at(-1)!;
+
+  const [now] = useState(() => Date.now());
+  const isOngoing = parseInt(rightmostYear, 10) >= new Date(now).getFullYear();
+  // [date, Record<ReceiverId, number>]
+  const partySumsPerDate: Record<string, Record<string, number>> = {};
+
+  const partyLines: LineSeriesOption[] = parties.map((party, idx) => ({
+    ...symbolConfiguration(idx),
+    yAxisIndex: 0,
+    name: party[PartyField.Id],
+    type: "line",
+    step: "end",
+    stack: "total",
+    areaStyle: {},
+    emphasis: {
+      focus: "series",
+    },
+    symbolSize: ([timestamp, value, date], params) => {
+      if (value === 0) return 0;
+
+      const previousValue =
+        (partySumsPerDate[date]?.[party[PartyField.Id]] ??
+        params.dataIndex === 0)
+          ? 0
+          : value;
+
+      if (value === previousValue) return 0;
+
+      if (
+        // padded data point needs no symbol
+        (isOngoing && timestamp === now) ||
+        // end of year data point needs no symbol
+        maxX === timestamp
+      ) {
+        return 0;
+      }
+
+      return 10;
+    },
+    color: party[PartyField.Color] ?? undefined,
+    data: [],
+  }));
+
+  const minX = new Date(leftmostYear).getTime();
+  const maxX = new Date(`${parseInt(rightmostYear, 10) + 1}`).getTime();
+
+  const yearsSet = new Set<string>(years);
+  const partiesSet = new Set<string>(parties.map((p) => p[PartyField.Id]));
+  const foundParties = new Set<string>([]);
+  const partySums: Record<string, number> = {};
+
+  donations.forEach((donation: Donation & { [DonationField.Date]: string }) => {
+    if (
+      donation[DonationField.Date] === donationYear(donation) &&
+      !donationsHaveYearsOnly
+    ) {
+      return;
+    }
+    if (!yearsSet.has(donationYear(donation))) return;
+    if (!partiesSet.has(donation[DonationField.Receiver])) return;
+
+    foundParties.add(donation[DonationField.Receiver]);
+
+    partySumsPerDate[donation[DonationField.Date]] ??= {};
+    partySumsPerDate[donation[DonationField.Date]][
+      donation[DonationField.Receiver]
+    ] ??= 0;
+    partySumsPerDate[donation[DonationField.Date]][
+      donation[DonationField.Receiver]
+    ] += donation[DonationField.Amount];
+    //
+    const idx = parties.findIndex(
+      (p) => p[PartyField.Id] === donation[DonationField.Receiver],
+    );
+    const previousValue = partyLines[idx].data!.at(-1) as
+      | [Date, number, string]
+      | undefined;
+    const previousAmount = previousValue?.[1] ?? 0;
+    const previousDate = previousValue?.[2] ?? undefined;
+
+    if (previousDate === donation[DonationField.Date]) {
+      // update existing entry to avoid additional points
+      previousValue![1] += donation[DonationField.Amount];
+    } else {
+      partyLines[idx].data!.push([
+        new Date(donation[DonationField.Date]),
+        previousAmount + donation[DonationField.Amount],
+        donation[DonationField.Date],
+      ]);
+
+      // update all other party lines with null y value to get stacking to work
+      partyLines.forEach((line, lineIdx) => {
+        if (lineIdx !== idx) {
+          line.data!.push([
+            new Date(donation[DonationField.Date]),
+            (line.data!.at(-1) as LineDatum | undefined)?.[1] ?? 0,
+            donation[DonationField.Date],
+          ]);
+        }
+      });
+    }
+
+    partySums[donation[DonationField.Receiver]] ??= 0;
+    partySums[donation[DonationField.Receiver]] +=
+      donation[DonationField.Amount];
+  });
+
+  partyLines.forEach((_, idx) => {
+    partyLines[idx].data!.unshift([minX, 0]);
+
+    // pad ongoing data to today
+    if (isOngoing) {
+      const previousValue =
+        (partyLines[idx].data!.at(-1) as LineDatum | undefined)?.[1] ?? 0;
+      partyLines[idx].data!.push([now, previousValue]);
+      return;
+    }
+
+    // add entry for end of year
+    const previousValue =
+      (partyLines[idx].data!.at(-1) as LineDatum | undefined)?.[1] ?? 0;
+    partyLines[idx].data!.push([maxX, previousValue]);
+  });
+
+  const minValueSpan = donationsHaveYearsOnly
+    ? // zoom to min 1 year
+      1000 * 60 * 60 * 24 * 365
+    : // zoom to min 5 days
+      1000 * 60 * 60 * 24 * 5;
+
+  const option: EChartsOption = {
+    grid: {
+      right: 20,
+      left: 20,
+      top: 80,
+      bottom: 60,
+      containLabel: true,
+    },
+    backgroundColor,
+    legend: {
+      show: true,
+      type: "scroll",
+      data: parties
+        .map((party) => party[PartyField.Id])
+        .toSorted((a, b) => partySums[b] - partySums[a]),
+      top: 20,
+      padding: [0, 20],
+      // left: "right",
+      // align: "left",
+      orient: "horizontal",
+      textStyle: {
+        width: 100,
+        overflow: "truncate",
+      },
+      formatter: (partyId) =>
+        partiesMap[partyId as ReceiverId][PartyField.Short],
+    },
+    dataZoom: [
+      {
+        type: "inside",
+        filterMode: "none",
+        minValueSpan,
+      },
+      {
+        id: "dataZoomX",
+        type: "slider",
+        xAxisIndex: [0],
+        filterMode: "none",
+        labelFormatter: (value) =>
+          formatTwoDigitDate(browserBasedLocale, value),
+        bottom: 20,
+        minValueSpan,
+      },
+    ],
+    tooltip: {
+      confine: true,
+      trigger: "axis",
+      axisPointer: {
+        type: "cross", // set axis pointer to 'cross' to show vertical and horizontal lines
+        label: {
+          backgroundColor: "#6a7985", // set background color of axis pointer label
+          formatter: (params) => {
+            if (params.axisDimension === "y") {
+              return formatCompactCountryCurrency(
+                browserBasedLocale,
+                params.value as number,
+                country,
+              );
+            } else if (params.axisDimension === "x") {
+              return formatMonthYear(
+                browserBasedLocale,
+                new Date(params.value),
+              );
+            }
+
+            return "";
+          },
+        },
+      },
+      formatter: (params) => {
+        if (!Array.isArray(params)) return "";
+
+        const lines: string[] = [];
+
+        for (let i = 0; i < params.length; i++) {
+          const param = params[i];
+          const [timestamp, sum] = param.value as [number, number];
+
+          // no tooltip for ongoing data
+          if (timestamp === now) continue;
+          // no tooltip for end of year data
+          if (timestamp === maxX) continue;
+
+          let line = "";
+          const partyLine = partyLines[param.seriesIndex as number];
+          const previousPartyValue =
+            (partyLine.data![param.dataIndex - 1] as LineDatum)?.[1] ?? 0;
+          const delta = sum - previousPartyValue;
+
+          const party = partiesMap[param.seriesName as ReceiverId];
+          const marker = typeof param.marker === "string" ? param.marker : "";
+          line += `${marker} <span class="font-medium">${party[PartyField.Short]}</span>: ${formatCountryCurrency(browserBasedLocale, sum, country)}`;
+
+          // only add delta if there is a change
+          if (delta > 0) {
+            line += ` (+${formatCountryCurrency(browserBasedLocale, delta, country)})`;
+          }
+
+          lines.push(line);
+        }
+
+        if (!lines.length) return "";
+
+        const date = (params[0].data as LineDatum)[0];
+        const formattedDate = donationsHaveYearsOnly
+          ? formatYear(browserBasedLocale, date)
+          : formatDate(browserBasedLocale, date);
+
+        return `<div class="text-sm font-semibold mb-2">${formattedDate}</div>${lines.join("<br/>")}`;
+      },
+    },
+    xAxis: {
+      type: "time",
+      min: new Date(`${parseInt(leftmostYear, 10) - 1}-12-31`),
+      max: new Date(`${parseInt(rightmostYear, 10) + 1}-01-01`),
+      minInterval: donationsHaveYearsOnly
+        ? // min interval is one year
+          1000 * 60 * 60 * 24 * 365
+        : // min interval is one month
+          1000 * 60 * 60 * 24,
+    },
+    yAxis: [
+      {
+        position: "left",
+        type: "value",
+        axisLabel: {
+          formatter: (value) =>
+            formatCompactCountryCurrency(browserBasedLocale, value, country),
+        },
+      },
+    ],
+    series: [
+      ...partyLines,
+      {
+        yAxisIndex: 0,
+        type: "line",
+        data: [],
+        markLine: buildElectionTimelineMarkArea(
+          country,
+          years,
+          isMobile,
+          isDark,
+        ),
+      },
+    ],
+  };
+
+  return (
+    <ExpandableReactEchart
+      height={550}
+      feature="line"
+      option={option}
+      title={chartTitle}
+      subtitle={subtitle}
+      years={years}
+    />
+  );
+};
