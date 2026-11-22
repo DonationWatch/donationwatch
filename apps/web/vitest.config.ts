@@ -1,0 +1,27 @@
+import react from "@vitejs/plugin-react";
+import { configDefaults, defineConfig } from "vitest/config";
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [
+    react(),
+    {
+      name: "remove-sourcemaps",
+      transform(code) {
+        return {
+          code,
+          map: { mappings: "" },
+        };
+      },
+    },
+  ],
+  test: {
+    exclude: [...configDefaults.exclude, "e2e/**"],
+    testTimeout: 30_000,
+    hookTimeout: 30_000,
+    alias: {
+      // match tsconfig path alias
+      "@/": new URL("./src/", import.meta.url).pathname,
+    },
+  },
+});

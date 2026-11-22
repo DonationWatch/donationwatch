@@ -5,7 +5,7 @@ description: Scaffold a new country's political-donation data loader for donatio
 
 # Adding a Country Data Loader
 
-A country loader is a `DataLoader` subclass (see [`tasks/load-data/data-loader.ts`](../../../tasks/load-data/data-loader.ts)) that turns one government transparency source into the app's canonical `Donation`/`Party`/`CountryConfig` shape. Everything else — id generation, refund/negative-sum filtering, donor normalization bookkeeping, writing the output files — is handled by the base class; the subclass only fetches, caches, and extracts.
+A country loader is a `DataLoader` subclass (see [`packages/data-pipeline/src/load-data/data-loader.ts`](../../../packages/data-pipeline/src/load-data/data-loader.ts)) that turns one government transparency source into the app's canonical `Donation`/`Party`/`CountryConfig` shape. Everything else — id generation, refund/negative-sum filtering, donor normalization bookkeeping, writing the output files — is handled by the base class; the subclass only fetches, caches, and extracts.
 
 Full field-by-field reference (PartyConfig, COUNTRY_CONFIG, Features, and the quirks seen in production loaders) lives in [references/loader-reference.md](references/loader-reference.md) — open it from step 2 onward.
 
@@ -15,30 +15,30 @@ Full field-by-field reference (PartyConfig, COUNTRY_CONFIG, Features, and the qu
 
 Ask the user for, rather than guessing:
 
-- An official flag SVG. **Never hand-write or programmatically generate a flag SVG** — ask the user to save one at `public/flags/<name>.svg` and optimize it first via [SVGOMG](https://jakearchibald.github.io/svgomg/). Hand-rolled flag paths are consistently wrong in ways that are easy to miss at review time (proportions, exact shades, missing charges), and nobody diff-reviews an SVG path at the point level before shipping it.
+- An official flag SVG. **Never hand-write or programmatically generate a flag SVG** — ask the user to save one at `apps/web/public/flags/<name>.svg` and optimize it first via [SVGOMG](https://jakearchibald.github.io/svgomg/). Hand-rolled flag paths are consistently wrong in ways that are easy to miss at review time (proportions, exact shades, missing charges), and nobody diff-reviews an SVG path at the point level before shipping it.
 - The source name/URL, currency, minimum public-donation-disclosure amount, minimum data year, and (if elections drive the story) the relevant election dates.
 
 Completion criterion: you have a real flag file path and the facts above confirmed by the user — no placeholder or memory-recalled values.
 
 ### 2. Register the country
 
-1. In [`src/utils/countries.ts`](../../../src/utils/countries.ts):
+1. In [`packages/core/src/utils/countries.ts`](../../../packages/core/src/utils/countries.ts):
    - Add the lowercase full name to the `Country` const enum and the `COUNTRIES` set.
    - Add the 2-letter code to `CountryCode`, the currency to `Currency` if it's new, and the mapping to `COUNTRY_CODES`.
-2. In [`src/utils/country-config.ts`](../../../src/utils/country-config.ts):
+2. In [`packages/core/src/utils/country-config.ts`](../../../packages/core/src/utils/country-config.ts):
    - Add a `COUNTRY_CONFIG[Country.x]` entry (`id`, `minYear`, `legislativeYears`, `features`, `minPublicDonationAmount`, `currency`, `source`, `code`, `wikiCountry`, `markers`, `states`; `donorFilters`/`receiverFilters`/`knownPartyRequirements`/`projection` as needed — see the reference doc).
 
 Completion criterion: `pnpm run lint` reports no errors touching `countries.ts` or `country-config.ts`, and every field above holds a real value, not a placeholder.
 
 ### 3. Wire the flag
 
-In [`src/utils/country-flags.ts`](../../../src/utils/country-flags.ts), import the SVG from step 1 and add it to the `countryFlags` map under the new `Country` key.
+In [`apps/web/src/utils/country-flags.ts`](../../../apps/web/src/utils/country-flags.ts), import the SVG from step 1 and add it to the `countryFlags` map under the new `Country` key.
 
 Completion criterion: the import resolves (the file from step 1 exists at that path) and the map has the new entry.
 
 ### 4. Add translations everywhere, not just `en.json`
 
-`pnpm run test:i18n` enforces identical key sets across every file in `src/messages/*.json`. For the new country add, to **every** locale file:
+`pnpm run test:i18n` enforces identical key sets across every file in `apps/web/src/messages/*.json`. For the new country add, to **every** locale file:
 
 - `countries.<CODE>` and `ref_countries.<CODE>` (the country's own name).
 - `home.what.source.<country>` — the paragraph(s) describing the data source, keyed by the `Country` enum value (not the code).
@@ -51,7 +51,7 @@ Completion criterion: `pnpm run test:i18n` passes.
 
 ### 5. Scaffold the loader shell
 
-Create `tasks/load-data/<code>/<code>-loader.ts` (lowercase code) extending `DataLoader`, plus `tasks/load-data/<code>/donor-meta.ts` (usually just `export const donorMeta: DonorMetaDefinition = { donors: {} };`). Implement `cacheFile`, `loadYearDataToCache`, and `extractYearData`; start `parties` as `{}` — the next step fills it in. Register the class in [`tasks/load-data/loaders.ts`](../../../tasks/load-data/loaders.ts).
+Create `packages/data-pipeline/src/load-data/<code>/<code>-loader.ts` (lowercase code) extending `DataLoader`, plus `packages/data-pipeline/src/load-data/<code>/donor-meta.ts` (usually just `export const donorMeta: DonorMetaDefinition = { donors: {} };`). Implement `cacheFile`, `loadYearDataToCache`, and `extractYearData`; start `parties` as `{}` — the next step fills it in. Register the class in [`packages/data-pipeline/src/load-data/loaders.ts`](../../../packages/data-pipeline/src/load-data/loaders.ts).
 
 Completion criterion: the file type-checks (all abstract members implemented) and appears in `loaders.ts`.
 
@@ -59,7 +59,7 @@ Completion criterion: the file type-checks (all abstract members implemented) an
 
 `loadYearDataToCache` (the network call) only runs when `FETCH_FROM_REMOTE=true`; `extractYearData` (the parsing you'll actually be debugging) always reads straight from the cache file on disk instead. So fetch from the live source exactly once per country per year range, then do all further development — the `parties` map, `extractYearData` bugs, `normalizeDonor`/`normalizeReceiver` fixes — against that cache. Re-fetching on every iteration is slow and repeatedly hits a government server for files that haven't changed.
 
-`tasks/load-data/index.ts` normally prompts with checkboxes for country and years; `tasks/utils.ts` also accepts `COUNTRIES`/`YEARS` env vars that skip both prompts entirely — set **both**, since the years-checkbox still fires even when its answer goes unused (and note it only controls what gets _fetched_; `loader.run()` always processes every year from `minYear` onward regardless, so `YEARS=all` is what gets full-history party discovery in one pass). For a brand new country there's nothing cached yet, so the one live fetch looks like:
+`packages/data-pipeline/src/load-data/index.ts` normally prompts with checkboxes for country and years; `packages/data-pipeline/src/utils.ts` also accepts `COUNTRIES`/`YEARS` env vars that skip both prompts entirely — set **both**, since the years-checkbox still fires even when its answer goes unused (and note it only controls what gets _fetched_; `loader.run()` always processes every year from `minYear` onward regardless, so `YEARS=all` is what gets full-history party discovery in one pass). For a brand new country there's nothing cached yet, so the one live fetch looks like:
 
 ```bash
 COUNTRIES=<CODE> YEARS=all pnpm run data:rebuild
@@ -96,4 +96,4 @@ pnpm run test:unit                                       # tests/data-integrity.
 pnpm run test:i18n
 ```
 
-Completion criterion: every command above passes, and `src/data/<country>/party-sums.ts` and `wikipedia-articles.ts` exist and are non-empty.
+Completion criterion: every command above passes, and `packages/data/src/countries/<country>/party-sums.ts` and `wikipedia-articles.ts` exist and are non-empty.

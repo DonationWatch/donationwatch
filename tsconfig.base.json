@@ -1,9 +1,5 @@
 {
   "compilerOptions": {
-    "rootDir": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    },
     "target": "ES2022",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -13,16 +9,11 @@
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    "types": ["@cloudflare/workers-types"]
+    "incremental": true
   },
   "exclude": ["node_modules"]
 }

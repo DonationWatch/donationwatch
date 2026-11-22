@@ -1,0 +1,38 @@
+import type { CountryConfig } from "@donationwatch/core/types/country-config";
+import type { ComponentProps, PropsWithChildren } from "react";
+
+import { Country } from "@donationwatch/core/utils/countries";
+
+const externalUrls: Partial<Record<Country, (id: string) => string>> = {
+  [Country.unitedkingdom]: (id: string) =>
+    `https://search.electoralcommission.org.uk/English/Donations/${id}`,
+  [Country.latvia]: (id: string) =>
+    `https://info.knab.gov.lv/donations/show?public_id=${id}`,
+};
+
+export const ExternalDonationLink = ({
+  countryConfig,
+  id,
+  children,
+  ...props
+}: PropsWithChildren<
+  {
+    countryConfig: CountryConfig;
+    id: string;
+  } & ComponentProps<"a">
+>) => {
+  const externalUrl = externalUrls[countryConfig.id]?.(id);
+
+  if (!externalUrl) return null;
+
+  return (
+    <a
+      {...props}
+      href={externalUrl}
+      rel="nofollow noopener noreferrer"
+      target="_blank"
+    >
+      {children}
+    </a>
+  );
+};

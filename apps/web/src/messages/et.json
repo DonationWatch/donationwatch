@@ -1,0 +1,1301 @@
+{
+  "copyright": "Autoriõigus",
+  "description": "DonationWatch annab selge ülevaate annetajatest ja erakondadest, lihtsustades poliitilise rahastamise mõistmist, selgitades keerulisi andmeid lihtsas keeles.",
+  "title": "Partei annetused {country}",
+  "sum": "Kokku",
+  "donation_count": "Annetuste arv",
+  "average": "keskmine",
+  "donations_by_party": "Annetused osapoolte kaupa",
+  "donations_per_year": "Annetused aastas",
+  "party_donations": "Partei annetused",
+  "more": "Rohkem",
+  "data_since": "Alates {year}. aastast",
+  "view_party": "Vaadake {party} partei lehekülge",
+  "faq": "Korduma kippuvad küsimused",
+  "navigation": {
+    "fun": "Huvitavad faktid",
+    "about": "Meist",
+    "other_countries": "Teised riigid",
+    "imprint": "Impressum",
+    "privacy": "Privaatsuspoliitika",
+    "transparency": "Läbipaistvus",
+    "methodology": "Metoodika",
+    "sources": "Allikad",
+    "export": "Andmete eksport",
+    "bar_chart_race": "Tulpdiagrammi võistlus",
+    "compare_parties": "Võrdle erakondi",
+    "support_us": "☕ Toeta serveri kulusid",
+    "enterprise": "Ettevõtte API",
+    "on_this_page": "Sellel lehel"
+  },
+  "data": {
+    "loading": "Sisu laadimine...",
+    "error": "Viga andmete laadimisel"
+  },
+  "sidebar": {
+    "sidebar": "Külgriba",
+    "toggle": "Lülita külgriba",
+    "donations": "Annetused",
+    "all_countries": "Kõik riigid",
+    "tools": "Tööriistad",
+    "show_all": "Kuva kõik ({num})",
+    "show_less": "Kuva vähem",
+    "more": "Rohkem"
+  },
+  "search": {
+    "filter": "Otsi...",
+    "filter_description": "Erakondade, aastate või doonorite otsing",
+    "parties": "Pooled",
+    "years": "Aastat",
+    "legislative_years": "Seadusandlikud aastad",
+    "empty": "Tulemusi ei leitud",
+    "donors": "Doonorid"
+  },
+  "page_title": {
+    "years": {
+      "description": "Aastal {year} said {parties} parteid riigis {country} kokku {sum} {count} annetusest, mis ületasid {minAmount}. Uurige üksikasjalikke jaotusi parteide, annetajate ja poliitilise rahastamise trendide lõikes.",
+      "overview": "Poliitilised annetused {country} ({year}) – Aastaülevaade ja rahastamine",
+      "changes": "Viimased muudatused poliitiliste parteide annetustes {country} aastal {year}",
+      "donors": "Erakondade annetajate nimekiri ja suurimad toetajad riigis {country} ({year})",
+      "timeline": "Ajaline joon poliitiliste parteide annetustest {country} aastal {year}",
+      "origin": "Geograafiline ülevaade parteiannetustest {country} aastal {year}"
+    },
+    "party": {
+      "donors": "{party}: Annetajate nimekiri ja rahastamise ülevaade ({country})",
+      "changes": "{party} annetuste viimased muudatused ({country})",
+      "timeline": "{party}: Rahastamise ajajoon ja annetuste ajalugu ({country})",
+      "origin": "{party} annetuste geograafiline ülevaade ({country})",
+      "description": "Annetajate nimekiri ja rahastuse ülevaade erakonnale {party} {country}. Vaadake, millised ettevõtted, organisatsioonid ja eraisikud annetavad: {count} annetust üle {minimumAmount}, kokku {sum} alates {year}. aastast.",
+      "timeline_description": "Jälgige erakonnale {party} deklareeritud poliitilisi annetusi ja rahastamise ajalugu {country}: kumulatiivsed summad, ajaloolised suundumused ja aastased verstapostid.",
+      "changes_description": "Viimased poliitilised annetused ja rahastamise uuendused erakonnale {party} {country}: äsja teatatud toetuste, kuupäevade ja summade kronoloogiline ülevaade.",
+      "origin_description": "Erakonnale {party} tehtud poliitiliste annetuste geograafiline päritolu {country}: jaotus osariikide, piirkondade ja välismaiste allikate järgi."
+    },
+    "donor": {
+      "overview": "{donor} – Poliitilised annetused ja rahastamise ajalugu ({country})",
+      "description": "Vaadake, kuhu läksid {donor} poliitilised annetused. {sum} annetatud {count} sissemaksega {parties} erakonnale {country} alates {minYear}."
+    }
+  },
+  "chart": {
+    "save_as_image": "Salvesta pildina",
+    "toggle_fullscreen": "Üleminek täisekraani režiimi",
+    "reset_zoom": "Zoomi lähtestamine",
+    "filtered": "filtreeritud andmestik"
+  },
+  "over_min_public_amount": "üle {amount}",
+  "over_threshold": "{type, select, count {ainult erakonnad, kellel on ≥ {count} annetust} sum {ainult erakonnad, kellel on ≥ {sum}} other {ainult erakonnad, kellel on ≥ {count} annetust või ≥ {sum}}}",
+  "prelim_data": "esialgsed andmed alates {year}. aastast",
+  "common": {
+    "date": "kuupäev",
+    "party": "Partei",
+    "donor": "Doonor",
+    "amount": "Summa",
+    "anonymizedDonor": "Anonümiseeritud annetaja",
+    "redactedDonor": "Varjatud annetaja",
+    "donorToPartyByYear": "Annetajad aastal {year}",
+    "country": "Riik",
+    "state": "Osariik",
+    "summary": "Kokkuvõte",
+    "download_format": "Laadi alla {format}",
+    "view_source": "Kuva allikas",
+    "donation_type": "Annetuse liik",
+    "donated_to": "Annetatud saajale {recipient}"
+  },
+  "sort": {
+    "asc": "Sorteerimine ülespoole",
+    "desc": "Sorteerimine kahanevas järjestuses",
+    "clear": "Tühista sorteerimine"
+  },
+  "old_data_warning": {
+    "description": "Viimane annetus: {date}.\nJärgnevad kirjed ootavad ametlikku avaldamist."
+  },
+  "footer": {
+    "sources": "Allikad",
+    "build": "Seisund {date}",
+    "build_since": "Alates {date}, aastast {year}",
+    "published_by": "Nagu avaldanud {source}",
+    "charts_license": "Diagrammid on litsentseeritud {license} alusel viitega autorile"
+  },
+  "header": {
+    "home": "Koduleht",
+    "language_selection": "Keele valik",
+    "country_selection": "Riigi valik"
+  },
+  "actions": {
+    "close": "Sulge",
+    "play": "Esita",
+    "pause": "Paus",
+    "restart": "Taaskäivita"
+  },
+  "donor_dialog": {
+    "title": "Doonori andmed",
+    "summary": "Kokkuvõte"
+  },
+  "donation_dialog": {
+    "title": "Annetuse üksikasjad",
+    "donor": "Doonor",
+    "country": "Riik",
+    "state": "Liitvabariigi",
+    "receiver": "Vastuvõtja",
+    "donation_amount": "Annetuse summa",
+    "date": "kuupäev"
+  },
+  "root": {
+    "title": "Avatud lähtekoodiga poliitiliste parteide annetuste jälgija",
+    "subtitle": "Jälgi ja uuri poliitilisi annetusi mitmes riigis. Mõista, kes rahastab poliitilisi parteisid ja kuidas raha üle maailma liigub.",
+    "enterprise": {
+      "title": "Ettevõtte API (beeta)",
+      "p0": "Kas vajate programmipõhist juurdepääsu registriteülestele üksuste vastendustele? Arendame praegu kõrge käideldavusega REST API-t OpenAPI spetsifikatsioonidega, mis on loodud spetsiaalselt institutsionaalsete vastavus- ja riskianalüüsi meeskondade jaoks."
+    },
+    "stats": {
+      "countries": "Kaasatud riigid",
+      "parties": "Poliitilised parteid",
+      "donations": "Individuaalsed annetused",
+      "currencies": "Jälgitavad valuutad"
+    },
+    "countries": {
+      "title": "Uuri poliitilisi annetusi riigiti",
+      "subtitle": "Vali riik, et pääseda ligi üksikasjalikele annetuskirjetele, parteide rahastamise andmetele ja annetajate teabele."
+    },
+    "biggest_donations": {
+      "title": "Suurimad poliitilised annetused ja annetajad",
+      "text": "Uurige suurimaid üksikuid poliitilisi panuseid ja suurimaid kogupanusega annetajaid, mis on registreeritud DonationWatchi jälgitavates riiklikes registrites; kõik summad on teisendatud eurodesse. Avalik rahastamine ja riiklikud toetused on välja jäetud, et keskenduda era- ja ettevõtete panustele.",
+      "single_donations_title": "Suurimad üksikannetused",
+      "single_donations_footer": "Järjestatud üksiktehingu järgi",
+      "top_donors_title": "Suurimad kogupanusega annetajad",
+      "top_donors_footer": "Koondatud kõigi kirjete põhjal",
+      "converted_to_eur": "Teisendatud eurodesse",
+      "rates_as_of": "Vahetuskursid (seisuga {date}):"
+    },
+    "why": {
+      "title": "Miks poliitiliste annetuste läbipaistvus on oluline",
+      "p0": "Demokraatia sõltub teadlikest kodanikest. Muutes poliitiliste annetuste andmed kättesaadavaks ja hõlpsasti uuritavaks, aitame inimestel mõista rahalisi seoseid, mis kujundavad nende poliitilist maastikku. Läbipaistvus poliitilises rahastamises suurendab usaldust, tugevdab vastutust ning annab valijatele võimaluse teha teadlikke otsuseid."
+    },
+    "open_source": {
+      "title": "Avatud lähtekood",
+      "p0": "DonationWatch on avatud lähtekoodiga. Saad koodi vaadata, probleemidest teatada või panustada {github} kaudu."
+    }
+  },
+  "biggest_donations": {
+    "text": "Alates {minYear} on {country} suurim avalikustatud üksikannetus ulatunud {amount}, mille andis {donor} parteile {party} aastal {year}. Sellele järgnevad {others}.",
+    "list": "{amount} annetajalt {donor} saajale {receiver}"
+  },
+  "home": {
+    "most_recent": "Viimased annetused",
+    "hero": {
+      "subtitle": "{country} erakondade annetuste jälgimine",
+      "subtitle_no_country": "Poliitiliste parteide annetuste jälgimine"
+    },
+    "last_period": "Kõige hiljutisem aasta:",
+    "previous_period": "Eelmise aasta annetused.",
+    "what": {
+      "title": "Mis see on?",
+      "summary": "Erakondade annetused on oluline osa poliitikast. Need on oluline poliitilise toetuse näitaja.\n\nMe püüame neid andmeid selgelt ja arusaadavalt esitada.",
+      "threshold": "Kuna väiksemaid poliitilisi parteisid on palju, jälgime üksnes nende parteide annetusi, mis ületavad teatud künnise. Praegune künnis on määratud {type, select, count {{count} annetust} sum {kokku {sum}} other {{count} annetust või kokku {sum}}} selle partei saadud panustena, sõltumata üksikannete suurusest.",
+      "no_donors": "Riiklike eeskirjade tõttu ei avalikusta {country} üksikute poliitiliste annetajate isikuid. Seetõttu kuvame auditeeritud kogusummasid erakondade kaupa, mitte üksikuid tehinguid. Funktsioonid nagu \"Suurimad annetajad\" või \"Annetaja otsing\" on selles piirkonnas keelatud.",
+      "source": {
+        "austria": "Siin kasutatud andmed pärinevad Austria Kontrollikojast ja hõlmavad kõiki parteide annetusi, mis on seal dokumenteeritud alates 2012. aastast.\n\nPange tähele: enne 8. juulit 2019 pidid erakonnad teatama kontrollikojale üle 51 000 euro (kuni 2018. aastani üle 50 000 euro) suurustest üksikannetustest. Alates 2019. aasta juulist on aruandluspiiriks 2500 eurot.\n\nErakondade andmeid ajakohastatakse tavaliselt kord kvartalis.\n\nTranslated with DeepL.com (free version)",
+        "germany": "Siin kasutatud andmed pärinevad Saksamaa Bundestagist ja hõlmavad kõiki alates 2010. aastast dokumenteeritud üle 50 000 euro ja alates 5. märtsist 2024. aastast üle 35 000 euro suuruseid annetusi erakondadele.",
+        "switzerland": "Siin kasutatud andmed pärinevad Šveitsi riigikontrollist ja hõlmavad kõiki seal alates 2023. aastast dokumenteeritud erakondade annetusi.",
+        "netherlands": "Siin esitatud teave on pärit Hollandi valitsuselt ja sisaldab kõiki alates aastast 2022 registreeritud poliitilisi annetusi, mis ületavad 1 000 €, nagu on märgitud iga-aastases aruandes „Overzicht van giften aan politieke partijen en hun neveninstellingen“.\n\nKäesoleva aasta jaoks on kaasatud ainult annetused, mis ületavad 10 000 €, tuginedes andmekogule „Overzicht substantiële giften aan politieke partijen“.\n\nPange tähele: mõnel annetusel puudub konkreetne kuupäevainfo ning seetõttu ei ole need lisatud ajareadesse ega teistesse kuupäeval põhinevatesse visualiseeringutesse.\n\nSP ja GL jaoks registreeritud annetused võivad tunduda suhteliselt suured, kuna mõlemad parteid nõuavad, et nende parlamendiliikmed ja haldurid annetaksid erakonnale märkimisväärse osa oma palgast.",
+        "europeanunion": "Siin esitatud andmed pärinevad Euroopa Poliitiliste Parteide ja Euroopa Poliitiliste Sihtasutuste Ametilt ning hõlmavad kõiki dokumenteeritud parteide ja sihtasutuste annetusi alates 2018. aastast. Euroopa poliitiliste sihtasutuste olulisuse tõttu jälgime ja kuvame nende annetusi sarnaselt Euroopa poliitiliste parteide omadega.\n\nKuna ametlikud andmed ei sisalda täpseid tehingukuupäevi, ei ole ajaread ega sarnased kuupäevapõhised visualiseeringud saadaval.\n\nPange tähele, et 2024. aasta Euroopa Parlamendi valimiste eel (6. detsembrist 2023 kuni 10. juunini 2024) kehtisid annetustele eriaruandlusnõuded koos iganädalaste aruannete ja ameti kiire avalikustamisega.\nAlates 10. juunist 2024 tuleb viivitamatult teavitada ainult üle 12 000 euro suurustest annetustest. Muud annetused muutuvad kättesaadavaks alles pärast majandusaasta aruannete esitamist.\n\nKui APPF on juriidilisest isikust annetajate kirjeldustes avaldanud ettevõtte registrikoodi (nt Eesti äriregistri kood, Belgia KBO, Prantsuse SIREN, Tšehhi IČO jne), eraldatakse ja kontrollitakse need kontrollkoodi alusel ning lingitakse otse vastavasse riiklikku äriregistrisse.",
+        "estonia": "Siin kasutatud andmed pärinevad Eesti erakondade rahastamise seirekomisjonilt ja hõlmavad kõiki seal alates 2014. aastast dokumenteeritud poliitilisi annetusi, mis ületavad 1 euro.\n\nEesti erakonnad on kohustatud oma tuludest, sealhulgas saadud annetustest, aru andma kord kvartalis.\nKomitee veebilehel olevaid andmeid ajakohastatakse vastavalt kord kvartalis.",
+        "czechrepublic": "Siin kasutatud andmed pärinevad Poliitiliste Parteilide ja Poliitiliste Liikumiste Haldamise Kontrolli Ametist ning hõlmavad kõiki seal alates 2018. aastast dokumenteeritud poliitilisi annetusi, mis ületavad 25 CZK.\n\nSee ulatus hõlmab ka kõiki annetusi erakondadele või poliitilistele liikumistele, mis on kas saanud üle 100 üksikud annetuse või mille kogusumma on ületanud 1 miljonit CZK, olenemata üksikannete suurusest. Andmeid ajakohastatakse kord aastas.\nAnnetajatüübi tuvastamine põhineb annetaja määramisel üksikisikuks, kui nii firstName kui ka lastName väljad on olemas.",
+        "latvia": "Siin kasutatud andmed pärinevad Korruptsiooni Ennetamise ja Tõkestamise Büroolt (KNAB) ning hõlmavad kõiki alates 2015. aastast dokumenteeritud poliitilisi annetusi, mis ületavad €1. See andmestik sisaldab rahalisi annetusi, mitterahalisi kingitusi ja teenuseid ning parteiühinemis- ja liikmemakse.",
+        "australia": "Siin kasutatud andmed pärinevad Australian Electoral Commissionist (AEC) ning täpsemalt AEC-i avaldatud andmestikust \"Donations Made Details\". See hõlmab kõiki seal dokumenteeritud poliitilisi annetusi alates 2014. aastast, mis ületavad 1 AUD.\n\nTasub märkida, et AEC-i andmestik võib sisaldada mõningaid trükivigu, mille tõttu võivad teatud annetused jääda arvestusest välja või ei pruugi need andmesisestuse ebajärjekindluse tõttu olla korrektselt konkreetsele parteile omistatud. Lisaks avaldatakse AEC-i iga-aastased avalikustamised igal aastal 1. veebruaril, kuid andmed ei anna täielikku ülevaadet kõigist panustest, kuna avalikustamislävi on $15,000.\n\nAnnetajate tüübid klassifitseeritakse annetajate nimede sobitamise teel. Kõik levinud ametiühingud kaardistatakse käsitsi annetajatüübi 'Ametiühing' alla. Ettevõtted tuvastatakse, kontrollides annetaja nimes konkreetseid ettevõtte tunnuseid: 'Pty' (Proprietary), 'Ltd' nime lõpus, 'Corporation' või 'Corp'.",
+        "unitedkingdom": "Siin kasutatud andmed pärinevad Electoral Commissionilt ning hõlmavad kõiki seal alates 2010. aastast dokumenteeritud poliitilisi annetusi, mis ületavad 1 000 £.\n\nElectoral Commissioni aluseks olev register seob kõik ajaloolised tehingud tagasiulatuvalt iga partei praeguse ametlikult registreeritud nimega. Seetõttu kuvatakse parteidele enne ametlikku ümberbrändimist või nimemuutust tehtud ajaloolised annetused (näiteks enne 2021. aastat The Brexit Partyle tehtud annetused) partei praeguse registreeritud nime all (Reform UK).\n\nAnnetusandmeid uuendatakse kord kvartalis.",
+        "serbia": "Siin kasutatud andmed ei pärine valitsuselt, vaid mittetulundusühingult „Serbia Uuriva Ajakirjanduse Keskus“ („Centar za istraživačko novinarstvo Srbije“ - CINS), mis on lahkesti koondanud Serbia Korruptsioonivastase Ameti annetuste andmed.\n\nNeed andmed hõlmavad kõiki seal dokumenteeritud poliitilisi annetusi alates 2015. aastast.\n\nKuna andmekogum ei sisalda konkreetset kuupäeva teavet üksikute annetuste kohta, ei ole kahjuks võimalik kuvada ajagraafikuid ega muid ajapõhiseid visualiseeringuid.",
+        "croatia": "Siin kasutatud andmed pärinevad Horvaatia Vabariigi Riiklikult Valimiskomisjonilt (DIP) ning hõlmavad kõiki poliitilisi annetusi rahalise väärtusega üle 1 €, mis on dokumenteeritud alates 2019. aastast.\nAndmestik kasutab iga aruandeaasta kohta ainult viimati avaldatud annetusdokumenti (nagu on teatanud izbori), et vältida sama aasta aruande varasemate versioonide duplikaate.\nKõik annetused kuvatakse eurodes, samas kui aluseks olev andmestik kasutab kuni 2024. aastani kunasid. Algselt kunades tehtud annetused teisendatakse eurodeks, kasutades ligikaudseid vahetuskursse iga poolaasta kohta ajavahemikus 2019–2024: H1 (0.1340, 0.1335, 0.1332, 0.1329, 0.1326) ja H2 (0.1341, 0.1338, 0.1334, 0.1327, 0.1328).",
+        "canada": "Siin kasutatud andmed pärinevad Elections Canada’lt ja põhinevad andmekogul „contributions as submitted“. See hõlmab kõiki poliitilisi annetusi, mille rahaline väärtus ületab 500 CAD, dokumenteeritud alates 2015. aastast. Kaasatud on kõik kirjed, mis kuuluvad aruandesse „Statement of Contributions Received“ valimisürituselt „Annual“ registreeritud erakondadele.",
+        "georgia": "Siin esitatud teave pärineb Gruusia korruptsioonivastasest büroost (ანტიკორუფციული ბიურო﻿) ja hõlmab kõiki alates 2011. aastast registreeritud poliitilisi annetusi, mis ületavad 1 GEL. Andmekogum hõlmab ainult annetusi, mis on klassifitseeritud kui tüüp #10 (Rahaannetused) või tüüp #16 (Rahaannetused juriidilistelt isikutelt).",
+        "norway": "Siin kasutatud andmed pärinevad Statistics Norway (SSB) ja Partifinansiering.no ametlikest erakondade rahastamise publikatsioonidest. Kuva­tud kogusummad on koondatud mitme raporteeritud saajaüksuse (näiteks kesk-, piirkondlike, kohalike ja noorteüksuste) põhjal üheks kogusummaks erakonna kohta, kusjuures aluseks olev saajate vastendus on läbipaistvuse tagamiseks jätkuvalt kättesaadav.\n\nNorra andmestikku uuendatakse kord aastas, kajastades alusandmete avalikustamise rütmi.",
+        "ukraine": "Siin kasutatud andmed on pärit riiklikust korruptsiooni ennetamise agentuurist (NAZK) PolitData portaali kaudu. Need sisaldavad kõiki ametlikes aruannetes märgitud kirjeid, mis on tähistatud kui „rahalised annetused“.\n\nMärkus andmete ulatuse kohta: See summa kajastab ainult otseseid rahalisi ülekandeid. See ei hõlma riiklikku rahastust parlamendierakondadele ega mitterahalisi (looduslikke) panuseid, nagu kaubad ja teenused.\n\nVene täiemahulise sissetungi tõttu peatati poliitiliste parteide kohustuslik aruandlus 2022. aasta algusest kuni 2023. aasta lõpuni julgeoleku- ja logistilistel põhjustel. Pärast seaduse nr 3337-IX vastuvõtmist täidavad parteid nüüd oma aruandeid tagantjärele. Aastate 2022–2025 andmeid ajakohastatakse endiselt, kuna NAZK töötleb neid esitusi.",
+        "france": "Siin kasutatud andmed pärinevad Commission Nationale des Comptes de Campagne et des Financements Politiques (CNCCFP) andmebaasist ning hõlmavad kõiki poliitilisi annetusi (eurodes), mis on dokumenteeritud väljal \"Dons_de_personne_physique\".\n\nErinevalt teistest piirkondadest avaldatakse Prantsuse andmed iga erakonna aastase koondsummana ning üksikute annetajate isikusamasus on privaatsusseadustega kaitstud.",
+        "sweden": "Siin kasutatud andmed pärinevad Kammarkollegietist, Rootsi ametlikust erakondade rahastamise riiklikust registrist. Et anda täpne ülevaade puhtalt era- ja rohujuuretasandi toetusest (esitatud SEK-is), hõlmab see koondandmestik otseseid panuseid, mis on dokumenteeritud kategooria 4 (\"Insamling av kontanter\") ja kategooria 5 (\"Bidrag\") all. Erakondade sisesed ülekanded, riiklikud toetused ja loteriitulud on topeltarvestuse vältimiseks ning väliste annetuste täpseks eristamiseks teadlikult välja jäetud. Kõik andmed on rühmitatud poliitilise parteilise kuuluvuse järgi (\"Partitillhörighet\").",
+        "southafrica": "Siin kasutatavad andmed pärinevad Lõuna-Aafrika Vabariigi valimiskomisjonilt (IEC) ja hõlmavad kõiki avaldatud erakondade rahastamise deklaratsioone (paragrahv 9(1)) alates 2021. aastast, sealhulgas kehtivaid hilinenud esitusi. Mitmeparteilise demokraatia fondi (Multi-Party Democracy Fund) kaudsed annetused ja annetajapoolsed topeltdeklaratsioonid (paragrahv 9(2)) on välja jäetud.\n\nMärkus künniste kohta: Erakonnad olid kohustatud teatama annetustest, mis ületavad 100 000 ZAR annetaja kohta aastas, kuni 1. aprillil 2024 tõsteti seaduslik avalikustamise künnis 200 000 ZAR-le.",
+        "unitedstates": "Siin esitatud andmed pärinevad Ameerika Ühendriikide Föderaalse Valimiskomisjoni (FEC) masstilistest avaldustest ja hõlmavad alates 2016. aastast dokumenteeritud poliitilisi annetusi.\n\nErinevalt parlamentaarsetest süsteemidest, kus annetused laekuvad otse erakondade keskkontoritesse, on USA föderaalne kampaaniarahastus detsentraliseeritud kandidaatide kampaaniate, erakondade organisatsioonide ja sõltumatute kulutuskomiteede vahel. Selleks et anda usaldusväärne ülevaade iga liikumise taga seisvatest finantskoalitsioonidest, koondab DonationWatch peamised rahastuskanalid ühtseteks erakondade kogusummadeks („Demokraadid“, „Vabariiklased“ ja „Bipartiilised ja mitteerakondlikud Super PAC-id“). See hõlmab:\n• Ametlikud erakonnakomiteed: riiklikud, kongressi ja osariikide komiteed (nt DNC, RNC, DSCC, NRSC, DCCC, NRCC)\n• Volitatud föderaalsete kandidaatide valimiskampaania komiteed\n• Poliitiliselt joondunud Super PAC-id, hübriid-PAC-id ja ühised rahastuskomiteed (nt Senate Majority PAC, Future Forward, MAGA Inc., Senate Leadership Fund, Harris Victory Fund, Trump 47 Committee)\n• Mitteerakondlikud ja tööstusharu Super PAC-id, kes toetavad mõlema suure erakonna kandidaate (nt Fairshake, United Democracy Project)\n\nMiks mõned PAC-id pole erakonnaga seotud:\nAmetlikud erakondade ja kandidaatide komiteed deklareerivad FEC-i registrites ametliku parteilise kuuluvuse ning need seotakse automaatselt. Super PAC-id ja hübriid-PAC-id tegutsevad sõltumatute üksustena ilma ametliku parteilise kuuluvuseta; DonationWatch auditeerib ja kaardistab pidevalt kõiki juhtivaid komiteesid, mille kumulatiivsed tulud ulatuvad vähemalt 5 miljoni dollarini. Sellest künnisest väiksemad üksikteemalised rühmad, ettevõtete PAC-id ja selge joonduseta komiteed jäetakse spekulatiivsete seoste vältimiseks sidumata ning neid ei arvestata erakondade koondsummade hulka.\n\nAndmete normaliseerimine ja ulatus:\n• Minimaalne summa: Jälgitakse ainult annetusi alates 10 000 dollarist. Kuna föderaalseadusega on otsesed annetused kandidaatidele piiratud (3 300 dollarit valimiste kohta) ja traditsioonilistele PAC-idele (5 000 dollarit aastas), eraldab see künnis suured maksed parteikomiteedele, ühistele rahakogumiskomiteedele (JFC), Super PAC-idele ja piiramatutele Hybrid PAC-ide kontodele.\n• 501(c)(4) mittetulundusühingud (\"Dark Money\"): 501(c)(4) sotsiaalhoolekande organisatsioonide (nt Future Forward USA Action, One Nation) annetused Super PAC-idele registreeritakse organisatsioonide laekumistena (ORG), kuna need üksused ei avalikusta oma tegelikke rahastajaid FEC-ile.\n• Duplikaatide eemaldamine: JFC annetused salvestatakse esmasel laekumisel, samas kui sisemised jaotused ja eraldamismärkmed jäetakse kõrvale. Vahenduskanaleid (WinRed, ActBlue) ja ülekandeid jälgitavate komiteede vahel ei arvestata, et vahendeid loetaks ainult üks kord.\n• Välistused: Tagasimaksed arvatakse annetaja kogusummadest maha. Kandidaatide omavahendid (laenud ja isiklikud panused) ning tegevustulud (intressid, dividendid, varade müük) jäetakse välja."
+      },
+      "source_link": "Andmeallikas"
+    },
+    "list": {
+      "subtitle": "Seadusandlikud perioodid",
+      "title": "Varasemad õigusloomeperioodid",
+      "summary": "Meie õigusloomeperioodi ülevaade annab täieliku ülevaate kõigist annetustest õigusloomeperioodi jooksul. Konkreetse õigusloomeperioodi üksikasjade vaatamiseks klõpsake kaardil."
+    },
+    "years": {
+      "title": "Iga-aastane ülevaade erakondade annetustest",
+      "subtitle": "Aasta jooksul kogunenud kogusummad",
+      "more": "Näita kõiki teisi aastaid",
+      "summary": "Meie iga-aastane peo annetuste ülevaade annab ülevaate kõigist annetustest igal aastal. Klõpsake kaardil, et minna üksikasjalikule aastaülevaatele."
+    },
+    "parties": {
+      "title": "Partei annetused",
+      "subtitle": "Üksikasjalikud andmed üksikute osapoolte kohta",
+      "more": "Näita kõiki teisi osapooli",
+      "summary": "Meie erakondade annetuste ülevaade esitab kumulatiivse esitluse kõikide annetuste kohta iga erakonna kohta. Klõpsake kaardil, et saada üksikasjalikku teavet annetuste kohta."
+    },
+    "donors": {
+      "title": "Annetajate annetused",
+      "subtitle": "Üksikute annetajate üksikasjad",
+      "summary": "Tutvuge meie annetajate ülevaatega, mis näitab olulisimaid rahalisi toetajaid alates aastast {minYear}. Klõpsake annetajal, et vaadata tema panuse üksikasjalikku teavet."
+    }
+  },
+  "stacked_years": {
+    "title": "Annetuse summa aastas",
+    "subtitle": "Avaldatud annetuste koondsumma riigis {country} aastate lõikes alates {years}.",
+    "preliminary": "Katkendlikud ribad tähistavad esialgset teavet, mis võib täieneda hilisemate avalikustamisuuendustega."
+  },
+  "years": {
+    "title": "Partei annetused",
+    "subtitle": "Avaldatud annetuste kumulatiivne summa igale parteile riigis {country}, {years}.",
+    "goto_year": "Hüpe aastasse {year}",
+    "no_date_omitted": "Välistab {count} annetust ({sum}), mille puhul allikas esitas ainult aasta.",
+    "no_data": {
+      "title": "Andmed pole saadaval",
+      "summary": "Vabandame, kuid meil pole veel {year}. aasta annetuste andmeid.",
+      "last_year": "Alternatiivina vaadake {year}. aasta andmeid."
+    }
+  },
+  "overview": {
+    "title": "Ülevaade",
+    "detail": {
+      "title": "Suurimad erakonnad ja nende annetuste kogusumma",
+      "summary": "Selles nimekirjas on esitatud kõige olulisemad erakonnad ja nende kumulatiivsed annetused teatud ajavahemiku jooksul, sorteeritud annetuste summa järgi.",
+      "summary2": "In den Jahren {years} erhielten insgesamt {partyCount} Parteien durch {donationCount} Spenden über {minimumAmount} eine Gesamtsumme von {donationSum}.",
+      "most_donations": "Die {party} erhielt die meisten Spenden mit insgesamt {count} Zuwendungen und einer Gesamtsumme von {sum}.",
+      "highest_sum": "5 erakonda, kes on saanud kõige rohkem annetusi, on {parties}."
+    },
+    "scatter": {
+      "title": "Annetuste jaotamine",
+      "subtitle": "Individuaalsed annetused igale erakonnale summa ja sageduse järgi {country} alates {years}. Kujutatud logaritmilisel skaalal, et näidata jaotust erinevate suurusjärkude lõikes.",
+      "summary": "Ülevaade erakondade annetuste jagunemisest annab ülevaatliku analüüsi annetuste jagunemisest erinevate erakondade vahel. Iga punkt tähistab ühte erakonda, x-telg näitab annetuste summasid ja hajuvusdiagramm annetuste sagedust.",
+      "span": "Suurima annetuste vahega oli {biggestSpanParty} erakond, kus väikseima ja suurima annetuse vahe oli {biggestSpanAmount}."
+    },
+    "pie": {
+      "title": "Erakondade annetuste jagamine",
+      "subtitle": "Kokku avaldatud annetused igale parteile, {country}, {years}."
+    }
+  },
+  "changes": {
+    "title": "Muudatused",
+    "description": "Uurige üksikasjalikku tabelit poliitiliste parteide annetustest riigis {country} aastast {year}, ainult üle {minAmount} annetused, sorteeritud tehingukuupäeva järgi, koos annetaja ja summa teabega.",
+    "detail": {
+      "title": "Poolte annetused tehingu kuupäeva järgi",
+      "summary": "Sellel lehel kuvatakse erakondade annetused tehingu kuupäeva järgi, kusjuures kõige eespool on loetletud kõige hiljutisemad annetused. Teave on esitatud selle kohta, kui palju raha on iga erakond milliselt annetajalt saanud."
+    }
+  },
+  "donors": {
+    "title": "Doonor",
+    "description": "Vaadake täielikku nimekirja {year}. aasta poliitilistele parteidele annetajatest riigis {country}. Uurige, kes annetas kõige rohkem ja kui palju igaüks panustas.",
+    "detail": {
+      "title": "Doonorite annetused erakondadele",
+      "subtitle": "Kokku avaldatud individuaalsete annetajate panused igale erakonnale riigis {country}, {years}.",
+      "summary": "Treemap visualiseerib erakondade annetusi selgelt struktureeritud kujul. Ülemisel tasandil on esitatud üksikud annetajad, kes on kujutatud ristkülikutena, mille suurus on proportsionaalne nende annetuste summaga.",
+      "summary2": "Iga annetaja all on veel ristkülikud, mis kujutavad vastavaid vastuvõtvaid erakondi. Selline hierarhiline paigutus annab kiire ülevaate annetuste jaotusest ja näitab ühe pilguga, kui palju abisaajaid iga annetaja on toetanud.",
+      "unique_donors": "Erinevate doonorite arv {years}. aastal on {count} doonorit.",
+      "biggest_donor": "Suurim annetus, {amount}, tuli {donor}.",
+      "most_donations": "{count} annetusega (kogusumma {sum}) juhib {donor} kõige sagedasemate üksikannetajate nimekirja.",
+      "most_unique_parties": "{donor} tegi annetusi kokku {count} erinevale osapoolele (kogusumma: {sum}), mis näitab, et annetuste saajate hulgas on suurim mitmekesisus.",
+      "top_3": "{years} aasta {amount} suurimad annetajad on {donors}."
+    },
+    "list": {
+      "title": "Parimad üksikisikud annetajad kogu annetuste järgi",
+      "p0": "See jaotis esitab kõigi üksikisikute annetajate järjestatud loetelu valitud aastate jooksul, sorteeritud nende avaldatud annetuste kumulatiivse summa järgi. Nii rõhutatakse annetajaid, kes on kõige rohkem panustanud."
+    },
+    "sankey": {
+      "title": "Sankey diagramm"
+    },
+    "histogram": {
+      "title": "Annetajate jaotus unikaalsete saajate arvu järgi",
+      "subtitle": "Unikaalsete erakondade arv, kes said avaldatud annetusi üksikannetajatelt riigis {country}, aastatel {years}.",
+      "p0": "See diagramm annab ülevaate sellest, kuidas üksikannetajad jaotavad oma annetused erakondade vahel, näidates, kas nad kalduvad toetama ühte erakonda või jaotama toetuse aja jooksul mitmele.",
+      "p1": "Aastal {years} oli suurim erinevate erakondade arv, mida üks annetaja toetas, {max}. Ainult {donors} annetaja panustas {max} erakonda. Keskmiselt toetas iga annetaja {mean} erakonda (mediaan: {median}).",
+      "p2": "{totalDonors} annetajast annetas {singlePartyDonors} ainult ühele parteile, mis moodustab {percentage} annetajatest.",
+      "tooltip": "{donors} annetajat • {parties} unikaalset erakonda",
+      "item": "{donors} annetajat annetas {parties} erakonnale"
+    }
+  },
+  "timeline": {
+    "title": "Arendus",
+    "description": "Vaadake kõigi poliitiliste parteide annetuste ajatelge riigis {country} aastate {years} kohta, koos igakuiste kogusummade ja aastate lõikes trendidega.",
+    "year_resolution_note": "See vaade on standarditud aastasele täpsusele, kuna mõned kirjed selles vahemikus sisaldavad ainult annetuse aastat. Täieliku ja täpse võrdluse tagamiseks ilma hinnangulisi kuupäevi kasutamata on kõik andmed koondatud aastapõhiselt.",
+    "detail": {
+      "title": "Erakondade annetuste areng aja jooksul",
+      "summary": "Vaadake allolevat interaktiivset joongraafikut, et jälgida iga erakonna annetuste ajalugu aja jooksul. x-telg näitab kuupäevi, y-telg aga annetuste summat. Iga erakond on kujutatud eraldi joonega, mis kasvab iga annetusega."
+    },
+    "days": "Riigis {country} registreeriti {years} jooksul annetusi {n} erineval päeval."
+  },
+  "per_year_party": {
+    "title": "Annetused erakonnale {party} aastas",
+    "subtitle": "Avaldatud annetuste aastane summa erakonnale {party} riigis {country}, {years}."
+  },
+  "per_month": {
+    "title": "Annetused kuus",
+    "subtitle": "Avaldatud annetuste kuusumma igale parteile riigis {country}, {years}.",
+    "description": "See kuhjatud tulpdiagramm illustreerib mitme erakonna igakuiseid annetusi. x-telg näitab kuud, y-telg kujutab annetuste summasid ja iga tulp on segmenteeritud värvi järgi, et näidata üksikute erakondade annetusi, mis võimaldab hõlpsasti võrrelda erakondade annetusi nii kuude sees kui ka kuude lõikes.",
+    "highest_sum": "{month} oli suurim annetuste kogusumma, kokku {count} annetust summas {sum}.",
+    "most_months": "{party} sai annetusi {count} kuu jooksul – enim kuid annetustega kõigi parteide seas.",
+    "month_most_donations": "Kõige suurema annetuste arvuga kuu oli {month}, mil laekus kokku {count} üksikannetust."
+  },
+  "per_year": {
+    "title": "Annetused aastate lõikes",
+    "subtitle": "Iga erakonna avaldatud annetuste aastane summa riigis {country}, {years}.",
+    "description": "See kuhjatud tulpdiagramm kujutab iga-aastaseid annetuste andmeid mitmele poliitilisele parteile. X-telg näitab aastaid, Y-telg annetuste summasid ning iga tulp on värvide kaupa jaotatud, et kuvada üksikute parteide panused, võimaldades hõlpsalt võrrelda annetusi nii aasta jooksul kui ka aastate vahel."
+  },
+  "party": {
+    "donors": {
+      "title": "{party} doonorid",
+      "subtitle": "Kokku avaldatud individuaalsete annetajate panused erakonnale {party} riigis {country}.",
+      "summary": "See lehekülg esitab kõik ametlikult avalikustatud annetused üle {minSum} parteile {party} alates {minYear}, grupeerituna annetajate kaupa, et näidata kogupanuseid aja jooksul. Kõik arvud põhinevad ametlikel avalikustamistel, mille on avaldanud {source}, näidatud nii puukaardina visuaalseks võrdluseks kui ka laiendatava aluseks olevate tehingute loendina."
+    },
+    "donor_list": {
+      "title": "Suurimad {party} toetajad koguannetuste järgi",
+      "p0": "Tutvuge organisatsioonide ja isikutega, kes toetavad {party}. See nimekiri on järjestatud kumulatiivse annetuse summa alusel ning näitab nii kogusummat kui ka suhtelist protsenti partei üldisest rahastamisest. Iga kirjet saab laiendada, et vaadata täielikku kronoloogilist ajalugu konkreetsest allikast pärinevate üksikute annetuste kohta."
+    },
+    "donor_types": {
+      "title": "Annetajate tüübid",
+      "treemap": {
+        "title": "Annetajate tüübid erakonna {party} jaoks",
+        "description": "Kokku avaldatud annetused erakonnale {party} riigis {country} annetajatüübi järgi."
+      },
+      "p0": "See puukaart rühmitab teatatud poliitilised annetused annetajatüüpide järgi (näiteks eraisikud, ettevõtted ja avalikud fondid) ning määrab iga ruudu suuruse vastavalt antud perioodi ja ulatuse kogusummale.",
+      "p1": "Suuremad ruudud näitavad suuremaid summasid ja igas ruudus olevad nimed tähistavad suurimaid annetajaid vastavas kategoorias. See vaade sisaldab {count} erinevat annetajatüüpi erakonna {party} jaoks.",
+      "p2": "Allpool on loetelu sektoritest, mis on järjestatud kogupanuste järgi, kõrgeimast madalaimani:"
+    },
+    "donation_types": {
+      "title": "Annetuste tüübid",
+      "treemap": {
+        "title": "Annetuste tüübid erakonnale {party}",
+        "description": "Kokku avaldatud annetused erakonnale {party} riigis {country} annetuse tüübi järgi."
+      },
+      "p0": "Poliitilised annetused erakonnale {party} on jaotatud annetuse tüübi järgi, et tagada läbipaistvus erakonna rahastamises.",
+      "all_single": "Kõik registreeritud annetused erakonnale {party} laekusid kui {type}, kogusummas {amount} ({percentage}) {count} kirje kohta.",
+      "largest_share": "Suurim osa rahastamisest saadi kui {type}, moodustades {amount} ({percentage} kõigist annetustest).",
+      "remaining_share": "Ülejäänud annetused laekusid kui {types}.",
+      "summary_item": "{amount} ({percentage}) kui {type}",
+      "treemap_guide": "Interaktiivne puukaart näitab iga annetustüübi suhtelist osakaalu, kus sisemised ruudud tähistavad selle kategooria suurimaid annetajaid. Allpool on täielik pingerida kogusumma järgi:"
+    },
+    "qa": {
+      "sum": {
+        "q": "Kui palju on {party} annetusi saanud?",
+        "a": "{party} on saanud kokku {sum} annetustes {count} dokumenteeritud annetusest."
+      },
+      "top_donors": {
+        "q": "Kes rahastab erakonda {party} ja kes on selle suurimad toetajad?",
+        "a": "{party} suurimad annetajad on: {donors}."
+      },
+      "largest_singular": {
+        "q": "Milline oli suurim üksik annetus {party}-le?",
+        "a": "Suurim üksik annetus oli {amount} annetajalt {donor} kuupäeval {date}."
+      },
+      "biggest_overall": {
+        "q": "Kes on {party} suurim üldine annetaja?",
+        "a": "{party} suurim üldine annetaja on {donor} koguannetustega {sum}."
+      },
+      "frequent_donor": {
+        "q": "Kes on teinud kõige rohkem annetusi {party}-le?",
+        "a": "{donor} on teinud kõige rohkem annetusi {party}-le {count} eraldi annetusega kogusummas {sum}."
+      }
+    },
+    "overview": {
+      "title": "Ülevaade annetustest {party}"
+    },
+    "changes": {
+      "detail": {
+        "title": "{party} annetused tehingu kuupäeva järgi",
+        "summary": "Sellel lehel on {party} annetuste nimekiri, mis on sorteeritud tehingu kuupäeva järgi, kusjuures kõige uuemad annetused on kõige eespool. See annab teavet selle kohta, kui suur on iga annetuse summa {party}-le ja vastavatele annetajatele."
+      }
+    },
+    "timeline": {
+      "chart_title": "{party} partei annetused",
+      "subtitle": "Avaldatud annetuste kumulatiivne summa erakonnale {party} riigis {country}.",
+      "detail": {
+        "title": "{party} annetused aja jooksul",
+        "summary": "Interaktiivne ajajoon annetuste ja deklareeritavate toetuste jälgimiseks erakonnale {party}. Võrrelge ajaloolisi suundumusi, aastatulusid ja rahastuse kogukasvu.",
+        "per_year": "{party} poolt saadud annetuste kogusumma varieerub aasta lõikes. Allpool on ajalooline ülevaade partei deklareeritud iga-aastastest rahastuse kogusummadest. See loetelu jälgib kõigi aruandluskohustuslike panuste ja rahalise toetuse summat iga konkreetse aasta kohta:"
+      }
+    },
+    "committees": {
+      "title": "Toetavad komiteed ja PAC-id",
+      "treemap": {
+        "title": "Erakonda {party} rahastavad komiteed",
+        "subtitle": "Annetuste jaotus saajakomitee järgi"
+      },
+      "p0": "Erakonna {party} annetused jagunevad {count, plural, one {# registreeritud komitee} other {# registreeritud komitee}} vahel, sealhulgas parteikomiteed, ühised kampaaniafondid ja sõltumatud Super PAC-id. Kokku saadi nende komiteede kaudu {amount}.",
+      "top_intro": "Allpool on toodud suurima panuse andnud komiteed:"
+    },
+    "interests": {
+      "title": "Tegevusalad ja huvirühmad",
+      "intro": "Paljud poliitilised annetajad riigis {country} tegutsevad rohkem kui ühes majandusharus. See ülevaade rühmitab erakonnale {party} tehtud annetused poliitikavaldkonna ja tegevusala järgi ning eristab üksikettevõtteid mitut sektorit esindavatest rühmadest.",
+      "intro_years": "Paljud poliitilised annetajad riigis {country} tegutsevad rohkem kui ühes majandusharus. See ülevaade rühmitab perioodil {years} tehtud annetused poliitikavaldkonna ja tegevusala järgi ning eristab üksikettevõtteid mitut sektorit esindavatest rühmadest.",
+      "explainer": {
+        "summary": "Kuidas seda lugeda: Otsesed ettevõtted vs. mitme sektori rühmad",
+        "direct_label": "Otsesed ettevõtted:",
+        "direct_text": "Ettevõtted, mille põhitegevus on selles sektoris (näiteks kaevandusettevõte, pank või hasartmängukorraldaja). Joonisel kuvatakse need ühtlase täitega ja eraldatakse valiku „Ainult otsesed ettevõtted“ sisselülitamisel.",
+        "multisector_label": "Mitme sektori rühmad ja katusorganisatsioonid:",
+        "multisector_text": "Tegevusalaliidud või konglomeraadid, mis esindavad mitut sektorit korraga (näiteks hotelliliidud, mis tegutsevad majutuse, mänguautomaatide ja alkoholi valdkonnas). Joonisel on need tähistatud triibulise mustriga ning kui valik „Ainult otsesed ettevõtted“ on välja lülitatud, kuvatakse neid koos otseste ettevõtetega.",
+        "domains_label": "Laiad valdkonnad vs. konkreetsed tegevusalad:",
+        "domains_text": "Kui valik „Rühmita valdkonna järgi“ on sisse lülitatud, koondatakse 24 konkreetset tegevusala 6 laiemasse poliitikavaldkonda. Tegevusalade nägemiseks klõpsake alloleval valdkonna real või suumimiseks klõpsake valdkonnal joonisel."
+      },
+      "switches": {
+        "direct_only": "Ainult otsesed ettevõtted",
+        "group_by_domain": "Rühmita valdkonna järgi"
+      },
+      "summary": {
+        "exposure": "Erakonnale {party} tehtud annetustest kogusummas {total} pärineb {tracked} ({percent}) annetajatelt, kes on seotud vähemalt ühe jälgitava tegevusala või huvirühmaga.",
+        "core": "Erakonnale {party} tehtud annetustest kogusummas {total} pärineb {tracked} ({percent}) otsestelt ettevõtetelt, mille põhitegevus kuulub jälgitavasse tegevusalasse.",
+        "exposure_years": "Perioodil {years} tehtud annetustest kogusummas {total} pärineb {tracked} ({percent}) annetajatelt, kes on seotud vähemalt ühe jälgitava tegevusala või huvirühmaga.",
+        "core_years": "Perioodil {years} tehtud annetustest kogusummas {total} pärineb {tracked} ({percent}) otsestelt ettevõtetelt, mille põhitegevus kuulub jälgitavasse tegevusalasse.",
+        "top_exposure_one": "Suurim seotud tegevusala on {item}.",
+        "top_exposure_many": "Suurimad seotud tegevusalad on {items}.",
+        "top_core_one": "Ainult otseste ettevõtete seas on suurim tegevusala {item}.",
+        "top_core_many": "Ainult otseste ettevõtete seas on suurimad tegevusalad {items}."
+      },
+      "show_top": "Kuva 10 suurimat sektorit",
+      "show_all": "Kuva kõik {count} aktiivset sektorit",
+      "note": {
+        "prefix": "Märkus: Tegevusalamärgendid on ametlikele aruannetele lisatud täiendav kiht.",
+        "exposure": "Mitme sektori annetajad ilmuvad iga esindatava sektori all, mistõttu sektorite summad kattuvad ja neid ei tohiks kokku liita; valdkonna kogusummades arvestatakse iga annetajat ühe korra.",
+        "core": "Mitmes sektoris põhitegevust omavad ettevõtted võivad ilmuda rohkem kui ühes sektoris; valdkonna kogusummades arvestatakse iga annetajat ühe korra.",
+        "share": "Protsendid näitavad iga rühma osakaalu kõigist erakonnale {party} tehtud annetustest.",
+        "share_years": "Protsendid näitavad iga rühma osakaalu kõigist perioodil {years} tehtud annetustest.",
+        "methodology_link": "Vaata kõiki kategooriaid metoodikas"
+      },
+      "chart": {
+        "title": "{party}: Tegevusalad ja huvirühmad",
+        "title_years": "{country} ({years}): Tegevusalad ja huvirühmad",
+        "subtitle_grouped_exposure": "Annetused rühmitatuna poliitikavaldkonna, tegevusala ja annetaja järgi võrreldes kategoriseerimata annetustega",
+        "subtitle_grouped_core": "Otsesed ettevõtted poliitikavaldkonna ja tegevusala järgi võrreldes kõigi teiste annetustega",
+        "subtitle_flat_exposure": "Annetused rühmitatuna tegevusala ja annetaja järgi võrreldes kategoriseerimata annetustega",
+        "subtitle_flat_core": "Otsesed ettevõtted tegevusala järgi võrreldes kõigi teiste annetustega",
+        "footer_note": "Tehisintellekti abil kategoriseeritud",
+        "legend_solid_label": "Ühtlane täide:",
+        "legend_solid_text": "Otsene ettevõte",
+        "legend_striped_label": "Triibuline muster:",
+        "legend_striped_text": "Mitme sektori rühm / katusorganisatsioon",
+        "uncategorized": "Muud / kategoriseerimata annetajad",
+        "uncategorized_donor": "Muu / kategoriseerimata annetaja",
+        "uncategorized_hint": "Ei ole veel seotud ühegi jälgitava tegevusala ega huvirühmaga.",
+        "uncategorized_desc": "Annetused eraisikutelt, kohalikelt ettevõtetelt ja rühmadelt, mis ei ole seotud jälgitava tegevusalaga.",
+        "tooltip_direct_business": "Otsene ettevõte",
+        "tooltip_multisector": "Mitme sektori rühm / katusorganisatsioon",
+        "tooltip_share_of": "Osakaal kategooriast {category}:",
+        "tooltip_share_uncategorized": "Osakaal kategoriseerimata annetustest:",
+        "tooltip_share_party": "Osakaal erakonna annetustest:",
+        "tooltip_share_total": "Osakaal koguannetustest:",
+        "tooltip_share_total_pct": "{amount} ({percent}% koguannetustest)",
+        "tooltip_donations": "Annetusi:",
+        "tooltip_donors": "Annetajaid:",
+        "tooltip_direct_businesses": "Otsesed ettevõtted:",
+        "tooltip_multisector_bodies": "Mitme sektori rühmad / liidud:",
+        "tooltip_solid_hint": "Ühtlane täide: Põhitegevus on selles sektoris.",
+        "tooltip_striped_hint": "Triibuline muster: Mitme sektori rühm või katusorganisatsioon, mis tegutseb mitmes valdkonnas."
+      }
+    }
+  },
+  "origin": {
+    "title": "Päritolu",
+    "description": "Vaadake, kust pärinevad poliitiliste parteide annetused riigis {country} aastatel {years}—jaotus osariikide ja rahvusvaheliste panuste lõikes.",
+    "detail": {
+      "title": "Annetuse päritolu lühidalt",
+      "description": "Vaadake {country} riigis {party} erakonnale tehtud poliitiliste annetuste läbipaistvat päritolu: jaotus osariikide ja välismaiste allikate järgi.",
+      "summary": "Saate selge ülevaate annetuste geograafilisest päritolust. Uurige, millistest liidumaadest või riikidest väljaspool {country} toetus pärineb. Jälgige läbipaistvalt, kuidas annetused geograafiliselt jaotuvad.",
+      "country": {
+        "austria": "Austrias registreeritakse annetuste päritolu alles alates 2023. aastast. Seetõttu ei saa kõiki vanemaid annetusi üksikutele liidumaadele määrata."
+      },
+      "sum": "{years}. aastal moodustasid erakondade annetused {country}s kodumaistelt allikatelt kokku {sumCountry}. Välismaistelt allikatelt pärit sissemaksed ulatusid {sumOthers}."
+    },
+    "type": {
+      "map": "Kaart"
+    },
+    "party": {
+      "subtitle": "Kokku avaldatud annetused {party} päritoluriigi järgi riigis {country}."
+    },
+    "country": {
+      "title": "Annetused {country}",
+      "subtitle": "Kokku avaldatud annetused päritoluriigi järgi riigis {country}, {years}.",
+      "summary": "Aastatel {from}-{until} registreeriti annetusi {stateCount} eri liidumaalt. Kõige suurema annetussummaga liidumaa on {highestState} {highestSum}. Kõige rohkem annetusi, nimelt {largesDonationCountNum}, tuli {largesDonationCountState}."
+    },
+    "elsewhere": {
+      "title": "Annetused väljaspoolt {country}",
+      "summary": "Aastatel {from}-{until} registreeriti annetusi {countryCount} erinevast riigist. Kõige suurema annetussummaga riik on {highestCountry} {highestSum}. Kõige rohkem annetusi, {largesDonationCountNum}, tuli {largesDonationCountState}."
+    }
+  },
+  "state": {
+    "germany": {
+      "BW": "Baden-Württemberg",
+      "BY": "Baieri",
+      "BE": "Berliin",
+      "BB": "Brandenburg",
+      "HB": "Bremen",
+      "HH": "Hamburg",
+      "HE": "Hesse",
+      "MV": "Mecklenburg-Vorpommeri",
+      "NI": "Alam-Saksi liidumaa",
+      "NW": "Nordrhein-Westfalen",
+      "RP": "Rheinland-Pfalz",
+      "SL": "Saarimaa",
+      "SN": "Saksimaa",
+      "ST": "Saksi-Anhalti liidumaa",
+      "SH": "Schleswig-Holstein",
+      "TH": "Tüüringi"
+    },
+    "austria": {
+      "1": "Burgenland",
+      "2": "Kärnteni",
+      "3": "Alam-Austria",
+      "4": "Ülem-Austria",
+      "5": "Salzburg",
+      "6": "Styria",
+      "7": "Tirol",
+      "8": "Vorarlberg",
+      "9": "Viin"
+    },
+    "canada": {
+      "ON": "Ontario",
+      "QC": "Québec",
+      "NS": "Nova Scotia",
+      "NB": "New Brunswick",
+      "MB": "Manitoba",
+      "BC": "Briti Columbia",
+      "PE": "Prints Edwardi saar",
+      "SK": "Saskatchewan",
+      "AB": "Alberta",
+      "NL": "Newfoundland ja Labrador",
+      "NT": "Loodealad",
+      "YT": "Yukon",
+      "NU": "Nunavut"
+    },
+    "unitedstates": {
+      "AL": "Alabama",
+      "AK": "Alaska",
+      "AZ": "Arizona",
+      "AR": "Arkansas",
+      "CA": "California",
+      "CO": "Colorado",
+      "CT": "Connecticut",
+      "DE": "Delaware",
+      "FL": "Florida",
+      "GA": "Georgia",
+      "HI": "Hawaii",
+      "ID": "Idaho",
+      "IL": "Illinois",
+      "IN": "Indiana",
+      "IA": "Iowa",
+      "KS": "Kansas",
+      "KY": "Kentucky",
+      "LA": "Louisiana",
+      "ME": "Maine",
+      "MD": "Maryland",
+      "MA": "Massachusetts",
+      "MI": "Michigan",
+      "MN": "Minnesota",
+      "MS": "Mississippi",
+      "MO": "Missouri",
+      "MT": "Montana",
+      "NE": "Nebraska",
+      "NV": "Nevada",
+      "NH": "New Hampshire",
+      "NJ": "New Jersey",
+      "NM": "New Mexico",
+      "NY": "New York",
+      "NC": "Põhja-Carolina",
+      "ND": "Põhja-Dakota",
+      "OH": "Ohio",
+      "OK": "Oklahoma",
+      "OR": "Oregon",
+      "PA": "Pennsylvania",
+      "RI": "Rhode Island",
+      "SC": "Lõuna-Carolina",
+      "SD": "Lõuna-Dakota",
+      "TN": "Tennessee",
+      "TX": "Texas",
+      "UT": "Utah",
+      "VT": "Vermont",
+      "VA": "Virginia",
+      "WA": "Washington",
+      "WV": "Lääne-Virginia",
+      "WI": "Wisconsin",
+      "WY": "Wyoming",
+      "DC": "Columbia ringkond",
+      "AS": "Ameerika Samoa",
+      "GU": "Guam",
+      "MP": "Põhja-Mariaanid",
+      "PR": "Puerto Rico",
+      "UM": "Ameerika Ühendriikide väikesed saared",
+      "VI": "Ameerika Neitsisaared"
+    }
+  },
+  "donor": {
+    "title": "Annetaja annetused",
+    "subtitle": "Panused ja saajad kokku",
+    "active_period": "Aktiivne periood",
+    "type": "Annetajatüüp",
+    "registration_number": "Registrikood",
+    "summary": "{donor} on teinud kokku {sum} {count} eraldi annetusena. Keskmine annetuse suurus on {avg}. Annetused on jagatud {parties} eri erakonna vahel.",
+    "oldest": "Esimene annetus pärast {minYear} tehti {date} summas {amount} erakonnale {party}.",
+    "newest": "Viimane annetus tehti {date}, kui {amount} läks erakonnale {party}.",
+    "most_donations": "Kõige sagedamini tehti annetusi {list}.",
+    "most_donations_item": "{party} ({count})",
+    "highest_most_donation": "Aastal {biggestYear} oli suurim annetuste kogusumma {biggestSum}, samas kui aastal {mostYear} tehti kõige rohkem üksikannetusi ({mostCount}).",
+    "biggest": "Suurim üksikmakse summas {amount} läks {date} erakonnale {party}.",
+    "tree_map": "{name} annetused",
+    "tree_map_subtitle": "Kokku avaldatud annetused igale parteile riigis {country}.",
+    "biggest_amounts": "Annetused olid peamiselt suunatud valitud parteide rühmale. Allpool on andmed saajate kaupa summade ja annetatud kogusumma protsendi järgi:",
+    "table": "See jaotis annab põhjaliku ülevaate kõigist {donor} poolt tehtud üksikutest annetustest. Saate tabelit sorteerida kuupäeva, partei või summa järgi, et hõlpsasti uurida, kuidas annetused on aja jooksul ja saajate vahel jaotunud. See detailne vaade võimaldab iga panuse läbipaistvat jälgimist ning pakub sügavamat pilku annetaja annetamismustritesse.",
+    "timeline": {
+      "title": "Annetuste kogunemine ajas",
+      "p0": "See jaotis näitab, kuidas {donor} annetused alates {year} erinevatele erakondadele on aja jooksul muutunud. Graafik visualiseerib annetatud kogusumma, kus iga erakonna osa on esile tõstetud, et oleks lihtne näha, millal ja kuhu toetus suunati.",
+      "p1": "Jälgige jooni, et märgata mustreid, tippe või muutusi annetamises. See ülevaade pakub läbipaistvat pilku, kuidas ühe annetaja panused on poliitilisel maastikul jaotatud.",
+      "years": "Annetused on aastate jooksul kõikunud. Järgneb iga aasta kogusumma koos protsendiga sellest, kui palju see aasta annab annetuste kogusummast antud annetaja puhul.",
+      "chart_subtitle": "Kumulatiivsed annetused {donor} poolt poliitilistele parteidele riigis {country}, kuvatud summa ja kuupäeva järgi alates {minYear}."
+    },
+    "anonymized": {
+      "title": "Kirje anonümiseeritud",
+      "description": "Selle annetusega seotud isikuandmed on eemaldatud vastavalt kehtivale GDPR-i taotlusele. Annetuse summa jääb kogurahastuse arvestustesse, et säilitada finantsläbipaistvus."
+    },
+    "redacted": {
+      "title": "Kirje varjatud",
+      "description": "Avaldav asutus varjas annetaja isikuandmed enne nende andmete avaldamist. Annetuse summa on siiski kogurahastuse arvutustes arvesse võetud, et säilitada finantsläbipaistvus."
+    },
+    "ubo": "Tegelikud kasusaajad (TK)",
+    "ubo_description": "Tegelik kasusaaja (TK) on isik, kes tegelikult niite tõmbab. Need on üksikisikud, kes lõpuks omavad või kontrollivad annetajat, tavaliselt omades 25% või rohkem tema aktsiatest või hääleõigustest. Kui ükski üksikisik ei vasta sellele künnisväärtusele, võidakse kõrgem juhtkond (nagu direktorid) loetleda \"pseudo-TK-dena\", et tagada vastutus.",
+    "donation_type": {
+      "title": "Annetuste liigid",
+      "subtitle": "Diagramm ja järgnev loend näitavad, milliseid annetusi {donor} tegi ja millised erakonnad said iga liigi eest kui palju.",
+      "summary": "Kogu summast {total}",
+      "summary_item": "{amount} anti {type} kujul",
+      "graph": {
+        "subtitle": "Kuidas {donor} sissemaksed liigi järgi iga erakonna vahel jagunevad"
+      }
+    },
+    "via": {
+      "title": "Vahendajad ja suunatud annetuste jaotus",
+      "overview": "Avalikest kampaaniate aruannetest nähtub, et {viaSum} annetaja {donor} poliitilistest annetustest ({pct} kõigist jälgitud {donorSum}) suunati vahenduskomiteede kaudu.",
+      "direct_donations": "Otsesed annetused moodustasid {amount}.",
+      "downstream_title": "Lõplike saajate poliitiline suunitlus",
+      "downstream_overview": "Vaadates suunatud annetuste lõplikke saajaid, jagunes kogu summa {count, plural, one {# poliitilise liikumise} other {# poliitilise liikumise}} vahel.",
+      "downstream_primary": "Peamine saaja oli {party}, kellele läks {amount} ({pct}) kõigist suunatud vahenditest.",
+      "downstream_followed_by": "Järgnevad {list}.",
+      "downstream_item": "{party}: {amount} ({pct})",
+      "table_intro": "Allolev tabel loetleb vahendus- ja ühiskomiteed, mille kaudu need annetused suunati{years}:",
+      "table_intro_years": " aastatel {earliestYear}–{latestYear}",
+      "intermediate_entity": "Vahendaja",
+      "transactions": "Tehingud",
+      "checks": "{count, plural, one {# makse} other {# makset}}"
+    }
+  },
+  "countries": {
+    "??": "Ei ole täpsustatud",
+    "DE": "Saksamaa",
+    "DK": "Taani",
+    "CH": "Šveits",
+    "TH": "Tai",
+    "AT": "Austria",
+    "UK": "Suurbritannia",
+    "NL": "Madalmaad",
+    "EU": "Euroopa Liit",
+    "LV": "Läti",
+    "ES": "Hispaania",
+    "FI": "Soome",
+    "HR": "Horvaatia",
+    "BE": "Belgia",
+    "LU": "Luksemburg",
+    "SI": "Sloveenia",
+    "EE": "Eesti",
+    "FR": "Prantsusmaa",
+    "IE": "Iirimaa",
+    "IT": "Itaalia",
+    "PL": "Poola",
+    "RO": "Rumeenia",
+    "CY": "Küpros",
+    "MT": "Malta",
+    "PT": "Portugal",
+    "LT": "Leedu",
+    "HU": "Ungari",
+    "CZ": "Tšehhi Vabariik",
+    "SG": "Singapur",
+    "MC": "Monaco",
+    "SE": "Rootsi",
+    "AD": "Andorra",
+    "IM": "Mani saar",
+    "NO": "Norra",
+    "LI": "Liechtenstein",
+    "MK": "Makedoonia",
+    "AL": "Albaania",
+    "MD": "Moldova",
+    "SM": "San Marino",
+    "FO": "Fääri saared",
+    "BA": "Bosnia ja Hertsegoviina",
+    "ME": "Montenegro",
+    "BG": "Bulgaaria",
+    "BY": "Valgevene",
+    "GR": "Kreeka",
+    "IS": "Island",
+    "SK": "Slovakkia",
+    "UA": "Ukraina",
+    "GB": "Ühendkuningriik",
+    "RS": "Serbia",
+    "AU": "Austraalia",
+    "ZA": "Lõuna-Aafrika Vabariik",
+    "US": "Ameerika Ühendriigid",
+    "CA": "Kanada",
+    "GE": "Gruusia",
+    "NZ": "Uus-Meremaa",
+    "VE": "Venezuela"
+  },
+  "ref_countries": {
+    "DE": "Saksamaa",
+    "DK": "Taani",
+    "CH": "Šveits",
+    "TH": "Tai",
+    "AT": "Austria",
+    "UK": "Suurbritannia",
+    "NL": "Madalmaad",
+    "EU": "Euroopa Liit",
+    "LV": "Läti",
+    "ES": "Hispaania",
+    "FI": "Soome",
+    "HR": "Horvaatia",
+    "BE": "Belgia",
+    "LU": "Luksemburg",
+    "SI": "Sloveenia",
+    "EE": "Eesti",
+    "FR": "Prantsusmaa",
+    "IE": "Iirimaa",
+    "IT": "Itaalia",
+    "PL": "Poola",
+    "RO": "Rumeenia",
+    "CY": "Küpros",
+    "CZ": "Tšehhi Vabariik",
+    "AU": "Austraalia",
+    "RS": "Serbia",
+    "CA": "Kanada",
+    "GE": "Gruusia",
+    "NO": "Norra",
+    "UA": "Ukraina",
+    "SE": "Rootsi",
+    "ZA": "South Africa",
+    "US": "Ameerika Ühendriigid"
+  },
+  "about": {
+    "title": "Meie kohta",
+    "description": {
+      "p0": "DonationWatch sai alguse sellest, et Saksamaa Bundestagi ametlikul veebisaidil ei ole andmed loetavad.",
+      "p1": "Meie eesmärk on seda parandada, kasutades ainult avalikult kättesaadavaid andmeid ja esitades neid tõhusamalt.",
+      "p2": "Me saime aru, et sellised riigid nagu Austria, Šveits ja Madalmaad avaldavad erakondade annetusi erinevalt. Et luua standardiseeritud liides, mis lihtsustab juurdepääsu nendele andmetele, oleme need riigid oma projekti kaasanud. Teised riigid järgnevad niipea, kui me leiame ja töötleme asjaomased andmed.",
+      "p3": "Kui teil on ettepanekuid või tagasisidet, võtke meiega",
+      "mail": "julgelt ühendust"
+    },
+    "source": "Kõik visualiseeritud andmed pärinevad üksnes avalikult kättesaadavatest valitsusallikatest ega sisalda varasematel aegadel avaldamata andmeid või eraarhiive. Läbipaistvus on meie aluspõhimõte."
+  },
+  "imprint": {
+    "title": "Jälg"
+  },
+  "privacy": {
+    "title": "Privaatsuspoliitika",
+    "last_updated": "Viimati uuendatud: {date}",
+    "effective_date": "Jõustumiskuupäev: {date}",
+    "controller": {
+      "title": "Vastutav töötleja",
+      "p": "Sellel veebisaidil toimuvate andmetöötluste eest vastutab:"
+    },
+    "data": {
+      "title": "Üldine andmete kogumine",
+      "p": "Võtame sinu andmete kaitset väga tõsiselt. Me ei kogu isikuandmeid külastajate jälgimiseks ega turunduseks. See tähendab:",
+      "li0": "Registreerimisvorme ega kasutajakontosid ei ole",
+      "li1": "Uudiskirjade registreerimine puudub",
+      "li2": "Küpsiseid ei kasutata jälgimise eesmärgil"
+    },
+    "cf": {
+      "title": "Cloudflare teenused",
+      "link": "Vaata Cloudflare privaatsuspoliitikat",
+      "p": "Kasutame Cloudflare, Inc. (101 Townsend St, San Francisco, CA 94107, USA) teenuseid, et tagada meie veebisaidi kiirus, turvalisus ja töökindlus.",
+      "p2": "Cloudflare kasutamisel töödeldakse sinu IP-aadressi, et ühendada sind lähima serveriga. Andmeid võidakse edastada USA-sse. Cloudflare on sertifitseeritud vastavalt EL–USA andmekaitseraamistikule (DPF), mis tagab vastavuse Euroopa andmekaitsenõuetele.",
+      "p3": "Meie õigustatud huvi (GDPR artikkel 6 lõige 1 punkt f) on tagada turvaline ja hästi toimiv veebisait. Rohkem infot leiad Cloudflare privaatsuspoliitikast.",
+      "workers": {
+        "summary": "Cloudflare Workers: Serverita platvorm meie saidi sisu kiireks edastamiseks."
+      },
+      "analytics": {
+        "summary": "Cloudflare Web Analytics: Privaatsussõbralik analüütikatööriist, mis ei kasuta küpsiseid, ei jälgi kasutajaid ja kogub üksnes koondandmeid (nt külastuste arvu)."
+      }
+    },
+    "logs": {
+      "title": "Automaatsed serverilogid",
+      "p": "Veebilehte külastades salvestab meie majutusteenuse pakkuja automaatselt teavet niinimetatud serverilogides, mis sisaldavad:",
+      "li0": "IP-aadresse (anonüümselt)",
+      "li1": "Päringu kuupäeva ja aega",
+      "li2": "Brauseri tüüpi ja seadme andmeid",
+      "li3": "Viitavat URL-i (referrer)",
+      "retention": "Andmete töötlemine põhineb meie õigustatud huvil (GDPR artikkel 6 lõige 1 punkt f) tagada tehniline stabiilsus, turvalisus ja korrektne toimimine. Andmeid ei liideta teiste allikatega ning need kustutatakse automaatselt 7 päeva jooksul."
+    },
+    "user_rights": {
+      "title": "Sinu kasutajaõigused",
+      "p": "Vastavalt GDPR-ile on sul õigus igal ajal tasuta saada teavet oma isikuandmete päritolu, saajate ja eesmärgi kohta. Samuti on sul õigus taotleda parandamist, blokeerimist või kustutamist. Kuna me töötleme vaid minimaalseid ja anonüümseid andmeid, ei saa me sind üldjuhul isiklikult tuvastada. Sul on ka õigus esitada kaebus andmekaitseasutusele. Küsimuste korral võta meiega ühendust.",
+      "erasure": "Õigus andmete kustutamisele (GDPR artikkel 17): Vastavalt GDPR artiklile 17 on andmesubjektil õigus nõuda oma isikuandmete kustutamist seaduses sätestatud alustel. Kustutamistaotluse saab esitada otse meile.",
+      "discretionary": "Kaalutlusõiguse alusel anonümiseerimine: Lisaks seadusjärgsetele nõuetele vaatab DonationWatch anonümiseerimistaotlusi läbi juhtumipõhiselt. Heakskiitmisel annetaja nimi anonümiseeritakse, säilitades summad ja erakondade kogumahud."
+    }
+  },
+  "fun": {
+    "link": "Lõbusad faktid",
+    "title": "Lõbusad faktid avalike andmete kohta",
+    "p0": "See leht näitab huvitavaid leide meie tööst avalikult kättesaadavate valitsuse andmetega. Need tähelepanekud ei ole kriitika, vaid pigem väikesed eripärad, mis võivad esineda igas suures andmekogumis.",
+    "p1": "Kuigi me teavitame probleemidest, kui see on asjakohane, ei pea me neid kiireloomulisteks küsimusteks, mida valitsusasutused peaksid lahendama. Meie kogemuse põhjal on need organisatsioonid olnud vastuvõtlikud ja avatud tagasisidele.",
+    "reported_fixed": "Sellest teatati {owner} ja nad parandasid selle.",
+    "reported_wontfix": "Sellest teatati {owner}-le ja nad ei saa seda muuta.",
+    "reported": "Sellest teatati {owner}."
+  },
+  "transparency": {
+    "title": "Läbipaistvus",
+    "p0": "Me püüame anda selget ja järjepidevat teavet erakondade annetajate kohta. Selle saavutamiseks normaliseerime automaatselt teatud annetajate nimed, et tagada ühtsus kogu meie andmebaasis. See lähenemisviis võimaldab meil säilitada täpsuse, võttes samal ajal arvesse erinevusi nimede registreerimises.",
+    "p1": "Läbipaistvuse huvides oleme koostanud nimekirja normaliseeritud nimedest koos nende variatsioonidega, mida oleme oma annetuste andmetes kohanud. Allpool leiate iga normaliseeritud nime koos selle variatsioonidega. See nimekiri aitab selgitada, miks võite näha annetajate nimesid, mis ei pruugi täpselt meie allikadokumentides esineda.",
+    "section": {
+      "filtered_donors": "Filtreeritud annetajad",
+      "filtered_receivers": "Filtreeritud saajad",
+      "aggregated": "Koondatud annetajad",
+      "categorized": "Annetajad valdkondade ja huvigruppide järgi"
+    },
+    "filtered_donors": {
+      "p0": "Poliitiliste annetuste tegelike allikate täpseks esitamiseks filtreerime välja teatud tehingud, mis on tegelikult riiklikud toetused, mitte ehtsad annetused. Kuna meie lähteandmestikud neid tehinguid otsesõnu ei märgista, tugineme regulaaravaldiste (regexp) filtrireeglite kogumile, et sellised kirjed automaatselt tuvastada ja eemaldada. Allpool saate vaadata kõiki rakendatud regexp-filtrireegleid.",
+      "p1": "Allpool on loetelu annetajatest, kelle panused filtreeriti välja vastavalt meie kriteeriumidele ja filtrireeglitele."
+    },
+    "filtered_receivers": {
+      "p0": "Selleks, et esitada ainult sisukaid saajate andmeid, filtreerime välja ka teatud saajad või erakonnad, mida peetakse annetajate jälgimise seisukohalt ebaoluliseks või mitteaktiivseks. Kuna meie andmestikud ei märgista neid saajaid alati otsesõnu, rakendame regulaaravaldistel (regexp) põhinevaid reegleid, et need automaatselt välja jätta. Allpool saate vaadata kõiki rakendatud regexp-filtrireegleid.",
+      "p1": "Allpool on loetelu saajatest, kelle kirjed filtreeriti välja vastavalt meie kriteeriumidele ja filtrireeglitele."
+    },
+    "receivers": {
+      "title": "Koondatud saajad",
+      "p0": "Riigis {country} võidakse annetused esitada eri erakonna organisatsioonilistele üksustele. Ühtsuse tagamiseks koondame seotud saajaüksused üheks erakonna tasandi kogusummaks. Allolev loetelu kirjeldab, millised saajaüksused on iga erakonna puhul koondatud."
+    },
+    "categorized": {
+      "title": "Annetajad valdkondade ja huvigruppide järgi",
+      "p0": "Et oleks lihtsam näha, millised majandusharud erakondi rahastavad, jaotame suuremad annetajad 24 valdkonna- ja huvikategooriasse (näiteks kaevandus, pangandus, hasartmängud või ametiühingud). Samuti märgime, kas annetaja on otsene ettevõte (peamine tegevusala selles sektoris) või katusorganisatsioon (mitmes valdkonnas tegutsev erialaliit või kontsern). Need annetajate kategooriad on määratud tehisintellekti abil — kui märkate vigu, võtke meiega julgelt ühendust või looge GitHubis issue.",
+      "p1": "Allpool on nimekiri kategoriseeritud annetajatest ja nendega seotud valdkondadest."
+    }
+  },
+  "related": {
+    "donors": "Sarnased doonorid"
+  },
+  "similar_donors": {
+    "title": "Sarnaste annetajate võrgustik",
+    "description": "Avastage selle annetajaga seotud laiemat annetajate võrgustikku.",
+    "summary": "Seotud annetajate võrgustikus on {count} unikaalset annetajat.",
+    "list_title": "Parteide jaotuse ülevaade"
+  },
+  "detect_country": {
+    "title": "Tundub, et olete riigis {country}.",
+    "description": "Puudutage, et uurida poliitilisi annetusi riigis {country}.",
+    "action": "Vaata annetusi riigile {country}"
+  },
+  "donor_type": {
+    "0": "Muu",
+    "1": "Eraisik",
+    "2": "Ettevõte",
+    "3": "Ametiühing",
+    "4": "Avalik fond",
+    "5": "Mittetulundusühing",
+    "6": "Registreritud erakond",
+    "7": "Usaldusfond",
+    "8": "Abiselts",
+    "9": "Piiratud vastutusega ühing",
+    "10": "Hoonetusselts",
+    "11": "Mittetulunduslik juriidiline isik",
+    "12": "Anonümiseeritud annetaja"
+  },
+  "donation_type": {
+    "0": "rahaline annetus",
+    "1": "liikmemaks",
+    "2": "sisseastumismaks",
+    "3": "mitterahaline annetus",
+    "4": "avalik rahastus"
+  },
+  "other_countries": {
+    "title": "Teised riigid"
+  },
+  "thanks": "Tänu üksikisikutele ja organisatsioonidele, nagu {external}, väärtusliku teabe eest poliitiliste annetuste mehhanismide kohta.",
+  "export": {
+    "title": "Andmete eksport",
+    "p0": "Hankige sellel saidil kasutatav täielik poliitiliste annetuste andmestik riigi {country} kohta. Eksport sisaldab normaliseeritud annetajate nimesid, summasid, kuupäevi ja saajaparteisid.",
+    "p1": "Oluline: Need ei ole {source} toorandmed. See andmestik sisaldab ainult annetusi, mille meie meeskond on normaliseerinud ja filtreerinud. Vaadake palun meie {methodology}.",
+    "license": "Litsents: {license}"
+  },
+  "bar_chart_race": {
+    "title": "Tulpdiagrammi võidusõit",
+    "description": "Visualiseeri annetuste kumuleerumist ajas. Vali aastavahemik, et näha, kuidas erakondade rahastamine dünaamiliselt muutub.",
+    "from": "Alates",
+    "to": "Kuni",
+    "download_video": "Laadi video alla",
+    "rendering": "Renderdamine... {percentage}",
+    "no_data": "Valitud vahemiku kohta andmed puuduvad.",
+    "note": "Palun pange tähele: see animatsioon renderdatakse teie brauseris kliendipoolel ja võib mõnes seadmes olla ressursimahukas. Video allalaadimine esitab automaatselt kogu animatsiooni.",
+    "individual_years": "Üksikud aastad",
+    "animation_duration": "Animatsiooni kestus",
+    "duration_s": "{seconds}s",
+    "custom_range": "Täiendav: Kohandatud aastavahemik",
+    "group_by": {
+      "label": "Rühmitamine",
+      "receiver": "Erakond",
+      "donor": "Annetaja"
+    },
+    "chart_title": "Erakondade annetuste jaotus",
+    "chart_subtitle": "Kokku avaldatud annetused iga erakonna kohta, {country}, {years}."
+  },
+  "compare_parties_page": {
+    "title": "Võrdle erakondi",
+    "description": "Vali allpool kahe kuni nelja erakonna vahel, et võrrelda nende annetuste statistikat kõrvuti. Nelja erakonna piirang tagab, et võrdlus jääb kõigil ekraanidel loetavaks."
+  },
+  "compare_parties": {
+    "parties": "Erakonnad",
+    "min_select": "Vali ülal vähemalt kaks erakonda, et näha võrdlust.",
+    "comparing": "Võrdlus",
+    "years": "Aastad",
+    "top_3_donors": "Top 3 annetajat",
+    "n_donations": "{count} annetust",
+    "donor_type": "Annetaja tüüp",
+    "donor": "Annetaja",
+    "overview": {
+      "title": "Ülevaade",
+      "description": "Üldstatistika, sealhulgas iga erakonna saadud annetuste kogusumma ja arv valitud ajavahemikus."
+    },
+    "timeline": {
+      "title": "Ajajoon",
+      "description": "Kronoloogiline jaotus, mis näitab, millal erakonnad said oma esimese ja viimase annetuse ning millal olid nende finantsiliselt aktiivseimad perioodid."
+    },
+    "top_donations": {
+      "title": "Suurimad annetused",
+      "description": "Toob esile suurima üksiku sissetuleva tehingu ja suurimad individuaalsed annetajad iga valitud erakonna jaoks."
+    },
+    "donor_types": {
+      "title": "Annetajate tüübid",
+      "description": "Finantstoetuse analüüs, jaotatuna üksuse tüübi järgi, näiteks ettevõtted, eraisikud või ametiühingud.",
+      "biggest_donor_type": "Suurim annetaja tüüp"
+    },
+    "donors": {
+      "title": "Annetajad",
+      "description": "Põhjalikum vaade unikaalsetesse isikutesse ja organisatsioonidesse, kes iga erakonda toetavad, sh annetuste sagedus ja kattuvad panused."
+    },
+    "overlapping": {
+      "title": "Kattuvad annetajad ({count})",
+      "description": "Annetajad, kes on teinud annetusi mitmele valitud erakonnale.",
+      "more": "... ja veel {count}"
+    },
+    "stats": {
+      "sum": "Annetuste kogusumma",
+      "count": "Annetuste arv",
+      "avg": "Keskmine annetus",
+      "median": "Mediaanannetus",
+      "first_year": "Esimene annetuse aasta",
+      "last_year": "Viimane annetuse aasta",
+      "active_year_sum": "Aktiivseim aasta (summa järgi)",
+      "active_year_count": "Aasta kõige rohkemate annetustega",
+      "unique_donors": "Unikaalsed annetajad",
+      "top_donor": "Suurim annetaja",
+      "frequent_donor": "Kõige sagedasem annetaja",
+      "biggest_donation": "Suurim üksik annetus"
+    }
+  },
+  "citation": {
+    "action": "Tsiteeri",
+    "success": "{style} stiilis viide kopeeritud lõikelauale.",
+    "data": "DonationWatch – {country} poliitiliste annetuste andmed",
+    "apa": "DonationWatch. ({year}). {title} [Andmestik]. Vaadatud {date}, aadressilt {url}"
+  },
+  "enterprise": {
+    "title": "Enterprise",
+    "heading": "Ettevõtte tasemel poliitilise rahastuse andmed.",
+    "p0": "Jälgige poliitilisi annetusi üle riigipiiride. Puhtad, täielikult rikastatud rahastuse API-d, mis põhinevad normaliseeritud tehingukirjetel ülemaailmsetest valimiskomisjonidest.",
+    "draft_schema": "* Märkus: v1 skeemi mustand. Vastuse struktuur võib beetatagasiside põhjal muutuda.",
+    "engine_specs": {
+      "title": "Mootori spetsifikatsioonid ja tugevused",
+      "s0": {
+        "title": "1. Standardiseeritud tehingukirjed",
+        "description": "Lõpetage võitlus segaste CSV-failide ja muutuvate riiklike vormingutega. Saage ligipääs puhtalt kaardistatud annetuskannetele, mis on normaliseeritud mitme rahvusvahelise registri lõikes."
+      },
+      "s1": {
+        "title": "2. Rikastatud REST API-d ja OpenAPI spetsifikatsioonid",
+        "description": "Öelge hüvasti hapratele veebiskreiperitele. Pääsete ligi usaldusväärsetele JSON-lõpp-punktidele täiustatud filtreerimisega annetaja, erakonna, kuupäeva ja summa järgi."
+      },
+      "s2": {
+        "title": "3. SLA töökindlus",
+        "description": "Loodud institutsionaalsete töövoogude jaoks. Eraldi API-võtmed, suure mahuga päringupiirangud ja sihitud tööaeg 99,9%."
+      }
+    },
+    "monitoring": {
+      "title": "Jälgivad:",
+      "financial": "Finantsasutused",
+      "government": "Riiklikud maksuametid",
+      "universities": "Tipptasemel ülikoolid",
+      "newsrooms": "Uurivad toimetused"
+    },
+    "register": {
+      "title": "Privaatse beetaversiooni registreerimine",
+      "p0": "Aluseks olevat andmemootorit viiakse praegu üle kõrge käideldavusega REST API-ks kommertskasutuseks. Esitage allpool oma päringunõuded, et liituda ootenimekirjaga ja saada prioriteetne ligipääs v1 väljalaskele."
+    },
+    "form": {
+      "successTitle": "Ligipääsutaotlus registreeritud",
+      "successMessageTemplate": "Täname, et esitasite oma päringu spetsifikatsioonid. Vaatame üle teie organisatsiooni andmenõuded ja võtame teiega ühendust seoses prioriteetse ligipääsuga v1 kommertslikele lõpp-punktidele.",
+      "submitAnotherButton": "< Esita veel üks taotlus",
+      "formTitle": "Beetajuurdepääsu taotlus",
+      "labelFullName": "Täisnimi",
+      "labelWorkEmail": "Töömeil",
+      "labelOrganization": "Organisatsioon",
+      "labelQueryRequest": "Siht-lõpp-punkt / Päringutaotlus",
+      "consentText": "Nõustun privaatsuspoliitikaga ja annan nõusoleku, et minuga võetakse ühendust seoses Enterprise API-ga.",
+      "buttonProcessing": "Taotluse töötlemine...",
+      "buttonSubmit": "Esita taotlus",
+      "errorFailedSubmit": "Ootenimekirja registreerimise esitamine ebaõnnestus.",
+      "errorUnexpected": "Tekkis ootamatu viga. Palun proovige uuesti.",
+      "turnstileLabel": "Andke meile teada, et olete inimene"
+    }
+  },
+  "errors": {
+    "required": "See väli on kohustuslik.",
+    "empty": "See väli ei tohi olla tühi.",
+    "email": "Palun sisestage kehtiv e-posti aadress."
+  },
+  "filter": {
+    "title": "Filtrid",
+    "description": "Täpsustage annetuste andmeid aastate, erakondade ja tüübi järgi.",
+    "select_all": "Vali kõik",
+    "select_none": "Tühista valik",
+    "reset": "Lähtesta",
+    "parties": "Erakonnad",
+    "donation_types": "Annetuse tüübid",
+    "donor_types": "Annetajate tüübid",
+    "years": {
+      "title": "Aastavahemik",
+      "from": "Alates",
+      "to": "Kuni"
+    },
+    "empty": {
+      "title": "Annetusi ei leitud",
+      "p0": "Teie praegusele filtrikonfiguratsioonile vastavaid annetusi ei leitud. Proovige filtreid kohandada või lähtestada.",
+      "reset": "Lähtesta filtrid"
+    }
+  },
+  "methodology": {
+    "title": "Metoodika",
+    "intro": "DonationWatch töötleb, normaliseerib ja kontekstualiseerib riiklike valimisasutuste avaldatud ametlikke andmekogusid. See leht dokumenteerib meie andmeallikaid, töötlemisreegleid ja piiranguid riigi {country} kohta.",
+    "sections": {
+      "profile": "Andmestiku profiil",
+      "source": "Andmeallikas ja ulatus",
+      "coverage": "Kaetus ja künnised",
+      "cadence": "Uuendamissagedus",
+      "processing": "Töötlemine ja normaliseerimine",
+      "anonymisation": "Anonümiseerimine ja varjamised",
+      "licence": "Litsents ja päritolu",
+      "version": "Andmete versioon ja ajatemplid",
+      "disclaimer": "Lahtiütlus"
+    },
+    "profile": {
+      "source": "Ametlik allikas",
+      "coverage": "Kaetud periood",
+      "coverage_preliminary": "{range} (esialgsed andmed alates {preliminarySince})",
+      "latest_transaction": "Viimane registreeritud tehing",
+      "last_processed": "Andmestik viimati töödeldud",
+      "cadence": "Uuendamissagedus",
+      "cadence_value": "{cadence, select, annual {Kord aastas} quarterly {Kord kvartalis} other {Regulaarne}}",
+      "volume": "Koostatud andmestiku maht",
+      "volume_value": "{count} kirjet ({sum}) {parties} erakonna lõikes",
+      "donation_threshold": "Annetuse alampiir",
+      "donation_threshold_all": "Kõik avaldatud annetused (ilma miinimumfiltrita)",
+      "party_threshold": "Erakonna kaasamise künnis",
+      "party_threshold_value": "{type, select, count {≥ {count} annetust} sum {≥ {sum} kumulatiivselt} other {≥ {count} annetust või ≥ {sum} kumulatiivselt}}",
+      "party_threshold_all": "Kõik aruandluses esitatud erakonnad on kaasatud",
+      "granularity": "Andmete detailsus",
+      "granularity_individual": "Üksiktehingute ja annetajate kirjed",
+      "granularity_aggregate": "Erakondade aastased koondsummad (ilma üksikannetajate nimedeta)",
+      "temporal_resolution": "Ajaline täpsus",
+      "resolution_date": "Täpne tehingukuupäev (AAAA-KK-PP)",
+      "resolution_year": "Ainult aruandeaasta (AAAA)",
+      "origin_coverage": "Geograafiline päritolu",
+      "origin_yes": "Maakond/piirkond ja päritoluriik",
+      "origin_no": "Ainult riigi tasand",
+      "donation_types": "Kaasatud annetuste liigid",
+      "donor_types": "Klassifitseeritud annetajate kategooriad",
+      "external_ids": "Välised registritunnused",
+      "external_ids_both": "Allikatehingute ID-d ja äriregistri koodid",
+      "external_ids_transaction": "Allikaregistri tehingu ID-d",
+      "external_ids_company": "Ettevõtete / juriidiliste isikute registrikoodid",
+      "external_ids_none": "Allikaregistris ei avaldata",
+      "access": "Andmetele ligipääs ja töövoog",
+      "export_link": "Laadi alla kogu andmestik (CSV / JSON)",
+      "pipeline_link": "Tutvu riigi andmelaadija lähtekoodiga (GitHub)"
+    },
+    "source": {
+      "default": "Riigi {country} andmed pärinevad otse allikast {source}.",
+      "link": "Vaata ametlikku registrit"
+    },
+    "coverage": {
+      "default": "Andmestik hõlmab avaldatud poliitilisi annetusi alates aastast {minYear}.",
+      "preliminary": "Andmed alates aastast {preliminarySince} on esialgsed ja võivad täieneda."
+    },
+    "threshold": {
+      "default": "DonationWatch rakendab selle andmestiku puhul iga tehingu kohta minimaalset kaasamisläve {amount}.",
+      "note": "See lävi on meie määratud, et vältida liigset väikeannetuste hulka, ning see võib olla kõrgem kui allikaregistri avalikustatud miinimumsumma. Annetused, mille absoluutväärtus jääb sellest summast allapoole, filtreeritakse välja.",
+      "all": "See andmestik sisaldab kõiki avaldatud annetusi ilma miinimumsumma filtrita.",
+      "party": "Erakonna kaasamise künnis: Aktiivsetele poliitilistele üksustele keskendumiseks kaasatakse koostatud andmestikku ainult erakonnad, millel on {type, select, count {vähemalt {count} dokumenteeritud annetust} sum {vähemalt {sum} kumulatiivseid annetusi} other {vähemalt {count} dokumenteeritud annetust või {sum} kumulatiivseid annetusi}}.",
+      "party_all": "Erakondade kaasamine: Kaasatud on kõik erakonnad, millel on tehingukünnist ületavaid kehtivaid annetusi.",
+      "net_positive": "Tagasimaksed ja nullsumma filtreerimine: Mõned registrid kajastavad tagastatud annetusi negatiivsete kirjetena. Annetajad või erakonnad, kelle kumulatiivne netoannetuste summa kogu andmestikus on null või negatiivne, jäetakse välja."
+    },
+    "cadence": {
+      "default": "Andmekogusid sünkroonitakse regulaarselt ametliku registriga.",
+      "annual": "Lähteandmeid uuendatakse kord aastas.",
+      "quarterly": "Lähteandmeid uuendatakse kord kvartalis."
+    },
+    "processing": {
+      "summary": "Algandmed läbivad sissevõtmisel deterministliku reeglipõhise normaliseerimise, et ühtlustada üksuste nimesid, koondada piirkondlikud harud ja välistada mittekvalifitseeruvad kirjed:",
+      "step_cleaning": "Teksti baaspuhastus: Kõikidele nimedele tehakse Unicode NFKC normaliseerimine, eemaldatakse ümbritsevad jutumärgid ja lõpukomad ning koondatakse korduvad tühikud.",
+      "step_clustering": "Annetaja võtme klasterdamine ja riigipõhised reeglid: Kanooniline otsinguvõti (mis eemaldab kõik mittetähe- ja mittenumbrimärgid ning teisendab teksti suurtähtedeks) rühmitab tõstu-, tühiku- ja kirjavahemärgivariandid ühe kanoonilise annetaja nime alla. Kui riigi andmelaadijas on seadistatud lisareeglid, ühtlustavad need kohalikke õiguslikke vorme, eemaldavad tiitlid või seovad tuntud aliased — kõik ühendatud variandid on toodud allpool jaotises Koondatud annetajad.",
+      "step_receivers": "Saajate vastendamine ja koondamine: Aruannetes esitatud saajate nimed seotakse kanooniliste erakondadega. Kui registrid esitavad annetusi piirkondlikele, kohalikele või noorteorganisatsioonidele eraldi, koondatakse need üheks erakonna kogusummaks (toodud allpool jaotises Koondatud saajad, kui see on asjakohane).",
+      "donor_identity": "Oluline piirang annetaja identiteedi osas (nimekaimud vs. ühendamata variandid): Ametlikud erakondade rahastamise registrid avaldavad harva üksikisikute kordumatuid identifikaatoreid (nagu isikukoodid, maksukohustuslase numbrid või sünniajad). Annetajate profiililehtedel olevad koondsummad rühmitatakse rangelt normaliseeritud annetaja nime alusel. Seetõttu võib üks annetajaprofiil koondada mitme täpselt sama nime kandva erineva isiku annetused (ülekoondamine), samas kui keskmisi nimesid või kaardistamata lühendeid sisaldavad variandid võivad jääda eraldi profiilideks (alakoondamine)."
+    },
+    "anonymisation": {
+      "summary": "Eristame ametiasutuse tehtud varjamisi ja taotluse alusel tehtud diskreetsust tagavat anonümiseerimist.",
+      "upstream": "Ametlikult varjatud: {count} annetaja kirjet varjati ametiasutuse poolt enne avaldamist.",
+      "by_request": "Taotluse alusel anonümiseeritud: {count} annetaja nime eemaldati taotluse alusel, säilitades summad ja erakondade kogusummad."
+    },
+    "licence": {
+      "output": "Meie koostatud ja normaliseeritud andmestik ning visualiseeringud on avaldatud litsentsi {licence} all.",
+      "export_prompt": "Teadlastele, ajakirjanikele ja andmeteadlastele on riigi {country} täielik normaliseeritud andmestik allalaaditav lehelt {exportLink} ning täpsete sissevõtu- ja normaliseerimisreeglitega saab tutvuda meie lehel {pipelineLink}."
+    },
+    "version": {
+      "last_updated": "Andmestik viimati töödeldud: {date}.",
+      "latest_donation": "Viimane registreeritud tehing andmestikus: {date}.",
+      "explanation": "Töötlemise ajatempel näitab, millal meie andmetorustik viimati ametliku registri andmed sünkroonis ja koostas, samas kui viimase tehingu kuupäev kajastab avaldatud kirjetes esinevat uusimat annetuse kuupäeva."
+    },
+    "disclaimer": {
+      "text": "Koostatud, mitte ametlik: DonationWatch on sõltumatu kodanikualgatus ega ole seotud valimisasutuste ega parteidega. Normaliseerimise tõttu ei tohiks seda andmestikku tsiteerida ametliku riikliku registrina."
+    },
+    "policy_domains": {
+      "title": "Poliitikavaldkonnad ja tegevusalade kategooriad",
+      "intro": "Annetajad riigis {country} on jaotatud 24 konkreetsesse tegevusala kategooriasse, mis on koondatud 6 laiemasse poliitikavaldkonda:",
+      "disclaimer": "Need kategooriad on parima teadmise järgi ja tehisintellekti abil loodud lisakiht, mis põhineb avalikel ettevõtete kirjeldustel, tegevusalaregistritel ja liitude liikmesustel, mitte ametlikel aruandlusklassifikatsioonidel. Otseseid ettevõtteid eristatakse mitme sektori katusorganisatsioonidest ning kategoriseerimata annetajad kuvatakse eraldi. Kui märkate valesti liigitatud annetajat või puuduvat seost, avage palun <github>GitHubis issue</github> või kirjutage aadressil <emailLink>{email}</emailLink>."
+    }
+  },
+  "interests": {
+    "domains": {
+      "energy-resources": {
+        "label": "Energeetika ja ressursid",
+        "description": "Fossiilkütused, kaevandamine, taastuvenergia, põllumajandus ja metsandus"
+      },
+      "built-environment": {
+        "label": "Ehitatud keskkond",
+        "description": "Kinnisvaraarendus, ehitus, taristu ja transport"
+      },
+      "finance-advisory": {
+        "label": "Rahandus ja nõustamine",
+        "description": "Pangandus, pensionifondid, kindlustus, nõustamine, õigusabi ja finantstehnoloogia"
+      },
+      "regulated-consumer": {
+        "label": "Reguleeritud tarbijakaubad",
+        "description": "Hasartmängud, alkohol, tubakas, supermarketid ja külalislahkus"
+      },
+      "health-tech-industry": {
+        "label": "Tervis, tehnoloogia ja tööstus",
+        "description": "Farmaatsia, eratervishoid, tehnoloogia, meedia, kaitsetööstus ja tootmine"
+      },
+      "labor-advocacy": {
+        "label": "Töö ja huvikaitse",
+        "description": "Ametiühingud, poliitilised rahastusfondid ja teemapõhine huvikaitse"
+      }
+    },
+    "tags": {
+      "fossil-fuels": {
+        "label": "Fossiilkütused ja soojusenergia",
+        "description": "Söe, nafta ja gaasi ammutamine ning soojusenergia tootmine"
+      },
+      "mining-metals": {
+        "label": "Kaevandamine ja metallid",
+        "description": "Rauamaagi, kulla, liitiumi ja kriitiliste maavarade kaevandamine"
+      },
+      "renewables-cleantech": {
+        "label": "Taastuvenergia ja puhtad tehnoloogiad",
+        "description": "Päikese- ja tuuleenergia, akusalvestus ja roheline vesinik"
+      },
+      "agriculture-forestry": {
+        "label": "Põllumajandus ja metsandus",
+        "description": "Põllumajandusäri, karjakasvatus, puit ja veeõigused"
+      },
+      "property-development": {
+        "label": "Kinnisvara ja arendus",
+        "description": "Äri- ja elamukinnisvara arendus ning kinnisvarafondid (REIT)"
+      },
+      "construction-infrastructure": {
+        "label": "Ehitus ja taristu",
+        "description": "Tsiviilehitus, maantee- ja raudtee-ehitajad ning ehitusmaterjalid"
+      },
+      "aviation-transport": {
+        "label": "Lennundus, laevandus ja logistika",
+        "description": "Lennufirmad, lennujaamad, sadamad, merendus ja kaubaveologistika"
+      },
+      "banking-lending": {
+        "label": "Pangandus ja laenud",
+        "description": "Kommertspangad, hoiu-laenuühistud ja pangavälised laenuandjad"
+      },
+      "wealth-super-insurance": {
+        "label": "Varahaldus, pensionid ja kindlustus",
+        "description": "Pensionifondid, erakapital, varahaldurid ja kindlustusandjad"
+      },
+      "consulting-accounting-legal": {
+        "label": "Nõustamine, raamatupidamine ja õigus",
+        "description": "Suure neliku audiitor- ja nõustamisfirmad, äriõigusbürood ning PR/lobitöö"
+      },
+      "crypto-fintech": {
+        "label": "Krüpto ja finantstehnoloogia",
+        "description": "Digivarade börsid, plokiahel ja alternatiivsed makselahendused"
+      },
+      "gambling-wagering": {
+        "label": "Hasartmängud ja kihlveod",
+        "description": "Kasiinod, veebikihlveod, loteriid ja mänguautomaadisaalid"
+      },
+      "alcohol-beverages": {
+        "label": "Alkohol ja joogid",
+        "description": "Õlletehased, piiritusetehased, veinitootjad ja alkoholijaemüük"
+      },
+      "tobacco-nicotine": {
+        "label": "Tubakas ja nikotiin",
+        "description": "Tubakatootjad, hulgimüüjad ja e-sigaretid"
+      },
+      "food-supermarkets": {
+        "label": "Supermarketid ja toidukaubandus",
+        "description": "Suured toidupoodide ketid, kiirtoit ja pakendatud toidu tootjad"
+      },
+      "hospitality-tourism": {
+        "label": "Majutus, klubid ja turism",
+        "description": "Hotellid, litsentseeritud klubid, restoranid ja turismiettevõtted"
+      },
+      "pharma-biotech": {
+        "label": "Farmaatsia ja biotehnoloogia",
+        "description": "Ravimitootjad, vaktsiinid ja meditsiiniuuringud"
+      },
+      "private-healthcare": {
+        "label": "Eratervishoid ja eakate hooldus",
+        "description": "Erahaiglad, patoloogia ja eakate hoolekandeasutused"
+      },
+      "tech-telecom-platforms": {
+        "label": "Tehnoloogia, telekom ja platvormid",
+        "description": "Tarkvara, pilveteenused, sotsiaalmeediaplatvormid ja sideoperaatorid"
+      },
+      "media-broadcasting": {
+        "label": "Meedia ja ringhääling",
+        "description": "Kommertstelevisioon, raadio, kirjastamine ja uudistevõrgud"
+      },
+      "defense-aerospace": {
+        "label": "Kaitse- ja lennundustööstus",
+        "description": "Kaitsetööstuse tarnijad, sõjatehnika ja turvasüsteemid"
+      },
+      "manufacturing-automotive": {
+        "label": "Tootmine ja autotööstus",
+        "description": "Tööstustootmine, paber ja pakendid ning sõidukite turustamine"
+      },
+      "trade-unions": {
+        "label": "Ametiühingud",
+        "description": "Avaliku ja erasektori töötajate ametiühingud"
+      },
+      "ideological-issue-advocacy": {
+        "label": "Ideoloogiline ja teemapõhine huvikaitse",
+        "description": "Poliitilised rahastusfondid, mõttekojad ja teemakampaaniad"
+      }
+    }
+  }
+}

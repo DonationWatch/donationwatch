@@ -1,0 +1,10 @@
+{
+  "$schema": "https://turborepo.dev/schema.json",
+  "extends": ["//"],
+  "tasks": {
+    "icons:generate": {
+      "inputs": ["src/icons/**"],
+      "outputs": ["../../apps/web/public/icons.svg"]
+    }
+  }
+}

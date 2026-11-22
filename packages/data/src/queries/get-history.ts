@@ -1,0 +1,48 @@
+import type { CountryConfig } from "@donationwatch/core/types/country-config";
+
+import { donationYear } from "@donationwatch/core/utils/date";
+import {
+  Donation,
+  DonationField,
+  DonationType,
+  ReceiverId,
+} from "@donationwatch/core/utils/types";
+
+export interface HistoryEntry {
+  donor: string;
+  amount: number;
+  date: string;
+  party: ReceiverId;
+  id: string;
+  donationType?: DonationType;
+  originalReceiver?: string;
+}
+
+export const getHistory = (
+  country: CountryConfig,
+  donations: Donation[],
+  years?: string[],
+): HistoryEntry[] => {
+  const history: HistoryEntry[] = [];
+  years ??= country.years;
+
+  const yearsSet = new Set(years);
+  donations.forEach((donation) => {
+    const year = donationYear(donation);
+    if (!yearsSet.has(year)) return;
+
+    history.push({
+      id: donation[DonationField.Id],
+      donor: donation[DonationField.DonorName],
+      amount: donation[DonationField.Amount],
+      date: donation[DonationField.Date],
+      party: donation[DonationField.Receiver],
+      donationType: donation[DonationField.DonationType],
+      ...(donation[DonationField.OriginalReceiver]
+        ? { originalReceiver: donation[DonationField.OriginalReceiver] }
+        : undefined),
+    });
+  });
+
+  return history.toReversed();
+};

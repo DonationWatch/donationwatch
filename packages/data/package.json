@@ -1,0 +1,26 @@
+{
+  "name": "@donationwatch/data",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./countries/*": "./src/countries/*.ts",
+    "./loader/*": "./src/loader/*.ts",
+    "./queries/*": "./src/queries/*.ts",
+    "./config/*": "./src/config/*.ts"
+  },
+  "scripts": {
+    "test:unit": "vitest run ./tests/",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@donationwatch/core": "workspace:*",
+    "@opennextjs/cloudflare": "catalog:",
+    "server-only": "file:../../stubs/server-only"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

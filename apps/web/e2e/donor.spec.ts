@@ -1,0 +1,107 @@
+import type { BrowserBasedLocale } from "@donationwatch/core/utils/locales";
+
+import { makeBrand } from "@donationwatch/core/utils/brand";
+import {
+  DONOR_WITH_UBOs,
+  DONOR_WITH_WIKIPEDIA_ARTICLE,
+} from "@donationwatch/core/utils/config";
+import { formatAnd } from "@donationwatch/core/utils/formatter";
+import { sha1Sync as hash } from "@donationwatch/core/utils/hash";
+import { expect } from "@playwright/test";
+
+import { test } from "./util/fixture";
+
+test.describe("Donor page", () => {
+  test("works as expected", async ({
+    page,
+    donorPage,
+    baseURL,
+    accessibility,
+    meta,
+    locale,
+  }) => {
+    await page.goto(
+      `${baseURL}/germany/donor/${hash(DONOR_WITH_WIKIPEDIA_ARTICLE)}`,
+    );
+
+    await test.step("wikipedia article loads", async () => {
+      await expect(donorPage.wikiQuote).toBeVisible();
+      await expect(donorPage.donorName).toBeVisible();
+      await expect(donorPage.pageTitle).toBeVisible();
+    });
+
+    await test.step("is accessible", async () => {
+      await accessibility.check();
+    });
+
+    await test.step("has correct meta", async () => {
+      await meta.expectConfigured(
+        DONOR_WITH_WIKIPEDIA_ARTICLE,
+        `/${locale}/germany/donors/${hash(DONOR_WITH_WIKIPEDIA_ARTICLE)}.png`,
+      );
+      await meta.expectIndexed();
+    });
+
+    await test.step("donation table loads", async () => {
+      await expect
+        .poll(() => donorPage.changesTable.rows.count())
+        .toBeGreaterThan(0);
+
+      await test.step("is accessible", async () => {
+        await accessibility.check();
+      });
+    });
+  });
+
+  test("shows UBOs if known", async ({
+    page,
+    donorPage,
+    baseURL,
+    accessibility,
+    meta,
+    locale,
+  }) => {
+    await page.goto(`${baseURL}/germany/donor/${hash(DONOR_WITH_UBOs)}`);
+
+    await meta.expectNoIndex();
+
+    await expect(donorPage.uboText).toHaveText(
+      // Branded as BrowserBasedLocale to satisfy formatter types in tests.
+      formatAnd(makeBrand<BrowserBasedLocale>(locale), [
+        "Fake UBO 1",
+        "Fake UBO 2",
+      ]),
+    );
+
+    await test.step("is accessible", async () => {
+      await accessibility.check();
+    });
+  });
+
+  test("country with DonationType feature shows donation type section", async ({
+    baseURL,
+    page,
+    donorPage,
+  }) => {
+    await page.goto(
+      `${baseURL}/latvia/donor/${hash(DONOR_WITH_WIKIPEDIA_ARTICLE)}`,
+    );
+
+    await donorPage.donationTypeSankey.expectHasFeature();
+  });
+
+  test("loads aggregate donor page for countries without named donors feature", async ({
+    baseURL,
+    page,
+    donorPage,
+  }) => {
+    const response = await page.goto(
+      `${baseURL}/france/donor/${hash(DONOR_WITH_WIKIPEDIA_ARTICLE)}`,
+    );
+
+    expect(response?.status()).toBe(200);
+    await expect
+      .poll(() => donorPage.changesTable.rows.count())
+      .toBeGreaterThan(0);
+  });
+});

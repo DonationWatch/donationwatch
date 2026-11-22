@@ -1,0 +1,1301 @@
+{
+  "copyright": "Autorská práva",
+  "description": "DonationWatch poskytuje jasný přehled o dárcích a stranách, což usnadňuje pochopení politického financování díky jednoduchému vysvětlení složitých dat.",
+  "title": "Dary stranám {country}",
+  "sum": "Součet",
+  "donation_count": "Počet darů",
+  "average": "Průměr",
+  "donations_by_party": "Dary podle strany",
+  "donations_per_year": "Dary za rok",
+  "party_donations": "Dary stranám",
+  "more": "Více",
+  "data_since": "Od roku {year}",
+  "view_party": "Zobrazit stránku strany {party}",
+  "faq": "Často kladené otázky",
+  "navigation": {
+    "fun": "Zajímavosti",
+    "about": "O nás",
+    "other_countries": "Další země",
+    "imprint": "Impresum",
+    "privacy": "Zásady ochrany osobních údajů",
+    "transparency": "Transparentnost",
+    "methodology": "Metodika",
+    "sources": "Zdroje",
+    "export": "Export dat",
+    "bar_chart_race": "Závod sloupcových grafů",
+    "compare_parties": "Porovnat strany",
+    "support_us": "☕ Podpořte provoz serveru",
+    "enterprise": "Podnikové API",
+    "on_this_page": "Na této stránce"
+  },
+  "data": {
+    "loading": "Načítání obsahu...",
+    "error": "Chyba při načítání dat"
+  },
+  "sidebar": {
+    "sidebar": "Postranní panel",
+    "toggle": "Přepnout postranní panel",
+    "donations": "Dary",
+    "all_countries": "Všechny země",
+    "tools": "Nástroje",
+    "show_all": "Zobrazit vše ({num})",
+    "show_less": "Zobrazit méně",
+    "more": "Více"
+  },
+  "search": {
+    "filter": "Vyhledávání...",
+    "filter_description": "Vyhledávání stran, let nebo dárců",
+    "parties": "Strany",
+    "years": "Roky",
+    "legislative_years": "Legislativní roky",
+    "empty": "Nebyly nalezeny žádné výsledky",
+    "donors": "Dárci"
+  },
+  "page_title": {
+    "years": {
+      "description": "V roce {year} obdrželo {parties} stran v {country} celkem {sum} z {count} darů nad {minAmount}. Prozkoumejte podrobné rozdělení podle strany, dárce a trendů ve financování politiky.",
+      "overview": "Politické dary v {country} ({year}) – Roční přehled a financování",
+      "changes": "Nedávné změny v politických stranových darech v {country} pro rok {year}",
+      "donors": "Seznam dárců politických stran a největší dárci v {country} ({year})",
+      "timeline": "Časová osa politických stranových darů v {country} pro rok {year}",
+      "origin": "Geografický přehled darů stran v {country} pro rok {year}"
+    },
+    "party": {
+      "donors": "{party}: Seznam dárců a přehled financování ({country})",
+      "changes": "Nedávné změny v darech pro {party} ({country})",
+      "timeline": "{party}: Časová osa financování a historie darů ({country})",
+      "origin": "Geografický přehled darů pro {party} ({country})",
+      "description": "Seznam dárců a přehled financování pro {party} v {country}. Zjistěte, které firmy, organizace a jednotlivci přispívají: {count} darů nad {minimumAmount} v celkové výši {sum} od roku {year}.",
+      "timeline_description": "Sledujte přiznané politické dary a historii financování pro {party} v {country}: kumulativní součty, historické trendy a roční přehledy.",
+      "changes_description": "Poslední politické dary a novinky ve financování pro {party} v {country}: chronologický přehled nově nahlášených příspěvků, dat a částek.",
+      "origin_description": "Geografický původ politických darů pro {party} v {country}: transparentní rozdělení podle států, regionů a zahraničních zdrojů."
+    },
+    "donor": {
+      "overview": "{donor} – Politické dary a historie financování ({country})",
+      "description": "Zjistěte, kam směřovaly politické dary {donor}. {sum} darováno v {count} příspěvcích pro {parties} strany v {country} od roku {minYear}."
+    }
+  },
+  "chart": {
+    "save_as_image": "Uložit jako obrázek",
+    "toggle_fullscreen": "Přepnutí na celou obrazovku",
+    "reset_zoom": "Obnovení zoomu",
+    "filtered": "filtrovaná datová sada"
+  },
+  "over_min_public_amount": "více než {amount}",
+  "over_threshold": "{type, select, count {pouze strany s ≥ {count} dary} sum {pouze strany s ≥ {sum}} other {pouze strany s ≥ {count} dary nebo ≥ {sum}}}",
+  "prelim_data": "předběžná data od roku {year}",
+  "common": {
+    "date": "Datum",
+    "party": "Strana",
+    "donor": "Dárce",
+    "amount": "Částka",
+    "anonymizedDonor": "Anonymizovaný dárce",
+    "redactedDonor": "Redigovaný dárce",
+    "donorToPartyByYear": "Dárci v roce {year}",
+    "country": "Země",
+    "state": "Stát",
+    "summary": "Souhrn",
+    "download_format": "Stáhnout {format}",
+    "view_source": "Zobrazit zdroj",
+    "donation_type": "Typ daru",
+    "donated_to": "Darováno pro {recipient}"
+  },
+  "sort": {
+    "asc": "Řadit vzestupně",
+    "desc": "Řadit sestupně",
+    "clear": "Zrušit řazení"
+  },
+  "old_data_warning": {
+    "description": "Poslední dar: {date}.\nNásledující záznamy čekají na oficiální zveřejnění."
+  },
+  "footer": {
+    "sources": "Zdroje",
+    "build": "Stav {date}",
+    "build_since": "Od {date}, od roku {year}",
+    "published_by": "Jak bylo zveřejněno {source}",
+    "charts_license": "Grafy licencovány pod {license} s uvedením zdroje"
+  },
+  "header": {
+    "home": "Domů",
+    "language_selection": "Výběr jazyka",
+    "country_selection": "Výběr země"
+  },
+  "actions": {
+    "close": "Zavřít",
+    "play": "Přehrát",
+    "pause": "Pozastavit",
+    "restart": "Restartovat"
+  },
+  "donor_dialog": {
+    "title": "Informace o dárci",
+    "summary": "Shrnutí"
+  },
+  "donation_dialog": {
+    "title": "Detaily daru",
+    "donor": "Dárce",
+    "country": "Země",
+    "state": "Stát",
+    "receiver": "Příjemce",
+    "donation_amount": "Částka daru",
+    "date": "Datum"
+  },
+  "root": {
+    "title": "Open source sledovač darů politickým stranám",
+    "subtitle": "Sledujte a prozkoumejte politické dary napříč více zeměmi. Pochopte, kdo financuje politické strany a jak peníze proudí po celém světě.",
+    "enterprise": {
+      "title": "Enterprise API (Beta)",
+      "p0": "Potřebujete programový přístup k mapování entit napříč registry? V současné době vyvíjíme vysoce dostupné REST API s OpenAPI specifikacemi, navržené speciálně pro týmy institucionální compliance a analýzy rizik."
+    },
+    "stats": {
+      "countries": "Pokryté země",
+      "parties": "Politické strany",
+      "donations": "Jednotlivé dary",
+      "currencies": "Sledované měny"
+    },
+    "countries": {
+      "title": "Prozkoumejte politické dary podle zemí",
+      "subtitle": "Vyberte zemi a získejte přístup k podrobným záznamům o darech, údajům o financování stran a informacím o dárcích."
+    },
+    "biggest_donations": {
+      "title": "Největší politické dary a dárci",
+      "text": "Prozkoumejte největší jednotlivé politické příspěvky a největší kumulativní dárce zaznamenané v národních registrech sledovaných platformou DonationWatch; všechny částky jsou přepočteny na EUR. Veřejné financování a státní dotace jsou vyloučeny, aby se pozornost soustředila na soukromé a firemní příspěvky.",
+      "single_donations_title": "Největší jednotlivé dary",
+      "single_donations_footer": "Seřazeno podle jednotlivé transakce",
+      "top_donors_title": "Největší kumulativní dárci",
+      "top_donors_footer": "Agregováno napříč všemi záznamy",
+      "converted_to_eur": "Přepočteno na EUR",
+      "rates_as_of": "Směnné kurzy (k datu {date}):"
+    },
+    "why": {
+      "title": "Proč je transparentnost politických darů důležitá",
+      "p0": "Demokracie závisí na informovaných občanech. Tím, že zpřístupňujeme data o politických darech a umožňujeme je snadno prozkoumávat, pomáháme lidem porozumět finančním vztahům, které utvářejí jejich politické prostředí. Transparentnost ve financování politiky buduje důvěru, posiluje odpovědnost a umožňuje voličům činit informovaná rozhodnutí."
+    },
+    "open_source": {
+      "title": "Open Source",
+      "p0": "DonationWatch je open source. Na {github} si můžete prohlédnout kód, nahlásit problémy nebo přispět."
+    }
+  },
+  "biggest_donations": {
+    "text": "Od roku {minYear} dosáhl největší zveřejněný jednotlivý dar v {country} částky {amount} od {donor} pro {party} v roce {year}. Následují {others}.",
+    "list": "{amount} od {donor} pro {receiver}"
+  },
+  "home": {
+    "most_recent": "Nejnovější dary",
+    "hero": {
+      "subtitle": "Sledování darů politických stran v {country}",
+      "subtitle_no_country": "Sledování darů politických stran"
+    },
+    "last_period": "Nejnovější rok:",
+    "previous_period": "Dary z předchozího roku.",
+    "what": {
+      "title": "Co je to?",
+      "summary": "Dary stranám jsou důležitou součástí politiky. Jsou významným indikátorem politické podpory.\n\nSnažíme se tato data zobrazit přehledně a srozumitelně.",
+      "threshold": "Vzhledem k velkému počtu menších politických stran sledujeme pouze dary pro strany, které splní určitý práh. Současný práh je stanoven na {type, select, count {{count} darů} sum {celkem {sum}} other {{count} darů nebo celkem {sum}}} příspěvků této straně, bez ohledu na výši jednotlivých darů.",
+      "no_donors": "V důsledku národních předpisů {country} nezveřejňuje identity jednotlivých politických dárců. Z tohoto důvodu zobrazujeme auditované souhrnné částky za každou stranu místo jednotlivých transakcí. Funkce jako „Největší dárci“ nebo „Vyhledávání dárců“ jsou v tomto regionu deaktivovány.",
+      "source": {
+        "austria": "Zde použité údaje pocházejí z rakouského Účetního dvora a zahrnují všechny stranické dary zdokumentované od roku 2012.\n\nUpozornění: Před 8. červencem 2019 musely politické strany hlásit rakouskému účetnímu dvoru individuální dary nad 51 000 eur (do roku 2018 nad 50 000 eur). Od července 2019 je limit pro vykazování 2 500 eur.\n\nÚdaje stran se obvykle aktualizují čtvrtletně.",
+        "germany": "Data zde použitá pocházejí od Německého spolkového sněmu a zahrnují všechny stranické dary zaznamenané od roku 2010 nad 50 000 € a od 5. března 2024 nad 35 000 €.",
+        "switzerland": "Data zde použitá pocházejí od Švýcarského federálního kontrolního úřadu a zahrnují všechny stranické dary zaznamenané od roku 2023.",
+        "netherlands": "Zde uvedené informace pocházejí od vlády Nizozemska a zahrnují všechny politické dary zaznamenané od roku 2022, které přesahují 1 000 €, jak je uvedeno ve výroční zprávě „Overzicht van giften aan politieke partijen en hun neveninstellingen“.\n\nPro aktuální rok jsou zahrnuty pouze dary přesahující 10 000 €, na základě datové sady „Overzicht substantiële giften aan politieke partijen“.\n\nUpozornění: Některé dary neobsahují konkrétní údaje o datu a proto nejsou zahrnuty do časových řad nebo jiných vizualizací založených na datech.\n\nDary vykázané pro SP a GL se mohou zdát relativně vysoké, protože obě strany požadují, aby jejich poslanci a administrátoři přispívali významnou část svého platu straně.",
+        "europeanunion": "Zde uvedené údaje pocházejí od Úřadu pro evropské politické strany a evropské politické nadace a zahrnují všechny zdokumentované dary stran a nadací od roku 2018. Vzhledem k významu evropských politických nadací sledujeme a zobrazujeme jejich dary podobně jako dary evropských politických stran.\n\nVzhledem k tomu, že oficiální údaje neobsahují přesná data transakcí, nejsou k dispozici žádné časové řady ani podobná vizuální znázornění založená na datech.\n\nUpozorňujeme, že v období před volbami do Evropského parlamentu v roce 2024 (od 6. prosince 2023 do 10. června 2024) platily zvláštní požadavky na vykazování darů, kdy úřad podával zprávy každý týden a včas je zveřejňoval.\nOd 10. června 2024 je třeba neprodleně hlásit pouze dary nad 12 000 eur. Ostatní dary budou k dispozici až po předložení roční účetní závěrky.\n\nPokud jsou úřadem APPF v záznamech firemních dárců uvedena identifikační čísla (např. české IČO, belgické KBO, francouzské SIREN, nizozemské KVK atd.), jsou tato čísla extrahována, zkontrolována pomocí kontrolního součtu a přímo propojena s příslušným oficiálním národním obchodním rejstříkem.",
+        "estonia": "Zde použité údaje pocházejí z estonského Výboru pro monitorování financování politických stran a zahrnují všechny politické dary zdokumentované od roku 2014, které přesahují 1 euro.\n\nPolitické strany v Estonsku jsou povinny čtvrtletně vykazovat své příjmy včetně přijatých darů.\nÚdaje na internetových stránkách výboru jsou odpovídajícím způsobem čtvrtletně aktualizovány.",
+        "czechrepublic": "Použitá data pocházejí z Úřadu pro dohled nad hospodařením politických stran a politických hnutí a zahrnují všechny politické dary, které jsou tam od roku 2018 zdokumentovány a přesahují 25 Kč.\n\nTento rozsah také zahrnuje všechny příspěvky stranám nebo politickým hnutím, které buď obdržely více než 100 individuálních darů, nebo překročily celkovou částku darů ve výši 1 milionu Kč, bez ohledu na velikost jednotlivých příspěvků. Data jsou aktualizována jednou ročně.\nUrčení typu dárce je založeno na identifikaci dárce jako fyzické osoby, pokud jsou vyplněna pole firstName i lastName.",
+        "latvia": "Zde použitá data pocházejí z Úřadu pro prevenci a boj proti korupci (KNAB) a zahrnují všechny politické příspěvky zdokumentované od roku 2015, které překračují 1 €. Tento soubor dat zahrnuje peněžní dary, věcné dary a služby a také stranické vstupní a členské příspěvky.",
+        "australia": "Zde použité údaje pocházejí z Australian Electoral Commission (AEC), konkrétně ze souboru „Donations Made Details“, který AEC zveřejňuje. Zahrnuje všechny politické dary v něm evidované od roku 2014, přesahující 1 AUD.\n\nJe dobré upozornit, že dataset AEC může obsahovat některé překlepy, což může vést k tomu, že některé dary nebudou zahrnuty nebo nebudou správně přiřazeny ke konkrétní straně kvůli nekonzistencím při zadávání dat. Roční zveřejnění AEC jsou navíc vydávána každý rok 1. února, ale data neposkytují úplný obraz všech příspěvků kvůli prahu pro zveřejnění ve výši $15,000.\n\nTypy dárců se klasifikují porovnáním názvů dárců. Všechny běžné odborové svazy jsou ručně mapovány na typ dárce „Odbory“. Společnosti se rozpoznávají kontrolou konkrétních firemních identifikátorů v názvu dárce: „Pty“ (Proprietary), „Ltd“ na konci názvu, „Corporation“ nebo „Corp“.",
+        "unitedkingdom": "Zde použitá data pocházejí od Electoral Commission a zahrnují všechny politické dary, které tam byly zdokumentovány od roku 2010 a přesahují 1 000 £.\n\nZákladní registr Electoral Commission zpětně přiřazuje všechny historické transakce k aktuálnímu oficiálně registrovanému názvu každé strany. Historické dary stranám před jejich oficiálním přejmenováním nebo změnou názvu (například dary pro The Brexit Party před rokem 2021) jsou proto zobrazeny pod aktuálním registrovaným názvem strany (Reform UK).\n\nÚdaje o darech jsou aktualizovány čtvrtletně.",
+        "serbia": "Údaje zde použité nepocházejí od vlády, ale od neziskové organizace „Centrum pro investigativní žurnalistiku Srbska“ („Centar za istraživačko novinarstvo Srbije“ - CINS), která laskavě shromáždila údaje o darech Srbské protikorupční agentury.\n\nTyto údaje zahrnují všechny politické dary zdokumentované tamtéž od roku 2015.\n\nVzhledem k tomu, že soubor dat neposkytuje konkrétní informace o datu jednotlivých darů, není bohužel možné zobrazit časové osy ani jiné časové vizualizace.",
+        "croatia": "Zde použitá data pocházejí ze Státní volební komise Chorvatské republiky (DIP) a zahrnují všechny politické dary s peněžní hodnotou přesahující 1 €, které jsou dokumentovány od roku 2019.\nDatová sada používá pro každý vykazovaný rok pouze poslední zveřejněný dokument o darech (podle údajů izbori), aby se předešlo duplicitám z dřívějších verzí zprávy za tentýž rok.\nVšechny dary jsou zobrazeny v eurech, zatímco podkladová datová sada používá do roku 2024 kuny. Dary původně poskytnuté v kunách se převádějí na eura pomocí přibližných směnných kurzů pro každé pololetí období 2019–2024: H1 (0.1340, 0.1335, 0.1332, 0.1329, 0.1326) a H2 (0.1341, 0.1338, 0.1334, 0.1327, 0.1328).",
+        "canada": "Zde použité údaje pocházejí od Elections Canada a jsou založeny na datovém souboru „contributions as submitted“. Zahrnují všechny politické dary s peněžní hodnotou přesahující 500 CAD, které byly zaznamenány od roku 2015. Zahrnuty jsou všechny položky, které jsou součástí zprávy „Statement of Contributions Received“ z volební události „Annual“ pro „Registered parties“.",
+        "georgia": "Zde uvedené informace pocházejí z Úřadu pro boj s korupcí (ანტიკორუფციული ბიურო﻿) Gruzie a zahrnují všechny politické dary zaznamenané od roku 2011, které přesahují 1 GEL. Datový soubor obsahuje pouze příspěvky klasifikované jako typ #10 (Finanční dary) nebo typ #16 (Finanční dary od právnických osob).",
+        "norway": "Zde použitá data pocházejí z oficiálních publikací o financování politických stran od Statistics Norway (SSB) a Partifinansiering.no. Uvedené součty jsou agregovány z více nahlášených přijímajících subjektů (například centrálních, regionálních, místních a mládežnických jednotek) do jediného celku za každou stranu, přičemž podkladové mapování příjemců zůstává k dispozici pro transparentnost.\n\nDatová sada pro Norsko je aktualizována v ročním cyklu a odráží tak tempo zveřejňování těchto podkladových údajů.",
+        "ukraine": "Zde použité údaje pocházejí z Národní agentury pro prevenci korupce (NAZK) prostřednictvím portálu PolitData. Obsahují všechny záznamy označené v oficiálních zprávách jako „peněžní příspěvky“.\n\nPoznámka k rozsahu dat: Tento součet odráží pouze přímé finanční převody. Nezahrnuje státní financování poskytované parlamentním stranám ani nepeněžní (věcné) příspěvky, jako jsou zboží a služby.\n\nKvůli rozsáhlé ruské invazi bylo povinné vykazování politických stran od začátku roku 2022 do konce roku 2023 z bezpečnostních a logistických důvodů pozastaveno. Po přijetí zákona č. 3337-IX nyní strany zpětně doplňují své zprávy. Údaje za roky 2022–2025 se stále aktualizují, jak NAZK zpracovává tyto podklady.",
+        "france": "Data použitá zde pocházejí z Commission Nationale des Comptes de Campagne et des Financements Politiques (CNCCFP) a zahrnují všechny politické dary (vykázané v eurech) uvedené v poli „Dons_de_personne_physique“.\n\nNa rozdíl od jiných regionů jsou francouzská data zveřejňována jako roční souhrn za jednotlivé strany a totožnost jednotlivých dárců je chráněna zákony o ochraně soukromí.",
+        "sweden": "Zde použitá data pocházejí z Kammarkollegiet, oficiálního švédského vládního registru financování politických stran. Aby tento souhrn poskytl přesný obraz čistě soukromé a občanské podpory (vykazované v SEK), zahrnuje přímé příspěvky zaznamenané v kategorii 4 (\"Insamling av kontanter\") a kategorii 5 (\"Bidrag\"). Vnitrostranické převody, státní dotace a příjmy z loterií byly výslovně vyloučeny, aby se zabránilo dvojímu započítání a aby bylo možné přesně oddělit externí dary. Všechna data jsou seskupena podle politické stranické příslušnosti (\"Partitillhörighet\").",
+        "southafrica": "Zde použité údaje pocházejí od Volební komise Jihoafrické republiky (IEC) a zahrnují všechna zveřejněná prohlášení o financování politických stran (oddíl 9(1)) od roku 2021, včetně platných pozdních podání. Nepřímé příspěvky do Fondu vícestranické demokracie (Multi-Party Democracy Fund) a duplicitní zprávy ze strany dárců (oddíl 9(2)) jsou vyloučeny.\n\nPoznámka k prahovým hodnotám: Politické strany byly povinny hlásit dary převyšující 100 000 ZAR na dárce a rok, dokud nebyla 1. dubna 2024 zákonná prahová hodnota pro zveřejnění zvýšena na 200 000 ZAR.",
+        "unitedstates": "Zde uvedená data pocházejí z hromadných zveřejnění Federální volební komise (FEC) a zahrnují politické příspěvky zdokumentované od roku 2016.\n\nNa rozdíl od parlamentních systémů, kde dary proudí přímo do ústředí stran, je federální financování kampaní v USA decentralizované mezi volební výbory kandidátů, stranické organizace a výbory pro nezávislé výdaje. Aby poskytla věrný obraz finančních koalic stojících za jednotlivými proudy, konsoliduje DonationWatch hlavní nástroje financování do sjednocených celkových součtů stran („Demokraté“, „Republikáni“ a „Bipartizanské a nadstranické Super PAC“). Patří sem:\n• Oficiální stranické výbory: celostátní, kongresové a státní stranické výbory (např. DNC, RNC, DSCC, NRSC, DCCC, NRCC)\n• Autorizované volební výbory federálních kandidátů\n• Politicky orientované Super PAC, Hybrid PAC a společné výbory pro fundraising (Joint Fundraising Committees) (např. Senate Majority PAC, Future Forward, MAGA Inc., Senate Leadership Fund, Harris Victory Fund, Trump 47 Committee)\n• Nadstranické a průmyslově zaměřené Super PAC podporující kandidáty obou hlavních stran (např. Fairshake, United Democracy Project)\n\nProč některé PAC nejsou přiřazeny ke stranám:\nOficiální stranické výbory a výbory kandidátů uvádějí oficiální stranickou příslušnost v záznamech FEC a jsou přiřazovány automaticky. Super PAC a Hybrid PAC fungují jako nezávislé subjekty bez formálního prohlášení o stranické příslušnosti; DonationWatch průběžně prověřuje a mapuje všechny významné výbory s kumulativními příjmy 5 milionů USD a více. Menší jednooborové skupiny, korporátní PAC a výbory pod touto hranicí bez jasné vazby zůstávají nepřiřazené, aby se předešlo spekulativním přiřazením, a nezapočítávají se do stranických součtů.\n\nNormalizace dat a rozsah:\n• Minimální částka: Sledují se pouze příspěvky ve výši 10 000 USD a vyšší. Vzhledem k tomu, že federální zákon omezuje přímé dary kandidátům (3 300 USD na volby) a tradičním účtům PAC (5 000 USD ročně), tato hranice izoluje vysoké částky plynoucí stranickým výborům, společným výborům pro získávání finančních prostředků (JFC), Super PAC a neomezeným účtům Hybrid PAC.\n• Neziskové organizace 501(c)(4) („Dark Money“): Příspěvky od organizací sociálního zabezpečení 501(c)(4) (např. Future Forward USA Action, One Nation) pro Super PAC jsou zaznamenány jako příjmy od organizací (ORG), protože tyto subjekty nezveřejňují své skutečné dárce FEC.\n• Deduplikace: Příspěvky JFC jsou zaznamenány při počátečním přijetí, zatímco interní přerozdělení a alokační memoranda jsou vyřazena. Průchozí transakce (WinRed, ActBlue) a převody mezi sledovanými výbory jsou vyloučeny, aby se finance započítávaly pouze jednou.\n• Vyloučení: Vrácené částky se odečítají od celkových součtů dárců. Vlastní financování kandidáty (půjčky a osobní příspěvky) a provozní příjmy (úroky, dividendy, prodej aktiv) jsou vyloučeny."
+      },
+      "source_link": "Zdroj dat"
+    },
+    "list": {
+      "subtitle": "Legislativní období",
+      "title": "Předchozí legislativní období",
+      "summary": "Náš přehled legislativních období poskytuje celkový přehled všech darů během legislativního období. Klikněte na kartu pro zobrazení detailů konkrétního legislativního období."
+    },
+    "years": {
+      "title": "Roční přehled darů",
+      "subtitle": "Agregované součty v průběhu roku",
+      "more": "Zobrazit všechna ostatní léta",
+      "summary": "Náš roční přehled darů poskytuje souhrn všech darů pro každý rok. Klikněte na kartu pro zobrazení detailního přehledu roku."
+    },
+    "parties": {
+      "title": "Dary stranám",
+      "subtitle": "Detaily jednotlivých stran",
+      "more": "Zobrazit všechny ostatní strany",
+      "summary": "Náš přehled darů představuje kumulativní zobrazení všech darů pro každou stranu. Klikněte na kartu pro zobrazení detailních informací o darech."
+    },
+    "donors": {
+      "title": "Dary dárců",
+      "subtitle": "Podrobnosti o jednotlivých dárcích",
+      "summary": "Objevte náš přehled dárců, který ukazuje nejvýznamnější finanční přispěvatele od roku {minYear}. Kliknutím na dárce zobrazíte podrobné informace o jeho příspěvcích."
+    }
+  },
+  "stacked_years": {
+    "title": "Výše příspěvku za rok",
+    "subtitle": "Agregovaný součet zveřejněných příspěvků v {country}, podle roku od {years}.",
+    "preliminary": "Přerušované sloupce označují předběžná data, která podléhají dalším aktualizacím zveřejnění."
+  },
+  "years": {
+    "title": "Dary stranám",
+    "subtitle": "Kumulativní součet zveřejněných darů každé straně v {country}, {years}.",
+    "goto_year": "Přejít na {year}",
+    "no_date_omitted": "Nezahrnuje {count} darů ({sum}), u kterých zdroj uvedl pouze rok.",
+    "no_data": {
+      "title": "Žádná data k dispozici",
+      "summary": "Je nám líto, ale zatím nemáme žádné údaje o darech pro rok {year}.",
+      "last_year": "Případně se podívejte na údaje z roku {year}."
+    }
+  },
+  "overview": {
+    "title": "Přehled",
+    "detail": {
+      "title": "Top politické strany a jejich celkové dary",
+      "summary": "Tento seznam představuje hlavní politické strany a jejich kumulované dary v určitém období, seřazené podle výše darů.",
+      "summary2": "V letech {years} obdrželo celkem {partyCount} stran od {donationCount} darů přes {minimumAmount} celkovou částku {donationSum}.",
+      "most_donations": "{party} obdržela nejvíce darů s celkovým počtem {count} příspěvků a celkovou částkou {sum}.",
+      "highest_sum": "5 stran s nejvyšším celkovým objemem darů jsou {parties}."
+    },
+    "scatter": {
+      "title": "Distribuce darů",
+      "subtitle": "Individuální dary každé straně podle výše a četnosti v {country} od {years}. Vyneseno na logaritmické škále pro zobrazení rozložení napříč různými řády velikosti.",
+      "summary": "Přehled distribuce darů stran nabízí stručnou analýzu rozložení darů mezi různými politickými stranami. Každý bod představuje stranu, kde osa x ukazuje částky darů a rozptyl udává četnost darů.",
+      "span": "Největší rozdíl v darech zaznamenala strana {biggestSpanParty}, kde rozdíl mezi nejmenším a největším darem činil {biggestSpanAmount}."
+    },
+    "pie": {
+      "title": "Distribuce darů stran",
+      "subtitle": "Celkové zveřejněné dary každé straně, {country}, {years}."
+    }
+  },
+  "changes": {
+    "title": "Změny",
+    "description": "Prozkoumejte podrobnou tabulku darů politickým stranám v {country} za rok {year}, pouze příspěvky nad {minAmount}, seřazené podle data transakce, s informacemi o dárci a částce.",
+    "detail": {
+      "title": "Dary stranám podle data transakce",
+      "summary": "Na této stránce jsou Dary stranám seřazeny podle data transakce, přičemž nejnovější dary jsou uvedeny nahoře. Jsou zde uvedeny informace o tom, kolik peněz každá strana od jakého dárce obdržela."
+    }
+  },
+  "donors": {
+    "title": "Dárci",
+    "description": "Zobrazte si úplný seznam dárců za rok {year} politickým stranám v {country}. Zjistěte, kdo daroval nejvíce a kolik každý přispěl.",
+    "detail": {
+      "title": "Dary od dárců politickým stranám",
+      "subtitle": "Celkové zveřejněné příspěvky jednotlivých dárců každé politické straně v {country}, {years}.",
+      "summary": "Mapa stromů vizualizuje dary stran v přehledném zobrazení. Na nejvyšší úrovni jsou zobrazeni jednotliví dárci, kteří jsou znázorněni obdélníky, jejichž velikost je úměrná výši jejich darů.",
+      "summary2": "Pod každým dárcem jsou další obdélníky představující příslušné strany, které jsou příjemci daru. Toto hierarchické uspořádání poskytuje rychlý přehled o rozložení darů a na první pohled ukazuje, kolik příjemců jednotliví dárci podpořili.",
+      "unique_donors": "Počet různých dárců v roce {years} činí {count} dárců.",
+      "biggest_donor": "Nejvyšší celkový dar ve výši {amount} poskytl {donor}.",
+      "most_donations": "{donor} je s {count} dary (celková částka: {sum}) na prvním místě v žebříčku nejčastějších individuálních dárců.",
+      "most_unique_parties": "{donor} poskytla dary celkem {count} různým stranám (celková částka: {sum}), což ukazuje největší rozmanitost mezi příjemci darů.",
+      "top_3": "V letech {years} jsou největšími {amount} dárci: {donors}."
+    },
+    "list": {
+      "title": "Nejlepší jednotliví dárce podle celkových příspěvků",
+      "p0": "Tato část představuje seřazený seznam všech jednotlivých dárců v rámci vybraných let, seřazený podle kumulativního součtu jejich publikovaných darů. Tím jsou zvýrazněni dárci, kteří přispěli nejvíce."
+    },
+    "sankey": {
+      "title": "Sankeyho diagram"
+    },
+    "histogram": {
+      "title": "Rozdělení dárců podle počtu jedinečných příjemců",
+      "subtitle": "Počet jedinečných politických stran, které obdržely zveřejněné příspěvky od jednotlivých dárců v {country}, {years}.",
+      "p0": "Tento graf poskytuje přehled o tom, jak jednotliví dárci rozdělují své příspěvky mezi politické strany, a ukazuje, zda mají tendenci soustředit svou podporu na jednu stranu nebo ji v průběhu času rozdělovat mezi více stran.",
+      "p1": "V roce {years} byl nejvyšší počet různých stran, které podpořil jeden dárce, {max}. Pouze {donors} dárce přispěl na {max} stran. V průměru každý dárce podpořil {mean} stran (medián: {median}).",
+      "p2": "Z {totalDonors} dárců přispělo {singlePartyDonors} pouze jedné straně, což představuje {percentage} dárců.",
+      "tooltip": "{donors} dárců • {parties} jedinečných stran",
+      "item": "{donors} dárců přispělo na {parties} stran"
+    }
+  },
+  "timeline": {
+    "title": "Vývoj",
+    "description": "Zobrazte časovou osu všech darů politickým stranám v {country} za {years}, s měsíčními součty a trendy v průběhu let.",
+    "year_resolution_note": "Tento pohled je standardizován na roční rozlišení, protože některé záznamy v tomto rozsahu uvádějí pouze rok příspěvku. Aby bylo možné zajistit úplné a přesné srovnání bez použití odhadovaných dat, jsou všechna data agregována podle roku.",
+    "detail": {
+      "title": "Časový průběh darů stranám",
+      "summary": "Prohlédněte si interaktivní čárový graf níže, abyste sledovali historii darů každé politické strany v průběhu času. Osa x představuje data, zatímco osa y zobrazuje částky darů. Každá politická strana je zobrazena samostatnou čarou, která se zvyšuje s každým darem."
+    },
+    "days": "V zemi {country} byly během {years} zaznamenány dary ve {n} různých dnech."
+  },
+  "per_year_party": {
+    "title": "Dary pro {party} za rok",
+    "subtitle": "Roční součet zveřejněných darů pro {party} v {country}, {years}."
+  },
+  "per_month": {
+    "title": "Dary za měsíc",
+    "subtitle": "Měsíční součet zveřejněných darů každé straně v {country}, {years}.",
+    "description": "Tento sloupcový graf znázorňuje údaje o měsíčních darech pro více politických stran. Osa x znázorňuje měsíce, osa y představuje částky darů a každý sloupec je barevně rozdělen, aby zobrazoval příspěvky jednotlivých stran, což umožňuje snadné porovnání darů stran v rámci jednotlivých měsíců i mezi nimi.",
+    "highest_sum": "{month} měl nejvyšší celkový počet darů, a to {count} dary v celkové výši {sum}.",
+    "most_months": "{party} obdržela dary v {count} měsících, což je nejvíce měsíců s příspěvky zevšech stran.",
+    "month_most_donations": "Měsíc s nejvyšším počtem darů byl {month}, kdy bylo získáno celkem {count} individuálních darů."
+  },
+  "per_year": {
+    "title": "Dary za rok",
+    "subtitle": "Roční souhrn zveřejněných darů jednotlivým stranám v {country}, {years}.",
+    "description": "Tento skládaný sloupcový graf znázorňuje roční data o darech pro různé politické strany. Osa x zobrazuje roky, osa y představuje částky darů a každý sloupec je rozdělen barvami, které ukazují příspěvky jednotlivých stran, což umožňuje snadné srovnání darů mezi stranami i napříč roky."
+  },
+  "party": {
+    "donors": {
+      "title": "Dárci pro {party}",
+      "subtitle": "Celkové zveřejněné příspěvky jednotlivých dárců straně {party} v {country}.",
+      "summary": "Tato stránka prezentuje všechny oficiálně zveřejněné dary nad {minSum} pro {party} od roku {minYear}, seskupené podle dárců pro zobrazení celkových příspěvků v čase. Všechny údaje jsou založeny na oficiálních zveřejněních publikovaných {source}, zobrazené jak jako treemap pro vizuální srovnání, tak jako rozbalitelný seznam podkladových transakcí."
+    },
+    "donor_list": {
+      "title": "Největší dárci strany {party} podle celkových příspěvků",
+      "p0": "Prozkoumejte subjekty a jednotlivce přispívající straně {party}. Tento seznam je seřazen podle kumulativní výše darované částky a zobrazuje jak celkovou sumu, tak relativní procentuální podíl na celkovém financování strany. Každou položku lze rozbalit a zobrazit úplnou chronologickou historii jednotlivých darů z daného zdroje."
+    },
+    "donor_types": {
+      "title": "Typy dárců",
+      "treemap": {
+        "title": "Typy dárců pro {party}",
+        "description": "Celkové zveřejněné příspěvky {party} v {country} podle typu dárce."
+      },
+      "p0": "Tento stromový diagram seskupuje nahlášené politické dary podle typu dárce (například jednotlivci, společnosti a veřejné fondy) a velikost každého obdélníku odpovídá celkové částce v daném období a rozsahu.",
+      "p1": "Větší boxy označují vyšší částky a jména zobrazená uvnitř představují největší dárce v daném typu. Tento pohled zahrnuje {count} různých typů dárců pro {party}.",
+      "p2": "Níže je seznam sektorů seřazených podle celkových příspěvků od nejvyšších po nejnižší:"
+    },
+    "donation_types": {
+      "title": "Typy darů",
+      "treemap": {
+        "title": "Typy darů pro {party}",
+        "description": "Celkové zveřejněné příspěvky {party} v {country} podle typu daru."
+      },
+      "p0": "Politické příspěvky straně {party} jsou rozděleny podle typu daru, aby poskytly transparentnost ohledně financování strany.",
+      "all_single": "Všechny evidované příspěvky straně {party} byly přijaty jako {type}, v celkové výši {amount} ({percentage}) v rámci {count} záznamů.",
+      "largest_share": "Největší podíl na financování byl přijat jako {type}, což představuje {amount} ({percentage} všech příspěvků).",
+      "remaining_share": "Zbývající příspěvky byly přijaty jako {types}.",
+      "summary_item": "{amount} ({percentage}) jako {type}",
+      "treemap_guide": "Interaktivní stromová mapa znázorňuje relativní velikost jednotlivých kategorií darů, přičemž vnořené obdélníky představují největší dárce v dané kategorii. Níže je kompletní pořadí podle celkové částky:"
+    },
+    "qa": {
+      "sum": {
+        "q": "Kolik obdržela {party} na darech?",
+        "a": "{party} obdržela celkem {sum} na darech z {count} zdokumentovaných darů."
+      },
+      "top_donors": {
+        "q": "Kdo financuje stranu {party} a kdo jsou její největší dárci?",
+        "a": "Největší dárci {party} jsou: {donors}."
+      },
+      "largest_singular": {
+        "q": "Jaký byl největší jednotlivý dar pro {party}?",
+        "a": "Největší jednotlivý dar byl {amount} od {donor} dne {date}."
+      },
+      "biggest_overall": {
+        "q": "Kdo je největší celkový dárce {party}?",
+        "a": "Největší celkový dárce {party} je {donor} s celkovými dary {sum}."
+      },
+      "frequent_donor": {
+        "q": "Kdo poskytl nejvíce darů {party}?",
+        "a": "{donor} poskytl nejvíce darů {party} s {count} samostatnými dary v celkové výši {sum}."
+      }
+    },
+    "overview": {
+      "title": "Přehled darů {party}"
+    },
+    "changes": {
+      "detail": {
+        "title": "Dary {party} podle data transakce",
+        "summary": "Tato stránka zobrazuje seznam darů {party}, které jsou seřazeny podle data transakce, přičemž nejnovější dary jsou uvedeny nahoře. Poskytuje informace o částce, kterou každý dar znamená pro {party}, a odpovídajících dárcích."
+      }
+    },
+    "timeline": {
+      "chart_title": "Dary {party}",
+      "subtitle": "Kumulativní součet zveřejněných darů straně {party} v {country}.",
+      "detail": {
+        "title": "Časový průběh darů {party}",
+        "summary": "Interaktivní časová osa sledující dary a vykazované příspěvky pro {party} v průběhu času. Porovnejte historické trendy, roční příjmy a celkový růst financování.",
+        "per_year": "Celková výše darů přijatých stranou {party} se liší podle roku. Níže je historický přehled ročních součtů financování uvedených stranou. Tento seznam sleduje součet všech ohlašovatelných příspěvků a finanční podpory pro každý konkrétní rok:"
+      }
+    },
+    "committees": {
+      "title": "Přispívající výbory & PAC",
+      "treemap": {
+        "title": "Výbory financující {party}",
+        "subtitle": "Rozdělení darů podle přijímajícího výboru"
+      },
+      "p0": "Kapitál pro {party} je rozdělen mezi {count, plural, one {# registrovaný výbor} few {# registrované výbory} other {# registrovaných výborů}}, včetně stranických výborů, společných volebních fondů a nezávislých Super PAC. Celkem bylo přes tyto výbory přijato {amount}.",
+      "top_intro": "Níže jsou uvedeny výbory s nejvyššími příspěvky:"
+    },
+    "interests": {
+      "title": "Odvětví a zájmové skupiny",
+      "intro": "Řada politických dárců v zemi {country} působí ve více než jednom odvětví. Tento přehled seskupuje dary pro {party} podle politické oblasti a odvětví a rozlišuje mezi jednotlivými společnostmi a víceodvětvovými skupinami.",
+      "intro_years": "Řada politických dárců v zemi {country} působí ve více než jednom odvětví. Tento přehled seskupuje dary v období {years} podle politické oblasti a odvětví a rozlišuje mezi jednotlivými společnostmi a víceodvětvovými skupinami.",
+      "explainer": {
+        "summary": "Jak toto číst: Přímé společnosti vs. víceodvětvové skupiny",
+        "direct_label": "Přímé společnosti:",
+        "direct_text": "Společnosti, jejichž hlavní činnost spadá do daného odvětví (například těžařská společnost, banka nebo provozovatel hazardních her). V grafu jsou zobrazeny plnou výplní a izolovány při zapnutí volby „Pouze přímé společnosti“.",
+        "multisector_label": "Víceodvětvové skupiny a zastřešující svazy:",
+        "multisector_text": "Odvětvová sdružení nebo konglomeráty zastupující více sektorů současně (například hotelové asociace působící v pohostinství, hazardních hrách a prodeji alkoholu). V grafu jsou označeny šrafováním a při vypnutí volby „Pouze přímé společnosti“ jsou zahrnuty vedle přímých společností.",
+        "domains_label": "Širší oblasti vs. konkrétní odvětví:",
+        "domains_text": "Při zapnuté volbě „Seskupit podle oblasti“ je 24 konkrétních odvětví seskupeno pod 6 širších politických oblastí. Kliknutím na řádek oblasti níže zobrazíte její odvětví, nebo kliknutím na oblast v grafu přiblížíte zobrazení."
+      },
+      "switches": {
+        "direct_only": "Pouze přímé společnosti",
+        "group_by_domain": "Seskupit podle oblasti"
+      },
+      "summary": {
+        "exposure": "Z celkového objemu {total} na darech pro {party} pochází {tracked} ({percent}) od dárců napojených alespoň na jedno sledované odvětví nebo zájmovou skupinu.",
+        "core": "Z celkového objemu {total} na darech pro {party} pochází {tracked} ({percent}) od přímých společností, jejichž hlavní činnost spadá do sledovaného odvětví.",
+        "exposure_years": "Z celkového objemu {total} na darech v období {years} pochází {tracked} ({percent}) od dárců napojených alespoň na jedno sledované odvětví nebo zájmovou skupinu.",
+        "core_years": "Z celkového objemu {total} na darech v období {years} pochází {tracked} ({percent}) od přímých společností, jejichž hlavní činnost spadá do sledovaného odvětví.",
+        "top_exposure_one": "Největším zastoupeným odvětvím je {item}.",
+        "top_exposure_many": "Největšími zastoupenými odvětvími jsou {items}.",
+        "top_core_one": "Mezi samotnými přímými společnostmi je největším odvětvím {item}.",
+        "top_core_many": "Mezi samotnými přímými společnostmi jsou největšími odvětvími {items}."
+      },
+      "show_top": "Zobrazit top 10 odvětví",
+      "show_all": "Zobrazit všech {count} aktivních odvětví",
+      "note": {
+        "prefix": "Poznámka: Odvětvové štítky jsou doplňkovou vrstvou nad oficiálními výkazy.",
+        "exposure": "Víceodvětvoví dárci se zobrazují v každém odvětví, které zastupují, takže se částky odvětví překrývají a neměly by se sčítat; součty oblastí započítávají každého dárce pouze jednou.",
+        "core": "Společnosti s hlavní činností ve více odvětvích se mohou objevit ve více než jednom odvětví; součty oblastí započítávají každého dárce pouze jednou.",
+        "share": "Procenta udávají podíl každé skupiny na všech darech pro {party}.",
+        "share_years": "Procenta udávají podíl každé skupiny na všech darech v období {years}.",
+        "methodology_link": "Zobrazit všechny kategorie v metodice"
+      },
+      "chart": {
+        "title": "{party}: Odvětví a zájmové skupiny",
+        "title_years": "{country} ({years}): Odvětví a zájmové skupiny",
+        "subtitle_grouped_exposure": "Dary seskupené podle politické oblasti, odvětví a dárce ve srovnání s nezařazenými dary",
+        "subtitle_grouped_core": "Přímé společnosti podle politické oblasti a odvětví ve srovnání se všemi ostatními dary",
+        "subtitle_flat_exposure": "Dary seskupené podle odvětví a dárce ve srovnání s nezařazenými dary",
+        "subtitle_flat_core": "Přímé společnosti podle odvětví ve srovnání se všemi ostatními dary",
+        "footer_note": "Kategorizace s asistencí AI",
+        "legend_solid_label": "Plná výplň:",
+        "legend_solid_text": "Přímá společnost",
+        "legend_striped_label": "Šrafování:",
+        "legend_striped_text": "Víceodvětvová skupina / svaz",
+        "uncategorized": "Ostatní / Nezařazení dárci",
+        "uncategorized_donor": "Ostatní / Nezařazený dárce",
+        "uncategorized_hint": "Zatím není napojeno na žádné sledované odvětví ani zájmovou skupinu.",
+        "uncategorized_desc": "Dary od jednotlivců, místních podniků a skupin nenapojených na sledované odvětví.",
+        "tooltip_direct_business": "Přímá společnost",
+        "tooltip_multisector": "Víceodvětvová skupina / svaz",
+        "tooltip_share_of": "Podíl na {category}:",
+        "tooltip_share_uncategorized": "Podíl na nezařazených:",
+        "tooltip_share_party": "Podíl na darech strany:",
+        "tooltip_share_total": "Podíl na celkových darech:",
+        "tooltip_share_total_pct": "{amount} ({percent}% z celkových darů)",
+        "tooltip_donations": "Počet darů:",
+        "tooltip_donors": "Počet dárců:",
+        "tooltip_direct_businesses": "Přímé společnosti:",
+        "tooltip_multisector_bodies": "Víceodvětvové skupiny / svazy:",
+        "tooltip_solid_hint": "Plná výplň: Hlavní činnost spadá do tohoto odvětví.",
+        "tooltip_striped_hint": "Šrafování: Víceodvětvová skupina nebo svaz působící ve více oblastech."
+      }
+    }
+  },
+  "origin": {
+    "title": "Původ",
+    "description": "Podívejte se, odkud pocházejí dary politickým stranám v {country} za {years} – rozdělení podle státu a mezinárodních příspěvků.",
+    "detail": {
+      "title": "Přehled původu darů",
+      "description": "Podívejte se na transparentní původ politických darů pro {party} v {country}: rozdělení podle států a zahraničních zdrojů.",
+      "summary": "Získejte přehled o geografickém původu darů. Zjistěte, z kterých spolkových zemí nebo zemí mimo {country} přichází podpora. Sledujte transparentně, jak jsou dary geograficky rozloženy.",
+      "country": {
+        "austria": "V Rakousku je původ darů zaznamenáván až od roku 2023. Všechny starší dary proto nemohou být přiřazeny jednotlivým spolkovým zemím."
+      },
+      "sum": "V roce {years} činily dary politickým stranám v {country} z domácích zdrojů celkem {sumCountry}. Příspěvky ze zahraničních zdrojů dosáhly výše {sumOthers}."
+    },
+    "type": {
+      "map": "Mapa"
+    },
+    "party": {
+      "subtitle": "Celkové zveřejněné dary straně {party} podle státu původu v {country}."
+    },
+    "country": {
+      "title": "Dary z {country}",
+      "subtitle": "Celkové zveřejněné dary podle státu původu v {country}, {years}.",
+      "summary": "V letech {from} až {until} byly zaznamenány dary z {stateCount} různých spolkových zemí. Spolková země s nejvyšší částkou darů je {highestState} s {highestSum}. Nejvíce darů, konkrétně {largesDonationCountNum}, pocházelo z {largesDonationCountState}."
+    },
+    "elsewhere": {
+      "title": "Dary ze zahraničí ({country})",
+      "summary": "V letech {from} až {until} byly zaznamenány dary z {countryCount} různých jiných zemí. Země s nejvyšší částkou darů je {highestCountry} s {highestSum}. Nejvíce darů, konkrétně {largesDonationCountNum}, pocházelo z {largesDonationCountState}."
+    }
+  },
+  "state": {
+    "germany": {
+      "BW": "Bádensko-Württembersko",
+      "BY": "Bavorsko",
+      "BE": "Berlín",
+      "BB": "Braniborsko",
+      "HB": "Brémy",
+      "HH": "Hamburk",
+      "HE": "Hesensko",
+      "MV": "Meklenbursko-Přední Pomořansko",
+      "NI": "Dolní Sasko",
+      "NW": "Severní Porýní-Vestfálsko",
+      "RP": "Porýní-Falc",
+      "SL": "Sársko",
+      "SN": "Sasko",
+      "ST": "Sasko-Anhaltsko",
+      "SH": "Šlesvicko-Holštýnsko",
+      "TH": "Durynsko"
+    },
+    "austria": {
+      "1": "Burgenland",
+      "2": "Korutany",
+      "3": "Dolní Rakousy",
+      "4": "Horní Rakousy",
+      "5": "Salcbursko",
+      "6": "Štýrsko",
+      "7": "Tyrolsko",
+      "8": "Vorarlbersko",
+      "9": "Vídeň"
+    },
+    "canada": {
+      "ON": "Ontario",
+      "QC": "Québec",
+      "NS": "Nové Skotsko",
+      "NB": "Nový Brunšvik",
+      "MB": "Manitoba",
+      "BC": "Britská Kolumbie",
+      "PE": "Ostrov prince Edwarda",
+      "SK": "Saskatchewan",
+      "AB": "Alberta",
+      "NL": "Newfoundland a Labrador",
+      "NT": "Severozápadní teritoria",
+      "YT": "Yukon",
+      "NU": "Nunavut"
+    },
+    "unitedstates": {
+      "AL": "Alabama",
+      "AK": "Aljaška",
+      "AZ": "Arizona",
+      "AR": "Arkansas",
+      "CA": "Kalifornie",
+      "CO": "Colorado",
+      "CT": "Connecticut",
+      "DE": "Delaware",
+      "FL": "Florida",
+      "GA": "Georgie",
+      "HI": "Havaj",
+      "ID": "Idaho",
+      "IL": "Illinois",
+      "IN": "Indiana",
+      "IA": "Iowa",
+      "KS": "Kansas",
+      "KY": "Kentucky",
+      "LA": "Louisiana",
+      "ME": "Maine",
+      "MD": "Maryland",
+      "MA": "Massachusetts",
+      "MI": "Michigan",
+      "MN": "Minnesota",
+      "MS": "Mississippi",
+      "MO": "Missouri",
+      "MT": "Montana",
+      "NE": "Nebraska",
+      "NV": "Nevada",
+      "NH": "New Hampshire",
+      "NJ": "New Jersey",
+      "NM": "Nové Mexiko",
+      "NY": "New York",
+      "NC": "Severní Karolína",
+      "ND": "Severní Dakota",
+      "OH": "Ohio",
+      "OK": "Oklahoma",
+      "OR": "Oregon",
+      "PA": "Pensylvánie",
+      "RI": "Rhode Island",
+      "SC": "Jižní Karolína",
+      "SD": "Jižní Dakota",
+      "TN": "Tennessee",
+      "TX": "Texas",
+      "UT": "Utah",
+      "VT": "Vermont",
+      "VA": "Virginie",
+      "WA": "Washington",
+      "WV": "Západní Virginie",
+      "WI": "Wisconsin",
+      "WY": "Wyoming",
+      "DC": "District of Columbia",
+      "AS": "Americká Samoa",
+      "GU": "Guam",
+      "MP": "Severní Mariany",
+      "PR": "Portoriko",
+      "UM": "Menší odlehlé ostrovy USA",
+      "VI": "Americké Panenské ostrovy"
+    }
+  },
+  "donor": {
+    "title": "Dary dárce",
+    "subtitle": "Celkové příspěvky a příjemci",
+    "active_period": "Aktivní období",
+    "type": "Typ dárce",
+    "registration_number": "IČO",
+    "summary": "{donor} daroval celkem {sum} v {count} jednotlivých darech. Průměrná velikost daru je {avg}. Dary byly rozděleny mezi {parties} různých stran.",
+    "oldest": "První dar po roce {minYear} byl učiněn dne {date} v částce {amount} straně {party}.",
+    "newest": "Nejnovější dar byl učiněn dne {date}, kdy {amount} bylo darováno straně {party}.",
+    "most_donations": "Nejčastěji byly dary posílány stranám {list}.",
+    "most_donations_item": "{party} ({count})",
+    "highest_most_donation": "Rok {biggestYear} zaznamenal nejvyšší celkovou částku darů ve výši {biggestSum}, zatímco v roce {mostYear} bylo učiněno nejvíce jednotlivých darů ({mostCount}).",
+    "biggest": "Největší jednotlivý dar ve výši {amount} byl poskytnut dne {date} straně {party}.",
+    "tree_map": "Dary od {name}",
+    "tree_map_subtitle": "Celkové zveřejněné dary každé straně v {country}.",
+    "biggest_amounts": "Dary byly primárně směřovány na vybranou skupinu stran. Níže je rozpis příjemců podle částky a procentního podílu na celkových darovaných částkách:",
+    "table": "Tato sekce poskytuje komplexní přehled všech jednotlivých darů poskytnutých {donor}. Tabulku můžete řadit podle data, strany nebo částky, abyste snadno prozkoumali, jak byly dary rozděleny v čase a mezi příjemce. Tento podrobný pohled umožňuje transparentní sledování každého příspěvku a nabízí hlubší vhled do dárcovských vzorců.",
+    "timeline": {
+      "title": "Hromadění darů v průběhu času",
+      "p0": "Tato sekce ukazuje, jak se dary od {donor} od roku {year} různým politickým stranám v průběhu času měnily. Graf znázorňuje celkovou darovanou částku, přičemž podíl jednotlivých stran je zvýrazněn, takže je snadné vidět, kdy a kam byla podpora směřována.",
+      "p1": "Sledujte čáry a pozorujte vzory, výkyvy nebo změny v darování. Tento přehled nabízí transparentní pohled na to, jak jsou příspěvky jednoho dárce rozloženy v politickém spektru.",
+      "years": "Dary se v průběhu let měnily. Následující ukazuje celkové částky darů podle roku spolu s procentním podílem každého roku na celkových darech tohoto dárce.",
+      "chart_subtitle": "Kumulativní dary od {donor} politickým stranám v {country}, zobrazené podle částky a data od roku {minYear}."
+    },
+    "anonymized": {
+      "title": "Záznam anonymizován",
+      "description": "Osobní identita spojená s tímto darem byla odstraněna v souladu s platnou žádostí podle GDPR. Výše daru zůstává zahrnuta do celkových výpočtů financování, aby byla zachována finanční transparentnost."
+    },
+    "redacted": {
+      "title": "Záznam redigován",
+      "description": "Identita dárce byla před zveřejněním těchto údajů redigována zveřejňujícím orgánem. Výše daru zůstává zahrnuta ve výpočtech celkového financování, aby byla zachována finanční transparentnost."
+    },
+    "ubo": "Konečný skutečný vlastník (KSV)",
+    "ubo_description": "Konečný skutečný vlastník (KSV) je osoba, která skutečně táhne za nitky. Jedná se o jednotlivce, kteří v konečném důsledku vlastní nebo kontrolují dárce, typicky držením 25 % nebo více jeho akcií nebo hlasovacích práv. Pokud žádná jednotlivá osoba nesplňuje tuto hranici, může být vrcholný management (například ředitelé) uveden jako \"pseudo-KSV\" k zajištění odpovědnosti.",
+    "donation_type": {
+      "title": "Typy darů",
+      "subtitle": "Graf a následující seznam ukazují, jaké druhy darů {donor} poskytl a které strany obdržely jakou částku pro každý typ.",
+      "summary": "Z celkové částky {total}",
+      "summary_item": "{amount} bylo poskytnuto jako {type}",
+      "graph": {
+        "subtitle": "Jak příspěvky od {donor} proudí k jednotlivým stranám podle typu"
+      }
+    },
+    "via": {
+      "title": "Zprostředkovatelé & distribuce směrovaných darů",
+      "overview": "Veřejné zprávy o financování kampaní ukazují, že {viaSum} z celkových politických darů dárce {donor} ({pct} ze všech sledovaných {donorSum}) bylo směrováno přes zprostředkující výbory.",
+      "direct_donations": "Přímé dary činily {amount}.",
+      "downstream_title": "Politická orientace příjemců",
+      "downstream_overview": "Při zkoumání konečných příjemců směrovaných darů byly veškeré prostředky rozděleny mezi {count, plural, one {# politické hnutí} few {# politická hnutí} other {# politických hnutí}}.",
+      "downstream_primary": "Hlavním příjemcem byla strana {party}, která získala {amount} ({pct}) všech směrovaných prostředků.",
+      "downstream_followed_by": "Následují {list}.",
+      "downstream_item": "{party} s {amount} ({pct})",
+      "table_intro": "Níže uvedená tabulka uvádí zprostředkující a společné fundraisingové výbory, přes které byly tyto dary směrovány{years}:",
+      "table_intro_years": " mezi lety {earliestYear} a {latestYear}",
+      "intermediate_entity": "Zprostředkovatel",
+      "transactions": "Transakce",
+      "checks": "{count, plural, one {# platba} few {# platby} other {# plateb}}"
+    }
+  },
+  "countries": {
+    "??": "Neuvedeno",
+    "DE": "Německo",
+    "DK": "Dánsko",
+    "CH": "Švýcarsko",
+    "TH": "Thajsko",
+    "AT": "Rakousko",
+    "UK": "Velká Británie",
+    "NL": "Nizozemsko",
+    "EU": "Evropská unie",
+    "LV": "Lotyšsko",
+    "ES": "Španělsko",
+    "FI": "Finsko",
+    "HR": "Chorvatsko",
+    "BE": "Belgie",
+    "LU": "Lucembursko",
+    "SI": "Slovinsko",
+    "EE": "Estonsko",
+    "FR": "Francie",
+    "IE": "Irsko",
+    "IT": "Itálie",
+    "PL": "Polsko",
+    "RO": "Rumunsko",
+    "CY": "Kypr",
+    "MT": "Malta",
+    "PT": "Portugalsko",
+    "LT": "Litva",
+    "HU": "Maďarsko",
+    "CZ": "Česko",
+    "SG": "Singapur",
+    "MC": "Monako",
+    "SE": "Švédsko",
+    "AD": "Andorra",
+    "IM": "Ostrov Man",
+    "NO": "Norsko",
+    "LI": "Lichtenštejnsko",
+    "MK": "Makedonie",
+    "AL": "Albánie",
+    "MD": "Moldavsko",
+    "SM": "San Marino",
+    "FO": "Faerské ostrovy",
+    "BA": "Bosna a Hercegovina",
+    "ME": "Černá Hora",
+    "BG": "Bulharsko",
+    "BY": "Bělorusko",
+    "GR": "Řecko",
+    "IS": "Island",
+    "SK": "Slovensko",
+    "UA": "Ukrajina",
+    "GB": "Spojené království",
+    "RS": "Srbsko",
+    "AU": "Austrálie",
+    "ZA": "Jižní Afrika",
+    "US": "Spojené státy americké",
+    "CA": "Kanada",
+    "GE": "Gruzie",
+    "NZ": "Nový Zéland",
+    "VE": "Venezuela"
+  },
+  "ref_countries": {
+    "DE": "Německo",
+    "DK": "Dánsko",
+    "CH": "Švýcarsko",
+    "TH": "Thajsko",
+    "AT": "Rakousko",
+    "UK": "Velká Británie",
+    "NL": "Nizozemsko",
+    "EU": "Evropská unie",
+    "LV": "Lotyšsko",
+    "ES": "Španělsko",
+    "FI": "Finsko",
+    "HR": "Chorvatsko",
+    "BE": "Belgie",
+    "LU": "Lucembursko",
+    "SI": "Slovinsko",
+    "EE": "Estonsko",
+    "FR": "Francie",
+    "IE": "Irsko",
+    "IT": "Itálie",
+    "PL": "Polsko",
+    "RO": "Rumunsko",
+    "CY": "Kypr",
+    "CZ": "Česko",
+    "AU": "Austrálie",
+    "RS": "Srbsko",
+    "CA": "Kanada",
+    "GE": "Gruzie",
+    "NO": "Norsko",
+    "UA": "Ukrajina",
+    "SE": "Švédsko",
+    "ZA": "South Africa",
+    "US": "Spojené státy"
+  },
+  "about": {
+    "title": "O nás",
+    "description": {
+      "p0": "DonationWatch vznikl z nedostatku čitelnosti dat na oficiálních stránkách německého Bundestagu.",
+      "p1": "Naším cílem je toto zlepšit pomocí veřejně dostupných dat a jejich efektivnější prezentace.",
+      "p2": "Zaznamenali jsme, že země jako Rakousko, Švýcarsko a Nizozemsko zveřejňují dary politickým stranám různě strukturované. Abychom vytvořili jednotné rozhraní, které usnadňuje přístup k těmto datům, zahrnuli jsme tyto země do našeho projektu. Další země budou následovat, jakmile nalezneme a zpracujeme odpovídající data.",
+      "p3": "Pokud máte návrhy nebo zpětnou vazbu, neváhejte nás",
+      "mail": "kontaktovat"
+    },
+    "source": "Všechny zobrazené informace pocházejí výhradně z veřejně dostupných vládních zdrojů a neobsahují žádné dříve nezveřejněné údaje nebo soukromé záznamy. Transparentnost je naším základem."
+  },
+  "imprint": {
+    "title": "Otisk"
+  },
+  "privacy": {
+    "title": "Ochrana soukromí",
+    "last_updated": "Naposledy aktualizováno: {date}",
+    "effective_date": "Účinné od: {date}",
+    "controller": {
+      "title": "Správce údajů",
+      "p": "Správcem osobních údajů na těchto webových stránkách je:"
+    },
+    "data": {
+      "title": "Obecný sběr dat",
+      "p": "Ochranu tvých údajů bereme velmi vážně. Nezískáváme žádné osobní údaje návštěvníků pro účely sledování nebo marketingu. To konkrétně znamená:",
+      "li0": "Žádné registrační formuláře ani uživatelské účty",
+      "li1": "Žádné přihlášky k odběru newsletteru",
+      "li2": "Žádné používání cookies pro sledovací účely"
+    },
+    "cf": {
+      "title": "Služby Cloudflare",
+      "link": "Zobrazit zásady ochrany osobních údajů Cloudflare",
+      "p": "Využíváme služby společnosti Cloudflare, Inc. (101 Townsend St, San Francisco, CA 94107, USA), abychom zajistili, že naše webové stránky budou rychlé, bezpečné a spolehlivé.",
+      "p2": "Při používání Cloudflare se zpracovává tvoje IP adresa, aby tě připojila k nejbližšímu serveru. Při tom může dojít k přenosu dat do USA. Cloudflare je certifikována v rámci EU-US Data Privacy Framework (DPF), což zaručuje dodržování evropských standardů ochrany osobních údajů při přenosu dat do USA.",
+      "p3": "Naším oprávněným zájmem (čl. 6 odst. 1 písm. f GDPR) je poskytovat bezpečný a výkonný web. Další podrobnosti nalezneš v zásadách ochrany osobních údajů Cloudflare.",
+      "workers": {
+        "summary": "Cloudflare Workers: Serverless platforma pro rychlé poskytování obsahu našich webových stránek."
+      },
+      "analytics": {
+        "summary": "Cloudflare Web Analytics: Nástroj pro analýzu šetrný k soukromí, který nepoužívá cookies, nesleduje jednotlivé uživatele napříč weby a shromažďuje pouze agregované metriky (např. čistý počet návštěvníků)."
+      }
+    },
+    "logs": {
+      "title": "Automatické serverové logy",
+      "p": "Při návštěvě našich webových stránek náš hostingový poskytovatel automaticky shromažďuje a ukládá informace v tzv. serverových log souborech. Tyto zahrnují:",
+      "li0": "IP adresy (anonymizované)",
+      "li1": "Datum a čas požadavku",
+      "li2": "Typ prohlížeče a informace o zařízení",
+      "li3": "Odkazující URL (referrer)",
+      "retention": "Zpracování těchto údajů probíhá na základě našeho oprávněného zájmu (čl. 6 odst. 1 písm. f GDPR) na technické stabilitě, bezpečnosti a bezchybné funkčnosti našich webových stránek. Nedochozí ke spojování s jinými zdroji dat. Data jsou automaticky smazána do 7 dnů."
+    },
+    "user_rights": {
+      "title": "Tvoje uživatelská práva",
+      "p": "V souladu s GDPR máš právo kdykoliv bezplatně získat informace o původu, příjemci a účelu uložených osobních údajů. Máš také právo požadovat opravu, blokování nebo vymazání těchto údajů. Jelikož však zpracováváme pouze minimální a anonymizované údaje, obvykle tě nemůžeme osobně identifikovat na základě našich logů. Dále máš právo podat stížnost u příslušného dozorového úřadu pro ochranu osobních údajů. V případě otázek ohledně ochrany soukromí se na nás můžeš kdykoli obrátit.",
+      "erasure": "Právo na výmaz (článek 17 GDPR): Podle článku 17 GDPR mají subjekty údajů právo na výmaz svých osobních údajů, pokud jsou splněny zákonné důvody. Žádost o výmaz můžete podat přímo nám.",
+      "discretionary": "Diskreční anonymizace: Nezávisle na zákonném právu na výmaz posuzuje DonationWatch žádosti o anonymizaci individuálně. V případě schválení je jméno dárce anonymizováno při zachování částek a součtů stran."
+    }
+  },
+  "fun": {
+    "link": "Zábavná fakta",
+    "title": "Zábavná fakta o veřejných datech",
+    "p0": "Tato stránka ukazuje zajímavé nálezy z naší práce s veřejně dostupnými vládními daty. Tato pozorování nejsou kritikou, ale spíše drobnými zvláštnostmi, které se mohou vyskytnout v jakémkoli velkém souboru dat.",
+    "p1": "Ačkoli o problémech informujeme, když je to vhodné, nepovažujeme je za naléhavé záležitosti, které by vládní instituce měly řešit. Z naší zkušenosti jsou tyto organizace vstřícné a otevřené zpětné vazbě.",
+    "reported_fixed": "Tato skutečnost byla nahlášena {owner}, který ji opravil.",
+    "reported_wontfix": "Tato skutečnost byla nahlášena společnosti {owner} a ta ji nemůže změnit.",
+    "reported": "Tato skutečnost byla nahlášena {owner}."
+  },
+  "transparency": {
+    "title": "Transparentnost",
+    "p0": "Snažíme se poskytovat jasné a konzistentní informace o dárcích politických stran. Za tímto účelem automaticky normalizujeme některá jména dárců, abychom zajistili jednotnost v naší databázi. Tento přístup nám umožňuje zachovat přesnost a zároveň zohlednit rozdíly ve způsobu zápisu jmen.",
+    "p1": "V zájmu transparentnosti jsme sestavili seznam normalizovaných jmen spolu s jejich variantami, které se vyskytly v našich dárcovských záznamech. Níže najdete každé normalizované jméno následované jeho variantami. Tento seznam vysvětluje, proč můžete vidět jména dárců, která se přesně neshodují s našimi zdrojovými dokumenty.",
+    "section": {
+      "filtered_donors": "Filtrovaní dárci",
+      "filtered_receivers": "Filtrovaní příjemci",
+      "aggregated": "Agregovaní dárci",
+      "categorized": "Dárci podle odvětví a zájmových skupin"
+    },
+    "filtered_donors": {
+      "p0": "Abychom přesně zachytili skutečné zdroje politických darů, odfiltrujeme některé transakce, které jsou ve skutečnosti státními příspěvky, nikoli skutečnými dary. Protože je naše zdrojové datové sady výslovně neoznačují, opíráme se o sadu filtračních pravidel založených na regulárních výrazech (regexp), která takové záznamy automaticky identifikují a odstraní. Níže si můžete prohlédnout úplný seznam použitých filtračních pravidel regexp.",
+      "p1": "Níže je uveden seznam dárců, jejichž příspěvky byly podle našich kritérií a filtračních pravidel odfiltrovány."
+    },
+    "filtered_receivers": {
+      "p0": "Abychom zajistili, že budeme zobrazovat pouze smysluplná data o příjemcích, filtrujeme také některé příjemce nebo strany, které jsou pro účely sledování dárců považovány za nerelevantní nebo neaktivní. Protože naše datové sady tyto příjemce ne vždy výslovně označují, používáme sadu pravidel založených na regexp k jejich automatickému vyloučení. Níže si můžete prohlédnout úplný seznam použitých filtračních pravidel regexp.",
+      "p1": "Níže je uveden seznam příjemců, jejichž záznamy byly podle našich kritérií a filtračních pravidel odfiltrovány."
+    },
+    "receivers": {
+      "title": "Agregovaní příjemci",
+      "p0": "V zemi {country} mohou být dary vykazovány různým organizačním jednotkám v rámci strany. Kvůli konzistenci slučujeme související subjekty příjemců do jednoho celkového součtu na úrovni strany. Níže uvedený seznam dokládá, které subjekty příjemců jsou u jednotlivých stran agregovány."
+    },
+    "categorized": {
+      "title": "Dárci podle odvětví a zájmových skupin",
+      "p0": "Aby bylo snazší vidět, která odvětví financují politické strany, rozdělujeme hlavní dárce do 24 odvětvových a zájmových kategorií (například těžba, bankovnictví, hazard nebo odbory). Uvádíme také, zda jde o přímou firmu (její hlavní činnost spadá do daného odvětví), nebo o zastřešující organizaci (oborové sdružení či konglomerát působící ve více oblastech). Tyto kategorie dárců jsou přiřazovány s pomocí AI — pokud narazíte na chybu nebo chybějící záznam, neváhejte nás kontaktovat nebo založit issue na GitHubu.",
+      "p1": "Níže je seznam kategorizovaných dárců a odvětví s nimi spojených."
+    }
+  },
+  "related": {
+    "donors": "Podobní dárci"
+  },
+  "similar_donors": {
+    "title": "Síť podobných dárců",
+    "description": "Prozkoumejte širší síť dárců propojenou s tímto dárcem.",
+    "summary": "V související síti dárců je {count} jedinečných dárců.",
+    "list_title": "Přehled rozdělení stran"
+  },
+  "detect_country": {
+    "title": "Vypadá to, že jste v {country}.",
+    "description": "Klepněte pro zobrazení politických darů v {country}.",
+    "action": "Zobrazit dary pro {country}"
+  },
+  "donor_type": {
+    "0": "Ostatní",
+    "1": "Jednotlivec",
+    "2": "Společnost",
+    "3": "Odborová organizace",
+    "4": "Veřejný fond",
+    "5": "Neregistrované sdružení",
+    "6": "Registrovaná politická strana",
+    "7": "Svěřenský fond",
+    "8": "Podpůrná společnost",
+    "9": "Partnerství s ručením omezeným",
+    "10": "Stavební spořitelna",
+    "11": "Nezisková právnická osoba",
+    "12": "Anonymizovaný dárce"
+  },
+  "donation_type": {
+    "0": "peněžní dar",
+    "1": "členský příspěvek",
+    "2": "vstupní poplatek",
+    "3": "věcný dar",
+    "4": "veřejné financování"
+  },
+  "other_countries": {
+    "title": "Ostatní země"
+  },
+  "thanks": "S poděkováním jednotlivcům a organizacím, jako je {external}, za poskytování cenných informací o mechanismech politických darů.",
+  "export": {
+    "title": "Export dat",
+    "p0": "Získejte kompletní datovou sadu politických darů pro {country} používanou na tomto webu. Export zahrnuje normalizovaná jména dárců, částky, data a příjemce (strany).",
+    "p1": "Důležité: Nejde o surová data ze zdroje {source}. Tato datová sada obsahuje pouze dary, které náš tým normalizoval a vyfiltroval. Přečtěte si prosím naši {methodology}.",
+    "license": "Licence: {license}"
+  },
+  "bar_chart_race": {
+    "title": "Závod sloupcového grafu",
+    "description": "Vizualizujte kumulaci darů v čase. Vyberte rozsah let a podívejte se, jak se dynamicky vyvíjí financování stran.",
+    "from": "Od",
+    "to": "Do",
+    "download_video": "Stáhnout video",
+    "rendering": "Vykreslování... {percentage}",
+    "no_data": "Pro vybraný rozsah nejsou k dispozici žádná data.",
+    "note": "Upozornění: Tato animace se vykresluje na straně klienta ve vašem prohlížeči a na některých zařízeních může být náročná na prostředky. Stažení videa automaticky přehraje celou animaci.",
+    "individual_years": "Jednotlivé roky",
+    "animation_duration": "Délka animace",
+    "duration_s": "{seconds}s",
+    "custom_range": "Pokročilé: Vlastní časové období",
+    "group_by": {
+      "label": "Seskupit podle",
+      "receiver": "Strana",
+      "donor": "Dárce"
+    },
+    "chart_title": "Rozložení stranických darů",
+    "chart_subtitle": "Celkové zveřejněné dary jednotlivým stranám, {country}, {years}."
+  },
+  "compare_parties_page": {
+    "title": "Porovnat strany",
+    "description": "Vyberte níže mezi dvěma až čtyřmi stranami pro porovnání jejich statistik darů vedle sebe. Limit čtyř stran zajišťuje, že porovnání zůstane přehledné na všech obrazovkách."
+  },
+  "compare_parties": {
+    "parties": "Strany",
+    "min_select": "Vyberte alespoň dvě strany výše, abyste viděli porovnání.",
+    "comparing": "Porovnávání",
+    "years": "Roky",
+    "top_3_donors": "Top 3 dárci",
+    "n_donations": "{count} darů",
+    "donor_type": "Typ dárce",
+    "donor": "Dárce",
+    "overview": {
+      "title": "Přehled",
+      "description": "Obecné statistiky včetně celkové částky a počtu darů, které jednotlivé strany získaly ve zvoleném časovém období."
+    },
+    "timeline": {
+      "title": "Časová osa",
+      "description": "Chronologický přehled ukazující, kdy strany přijaly svůj první a poslední dar, a jejich nejaktivnější finanční období."
+    },
+    "top_donations": {
+      "title": "Největší dary",
+      "description": "Zvýrazňuje největší jednotlivý dar a nejštědřejší individuální dárce pro každou vybranou stranu."
+    },
+    "donor_types": {
+      "title": "Typy dárců",
+      "description": "Analýza finanční podpory podle typu subjektu, jako jsou firmy, jednotlivci nebo odbory.",
+      "biggest_donor_type": "Největší typ dárce"
+    },
+    "donors": {
+      "title": "Dárci",
+      "description": "Podrobnější pohled na osoby a organizace podporující jednotlivé strany, včetně četnosti a překryvů darů."
+    },
+    "overlapping": {
+      "title": "Překrývající se dárci ({count})",
+      "description": "Dárci, kteří přispěli více vybraným stranám.",
+      "more": "... a {count} dalších"
+    },
+    "stats": {
+      "sum": "Celková částka darů",
+      "count": "Počet darů",
+      "avg": "Průměrný dar",
+      "median": "Medián daru",
+      "first_year": "První rok daru",
+      "last_year": "Poslední rok daru",
+      "active_year_sum": "Nejaktivnější rok (podle částky)",
+      "active_year_count": "Rok s největším počtem darů",
+      "unique_donors": "Jedineční dárci",
+      "top_donor": "Největší dárce",
+      "frequent_donor": "Nejčastější dárce",
+      "biggest_donation": "Největší jednotlivý dar"
+    }
+  },
+  "citation": {
+    "action": "Citovat",
+    "success": "Citace ve stylu {style} zkopírována do schránky.",
+    "data": "DonationWatch – data o politických darech v {country}",
+    "apa": "DonationWatch. ({year}). {title} [Datová sada]. Získáno {date}, z {url}"
+  },
+  "enterprise": {
+    "title": "Enterprise",
+    "heading": "Data o politickém financování na úrovni Enterprise.",
+    "p0": "Sledujte politické dary napříč hranicemi. Čistá, plně obohacená funding API postavená na normalizovaných transakčních záznamech z globálních volebních komisí.",
+    "draft_schema": "* Poznámka: Návrh schématu v1. Struktura odpovědi se může změnit na základě zpětné vazby z bety.",
+    "engine_specs": {
+      "title": "Specifikace engine a silné stránky",
+      "s0": {
+        "title": "1. Standardizované transakční záznamy",
+        "description": "Přestaňte bojovat s nepřehlednými CSV a měnícími se vládními formáty. Získejte přístup k čistě mapovaným záznamům o darech normalizovaným napříč více mezinárodními registry."
+      },
+      "s1": {
+        "title": "2. Obohacená REST API a specifikace OpenAPI",
+        "description": "Rozlučte se s křehkými webovými scrapery. Získejte přístup ke spolehlivým koncovým bodům JSON s pokročilým filtrováním podle dárce, strany, data a výše."
+      },
+      "s2": {
+        "title": "3. Spolehlivost SLA",
+        "description": "Vytvořeno pro institucionální workflow. Vyhrazené API klíče, limity pro vysoký objem požadavků a cílová dostupnost 99,9 %."
+      }
+    },
+    "monitoring": {
+      "title": "Sledují:",
+      "financial": "Finanční instituce",
+      "government": "Vládní daňové úřady",
+      "universities": "Přední univerzity",
+      "newsrooms": "Investigativní redakce"
+    },
+    "register": {
+      "title": "Registrace do soukromé bety",
+      "p0": "Základní datový engine je momentálně převáděn do vysoce dostupného REST API pro komerční využití. Odešlete níže své požadavky na dotazy, připojte se na čekací listinu a získejte přednostní přístup k vydání v1."
+    },
+    "form": {
+      "successTitle": "Žádost o přístup zaregistrována",
+      "successMessageTemplate": "Děkujeme za odeslání specifikací vašich dotazů. Prověříme datové požadavky vaší organizace a budeme vás kontaktovat ohledně přednostního přístupu ke komerčním endpointům v1.",
+      "submitAnotherButton": "< Odeslat další žádost",
+      "formTitle": "Žádost o beta přístup",
+      "labelFullName": "Celé jméno",
+      "labelWorkEmail": "Pracovní e-mail",
+      "labelOrganization": "Organizace",
+      "labelQueryRequest": "Cílový endpoint / Požadavek na dotaz",
+      "consentText": "Souhlasím se zásadami ochrany osobních údajů a souhlasím s tím, aby mě někdo kontaktoval ohledně Enterprise API.",
+      "buttonProcessing": "Zpracováváme žádost...",
+      "buttonSubmit": "Odeslat žádost",
+      "errorFailedSubmit": "Registraci na čekací listinu se nepodařilo odeslat.",
+      "errorUnexpected": "Došlo k neočekávané chybě. Zkuste to prosím znovu.",
+      "turnstileLabel": "Dejte nám vědět, že jste člověk"
+    }
+  },
+  "errors": {
+    "required": "Toto pole je povinné.",
+    "empty": "Toto pole nesmí být prázdné.",
+    "email": "Zadejte prosím platnou e-mailovou adresu."
+  },
+  "filter": {
+    "title": "Filtry",
+    "description": "Upřesněte data o darech podle let, stran a typu.",
+    "select_all": "Vybrat vše",
+    "select_none": "Zrušit výběr",
+    "reset": "Resetovat",
+    "parties": "Strany",
+    "donation_types": "Typy darů",
+    "donor_types": "Typy dárců",
+    "years": {
+      "title": "Rozsah let",
+      "from": "Od",
+      "to": "Do"
+    },
+    "empty": {
+      "title": "Nebyly nalezeny žádné dary",
+      "p0": "Nebyly nalezeny žádné dary odpovídající vašemu aktuálnímu nastavení filtrů. Zkuste filtry upravit nebo je resetovat.",
+      "reset": "Obnovit filtry"
+    }
+  },
+  "methodology": {
+    "title": "Metodika",
+    "intro": "DonationWatch zpracovává, normalizuje a zasazuje do kontextu oficiální datové sady zveřejňované volebními a dozorovými orgány. Tato stránka dokumentuje naše zdroje dat, pravidla zpracování, normalizační kritéria a omezení pro zemi {country}.",
+    "sections": {
+      "profile": "Profil datové sady",
+      "source": "Zdroj dat a rozsah",
+      "coverage": "Pokrytí a prahové hodnoty",
+      "cadence": "Frekvence aktualizací",
+      "processing": "Zpracování a normalizace",
+      "anonymisation": "Anonymizace a redakce",
+      "licence": "Licence a původ",
+      "version": "Verze dat a časová razítka",
+      "disclaimer": "Upozornění"
+    },
+    "profile": {
+      "source": "Oficiální zdroj",
+      "coverage": "Období pokrytí",
+      "coverage_preliminary": "{range} (předběžná data od {preliminarySince})",
+      "latest_transaction": "Poslední zaznamenaná transakce",
+      "last_processed": "Datová sada naposledy zpracována",
+      "cadence": "Frekvence aktualizací",
+      "cadence_value": "{cadence, select, annual {Roční} quarterly {Čtvrtletní} other {Pravidelná}}",
+      "volume": "Objem kompilované datové sady",
+      "volume_value": "{count} záznamů ({sum}) napříč {parties} stranami",
+      "donation_threshold": "Prahová hodnota na dar",
+      "donation_threshold_all": "Všechny zveřejněné příspěvky (bez minimálního filtru)",
+      "party_threshold": "Prahová hodnota pro zahrnutí strany",
+      "party_threshold_value": "{type, select, count {≥ {count} darů} sum {≥ {sum} kumulativně} other {≥ {count} darů nebo ≥ {sum} kumulativně}}",
+      "party_threshold_all": "Zahrnuty všechny vykazované strany",
+      "granularity": "Granularita dat",
+      "granularity_individual": "Jednotlivé transakce a záznamy o dárcích",
+      "granularity_aggregate": "Roční souhrny na úrovni stran (bez identit jednotlivých dárců)",
+      "temporal_resolution": "Časové rozlišení",
+      "resolution_date": "Přesné datum transakce (RRRR-MM-DD)",
+      "resolution_year": "Pouze vykazovaný rok (RRRR)",
+      "origin_coverage": "Geografický původ",
+      "origin_yes": "Kraj/region a země původu",
+      "origin_no": "Pouze na úrovni státu",
+      "donation_types": "Zahrnuté typy příspěvků",
+      "donor_types": "Klasifikované kategorie dárců",
+      "external_ids": "Externí identifikátory v registru",
+      "external_ids_both": "ID zdrojových transakcí a identifikační čísla firem (IČO)",
+      "external_ids_transaction": "ID transakcí ve zdrojovém registru",
+      "external_ids_company": "Registrační / identifikační čísla firem",
+      "external_ids_none": "Ve zdrojovém registru nejsou zveřejněny",
+      "access": "Přístup k datům a pipeline",
+      "export_link": "Stáhnout kompletní datovou sadu (CSV / JSON)",
+      "pipeline_link": "Zobrazit zdrojový kód loaderu pro danou zemi (GitHub)"
+    },
+    "source": {
+      "default": "Data pro zemi {country} pocházejí přímo z {source}.",
+      "link": "Navštívit oficiální registr"
+    },
+    "coverage": {
+      "default": "Datová sada pokrývá zveřejněné politické dary od roku {minYear}.",
+      "preliminary": "Záznamy od roku {preliminarySince} jsou předběžné a podléhají průběžným aktualizacím dozorového orgánu."
+    },
+    "threshold": {
+      "default": "DonationWatch uplatňuje pro tuto datovou sadu minimální prahovou hodnotu {amount} na transakci.",
+      "note": "Tento limit jsme nastavili, abychom se vyhnuli nadměrnému množství drobných darů, a může být vyšší než minimální částka exportovaná zdrojovým registrem. Příspěvky s absolutní hodnotou pod touto částkou jsou odfiltrovány.",
+      "all": "Tento datový soubor obsahuje všechny zveřejněné dary bez filtru minimální částky.",
+      "party": "Prahová hodnota pro zahrnutí strany: Abychom se zaměřili na aktivní politické subjekty, jsou do kompilované datové sady zahrnuty pouze strany s {type, select, count {alespoň {count} zdokumentovanými dary} sum {alespoň {sum} v kumulativních darech} other {alespoň {count} zdokumentovanými dary nebo {sum} v kumulativních darech}}.",
+      "party_all": "Zahrnutí stran: Zahrnuty jsou všechny politické strany s platnými vykázanými příspěvky nad prahem transakce.",
+      "net_positive": "Vrácené dary a filtrování nulového součtu: Některé registry evidují vrácené či refundované příspěvky jako záporné položky. Dárci nebo přijímající strany, jejichž kumulativní čistý součet příspěvků v celé datové sadě je nulový nebo záporný, jsou vyloučeni."
+    },
+    "cadence": {
+      "default": "Datové sady jsou pravidelně synchronizovány se zveřejněným zdrojovým registrem.",
+      "annual": "Zdrojová datová sada je aktualizována v ročním cyklu.",
+      "quarterly": "Zdrojová datová sada je aktualizována ve čtvrtletním cyklu."
+    },
+    "processing": {
+      "summary": "Surová data procházejí při načítání deterministickou, pravidly řízenou normalizací s cílem sjednotit názvy subjektů, sloučit organizační pobočky a vyloučit nevyhovující záznamy:",
+      "step_cleaning": "Základní čištění řetězců: Všechny názvy subjektů procházejí normalizací Unicode NFKC, oříznutím okolních uvozovek a koncových čárek a sloučením vícenásobných mezer.",
+      "step_clustering": "Seskupování podle klíče dárce a pravidla pro danou zemi: Kanonický vyhledávací klíč (odstraňující všechny nealfanumerické znaky a převádějící text na velká písmena) seskupuje varianty ve velikosti písmen, mezerách a interpunkci pod jeden kanonický název dárce. Pokud jsou pro loader dané země nastavena další pravidla, standardizují místní právní formy, odstraňují osobní tituly nebo mapují známé aliasy — přičemž každá sloučená varianta je uvedena níže v části Agregovaní dárci.",
+      "step_receivers": "Mapování a konsolidace příjemců: Vykázané názvy příjemců jsou mapovány na kanonické politické strany. Pokud registry vykazují příspěvky krajským, místním nebo mládežnickým organizacím odděleně, jsou konsolidovány do jednoho celkového součtu za stranu (v relevantních případech uvedeno níže v části Agregovaní příjemci).",
+      "donor_identity": "Důležité omezení ohledně identity dárců (shoda jmen vs. nesloučené varianty): Oficiální registry financování politických stran zřídka zveřejňují jednoznačné osobní identifikátory (jako jsou rodná čísla, daňová čísla nebo data narození) jednotlivých dárců. Částky na profilových stránkách dárců jsou seskupovány výhradně podle normalizovaného jména dárce. V důsledku toho může jeden profil dárce sdružovat příspěvky více různých osob se stejným jménem (nadměrná agregace), zatímco varianty obsahující druhá jména nebo nenamapované zkratky mohou zůstat jako samostatné profily (nedostatečná agregace)."
+    },
+    "anonymisation": {
+      "summary": "Rozlišujeme mezi redakcemi provedenými přímo zveřejňujícím orgánem a diskreční anonymizací na základě žádosti.",
+      "upstream": "Redigováno úřadem: {count} dárcovských záznamů bylo úřadem před zveřejněním skryto.",
+      "by_request": "Anonymizováno na žádost: {count} jmen dárců bylo odstraněno na žádost, přičemž částky transakcí a stranické součty zůstaly zachovány."
+    },
+    "licence": {
+      "output": "Naše kompilovaná, normalizovaná datová sada a vizualizace jsou publikovány pod licencí {licence}.",
+      "export_prompt": "Pro výzkumníky, novináře a datové vědce je kompletní normalizovaná datová sada pro zemi {country} ke stažení přes naši stránku {exportLink} a přesná pravidla načítání a normalizace lze zkontrolovat v našem {pipelineLink}."
+    },
+    "version": {
+      "last_updated": "Datová sada naposledy zpracována: {date}.",
+      "latest_donation": "Poslední zaznamenaná transakce v datové sadě: {date}.",
+      "explanation": "Časové razítko zpracování udává, kdy naše pipeline naposledy synchronizovala a zkompilovala data z oficiálního registru, zatímco datum poslední transakce odráží nejnovější datum příspěvku přítomné ve zveřejněných záznamech."
+    },
+    "disclaimer": {
+      "text": "Kompilovaná, nikoliv oficiální data: DonationWatch je nezávislý občanský projekt a není spojen s žádným volebním orgánem ani politickou stranou. Vzhledem k normalizaci a filtrování by tato datová sada neměla být citována jako oficiální státní registr."
+    },
+    "policy_domains": {
+      "title": "Politické oblasti a odvětvové kategorie",
+      "intro": "Dárci v zemi {country} jsou přiřazeni do 24 konkrétních odvětvových kategorií seskupených pod 6 širších politických oblastí:",
+      "disclaimer": "Tyto kategorie představují doplňkovou vrstvu sestavenou podle nejlepšího vědomí s asistencí AI na základě veřejných popisů společností, oborových registrů a členství ve svazech, nikoli oficiální klasifikaci úřadů. Přímé společnosti jsou odlišeny od víceodvětvových zastřešujících svazů a nezařazení dárci zůstávají uvedeni odděleně. Pokud narazíte na chybně zařazeného dárce nebo chybějící vazbu, otevřete prosím <github>issue na GitHubu</github> nebo napište na <emailLink>{email}</emailLink>."
+    }
+  },
+  "interests": {
+    "domains": {
+      "energy-resources": {
+        "label": "Energetika a zdroje",
+        "description": "Fosilní paliva, těžba, obnovitelné zdroje, zemědělství a lesnictví"
+      },
+      "built-environment": {
+        "label": "Výstavba a infrastruktura",
+        "description": "Development nemovitostí, stavebnictví, infrastruktura a doprava"
+      },
+      "finance-advisory": {
+        "label": "Finance a poradenství",
+        "description": "Bankovnictví, penzijní fondy, pojišťovnictví, poradenství, právo a fintech"
+      },
+      "regulated-consumer": {
+        "label": "Regulovaná spotřeba",
+        "description": "Hazardní hry, alkohol, tabák, supermarkety a pohostinství"
+      },
+      "health-tech-industry": {
+        "label": "Zdravotnictví, technologie a průmysl",
+        "description": "Farmacie, soukromá zdravotní péče, technologie, média, obrana a výroba"
+      },
+      "labor-advocacy": {
+        "label": "Práce a zájmová advokacie",
+        "description": "Odbory, politické fundraisingové fondy a tematické kampaně"
+      }
+    },
+    "tags": {
+      "fossil-fuels": {
+        "label": "Fosilní paliva a tepelná energetika",
+        "description": "Těžba uhlí, ropy a plynu a výroba tepelné energie"
+      },
+      "mining-metals": {
+        "label": "Těžba a kovy",
+        "description": "Těžba železné rudy, zlata, lithia a kritických nerostů"
+      },
+      "renewables-cleantech": {
+        "label": "Obnovitelné zdroje a čisté technologie",
+        "description": "Solární a větrná energie, bateriová úložiště a zelený vodík"
+      },
+      "agriculture-forestry": {
+        "label": "Zemědělství a lesnictví",
+        "description": "Agropodnikání, pastevectví, chov hospodářských zvířat, dřevo a vodní práva"
+      },
+      "property-development": {
+        "label": "Nemovitosti a development",
+        "description": "Komerční a rezidenční development nemovitostí a realitní fondy REIT"
+      },
+      "construction-infrastructure": {
+        "label": "Stavebnictví a infrastruktura",
+        "description": "Inženýrské stavby, dodavatelé silnic a železnic a stavební materiály"
+      },
+      "aviation-transport": {
+        "label": "Letectví, lodní doprava a logistika",
+        "description": "Letecké společnosti, letiště, přístavy, námořní a nákladní logistika"
+      },
+      "banking-lending": {
+        "label": "Bankovnictví a úvěry",
+        "description": "Komerční banky, družstevní záložny a nebankovní poskytovatelé úvěrů"
+      },
+      "wealth-super-insurance": {
+        "label": "Správa majetku, penze a pojištění",
+        "description": "Penzijní fondy, private equity, správci aktiv a pojišťovny"
+      },
+      "consulting-accounting-legal": {
+        "label": "Poradenství, účetnictví a právo",
+        "description": "Auditorské a poradenské firmy Velké čtyřky, korporátní advokátní kanceláře a PR/lobbing"
+      },
+      "crypto-fintech": {
+        "label": "Krypto a fintech",
+        "description": "Burzy digitálních aktiv, blockchain a alternativní platební systémy"
+      },
+      "gambling-wagering": {
+        "label": "Hazardní hry a sázení",
+        "description": "Kasina, online sázení, loterie a provozovny hracích automatů"
+      },
+      "alcohol-beverages": {
+        "label": "Alkohol a nápoje",
+        "description": "Pivovary, lihovary, vinařství a maloobchodní prodejny alkoholu"
+      },
+      "tobacco-nicotine": {
+        "label": "Tabák a nikotin",
+        "description": "Výrobci tabáku, velkoobchodníci a elektronické cigarety"
+      },
+      "food-supermarkets": {
+        "label": "Supermarkety a potravinářství",
+        "description": "Velké obchodní řetězce s potravinami, rychlé občerstvení a výrobci balených potravin"
+      },
+      "hospitality-tourism": {
+        "label": "Pohostinství, kluby a cestovní ruch",
+        "description": "Hotely, licencované kluby, restaurace a provozovatelé cestovního ruchu"
+      },
+      "pharma-biotech": {
+        "label": "Farmacie a biotechnologie",
+        "description": "Výrobci léčiv, vakcín a lékařský výzkum"
+      },
+      "private-healthcare": {
+        "label": "Soukromé zdravotnictví a péče o seniory",
+        "description": "Soukromé nemocnice, patologie a poskytovatelé péče o seniory"
+      },
+      "tech-telecom-platforms": {
+        "label": "Technologie, telekomunikace a platformy",
+        "description": "Software, cloud, sociální platformy a telekomunikační operátoři"
+      },
+      "media-broadcasting": {
+        "label": "Média a vysílání",
+        "description": "Komerční televize, rozhlas, vydavatelství a zpravodajské sítě"
+      },
+      "defense-aerospace": {
+        "label": "Obrana a letectví",
+        "description": "Dodavatelé obranného průmyslu, vojenská technika a bezpečnostní systémy"
+      },
+      "manufacturing-automotive": {
+        "label": "Výroba a automobilový průmysl",
+        "description": "Průmyslová výroba, papír a obaly a distribuce vozidel"
+      },
+      "trade-unions": {
+        "label": "Odborové organizace",
+        "description": "Zaměstnanecké odbory ve veřejném i soukromém sektoru"
+      },
+      "ideological-issue-advocacy": {
+        "label": "Ideologická a tematická advokacie",
+        "description": "Politické fundraisingové fondy, think tanky a tematické kampaně"
+      }
+    }
+  }
+}

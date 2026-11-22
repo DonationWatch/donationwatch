@@ -40,7 +40,7 @@ jobs:
 
       - name: Get Playwright version
         id: playwright-version
-        run: echo "version=$(pnpm exec playwright --version)" >> $GITHUB_OUTPUT
+        run: echo "version=$(pnpm --filter @donationwatch/web exec playwright --version)" >> $GITHUB_OUTPUT
 
       - name: Cache Playwright Browsers
         id: playwright-cache
@@ -51,21 +51,21 @@ jobs:
 
       - name: Install Playwright Browsers
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: pnpm exec playwright install --with-deps chromium
+        run: pnpm --filter @donationwatch/web exec playwright install --with-deps chromium
 
       - name: Install Playwright OS Dependencies
         if: steps.playwright-cache.outputs.cache-hit == 'true'
-        run: pnpm exec playwright install-deps chromium
+        run: pnpm --filter @donationwatch/web exec playwright install-deps chromium
 
       - name: Run Playwright tests
-        run: pnpm exec playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+        run: pnpm --filter @donationwatch/web exec playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
 
       - name: Upload blob report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: blob-report-${{ matrix.shardIndex }}
-          path: blob-report/
+          path: apps/web/blob-report/
           retention-days: 1
 
   merge-reports:
@@ -94,11 +94,11 @@ jobs:
           merge-multiple: true
 
       - name: Merge Playwright Reports
-        run: pnpm exec playwright merge-reports --reporter html ./all-blob-reports
+        run: pnpm --filter @donationwatch/web exec playwright merge-reports --reporter html ../../all-blob-reports
 
       - name: Upload HTML report artifact
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report
-          path: playwright-report/
+          path: apps/web/playwright-report/
           retention-days: 14

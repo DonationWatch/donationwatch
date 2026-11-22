@@ -1,0 +1,127 @@
+import type { PartyYearsSums } from "../types/party-stats";
+import type { Brand } from "./brand";
+import type { Countries } from "./countries";
+
+export type ReceiverId = Brand<string, "ReceiverId">;
+
+export const enum AddressField {
+  Country,
+  State,
+  Zip,
+}
+
+export interface DonationAddress {
+  [AddressField.Country]: Countries;
+  [AddressField.State]?: string;
+}
+
+export interface ExtractedDonationAddress extends DonationAddress {
+  [AddressField.Zip]?: string;
+}
+
+export const enum DonorType {
+  Other,
+  Individual,
+  Company,
+  TradeUnion,
+  PublicFund,
+  UnincorporatedAssociation,
+  RegisteredPoliticalParty,
+  Trust,
+  FriendlySociety,
+  LimitedLiabilityPartnership,
+  BuildingSociety,
+  NonProfitLegalEntity,
+  AnonymizedDonor,
+}
+
+export const enum DonationType {
+  // Private monetary donations
+  Money,
+  // Regular member dues
+  MembershipFee,
+  // One-time entry fees
+  JoiningFee,
+  // In-kind / Non-cash donations
+  PropertyOrService,
+  // State subsidies (e.g., Short Money, Cranborne Money)
+  PublicFunds,
+}
+
+export const enum DonationField {
+  Id,
+  Date,
+  DonationType,
+  DonorName,
+  Amount,
+  Receiver,
+  Address,
+  DonorIndex,
+  DonorType,
+  // Ultimate Beneficial Owners
+  // see https://en.wikipedia.org/wiki/Beneficial_ownership
+  UBOs,
+  // Official registration / entity number (e.g. UK Companies House CRN, Norwegian OrgNr, French SIREN)
+  DonorRegistrationNumber,
+  // Initial recipient committee, PAC, or sub-organization when consolidated under a party
+  OriginalReceiver,
+  OriginalReceiverIndex,
+}
+
+export interface Donation {
+  [DonationField.Id]: string;
+  [DonationField.Amount]: number;
+  // name of the donor
+  [DonationField.DonorName]: string;
+  // either year or year-month-day
+  [DonationField.Date]: string;
+  [DonationField.Address]: DonationAddress;
+  [DonationField.Receiver]: ReceiverId;
+  [DonationField.DonorType]?: DonorType;
+  [DonationField.UBOs]?: string[];
+  // being unset = DonationTypes.Money
+  [DonationField.DonationType]?: DonationType;
+  [DonationField.DonorRegistrationNumber]?: string;
+  [DonationField.OriginalReceiver]?: string;
+}
+
+export type IsoDate = `${number}-${number}-${number}`;
+
+import type { DonorInterestAttribution } from "../types/interests";
+
+// Type for defining that's later post processed into the DonorMeta
+// This won't reach the next app
+export interface DonorMetaItem {
+  wiki?: number;
+  interests?: DonorInterestAttribution[];
+}
+
+export interface DonorMetaDefinition {
+  donors: Record<string, DonorMetaItem>;
+  relations?: [donor: string, kind: RelationKind][][];
+}
+
+export type DonorMetaRelation = [
+  donor: string,
+  kind: RelationKind,
+  partySum: PartyYearsSums,
+];
+
+export interface DonorMeta {
+  wiki?: number;
+  relations?: DonorMetaRelation[];
+  interests?: DonorInterestAttribution[];
+}
+
+export const enum RelationKind {
+  family,
+  company,
+  owner,
+  organization,
+}
+
+// To be used as RegExp
+export type DonorFilter = string;
+
+// To be used as RegExp
+export type ReceiverFilter = string;

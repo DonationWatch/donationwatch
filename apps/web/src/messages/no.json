@@ -1,0 +1,1301 @@
+{
+  "copyright": "Opphavsrett",
+  "description": "DonationWatch gir tydelig innsikt i givere og partier, og gjør det enklere å forstå politisk finansiering ved å forklare komplekse data på en enkel måte",
+  "title": "Partidonasjoner {country}",
+  "sum": "Sum",
+  "donation_count": "Antall donasjoner",
+  "average": "Gjennomsnitt",
+  "donations_by_party": "Donasjoner per parti",
+  "donations_per_year": "Donasjoner per år",
+  "party_donations": "Partidonasjoner",
+  "more": "Mer",
+  "data_since": "Siden {year}",
+  "view_party": "Vis partisiden for {party}",
+  "faq": "Ofte stilte spørsmål",
+  "navigation": {
+    "fun": "Morsomme fakta",
+    "about": "Om oss",
+    "other_countries": "Andre land",
+    "imprint": "Impressum",
+    "privacy": "Personvernerklæring",
+    "transparency": "Åpenhet",
+    "methodology": "Metodologi",
+    "sources": "Kilder",
+    "export": "Dataeksport",
+    "bar_chart_race": "Søylediagram-kappløp",
+    "compare_parties": "Sammenlign partier",
+    "support_us": "☕ Støtt serverkostnader",
+    "enterprise": "Bedrifts-API",
+    "on_this_page": "På denne siden"
+  },
+  "data": {
+    "loading": "Innhold lastes...",
+    "error": "Feil ved lasting av data"
+  },
+  "sidebar": {
+    "sidebar": "Sidemeny",
+    "toggle": "Vis/skjul sidepanel",
+    "donations": "Donasjoner",
+    "all_countries": "Alle land",
+    "tools": "Verktøy",
+    "show_all": "Vis alle ({num})",
+    "show_less": "Vis færre",
+    "more": "Mer"
+  },
+  "search": {
+    "filter": "Søk...",
+    "filter_description": "Søk etter partier, år eller givere",
+    "parties": "Partier",
+    "years": "År",
+    "legislative_years": "Lovgivningsperioder",
+    "empty": "Ingen resultater",
+    "donors": "Givere"
+  },
+  "page_title": {
+    "years": {
+      "description": "I {year} mottok {parties} partier i {country} totalt {sum} fra {count} donasjoner over {minAmount}. Utforsk detaljerte oppdelinger per parti og giver, samt trender i politisk finansiering.",
+      "overview": "Politiske donasjoner i {country} ({year}) – Årsoversikt og finansiering",
+      "changes": "Siste endringer i politiske partidonasjoner i {country} for {year}",
+      "donors": "Partidonorliste og største bidragsytere i {country} ({year})",
+      "timeline": "Tidslinje for politiske partidonasjoner i {country} for {year}",
+      "origin": "Geografisk oversikt over partidonasjoner i {country} for {year}"
+    },
+    "party": {
+      "donors": "{party}: Giverliste og finansieringsoversikt ({country})",
+      "changes": "Siste endringer i donasjoner til {party} ({country})",
+      "timeline": "{party}: Tidslinje for finansiering og donasjonshistorikk ({country})",
+      "origin": "Geografisk oversikt over donasjoner til {party} ({country})",
+      "description": "Giverliste og finansieringsoversikt for {party} i {country}. Se hvilke bedrifter, organisasjoner og privatpersoner som bidrar: {count} donasjoner over {minimumAmount} på til sammen {sum} siden {year}.",
+      "timeline_description": "Følg innrapporterte politiske donasjoner og finansieringshistorikk for {party} i {country}: kumulative totaler, historiske trender og årlige milepæler.",
+      "changes_description": "Siste politiske donasjoner og finansieringsoppdateringer for {party} i {country}: kronologisk oversikt over nylig innrapporterte bidrag, datoer og beløp.",
+      "origin_description": "Geografisk opprinnelse for politiske donasjoner til {party} i {country}: oversikt over delstater, regioner og utenlandske kilder."
+    },
+    "donor": {
+      "overview": "{donor} – Politiske donasjoner og finansieringshistorikk ({country})",
+      "description": "Se hvor {donor}s politiske donasjoner gikk. {sum} donert i {count} bidrag til {parties} partier i {country} siden {minYear}."
+    }
+  },
+  "chart": {
+    "save_as_image": "Lagre som bilde",
+    "toggle_fullscreen": "Bytt fullskjerm",
+    "reset_zoom": "Tilbakestill zoom",
+    "filtered": "filtrert datasett"
+  },
+  "over_min_public_amount": "over {amount}",
+  "over_threshold": "{type, select, count {bare partier med ≥ {count} donasjoner} sum {bare partier med ≥ {sum}} other {bare partier med ≥ {count} donasjoner eller ≥ {sum}}}",
+  "prelim_data": "foreløpige data siden {year}",
+  "common": {
+    "date": "Dato",
+    "party": "Parti",
+    "donor": "Giver",
+    "amount": "Beløp",
+    "anonymizedDonor": "Anonymisert donor",
+    "redactedDonor": "Sensurert giver",
+    "donorToPartyByYear": "Donorer i {year}",
+    "country": "Land",
+    "state": "Stat",
+    "summary": "Sammendrag",
+    "download_format": "Last ned {format}",
+    "view_source": "Vis kilde",
+    "donation_type": "Donasjonstype",
+    "donated_to": "Donert til {recipient}"
+  },
+  "sort": {
+    "asc": "Sorter stigende",
+    "desc": "Sorter synkende",
+    "clear": "Fjern sortering"
+  },
+  "old_data_warning": {
+    "description": "Siste donasjon: {date}.\nPåfølgende oppføringer venter på offisiell publisering."
+  },
+  "footer": {
+    "sources": "Kilder",
+    "build": "Per {date}",
+    "build_since": "Per {date}, siden {year}",
+    "published_by": "Som publisert av {source}",
+    "charts_license": "Diagrammer lisensiert under {license} med kildehenvisning"
+  },
+  "header": {
+    "home": "Hjem",
+    "language_selection": "Språkvalg",
+    "country_selection": "Landvalg"
+  },
+  "actions": {
+    "close": "Lukk",
+    "play": "Spill av",
+    "pause": "Pause",
+    "restart": "Start på nytt"
+  },
+  "donor_dialog": {
+    "title": "Giverinformasjon",
+    "summary": "Sammendrag"
+  },
+  "donation_dialog": {
+    "title": "Donasjonsdetaljer",
+    "donor": "Giver",
+    "country": "Land",
+    "state": "Delstat/region",
+    "receiver": "Mottaker",
+    "donation_amount": "Donasjonsbeløp",
+    "date": "Dato"
+  },
+  "root": {
+    "title": "Åpen kildekode-sporer for donasjoner til politiske partier",
+    "subtitle": "Spor og utforsk politiske donasjoner på tvers av flere land. Forstå hvem som finansierer politiske partier og hvordan penger flyter globalt.",
+    "enterprise": {
+      "title": "Enterprise API (Beta)",
+      "p0": "Trenger du programmatisk tilgang til enhetskartlegging på tvers av registre? Vi utvikler for tiden en høyt tilgjengelig REST-API med OpenAPI-spesifikasjoner, spesielt designet for institusjonelle compliance- og risikoteam."
+    },
+    "stats": {
+      "countries": "Land dekket",
+      "parties": "Politiske partier",
+      "donations": "Enkeltstående donasjoner",
+      "currencies": "Valutaer som spores"
+    },
+    "countries": {
+      "title": "Utforsk politiske donasjoner etter land",
+      "subtitle": "Velg et land for å få tilgang til detaljerte donasjonsoppføringer, data om partifinansiering og informasjon om givere."
+    },
+    "biggest_donations": {
+      "title": "Største politiske donasjoner og givere",
+      "text": "Utforsk de største enkeltstående politiske bidragene og giverne med høyest samlet beløp som er registrert i de nasjonale registrene DonationWatch følger, med alle beløp omregnet til EUR. Offentlig finansiering og statlige tilskudd er utelatt for å fokusere på private bidrag og bedriftsbidrag.",
+      "single_donations_title": "Største enkeltstående donasjoner",
+      "single_donations_footer": "Rangert etter enkelttransaksjon",
+      "top_donors_title": "Største samlede givere",
+      "top_donors_footer": "Aggregert på tvers av alle oppføringer",
+      "converted_to_eur": "Omregnet til EUR",
+      "rates_as_of": "Valutakurser (per {date}):"
+    },
+    "why": {
+      "title": "Hvorfor åpenhet om politiske donasjoner er viktig",
+      "p0": "Demokrati er avhengig av informerte borgere. Ved å gjøre data om politiske donasjoner tilgjengelige og enkle å utforske, hjelper vi folk å forstå de økonomiske relasjonene som former deres politiske landskap. Åpenhet i politisk finansiering bygger tillit, styrker ansvarlighet og gjør velgere i stand til å ta informerte beslutninger."
+    },
+    "open_source": {
+      "title": "Åpen kildekode",
+      "p0": "DonationWatch er åpen kildekode. Du kan se gjennom koden, rapportere problemer eller bidra på {github}."
+    }
+  },
+  "biggest_donations": {
+    "text": "Siden {minYear} var den største offentliggjorte enkeltdonasjonen i {country} på {amount} fra {donor} til {party} i {year}. Dette etterfølges av {others}.",
+    "list": "{amount} fra {donor} til {receiver}"
+  },
+  "home": {
+    "most_recent": "Nyeste donasjoner",
+    "hero": {
+      "subtitle": "Sporing av politiske partidonasjoner for {country}",
+      "subtitle_no_country": "Sporing av politiske partidonasjoner"
+    },
+    "last_period": "Siste år:",
+    "previous_period": "Donasjoner fra forrige år.",
+    "what": {
+      "title": "Hva er dette?",
+      "summary": "Partidonasjoner er en viktig del av politikken. De er en viktig indikator på politisk støtte.\n\nVi prøver å presentere disse dataene tydelig og forståelig.",
+      "threshold": "På grunn av det høye antallet mindre politiske partier sporer vi bare donasjoner til partier som oppfyller en viss terskel. Den nåværende terskelen er satt til {type, select, count {{count} donasjoner} sum {totalt {sum}} other {{count} donasjoner eller totalt {sum}}} i bidrag til partiet, uavhengig av størrelsen på enkeltbidrag.",
+      "no_donors": "På grunn av nasjonale forskrifter offentliggjør ikke {country} identiteten til individuelle politiske givere. Derfor viser vi reviderte samlede beløp per parti i stedet for individuelle transaksjoner. Funksjoner som \"Toppgivere\" eller \"Giversøk\" er deaktivert for denne regionen.",
+      "source": {
+        "austria": "Dataene som brukes her kommer fra den østerrikske Riksrevisjonen (Austrian Court of Audit) og inkluderer alle partidonasjoner som er dokumentert der siden 2012.\n\nMerk: Før 8. juli 2019 måtte politiske partier rapportere enkeltbidrag over 51 000 euro (fram til 2018 over 50 000 euro) til ACA. Siden juli 2019 har rapporteringsgrensen vært 2 500 euro.\n\nPartienes data oppdateres normalt kvartalsvis.",
+        "germany": "Dataene som brukes her kommer fra den tyske Forbundsdagen (Bundestag) og inkluderer alle partidonasjoner over €50 000 dokumentert der siden 2010, samt over €35 000 siden 5. mars 2024.",
+        "switzerland": "Dataene som brukes her kommer fra det sveitsiske føderale finanskontrollorganet og inkluderer alle politiske donasjoner dokumentert der siden 2023.",
+        "netherlands": "Informasjonen som presenteres her er hentet fra Nederlands regjering og inkluderer alle politiske donasjoner registrert siden 2022 som overstiger €1 000, slik de er rapportert i den årlige «Overzicht van giften aan politieke partijen en hun neveninstellingen».\n\nFor inneværende år er bare donasjoner som overstiger €10 000 inkludert, basert på datasettet «Overzicht substantiële giften aan politieke partijen».\n\nMerk: Noen donasjoner mangler spesifikk datoinformasjon og blir derfor ikke inkludert i tidsserier eller andre datobaserte visualiseringer.\n\nDonasjoner rapportert for SP og GL kan framstå relativt høye fordi begge partier krever at deres parlamentsmedlemmer og tillitsvalgte bidrar med en betydelig del av lønnen sin til partiet.",
+        "europeanunion": "Dataene som presenteres her er hentet fra Authority for European Political Parties and European Political Foundations, og omfatter alle dokumenterte donasjoner til partier og stiftelser siden 2018. På grunn av betydningen av europeiske politiske stiftelser sporer og viser vi deres donasjoner på samme måte som for europeiske politiske partier.\n\nSiden de offisielle dataene ikke inneholder datoinformasjon, finnes det ingen tidsserier eller tilsvarende visuelle framstillinger.\n\nMerk at i forkant av EU-valget i 2024 (fra 6. desember 2023 til 10. juni 2024) gjaldt særskilte rapporteringskrav for donasjoner, med ukentlige rapporter og rask publisering fra myndigheten.\nSiden 10. juni 2024 må bare donasjoner over 12 000 euro rapporteres umiddelbart. Andre donasjoner blir først tilgjengelige etter at de årlige regnskapene er levert.\n\nDer APPF oppgir organisasjonsnummer for bedrifter og juridiske personer (som belgisk KBO, fransk SIREN, tsjekkisk IČO, nederlandsk KVK osv.), trekkes disse ut, valideres med kontrollsiffer og lenkes direkte til det aktuelle offisielle foretaksregisteret.",
+        "estonia": "Dataene som brukes her kommer fra Estlands komité for overvåking av partifinansiering og inkluderer alle politiske donasjoner dokumentert der siden 2014 som overstiger 1 euro.\n\nPolitiske partier i Estland er pålagt å rapportere inntekter, inkludert mottatte donasjoner, kvartalsvis.\nDataene på komiteens nettside oppdateres tilsvarende kvartalsvis.",
+        "czechrepublic": "Dataene som brukes her kommer fra kontoret for kontroll av administrasjonen av politiske partier og politiske bevegelser, og inkluderer alle politiske donasjoner dokumentert der siden 2018 som overstiger 25 CZK.\n\nDette omfanget inkluderer også alle bidrag til partier eller politiske bevegelser som enten har mottatt mer enn 100 enkeltbidrag eller har passert 1 million CZK i totale donasjonsbeløp, uavhengig av størrelsen på enkeltbidragene. Dataene oppdateres årlig.\nKlassifisering av givertype er basert på at en giver identifiseres som en privatperson hvis både firstName- og lastName-feltene er til stede.",
+        "latvia": "Dataene som brukes her er hentet fra Kontoret for korrupsjonsforebygging og -bekjempelse (KNAB) og inkluderer alle politiske bidrag dokumentert siden 2015 som overstiger €1. Dette datasettet omfatter pengedonasjoner, tingsgaver og tjenester, samt partiinnmeldings- og medlemskontingenter.",
+        "australia": "Dataene som brukes her kommer fra Australian Electoral Commission (AEC), og spesielt fra datasettet \"Donations Made Details\" som AEC publiserer. Det inkluderer alle politiske donasjoner som er dokumentert der siden 2014, over 1 AUD.\n\nDet er verdt å merke seg at AEC-datasettet kan inneholde enkelte skrivefeil, noe som kan føre til at visse donasjoner ikke blir fanget opp eller ikke blir riktig knyttet til et bestemt parti på grunn av inkonsistens i dataregistreringen. I tillegg publiseres AECs årlige offentliggjøringer 1. februar hvert år, men dataene gir ikke et fullstendig bilde av alle bidrag på grunn av terskelen for offentliggjøring på $15,000.\n\nDonortyper klassifiseres ved å matche donornavn. Alle vanlige fagforeninger mappes manuelt til donortypen 'Fagforening'. Selskaper oppdages ved å sjekke etter spesifikke selskapsidentifikatorer i donornavnet: 'Pty' (Proprietary), 'Ltd' på slutten av navnet, 'Corporation' eller 'Corp'.",
+        "unitedkingdom": "Dataene som brukes her, kommer fra Electoral Commission og inkluderer alle politiske donasjoner som er dokumentert der siden 2010 og overstiger £1 000.\n\nDet underliggende registeret til Electoral Commission knytter alle historiske transaksjoner retroaktivt til hver partis nåværende offisielt registrerte navn. Historiske donasjoner til partier før en offisiell omprofilering eller navneendring (for eksempel donasjoner til The Brexit Party før 2021) vises derfor under partiets nåværende registrerte navn (Reform UK).\n\nDonasjonsdataene oppdateres kvartalsvis.",
+        "serbia": "Dataene som brukes her kommer ikke fra myndighetene, men fra den ideelle organisasjonen «Center for Investigative Journalism of Serbia» («Centar za istraživačko novinarstvo Srbije» – CINS), som har aggregert donasjonsdata fra Serbias antikorrupsjonsbyrå.\n\nDisse dataene inkluderer alle politiske donasjoner dokumentert der siden 2015.\n\nSiden datasettet ikke gir spesifikk datoinformasjon for enkeltbidrag, er det dessverre ikke mulig å vise tidslinjer eller andre tidsbaserte visualiseringer.",
+        "croatia": "Dataene som brukes her kommer fra Den statlige valgkommisjonen i Republikken Kroatia (DIP) og inkluderer alle politiske donasjoner med en pengeverdi som overstiger 1 €, dokumentert siden 2019.\nDatasettet bruker kun det sist publiserte donasjonsdokumentet for hvert rapporteringsår (slik det er oppgitt av izbori) for å unngå duplikater fra tidligere versjoner av rapporten for samme år.\nAlle donasjoner vises i euro, mens det underliggende datasettet bruker kuna fram til 2024. Donasjoner som opprinnelig er gitt i kuna, konverteres til euro ved hjelp av omtrentlige valutakurser for hvert halvår fra 2019 til 2024: H1 (0.1340, 0.1335, 0.1332, 0.1329, 0.1326) og H2 (0.1341, 0.1338, 0.1334, 0.1327, 0.1328).",
+        "canada": "Dataene som brukes her kommer fra Elections Canada og er basert på datasettet \"contributions as submitted\". Det inkluderer alle politiske donasjoner med pengeverdi over 500 CAD, dokumentert siden 2015. Alle oppføringer som inngår i rapporten \"Statement of Contributions Received\" fra valgtypen \"Annual\" til \"Registered parties\" er inkludert.",
+        "georgia": "Informasjonen som presenteres her er hentet fra Georgias antikorrupsjonsbyrå (ანტიკორუფციული ბიურო﻿) og inkluderer alle politiske donasjoner registrert siden 2011 som overstiger 1 GEL. Datasettet omfatter kun bidrag klassifisert som type #10 (monetære donasjoner) eller type #16 (monetære donasjoner fra juridiske personer).",
+        "norway": "Dataene som brukes her kommer fra de offisielle publikasjonene om partifinansiering fra Statistisk sentralbyrå (SSB) og Partifinansiering.no. Totalene som vises er aggregert fra flere rapporterte mottakerenheter (for eksempel sentrale, regionale, lokale og ungdomsenheter) til én samlet totalsum per parti, mens den underliggende mappingen av mottakere holdes tilgjengelig for åpenhet.\n\nNorgesdatasettet oppdateres årlig, i tråd med publiseringstakten for de underliggende opplysningene.",
+        "ukraine": "Dataene som brukes her, er hentet fra Nasjonalt byrå for korrupsjonsforebygging (NAZK) via PolitData-portalen. De inkluderer alle poster identifisert som «økonomiske bidrag» i de offisielle rapportene.\n\nMerknad om datagrunnlag: Dette tallet viser kun direkte pengetransaksjoner. Det inkluderer ikke statlig finansiering til parlamentariske partier eller ikke-monetære bidrag, som varer og tjenester.\n\nPå grunn av den fullskala russiske invasjonen ble den obligatoriske rapporteringen for politiske partier suspendert fra tidlig 2022 til slutten av 2023 av sikkerhets- og logistikkårsaker. Etter vedtakelsen av lov 3337-IX leverer partiene nå inn sine rapporter i ettertid. Data for 2022–2025 oppdateres fortsatt mens NAZK behandler disse innsendelsene.",
+        "france": "Dataene som brukes her kommer fra Commission Nationale des Comptes de Campagne et des Financements Politiques (CNCCFP) og inkluderer alle politiske donasjoner (rapportert i euro) som er dokumentert i feltet \"Dons_de_personne_physique\".\n\nI motsetning til andre regioner publiseres de franske dataene som en årlig samlet oversikt per parti, og identiteten til individuelle givere er beskyttet av personvernlovgivningen.",
+        "sweden": "Dataene som brukes her, kommer fra Kammarkollegiet, det offisielle svenske statlige registeret for partifinansiering. For å gi et nøyaktig bilde av ren privat og grasrotbasert støtte (rapportert i SEK), inkluderer denne sammenstillingen direkte bidrag dokumentert under kategori 4 (\"Insamling av kontanter\") og kategori 5 (\"Bidrag\"). Interne partioverføringer, statlige subsidier og lotteriinntekter er uttrykkelig utelatt for å forhindre dobbeltelling og for å isolere eksterne donasjoner på en presis måte. Alle data er gruppert etter politisk partitilhørighet (\"Partitillhörighet\").",
+        "southafrica": "Dataene som brukes her, kommer fra Sør-Afrikas valgkommisjon (IEC) og omfatter alle offentliggjorte erklæringer om finansiering av politiske partier (seksjon 9(1)) siden 2021, inkludert gyldige sene innleveringer. Indirekte bidrag til flerpartidemokratifondet (Multi-Party Democracy Fund) og dupliserte rapporter fra giverens side (seksjon 9(2)) er ekskludert.\n\nMerknad om terskler: Politiske partier var pålagt å rapportere donasjoner over 100 000 ZAR per giver per år, til 1. april 2024, da den juridiske offentliggjøringsterskelen ble hevet til 200 000 ZAR.",
+        "unitedstates": "Dataene som presenteres her, er hentet fra Federal Election Commissions (FEC) masseavsløringer og dekker politiske bidrag dokumentert siden 2016.\n\nI motsetning til parlamentariske systemer, der donasjoner går direkte til sentrale partikontorer, er finansieringen av føderale valgkamper i USA desentralisert mellom kandidatkampanjer, partiorganisasjoner og uavhengige organisasjoner for valgpåvirkning (Super PAC-er). For å gi et presist bilde av de finansielle koalisjonene bak hver bevegelse, konsoliderer DonationWatch de viktigste finansieringskanalene til enhetlige partitotaler («Demokratene», «Republikanerne» og «Tverrpolitiske og partipolitisk nøytrale Super PAC-er»). Dette omfatter:\n• Offisielle partikomiteer: Nasjonale, kongress- og delstatspartikomiteer (f.eks. DNC, RNC, DSCC, NRSC, DCCC, NRCC)\n• Godkjente valgkampanjekomiteer for føderale kandidater\n• Politisk orienterte Super PAC-er, hybrid-PAC-er og felles innsamlingskomiteer (f.eks. Senate Majority PAC, Future Forward, MAGA Inc., Senate Leadership Fund, Harris Victory Fund, Trump 47 Committee)\n• Partipolitisk nøytrale og næringsrettede Super PAC-er som støtter kandidater fra begge de store partiene (f.eks. Fairshake, United Democracy Project)\n\nHvorfor enkelte PAC-er ikke er tilknyttet et parti:\nOffisielle partikomiteer og kandidaters valgkampkomiteer oppgir en offisiell partitilhørighet i FEC-registrene og kobles automatisk. Super PAC-er og hybrid-PAC-er opererer som uavhengige enheter uten formelle partierklæringer; DonationWatch reviderer og kartlegger fortløpende alle fremtredende komiteer med samlede inntekter på 5 millioner dollar eller mer. Mindre enkeltsak-grupper, næringslivs-PAC-er og komiteer under denne terskelen uten tydelig tilhørighet forblir ukoblet for å forhindre spekulative antagelser, og utelates fra partitallene.\n\nDatanormalisering og omfang:\n• Minimumsbeløp: Kun bidrag på 10 000 USD eller mer spores. Fordi føderal lov begrenser direkte donasjoner til kandidater (3 300 USD per valg) og tradisjonelle PAC-kontoer (5 000 USD per år), isolerer denne terskelen store innbetalinger til partikomiteer, felles innsamlingskomiteer (JFC), Super PAC-er og ubegrensede Hybrid PAC-kontoer.\n• 501(c)(4)-organisasjoner («Dark Money»): Bidrag fra 501(c)(4)-organisasjoner (f.eks. Future Forward USA Action, One Nation) til Super PAC-er føres som organisasjonsinnbetalinger (ORG), ettersom disse enhetene ikke oppgir sine bakenforliggende givere til FEC.\n• Deduplisering: JFC-bidrag registreres ved opprinnelig mottak, mens interne fordelinger og tildelingsnotater forkastes. Videreformidlinger (WinRed, ActBlue) og overføringer mellom sporede komiteer er utelukket, slik at midler bare telles én gang.\n• Eksklusjoner: Refusjoner trekkes fra givernes totaler. Kandidaters egenfinansiering (lån og personlige bidrag) samt driftsinntekter (renter, utbytter, salg av eiendeler) er ekskludert."
+      },
+      "source_link": "Datakilde"
+    },
+    "list": {
+      "subtitle": "Lovgivningsperioder",
+      "title": "Tidligere lovgivningsperioder",
+      "summary": "Oversikten over lovgivningsperioder samler alle donasjoner gjennom hele en lovgivningsperiode. Klikk på et kort for å gå til den aktuelle perioden."
+    },
+    "years": {
+      "title": "Årlig oversikt over partidonasjoner",
+      "subtitle": "Aggregerte summer på tvers av år",
+      "more": "Vis alle resterende år",
+      "summary": "Utforsk vår årlige oversikt over partidonasjoner, som oppsummerer alle bidrag for hvert år. Klikk på et kort for å gå til den detaljerte årsvisningen."
+    },
+    "parties": {
+      "title": "Partidonasjoner",
+      "subtitle": "Detaljer om enkeltpartier",
+      "more": "Vis alle resterende partier",
+      "summary": "Utforsk vår oversikt over partidonasjoner, som aggregerer alle bidrag per parti. Klikk på et kort for å se donasjonsdetaljene."
+    },
+    "donors": {
+      "title": "Giverdonasjoner",
+      "subtitle": "Detaljer om enkeltgivere",
+      "summary": "Utforsk giveroversikten vår, som viser de mest betydelige økonomiske bidragsyterne siden {minYear}. Klikk på en giver for å se detaljert informasjon om bidragene."
+    }
+  },
+  "stacked_years": {
+    "title": "Donasjonsbeløp per år",
+    "subtitle": "Aggregert sum av publiserte bidrag i {country}, per år fra {years}.",
+    "preliminary": "Stiplede søyler indikerer foreløpige data som kan bli oppdatert med ytterligere offentliggjøringer."
+  },
+  "years": {
+    "title": "Partidonasjoner",
+    "subtitle": "Akkumulert sum av publiserte donasjoner til hvert parti i {country}, {years}.",
+    "goto_year": "Gå til år {year}",
+    "no_date_omitted": "Utelater {count} donasjoner ({sum}) der kilden kun oppga et år.",
+    "no_data": {
+      "title": "Ingen data tilgjengelig",
+      "summary": "Beklager, men det finnes ennå ingen donasjonsdata for {year}.",
+      "last_year": "Alternativt kan du se dataene fra {year}."
+    }
+  },
+  "overview": {
+    "title": "Oversikt",
+    "detail": {
+      "title": "Topp politiske partier og totale donasjoner",
+      "summary": "Denne listen viser de største politiske partiene og deres samlede donasjoner innenfor et bestemt intervall, sortert synkende etter totalsum.",
+      "summary2": "I årene {years} mottok totalt {partyCount} partier til sammen {donationSum} gjennom {donationCount} donasjoner over {minimumAmount}.",
+      "most_donations": "{party} mottok flest donasjoner med totalt {count} bidrag, som utgjør {sum}.",
+      "highest_sum": "De 5 partiene med høyest totalsum i donasjoner er {parties}."
+    },
+    "scatter": {
+      "title": "Donasjonsfordeling",
+      "subtitle": "Individuelle donasjoner til hvert parti etter beløp og hyppighet i {country} fra {years}. Plottet på en logaritmisk skala for å vise fordelingen over varierende størrelsesordener.",
+      "summary": "Oversikten over donasjonsfordeling gir en kort analyse av hvordan donasjoner er fordelt mellom ulike politiske partier. I et spredningsdiagram representerer hvert punkt et parti, der x-aksen viser donasjonsbeløp og størrelsen på punktet reflekterer donasjonsfrekvens.",
+      "span": "{biggestSpanParty}-partiet hadde det største spenn i donasjoner, med en forskjell på {biggestSpanAmount} mellom den minste og største donasjonen."
+    },
+    "pie": {
+      "title": "Fordeling av partidonasjoner",
+      "subtitle": "Totale publiserte donasjoner til hvert parti, {country}, {years}."
+    }
+  },
+  "changes": {
+    "title": "Endringer",
+    "description": "Utforsk en detaljert tabell over politiske partidonasjoner i {country} fra {year}, kun bidrag over {minAmount}, sortert etter transaksjonsdato, med giver- og beløpsinformasjon.",
+    "detail": {
+      "title": "Partidonasjoner etter transaksjonsdato",
+      "summary": "Denne siden viser en liste over partidonasjoner sortert etter transaksjonsdato, med de nyeste donasjonene øverst. Den gir informasjon om beløpet hvert parti mottok og tilhørende givere."
+    }
+  },
+  "donors": {
+    "title": "Givere",
+    "description": "Se hele listen over givere i {year} til politiske partier i {country}. Finn ut hvem som ga mest og hvor mye hver bidro med.",
+    "detail": {
+      "title": "Giverbidrag til politiske partier",
+      "subtitle": "Totale publiserte bidrag per giver til hvert politisk parti i {country}, {years}.",
+      "summary": "Treemapet visualiserer partidonasjonene på en tydelig strukturert måte. Øverste nivå viser giverne, representert ved rektangler der størrelsen er proporsjonal med donasjonsbeløpet.",
+      "summary2": "Under hver giver vises videre rektangler som representerer de respektive mottakerpartiene. Denne hierarkiske visningen gir en rask oversikt over donasjonsfordelingen og viser med et blikk hvor mange mottakere hver giver har støttet.",
+      "unique_donors": "Antall ulike givere i {years} utgjør {count} givere.",
+      "biggest_donor": "Den høyeste totalsummen på {amount} kom fra {donor}.",
+      "most_donations": "Med {count} donasjoner (totalbeløp: {sum}) topper {donor} listen over de mest hyppige giverne.",
+      "most_unique_parties": "{donor} donerte til totalt {count} ulike partier (totalbeløp: {sum}), og viser dermed størst mangfold blant mottakerpartiene.",
+      "top_3": "I {years} er de {amount} største giverne {donors}."
+    },
+    "list": {
+      "title": "Toppgivere etter totale bidrag",
+      "p0": "Denne seksjonen viser en rangert liste over alle givere i valgte år, sortert etter samlet sum av publiserte donasjoner, og fremhever giverne som har bidratt mest."
+    },
+    "sankey": {
+      "title": "Sankey-diagram"
+    },
+    "histogram": {
+      "title": "Fordeling av givere etter antall unike mottakere",
+      "subtitle": "Antall unike politiske partier som mottok publiserte bidrag fra givere i {country}, {years}.",
+      "p0": "Dette diagrammet gir en oversikt over hvordan givere fordeler bidragene sine mellom politiske partier, og viser om givere typisk konsentrerer støtten om ett parti eller sprer den på flere over tid.",
+      "p1": "I {years} var det høyeste antallet ulike partier støttet av én giver {max}. Bare {donors} giver bidro til {max} partier. I snitt støttet hver giver {mean} partier (median: {median}).",
+      "p2": "Med {singlePartyDonors} av {totalDonors} givere bidro {percentage} av giverne til bare ett parti.",
+      "tooltip": "{donors} givere • {parties} unike partier",
+      "item": "{donors} givere donerte til {parties} partier"
+    }
+  },
+  "timeline": {
+    "title": "Tidslinje",
+    "description": "Se en tidslinje over alle politiske partidonasjoner i {country} for {years}, med månedlige totaler og trender på tvers av årene.",
+    "year_resolution_note": "Denne visningen er standardisert til årlig oppløsning fordi noen poster i dette området kun oppgir året for bidraget. For å sikre en fullstendig og nøyaktig sammenligning uten bruk av estimerte datoer, er alle data aggregert etter år.",
+    "detail": {
+      "title": "Tidslinje over politiske partidonasjoner",
+      "summary": "Se det interaktive linjediagrammet nedenfor for å følge donasjonshistorikken for hvert politisk parti over tid. X-aksen viser datoer, mens y-aksen viser donert beløp. Hvert parti er representert med en egen linje som vokser for hver donasjon."
+    },
+    "days": "I {country} gjennom {years} ble donasjoner registrert på {n} unike dager."
+  },
+  "per_year_party": {
+    "title": "Donasjoner til {party} per år",
+    "subtitle": "Årlig sum av publiserte donasjoner til {party} i {country}, {years}."
+  },
+  "per_month": {
+    "title": "Donasjoner per måned",
+    "subtitle": "Månedlig sum av publiserte donasjoner til hvert parti i {country}, {years}.",
+    "description": "Dette stablede stolpediagrammet viser månedlige donasjonsdata for flere politiske partier. X-aksen viser måneder, y-aksen viser donasjonssummer, og hver stolpe er delt opp etter farge for å vise bidrag per parti, slik at det blir enkelt å sammenligne partidonasjoner innen og mellom måneder.",
+    "highest_sum": "{month} hadde høyest total donasjonssum, med totalt {count} donasjoner som utgjorde {sum}.",
+    "most_months": "{party} mottok donasjoner i {count} måneder, flest måneder med bidrag blant alle partier.",
+    "month_most_donations": "Måneden med høyest antall donasjoner var {month}, som mottok totalt {count} enkeltbidrag."
+  },
+  "per_year": {
+    "title": "Donasjoner per år",
+    "subtitle": "Årlig sum av publiserte donasjoner til hvert parti i {country}, {years}.",
+    "description": "Dette stablede stolpediagrammet viser årlige donasjonsdata for flere politiske partier. X-aksen viser år, Y-aksen representerer donasjonssummer, og hver stolpe er delt inn i fargede segmenter som viser bidragene fra de enkelte partiene, noe som gjør det enkelt å sammenligne donasjoner både innenfor og mellom år."
+  },
+  "party": {
+    "donors": {
+      "title": "Givere til {party}",
+      "subtitle": "Totale publiserte bidrag fra givere til {party} i {country}.",
+      "summary": "Denne siden viser alle offisielt offentliggjorte donasjoner over {minSum} til {party} siden {minYear}, gruppert etter giver for å vise totalbidrag over tid. Alle tall er basert på offisielle offentliggjøringer publisert av {source}, vist både som treemap for visuell sammenligning og som en utvidbar liste over de underliggende transaksjonene."
+    },
+    "donor_list": {
+      "title": "Største givere til {party} etter totale bidrag",
+      "p0": "Utforsk organisasjoner og enkeltpersoner som bidrar til {party}. Denne listen er sortert etter det kumulative beløpet som er donert, og viser både totalsummen og den relative prosentandelen av partiets samlede finansiering. Du kan utvide en hvilken som helst oppføring for å se en fullstendig kronologisk historikk over individuelle donasjoner fra den bestemte kilden."
+    },
+    "donor_types": {
+      "title": "Givertyper",
+      "treemap": {
+        "title": "{party}: givertyper",
+        "description": "Totale publiserte bidrag til {party} i {country} etter givertype."
+      },
+      "p0": "Dette treemapet grupperer rapporterte politiske donasjoner etter givertype (for eksempel privatpersoner, selskaper og offentlige midler) og skalerer hvert rektangel etter totalt beløp bidratt i valgt periode og omfang.",
+      "p1": "Større bokser indikerer høyere summer, og navnene som vises i hver boks er de største bidragsyterne innen givertypen. Denne visningen inkluderer {count} ulike givertyper for {party}.",
+      "p2": "Nedenfor er en liste som rangerer givertyper etter totalbidrag, sortert fra høyest til lavest:"
+    },
+    "donation_types": {
+      "title": "Donasjonstyper",
+      "treemap": {
+        "title": "{party}: donasjonstyper",
+        "description": "Totale publiserte bidrag til {party} i {country} etter donasjonstype."
+      },
+      "p0": "Politiske bidrag til {party} er kategorisert etter donasjonstype for å gi åpenhet om hvordan partiet er finansiert.",
+      "all_single": "Alle registrerte bidrag til {party} ble mottatt som {type}, på til sammen {amount} ({percentage}) fordelt på {count} registreringer.",
+      "largest_share": "Den største andelen av finansieringen ble mottatt som {type}, og utgjorde {amount} ({percentage} av alle bidrag).",
+      "remaining_share": "De resterende bidragene ble mottatt som {types}.",
+      "summary_item": "{amount} ({percentage}) som {type}",
+      "treemap_guide": "Det interaktive trekartet viser den relative størrelsen på hver donasjonstype, der indre rektangler representerer de største individuelle bidragsyterne. Nedenfor er den fullstendige rangeringen etter totalbeløp:"
+    },
+    "qa": {
+      "sum": {
+        "q": "Hvor mye har {party} mottatt i donasjoner?",
+        "a": "{party} har mottatt totalt {sum} fra {count} dokumenterte donasjoner."
+      },
+      "top_donors": {
+        "q": "Hvem finansierer {party} og hvem er de største giverne?",
+        "a": "De største giverne til {party} er: {donors}."
+      },
+      "largest_singular": {
+        "q": "Hva var den største enkeltdonasjonen til {party}?",
+        "a": "Den største enkeltdonasjonen var {amount} fra {donor} den {date}."
+      },
+      "biggest_overall": {
+        "q": "Hvem er den største giveren totalt til {party}?",
+        "a": "Den største giveren totalt til {party} er {donor} med donasjoner på til sammen {sum}."
+      },
+      "frequent_donor": {
+        "q": "Hvem har gitt flest donasjoner til {party}?",
+        "a": "{donor} har gitt flest donasjoner til {party} med {count} separate donasjoner som til sammen utgjør {sum}."
+      }
+    },
+    "overview": {
+      "title": "Donasjonsoversikt {party}"
+    },
+    "changes": {
+      "detail": {
+        "title": "{party}-donasjoner etter transaksjonsdato",
+        "summary": "Denne siden viser en liste over {party}-donasjoner sortert etter transaksjonsdato, med de nyeste bidragene øverst. Den gir detaljer om beløpet {party} mottok og de respektive giverne."
+      }
+    },
+    "timeline": {
+      "chart_title": "{party}-donasjoner",
+      "subtitle": "Akkumulert sum av publiserte donasjoner til {party} i {country}.",
+      "detail": {
+        "title": "Tidslinje for {party}-donasjoner",
+        "summary": "Interaktiv tidslinje som sporer donasjoner og rapporteringspliktige bidrag til {party} over tid. Sammenlign historiske trender, årlige inntekter og total finansieringsvekst.",
+        "per_year": "Det totale beløpet i donasjoner mottatt av {party} varierer fra år til år. Nedenfor finner du en historisk oversikt over de årlige finansieringstotalene som partiet har oppgitt. Denne listen følger summen av alle rapporteringspliktige bidrag og økonomisk støtte for hvert enkelt år:"
+      }
+    },
+    "committees": {
+      "title": "Bidragsytende komiteer og PAC-er",
+      "treemap": {
+        "title": "Komiteer som støtter {party}",
+        "subtitle": "Fordeling av bidrag etter mottakerkomité"
+      },
+      "p0": "Kapitalen til {party} er fordelt over {count, plural, one {# registrert komité} other {# registrerte komiteer}}, inkludert partikomiteer, felles valgkampfond og uavhengige Super PAC-er. Totalt ble {amount} mottatt via disse komiteene.",
+      "top_intro": "Nedenfor er de største bidragsytende komiteene:"
+    },
+    "interests": {
+      "title": "Bransjer og interessegrupper",
+      "intro": "Mange politiske givere i {country} opererer i mer enn én bransje. Denne oversikten grupperer gaver til {party} etter politikkområde og bransje, og skiller mellom enkeltselskaper og flersektorgrupper.",
+      "intro_years": "Mange politiske givere i {country} opererer i mer enn én bransje. Denne oversikten grupperer gaver i {years} etter politikkområde og bransje, og skiller mellom enkeltselskaper og flersektorgrupper.",
+      "explainer": {
+        "summary": "Slik leser du dette: Direkte selskaper vs. flersektorgrupper",
+        "direct_label": "Direkte selskaper:",
+        "direct_text": "Selskaper som har sin hovedvirksomhet i den aktuelle sektoren (for eksempel et gruveselskap, en bank eller en pengespilloperatør). Vises som helfylte felt i diagrammet og isoleres når «Kun direkte selskaper» er slått på.",
+        "multisector_label": "Flersektorgrupper og paraplyorganisasjoner:",
+        "multisector_text": "Bransjeforeninger eller konglomerater som representerer flere sektorer samtidig (for eksempel hotellforeninger som er aktive innen servering, spilleautomater og alkohol). Vises med stripete mønster i diagrammet og inkluderes sammen med direkte selskaper når «Kun direkte selskaper» er slått av.",
+        "domains_label": "Brede områder vs. spesifikke bransjer:",
+        "domains_text": "Når «Grupper etter område» er på, samles de 24 spesifikke bransjene under 6 brede politikkområder. Klikk på en områderad nedenfor for å utvide bransjene, eller klikk på et område i diagrammet for å zoome inn."
+      },
+      "switches": {
+        "direct_only": "Kun direkte selskaper",
+        "group_by_domain": "Grupper etter område"
+      },
+      "summary": {
+        "exposure": "Av totalt {total} i gaver til {party} kommer {tracked} ({percent}) fra givere som er knyttet til minst én sporet bransje eller interessegruppe.",
+        "core": "Av totalt {total} i gaver til {party} kommer {tracked} ({percent}) fra direkte selskaper med hovedvirksomhet i en sporet bransje.",
+        "exposure_years": "Av totalt {total} i gaver i {years} kommer {tracked} ({percent}) fra givere som er knyttet til minst én sporet bransje eller interessegruppe.",
+        "core_years": "Av totalt {total} i gaver i {years} kommer {tracked} ({percent}) fra direkte selskaper med hovedvirksomhet i en sporet bransje.",
+        "top_exposure_one": "Den største tilknyttede bransjen er {item}.",
+        "top_exposure_many": "De største tilknyttede bransjene er {items}.",
+        "top_core_one": "Blant direkte selskaper alene er den største bransjen {item}.",
+        "top_core_many": "Blant direkte selskaper alene er de største bransjene {items}."
+      },
+      "show_top": "Vis topp 10 sektorer",
+      "show_all": "Vis alle {count} aktive sektorer",
+      "note": {
+        "prefix": "Merk: Bransjetagger er et beriket lag oppå offisielle innrapporteringer.",
+        "exposure": "Flersektorgivere vises under hver sektor de representerer, så sektorbeløpene overlapper og bør ikke summeres; områdesummer teller hver giver én gang.",
+        "core": "Selskaper med hovedvirksomhet i flere sektorer kan vises i mer enn én sektor; områdesummer teller hver giver én gang.",
+        "share": "Prosentene viser hver gruppes andel av alle gaver til {party}.",
+        "share_years": "Prosentene viser hver gruppes andel av alle gaver i {years}.",
+        "methodology_link": "Se alle kategorier i metodikken"
+      },
+      "chart": {
+        "title": "{party}: Bransjer og interessegrupper",
+        "title_years": "{country} ({years}): Bransjer og interessegrupper",
+        "subtitle_grouped_exposure": "Gaver gruppert etter politikkområde, bransje og giver, sammenlignet med ukategoriserte gaver",
+        "subtitle_grouped_core": "Direkte selskaper etter politikkområde og bransje, sammenlignet med alle andre gaver",
+        "subtitle_flat_exposure": "Gaver gruppert etter bransje og giver, sammenlignet med ukategoriserte gaver",
+        "subtitle_flat_core": "Direkte selskaper etter bransje, sammenlignet med alle andre gaver",
+        "footer_note": "KI-assistert kategorisering",
+        "legend_solid_label": "Helfylt:",
+        "legend_solid_text": "Direkte selskap",
+        "legend_striped_label": "Stripete mønster:",
+        "legend_striped_text": "Flersektorgruppe / paraplyorganisasjon",
+        "uncategorized": "Andre / ukategoriserte givere",
+        "uncategorized_donor": "Annen / ukategorisert giver",
+        "uncategorized_hint": "Ennå ikke knyttet til noen sporet bransje eller interessegruppe.",
+        "uncategorized_desc": "Gaver fra privatpersoner, lokale bedrifter og grupper som ikke er knyttet til en sporet bransje.",
+        "tooltip_direct_business": "Direkte selskap",
+        "tooltip_multisector": "Flersektorgruppe / paraplyorganisasjon",
+        "tooltip_share_of": "Andel av {category}:",
+        "tooltip_share_uncategorized": "Andel av ukategoriserte:",
+        "tooltip_share_party": "Andel av partiets gaver:",
+        "tooltip_share_total": "Andel av totale gaver:",
+        "tooltip_share_total_pct": "{amount} ({percent}% av totale gaver)",
+        "tooltip_donations": "Gaver:",
+        "tooltip_donors": "Givere:",
+        "tooltip_direct_businesses": "Direkte selskaper:",
+        "tooltip_multisector_bodies": "Flersektorgrupper / foreninger:",
+        "tooltip_solid_hint": "Helfylt: Hovedvirksomheten er i denne sektoren.",
+        "tooltip_striped_hint": "Stripete mønster: Flersektorgruppe eller paraplyorganisasjon aktiv på flere områder."
+      }
+    }
+  },
+  "origin": {
+    "title": "Opprinnelse",
+    "description": "Se hvor politiske partidonasjoner i {country} for {years} kommer fra—fordelt på delstat/region og bidrag fra utlandet.",
+    "detail": {
+      "title": "Donasjonsopprinnelse på et blikk",
+      "description": "Se tydelig opprinnelse for politiske donasjoner til {party} i {country}: fordelt på delstat/region og utenlandske kilder.",
+      "summary": "Utforsk en tydelig oversikt over den geografiske opprinnelsen til donasjoner. Se hvilke delstater/regioner eller land utenfor {country} som bidrar. Følg åpenheten i donasjonsfordelingen for å få innsikt i det geografiske bildet av bidrag.",
+      "country": {
+        "austria": "I Østerrike registreres opprinnelse for donasjoner først fra og med 2023. Derfor kan eldre donasjoner ikke tilordnes enkeltforbundsstater."
+      },
+      "sum": "For året {years} utgjorde politiske partidonasjoner i {country} {sumCountry} fra innenlandske kilder. Bidrag fra utenlandsk opprinnelse utgjorde {sumOthers}."
+    },
+    "type": {
+      "map": "Kart"
+    },
+    "party": {
+      "subtitle": "Totale publiserte donasjoner til {party} etter opprinnelsesdelstat/region i {country}."
+    },
+    "country": {
+      "title": "Donasjoner fra {country}",
+      "subtitle": "Totale publiserte donasjoner etter opprinnelsesdelstat/region i {country}, {years}.",
+      "summary": "Mellom årene {from} og {until} ble donasjoner registrert fra {stateCount} ulike delstater/regioner. Delstaten/regionen med høyest donasjonsbeløp er {highestState} med {highestSum}. Flest donasjoner, nærmere bestemt {largesDonationCountNum}, kom fra {largesDonationCountState}."
+    },
+    "elsewhere": {
+      "title": "Donasjoner utenfor {country}",
+      "summary": "Mellom årene {from} og {until} ble donasjoner registrert fra {countryCount} ulike land. Landet med høyest donasjonsbeløp er {highestCountry} med {highestSum}. Flest donasjoner, nærmere bestemt {largesDonationCountNum}, kom fra {largesDonationCountState}."
+    }
+  },
+  "donor": {
+    "title": "Donasjoner fra giveren",
+    "subtitle": "Totale bidrag og mottakere",
+    "active_period": "Aktiv periode",
+    "type": "Givertype",
+    "registration_number": "Organisasjonsnummer",
+    "summary": "{donor} har gitt totalt {sum} fordelt på {count} enkeltbidrag. Gjennomsnittlig donasjon er {avg}. Donasjonene ble fordelt på {parties} ulike partier.",
+    "oldest": "Den første donasjonen etter {minYear} ble gjort den {date} med beløpet {amount} til {party}.",
+    "newest": "Den nyeste donasjonen ble gjort den {date}, med {amount} til {party}.",
+    "most_donations": "De mest hyppige donasjonene gikk til {list}.",
+    "most_donations_item": "{party} ({count})",
+    "highest_most_donation": "Året {biggestYear} hadde høyest total donasjonssum på {biggestSum}, mens flest enkeltbidrag ({mostCount}) ble gjort i {mostYear}.",
+    "biggest": "Den største enkeltdonasjonen på {amount} gikk til {party} den {date}.",
+    "tree_map": "Donasjoner fra {name}",
+    "tree_map_subtitle": "Totale publiserte donasjoner til hvert parti i {country}.",
+    "biggest_amounts": "Donasjonene var i hovedsak rettet mot en utvalgt gruppe partier. Nedenfor er en oversikt over mottakere etter beløp og andel av totalt donert beløp:",
+    "table": "Denne seksjonen gir en fullstendig oversikt over alle enkeltbidrag gjort av {donor}. Du kan sortere tabellen etter dato, parti eller beløp for enkelt å utforske hvordan donasjonene ble fordelt over tid og mellom mottakere. Denne detaljerte visningen muliggjør transparent sporing av hvert bidrag og gir dypere innsikt i giverens donasjonsmønstre.",
+    "timeline": {
+      "title": "Akkumulering av donasjoner over tid",
+      "p0": "Denne seksjonen viser hvordan donasjoner fra {donor} siden {year} til ulike politiske partier har endret seg over tid. Diagrammet visualiserer total donert sum, med hver parts andel fremhevet, slik at det er enkelt å se når og hvor støtten ble rettet.",
+      "p1": "Følg linjene for å se mønstre, topper eller skift i donering. Denne oversikten gir et transparent bilde av hvordan én givers bidrag fordeles i det politiske landskapet.",
+      "years": "Donasjonene har variert over årene. Nedenfor vises totale donasjonsbeløp per år, sammen med prosentandelen hvert år utgjør av alle donasjoner fra denne giveren.",
+      "chart_subtitle": "Akkumulerte donasjoner fra {donor} til politiske partier i {country}, vist etter beløp og dato siden {minYear}."
+    },
+    "anonymized": {
+      "title": "Registrering anonymisert",
+      "description": "Den personlige identiteten knyttet til denne donasjonen er fjernet i samsvar med en gyldig GDPR-forespørsel. Donasjonsbeløpet forblir inkludert i de samlede beregningene av finansieringen for å opprettholde økonomisk åpenhet."
+    },
+    "redacted": {
+      "title": "Oppføring sladdet",
+      "description": "Giverens identitet ble sladdet av den publiserende myndigheten før disse dataene ble offentliggjort. Donasjonsbeløpet er fortsatt inkludert i beregningene av total finansiering for å ivareta finansiell åpenhet."
+    },
+    "ubo": "Reelle rettighetshavere (RRH)",
+    "ubo_description": "En reell rettighetshaver (RRH) er personen som faktisk styrer. Det er de personene som til syvende og sist eier eller kontrollerer giveren, vanligvis ved å inneha 25 % eller mer av aksjene eller stemmerettighetene. Hvis ingen enkeltperson oppfyller denne terskelen, kan toppledelsen (som direktører) bli oppført som \"pseudo-RRH-er\" for å sikre ansvarlighet.",
+    "donation_type": {
+      "title": "Donasjonstyper",
+      "subtitle": "Diagrammet og den følgende listen viser hvilke typer donasjoner {donor} har gitt, og hvilke partier som mottok hvilket beløp for hver type.",
+      "summary": "Av totalt {total}",
+      "summary_item": "{amount} ble gitt som {type}",
+      "graph": {
+        "subtitle": "Hvordan bidragene fra {donor} fordeles på hvert parti etter type"
+      }
+    },
+    "via": {
+      "title": "Mellommenn og fordeling av videreformidlede donasjoner",
+      "overview": "Offentlige innsynsrapporter viser at {viaSum} av de totale politiske bidragene fra {donor} ({pct} av alle {donorSum} som spores) ble videreformidlet via mellomledd.",
+      "direct_donations": "Direkte donasjoner utgjorde {amount}.",
+      "downstream_title": "Mottakernes politiske tilhørighet",
+      "downstream_overview": "Når man ser på de endelige mottakerne av de videreformidlede bidragene, ble samtlige midler fordelt på {count, plural, one {# politisk bevegelse} other {# politiske bevegelser}}.",
+      "downstream_primary": "Hovedmottakeren var {party}, som mottok {amount} ({pct}) av alle videreformidlede midler.",
+      "downstream_followed_by": "Etterfulgt av {list}.",
+      "downstream_item": "{party} med {amount} ({pct})",
+      "table_intro": "Tabellen nedenfor viser mellomledd og felles innsamlingskomiteer som disse donasjonene ble formidlet gjennom{years}:",
+      "table_intro_years": " mellom {earliestYear} og {latestYear}",
+      "intermediate_entity": "Mellomenhet",
+      "transactions": "Transaksjoner",
+      "checks": "{count, plural, one {# innbetaling} other {# innbetalinger}}"
+    }
+  },
+  "countries": {
+    "??": "Ikke spesifisert",
+    "DE": "Tyskland",
+    "DK": "Danmark",
+    "CH": "Sveits",
+    "TH": "Thailand",
+    "AT": "Østerrike",
+    "UK": "Storbritannia",
+    "NL": "Nederland",
+    "EU": "Den europeiske union",
+    "LV": "Latvia",
+    "ES": "Spania",
+    "FI": "Finland",
+    "HR": "Kroatia",
+    "BE": "Belgia",
+    "LU": "Luxembourg",
+    "SI": "Slovenia",
+    "EE": "Estland",
+    "FR": "Frankrike",
+    "IE": "Irland",
+    "IT": "Italia",
+    "PL": "Polen",
+    "RO": "Romania",
+    "CY": "Kypros",
+    "MT": "Malta",
+    "PT": "Portugal",
+    "LT": "Litauen",
+    "HU": "Ungarn",
+    "CZ": "Tsjekkia",
+    "SG": "Singapore",
+    "MC": "Monaco",
+    "SE": "Sverige",
+    "AD": "Andorra",
+    "IM": "Isle of Man",
+    "NO": "Norge",
+    "LI": "Liechtenstein",
+    "MK": "Makedonia",
+    "AL": "Albania",
+    "MD": "Moldova",
+    "SM": "San Marino",
+    "FO": "Færøyene",
+    "BA": "Bosnia-Hercegovina",
+    "ME": "Montenegro",
+    "BG": "Bulgaria",
+    "BY": "Belarus",
+    "GR": "Hellas",
+    "IS": "Island",
+    "SK": "Slovakia",
+    "UA": "Ukraina",
+    "GB": "Storbritannia",
+    "RS": "Serbia",
+    "AU": "Australia",
+    "ZA": "Sør-Afrika",
+    "US": "USA",
+    "CA": "Canada",
+    "GE": "Georgia",
+    "NZ": "New Zealand",
+    "VE": "Venezuela"
+  },
+  "ref_countries": {
+    "DE": "Tyskland",
+    "DK": "Danmark",
+    "CH": "Sveits",
+    "TH": "Thailand",
+    "AT": "Østerrike",
+    "UK": "Storbritannia",
+    "NL": "Nederland",
+    "EU": "EU",
+    "LV": "Latvia",
+    "ES": "Spania",
+    "FI": "Finland",
+    "HR": "Kroatia",
+    "BE": "Belgia",
+    "LU": "Luxembourg",
+    "SI": "Slovenia",
+    "EE": "Estland",
+    "FR": "Frankrike",
+    "IE": "Irland",
+    "IT": "Italia",
+    "PL": "Polen",
+    "RO": "Romania",
+    "CY": "Kypros",
+    "CZ": "Tsjekkia",
+    "AU": "Australia",
+    "RS": "Serbia",
+    "CA": "Canada",
+    "GE": "Georgia",
+    "NO": "Norge",
+    "UA": "Ukraina",
+    "SE": "Sverige",
+    "ZA": "South Africa",
+    "US": "USA"
+  },
+  "state": {
+    "germany": {
+      "BW": "Baden-Württemberg",
+      "BY": "Bayern",
+      "BE": "Berlin",
+      "BB": "Brandenburg",
+      "HB": "Bremen",
+      "HH": "Hamburg",
+      "HE": "Hessen",
+      "MV": "Mecklenburg-Vorpommern",
+      "NI": "Niedersachsen",
+      "NW": "Nordrhein-Westfalen",
+      "RP": "Rheinland-Pfalz",
+      "SL": "Saarland",
+      "SN": "Sachsen",
+      "ST": "Sachsen-Anhalt",
+      "SH": "Schleswig-Holstein",
+      "TH": "Thüringen"
+    },
+    "austria": {
+      "1": "Burgenland",
+      "2": "Kärnten",
+      "3": "Niederösterreich",
+      "4": "Oberösterreich",
+      "5": "Salzburg",
+      "6": "Steiermark",
+      "7": "Tyrol",
+      "8": "Vorarlberg",
+      "9": "Wien"
+    },
+    "canada": {
+      "ON": "Ontario",
+      "QC": "Québec",
+      "NS": "Nova Scotia",
+      "NB": "New Brunswick",
+      "MB": "Manitoba",
+      "BC": "British Columbia",
+      "PE": "Prins Edward Island",
+      "SK": "Saskatchewan",
+      "AB": "Alberta",
+      "NL": "Newfoundland og Labrador",
+      "NT": "Nordvestterritoriene",
+      "YT": "Yukon",
+      "NU": "Nunavut"
+    },
+    "unitedstates": {
+      "AL": "Alabama",
+      "AK": "Alaska",
+      "AZ": "Arizona",
+      "AR": "Arkansas",
+      "CA": "California",
+      "CO": "Colorado",
+      "CT": "Connecticut",
+      "DE": "Delaware",
+      "FL": "Florida",
+      "GA": "Georgia",
+      "HI": "Hawaii",
+      "ID": "Idaho",
+      "IL": "Illinois",
+      "IN": "Indiana",
+      "IA": "Iowa",
+      "KS": "Kansas",
+      "KY": "Kentucky",
+      "LA": "Louisiana",
+      "ME": "Maine",
+      "MD": "Maryland",
+      "MA": "Massachusetts",
+      "MI": "Michigan",
+      "MN": "Minnesota",
+      "MS": "Mississippi",
+      "MO": "Missouri",
+      "MT": "Montana",
+      "NE": "Nebraska",
+      "NV": "Nevada",
+      "NH": "New Hampshire",
+      "NJ": "New Jersey",
+      "NM": "New Mexico",
+      "NY": "New York",
+      "NC": "Nord-Carolina",
+      "ND": "Nord-Dakota",
+      "OH": "Ohio",
+      "OK": "Oklahoma",
+      "OR": "Oregon",
+      "PA": "Pennsylvania",
+      "RI": "Rhode Island",
+      "SC": "Sør-Carolina",
+      "SD": "Sør-Dakota",
+      "TN": "Tennessee",
+      "TX": "Texas",
+      "UT": "Utah",
+      "VT": "Vermont",
+      "VA": "Virginia",
+      "WA": "Washington",
+      "WV": "Vest-Virginia",
+      "WI": "Wisconsin",
+      "WY": "Wyoming",
+      "DC": "District of Columbia",
+      "AS": "Amerikansk Samoa",
+      "GU": "Guam",
+      "MP": "Nord-Marianene",
+      "PR": "Puerto Rico",
+      "UM": "USAs ytre småøyer",
+      "VI": "De amerikanske Jomfruøyene"
+    }
+  },
+  "about": {
+    "title": "Om",
+    "description": {
+      "p0": "DonationWatch oppstod av frustrasjon over mangelen på lett lesbare data på den offisielle nettsiden til den tyske Forbundsdagen (Bundestag).",
+      "p1": "Målet vårt er å forbedre dette ved å bruke offentlig tilgjengelige data og presentere dem på en mer effektiv måte.",
+      "p2": "Vi la merke til at land som Østerrike, Sveits og Nederland publiserer politiske donasjoner i ulike strukturerte formater. For å skape et enhetlig grensesnitt som forenkler tilgangen til denne informasjonen, har vi inkludert disse landene i prosjektet. Flere land vil bli lagt til etter hvert som relevante data finnes og behandles.",
+      "p3": "Hvis du har forslag eller tilbakemeldinger, ta gjerne",
+      "mail": "kontakt med oss"
+    },
+    "source": "All visualisert informasjon kommer utelukkende fra offentlig tilgjengelige myndighetskilder, og inkluderer ingen tidligere upubliserte data eller private registre. Åpenhet er fundamentet vårt"
+  },
+  "imprint": {
+    "title": "Impressum"
+  },
+  "privacy": {
+    "title": "Personvern",
+    "last_updated": "Sist oppdatert: {date}",
+    "effective_date": "Gjelder fra: {date}",
+    "controller": {
+      "title": "Behandlingsansvarlig",
+      "p": "Ansvarlig for databehandlingen på dette nettstedet er:"
+    },
+    "data": {
+      "title": "Generell datainnsamling",
+      "p": "Vi tar beskyttelsen av dine data svært alvorlig. Vi samler ikke inn personopplysninger fra besøkende til sporing eller markedsføring. Dette betyr konkret:",
+      "li0": "Ingen registreringsskjemaer eller brukerkontoer",
+      "li1": "Ingen nyhetsbrev-abonnenter",
+      "li2": "Ingen bruk av informasjonskapsler for sporing"
+    },
+    "cf": {
+      "title": "Cloudflare-tjenester",
+      "link": "Vis Cloudflares personvernerklæring",
+      "p": "Vi bruker tjenester fra Cloudflare, Inc. (101 Townsend St, San Francisco, CA 94107, USA) for å sikre at nettstedet vårt er raskt, trygt og pålitelig.",
+      "p2": "Når du bruker Cloudflare, behandles IP-adressen din for å koble deg til nærmeste server. Data kan overføres til USA. Cloudflare er sertifisert under EU–US Data Privacy Framework (DPF), som sikrer samsvar med europeiske personvernstandarder.",
+      "p3": "Vår berettigede interesse (GDPR art. 6 nr. 1 bokstav f) er å tilby et sikkert og effektivt nettsted. Mer informasjon finner du i Cloudflares personvernerklæring.",
+      "workers": {
+        "summary": "Cloudflare Workers: En serverløs plattform for rask levering av nettsideinnhold."
+      },
+      "analytics": {
+        "summary": "Cloudflare Web Analytics: Et personvernvennlig analyserverktøy som ikke bruker informasjonskapsler, ikke sporer brukere, og kun samler inn aggregerte data (for eksempel antall besøkende)."
+      }
+    },
+    "logs": {
+      "title": "Automatiske serverlogger",
+      "p": "Når du besøker nettstedet vårt, samler og lagrer vår hosting-leverandør automatisk informasjon i såkalte serverlogger. Disse inkluderer:",
+      "li0": "IP-adresser (anonymisert)",
+      "li1": "Dato og klokkeslett for forespørselen",
+      "li2": "Nettlesertype og enhetsinformasjon",
+      "li3": "Henvisende URL (referrer)",
+      "retention": "Behandlingen av disse dataene skjer basert på vår berettigede interesse (GDPR art. 6 nr. 1 bokstav f) for teknisk stabilitet, sikkerhet og feilfri drift av nettstedet vårt. Dataene kombineres ikke med andre kilder, og slettes automatisk innen 7 dager."
+    },
+    "user_rights": {
+      "title": "Dine rettigheter",
+      "p": "I henhold til GDPR har du rett til når som helst gratis å be om informasjon om opprinnelse, mottakere og formål med lagrede personopplysninger. Du har også rett til å be om retting, blokkering eller sletting av slike data. Ettersom vi kun behandler minimale og anonymiserte data, kan vi vanligvis ikke identifisere deg personlig. Du har også rett til å klage til relevant datatilsynsmyndighet. Kontakt oss gjerne ved spørsmål om personvern.",
+      "erasure": "Rett til sletting (artikkel 17 GDPR): I henhold til artikkel 17 i GDPR har registrerte rett til å få slettet personopplysninger når lovfestede vilkår er oppfylt. Du kan sende en sletteforespørsel direkte til oss.",
+      "discretionary": "Skjønnsmessig anonymisering: Uavhengig av lovbestemte krav om sletting, vurderer DonationWatch anonymiseringsforespørsler individuelt. Navn anonymiseres mens beløp og partitotaler opprettholdes for å sikre åpenhet."
+    }
+  },
+  "fun": {
+    "link": "Fun facts",
+    "title": "Morsomme fakta om offentlige data",
+    "p0": "Denne siden viser interessante funn fra arbeidet vårt med offentlig tilgjengelige myndighetsdata. Disse observasjonene er ikke kritikk, men små særheter som kan forekomme i ethvert stort datasett.",
+    "p1": "Når det er hensiktsmessig rapporterer vi problemer videre, men vi anser dem ikke som hastesaker for myndighetene. Etter vår erfaring har disse organisasjonene vært mottakelige og åpne for tilbakemeldinger.",
+    "reported_fixed": "Dette ble rapportert til {owner} og rettet av dem.",
+    "reported_wontfix": "Dette ble rapportert til {owner} og de kan ikke endre det.",
+    "reported": "Dette ble rapportert til {owner}."
+  },
+  "transparency": {
+    "title": "Åpenhet",
+    "p0": "Vi jobber for å gi tydelig og konsistent informasjon om givere til politiske partier. For å få til dette normaliserer vi automatisk enkelte givernavn for å sikre ensartethet i databasen vår. Denne tilnærmingen gjør at vi kan bevare nøyaktighet samtidig som vi håndterer avvik i hvordan navn kan være registrert.",
+    "p1": "Av hensyn til åpenhet har vi samlet en liste over normaliserte navn sammen med variantene vi har funnet i donasjonsregistrene. Nedenfor finner du hvert normalisert navn etterfulgt av variantene. Listen forklarer hvorfor du kan se givernavn som ikke samsvarer nøyaktig med kildedokumentene.",
+    "section": {
+      "filtered_donors": "Filtrerte givere",
+      "filtered_receivers": "Filtrerte mottakere",
+      "aggregated": "Aggregerte givere",
+      "categorized": "Givere etter bransje og interessegruppe"
+    },
+    "filtered_donors": {
+      "p0": "For å gi et mest mulig presist bilde av de reelle kildene til politiske donasjoner, filtrerer vi bort enkelte transaksjoner som i praksis er offentlige bidrag snarere enn reelle donasjoner. Fordi kildedatasett ikke merker disse eksplisitt, bruker vi et sett med filtreringsregler basert på regulære uttrykk (regexp) for automatisk å identifisere og fjerne slike oppføringer. Nedenfor kan du se hele listen over anvendte regexp-filtreringsregler.",
+      "p1": "Nedenfor finner du en liste over givere der bidragene ble filtrert bort i tråd med våre kriterier og filtreringsregler."
+    },
+    "filtered_receivers": {
+      "p0": "For å sikre at vi bare presenterer meningsfulle mottakerdata, filtrerer vi også bort enkelte mottakere eller partier som anses som irrelevante eller ikke-operative for formål knyttet til sporing av givere. Siden datasettene våre ikke alltid merker disse mottakerne eksplisitt, bruker vi et sett med regexp-baserte regler for automatisk å ekskludere dem. Nedenfor kan du se hele listen over anvendte regexp-filtreringsregler.",
+      "p1": "Nedenfor finner du en liste over mottakere der oppføringene ble filtrert bort i tråd med våre kriterier og filtreringsregler."
+    },
+    "receivers": {
+      "title": "Aggregerte mottakere",
+      "p0": "I {country} kan donasjoner rapporteres til ulike organisatoriske enheter innenfor et parti. For konsistens konsoliderer vi relaterte mottakerenheter til én totalsum på partinivå. Listen nedenfor dokumenterer hvilke mottakerenheter som er aggregert inn i hvert parti."
+    },
+    "categorized": {
+      "title": "Givere etter bransje og interessegruppe",
+      "p0": "For å gjøre det enklere å se hvilke bransjer som finansierer politiske partier, grupperer vi store givere i 24 bransje- og interessekategorier (som gruvedrift, bank, pengespill eller fagforeninger). Vi oppgir også om giveren er et direkte selskap (hovedvirksomhet i den sektoren) eller en paraplyorganisasjon (bransjeforening eller konsern aktivt på flere områder). Disse kategoriene er tildelt ved hjelp av KI — hvis du oppdager feil, er du velkommen til å kontakte oss eller opprette et GitHub-issue.",
+      "p1": "Nedenfor er listen over kategoriserte givere og bransjene knyttet til hver av dem."
+    }
+  },
+  "related": {
+    "donors": "Lignende givere"
+  },
+  "similar_donors": {
+    "title": "Nettverk av lignende givere",
+    "description": "Utforsk det bredere donasjonsnettverket knyttet til denne giveren.",
+    "summary": "I det relaterte donasjonsnettverket finnes det {count} unike givere.",
+    "list_title": "Oversikt over fordeling på partier"
+  },
+  "detect_country": {
+    "title": "Det ser ut til at du er i {country}.",
+    "description": "Trykk for å utforske politiske donasjoner i {country}.",
+    "action": "Vis donasjoner for {country}"
+  },
+  "donor_type": {
+    "0": "Annet",
+    "1": "Privatperson",
+    "2": "Selskap",
+    "3": "Fagforening",
+    "4": "Offentlige midler",
+    "5": "Uregistrert forening",
+    "6": "Registrert politisk parti",
+    "7": "Trust",
+    "8": "Gjensidig hjelpeforening",
+    "9": "Partnerskap med begrenset ansvar",
+    "10": "Boligbyggelag",
+    "11": "Ideell juridisk enhet",
+    "12": "Anonymisert donor"
+  },
+  "donation_type": {
+    "0": "pengedonasjon",
+    "1": "medlemskontingent",
+    "2": "innmeldingsavgift",
+    "3": "tingsinnskudd",
+    "4": "offentlig støtte"
+  },
+  "other_countries": {
+    "title": "Andre land"
+  },
+  "thanks": "Med takk til enkeltpersoner og organisasjoner som {external} for å ha gitt verdifull informasjon om mekanismer for politiske donasjoner.",
+  "export": {
+    "title": "Dataeksport",
+    "p0": "Få hele datasettet med politiske donasjoner for {country} som brukes på dette nettstedet. Eksporten inkluderer normaliserte donornavn, beløp, datoer og mottakerpartier.",
+    "p1": "Viktig: Dette er ikke rådataene fra {source}. Dette datasettet inneholder kun donasjoner som er normalisert og filtrert av teamet vårt. Se vår {methodology}.",
+    "license": "Lisens: {license}"
+  },
+  "bar_chart_race": {
+    "title": "Søylediagram-kappløp",
+    "description": "Visualiser akkumuleringen av donasjoner over tid. Velg et årsspenn for å se hvordan partifinansieringen utvikler seg dynamisk.",
+    "from": "Fra",
+    "to": "Til",
+    "download_video": "Last ned video",
+    "rendering": "Renderer... {percentage}",
+    "no_data": "Ingen data tilgjengelig for det valgte spennet.",
+    "note": "Vennligst merk: Denne animasjonen rendres på klientsiden i nettleseren din og kan være ressurskrevende på enkelte enheter. Nedlasting av videoen vil automatisk spille av hele animasjonen.",
+    "individual_years": "Enkeltår",
+    "animation_duration": "Animasjonsvarighet",
+    "duration_s": "{seconds}s",
+    "custom_range": "Avansert: Egendefinert tidsperiode",
+    "group_by": {
+      "label": "Grupper etter",
+      "receiver": "Parti",
+      "donor": "Giver"
+    },
+    "chart_title": "Fordeling av partidonasjoner",
+    "chart_subtitle": "Totalt publiserte donasjoner til hvert parti, {country}, {years}."
+  },
+  "compare_parties_page": {
+    "title": "Sammenlign partier",
+    "description": "Velg mellom to og fire partier nedenfor for å sammenligne donasjonsstatistikken deres side om side. Begrensningen på fire partier sørger for at sammenligningen forblir lesbar på alle skjermer."
+  },
+  "compare_parties": {
+    "parties": "Partier",
+    "min_select": "Velg minst to partier ovenfor for å se en sammenligning.",
+    "comparing": "Sammenligner",
+    "years": "År",
+    "top_3_donors": "Topp 3 givere",
+    "n_donations": "{count} donasjoner",
+    "donor_type": "Givertype",
+    "donor": "Giver",
+    "overview": {
+      "title": "Oversikt",
+      "description": "Generell statistikk, inkludert den totale summen og antall donasjoner hver part har mottatt i valgt tidsrom."
+    },
+    "timeline": {
+      "title": "Tidslinje",
+      "description": "En kronologisk oversikt som viser når partiene mottok sine første og siste donasjoner, samt deres mest finansielt aktive perioder."
+    },
+    "top_donations": {
+      "title": "Største donasjoner",
+      "description": "Fremhever den største enkeltstående innbetalingstransaksjonen og de største individuelle giverne for hver valgt part."
+    },
+    "donor_types": {
+      "title": "Givertyper",
+      "description": "En analyse av økonomisk støtte kategorisert etter enhetstype, som selskaper, privatpersoner eller fagforeninger.",
+      "biggest_donor_type": "Største givertype"
+    },
+    "donors": {
+      "title": "Givere",
+      "description": "Et dypere innblikk i de unike personene og organisasjonene som støtter hver part, inkludert hyppighet og overlappende bidrag."
+    },
+    "overlapping": {
+      "title": "Overlappende givere ({count})",
+      "description": "Givere som har donert til flere av de valgte partiene.",
+      "more": "... og {count} til"
+    },
+    "stats": {
+      "sum": "Totale donasjoner",
+      "count": "Antall donasjoner",
+      "avg": "Gjennomsnittlig donasjon",
+      "median": "Median-donasjon",
+      "first_year": "Første donasjonsår",
+      "last_year": "Siste donasjonsår",
+      "active_year_sum": "Mest aktive år (etter sum)",
+      "active_year_count": "Året med flest donasjoner",
+      "unique_donors": "Unike givere",
+      "top_donor": "Største giver",
+      "frequent_donor": "Mest hyppige giver",
+      "biggest_donation": "Største enkeltstående donasjon"
+    }
+  },
+  "citation": {
+    "action": "Siter",
+    "success": "{style}-stil-sitat kopiert til utklippstavlen.",
+    "data": "DonationWatch – data om politiske donasjoner i {country}",
+    "apa": "DonationWatch. ({year}). {title} [Datasett]. Hentet {date}, fra {url}"
+  },
+  "enterprise": {
+    "title": "Enterprise",
+    "heading": "Politiske finansieringsdata på enterprise-nivå.",
+    "p0": "Spor politiske donasjoner på tvers av landegrenser. Ryddige, fullt berikede finansierings-API-er bygget på normaliserte transaksjonsregistre fra globale valgkommisjoner.",
+    "draft_schema": "* Merk: Utkast til v1-skjema. Responsstrukturen kan bli endret basert på tilbakemeldinger fra betaen.",
+    "engine_specs": {
+      "title": "Motorspesifikasjoner og styrker",
+      "s0": {
+        "title": "1. Standardiserte transaksjonsregistre",
+        "description": "Slipp å kjempe med rotete CSV-filer og skiftende offentlige formater. Få tilgang til rent mappede donasjonsoppføringer normalisert på tvers av flere internasjonale registre."
+      },
+      "s1": {
+        "title": "2. Berikede REST-API-er og OpenAPI-spesifikasjoner",
+        "description": "Si farvel til skjøre webskrapere. Få tilgang til pålitelige JSON-endepunkter med avansert filtrering etter donor, parti, dato og beløp."
+      },
+      "s2": {
+        "title": "3. SLA-pålitelighet",
+        "description": "Bygget for institusjonelle arbeidsflyter. Dedikerte API-nøkler, rategrenser for høyt volum og målrettet oppetid på 99,9 %."
+      }
+    },
+    "monitoring": {
+      "title": "Overvåkes av:",
+      "financial": "Finansinstitusjoner",
+      "government": "Statlige skattemyndigheter",
+      "universities": "Ledende universiteter",
+      "newsrooms": "Undersøkende redaksjoner"
+    },
+    "register": {
+      "title": "Registrering for privat beta",
+      "p0": "Den underliggende datamotoren blir for tiden overført til et REST-API med høy tilgjengelighet for kommersiell bruk. Send inn kravene til spørringene dine nedenfor for å bli med på ventelisten og få prioritert tilgang til v1-lanseringen."
+    },
+    "form": {
+      "successTitle": "Tilgangsforespørsel registrert",
+      "successMessageTemplate": "Takk for at du sendte inn spesifikasjonene for spørringen din. Vi vil gjennomgå organisasjonens datakrav og kontakte deg angående prioritert tilgang til de kommersielle v1-endepunktene.",
+      "submitAnotherButton": "< Send inn en ny forespørsel",
+      "formTitle": "Søknad om beta-tilgang",
+      "labelFullName": "Fullt navn",
+      "labelWorkEmail": "Jobb-e-post",
+      "labelOrganization": "Organisasjon",
+      "labelQueryRequest": "Mål-endepunkt / Spørringsforespørsel",
+      "consentText": "Jeg godtar personvernerklæringen og samtykker til å bli kontaktet angående Enterprise API.",
+      "buttonProcessing": "Behandler forespørsel...",
+      "buttonSubmit": "Send inn forespørsel",
+      "errorFailedSubmit": "Kunne ikke sende inn registrering til ventelisten.",
+      "errorUnexpected": "Det oppsto en uventet feil. Prøv igjen.",
+      "turnstileLabel": "La oss vite at du er et menneske"
+    }
+  },
+  "errors": {
+    "required": "Dette feltet er påkrevd.",
+    "empty": "Dette feltet kan ikke være tomt.",
+    "email": "Vennligst oppgi en gyldig e-postadresse."
+  },
+  "filter": {
+    "title": "Filtre",
+    "description": "Avgrens donasjonsdata etter år, partier og type.",
+    "select_all": "Velg alle",
+    "select_none": "Velg ingen",
+    "reset": "Tilbakestill",
+    "parties": "Partier",
+    "donation_types": "Donasjonstyper",
+    "donor_types": "Donortyper",
+    "years": {
+      "title": "Årsintervall",
+      "from": "Fra",
+      "to": "Til"
+    },
+    "empty": {
+      "title": "Ingen donasjoner funnet",
+      "p0": "Det finnes ingen donasjoner som samsvarer med din nåværende filterkonfigurasjon. Prøv å justere filtrene eller tilbakestille dem.",
+      "reset": "Tilbakestill filtre"
+    }
+  },
+  "methodology": {
+    "title": "Metodologi",
+    "intro": "DonationWatch behandler, normaliserer og kontekstualiserer offisielle offentliggjøringsdata fra nasjonale valgmyndigheter og tilsynsorganer. Denne siden dokumenterer våre datakilder, behandlingsregler og begrensninger for {country}.",
+    "sections": {
+      "profile": "Datasettprofil",
+      "source": "Datakilde og omfang",
+      "coverage": "Dekning og terskelverdier",
+      "cadence": "Oppdateringsfrekvens",
+      "processing": "Behandling og normalisering",
+      "anonymisation": "Anonymisering og sladding",
+      "licence": "Lisens og opprinnelse",
+      "version": "Dataversjon og tidsstempler",
+      "disclaimer": "Ansvarsfraskrivelse"
+    },
+    "profile": {
+      "source": "Offisiell kilde",
+      "coverage": "Dekningsperiode",
+      "coverage_preliminary": "{range} (foreløpig siden {preliminarySince})",
+      "latest_transaction": "Siste registrerte transaksjon",
+      "last_processed": "Datasett sist behandlet",
+      "cadence": "Oppdateringsfrekvens",
+      "cadence_value": "{cadence, select, annual {Årlig} quarterly {Kvartalsvis} other {Periodisk}}",
+      "volume": "Sammenstilt datasettvolum",
+      "volume_value": "{count} oppføringer ({sum}) på tvers av {parties} partier",
+      "donation_threshold": "Terskel per donasjon",
+      "donation_threshold_all": "Alle publiserte bidrag (ingen minimumsfilter)",
+      "party_threshold": "Terskel for partiinkludering",
+      "party_threshold_value": "{type, select, count {≥ {count} donasjoner} sum {≥ {sum} kumulativt} other {≥ {count} donasjoner eller ≥ {sum} kumulativt}}",
+      "party_threshold_all": "Alle rapporterte partier inkludert",
+      "granularity": "Datagranularitet",
+      "granularity_individual": "Enkelttransaksjoner og giveroppføringer",
+      "granularity_aggregate": "Årlige partitotaler (ingen individuelle giveridentiteter)",
+      "temporal_resolution": "Tidsoppløsning",
+      "resolution_date": "Nøyaktig transaksjonsdato (ÅÅÅÅ-MM-DD)",
+      "resolution_year": "Kun rapporteringsår (ÅÅÅÅ)",
+      "origin_coverage": "Geografisk opprinnelse",
+      "origin_yes": "Fylke/region og opprinnelsesland",
+      "origin_no": "Kun på landsnivå",
+      "donation_types": "Inkluderte bidragstyper",
+      "donor_types": "Klassifiserte giverkategorier",
+      "external_ids": "Eksterne register-ID-er",
+      "external_ids_both": "Kildetransaksjons-ID-er og organisasjonsnumre",
+      "external_ids_transaction": "Transaksjons-ID-er fra kilderegisteret",
+      "external_ids_company": "Organisasjons- / foretaksnumre",
+      "external_ids_none": "Ingen publisert i kilderegisteret",
+      "access": "Datatilgang og pipeline",
+      "export_link": "Last ned hele datasettet (CSV / JSON)",
+      "pipeline_link": "Se kildekoden til landets innlaster (GitHub)"
+    },
+    "source": {
+      "default": "Data for {country} er hentet direkte fra {source}.",
+      "link": "Besøk offisielt kilderegister"
+    },
+    "coverage": {
+      "default": "Datasettet dekker publiserte politiske bidrag fra og med {minYear}.",
+      "preliminary": "Oppføringer fra {preliminarySince} er foreløpige og kan bli oppdatert av myndighetene."
+    },
+    "threshold": {
+      "default": "DonationWatch bruker en minimumsgrense på {amount} per transaksjon for dette datasettet.",
+      "note": "Denne terskelen er konfigurert av oss for å unngå en overveldende mengde smådonasjoner, og kan være høyere enn minstebeløpet som eksporteres av kilderegisteret. Bidrag med en absoluttverdi under dette beløpet filtreres bort.",
+      "all": "Dette datasettet inkluderer alle publiserte bidrag uten et minimumsbeløpsfilter.",
+      "party": "Inkluderingsterskel på partinivå: For å fokusere på aktive politiske enheter inkluderes kun partier med {type, select, count {minst {count} dokumenterte donasjoner} sum {minst {sum} i kumulative donasjoner} other {minst {count} dokumenterte donasjoner eller {sum} i kumulative donasjoner}} i det sammenstilte datasettet.",
+      "party_all": "Partiinkludering: Alle politiske partier med gyldige rapporterte bidrag over transaksjonsterskelen er inkludert.",
+      "net_positive": "Tilbakebetalinger og netto-null-filtrering: Enkelte registre fører returnerte eller refunderte bidrag som negative oppføringer. Givere eller mottakerpartier med en kumulativ netto bidragssum på null eller mindre i datasettet ekskluderes."
+    },
+    "cadence": {
+      "default": "Datasett synkroniseres jevnlig med det publiserte kilderegisteret.",
+      "annual": "Kildedatasettet oppdateres i en årlig syklus.",
+      "quarterly": "Kildedatasettet oppdateres i en kvartalsvis syklus."
+    },
+    "processing": {
+      "summary": "Rådata gjennomgår deterministisk, regelbasert normalisering ved innlesing for å standardisere enhetsnavn, konsolidere underavdelinger og ekskludere ugyldige oppføringer:",
+      "step_cleaning": "Grunnleggende tekstvask: Alle enhetsnavn gjennomgår Unicode NFKC-normalisering, fjerning av omsluttende anførselstegn og avsluttende komma, samt sammenslåing av doble mellomrom.",
+      "step_clustering": "Givernøkkel-gruppering og landsregler: En kanonisk oppslagsnøkkel (som fjerner alle ikke-alfanumeriske tegn og gjør om til store bokstaver) grupperer varianter i store/små bokstaver, mellomrom og tegnsetting under ett kanonisk givernavn. Der det er konfigurert for et lands innlaster, standardiserer tilleggsregler lokale selskapsformer, fjerner personlige titler eller kobler kjente aliaser — der hver sammenslått variant er oppført under Aggregerte givere nedenfor.",
+      "step_receivers": "Mottakerkobling og konsolidering: Rapporterte mottakernavn kobles til kanoniske politiske partier. Der registre rapporterer bidrag til regionale, lokale eller ungdomsorganisasjoner separat, samles disse til én partitotal (oppført under Aggregerte mottakere nedenfor når det er aktuelt).",
+      "donor_identity": "Viktig begrensning knyttet til giveridentitet (navnebrødre vs. ikke-sammenslåtte varianter): Offisielle partifinansieringsregistre publiserer sjelden unike personidentifikatorer (som fødselsnumre, skatte-ID-er eller fødselsdatoer) for individuelle givere. Donasjonstotaler på giverprofiler aggregeres strengt etter normalisert givernavn. Dermed kan én giverprofil samle bidrag fra flere ulike personer som deler nøyaktig samme navn (overaggregering), mens varianter med mellomnavn eller ukoblede forkortelser kan bli stående som separate profiler (underaggregering)."
+    },
+    "anonymisation": {
+      "summary": "Vi skiller mellom sladding utført av publiserende myndighet og skjønnsmessig anonymisering utført etter forespørsel.",
+      "upstream": "Sladdet av kilde: {count} oppføringer ble sladdet av myndighetene før publisering.",
+      "by_request": "Anonymisert etter forespørsel: {count} navn har blitt fjernet etter forespørsel, mens beløp og partitotaler opprettholdes."
+    },
+    "licence": {
+      "output": "Vårt sammenstilte, normaliserte datasett og visualiseringer er utgitt under {licence}-lisensen.",
+      "export_prompt": "For forskere, journalister og dataforskere kan hele det normaliserte datasettet for {country} lastes ned via vår side {exportLink}, og de nøyaktige innlesings- og normaliseringsreglene kan etterprøves i vår {pipelineLink}."
+    },
+    "version": {
+      "last_updated": "Datasett sist behandlet: {date}.",
+      "latest_donation": "Siste registrerte transaksjon i datasettet: {date}.",
+      "explanation": "Behandlingstidsstempelet viser når vår pipeline sist synkroniserte og sammenstilte data fra det offisielle registeret, mens datoen for siste transaksjon gjenspeiler den nyeste bidragsdatoen i de publiserte oppføringene."
+    },
+    "disclaimer": {
+      "text": "Sammenstilt, ikke offisielt: DonationWatch er et uavhengig samfunnsprosjekt og er ikke tilknyttet valgmyndigheter eller politiske partier. På grunn av normalisering og filtrering skal dette datasettet ikke siteres som et offisielt register."
+    },
+    "policy_domains": {
+      "title": "Politikkområder og bransjekategorier",
+      "intro": "Givere i {country} er kartlagt til 24 spesifikke bransjekategorier gruppert under 6 brede politikkområder:",
+      "disclaimer": "Disse kategoriene er et best mulig KI-assistert tilleggslag basert på offentlige selskapsbeskrivelser, bransjeregistre og foreningsmedlemskap, og ikke en offisiell klassifisering fra innrapporteringsmyndighetene. Direkte selskaper skilles fra flersektorielle paraplyorganisasjoner, og ukategoriserte givere vises fortsatt separat. Hvis du oppdager en feilklassifisert giver eller en manglende kobling, ber vi deg <github>opprette en sak på GitHub</github> eller skrive til <emailLink>{email}</emailLink>."
+    }
+  },
+  "interests": {
+    "domains": {
+      "energy-resources": {
+        "label": "Energi og ressurser",
+        "description": "Fossilt brensel, gruvedrift, fornybar energi, landbruk og skogbruk"
+      },
+      "built-environment": {
+        "label": "Bygget miljø",
+        "description": "Eiendomsutvikling, bygg og anlegg, infrastruktur og transport"
+      },
+      "finance-advisory": {
+        "label": "Finans og rådgivning",
+        "description": "Bank, pensjon, forsikring, rådgivning, juss og fintech"
+      },
+      "regulated-consumer": {
+        "label": "Regulert forbruk",
+        "description": "Pengespill, alkohol, tobakk, dagligvare og servering"
+      },
+      "health-tech-industry": {
+        "label": "Helse, teknologi og industri",
+        "description": "Legemidler, privat helse, teknologi, medier, forsvar og produksjon"
+      },
+      "labor-advocacy": {
+        "label": "Arbeidsliv og interessepolitikk",
+        "description": "Fagforeninger, politiske innsamlingsfond og saksbasert påvirkning"
+      }
+    },
+    "tags": {
+      "fossil-fuels": {
+        "label": "Fossilt brensel og termisk kraft",
+        "description": "Utvinning av kull, olje og gass og termisk kraftproduksjon"
+      },
+      "mining-metals": {
+        "label": "Gruvedrift og metaller",
+        "description": "Utvinning av jernmalm, gull, litium og kritiske mineraler"
+      },
+      "renewables-cleantech": {
+        "label": "Fornybar energi og ren teknologi",
+        "description": "Sol- og vindkraft, batterilagring og grønn hydrogenteknologi"
+      },
+      "agriculture-forestry": {
+        "label": "Landbruk og skogbruk",
+        "description": "Landbruksnæring, husdyrhold, tømmer og vannrettigheter"
+      },
+      "property-development": {
+        "label": "Eiendom og eiendomsutvikling",
+        "description": "Kommersiell og boligrettet eiendomsutvikling og eiendomsfond (REIT)"
+      },
+      "construction-infrastructure": {
+        "label": "Bygg og infrastruktur",
+        "description": "Anleggsteknikk, vei- og jernbaneentreprenører og byggematerialer"
+      },
+      "aviation-transport": {
+        "label": "Luftfart, sjøfart og logistikk",
+        "description": "Flyselskaper, flyplasser, havner, maritim og godslogistikk"
+      },
+      "banking-lending": {
+        "label": "Bank og utlån",
+        "description": "Forretningsbanker, kredittforeninger og ikke-bankbaserte långivere"
+      },
+      "wealth-super-insurance": {
+        "label": "Formue, pensjon og forsikring",
+        "description": "Pensjonsfond, aktiv eierkapital, kapitalforvaltere og forsikringsselskaper"
+      },
+      "consulting-accounting-legal": {
+        "label": "Rådgivning, regnskap og juss",
+        "description": "De fire store revisjons- og rådgivningsselskapene, forretningsadvokater og PR/lobby"
+      },
+      "crypto-fintech": {
+        "label": "Krypto og fintech",
+        "description": "Børser for digitale eiendeler, blokkjede og alternative betalingstjenester"
+      },
+      "gambling-wagering": {
+        "label": "Pengespill og tipping",
+        "description": "Kasinoer, nettspill, lotterier og spillautomatlokaler"
+      },
+      "alcohol-beverages": {
+        "label": "Alkohol og drikkevarer",
+        "description": "Bryggerier, destillerier, vingårder og detaljhandel med alkohol"
+      },
+      "tobacco-nicotine": {
+        "label": "Tobakk og nikotin",
+        "description": "Tobakksprodusenter, grossister og e-sigaretter"
+      },
+      "food-supermarkets": {
+        "label": "Dagligvare og matvarehandel",
+        "description": "Store dagligvarekjeder, hurtigmat og produsenter av ferdigmat"
+      },
+      "hospitality-tourism": {
+        "label": "Servering, klubber og reiseliv",
+        "description": "Hoteller, lisensierte klubber, restauranter og reiselivsaktører"
+      },
+      "pharma-biotech": {
+        "label": "Legemidler og bioteknologi",
+        "description": "Legemiddelprodusenter, vaksiner og medisinsk forskning"
+      },
+      "private-healthcare": {
+        "label": "Privat helse og eldreomsorg",
+        "description": "Private sykehus, patologi og tilbydere av eldreomsorg"
+      },
+      "tech-telecom-platforms": {
+        "label": "Teknologi, telekom og plattformer",
+        "description": "Programvare, skytjenester, sosiale plattformer og teleoperatører"
+      },
+      "media-broadcasting": {
+        "label": "Medier og kringkasting",
+        "description": "Kommersiell TV, radio, forlag og nyhetsnettverk"
+      },
+      "defense-aerospace": {
+        "label": "Forsvar og luft- og romfart",
+        "description": "Forsvarsleverandører, militært materiell og sikkerhetssystemer"
+      },
+      "manufacturing-automotive": {
+        "label": "Industri og bilbransje",
+        "description": "Industriell produksjon, papir og emballasje og kjøretøydistribusjon"
+      },
+      "trade-unions": {
+        "label": "Fagforeninger",
+        "description": "Arbeidstakerorganisasjoner i offentlig og privat sektor"
+      },
+      "ideological-issue-advocacy": {
+        "label": "Ideologisk og saksbasert påvirkning",
+        "description": "Politiske innsamlingsfond, tankesmier og sakskampanjer"
+      }
+    }
+  }
+}

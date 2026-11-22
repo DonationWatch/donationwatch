@@ -1,0 +1,127 @@
+import type { Metadata } from "next";
+
+import { THUMBNAIL_PREFIX } from "@donationwatch/core/utils/config";
+import {
+  COUNTRIES,
+  getCountryName,
+  getReferencingCountryName,
+} from "@donationwatch/core/utils/countries";
+import { formatYearsRange } from "@donationwatch/core/utils/formatter";
+import {
+  isValidCountry,
+  isValidLocale,
+} from "@donationwatch/core/utils/validate";
+import { getParties } from "@donationwatch/data/loader/parties";
+import { getCountryConfig } from "@donationwatch/data/queries/get-country-config";
+import { SidebarInset } from "@donationwatch/ui/components/sidebar";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { notFound } from "next/navigation";
+
+import { DonationFilterSheet } from "@/components/donations-filter/donation-filter-sheet";
+import { CountryFooter } from "@/components/layout/country-footer";
+import { DynamicAppSidebar as AppSidebar } from "@/components/layout/dynamic-app-sidebar";
+import { PageFooter } from "@/components/layout/page-footer";
+import { StickyFooter } from "@/components/layout/sticky-footer";
+import { StickyHeader } from "@/components/layout/sticky-header";
+import { CountryLayoutProviders } from "@/components/providers/country-layout-providers";
+import { getMessagesForLocale } from "@/utils/i18n-loader";
+import { pick } from "@/utils/i18n-pick";
+import { baseOpenGraph, baseTwitter } from "@/utils/meta";
+import { notFoundMetadata } from "@/utils/not-found-metadata";
+
+export async function generateStaticParams() {
+  return [...COUNTRIES].map((country) => ({ country }));
+}
+
+export async function generateMetadata(
+  props: LayoutProps<"/[locale]/[country]">,
+): Promise<Metadata> {
+  const { locale, country } = await props.params;
+
+  if (!isValidLocale(locale)) return notFoundMetadata;
+  if (!isValidCountry(country)) return notFoundMetadata;
+  setRequestLocale(locale);
+
+  const [t, tHome, tCountries, tRefCountries, countryConfig] =
+    await Promise.all([
+      getTranslations({ locale }),
+      getTranslations({ locale, namespace: "home" }),
+      getTranslations({ locale, namespace: "countries" }),
+      getTranslations({ locale, namespace: "ref_countries" }),
+      getCountryConfig(country),
+    ]);
+
+  const countryName = getCountryName(countryConfig, tCountries);
+  const title = {
+    template: `%s | DonationWatch`,
+    default: `${t("title", { country: countryName })} | DonationWatch`,
+  };
+
+  const description = `${tHome("hero.subtitle", {
+    country: getReferencingCountryName(countryConfig, tRefCountries),
+  })} — ${t("years.subtitle", {
+    country: countryName,
+    years: formatYearsRange(countryConfig.years),
+  })} ${t("description")}`;
+
+  const imageUrl = `${THUMBNAIL_PREFIX}/${locale}/${country}/cover.png`;
+
+  return {
+    title,
+    description,
+    openGraph: baseOpenGraph({
+      locale,
+      images: [{ url: imageUrl, width: 800, height: 418 }],
+    }),
+    twitter: baseTwitter({
+      card: "summary_large_image",
+      images: [imageUrl],
+    }),
+  };
+}
+
+export default async function CountryRootLayout(
+  props: LayoutProps<"/[locale]/[country]">,
+) {
+  const params = await props.params;
+
+  if (!isValidCountry(params.country)) return notFound();
+  if (!isValidLocale(params.locale)) return notFound();
+  setRequestLocale(params.locale);
+
+  const { locale, country } = params;
+  const { children } = props;
+
+  const [messages, countryConfig, parties] = await Promise.all([
+    getMessagesForLocale(locale),
+    getCountryConfig(country),
+    getParties(country),
+  ]);
+  const filterMessages = pick(messages, ["donation_type", "donor_type"]);
+
+  return (
+    <CountryLayoutProviders
+      countryConfig={countryConfig}
+      parties={parties}
+      filterMessages={filterMessages}
+    >
+      <AppSidebar />
+      <SidebarInset className="min-w-0 flex-1 md:peer-data-[variant=inset]:border md:peer-data-[variant=inset]:border-zinc-200/80 md:peer-data-[variant=inset]:shadow-sm md:peer-data-[variant=inset]:ring-1 md:peer-data-[variant=inset]:ring-black/5 md:peer-data-[variant=inset]:ring-inset md:peer-data-[variant=inset]:dark:border-black/50 md:peer-data-[variant=inset]:dark:shadow-lg md:peer-data-[variant=inset]:dark:ring-white/10">
+        <div className="flex min-h-screen flex-col lg:px-16">
+          <StickyHeader />
+          <div className="relative flex grow flex-col dark:text-white">
+            <div className="flex grow flex-col">{children}</div>
+            <CountryFooter
+              country={country}
+              locale={locale}
+              source={countryConfig.source}
+            />
+          </div>
+          <DonationFilterSheet />
+          <PageFooter locale={locale} />
+          <StickyFooter />
+        </div>
+      </SidebarInset>
+    </CountryLayoutProviders>
+  );
+}

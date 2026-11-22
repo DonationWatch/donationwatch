@@ -1,0 +1,25 @@
+{
+  "$schema": "https://turborepo.dev/schema.json",
+  "tasks": {
+    "transit": {
+      "dependsOn": ["^transit"]
+    },
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
+    "typecheck": {
+      "dependsOn": ["transit"]
+    },
+    "test:unit": {
+      "dependsOn": ["transit"],
+      "env": ["FAKE"]
+    },
+    "test:i18n": {},
+    "icons:generate": {},
+    "dev": {
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

@@ -102,28 +102,28 @@ jobs:
 
             const rows = [
               {
-                name: '**Server Worker** (`worker.js` / `server-functions`)',
-                pr: prBreakdown.server_worker,
-                main: mainBreakdown.server_worker
+                name: '**Server Bundle** (`.next/server`)',
+                pr: prBreakdown.server_code,
+                main: mainBreakdown.server_code
               },
               {
-                name: '**Static Assets** (`assets/`)',
+                name: '**Static Assets** (`.next/static`)',
                 pr: prBreakdown.static_assets,
                 main: mainBreakdown.static_assets
               },
               {
-                name: '**Cache & Pre-rendered** (`cache/`)',
+                name: '**Cache & Pre-rendered** (`.next/cache`)',
                 pr: prBreakdown.cache,
                 main: mainBreakdown.cache
               },
               {
-                name: '**Total OpenNext Output** (`.open-next`)',
-                pr: prBreakdown.total_opennext || currentMetrics.size_bytes,
-                main: mainBreakdown.total_opennext || (mainMetrics ? mainMetrics.size_bytes : null)
+                name: '**Total Next.js Output** (`.next`)',
+                pr: prBreakdown.total_next || currentMetrics.size_bytes,
+                main: mainBreakdown.total_next || (mainMetrics ? mainMetrics.size_bytes : null)
               }
             ];
 
-            const botHeader = '### 📦 OpenNext / Cloudflare Build Output Size Report';
+            const botHeader = '### 📦 Next.js Build Output Size Report';
             const tableRows = rows.map(r => {
               return `| ${r.name} | \`${formatSize(r.main)}\` | \`${formatSize(r.pr)}\` | **${formatDiff(r.pr, r.main)}** |`;
             });
@@ -135,7 +135,7 @@ jobs:
               '| :--- | :--- | :--- | :--- |',
               ...tableRows,
               '',
-              `*Automated OpenNext build size check triggered by commit \`${currentMetrics.sha.substring(0, 7)}\`.*`,
+              `*Automated build size check triggered by commit \`${currentMetrics.sha.substring(0, 7)}\`.*`,
             ].join('\n');
 
             // 4. Find existing comment and update or create new
