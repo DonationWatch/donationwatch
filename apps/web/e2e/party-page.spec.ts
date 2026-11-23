@@ -235,6 +235,7 @@ test.describe("Party page", () => {
           CHECK_PARTY,
           `/${locale}/germany/parties/${CHECK_PARTY}.png`,
         );
+        await meta.expectNoIndex();
       });
 
       await test.step("state expandable elements expand", async () => {

@@ -71,7 +71,7 @@
       "origin_description": "Geografický původ politických darů pro {party} v {country}: transparentní rozdělení podle států, regionů a zahraničních zdrojů."
     },
     "donor": {
-      "overview": "{donor} – Politické dary a historie financování ({country})",
+      "overview": "{donor} – {sum} v politických darech ({country})",
       "description": "Zjistěte, kam směřovaly politické dary {donor}. {sum} darováno v {count} příspěvcích pro {parties} strany v {country} od roku {minYear}."
     }
   },

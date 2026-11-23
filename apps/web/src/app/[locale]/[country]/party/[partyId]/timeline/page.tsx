@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { PartyField } from "@donationwatch/core/types/party";
 import { getCountryName } from "@donationwatch/core/utils/countries";
+import { Features, hasFeature } from "@donationwatch/core/utils/features";
 import { formatYearsRange } from "@donationwatch/core/utils/formatter";
 import { getPartyFullAndShortName } from "@donationwatch/core/utils/party";
 import { getParty } from "@donationwatch/data/config/parties";
@@ -53,10 +54,14 @@ export async function generateMetadata(
       country: countryName,
     }),
     alternates: generateAlternates(`${country}/party/${partyId}/timeline`),
-    robots: {
-      index: false,
-      follow: true,
-    },
+    ...(hasFeature(countryConfig, Features.Donors)
+      ? {
+          robots: {
+            index: false,
+            follow: true,
+          },
+        }
+      : {}),
   };
 }
 export default async function TimelinePage(

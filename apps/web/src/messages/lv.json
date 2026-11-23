@@ -71,7 +71,7 @@
       "origin_description": "Ģeogrāfiskā izcelsme politiskajiem ziedojumiem {party} {country}: sadalījums pa štatiem, reģioniem un ārvalstu avotiem."
     },
     "donor": {
-      "overview": "{donor} – Politiskie ziedojumi un finansējuma vēsture ({country})",
+      "overview": "{donor} – {sum} politiskajos ziedojumos ({country})",
       "description": "Uzziniet, kur nonāca {donor} politiskie ziedojumi. {sum} ziedots {count} iemaksās {parties} partijām {country} kopš {minYear}."
     }
   },

@@ -25,6 +25,10 @@ export async function generateMetadata(
     alternates: generateAlternates(
       `${country}/party/${partyId}/origin/overview`,
     ),
+    robots: {
+      index: false,
+      follow: true,
+    },
   };
 }
 

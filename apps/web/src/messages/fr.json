@@ -71,7 +71,7 @@
       "origin_description": "Origine géographique des dons politiques pour {party} en {country} : répartition transparente par région, État et sources étrangères."
     },
     "donor": {
-      "overview": "{donor} – Dons politiques et historique de financement ({country})",
+      "overview": "{donor} – {sum} de dons politiques ({country})",
       "description": "Découvrez où sont allés les dons politiques de {donor}. {sum} donnés en {count} contributions à {parties} partis en {country} depuis {minYear}."
     }
   },

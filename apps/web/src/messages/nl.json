@@ -71,7 +71,7 @@
       "origin_description": "Geografische herkomst van politieke donaties aan {party} in {country}: uitsplitsing per staat, regio en buitenlandse bronnen."
     },
     "donor": {
-      "overview": "{donor} – Politieke donaties & financieringsgeschiedenis ({country})",
+      "overview": "{donor} – {sum} aan politieke donaties ({country})",
       "description": "Bekijk waar de politieke donaties van {donor} naartoe gingen. {sum} gedoneerd in {count} bijdragen aan {parties} partijen in {country} sinds {minYear}."
     }
   },

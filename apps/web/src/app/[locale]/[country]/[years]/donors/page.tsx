@@ -16,7 +16,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound, redirect } from "next/navigation";
 
 import { Article } from "@/components/layout/article";
-import { generateAlternates } from "@/utils/meta";
+import { generateAlternates, isCanonicalYearRange } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
 
 import { YearsDonorsClientPage } from "./_components/years-donors-client-page";
@@ -40,7 +40,8 @@ export async function generateMetadata(
     getCountryConfig(country),
   ]);
 
-  const yearsRange = formatYearsRange(deserializeYears(years));
+  const deserializedYears = deserializeYears(years);
+  const yearsRange = formatYearsRange(deserializedYears);
   const countryName = getCountryName(countryConfig, tCountries);
   const description = t("donors.description", {
     year: yearsRange,
@@ -54,6 +55,14 @@ export async function generateMetadata(
     }),
     description,
     alternates: generateAlternates(`${country}/${years}/donors`),
+    ...(!isCanonicalYearRange(deserializedYears, countryConfig)
+      ? {
+          robots: {
+            index: false,
+            follow: true,
+          },
+        }
+      : {}),
   };
 }
 
