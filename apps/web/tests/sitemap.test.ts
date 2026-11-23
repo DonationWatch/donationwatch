@@ -45,14 +45,42 @@ describe("sitemap", () => {
     );
   });
 
-  it("excludes /changes and /timeline sub-pages and clamps lastModified to manualMinLastModified", async () => {
+  it("excludes /changes, party /origin/overview, and /timeline (except for countries without Features.Donors) and clamps lastModified", async () => {
     const urls = await sitemap({ id: Promise.resolve("en") });
     const locs = urls.map((entry) => entry.url);
 
     expect(locs.filter((url) => url.endsWith("/changes"))).toHaveLength(0);
-    expect(locs.filter((url) => url.endsWith("/timeline"))).toHaveLength(0);
+    expect(
+      locs.filter(
+        (url) => url.includes("/party/") && url.endsWith("/origin/overview"),
+      ),
+    ).toHaveLength(0);
 
-    const minTimestamp = new Date("2026-11-19T00:00:00.000Z").getTime();
+    // Countries with Features.Donors should not include /timeline
+    expect(
+      locs.filter(
+        (url) => url.includes("/germany/") && url.endsWith("/timeline"),
+      ),
+    ).toHaveLength(0);
+    expect(
+      locs.filter(
+        (url) => url.includes("/unitedkingdom/") && url.endsWith("/timeline"),
+      ),
+    ).toHaveLength(0);
+
+    // Countries without Features.Donors (e.g. France, Sweden) keep /party/*/timeline as their primary party page
+    expect(
+      locs.filter(
+        (url) => url.includes("/france/party/") && url.endsWith("/timeline"),
+      ).length,
+    ).toBeGreaterThan(0);
+    expect(
+      locs.filter(
+        (url) => url.includes("/sweden/party/") && url.endsWith("/timeline"),
+      ).length,
+    ).toBeGreaterThan(0);
+
+    const minTimestamp = new Date("2026-11-22T00:00:00.000Z").getTime();
     for (const entry of urls) {
       expect(entry.lastModified).toBeInstanceOf(Date);
       expect((entry.lastModified as Date).getTime()).toBeGreaterThanOrEqual(

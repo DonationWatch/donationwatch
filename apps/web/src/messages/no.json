@@ -71,7 +71,7 @@
       "origin_description": "Geografisk opprinnelse for politiske donasjoner til {party} i {country}: oversikt over delstater, regioner og utenlandske kilder."
     },
     "donor": {
-      "overview": "{donor} – Politiske donasjoner og finansieringshistorikk ({country})",
+      "overview": "{donor} – {sum} i politiske donasjoner ({country})",
       "description": "Se hvor {donor}s politiske donasjoner gikk. {sum} donert i {count} bidrag til {parties} partier i {country} siden {minYear}."
     }
   },

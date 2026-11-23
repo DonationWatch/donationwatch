@@ -9,6 +9,20 @@ import {
 } from "@donationwatch/core/utils/config";
 import { CONST_LOCALES } from "@donationwatch/core/utils/locales";
 
+export const isCanonicalYearRange = (
+  years: readonly string[],
+  countryConfig: { legislativeYears?: readonly (readonly string[])[] },
+): boolean => {
+  if (years.length <= 1) return true;
+
+  return (countryConfig.legislativeYears ?? []).some(
+    (legYears) =>
+      legYears.length === years.length &&
+      legYears[0] === years[0] &&
+      legYears.at(-1) === years.at(-1),
+  );
+};
+
 export const generateAlternates = (
   path?: string,
 ): Required<Pick<AlternateURLs, "canonical" | "languages">> => {

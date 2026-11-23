@@ -71,7 +71,7 @@
       "origin_description": "Geografische Herkunft der Parteispenden an {party} in {country}: Transparente Aufschlüsselung nach Bundesländern, Regionen und ausländischen Quellen."
     },
     "donor": {
-      "overview": "{donor} – Parteispenden & Finanzierung ({country})",
+      "overview": "{donor} – {sum} an Parteispenden ({country})",
       "description": "Erfahren Sie, wohin die politischen Spenden von {donor} geflossen sind. {sum} gespendet in {count} Beiträgen an {parties} Parteien in {country} seit {minYear}."
     }
   },

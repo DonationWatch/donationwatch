@@ -71,7 +71,7 @@
       "origin_description": "Geographical origin of political donations to {party} in {country}. Transparent breakdown of regional, state, and foreign contributions."
     },
     "donor": {
-      "overview": "{donor} – Political Donations & Funding History ({country})",
+      "overview": "{donor} – {sum} in Political Donations ({country})",
       "description": "See where {donor}’s political donations went. {sum} donated across {count} contributions to {parties} parties in {country} since {minYear}."
     }
   },

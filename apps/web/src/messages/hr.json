@@ -71,7 +71,7 @@
       "origin_description": "Geografsko podrijetlo političkih donacija za {party} u {country}: pregled po regijama, državama i stranim izvorima."
     },
     "donor": {
-      "overview": "{donor} – Političke donacije i povijest financiranja ({country})",
+      "overview": "{donor} – {sum} u političkim donacijama ({country})",
       "description": "Pogledajte kamo su otišle političke donacije od {donor}. {sum} donirano u {count} doprinosa za {parties} stranaka u {country} od {minYear}."
     }
   },

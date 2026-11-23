@@ -5,10 +5,12 @@ import {
   isValidCountry,
   isValidLocale,
 } from "@donationwatch/core/utils/validate";
+import { getCountryConfig } from "@donationwatch/data/queries/get-country-config";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
-import { generateAlternates } from "@/utils/meta";
+import { generateAlternates, isCanonicalYearRange } from "@/utils/meta";
+import { notFoundMetadata } from "@/utils/not-found-metadata";
 
 import { YearsOriginClientPage } from "./_components/years-origin-client-page";
 
@@ -17,10 +19,22 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const params = await props.params;
 
+  if (!isValidCountry(params.country)) return notFoundMetadata;
+
   const { country, years } = params;
+  const countryConfig = await getCountryConfig(country);
+  const deserializedYears = deserializeYears(years);
 
   return {
     alternates: generateAlternates(`${country}/${years}/origin/overview`),
+    ...(!isCanonicalYearRange(deserializedYears, countryConfig)
+      ? {
+          robots: {
+            index: false,
+            follow: true,
+          },
+        }
+      : {}),
   };
 }
 

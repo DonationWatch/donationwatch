@@ -22,7 +22,7 @@ const yearSubPages = ["overview", "donors", "origin/overview"];
 
 // Use this to force a minimum last modified date e.g. for important changes that are not reflected in the data
 const manualMinLastModified: number = new Date(
-  "2026-11-19T00:00:00.000Z",
+  "2026-11-22T00:00:00.000Z",
 ).getTime();
 const lastModified = new Date();
 
@@ -38,8 +38,6 @@ const clampLastModified = (
     ),
   );
 };
-
-const partySubPages = ["donors", "origin/overview"];
 
 export const dynamic = "force-static";
 
@@ -166,12 +164,16 @@ export default async function sitemap(props: {
                 },
               );
 
-              return partySubPages
-                .filter(filterConditionalSubPages)
-                .map((subPage) => ({
-                  url: `${partiesBaseUrl}/${subPage}`,
+              const primaryPartySubPage = hasFeature(config, Features.Donors)
+                ? "donors"
+                : "timeline";
+
+              return [
+                {
+                  url: `${partiesBaseUrl}/${primaryPartySubPage}`,
                   lastModified: clampLastModified(lastDonation, lastModified),
-                }));
+                },
+              ];
             }),
             filledYears.flatMap((year) => {
               const yearsBaseUrl = `${BASE_URL}/${locale}/${country}/${year}`;

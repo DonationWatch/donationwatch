@@ -32,7 +32,7 @@ import {
   ArticleTitle,
 } from "@/components/layout/article";
 import { FilteredYearsCard } from "@/components/years/filtered-years-header";
-import { generateAlternates } from "@/utils/meta";
+import { generateAlternates, isCanonicalYearRange } from "@/utils/meta";
 import { notFoundMetadata } from "@/utils/not-found-metadata";
 
 import { YearsOverviewClientPage } from "./_components/years-overview-client-page";
@@ -91,6 +91,14 @@ export async function generateMetadata(
     }),
     description,
     alternates: generateAlternates(`${country}/${years}/overview`),
+    ...(!isCanonicalYearRange(deserializedYears, countryConfig)
+      ? {
+          robots: {
+            index: false,
+            follow: true,
+          },
+        }
+      : {}),
   };
 }
 

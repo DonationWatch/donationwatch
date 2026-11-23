@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
 
-import { generateAlternates } from "@/utils/meta";
+import { generateAlternates, isCanonicalYearRange } from "@/utils/meta";
 
 test("generateAlternates", () => {
   expect(generateAlternates()).toEqual({
@@ -53,4 +53,26 @@ test("generateAlternates", () => {
       "x-default": "https://donation.watch/en/foo/bar/baz",
     },
   });
+});
+
+test("isCanonicalYearRange", () => {
+  const config = {
+    legislativeYears: [
+      ["2020", "2021", "2022", "2023", "2024"],
+      ["2025", "2026", "2027", "2028", "2029"],
+    ],
+  };
+
+  expect(isCanonicalYearRange(["2024"], config)).toBe(true);
+  expect(
+    isCanonicalYearRange(["2020", "2021", "2022", "2023", "2024"], config),
+  ).toBe(true);
+  expect(
+    isCanonicalYearRange(
+      ["2019", "2020", "2021", "2022", "2023", "2024", "2025"],
+      config,
+    ),
+  ).toBe(false);
+  expect(isCanonicalYearRange(["2021", "2022"], config)).toBe(false);
+  expect(isCanonicalYearRange(["2021", "2022"], {})).toBe(false);
 });

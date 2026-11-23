@@ -95,11 +95,14 @@ export async function generateMetadata(
     })
     .join(", ");
 
+  const formattedSum = formatCompactCountryCurrency(locale, sum, countryConfig);
+  const countryName = getCountryName(countryConfig, tCountries);
+
   const baseDescription = tPageTitle("donor.description", {
-    country: getCountryName(countryConfig, tCountries),
+    country: countryName,
     donor: donorName,
     count,
-    sum: formatCompactCountryCurrency(locale, sum, countryConfig),
+    sum: formattedSum,
     minYear: countryConfig.minYear,
     parties: sortedPartyEntries.length,
   });
@@ -115,7 +118,8 @@ export async function generateMetadata(
   const metadata: Metadata = {
     title: tPageTitle("donor.overview", {
       donor: donorName,
-      country: getCountryName(countryConfig, tCountries),
+      sum: formattedSum,
+      country: countryName,
     }),
     description,
     alternates: generateAlternates(`${country}/donor/${donorId}`),
