@@ -26,7 +26,7 @@
     "@donationwatch/core": "workspace:*",
     "@donationwatch/data": "workspace:*",
     "@donationwatch/ui": "workspace:*",
-    "@inquirer/prompts": "^8.7.5",
+    "@inquirer/prompts": "^8.8.1",
     "@resvg/resvg-js": "^2.6.2",
     "cheerio": "^1.2.0",
     "csv-parse": "^7.0.3",
@@ -47,7 +47,7 @@
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@types/unzipper": "^0.10.11",
-    "tsx": "^4.23.15",
+    "tsx": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:"

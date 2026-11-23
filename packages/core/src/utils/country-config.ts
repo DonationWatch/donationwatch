@@ -1,6 +1,6 @@
 import type { UnloadedCountryConfig } from "../types/country-config";
 
-import { Country } from "./countries";
+import { Country, type CountryCode } from "./countries";
 import { Features } from "./features";
 
 // This is the static config of each country.
@@ -845,3 +845,7 @@ export const COUNTRY_CONFIG: Record<Country, UnloadedCountryConfig> = {
     ],
   },
 };
+
+export const COUNTRY_CONFIG_BY_CODE = Object.fromEntries(
+  Object.values(COUNTRY_CONFIG).map((config) => [config.code, config]),
+) as Record<CountryCode, UnloadedCountryConfig>;

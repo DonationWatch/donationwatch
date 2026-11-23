@@ -31,7 +31,10 @@ import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 
-import { ChartCard } from "@/components/charts/expandable-react-echart";
+import {
+  ChartCard,
+  LoadingChartCard,
+} from "@/components/charts/expandable-react-echart";
 import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useChart } from "@/hooks/use-chart";
@@ -73,6 +76,72 @@ interface UncategorizedDonorDonation {
   donationCount: number;
 }
 
+const usePartyInterestsChartMeta = () => {
+  const {
+    state: { donations, viewMode, isGrouped },
+    meta: { scope },
+  } = useInterestsContext();
+  const country = useRequiredCountryConfig();
+  const t = useTranslations("party.interests");
+  const tCountries = useTranslations("countries");
+
+  const countryName = getCountryName(country, tCountries);
+  const party = scope.kind === "party" ? scope.party : undefined;
+  const propYears = scope.kind === "years" ? scope.years : undefined;
+  const partyDisplayName = party ? getPartyFullAndShortName(party) : undefined;
+  const yearsLabel = propYears
+    ? formatYearsRange(propYears)
+    : formatYearsRange(country.years);
+
+  const title = partyDisplayName
+    ? t("chart.title", { party: partyDisplayName })
+    : t("chart.title_years", { country: countryName, years: yearsLabel });
+  const subtitle = isGrouped
+    ? viewMode === "exposure"
+      ? t("chart.subtitle_grouped_exposure")
+      : t("chart.subtitle_grouped_core")
+    : viewMode === "exposure"
+      ? t("chart.subtitle_flat_exposure")
+      : t("chart.subtitle_flat_core");
+
+  const countryYears = country.years;
+  const years = useMemo(() => {
+    const yearsSet = new Set<string>();
+    for (const d of donations) {
+      yearsSet.add(donationYear(d));
+    }
+    return yearsSet.size > 0
+      ? Array.from(yearsSet)
+      : (propYears ?? countryYears);
+  }, [donations, propYears, countryYears]);
+
+  return {
+    party,
+    title,
+    subtitle,
+    years,
+    footerNote: t("chart.footer_note"),
+  };
+};
+
+export const PartyInterestsLoadingChart = () => {
+  const { title, subtitle, years, footerNote } = usePartyInterestsChartMeta();
+
+  return (
+    <LoadingChartCard
+      years={years}
+      title={title}
+      subtitle={subtitle}
+      height={480}
+      heightMode="fixed"
+      feature="treemap"
+      extraNote={footerNote}
+    >
+      <TreemapPatternLegend />
+    </LoadingChartCard>
+  );
+};
+
 export const PartyInterestsChart = () => {
   const {
     state: {
@@ -84,15 +153,16 @@ export const PartyInterestsChart = () => {
       viewMode,
       isGrouped,
     },
-    meta: { scope, interestMap },
+    meta: { interestMap },
   } = useInterestsContext();
+  const { party, title, subtitle, years, footerNote } =
+    usePartyInterestsChartMeta();
   const country = useRequiredCountryConfig();
   const locale = useBrowserBasedLocale();
   const routeLocale = useLocale();
   const router = useRouter();
   const t = useTranslations("party.interests");
   const tInterests = useTranslations("interests");
-  const tCountries = useTranslations("countries");
   const {
     backgroundColor,
     isDark,
@@ -100,14 +170,6 @@ export const PartyInterestsChart = () => {
     treemapBorderColor,
     treemapColors,
   } = useChart();
-
-  const countryName = getCountryName(country, tCountries);
-  const party = scope.kind === "party" ? scope.party : undefined;
-  const propYears = scope.kind === "years" ? scope.years : undefined;
-  const partyDisplayName = party ? getPartyFullAndShortName(party) : undefined;
-  const yearsLabel = propYears
-    ? formatYearsRange(propYears)
-    : formatYearsRange(country.years);
 
   // Remaining donations not tied to any tracked policy interest
   const uncategorizedAmount = Math.max(
@@ -791,28 +853,6 @@ export const PartyInterestsChart = () => {
     t,
   ]);
 
-  const title = partyDisplayName
-    ? t("chart.title", { party: partyDisplayName })
-    : t("chart.title_years", { country: countryName, years: yearsLabel });
-  const subtitle = isGrouped
-    ? viewMode === "exposure"
-      ? t("chart.subtitle_grouped_exposure")
-      : t("chart.subtitle_grouped_core")
-    : viewMode === "exposure"
-      ? t("chart.subtitle_flat_exposure")
-      : t("chart.subtitle_flat_core");
-
-  const countryYears = country.years;
-  const years = useMemo(() => {
-    const yearsSet = new Set<string>();
-    for (const d of donations) {
-      yearsSet.add(donationYear(d));
-    }
-    return yearsSet.size > 0
-      ? Array.from(yearsSet)
-      : (propYears ?? countryYears);
-  }, [donations, propYears, countryYears]);
-
   return (
     <ChartCard.Provider years={years} title={title}>
       <ChartCard.Frame>
@@ -843,7 +883,7 @@ export const PartyInterestsChart = () => {
             });
           }}
         />
-        <ChartCard.Footer extraNote={t("chart.footer_note")} />
+        <ChartCard.Footer extraNote={footerNote} />
       </ChartCard.Frame>
     </ChartCard.Provider>
   );

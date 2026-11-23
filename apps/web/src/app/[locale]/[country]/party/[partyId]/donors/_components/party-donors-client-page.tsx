@@ -8,6 +8,7 @@ import { PartyField } from "@donationwatch/core/types/party";
 import { Features, hasFeature } from "@donationwatch/core/utils/features";
 import { useEffect } from "react";
 
+import { LoadingChartCard } from "@/components/charts/expandable-react-echart";
 import { LoadingPartyDonationTypeTreemap } from "@/components/charts/loading-donation-types-treemap";
 import { LoadingDonationPartyTreemap } from "@/components/charts/loading-donation-years-treemap";
 import { LoadingPartyDonorTypeTreemap } from "@/components/charts/loading-donor-types-treemap";
@@ -124,7 +125,12 @@ export const PartyDonorsClientPage = ({
               ssrStats={ssrStats}
               chart={
                 isPendingClientDonations ? (
-                  <Loading />
+                  <LoadingChartCard
+                    height={600}
+                    title={treemapTitle}
+                    subtitle={treemapSubtitle}
+                    feature="treemap"
+                  />
                 ) : (
                   <LoadingDonationPartyTreemap
                     party={party}
@@ -154,7 +160,12 @@ export const PartyDonorsClientPage = ({
                 ssrDonorTypes={ssrStats?.donorTypes}
                 chart={
                   isPendingClientDonations ? (
-                    <Loading />
+                    <LoadingChartCard
+                      height={600}
+                      title={donorTypesTreemapTitle}
+                      subtitle={donorTypesTreemapSubtitle}
+                      feature="treemap"
+                    />
                   ) : (
                     <LoadingPartyDonorTypeTreemap
                       party={party}
@@ -184,7 +195,12 @@ export const PartyDonorsClientPage = ({
                 ssrDonationTypes={ssrStats?.donationTypes}
                 chart={
                   isPendingClientDonations ? (
-                    <Loading />
+                    <LoadingChartCard
+                      height={600}
+                      title={donationTypesTreemapTitle}
+                      subtitle={donationTypesTreemapSubtitle}
+                      feature="treemap"
+                    />
                   ) : (
                     <LoadingPartyDonationTypeTreemap
                       party={party}

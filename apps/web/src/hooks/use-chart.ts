@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+
 import { useDarkColorScheme, useMobile } from "./use-media-query";
 
 const cssColorCache = new Map<string, string>();
@@ -58,19 +60,24 @@ export const useChart = () => {
   const zinc800 = resolveCssVarColor("--color-zinc-800", "#27272a");
   const zinc900 = resolveCssVarColor("--color-zinc-900", "#18181b");
 
-  return {
-    isMobile,
-    isDark,
-    barBorderColor: isDark ? zinc900 : zinc50,
-    backgroundColor: isDark ? zinc900 : white,
-    treemapBorderColor: isDark ? zinc900 : zinc100,
-    treemapColors: {
+  const treemapColors = useMemo(
+    () => ({
       zinc100,
       zinc200,
       zinc400,
       zinc600,
       zinc800,
       zinc900,
-    },
+    }),
+    [zinc100, zinc200, zinc400, zinc600, zinc800, zinc900],
+  );
+
+  return {
+    isMobile,
+    isDark,
+    barBorderColor: isDark ? zinc900 : zinc50,
+    backgroundColor: isDark ? zinc900 : white,
+    treemapBorderColor: isDark ? zinc900 : zinc100,
+    treemapColors,
   };
 };

@@ -21,6 +21,7 @@ import {
   useState,
 } from "react";
 
+import Loading from "@/components/loading/loading";
 import { useRequiredCountryConfig } from "@/components/providers/country-provider";
 import { useBrowserBasedLocale } from "@/hooks/use-browser-based-locale";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
@@ -256,6 +257,16 @@ const ChartCardExpandTool = () => {
   );
 };
 
+const getChartCanvasHeight = (
+  height: number,
+  heightMode: ChartHeightMode,
+): string => {
+  // 200px is approximation of header and footer text height
+  return heightMode === "screen"
+    ? `min(${height}px, calc(100vh - 60px - 200px))`
+    : `${height}px`;
+};
+
 const ChartCardCanvas = ({
   height,
   heightMode = "fixed",
@@ -285,11 +296,7 @@ const ChartCardCanvas = ({
         isExpanded
           ? undefined
           : {
-              // 200px is approximation of header and footer text height
-              height:
-                heightMode === "screen"
-                  ? `min(${height}px, calc(100vh - 60px - 200px))`
-                  : `${height}px`,
+              height: getChartCanvasHeight(height, heightMode),
             }
       }
       className={
@@ -309,6 +316,35 @@ const ChartCardCanvas = ({
         onClick={onClick}
         onZoom={handleZoom}
       />
+    </div>
+  );
+};
+
+const ChartCardLoadingCanvas = ({
+  height,
+  heightMode = "fixed",
+  feature,
+}: {
+  height: number;
+  heightMode?: ChartHeightMode;
+  feature?: ChartFeature;
+}) => {
+  useEffect(() => {
+    void import("./echart").then((mod) => {
+      if (feature) {
+        void mod.preloadChartFeature(feature);
+      }
+    });
+  }, [feature]);
+
+  return (
+    <div
+      style={{
+        height: getChartCanvasHeight(height, heightMode),
+      }}
+      className="flex w-full grow items-center justify-center"
+    >
+      <Loading />
     </div>
   );
 };
@@ -392,7 +428,42 @@ export const ChartCard = {
   ResetZoomTool: ChartCardResetZoomTool,
   ExpandTool: ChartCardExpandTool,
   Canvas: ChartCardCanvas,
+  LoadingCanvas: ChartCardLoadingCanvas,
   Footer: ChartCardFooter,
+};
+
+export const LoadingChartCard = ({
+  years = [],
+  title,
+  subtitle,
+  height,
+  heightMode = "screen",
+  feature,
+  extraNote,
+  children,
+}: PropsWithChildren<{
+  years?: string[];
+  title?: string;
+  subtitle?: string;
+  height: number;
+  heightMode?: ChartHeightMode;
+  feature?: ChartFeature;
+  extraNote?: string;
+}>): JSX.Element => {
+  return (
+    <ChartCard.Provider years={years} title={title}>
+      <ChartCard.Frame>
+        <ChartCard.Header title={title} subtitle={subtitle} />
+        {children}
+        <ChartCard.LoadingCanvas
+          height={height}
+          heightMode={heightMode}
+          feature={feature}
+        />
+        <ChartCard.Footer extraNote={extraNote} />
+      </ChartCard.Frame>
+    </ChartCard.Provider>
+  );
 };
 
 type BaseChartVariantProps = ReactEChartsProps & {

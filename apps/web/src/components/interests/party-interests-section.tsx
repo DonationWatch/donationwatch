@@ -4,16 +4,22 @@ import type { DonorInterestMap } from "@donationwatch/core/types/interests";
 import type { Party } from "@donationwatch/core/types/party";
 import type { Donation } from "@donationwatch/core/utils/types";
 
+import { useMemo } from "react";
+
 import {
   ArticleSectionColumn,
   ArticleSectionOneColumns,
   ArticleSectionTitle,
 } from "@/components/layout/article";
-import Loading from "@/components/loading/loading";
 import { useClientTranslations as useTranslations } from "@/hooks/use-client-translations";
 
+import type { InterestsScope } from "./interests-context";
+
 import { InterestsProvider } from "./interests-context";
-import { PartyInterestsChart } from "./party-interests-chart";
+import {
+  PartyInterestsChart,
+  PartyInterestsLoadingChart,
+} from "./party-interests-chart";
 import { PartyInterestsText } from "./party-interests-text";
 
 interface InterestsSectionLayoutProps {
@@ -47,14 +53,25 @@ export const PartyInterestsSection = ({
   donorInterests,
   isPendingClientDonations = false,
 }: PartyInterestsSectionProps) => {
+  const scope = useMemo<InterestsScope>(
+    () => ({ kind: "party", party }),
+    [party],
+  );
+
   return (
     <InterestsProvider
-      scope={{ kind: "party", party }}
+      scope={scope}
       donations={donations}
       donorInterests={donorInterests}
     >
       <InterestsSectionLayout
-        chart={isPendingClientDonations ? <Loading /> : <PartyInterestsChart />}
+        chart={
+          isPendingClientDonations ? (
+            <PartyInterestsLoadingChart />
+          ) : (
+            <PartyInterestsChart />
+          )
+        }
       />
     </InterestsProvider>
   );
@@ -72,9 +89,14 @@ export const YearsInterestsSection = ({
   donations,
   donorInterests,
 }: YearsInterestsSectionProps) => {
+  const scope = useMemo<InterestsScope>(
+    () => ({ kind: "years", years }),
+    [years],
+  );
+
   return (
     <InterestsProvider
-      scope={{ kind: "years", years }}
+      scope={scope}
       donations={donations}
       donorInterests={donorInterests}
     >

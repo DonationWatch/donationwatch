@@ -112,6 +112,14 @@ export const countryCodesToCountry: Record<string, Country> =
     ]),
   );
 
+export const COUNTRY_CODE_LIST: readonly CountryCode[] =
+  Object.values(COUNTRY_CODES);
+
+const COUNTRY_CODE_SET = new Set<string>(COUNTRY_CODE_LIST);
+
+export const isCountryCode = (code: string): code is CountryCode =>
+  COUNTRY_CODE_SET.has(code);
+
 export const getCountryName = (
   country: { code: CountryCode },
   t: (key: CountryCode) => string,

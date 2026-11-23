@@ -179,7 +179,15 @@ The generated files are written to `packages/data/src/countries/` and `apps/web/
 
 ## Deployment
 
-The project supports deployment to Cloudflare using OpenNext:
+The web app deploys to Cloudflare using OpenNext and Cloudflare Workers Builds:
+
+- **Root directory:** `/`
+- **Build command:** `pnpm run pre-deploy && pnpm run cf:build`
+- **Deploy command:** `pnpm -C apps/web exec wrangler deploy`
+- **Watch paths (Include):** `apps/web/**`, `packages/core/**`, `packages/data/**`, `packages/ui/**`, `pnpm-lock.yaml`
+- **Watch paths (Exclude):** `packages/data-pipeline/**`, `.github/**`, `**/*.md`
+
+Local OpenNext preview and deploy commands:
 
 ```bash
 # Build and preview locally
