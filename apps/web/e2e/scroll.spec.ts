@@ -34,6 +34,55 @@ test.describe("Scroll behavior", () => {
     await expect(section).toBeInViewport();
   });
 
+  test("Party donors page keeps industries treemap rendered after clicking TOC link", async ({
+    page,
+    baseURL,
+  }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto(`${baseURL}/germany/party/${CHECK_PARTY}/donors`);
+
+    const interestsSection = page.locator(
+      'section[aria-labelledby="sec-party-interests"]',
+    );
+    const canvas = interestsSection
+      .locator('[data-testid="chart"][data-testid-feature="treemap"] canvas')
+      .first();
+    await expect(canvas).toBeVisible();
+
+    const tocLink = page.locator(
+      'a[data-toc-link][href="#sec-party-interests"]',
+    );
+    await expect(tocLink).toBeVisible();
+    await tocLink.click();
+
+    await expect(page.locator("#sec-party-interests").first()).toBeInViewport();
+
+    await expect
+      .poll(async () => {
+        return canvas.evaluate((el: HTMLCanvasElement) => {
+          const ctx = el.getContext("2d");
+          if (!ctx || el.width === 0 || el.height === 0) return false;
+          const { data } = ctx.getImageData(0, 0, el.width, el.height);
+          const firstR = data[0];
+          const firstG = data[1];
+          const firstB = data[2];
+          const firstA = data[3];
+          for (let i = 4; i < data.length; i += 64) {
+            if (
+              data[i] !== firstR ||
+              data[i + 1] !== firstG ||
+              data[i + 2] !== firstB ||
+              data[i + 3] !== firstA
+            ) {
+              return true;
+            }
+          }
+          return false;
+        });
+      })
+      .toBe(true);
+  });
+
   test("Year changes page scrolls to section on deep link", async ({
     page,
     baseURL,
