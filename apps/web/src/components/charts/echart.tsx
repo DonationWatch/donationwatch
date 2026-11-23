@@ -18,6 +18,7 @@ import { useEffect, useImperativeHandle, useRef, useState } from "react";
 
 import { echartsEmptyLocale } from "@/components/charts/echart-empty-locale";
 import Loading from "@/components/loading/loading";
+import { useDarkColorScheme } from "@/hooks/use-media-query";
 
 echarts.use([
   CanvasRenderer,
@@ -115,6 +116,7 @@ export interface EChartsPublicApi {
   resetZoom: () => void;
 }
 
+const loadedFeatures = new Set<ChartFeature>();
 const registeredLocales = new Set<string>();
 
 // Populate echart time translations based on the locale
@@ -172,44 +174,55 @@ export const ReactECharts = ({
   locale?: string;
   ref?: Ref<EChartsPublicApi | undefined>;
 }): JSX.Element => {
-  const [loadingModules, setLoadingModules] = useState<boolean>(true);
+  const [loadedFeature, setLoadedFeature] = useState<ChartFeature | null>(() =>
+    loadedFeatures.has(feature) ? feature : null,
+  );
+  const [chart, setChart] = useState<EChartsType | undefined>(undefined);
   const chartRef = useRef<HTMLDivElement>(null);
-  const chartInstance = useRef<EChartsType | undefined>(undefined);
-
-  if (!theme) {
-    theme =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light";
-  }
+  const isDark = useDarkColorScheme();
+  const resolvedTheme = theme ?? (isDark ? "dark" : "light");
+  const loadingModules = loadedFeature !== feature;
 
   useImperativeHandle(
     ref,
     () => ({
       resetZoom: () => {
-        chartInstance.current?.dispatchAction({
+        if (!chart || chart.isDisposed()) return;
+        chart.dispatchAction({
           type: "dataZoom",
           start: 0,
           end: 100,
         });
       },
     }),
-    [],
+    [chart],
   );
 
   useEffect(() => {
+    if (loadedFeatures.has(feature)) {
+      setLoadedFeature(feature);
+      return;
+    }
+
+    let cancelled = false;
     void featureImports[feature]().then((installFns) => {
       // @ts-expect-error - incorrect upstream types
       echarts.use(installFns);
+      loadedFeatures.add(feature);
 
-      setLoadingModules(false);
+      if (!cancelled) {
+        setLoadedFeature(feature);
+      }
     });
+
+    return () => {
+      cancelled = true;
+    };
   }, [feature]);
 
   useEffect(() => {
     // Initialize chart
-    let chart: EChartsType | undefined;
+    let instance: EChartsType | undefined;
     let resizeObserver: ResizeObserver | undefined;
     const chartElement = chartRef.current;
 
@@ -217,51 +230,22 @@ export const ReactECharts = ({
       if (locale) {
         registerLocale(locale);
       }
-      chart = echarts.init(chartElement, theme, { locale });
-      chartInstance.current = chart;
-      chart.setOption({
+      instance = echarts.init(chartElement, resolvedTheme, { locale });
+      instance.setOption({
         animation: false,
       });
-
-      if (onZoom) {
-        if (feature === "treemap") {
-          chart.on("treemapRender", () => {
-            onZoom();
-          });
-        }
-      }
-
-      if (onClick) {
-        chart.on("click", (event) => onClick(event));
-      }
-      if (onZrClick) {
-        chart.getZr().on("click", (params) => onZrClick(params, chart));
-        chart.getZr().on("mousemove", (params) => {
-          // @ts-expect-error - getModel is typed as private but we need it to get the grid component and check if the mouse is inside the grid.
-          const grid = chart!.getModel().getComponent("grid");
-
-          const x = params.event?.zrX;
-          const y = params.event?.zrY;
-
-          if (!grid.coordinateSystem.containPoint([x, y])) return;
-
-          chart!.getZr().setCursorStyle("pointer");
-        });
-        chart.on("mouseout", function () {
-          chart!.getZr().setCursorStyle("default");
-        });
-      }
+      setChart(instance);
 
       // Add ResizeObserver to sync chart size with container
       resizeObserver = new ResizeObserver(() => {
-        chart?.resize();
+        instance?.resize();
       });
       resizeObserver.observe(chartElement);
     }
 
     // Add chart resize listener (for window resizes, optional)
     function resizeChart() {
-      chart?.resize();
+      instance?.resize();
     }
     window.addEventListener("resize", resizeChart);
 
@@ -272,18 +256,78 @@ export const ReactECharts = ({
         resizeObserver.unobserve(chartElement);
         resizeObserver.disconnect();
       }
-      chart?.dispose();
-      chartInstance.current = undefined;
+      instance?.dispose();
+      setChart(undefined);
     };
-  }, [theme, loadingModules, onZrClick, onZoom, onClick, feature, locale]);
+  }, [resolvedTheme, loadingModules, feature, locale]);
 
   useEffect(() => {
-    // Update chart
-    if (!loadingModules && chartRef.current !== null) {
-      const chart = echarts.getInstanceByDom(chartRef.current);
-      chart!.setOption(option, settings);
+    if (!chart || chart.isDisposed()) return;
+
+    const handleTreemapRender =
+      onZoom && feature === "treemap" ? () => onZoom() : undefined;
+    if (handleTreemapRender) {
+      chart.on("treemapRender", handleTreemapRender);
     }
-  }, [option, settings, theme, loadingModules]); // Whenever theme changes we need to add option and setting due to it being deleted in cleanup function
+
+    const handleClick = onClick
+      ? (event: echarts.ECElementEvent) => onClick(event)
+      : undefined;
+    if (handleClick) {
+      chart.on("click", handleClick);
+    }
+
+    let handleZrClick: ((params: echarts.ElementEvent) => void) | undefined;
+    let handleZrMouseMove: ((params: echarts.ElementEvent) => void) | undefined;
+    let handleMouseOut: (() => void) | undefined;
+
+    if (onZrClick) {
+      handleZrClick = (params) => onZrClick(params, chart);
+      handleZrMouseMove = (params) => {
+        // @ts-expect-error - getModel is typed as private but we need it to get the grid component and check if the mouse is inside the grid.
+        const grid = chart.getModel().getComponent("grid");
+
+        const x = params.event?.zrX;
+        const y = params.event?.zrY;
+
+        if (!grid?.coordinateSystem?.containPoint([x, y])) return;
+
+        chart.getZr().setCursorStyle("pointer");
+      };
+      handleMouseOut = () => {
+        chart.getZr().setCursorStyle("default");
+      };
+
+      chart.getZr().on("click", handleZrClick);
+      chart.getZr().on("mousemove", handleZrMouseMove);
+      chart.on("mouseout", handleMouseOut);
+    }
+
+    return () => {
+      if (chart.isDisposed()) return;
+
+      if (handleTreemapRender) {
+        chart.off("treemapRender", handleTreemapRender);
+      }
+      if (handleClick) {
+        chart.off("click", handleClick);
+      }
+      if (handleZrClick) {
+        chart.getZr().off("click", handleZrClick);
+      }
+      if (handleZrMouseMove) {
+        chart.getZr().off("mousemove", handleZrMouseMove);
+      }
+      if (handleMouseOut) {
+        chart.off("mouseout", handleMouseOut);
+      }
+    };
+  }, [chart, feature, onZoom, onClick, onZrClick]);
+
+  useEffect(() => {
+    if (!chart || chart.isDisposed()) return;
+    chart.setOption(option, settings);
+  }, [chart, option, settings]);
 
   if (loadingModules)
     return (
