@@ -88,6 +88,19 @@ const nextConfig = {
         destination: "/:locale/:country/methodology",
         permanent: true,
       },
+
+      // added on 2026-11-23
+      // redirect direct apple-touch-icon probes to Next.js built-in /apple-icon.png
+      {
+        source: "/apple-touch-icon.png",
+        destination: "/apple-icon.png",
+        permanent: true,
+      },
+      {
+        source: "/apple-touch-icon-precomposed.png",
+        destination: "/apple-icon.png",
+        permanent: true,
+      },
     ];
   },
 };

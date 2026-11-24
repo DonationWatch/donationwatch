@@ -11,22 +11,6 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   openGraph: baseOpenGraph(),
   twitter: baseTwitter(),
-  icons: {
-    icon: [
-      {
-        rel: "icon",
-        type: "image/x-icon",
-        url: "/favicon.ico",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        rel: "icon",
-        type: "image/svg+xml",
-        url: "/favicon-dark.svg",
-        media: "(prefers-color-scheme: dark)",
-      },
-    ],
-  },
 };
 
 export default function RootLayout({

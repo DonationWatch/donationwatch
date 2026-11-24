@@ -64,6 +64,18 @@ export default async function LangLayout(props: LayoutProps<"/[locale]">) {
   return (
     <html lang={locale} className="scroll-pt-15" suppressHydrationWarning>
       <head>
+        <link
+          rel="icon"
+          type="image/x-icon"
+          href="/favicon.ico"
+          media="(prefers-color-scheme: light)"
+        />
+        <link
+          rel="icon"
+          type="image/svg+xml"
+          href="/favicon-dark.svg"
+          media="(prefers-color-scheme: dark)"
+        />
         <OrganizationSchema />
         <script
           dangerouslySetInnerHTML={{
