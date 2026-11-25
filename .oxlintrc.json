@@ -59,7 +59,18 @@
     "@typescript-eslint/no-require-imports": "error",
     "@typescript-eslint/no-unnecessary-type-constraint": "error",
     "@typescript-eslint/no-unsafe-function-type": "error",
-    "@typescript-eslint/require-array-sort-compare": "off"
+    "@typescript-eslint/require-array-sort-compare": "off",
+    "no-restricted-imports": [
+      "error",
+      {
+        "paths": [
+          {
+            "name": "cn",
+            "message": "Import cn from the local utils module (e.g. ../lib/utils) instead of the npm 'cn' package."
+          }
+        ]
+      }
+    ]
   },
   "overrides": [
     {
@@ -73,6 +84,12 @@
         "no-restricted-imports": [
           "error",
           {
+            "paths": [
+              {
+                "name": "cn",
+                "message": "Import cn from the local utils module (e.g. ../lib/utils) instead of the npm 'cn' package."
+              }
+            ],
             "patterns": [
               {
                 "group": [
@@ -93,6 +110,12 @@
         "no-restricted-imports": [
           "error",
           {
+            "paths": [
+              {
+                "name": "cn",
+                "message": "Import cn from the local utils module (e.g. ../lib/utils) instead of the npm 'cn' package."
+              }
+            ],
             "patterns": [
               {
                 "group": [
@@ -125,6 +148,12 @@
         "no-restricted-imports": [
           "error",
           {
+            "paths": [
+              {
+                "name": "cn",
+                "message": "Import cn from the local utils module (e.g. ../lib/utils) instead of the npm 'cn' package."
+              }
+            ],
             "patterns": [
               {
                 "group": [
@@ -153,6 +182,12 @@
         "no-restricted-imports": [
           "error",
           {
+            "paths": [
+              {
+                "name": "cn",
+                "message": "Import cn from the local utils module (e.g. ../lib/utils) instead of the npm 'cn' package."
+              }
+            ],
             "patterns": [
               {
                 "group": [

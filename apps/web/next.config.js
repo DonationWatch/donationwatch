@@ -29,6 +29,19 @@ const nextConfig = {
   typescript: {
     tsconfigPath: "./tsconfig.next.json",
   },
+  turbopack: {
+    resolveAlias: {
+      buffer: {
+        browser: "./src/lib/empty-buffer.ts",
+      },
+      "next/dist/compiled/buffer": {
+        browser: "./src/lib/empty-buffer.ts",
+      },
+      "next/dist/compiled/buffer/index.js": {
+        browser: "./src/lib/empty-buffer.ts",
+      },
+    },
+  },
   outputFileTracingExcludes: {
     // remove sourcemaps https://opennext.js.org/aws/common_issues#remove-sourcemaps
     "*": ["./**/*.js.map", "./**/*.mjs.map", "./**/*.cjs.map"],

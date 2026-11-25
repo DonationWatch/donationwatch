@@ -16,10 +16,7 @@
     "class-variance-authority": "catalog:",
     "clsx": "catalog:",
     "cmdk": "^1.1.1",
-    "cn": "^0.5.2",
     "lucide-react": "catalog:",
-    "next-themes": "catalog:",
-    "sonner": "catalog:",
     "tailwind-merge": "catalog:"
   },
   "devDependencies": {

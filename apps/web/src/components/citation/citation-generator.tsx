@@ -10,8 +10,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@donationwatch/ui/components/dropdown-menu";
+import { toast } from "@donationwatch/ui/components/toast";
 import { ChevronDownIcon, Quote } from "lucide-react";
-import { toast } from "sonner";
 
 import type { StrictNamespacedTranslator } from "@/utils/translator";
 
@@ -88,14 +88,13 @@ export function CitationGenerator({
       const text = generateCitation(citation.id, locale, title, url, tCitation);
 
       await navigator.clipboard.writeText(text.trim());
-      toast.success(
-        tCitation("success", {
+      toast.add({
+        type: "success",
+        title: tCitation("success", {
           style: citation.label,
         }),
-        {
-          duration: 3000,
-        },
-      );
+        timeout: 3000,
+      });
     } catch (e) {
       console.error("Failed to generate and copy citation", e);
     }
