@@ -8,7 +8,7 @@ import {
   isValidLocale,
 } from "@donationwatch/core/utils/validate";
 import { getCountryConfig } from "@donationwatch/data/queries/get-country-config";
-import { Toaster } from "@donationwatch/ui/components/sonner";
+import { Toaster } from "@donationwatch/ui/components/toast";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -183,7 +183,7 @@ export default async function Page(
           </ArticleLead>
         </ArticleHeader>
         <DataExport locale={locale} />
-        <Toaster position={"top-center"} />
+        <Toaster timeout={3000} />
       </Article>
     </ScopedClientIntlProvider>
   );
